@@ -1,0 +1,163 @@
+--- ../../../gtk-vnc.hg/src/gvnc.h	2007-04-23 14:19:10.000000000 -0300
++++ ./gvnc.h	2007-05-22 09:57:14.000000000 -0300
+@@ -88,5 +88,7 @@ gboolean gvnc_set_vnc_ops(struct gvnc *g
+ gboolean gvnc_shared_memory_enabled(struct gvnc *gvnc);
+ 
+ const char *gvnc_get_name(struct gvnc *gvnc);
++int gvnc_get_width(struct gvnc *gvnc);
++int gvnc_get_height(struct gvnc *gvnc);
+ 
+ #endif
+--- ../../../gtk-vnc.hg/src/gvnc.c	2007-04-23 14:19:10.000000000 -0300
++++ ./gvnc.c	2007-05-23 10:38:36.000000000 -0300
+@@ -1235,7 +1235,7 @@ static gboolean gvnc_perform_auth(struct
+ 	unsigned int nauth, i;
+ 	unsigned int auth[10];
+ 
+-	if (gvnc->minor == 3) {
++	if (gvnc->minor <= 6) {
+ 		nauth = 1;
+ 		auth[0] = gvnc_read_u32(gvnc);
+ 	} else {
+@@ -1270,7 +1270,7 @@ static gboolean gvnc_perform_auth(struct
+ 		}
+ 	}
+ 
+-	if (gvnc->minor != 3) {
++	if (gvnc->minor > 6) {
+ 		GVNC_DEBUG("Chose auth %d\n", wantAuth);
+ 		gvnc_write_u8(gvnc, wantAuth);
+ 		gvnc_flush(gvnc);
+@@ -1326,6 +1326,8 @@ struct gvnc *gvnc_connect(GIOChannel *ch
+ 	if (gvnc->major != 3)
+ 		goto error;
+ 	if (gvnc->minor != 3 &&
++	    gvnc->minor != 5 &&
++	    gvnc->minor != 6 &&
+ 	    gvnc->minor != 7 &&
+ 	    gvnc->minor != 8)
+ 		goto error;
+@@ -1437,6 +1439,16 @@ const char *gvnc_get_name(struct gvnc *g
+ 	return gvnc->name;
+ }
+ 
++int gvnc_get_width(struct gvnc *gvnc)
++{
++	return gvnc->width;
++}
++
++int gvnc_get_height(struct gvnc *gvnc)
++{
++	return gvnc->height;
++}
++
+ /*
+  * Local variables:
+  *  c-indent-level: 8
+--- ../../../gtk-vnc.hg/src/vncdisplay.h	2007-04-23 14:19:11.000000000 -0300
++++ ./vncdisplay.h	2007-05-23 20:38:54.000000000 -0300
+@@ -44,7 +44,10 @@ struct _VncDisplay
+ 
+ struct _VncDisplayClass
+ {
+-	GtkDrawingAreaClass parent;
++	GtkDrawingAreaClass parent_class;
++
++	/* Signals */
++	void		(* vnc_initialized)	(VncDisplay *display);
+ 
+ 	int enter_grab_event_id;
+ 	int leave_grab_event_id;
+@@ -61,6 +64,10 @@ void		vnc_display_set_password(VncDispla
+ 
+ void		vnc_display_set_use_shm(VncDisplay *obj, gboolean enable);
+ 
++int		vnc_display_get_width(VncDisplay *obj);
++int		vnc_display_get_height(VncDisplay *obj);
++const char *	vnc_display_get_host_name(VncDisplay *obj);
++
+ G_END_DECLS
+ 
+ #endif
+--- ../../../gtk-vnc.hg/src/vncdisplay.c	2007-04-23 14:19:11.000000000 -0300
++++ ./vncdisplay.c	2007-05-23 20:40:19.000000000 -0300
+@@ -45,6 +45,15 @@ struct _VncDisplayPrivate
+ 	int use_shm;
+ };
+ 
++/* Signals */
++enum
++{
++  VNC_INITIALIZED,
++  LAST_SIGNAL
++};
++
++static guint signals[LAST_SIGNAL] = { 0 };
++
+ GtkWidget *vnc_display_new(void)
+ {
+ 	return GTK_WIDGET(g_object_new(VNC_TYPE_DISPLAY, NULL));
+@@ -375,6 +384,10 @@ static void *vnc_coroutine(void *opaque)
+ 	if (priv->gvnc == NULL)
+ 		return NULL;
+ 
++	g_signal_emit (G_OBJECT (obj),
++		       signals[VNC_INITIALIZED],
++		       0);
++
+ 	gvnc_set_encodings(priv->gvnc, 6, encodings);
+ 
+ 	gvnc_set_vnc_ops(priv->gvnc, &ops);
+@@ -415,7 +428,17 @@ void vnc_display_open(VncDisplay *obj, i
+ 
+ static void vnc_display_class_init(VncDisplayClass *klass)
+ {
+-	g_type_class_add_private(klass, sizeof(VncDisplayPrivate));
++	GObjectClass *object_class = G_OBJECT_CLASS (klass);
++
++	signals[VNC_INITIALIZED] =
++		g_signal_new ("vnc-initialized",
++			      G_OBJECT_CLASS_TYPE (object_class),
++			      G_SIGNAL_RUN_FIRST,
++			      G_STRUCT_OFFSET (VncDisplayClass, vnc_initialized),
++			      NULL, NULL,
++			      g_cclosure_marshal_VOID__VOID,
++			      G_TYPE_NONE,
++			      0);
+ 
+ 	klass->enter_grab_event_id =
+ 		g_signal_new("enter-grab-event",
+@@ -438,6 +461,8 @@ static void vnc_display_class_init(VncDi
+ 			     g_cclosure_marshal_VOID__VOID,
+ 			     G_TYPE_NONE,
+ 			     0);
++
++	g_type_class_add_private(klass, sizeof(VncDisplayPrivate));
+ }
+ 
+ static void vnc_display_init(GTypeInstance *instance, gpointer klass)
+@@ -517,3 +542,24 @@ GType vnc_display_get_type(void)
+ 	return type;
+ }
+ 
++int vnc_display_get_width(VncDisplay *obj)
++{
++  g_return_val_if_fail (VNC_IS_DISPLAY (obj), -1);
++
++  return gvnc_get_width (obj->priv->gvnc);
++}
++
++int vnc_display_get_height(VncDisplay *obj)
++{
++  g_return_val_if_fail (VNC_IS_DISPLAY (obj), -1);
++
++  return gvnc_get_height (obj->priv->gvnc);
++}
++
++const char * vnc_display_get_host_name(VncDisplay *obj)
++{
++  g_return_val_if_fail (VNC_IS_DISPLAY (obj), NULL);
++
++  return gvnc_get_name (obj->priv->gvnc);
++}
++

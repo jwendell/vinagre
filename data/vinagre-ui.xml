@@ -1,0 +1,79 @@
+<!--
+ * vinagre-ui.xml
+ * This file is part of gedit
+ *
+ * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA.
+-->
+
+<ui>
+
+  <menubar name="MenuBar">
+    <menu name="MachineMenu" action="Machine">
+      <menuitem name="MachineConnectMenu" action="MachineConnect"/>
+      <separator/>
+      <menuitem name="MachineCloseMenu" action="MachineClose"/>
+      <menuitem name="MachineCloseAllMenu" action="MachineCloseAll"/>
+      <separator/>
+      <menuitem name="MachineQuitMenu" action="MachineQuit"/>
+    </menu>
+
+    <menu name="EditMenu" action="Edit">
+      <menuitem name="EditCopyMenu" action="EditCopy"/>
+      <menuitem name="EditPasteMenu" action="EditPaste"/>
+      <separator/>
+      <menuitem name="EditPreferencesMenu" action="EditPreferences"/>
+    </menu>
+
+    <menu name="ViewMenu" action="View">
+      <menuitem name="ViewToolbarMenu" action="ViewToolbar"/>
+      <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
+      <menuitem name="ViewFavoritesMenu" action="ViewFavorites"/>
+      <separator/>
+      <menuitem name="ViewFullScreenMenu" action="ViewFullScreen"/>
+    </menu>
+
+    <menu name="FavoritesMenu" action="Favorites">
+      <menuitem name="FavoritesAddMenu" action="FavoritesAdd"/>
+      <separator/>
+      <menuitem name="FavoritesEditMenu" action="FavoritesEdit"/>
+      <menuitem name="FavoritesDelMenu" action="FavoritesDel"/>
+      <separator/>
+      <placeholder name="FavoritesList"/>
+    </menu>
+
+    <menu name="HelpMenu" action="Help">
+      <menuitem name="HelpContentsMenu" action="HelpContents"/>
+      <menuitem name="HelpAboutMenu" action="HelpAbout"/>
+    </menu>
+  </menubar>
+
+  <toolbar name="ToolBar">
+    <toolitem action="MachineConnect"/>
+    <toolitem action="MachineClose"/>
+    <separator/>
+    <toolitem action="ViewFullScreen"/>
+  </toolbar>
+
+  <popup name="FavPopup" action="FavPopupAction">
+    <menuitem action="FavoritesOpen"/>
+    <separator/>
+    <menuitem action="FavoritesEdit"/>
+    <menuitem action="FavoritesDel"/>
+  </popup>
+
+</ui>

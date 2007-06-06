@@ -1,0 +1,22 @@
+Vinagre Installation Instructions
+=================================
+
+You'll need the devel packages of the following libraries:
+
+ - gtk+-2.0
+ - libglade-2.0
+ - gconf-2.0
+ - gnutls
+
+To compile it, just do:
+
+./configure [--prefix=/usr]
+make
+make install (as root, or with sudo)
+
+Avahi integration
+=================
+
+Optionally, if you have the avahi-client devel packages, you may want add
+    --enable-avahi
+to configure script, in order to be able to browse for VNC servers around.
