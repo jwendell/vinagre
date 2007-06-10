@@ -11,9 +11,11 @@ int main (int argc, char **argv) {
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  g_thread_init (NULL);
+
   gtk_init (&argc, &argv);
 
-  g_set_application_name (_("vinagre"));
+  g_set_application_name (_("Vinagre"));
   vinagre_prefs_manager_init ();
 
   main_window = vinagre_window_new ();

@@ -208,17 +208,39 @@ vinagre_cmd_help_about (GtkAction     *action,
 	"Copyright \xc2\xa9 2007 Jonh Wendell";
 
   static const gchar comments[] = \
-	N_("vinagre is a VNC client for the GNOME Desktop");
+	N_("Vinagre is a VNC client for the GNOME Desktop");
+
+  static const char *license[] = {
+	N_("Vinagre is free software; you can redistribute it and/or modify "
+	   "it under the terms of the GNU General Public License as published by "
+	   "the Free Software Foundation; either version 2 of the License, or "
+	   "(at your option) any later version."),
+	N_("Vinagre is distributed in the hope that it will be useful, "
+	   "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+	   "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+	   "GNU General Public License for more details."),
+	N_("You should have received a copy of the GNU General Public License "
+	   "along with Nautilus; if not, write to the Free Software Foundation, Inc., "
+	   "59 Temple Place, Suite 330, Boston, MA  02111-1307  USA")
+  };
+
+  gchar *license_trans;
+
+  license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]),
+				     _(license[2]), NULL);
+
 
   gtk_show_about_dialog (GTK_WINDOW (window),
 			 "authors", authors,
 			 "comments", _(comments),
 			 "copyright", copyright,
+			 "license", license_trans,
+			 "wrap-license", TRUE,
 			 "logo-icon-name", "gnome-remote-desktop",
-		         "translator-credits", _("translator-credits"),
+			 "translator-credits", _("translator-credits"),
 			 "version", VERSION,
 			 "website", "http://www.gnome.org/~jwendell/vinagre",
-			 "name", "vinagre",
+			 "website-label", _("Vinagre Website"),
 			 NULL);
 }
 

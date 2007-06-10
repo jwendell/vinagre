@@ -739,7 +739,7 @@ vinagre_window_new ()
 {
   return g_object_new (VINAGRE_TYPE_WINDOW,
 		       "type",      GTK_WINDOW_TOPLEVEL,
-		       "title",     "vinagre",
+		       "title",     "Vinagre",
 		       NULL); 
 }
 
