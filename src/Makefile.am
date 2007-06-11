@@ -1,12 +1,14 @@
 SUBDIRS = gtk-vnc
 
-INCLUDES = 								\
-	$(DISABLE_DEPRECATED_CFLAGS)					\
-	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\"				\
-	-DPACKAGE_DATA_DIR=\""$(datadir)"\"				\
-	-DVINAGRE_GLADEDIR=\""$(datadir)/vinagre"\"			\
-	$(VINAGRE_CFLAGS)						\
+INCLUDES = 						\
+	-DBINDIR=\"$(bindir)\"			 	\
+	-DDATADIR=\"$(datadir)\"			\
+	-DPREFIX=\""$(prefix)"\" 			\
+	-DSYSCONFDIR=\""$(sysconfdir)"\" 		\
+	-DLIBDIR=\""$(libdir)"\" 			\
+	-DVINAGRE_DATADIR=\""$(datadir)/vinagre"\"	\
+	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\"	\
+	$(VINAGRE_CFLAGS)				\
 	$(AVAHI_CFLAGS)
 
 bin_PROGRAMS = vinagre

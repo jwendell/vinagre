@@ -242,6 +242,7 @@ vinagre_cmd_help_about (GtkAction     *action,
 			 "website", "http://www.gnome.org/~jwendell/vinagre",
 			 "website-label", _("Vinagre Website"),
 			 NULL);
+  g_free (license_trans);
 }
 
 

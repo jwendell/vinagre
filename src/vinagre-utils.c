@@ -85,7 +85,7 @@ vinagre_utils_get_glade_filename (void)
   if (g_file_test (VINAGRE_GLADE_FILE, G_FILE_TEST_EXISTS))
     return VINAGRE_GLADE_FILE;
   else
-    return VINAGRE_GLADEDIR "/" VINAGRE_GLADE_FILE;
+    return VINAGRE_DATADIR "/" VINAGRE_GLADE_FILE;
 }
 
 const gchar *
@@ -94,7 +94,7 @@ vinagre_utils_get_ui_xml_filename (void)
   if (g_file_test (VINAGRE_UI_XML_FILE, G_FILE_TEST_EXISTS))
     return VINAGRE_UI_XML_FILE;
   else
-    return VINAGRE_GLADEDIR "/" VINAGRE_UI_XML_FILE;
+    return VINAGRE_DATADIR "/" VINAGRE_UI_XML_FILE;
 }
 
 /*
