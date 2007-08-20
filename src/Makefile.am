@@ -1,5 +1,3 @@
-SUBDIRS = gtk-vnc
-
 INCLUDES = 						\
 	-DBINDIR=\"$(bindir)\"			 	\
 	-DDATADIR=\"$(datadir)\"			\
@@ -12,12 +10,6 @@ INCLUDES = 						\
 	$(AVAHI_CFLAGS)
 
 bin_PROGRAMS = vinagre
-
-if VINAGRE_AVAHI
-VINAGRE_AVAHI_SRC =	\
-	avahi-ui.h	\
-	avahi-ui.c
-endif
 
 vinagre_SOURCES = \
 	vinagre-commands.c vinagre-commands.h		\
@@ -32,12 +24,10 @@ vinagre_SOURCES = \
 	vinagre-tab.c vinagre-tab.h			\
 	vinagre-utils.c vinagre-utils.h			\
 	vinagre-window.c vinagre-window.h		\
-	vinagre-ui.h vinagre-window-private.h		\
-	$(VINAGRE_AVAHI_SRC)
+	vinagre-ui.h vinagre-window-private.h
 
 vinagre_LDADD = \
 	$(VINAGRE_LIBS)		\
-	gtk-vnc/libgtkvnc.la	\
 	$(GTKVNC_LIBS)		\
 	$(AVAHI_LIBS)
 

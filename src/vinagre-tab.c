@@ -25,10 +25,13 @@
 #endif
 
 #include <glib/gi18n.h>
+#include <glade/glade.h>
+#include <vncdisplay.h>
 
 #include "vinagre-notebook.h"
 #include "vinagre-tab.h"
-#include "gtk-vnc/vncdisplay.h"
+#include "vinagre-main.h"
+#include "vinagre-utils.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
 
@@ -44,6 +47,8 @@ G_DEFINE_TYPE(VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
 enum
 {
   TAB_CONNECTED,
+  TAB_DISCONNECTED,
+  TAB_INITIALIZED,
   LAST_SIGNAL
 };
 
@@ -134,21 +139,66 @@ vinagre_tab_class_init (VinagreTabClass *klass)
 			      G_TYPE_NONE,
 			      0);
 
+  signals[TAB_DISCONNECTED] =
+		g_signal_new ("tab-disconnected",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (VinagreTabClass, tab_disconnected),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+
+  signals[TAB_INITIALIZED] =
+		g_signal_new ("tab-initialized",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (VinagreTabClass, tab_initialized),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+
   g_type_class_add_private (object_class, sizeof (VinagreTabPrivate));
 }
 
 static gboolean
 open_vnc (VinagreTab *tab)
 {
-  /* FIXME: Do we really want this? */
-  if (tab->priv->conn->sock <=0)
-    vinagre_connection_connect (tab->priv->conn);
+  gchar *port;
+  
+  port = g_strdup_printf ("%d", tab->priv->conn->port);
+  
+  if (!vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), tab->priv->conn->host, port))
+    vinagre_utils_show_error (_("Error connecting to host."), NULL);
 
-  vnc_display_set_password (VNC_DISPLAY(tab->priv->vnc), tab->priv->conn->password);
-  vnc_display_open (VNC_DISPLAY(tab->priv->vnc), tab->priv->conn->sock);
+  vnc_display_set_keyboard_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
+  vnc_display_set_pointer_grab  (VNC_DISPLAY(tab->priv->vnc), TRUE);
+  vnc_display_set_pointer_local (VNC_DISPLAY(tab->priv->vnc), TRUE);
 
+  g_free (port);
   gtk_widget_grab_focus (tab->priv->vnc);
   return FALSE;
+}
+
+static void
+vnc_connected_cb (VncDisplay *vnc, VinagreTab *tab)
+{
+  /* Emits the signal saying that we have connected to the machine */
+  g_signal_emit (G_OBJECT (tab),
+		 signals[TAB_CONNECTED],
+		 0);
+printf("connected\n");
+}
+
+static void
+vnc_disconnected_cb (VncDisplay *vnc, VinagreTab *tab)
+{
+  /* Emits the signal saying that we have disconnected from the machine */
+  g_signal_emit (G_OBJECT (tab),
+		 signals[TAB_DISCONNECTED],
+		 0);
+printf("disconnected\n");
 }
 
 static void
@@ -156,8 +206,50 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),
-		 signals[TAB_CONNECTED],
+		 signals[TAB_INITIALIZED],
 		 0);
+printf("initialized\n");
+}
+
+static gchar *
+ask_password()
+{
+  GladeXML   *xml;
+  const char *glade_file;
+  GtkWidget *password_dialog, *password_entry;
+  gchar *password;
+  int result;
+
+  glade_file = vinagre_utils_get_glade_filename ();
+  xml = glade_xml_new (glade_file, NULL, NULL);
+
+  password_dialog = glade_xml_get_widget (xml, "password_required_dialog");
+  gtk_window_set_transient_for (GTK_WINDOW(password_dialog), GTK_WINDOW(main_window));
+
+  result = gtk_dialog_run (GTK_DIALOG (password_dialog));
+  if (result != -5)
+    {
+      gtk_widget_destroy (GTK_WIDGET (password_dialog));
+      return NULL;
+    }
+
+  password_entry = glade_xml_get_widget (xml, "password_entry");
+  password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
+
+  gtk_widget_destroy (GTK_WIDGET (password_dialog));
+
+  g_object_unref (xml);
+  return password;
+}
+
+static void
+vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
+{
+  gchar *password;
+  
+  password = ask_password ();
+  vinagre_connection_set_password (tab->priv->conn, password);
+  vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
 }
 
 static void
@@ -184,8 +276,23 @@ vinagre_tab_init (VinagreTab *tab)
 				       GTK_SHADOW_IN);
 
   g_signal_connect (tab->priv->vnc,
+		    "vnc-connected",
+		    G_CALLBACK (vnc_connected_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
 		    "vnc-initialized",
 		    G_CALLBACK (vnc_initialized_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-disconnected",
+		    G_CALLBACK (vnc_disconnected_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-auth-credential",
+		    G_CALLBACK (vnc_authentication_cb),
 		    tab);
 
  /* connect VNC */
@@ -213,13 +320,12 @@ vinagre_tab_get_tooltips (VinagreTab *tab)
 
   g_return_val_if_fail (VINAGRE_IS_TAB (tab), NULL);
 
-  tip =  g_markup_printf_escaped ("%s %s\n"
-				  "%s %s\n\n"
-				  "%s %s\n"
-				  "%s %d\n"
-				  "%s %dx%d",
-				  _("Desktop Name:"), vnc_display_get_host_name (VNC_DISPLAY (tab->priv->vnc)),
-				  _("Type:"), _("VNC"),
+  tip =  g_markup_printf_escaped (
+				  "<b>%s</b> %s\n\n"
+				  "<b>%s</b> %s\n"
+				  "<b>%s</b> %d\n"
+				  "<b>%s</b> %dx%d",
+				  _("Desktop Name:"), vnc_display_get_name (VNC_DISPLAY (tab->priv->vnc)),
 				  _("Host:"), tab->priv->conn->host,
 				  _("Port:"), tab->priv->conn->port,
 				  _("Dimensions:"), vnc_display_get_width (VNC_DISPLAY (tab->priv->vnc)), vnc_display_get_height (VNC_DISPLAY (tab->priv->vnc)));

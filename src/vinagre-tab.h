@@ -52,6 +52,8 @@ struct _VinagreTabClass
 
   /* Signals */
   void		(* tab_connected)		(VinagreTab *tab);
+  void		(* tab_disconnected)	(VinagreTab *tab);
+  void		(* tab_initialized)		(VinagreTab *tab);
 };
 
 GType 		  vinagre_tab_get_type		(void) G_GNUC_CONST;

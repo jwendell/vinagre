@@ -100,12 +100,14 @@ vinagre_connection_free (VinagreConnection *conn)
   }
 }
 
+/*
 gboolean
 vinagre_connection_connect (VinagreConnection *conn)
 {
   conn->sock = connect_to_host (conn->host, conn->port);
   return (conn->sock > 0);
 }
+*/
 
 const gchar *
 vinagre_connection_best_name (VinagreConnection *conn)

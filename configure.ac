@@ -33,8 +33,8 @@ AM_GLIB_GNU_GETTEXT
 # Check required GNOME libraries
 #*******************************************************************************
 
-GLIB_REQUIRED=2.10.0
-GTK_REQUIRED=2.10.0
+GLIB_REQUIRED=2.11.0
+GTK_REQUIRED=2.11.0
 LIBGLADE_REQUIRED=2.6.0
 GCONF_REQUIRED=2.16.0
 
@@ -42,23 +42,16 @@ PKG_CHECK_MODULES(VINAGRE, \
   glib-2.0 >= $GLIB_REQUIRED \
   gtk+-2.0 >= $GTK_REQUIRED \ 
   libglade-2.0 >= $LIBGLADE_REQUIRED \
-  gconf-2.0 >= $GCONF_REQUIRED)
+  gconf-2.0 >= $GCONF_REQUIRED \
+  gtk-vnc-1.0)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
-
-#*******************************************************************************
-# Check for gnutls for gtk-vnc
-#*******************************************************************************
-
-PKG_CHECK_MODULES(GTKVNC, [gnutls])
-AC_SUBST(GTKVNC_CFLAGS)
-AC_SUBST(GTKVNC_LIBS)
 
 #*******************************************************************************
 # Check for Avahi
 #*******************************************************************************
 
-AVAHI_REQUIRED=0.6.17
+AVAHI_REQUIRED=0.6.18
 
 AC_ARG_ENABLE(avahi,
         AS_HELP_STRING([--enable-avahi],[Enable use of avahi]),
@@ -73,7 +66,7 @@ AVAHI_CFLAGS=
 AVAHI_LIBS=
 if test "x$VINAGRE_ENABLE_AVAHI" = "xyes" ; then
     PKG_CHECK_MODULES(AVAHI,
-		      [avahi-client >= $AVAHI_REQUIRED  avahi-glib >= $AVAHI_REQUIRED ])
+		      [avahi-ui >= $AVAHI_REQUIRED])
     AVAHI_CFLAGS="$AVAHI_CFLAGS -DVINAGRE_HAVE_AVAHI"
 fi
 AC_SUBST(AVAHI_CFLAGS)
@@ -87,7 +80,6 @@ Makefile
 data/Makefile
 data/vinagre.desktop.in
 src/Makefile
-src/gtk-vnc/Makefile
 po/Makefile.in
 ])
 

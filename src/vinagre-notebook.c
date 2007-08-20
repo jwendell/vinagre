@@ -38,21 +38,15 @@
 
 struct _VinagreNotebookPrivate
 {
-  GtkTooltips *tips;
-//  gint           x_start;
-//  gint           y_start;
+  gint dummy;
 };
 
 G_DEFINE_TYPE(VinagreNotebook, vinagre_notebook, GTK_TYPE_NOTEBOOK)
-
-static void vinagre_notebook_finalize (GObject *object);
 
 static void
 vinagre_notebook_class_init (VinagreNotebookClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  object_class->finalize = vinagre_notebook_finalize;
 
   g_type_class_add_private (object_class, sizeof(VinagreNotebookPrivate));
 }
@@ -71,19 +65,6 @@ vinagre_notebook_init (VinagreNotebook *notebook)
   gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
   gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
-
-  notebook->priv->tips = gtk_tooltips_new ();
-  g_object_ref_sink (notebook->priv->tips);
-}
-
-static void
-vinagre_notebook_finalize (GObject *object)
-{
-  VinagreNotebook *notebook = VINAGRE_NOTEBOOK (object);
-
-  g_object_unref (notebook->priv->tips);
-
-  G_OBJECT_CLASS (vinagre_notebook_parent_class)->finalize (object);
 }
 
 static void
@@ -112,7 +93,7 @@ tab_label_style_set_cb (GtkWidget *hbox,
 }
 
 static void
-tab_connected_cb (VinagreTab *tab, VinagreNotebook *nb)
+tab_initialized_cb (VinagreTab *tab, VinagreNotebook *nb)
 {
   char *str;
   GtkWidget *label;
@@ -121,7 +102,7 @@ tab_connected_cb (VinagreTab *tab, VinagreNotebook *nb)
   g_return_if_fail (label != NULL);
 
   str = vinagre_tab_get_tooltips (tab);
-  gtk_tooltips_set_tip (nb->priv->tips, label, str, NULL);
+  gtk_widget_set_tooltip_markup (label, str);
 
   g_free (str);
 }
@@ -130,90 +111,88 @@ static GtkWidget *
 build_tab_label (VinagreNotebook *nb, 
 		 VinagreTab      *tab)
 {
-	GtkWidget *hbox, *label_hbox, *label_ebox;
-	GtkWidget *label, *dummy_label;
-	GtkWidget *close_button;
-	GtkRcStyle *rcstyle;
-	GtkWidget *image;
-	GtkWidget *icon;
+  GtkWidget *hbox, *label_hbox, *label_ebox;
+  GtkWidget *label, *dummy_label;
+  GtkWidget *close_button;
+  GtkRcStyle *rcstyle;
+  GtkWidget *image;
+  GtkWidget *icon;
 
-	hbox = gtk_hbox_new (FALSE, 4);
+  hbox = gtk_hbox_new (FALSE, 4);
 
-	label_ebox = gtk_event_box_new ();
-	gtk_event_box_set_visible_window (GTK_EVENT_BOX (label_ebox), FALSE);
-	gtk_box_pack_start (GTK_BOX (hbox), label_ebox, TRUE, TRUE, 0);
+  label_ebox = gtk_event_box_new ();
+  gtk_event_box_set_visible_window (GTK_EVENT_BOX (label_ebox), FALSE);
+  gtk_box_pack_start (GTK_BOX (hbox), label_ebox, TRUE, TRUE, 0);
 
-	label_hbox = gtk_hbox_new (FALSE, 4);
-	gtk_container_add (GTK_CONTAINER (label_ebox), label_hbox);
+  label_hbox = gtk_hbox_new (FALSE, 4);
+  gtk_container_add (GTK_CONTAINER (label_ebox), label_hbox);
 
-	/* setup close button */
-	close_button = gtk_button_new ();
-	gtk_button_set_relief (GTK_BUTTON (close_button),
-			       GTK_RELIEF_NONE);
+  /* setup close button */
+  close_button = gtk_button_new ();
+  gtk_button_set_relief (GTK_BUTTON (close_button),
+			 GTK_RELIEF_NONE);
 
-	/* don't allow focus on the close button */
-	gtk_button_set_focus_on_click (GTK_BUTTON (close_button), FALSE);
+  /* don't allow focus on the close button */
+  gtk_button_set_focus_on_click (GTK_BUTTON (close_button), FALSE);
 
-	/* make it as small as possible */
-	rcstyle = gtk_rc_style_new ();
-	rcstyle->xthickness = rcstyle->ythickness = 0;
-	gtk_widget_modify_style (close_button, rcstyle);
-	gtk_rc_style_unref (rcstyle),
+  /* make it as small as possible */
+  rcstyle = gtk_rc_style_new ();
+  rcstyle->xthickness = rcstyle->ythickness = 0;
+  gtk_widget_modify_style (close_button, rcstyle);
+  gtk_rc_style_unref (rcstyle),
 
-	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
+  image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
 					  GTK_ICON_SIZE_MENU);
-	gtk_container_add (GTK_CONTAINER (close_button), image);
-	gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (close_button), image);
+  gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
 
-	gtk_tooltips_set_tip (nb->priv->tips, close_button,
-			      _("Close connection"), NULL);
+  gtk_widget_set_tooltip_text (close_button, _("Close connection"));
 
-	g_signal_connect (close_button,
-			  "clicked",
-			  G_CALLBACK (close_button_clicked_cb),
-			  tab);
+  g_signal_connect (close_button,
+		    "clicked",
+		    G_CALLBACK (close_button_clicked_cb),
+		    tab);
 
-	/* setup site icon, empty by default */
-	icon = gtk_image_new ();
-	gtk_box_pack_start (GTK_BOX (label_hbox), icon, FALSE, FALSE, 0);
+  /* setup site icon, empty by default */
+  icon = gtk_image_new ();
+  gtk_box_pack_start (GTK_BOX (label_hbox), icon, FALSE, FALSE, 0);
 	
-	/* setup label */
-	label = gtk_label_new (vinagre_connection_best_name (vinagre_tab_get_conn (tab)));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (label), 0, 0);
-	gtk_box_pack_start (GTK_BOX (label_hbox), label, FALSE, FALSE, 0);
+  /* setup label */
+  label = gtk_label_new (vinagre_connection_best_name (vinagre_tab_get_conn (tab)));
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_misc_set_padding (GTK_MISC (label), 0, 0);
+  gtk_box_pack_start (GTK_BOX (label_hbox), label, FALSE, FALSE, 0);
 
-	dummy_label = gtk_label_new ("");
-	gtk_box_pack_start (GTK_BOX (label_hbox), dummy_label, TRUE, TRUE, 0);
+  dummy_label = gtk_label_new ("");
+  gtk_box_pack_start (GTK_BOX (label_hbox), dummy_label, TRUE, TRUE, 0);
 	
-	/* Set minimal size */
-	g_signal_connect (hbox, "style-set",
-			  G_CALLBACK (tab_label_style_set_cb), NULL);
+  /* Set minimal size */
+  g_signal_connect (hbox, "style-set",
+		    G_CALLBACK (tab_label_style_set_cb), NULL);
 	
-	gtk_widget_show (hbox);
-	gtk_widget_show (label_ebox);
-	gtk_widget_show (label_hbox);
-	gtk_widget_show (label);
-	gtk_widget_show (dummy_label);	
-	gtk_widget_show (image);
-	gtk_widget_show (close_button);
-	gtk_widget_show (icon);
-	
-	g_object_set_data (G_OBJECT (hbox), "label", label);
-	g_object_set_data (G_OBJECT (tab),  "label", label);
-	g_object_set_data (G_OBJECT (hbox), "label-ebox", label_ebox);
-	g_object_set_data (G_OBJECT (tab),  "label-ebox", label_ebox);
-	g_object_set_data (G_OBJECT (hbox), "icon", icon);
-	g_object_set_data (G_OBJECT (hbox), "close-button", close_button);
-	g_object_set_data (G_OBJECT (tab),  "close-button", close_button);
-	g_object_set_data (G_OBJECT (hbox), "tooltips", nb->priv->tips);
+  gtk_widget_show (hbox);
+  gtk_widget_show (label_ebox);
+  gtk_widget_show (label_hbox);
+  gtk_widget_show (label);
+  gtk_widget_show (dummy_label);	
+  gtk_widget_show (image);
+  gtk_widget_show (close_button);
+  gtk_widget_show (icon);
+  
+  g_object_set_data (G_OBJECT (hbox), "label", label);
+  g_object_set_data (G_OBJECT (tab),  "label", label);
+  g_object_set_data (G_OBJECT (hbox), "label-ebox", label_ebox);
+  g_object_set_data (G_OBJECT (tab),  "label-ebox", label_ebox);
+  g_object_set_data (G_OBJECT (hbox), "icon", icon);
+  g_object_set_data (G_OBJECT (hbox), "close-button", close_button);
+  g_object_set_data (G_OBJECT (tab),  "close-button", close_button);
 
   g_signal_connect (tab,
-		    "tab-connected",
-		    G_CALLBACK (tab_connected_cb),
+		    "tab-initialized",
+		    G_CALLBACK (tab_initialized_cb),
 		    nb);
 
-	return hbox;
+  return hbox;
 }
 
 void
@@ -258,10 +237,6 @@ vinagre_notebook_remove_tab (VinagreNotebook *nb,
 
   label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
   ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (label), "label-ebox"));
-  gtk_tooltips_set_tip (GTK_TOOLTIPS (nb->priv->tips), 
-			ebox, 
-			NULL, 
-			NULL);
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (nb), position);
 }

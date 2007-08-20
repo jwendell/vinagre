@@ -37,7 +37,6 @@ struct _VinagreFavPrivate
   VinagreWindow *window;
   GtkWidget     *tree;
   GtkTreeModel  *model;
-  GtkTooltips   *tips;
 };
 
 G_DEFINE_TYPE(VinagreFav, vinagre_fav, GTK_TYPE_VBOX)
@@ -426,8 +425,6 @@ vinagre_fav_init (VinagreFav *fav)
 
   fav->priv = VINAGRE_FAV_GET_PRIVATE (fav);
 
-  fav->priv->tips = gtk_tooltips_new ();
-
   /* setup label */
   label_box = gtk_hbox_new (FALSE, 0);
   label = gtk_label_new (_("Favorites"));
@@ -438,8 +435,7 @@ vinagre_fav_init (VinagreFav *fav)
   /* setup small close button */
   close_button = vinagre_utils_create_small_close_button ();
   gtk_box_pack_start (GTK_BOX(label_box), close_button, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (fav->priv->tips, close_button,
-			_("Hide favorites"), NULL);
+  gtk_widget_set_tooltip_text (close_button, _("Hide favorites"));
   gtk_box_pack_start (GTK_BOX(fav), label_box, FALSE, FALSE, 0);
   g_signal_connect (close_button,
 		    "clicked",
