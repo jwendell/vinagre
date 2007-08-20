@@ -188,7 +188,6 @@ vnc_connected_cb (VncDisplay *vnc, VinagreTab *tab)
   g_signal_emit (G_OBJECT (tab),
 		 signals[TAB_CONNECTED],
 		 0);
-printf("connected\n");
 }
 
 static void
@@ -198,7 +197,6 @@ vnc_disconnected_cb (VncDisplay *vnc, VinagreTab *tab)
   g_signal_emit (G_OBJECT (tab),
 		 signals[TAB_DISCONNECTED],
 		 0);
-printf("disconnected\n");
 }
 
 static void
@@ -208,7 +206,6 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
   g_signal_emit (G_OBJECT (tab),
 		 signals[TAB_INITIALIZED],
 		 0);
-printf("initialized\n");
 }
 
 static gchar *
