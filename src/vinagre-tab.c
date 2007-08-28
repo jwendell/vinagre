@@ -253,8 +253,12 @@ static void
 vinagre_tab_init (VinagreTab *tab)
 {
   GtkWidget *scroll;
+  GtkWidget *align;
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
+
+  /* Create the alignment */
+  align = gtk_alignment_new (0.5, 0.5, 0.5, 0.5);
 
   /* Create the scrolled window */
   scroll = gtk_scrolled_window_new (NULL, NULL);
@@ -263,12 +267,15 @@ vinagre_tab_init (VinagreTab *tab)
 				  GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
 				       GTK_SHADOW_IN);
+
   gtk_box_pack_end (GTK_BOX(tab), scroll, TRUE, TRUE, 0);
 
   /* Create the vnc widget */
   tab->priv->vnc = vnc_display_new ();
+  gtk_container_add (GTK_CONTAINER (align), tab->priv->vnc);
+
   gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroll),
-					 tab->priv->vnc);
+					 align);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
 				       GTK_SHADOW_IN);
 
