@@ -258,7 +258,7 @@ vinagre_tab_init (VinagreTab *tab)
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
 
   /* Create the alignment */
-  align = gtk_alignment_new (0.5, 0.5, 0.5, 0.5);
+  align = gtk_alignment_new (0.5, 0.5, 0, 0);
 
   /* Create the scrolled window */
   scroll = gtk_scrolled_window_new (NULL, NULL);
