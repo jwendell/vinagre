@@ -30,6 +30,8 @@
 
 #include "vinagre-notebook.h"
 #include "vinagre-window.h"
+#include "vinagre-utils.h"
+#include "vinagre-main.h"
 
 #define AFTER_ALL_TABS -1
 #define NOT_IN_APP_WINDOWS -2
@@ -105,6 +107,20 @@ tab_initialized_cb (VinagreTab *tab, VinagreNotebook *nb)
   gtk_widget_set_tooltip_markup (label, str);
 
   g_free (str);
+}
+
+static void
+tab_disconnected_cb (VinagreTab *tab, VinagreNotebook *nb)
+{
+  gchar *message;
+
+  message = g_strdup_printf (_("Connection to host \"%s\" was closed."),
+			     vinagre_connection_best_name (
+				vinagre_tab_get_conn (tab)));
+  vinagre_utils_show_error (message, GTK_WINDOW (main_window));
+  g_free (message);
+
+  vinagre_notebook_remove_tab (nb, tab);
 }
 
 static GtkWidget *
@@ -190,6 +206,10 @@ build_tab_label (VinagreNotebook *nb,
   g_signal_connect (tab,
 		    "tab-initialized",
 		    G_CALLBACK (tab_initialized_cb),
+		    nb);
+  g_signal_connect (tab,
+		    "tab-disconnected",
+		    G_CALLBACK (tab_disconnected_cb),
 		    nb);
 
   return hbox;

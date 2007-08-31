@@ -39,4 +39,4 @@ const gchar	*vinagre_utils_get_ui_xml_filename	(void);
 gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 							 gssize      length);
 
-#endif  /* __VINAGRE_FAV_H__  */
+#endif  /* __VINAGRE_UTILS_H__  */
