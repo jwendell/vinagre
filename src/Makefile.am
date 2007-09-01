@@ -20,7 +20,6 @@ vinagre_SOURCES = \
 	vinagre-main.c vinagre-main.h			\
 	vinagre-notebook.c vinagre-notebook.h		\
 	vinagre-prefs-manager.c	vinagre-prefs-manager.h	\
-	vinagre-socket.c vinagre-socket.h		\
 	vinagre-tab.c vinagre-tab.h			\
 	vinagre-utils.c vinagre-utils.h			\
 	vinagre-window.c vinagre-window.h		\

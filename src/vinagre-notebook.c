@@ -139,6 +139,7 @@ build_tab_label (VinagreNotebook *nb,
   label_ebox = gtk_event_box_new ();
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (label_ebox), FALSE);
   gtk_box_pack_start (GTK_BOX (hbox), label_ebox, TRUE, TRUE, 0);
+  gtk_widget_set_tooltip_text (label_ebox, _("Connecting..."));
 
   label_hbox = gtk_hbox_new (FALSE, 4);
   gtk_container_add (GTK_CONTAINER (label_ebox), label_hbox);

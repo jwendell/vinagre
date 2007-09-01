@@ -21,7 +21,6 @@
  */
 
 #include "vinagre-connection.h"
-#include "vinagre-socket.h"
 
 VinagreConnection *
 vinagre_connection_new ()
@@ -34,7 +33,6 @@ vinagre_connection_new ()
   conn->name = NULL;
   conn->password = NULL;
   conn->desktop_name = NULL;
-  conn->sock = 0;
 
   return conn;
 }
@@ -77,7 +75,6 @@ void
 vinagre_connection_free (VinagreConnection *conn)
 {
   if (conn) {
-    disconnect (conn->sock);
 
     if (conn->host)
       g_free (conn->host);
@@ -100,15 +97,6 @@ vinagre_connection_free (VinagreConnection *conn)
   }
 }
 
-/*
-gboolean
-vinagre_connection_connect (VinagreConnection *conn)
-{
-  conn->sock = connect_to_host (conn->host, conn->port);
-  return (conn->sock > 0);
-}
-*/
-
 const gchar *
 vinagre_connection_best_name (VinagreConnection *conn)
 {
@@ -119,7 +107,7 @@ vinagre_connection_best_name (VinagreConnection *conn)
     return conn->desktop_name;
 
   if (conn->host)
-    return conn->host;
+    return g_strdup_printf ("%s:%d", conn->host, conn->port);
 
   return NULL;
 }

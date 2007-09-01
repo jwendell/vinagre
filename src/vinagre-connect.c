@@ -27,7 +27,6 @@
 
 #include "vinagre-connect.h"
 #include "vinagre-main.h"
-#include "vinagre-socket.h"
 #include "vinagre-utils.h"
 #include "vinagre-favorites.h"
 
@@ -106,34 +105,17 @@ VinagreConnection *vinagre_connect ()
   gint               result;
   const gchar       *host;
   int                port;
-/*  int                sock;*/
 
   dialog = vinagre_connect_create_window ();
 
-/*  do
-    {*/
-      result = gtk_dialog_run (GTK_DIALOG (dialog));
-
-      if (result == GTK_RESPONSE_OK)
-        {
-	  host = gtk_entry_get_text (GTK_ENTRY(host_entry));
-	  port = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (port_entry));
-/*
-	  sock = connect_to_host (host, port);
-
-	  if (sock == -1)
-            {
-	      vinagre_utils_show_error (_("Error connecting to host"), GTK_WINDOW(dialog));
-              gtk_widget_grab_focus (host_entry);
-            }*/
-        }
-
-/*    } while ((result == GTK_RESPONSE_OK) && (sock == -1));*/
+  result = gtk_dialog_run (GTK_DIALOG (dialog));
 
   if (result == GTK_RESPONSE_OK)
     {
+      host = gtk_entry_get_text (GTK_ENTRY(host_entry));
+      port = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (port_entry));
+
       gtk_widget_hide (GTK_WIDGET (dialog));
-      /*disconnect (sock);*/
 
       conn = vinagre_favorites_exists (host, port);
       if (!conn)
@@ -141,8 +123,6 @@ VinagreConnection *vinagre_connect ()
 	  conn = vinagre_connection_new ();
 	  vinagre_connection_set_host (conn, host);
 	  vinagre_connection_set_port (conn, port);
-	  /*vinagre_connection_set_password (conn, vinagre_connect_ask_password());*/
-	  /*vinagre_connection_connect (conn);*/
 	}
     }
 

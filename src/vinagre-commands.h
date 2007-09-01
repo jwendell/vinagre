@@ -29,6 +29,9 @@
 
 G_BEGIN_DECLS
 
+void		vinagre_cmd_direct_connect	(VinagreConnection *conn,
+						 VinagreWindow     *window);
+
 void		vinagre_cmd_machine_connect	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_machine_close	(GtkAction     *action,

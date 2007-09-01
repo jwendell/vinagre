@@ -32,7 +32,6 @@ typedef struct
   char *name;
   char *password;
   char *desktop_name;
-  int   sock;
 } VinagreConnection;
 
 VinagreConnection *vinagre_connection_new (void);
@@ -47,7 +46,7 @@ void		  vinagre_connection_set_name (VinagreConnection *conn,
 					       const char *name);
 
 void              vinagre_connection_free (VinagreConnection *conn);
-/*gboolean          vinagre_connection_connect (VinagreConnection *conn);*/
+
 const gchar       *vinagre_connection_best_name (VinagreConnection *conn);
 
 VinagreConnection *vinagre_connection_clone (VinagreConnection *conn);

@@ -39,6 +39,20 @@
 #include "vinagre-window-private.h"
 #include "vinagre-prefs-manager.h"
 
+void
+vinagre_cmd_direct_connect (VinagreConnection *conn,
+			    VinagreWindow     *window)
+{
+  GtkWidget *tab;
+
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+
+  tab = vinagre_tab_new (conn);
+  vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
+			    VINAGRE_TAB (tab),
+			    -1);
+}
+
 /* Machine Menu */
 void
 vinagre_cmd_machine_connect (GtkAction     *action,
