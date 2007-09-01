@@ -66,8 +66,12 @@ vinagre_utils_show_error (const gchar *message, GtkWindow *parent)
 			      GTK_MESSAGE_ERROR,
 			      GTK_BUTTONS_CLOSE,
 			      message);
-  gtk_dialog_run(GTK_DIALOG(d));
-  gtk_widget_destroy(d);
+
+  g_signal_connect_swapped (d,
+			    "response", 
+			    G_CALLBACK (gtk_widget_destroy),
+			    d);
+  gtk_widget_show_all (GTK_WIDGET(d));
 }
 
 void

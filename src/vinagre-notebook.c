@@ -248,16 +248,12 @@ void
 vinagre_notebook_remove_tab (VinagreNotebook *nb,
 			     VinagreTab      *tab)
 {
-  GtkWidget *label, *ebox;
   gint position;
 
   g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
   position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
-
-  label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
-  ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (label), "label-ebox"));
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (nb), position);
 }

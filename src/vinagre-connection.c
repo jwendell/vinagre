@@ -100,6 +100,8 @@ vinagre_connection_free (VinagreConnection *conn)
 const gchar *
 vinagre_connection_best_name (VinagreConnection *conn)
 {
+  g_return_val_if_fail (conn != NULL, NULL);
+
   if (conn->name)
     return conn->name;
 
