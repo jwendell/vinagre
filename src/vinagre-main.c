@@ -31,7 +31,7 @@
 #include "vinagre-prefs-manager.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
-
+#include "vinagre-favorites.h"
 
 /* command line */
 static gchar **remaining_args = NULL;
@@ -61,9 +61,13 @@ vinagre_main_process_command_line (void)
 	  host = server[0];
 	  port = server[1] ? atoi (server[1]) : 5900;
 
-	  conn = vinagre_connection_new ();
-	  vinagre_connection_set_host (conn, host);
-	  vinagre_connection_set_port (conn, port);
+	  conn = vinagre_favorites_exists (host, port);
+	  if (!conn)
+	    {
+	      conn = vinagre_connection_new ();
+	      vinagre_connection_set_host (conn, host);
+	      vinagre_connection_set_port (conn, port);
+	    }
 
 	  servers = g_slist_append (servers, conn);
 	  g_strfreev (server);
@@ -102,7 +106,7 @@ int main (int argc, char **argv) {
       next = l->next;
       vinagre_cmd_direct_connect (conn, main_window);
     }
-//  g_slist_free (servers);
+  g_slist_free (servers);
 
   gtk_main ();
 

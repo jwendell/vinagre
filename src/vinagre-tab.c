@@ -39,6 +39,7 @@ struct _VinagreTabPrivate
 {
   GtkWidget *vnc;
   VinagreConnection *conn;
+  VinagreNotebook *nb;
 };
 
 G_DEFINE_TYPE(VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
@@ -245,8 +246,15 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
   gchar *password;
   
   password = ask_password ();
+  if (!password) {
+    vinagre_notebook_remove_tab (tab->priv->nb, tab);
+    return;
+  }
+
   vinagre_connection_set_password (tab->priv->conn, password);
   vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
+
+  g_free (password);
 }
 
 static void
@@ -364,3 +372,22 @@ vinagre_tab_set_title (VinagreTab *tab,
   label = GTK_LABEL (g_object_get_data (G_OBJECT (tab),  "label"));
   gtk_label_set_label (label, title);
 }
+
+void
+vinagre_tab_set_notebook (VinagreTab      *tab,
+		          VinagreNotebook *nb)
+{
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+  g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
+
+  tab->priv->nb = nb;
+}
+
+VinagreNotebook *
+vinagre_tab_get_notebook (VinagreTab *tab)
+{
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), NULL);
+
+  return tab->priv->nb;
+}
+

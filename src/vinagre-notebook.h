@@ -20,10 +20,8 @@
  * Boston, MA 02111-1307, USA.
  */
   
-#ifndef VINAGRE_NOTEBOOK_H
-#define VINAGRE_NOTEBOOK_H
-
-#include "vinagre-tab.h"
+#ifndef __VINAGRE_NOTEBOOK_H__
+#define __VINAGRE_NOTEBOOK_H__
 
 #include <glib.h>
 #include <gtk/gtknotebook.h>
@@ -47,6 +45,8 @@ typedef struct _VinagreNotebookPrivate	VinagreNotebookPrivate;
  * Main object structure
  */
 typedef struct _VinagreNotebook		VinagreNotebook;
+
+#include "vinagre-tab.h"
  
 struct _VinagreNotebook
 {
@@ -83,17 +83,17 @@ struct _VinagreNotebookClass
  */
 GType		vinagre_notebook_get_type		(void) G_GNUC_CONST;
 
-GtkWidget      *vinagre_notebook_new		(void);
+GtkWidget      *vinagre_notebook_new			(void);
 
-void		vinagre_notebook_add_tab	(VinagreNotebook *nb,
-						 VinagreTab      *tab,
-						 gint           position);
+void		vinagre_notebook_add_tab		(VinagreNotebook *nb,
+							 VinagreTab      *tab,
+							 gint           position);
 
-void		vinagre_notebook_remove_tab	(VinagreNotebook *nb,
-						 VinagreTab      *tab);
+void		vinagre_notebook_remove_tab		(VinagreNotebook *nb,
+							 VinagreTab      *tab);
 
 void		vinagre_notebook_remove_all_tabs 	(VinagreNotebook *nb);
 
 G_END_DECLS
 
-#endif /* VINAGRE_NOTEBOOK_H */
+#endif /* __VINAGRE_NOTEBOOK_H__ */

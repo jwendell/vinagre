@@ -235,6 +235,7 @@ vinagre_notebook_add_tab (VinagreNotebook *nb,
 				  position);
 
   gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), pos);
+  vinagre_tab_set_notebook (tab, nb);
 }
 
 static void

@@ -40,6 +40,8 @@ typedef struct _VinagreTabPrivate VinagreTabPrivate;
 typedef struct _VinagreTab        VinagreTab;
 typedef struct _VinagreTabClass   VinagreTabClass;
 
+#include "vinagre-notebook.h"
+
 struct _VinagreTab 
 {
   GtkVBox vbox;
@@ -52,7 +54,7 @@ struct _VinagreTabClass
 
   /* Signals */
   void		(* tab_connected)		(VinagreTab *tab);
-  void		(* tab_disconnected)	(VinagreTab *tab);
+  void		(* tab_disconnected)		(VinagreTab *tab);
   void		(* tab_initialized)		(VinagreTab *tab);
 };
 
@@ -69,6 +71,9 @@ gchar             *vinagre_tab_get_tooltips     (VinagreTab *tab);
 void		  vinagre_tab_set_title		(VinagreTab *tab,
 						 const char *title);
 
+void		  vinagre_tab_set_notebook	(VinagreTab *tab,
+						 VinagreNotebook *nb);
+VinagreNotebook   *vinagre_tab_get_notebook	(VinagreTab *tab);
 G_END_DECLS
 
 #endif  /* __VINAGRE_TAB_H__  */
