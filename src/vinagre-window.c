@@ -129,9 +129,6 @@ vinagre_window_state_event_cb (GtkWidget *widget,
 {
   VinagreWindow *window;
 
-  if (event->changed_mask != GDK_WINDOW_STATE_FULLSCREEN)
-    return FALSE;
-
   window = VINAGRE_WINDOW (widget);
 
   if (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN)
