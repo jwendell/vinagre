@@ -391,3 +391,47 @@ vinagre_tab_get_notebook (VinagreTab *tab)
   return tab->priv->nb;
 }
 
+void
+vinagre_tab_take_screenshot (VinagreTab *tab)
+{
+  GdkPixbuf     *pix;
+  GtkWidget     *dialog;
+  GString       *suggested_filename;
+  gchar         *filename;
+  GtkFileFilter *filter;
+
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  pix = vnc_display_get_pixbuf (VNC_DISPLAY (tab->priv->vnc));
+
+  filename = NULL;
+  suggested_filename = g_string_new (NULL);
+  g_string_printf (suggested_filename, _("Screenshot of %s"), vinagre_connection_best_name (tab->priv->conn));
+  g_string_append (suggested_filename, ".png");
+
+  dialog = gtk_file_chooser_dialog_new (_("Save Screenshot"),
+				      GTK_WINDOW (main_window),
+				      GTK_FILE_CHOOSER_ACTION_SAVE,
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+				      NULL);
+  gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
+  gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), suggested_filename->str);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_set_name (filter, _("Supported formats"));
+  gtk_file_filter_add_pixbuf_formats (filter);
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+
+  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+    {
+      filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+      gdk_pixbuf_save (pix, filename, "png", NULL, NULL);
+      g_free (filename);
+  }
+
+  gtk_widget_destroy (dialog);
+  gdk_pixbuf_unref (pix);
+  g_string_free (suggested_filename, TRUE);
+}

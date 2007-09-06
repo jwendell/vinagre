@@ -81,6 +81,13 @@ vinagre_cmd_machine_close (GtkAction     *action,
 }
 
 void
+vinagre_cmd_machine_take_screenshot (GtkAction     *action,
+				     VinagreWindow *window)
+{
+  vinagre_tab_take_screenshot (vinagre_window_get_active_tab (window));
+}
+
+void
 vinagre_cmd_machine_close_all (GtkAction     *action,
 			       VinagreWindow *window)
 {

@@ -788,6 +788,14 @@ vinagre_window_close_active_tab	(VinagreWindow *window)
 			    VINAGRE_TAB (window->priv->active_tab));
 }
 
+VinagreTab *
+vinagre_window_get_active_tab	(VinagreWindow *window)
+{
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+
+  return VINAGRE_TAB (window->priv->active_tab);
+}
+
 GtkUIManager *
 vinagre_window_get_ui_manager (VinagreWindow *window)
 {

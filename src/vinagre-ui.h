@@ -68,6 +68,8 @@ static const GtkActionEntry vinagre_menu_entries[] =
   /* Machine menu */
   { "MachineClose", GTK_STOCK_CLOSE, NULL, "<control>W",
     N_("Close the current connection"), G_CALLBACK (vinagre_cmd_machine_close) },
+  { "MachineTakeScreenshot", "applets-screenshooter", N_("Take screenshot"), NULL,
+    N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_machine_take_screenshot) },
   { "MachineCloseAll", GTK_STOCK_CLOSE, N_("C_lose All"), "<control><shift>W",
     N_("Close all active connections"), G_CALLBACK (vinagre_cmd_machine_close_all) },
 
