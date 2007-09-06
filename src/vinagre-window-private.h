@@ -35,6 +35,8 @@ struct _VinagreWindowPrivate
   GtkWidget       *notebook;
   GtkWidget       *fav_panel;
   GtkWidget       *statusbar;	
+  guint           generic_message_cid;
+  guint           tip_message_cid;
 
   GtkWidget       *hpaned;
 

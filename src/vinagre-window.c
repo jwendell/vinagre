@@ -197,6 +197,64 @@ vinagre_window_class_init (VinagreWindowClass *klass)
 }
 
 static void
+menu_item_select_cb (GtkItem       *proxy,
+		     VinagreWindow *window)
+{
+  GtkAction *action;
+  char *message;
+
+  action = g_object_get_data (G_OBJECT (proxy),  "gtk-action");
+  g_return_if_fail (action != NULL);
+
+  g_object_get (G_OBJECT (action), "tooltip", &message, NULL);
+  if (message)
+    {
+      gtk_statusbar_push (GTK_STATUSBAR (window->priv->statusbar),
+			  window->priv->tip_message_cid, message);
+      g_free (message);
+    }
+}
+
+static void
+menu_item_deselect_cb (GtkItem       *proxy,
+                       VinagreWindow *window)
+{
+  gtk_statusbar_pop (GTK_STATUSBAR (window->priv->statusbar),
+		     window->priv->tip_message_cid);
+}
+
+static void
+connect_proxy_cb (GtkUIManager  *manager,
+                  GtkAction     *action,
+                  GtkWidget     *proxy,
+                  VinagreWindow *window)
+{
+  if (GTK_IS_MENU_ITEM (proxy))
+    {
+       g_signal_connect (proxy, "select",
+			 G_CALLBACK (menu_item_select_cb), window);
+       g_signal_connect (proxy, "deselect",
+			 G_CALLBACK (menu_item_deselect_cb), window);
+    }
+}
+
+static void
+disconnect_proxy_cb (GtkUIManager  *manager,
+                     GtkAction     *action,
+                     GtkWidget     *proxy,
+                     VinagreWindow *window)
+{
+printf("disconnect\n");
+  if (GTK_IS_MENU_ITEM (proxy))
+    {
+      g_signal_handlers_disconnect_by_func
+		(proxy, G_CALLBACK (menu_item_select_cb), window);
+      g_signal_handlers_disconnect_by_func
+		(proxy, G_CALLBACK (menu_item_deselect_cb), window);
+    }
+}
+
+static void
 create_menu_bar_and_toolbar (VinagreWindow *window, 
 			     GtkWidget     *main_box)
 {
@@ -206,6 +264,17 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 
   manager = gtk_ui_manager_new ();
   window->priv->manager = manager;
+
+  /* show tooltips in the statusbar */
+  g_signal_connect (manager,
+		    "connect-proxy",
+		    G_CALLBACK (connect_proxy_cb),
+		    window);
+  g_signal_connect (manager,
+		   "disconnect-proxy",
+		    G_CALLBACK (disconnect_proxy_cb),
+		    window);
+
   gtk_window_add_accel_group (GTK_WINDOW (window),
 			      gtk_ui_manager_get_accel_group (manager));
 
@@ -535,6 +604,11 @@ create_statusbar (VinagreWindow *window,
 		  GtkWidget   *main_box)
 {
   window->priv->statusbar = gtk_statusbar_new ();
+
+  window->priv->generic_message_cid = gtk_statusbar_get_context_id
+	(GTK_STATUSBAR (window->priv->statusbar), "generic_message");
+  window->priv->tip_message_cid = gtk_statusbar_get_context_id
+	(GTK_STATUSBAR (window->priv->statusbar), "tip_message");
 
   gtk_box_pack_end (GTK_BOX (main_box),
 		    window->priv->statusbar,
