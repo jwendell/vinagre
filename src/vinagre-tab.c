@@ -30,8 +30,8 @@
 
 #include "vinagre-notebook.h"
 #include "vinagre-tab.h"
-#include "vinagre-main.h"
 #include "vinagre-utils.h"
+#include "vinagre-window.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
 
@@ -40,6 +40,9 @@ struct _VinagreTabPrivate
   GtkWidget *vnc;
   VinagreConnection *conn;
   VinagreNotebook *nb;
+  GtkWidget *window;
+  GtkStatusbar *status;
+  guint status_id;
 };
 
 G_DEFINE_TYPE(VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
@@ -167,6 +170,10 @@ static gboolean
 open_vnc (VinagreTab *tab)
 {
   gchar *port;
+
+  tab->priv->window = gtk_widget_get_toplevel (GTK_WIDGET (tab));
+  tab->priv->status = GTK_STATUSBAR (vinagre_window_get_statusbar (VINAGRE_WINDOW (tab->priv->window)));
+  tab->priv->status_id = gtk_statusbar_get_context_id (tab->priv->status, "VNC Widget Messages");
   
   port = g_strdup_printf ("%d", tab->priv->conn->port);
   
@@ -210,7 +217,7 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 }
 
 static gchar *
-ask_password()
+ask_password(VinagreTab *tab)
 {
   GladeXML   *xml;
   const char *glade_file;
@@ -222,7 +229,7 @@ ask_password()
   xml = glade_xml_new (glade_file, NULL, NULL);
 
   password_dialog = glade_xml_get_widget (xml, "password_required_dialog");
-  gtk_window_set_transient_for (GTK_WINDOW(password_dialog), GTK_WINDOW(main_window));
+  gtk_window_set_transient_for (GTK_WINDOW(password_dialog), GTK_WINDOW(tab->priv->window));
 
   result = gtk_dialog_run (GTK_DIALOG (password_dialog));
   if (result != -5)
@@ -245,7 +252,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
 {
   gchar *password;
   
-  password = ask_password ();
+  password = ask_password (tab);
   if (!password) {
     vinagre_notebook_remove_tab (tab->priv->nb, tab);
     return;
@@ -255,6 +262,16 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
   vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
 
   g_free (password);
+}
+
+static void vnc_grab_cb (VncDisplay *vnc, VinagreTab *tab)
+{
+  gtk_statusbar_push (tab->priv->status, tab->priv->status_id, _("Press Ctrl+Alt to release the cursor"));
+}
+
+static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
+{
+  gtk_statusbar_pop (tab->priv->status, tab->priv->status_id);
 }
 
 static void
@@ -305,6 +322,16 @@ vinagre_tab_init (VinagreTab *tab)
   g_signal_connect (tab->priv->vnc,
 		    "vnc-auth-credential",
 		    G_CALLBACK (vnc_authentication_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-pointer-grab",
+		    G_CALLBACK (vnc_grab_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-pointer-ungrab",
+		    G_CALLBACK (vnc_ungrab_cb),
 		    tab);
 
  /* connect VNC */
@@ -410,7 +437,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   g_string_append (suggested_filename, ".png");
 
   dialog = gtk_file_chooser_dialog_new (_("Save Screenshot"),
-				      GTK_WINDOW (main_window),
+				      GTK_WINDOW (tab->priv->window),
 				      GTK_FILE_CHOOSER_ACTION_SAVE,
 				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
