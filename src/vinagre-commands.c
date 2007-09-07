@@ -260,7 +260,7 @@ vinagre_cmd_help_about (GtkAction     *action,
 			 "logo-icon-name", "gnome-remote-desktop",
 			 "translator-credits", _("translator-credits"),
 			 "version", VERSION,
-			 "website", "http://www.gnome.org/~jwendell/vinagre",
+			 "website", "http://www.gnome.org/projects/vinagre/",
 			 "website-label", _("Vinagre Website"),
 			 NULL);
   g_free (license_trans);
