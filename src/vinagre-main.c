@@ -90,7 +90,8 @@ int main (int argc, char **argv) {
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
   g_option_context_parse (context, &argc, &argv, &error);
 
-  g_thread_init (NULL);
+  if (!g_thread_supported ())
+    g_thread_init (NULL);
 
   g_set_application_name (_("Vinagre"));
   vinagre_prefs_manager_init ();
