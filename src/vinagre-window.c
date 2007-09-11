@@ -617,7 +617,7 @@ create_statusbar (VinagreWindow *window,
 		    0);
 }
 
-static void 
+void
 vinagre_window_set_title (VinagreWindow *window)
 {
   gchar *title;

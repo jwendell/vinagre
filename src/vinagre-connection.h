@@ -44,6 +44,8 @@ void		  vinagre_connection_set_password (VinagreConnection *conn,
 						   const char *password);
 void		  vinagre_connection_set_name (VinagreConnection *conn,
 					       const char *name);
+void		  vinagre_connection_set_desktop_name (VinagreConnection *conn,
+						       const char *desktop_name);
 
 void              vinagre_connection_free (VinagreConnection *conn);
 

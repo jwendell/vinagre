@@ -210,6 +210,16 @@ vnc_disconnected_cb (VncDisplay *vnc, VinagreTab *tab)
 static void
 vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
+  GtkLabel *label;
+
+  vinagre_connection_set_desktop_name (tab->priv->conn,
+				       vnc_display_get_name (VNC_DISPLAY (tab->priv->vnc)));
+  label = g_object_get_data (G_OBJECT (tab), "label");
+  g_return_if_fail (label != NULL);
+  gtk_label_set_label (label, vinagre_connection_best_name (tab->priv->conn));
+
+  vinagre_window_set_title (VINAGRE_WINDOW (tab->priv->window));
+
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),
 		 signals[TAB_INITIALIZED],

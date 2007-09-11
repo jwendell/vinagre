@@ -71,6 +71,15 @@ vinagre_connection_set_name (VinagreConnection *conn,
   conn->name = g_strdup (name);
 }
 
+void 
+vinagre_connection_set_desktop_name (VinagreConnection *conn,
+				     const char *desktop_name)
+{
+  if (conn->desktop_name)
+    g_free (conn->desktop_name);
+  conn->desktop_name = g_strdup (desktop_name);
+}
+
 void
 vinagre_connection_free (VinagreConnection *conn)
 {
@@ -125,6 +134,7 @@ vinagre_connection_clone (VinagreConnection *conn)
   vinagre_connection_set_port (new_conn, conn->port);
   vinagre_connection_set_password (new_conn, conn->password);
   vinagre_connection_set_name (new_conn, conn->name);
+  vinagre_connection_set_desktop_name (new_conn, conn->desktop_name);
 
   return new_conn;
 }

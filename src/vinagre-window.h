@@ -84,6 +84,7 @@ GtkUIManager	*vinagre_window_get_ui_manager		(VinagreWindow         *window);
 gboolean	vinagre_window_is_fullscreen		(VinagreWindow         *window);
 
 void		vinagre_window_toggle_fullscreen	(VinagreWindow *window);
+void		vinagre_window_set_title		(VinagreWindow *window);
 
 G_END_DECLS
 
