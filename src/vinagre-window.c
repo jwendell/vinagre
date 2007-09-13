@@ -685,7 +685,7 @@ vinagre_window_switch_page (GtkNotebook     *notebook,
 static void
 create_notebook (VinagreWindow *window)
 {
-  window->priv->notebook = vinagre_notebook_new ();
+  window->priv->notebook = vinagre_notebook_new (window);
 
   gtk_paned_pack2 (GTK_PANED (window->priv->hpaned), 
   		   window->priv->notebook,

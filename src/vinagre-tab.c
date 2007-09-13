@@ -31,7 +31,6 @@
 #include "vinagre-notebook.h"
 #include "vinagre-tab.h"
 #include "vinagre-utils.h"
-#include "vinagre-window.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
 
@@ -40,7 +39,7 @@ struct _VinagreTabPrivate
   GtkWidget *vnc;
   VinagreConnection *conn;
   VinagreNotebook *nb;
-  GtkWidget *window;
+  VinagreWindow *window;
   GtkStatusbar *status;
   guint status_id;
 };
@@ -171,8 +170,7 @@ open_vnc (VinagreTab *tab)
 {
   gchar *port;
 
-  tab->priv->window = gtk_widget_get_toplevel (GTK_WIDGET (tab));
-  tab->priv->status = GTK_STATUSBAR (vinagre_window_get_statusbar (VINAGRE_WINDOW (tab->priv->window)));
+  tab->priv->status = GTK_STATUSBAR (vinagre_window_get_statusbar (tab->priv->window));
   tab->priv->status_id = gtk_statusbar_get_context_id (tab->priv->status, "VNC Widget Messages");
   
   port = g_strdup_printf ("%d", tab->priv->conn->port);
@@ -208,6 +206,24 @@ vnc_disconnected_cb (VncDisplay *vnc, VinagreTab *tab)
 }
 
 static void
+vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreTab *tab)
+{
+  GString *message;
+  message = g_string_new (NULL);
+  g_string_printf (message, _("Authentication to host \"%s\" has failed"),
+			vinagre_connection_best_name (
+				vinagre_tab_get_conn (tab)));
+  if (msg)
+  	g_string_append_printf (message, " (%s)", msg);
+  g_string_append_printf (message, ".");
+
+  vinagre_utils_show_error (message->str, GTK_WINDOW (tab->priv->window));
+  g_string_free (message, TRUE);
+
+  vinagre_notebook_remove_tab (tab->priv->nb, tab);
+}
+
+static void
 vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   GtkLabel *label;
@@ -218,7 +234,7 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
   g_return_if_fail (label != NULL);
   gtk_label_set_label (label, vinagre_connection_best_name (tab->priv->conn));
 
-  vinagre_window_set_title (VINAGRE_WINDOW (tab->priv->window));
+  vinagre_window_set_title (tab->priv->window);
 
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),
@@ -344,6 +360,11 @@ vinagre_tab_init (VinagreTab *tab)
 		    G_CALLBACK (vnc_ungrab_cb),
 		    tab);
 
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-auth-failure",
+		    G_CALLBACK (vnc_auth_failed_cb),
+		    tab);
+
  /* connect VNC */
  /* FIXME: i had to add a timeout because private conn is not available at this time*/
   g_timeout_add (1000,
@@ -354,11 +375,13 @@ vinagre_tab_init (VinagreTab *tab)
 }
 
 GtkWidget *
-vinagre_tab_new (VinagreConnection *conn)
+vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
 {
-  return GTK_WIDGET (g_object_new (VINAGRE_TYPE_TAB, 
+  VinagreTab *tab = g_object_new (VINAGRE_TYPE_TAB, 
 				   "conn", conn,
-				   NULL));
+				   NULL);
+  tab->priv->window = window;
+  return GTK_WIDGET (tab);
 }
 
 

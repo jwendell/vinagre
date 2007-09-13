@@ -46,8 +46,9 @@ typedef struct _VinagreNotebookPrivate	VinagreNotebookPrivate;
  */
 typedef struct _VinagreNotebook		VinagreNotebook;
 
+#include "vinagre-window.h"
 #include "vinagre-tab.h"
- 
+
 struct _VinagreNotebook
 {
 	GtkNotebook notebook;
@@ -83,7 +84,7 @@ struct _VinagreNotebookClass
  */
 GType		vinagre_notebook_get_type		(void) G_GNUC_CONST;
 
-GtkWidget      *vinagre_notebook_new			(void);
+GtkWidget      *vinagre_notebook_new			(VinagreWindow *window);
 
 void		vinagre_notebook_add_tab		(VinagreNotebook *nb,
 							 VinagreTab      *tab,

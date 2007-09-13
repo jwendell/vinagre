@@ -24,7 +24,6 @@
 #define __VINAGRE_TAB_H__
 
 #include <gtk/gtk.h>
-#include "vinagre-connection.h"
 
 G_BEGIN_DECLS
 
@@ -40,7 +39,9 @@ typedef struct _VinagreTabPrivate VinagreTabPrivate;
 typedef struct _VinagreTab        VinagreTab;
 typedef struct _VinagreTabClass   VinagreTabClass;
 
+#include "vinagre-connection.h"
 #include "vinagre-notebook.h"
+#include "vinagre-window.h"
 
 struct _VinagreTab 
 {
@@ -60,7 +61,8 @@ struct _VinagreTabClass
 
 GType 		  vinagre_tab_get_type		(void) G_GNUC_CONST;
 
-GtkWidget 	  *vinagre_tab_new 		(VinagreConnection *conn);
+GtkWidget 	  *vinagre_tab_new 		(VinagreConnection *conn,
+						 VinagreWindow     *window);
 
 VinagreConnection *vinagre_tab_get_conn		(VinagreTab *tab);
 

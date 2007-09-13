@@ -29,18 +29,13 @@
 #include <gtk/gtk.h>
 
 #include "vinagre-notebook.h"
-#include "vinagre-window.h"
 #include "vinagre-utils.h"
-#include "vinagre-main.h"
-
-#define AFTER_ALL_TABS -1
-#define NOT_IN_APP_WINDOWS -2
 
 #define VINAGRE_NOTEBOOK_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_NOTEBOOK, VinagreNotebookPrivate))
 
 struct _VinagreNotebookPrivate
 {
-  gint dummy;
+  VinagreWindow *window;
 };
 
 G_DEFINE_TYPE(VinagreNotebook, vinagre_notebook, GTK_TYPE_NOTEBOOK)
@@ -54,9 +49,12 @@ vinagre_notebook_class_init (VinagreNotebookClass *klass)
 }
 
 GtkWidget *
-vinagre_notebook_new (void)
+vinagre_notebook_new (VinagreWindow *window)
 {
-  return GTK_WIDGET (g_object_new (VINAGRE_TYPE_NOTEBOOK, NULL));
+  VinagreNotebook *nb = g_object_new (VINAGRE_TYPE_NOTEBOOK, NULL);
+
+  nb->priv->window = window;
+  return GTK_WIDGET (nb);
 }
 
 static void
@@ -117,7 +115,7 @@ tab_disconnected_cb (VinagreTab *tab, VinagreNotebook *nb)
   message = g_strdup_printf (_("Connection to host \"%s\" was closed."),
 			     vinagre_connection_best_name (
 				vinagre_tab_get_conn (tab)));
-  vinagre_utils_show_error (message, GTK_WINDOW (main_window));
+  vinagre_utils_show_error (message, GTK_WINDOW (nb->priv->window));
   g_free (message);
 
   vinagre_notebook_remove_tab (nb, tab);
@@ -255,6 +253,10 @@ vinagre_notebook_remove_tab (VinagreNotebook *nb,
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
   position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
+
+  g_signal_handlers_disconnect_by_func (tab,
+					G_CALLBACK (tab_disconnected_cb),
+					nb);
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (nb), position);
 }

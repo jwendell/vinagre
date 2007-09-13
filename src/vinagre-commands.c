@@ -47,7 +47,7 @@ vinagre_cmd_direct_connect (VinagreConnection *conn,
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  tab = vinagre_tab_new (conn);
+  tab = vinagre_tab_new (conn, window);
   vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
 			    VINAGRE_TAB (tab),
 			    -1);
@@ -67,7 +67,7 @@ vinagre_cmd_machine_connect (GtkAction     *action,
   if (!conn)
     return;
 
-  tab = vinagre_tab_new (conn);
+  tab = vinagre_tab_new (conn, window);
   vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
 			    VINAGRE_TAB (tab),
 			    -1);
@@ -148,7 +148,7 @@ vinagre_cmd_open_favorite (VinagreWindow     *window,
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
   new_conn = vinagre_connection_clone (conn);
-  tab = vinagre_tab_new (new_conn);
+  tab = vinagre_tab_new (new_conn, window);
   vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
 			    VINAGRE_TAB (tab),
 			    -1);

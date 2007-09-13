@@ -24,7 +24,6 @@
 #define __VINAGRE_WINDOW_H__
 
 #include <gtk/gtk.h>
-#include "vinagre-tab.h"
 
 G_BEGIN_DECLS
 
@@ -39,6 +38,8 @@ G_BEGIN_DECLS
 typedef struct _VinagreWindowPrivate VinagreWindowPrivate;
 typedef struct _VinagreWindow        VinagreWindow;
 typedef struct _VinagreWindowClass   VinagreWindowClass;
+
+#include "vinagre-tab.h"
 
 struct _VinagreWindow 
 {
