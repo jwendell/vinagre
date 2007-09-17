@@ -1,5 +1,5 @@
 /*
- * vinagre-help-commands.c
+ * vinagre-commands.c
  * This file is part of vinagre
  *
  * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
@@ -15,9 +15,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -241,8 +239,7 @@ vinagre_cmd_help_about (GtkAction     *action,
 	   "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
 	   "GNU General Public License for more details."),
 	N_("You should have received a copy of the GNU General Public License "
-	   "along with Nautilus; if not, write to the Free Software Foundation, Inc., "
-	   "59 Temple Place, Suite 330, Boston, MA  02111-1307  USA")
+	   "along with this program. If not, see <http://www.gnu.org/licenses/>.")
   };
 
   gchar *license_trans;
