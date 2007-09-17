@@ -120,7 +120,7 @@ vinagre_tab_class_init (VinagreTabClass *klass)
   object_class->finalize = vinagre_tab_finalize;
   object_class->get_property = vinagre_tab_get_property;
   object_class->set_property = vinagre_tab_set_property;
-	
+
   g_object_class_install_property (object_class,
 				   PROP_CONN,
 				   g_param_spec_pointer ("conn",
@@ -293,11 +293,17 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
 static void vnc_grab_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   gtk_statusbar_push (tab->priv->status, tab->priv->status_id, _("Press Ctrl+Alt to release the cursor"));
+
+  if (vinagre_window_is_fullscreen (tab->priv->window))
+    gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->nb), FALSE);
 }
 
 static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   gtk_statusbar_pop (tab->priv->status, tab->priv->status_id);
+
+  if (vinagre_window_is_fullscreen (tab->priv->window))
+    gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->nb), TRUE);
 }
 
 static void

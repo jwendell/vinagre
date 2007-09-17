@@ -645,6 +645,9 @@ vinagre_window_page_removed (GtkNotebook   *notebook,
 
   window->priv->active_tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (window->priv->notebook), gtk_notebook_get_current_page (GTK_NOTEBOOK (window->priv->notebook)));
 
+  if (!window->priv->active_tab && window->priv->fullscreen)
+    vinagre_window_toggle_fullscreen (window);
+
   vinagre_window_set_title (window);
   set_machine_menu_sensitivity (window);
 }
