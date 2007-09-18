@@ -157,7 +157,7 @@ vinagre_favorites_add (VinagreConnection *conn,
 			      name,
 			      "port",
 			      conn->port);
-      if (strlen(conn->password) > 0)
+      if (conn->password)
 	g_key_file_set_string (favorites,
 			       name,
 			       "password",
