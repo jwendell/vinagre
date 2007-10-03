@@ -222,6 +222,22 @@ vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreTab *tab)
 }
 
 static void
+vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreTab *tab)
+{
+  GString *message;
+  message = g_string_new (NULL);
+  g_string_printf (message, _("Authentication method to host \"%s\" is unsupported. (%u)"),
+			vinagre_connection_best_name (
+				vinagre_tab_get_conn (tab)),
+			auth_type);
+
+  vinagre_utils_show_error (message->str, GTK_WINDOW (tab->priv->window));
+  g_string_free (message, TRUE);
+
+  vinagre_notebook_remove_tab (tab->priv->nb, tab);
+}
+
+static void
 vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   GtkLabel *label;
@@ -367,6 +383,11 @@ vinagre_tab_init (VinagreTab *tab)
   g_signal_connect (tab->priv->vnc,
 		    "vnc-auth-failure",
 		    G_CALLBACK (vnc_auth_failed_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-auth-unsupported",
+		    G_CALLBACK (vnc_auth_unsupported_cb),
 		    tab);
 
  /* connect VNC */
