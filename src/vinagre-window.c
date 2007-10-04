@@ -78,6 +78,7 @@ vinagre_window_delete_event (GtkWidget   *widget,
     g_signal_handler_disconnect (window->priv->notebook,
 				 window->priv->signal_notebook);
 
+  vinagre_window_close_all_tabs (window);
   gtk_main_quit ();
 
   if (GTK_WIDGET_CLASS (vinagre_window_parent_class)->delete_event)

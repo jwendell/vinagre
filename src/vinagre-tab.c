@@ -24,6 +24,7 @@
 
 #include <glib/gi18n.h>
 #include <glade/glade.h>
+#include <gnome-keyring.h>
 #include <vncdisplay.h>
 
 #include "vinagre-notebook.h"
@@ -34,12 +35,14 @@
 
 struct _VinagreTabPrivate
 {
-  GtkWidget *vnc;
+  GtkWidget         *vnc;
   VinagreConnection *conn;
-  VinagreNotebook *nb;
-  VinagreWindow *window;
-  GtkStatusbar *status;
-  guint status_id;
+  VinagreNotebook   *nb;
+  VinagreWindow     *window;
+  GtkStatusbar      *status;
+  guint              status_id;
+  gboolean           save_password;
+  guint32            keyring_item_id;
 };
 
 G_DEFINE_TYPE(VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
@@ -218,6 +221,12 @@ vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreTab *tab)
   vinagre_utils_show_error (message->str, GTK_WINDOW (tab->priv->window));
   g_string_free (message, TRUE);
 
+  if (tab->priv->keyring_item_id > 0)
+    {
+      gnome_keyring_item_delete_sync (NULL, tab->priv->keyring_item_id);
+      tab->priv->keyring_item_id = 0;
+    }
+
   vinagre_notebook_remove_tab (tab->priv->nb, tab);
 }
 
@@ -256,6 +265,66 @@ vnc_server_cut_text_cb (VncDisplay *vnc, const gchar *text, VinagreTab *tab)
 }
 
 static void
+vinagre_tab_save_password (VinagreTab *tab)
+{
+  GnomeKeyringResult result;
+
+  if (!tab->priv->save_password)
+    return;
+
+  result = gnome_keyring_set_network_password_sync (
+                NULL,           /* default keyring */
+                NULL,           /* user            */
+                NULL,           /* domain          */
+                tab->priv->conn->host,   /* server          */
+                NULL,           /* object          */
+                "rfb",          /* protocol        */
+                "vnc-password", /* authtype        */
+                tab->priv->conn->port,           /* port            */
+                tab->priv->conn->password,       /* password        */
+                &tab->priv->keyring_item_id);
+
+  if (result != GNOME_KEYRING_RESULT_OK)
+    vinagre_utils_show_error (_("Error saving the password on the keyring."),
+			      GTK_WINDOW (tab->priv->window));
+
+  tab->priv->save_password = FALSE;
+}
+
+static gchar *
+vinagre_tab_find_password (VinagreTab *tab)
+{
+  GnomeKeyringNetworkPasswordData *found_item;
+  GnomeKeyringResult               result;
+  GList                           *matches;
+  gchar                           *password;
+  
+  matches = NULL;
+
+  result = gnome_keyring_find_network_password_sync (
+                NULL,           /* user     */
+		NULL,           /* domain   */
+		tab->priv->conn->host,   /* server   */
+		NULL,           /* object   */
+		"rfb",          /* protocol */
+		"vnc-password", /* authtype */
+		tab->priv->conn->port,           /* port     */
+		&matches);
+
+  if (result != GNOME_KEYRING_RESULT_OK || matches == NULL || matches->data == NULL)
+    return NULL;
+
+  found_item = (GnomeKeyringNetworkPasswordData *) matches->data;
+
+  password = g_strdup (found_item->password);
+  tab->priv->keyring_item_id = found_item->item_id;
+
+  gnome_keyring_network_password_list_free (matches);
+
+  return password;
+}
+
+static void
 vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   GtkLabel *label;
@@ -267,6 +336,7 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
   gtk_label_set_label (label, vinagre_connection_best_name (tab->priv->conn));
 
   vinagre_window_set_title (tab->priv->window);
+  vinagre_tab_save_password (tab);
 
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),
@@ -279,8 +349,8 @@ ask_password(VinagreTab *tab)
 {
   GladeXML   *xml;
   const char *glade_file;
-  GtkWidget *password_dialog, *password_entry;
-  gchar *password;
+  GtkWidget *password_dialog, *password_entry, *host_label, *save_password_check;
+  gchar *password = NULL;
   int result;
 
   glade_file = vinagre_utils_get_glade_filename ();
@@ -289,19 +359,22 @@ ask_password(VinagreTab *tab)
   password_dialog = glade_xml_get_widget (xml, "password_required_dialog");
   gtk_window_set_transient_for (GTK_WINDOW(password_dialog), GTK_WINDOW(tab->priv->window));
 
+  host_label = glade_xml_get_widget (xml, "host_label");
+  gtk_label_set_text (GTK_LABEL (host_label), vinagre_connection_best_name (tab->priv->conn));
+
   result = gtk_dialog_run (GTK_DIALOG (password_dialog));
-  if (result != -5)
+  if (result == -5)
     {
-      gtk_widget_destroy (GTK_WIDGET (password_dialog));
-      return NULL;
+      password_entry = glade_xml_get_widget (xml, "password_entry");
+      password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
+
+      save_password_check = glade_xml_get_widget (xml, "save_password_check");
+      tab->priv->save_password = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (save_password_check));
     }
 
-  password_entry = glade_xml_get_widget (xml, "password_entry");
-  password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
-
   gtk_widget_destroy (GTK_WIDGET (password_dialog));
-
   g_object_unref (xml);
+
   return password;
 }
 
@@ -309,12 +382,16 @@ static void
 vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
 {
   gchar *password;
-  
-  password = ask_password (tab);
-  if (!password) {
-    vinagre_notebook_remove_tab (tab->priv->nb, tab);
-    return;
-  }
+
+  password = vinagre_tab_find_password (tab);
+  if (!password)
+    {
+      password = ask_password (tab);
+      if (!password) {
+        vinagre_notebook_remove_tab (tab->priv->nb, tab);
+        return;
+      }
+    }
 
   vinagre_connection_set_password (tab->priv->conn, password);
   vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
@@ -350,6 +427,8 @@ vinagre_tab_init (VinagreTab *tab)
   GtkWidget *align;
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
+  tab->priv->save_password = FALSE;
+  tab->priv->keyring_item_id = 0;
 
   /* Create the alignment */
   align = gtk_alignment_new (0.5, 0.5, 0, 0);

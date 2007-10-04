@@ -157,11 +157,6 @@ vinagre_favorites_add (VinagreConnection *conn,
 			      name,
 			      "port",
 			      conn->port);
-      if (conn->password)
-	g_key_file_set_string (favorites,
-			       name,
-			       "password",
-			       conn->password);
 
       vinagre_connection_set_name (conn, name);
       vinagre_favorites_save_file ();
@@ -218,10 +213,6 @@ vinagre_favorites_edit (VinagreConnection *conn,
 			     name,
 			     "host",
 			     conn->host);
-      g_key_file_set_string (favorites,
-			     name,
-			     "password",
-			     conn->password);
       g_key_file_set_integer (favorites,
 			      name,
 			      "port",
@@ -257,10 +248,6 @@ vinagre_favorites_get_all (void)
 
       s_value = g_key_file_get_string (favorites, conns[i], "host", NULL);
       vinagre_connection_set_host (conn, s_value);
-      g_free (s_value);
-
-      s_value = g_key_file_get_string (favorites, conns[i], "password", NULL);
-      vinagre_connection_set_password (conn, s_value);
       g_free (s_value);
 
       i_value = g_key_file_get_integer (favorites, conns[i], "port", NULL);
@@ -344,9 +331,6 @@ vinagre_favorites_exists (const char *host, int port)
 	  vinagre_connection_set_port (conn, port);
 
 	  g_free (s_host);
-
-	  s_host = g_key_file_get_string (favorites, conns[i], "password", NULL);
-	  vinagre_connection_set_password (conn, s_host);
 
 	  break;
 	}

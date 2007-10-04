@@ -1,15 +1,27 @@
 2007-10-04  Jonh Wendell <jwendell@gnome.org>
 
+	* configure.ac,
+	* data/vinagre.glade,
+	* src/vinagre-tab.c:
+	  - Added gnome-keyring support.
+	* src/vinagre-favorites.c:
+	  - Don't save the password in the favorites file.
+	* src/vinagre-window.c:
+	  - Avoid a crash when exiting the application with more than one
+	    tab opened.
+
+2007-10-04  Jonh Wendell <jwendell@gnome.org>
+
 	* src/vinagre-tab.c:
 	  - Added bell support.
 
 2007-10-03  Jonh Wendell <jwendell@gnome.org>
 
 	* src/vinagre-tab.c,
-	  src/vinagre-window.c,
-	  src/vinagre-tab.h,
-	  src/vinagre-ui.h,
-	  data/vinagre-ui.xml:
+	* src/vinagre-window.c,
+	* src/vinagre-tab.h,
+	* src/vinagre-ui.h,
+	* data/vinagre-ui.xml:
 	  - Added clipboard support (copy and paste)
 	  - Dropped edit menu, it's not being used anyway.
 

@@ -43,6 +43,7 @@ PKG_CHECK_MODULES(VINAGRE, \
   gtk+-2.0 >= $GTK_REQUIRED \ 
   libglade-2.0 >= $LIBGLADE_REQUIRED \
   gconf-2.0 >= $GCONF_REQUIRED \
+  gnome-keyring-1 \
   gtk-vnc-1.0)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
