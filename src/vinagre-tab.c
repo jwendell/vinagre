@@ -238,6 +238,24 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreTab *tab)
 }
 
 static void
+vnc_server_cut_text_cb (VncDisplay *vnc, const gchar *text, VinagreTab *tab)
+{
+  GtkClipboard *cb;
+  gchar *out;
+  gsize a, b;
+
+  if (!text)
+    return;
+
+  out = g_convert (text, -1, "utf-8", "iso8859-1", &a, &b, NULL);
+  if (out) {
+    cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+    gtk_clipboard_set_text (cb, out, -1);
+    g_free (out);
+  }
+}
+
+static void
 vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   GtkLabel *label;
@@ -390,6 +408,11 @@ vinagre_tab_init (VinagreTab *tab)
 		    G_CALLBACK (vnc_auth_unsupported_cb),
 		    tab);
 
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-server-cut-text",
+		    G_CALLBACK (vnc_server_cut_text_cb),
+		    tab);
+
  /* connect VNC */
  /* FIXME: i had to add a timeout because private conn is not available at this time*/
   g_timeout_add (1000,
@@ -519,4 +542,20 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   gtk_widget_destroy (dialog);
   gdk_pixbuf_unref (pix);
   g_string_free (suggested_filename, TRUE);
+}
+
+void
+vinagre_tab_paste_text (VinagreTab *tab, const gchar *text)
+{
+  gchar *out;
+  size_t a, b;
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  out = g_convert (text, -1, "iso8859-1", "utf-8", &a, &b, NULL);
+
+  if (out)
+    {
+      vnc_display_client_cut_text (VNC_DISPLAY (tab->priv->vnc), out);
+      g_free (out);
+    }
 }

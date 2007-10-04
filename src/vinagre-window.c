@@ -526,10 +526,6 @@ init_widgets_visibility (VinagreWindow *window)
 					"HelpContents");
   gtk_action_set_sensitive (action, FALSE);
 
-  action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"EditPreferences");
-  gtk_action_set_sensitive (action, FALSE);
-
   /* fav panel visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewFavorites");
@@ -713,6 +709,29 @@ create_notebook (VinagreWindow *window)
 }
 
 static void
+vinagre_window_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreWindow *window)
+{
+  gchar *text;
+
+  text = gtk_clipboard_wait_for_text (cb);
+  if (text) {
+    if (window->priv->active_tab)
+      vinagre_tab_paste_text (VINAGRE_TAB (window->priv->active_tab), text);
+    g_free (text);
+  }
+
+}
+
+static void
+vinagre_window_init_clipboard (VinagreWindow *window)
+{
+  GtkClipboard *cb;
+
+  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+  g_signal_connect (cb, "owner-change", G_CALLBACK (vinagre_window_clipboard_cb), window);
+}
+
+static void
 vinagre_window_init (VinagreWindow *window)
 {
   GtkWidget *main_box;
@@ -759,6 +778,7 @@ vinagre_window_init (VinagreWindow *window)
   set_machine_menu_sensitivity (window);
 
   vinagre_window_update_favorites_list_menu (window);
+  vinagre_window_init_clipboard (window);
 }
 
 GtkWidget *

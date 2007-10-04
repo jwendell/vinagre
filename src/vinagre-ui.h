@@ -42,10 +42,6 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
   { "MachineQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
     N_("Quit the program"), G_CALLBACK (gtk_main_quit) },
   	
-  /* Edit menu */
-  { "EditPreferences", GTK_STOCK_PREFERENCES, N_("_Preferences"), NULL,
-    N_("Configure the application"), NULL },
-
   /* Favorites menu */
   { "FavoritesOpen", GTK_STOCK_CONNECT, N_("_Open favorite"), NULL,
     N_("Connect to this favorite"), G_CALLBACK (vinagre_cmd_favorites_open) },
@@ -70,12 +66,6 @@ static const GtkActionEntry vinagre_menu_entries[] =
     N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_machine_take_screenshot) },
   { "MachineCloseAll", GTK_STOCK_CLOSE, N_("C_lose All"), "<control><shift>W",
     N_("Close all active connections"), G_CALLBACK (vinagre_cmd_machine_close_all) },
-
-  /* Edit menu */
-  { "EditCopy", GTK_STOCK_COPY, NULL, "<control>C",
-    N_("Copy the selection"), NULL },
-  { "EditPaste", GTK_STOCK_PASTE, NULL, "<control>V",
-    N_("Paste the clipboard"), NULL },
 
   /* View menu */
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
