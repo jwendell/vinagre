@@ -330,6 +330,11 @@ static void vnc_grab_cb (VncDisplay *vnc, VinagreTab *tab)
     gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->nb), FALSE);
 }
 
+static void vnc_bell_cb (VncDisplay *vnc, VinagreTab *tab)
+{
+  gdk_window_beep (GTK_WIDGET (tab->priv->window)->window);
+}
+
 static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   gtk_statusbar_pop (tab->priv->status, tab->priv->status_id);
@@ -411,6 +416,11 @@ vinagre_tab_init (VinagreTab *tab)
   g_signal_connect (tab->priv->vnc,
 		    "vnc-server-cut-text",
 		    G_CALLBACK (vnc_server_cut_text_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-bell",
+		    G_CALLBACK (vnc_bell_cb),
 		    tab);
 
  /* connect VNC */
