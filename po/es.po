@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-20 03:43+0100\n"
-"PO-Revision-Date: 2007-09-20 16:22+0200\n"
+"POT-Creation-Date: 2007-10-04 19:25+0100\n"
+"PO-Revision-Date: 2007-10-07 16:03+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,9 @@ msgstr "<b>Introduzca un nombre para esta conexión</b>"
 msgid ""
 "<b>In order to connect on this machine, a password is required. Please, "
 "supply it.</b>"
-msgstr "<b>Se necesita una clave para poder conectarse a esta máquina, proporciónela.</b>"
+msgstr ""
+"<b>Se necesita una clave para poder conectarse a esta máquina, proporciónela."
+"</b>"
 
 #: ../data/vinagre.glade.h:4
 msgid "<b>Which machine do you want to connect to?</b>"
@@ -47,25 +49,29 @@ msgstr "<b>¿A qué máquina quiere conectarse?</b>"
 msgid "Add to favorites"
 msgstr "Añadir a los favoritos"
 
-#: ../data/vinagre.glade.h:6
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:538
+msgid "Host:"
+msgstr "Equipo:"
+
+#: ../data/vinagre.glade.h:7
 msgid "_Host:"
 msgstr "_Equipo:"
 
-#: ../data/vinagre.glade.h:7
+#: ../data/vinagre.glade.h:8
 msgid "_Name:"
 msgstr "_Nombre:"
 
-#: ../data/vinagre.glade.h:8
+#: ../data/vinagre.glade.h:9
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#: ../data/vinagre.glade.h:9
+#: ../data/vinagre.glade.h:10
 msgid "_Port:"
 msgstr "_Puerto:"
 
-#: ../data/vinagre.glade.h:10
-msgid "_Save this password on keyring"
-msgstr "_Guardar esta contraseña en el depósito de claves"
+#: ../data/vinagre.glade.h:11
+msgid "_Remember this password"
+msgstr "_Recordar esta contraseña"
 
 #: ../src/vinagre-commands.c:230
 msgid "Vinagre is a VNC client for the GNOME Desktop"
@@ -92,8 +98,8 @@ msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
-"Debería haber recibido una copia de la Licencia Pública General GNU junto con "
-"este programa. Si no la recibió, consulte <http://www.gnu.org/licenses/>."
+"Debería haber recibido una copia de la Licencia Pública General GNU junto "
+"con este programa. Si no la recibió, consulte <http://www.gnu.org/licenses/>."
 
 #: ../src/vinagre-commands.c:258
 msgid "translator-credits"
@@ -129,16 +135,16 @@ msgstr "Error al guardar los favoritos: %s"
 msgid "Error while initializing favorites: %s"
 msgstr "Error al inicializar los favoritos: %s"
 
-#: ../src/vinagre-favorites.c:295
+#: ../src/vinagre-favorites.c:282
 msgid "Confirm removal?"
 msgstr "¿Confirmar eliminación?"
 
-#: ../src/vinagre-favorites.c:298
+#: ../src/vinagre-favorites.c:285
 #, c-format
 msgid "Are you sure you want to exclude <i>%s</i> from favorites?"
 msgstr "¿Está seguro de que quiere excluir <i>%s</i> de los favoritos?"
 
-#: ../src/vinagre-favorites.c:309
+#: ../src/vinagre-favorites.c:296
 #, c-format
 msgid "Error while removing %s from favorites: %s"
 msgstr "Error al eliminar %s de los favoritos: %s"
@@ -178,45 +184,50 @@ msgstr "No se pudo inicializar el gestor de preferencias."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Se esperaba «%s» y se obtuvo «%s» para la clave %s"
 
-#: ../src/vinagre-tab.c:177
+#: ../src/vinagre-tab.c:180
 msgid "Error connecting to host."
 msgstr "Error al conectar con el equipo."
 
-#: ../src/vinagre-tab.c:211
+#: ../src/vinagre-tab.c:214
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "La autenticación contra el equipo «%s» ha fallado"
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:238
+#, c-format
+msgid "Authentication method to host \"%s\" is unsupported. (%u)"
+msgstr "El método de autenticación contra el equipo «%s» no está soportado. (%u)"
+
+#: ../src/vinagre-tab.c:288
+msgid "Error saving the password on the keyring."
+msgstr "Error al guardar la contraseña en el depósito de claves."
+
+#: ../src/vinagre-tab.c:404
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Pulse Ctrl.+Alt para liberar el cursor"
 
-#: ../src/vinagre-tab.c:404
+#: ../src/vinagre-tab.c:537
 msgid "Desktop Name:"
 msgstr "Nombre del escritorio:"
 
-#: ../src/vinagre-tab.c:405
-msgid "Host:"
-msgstr "Equipo:"
-
-#: ../src/vinagre-tab.c:406
+#: ../src/vinagre-tab.c:539
 msgid "Port:"
 msgstr "Puerto:"
 
-#: ../src/vinagre-tab.c:407
+#: ../src/vinagre-tab.c:540
 msgid "Dimensions:"
 msgstr "Dimensiones:"
 
-#: ../src/vinagre-tab.c:473
+#: ../src/vinagre-tab.c:606
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de pantalla de %s"
 
-#: ../src/vinagre-tab.c:476
+#: ../src/vinagre-tab.c:609
 msgid "Save Screenshot"
 msgstr "Guardar la captura de pantalla"
 
-#: ../src/vinagre-tab.c:487
+#: ../src/vinagre-tab.c:620
 msgid "Supported formats"
 msgstr "Formatos soportados"
 
@@ -233,7 +244,7 @@ msgstr "_Editar"
 msgid "_View"
 msgstr "_Ver"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:100
+#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:90
 msgid "_Favorites"
 msgstr "_Favoritos"
 
@@ -249,115 +260,98 @@ msgstr "Conectar a una máquina remota"
 msgid "Quit the program"
 msgstr "Salir del programa"
 
-#. Edit menu
-#: ../src/vinagre-ui.h:46
-msgid "_Preferences"
-msgstr "_Preferencias"
-
-#: ../src/vinagre-ui.h:47
-msgid "Configure the application"
-msgstr "Configurar la aplicación"
-
 #. Favorites menu
-#: ../src/vinagre-ui.h:50
+#: ../src/vinagre-ui.h:46
 msgid "_Open favorite"
 msgstr "_Abrir favorito"
 
-#: ../src/vinagre-ui.h:51
+#: ../src/vinagre-ui.h:47
 msgid "Connect to this favorite"
 msgstr "Conectar a este favorito"
 
-#: ../src/vinagre-ui.h:52
+#: ../src/vinagre-ui.h:48
 msgid "_Edit favorite"
 msgstr "_Editar favorito"
 
-#: ../src/vinagre-ui.h:53
+#: ../src/vinagre-ui.h:49
 msgid "Edit the details of selected favorite"
 msgstr "Editar los detalles del favorito seleccionado"
 
-#: ../src/vinagre-ui.h:54
+#: ../src/vinagre-ui.h:50
 msgid "_Remove from favorites"
 msgstr "_Quitar de favoritos"
 
-#: ../src/vinagre-ui.h:55
+#: ../src/vinagre-ui.h:51
 msgid "Remove current selected connection from favorites"
 msgstr "Eliminar la conexión actualmente seleccionada de los favoritos"
 
 #. Help menu
-#: ../src/vinagre-ui.h:58
+#: ../src/vinagre-ui.h:54
 msgid "_Contents"
 msgstr "_Contenido"
 
-#: ../src/vinagre-ui.h:59
+#: ../src/vinagre-ui.h:55
 msgid "Open the vinagre manual"
 msgstr "Abrir el manual de vinagre"
 
-#: ../src/vinagre-ui.h:61
+#: ../src/vinagre-ui.h:57
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:64
 msgid "Close the current connection"
 msgstr "Cerrar la conexión actual"
 
-#: ../src/vinagre-ui.h:69
+#: ../src/vinagre-ui.h:65
 msgid "Take screenshot"
 msgstr "Capturar pantalla"
 
-#: ../src/vinagre-ui.h:70
+#: ../src/vinagre-ui.h:66
 msgid "Take a screenshot of active connection"
 msgstr "Toma una captura de pantalla de la conexión activa"
 
-#: ../src/vinagre-ui.h:71
+#: ../src/vinagre-ui.h:67
 msgid "C_lose All"
 msgstr "Cerrar _todo"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:68
 msgid "Close all active connections"
 msgstr "Cierra todas las conexiones activas"
 
-#: ../src/vinagre-ui.h:76
-msgid "Copy the selection"
-msgstr "Copiar la selección"
-
-#: ../src/vinagre-ui.h:78
-msgid "Paste the clipboard"
-msgstr "Pegar el portapapeles"
-
-#: ../src/vinagre-ui.h:82
+#: ../src/vinagre-ui.h:72
 msgid "View the current machine in full screen"
 msgstr "Ver la máquina actual a pantalla completa"
 
 #. Favorites menu
-#: ../src/vinagre-ui.h:85
+#: ../src/vinagre-ui.h:75
 msgid "_Add to favorites"
 msgstr "_Añadir a favoritos"
 
-#: ../src/vinagre-ui.h:86
+#: ../src/vinagre-ui.h:76
 msgid "Add current connection to favorites"
 msgstr "Añadir la conexión actual a los favoritos"
 
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:82
 msgid "_Toolbar"
 msgstr "Barra de _herramientas"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:83
 msgid "Show or hide the toolbar"
 msgstr "Mostrar u ocultar la barra de herramientas"
 
-#: ../src/vinagre-ui.h:96
+#: ../src/vinagre-ui.h:86
 msgid "_Statusbar"
 msgstr "Barra de e_stado"
 
-#: ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:87
 msgid "Show or hide the statusbar"
 msgstr "Mostrar u ocultar la barra de estado"
 
-#: ../src/vinagre-ui.h:101
+#: ../src/vinagre-ui.h:91
 msgid "Show or hide the favorites panel"
 msgstr "Mostrar u ocultar el panel de favoritos"
 
-#: ../src/vinagre-window.c:310
+#: ../src/vinagre-window.c:311
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "No se pudo mezclar vinagre-ui.xml: %s"
