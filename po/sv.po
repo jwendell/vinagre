@@ -7,25 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-19 13:58+0200\n"
-"PO-Revision-Date: 2007-09-19 13:58+0100\n"
+"POT-Creation-Date: 2007-10-09 22:00+0200\n"
+"PO-Revision-Date: 2007-10-09 22:14+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../data/vinagre-mime.xml.in.h:1
+msgid "Remote Desktop (VNC) file"
+msgstr "Fjärrskrivbordsfil (VNC)"
+
 #: ../data/vinagre.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Få åtkomst till fjärrskrivbord"
 
 #: ../data/vinagre.desktop.in.in.h:2
+#: ../src/vinagre-main.c:79
 msgid "Remote Desktop Viewer"
 msgstr "Fjärrskrivbordsvisare"
 
 #: ../data/vinagre.glade.h:1
-msgid "<b>Editing a favorite</b>"
-msgstr "<b>Redigering av favorit</b>"
+msgid "<b>Editing a bookmark</b>"
+msgstr "<b>Redigering av bokmärke</b>"
 
 #: ../data/vinagre.glade.h:2
 msgid "<b>Enter a name for this connection</b>"
@@ -40,46 +45,80 @@ msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Vilken maskin vill du ansluta till?</b>"
 
 #: ../data/vinagre.glade.h:5
-msgid "Add to favorites"
-msgstr "Lägg till i favoriter"
+msgid "Editing a bookmark"
+msgstr "Redigerar ett bokmärke"
 
 #: ../data/vinagre.glade.h:6
+#: ../src/vinagre-tab.c:590
+msgid "Host:"
+msgstr "Värd:"
+
+#: ../data/vinagre.glade.h:7
+msgid "Saving to bookmarks"
+msgstr "Sparar till bokmärken"
+
+#: ../data/vinagre.glade.h:8
 msgid "_Host:"
 msgstr "_Värd:"
 
-#: ../data/vinagre.glade.h:7
+#: ../data/vinagre.glade.h:9
 msgid "_Name:"
 msgstr "_Namn:"
 
-#: ../data/vinagre.glade.h:8
+#: ../data/vinagre.glade.h:10
 msgid "_Password:"
 msgstr "_Lösenord:"
 
-#: ../data/vinagre.glade.h:9
+#: ../data/vinagre.glade.h:11
 msgid "_Port:"
 msgstr "_Port:"
 
-#: ../data/vinagre.glade.h:10
-msgid "_Save this password on keyring"
-msgstr "_Spara lösenordet i nyckelring"
+#: ../data/vinagre.glade.h:12
+msgid "_Remember this password"
+msgstr "_Kom ihåg detta lösenord"
 
-#: ../src/vinagre-commands.c:230
+#: ../src/vinagre-bookmarks.c:58
+#: ../src/vinagre-bookmarks.c:76
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "Fel när bokmärken sparades: %s"
+
+#: ../src/vinagre-bookmarks.c:111
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "Fel vid initiering av bokmärken: %s"
+
+#: ../src/vinagre-bookmarks.c:282
+msgid "Confirm removal?"
+msgstr "Bekräfta borttagning?"
+
+#: ../src/vinagre-bookmarks.c:285
+#, c-format
+msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
+msgstr "Är du säker på att du vill ta bort <i>%s</i> från dina bokmärken?"
+
+#: ../src/vinagre-bookmarks.c:296
+#, c-format
+msgid "Error while removing %s from bookmarks: %s"
+msgstr "Fel vid borttagning av %s från bokmärken: %s"
+
+#: ../src/vinagre-commands.c:235
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre är en VNC-klient för GNOME-skrivbordet"
 
-#: ../src/vinagre-commands.c:233
+#: ../src/vinagre-commands.c:238
 msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
 msgstr "Vinagre är fri programvara. Du kan distribuera det och/eller modifiera det under villkoren i GNU General Public License, publicerad av Free Software Foundation, antingen version 2 eller (om du så vill) någon senare version."
 
-#: ../src/vinagre-commands.c:237
+#: ../src/vinagre-commands.c:242
 msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
 msgstr "Vinagre distribueras i hopp om att det ska vara användbart, men UTAN NÅGON SOM HELST GARANTI, även utan underförstådd garanti om SÄLJBARHET eller LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL. Se GNU General Public License för ytterligare information."
 
-#: ../src/vinagre-commands.c:241
+#: ../src/vinagre-commands.c:246
 msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr "Du bör ha fått en kopia av GNU General Public License tillsammans med detta program. Om inte, se <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:258
+#: ../src/vinagre-commands.c:263
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -87,7 +126,7 @@ msgstr ""
 "Skicka synpunker på översättningen till\n"
 "tp-sv@listor.tp-sv.se"
 
-#: ../src/vinagre-commands.c:261
+#: ../src/vinagre-commands.c:266
 msgid "Vinagre Website"
 msgstr "Webbplats för Vinagre"
 
@@ -100,61 +139,32 @@ msgid "Name"
 msgstr "Namn"
 
 #: ../src/vinagre-fav.c:428
-msgid "Favorites"
-msgstr "Favoriter"
+msgid "Bookmarks"
+msgstr "Bokmärken"
 
 #: ../src/vinagre-fav.c:436
-msgid "Hide favorites"
-msgstr "Dölj favoriter"
+msgid "Hide bookmarks"
+msgstr "Dölj bokmärken"
 
-#: ../src/vinagre-favorites.c:58
-#: ../src/vinagre-favorites.c:76
-#, c-format
-msgid "Error while saving favorites: %s"
-msgstr "Fel vid sparande av favoriter: %s"
-
-#: ../src/vinagre-favorites.c:111
-#, c-format
-msgid "Error while initializing favorites: %s"
-msgstr "Fel vid initiering av favoriter: %s"
-
-#: ../src/vinagre-favorites.c:295
-msgid "Confirm removal?"
-msgstr "Bekräfta borttagning?"
-
-#: ../src/vinagre-favorites.c:298
-#, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from favorites?"
-msgstr "Är du säker på att du vill ta bort <i>%s</i> från favoriterna?"
-
-#: ../src/vinagre-favorites.c:309
-#, c-format
-msgid "Error while removing %s from favorites: %s"
-msgstr "Fel vid borttagning av %s från favoriter: %s"
-
-#: ../src/vinagre-main.c:41
+#: ../src/vinagre-main.c:40
 msgid "[server:port]"
 msgstr "[server:port]"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:86
+#: ../src/vinagre-main.c:71
 msgid "- VNC Client for GNOME"
 msgstr "- VNC-klient för GNOME"
 
-#: ../src/vinagre-main.c:94
-msgid "Vinagre"
-msgstr "Vinagre"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:114
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Anslutningen till värden \"%s\" stängdes."
 
-#: ../src/vinagre-notebook.c:138
+#: ../src/vinagre-notebook.c:140
 msgid "Connecting..."
 msgstr "Ansluter..."
 
-#: ../src/vinagre-notebook.c:162
+#: ../src/vinagre-notebook.c:164
 msgid "Close connection"
 msgstr "Stäng anslutning"
 
@@ -167,45 +177,54 @@ msgstr "Kan inte initiera inställningshanteraren."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Förväntade \"%s\", fick \"%s\" för nyckeln %s"
 
-#: ../src/vinagre-tab.c:177
+#: ../src/vinagre-tab.c:180
 msgid "Error connecting to host."
 msgstr "Fel vid anslutning till värden."
 
-#: ../src/vinagre-tab.c:211
+#: ../src/vinagre-tab.c:218
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autentisering mot värden \"%s\" misslyckades"
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:246
+#, c-format
+msgid "Authentication method to host \"%s\" is unsupported. (%u)"
+msgstr "Autentiseringsmetod mot värden \"%s\" stöds inte. (%u)"
+
+#: ../src/vinagre-tab.c:302
+msgid "Error saving recent connection."
+msgstr "Fel när senaste anslutningen sparades."
+
+#: ../src/vinagre-tab.c:333
+msgid "Error saving the password on the keyring."
+msgstr "Fel när lösenordet sparades i nyckelringen."
+
+#: ../src/vinagre-tab.c:456
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Tryck på Ctrl+Alt för att släppa muspekaren"
 
-#: ../src/vinagre-tab.c:404
+#: ../src/vinagre-tab.c:589
 msgid "Desktop Name:"
 msgstr "Skrivbordsnamn:"
 
-#: ../src/vinagre-tab.c:405
-msgid "Host:"
-msgstr "Värd:"
-
-#: ../src/vinagre-tab.c:406
+#: ../src/vinagre-tab.c:591
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:407
+#: ../src/vinagre-tab.c:592
 msgid "Dimensions:"
 msgstr "Dimensioner:"
 
-#: ../src/vinagre-tab.c:473
+#: ../src/vinagre-tab.c:659
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skärmbild för %s"
 
-#: ../src/vinagre-tab.c:476
+#: ../src/vinagre-tab.c:662
 msgid "Save Screenshot"
 msgstr "Spara skärmbild"
 
-#: ../src/vinagre-tab.c:487
+#: ../src/vinagre-tab.c:673
 msgid "Supported formats"
 msgstr "Format som stöds"
 
@@ -223,9 +242,9 @@ msgid "_View"
 msgstr "_Visa"
 
 #: ../src/vinagre-ui.h:36
-#: ../src/vinagre-ui.h:100
-msgid "_Favorites"
-msgstr "_Favoriter"
+#: ../src/vinagre-ui.h:90
+msgid "_Bookmarks"
+msgstr "_Bokmärken"
 
 #: ../src/vinagre-ui.h:37
 msgid "_Help"
@@ -239,119 +258,130 @@ msgstr "Anslut till en fjärrmaskin"
 msgid "Quit the program"
 msgstr "Avsluta programmet"
 
-#. Edit menu
+#. Bookmarks menu
 #: ../src/vinagre-ui.h:46
-msgid "_Preferences"
-msgstr "_Inställningar"
+msgid "_Open bookmark"
+msgstr "_Öppna bokmärke"
 
 #: ../src/vinagre-ui.h:47
-msgid "Configure the application"
-msgstr "Konfigurera programmet"
+msgid "Connect into this machine"
+msgstr "Anslut till denna maskin"
 
-#. Favorites menu
+#: ../src/vinagre-ui.h:48
+msgid "_Edit bookmark"
+msgstr "R_edigera bokmärke"
+
+#: ../src/vinagre-ui.h:49
+msgid "Edit the details of selected bookmark"
+msgstr "Redigera detaljerna för markerat bokmärke"
+
 #: ../src/vinagre-ui.h:50
-msgid "_Open favorite"
-msgstr "_Öppna favorit"
+msgid "_Remove from bookmarks"
+msgstr "_Ta bort från bokmärken"
 
 #: ../src/vinagre-ui.h:51
-msgid "Connect to this favorite"
-msgstr "Anslut till den här favoriten"
-
-#: ../src/vinagre-ui.h:52
-msgid "_Edit favorite"
-msgstr "R_edigera favorit"
-
-#: ../src/vinagre-ui.h:53
-msgid "Edit the details of selected favorite"
-msgstr "Redigera detaljerna för vald favorit"
-
-#: ../src/vinagre-ui.h:54
-msgid "_Remove from favorites"
-msgstr "_Ta bort från favoriter"
-
-#: ../src/vinagre-ui.h:55
-msgid "Remove current selected connection from favorites"
-msgstr "Ta bort aktuellt markerad anslutning från favoriter"
+msgid "Remove current selected connection from bookmarks"
+msgstr "Ta bort aktuellt markerad anslutning från bokmärken"
 
 #. Help menu
-#: ../src/vinagre-ui.h:58
+#: ../src/vinagre-ui.h:54
 msgid "_Contents"
 msgstr "_Innehåll"
 
-#: ../src/vinagre-ui.h:59
+#: ../src/vinagre-ui.h:55
 msgid "Open the vinagre manual"
 msgstr "Öppna handboken för Vinagre"
 
-#: ../src/vinagre-ui.h:61
+#: ../src/vinagre-ui.h:57
 msgid "About this application"
 msgstr "Om det här programmet"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:64
 msgid "Close the current connection"
 msgstr "Stäng aktuell anslutning"
 
-#: ../src/vinagre-ui.h:69
+#: ../src/vinagre-ui.h:65
 msgid "Take screenshot"
 msgstr "Ta skärmbild"
 
-#: ../src/vinagre-ui.h:70
+#: ../src/vinagre-ui.h:66
 msgid "Take a screenshot of active connection"
 msgstr "Ta en skärmbild på aktiv anslutning"
 
-#: ../src/vinagre-ui.h:71
+#: ../src/vinagre-ui.h:67
 msgid "C_lose All"
 msgstr "S_täng alla"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:68
 msgid "Close all active connections"
 msgstr "Stäng alla aktiva anslutningar"
 
-#: ../src/vinagre-ui.h:76
-msgid "Copy the selection"
-msgstr "Kopiera markeringen"
-
-#: ../src/vinagre-ui.h:78
-msgid "Paste the clipboard"
-msgstr "Klistra in urklippet"
-
-#: ../src/vinagre-ui.h:82
+#: ../src/vinagre-ui.h:72
 msgid "View the current machine in full screen"
 msgstr "Visa den aktuella maskinen i helskärm"
 
-#. Favorites menu
-#: ../src/vinagre-ui.h:85
-msgid "_Add to favorites"
-msgstr "_Lägg till i favoriter"
+#. Bookmarks menu
+#: ../src/vinagre-ui.h:75
+msgid "_Add to bookmarks"
+msgstr "_Lägg till bokmärke"
 
-#: ../src/vinagre-ui.h:86
-msgid "Add current connection to favorites"
-msgstr "Lägg till aktuell anslutning till favoriter"
+#: ../src/vinagre-ui.h:76
+msgid "Add current connection to your bookmarks"
+msgstr "Lägg till aktuell anslutning till dina bokmärken"
 
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:82
 msgid "_Toolbar"
 msgstr "_Verktygsrad"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:83
 msgid "Show or hide the toolbar"
 msgstr "Visa eller dölj verktygsraden"
 
-#: ../src/vinagre-ui.h:96
+#: ../src/vinagre-ui.h:86
 msgid "_Statusbar"
 msgstr "_Statusrad"
 
-#: ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:87
 msgid "Show or hide the statusbar"
 msgstr "Visa eller dölj statusraden"
 
-#: ../src/vinagre-ui.h:101
-msgid "Show or hide the favorites panel"
-msgstr "Visa eller dölj favoritpanelen"
+#: ../src/vinagre-ui.h:91
+msgid "Show or hide the bookmarks panel"
+msgstr "Visa eller dölj bokmärkespanelen"
 
-#: ../src/vinagre-window.c:310
+#: ../src/vinagre-window.c:350
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Kunde inte sammanfoga vinagre-ui.xml: %s"
 
+#: ../src/vinagre-window.c:378
+msgid "_Recent connections"
+msgstr "_Tidigare anslutningar"
+
+#~ msgid "Add to favorites"
+#~ msgstr "Lägg till i favoriter"
+#~ msgid "Favorites"
+#~ msgstr "Favoriter"
+#~ msgid "Hide favorites"
+#~ msgstr "Dölj favoriter"
+#~ msgid "Vinagre"
+#~ msgstr "Vinagre"
+#~ msgid "_Favorites"
+#~ msgstr "_Favoriter"
+#~ msgid "_Preferences"
+#~ msgstr "_Inställningar"
+#~ msgid "Configure the application"
+#~ msgstr "Konfigurera programmet"
+#~ msgid "_Open favorite"
+#~ msgstr "_Öppna favorit"
+#~ msgid "Connect to this favorite"
+#~ msgstr "Anslut till den här favoriten"
+#~ msgid "_Edit favorite"
+#~ msgstr "R_edigera favorit"
+#~ msgid "Copy the selection"
+#~ msgstr "Kopiera markeringen"
+#~ msgid "Paste the clipboard"
+#~ msgstr "Klistra in urklippet"
 #~ msgid "VNC Client"
 #~ msgstr "VNC-klient"
 #~ msgid "  "
