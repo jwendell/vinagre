@@ -210,16 +210,20 @@ static void
 vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreTab *tab)
 {
   GString *message;
+  gchar   *name;
+
   message = g_string_new (NULL);
+  name = vinagre_connection_best_name (vinagre_tab_get_conn (tab));
+
   g_string_printf (message, _("Authentication to host \"%s\" has failed"),
-			vinagre_connection_best_name (
-				vinagre_tab_get_conn (tab)));
+		   name);
   if (msg)
   	g_string_append_printf (message, " (%s)", msg);
   g_string_append_printf (message, ".");
 
   vinagre_utils_show_error (message->str, GTK_WINDOW (tab->priv->window));
   g_string_free (message, TRUE);
+  g_free (name);
 
   if (tab->priv->keyring_item_id > 0)
     {
@@ -234,14 +238,18 @@ static void
 vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreTab *tab)
 {
   GString *message;
+  gchar   *name;
+
   message = g_string_new (NULL);
+  name = vinagre_connection_best_name (vinagre_tab_get_conn (tab));
+
   g_string_printf (message, _("Authentication method to host \"%s\" is unsupported. (%u)"),
-			vinagre_connection_best_name (
-				vinagre_tab_get_conn (tab)),
-			auth_type);
+		   name,
+		   auth_type);
 
   vinagre_utils_show_error (message->str, GTK_WINDOW (tab->priv->window));
   g_string_free (message, TRUE);
+  g_free (name);
 
   vinagre_notebook_remove_tab (tab->priv->nb, tab);
 }
@@ -262,6 +270,43 @@ vnc_server_cut_text_cb (VncDisplay *vnc, const gchar *text, VinagreTab *tab)
     gtk_clipboard_set_text (cb, out, -1);
     g_free (out);
   }
+}
+
+static void
+vinagre_tab_add_recent_used (VinagreTab *tab)
+{
+  GtkRecentManager *manager;
+  GtkRecentData    *data;
+  GString          *uri;
+
+  static gchar *groups[2] = {
+		"vinagre",
+		NULL
+	};
+
+  manager = gtk_recent_manager_get_default ();
+  data = g_slice_new (GtkRecentData);
+
+  uri = g_string_new (NULL);
+  g_string_printf (uri, "%s:%d", tab->priv->conn->host, tab->priv->conn->port);
+
+  data->display_name = vinagre_connection_best_name (tab->priv->conn);
+  data->description = NULL;
+  data->mime_type = g_strdup ("application/x-vnc");
+  data->app_name = (gchar *) g_get_application_name ();
+  data->app_exec = g_strjoin (" ", g_get_prgname (), "%u", NULL);
+  data->groups = groups;
+  data->is_private = FALSE;
+
+  if (!gtk_recent_manager_add_full (manager, uri->str, data))
+    vinagre_utils_show_error (_("Error saving recent connection."),
+			      GTK_WINDOW (tab->priv->window));
+
+  g_string_free (uri, TRUE);
+  g_free (data->app_exec);
+  g_free (data->mime_type);
+  g_free (data->display_name);
+  g_slice_free (GtkRecentData, data);
 }
 
 static void
@@ -328,15 +373,20 @@ static void
 vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   GtkLabel *label;
+  gchar    *name;
 
   vinagre_connection_set_desktop_name (tab->priv->conn,
 				       vnc_display_get_name (VNC_DISPLAY (tab->priv->vnc)));
+
+  name = vinagre_connection_best_name (tab->priv->conn);
   label = g_object_get_data (G_OBJECT (tab), "label");
   g_return_if_fail (label != NULL);
-  gtk_label_set_label (label, vinagre_connection_best_name (tab->priv->conn));
+  gtk_label_set_label (label, name);
+  g_free (name);
 
   vinagre_window_set_title (tab->priv->window);
   vinagre_tab_save_password (tab);
+  vinagre_tab_add_recent_used (tab);
 
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),
@@ -349,9 +399,9 @@ ask_password(VinagreTab *tab)
 {
   GladeXML   *xml;
   const char *glade_file;
-  GtkWidget *password_dialog, *password_entry, *host_label, *save_password_check;
-  gchar *password = NULL;
-  int result;
+  GtkWidget  *password_dialog, *password_entry, *host_label, *save_password_check;
+  gchar      *password = NULL, *name;
+  int         result;
 
   glade_file = vinagre_utils_get_glade_filename ();
   xml = glade_xml_new (glade_file, NULL, NULL);
@@ -360,7 +410,9 @@ ask_password(VinagreTab *tab)
   gtk_window_set_transient_for (GTK_WINDOW(password_dialog), GTK_WINDOW(tab->priv->window));
 
   host_label = glade_xml_get_widget (xml, "host_label");
-  gtk_label_set_text (GTK_LABEL (host_label), vinagre_connection_best_name (tab->priv->conn));
+  name = vinagre_connection_best_name (tab->priv->conn);
+  gtk_label_set_text (GTK_LABEL (host_label), name);
+  g_free (name);
 
   result = gtk_dialog_run (GTK_DIALOG (password_dialog));
   if (result == -5)
@@ -594,7 +646,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   GdkPixbuf     *pix;
   GtkWidget     *dialog;
   GString       *suggested_filename;
-  gchar         *filename;
+  gchar         *filename, *name;
   GtkFileFilter *filter;
 
   g_return_if_fail (VINAGRE_IS_TAB (tab));
@@ -602,8 +654,9 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   pix = vnc_display_get_pixbuf (VNC_DISPLAY (tab->priv->vnc));
 
   filename = NULL;
+  name = vinagre_connection_best_name (tab->priv->conn);
   suggested_filename = g_string_new (NULL);
-  g_string_printf (suggested_filename, _("Screenshot of %s"), vinagre_connection_best_name (tab->priv->conn));
+  g_string_printf (suggested_filename, _("Screenshot of %s"), name);
   g_string_append (suggested_filename, ".png");
 
   dialog = gtk_file_chooser_dialog_new (_("Save Screenshot"),
@@ -631,6 +684,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   gtk_widget_destroy (dialog);
   gdk_pixbuf_unref (pix);
   g_string_free (suggested_filename, TRUE);
+  g_free (name);
 }
 
 void

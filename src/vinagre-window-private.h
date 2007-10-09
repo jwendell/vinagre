@@ -43,8 +43,10 @@ struct _VinagreWindowPrivate
   GtkActionGroup *action_group;
   GtkActionGroup *always_sensitive_action_group;
   GtkActionGroup *favorites_list_action_group;
+  GtkActionGroup *recent_action_group;
+  GtkAction      *recent_action;
   guint           favorites_list_menu_ui_id;
-
+  guint           recents_menu_ui_id;
 
   GtkWidget       *toolbar;
   GtkWidget       *menubar;

@@ -457,10 +457,11 @@ vinagre_fav_new (VinagreWindow *window)
 void
 vinagre_fav_update_list (VinagreFav *fav)
 {
-  GtkTreeIter   iter;
-  GtkListStore *store;
-  GList        *list;
+  GtkTreeIter        iter;
+  GtkListStore      *store;
+  GList             *list;
   VinagreConnection *conn;
+  gchar             *name;
 
   g_return_if_fail (VINAGRE_IS_FAV (fav));
 
@@ -471,13 +472,15 @@ vinagre_fav_update_list (VinagreFav *fav)
   while (list)
     {
       conn = (VinagreConnection *) list->data;
+      name = vinagre_connection_best_name (conn);
 
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
-                          NAME_COL, vinagre_connection_best_name (conn),
+                          NAME_COL, name,
                           CONN_COL, conn,
                           -1);
       list = list->next;
+      g_free (name);
     }
 
   g_list_free (list);

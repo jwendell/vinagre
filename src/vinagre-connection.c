@@ -18,7 +18,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdlib.h>
 #include "vinagre-connection.h"
+#include "vinagre-favorites.h"
 
 VinagreConnection *
 vinagre_connection_new ()
@@ -104,16 +106,16 @@ vinagre_connection_free (VinagreConnection *conn)
   }
 }
 
-const gchar *
+gchar *
 vinagre_connection_best_name (VinagreConnection *conn)
 {
   g_return_val_if_fail (conn != NULL, NULL);
 
   if (conn->name)
-    return conn->name;
+    return g_strdup (conn->name);
 
   if (conn->desktop_name)
-    return conn->desktop_name;
+    return g_strdup (conn->desktop_name);
 
   if (conn->host)
     return g_strdup_printf ("%s:%d", conn->host, conn->port);
@@ -135,4 +137,27 @@ vinagre_connection_clone (VinagreConnection *conn)
   vinagre_connection_set_desktop_name (new_conn, conn->desktop_name);
 
   return new_conn;
+}
+VinagreConnection
+*vinagre_connection_new_from_string (const gchar *url)
+{
+  VinagreConnection *conn;
+  gchar **server;
+  gint    port;
+  gchar  *host;
+
+  server = g_strsplit (url, ":", 2);
+  host = server[0];
+  port = server[1] ? atoi (server[1]) : 5900;
+
+  conn = vinagre_favorites_exists (host, port);
+  if (!conn)
+    {
+      conn = vinagre_connection_new ();
+      vinagre_connection_set_host (conn, host);
+      vinagre_connection_set_port (conn, port);
+    }
+
+  g_strfreev (server);
+  return conn;
 }

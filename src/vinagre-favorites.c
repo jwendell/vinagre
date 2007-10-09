@@ -264,10 +264,10 @@ gboolean
 vinagre_favorites_del (VinagreConnection *conn,
 		       VinagreWindow     *window)
 {
-  gint result;
+  gint       result;
   GtkWidget *dialog;
-  const gchar *name;
-  GError *error = NULL;
+  gchar     *name;
+  GError    *error = NULL;
 
   g_return_val_if_fail (favorites != NULL, FALSE);
   g_return_val_if_fail (conn != NULL, FALSE);
@@ -287,6 +287,7 @@ vinagre_favorites_del (VinagreConnection *conn,
  
   result = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
+  g_free (name);
 
   if (result == GTK_RESPONSE_OK)
     {
@@ -331,6 +332,7 @@ vinagre_favorites_exists (const char *host, int port)
 	  vinagre_connection_set_port (conn, port);
 
 	  g_free (s_host);
+	  s_host = NULL;
 
 	  break;
 	}

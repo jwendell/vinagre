@@ -22,7 +22,6 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <glib/goption.h>
-#include <stdlib.h>
 
 #include <config.h>
 #include "vinagre-main.h"
@@ -46,29 +45,15 @@ static const GOptionEntry options [] =
 static void
 vinagre_main_process_command_line (void)
 {
-  gint i, port;
-  gchar *host;
-  gchar **server;
+  gint i;
   VinagreConnection *conn;
 
   if (remaining_args)
     {
       for (i = 0; remaining_args[i]; i++) 
 	{
-	  server = g_strsplit (remaining_args[i], ":", 2);
-	  host = server[0];
-	  port = server[1] ? atoi (server[1]) : 5900;
-
-	  conn = vinagre_favorites_exists (host, port);
-	  if (!conn)
-	    {
-	      conn = vinagre_connection_new ();
-	      vinagre_connection_set_host (conn, host);
-	      vinagre_connection_set_port (conn, port);
-	    }
-
+	  conn = vinagre_connection_new_from_string (remaining_args[i]);
 	  servers = g_slist_append (servers, conn);
-	  g_strfreev (server);
 	}
     }
 }
@@ -91,7 +76,7 @@ int main (int argc, char **argv) {
   if (!g_thread_supported ())
     g_thread_init (NULL);
 
-  g_set_application_name (_("Vinagre"));
+  g_set_application_name (_("Remote Desktop Viewer"));
   vinagre_prefs_manager_init ();
 
   main_window = vinagre_window_new ();

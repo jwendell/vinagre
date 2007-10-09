@@ -34,21 +34,23 @@ typedef struct
 
 VinagreConnection *vinagre_connection_new (void);
 
-void		  vinagre_connection_set_host (VinagreConnection *conn,
-					       const char *host);
-void		  vinagre_connection_set_port (VinagreConnection *conn,
-					       int port);
-void		  vinagre_connection_set_password (VinagreConnection *conn,
-						   const char *password);
-void		  vinagre_connection_set_name (VinagreConnection *conn,
-					       const char *name);
-void		  vinagre_connection_set_desktop_name (VinagreConnection *conn,
-						       const char *desktop_name);
+void		   vinagre_connection_set_host		(VinagreConnection *conn,
+							 const char *host);
+void		   vinagre_connection_set_port		(VinagreConnection *conn,
+							 int port);
+void		   vinagre_connection_set_password	(VinagreConnection *conn,
+							 const char *password);
+void		   vinagre_connection_set_name		(VinagreConnection *conn,
+							 const char *name);
+void		   vinagre_connection_set_desktop_name	(VinagreConnection *conn,
+							 const char *desktop_name);
 
-void              vinagre_connection_free (VinagreConnection *conn);
+void               vinagre_connection_free		(VinagreConnection *conn);
 
-const gchar       *vinagre_connection_best_name (VinagreConnection *conn);
+gchar             *vinagre_connection_best_name		(VinagreConnection *conn);
 
-VinagreConnection *vinagre_connection_clone (VinagreConnection *conn);
+VinagreConnection *vinagre_connection_clone		(VinagreConnection *conn);
+
+VinagreConnection *vinagre_connection_new_from_string	(const gchar *url);
 
 #endif /* __VINAGRE_CONNECTION_H__  */

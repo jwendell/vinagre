@@ -158,16 +158,21 @@ vinagre_cmd_favorites_add (GtkAction     *action,
 			   VinagreWindow *window)
 {
   VinagreConnection *conn;
+  gchar             *name;
 
   conn = vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab));
   g_return_if_fail (conn != NULL);
 
+  name = vinagre_connection_best_name (conn);
+
   vinagre_favorites_add (conn, window);
   vinagre_tab_set_title (VINAGRE_TAB (window->priv->active_tab),
-			 vinagre_connection_best_name (conn));
+			 name);
 
   vinagre_fav_update_list (VINAGRE_FAV (window->priv->fav_panel));
   vinagre_window_update_favorites_list_menu (window);
+
+  g_free (name);
 }
 
 void

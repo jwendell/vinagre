@@ -243,7 +243,6 @@ disconnect_proxy_cb (GtkUIManager  *manager,
                      GtkWidget     *proxy,
                      VinagreWindow *window)
 {
-printf("disconnect\n");
   if (GTK_IS_MENU_ITEM (proxy))
     {
       g_signal_handlers_disconnect_by_func
@@ -254,12 +253,52 @@ printf("disconnect\n");
 }
 
 static void
+activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
+{
+  VinagreConnection *conn;
+
+  conn = vinagre_connection_new_from_string (gtk_recent_chooser_get_current_uri (action));
+  vinagre_cmd_open_favorite (window, conn);
+
+  vinagre_connection_free (conn);
+}
+
+static void update_recent_connections (VinagreWindow *window)
+{
+  VinagreWindowPrivate *p = window->priv;
+
+  g_return_if_fail (p->recent_action_group != NULL);
+
+  if (p->recents_menu_ui_id != 0)
+    gtk_ui_manager_remove_ui (p->manager, p->recents_menu_ui_id);
+
+  p->recents_menu_ui_id = gtk_ui_manager_new_merge_id (p->manager);
+
+  gtk_ui_manager_add_ui (p->manager,
+			 p->recents_menu_ui_id,
+			 "/MenuBar/MachineMenu/FileRecentsPlaceholder",
+			 "recent_connections",
+			 "recent_connections",
+			 GTK_UI_MANAGER_MENUITEM,
+			 FALSE);
+}
+
+static void
+recent_manager_changed (GtkRecentManager *manager,
+			VinagreWindow     *window)
+{
+  update_recent_connections (window);
+}
+
+static void
 create_menu_bar_and_toolbar (VinagreWindow *window, 
 			     GtkWidget     *main_box)
 {
   GtkActionGroup *action_group;
   GtkUIManager *manager;
   GError *error = NULL;
+  GtkRecentManager *recent_manager;
+  GtkRecentFilter *filter;
 
   manager = gtk_ui_manager_new ();
   window->priv->manager = manager;
@@ -312,8 +351,8 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
       g_error_free (error);
     }
 
-  /* list of open documents menu */
-  action_group = gtk_action_group_new ("DocumentsListActions");
+  /* Favorites */
+  action_group = gtk_action_group_new ("FavoritesActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
   window->priv->favorites_list_action_group = action_group;
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
@@ -333,6 +372,49 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 		      FALSE,
 		      FALSE,
 		      0);
+
+/*
+  connect_button = gtk_ui_manager_get_widget (manager, "/ToolBar/MachineConnect");
+  recent_menu = gtk_recent_chooser_menu_new ();
+  filter = gtk_recent_filter_new ();
+  gtk_recent_filter_add_group (filter, "vinagre");
+  gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (recent_menu),
+				 filter);
+  gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (connect_button),
+				 recent_menu);
+*/
+
+  /* Recent connections */
+  window->priv->recent_action = gtk_recent_action_new ("recent_connections",
+						     _("_Recent connections"),
+						       NULL, NULL);
+  g_signal_connect (window->priv->recent_action,
+		    "item-activated",
+		    G_CALLBACK (activate_recent_cb),
+		    window);
+
+  action_group = gtk_action_group_new ("VinagreRecentConnectionsActions");
+  gtk_action_group_set_translation_domain (action_group, NULL);
+
+  gtk_ui_manager_insert_action_group (manager, action_group, 0);
+  g_object_unref (action_group);
+  window->priv->recent_action_group = action_group;
+  gtk_action_group_add_action (window->priv->recent_action_group,
+			       window->priv->recent_action);
+
+  filter = gtk_recent_filter_new ();
+  gtk_recent_filter_add_group (filter, "vinagre");
+  gtk_recent_chooser_add_filter (GTK_RECENT_CHOOSER (window->priv->recent_action),
+				 filter);
+
+  update_recent_connections (window);
+
+  recent_manager = gtk_recent_manager_get_default ();
+  g_signal_connect (recent_manager,
+		    "changed",
+		    G_CALLBACK (recent_manager_changed),
+		    window);
+
 }
 
 static void
@@ -404,12 +486,13 @@ void
 vinagre_window_update_favorites_list_menu (VinagreWindow *window)
 {
   VinagreWindowPrivate *p = window->priv;
-  GList *actions, *l, *favs;
-  gint n, i;
-  guint id;
-  VinagreConnection *conn;
-  gchar *action_name, *action_label;
-  GtkAction *action;
+  GList                *actions, *l, *favs;
+  gint                  n, i;
+  guint                 id;
+  VinagreConnection    *conn;
+  gchar                *action_name, *action_label;
+  GtkAction            *action;
+  gchar                *name;
 
   g_return_if_fail (p->favorites_list_action_group != NULL);
 
@@ -437,11 +520,12 @@ vinagre_window_update_favorites_list_menu (VinagreWindow *window)
   while (favs)
     {
       conn = (VinagreConnection *) favs->data;
+      name = vinagre_connection_best_name (conn);
 
       action_name = g_strdup_printf ("Fav_%d", i);
       action_label = vinagre_utils_escape_underscores (
-			vinagre_connection_best_name (conn),
-			-1);
+		     name,
+		     -1);
       action = gtk_action_new (action_name,
 			       action_label,
 			       NULL,
@@ -468,6 +552,7 @@ vinagre_window_update_favorites_list_menu (VinagreWindow *window)
       g_object_unref (action);
       g_free (action_name);
       g_free (action_label);
+      g_free (name);
 
       favs = favs->next;
       i++;
@@ -615,7 +700,7 @@ create_statusbar (VinagreWindow *window,
 void
 vinagre_window_set_title (VinagreWindow *window)
 {
-  gchar *title;
+  gchar *title, *name;
 
   if (window->priv->active_tab == NULL)
     {
@@ -623,11 +708,13 @@ vinagre_window_set_title (VinagreWindow *window)
       return;
     }
 
+  name = vinagre_connection_best_name (vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab)));
   title = g_strdup_printf ("%s - %s",
-			   vinagre_connection_best_name (vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab))),
+			   name,
 			   "vinagre");
   gtk_window_set_title (GTK_WINDOW (window), title);
   g_free (title);
+  g_free (name);
 }
 
 static void
