@@ -25,7 +25,7 @@
 #include <glib/gi18n.h>
 #include "vinagre-fav.h"
 #include "vinagre-utils.h"
-#include "vinagre-favorites.h"
+#include "vinagre-bookmarks.h"
 #include "vinagre-window-private.h"
 
 #define VINAGRE_FAV_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_FAV, VinagreFavPrivate))
@@ -170,7 +170,7 @@ vinagre_fav_row_activated_cb (GtkTreeView       *treeview,
 		      CONN_COL, &conn, 
 		      -1);
 
-  /* Emits the signal saying that user has activated a favorite */
+  /* Emits the signal saying that user has activated a bookmark */
   g_signal_emit (G_OBJECT (fav), 
 		 signals[FAV_ACTIVATED],
 		 0, 
@@ -192,7 +192,7 @@ vinagre_fav_selection_changed_cb (GtkTreeSelection *selection,
 			  -1);
     }
 
-  /* Emits the signal saying that user has selected a favorite */
+  /* Emits the signal saying that user has selected a bookmark */
   g_signal_emit (G_OBJECT (fav), 
 		 signals[FAV_SELECTED],
 		 0, 
@@ -433,7 +433,7 @@ vinagre_fav_init (VinagreFav *fav)
   /* setup small close button */
   close_button = vinagre_utils_create_small_close_button ();
   gtk_box_pack_start (GTK_BOX(label_box), close_button, FALSE, FALSE, 0);
-  gtk_widget_set_tooltip_text (close_button, _("Hide favorites"));
+  gtk_widget_set_tooltip_text (close_button, _("Hide bookmarks"));
   gtk_box_pack_start (GTK_BOX(fav), label_box, FALSE, FALSE, 0);
   g_signal_connect (close_button,
 		    "clicked",
@@ -468,7 +468,7 @@ vinagre_fav_update_list (VinagreFav *fav)
   store = GTK_LIST_STORE (fav->priv->model);
   gtk_list_store_clear (store);
 
-  list = vinagre_favorites_get_all ();
+  list = vinagre_bookmarks_get_all ();
   while (list)
     {
       conn = (VinagreConnection *) list->data;

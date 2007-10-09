@@ -1,5 +1,5 @@
 /*
- * vinagre-favorites.h
+ * vinagre-bookmarks.h
  * This file is part of vinagre
  *
  * Copyright (C) 2007  Jonh Wendell <wendell@bani.com.br>
@@ -27,17 +27,17 @@
 #include "vinagre-connection.h"
 #include "vinagre-window.h"
 
-void			vinagre_favorites_init		(void);
-void			vinagre_favorites_finalize	(void);
+void			vinagre_bookmarks_init		(void);
+void			vinagre_bookmarks_finalize	(void);
 
-gboolean		vinagre_favorites_add		(VinagreConnection *conn,
+gboolean		vinagre_bookmarks_add		(VinagreConnection *conn,
 							 VinagreWindow     *window);
-gboolean		vinagre_favorites_del		(VinagreConnection *conn,
+gboolean		vinagre_bookmarks_del		(VinagreConnection *conn,
 							 VinagreWindow     *window);
-gboolean		vinagre_favorites_edit		(VinagreConnection *conn,
+gboolean		vinagre_bookmarks_edit		(VinagreConnection *conn,
 							 VinagreWindow     *window);
 
-GList			*vinagre_favorites_get_all	(void);
-VinagreConnection	*vinagre_favorites_exists	(const char *host, int port);
+GList			*vinagre_bookmarks_get_all	(void);
+VinagreConnection	*vinagre_bookmarks_exists	(const char *host, int port);
 
 #endif  /* __VINAGRE_FAVORITES_H__ */

@@ -49,15 +49,15 @@ void		vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
 void		vinagre_cmd_view_fullscreen	(GtkAction     *action,
 						 VinagreWindow *window);
 
-void		vinagre_cmd_open_favorite	(VinagreWindow     *window,
+void		vinagre_cmd_open_bookmark	(VinagreWindow     *window,
 						 VinagreConnection *conn);
-void		vinagre_cmd_favorites_add	(GtkAction     *action,
+void		vinagre_cmd_bookmarks_add	(GtkAction     *action,
 						 VinagreWindow *window);
-void		vinagre_cmd_favorites_open	(GtkAction     *action,
+void		vinagre_cmd_bookmarks_open	(GtkAction     *action,
 						 VinagreWindow *window);
-void		vinagre_cmd_favorites_edit	(GtkAction     *action,
+void		vinagre_cmd_bookmarks_edit	(GtkAction     *action,
 						 VinagreWindow *window);
-void		vinagre_cmd_favorites_del	(GtkAction     *action,
+void		vinagre_cmd_bookmarks_del	(GtkAction     *action,
 						 VinagreWindow *window);
 
 void		vinagre_cmd_help_about		(GtkAction     *action,

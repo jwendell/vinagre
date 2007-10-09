@@ -76,7 +76,7 @@ GtkWidget	*vinagre_window_get_toolbar		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_fav_panel		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_notebook		(VinagreWindow	       *window);
 
-void		vinagre_window_update_favorites_list_menu (VinagreWindow       *window);
+void		vinagre_window_update_bookmarks_list_menu (VinagreWindow       *window);
 
 GtkUIManager	*vinagre_window_get_ui_manager		(VinagreWindow         *window);
 

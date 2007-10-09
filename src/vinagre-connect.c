@@ -26,7 +26,7 @@
 #include "vinagre-connect.h"
 #include "vinagre-main.h"
 #include "vinagre-utils.h"
-#include "vinagre-favorites.h"
+#include "vinagre-bookmarks.h"
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -115,7 +115,7 @@ VinagreConnection *vinagre_connect ()
 
       gtk_widget_hide (GTK_WIDGET (dialog));
 
-      conn = vinagre_favorites_exists (host, port);
+      conn = vinagre_bookmarks_exists (host, port);
       if (!conn)
 	{
 	  conn = vinagre_connection_new ();

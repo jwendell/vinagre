@@ -1,5 +1,5 @@
 /*
- * vinagre-favorites.c
+ * vinagre-bookmarks.c
  * This file is part of vinagre
  *
  * Copyright (C) 2007  Jonh Wendell <wendell@bani.com.br>
@@ -18,7 +18,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "vinagre-favorites.h"
+#include "vinagre-bookmarks.h"
 #include "vinagre-utils.h"
 
 #include <gtk/gtk.h>
@@ -26,9 +26,9 @@
 #include <glade/glade.h>
 #include <string.h>
 
-#define VINAGRE_FAVORITES_FILE  "vinagre.favorites"
+#define VINAGRE_FAVORITES_FILE  "vinagre.bookmarks"
 
-GKeyFile *favorites = NULL;
+GKeyFile *bookmarks = NULL;
 
 static gchar *
 filename (void)
@@ -40,7 +40,7 @@ filename (void)
 }
 
 static void
-vinagre_favorites_save_file (void)
+vinagre_bookmarks_save_file (void)
 {
   gchar    *file;
   gchar    *data;
@@ -48,14 +48,14 @@ vinagre_favorites_save_file (void)
   GError   *error;
 
   error = NULL;
-  data = g_key_file_to_data (favorites,
+  data = g_key_file_to_data (bookmarks,
 			     &length,
 			     &error);
   if (!data)
     {
       if (error)
 	{
-	  g_warning (_("Error while saving favorites: %s"), error->message);
+	  g_warning (_("Error while saving bookmarks: %s"), error->message);
 	  g_error_free (error);
 	}
 
@@ -73,7 +73,7 @@ vinagre_favorites_save_file (void)
     {
       if (error)
 	{
-	  g_warning (_("Error while saving favorites: %s"), error->message);
+	  g_warning (_("Error while saving bookmarks: %s"), error->message);
 	  g_error_free (error);
 	}
     }
@@ -83,22 +83,22 @@ vinagre_favorites_save_file (void)
 }
 
 void
-vinagre_favorites_init (void)
+vinagre_bookmarks_init (void)
 {
   gchar    *file;
   gboolean loaded;
   GError   *error;
 
-  g_return_if_fail (favorites == NULL);
+  g_return_if_fail (bookmarks == NULL);
 
-  favorites = g_key_file_new ();
+  bookmarks = g_key_file_new ();
 
   loaded = FALSE;
   error  = NULL;
 
   file = filename ();
   if (g_file_test (file, G_FILE_TEST_EXISTS))
-    loaded = g_key_file_load_from_file (favorites,
+    loaded = g_key_file_load_from_file (bookmarks,
 					file,
 					G_KEY_FILE_NONE,
 					&error);
@@ -108,22 +108,22 @@ vinagre_favorites_init (void)
     {
       if (error)
 	{
-	  g_warning (_("Error while initializing favorites: %s"), error->message);
+	  g_warning (_("Error while initializing bookmarks: %s"), error->message);
 	  g_error_free (error);
 	}
     }
 }
 
 void
-vinagre_favorites_finalize (void)
+vinagre_bookmarks_finalize (void)
 {
-  g_return_if_fail (favorites != NULL);
+  g_return_if_fail (bookmarks != NULL);
 
-  g_key_file_free (favorites);
+  g_key_file_free (bookmarks);
 }
 
 gboolean
-vinagre_favorites_add (VinagreConnection *conn,
+vinagre_bookmarks_add (VinagreConnection *conn,
 		       VinagreWindow     *window)
 {
   gint result;
@@ -149,17 +149,17 @@ vinagre_favorites_add (VinagreConnection *conn,
       if (strlen(name) < 1)
 	name = conn->host;
 
-      g_key_file_set_string (favorites,
+      g_key_file_set_string (bookmarks,
 			     name,
 			     "host",
 			     conn->host);
-      g_key_file_set_integer (favorites,
+      g_key_file_set_integer (bookmarks,
 			      name,
 			      "port",
 			      conn->port);
 
       vinagre_connection_set_name (conn, name);
-      vinagre_favorites_save_file ();
+      vinagre_bookmarks_save_file ();
     }
 
   gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -169,7 +169,7 @@ vinagre_favorites_add (VinagreConnection *conn,
 }
 
 gboolean
-vinagre_favorites_edit (VinagreConnection *conn,
+vinagre_bookmarks_edit (VinagreConnection *conn,
 		        VinagreWindow     *window)
 {
   gint result;
@@ -200,7 +200,7 @@ vinagre_favorites_edit (VinagreConnection *conn,
   if (result == GTK_RESPONSE_OK)
     {
 
-      g_key_file_remove_group (favorites, conn->name, NULL);
+      g_key_file_remove_group (bookmarks, conn->name, NULL);
 
       name = gtk_entry_get_text (GTK_ENTRY (name_entry));
       vinagre_connection_set_host (conn, gtk_entry_get_text (GTK_ENTRY (host_entry)));
@@ -209,17 +209,17 @@ vinagre_favorites_edit (VinagreConnection *conn,
       if (strlen(conn->name) < 1)
 	name = conn->host;
 
-      g_key_file_set_string (favorites,
+      g_key_file_set_string (bookmarks,
 			     name,
 			     "host",
 			     conn->host);
-      g_key_file_set_integer (favorites,
+      g_key_file_set_integer (bookmarks,
 			      name,
 			      "port",
 			      conn->port);
 
       vinagre_connection_set_name (conn, name);
-      vinagre_favorites_save_file ();
+      vinagre_bookmarks_save_file ();
     }
 
   gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -229,7 +229,7 @@ vinagre_favorites_edit (VinagreConnection *conn,
 }
 
 GList *
-vinagre_favorites_get_all (void)
+vinagre_bookmarks_get_all (void)
 {
   GList *list = NULL;
   gsize length, i;
@@ -238,19 +238,19 @@ vinagre_favorites_get_all (void)
   gchar *s_value;
   gint i_value;
 
-  g_return_val_if_fail (favorites != NULL, NULL);
+  g_return_val_if_fail (bookmarks != NULL, NULL);
 
-  conns = g_key_file_get_groups (favorites, &length);
+  conns = g_key_file_get_groups (bookmarks, &length);
   for (i=0; i<length; i++)
     {
       conn = vinagre_connection_new ();
       vinagre_connection_set_name (conn, conns[i]);
 
-      s_value = g_key_file_get_string (favorites, conns[i], "host", NULL);
+      s_value = g_key_file_get_string (bookmarks, conns[i], "host", NULL);
       vinagre_connection_set_host (conn, s_value);
       g_free (s_value);
 
-      i_value = g_key_file_get_integer (favorites, conns[i], "port", NULL);
+      i_value = g_key_file_get_integer (bookmarks, conns[i], "port", NULL);
       vinagre_connection_set_port (conn, i_value);
 
       list = g_list_append (list, conn);
@@ -261,7 +261,7 @@ vinagre_favorites_get_all (void)
 }
 
 gboolean
-vinagre_favorites_del (VinagreConnection *conn,
+vinagre_bookmarks_del (VinagreConnection *conn,
 		       VinagreWindow     *window)
 {
   gint       result;
@@ -269,11 +269,11 @@ vinagre_favorites_del (VinagreConnection *conn,
   gchar     *name;
   GError    *error = NULL;
 
-  g_return_val_if_fail (favorites != NULL, FALSE);
+  g_return_val_if_fail (bookmarks != NULL, FALSE);
   g_return_val_if_fail (conn != NULL, FALSE);
 
   name = vinagre_connection_best_name (conn);
-  g_return_val_if_fail (g_key_file_has_group (favorites, name), FALSE);
+  g_return_val_if_fail (g_key_file_has_group (bookmarks, name), FALSE);
 
   dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 				   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -287,27 +287,28 @@ vinagre_favorites_del (VinagreConnection *conn,
  
   result = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
-  g_free (name);
 
   if (result == GTK_RESPONSE_OK)
     {
-      g_key_file_remove_group (favorites, name, &error);
+      g_key_file_remove_group (bookmarks, name, &error);
       if (error)
 	{
-	  g_warning (_("Error while removing %s from favorites: %s"),
+	  g_warning (_("Error while removing %s from bookmarks: %s"),
 			name,
 			error->message);
 	  g_error_free (error);
+	  g_free (name);
 	  return FALSE;
 	}
-      vinagre_favorites_save_file ();
+      g_free (name);
+      vinagre_bookmarks_save_file ();
     }
 
   return (result == GTK_RESPONSE_OK);
 }
 
 VinagreConnection *
-vinagre_favorites_exists (const char *host, int port)
+vinagre_bookmarks_exists (const char *host, int port)
 {
   VinagreConnection *conn = NULL;
   gsize length, i;
@@ -315,13 +316,13 @@ vinagre_favorites_exists (const char *host, int port)
   gchar *s_host = NULL;
   gint  i_port;
 
-  g_return_val_if_fail (favorites != NULL, NULL);
+  g_return_val_if_fail (bookmarks != NULL, NULL);
 
-  conns = g_key_file_get_groups (favorites, &length);
+  conns = g_key_file_get_groups (bookmarks, &length);
   for (i=0; i<length; i++)
     {
-      s_host = g_key_file_get_string (favorites, conns[i], "host", NULL);
-      i_port = g_key_file_get_integer (favorites, conns[i], "port", NULL);
+      s_host = g_key_file_get_string (bookmarks, conns[i], "host", NULL);
+      i_port = g_key_file_get_integer (bookmarks, conns[i], "port", NULL);
 
       if ( (g_str_equal (host, s_host)) && (port == i_port) )
 	{

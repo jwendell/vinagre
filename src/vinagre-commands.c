@@ -32,7 +32,7 @@
 #include "vinagre-notebook.h"
 #include "vinagre-tab.h"
 #include "vinagre-connect.h"
-#include "vinagre-favorites.h"
+#include "vinagre-bookmarks.h"
 #include "vinagre-fav.h"
 #include "vinagre-window-private.h"
 #include "vinagre-prefs-manager.h"
@@ -137,7 +137,7 @@ vinagre_cmd_view_fullscreen (GtkAction     *action,
 
 /* Bookmarks Menu */
 void
-vinagre_cmd_open_favorite (VinagreWindow     *window,
+vinagre_cmd_open_bookmark (VinagreWindow     *window,
 			   VinagreConnection *conn)
 {
   GtkWidget *tab;
@@ -154,7 +154,7 @@ vinagre_cmd_open_favorite (VinagreWindow     *window,
 }
 
 void
-vinagre_cmd_favorites_add (GtkAction     *action,
+vinagre_cmd_bookmarks_add (GtkAction     *action,
 			   VinagreWindow *window)
 {
   VinagreConnection *conn;
@@ -165,31 +165,31 @@ vinagre_cmd_favorites_add (GtkAction     *action,
 
   name = vinagre_connection_best_name (conn);
 
-  vinagre_favorites_add (conn, window);
+  vinagre_bookmarks_add (conn, window);
   vinagre_tab_set_title (VINAGRE_TAB (window->priv->active_tab),
 			 name);
 
   vinagre_fav_update_list (VINAGRE_FAV (window->priv->fav_panel));
-  vinagre_window_update_favorites_list_menu (window);
+  vinagre_window_update_bookmarks_list_menu (window);
 
   g_free (name);
 }
 
 void
-vinagre_cmd_favorites_edit (GtkAction     *action,
+vinagre_cmd_bookmarks_edit (GtkAction     *action,
 			    VinagreWindow *window)
 {
   g_return_if_fail (window->priv->fav_conn_selected != NULL);
 
-  if (vinagre_favorites_edit (window->priv->fav_conn_selected, window))
+  if (vinagre_bookmarks_edit (window->priv->fav_conn_selected, window))
     {
       vinagre_fav_update_list (VINAGRE_FAV (window->priv->fav_panel));
-      vinagre_window_update_favorites_list_menu (window);
+      vinagre_window_update_bookmarks_list_menu (window);
     }
 }
 
 void
-vinagre_cmd_favorites_open (GtkAction     *action,
+vinagre_cmd_bookmarks_open (GtkAction     *action,
 			    VinagreWindow *window)
 {
   VinagreConnection *conn = NULL;
@@ -202,19 +202,19 @@ vinagre_cmd_favorites_open (GtkAction     *action,
 
   g_return_if_fail (conn != NULL);
 
-  vinagre_cmd_open_favorite (window, conn);
+  vinagre_cmd_open_bookmark (window, conn);
 }
 
 void
-vinagre_cmd_favorites_del (GtkAction     *action,
+vinagre_cmd_bookmarks_del (GtkAction     *action,
 			   VinagreWindow *window)
 {
   g_return_if_fail (window->priv->fav_conn_selected != NULL);
 
-  if (vinagre_favorites_del (window->priv->fav_conn_selected, window))
+  if (vinagre_bookmarks_del (window->priv->fav_conn_selected, window))
     {
       vinagre_fav_update_list (VINAGRE_FAV (window->priv->fav_panel));
-      vinagre_window_update_favorites_list_menu (window);
+      vinagre_window_update_bookmarks_list_menu (window);
     }
 }
 

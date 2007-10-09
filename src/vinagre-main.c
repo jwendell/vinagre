@@ -28,7 +28,7 @@
 #include "vinagre-prefs-manager.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
-#include "vinagre-favorites.h"
+#include "vinagre-bookmarks.h"
 
 /* command line */
 static gchar **remaining_args = NULL;

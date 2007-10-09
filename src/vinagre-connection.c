@@ -20,7 +20,7 @@
 
 #include <stdlib.h>
 #include "vinagre-connection.h"
-#include "vinagre-favorites.h"
+#include "vinagre-bookmarks.h"
 
 VinagreConnection *
 vinagre_connection_new ()
@@ -150,7 +150,7 @@ VinagreConnection
   host = server[0];
   port = server[1] ? atoi (server[1]) : 5900;
 
-  conn = vinagre_favorites_exists (host, port);
+  conn = vinagre_bookmarks_exists (host, port);
   if (!conn)
     {
       conn = vinagre_connection_new ();

@@ -44,11 +44,11 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
   	
   /* Bookmarks menu */
   { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
-    N_("Connect into this machine"), G_CALLBACK (vinagre_cmd_favorites_open) },
+    N_("Connect into this machine"), G_CALLBACK (vinagre_cmd_bookmarks_open) },
   { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit bookmark"), NULL,
-    N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_cmd_favorites_edit) },
+    N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_cmd_bookmarks_edit) },
   { "BookmarksDel", GTK_STOCK_DELETE, N_("_Remove from bookmarks"), NULL,
-    N_("Remove current selected connection from bookmarks"), G_CALLBACK (vinagre_cmd_favorites_del) },
+    N_("Remove current selected connection from bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_del) },
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
@@ -73,7 +73,7 @@ static const GtkActionEntry vinagre_menu_entries[] =
 
   /* Bookmarks menu */
   { "BookmarksAdd", GTK_STOCK_SAVE, N_("_Add to bookmarks"), "<control>D",
-    N_("Add current connection to your bookmarks"), G_CALLBACK (vinagre_cmd_favorites_add) }
+    N_("Add current connection to your bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_add) }
 
 };
 
