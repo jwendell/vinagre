@@ -412,7 +412,7 @@ vinagre_fav_hide (GtkButton *button, VinagreFav *fav)
   GtkAction *action;
 
   action = gtk_action_group_get_action (fav->priv->window->priv->always_sensitive_action_group,
-					"ViewFavorites");
+					"ViewBookmarks");
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
 }
 
@@ -425,7 +425,7 @@ vinagre_fav_init (VinagreFav *fav)
 
   /* setup label */
   label_box = gtk_hbox_new (FALSE, 0);
-  label = gtk_label_new (_("Favorites"));
+  label = gtk_label_new (_("Bookmarks"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_misc_set_padding (GTK_MISC (label), 6, 6);
   gtk_box_pack_start (GTK_BOX(label_box), label, TRUE, TRUE, 0);

@@ -135,8 +135,8 @@ vinagre_favorites_add (VinagreConnection *conn,
   g_return_val_if_fail (conn != NULL, FALSE);
 
   glade_file = vinagre_utils_get_glade_filename ();
-  xml = glade_xml_new (glade_file, "add_to_favorites_dialog", NULL);
-  dialog = glade_xml_get_widget (xml, "add_to_favorites_dialog");
+  xml = glade_xml_new (glade_file, "add_to_bookmarks_dialog", NULL);
+  dialog = glade_xml_get_widget (xml, "add_to_bookmarks_dialog");
   gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
 
   gtk_widget_show_all (dialog);
@@ -145,7 +145,7 @@ vinagre_favorites_add (VinagreConnection *conn,
 
   if (result == GTK_RESPONSE_OK)
     {
-      name = gtk_entry_get_text (GTK_ENTRY (glade_xml_get_widget (xml, "favorite_name_entry")));
+      name = gtk_entry_get_text (GTK_ENTRY (glade_xml_get_widget (xml, "bookmark_name_entry")));
       if (strlen(name) < 1)
 	name = conn->host;
 
@@ -181,13 +181,13 @@ vinagre_favorites_edit (VinagreConnection *conn,
   g_return_val_if_fail (conn != NULL, FALSE);
 
   glade_file = vinagre_utils_get_glade_filename ();
-  xml = glade_xml_new (glade_file, "edit_favorite_dialog", NULL);
-  dialog = glade_xml_get_widget (xml, "edit_favorite_dialog");
+  xml = glade_xml_new (glade_file, "edit_bookmark_dialog", NULL);
+  dialog = glade_xml_get_widget (xml, "edit_bookmark_dialog");
   gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
 
-  name_entry = glade_xml_get_widget (xml, "edit_favorite_name_entry");
-  host_entry = glade_xml_get_widget (xml, "edit_favorite_host_entry");
-  port_entry = glade_xml_get_widget (xml, "edit_favorite_port_entry");
+  name_entry = glade_xml_get_widget (xml, "edit_bookmark_name_entry");
+  host_entry = glade_xml_get_widget (xml, "edit_bookmark_host_entry");
+  port_entry = glade_xml_get_widget (xml, "edit_bookmark_port_entry");
 
   gtk_entry_set_text (GTK_ENTRY(name_entry), conn->name);
   gtk_entry_set_text (GTK_ENTRY(host_entry), conn->host);
@@ -282,7 +282,7 @@ vinagre_favorites_del (VinagreConnection *conn,
 				   _("Confirm removal?"));
 
   gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
-					    _("Are you sure you want to exclude <i>%s</i> from favorites?"),
+					    _("Are you sure you want to exclude <i>%s</i> from bookmarks?"),
 					    name);
  
   result = gtk_dialog_run (GTK_DIALOG (dialog));

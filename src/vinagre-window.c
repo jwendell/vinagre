@@ -351,8 +351,8 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
       g_error_free (error);
     }
 
-  /* Favorites */
-  action_group = gtk_action_group_new ("FavoritesActions");
+  /* Bookmarks */
+  action_group = gtk_action_group_new ("BookmarksActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
   window->priv->favorites_list_action_group = action_group;
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
@@ -372,17 +372,6 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 		      FALSE,
 		      FALSE,
 		      0);
-
-/*
-  connect_button = gtk_ui_manager_get_widget (manager, "/ToolBar/MachineConnect");
-  recent_menu = gtk_recent_chooser_menu_new ();
-  filter = gtk_recent_filter_new ();
-  gtk_recent_filter_add_group (filter, "vinagre");
-  gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (recent_menu),
-				 filter);
-  gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (connect_button),
-				 recent_menu);
-*/
 
   /* Recent connections */
   window->priv->recent_action = gtk_recent_action_new ("recent_connections",
@@ -457,9 +446,9 @@ fav_panel_selected (VinagreFav        *fav,
   GtkAction *action1, *action2;
 
   action1 = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					 "FavoritesDel");
+					 "BookmarksDel");
   action2 = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					 "FavoritesEdit");
+					 "BookmarksEdit");
 
   if (window->priv->fav_conn_selected)
     {
@@ -544,7 +533,7 @@ vinagre_window_update_favorites_list_menu (VinagreWindow *window)
 
       gtk_ui_manager_add_ui (p->manager,
 			     id,
-			     "/MenuBar/FavoritesMenu/FavoritesList",
+			     "/MenuBar/BookmarksMenu/BookmarksList",
 			     action_name, action_name,
 			     GTK_UI_MANAGER_MENUITEM,
 			     FALSE);
@@ -600,11 +589,11 @@ init_widgets_visibility (VinagreWindow *window)
 
   /* Remove and Edit favorites starts disabled */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"FavoritesDel");
+					"BookmarksDel");
   gtk_action_set_sensitive (action, FALSE);
 
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"FavoritesEdit");
+					"BookmarksEdit");
   gtk_action_set_sensitive (action, FALSE);
 
   /* TODO: Implement these commands */
@@ -614,7 +603,7 @@ init_widgets_visibility (VinagreWindow *window)
 
   /* fav panel visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"ViewFavorites");
+					"ViewBookmarks");
   visible = vinagre_prefs_manager_get_side_pane_visible ();
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);

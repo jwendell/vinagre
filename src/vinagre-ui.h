@@ -33,7 +33,7 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
   { "Machine", NULL, N_("_Machine") },
   { "Edit", NULL, N_("_Edit") },
   { "View", NULL, N_("_View") },
-  { "Favorites", NULL, N_("_Favorites") },
+  { "Bookmarks", NULL, N_("_Bookmarks") },
   { "Help", NULL, N_("_Help") },
 
   /* Machine menu */
@@ -42,13 +42,13 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
   { "MachineQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
     N_("Quit the program"), G_CALLBACK (gtk_main_quit) },
   	
-  /* Favorites menu */
-  { "FavoritesOpen", GTK_STOCK_CONNECT, N_("_Open favorite"), NULL,
-    N_("Connect to this favorite"), G_CALLBACK (vinagre_cmd_favorites_open) },
-  { "FavoritesEdit", GTK_STOCK_EDIT, N_("_Edit favorite"), NULL,
-    N_("Edit the details of selected favorite"), G_CALLBACK (vinagre_cmd_favorites_edit) },
-  { "FavoritesDel", GTK_STOCK_DELETE, N_("_Remove from favorites"), NULL,
-    N_("Remove current selected connection from favorites"), G_CALLBACK (vinagre_cmd_favorites_del) },
+  /* Bookmarks menu */
+  { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
+    N_("Connect into this machine"), G_CALLBACK (vinagre_cmd_favorites_open) },
+  { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit bookmark"), NULL,
+    N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_cmd_favorites_edit) },
+  { "BookmarksDel", GTK_STOCK_DELETE, N_("_Remove from bookmarks"), NULL,
+    N_("Remove current selected connection from bookmarks"), G_CALLBACK (vinagre_cmd_favorites_del) },
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
@@ -71,9 +71,9 @@ static const GtkActionEntry vinagre_menu_entries[] =
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
     N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) },
 
-  /* Favorites menu */
-  { "FavoritesAdd", GTK_STOCK_SAVE, N_("_Add to favorites"), "<control>D",
-    N_("Add current connection to favorites"), G_CALLBACK (vinagre_cmd_favorites_add) }
+  /* Bookmarks menu */
+  { "BookmarksAdd", GTK_STOCK_SAVE, N_("_Add to bookmarks"), "<control>D",
+    N_("Add current connection to your bookmarks"), G_CALLBACK (vinagre_cmd_favorites_add) }
 
 };
 
@@ -87,8 +87,8 @@ static const GtkToggleActionEntry vinagre_always_sensitive_toggle_menu_entries[]
     N_("Show or hide the statusbar"),
     G_CALLBACK (vinagre_cmd_view_show_statusbar), FALSE },
 
-  { "ViewFavorites", NULL, N_("_Favorites"), "F9",
-    N_("Show or hide the favorites panel"),
+  { "ViewBookmarks", NULL, N_("_Bookmarks"), "F9",
+    N_("Show or hide the bookmarks panel"),
     G_CALLBACK (vinagre_cmd_view_show_fav_panel), FALSE }
 };
 

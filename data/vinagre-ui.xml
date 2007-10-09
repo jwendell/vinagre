@@ -37,18 +37,18 @@
     <menu name="ViewMenu" action="View">
       <menuitem name="ViewToolbarMenu" action="ViewToolbar"/>
       <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
-      <menuitem name="ViewFavoritesMenu" action="ViewFavorites"/>
+      <menuitem name="ViewBookmarksMenu" action="ViewBookmarks"/>
       <separator/>
       <menuitem name="ViewFullScreenMenu" action="ViewFullScreen"/>
     </menu>
 
-    <menu name="FavoritesMenu" action="Favorites">
-      <menuitem name="FavoritesAddMenu" action="FavoritesAdd"/>
+    <menu name="BookmarksMenu" action="Bookmarks">
+      <menuitem name="BookmarksAddMenu" action="BookmarksAdd"/>
       <separator/>
-      <menuitem name="FavoritesEditMenu" action="FavoritesEdit"/>
-      <menuitem name="FavoritesDelMenu" action="FavoritesDel"/>
+      <menuitem name="BookmarksEditMenu" action="BookmarksEdit"/>
+      <menuitem name="BookmarksDelMenu" action="BookmarksDel"/>
       <separator/>
-      <placeholder name="FavoritesList"/>
+      <placeholder name="BookmarksList"/>
     </menu>
 
     <menu name="HelpMenu" action="Help">
@@ -66,10 +66,10 @@
   </toolbar>
 
   <popup name="FavPopup" action="FavPopupAction">
-    <menuitem action="FavoritesOpen"/>
+    <menuitem action="BookmarksOpen"/>
     <separator/>
-    <menuitem action="FavoritesEdit"/>
-    <menuitem action="FavoritesDel"/>
+    <menuitem action="BookmarksEdit"/>
+    <menuitem action="BookmarksDel"/>
   </popup>
 
 </ui>

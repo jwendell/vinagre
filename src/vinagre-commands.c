@@ -135,7 +135,7 @@ vinagre_cmd_view_fullscreen (GtkAction     *action,
   vinagre_window_toggle_fullscreen (window);
 }
 
-/* Favorites Menu */
+/* Bookmarks Menu */
 void
 vinagre_cmd_open_favorite (VinagreWindow     *window,
 			   VinagreConnection *conn)
