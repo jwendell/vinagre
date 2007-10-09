@@ -824,7 +824,7 @@ vinagre_window_init (VinagreWindow *window)
 {
   GtkWidget *main_box;
 
-  gtk_window_set_default_icon_name ("gnome-remote-desktop");
+  gtk_window_set_default_icon_name ("vinagre");
 
   window->priv = VINAGRE_WINDOW_GET_PRIVATE (window);
   window->priv->active_tab = NULL;
