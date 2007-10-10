@@ -104,6 +104,7 @@ vinagre_window_show_hide_controls (VinagreWindow *window)
       gtk_widget_hide (window->priv->statusbar);
 
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), FALSE);
+      gtk_notebook_set_show_border (GTK_NOTEBOOK (window->priv->notebook), FALSE);
     }
   else
     {
@@ -119,6 +120,7 @@ vinagre_window_show_hide_controls (VinagreWindow *window)
         gtk_widget_show_all (window->priv->statusbar);
 
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), TRUE);
+      gtk_notebook_set_show_border (GTK_NOTEBOOK (window->priv->notebook), TRUE);
     }
 }
 
@@ -127,6 +129,9 @@ vinagre_window_state_event_cb (GtkWidget *widget,
 			       GdkEventWindowState *event)
 {
   VinagreWindow *window;
+
+  if ((event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) == 0)
+    return FALSE;
 
   window = VINAGRE_WINDOW (widget);
 
@@ -161,7 +166,7 @@ vinagre_window_configure_event (GtkWidget         *widget,
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->configure_event (widget, event);
 }
 
-
+/*
 static gboolean
 vinagre_window_key_press_cb (GtkWidget   *widget,
 			     GdkEventKey *event)
@@ -178,6 +183,7 @@ vinagre_window_key_press_cb (GtkWidget   *widget,
 
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->key_press_event (widget, event);
 }
+*/
 
 static void
 vinagre_window_class_init (VinagreWindowClass *klass)
@@ -187,7 +193,7 @@ vinagre_window_class_init (VinagreWindowClass *klass)
 
   object_class->finalize     = vinagre_window_finalize;
 
-  widget_class->key_press_event    = vinagre_window_key_press_cb;
+  //widget_class->key_press_event    = vinagre_window_key_press_cb;
   widget_class->window_state_event = vinagre_window_state_event_cb;
   widget_class->configure_event    = vinagre_window_configure_event;
   widget_class->delete_event       = vinagre_window_delete_event;

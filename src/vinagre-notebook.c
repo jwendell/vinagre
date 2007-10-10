@@ -61,7 +61,6 @@ vinagre_notebook_init (VinagreNotebook *notebook)
   notebook->priv = VINAGRE_NOTEBOOK_GET_PRIVATE (notebook);
 
   gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
-  gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 }
 

@@ -36,6 +36,7 @@
 struct _VinagreTabPrivate
 {
   GtkWidget         *vnc;
+  GtkWidget         *scroll;
   VinagreConnection *conn;
   VinagreNotebook   *nb;
   VinagreWindow     *window;
@@ -60,10 +61,51 @@ enum
 enum
 {
   PROP_0,
-  PROP_CONN
+  PROP_CONN,
+  PROP_WINDOW,
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
+
+static gboolean
+vinagre_tab_window_state_cb (GtkWidget           *widget,
+			     GdkEventWindowState *event,
+			     VinagreTab          *tab)
+{
+  int vnc_w, vnc_h, screen_w, screen_h;
+  GdkScreen *screen;
+  GtkPolicyType h, v;
+
+  if ((event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) == 0)
+    return FALSE;
+
+  vnc_w = vnc_display_get_width (VNC_DISPLAY (tab->priv->vnc));
+  vnc_h = vnc_display_get_height (VNC_DISPLAY (tab->priv->vnc));
+
+  screen = gtk_widget_get_screen (GTK_WIDGET (tab));
+  screen_w = gdk_screen_get_width (screen);
+  screen_h = gdk_screen_get_height (screen);
+
+  if (vnc_w <= screen_w)
+    h = GTK_POLICY_NEVER;
+  else
+    h = GTK_POLICY_AUTOMATIC;
+  
+  if (vnc_h <= screen_h)
+    v = GTK_POLICY_NEVER;
+  else
+    v = GTK_POLICY_AUTOMATIC;
+
+  if (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN)
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
+				    h, v);
+  else
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
+				    GTK_POLICY_AUTOMATIC,
+				    GTK_POLICY_AUTOMATIC);
+
+  return FALSE;
+}
 
 static void
 vinagre_tab_get_property (GObject    *object,
@@ -77,6 +119,9 @@ vinagre_tab_get_property (GObject    *object,
     {
       case PROP_CONN:
         g_value_set_pointer (value, tab->priv->conn);
+	break;
+      case PROP_WINDOW:
+        g_value_set_pointer (value, tab->priv->window);
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -97,6 +142,13 @@ vinagre_tab_set_property (GObject      *object,
       case PROP_CONN:
         tab->priv->conn = g_value_get_pointer (value);
         break;
+      case PROP_WINDOW:
+        tab->priv->window = g_value_get_pointer (value);
+	g_signal_connect (tab->priv->window,
+			  "window-state-event",
+			  G_CALLBACK (vinagre_tab_window_state_cb),
+			  tab);
+        break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;			
@@ -108,6 +160,9 @@ vinagre_tab_finalize (GObject *object)
 {
   VinagreTab *tab = VINAGRE_TAB (object);
 
+  g_signal_handlers_disconnect_by_func (tab->priv->window,
+  					vinagre_tab_window_state_cb,
+  					tab);
   vinagre_connection_free (tab->priv->conn);
 	
   G_OBJECT_CLASS (vinagre_tab_parent_class)->finalize (object);
@@ -127,6 +182,16 @@ vinagre_tab_class_init (VinagreTabClass *klass)
 				   g_param_spec_pointer ("conn",
 							 "Connection",
 							 "The connection",
+							 G_PARAM_READWRITE |
+							 G_PARAM_CONSTRUCT_ONLY |
+							 G_PARAM_STATIC_NAME |
+							 G_PARAM_STATIC_NICK |
+							 G_PARAM_STATIC_BLURB));
+  g_object_class_install_property (object_class,
+				   PROP_WINDOW,
+				   g_param_spec_pointer ("window",
+							 "Window",
+							 "The VinagreWindow",
 							 G_PARAM_READWRITE |
 							 G_PARAM_CONSTRUCT_ONLY |
 							 G_PARAM_STATIC_NAME |
@@ -475,8 +540,8 @@ static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
 static void
 vinagre_tab_init (VinagreTab *tab)
 {
-  GtkWidget *scroll;
   GtkWidget *align;
+  GtkWidget *viewport;
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
   tab->priv->save_password = FALSE;
@@ -486,23 +551,23 @@ vinagre_tab_init (VinagreTab *tab)
   align = gtk_alignment_new (0.5, 0.5, 0, 0);
 
   /* Create the scrolled window */
-  scroll = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
+  tab->priv->scroll = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				  GTK_POLICY_AUTOMATIC,
 				  GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-				       GTK_SHADOW_IN);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (tab->priv->scroll),
+				       GTK_SHADOW_NONE);
 
-  gtk_box_pack_end (GTK_BOX(tab), scroll, TRUE, TRUE, 0);
+  gtk_box_pack_end (GTK_BOX(tab), tab->priv->scroll, TRUE, TRUE, 0);
 
   /* Create the vnc widget */
   tab->priv->vnc = vnc_display_new ();
   gtk_container_add (GTK_CONTAINER (align), tab->priv->vnc);
 
-  gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroll),
+  gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 					 align);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-				       GTK_SHADOW_IN);
+  viewport = gtk_bin_get_child (GTK_BIN (tab->priv->scroll));
+  gtk_viewport_set_shadow_type(GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
 
   g_signal_connect (tab->priv->vnc,
 		    "vnc-connected",
@@ -568,8 +633,8 @@ vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
 {
   VinagreTab *tab = g_object_new (VINAGRE_TYPE_TAB, 
 				   "conn", conn,
+				   "window", window,
 				   NULL);
-  tab->priv->window = window;
   return GTK_WIDGET (tab);
 }
 
