@@ -43,16 +43,17 @@ UPDATE_DESKTOP = \
                 fi \
         fi
 
-UPDATE_ICON =  gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+UPDATE_ICON =  gtk-update-icon-cache -f -t $(DESTDIR)$(datadir)/icons/hicolor
 
 install-data-hook: 
 	$(UPDATE_MIME)
 	$(UPDATE_DESKTOP)
-	ln -s $(datadir)/icons/hicolor/scalable/apps/vinagre.svg $(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg
+	mkdir -p  $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/
+	ln -s $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/vinagre.svg $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg
 	$(UPDATE_ICON)
 
 uninstall-hook: 
 	$(UPDATE_MIME)
 	$(UPDATE_DESKTOP)
-	rm -f $(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg
+	rm -f $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg
 	$(UPDATE_ICON)
