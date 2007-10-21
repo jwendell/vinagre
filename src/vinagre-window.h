@@ -73,8 +73,11 @@ void		 vinagre_window_set_active_tab		(VinagreWindow         *window,
 
 GtkWidget	*vinagre_window_get_statusbar		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_toolbar		(VinagreWindow         *window);
+GtkWidget	*vinagre_window_get_menubar		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_fav_panel		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_notebook		(VinagreWindow	       *window);
+GtkActionGroup	*vinagre_window_get_main_action		(VinagreWindow         *window);
+GtkActionGroup	*vinagre_window_get_sensitive_action	(VinagreWindow         *window);
 
 void		vinagre_window_update_bookmarks_list_menu (VinagreWindow       *window);
 
@@ -88,3 +91,4 @@ void		vinagre_window_set_title		(VinagreWindow *window);
 G_END_DECLS
 
 #endif  /* __VINAGRE_WINDOW_H__  */
+/* vim: ts=8 */

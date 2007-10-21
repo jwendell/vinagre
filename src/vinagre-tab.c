@@ -97,12 +97,18 @@ vinagre_tab_window_state_cb (GtkWidget           *widget,
     v = GTK_POLICY_AUTOMATIC;
 
   if (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN)
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
-				    h, v);
+    {
+      vnc_display_set_pointer_grab  (VNC_DISPLAY(tab->priv->vnc), TRUE);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
+				      h, v);
+    }
   else
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
-				    GTK_POLICY_AUTOMATIC,
-				    GTK_POLICY_AUTOMATIC);
+    {
+      vnc_display_set_pointer_grab  (VNC_DISPLAY(tab->priv->vnc), FALSE);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
+				      GTK_POLICY_AUTOMATIC,
+				      GTK_POLICY_AUTOMATIC);
+    }
 
   return FALSE;
 }
@@ -159,6 +165,10 @@ static void
 vinagre_tab_finalize (GObject *object)
 {
   VinagreTab *tab = VINAGRE_TAB (object);
+
+  gtk_statusbar_pop (tab->priv->status, tab->priv->status_id);
+  gtk_action_group_set_sensitive (vinagre_window_get_sensitive_action (tab->priv->window),
+				  TRUE);
 
   g_signal_handlers_disconnect_by_func (tab->priv->window,
   					vinagre_tab_window_state_cb,
@@ -244,8 +254,6 @@ open_vnc (VinagreTab *tab)
   if (!vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), tab->priv->conn->host, port))
     vinagre_utils_show_error (_("Error connecting to host."), NULL);
 
-  vnc_display_set_keyboard_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
-  vnc_display_set_pointer_grab  (VNC_DISPLAY(tab->priv->vnc), TRUE);
   vnc_display_set_pointer_local (VNC_DISPLAY(tab->priv->vnc), TRUE);
 
   g_free (port);
@@ -453,6 +461,10 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
   vinagre_tab_save_password (tab);
   vinagre_tab_add_recent_used (tab);
 
+  gtk_statusbar_push (tab->priv->status,
+		      tab->priv->status_id,
+		      _("Press Ctrl+Alt to grab the cursor"));
+
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),
 		 signals[TAB_INITIALIZED],
@@ -518,7 +530,18 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
 
 static void vnc_grab_cb (VncDisplay *vnc, VinagreTab *tab)
 {
-  gtk_statusbar_push (tab->priv->status, tab->priv->status_id, _("Press Ctrl+Alt to release the cursor"));
+
+  gtk_statusbar_pop (tab->priv->status,
+		     tab->priv->status_id);
+
+  gtk_statusbar_push (tab->priv->status,
+		      tab->priv->status_id,
+		      _("Press Ctrl+Alt to release the cursor"));
+
+  gtk_action_group_set_sensitive (vinagre_window_get_main_action (tab->priv->window),
+				  FALSE);
+  gtk_action_group_set_sensitive (vinagre_window_get_sensitive_action (tab->priv->window),
+				  FALSE);
 
   if (vinagre_window_is_fullscreen (tab->priv->window))
     gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->nb), FALSE);
@@ -532,6 +555,14 @@ static void vnc_bell_cb (VncDisplay *vnc, VinagreTab *tab)
 static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   gtk_statusbar_pop (tab->priv->status, tab->priv->status_id);
+  gtk_statusbar_push (tab->priv->status,
+		      tab->priv->status_id,
+		      _("Press Ctrl+Alt to grab the cursor"));
+
+  gtk_action_group_set_sensitive (vinagre_window_get_main_action (tab->priv->window),
+				  TRUE);
+  gtk_action_group_set_sensitive (vinagre_window_get_sensitive_action (tab->priv->window),
+				  TRUE);
 
   if (vinagre_window_is_fullscreen (tab->priv->window))
     gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->nb), TRUE);
@@ -767,3 +798,5 @@ vinagre_tab_paste_text (VinagreTab *tab, const gchar *text)
       g_free (out);
     }
 }
+
+/* vim: ts=8 */

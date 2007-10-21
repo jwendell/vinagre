@@ -166,7 +166,7 @@ vinagre_window_configure_event (GtkWidget         *widget,
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->configure_event (widget, event);
 }
 
-/*
+
 static gboolean
 vinagre_window_key_press_cb (GtkWidget   *widget,
 			     GdkEventKey *event)
@@ -178,12 +178,11 @@ vinagre_window_key_press_cb (GtkWidget   *widget,
       case GDK_F11:
 	if (window->priv->active_tab)
 	  vinagre_window_toggle_fullscreen (window);
-	break;
+	return FALSE;
     }
 
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->key_press_event (widget, event);
 }
-*/
 
 static void
 vinagre_window_class_init (VinagreWindowClass *klass)
@@ -193,7 +192,7 @@ vinagre_window_class_init (VinagreWindowClass *klass)
 
   object_class->finalize     = vinagre_window_finalize;
 
-  //widget_class->key_press_event    = vinagre_window_key_press_cb;
+  widget_class->key_press_event    = vinagre_window_key_press_cb;
   widget_class->window_state_event = vinagre_window_state_event_cb;
   widget_class->configure_event    = vinagre_window_configure_event;
   widget_class->delete_event       = vinagre_window_delete_event;
@@ -699,14 +698,14 @@ vinagre_window_set_title (VinagreWindow *window)
 
   if (window->priv->active_tab == NULL)
     {
-      gtk_window_set_title (GTK_WINDOW (window), "vinagre");
+      gtk_window_set_title (GTK_WINDOW (window), g_get_application_name ());
       return;
     }
 
   name = vinagre_connection_best_name (vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab)));
   title = g_strdup_printf ("%s - %s",
 			   name,
-			   "vinagre");
+			   g_get_application_name ());
   gtk_window_set_title (GTK_WINDOW (window), title);
   g_free (title);
   g_free (name);
@@ -914,7 +913,7 @@ vinagre_window_new ()
 {
   return g_object_new (VINAGRE_TYPE_WINDOW,
 		       "type",      GTK_WINDOW_TOPLEVEL,
-		       "title",     "Vinagre",
+		       "title",     g_get_application_name (),
 		       NULL); 
 }
 
@@ -950,6 +949,30 @@ vinagre_window_get_toolbar (VinagreWindow *window)
 }
 
 GtkWidget *
+vinagre_window_get_menubar (VinagreWindow *window)
+{
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+
+  return window->priv->menubar;
+}
+
+GtkActionGroup *
+vinagre_window_get_main_action (VinagreWindow *window)
+{
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+
+  return window->priv->action_group;
+}
+
+GtkActionGroup *
+vinagre_window_get_sensitive_action (VinagreWindow *window)
+{
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+
+  return window->priv->always_sensitive_action_group;
+}
+
+GtkWidget *
 vinagre_window_get_fav_panel (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
@@ -981,4 +1004,4 @@ vinagre_window_get_ui_manager (VinagreWindow *window)
 
   return window->priv->manager;
 }
-
+/* vim: ts=8 */

@@ -271,3 +271,4 @@ vinagre_notebook_remove_all_tabs (VinagreNotebook *nb)
 			(GtkCallback) remove_tab,
 			 nb);
 }
+/* vim: ts=8 */
