@@ -7,17 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-09 22:00+0200\n"
-"PO-Revision-Date: 2007-10-09 22:14+0100\n"
+"POT-Creation-Date: 2007-10-22 20:25+0200\n"
+"PO-Revision-Date: 2007-10-22 20:25+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../data/vinagre-mime.xml.in.h:1
-msgid "Remote Desktop (VNC) file"
-msgstr "Fjärrskrivbordsfil (VNC)"
 
 #: ../data/vinagre.desktop.in.in.h:1
 msgid "Access remote desktops"
@@ -49,7 +45,7 @@ msgid "Editing a bookmark"
 msgstr "Redigerar ett bokmärke"
 
 #: ../data/vinagre.glade.h:6
-#: ../src/vinagre-tab.c:590
+#: ../src/vinagre-tab.c:686
 msgid "Host:"
 msgstr "Värd:"
 
@@ -77,30 +73,9 @@ msgstr "_Port:"
 msgid "_Remember this password"
 msgstr "_Kom ihåg detta lösenord"
 
-#: ../src/vinagre-bookmarks.c:58
-#: ../src/vinagre-bookmarks.c:76
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "Fel när bokmärken sparades: %s"
-
-#: ../src/vinagre-bookmarks.c:111
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "Fel vid initiering av bokmärken: %s"
-
-#: ../src/vinagre-bookmarks.c:282
-msgid "Confirm removal?"
-msgstr "Bekräfta borttagning?"
-
-#: ../src/vinagre-bookmarks.c:285
-#, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
-msgstr "Är du säker på att du vill ta bort <i>%s</i> från dina bokmärken?"
-
-#: ../src/vinagre-bookmarks.c:296
-#, c-format
-msgid "Error while removing %s from bookmarks: %s"
-msgstr "Fel vid borttagning av %s från bokmärken: %s"
+#: ../data/vinagre-mime.xml.in.h:1
+msgid "Remote Desktop (VNC) file"
+msgstr "Fjärrskrivbordsfil (VNC)"
 
 #: ../src/vinagre-commands.c:235
 msgid "Vinagre is a VNC client for the GNOME Desktop"
@@ -146,6 +121,31 @@ msgstr "Bokmärken"
 msgid "Hide bookmarks"
 msgstr "Dölj bokmärken"
 
+#: ../src/vinagre-bookmarks.c:58
+#: ../src/vinagre-bookmarks.c:76
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "Fel när bokmärken sparades: %s"
+
+#: ../src/vinagre-bookmarks.c:111
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "Fel vid initiering av bokmärken: %s"
+
+#: ../src/vinagre-bookmarks.c:282
+msgid "Confirm removal?"
+msgstr "Bekräfta borttagning?"
+
+#: ../src/vinagre-bookmarks.c:285
+#, c-format
+msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
+msgstr "Är du säker på att du vill ta bort <i>%s</i> från dina bokmärken?"
+
+#: ../src/vinagre-bookmarks.c:296
+#, c-format
+msgid "Error while removing %s from bookmarks: %s"
+msgstr "Fel vid borttagning av %s från bokmärken: %s"
+
 #: ../src/vinagre-main.c:40
 msgid "[server:port]"
 msgstr "[server:port]"
@@ -155,16 +155,16 @@ msgstr "[server:port]"
 msgid "- VNC Client for GNOME"
 msgstr "- VNC-klient för GNOME"
 
-#: ../src/vinagre-notebook.c:114
+#: ../src/vinagre-notebook.c:113
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Anslutningen till värden \"%s\" stängdes."
 
-#: ../src/vinagre-notebook.c:140
+#: ../src/vinagre-notebook.c:139
 msgid "Connecting..."
 msgstr "Ansluter..."
 
-#: ../src/vinagre-notebook.c:164
+#: ../src/vinagre-notebook.c:163
 msgid "Close connection"
 msgstr "Stäng anslutning"
 
@@ -177,54 +177,59 @@ msgstr "Kan inte initiera inställningshanteraren."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Förväntade \"%s\", fick \"%s\" för nyckeln %s"
 
-#: ../src/vinagre-tab.c:180
+#: ../src/vinagre-tab.c:255
 msgid "Error connecting to host."
 msgstr "Fel vid anslutning till värden."
 
-#: ../src/vinagre-tab.c:218
+#: ../src/vinagre-tab.c:291
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autentisering mot värden \"%s\" misslyckades"
 
-#: ../src/vinagre-tab.c:246
+#: ../src/vinagre-tab.c:319
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Autentiseringsmetod mot värden \"%s\" stöds inte. (%u)"
 
-#: ../src/vinagre-tab.c:302
+#: ../src/vinagre-tab.c:375
 msgid "Error saving recent connection."
 msgstr "Fel när senaste anslutningen sparades."
 
-#: ../src/vinagre-tab.c:333
+#: ../src/vinagre-tab.c:406
 msgid "Error saving the password on the keyring."
 msgstr "Fel när lösenordet sparades i nyckelringen."
 
-#: ../src/vinagre-tab.c:456
+#: ../src/vinagre-tab.c:466
+#: ../src/vinagre-tab.c:560
+msgid "Press Ctrl+Alt to grab the cursor"
+msgstr "Tryck på Ctrl+Alt för att fånga muspekaren"
+
+#: ../src/vinagre-tab.c:539
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Tryck på Ctrl+Alt för att släppa muspekaren"
 
-#: ../src/vinagre-tab.c:589
+#: ../src/vinagre-tab.c:685
 msgid "Desktop Name:"
 msgstr "Skrivbordsnamn:"
 
-#: ../src/vinagre-tab.c:591
+#: ../src/vinagre-tab.c:687
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:592
+#: ../src/vinagre-tab.c:688
 msgid "Dimensions:"
 msgstr "Dimensioner:"
 
-#: ../src/vinagre-tab.c:659
+#: ../src/vinagre-tab.c:755
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skärmbild för %s"
 
-#: ../src/vinagre-tab.c:662
+#: ../src/vinagre-tab.c:758
 msgid "Save Screenshot"
 msgstr "Spara skärmbild"
 
-#: ../src/vinagre-tab.c:673
+#: ../src/vinagre-tab.c:769
 msgid "Supported formats"
 msgstr "Format som stöds"
 
@@ -349,12 +354,12 @@ msgstr "Visa eller dölj statusraden"
 msgid "Show or hide the bookmarks panel"
 msgstr "Visa eller dölj bokmärkespanelen"
 
-#: ../src/vinagre-window.c:350
+#: ../src/vinagre-window.c:355
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Kunde inte sammanfoga vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:378
+#: ../src/vinagre-window.c:383
 msgid "_Recent connections"
 msgstr "_Tidigare anslutningar"
 
