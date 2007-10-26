@@ -7,17 +7,17 @@ ui_DATA = vinagre-ui.xml
 iconsdir = $(datadir)/icons/hicolor/scalable/apps
 icons_DATA = vinagre.svg
 
-@INTLTOOL_DESKTOP_RULE@
-
 desktopdir       = $(datadir)/applications
 desktop_in_files = vinagre.desktop.in
 desktop_DATA     = $(desktop_in_files:.desktop.in=.desktop)
 
-@INTLTOOL_XML_RULE@
+@INTLTOOL_DESKTOP_RULE@
 
 MIMEFILES = vinagre-mime.xml.in
 mimedir = $(datadir)/mime/packages
 mime_DATA = vinagre-mime.xml
+
+@INTLTOOL_XML_RULE@
 
 CLEANFILES = \
 	$(desktop_DATA)
