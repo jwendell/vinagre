@@ -24,7 +24,6 @@
 #include <glade/glade.h>
 
 #include "vinagre-connect.h"
-#include "vinagre-main.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
 
@@ -68,17 +67,17 @@ vinagre_connect_find_button_cb (GtkButton *button,
 				 aui_service_dialog_get_port(AUI_SERVICE_DIALOG(d)));
     }
 
-  gtk_widget_destroy(d);
+  gtk_widget_destroy (d);
 }
 #endif
 
 static GtkWidget *
-vinagre_connect_create_window ()
+vinagre_connect_create_window (VinagreWindow *window)
 {
   glade_file = vinagre_utils_get_glade_filename ();
   xml = glade_xml_new (glade_file, NULL, NULL);
   dialog = glade_xml_get_widget (xml, "connect_dialog");
-  gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(main_window));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
 
   host_entry = glade_xml_get_widget (xml, "host_entry");
   port_entry = glade_xml_get_widget (xml, "port_entry");
@@ -97,14 +96,14 @@ vinagre_connect_create_window ()
   return dialog;
 }
 
-VinagreConnection *vinagre_connect ()
+VinagreConnection *vinagre_connect (VinagreWindow *window)
 {
   VinagreConnection *conn = NULL;
   gint               result;
   const gchar       *host;
   int                port;
 
-  dialog = vinagre_connect_create_window ();
+  dialog = vinagre_connect_create_window (window);
 
   result = gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -124,6 +123,8 @@ VinagreConnection *vinagre_connect ()
 	}
     }
 
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  gtk_widget_destroy (dialog);
+  g_object_unref (xml);
   return conn;
 }
+/* vim: ts=8 */

@@ -18,6 +18,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "vinagre-tab.h"
+#include "vinagre-window.h"
 
-VinagreConnection *vinagre_connect (void);
+VinagreConnection *vinagre_connect (VinagreWindow *window);

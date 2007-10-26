@@ -24,11 +24,11 @@
 #include <glib/goption.h>
 
 #include <config.h>
-#include "vinagre-main.h"
 #include "vinagre-prefs-manager.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
 #include "vinagre-bookmarks.h"
+#include "vinagre-window.h"
 
 /* command line */
 static gchar **remaining_args = NULL;
@@ -59,9 +59,10 @@ vinagre_main_process_command_line (void)
 }
 
 int main (int argc, char **argv) {
-  GOptionContext *context;
-  GError *error = NULL;
-  GSList *l, *next;
+  GOptionContext    *context;
+  GError            *error = NULL;
+  GSList            *l, *next;
+  VinagreWindow     *main_window;
 
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");

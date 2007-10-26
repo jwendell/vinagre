@@ -17,7 +17,7 @@ vinagre_SOURCES = \
 	vinagre-connection.c vinagre-connection.h	\
 	vinagre-fav.c vinagre-fav.h			\
 	vinagre-bookmarks.c vinagre-bookmarks.h		\
-	vinagre-main.c vinagre-main.h			\
+	vinagre-main.c 			\
 	vinagre-notebook.c vinagre-notebook.h		\
 	vinagre-prefs-manager.c	vinagre-prefs-manager.h	\
 	vinagre-tab.c vinagre-tab.h			\

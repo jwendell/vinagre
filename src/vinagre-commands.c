@@ -61,7 +61,7 @@ vinagre_cmd_machine_connect (GtkAction     *action,
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  conn = vinagre_connect ();
+  conn = vinagre_connect (window);
   if (!conn)
     return;
 
@@ -267,6 +267,4 @@ vinagre_cmd_help_about (GtkAction     *action,
 			 NULL);
   g_free (license_trans);
 }
-
-
-
+/* vim: ts=8 */
