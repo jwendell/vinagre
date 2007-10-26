@@ -35,23 +35,27 @@
 #include <avahi-ui/avahi-ui.h>
 #endif
 
-GladeXML   *xml;
-const char *glade_file;
-
-GtkWidget *dialog;
-GtkWidget *host_entry;
-GtkWidget *port_entry;
-GtkWidget *find_button;
+typedef struct {
+  GladeXML  *xml;
+  GtkWidget *dialog;
+  GtkWidget *host_entry;
+  GtkWidget *port_entry;
+  GtkWidget *find_button;
+} VinagreConnectDialog;
 
 #ifdef VINAGRE_HAVE_AVAHI
 static void
-vinagre_connect_find_button_cb (GtkButton *button,
-				gpointer  user_data)
+vinagre_connect_find_button_cb (GtkButton            *button,
+				VinagreConnectDialog *dialog)
 {
   GtkWidget *d;
 
-  d = aui_service_dialog_new (_("Choose a VNC Server"), GTK_WINDOW(dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
-  gtk_window_set_transient_for (GTK_WINDOW(d), GTK_WINDOW(dialog));
+  d = aui_service_dialog_new (_("Choose a VNC Server"),
+				GTK_WINDOW(dialog->dialog),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+				NULL);
+  gtk_window_set_transient_for (GTK_WINDOW(d), GTK_WINDOW(dialog->dialog));
   aui_service_dialog_set_resolve_service (AUI_SERVICE_DIALOG(d), TRUE);
   aui_service_dialog_set_resolve_host_name (AUI_SERVICE_DIALOG(d), TRUE);
   aui_service_dialog_set_browse_service_types (AUI_SERVICE_DIALOG(d),
@@ -60,10 +64,10 @@ vinagre_connect_find_button_cb (GtkButton *button,
 
   if (gtk_dialog_run(GTK_DIALOG(d)) == GTK_RESPONSE_ACCEPT)
     {
-      gtk_entry_set_text (GTK_ENTRY (host_entry),
+      gtk_entry_set_text (GTK_ENTRY (dialog->host_entry),
 			  aui_service_dialog_get_host_name(AUI_SERVICE_DIALOG(d)));
 
-      gtk_spin_button_set_value (GTK_SPIN_BUTTON (port_entry),
+      gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->port_entry),
 				 aui_service_dialog_get_port(AUI_SERVICE_DIALOG(d)));
     }
 
@@ -71,48 +75,39 @@ vinagre_connect_find_button_cb (GtkButton *button,
 }
 #endif
 
-static GtkWidget *
-vinagre_connect_create_window (VinagreWindow *window)
-{
-  glade_file = vinagre_utils_get_glade_filename ();
-  xml = glade_xml_new (glade_file, NULL, NULL);
-  dialog = glade_xml_get_widget (xml, "connect_dialog");
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
-
-  host_entry = glade_xml_get_widget (xml, "host_entry");
-  port_entry = glade_xml_get_widget (xml, "port_entry");
-  find_button = glade_xml_get_widget (xml, "find_button");
-
-#ifdef VINAGRE_HAVE_AVAHI
-  gtk_widget_show (find_button);
-  g_signal_connect (find_button,
-		    "clicked",
-		    G_CALLBACK (vinagre_connect_find_button_cb),
-		    NULL);
-
-#endif
-
-  gtk_widget_show_all (dialog);
-  return dialog;
-}
-
 VinagreConnection *vinagre_connect (VinagreWindow *window)
 {
-  VinagreConnection *conn = NULL;
-  gint               result;
-  const gchar       *host;
-  int                port;
+  VinagreConnection    *conn = NULL;
+  gint                  result;
+  const gchar          *host;
+  int                   port;
+  VinagreConnectDialog  dialog;
 
-  dialog = vinagre_connect_create_window (window);
+  dialog.xml = glade_xml_new (vinagre_utils_get_glade_filename (), NULL, NULL);
+  dialog.dialog = glade_xml_get_widget (dialog.xml, "connect_dialog");
+  gtk_window_set_transient_for (GTK_WINDOW (dialog.dialog), GTK_WINDOW (window));
 
-  result = gtk_dialog_run (GTK_DIALOG (dialog));
+  dialog.host_entry  = glade_xml_get_widget (dialog.xml, "host_entry");
+  dialog.port_entry  = glade_xml_get_widget (dialog.xml, "port_entry");
+  dialog.find_button = glade_xml_get_widget (dialog.xml, "find_button");
+
+#ifdef VINAGRE_HAVE_AVAHI
+  gtk_widget_show (dialog.find_button);
+  g_signal_connect (dialog.find_button,
+		    "clicked",
+		    G_CALLBACK (vinagre_connect_find_button_cb),
+		    &dialog);
+#endif
+
+  gtk_widget_show_all (dialog.dialog);
+  result = gtk_dialog_run (GTK_DIALOG (dialog.dialog));
 
   if (result == GTK_RESPONSE_OK)
     {
-      host = gtk_entry_get_text (GTK_ENTRY(host_entry));
-      port = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (port_entry));
+      host = gtk_entry_get_text (GTK_ENTRY(dialog.host_entry));
+      port = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (dialog.port_entry));
 
-      gtk_widget_hide (GTK_WIDGET (dialog));
+      gtk_widget_hide (GTK_WIDGET (dialog.dialog));
 
       conn = vinagre_bookmarks_exists (host, port);
       if (!conn)
@@ -123,8 +118,8 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 	}
     }
 
-  gtk_widget_destroy (dialog);
-  g_object_unref (xml);
+  gtk_widget_destroy (dialog.dialog);
+  g_object_unref (dialog.xml);
   return conn;
 }
 /* vim: ts=8 */
