@@ -80,8 +80,8 @@ AC_OUTPUT([
 Makefile
 data/Makefile
 data/vinagre.desktop.in
-src/Makefile
 po/Makefile.in
+src/Makefile
 ])
 
 #*******************************************************************************
