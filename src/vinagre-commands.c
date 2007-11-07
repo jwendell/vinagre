@@ -72,6 +72,58 @@ vinagre_cmd_machine_connect (GtkAction     *action,
 }
 
 void
+vinagre_cmd_machine_open (GtkAction     *action,
+			  VinagreWindow *window)
+{
+  GtkWidget         *tab;
+  VinagreConnection *conn;
+  GtkWidget         *dialog;
+  GtkFileFilter     *filter;
+  GSList            *files, *l;
+  gchar             *uri;
+
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+
+  dialog = gtk_file_chooser_dialog_new (_("Choose the file"),
+					GTK_WINDOW (window),
+					GTK_FILE_CHOOSER_ACTION_OPEN,
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+					NULL);
+
+  gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), FALSE);
+  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), TRUE);
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_set_name (filter, _("Supported formats"));
+  gtk_file_filter_add_pattern (filter, "*.vnc");
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+
+  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+    {
+      files = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dialog));
+      for (l = files; l; l = l->next)
+        {
+	  uri = (gchar *)l->data;
+	  conn = vinagre_connection_new_from_file (uri);
+	  g_free (uri);
+
+	  if (conn)
+	    {
+	      tab = vinagre_tab_new (conn, window);
+	      vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
+				        VINAGRE_TAB (tab),
+				        -1);
+	    }
+	}
+      g_slist_free (files);
+    }
+
+  gtk_widget_destroy (dialog);
+
+}
+
+void
 vinagre_cmd_machine_close (GtkAction     *action,
 			   VinagreWindow *window)
 {

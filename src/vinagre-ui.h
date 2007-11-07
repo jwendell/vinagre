@@ -39,6 +39,8 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
   /* Machine menu */
   { "MachineConnect", GTK_STOCK_CONNECT, NULL, "<control>N",
     N_("Connect into a remote machine"), G_CALLBACK (vinagre_cmd_machine_connect) },
+  { "MachineOpen", GTK_STOCK_OPEN, NULL, "<control>O",
+    N_("Open a .VNC file"), G_CALLBACK (vinagre_cmd_machine_open) },
   { "MachineQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
     N_("Quit the program"), G_CALLBACK (gtk_main_quit) },
   	
@@ -95,3 +97,4 @@ static const GtkToggleActionEntry vinagre_always_sensitive_toggle_menu_entries[]
 G_END_DECLS
 
 #endif  /* __VINAGRE_UI_H__  */
+/* vim: ts=8 */

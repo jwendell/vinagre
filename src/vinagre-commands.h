@@ -32,6 +32,8 @@ void		vinagre_cmd_direct_connect	(VinagreConnection *conn,
 
 void		vinagre_cmd_machine_connect	(GtkAction     *action,
 						 VinagreWindow *window);
+void		vinagre_cmd_machine_open	(GtkAction     *action,
+						 VinagreWindow *window);
 void		vinagre_cmd_machine_close	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_machine_take_screenshot (GtkAction     *action,
@@ -68,3 +70,4 @@ void		vinagre_cmd_help_about		(GtkAction     *action,
 G_END_DECLS
 
 #endif /* __VINAGRE_COMMANDS_H__ */ 
+/* vim: ts=8 */
