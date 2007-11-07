@@ -81,6 +81,8 @@ vinagre_cmd_machine_open (GtkAction     *action,
   GtkFileFilter     *filter;
   GSList            *files, *l;
   gchar             *uri;
+  gchar             *error;
+  GSList            *errors = NULL;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
@@ -105,8 +107,7 @@ vinagre_cmd_machine_open (GtkAction     *action,
       for (l = files; l; l = l->next)
         {
 	  uri = (gchar *)l->data;
-	  conn = vinagre_connection_new_from_file (uri);
-	  g_free (uri);
+	  conn = vinagre_connection_new_from_file (uri, &error);
 
 	  if (conn)
 	    {
@@ -115,10 +116,22 @@ vinagre_cmd_machine_open (GtkAction     *action,
 				        VINAGRE_TAB (tab),
 				        -1);
 	    }
+	  else
+	    {
+	      errors = g_slist_append (errors, g_strdup (uri));
+	      if (error)
+	        g_free (error);
+	    }
+
+	  g_free (uri);
 	}
       g_slist_free (files);
     }
 
+  if (errors)
+    vinagre_utils_show_many_errors (_("The following file(s) could not be opened:"),
+				    errors,
+				    GTK_WINDOW (window));
   gtk_widget_destroy (dialog);
 
 }

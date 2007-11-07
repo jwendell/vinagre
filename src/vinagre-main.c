@@ -30,6 +30,7 @@
 #include "vinagre-commands.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-window.h"
+#include "vinagre-utils.h"
 
 /* command line */
 static gchar **files = NULL;
@@ -49,19 +50,28 @@ static const GOptionEntry options [] =
 };
 
 static void
-vinagre_main_process_command_line (void)
+vinagre_main_process_command_line (VinagreWindow *window)
 {
-  gint i;
+  gint               i;
   VinagreConnection *conn;
+  gchar             *error;
+  GSList            *errors = NULL;
 
   if (files)
     {
       for (i = 0; files[i]; i++) 
 	{
-	  conn = vinagre_connection_new_from_file (files[i]);
+	  conn = vinagre_connection_new_from_file (files[i], &error);
 	  if (conn)
 	    servers = g_slist_append (servers, conn);
+	  else
+	    {
+	      errors = g_slist_append (errors, files[i]);
+	      if (error)
+	        g_free (error);
+	    }
 	}
+      g_free (files);
     }
 
   if (remaining_args)
@@ -72,7 +82,13 @@ vinagre_main_process_command_line (void)
 	  if (conn)
 	    servers = g_slist_append (servers, conn);
 	}
+      g_free (remaining_args);
     }
+
+  if (errors)
+    vinagre_utils_show_many_errors (_("The following file(s) could not be opened:"),
+				    errors,
+				    GTK_WINDOW (window));
 }
 
 int main (int argc, char **argv) {
@@ -85,16 +101,24 @@ int main (int argc, char **argv) {
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  g_set_application_name (_("Remote Desktop Viewer"));
+
   /* Setup command line options */
   context = g_option_context_new (_("- VNC Client for GNOME"));
   g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
   g_option_context_parse (context, &argc, &argv, &error);
+  if (error)
+    {
+      g_print ("%s\n%s\n",
+	       error->message,
+	       _("Run 'vinagre --help' to see a full list of available command line options"));
+      g_error_free (error);
+      return 1;
+    }
 
   if (!g_thread_supported ())
     g_thread_init (NULL);
-
-  g_set_application_name (_("Remote Desktop Viewer"));
 
   if (!gnome_vfs_init ())
       g_error (_("Could not initialize GnomeVFS\n"));
@@ -104,7 +128,7 @@ int main (int argc, char **argv) {
   main_window = vinagre_window_new ();
   gtk_widget_show (GTK_WIDGET(main_window));
 
-  vinagre_main_process_command_line ();
+  vinagre_main_process_command_line (main_window);
   for (l = servers; l; l = next)
     {
       VinagreConnection *conn = l->data;

@@ -142,8 +142,8 @@ vinagre_connection_clone (VinagreConnection *conn)
   return new_conn;
 }
 
-VinagreConnection
-*vinagre_connection_new_from_string (const gchar *url)
+VinagreConnection *
+vinagre_connection_new_from_string (const gchar *url)
 {
   VinagreConnection *conn;
   gchar **server;
@@ -166,8 +166,8 @@ VinagreConnection
   return conn;
 }
 
-VinagreConnection
-*vinagre_connection_new_from_file (const gchar *uri)
+VinagreConnection *
+vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
 {
   GKeyFile          *file;
   GError            *error = NULL;
@@ -182,10 +182,7 @@ VinagreConnection
   result = gnome_vfs_read_entire_file (uri, &file_size, &data);
   if (result != GNOME_VFS_OK)
     {
-      const char *error_string;
-
-      error_string = gnome_vfs_result_to_string (result);
-      g_warning (_("Error while opening the file (%s): %s\n"), uri, error_string);
+      *error_msg = g_strdup (gnome_vfs_result_to_string (result));
 
       if (data)
 	g_free (data);
@@ -219,7 +216,7 @@ VinagreConnection
     {
       if (error)
 	{
-	  g_warning (_("Error while opening the file (%s): %s\n"), uri, error->message);
+	  *error_msg = g_strdup (error->message);
 	  g_error_free (error);
 	}
     }
@@ -228,6 +225,8 @@ VinagreConnection
     g_free (data);
 
   g_key_file_free (file);
+  *error_msg = NULL;
+
   return conn;
 }
 /* vim: ts=8 */

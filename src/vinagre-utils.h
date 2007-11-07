@@ -29,6 +29,10 @@ GtkWidget	*vinagre_utils_create_small_close_button (void);
 void		vinagre_utils_show_error		(const gchar *message,
 							 GtkWindow *parent);
 
+void		vinagre_utils_show_many_errors		(const gchar *message,
+							 GSList *items,
+							 GtkWindow *parent);
+
 void		vinagre_utils_toggle_widget_visible	(GtkWidget *widget);
 
 const gchar	*vinagre_utils_get_glade_filename	(void);
@@ -38,3 +42,4 @@ gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 							 gssize      length);
 
 #endif  /* __VINAGRE_UTILS_H__  */
+/* vim: ts=8 */

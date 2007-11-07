@@ -140,3 +140,24 @@ vinagre_utils_escape_underscores (const gchar* text,
 
 	return g_string_free (str, FALSE);
 }
+
+void
+vinagre_utils_show_many_errors (const gchar *message, GSList *items, GtkWindow *parent)
+{
+  GString *msg;
+  GSList  *l;
+
+  msg = g_string_new (message);
+  g_string_append_c (msg, '\n');
+
+  for (l = items; l; l = l->next)
+    {
+      g_string_append_printf (msg, "\n%s", (gchar *)l->data);
+      g_free (l->data);
+    }
+
+    vinagre_utils_show_error (msg->str, parent);
+    g_slist_free (items);
+    g_string_free (msg, TRUE);
+}
+/* vim: ts=8 */
