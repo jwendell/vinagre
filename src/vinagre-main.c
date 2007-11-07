@@ -86,7 +86,9 @@ vinagre_main_process_command_line (VinagreWindow *window)
     }
 
   if (errors)
-    vinagre_utils_show_many_errors (_("The following file(s) could not be opened:"),
+    vinagre_utils_show_many_errors (ngettext ("The following file could not be opened:",
+					      "The following files could not be opened:",
+					      g_slist_length (errors)),
 				    errors,
 				    GTK_WINDOW (window));
 }
