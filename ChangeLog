@@ -1,3 +1,12 @@
+2007-11-06  Jonh Wendell <jwendell@gnome.org>
+
+	Initial support to load .vnc files:
+
+	* configure.ac: Added gnome-vfs as a dependency
+	* src/vinagre-tab.c: Use "x-remote-connection" in recent connection
+	* src/vinagre-main.c: Parse filenames as parameters ("-f" command line flag)
+	* src/vinagre-connection.[ch]: vinagre_connection_new_from_file (): new function
+
 2007-10-21  Jonh Wendell <jwendell@gnome.org>
 
 	* src/vinagre-tab.c,

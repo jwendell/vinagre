@@ -353,3 +353,4 @@ vinagre_bookmarks_exists (const char *host, int port)
 
   return conn;
 }
+/* vim: ts=8 */

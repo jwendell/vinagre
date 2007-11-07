@@ -22,6 +22,7 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <glib/goption.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include <config.h>
 #include "vinagre-prefs-manager.h"
@@ -31,15 +32,20 @@
 #include "vinagre-window.h"
 
 /* command line */
+static gchar **files = NULL;
 static gchar **remaining_args = NULL;
 static GSList *servers = NULL;
 
 static const GOptionEntry options [] =
 {
-	{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &remaining_args,
-	  NULL, N_("[server:port]") },
+  { "file", 'f', 0, G_OPTION_ARG_FILENAME_ARRAY, &files,
+    N_("Opens a .vnc file"), N_("filename")},
 
-	{ NULL }
+  { 
+    G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &remaining_args,
+    NULL, N_("[server:port]") },
+
+  { NULL }
 };
 
 static void
@@ -48,12 +54,23 @@ vinagre_main_process_command_line (void)
   gint i;
   VinagreConnection *conn;
 
+  if (files)
+    {
+      for (i = 0; files[i]; i++) 
+	{
+	  conn = vinagre_connection_new_from_file (files[i]);
+	  if (conn)
+	    servers = g_slist_append (servers, conn);
+	}
+    }
+
   if (remaining_args)
     {
       for (i = 0; remaining_args[i]; i++) 
 	{
 	  conn = vinagre_connection_new_from_string (remaining_args[i]);
-	  servers = g_slist_append (servers, conn);
+	  if (conn)
+	    servers = g_slist_append (servers, conn);
 	}
     }
 }
@@ -78,6 +95,10 @@ int main (int argc, char **argv) {
     g_thread_init (NULL);
 
   g_set_application_name (_("Remote Desktop Viewer"));
+
+  if (!gnome_vfs_init ())
+      g_error (_("Could not initialize GnomeVFS\n"));
+
   vinagre_prefs_manager_init ();
 
   main_window = vinagre_window_new ();
@@ -96,6 +117,8 @@ int main (int argc, char **argv) {
   gtk_main ();
 
   vinagre_prefs_manager_shutdown ();
+  gnome_vfs_shutdown ();
 
   return 0;
 }
+/* vim: ts=8 */

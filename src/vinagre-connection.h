@@ -52,5 +52,7 @@ gchar             *vinagre_connection_best_name		(VinagreConnection *conn);
 VinagreConnection *vinagre_connection_clone		(VinagreConnection *conn);
 
 VinagreConnection *vinagre_connection_new_from_string	(const gchar *url);
+VinagreConnection *vinagre_connection_new_from_file	(const gchar *uri);
 
 #endif /* __VINAGRE_CONNECTION_H__  */
+/* vim: ts=8 */

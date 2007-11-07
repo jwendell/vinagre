@@ -44,6 +44,7 @@ PKG_CHECK_MODULES(VINAGRE, \
   libglade-2.0 >= $LIBGLADE_REQUIRED \
   gconf-2.0 >= $GCONF_REQUIRED \
   gnome-keyring-1 \
+  gnome-vfs-2.0 \
   gtk-vnc-1.0)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
@@ -80,6 +81,7 @@ AC_OUTPUT([
 Makefile
 data/Makefile
 data/vinagre.desktop.in
+data/vinagre-file.desktop.in
 po/Makefile.in
 src/Makefile
 ])

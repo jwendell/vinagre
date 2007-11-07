@@ -365,7 +365,7 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
 
   data->display_name = vinagre_connection_best_name (tab->priv->conn);
   data->description = NULL;
-  data->mime_type = g_strdup ("application/x-vnc");
+  data->mime_type = g_strdup ("application/x-remote-connection");
   data->app_name = (gchar *) g_get_application_name ();
   data->app_exec = g_strjoin (" ", g_get_prgname (), "%u", NULL);
   data->groups = groups;

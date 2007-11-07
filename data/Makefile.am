@@ -9,7 +9,7 @@ icons_DATA = vinagre.svg
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir       = $(datadir)/applications
-desktop_in_files = vinagre.desktop.in
+desktop_in_files = vinagre.desktop.in vinagre-file.desktop.in
 desktop_DATA     = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_XML_RULE@
@@ -44,7 +44,9 @@ UPDATE_DESKTOP = \
 
 UPDATE_ICON =  gtk-update-icon-cache -f -t $(DESTDIR)$(datadir)/icons/hicolor
 
-CLEAR_SLINK = rm -f $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg
+CLEAR_SLINK = \
+		rm -f $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg \
+		rm -f $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-remote-connection.svg
 
 install-data-hook: 
 	$(UPDATE_MIME)
@@ -52,6 +54,7 @@ install-data-hook:
 	$(CLEAR_SLINK)
 	mkdir -p  $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/
 	ln -s $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/vinagre.svg $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg
+	ln -s $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/vinagre.svg $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-remote-connection.svg
 	$(UPDATE_ICON)
 
 uninstall-hook: 

@@ -485,3 +485,4 @@ vinagre_fav_update_list (VinagreFav *fav)
 
   g_list_free (list);
 }
+/* vim: ts=8 */

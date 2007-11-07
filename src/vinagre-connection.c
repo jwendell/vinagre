@@ -19,6 +19,9 @@
  */
 
 #include <stdlib.h>
+#include <glib/gi18n.h>
+#include <libgnomevfs/gnome-vfs.h>
+
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks.h"
 
@@ -138,6 +141,7 @@ vinagre_connection_clone (VinagreConnection *conn)
 
   return new_conn;
 }
+
 VinagreConnection
 *vinagre_connection_new_from_string (const gchar *url)
 {
@@ -161,3 +165,69 @@ VinagreConnection
   g_strfreev (server);
   return conn;
 }
+
+VinagreConnection
+*vinagre_connection_new_from_file (const gchar *uri)
+{
+  GKeyFile          *file;
+  GError            *error = NULL;
+  gboolean           loaded;
+  VinagreConnection *conn = NULL;
+  gchar             *host = NULL;
+  gint               port;
+  GnomeVFSResult     result;
+  int                file_size;
+  char              *data = NULL;
+
+  result = gnome_vfs_read_entire_file (uri, &file_size, &data);
+  if (result != GNOME_VFS_OK)
+    {
+      const char *error_string;
+
+      error_string = gnome_vfs_result_to_string (result);
+      g_warning (_("Error while opening the file (%s): %s\n"), uri, error_string);
+
+      if (data)
+	g_free (data);
+
+      return NULL;
+    }
+
+  file = g_key_file_new ();
+  loaded = g_key_file_load_from_data (file,
+				      data,
+				      file_size,
+				      G_KEY_FILE_NONE,
+				      &error);
+  if (loaded)
+    {
+      host = g_key_file_get_string (file, "connection", "host", NULL);
+      port = g_key_file_get_integer (file, "connection", "port", NULL);
+      if (host)
+	{
+	  conn = vinagre_bookmarks_exists (host, port);
+	  if (!conn)
+	    {
+	      conn = vinagre_connection_new ();
+	      vinagre_connection_set_host (conn, host);
+	      vinagre_connection_set_port (conn, port);
+	    }
+	  g_free (host);
+	}
+    }
+  else
+    {
+      if (error)
+	{
+	  g_warning (_("Error while opening the file (%s): %s\n"), uri, error->message);
+	  g_error_free (error);
+	}
+    }
+
+  if (data)
+    g_free (data);
+
+  g_key_file_free (file);
+  return conn;
+}
+/* vim: ts=8 */

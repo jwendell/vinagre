@@ -41,3 +41,4 @@ GList			*vinagre_bookmarks_get_all	(void);
 VinagreConnection	*vinagre_bookmarks_exists	(const char *host, int port);
 
 #endif  /* __VINAGRE_FAVORITES_H__ */
+/* vim: ts=8 */
