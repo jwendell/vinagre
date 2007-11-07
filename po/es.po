@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-07 01:39+0000\n"
-"PO-Revision-Date: 2007-11-07 09:55+0100\n"
+"POT-Creation-Date: 2007-11-07 13:22+0000\n"
+"PO-Revision-Date: 2007-11-07 15:28+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -110,11 +110,19 @@ msgstr "¿Está seguro de que quiere excluir <i>%s</i> de los marcadores?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Error al eliminar %s de los marcadores: %s"
 
-#: ../src/vinagre-commands.c:235
+#: ../src/vinagre-commands.c:87
+msgid "Choose the file"
+msgstr "Elegir el archivo"
+
+#: ../src/vinagre-commands.c:98 ../src/vinagre-tab.c:769
+msgid "Supported formats"
+msgstr "Formatos soportados"
+
+#: ../src/vinagre-commands.c:287
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre es un cliente VNC para el escritorio GNOME"
 
-#: ../src/vinagre-commands.c:238
+#: ../src/vinagre-commands.c:290
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -126,7 +134,7 @@ msgstr ""
 "Free Sofware Foundation; tanto en la versión 2 de la Licencia o (a su "
 "elección) cualquier versión posterior."
 
-#: ../src/vinagre-commands.c:242
+#: ../src/vinagre-commands.c:294
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -138,7 +146,7 @@ msgstr ""
 "CUALQUIER PROPÓSITO PARTICULAR. Para obtener más detalles consulte la "
 "Licencia Pública General GNU."
 
-#: ../src/vinagre-commands.c:246
+#: ../src/vinagre-commands.c:298
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -146,11 +154,11 @@ msgstr ""
 "Debería haber recibido una copia de la Licencia Pública General GNU junto "
 "con este programa. Si no la recibió, consulte <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:263
+#: ../src/vinagre-commands.c:315
 msgid "translator-credits"
 msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2007"
 
-#: ../src/vinagre-commands.c:266
+#: ../src/vinagre-commands.c:318
 msgid "Vinagre Website"
 msgstr "Página web de Vinagre"
 
@@ -269,10 +277,6 @@ msgstr "Captura de pantalla de %s"
 msgid "Save Screenshot"
 msgstr "Guardar la captura de pantalla"
 
-#: ../src/vinagre-tab.c:769
-msgid "Supported formats"
-msgstr "Formatos soportados"
-
 #. Toplevel
 #: ../src/vinagre-ui.h:33
 msgid "_Machine"
@@ -286,7 +290,7 @@ msgstr "_Editar"
 msgid "_View"
 msgstr "_Ver"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:92
 msgid "_Bookmarks"
 msgstr "_Marcadores"
 
@@ -299,97 +303,101 @@ msgid "Connect into a remote machine"
 msgstr "Conectar a una máquina remota"
 
 #: ../src/vinagre-ui.h:43
+msgid "Open a .VNC file"
+msgstr "Abrir un archivo .VNC"
+
+#: ../src/vinagre-ui.h:45
 msgid "Quit the program"
 msgstr "Salir del programa"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:46
+#: ../src/vinagre-ui.h:48
 msgid "_Open bookmark"
 msgstr "_Abrir marcador"
 
-#: ../src/vinagre-ui.h:47
+#: ../src/vinagre-ui.h:49
 msgid "Connect into this machine"
 msgstr "Conectar con esta máquina"
 
-#: ../src/vinagre-ui.h:48
+#: ../src/vinagre-ui.h:50
 msgid "_Edit bookmark"
 msgstr "_Editar marcador"
 
-#: ../src/vinagre-ui.h:49
+#: ../src/vinagre-ui.h:51
 msgid "Edit the details of selected bookmark"
 msgstr "Editar los detalles del marcador seleccionado"
 
-#: ../src/vinagre-ui.h:50
+#: ../src/vinagre-ui.h:52
 msgid "_Remove from bookmarks"
 msgstr "_Quitar de los marcadores"
 
-#: ../src/vinagre-ui.h:51
+#: ../src/vinagre-ui.h:53
 msgid "Remove current selected connection from bookmarks"
 msgstr "Eliminar la conexión actualmente seleccionada de los marcadores"
 
 #. Help menu
-#: ../src/vinagre-ui.h:54
+#: ../src/vinagre-ui.h:56
 msgid "_Contents"
 msgstr "_Contenido"
 
-#: ../src/vinagre-ui.h:55
+#: ../src/vinagre-ui.h:57
 msgid "Open the vinagre manual"
 msgstr "Abrir el manual de vinagre"
 
-#: ../src/vinagre-ui.h:57
+#: ../src/vinagre-ui.h:59
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
-#: ../src/vinagre-ui.h:64
+#: ../src/vinagre-ui.h:66
 msgid "Close the current connection"
 msgstr "Cerrar la conexión actual"
 
-#: ../src/vinagre-ui.h:65
+#: ../src/vinagre-ui.h:67
 msgid "Take screenshot"
 msgstr "Capturar pantalla"
 
-#: ../src/vinagre-ui.h:66
+#: ../src/vinagre-ui.h:68
 msgid "Take a screenshot of active connection"
 msgstr "Toma una captura de pantalla de la conexión activa"
 
-#: ../src/vinagre-ui.h:67
+#: ../src/vinagre-ui.h:69
 msgid "C_lose All"
 msgstr "Cerrar _todo"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:70
 msgid "Close all active connections"
 msgstr "Cierra todas las conexiones activas"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:74
 msgid "View the current machine in full screen"
 msgstr "Ver la máquina actual a pantalla completa"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:75
+#: ../src/vinagre-ui.h:77
 msgid "_Add to bookmarks"
 msgstr "_Añadir marcador"
 
-#: ../src/vinagre-ui.h:76
+#: ../src/vinagre-ui.h:78
 msgid "Add current connection to your bookmarks"
 msgstr "Añadir la conexión actual a los marcadores"
 
-#: ../src/vinagre-ui.h:82
+#: ../src/vinagre-ui.h:84
 msgid "_Toolbar"
 msgstr "Barra de _herramientas"
 
-#: ../src/vinagre-ui.h:83
+#: ../src/vinagre-ui.h:85
 msgid "Show or hide the toolbar"
 msgstr "Mostrar u ocultar la barra de herramientas"
 
-#: ../src/vinagre-ui.h:86
+#: ../src/vinagre-ui.h:88
 msgid "_Statusbar"
 msgstr "Barra de e_stado"
 
-#: ../src/vinagre-ui.h:87
+#: ../src/vinagre-ui.h:89
 msgid "Show or hide the statusbar"
 msgstr "Mostrar u ocultar la barra de estado"
 
-#: ../src/vinagre-ui.h:91
+#: ../src/vinagre-ui.h:93
 msgid "Show or hide the bookmarks panel"
 msgstr "Mostrar u ocultar el panel de marcadores"
 
