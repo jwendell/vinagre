@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-21 21:23+0100\n"
-"PO-Revision-Date: 2007-10-22 19:21+0200\n"
+"POT-Creation-Date: 2007-11-07 01:39+0000\n"
+"PO-Revision-Date: 2007-11-07 09:55+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,12 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../data/vinagre.desktop.in.in.h:1
+#: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Acceder a escritorios remotos"
 
-#: ../data/vinagre.desktop.in.in.h:2 ../src/vinagre-main.c:79
+#: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
+#: ../src/vinagre-main.c:97
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
@@ -81,6 +82,34 @@ msgstr "_Recordar esta contraseña"
 msgid "Remote Desktop (VNC) file"
 msgstr "Archivo de escritorio remoto (VNC)"
 
+#: ../data/vinagre-mime.xml.in.h:2
+msgid "Remote Desktop Connection"
+msgstr "Conexión a un escritorio remoto"
+
+#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "Error al guardar los marcadores: %s"
+
+#: ../src/vinagre-bookmarks.c:111
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "Error al inicializar los marcadores: %s"
+
+#: ../src/vinagre-bookmarks.c:282
+msgid "Confirm removal?"
+msgstr "¿Confirmar eliminación?"
+
+#: ../src/vinagre-bookmarks.c:285
+#, c-format
+msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
+msgstr "¿Está seguro de que quiere excluir <i>%s</i> de los marcadores?"
+
+#: ../src/vinagre-bookmarks.c:296
+#, c-format
+msgid "Error while removing %s from bookmarks: %s"
+msgstr "Error al eliminar %s de los marcadores: %s"
+
 #: ../src/vinagre-commands.c:235
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre es un cliente VNC para el escritorio GNOME"
@@ -125,9 +154,14 @@ msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2007"
 msgid "Vinagre Website"
 msgstr "Página web de Vinagre"
 
-#: ../src/vinagre-connect.c:54
+#: ../src/vinagre-connect.c:53
 msgid "Choose a VNC Server"
 msgstr "Elija un servidor VNC"
+
+#: ../src/vinagre-connection.c:188 ../src/vinagre-connection.c:222
+#, c-format
+msgid "Error while opening the file (%s): %s\n"
+msgstr "Error al abrir el archivo (%s): %s\n"
 
 #: ../src/vinagre-fav.c:380
 msgid "Name"
@@ -141,38 +175,26 @@ msgstr "Marcadores"
 msgid "Hide bookmarks"
 msgstr "Ocultar los marcadores"
 
-#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "Error al guardar los marcadores: %s"
+#: ../src/vinagre-main.c:42
+msgid "Opens a .vnc file"
+msgstr "Abre un archivo .vnc"
 
-#: ../src/vinagre-bookmarks.c:111
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "Error al inicializar los marcadores: %s"
+#: ../src/vinagre-main.c:42
+msgid "filename"
+msgstr "nombre de archivo"
 
-#: ../src/vinagre-bookmarks.c:282
-msgid "Confirm removal?"
-msgstr "¿Confirmar eliminación?"
-
-#: ../src/vinagre-bookmarks.c:285
-#, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
-msgstr "¿Está seguro de que quiere excluir <i>%s</i> de los marcadores?"
-
-#: ../src/vinagre-bookmarks.c:296
-#, c-format
-msgid "Error while removing %s from bookmarks: %s"
-msgstr "Error al eliminar %s de los marcadores: %s"
-
-#: ../src/vinagre-main.c:40
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[servidor:puerto]"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:71
+#: ../src/vinagre-main.c:89
 msgid "- VNC Client for GNOME"
 msgstr " - Cliente VNC para GNOME"
+
+#: ../src/vinagre-main.c:100
+msgid "Could not initialize GnomeVFS\n"
+msgstr "No se pudo inicializar GnomeVFS\n"
 
 #: ../src/vinagre-notebook.c:113
 #, c-format
