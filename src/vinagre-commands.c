@@ -296,6 +296,11 @@ vinagre_cmd_help_about (GtkAction     *action,
 	NULL
   };
 
+  static const gchar * const artists[] = {
+	"Vinicius Depizzol <vdepizzol@gmail.com>",
+	NULL
+  };
+
   static const gchar copyright[] = \
 	"Copyright \xc2\xa9 2007 Jonh Wendell";
 
@@ -323,11 +328,12 @@ vinagre_cmd_help_about (GtkAction     *action,
 
   gtk_show_about_dialog (GTK_WINDOW (window),
 			 "authors", authors,
+			 "artists", artists,
 			 "comments", _(comments),
 			 "copyright", copyright,
 			 "license", license_trans,
 			 "wrap-license", TRUE,
-			 "logo-icon-name", "gnome-remote-desktop",
+			 "logo-icon-name", "vinagre",
 			 "translator-credits", _("translator-credits"),
 			 "version", VERSION,
 			 "website", "http://www.gnome.org/projects/vinagre/",

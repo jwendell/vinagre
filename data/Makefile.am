@@ -1,11 +1,10 @@
+SUBDIRS = icons
+
 gladedir   = $(datadir)/vinagre
 glade_DATA = vinagre.glade
 
 uidir = $(datadir)/vinagre
 ui_DATA = vinagre-ui.xml
-
-iconsdir = $(datadir)/icons/hicolor/scalable/apps
-icons_DATA = vinagre.svg
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir       = $(datadir)/applications
@@ -25,8 +24,7 @@ EXTRA_DIST = \
 	$(glade_DATA) \
 	$(ui_DATA) \
 	$(desktop_in_files) \
-	$(MIMEFILES) \
-	$(icons_DATA)
+	$(MIMEFILES)
 
 UPDATE_MIME = \
         if [ -f $(DESTDIR)$(datadir)/mime/packages/freedesktop.org.xml ] ; then \
@@ -42,23 +40,10 @@ UPDATE_DESKTOP = \
                 fi \
         fi
 
-UPDATE_ICON =  gtk-update-icon-cache -f -t $(DESTDIR)$(datadir)/icons/hicolor
-
-CLEAR_SLINK = \
-		rm -f $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg \
-		rm -f $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-remote-connection.svg
-
 install-data-hook: 
 	$(UPDATE_MIME)
 	$(UPDATE_DESKTOP)
-	$(CLEAR_SLINK)
-	mkdir -p  $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/
-	ln -s $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/vinagre.svg $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-vnc.svg
-	ln -s $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/vinagre.svg $(DESTDIR)$(datadir)/icons/hicolor/scalable/mimetypes/application-x-remote-connection.svg
-	$(UPDATE_ICON)
 
 uninstall-hook: 
 	$(UPDATE_MIME)
 	$(UPDATE_DESKTOP)
-	$(CLEAR_SLINK)
-	$(UPDATE_ICON)

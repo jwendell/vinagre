@@ -82,6 +82,7 @@ Makefile
 data/Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
+data/icons/Makefile
 po/Makefile.in
 src/Makefile
 ])
