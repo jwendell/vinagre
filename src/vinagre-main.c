@@ -103,8 +103,6 @@ int main (int argc, char **argv) {
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  g_set_application_name (_("Remote Desktop Viewer"));
-
   /* Setup command line options */
   context = g_option_context_new (_("- VNC Client for GNOME"));
   g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
@@ -118,6 +116,8 @@ int main (int argc, char **argv) {
       g_error_free (error);
       return 1;
     }
+
+  g_set_application_name (_("Remote Desktop Viewer"));
 
   if (!g_thread_supported ())
     g_thread_init (NULL);
