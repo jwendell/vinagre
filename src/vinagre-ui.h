@@ -64,19 +64,24 @@ static const GtkActionEntry vinagre_menu_entries[] =
   /* Machine menu */
   { "MachineClose", GTK_STOCK_CLOSE, NULL, "<control>W",
     N_("Close the current connection"), G_CALLBACK (vinagre_cmd_machine_close) },
-  { "MachineTakeScreenshot", "applets-screenshooter", N_("Take screenshot"), NULL,
-    N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_machine_take_screenshot) },
   { "MachineCloseAll", GTK_STOCK_CLOSE, N_("C_lose All"), "<control><shift>W",
     N_("Close all active connections"), G_CALLBACK (vinagre_cmd_machine_close_all) },
-
-  /* View menu */
-  { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
-    N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) },
 
   /* Bookmarks menu */
   { "BookmarksAdd", GTK_STOCK_SAVE, N_("_Add to bookmarks"), "<control>D",
     N_("Add current connection to your bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_add) }
 
+};
+
+static const GtkActionEntry vinagre_machine_connected_menu_entries[] =
+{
+  /* Machine menu */
+  { "MachineTakeScreenshot", "applets-screenshooter", N_("Take screenshot"), NULL,
+    N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_machine_take_screenshot) },
+
+  /* View menu */
+  { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
+    N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) },
 };
 
 static const GtkToggleActionEntry vinagre_always_sensitive_toggle_menu_entries[] =

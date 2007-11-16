@@ -42,6 +42,7 @@ struct _VinagreWindowPrivate
   GtkUIManager   *manager;
   GtkActionGroup *action_group;
   GtkActionGroup *always_sensitive_action_group;
+  GtkActionGroup *machine_connected_action_group;
   GtkActionGroup *bookmarks_list_action_group;
   GtkActionGroup *recent_action_group;
   GtkAction      *recent_action;
@@ -65,6 +66,7 @@ struct _VinagreWindowPrivate
   gboolean        fav_panel_visible;
 
   gulong	  signal_notebook;
+  gint            machines_connected;
 };
 
 

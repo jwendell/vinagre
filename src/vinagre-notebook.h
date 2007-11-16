@@ -62,19 +62,19 @@ typedef struct _VinagreNotebookClass	VinagreNotebookClass;
 
 struct _VinagreNotebookClass
 {
-        GtkNotebookClass parent_class;
+  GtkNotebookClass parent_class;
 
-	/* Signals */
-	void	 (* tab_added)      (VinagreNotebook *notebook,
-				     VinagreTab      *tab);
-	void	 (* tab_removed)    (VinagreNotebook *notebook,
-				     VinagreTab      *tab);
-	void	 (* tab_detached)   (VinagreNotebook *notebook,
-				     VinagreTab      *tab);
-	void	 (* tabs_reordered) (VinagreNotebook *notebook);
-	void	 (* tab_close_request)
-				    (VinagreNotebook *notebook,
-				     VinagreTab      *tab);
+  /* Signals */
+  void	 (* tab_added)      (VinagreNotebook *notebook,
+			     VinagreTab      *tab);
+  void	 (* tab_removed)    (VinagreNotebook *notebook,
+			     VinagreTab      *tab);
+  void	 (* tab_detached)   (VinagreNotebook *notebook,
+			     VinagreTab      *tab);
+  void	 (* tabs_reordered) (VinagreNotebook *notebook);
+  void	 (* tab_close_request)
+			    (VinagreNotebook *notebook,
+			     VinagreTab      *tab);
 };
 
 /*
@@ -96,3 +96,4 @@ void		vinagre_notebook_remove_all_tabs 	(VinagreNotebook *nb);
 G_END_DECLS
 
 #endif /* __VINAGRE_NOTEBOOK_H__ */
+/* vim: ts=8 */

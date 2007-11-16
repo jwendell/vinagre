@@ -273,6 +273,8 @@ vnc_connected_cb (VncDisplay *vnc, VinagreTab *tab)
 static void
 vnc_disconnected_cb (VncDisplay *vnc, VinagreTab *tab)
 {
+  _vinagre_window_del_machine_connected (tab->priv->window);
+
   /* Emits the signal saying that we have disconnected from the machine */
   g_signal_emit (G_OBJECT (tab),
 		 signals[TAB_DISCONNECTED],
@@ -464,6 +466,8 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
   gtk_statusbar_push (tab->priv->status,
 		      tab->priv->status_id,
 		      _("Press Ctrl+Alt to grab the cursor"));
+
+  _vinagre_window_add_machine_connected (tab->priv->window);
 
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),

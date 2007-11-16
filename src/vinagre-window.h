@@ -88,6 +88,9 @@ gboolean	vinagre_window_is_fullscreen		(VinagreWindow         *window);
 void		vinagre_window_toggle_fullscreen	(VinagreWindow *window);
 void		vinagre_window_set_title		(VinagreWindow *window);
 
+void		_vinagre_window_add_machine_connected	(VinagreWindow *window);
+void		_vinagre_window_del_machine_connected	(VinagreWindow *window);
+
 G_END_DECLS
 
 #endif  /* __VINAGRE_WINDOW_H__  */

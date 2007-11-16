@@ -348,6 +348,18 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   g_object_unref (action_group);
   window->priv->action_group = action_group;
 
+  /* Machine connected actions */
+  action_group = gtk_action_group_new ("VinagreWindowMachineConnectedActions");
+  gtk_action_group_set_translation_domain (action_group, NULL);
+  gtk_action_group_add_actions (action_group,
+				vinagre_machine_connected_menu_entries,
+				G_N_ELEMENTS (vinagre_machine_connected_menu_entries),
+				window);
+
+  gtk_ui_manager_insert_action_group (manager, action_group, 0);
+  g_object_unref (action_group);
+  window->priv->machine_connected_action_group = action_group;
+
   /* now load the UI definition */
   gtk_ui_manager_add_ui_from_file (manager, vinagre_utils_get_ui_xml_filename (), &error);
   if (error != NULL)
@@ -420,6 +432,9 @@ set_machine_menu_sensitivity (VinagreWindow *window)
 
   active = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook)) > 0;
   gtk_action_group_set_sensitive (window->priv->action_group, active);
+
+  active = window->priv->machines_connected > 0;
+  gtk_action_group_set_sensitive (window->priv->machine_connected_action_group, active);
 }
 
 static void
@@ -828,6 +843,7 @@ vinagre_window_init (VinagreWindow *window)
   window->priv->fav_conn_selected = NULL;
   window->priv->fullscreen = FALSE;
   window->priv->signal_notebook = 0;
+  window->priv->machines_connected = 0;
 
   vinagre_bookmarks_init ();
 
@@ -1007,4 +1023,26 @@ vinagre_window_get_ui_manager (VinagreWindow *window)
 
   return window->priv->manager;
 }
+
+void
+_vinagre_window_add_machine_connected (VinagreWindow *window)
+{
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+
+  window->priv->machines_connected++;
+  set_machine_menu_sensitivity (window);
+}
+
+void
+_vinagre_window_del_machine_connected (VinagreWindow *window)
+{
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+
+  if (window->priv->machines_connected > 0)
+    {
+      window->priv->machines_connected--;
+      set_machine_menu_sensitivity (window);
+    }
+}
+
 /* vim: ts=8 */
