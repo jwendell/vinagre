@@ -49,7 +49,8 @@ enum
 
 /* TreeModel */
 enum {
-  NAME_COL = 0,
+  IMAGE_COL = 0,
+  NAME_COL,
   CONN_COL,
   NUM_COLS
 };
@@ -365,6 +366,7 @@ vinagre_fav_create_tree (VinagreFav *fav)
 
   /* Create the model */
   fav->priv->model = GTK_TREE_MODEL (gtk_list_store_new (NUM_COLS,
+							 GDK_TYPE_PIXBUF,
 							 G_TYPE_STRING,
 							 G_TYPE_POINTER));
 
@@ -374,6 +376,13 @@ vinagre_fav_create_tree (VinagreFav *fav)
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
   g_signal_connect (selection, "changed", G_CALLBACK (vinagre_fav_selection_changed_cb), fav);
 
+  cell = gtk_cell_renderer_pixbuf_new ();
+  gtk_tree_view_insert_column_with_attributes ( GTK_TREE_VIEW (fav->priv->tree),
+						-1,
+						_("Image"),
+						cell,
+						"pixbuf", IMAGE_COL,
+						NULL);
   cell = gtk_cell_renderer_text_new ();
   gtk_tree_view_insert_column_with_attributes ( GTK_TREE_VIEW (fav->priv->tree),
 						-1,
@@ -462,6 +471,7 @@ vinagre_fav_update_list (VinagreFav *fav)
   GList             *list;
   VinagreConnection *conn;
   gchar             *name;
+  GdkPixbuf         *pixbuf;
 
   g_return_if_fail (VINAGRE_IS_FAV (fav));
 
@@ -474,13 +484,18 @@ vinagre_fav_update_list (VinagreFav *fav)
       conn = (VinagreConnection *) list->data;
       name = vinagre_connection_best_name (conn);
 
+      pixbuf = vinagre_connection_get_icon (conn);
+
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
+                          IMAGE_COL, pixbuf,
                           NAME_COL, name,
                           CONN_COL, conn,
                           -1);
       list = list->next;
       g_free (name);
+      if (pixbuf != NULL)
+	g_object_unref (pixbuf);
     }
 
   g_list_free (list);

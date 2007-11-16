@@ -22,6 +22,12 @@
 #define __VINAGRE_CONNECTION_H__
 
 #include <glib.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+
+typedef enum
+{
+  VINAGRE_CONNECTION_TYPE_VNC = 0
+} VinagreConnectionType;
 
 typedef struct
 {
@@ -30,6 +36,7 @@ typedef struct
   char *name;
   char *password;
   char *desktop_name;
+  VinagreConnectionType type;
 } VinagreConnection;
 
 VinagreConnection *vinagre_connection_new (void);
@@ -53,6 +60,8 @@ VinagreConnection *vinagre_connection_clone		(VinagreConnection *conn);
 
 VinagreConnection *vinagre_connection_new_from_string	(const gchar *url);
 VinagreConnection *vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg);
+
+GdkPixbuf         *vinagre_connection_get_icon		(VinagreConnection *conn);
 
 #endif /* __VINAGRE_CONNECTION_H__  */
 /* vim: ts=8 */

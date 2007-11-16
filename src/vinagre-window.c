@@ -486,7 +486,7 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
   VinagreConnection    *conn;
   gchar                *action_name, *action_label;
   GtkAction            *action;
-  gchar                *name;
+  gchar                *name, *tooltip;
 
   g_return_if_fail (p->bookmarks_list_action_group != NULL);
 
@@ -517,13 +517,15 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
       name = vinagre_connection_best_name (conn);
 
       action_name = g_strdup_printf ("Fav_%d", i);
+      tooltip = g_strdup_printf (_("Open %s:%d"), conn->host, conn->port);
       action_label = vinagre_utils_escape_underscores (
 		     name,
 		     -1);
       action = gtk_action_new (action_name,
 			       action_label,
-			       NULL,
+			       tooltip,
 			       NULL);
+      g_object_set (G_OBJECT (action), "icon-name", "application-x-vnc", NULL);
       g_object_set_data_full (G_OBJECT (action),
 			      "conn",
 			      conn,
@@ -547,6 +549,7 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
       g_free (action_name);
       g_free (action_label);
       g_free (name);
+      g_free (tooltip);
 
       favs = favs->next;
       i++;

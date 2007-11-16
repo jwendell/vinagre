@@ -36,6 +36,7 @@ vinagre_connection_new ()
   conn->name = NULL;
   conn->password = NULL;
   conn->desktop_name = NULL;
+  conn->type = VINAGRE_CONNECTION_TYPE_VNC;
 
   return conn;
 }
@@ -228,5 +229,21 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
   *error_msg = NULL;
 
   return conn;
+}
+
+GdkPixbuf *
+vinagre_connection_get_icon (VinagreConnection *conn)
+{
+  GdkPixbuf         *pixbuf;
+  GtkIconTheme      *icon_theme;
+
+  icon_theme = gtk_icon_theme_get_default ();
+  pixbuf = gtk_icon_theme_load_icon (icon_theme,
+				     "application-x-vnc",
+				     16,
+				     0,
+				     NULL);
+
+  return pixbuf;
 }
 /* vim: ts=8 */
