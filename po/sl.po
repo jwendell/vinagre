@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-17 04:16+0100\n"
-"PO-Revision-Date: 2007-11-12 15:04+0100\n"
+"PO-Revision-Date: 2007-11-18 19:56+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgid "Editing a bookmark"
 msgstr "Urejanje zaznamka"
 
 #: ../data/vinagre.glade.h:6
-#: ../src/vinagre-tab.c:686
+#: ../src/vinagre-tab.c:690
 msgid "Host:"
 msgstr "Gostitelj:"
 
@@ -119,7 +119,7 @@ msgid "Choose the file"
 msgstr "Izberite datoteko"
 
 #: ../src/vinagre-commands.c:100
-#: ../src/vinagre-tab.c:769
+#: ../src/vinagre-tab.c:773
 msgid "Supported formats"
 msgstr "Podprte oblike zapisov"
 
@@ -160,15 +160,19 @@ msgstr "Spletna stran Vinagre"
 msgid "Choose a VNC Server"
 msgstr "Izbor VNC strežnika"
 
-#: ../src/vinagre-fav.c:380
+#: ../src/vinagre-fav.c:382
+msgid "Image"
+msgstr "Slika"
+
+#: ../src/vinagre-fav.c:389
 msgid "Name"
 msgstr "Ime"
 
-#: ../src/vinagre-fav.c:428
+#: ../src/vinagre-fav.c:437
 msgid "Bookmarks"
 msgstr "Zaznamki"
 
-#: ../src/vinagre-fav.c:436
+#: ../src/vinagre-fav.c:445
 msgid "Hide bookmarks"
 msgstr "Skrij zaznamke"
 
@@ -223,51 +227,51 @@ msgstr "Pričakovan `%s' dobljen `%s' za ključ %s"
 msgid "Error connecting to host."
 msgstr "Napaka med povezovanjem z gostiteljem."
 
-#: ../src/vinagre-tab.c:291
+#: ../src/vinagre-tab.c:293
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Neuspešen poskus overitve z gostiteljem \"%s\"."
 
-#: ../src/vinagre-tab.c:319
+#: ../src/vinagre-tab.c:321
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Način overitve z gostiteljem \"%s\" ni podprt. (%u)"
 
-#: ../src/vinagre-tab.c:375
+#: ../src/vinagre-tab.c:377
 msgid "Error saving recent connection."
 msgstr "Napaka med shranjevanjem nedavnih povezav"
 
-#: ../src/vinagre-tab.c:406
+#: ../src/vinagre-tab.c:408
 msgid "Error saving the password on the keyring."
 msgstr "Napaka pri shranjevanju gesla v zbirko ključev."
 
-#: ../src/vinagre-tab.c:466
-#: ../src/vinagre-tab.c:560
+#: ../src/vinagre-tab.c:468
+#: ../src/vinagre-tab.c:564
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Pritisnite Ctrl+Alt za sprostitev kazalnika"
 
-#: ../src/vinagre-tab.c:539
+#: ../src/vinagre-tab.c:543
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Pritisnite Ctrl+Alt za sprostitev kazalnika"
 
-#: ../src/vinagre-tab.c:685
+#: ../src/vinagre-tab.c:689
 msgid "Desktop Name:"
 msgstr "Ime namizja:"
 
-#: ../src/vinagre-tab.c:687
+#: ../src/vinagre-tab.c:691
 msgid "Port:"
 msgstr "Vrata:"
 
-#: ../src/vinagre-tab.c:688
+#: ../src/vinagre-tab.c:692
 msgid "Dimensions:"
 msgstr "Mere:"
 
-#: ../src/vinagre-tab.c:755
+#: ../src/vinagre-tab.c:759
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Zajeta slika %s"
 
-#: ../src/vinagre-tab.c:758
+#: ../src/vinagre-tab.c:762
 msgid "Save Screenshot"
 msgstr "Shrani zajeto sliko"
 
@@ -285,7 +289,7 @@ msgid "_View"
 msgstr "Pogled"
 
 #: ../src/vinagre-ui.h:36
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:97
 msgid "_Bookmarks"
 msgstr "_Zaznamki"
 
@@ -348,60 +352,66 @@ msgid "Close the current connection"
 msgstr "Zapri trenutno povezavo"
 
 #: ../src/vinagre-ui.h:67
-msgid "Take screenshot"
-msgstr "Zajemi zaslonsko sliko"
-
-#: ../src/vinagre-ui.h:68
-msgid "Take a screenshot of active connection"
-msgstr "Zajemi zaslonsko sliko dejavne povezave"
-
-#: ../src/vinagre-ui.h:69
 msgid "C_lose All"
 msgstr "Zapri _vse"
 
-#: ../src/vinagre-ui.h:70
+#: ../src/vinagre-ui.h:68
 msgid "Close all active connections"
 msgstr "Zapri vse dejavne povezave"
 
-#: ../src/vinagre-ui.h:74
-msgid "View the current machine in full screen"
-msgstr "Pogled trenutnega računalnika v celozaslonskem načinu"
-
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:77
+#: ../src/vinagre-ui.h:71
 msgid "_Add to bookmarks"
 msgstr "Dodaj med _zaznamke"
 
-#: ../src/vinagre-ui.h:78
+#: ../src/vinagre-ui.h:72
 msgid "Add current connection to your bookmarks"
 msgstr "Dodaj trenutno povezavo med zaznamke"
 
+#. Machine menu
+#: ../src/vinagre-ui.h:79
+msgid "Take screenshot"
+msgstr "Zajemi zaslonsko sliko"
+
+#: ../src/vinagre-ui.h:80
+msgid "Take a screenshot of active connection"
+msgstr "Zajemi zaslonsko sliko dejavne povezave"
+
 #: ../src/vinagre-ui.h:84
+msgid "View the current machine in full screen"
+msgstr "Pogled trenutnega računalnika v celozaslonskem načinu"
+
+#: ../src/vinagre-ui.h:89
 msgid "_Toolbar"
 msgstr "_Orodna vrstica"
 
-#: ../src/vinagre-ui.h:85
+#: ../src/vinagre-ui.h:90
 msgid "Show or hide the toolbar"
 msgstr "Prikaži ali skrij orodno vrstico"
 
-#: ../src/vinagre-ui.h:88
+#: ../src/vinagre-ui.h:93
 msgid "_Statusbar"
 msgstr "_Vrstica stanja"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:94
 msgid "Show or hide the statusbar"
 msgstr "Prikaži ali skrij statusno vrstico"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:98
 msgid "Show or hide the bookmarks panel"
 msgstr "Pokaži ali skrij pladenj zaznamkov"
 
-#: ../src/vinagre-window.c:355
+#: ../src/vinagre-window.c:367
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Ni mogoče združiti vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:383
+#: ../src/vinagre-window.c:395
 msgid "_Recent connections"
 msgstr "_Nedavne povezave"
+
+#: ../src/vinagre-window.c:535
+#, c-format
+msgid "Open %s:%d"
+msgstr "Odpri %s:%d"
 
