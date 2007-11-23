@@ -3,25 +3,27 @@
 # This file is distributed under the same license as the vinagre package.
 # Jonh Wendell <wendell@bani.com.br>, 2007.
 # Vladimir Melo <vladimirmelo.psi@gmail.com>, 2007.
-#
+# Og Maciel <ogmaciel@gnome.org>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 13:36-0300\n"
-"PO-Revision-Date: 2007-10-26 13:31-0300\n"
-"Last-Translator: Vladimir Melo <vladimirmelo@foresightlinux.org>\n"
-"Language-Team: Português/Brasil <gnome-l10n-br@listas.cipsga.org.br>\n"
+"POT-Creation-Date: 2007-11-16 14:20+0000\n"
+"PO-Revision-Date: 2007-11-23 13:54-0500\n"
+"Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/vinagre.desktop.in.in.h:1
+#: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Acesse áreas de trabalho remotas"
 
-#: ../data/vinagre.desktop.in.in.h:2 ../src/vinagre-main.c:80
+#: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
+#: ../src/vinagre-main.c:120
 msgid "Remote Desktop Viewer"
 msgstr "Visualizador de Área de Trabalho Remota"
 
@@ -81,65 +83,9 @@ msgstr "Lemb_rar esta senha"
 msgid "Remote Desktop (VNC) file"
 msgstr "Arquivo de Área de Trabalho Remota (VNC)"
 
-#: ../src/vinagre-commands.c:235
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre é um cliente VNC para o Ambiente de Trabalho GNOME"
-
-#: ../src/vinagre-commands.c:238
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"O Vinagre é software livre; você pode redistribuí-lo e/ou modificá-lo sob os "
-"termos da Licença Pública Geral GNU, conforme publicada pela Free Software "
-"Foundation; tanto a versão 2 da Licença como (a seu critério) qualquer "
-"versão."
-
-#: ../src/vinagre-commands.c:242
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"O Vinagre é distribuído na expectativa de ser útil, mas SEM QUALQUER "
-"GARANTIA; sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou de ADEQUAÇÃO "
-"A QUALQUER PROPÓSITO EM PARTICULAR. Consulte a Licença Pública Geral GNU "
-"para obter mais detalhes."
-
-#: ../src/vinagre-commands.c:246
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Você deve ter recebido uma cópia da Licença Pública Geral GNU junto com este "
-"programa. Se não, veja <http://www.gnu.org/licenses/>."
-
-#: ../src/vinagre-commands.c:263
-msgid "translator-credits"
-msgstr "Vladimir Melo <vladimirmelo.psi@gmail.com>, 2007."
-
-#: ../src/vinagre-commands.c:266
-msgid "Vinagre Website"
-msgstr "Site do Vinagre"
-
-#: ../src/vinagre-connect.c:53
-msgid "Choose a VNC Server"
-msgstr "Escolha um Servidor VNC"
-
-#: ../src/vinagre-fav.c:380
-msgid "Name"
-msgstr "Nome"
-
-#: ../src/vinagre-fav.c:428
-msgid "Bookmarks"
-msgstr "Marcadores"
-
-#: ../src/vinagre-fav.c:436
-msgid "Hide bookmarks"
-msgstr "Ocultar marcadores"
+#: ../data/vinagre-mime.xml.in.h:2
+msgid "Remote Desktop Connection"
+msgstr "Conexão de Área de Trabalho Remota"
 
 #: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
 #, c-format
@@ -153,7 +99,7 @@ msgstr "Erro ao inicializar marcadores: %s"
 
 #: ../src/vinagre-bookmarks.c:282
 msgid "Confirm removal?"
-msgstr "Confirmar remoção?"
+msgstr "Confirma remoção?"
 
 #: ../src/vinagre-bookmarks.c:285
 #, c-format
@@ -165,14 +111,112 @@ msgstr "Tem certeza que quer excluir <i>%s</i> dos marcadores?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Erro ao remover %s dos marcadores: %s"
 
-#: ../src/vinagre-main.c:40
+#: ../src/vinagre-commands.c:89
+msgid "Choose the file"
+msgstr "Escolha o arquivo"
+
+#: ../src/vinagre-commands.c:100 ../src/vinagre-tab.c:769
+msgid "Supported formats"
+msgstr "Formatos suportados"
+
+#: ../src/vinagre-commands.c:132 ../src/vinagre-main.c:89
+msgid "The following file could not be opened:"
+msgid_plural "The following files could not be opened:"
+msgstr[0] "Não foi possível abrir o seguinte arquivo:"
+msgstr[1] "Não foi possível abrir os seguintes arquivos:"
+
+#: ../src/vinagre-commands.c:308
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "Vinagre é um cliente VNC para o Ambiente de Trabalho GNOME"
+
+#: ../src/vinagre-commands.c:311
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"O Vinagre é software livre; você pode redistribuí-lo e/ou modificá-lo sob os "
+"termos da Licença Pública Geral GNU, conforme publicada pela Free Software "
+"Foundation; tanto a versão 2 da Licença como (a seu critério) qualquer "
+"versão."
+
+#: ../src/vinagre-commands.c:315
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"O Vinagre é distribuído na expectativa de ser útil, mas SEM QUALQUER "
+"GARANTIA; sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou de ADEQUAÇÃO "
+"A QUALQUER PROPÓSITO EM PARTICULAR. Consulte a Licença Pública Geral GNU "
+"para obter mais detalhes."
+
+#: ../src/vinagre-commands.c:319
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Você deve ter recebido uma cópia da Licença Pública Geral GNU junto com este "
+"programa. Se não, veja <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-commands.c:337
+msgid "translator-credits"
+msgstr "Vladimir Melo <vladimirmelo.psi@gmail.com>,\n"
+"Og Maciel <ogmaciel@gnome.org>"
+
+#: ../src/vinagre-commands.c:340
+msgid "Vinagre Website"
+msgstr "Site do Vinagre"
+
+#: ../src/vinagre-connect.c:53
+msgid "Choose a VNC Server"
+msgstr "Escolha um Servidor VNC"
+
+#: ../src/vinagre-fav.c:382
+msgid "Image"
+msgstr "Imagem"
+
+#: ../src/vinagre-fav.c:389
+msgid "Name"
+msgstr "Nome"
+
+#: ../src/vinagre-fav.c:437
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+#: ../src/vinagre-fav.c:445
+msgid "Hide bookmarks"
+msgstr "Ocultar marcadores"
+
+#: ../src/vinagre-main.c:43
+msgid "Opens a .vnc file"
+msgstr "Abre um arquivo .vnc"
+
+#: ../src/vinagre-main.c:43
+msgid "filename"
+msgstr "nome do arquivo"
+
+#: ../src/vinagre-main.c:47
 msgid "[server:port]"
 msgstr "[servidor:porta]"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:72
+#: ../src/vinagre-main.c:107
 msgid "- VNC Client for GNOME"
-msgstr "- Cliente VNC para GNOME"
+msgstr "- Cliente VNC para o GNOME"
+
+#: ../src/vinagre-main.c:115
+msgid ""
+"Run 'vinagre --help' to see a full list of available command line options"
+msgstr ""
+"Execute \"vinagre --help\" para ver uma lista completa das opções de linha"
+" de comando disponíveis"
+
+#: ../src/vinagre-main.c:126
+msgid "Could not initialize GnomeVFS\n"
+msgstr "Não foi possível iniciar o GnomeVFS\n"
 
 #: ../src/vinagre-notebook.c:113
 #, c-format
@@ -189,7 +233,7 @@ msgstr "Fechar conexão"
 
 #: ../src/vinagre-prefs-manager.c:124
 msgid "Cannot initialize preferences manager."
-msgstr "Não foi possível inicializar o gerenciador de preferências."
+msgstr "Não foi possível iniciar o gerente de preferências."
 
 #: ../src/vinagre-prefs-manager.c:420
 #, c-format
@@ -247,10 +291,6 @@ msgstr "Captura de tela de %s"
 msgid "Save Screenshot"
 msgstr "Salvar Captura de Tela"
 
-#: ../src/vinagre-tab.c:769
-msgid "Supported formats"
-msgstr "Formatos suportados"
-
 #. Toplevel
 #: ../src/vinagre-ui.h:33
 msgid "_Machine"
@@ -264,7 +304,7 @@ msgstr "_Editar"
 msgid "_View"
 msgstr "_Ver"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:92
 msgid "_Bookmarks"
 msgstr "M_arcadores"
 
@@ -274,100 +314,104 @@ msgstr "A_juda"
 
 #: ../src/vinagre-ui.h:41
 msgid "Connect into a remote machine"
-msgstr "Conecta a uma máquina remota"
+msgstr "Conecta à uma máquina remota"
 
 #: ../src/vinagre-ui.h:43
+msgid "Open a .VNC file"
+msgstr "Abre um arquivo .VNC"
+
+#: ../src/vinagre-ui.h:45
 msgid "Quit the program"
 msgstr "Sai do programa"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:46
+#: ../src/vinagre-ui.h:48
 msgid "_Open bookmark"
 msgstr "_Abrir marcador"
 
-#: ../src/vinagre-ui.h:47
+#: ../src/vinagre-ui.h:49
 msgid "Connect into this machine"
 msgstr "Conecta a esta máquina"
 
-#: ../src/vinagre-ui.h:48
+#: ../src/vinagre-ui.h:50
 msgid "_Edit bookmark"
 msgstr "_Editar marcador"
 
-#: ../src/vinagre-ui.h:49
+#: ../src/vinagre-ui.h:51
 msgid "Edit the details of selected bookmark"
 msgstr "Edita os detalhes do marcador selecionado"
 
-#: ../src/vinagre-ui.h:50
+#: ../src/vinagre-ui.h:52
 msgid "_Remove from bookmarks"
 msgstr "_Remover dos marcadores"
 
-#: ../src/vinagre-ui.h:51
+#: ../src/vinagre-ui.h:53
 msgid "Remove current selected connection from bookmarks"
 msgstr "Remove a conexão atual selecionada dos marcadores"
 
 #. Help menu
-#: ../src/vinagre-ui.h:54
+#: ../src/vinagre-ui.h:56
 msgid "_Contents"
 msgstr "_Sumário"
 
-#: ../src/vinagre-ui.h:55
-msgid "Open the vinagre manual"
-msgstr "Abre o manual do vinagre"
-
 #: ../src/vinagre-ui.h:57
+msgid "Open the vinagre manual"
+msgstr "Abrir o manual do vinagre"
+
+#: ../src/vinagre-ui.h:59
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
-#: ../src/vinagre-ui.h:64
+#: ../src/vinagre-ui.h:66
 msgid "Close the current connection"
 msgstr "Fecha a conexão atual"
 
-#: ../src/vinagre-ui.h:65
+#: ../src/vinagre-ui.h:67
 msgid "Take screenshot"
-msgstr "Captura tela"
+msgstr "Capturar tela"
 
-#: ../src/vinagre-ui.h:66
+#: ../src/vinagre-ui.h:68
 msgid "Take a screenshot of active connection"
 msgstr "Captura uma tela da conexão ativa"
 
-#: ../src/vinagre-ui.h:67
+#: ../src/vinagre-ui.h:69
 msgid "C_lose All"
 msgstr "_Fechar Todas"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:70
 msgid "Close all active connections"
 msgstr "Fecha todas as conexões ativas"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:74
 msgid "View the current machine in full screen"
 msgstr "Vê a máquina atual em tela cheia"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:75
+#: ../src/vinagre-ui.h:77
 msgid "_Add to bookmarks"
 msgstr "_Adicionar aos marcadores"
 
-#: ../src/vinagre-ui.h:76
+#: ../src/vinagre-ui.h:78
 msgid "Add current connection to your bookmarks"
 msgstr "Adiciona conexão atual aos seus marcadores"
 
-#: ../src/vinagre-ui.h:82
+#: ../src/vinagre-ui.h:84
 msgid "_Toolbar"
 msgstr "Barra de _ferramentas"
 
-#: ../src/vinagre-ui.h:83
+#: ../src/vinagre-ui.h:85
 msgid "Show or hide the toolbar"
 msgstr "Mostra ou oculta a barra de ferramentas"
 
-#: ../src/vinagre-ui.h:86
+#: ../src/vinagre-ui.h:88
 msgid "_Statusbar"
 msgstr "Barra de _status"
 
-#: ../src/vinagre-ui.h:87
+#: ../src/vinagre-ui.h:89
 msgid "Show or hide the statusbar"
 msgstr "Mostra ou oculta a barra de status"
 
-#: ../src/vinagre-ui.h:91
+#: ../src/vinagre-ui.h:93
 msgid "Show or hide the bookmarks panel"
 msgstr "Mostra ou oculta o painel de marcadores"
 
@@ -379,6 +423,11 @@ msgstr "Não foi possível mesclar vinagre-ui.xml: %s"
 #: ../src/vinagre-window.c:383
 msgid "_Recent connections"
 msgstr "Conexões _recentes"
+
+#: ../src/vinagre-window.c:520
+#, c-format
+msgid "Open %s:%d"
+msgstr "Abrir %s:%d"
 
 #, fuzzy
 #~ msgid "Add to favorites"
