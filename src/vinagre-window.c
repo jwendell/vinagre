@@ -532,6 +532,7 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
       name = vinagre_connection_best_name (conn);
 
       action_name = g_strdup_printf ("Fav_%d", i);
+      /* Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu */
       tooltip = g_strdup_printf (_("Open %s:%d"), conn->host, conn->port);
       action_label = vinagre_utils_escape_underscores (
 		     name,
