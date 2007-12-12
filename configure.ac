@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(vinagre, 0.3)
+AC_INIT(vinagre, 0.4)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
@@ -37,6 +37,7 @@ GLIB_REQUIRED=2.11.0
 GTK_REQUIRED=2.11.0
 LIBGLADE_REQUIRED=2.6.0
 GCONF_REQUIRED=2.16.0
+GTK_VNC_REQUIRED=0.3
 
 PKG_CHECK_MODULES(VINAGRE, \ 
   glib-2.0 >= $GLIB_REQUIRED \
@@ -45,7 +46,7 @@ PKG_CHECK_MODULES(VINAGRE, \
   gconf-2.0 >= $GCONF_REQUIRED \
   gnome-keyring-1 \
   gnome-vfs-2.0 \
-  gtk-vnc-1.0)
+  gtk-vnc-1.0 >= $GTK_VNC_REQUIRED)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
 
