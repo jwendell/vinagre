@@ -299,11 +299,12 @@ static void
 create_menu_bar_and_toolbar (VinagreWindow *window, 
 			     GtkWidget     *main_box)
 {
-  GtkActionGroup *action_group;
-  GtkUIManager *manager;
-  GError *error = NULL;
+  GtkActionGroup   *action_group;
+  GtkUIManager     *manager;
+  GError           *error = NULL;
   GtkRecentManager *recent_manager;
-  GtkRecentFilter *filter;
+  GtkRecentFilter  *filter;
+  GtkAction        *action;
 
   manager = gtk_ui_manager_new ();
   window->priv->manager = manager;
@@ -337,6 +338,9 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   g_object_unref (action_group);
   window->priv->always_sensitive_action_group = action_group;
 
+  action = gtk_action_group_get_action (action_group, "MachineConnect");
+  g_object_set (action, "is_important", TRUE, NULL);
+
   action_group = gtk_action_group_new ("VinagreWindowActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
   gtk_action_group_add_actions (action_group,
@@ -347,6 +351,9 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
   window->priv->action_group = action_group;
+
+  action = gtk_action_group_get_action (action_group, "MachineClose");
+  g_object_set (action, "is_important", TRUE, NULL);
 
   /* Machine connected actions */
   action_group = gtk_action_group_new ("VinagreWindowMachineConnectedActions");
@@ -359,6 +366,9 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
   window->priv->machine_connected_action_group = action_group;
+
+  action = gtk_action_group_get_action (action_group, "ViewFullScreen");
+  g_object_set (action, "is_important", TRUE, NULL);
 
   /* now load the UI definition */
   gtk_ui_manager_add_ui_from_file (manager, vinagre_utils_get_ui_xml_filename (), &error);
