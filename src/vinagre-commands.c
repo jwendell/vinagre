@@ -25,6 +25,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include "vinagre-commands.h"
 #include "vinagre-utils.h"
@@ -286,6 +287,24 @@ vinagre_cmd_bookmarks_del (GtkAction     *action,
     }
 }
 
+/* Make url in about dialog clickable */
+static void
+vinagre_about_dialog_handle_url (GtkAboutDialog *about, const char *link, gpointer data)
+{
+  gnome_vfs_url_show (link);
+}
+
+/* Make email in about dialog clickable */
+static void
+vinagre_about_dialog_handle_email (GtkAboutDialog *about, const char *link, gpointer data)
+{
+  char *address;
+
+  address = g_strdup_printf ("mailto:%s", link);
+  gnome_vfs_url_show (address);
+  g_free (address);
+}
+
 /* Help Menu */
 void
 vinagre_cmd_help_about (GtkAction     *action,
@@ -324,6 +343,10 @@ vinagre_cmd_help_about (GtkAction     *action,
 
   license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]),
 				     _(license[2]), NULL);
+
+  /* Make URLs and email clickable in about dialog */
+  gtk_about_dialog_set_url_hook (vinagre_about_dialog_handle_url, NULL, NULL);
+  gtk_about_dialog_set_email_hook (vinagre_about_dialog_handle_email, NULL, NULL);
 
 
   gtk_show_about_dialog (GTK_WINDOW (window),
