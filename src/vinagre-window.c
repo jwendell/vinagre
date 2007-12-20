@@ -630,11 +630,6 @@ init_widgets_visibility (VinagreWindow *window)
 					"BookmarksEdit");
   gtk_action_set_sensitive (action, FALSE);
 
-  /* TODO: Implement these commands */
-  action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"HelpContents");
-  gtk_action_set_sensitive (action, FALSE);
-
   /* fav panel visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewBookmarks");

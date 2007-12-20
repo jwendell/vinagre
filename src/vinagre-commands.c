@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <string.h>
 
 #include "vinagre-commands.h"
 #include "vinagre-utils.h"
@@ -306,6 +307,49 @@ vinagre_about_dialog_handle_email (GtkAboutDialog *about, const char *link, gpoi
 }
 
 /* Help Menu */
+
+void
+vinagre_cmd_help_contents (GtkAction     *action,
+			   VinagreWindow *window)
+{
+  GError *error = NULL;
+  char *command;
+  const char *lang;
+  char *uri = NULL;
+  int i;
+
+  const char * const * langs = g_get_language_names ();
+
+  for (i = 0; langs[i]; i++)
+    {
+      lang = langs[i];
+      if (strchr (lang, '.')) 
+          continue;
+
+      if (uri)
+	g_free (uri);
+
+      uri = g_build_filename (DATADIR, "/gnome/help/vinagre/", lang, "/vinagre.xml", NULL);
+					
+      if (g_file_test (uri, G_FILE_TEST_EXISTS))
+          break;
+    }
+	
+  command = g_strconcat ("gnome-open ghelp://", uri,  NULL);
+	
+  gdk_spawn_command_line_on_screen (gtk_window_get_screen (GTK_WINDOW (window)),
+				    command,
+				    &error);
+  if (error != NULL) 
+    {
+      vinagre_utils_show_error (error->message, GTK_WINDOW (window));
+      g_error_free (error);
+    }
+
+  g_free (command);
+  g_free (uri);
+}
+
 void
 vinagre_cmd_help_about (GtkAction     *action,
 			VinagreWindow *window)
@@ -364,4 +408,5 @@ vinagre_cmd_help_about (GtkAction     *action,
 			 NULL);
   g_free (license_trans);
 }
+
 /* vim: ts=8 */

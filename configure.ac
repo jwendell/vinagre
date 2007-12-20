@@ -27,6 +27,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 IT_PROG_INTLTOOL([0.35.0])
 AM_GLIB_GNU_GETTEXT
 
+GNOME_DOC_INIT
 
 #*******************************************************************************
 # Check required GNOME libraries
@@ -83,6 +84,7 @@ data/Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
 data/icons/Makefile
+help/Makefile
 po/Makefile.in
 src/Makefile
 ])

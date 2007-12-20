@@ -62,6 +62,8 @@ void		vinagre_cmd_bookmarks_edit	(GtkAction     *action,
 void		vinagre_cmd_bookmarks_del	(GtkAction     *action,
 						 VinagreWindow *window);
 
+void		vinagre_cmd_help_contents	(GtkAction     *action,
+						 VinagreWindow *window);
 void		vinagre_cmd_help_about		(GtkAction     *action,
 						 VinagreWindow *window);
 

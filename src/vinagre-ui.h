@@ -54,7 +54,7 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
-    N_("Open the vinagre manual"), NULL },
+    N_("Open the vinagre manual"),  G_CALLBACK (vinagre_cmd_help_contents)},
   { "HelpAbout", GTK_STOCK_ABOUT, NULL, NULL,
     N_("About this application"), G_CALLBACK (vinagre_cmd_help_about) }
 };

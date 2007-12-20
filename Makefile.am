@@ -1,4 +1,4 @@
-SUBDIRS = src po data
+SUBDIRS = src help po data
 
 vinagredocdir = ${datadir}/doc/vinagre
 vinagredoc_DATA = \
