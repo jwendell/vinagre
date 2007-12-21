@@ -369,6 +369,8 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 
   action = gtk_action_group_get_action (action_group, "ViewFullScreen");
   g_object_set (action, "is_important", TRUE, NULL);
+  action = gtk_action_group_get_action (action_group, "MachineTakeScreenshot");
+  g_object_set (action, "is_important", TRUE, NULL);
 
   /* now load the UI definition */
   gtk_ui_manager_add_ui_from_file (manager, vinagre_utils_get_ui_xml_filename (), &error);
