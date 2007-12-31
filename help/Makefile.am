@@ -8,5 +8,5 @@ DOC_INCLUDES =
 DOC_FIGURES = \
 	figures/vinagre-screenshot.png 
 
-DOC_LINGUAS = es sv
+DOC_LINGUAS = es oc sv
 
