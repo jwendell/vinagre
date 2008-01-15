@@ -255,6 +255,7 @@ open_vnc (VinagreTab *tab)
     vinagre_utils_show_error (_("Error connecting to host."), NULL);
 
   vnc_display_set_pointer_local (VNC_DISPLAY(tab->priv->vnc), TRUE);
+  vnc_display_set_lossy_encoding (VNC_DISPLAY(tab->priv->vnc), TRUE);
 
   g_free (port);
   gtk_widget_grab_focus (tab->priv->vnc);
