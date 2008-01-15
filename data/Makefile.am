@@ -3,6 +3,8 @@ SUBDIRS = icons
 gladedir   = $(datadir)/vinagre
 glade_DATA = vinagre.glade
 
+man_MANS = vinagre.1
+
 uidir = $(datadir)/vinagre
 ui_DATA = vinagre-ui.xml
 
@@ -22,6 +24,7 @@ CLEANFILES = \
 
 EXTRA_DIST = \
 	$(glade_DATA) \
+	$(man_MANS) \
 	$(ui_DATA) \
 	$(desktop_in_files) \
 	$(MIMEFILES)
