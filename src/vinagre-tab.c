@@ -241,7 +241,7 @@ vinagre_tab_class_init (VinagreTabClass *klass)
   g_type_class_add_private (object_class, sizeof (VinagreTabPrivate));
 }
 
-static gboolean
+static void
 open_vnc (VinagreTab *tab)
 {
   gchar *port;
@@ -259,7 +259,6 @@ open_vnc (VinagreTab *tab)
 
   g_free (port);
   gtk_widget_grab_focus (tab->priv->vnc);
-  return FALSE;
 }
 
 static void
@@ -655,12 +654,6 @@ vinagre_tab_init (VinagreTab *tab)
 		    G_CALLBACK (vnc_bell_cb),
 		    tab);
 
- /* connect VNC */
- /* FIXME: i had to add a timeout because private conn is not available at this time*/
-  g_timeout_add (1000,
-		 (GSourceFunc) open_vnc,
-		 tab);
-
   gtk_widget_show_all (GTK_WIDGET (tab));
 }
 
@@ -671,6 +664,7 @@ vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
 				   "conn", conn,
 				   "window", window,
 				   NULL);
+  open_vnc (tab);
   return GTK_WIDGET (tab);
 }
 
