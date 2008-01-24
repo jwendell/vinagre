@@ -2,7 +2,7 @@
  * vinagre-main.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <glib/goption.h>
-#include <libgnomevfs/gnome-vfs.h>
 
 #include <config.h>
 #include "vinagre-prefs-manager.h"
@@ -122,9 +121,6 @@ int main (int argc, char **argv) {
   if (!g_thread_supported ())
     g_thread_init (NULL);
 
-  if (!gnome_vfs_init ())
-      g_error (_("Could not initialize GnomeVFS\n"));
-
   vinagre_prefs_manager_init ();
 
   main_window = vinagre_window_new ();
@@ -143,7 +139,6 @@ int main (int argc, char **argv) {
   gtk_main ();
 
   vinagre_prefs_manager_shutdown ();
-  gnome_vfs_shutdown ();
 
   return 0;
 }

@@ -2,7 +2,7 @@
  * vinagre-commands.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <string.h>
 
 #include "vinagre-commands.h"
@@ -290,19 +289,32 @@ vinagre_cmd_bookmarks_del (GtkAction     *action,
 
 /* Make url in about dialog clickable */
 static void
-vinagre_about_dialog_handle_url (GtkAboutDialog *about, const char *link, gpointer data)
+vinagre_about_dialog_handle_url (GtkAboutDialog *about,
+				 const char     *link,
+				 gpointer        data)
 {
-  gnome_vfs_url_show (link);
-}
+  GError *error = NULL;
+  gchar  *address, *command;
 
-/* Make email in about dialog clickable */
-static void
-vinagre_about_dialog_handle_email (GtkAboutDialog *about, const char *link, gpointer data)
-{
-  char *address;
+  VinagreWindow *window = VINAGRE_WINDOW (data);
 
-  address = g_strdup_printf ("mailto:%s", link);
-  gnome_vfs_url_show (address);
+  if (g_strstr_len (link, strlen (link), "@"))
+    address = g_strdup_printf ("mailto:%s", link);
+  else
+    address = g_strdup (link);
+
+  command = g_strconcat ("gnome-open ", address,  NULL);
+	
+  gdk_spawn_command_line_on_screen (gtk_window_get_screen (GTK_WINDOW (window)),
+				    command,
+				    &error);
+  if (error != NULL) 
+    {
+      vinagre_utils_show_error (error->message, GTK_WINDOW (window));
+      g_error_free (error);
+    }
+
+  g_free (command);
   g_free (address);
 }
 
@@ -389,8 +401,8 @@ vinagre_cmd_help_about (GtkAction     *action,
 				     _(license[2]), NULL);
 
   /* Make URLs and email clickable in about dialog */
-  gtk_about_dialog_set_url_hook (vinagre_about_dialog_handle_url, NULL, NULL);
-  gtk_about_dialog_set_email_hook (vinagre_about_dialog_handle_email, NULL, NULL);
+  gtk_about_dialog_set_url_hook (vinagre_about_dialog_handle_url, window, NULL);
+  gtk_about_dialog_set_email_hook (vinagre_about_dialog_handle_url, window, NULL);
 
 
   gtk_show_about_dialog (GTK_WINDOW (window),

@@ -33,19 +33,19 @@ GNOME_DOC_INIT
 # Check required GNOME libraries
 #*******************************************************************************
 
-GLIB_REQUIRED=2.11.0
-GTK_REQUIRED=2.11.0
+GLIB_REQUIRED=2.15.3
+GTK_REQUIRED=2.12.0
 LIBGLADE_REQUIRED=2.6.0
 GCONF_REQUIRED=2.16.0
 GTK_VNC_REQUIRED=0.3
 
 PKG_CHECK_MODULES(VINAGRE, \ 
   glib-2.0 >= $GLIB_REQUIRED \
+  gio-2.0 >= $GLIB_REQUIRED \
   gtk+-2.0 >= $GTK_REQUIRED \ 
   libglade-2.0 >= $LIBGLADE_REQUIRED \
   gconf-2.0 >= $GCONF_REQUIRED \
   gnome-keyring-1 \
-  gnome-vfs-2.0 \
   gtk-vnc-1.0 >= $GTK_VNC_REQUIRED)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
@@ -92,6 +92,9 @@ src/Makefile
 #*******************************************************************************
 
 echo "
+
+This is vinagre version AC_PACKAGE_VERSION
+
 Configure summary:
 
 	Compiler ...................:  ${CC} 

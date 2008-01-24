@@ -2,7 +2,7 @@
  * vinagre-connection.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 
 #include <stdlib.h>
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs.h>
+#include <gio/gio.h>
 
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks.h"
@@ -176,18 +176,29 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
   VinagreConnection *conn = NULL;
   gchar             *host = NULL;
   gint               port;
-  GnomeVFSResult     result;
   int                file_size;
   char              *data = NULL;
+  GFile             *file_a;
 
-  result = gnome_vfs_read_entire_file (uri, &file_size, &data);
-  if (result != GNOME_VFS_OK)
+  file_a = g_file_new_for_commandline_arg (uri);
+  loaded = g_file_load_contents (file_a,
+				 NULL,
+				 &data,
+				 &file_size,
+				 NULL,
+				 &error);
+  if (!loaded)
     {
-      *error_msg = g_strdup (gnome_vfs_result_to_string (result));
+      if (error)
+	{
+	  *error_msg = g_strdup (error->message);
+	  g_error_free (error);
+	}
 
       if (data)
 	g_free (data);
 
+      g_object_unref (file_a);
       return NULL;
     }
 
@@ -226,6 +237,7 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
     g_free (data);
 
   g_key_file_free (file);
+  g_object_unref (file_a);
   *error_msg = NULL;
 
   return conn;
