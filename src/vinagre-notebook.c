@@ -2,7 +2,7 @@
  * vinagre-notebook.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,21 +72,6 @@ close_button_clicked_cb (GtkWidget *widget,
 
   notebook = VINAGRE_NOTEBOOK (gtk_widget_get_parent (tab));
   vinagre_notebook_remove_tab (notebook, VINAGRE_TAB (tab));
-}
-
-static void
-tab_label_style_set_cb (GtkWidget *hbox,
-			GtkStyle *previous_style,
-			gpointer user_data)
-{
-  GtkWidget *button;
-  gint h, w;
-
-  gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (hbox),
-				     GTK_ICON_SIZE_MENU, &w, &h);
-
-  button = g_object_get_data (G_OBJECT (hbox), "close-button");
-  gtk_widget_set_size_request (button, w + 2, h + 2);
 }
 
 static void
@@ -181,10 +166,6 @@ build_tab_label (VinagreNotebook *nb,
 
   dummy_label = gtk_label_new ("");
   gtk_box_pack_start (GTK_BOX (label_hbox), dummy_label, TRUE, TRUE, 0);
-	
-  /* Set minimal size */
-  g_signal_connect (hbox, "style-set",
-		    G_CALLBACK (tab_label_style_set_cb), NULL);
 	
   gtk_widget_show (hbox);
   gtk_widget_show (label_ebox);
