@@ -2,7 +2,7 @@
  * vinagre-window.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -73,10 +73,17 @@ vinagre_window_delete_event (GtkWidget   *widget,
 			     GdkEventAny *event)
 {
   VinagreWindow *window = VINAGRE_WINDOW (widget);
+  GtkClipboard  *cb;
+
+  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
 
   if (window->priv->signal_notebook > 0)
     g_signal_handler_disconnect (window->priv->notebook,
 				 window->priv->signal_notebook);
+
+  if (window->priv->signal_clipboard > 0)
+    g_signal_handler_disconnect (cb,
+				 window->priv->signal_clipboard);
 
   vinagre_window_close_all_tabs (window);
   gtk_main_quit ();
@@ -836,7 +843,10 @@ vinagre_window_init_clipboard (VinagreWindow *window)
   GtkClipboard *cb;
 
   cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-  g_signal_connect (cb, "owner-change", G_CALLBACK (vinagre_window_clipboard_cb), window);
+  window->priv->signal_clipboard = g_signal_connect (cb,
+						     "owner-change",
+						     G_CALLBACK (vinagre_window_clipboard_cb),
+						     window);
 }
 
 static void

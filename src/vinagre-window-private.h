@@ -2,7 +2,7 @@
  * vinagre-window-private.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,6 +66,7 @@ struct _VinagreWindowPrivate
   gboolean        fav_panel_visible;
 
   gulong	  signal_notebook;
+  gulong	  signal_clipboard;
   gint            machines_connected;
 };
 
