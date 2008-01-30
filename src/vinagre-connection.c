@@ -180,6 +180,8 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
   char              *data = NULL;
   GFile             *file_a;
 
+  *error_msg = NULL;
+
   file_a = g_file_new_for_commandline_arg (uri);
   loaded = g_file_load_contents (file_a,
 				 NULL,
@@ -238,7 +240,6 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
 
   g_key_file_free (file);
   g_object_unref (file_a);
-  *error_msg = NULL;
 
   return conn;
 }

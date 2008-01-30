@@ -362,7 +362,7 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
   data = g_slice_new (GtkRecentData);
 
   uri = g_string_new (NULL);
-  g_string_printf (uri, "%s:%d", tab->priv->conn->host, tab->priv->conn->port);
+  g_string_printf (uri, "vnc://%s:%d", tab->priv->conn->host, tab->priv->conn->port);
 
   data->display_name = vinagre_connection_best_name (tab->priv->conn);
   data->description = NULL;
