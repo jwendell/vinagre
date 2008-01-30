@@ -111,7 +111,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
   if (errors)
     {
       vinagre_utils_show_many_errors (ngettext ("The following error has occurred:",
-						"The following errors has occurred:",
+						"The following errors have occurred:",
 						g_slist_length (errors)),
 				      errors,
 				      GTK_WINDOW (window));
