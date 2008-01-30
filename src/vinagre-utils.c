@@ -2,7 +2,7 @@
  * vinagre-utils.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -151,13 +151,9 @@ vinagre_utils_show_many_errors (const gchar *message, GSList *items, GtkWindow *
   g_string_append_c (msg, '\n');
 
   for (l = items; l; l = l->next)
-    {
-      g_string_append_printf (msg, "\n%s", (gchar *)l->data);
-      g_free (l->data);
-    }
+    g_string_append_printf (msg, "\n%s", (gchar *)l->data);
 
-    vinagre_utils_show_error (msg->str, parent);
-    g_slist_free (items);
-    g_string_free (msg, TRUE);
+  vinagre_utils_show_error (msg->str, parent);
+  g_string_free (msg, TRUE);
 }
 /* vim: ts=8 */

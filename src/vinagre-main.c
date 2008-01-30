@@ -33,6 +33,7 @@
 
 /* command line */
 static gchar **files = NULL;
+static gchar **urls = NULL;
 static gchar **remaining_args = NULL;
 static GSList *servers = NULL;
 
@@ -40,6 +41,9 @@ static const GOptionEntry options [] =
 {
   { "file", 'f', 0, G_OPTION_ARG_FILENAME_ARRAY, &files,
     N_("Opens a .vnc file"), N_("filename")},
+
+  { "url", 'u', 0, G_OPTION_ARG_STRING_ARRAY, &urls,
+    N_("Handles an URL like vnc://host[:port]"), N_("url")},
 
   { 
     G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &remaining_args,
@@ -54,7 +58,9 @@ vinagre_main_process_command_line (VinagreWindow *window)
   gint               i;
   VinagreConnection *conn;
   gchar             *error;
-  GSList            *errors = NULL;
+  gchar             **url;
+  GSList            *file_errors = NULL;
+  GSList            *url_errors = NULL;
 
   if (files)
     {
@@ -62,15 +68,35 @@ vinagre_main_process_command_line (VinagreWindow *window)
 	{
 	  conn = vinagre_connection_new_from_file (files[i], &error);
 	  if (conn)
-	    servers = g_slist_append (servers, conn);
+	    servers = g_slist_prepend (servers, conn);
 	  else
 	    {
-	      errors = g_slist_append (errors, files[i]);
+	      file_errors = g_slist_prepend (file_errors, g_strdup (files[i]));
 	      if (error)
 	        g_free (error);
 	    }
 	}
-      g_free (files);
+      g_strfreev (files);
+    }
+
+  if (urls)
+    {
+      for (i = 0; urls[i]; i++) 
+	{
+	  url = g_strsplit (urls[i], "://", 2);
+	  if (g_strv_length (url) == 2)
+	    {
+	      conn = vinagre_connection_new_from_string (url[1]);
+	      if (conn)
+		servers = g_slist_prepend (servers, conn);
+	    }
+	  else
+	    {
+	      url_errors = g_slist_prepend (url_errors, g_strdup (urls[i]));
+	    }
+	  g_strfreev (url);
+	}
+      g_strfreev (urls);
     }
 
   if (remaining_args)
@@ -79,17 +105,31 @@ vinagre_main_process_command_line (VinagreWindow *window)
 	{
 	  conn = vinagre_connection_new_from_string (remaining_args[i]);
 	  if (conn)
-	    servers = g_slist_append (servers, conn);
+	    servers = g_slist_prepend (servers, conn);
 	}
-      g_free (remaining_args);
+      g_strfreev (remaining_args);
     }
 
-  if (errors)
-    vinagre_utils_show_many_errors (ngettext ("The following file could not be opened:",
-					      "The following files could not be opened:",
-					      g_slist_length (errors)),
-				    errors,
-				    GTK_WINDOW (window));
+  if (file_errors)
+    {
+      vinagre_utils_show_many_errors (ngettext ("The following file could not be opened:",
+						"The following files could not be opened:",
+						g_slist_length (file_errors)),
+				      file_errors,
+				      GTK_WINDOW (window));
+      g_slist_free (file_errors);
+    }
+
+  if (url_errors)
+    {
+      vinagre_utils_show_many_errors (ngettext ("The following URL could not be opened:",
+						"The following URL's could not be opened:",
+						g_slist_length (url_errors)),
+				      url_errors,
+				      GTK_WINDOW (window));
+      g_slist_free (url_errors);
+    }
+
 }
 
 int main (int argc, char **argv) {
