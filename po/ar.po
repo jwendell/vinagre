@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome 2-22\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-24 10:45+0000\n"
+"POT-Creation-Date: 2008-01-31 08:09+0000\n"
 "PO-Revision-Date: 2007-11-24 11:19+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabeyes <doc@arabeyes.org>\n"
@@ -15,16 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Arabic\n"
-"Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : 3\n"
+"Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && "
+"n<=10 ? 2 : 3\n"
 
-#: ../data/vinagre.desktop.in.in.h:1
-#: ../data/vinagre-file.desktop.in.in.h:1
+#: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "مكّن وصول سطح المكتب البعيد"
 
-#: ../data/vinagre.desktop.in.in.h:2
-#: ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
+#: ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "عارض سطح المكتب البعيد"
 
@@ -37,7 +36,9 @@ msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>ادخل إسما لهذا الإتصال</b>"
 
 #: ../data/vinagre.glade.h:3
-msgid "<b>In order to connect on this machine, a password is required. Please, supply it.</b>"
+msgid ""
+"<b>In order to connect on this machine, a password is required. Please, "
+"supply it.</b>"
 msgstr "<b>للإتصال بهذا الخادم، يجب ادخال كلمة السر.</b>"
 
 #: ../data/vinagre.glade.h:4
@@ -48,8 +49,7 @@ msgstr "<b>أي خادم تريد الإتصال به؟ </b>"
 msgid "Editing a bookmark"
 msgstr "تحرير علامة الموقع"
 
-#: ../data/vinagre.glade.h:6
-#: ../src/vinagre-tab.c:690
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:684
 msgid "Host:"
 msgstr "المضيف:"
 
@@ -77,6 +77,10 @@ msgstr "ال_منْفذ:"
 msgid "_Remember this password"
 msgstr "_تذكّر كلمة السر هذه"
 
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr ""
+
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "ملف (VNC) لسطح المكتب البعيد"
@@ -85,8 +89,7 @@ msgstr "ملف (VNC) لسطح المكتب البعيد"
 msgid "Remote Desktop Connection"
 msgstr "اتصال سطح مكتب بعيد"
 
-#: ../src/vinagre-bookmarks.c:58
-#: ../src/vinagre-bookmarks.c:76
+#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "خطأ عند حفظ علامات الموقع: %s"
@@ -110,17 +113,15 @@ msgstr "أمتأكد من إنك تريد اخراج \"%s\" من علامات ا
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "خطأ عند حذف %s  من علامات المواقع: %s"
 
-#: ../src/vinagre-commands.c:89
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "اختر الملف"
 
-#: ../src/vinagre-commands.c:100
-#: ../src/vinagre-tab.c:773
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "التنسيقات المتوفّرة"
 
-#: ../src/vinagre-commands.c:132
-#: ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "لا يمكن فتح هذه الملفات"
@@ -128,27 +129,45 @@ msgstr[1] "لا يمكن فتح اذه الملف"
 msgstr[2] "لا يمكن فتح هذه الملفات"
 msgstr[3] "لا يمكن فتح هذه الملفات"
 
-#: ../src/vinagre-commands.c:308
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "فيناجري هو عميل VNC لسطح مكتب جنوم"
 
-#: ../src/vinagre-commands.c:311
-msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
-msgstr "فيناجري برنامج حر؛ بامكانك إعادة توزيعه و/أو تعديله تحت شروط الرخصة العامة لجنو والتي نشرتها منظمة البرمجيات الحرة؛ سواء كانت الإصدارة 2 للرخصة أو أي إصدارة بعدها حسب الرغبة. "
+#: ../src/vinagre-commands.c:386
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"فيناجري برنامج حر؛ بامكانك إعادة توزيعه و/أو تعديله تحت شروط الرخصة العامة "
+"لجنو والتي نشرتها منظمة البرمجيات الحرة؛ سواء كانت الإصدارة 2 للرخصة أو أي "
+"إصدارة بعدها حسب الرغبة. "
 
-#: ../src/vinagre-commands.c:315
-msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
-msgstr "يوزّع فيناجري  على أمل أن يكون مفيدال لمن يستخدمه دون أدنى مسؤولية؛ ولا حتى أيضشمان يضمن صلاحية العرض في السوق أو توافقه مع أي استخدام محدد. يمكنم مراجعة الرخصة العامة لجنو لمزيد من التفاصيل. "
+#: ../src/vinagre-commands.c:390
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"يوزّع فيناجري  على أمل أن يكون مفيدال لمن يستخدمه دون أدنى مسؤولية؛ ولا حتى "
+"أيضشمان يضمن صلاحية العرض في السوق أو توافقه مع أي استخدام محدد. يمكنم "
+"مراجعة الرخصة العامة لجنو لمزيد من التفاصيل. "
 
-#: ../src/vinagre-commands.c:319
-msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr "من المفنرض أن تكون قد استلمت نسخة من رخصة جنو العامة مع البرنامج؛ في حال عدم استلامك لذلك، يمكنك تصفح <http://www.gnu.org/licenses/>."
+#: ../src/vinagre-commands.c:394
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"من المفنرض أن تكون قد استلمت نسخة من رخصة جنو العامة مع البرنامج؛ في حال عدم "
+"استلامك لذلك، يمكنك تصفح <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:337
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
 msgstr "جهاد عفيفي <djihed@gmail.com>"
 
-#: ../src/vinagre-commands.c:340
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "موقع فيناجري"
 
@@ -172,41 +191,51 @@ msgstr "علامات المواقع"
 msgid "Hide bookmarks"
 msgstr "اخف علامات مواقع"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "يفتح ملف .vnc"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "اسم الملف"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[خادم:منفذ]"
 
+#: ../src/vinagre-main.c:73
+msgid "Unknown error"
+msgstr ""
+
+#: ../src/vinagre-main.c:113
+#, fuzzy
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "لا يمكن فتح هذه الملفات"
+msgstr[1] "لا يمكن فتح اذه الملف"
+msgstr[2] "لا يمكن فتح هذه الملفات"
+msgstr[3] "لا يمكن فتح هذه الملفات"
+
 #. Setup command line options
-#: ../src/vinagre-main.c:107
+#: ../src/vinagre-main.c:133
 msgid "- VNC Client for GNOME"
 msgstr "- عميل VNC لجينوم."
 
-#: ../src/vinagre-main.c:115
-msgid "Run 'vinagre --help' to see a full list of available command line options"
+#: ../src/vinagre-main.c:141
+msgid ""
+"Run 'vinagre --help' to see a full list of available command line options"
 msgstr "شغّل 'vinagre --help' لرئية قائمة كاملة لخيارات سطر الأوامر."
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "لم يمكن بدأ GnomeVFS\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "تم غلق الإتصال بالخادم \"%s\""
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
 msgstr "جاري الاتصال..."
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "اغلق الإتصال"
 
@@ -223,51 +252,50 @@ msgstr "توقّعت `%s' تلقّيت `%s' للمفتاح %s"
 msgid "Error connecting to host."
 msgstr "خطأ عند الاتّصال بالخادم."
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:292
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "فشل التوثيق للخادم  \"%s\""
 
-#: ../src/vinagre-tab.c:321
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "طريقة التوثيق للخادم \"%s\" غير مدعومة. (%u)"
 
-#: ../src/vinagre-tab.c:377
+#: ../src/vinagre-tab.c:376
 msgid "Error saving recent connection."
 msgstr "خطأ أثناء حفظ الإتصال الأخير"
 
-#: ../src/vinagre-tab.c:408
+#: ../src/vinagre-tab.c:407
 msgid "Error saving the password on the keyring."
 msgstr "خطأ عند حفظ كلمة السر على حلقة المفاتيح."
 
-#: ../src/vinagre-tab.c:468
-#: ../src/vinagre-tab.c:564
+#: ../src/vinagre-tab.c:467 ../src/vinagre-tab.c:563
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "اضغط Ctrl+Alt لأخذ المؤشر"
 
-#: ../src/vinagre-tab.c:543
+#: ../src/vinagre-tab.c:542
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "اضغط Ctrl+Alt لإطلاق المؤشر"
 
-#: ../src/vinagre-tab.c:689
+#: ../src/vinagre-tab.c:683
 msgid "Desktop Name:"
 msgstr "إسم سطح المكتب:"
 
-#: ../src/vinagre-tab.c:691
+#: ../src/vinagre-tab.c:685
 msgid "Port:"
 msgstr "المنفذ:"
 
-#: ../src/vinagre-tab.c:692
+#: ../src/vinagre-tab.c:686
 msgid "Dimensions:"
 msgstr "الأبعاد:"
 
-#: ../src/vinagre-tab.c:759
+#: ../src/vinagre-tab.c:753
 #, c-format
 msgid "Screenshot of %s"
 msgstr "لقطة شاشة لـ %s"
 
-#: ../src/vinagre-tab.c:762
+#: ../src/vinagre-tab.c:756
 msgid "Save Screenshot"
 msgstr "احفظ لقطة الشاشة"
 
@@ -284,8 +312,7 @@ msgstr "_حرّر"
 msgid "_View"
 msgstr "إ_عرض"
 
-#: ../src/vinagre-ui.h:36
-#: ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:97
 msgid "_Bookmarks"
 msgstr "_علامات مواقع"
 
@@ -397,17 +424,20 @@ msgstr "اظهر أو اخف شريط الحالة"
 msgid "Show or hide the bookmarks panel"
 msgstr "اعرض أو إخف لوحة علامات الموقع"
 
-#: ../src/vinagre-window.c:367
+#: ../src/vinagre-window.c:386
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "لم يمكن ادماج vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:395
+#: ../src/vinagre-window.c:414
 msgid "_Recent connections"
 msgstr "الإتّصالات ال_حديثة"
 
-#: ../src/vinagre-window.c:535
+#. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
+#: ../src/vinagre-window.c:555
 #, c-format
 msgid "Open %s:%d"
 msgstr "افتح %s:%d"
 
+#~ msgid "Could not initialize GnomeVFS\n"
+#~ msgstr "لم يمكن بدأ GnomeVFS\n"
