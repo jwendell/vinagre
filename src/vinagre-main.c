@@ -88,7 +88,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
 	      if (g_strcmp0 (url[0], "vnc"))
 		{
 		  errors = g_slist_prepend (errors,
-					    g_strdup_printf ("The protocol %s is not supported.",
+					    g_strdup_printf (_("The protocol %s is not supported."),
 					    		     url[0]));
 		  g_strfreev (url);
 		  continue;
