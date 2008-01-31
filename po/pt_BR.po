@@ -9,21 +9,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-16 14:20+0000\n"
-"PO-Revision-Date: 2007-11-23 13:54-0500\n"
+"POT-Creation-Date: 2008-01-31 08:54-0300\n"
+"PO-Revision-Date: 2008-01-31 08:54-0300\n"
 "Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Acesse áreas de trabalho remotas"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Visualizador de Área de Trabalho Remota"
 
@@ -51,7 +51,7 @@ msgstr "<b>A qual máquina você quer se conectar?</b>"
 msgid "Editing a bookmark"
 msgstr "Editando um marcador"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:686
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:684
 msgid "Host:"
 msgstr "Máquina:"
 
@@ -78,6 +78,10 @@ msgstr "_Porta:"
 #: ../data/vinagre.glade.h:12
 msgid "_Remember this password"
 msgstr "Lemb_rar esta senha"
+
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "O manipulador de URLs \"vnc://\""
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -111,25 +115,25 @@ msgstr "Tem certeza que quer excluir <i>%s</i> dos marcadores?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Erro ao remover %s dos marcadores: %s"
 
-#: ../src/vinagre-commands.c:89
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "Escolha o arquivo"
 
-#: ../src/vinagre-commands.c:100 ../src/vinagre-tab.c:769
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "Formatos suportados"
 
-#: ../src/vinagre-commands.c:132 ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Não foi possível abrir o seguinte arquivo:"
 msgstr[1] "Não foi possível abrir os seguintes arquivos:"
 
-#: ../src/vinagre-commands.c:308
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre é um cliente VNC para o Ambiente de Trabalho GNOME"
 
-#: ../src/vinagre-commands.c:311
+#: ../src/vinagre-commands.c:386
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -141,7 +145,7 @@ msgstr ""
 "Foundation; tanto a versão 2 da Licença como (a seu critério) qualquer "
 "versão."
 
-#: ../src/vinagre-commands.c:315
+#: ../src/vinagre-commands.c:390
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -153,7 +157,7 @@ msgstr ""
 "A QUALQUER PROPÓSITO EM PARTICULAR. Consulte a Licença Pública Geral GNU "
 "para obter mais detalhes."
 
-#: ../src/vinagre-commands.c:319
+#: ../src/vinagre-commands.c:394
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -161,12 +165,13 @@ msgstr ""
 "Você deve ter recebido uma cópia da Licença Pública Geral GNU junto com este "
 "programa. Se não, veja <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:337
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
-msgstr "Vladimir Melo <vladimirmelo.psi@gmail.com>,\n"
+msgstr ""
+"Vladimir Melo <vladimirmelo.psi@gmail.com>,\n"
 "Og Maciel <ogmaciel@gnome.org>"
 
-#: ../src/vinagre-commands.c:340
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Site do Vinagre"
 
@@ -190,44 +195,55 @@ msgstr "Marcadores"
 msgid "Hide bookmarks"
 msgstr "Ocultar marcadores"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "Abre um arquivo .vnc"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "nome do arquivo"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[servidor:porta]"
 
+#: ../src/vinagre-main.c:73
+msgid "Unknown error"
+msgstr "Erro desconhecido"
+
+#: ../src/vinagre-main.c:91
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "O protocolo %s não é suportado."
+
+#: ../src/vinagre-main.c:113
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Não foi possível abrir o seguinte arquivo:"
+msgstr[1] "Os seguintes erros ocorreram:"
+
 #. Setup command line options
-#: ../src/vinagre-main.c:107
+#: ../src/vinagre-main.c:133
 msgid "- VNC Client for GNOME"
 msgstr "- Cliente VNC para o GNOME"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
-"Execute \"vinagre --help\" para ver uma lista completa das opções de linha"
-" de comando disponíveis"
+"Execute \"vinagre --help\" para ver uma lista completa das opções de linha "
+"de comando disponíveis"
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "Não foi possível iniciar o GnomeVFS\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "A conexão com a máquina \"%s\" foi fechada."
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "Fechar conexão"
 
@@ -244,50 +260,50 @@ msgstr "Esperado \"%s\" recebido \"%s\" para chave %s"
 msgid "Error connecting to host."
 msgstr "Erro ao conectar à máquina."
 
-#: ../src/vinagre-tab.c:291
+#: ../src/vinagre-tab.c:292
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autenticação para máquina \"%s\" falhou"
 
-#: ../src/vinagre-tab.c:319
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Método de autenticação para máquina \"%s\" não é suportado. (%u)"
 
-#: ../src/vinagre-tab.c:375
+#: ../src/vinagre-tab.c:376
 msgid "Error saving recent connection."
 msgstr "Erro ao salvar conexão recente."
 
-#: ../src/vinagre-tab.c:406
+#: ../src/vinagre-tab.c:407
 msgid "Error saving the password on the keyring."
 msgstr "Erro ao salvar a senha no chaveiro."
 
-#: ../src/vinagre-tab.c:466 ../src/vinagre-tab.c:560
+#: ../src/vinagre-tab.c:467 ../src/vinagre-tab.c:563
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Pressione Crtl+Alt para capturar o cursor"
 
-#: ../src/vinagre-tab.c:539
+#: ../src/vinagre-tab.c:542
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Pressione Ctrl+Alt para liberar o cursor"
 
-#: ../src/vinagre-tab.c:685
+#: ../src/vinagre-tab.c:683
 msgid "Desktop Name:"
 msgstr "Nome da Área de Trabalho:"
 
-#: ../src/vinagre-tab.c:687
+#: ../src/vinagre-tab.c:685
 msgid "Port:"
 msgstr "Porta:"
 
-#: ../src/vinagre-tab.c:688
+#: ../src/vinagre-tab.c:686
 msgid "Dimensions:"
 msgstr "Dimensões:"
 
-#: ../src/vinagre-tab.c:755
+#: ../src/vinagre-tab.c:753
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de tela de %s"
 
-#: ../src/vinagre-tab.c:758
+#: ../src/vinagre-tab.c:756
 msgid "Save Screenshot"
 msgstr "Salvar Captura de Tela"
 
@@ -304,7 +320,7 @@ msgstr "_Editar"
 msgid "_View"
 msgstr "_Ver"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:97
 msgid "_Bookmarks"
 msgstr "M_arcadores"
 
@@ -367,85 +383,66 @@ msgid "Close the current connection"
 msgstr "Fecha a conexão atual"
 
 #: ../src/vinagre-ui.h:67
-msgid "Take screenshot"
-msgstr "Capturar tela"
-
-#: ../src/vinagre-ui.h:68
-msgid "Take a screenshot of active connection"
-msgstr "Captura uma tela da conexão ativa"
-
-#: ../src/vinagre-ui.h:69
 msgid "C_lose All"
 msgstr "_Fechar Todas"
 
-#: ../src/vinagre-ui.h:70
+#: ../src/vinagre-ui.h:68
 msgid "Close all active connections"
 msgstr "Fecha todas as conexões ativas"
 
-#: ../src/vinagre-ui.h:74
-msgid "View the current machine in full screen"
-msgstr "Vê a máquina atual em tela cheia"
-
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:77
+#: ../src/vinagre-ui.h:71
 msgid "_Add to bookmarks"
 msgstr "_Adicionar aos marcadores"
 
-#: ../src/vinagre-ui.h:78
+#: ../src/vinagre-ui.h:72
 msgid "Add current connection to your bookmarks"
 msgstr "Adiciona conexão atual aos seus marcadores"
 
+#. Machine menu
+#: ../src/vinagre-ui.h:79
+msgid "Take screenshot"
+msgstr "Capturar tela"
+
+#: ../src/vinagre-ui.h:80
+msgid "Take a screenshot of active connection"
+msgstr "Captura uma tela da conexão ativa"
+
 #: ../src/vinagre-ui.h:84
+msgid "View the current machine in full screen"
+msgstr "Vê a máquina atual em tela cheia"
+
+#: ../src/vinagre-ui.h:89
 msgid "_Toolbar"
 msgstr "Barra de _ferramentas"
 
-#: ../src/vinagre-ui.h:85
+#: ../src/vinagre-ui.h:90
 msgid "Show or hide the toolbar"
 msgstr "Mostra ou oculta a barra de ferramentas"
 
-#: ../src/vinagre-ui.h:88
+#: ../src/vinagre-ui.h:93
 msgid "_Statusbar"
 msgstr "Barra de _status"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:94
 msgid "Show or hide the statusbar"
 msgstr "Mostra ou oculta a barra de status"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:98
 msgid "Show or hide the bookmarks panel"
 msgstr "Mostra ou oculta o painel de marcadores"
 
-#: ../src/vinagre-window.c:355
+#: ../src/vinagre-window.c:386
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Não foi possível mesclar vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:383
+#: ../src/vinagre-window.c:414
 msgid "_Recent connections"
 msgstr "Conexões _recentes"
 
-#: ../src/vinagre-window.c:520
+#. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
+#: ../src/vinagre-window.c:555
 #, c-format
 msgid "Open %s:%d"
 msgstr "Abrir %s:%d"
-
-#, fuzzy
-#~ msgid "Add to favorites"
-#~ msgstr "Esconder favoritos"
-
-#~ msgid "Favorites"
-#~ msgstr "Favoritos"
-
-#~ msgid "Hide favorites"
-#~ msgstr "Esconder favoritos"
-
-#~ msgid "_Favorites"
-#~ msgstr "_Favoritos"
-
-#, fuzzy
-#~ msgid "_Open favorite"
-#~ msgstr "Esconder favoritos"
-
-#, fuzzy
-#~ msgid "_Edit favorite"
-#~ msgstr "Esconder favoritos"
