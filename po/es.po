@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-30 18:44+0000\n"
-"PO-Revision-Date: 2008-01-30 21:20+0100\n"
+"POT-Creation-Date: 2008-01-31 11:57+0000\n"
+"PO-Revision-Date: 2008-02-01 16:08+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "Access remote desktops"
 msgstr "Acceder a escritorios remotos"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:159
+#: ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
@@ -122,7 +122,7 @@ msgstr "Elegir el archivo"
 msgid "Supported formats"
 msgstr "Formatos soportados"
 
-#: ../src/vinagre-commands.c:133 ../src/vinagre-main.c:115
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "No se pudo abrir el siguiente archivo:"
@@ -192,38 +192,39 @@ msgstr "Marcadores"
 msgid "Hide bookmarks"
 msgstr "Ocultar los marcadores"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "Abre un archivo .vnc"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "nombre de archivo"
 
 #: ../src/vinagre-main.c:46
-msgid "Handles an URL like vnc://host[:port]"
-msgstr "Maneja un URL como vnc://equipo[:puerto]"
-
-#: ../src/vinagre-main.c:46
-msgid "url"
-msgstr "URL"
-
-#: ../src/vinagre-main.c:50
 msgid "[server:port]"
 msgstr "[servidor:puerto]"
 
-#: ../src/vinagre-main.c:125
-msgid "The following URL could not be opened:"
-msgid_plural "The following URL's could not be opened:"
-msgstr[0] "No se pudo abrir el siguiente URL:"
-msgstr[1] "No se pudieron abrir los siguientes URL:"
+#: ../src/vinagre-main.c:73
+msgid "Unknown error"
+msgstr "Error desconocido"
+
+#: ../src/vinagre-main.c:91
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "El protocolo %s no está soportado."
+
+#: ../src/vinagre-main.c:113
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Ha ocurrido el siguiente error:"
+msgstr[1] "Han ocurrido los siguientes errores:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:146
+#: ../src/vinagre-main.c:133
 msgid "- VNC Client for GNOME"
 msgstr " - Cliente VNC para GNOME"
 
-#: ../src/vinagre-main.c:154
+#: ../src/vinagre-main.c:141
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Ejecute «vinagre --help» para ver una lista completa de las opciones "
