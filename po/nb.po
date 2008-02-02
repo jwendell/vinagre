@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-01 13:30+0100\n"
-"PO-Revision-Date: 2007-12-01 13:35+0100\n"
+"POT-Creation-Date: 2008-02-02 21:35+0100\n"
+"PO-Revision-Date: 2008-02-02 21:35+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "Access remote desktops"
 msgstr "Bruk eksternt skrivebord"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Visning av eksternt skrivebord"
 
@@ -47,7 +47,7 @@ msgstr "<b>Hvilken maskin vil du koble til?</b>"
 msgid "Editing a bookmark"
 msgstr "Redigerer et bokmerke"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:690
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:684
 msgid "Host:"
 msgstr "Vert:"
 
@@ -74,6 +74,10 @@ msgstr "_Port:"
 #: ../data/vinagre.glade.h:12
 msgid "_Remember this password"
 msgstr "_Husk dette passordet"
+
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "Håndterer for «vnc://»-URLer"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -107,25 +111,25 @@ msgstr "Er du sikker på at du ønsker å utelate <i>%s</i> fra bokmerkene?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Feil ved fjerning av %s fra bokmerkene: %s"
 
-#: ../src/vinagre-commands.c:89
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "Velg fil"
 
-#: ../src/vinagre-commands.c:100 ../src/vinagre-tab.c:773
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "Støttede formater"
 
-#: ../src/vinagre-commands.c:132 ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Følgende fil kunne ikke bli åpnet:"
 msgstr[1] "Følgende filer kunne ikke bli åpnet:"
 
-#: ../src/vinagre-commands.c:308
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre er en VNC-klient for GNOME-skrivebordet"
 
-#: ../src/vinagre-commands.c:311
+#: ../src/vinagre-commands.c:386
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -137,7 +141,7 @@ msgstr ""
 "Software Foundation; enten versjon 2 av lisensen, eller (hvis du ønsker det) "
 "enhver senere versjon."
 
-#: ../src/vinagre-commands.c:315
+#: ../src/vinagre-commands.c:390
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -148,7 +152,7 @@ msgstr ""
 "GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET "
 "BESTEMT FORMÅL. Se GNU General Public License for detaljer."
 
-#: ../src/vinagre-commands.c:319
+#: ../src/vinagre-commands.c:394
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -156,13 +160,13 @@ msgstr ""
 "Du skal ha mottatt en kopi av GNU General Public License sammen med dette "
 "programmet. Hvis ikke, se på <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:337
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
 msgstr ""
 "Kjartan Maraas <kmaraas@gnome.org>\n"
 "Espen Stefansen <libbe AT stefansen DOT net>"
 
-#: ../src/vinagre-commands.c:340
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Hjemmeside for Vinagre"
 
@@ -186,42 +190,54 @@ msgstr "Bokmerker"
 msgid "Hide bookmarks"
 msgstr "Skjul bokmerker"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "Åpner en .vnc-fil"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "filnavn"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[tjener:port]"
 
+#: ../src/vinagre-main.c:73
+msgid "Unknown error"
+msgstr "Ukjent feil"
+
+#: ../src/vinagre-main.c:91
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "Protokoll %s er ikke støttet."
+
+#: ../src/vinagre-main.c:113
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Følgende feil oppsto:"
+msgstr[1] "Følgende feil oppsto:"
+
 #. Setup command line options
-#: ../src/vinagre-main.c:107
+#: ../src/vinagre-main.c:133
 msgid "- VNC Client for GNOME"
 msgstr "- VNC-klient for GNOME"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
-msgstr "Kjør 'vinagre --help' for å se en liste med tilgjengelige kommandolinjevalg"
+msgstr ""
+"Kjør 'vinagre --help' for å se en liste med tilgjengelige kommandolinjevalg"
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "Kunne ikke initialisere GnomeVFS\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Tilkoblingen til verten «%s» ble lukket."
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
 msgstr "Kobler til ..."
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "Lukk tilkobling"
 
@@ -238,50 +254,50 @@ msgstr "Forventet «%s», fikk «%s» for nøkkelen %s"
 msgid "Error connecting to host."
 msgstr "Feil ved tilkobling til verten."
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:292
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autentisering mot verten «%s» feilet"
 
-#: ../src/vinagre-tab.c:321
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Autentiseringsmetoden mot verten «%s» er ikke støttet. (%u)"
 
-#: ../src/vinagre-tab.c:377
+#: ../src/vinagre-tab.c:376
 msgid "Error saving recent connection."
 msgstr "Feil under lagring av siste tilkobling."
 
-#: ../src/vinagre-tab.c:408
+#: ../src/vinagre-tab.c:407
 msgid "Error saving the password on the keyring."
 msgstr "Feil under lagring av passord på nøkkelringen."
 
-#: ../src/vinagre-tab.c:468 ../src/vinagre-tab.c:564
+#: ../src/vinagre-tab.c:467 ../src/vinagre-tab.c:563
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Trykk Ctrl + Alt for å fange pekeren"
 
-#: ../src/vinagre-tab.c:543
+#: ../src/vinagre-tab.c:542
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Trykk Ctrl + Alt for å slippe pekeren"
 
-#: ../src/vinagre-tab.c:689
+#: ../src/vinagre-tab.c:683
 msgid "Desktop Name:"
 msgstr "Skrivebordsnavn:"
 
-#: ../src/vinagre-tab.c:691
+#: ../src/vinagre-tab.c:685
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:692
+#: ../src/vinagre-tab.c:686
 msgid "Dimensions:"
 msgstr "Dimensjoner:"
 
-#: ../src/vinagre-tab.c:759
+#: ../src/vinagre-tab.c:753
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skjermbilde av %s"
 
-#: ../src/vinagre-tab.c:762
+#: ../src/vinagre-tab.c:756
 msgid "Save Screenshot"
 msgstr "Lagre skjermbilde"
 
@@ -410,17 +426,17 @@ msgstr "Vis eller skjul statuslinjen"
 msgid "Show or hide the bookmarks panel"
 msgstr "Vis eller skjul bokmerketpanelet"
 
-#: ../src/vinagre-window.c:367
+#: ../src/vinagre-window.c:386
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Klarte ikke å slå sammen vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:395
+#: ../src/vinagre-window.c:414
 msgid "_Recent connections"
 msgstr "_Siste tilkoblinger"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:536
+#: ../src/vinagre-window.c:555
 #, c-format
 msgid "Open %s:%d"
 msgstr "Åpne %s:%d"
