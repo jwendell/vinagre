@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-24 09:04+0000\n"
-"PO-Revision-Date: 2008-01-26 10:33+0200\n"
+"POT-Creation-Date: 2008-01-31 11:57+0000\n"
+"PO-Revision-Date: 2008-02-01 17:27+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgid "Access remote desktops"
 msgstr "Ligipääs kaugtöölaudadele"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Kaugtöölaudade vaataja"
 
@@ -79,6 +79,10 @@ msgstr "_Port:"
 msgid "_Remember this password"
 msgstr "See parool _jäetakse meelde"
 
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "\"vnc://\" URL-ide käsitleja"
+
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "Kaugtöölaua (VNC) fail"
@@ -111,37 +115,37 @@ msgstr "Soovid sa <i>%s</i> eemaldada järjehoidjate hulgast?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Viga %s eemaldamisel järjehoidjate seast: %s"
 
-#: ../src/vinagre-commands.c:91
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "Faili valimine"
 
-#: ../src/vinagre-commands.c:102 ../src/vinagre-tab.c:767
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "Toetatud vormingud"
 
-#: ../src/vinagre-commands.c:134 ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Järgnevat faili pole võimalik avada:"
 msgstr[1] "Järgnevaid faile pole võimalik avada:"
 
-#: ../src/vinagre-commands.c:371
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre on VNC-klient GNOME töölauale"
 
-#: ../src/vinagre-commands.c:374
+#: ../src/vinagre-commands.c:386
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Vinagre on vaba tarkvara. Te võite seda edasi levitada ja/või muuta vastavalt "
-"GNU Üldise Avaliku Litsentsi tingimustele, nagu need on Vaba Tarkvara Fondi "
-"poolt avaldatud; kas Litsentsi versioon number 2 või (vastavalt Teie "
-"valikule) ükskõik milline hilisem versioon."
+"Vinagre on vaba tarkvara. Te võite seda edasi levitada ja/või muuta "
+"vastavalt GNU Üldise Avaliku Litsentsi tingimustele, nagu need on Vaba "
+"Tarkvara Fondi poolt avaldatud; kas Litsentsi versioon number 2 või "
+"(vastavalt Teie valikule) ükskõik milline hilisem versioon."
 
-#: ../src/vinagre-commands.c:378
+#: ../src/vinagre-commands.c:390
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -153,7 +157,7 @@ msgstr ""
 "TEATUD KINDLAKS EESMÄRGIKS. Üksikasjade suhtes vaata GNU Üldist Avalikku "
 "Litsentsi."
 
-#: ../src/vinagre-commands.c:382
+#: ../src/vinagre-commands.c:394
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -161,11 +165,11 @@ msgstr ""
 "Te peaks olema saanud GNU Üldise Avaliku Litsentsi koopia koos selle "
 "programmiga; kui ei, siis vaadake aadressi <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:404
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
 msgstr "Ivar Smolin <okul@linux.ee>, 2008."
 
-#: ../src/vinagre-commands.c:407
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Vinagre veebisait"
 
@@ -189,42 +193,53 @@ msgstr "Järjehoidjad"
 msgid "Hide bookmarks"
 msgstr "Järjehoidjate peitmine"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr ".vnc faili avamine"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "failinimi"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[server:port]"
 
+#: ../src/vinagre-main.c:73
+msgid "Unknown error"
+msgstr "Tundmatu viga"
+
+#: ../src/vinagre-main.c:91
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "%s-protokoll pole toetatud."
+
+#: ../src/vinagre-main.c:113
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Leidis aset järgmine viga:"
+msgstr[1] "Leidis aset järgmised vead:"
+
 #. Setup command line options
-#: ../src/vinagre-main.c:107
+#: ../src/vinagre-main.c:133
 msgid "- VNC Client for GNOME"
 msgstr " - VNC klient GNOME jaoks"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Kõigi käsureavõtmete vaatamiseks käivita 'vinagre --help'"
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "GnomeVFS'i pole võimalik lähtestada\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Ühendus hostiga \"%s\" sulgeti."
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
 msgstr "Ühendumine..."
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "Ühenduse sulgemine"
 
@@ -413,17 +428,17 @@ msgstr "Olekuriba näitamine või peitmine"
 msgid "Show or hide the bookmarks panel"
 msgstr "Järjehoidjate paneeli näitamine või peitmine"
 
-#: ../src/vinagre-window.c:379
+#: ../src/vinagre-window.c:386
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Faili vinagre-ui.xml pole võimalik ühendada: %s"
 
-#: ../src/vinagre-window.c:407
+#: ../src/vinagre-window.c:414
 msgid "_Recent connections"
 msgstr "_Hiljutised ühendused"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:548
+#: ../src/vinagre-window.c:555
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d avamine"
