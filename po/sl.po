@@ -1,14 +1,14 @@
 # Copyright (C) 2005-2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the vinagre package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2007.
+# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-17 04:16+0100\n"
-"PO-Revision-Date: 2007-11-18 19:56+0100\n"
+"PO-Revision-Date: 2008-02-06 16:28+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Dostop do oddaljenih namizij"
 
 #: ../data/vinagre.desktop.in.in.h:2
 #: ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Pregledovalnik oddaljenih namizij"
 
@@ -53,7 +53,7 @@ msgid "Editing a bookmark"
 msgstr "Urejanje zaznamka"
 
 #: ../data/vinagre.glade.h:6
-#: ../src/vinagre-tab.c:690
+#: ../src/vinagre-tab.c:684
 msgid "Host:"
 msgstr "Gostitelj:"
 
@@ -80,6 +80,10 @@ msgstr "_Vrata:"
 #: ../data/vinagre.glade.h:12
 msgid "_Remember this password"
 msgstr "_Zapomni si to geslo"
+
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "Upravljavec z \"vnc://\" naslovi URL"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -114,17 +118,16 @@ msgstr "Ali zares želite izločiti <i>%s</i> iz zaznamkov?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Napaka med odstranjevanjem %s iz zaznamkov: %s"
 
-#: ../src/vinagre-commands.c:89
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "Izberite datoteko"
 
-#: ../src/vinagre-commands.c:100
-#: ../src/vinagre-tab.c:773
+#: ../src/vinagre-commands.c:101
+#: ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "Podprte oblike zapisov"
 
-#: ../src/vinagre-commands.c:132
-#: ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Datoteke, ki jih ni bilo mogoče odpreti:"
@@ -132,27 +135,27 @@ msgstr[1] "Datoteka, ki je ni bilo mogoče odpreti:"
 msgstr[2] "Datoteki, ki ju ni bilo mogoče odpreti:"
 msgstr[3] "Datoteke, ki jih ni bilo mogoče odpreti:"
 
-#: ../src/vinagre-commands.c:308
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Program Vinagre je VNC odjemalec za GNOME namizje"
 
-#: ../src/vinagre-commands.c:311
+#: ../src/vinagre-commands.c:386
 msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
 msgstr "Program Vinagre je prosti program; lahko ga izmenjujete in spreminjate pod pogoji GNU splošne javne licence kot je objavljena z Free Software Foundation; različica 2 in vse nadaljnje različice."
 
-#: ../src/vinagre-commands.c:315
+#: ../src/vinagre-commands.c:390
 msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
 msgstr "Uporaba in razširjanje programa Vinagre je prosto, vendar brez kakršnekoli garancije. Za več podrobnosti si oglejte GNU splošno javno licenco."
 
-#: ../src/vinagre-commands.c:319
+#: ../src/vinagre-commands.c:394
 msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr "Skupaj s programom bi morali dobiti tudi kopijo GNU splošne javne licence. V primeru, da je niste, si oglejte <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:337
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
-#: ../src/vinagre-commands.c:340
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Spletna stran Vinagre"
 
@@ -176,41 +179,54 @@ msgstr "Zaznamki"
 msgid "Hide bookmarks"
 msgstr "Skrij zaznamke"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "Odpre .vnc datoteko"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "ime datoteke"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[strežnik:vrata]"
 
+#: ../src/vinagre-main.c:73
+msgid "Unknown error"
+msgstr "Neznana napaka"
+
+#: ../src/vinagre-main.c:91
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "Protokol %s ni podprt."
+
+#: ../src/vinagre-main.c:113
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Prišlo je do naslednjih napak:"
+msgstr[1] "Prišlo je do naslednje napake:"
+msgstr[2] "Prišlo je do naslednjih napak:"
+msgstr[3] "Prišlo je do naslednjih napak:"
+
 #. Setup command line options
-#: ../src/vinagre-main.c:107
+#: ../src/vinagre-main.c:133
 msgid "- VNC Client for GNOME"
 msgstr "- VNC odjemalec za GNOME"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:141
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Zagon ukaza 'vinagre --help' izpiše celoten seznam ukazov, ki so na voljo."
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "Ni mogoče zagnati GnomeVFS\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Povezava z gostiteljem \"%s\" je prekinjena."
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "Zapri povezavo"
 
@@ -227,51 +243,51 @@ msgstr "Pričakovan `%s' dobljen `%s' za ključ %s"
 msgid "Error connecting to host."
 msgstr "Napaka med povezovanjem z gostiteljem."
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:292
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Neuspešen poskus overitve z gostiteljem \"%s\"."
 
-#: ../src/vinagre-tab.c:321
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Način overitve z gostiteljem \"%s\" ni podprt. (%u)"
 
-#: ../src/vinagre-tab.c:377
+#: ../src/vinagre-tab.c:376
 msgid "Error saving recent connection."
 msgstr "Napaka med shranjevanjem nedavnih povezav"
 
-#: ../src/vinagre-tab.c:408
+#: ../src/vinagre-tab.c:407
 msgid "Error saving the password on the keyring."
 msgstr "Napaka pri shranjevanju gesla v zbirko ključev."
 
-#: ../src/vinagre-tab.c:468
-#: ../src/vinagre-tab.c:564
+#: ../src/vinagre-tab.c:467
+#: ../src/vinagre-tab.c:563
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Pritisnite Ctrl+Alt za sprostitev kazalnika"
 
-#: ../src/vinagre-tab.c:543
+#: ../src/vinagre-tab.c:542
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Pritisnite Ctrl+Alt za sprostitev kazalnika"
 
-#: ../src/vinagre-tab.c:689
+#: ../src/vinagre-tab.c:683
 msgid "Desktop Name:"
 msgstr "Ime namizja:"
 
-#: ../src/vinagre-tab.c:691
+#: ../src/vinagre-tab.c:685
 msgid "Port:"
 msgstr "Vrata:"
 
-#: ../src/vinagre-tab.c:692
+#: ../src/vinagre-tab.c:686
 msgid "Dimensions:"
 msgstr "Mere:"
 
-#: ../src/vinagre-tab.c:759
+#: ../src/vinagre-tab.c:753
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Zajeta slika %s"
 
-#: ../src/vinagre-tab.c:762
+#: ../src/vinagre-tab.c:756
 msgid "Save Screenshot"
 msgstr "Shrani zajeto sliko"
 
@@ -401,16 +417,17 @@ msgstr "Prikaži ali skrij statusno vrstico"
 msgid "Show or hide the bookmarks panel"
 msgstr "Pokaži ali skrij pladenj zaznamkov"
 
-#: ../src/vinagre-window.c:367
+#: ../src/vinagre-window.c:386
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Ni mogoče združiti vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:395
+#: ../src/vinagre-window.c:414
 msgid "_Recent connections"
 msgstr "_Nedavne povezave"
 
-#: ../src/vinagre-window.c:535
+#. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
+#: ../src/vinagre-window.c:555
 #, c-format
 msgid "Open %s:%d"
 msgstr "Odpri %s:%d"
