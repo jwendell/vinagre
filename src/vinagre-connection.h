@@ -2,7 +2,7 @@
  * vinagre-connection.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ gchar             *vinagre_connection_best_name		(VinagreConnection *conn);
 
 VinagreConnection *vinagre_connection_clone		(VinagreConnection *conn);
 
-VinagreConnection *vinagre_connection_new_from_string	(const gchar *url);
+VinagreConnection *vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg);
 VinagreConnection *vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg);
 
 GdkPixbuf         *vinagre_connection_get_icon		(VinagreConnection *conn);

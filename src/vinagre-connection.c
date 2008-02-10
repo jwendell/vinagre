@@ -144,14 +144,31 @@ vinagre_connection_clone (VinagreConnection *conn)
 }
 
 VinagreConnection *
-vinagre_connection_new_from_string (const gchar *url)
+vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
 {
   VinagreConnection *conn;
-  gchar **server;
+  gchar **server, **url;
   gint    port;
   gchar  *host;
 
-  server = g_strsplit (url, ":", 2);
+  *error_msg = NULL;
+
+  url = g_strsplit (uri, "://", 2);
+  if (g_strv_length (url) == 2)
+    {
+      if (g_strcmp0 (url[0], "vnc"))
+	{
+	  *error_msg = g_strdup_printf (_("The protocol %s is not supported."),
+					url[0]);
+	  g_strfreev (url);
+	  return NULL;
+	}
+      host = url[1];
+    }
+  else
+    host = (gchar *) uri;
+
+  server = g_strsplit (host, ":", 2);
   host = server[0];
   port = server[1] ? atoi (server[1]) : 5900;
 
@@ -164,6 +181,8 @@ vinagre_connection_new_from_string (const gchar *url)
     }
 
   g_strfreev (server);
+  g_strfreev (url);
+
   return conn;
 }
 

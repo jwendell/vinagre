@@ -54,8 +54,6 @@ vinagre_main_process_command_line (VinagreWindow *window)
   gint               i;
   VinagreConnection *conn;
   gchar             *error;
-  gchar             *host;
-  gchar             **url;
   GSList            *errors = NULL;
 
   if (files)
@@ -82,27 +80,17 @@ vinagre_main_process_command_line (VinagreWindow *window)
     {
       for (i = 0; remaining_args[i]; i++) 
 	{
-	  url = g_strsplit (remaining_args[i], "://", 2);
-	  if (g_strv_length (url) == 2)
-	    {
-	      if (g_strcmp0 (url[0], "vnc"))
-		{
-		  errors = g_slist_prepend (errors,
-					    g_strdup_printf (_("The protocol %s is not supported."),
-					    		     url[0]));
-		  g_strfreev (url);
-		  continue;
-		}
-	      host = url[1];
-	    }
-	  else
-	    host = remaining_args[i];
-
-	  conn = vinagre_connection_new_from_string (host);
+	  conn = vinagre_connection_new_from_string (remaining_args[i], &error);
 	  if (conn)
 	    servers = g_slist_prepend (servers, conn);
+	  else
+	    errors = g_slist_prepend (errors,
+				      g_strdup_printf ("%s: %s",
+						       remaining_args[i],
+						       error ? error : _("Unknown error")));
 
-	  g_strfreev (url);
+	  if (error)
+	    g_free (error);
 	}
 
       g_strfreev (remaining_args);

@@ -268,11 +268,26 @@ static void
 activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
 {
   VinagreConnection *conn;
+  gchar             *error, *msg;
 
-  conn = vinagre_connection_new_from_string (gtk_recent_chooser_get_current_uri (action));
-  vinagre_cmd_open_bookmark (window, conn);
+  conn = vinagre_connection_new_from_string (gtk_recent_chooser_get_current_uri (action),
+					     &error);
+  if (conn)
+    {
+      vinagre_cmd_open_bookmark (window, conn);
+      vinagre_connection_free (conn);
+    }
+  else
+    {
+      msg = g_strdup_printf ("%s %s",
+			     _("The following error has occurred:"),
+			     error ? error : _("Unknown error"));
+      vinagre_utils_show_error (msg, GTK_WINDOW (window));
+      g_free (msg);
+    }
 
-  vinagre_connection_free (conn);
+  if (error)
+    g_free (error);
 }
 
 static void update_recent_connections (VinagreWindow *window)
@@ -413,6 +428,14 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   window->priv->recent_action = gtk_recent_action_new ("recent_connections",
 						     _("_Recent connections"),
 						       NULL, NULL);
+  g_object_set (G_OBJECT (window->priv->recent_action),
+		"show-not-found", TRUE,
+		"local-only", FALSE,
+		"show-private", TRUE,
+		"show-tips", TRUE,
+		"sort-type", GTK_RECENT_SORT_MRU,
+		NULL);
+  gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (window->priv->recent_action), FALSE);
   g_signal_connect (window->priv->recent_action,
 		    "item-activated",
 		    G_CALLBACK (activate_recent_cb),
