@@ -1,14 +1,14 @@
 # Traducció del Vinagre de l'equip de Softcatalà.
-# Copyright (C) 2007 Free Software Foundation, Inc.
+# Copyright © 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Vinagre package.
-# Joan Duran <jodufi@gmail.com>, 2007.
+# Joan Duran <jodufi@gmail.com>, 2007, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-27 13:44+0100\n"
-"PO-Revision-Date: 2007-11-26 19:25+0100\n"
+"POT-Creation-Date: 2008-02-12 14:50+0100\n"
+"PO-Revision-Date: 2008-02-11 21:38+0100\n"
 "Last-Translator: Joan Duran <jodufi@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "Access remote desktops"
 msgstr "Accés a escriptoris remots"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:134
 msgid "Remote Desktop Viewer"
 msgstr "Visualitzador d'escriptoris remots"
 
@@ -49,7 +49,7 @@ msgstr "<b>A quin ordinador us voleu connectar?</b>"
 msgid "Editing a bookmark"
 msgstr "Edició d'una adreça d'interès"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:690
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:684
 msgid "Host:"
 msgstr "Ordinador:"
 
@@ -76,6 +76,10 @@ msgstr "_Port:"
 #: ../data/vinagre.glade.h:12
 msgid "_Remember this password"
 msgstr "_Recorda aquesta contrasenya"
+
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "El gestor per a URL tipus «vnc://»"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -109,25 +113,25 @@ msgstr "Segur que voleu excloure <i>%s</i> de les adreces d'interès?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "S'ha produït un error en suprimir %s de les adreces d'interès: %s"
 
-#: ../src/vinagre-commands.c:89
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "Seleccioneu el fitxer"
 
-#: ../src/vinagre-commands.c:100 ../src/vinagre-tab.c:773
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "Formats admesos"
 
-#: ../src/vinagre-commands.c:132 ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "No s'ha pogut obrir el fitxer següent:"
 msgstr[1] "No s'han pogut obrir els fitxers següents:"
 
-#: ../src/vinagre-commands.c:308
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "El Vinagre és un client de VNC per a l'escriptori GNOME"
 
-#: ../src/vinagre-commands.c:311
+#: ../src/vinagre-commands.c:386
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -139,7 +143,7 @@ msgstr ""
 "Foundation; o bé la versió 2 de la llicència, o bé (si ho preferiu) "
 "qualsevol versió posterior."
 
-#: ../src/vinagre-commands.c:315
+#: ../src/vinagre-commands.c:390
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -151,7 +155,7 @@ msgstr ""
 "PER A CAP PROPÒSIT PARTICULAR. Vegeu la Llicència Publica General de la GNU "
 "per a més detalls."
 
-#: ../src/vinagre-commands.c:319
+#: ../src/vinagre-commands.c:394
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -160,17 +164,22 @@ msgstr ""
 "juntament aquest programa. En cas contrari, vegeu <http://www.gnu.org/"
 "licenses/>."
 
-#: ../src/vinagre-commands.c:337
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
-msgstr "Joan Duran <jodufi@gmail.com>, 2007"
+msgstr "Joan Duran <jodufi@gmail.com>, 2007, 2008"
 
-#: ../src/vinagre-commands.c:340
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Lloc web del Vinagre"
 
 #: ../src/vinagre-connect.c:53
 msgid "Choose a VNC Server"
 msgstr "Seleccioneu un servidor de VNC"
+
+#: ../src/vinagre-connection.c:161
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "El protocol %s no està admès."
 
 #: ../src/vinagre-fav.c:382
 msgid "Image"
@@ -188,44 +197,51 @@ msgstr "Adreces d'interès"
 msgid "Hide bookmarks"
 msgstr "Amaga les adreces d'interès"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "Obre un fitxer .vnc"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "nomdelfitxer"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[servidor:port]"
 
+#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
+#: ../src/vinagre-window.c:284
+msgid "Unknown error"
+msgstr "Error desconegut"
+
+#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Ha succeït l'error següent:"
+msgstr[1] "Han succeït els errors següents:"
+
 #. Setup command line options
-#: ../src/vinagre-main.c:107
+#: ../src/vinagre-main.c:121
 msgid "- VNC Client for GNOME"
 msgstr "- Client de VNC del GNOME"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:129
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Executeu «vinagre --help» per a veure una llista completa de les opcions "
 "disponibles en la línia d'ordres"
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "No s'ha pogut inicialitzar el GnomeVFS\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "S'ha tancat la connexió amb l'ordinador «%s»."
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
 msgstr "S'està connectant..."
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "Tanca la connexió"
 
@@ -242,50 +258,50 @@ msgstr "S'esperava «%s» i s'ha obtingut «%s» per a la clau %s"
 msgid "Error connecting to host."
 msgstr "S'ha produït un error en connectar-se a l'ordinador."
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:292
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Ha fallat l'autenticació a l'ordinador «%s»"
 
-#: ../src/vinagre-tab.c:321
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "El mètode d'autenticació a l'ordinador «%s» no està admès. (%u)"
 
-#: ../src/vinagre-tab.c:377
+#: ../src/vinagre-tab.c:376
 msgid "Error saving recent connection."
 msgstr "S'ha produït un error en desar la connexió recent."
 
-#: ../src/vinagre-tab.c:408
+#: ../src/vinagre-tab.c:407
 msgid "Error saving the password on the keyring."
 msgstr "S'ha produït un error en desar la contrasenya a l'anell de claus."
 
-#: ../src/vinagre-tab.c:468 ../src/vinagre-tab.c:564
+#: ../src/vinagre-tab.c:467 ../src/vinagre-tab.c:563
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Premeu Ctrl+Alt per a capturar el cursor"
 
-#: ../src/vinagre-tab.c:543
+#: ../src/vinagre-tab.c:542
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Premeu Ctrl+Alt per a alliberar el cursor"
 
-#: ../src/vinagre-tab.c:689
+#: ../src/vinagre-tab.c:683
 msgid "Desktop Name:"
 msgstr "Nom de l'escriptori:"
 
-#: ../src/vinagre-tab.c:691
+#: ../src/vinagre-tab.c:685
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:692
+#: ../src/vinagre-tab.c:686
 msgid "Dimensions:"
 msgstr "Dimensions:"
 
-#: ../src/vinagre-tab.c:759
+#: ../src/vinagre-tab.c:753
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de pantalla de %s"
 
-#: ../src/vinagre-tab.c:762
+#: ../src/vinagre-tab.c:756
 msgid "Save Screenshot"
 msgstr "Desa la captura de pantalla"
 
@@ -414,20 +430,23 @@ msgstr "Mostra o amaga la barra d'estat"
 msgid "Show or hide the bookmarks panel"
 msgstr "Mostra o amaga el quadre d'adreces d'interès"
 
-#: ../src/vinagre-window.c:367
+#: ../src/vinagre-window.c:401
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "No s'ha pogut fusionar el vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:395
+#: ../src/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "Connexions _recents"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:536
+#: ../src/vinagre-window.c:578
 #, c-format
 msgid "Open %s:%d"
 msgstr "Obre %s:%d"
+
+#~ msgid "Could not initialize GnomeVFS\n"
+#~ msgstr "No s'ha pogut inicialitzar el GnomeVFS\n"
 
 #~ msgid "Add to favorites"
 #~ msgstr "Afegeix-lo a preferits"
