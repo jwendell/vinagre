@@ -1,29 +1,29 @@
 # Dutch translation of Vinagre
-# Copyright (C) 2007 VINAGRES COPYRIGHT HOLDER
+#
 # This file is distributed under the same license as the Vinagre package.
+#
 # Reinout van Schouwen <reinouts@gnome.org>, 2007
+# Wouter Bolsterlee <wbolster@gnome.org>, 2008
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-14 00:54+0100\n"
-"PO-Revision-Date: 2007-12-14 00:54+0100\n"
-"Last-Translator: Reinout van Schouwen <reinouts@gnome.org>\n"
+"POT-Creation-Date: 2008-02-12 22:38+0100\n"
+"PO-Revision-Date: 2008-02-12 22:40+0100\n"
+"Last-Translator: Wouter Bolsterlee <wbolster@gnome.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: Netherlands\n"
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Toegang tot werkplekken op afstand"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:134
 msgid "Remote Desktop Viewer"
 msgstr "Werkplek op afstand"
 
@@ -51,7 +51,7 @@ msgstr "<b>Met welke machine wilt u verbinding maken?</b>"
 msgid "Editing a bookmark"
 msgstr "Bladwijzer bewerken"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:690
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:684
 msgid "Host:"
 msgstr "Host:"
 
@@ -78,6 +78,10 @@ msgstr "_Poort:"
 #: ../data/vinagre.glade.h:12
 msgid "_Remember this password"
 msgstr "Dit wachtwoord _onthouden"
+
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "De afhandelaar voor ‘vnc://’-adressen"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -111,25 +115,25 @@ msgstr "Weet u zeker dat u <i>%s</i> wilt uitsluiten van de bladwijzers?"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Fout bij het verwijderen van %s uit de bladwijzers: %s"
 
-#: ../src/vinagre-commands.c:89
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "Kies het bestand"
 
-#: ../src/vinagre-commands.c:100 ../src/vinagre-tab.c:773
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "Ondersteunde formaten"
 
-#: ../src/vinagre-commands.c:132 ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Het volgende bestand kon niet worden geopend:"
 msgstr[1] "De volgende bestanden konden niet worden geopend:"
 
-#: ../src/vinagre-commands.c:308
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre is een VNC-client voor de GNOME-werkomgeving"
+msgstr "Vinagre is een VNC-client voor de Gnome-werkomgeving"
 
-#: ../src/vinagre-commands.c:311
+#: ../src/vinagre-commands.c:386
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -141,7 +145,7 @@ msgstr ""
 "door de Free Software Foundation; ofwel versie 2 van deze licentie of(zo u "
 "wilt) een latere versie."
 
-#: ../src/vinagre-commands.c:315
+#: ../src/vinagre-commands.c:390
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -153,7 +157,7 @@ msgstr ""
 "GESCHIKTHEID VOOR EEN BEPAALD DOEL.  Zie deGNU General Public License voor "
 "meer details."
 
-#: ../src/vinagre-commands.c:319
+#: ../src/vinagre-commands.c:394
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -161,20 +165,26 @@ msgstr ""
 "U zou een kopie van de GNU General Public License ontvangen moeten hebben "
 "samen met dit programma. Zoniet, kijk dan op <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:337
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
 msgstr ""
 "Reinout van Schouwen \n"
+"Wouter Bolsterlee \n"
 "\n"
 "Kijk voor meer info op http://nl.gnome.org/"
 
-#: ../src/vinagre-commands.c:340
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Vinagre-webstek"
 
 #: ../src/vinagre-connect.c:53
 msgid "Choose a VNC Server"
 msgstr "VNC-server kiezen"
+
+#: ../src/vinagre-connection.c:161
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "Protocol ‘%s’ is niet ondersteund."
 
 #: ../src/vinagre-fav.c:382
 msgid "Image"
@@ -192,42 +202,49 @@ msgstr "Bladwijzers"
 msgid "Hide bookmarks"
 msgstr "Bladwijzers verbergen"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "Opent een .vnc-bestand"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "bestandsnaam"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[server:poort]"
 
-#. Setup command line options
-#: ../src/vinagre-main.c:107
-msgid "- VNC Client for GNOME"
-msgstr "- VNC-client voor GNOME"
+#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
+#: ../src/vinagre-window.c:284
+msgid "Unknown error"
+msgstr "Onbekende fout"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "De volgende fout is opgetreden:"
+msgstr[1] "De volgende fouten zijn opgetreden:"
+
+#. Setup command line options
+#: ../src/vinagre-main.c:121
+msgid "- VNC Client for GNOME"
+msgstr "- VNC-client voor Gnome"
+
+#: ../src/vinagre-main.c:129
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Start 'vinagre --help' om een lijst met opdrachtregelopties te zien"
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "Kan GnomeVFS niet initialiseren\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Verbinding met host ‘%s’ is verbroken."
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
-msgstr "Verbinden..."
+msgstr "Verbinden…"
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "Verbinding sluiten"
 
@@ -244,52 +261,52 @@ msgstr "Verwacht: `%s' Ontvangen: `%s', voor sleutel %s"
 msgid "Error connecting to host."
 msgstr "Fout bij verbinding maken met host."
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:292
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Aanmelden bij host ‘%s’ is mislukt"
 
-#: ../src/vinagre-tab.c:321
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Aanmeldingsmethode voor host ‘%s’ wordt niet ondersteund. (%u)"
 
-#: ../src/vinagre-tab.c:377
+#: ../src/vinagre-tab.c:376
 msgid "Error saving recent connection."
 msgstr "Er is een fout opgetreden bij het opslaan van een recente verbinding."
 
-#: ../src/vinagre-tab.c:408
+#: ../src/vinagre-tab.c:407
 msgid "Error saving the password on the keyring."
 msgstr ""
 "Er is een fout opgetreden bij het opslaan van het wachtwoord in de "
 "sleutelbos."
 
-#: ../src/vinagre-tab.c:468 ../src/vinagre-tab.c:564
+#: ../src/vinagre-tab.c:467 ../src/vinagre-tab.c:563
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Druk op Ctrl+Alt om de cursor te pakken"
 
-#: ../src/vinagre-tab.c:543
+#: ../src/vinagre-tab.c:542
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Druk op Ctrl+Alt om de cursor vrij te laten"
 
-#: ../src/vinagre-tab.c:689
+#: ../src/vinagre-tab.c:683
 msgid "Desktop Name:"
 msgstr "Werkpleknaam:"
 
-#: ../src/vinagre-tab.c:691
+#: ../src/vinagre-tab.c:685
 msgid "Port:"
 msgstr "Poort:"
 
-#: ../src/vinagre-tab.c:692
+#: ../src/vinagre-tab.c:686
 msgid "Dimensions:"
 msgstr "Afmetingen:"
 
-#: ../src/vinagre-tab.c:759
+#: ../src/vinagre-tab.c:753
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Schermafdruk van %s"
 
-#: ../src/vinagre-tab.c:762
+#: ../src/vinagre-tab.c:756
 msgid "Save Screenshot"
 msgstr "Schermafdruk opslaan"
 
@@ -418,17 +435,17 @@ msgstr "Statusbalk weergeven/verbergen"
 msgid "Show or hide the bookmarks panel"
 msgstr "Het bladwijzerpaneel tonen/verbergen"
 
-#: ../src/vinagre-window.c:377
+#: ../src/vinagre-window.c:401
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Kan vinagre-ui.xml niet samenvoegen: %s"
 
-#: ../src/vinagre-window.c:405
+#: ../src/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "_Recente verbindingen"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:546
+#: ../src/vinagre-window.c:578
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d openen"
