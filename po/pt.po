@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-26 10:12+0000\n"
-"PO-Revision-Date: 2008-01-19 20:04+0000\n"
+"POT-Creation-Date: 2008-02-12 22:26+0000\n"
+"PO-Revision-Date: 2008-02-12 22:30+0000\n"
 "Last-Translator: Filipe Gomes <filipefgomes@gmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "Access remote desktops"
 msgstr "Aceder a áreas de trabalho remotas"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:119
+#: ../src/vinagre-main.c:134
 msgid "Remote Desktop Viewer"
 msgstr "Visualizador de Área de Trabalho Remota"
 
@@ -76,6 +76,10 @@ msgstr "_Porto:"
 msgid "_Remember this password"
 msgstr "_Recordar esta senha"
 
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "O manipulador de URLs \"vnc://\""
+
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "Ficheiro de Área de Trabalho Remota (VNC)"
@@ -116,7 +120,7 @@ msgstr "Seleccione o ficheiro"
 msgid "Supported formats"
 msgstr "Formatos suportados"
 
-#: ../src/vinagre-commands.c:133 ../src/vinagre-main.c:88
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Não foi possível abrir o seguinte ficheiro:"
@@ -170,6 +174,11 @@ msgstr "Página Web do Vinagre"
 msgid "Choose a VNC Server"
 msgstr "Seleccione um Servidor de VNC"
 
+#: ../src/vinagre-connection.c:161
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "O protocolo %s não é suportado."
+
 #: ../src/vinagre-fav.c:382
 msgid "Image"
 msgstr "Imagem"
@@ -198,12 +207,23 @@ msgstr "nomedoficheiro"
 msgid "[server:port]"
 msgstr "[servidor:porto]"
 
+#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
+#: ../src/vinagre-window.c:284
+msgid "Unknown error"
+msgstr "Erro desconhecido"
+
+#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Ocorreu o seguinte erro:"
+msgstr[1] "Ocorreram os seguintes erros:"
+
 #. Setup command line options
-#: ../src/vinagre-main.c:106
+#: ../src/vinagre-main.c:121
 msgid "- VNC Client for GNOME"
 msgstr "- Cliente VNC para o GNOME"
 
-#: ../src/vinagre-main.c:114
+#: ../src/vinagre-main.c:129
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
@@ -408,18 +428,17 @@ msgstr "Apresentar ou esconder a barra de estados"
 msgid "Show or hide the bookmarks panel"
 msgstr "Apresentar ou esconder o painel de marcadores"
 
-#: ../src/vinagre-window.c:379
+#: ../src/vinagre-window.c:401
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Incapaz de juntar vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:407
+#: ../src/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "Ligações _recentes"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:548
+#: ../src/vinagre-window.c:578
 #, c-format
 msgid "Open %s:%d"
 msgstr "Abrir %s:%d"
-
