@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-02 21:55+0100\n"
+"POT-Creation-Date: 2008-02-19 20:27+0100\n"
 "PO-Revision-Date: 2007-12-28 13:41+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -22,7 +22,7 @@ msgid "Access remote desktops"
 msgstr "Accedir a de burèus distants"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:146
+#: ../src/vinagre-main.c:134
 msgid "Remote Desktop Viewer"
 msgstr ""
 
@@ -164,6 +164,11 @@ msgstr "Sit web de Vinagre"
 msgid "Choose a VNC Server"
 msgstr "Causissètz un servidor VNC"
 
+#: ../src/vinagre-connection.c:161
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr ""
+
 #: ../src/vinagre-fav.c:382
 msgid "Image"
 msgstr "Imatge"
@@ -192,27 +197,23 @@ msgstr "nom de fichièr"
 msgid "[server:port]"
 msgstr "[servidor:pòrt]"
 
-#: ../src/vinagre-main.c:73
+#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
+#: ../src/vinagre-window.c:284
 msgid "Unknown error"
 msgstr ""
 
-#: ../src/vinagre-main.c:91
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr ""
-
-#: ../src/vinagre-main.c:113
+#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] ""
 msgstr[1] ""
 
 #. Setup command line options
-#: ../src/vinagre-main.c:133
+#: ../src/vinagre-main.c:121
 msgid "- VNC Client for GNOME"
 msgstr "- Client VNC per GNOME"
 
-#: ../src/vinagre-main.c:141
+#: ../src/vinagre-main.c:129
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
@@ -417,17 +418,17 @@ msgstr ""
 msgid "Show or hide the bookmarks panel"
 msgstr ""
 
-#: ../src/vinagre-window.c:386
+#: ../src/vinagre-window.c:401
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr ""
 
-#: ../src/vinagre-window.c:414
+#: ../src/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "Connexions _recentas"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:555
+#: ../src/vinagre-window.c:578
 #, c-format
 msgid "Open %s:%d"
 msgstr "Dobrir %s:%d"
