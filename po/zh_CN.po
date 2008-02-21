@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-24 04:12+0000\n"
-"PO-Revision-Date: 2008-01-24 14:03+0800\n"
+"POT-Creation-Date: 2008-02-04 12:21+0000\n"
+"PO-Revision-Date: 2008-02-04 20:58+0800\n"
 "Last-Translator: Deng Xiyue <manphiz@gmail.com>\n"
 "Language-Team: i18n-zh <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "Access remote desktops"
 msgstr "访问远程桌面"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "远程桌面查看器"
 
@@ -73,6 +73,10 @@ msgstr "端口(_P)："
 msgid "_Remember this password"
 msgstr "记住此密码(_R)"
 
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "“vnc://”这类 URL 的处理程序"
+
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "远程桌面(VNC)文件"
@@ -105,41 +109,41 @@ msgstr "您确认您想从书签中排除<i>%s</i>？"
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "从书签移除 %s 时出错：%s"
 
-#: ../src/vinagre-commands.c:91
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "选择文件"
 
-#: ../src/vinagre-commands.c:102 ../src/vinagre-tab.c:767
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
 msgid "Supported formats"
 msgstr "支持的格式"
 
-#: ../src/vinagre-commands.c:134 ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "无法打开下列文件："
 msgstr[1] "无法打开下列文件："
 
-#: ../src/vinagre-commands.c:371
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre 是 GNOME 桌面的 VNC 客户端"
 
-#: ../src/vinagre-commands.c:374
+#: ../src/vinagre-commands.c:386
 msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
 msgstr "Vinagre 是自由软件；您可以在自由软件基金会发行的 GNU 通用公共许可的条款下重新分发它和/或修改它；无论此许可的版本2，或者(以您的选择)任何更新的版本。"
 
-#: ../src/vinagre-commands.c:378
+#: ../src/vinagre-commands.c:390
 msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
 msgstr "Vinagre 被分发是希望它能够有所用处，但“没有任何保证”；甚至没有隐含“可销售”或者“用于特定用途”的保证。请查看 GNU 通用公共许可以获得更多细节。"
 
-#: ../src/vinagre-commands.c:382
+#: ../src/vinagre-commands.c:394
 msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr "您应该随本程序收到 GNU 通用公共许可的副本。如果没有，请查看 <http://www.gnu.org/licenses/>。"
 
-#: ../src/vinagre-commands.c:404
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
 msgstr "翻译人员名单"
 
-#: ../src/vinagre-commands.c:407
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Vinagre 网站"
 
@@ -163,41 +167,52 @@ msgstr "书签"
 msgid "Hide bookmarks"
 msgstr "隐藏书签"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "打开 .vnc 文件"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "文件名"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[服务器:端口]"
 
+#: ../src/vinagre-main.c:73
+msgid "Unknown error"
+msgstr "未知错误"
+
+#: ../src/vinagre-main.c:91
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "尚未支持 %s 协议"
+
+#: ../src/vinagre-main.c:113
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "发生下列错误："
+msgstr[1] "发生下列错误："
+
 #. Setup command line options
-#: ../src/vinagre-main.c:107
+#: ../src/vinagre-main.c:133
 msgid "- VNC Client for GNOME"
 msgstr "- GNOME 的 VNC 客户端"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:141
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "执行“vinagre --help”以查看可用命令行选项的完整列表"
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "无法初始化 GnomeVFS\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "到主机“%s”的连接已关闭。"
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
 msgstr "正在连接..."
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "关闭连接"
 
@@ -386,17 +401,20 @@ msgstr "显示或隐藏状态栏"
 msgid "Show or hide the bookmarks panel"
 msgstr "显示或隐藏书签面板"
 
-#: ../src/vinagre-window.c:379
+#: ../src/vinagre-window.c:386
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "无法合并 vinagre-ui.xml：%s"
 
-#: ../src/vinagre-window.c:407
+#: ../src/vinagre-window.c:414
 msgid "_Recent connections"
 msgstr "最近连接"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:548
+#: ../src/vinagre-window.c:555
 #, c-format
 msgid "Open %s:%d"
 msgstr "打开 %s：%d"
+
+#~ msgid "Could not initialize GnomeVFS\n"
+#~ msgstr "无法初始化 GnomeVFS\n"
