@@ -2,7 +2,7 @@
  * vinagre-tab.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -272,8 +272,6 @@ vnc_connected_cb (VncDisplay *vnc, VinagreTab *tab)
 static void
 vnc_disconnected_cb (VncDisplay *vnc, VinagreTab *tab)
 {
-  _vinagre_window_del_machine_connected (tab->priv->window);
-
   /* Emits the signal saying that we have disconnected from the machine */
   g_signal_emit (G_OBJECT (tab),
 		 signals[TAB_DISCONNECTED],

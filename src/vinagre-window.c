@@ -781,7 +781,7 @@ vinagre_window_page_removed (GtkNotebook   *notebook,
     vinagre_window_toggle_fullscreen (window);
 
   vinagre_window_set_title (window);
-  set_machine_menu_sensitivity (window);
+  _vinagre_window_del_machine_connected (window);
 }
 
 static void
@@ -795,7 +795,6 @@ vinagre_window_page_added (GtkNotebook  *notebook,
   window->priv->active_tab = child;
 
   vinagre_window_set_title (window);
-  set_machine_menu_sensitivity (window);
 }
 
 static void 
