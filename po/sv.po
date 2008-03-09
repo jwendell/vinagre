@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-01 01:30+0100\n"
-"PO-Revision-Date: 2008-02-01 01:30+0100\n"
+"POT-Creation-Date: 2008-03-09 20:35+0100\n"
+"PO-Revision-Date: 2008-03-09 20:35+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "Få åtkomst till fjärrskrivbord"
 
 #: ../data/vinagre.desktop.in.in.h:2
 #: ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:146
+#: ../src/vinagre-main.c:134
 msgid "Remote Desktop Viewer"
 msgstr "Fjärrskrivbordsvisare"
 
@@ -37,18 +37,18 @@ msgstr "<b>Ange ett namn för denna anslutning</b>"
 
 #: ../data/vinagre.glade.h:3
 msgid "<b>In order to connect on this machine, a password is required. Please, supply it.</b>"
-msgstr "<b>Ett lösenord krävs för att kunna ansluta till denna maskin.</b>"
+msgstr "<b>Ett lösenord krävs för att kunna ansluta till denna dator.</b>"
 
 #: ../data/vinagre.glade.h:4
 msgid "<b>Which machine do you want to connect to?</b>"
-msgstr "<b>Vilken maskin vill du ansluta till?</b>"
+msgstr "<b>Vilken dator vill du ansluta till?</b>"
 
 #: ../data/vinagre.glade.h:5
 msgid "Editing a bookmark"
 msgstr "Redigerar ett bokmärke"
 
 #: ../data/vinagre.glade.h:6
-#: ../src/vinagre-tab.c:684
+#: ../src/vinagre-tab.c:682
 msgid "Host:"
 msgstr "Värd:"
 
@@ -118,7 +118,7 @@ msgid "Choose the file"
 msgstr "Välj filen"
 
 #: ../src/vinagre-commands.c:101
-#: ../src/vinagre-tab.c:767
+#: ../src/vinagre-tab.c:765
 msgid "Supported formats"
 msgstr "Format som stöds"
 
@@ -160,6 +160,11 @@ msgstr "Webbplats för Vinagre"
 msgid "Choose a VNC Server"
 msgstr "Välj en VNC-server"
 
+#: ../src/vinagre-connection.c:161
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "Protokollet %s stöds inte."
+
 #: ../src/vinagre-fav.c:382
 msgid "Image"
 msgstr "Bild"
@@ -188,27 +193,25 @@ msgstr "filnamn"
 msgid "[server:port]"
 msgstr "[server:port]"
 
-#: ../src/vinagre-main.c:73
+#: ../src/vinagre-main.c:71
+#: ../src/vinagre-main.c:90
+#: ../src/vinagre-window.c:284
 msgid "Unknown error"
 msgstr "Okänt fel"
 
-#: ../src/vinagre-main.c:91
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "Protokollet %s stöds inte."
-
-#: ../src/vinagre-main.c:113
+#: ../src/vinagre-main.c:101
+#: ../src/vinagre-window.c:283
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Följande fel har inträffat:"
 msgstr[1] "Följande fel har inträffat:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:133
+#: ../src/vinagre-main.c:121
 msgid "- VNC Client for GNOME"
 msgstr "- VNC-klient för GNOME"
 
-#: ../src/vinagre-main.c:141
+#: ../src/vinagre-main.c:129
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Kör \"vinagre --help\" för att se en fullständig lista över tillgängliga kommandoradsflaggor"
 
@@ -238,58 +241,58 @@ msgstr "Förväntade \"%s\", fick \"%s\" för nyckeln %s"
 msgid "Error connecting to host."
 msgstr "Fel vid anslutning till värden."
 
-#: ../src/vinagre-tab.c:292
+#: ../src/vinagre-tab.c:290
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autentisering mot värden \"%s\" misslyckades"
 
-#: ../src/vinagre-tab.c:320
+#: ../src/vinagre-tab.c:318
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Autentiseringsmetod mot värden \"%s\" stöds inte. (%u)"
 
-#: ../src/vinagre-tab.c:376
+#: ../src/vinagre-tab.c:374
 msgid "Error saving recent connection."
 msgstr "Fel när senaste anslutningen sparades."
 
-#: ../src/vinagre-tab.c:407
+#: ../src/vinagre-tab.c:405
 msgid "Error saving the password on the keyring."
 msgstr "Fel när lösenordet sparades i nyckelringen."
 
-#: ../src/vinagre-tab.c:467
-#: ../src/vinagre-tab.c:563
+#: ../src/vinagre-tab.c:465
+#: ../src/vinagre-tab.c:561
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Tryck på Ctrl+Alt för att fånga muspekaren"
 
-#: ../src/vinagre-tab.c:542
+#: ../src/vinagre-tab.c:540
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Tryck på Ctrl+Alt för att släppa muspekaren"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:681
 msgid "Desktop Name:"
 msgstr "Skrivbordsnamn:"
 
-#: ../src/vinagre-tab.c:685
+#: ../src/vinagre-tab.c:683
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:686
+#: ../src/vinagre-tab.c:684
 msgid "Dimensions:"
 msgstr "Dimensioner:"
 
-#: ../src/vinagre-tab.c:753
+#: ../src/vinagre-tab.c:751
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skärmbild för %s"
 
-#: ../src/vinagre-tab.c:756
+#: ../src/vinagre-tab.c:754
 msgid "Save Screenshot"
 msgstr "Spara skärmbild"
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
 msgid "_Machine"
-msgstr "_Maskin"
+msgstr "_Dator"
 
 #: ../src/vinagre-ui.h:34
 msgid "_Edit"
@@ -310,7 +313,7 @@ msgstr "_Hjälp"
 
 #: ../src/vinagre-ui.h:41
 msgid "Connect into a remote machine"
-msgstr "Anslut till en fjärrmaskin"
+msgstr "Anslut till en fjärrdator"
 
 #: ../src/vinagre-ui.h:43
 msgid "Open a .VNC file"
@@ -327,7 +330,7 @@ msgstr "_Öppna bokmärke"
 
 #: ../src/vinagre-ui.h:49
 msgid "Connect into this machine"
-msgstr "Anslut till denna maskin"
+msgstr "Anslut till denna dator"
 
 #: ../src/vinagre-ui.h:50
 msgid "_Edit bookmark"
@@ -390,7 +393,7 @@ msgstr "Ta en skärmbild på aktiv anslutning"
 
 #: ../src/vinagre-ui.h:84
 msgid "View the current machine in full screen"
-msgstr "Visa den aktuella maskinen i helskärm"
+msgstr "Visa den aktuella datorn i helskärm"
 
 #: ../src/vinagre-ui.h:89
 msgid "_Toolbar"
@@ -412,17 +415,17 @@ msgstr "Visa eller dölj statusraden"
 msgid "Show or hide the bookmarks panel"
 msgstr "Visa eller dölj bokmärkespanelen"
 
-#: ../src/vinagre-window.c:386
+#: ../src/vinagre-window.c:401
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Kunde inte sammanfoga vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:414
+#: ../src/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "_Tidigare anslutningar"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:555
+#: ../src/vinagre-window.c:578
 #, c-format
 msgid "Open %s:%d"
 msgstr "Öppna %s:%d"
