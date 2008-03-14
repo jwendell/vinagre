@@ -572,15 +572,11 @@ static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
 static void
 vinagre_tab_init (VinagreTab *tab)
 {
-  GtkWidget *align;
   GtkWidget *viewport;
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
   tab->priv->save_password = FALSE;
   tab->priv->keyring_item_id = 0;
-
-  /* Create the alignment */
-  align = gtk_alignment_new (0.5, 0.5, 0, 0);
 
   /* Create the scrolled window */
   tab->priv->scroll = gtk_scrolled_window_new (NULL, NULL);
@@ -594,10 +590,9 @@ vinagre_tab_init (VinagreTab *tab)
 
   /* Create the vnc widget */
   tab->priv->vnc = vnc_display_new ();
-  gtk_container_add (GTK_CONTAINER (align), tab->priv->vnc);
 
   gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (tab->priv->scroll),
-					 align);
+					 tab->priv->vnc);
   viewport = gtk_bin_get_child (GTK_BIN (tab->priv->scroll));
   gtk_viewport_set_shadow_type(GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
 
@@ -793,6 +788,23 @@ vinagre_tab_paste_text (VinagreTab *tab, const gchar *text)
       vnc_display_client_cut_text (VNC_DISPLAY (tab->priv->vnc), out);
       g_free (out);
     }
+}
+
+gboolean
+vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  if (vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc)) == active)
+    return TRUE;
+
+  return vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active);
+}
+
+gboolean
+vinagre_tab_get_scaling (VinagreTab *tab) {
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  return vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc));
 }
 
 /* vim: ts=8 */

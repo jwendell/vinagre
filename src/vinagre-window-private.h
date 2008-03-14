@@ -46,6 +46,7 @@ struct _VinagreWindowPrivate
   GtkActionGroup *bookmarks_list_action_group;
   GtkActionGroup *recent_action_group;
   GtkAction      *recent_action;
+  GtkAction      *scaling_action;
   guint           bookmarks_list_menu_ui_id;
   guint           recents_menu_ui_id;
 
