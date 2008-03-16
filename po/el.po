@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-18 04:01+0000\n"
+"POT-Creation-Date: 2008-03-16 16:41+0000\n"
 "PO-Revision-Date: 2008-02-19 10:37+0000\n"
 "Last-Translator: Simos Xenitellis <simos@gnome.org>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
@@ -19,16 +19,14 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../data/vinagre.desktop.in.in.h:1
-#: ../data/vinagre-file.desktop.in.in.h:1
+#: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Πρόσβαση σε απομακρυσμένους υπολογιστές"
 
-#: ../data/vinagre.desktop.in.in.h:2
-#: ../data/vinagre-file.desktop.in.in.h:2
+#: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../src/vinagre-main.c:134
 msgid "Remote Desktop Viewer"
-msgstr "Αναγνώστης απομακρυσμένων υπολογιστών"
+msgstr "Σύνδεση απομακρυσμένης επιφ. εργασίας"
 
 #: ../data/vinagre.glade.h:1
 msgid "<b>Editing a bookmark</b>"
@@ -39,8 +37,12 @@ msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>Εισάγετε ένα όνομα για τη σύνδεση</b>"
 
 #: ../data/vinagre.glade.h:3
-msgid "<b>In order to connect on this machine, a password is required. Please, supply it.</b>"
-msgstr "<b>Για να συνδεθείτε στο σύστημα, απαιτείται κωδικός. Παρακαλώ, συμπληρώστε τον.<b>"
+msgid ""
+"<b>In order to connect on this machine, a password is required. Please, "
+"supply it.</b>"
+msgstr ""
+"<b>Για να συνδεθείτε στο σύστημα, απαιτείται κωδικός. Παρακαλώ, συμπληρώστε "
+"τον.<b>"
 
 #: ../data/vinagre.glade.h:4
 msgid "<b>Which machine do you want to connect to?</b>"
@@ -50,8 +52,7 @@ msgstr "<b>Με ποιο σύστημα επιθυμείτε να συνδεθε
 msgid "Editing a bookmark"
 msgstr "Επεξεργασία ενός σελιδοδείκτη"
 
-#: ../data/vinagre.glade.h:6
-#: ../src/vinagre-tab.c:684
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:677
 msgid "Host:"
 msgstr "Σύστημα:"
 
@@ -91,8 +92,7 @@ msgstr "Αρχείο (VNC) απομακρυσμένου συστήματος"
 msgid "Remote Desktop Connection"
 msgstr "Σύνδεση σε απομακρυσμένο υπολογιστή"
 
-#: ../src/vinagre-bookmarks.c:58
-#: ../src/vinagre-bookmarks.c:76
+#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Σφάλμα κατά την αποθήκευση των σελιδοδεικτών: %s"
@@ -109,7 +109,8 @@ msgstr "Επιβεβαιώνετε την αφαίρεση;"
 #: ../src/vinagre-bookmarks.c:285
 #, c-format
 msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
-msgstr "Είστε σίγουρος ότι θέλετε να εξάγετε το <i>%s</i> από τους σελιδοδείκτες;"
+msgstr ""
+"Είστε σίγουρος ότι θέλετε να εξάγετε το <i>%s</i> από τους σελιδοδείκτες;"
 
 #: ../src/vinagre-bookmarks.c:296
 #, c-format
@@ -120,35 +121,73 @@ msgstr "Σφάλμα κατά την αφαίρεση του %s από τους 
 msgid "Choose the file"
 msgstr "Επιλογή του αρχείου"
 
-#: ../src/vinagre-commands.c:101
-#: ../src/vinagre-tab.c:767
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:760
 msgid "Supported formats"
 msgstr "Υποστηριζόμενες μορφές"
 
 #: ../src/vinagre-commands.c:133
-#: ../src/vinagre-commands.c:383
+msgid "The following file could not be opened:"
+msgid_plural "The following files could not be opened:"
+msgstr[0] "Το αρχείο δεν μπόρεσε να προσπελαστεί:"
+msgstr[1] "Τα αρχεία αυτά δεν μπόρεσαν να προσπελαστούν:"
+
+#: ../src/vinagre-commands.c:219
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+
+#: ../src/vinagre-commands.c:400
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Το Vinagre είναι ένας VNC πελάτης για το γραφικό περιβάλλον του GNOME"
 
-#: ../src/vinagre-commands.c:386
-msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
-msgstr "Tο Vinagre είναι ένα ελεύθερο λογισμικό· μπορείτε να το αναδιανείμετε ή/και να το τροποποιήσετε υπό τους όρους του GNU General Public License όπως δημοσιεύεται από το Free Software Foundation· είτε για την έκδοση 2 της Άδειας, ή (κατ' επιλογή σας) για κάθε νεότερη έκδοση."
+#: ../src/vinagre-commands.c:403
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"Tο Vinagre είναι ένα ελεύθερο λογισμικό· μπορείτε να το αναδιανείμετε ή/και "
+"να το τροποποιήσετε υπό τους όρους του GNU General Public License όπως "
+"δημοσιεύεται από το Free Software Foundation· είτε για την έκδοση 2 της "
+"Άδειας, ή (κατ' επιλογή σας) για κάθε νεότερη έκδοση."
 
-#: ../src/vinagre-commands.c:390
-msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
-msgstr "Το Vinagre διανέμεται με την ελπίδα ότι θα είναι χρήσιμο, αλλά χωρίς καμία εγγύηση· χωρίς ακόμα και τη συναγόμενη εγγύηση της ΕΜΠΟΡΕΥΜΑΤΙΚΟΤΗΤΑ Ή ΚΑΤΑΛΛΗΛΟΤΗΤΑ ΓΙΑ ΣΥΓΚΕΚΡΙΜΕΝΟ ΣΚΟΠΟ. Ανατρέξτε στην GNU General Public License για περισσότερες λεπτομέρειες."
+#: ../src/vinagre-commands.c:407
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"Το Vinagre διανέμεται με την ελπίδα ότι θα είναι χρήσιμο, αλλά χωρίς καμία "
+"εγγύηση· χωρίς ακόμα και τη συναγόμενη εγγύηση της ΕΜΠΟΡΕΥΜΑΤΙΚΟΤΗΤΑ Ή "
+"ΚΑΤΑΛΛΗΛΟΤΗΤΑ ΓΙΑ ΣΥΓΚΕΚΡΙΜΕΝΟ ΣΚΟΠΟ. Ανατρέξτε στην GNU General Public "
+"License για περισσότερες λεπτομέρειες."
 
-#: ../src/vinagre-commands.c:394
-msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr "Θα έπρεπε να έχετε λάβει ένα αντίγραφο της GNU General Public License συνοδευόμενη με αυτό το πρόγραμμα. Αν όχι, ανατρέξτε στο σύνδεσμο <http://www.gnu.org/licenses/>."
+#: ../src/vinagre-commands.c:411
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Θα έπρεπε να έχετε λάβει ένα αντίγραφο της GNU General Public License "
+"συνοδευόμενη με αυτό το πρόγραμμα. Αν όχι, ανατρέξτε στο σύνδεσμο <http://"
+"www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:416
+#: ../src/vinagre-commands.c:433
 msgid "translator-credits"
-msgstr "Giannis Katsampirhs <giannis1_86@hotmail.com>"
+msgstr ""
+"Ελληνική μεταφραστική ομάδα GNOME\n"
+" Γιάννης Κατσαμπίρης <giannis1_86@hotmail.com>\n"
+" Σίμος Ξενιτέλλης <simos@gnome.org>\n"
+"\n"
+"Για περισσότερα δείτε http://www.gnome.gr/"
 
-#: ../src/vinagre-commands.c:419
+#: ../src/vinagre-commands.c:436
 msgid "Vinagre Website"
-msgstr "Δικτυακός τόπο Vinagre"
+msgstr "Δικτυακός τόπος Vinagre"
 
 #: ../src/vinagre-connect.c:53
 msgid "Choose a VNC Server"
@@ -187,16 +226,16 @@ msgstr "όνομα αρχείου"
 msgid "[server:port]"
 msgstr "[εξυπηρετητής:θύρα]"
 
-#: ../src/vinagre-main.c:71
-#: ../src/vinagre-main.c:90
+#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
 #: ../src/vinagre-window.c:284
 msgid "Unknown error"
 msgstr "Άγνωστο σφάλμα"
 
-#: ../src/vinagre-main.c:101
-#: ../src/vinagre-window.c:283
+#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
 msgid "The following error has occurred:"
-msgstr "Επιστράφηκε το ακόλουθο σφάλμα:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Συνέβει το ακόλουθο σφάλμα:"
+msgstr[1] "Συνέβησαν τα ακόλουθα σφάλματα:"
 
 #. Setup command line options
 #: ../src/vinagre-main.c:121
@@ -204,8 +243,11 @@ msgid "- VNC Client for GNOME"
 msgstr "- Πελάτης VNC για το GNOME"
 
 #: ../src/vinagre-main.c:129
-msgid "Run 'vinagre --help' to see a full list of available command line options"
-msgstr "Εκτελέστε την εντολή 'vinagre --help' για να δείτε μία πλήρη λίστα με τις διαθέσιμες επιλογές εντολών για το vinagre"
+msgid ""
+"Run 'vinagre --help' to see a full list of available command line options"
+msgstr ""
+"Εκτελέστε την εντολή 'vinagre --help' για να δείτε μία πλήρη λίστα με τις "
+"διαθέσιμες επιλογές εντολών για το vinagre"
 
 #: ../src/vinagre-notebook.c:98
 #, c-format
@@ -233,51 +275,50 @@ msgstr "Αναμενόταν `%s' επέστρεψε `%s' για το κλειδ
 msgid "Error connecting to host."
 msgstr "Σφάλμα κατά τη σύνδεση στον host."
 
-#: ../src/vinagre-tab.c:292
+#: ../src/vinagre-tab.c:290
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Η επαλήθευση στον host \"%s\" έχει αποτύχει"
 
-#: ../src/vinagre-tab.c:320
+#: ../src/vinagre-tab.c:318
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Η μέθοδος επαλήθευσης στον host \"%s\" δεν υποστηρίζεται. (%u)"
 
-#: ../src/vinagre-tab.c:376
+#: ../src/vinagre-tab.c:374
 msgid "Error saving recent connection."
 msgstr "Σφάλμα κατά την αποθήκευση της πρόσφατης σύνδεσης."
 
-#: ../src/vinagre-tab.c:407
+#: ../src/vinagre-tab.c:405
 msgid "Error saving the password on the keyring."
 msgstr "Σφάλμα κατά την αποθήκευση του συνθηματικού στο keyring."
 
-#: ../src/vinagre-tab.c:467
-#: ../src/vinagre-tab.c:563
+#: ../src/vinagre-tab.c:465 ../src/vinagre-tab.c:561
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Πατήστε Ctrl+Alt για να αρπάξετε τον δρομέα"
 
-#: ../src/vinagre-tab.c:542
+#: ../src/vinagre-tab.c:540
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Πατήστε Ctrl+Alt για να απελευθερώσετε το δρομέα"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:676
 msgid "Desktop Name:"
 msgstr "Όνομα υπολογιστή:"
 
-#: ../src/vinagre-tab.c:685
+#: ../src/vinagre-tab.c:678
 msgid "Port:"
 msgstr "Θύρα:"
 
-#: ../src/vinagre-tab.c:686
+#: ../src/vinagre-tab.c:679
 msgid "Dimensions:"
 msgstr "Διαστάσεις:"
 
-#: ../src/vinagre-tab.c:753
+#: ../src/vinagre-tab.c:746
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Στιγμιότυπο του %s"
 
-#: ../src/vinagre-tab.c:756
+#: ../src/vinagre-tab.c:749
 msgid "Save Screenshot"
 msgstr "Αποθήκευση στιγμιότυπου"
 
@@ -294,8 +335,7 @@ msgstr "_Επεξεργασία"
 msgid "_View"
 msgstr "_Προβολή"
 
-#: ../src/vinagre-ui.h:36
-#: ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:104
 msgid "_Bookmarks"
 msgstr "_Σελιδοδείκτες"
 
@@ -388,37 +428,44 @@ msgid "View the current machine in full screen"
 msgstr "Προβολή του τρέχοντος συστήματος σε πλήρη οθόνη"
 
 #: ../src/vinagre-ui.h:89
+msgid "S_caling"
+msgstr "_Κλιμάκωση"
+
+#: ../src/vinagre-ui.h:90
+msgid "Fit the remote screen into the current window size"
+msgstr ""
+
+#: ../src/vinagre-ui.h:96
 msgid "_Toolbar"
 msgstr "_Εργαλειθήκη"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:97
 msgid "Show or hide the toolbar"
 msgstr "Εμφάνιση ή απόκρυψη της εργαλειοθήκης"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:100
 msgid "_Statusbar"
 msgstr "_Μπάρα κατάστασης"
 
-#: ../src/vinagre-ui.h:94
+#: ../src/vinagre-ui.h:101
 msgid "Show or hide the statusbar"
 msgstr "Εμφάνιση ή απόκρυψη της μπάρας κατάστασης"
 
-#: ../src/vinagre-ui.h:98
+#: ../src/vinagre-ui.h:105
 msgid "Show or hide the bookmarks panel"
 msgstr "Εμφάνιση ή απόκρυψη του πίνακα των σελιδοδεικτών"
 
-#: ../src/vinagre-window.c:401
+#: ../src/vinagre-window.c:406
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Δεν ήταν δυνατή η συγχώνευση του vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:429
+#: ../src/vinagre-window.c:434
 msgid "_Recent connections"
 msgstr "_Πρόσφατες συνδέσεις"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:578
+#: ../src/vinagre-window.c:583
 #, c-format
 msgid "Open %s:%d"
 msgstr "Σύνδεση με %s:%d"
-
