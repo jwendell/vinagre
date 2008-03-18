@@ -204,23 +204,6 @@ vinagre_cmd_view_fullscreen (GtkAction     *action,
   vinagre_window_toggle_fullscreen (window);
 }
 
-void
-vinagre_cmd_view_scaling (GtkAction     *action,
-			  VinagreWindow *window)
-{
-  gboolean active;
-
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-  if (!vinagre_tab_set_scaling (vinagre_window_get_active_tab (window), active))
-    {
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-      vinagre_utils_show_error (_("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
-				GTK_WINDOW (window));
-    }
-}
-
 /* Bookmarks Menu */
 void
 vinagre_cmd_open_bookmark (VinagreWindow     *window,

@@ -2,7 +2,7 @@
  * vinagre-tab.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -78,10 +78,6 @@ VinagreNotebook   *vinagre_tab_get_notebook	(VinagreTab *tab);
 void		  vinagre_tab_take_screenshot	(VinagreTab *tab);
 void		  vinagre_tab_paste_text	(VinagreTab *tab,
 						 const gchar *text);
-
-gboolean	  vinagre_tab_set_scaling	(VinagreTab *tab, gboolean active);
-gboolean	  vinagre_tab_get_scaling	(VinagreTab *tab);
 G_END_DECLS
 
 #endif  /* __VINAGRE_TAB_H__  */
-/* vim: ts=8 */

@@ -2,7 +2,7 @@
  * vinagre-commands.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,8 +47,6 @@ void		vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 void		vinagre_cmd_view_show_statusbar	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
-						 VinagreWindow *window);
-void		vinagre_cmd_view_scaling	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_fullscreen	(GtkAction     *action,
 						 VinagreWindow *window);

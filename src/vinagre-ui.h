@@ -2,7 +2,7 @@
  * vinagre-ui.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,13 +82,6 @@ static const GtkActionEntry vinagre_machine_connected_menu_entries[] =
   /* View menu */
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
     N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) },
-};
-
-static const GtkToggleActionEntry vinagre_machine_connected_toggle_menu_entries[] =
-{
-  { "ViewScaling", NULL, N_("S_caling"), NULL,
-    N_("Fit the remote screen into the current window size"),
-    G_CALLBACK (vinagre_cmd_view_scaling), FALSE }
 };
 
 static const GtkToggleActionEntry vinagre_always_sensitive_toggle_menu_entries[] =

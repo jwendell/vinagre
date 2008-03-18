@@ -384,15 +384,10 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 				vinagre_machine_connected_menu_entries,
 				G_N_ELEMENTS (vinagre_machine_connected_menu_entries),
 				window);
-  gtk_action_group_add_toggle_actions  (action_group,
-					vinagre_machine_connected_toggle_menu_entries,
-					G_N_ELEMENTS (vinagre_machine_connected_toggle_menu_entries),
-					window);
 
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
   window->priv->machine_connected_action_group = action_group;
-  window->priv->scaling_action = gtk_action_group_get_action (action_group, "ViewScaling");
 
   action = gtk_action_group_get_action (action_group, "ViewFullScreen");
   g_object_set (action, "is_important", TRUE, NULL);
@@ -773,20 +768,6 @@ vinagre_window_set_title (VinagreWindow *window)
 }
 
 static void
-update_toggle_machine_items (VinagreWindow *window) {
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  if (window->priv->active_tab == NULL)
-    {
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (window->priv->scaling_action), FALSE);
-      return;
-    }
-
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (window->priv->scaling_action),
-				vinagre_tab_get_scaling (VINAGRE_TAB (window->priv->active_tab)));
-}
-
-static void
 vinagre_window_page_removed (GtkNotebook   *notebook,
 			     GtkWidget     *child,
 			     guint         page_num,
@@ -800,7 +781,6 @@ vinagre_window_page_removed (GtkNotebook   *notebook,
     vinagre_window_toggle_fullscreen (window);
 
   vinagre_window_set_title (window);
-  update_toggle_machine_items (window);
   _vinagre_window_del_machine_connected (window);
 }
 
@@ -815,7 +795,6 @@ vinagre_window_page_added (GtkNotebook  *notebook,
   window->priv->active_tab = child;
 
   vinagre_window_set_title (window);
-  update_toggle_machine_items (window);
 }
 
 static void 
@@ -835,7 +814,6 @@ vinagre_window_switch_page (GtkNotebook     *notebook,
   window->priv->active_tab = tab;
 
   vinagre_window_set_title (window);
-  update_toggle_machine_items (window);
 }
 
 static void
