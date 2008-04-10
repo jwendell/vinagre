@@ -1,3 +1,5 @@
+NULL =
+
 INCLUDES = 						\
 	-DBINDIR=\"$(bindir)\"			 	\
 	-DDATADIR=\"$(datadir)\"			\
@@ -7,7 +9,7 @@ INCLUDES = 						\
 	-DVINAGRE_DATADIR=\""$(datadir)/vinagre"\"	\
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\"	\
 	$(VINAGRE_CFLAGS)				\
-	$(AVAHI_CFLAGS)
+	$(NULL)
 
 bin_PROGRAMS = vinagre
 
@@ -23,10 +25,54 @@ vinagre_SOURCES = \
 	vinagre-tab.c vinagre-tab.h			\
 	vinagre-utils.c vinagre-utils.h			\
 	vinagre-window.c vinagre-window.h		\
-	vinagre-ui.h vinagre-window-private.h
+	vinagre-ui.h vinagre-window-private.h		\
+	vinagre-enums.h vinagre-enums.c			\
+	gossip-cell-renderer-expander.c gossip-cell-renderer-expander.h \
+	vinagre-mdns.h vinagre-mdns.c \
+	$(NULL)
 
 vinagre_LDADD = \
 	$(VINAGRE_LIBS)		\
 	$(GTKVNC_LIBS)		\
-	$(AVAHI_LIBS)
+	$(NULL)
 
+vinagre_enum_headers = \
+	$(top_srcdir)/src/vinagre-connection.h \
+	$(NULL)
+
+vinagre-enums.c: @REBUILD@ $(vinagre_enum_headers)
+	glib-mkenums    --fhead "#include <glib-object.h>\n" \
+			--fhead "#include \"vinagre-enums.h\"\n\n" \
+			--fprod "\n/* enumerations from \"@filename@\" */" \
+			--fprod "\n#include \"@filename@\"\n" \
+			--vhead "static const G@Type@Value _@enum_name@_values[] = {" \
+			--vprod "  { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
+			--vtail "  { 0, NULL, NULL }\n};\n\n" \
+			--vtail "GType\n@enum_name@_get_type (void)\n{\n" \
+			--vtail "  static GType type = 0;\n\n" \
+			--vtail "  if (!type)\n" \
+			--vtail "    type = g_@type@_register_static (\"@EnumName@\", _@enum_name@_values);\n\n" \
+			--vtail "  return type;\n}\n\n" \
+		$(vinagre_enum_headers) > $@
+
+vinagre-enums.h: @REBUILD@ $(vinagre_enum_headers)
+	glib-mkenums    --fhead "#ifndef __VINAGRE_ENUMS_H__\n" \
+			--fhead "#define __VINAGRE_ENUMS_H__ 1\n\n" \
+			--fhead "G_BEGIN_DECLS\n\n" \
+			--ftail "G_END_DECLS\n\n" \
+			--ftail "#endif /* __VINAGRE_ENUMS_H__ */\n" \
+			--fprod "\n/* --- @filename@ --- */" \
+			--eprod "#define VINAGRE_TYPE_@ENUMSHORT@ @enum_name@_get_type()\n" \
+			--eprod "GType @enum_name@_get_type (void);\n" \
+		$(vinagre_enum_headers) >  $@
+
+BUILT_SOURCES = \
+	vinagre-enums.c \
+	vinagre-enums.h \
+	$(NULL)
+
+DISTCLEANFILES = \
+	$(BUILT_SOURCES) \
+	$(NULL)
+
+$(vinagre_OBJECTS): $(BUILT_SOURCES)

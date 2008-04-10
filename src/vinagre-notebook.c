@@ -94,7 +94,7 @@ tab_disconnected_cb (VinagreTab *tab, VinagreNotebook *nb)
 {
   gchar *message, *name;
 
-  name = vinagre_connection_best_name (vinagre_tab_get_conn (tab));
+  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
   message = g_strdup_printf (_("Connection to host \"%s\" was closed."),
 			     name);
   vinagre_utils_show_error (message, GTK_WINDOW (nb->priv->window));
@@ -157,7 +157,7 @@ build_tab_label (VinagreNotebook *nb,
   gtk_box_pack_start (GTK_BOX (label_hbox), icon, FALSE, FALSE, 0);
 	
   /* setup label */
-  name = vinagre_connection_best_name (vinagre_tab_get_conn (tab));
+  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
   label = gtk_label_new (name);
   g_free (name);
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);

@@ -2,7 +2,7 @@
  * vinagre-fav.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,8 +26,10 @@
 #include "vinagre-fav.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
+#include "vinagre-mdns.h"
 #include "vinagre-window-private.h"
-
+#include "gossip-cell-renderer-expander.h"
+ 
 #define VINAGRE_FAV_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_FAV, VinagreFavPrivate))
 
 struct _VinagreFavPrivate
@@ -35,6 +37,7 @@ struct _VinagreFavPrivate
   VinagreWindow *window;
   GtkWidget     *tree;
   GtkTreeModel  *model;
+  GtkTreeViewColumn *main_column;
 };
 
 G_DEFINE_TYPE(VinagreFav, vinagre_fav, GTK_TYPE_VBOX)
@@ -52,6 +55,9 @@ enum {
   IMAGE_COL = 0,
   NAME_COL,
   CONN_COL,
+  IS_FOLDER_COL,
+  IS_GROUP_COL,
+  IS_AVAHI_COL,
   NUM_COLS
 };
 
@@ -68,8 +74,6 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static void
 vinagre_fav_finalize (GObject *object)
 {
-//  VinagreFav *fav = VINAGRE_FAV (object);
-
   G_OBJECT_CLASS (vinagre_fav_parent_class)->finalize (object);
 }
 
@@ -164,12 +168,24 @@ vinagre_fav_row_activated_cb (GtkTreeView       *treeview,
 {
   GtkTreeIter iter;
   VinagreConnection *conn = NULL;
+  gboolean folder, group;
 
   gtk_tree_model_get_iter (fav->priv->model, &iter, path);
   gtk_tree_model_get (fav->priv->model, 
 		      &iter,
-		      CONN_COL, &conn, 
+		      CONN_COL, &conn,
+                      IS_FOLDER_COL, &folder,
+                      IS_GROUP_COL, &group,
 		      -1);
+
+  if (folder || group)
+    {
+      if (gtk_tree_view_row_expanded (treeview, path))
+        gtk_tree_view_collapse_row (treeview, path);
+      else
+        gtk_tree_view_expand_row (treeview, path, FALSE);
+      return;
+    }
 
   /* Emits the signal saying that user has activated a bookmark */
   g_signal_emit (G_OBJECT (fav), 
@@ -184,14 +200,19 @@ vinagre_fav_selection_changed_cb (GtkTreeSelection *selection,
 {
   GtkTreeIter iter;
   VinagreConnection *conn = NULL;
+  gboolean avahi;
 
   if (gtk_tree_selection_get_selected (selection, NULL, &iter))
     {
       gtk_tree_model_get (fav->priv->model, 
 			  &iter,
-			  CONN_COL, &conn, 
+			  CONN_COL, &conn,
+                          IS_AVAHI_COL, &avahi,
 			  -1);
     }
+
+  if (avahi)
+    conn = NULL;
 
   /* Emits the signal saying that user has selected a bookmark */
   g_signal_emit (G_OBJECT (fav), 
@@ -301,36 +322,47 @@ fav_button_press_event (GtkTreeView    *treeview,
 			GdkEventButton *event,
 			VinagreFav     *fav)
 {
-	if ((GDK_BUTTON_PRESS == event->type) && (3 == event->button))
-	{
-		GtkTreePath* path = NULL;
-		
-		if (event->window == gtk_tree_view_get_bin_window (treeview))
-		{
-			/* Change the cursor position */
-			if (gtk_tree_view_get_path_at_pos (treeview,
-							   event->x,
-							   event->y,
-							   &path,
-							   NULL,
-							   NULL,
-							   NULL))
-			{				
-			
-				gtk_tree_view_set_cursor (treeview,
-							  path,
-							  NULL,
-							  FALSE);
-					
-				gtk_tree_path_free (path);
-							   
-				/* A row exists at mouse position */
-				return show_popup_menu (fav, event);
-			}
-		}
-	}
-	
-	return FALSE;
+  GtkTreePath *path = NULL;
+  GtkTreeIter iter;
+  gboolean folder, group, avahi;
+
+  if (!((GDK_BUTTON_PRESS == event->type) && (3 == event->button)))
+    return FALSE;
+
+  if (event->window == gtk_tree_view_get_bin_window (treeview))
+    {
+    /* Change the cursor position */
+    if (gtk_tree_view_get_path_at_pos (treeview,
+				       event->x,
+				       event->y,
+				       &path,
+				       NULL,
+				       NULL,
+			               NULL))
+      {				
+        gtk_tree_model_get_iter (fav->priv->model, &iter, path);
+        gtk_tree_model_get (fav->priv->model, 
+		            &iter,
+                            IS_FOLDER_COL, &folder,
+                            IS_GROUP_COL, &group,
+                            IS_AVAHI_COL, &avahi,
+		            -1);
+        if (folder || group || avahi)
+          {
+            gtk_tree_path_free (path);
+            return FALSE;
+          }
+
+        gtk_tree_view_set_cursor (treeview,
+				  path,
+				  NULL,
+				  FALSE);
+	 gtk_tree_path_free (path);
+	 /* A row exists at mouse position */
+	 return show_popup_menu (fav, event);
+      }
+    }
+  return FALSE;
 }
 
 
@@ -345,6 +377,222 @@ fav_popup_menu (GtkWidget  *treeview,
   return FALSE;
 }
 
+static gboolean
+vinagre_fav_tooltip (GtkWidget *widget,
+                     gint x, gint y, gboolean k,
+                     GtkTooltip *tooltip,
+                     VinagreFav *fav)
+{
+  gchar *tip, *name;
+  GtkTreePath *path = NULL;
+  gint bx, by;
+  GtkTreeIter iter;
+  gboolean folder, group;
+  VinagreConnection *conn = NULL;
+
+  gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget),
+                                                     x, y,
+                                                     &bx, &by);
+  
+  if (!gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget),
+				      bx,
+				      by,
+				      &path,
+				      NULL,
+				      NULL,
+			              NULL))
+    return FALSE;
+
+  gtk_tree_model_get_iter (fav->priv->model, &iter, path);
+  gtk_tree_model_get (fav->priv->model, 
+		      &iter,
+		      CONN_COL, &conn, 
+                      IS_FOLDER_COL, &folder,
+                      IS_GROUP_COL, &group,
+		      -1);
+
+  gtk_tree_path_free (path);
+
+  if (folder || group)
+    return FALSE;
+
+  name = vinagre_connection_get_best_name (conn);
+  tip = g_markup_printf_escaped ("<b>%s</b>\n"
+                                 "<small><b>%s</b> %s</small>\n"
+				 "<small><b>%s</b> %d</small>",
+                                 name,
+				 _("Host:"), vinagre_connection_get_host (conn),
+				 _("Port:"), vinagre_connection_get_port (conn));
+
+  gtk_tooltip_set_markup (tooltip, tip);
+  g_free (tip);
+  g_free (name);
+
+  return TRUE;
+}
+
+static void
+vinagre_fav_indent_level1_cell_data_func (GtkTreeViewColumn *tree_column,
+					  GtkCellRenderer   *cell,
+					  GtkTreeModel      *model,
+					  GtkTreeIter       *iter,
+					  VinagreFav        *fav)
+{
+  GtkTreePath *path;
+  int          depth;
+
+  path = gtk_tree_model_get_path (model, iter);
+  depth = gtk_tree_path_get_depth (path);
+  gtk_tree_path_free (path);
+  g_object_set (cell,
+	        "text", " ",
+		"visible", depth > 1,
+		NULL);
+}
+
+static void
+vinagre_fav_cell_set_background (VinagreFav       *fav,
+				 GtkCellRenderer  *cell,
+				 gboolean         is_group,
+				 gboolean         is_active)
+{
+  GdkColor  color;
+  GtkStyle *style;
+
+  g_return_if_fail (fav != NULL);
+  g_return_if_fail (cell != NULL);
+
+  style = gtk_widget_get_style (GTK_WIDGET (fav));
+
+  if (!is_group)
+    {
+      if (is_active)
+        {
+          color = style->bg[GTK_STATE_SELECTED];
+
+	  /* Here we take the current theme colour and add it to
+	   * the colour for white and average the two. This
+	   * gives a colour which is inline with the theme but
+	   * slightly whiter.
+	   */
+	  color.red = (color.red + (style->white).red) / 2;
+	  color.green = (color.green + (style->white).green) / 2;
+	  color.blue = (color.blue + (style->white).blue) / 2;
+
+	  g_object_set (cell,
+		        "cell-background-gdk", &color,
+		        NULL);
+	
+        }
+      else
+        {
+	  g_object_set (cell,
+	                "cell-background-gdk", NULL,
+		        NULL);
+        }
+      }
+    else
+      {
+        color = style->text_aa[GTK_STATE_INSENSITIVE];
+
+	color.red = (color.red + (style->white).red) / 2;
+	color.green = (color.green + (style->white).green) / 2;
+	color.blue = (color.blue + (style->white).blue) / 2;
+
+	g_object_set (cell,
+		      "cell-background-gdk", &color,
+		      NULL);
+      }
+}
+
+static void
+vinagre_fav_pixbuf_cell_data_func (GtkTreeViewColumn *tree_column,
+				   GtkCellRenderer   *cell,
+				   GtkTreeModel      *model,
+				   GtkTreeIter       *iter,
+				   VinagreFav        *fav)
+{
+  GdkPixbuf *pixbuf;
+  gboolean   is_group;
+  gboolean   is_active;
+
+  gtk_tree_model_get (model, iter,
+		      IS_GROUP_COL, &is_group,
+		      IMAGE_COL, &pixbuf,
+		      -1);
+
+  g_object_set (cell,
+	        "visible", !is_group,
+		"pixbuf", pixbuf,
+		NULL);
+
+  if (pixbuf != NULL)
+    g_object_unref (pixbuf);
+
+  is_active = FALSE;
+  vinagre_fav_cell_set_background (fav, cell, is_group, is_active);
+}
+
+static void
+vinagre_fav_title_cell_data_func (GtkTreeViewColumn *column,
+				  GtkCellRenderer   *renderer,
+				  GtkTreeModel      *tree_model,
+				  GtkTreeIter       *iter,
+				  VinagreFav        *fav)
+{
+  char    *str;
+  gboolean is_group;
+  gboolean is_active;
+
+  gtk_tree_model_get (GTK_TREE_MODEL (fav->priv->model), iter,
+		      NAME_COL, &str,
+		      IS_GROUP_COL, &is_group,
+		      -1);
+
+  g_object_set (renderer,
+	        "text", str,
+		NULL);
+
+  is_active = FALSE;
+  vinagre_fav_cell_set_background (fav, renderer, is_group, is_active);
+
+  g_free (str);
+}
+
+static void
+vinagre_fav_expander_cell_data_func (GtkTreeViewColumn *column,
+				     GtkCellRenderer   *cell,
+				     GtkTreeModel      *model,
+				     GtkTreeIter       *iter,
+				     VinagreFav        *fav)
+{
+  gboolean is_group;
+  gboolean is_active;
+
+  gtk_tree_model_get (model, iter,
+		      IS_GROUP_COL, &is_group,
+		      -1);
+
+  if (gtk_tree_model_iter_has_child (model, iter))
+    {
+      GtkTreePath *path;
+      gboolean     row_expanded;
+
+      path = gtk_tree_model_get_path (model, iter);
+      row_expanded = gtk_tree_view_row_expanded (GTK_TREE_VIEW (column->tree_view), path);
+      gtk_tree_path_free (path);
+
+      g_object_set (cell,
+		    "visible", TRUE,
+		    "expander-style", row_expanded ? GTK_EXPANDER_EXPANDED : GTK_EXPANDER_COLLAPSED,
+		    NULL);
+    }
+  else
+    g_object_set (cell, "visible", FALSE, NULL);
+
+  is_active = FALSE;
+  vinagre_fav_cell_set_background (fav, cell, is_group, is_active);
+}
 
 static void
 vinagre_fav_create_tree (VinagreFav *fav)
@@ -365,31 +613,73 @@ vinagre_fav_create_tree (VinagreFav *fav)
   gtk_box_pack_start (GTK_BOX(fav), scroll, TRUE, TRUE, 0);
 
   /* Create the model */
-  fav->priv->model = GTK_TREE_MODEL (gtk_list_store_new (NUM_COLS,
+  fav->priv->model = GTK_TREE_MODEL (gtk_tree_store_new (NUM_COLS,
 							 GDK_TYPE_PIXBUF,
 							 G_TYPE_STRING,
-							 G_TYPE_POINTER));
+							 VINAGRE_TYPE_CONNECTION,
+                                                         G_TYPE_BOOLEAN,
+                                                         G_TYPE_BOOLEAN,
+                                                         G_TYPE_BOOLEAN));
 
   fav->priv->tree = gtk_tree_view_new_with_model (fav->priv->model);
+  g_object_set (fav->priv->tree, "show-expanders", FALSE, NULL);
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (fav->priv->tree), FALSE);
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (fav->priv->tree));
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
   g_signal_connect (selection, "changed", G_CALLBACK (vinagre_fav_selection_changed_cb), fav);
 
-  cell = gtk_cell_renderer_pixbuf_new ();
-  gtk_tree_view_insert_column_with_attributes ( GTK_TREE_VIEW (fav->priv->tree),
-						-1,
-						_("Image"),
-						cell,
-						"pixbuf", IMAGE_COL,
-						NULL);
+  fav->priv->main_column = gtk_tree_view_column_new ();
+//  gtk_tree_view_column_set_title (fav->priv->main_column, _("S_ource"));
+  gtk_tree_view_column_set_clickable (fav->priv->main_column, FALSE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (fav->priv->tree), fav->priv->main_column);
+
+  /* Set up the indent level1 column */
   cell = gtk_cell_renderer_text_new ();
-  gtk_tree_view_insert_column_with_attributes ( GTK_TREE_VIEW (fav->priv->tree),
-						-1,
-						_("Name"),
-						cell,
-						"text", NAME_COL,
-						NULL);
+  gtk_tree_view_column_pack_start (fav->priv->main_column, cell, FALSE);
+  gtk_tree_view_column_set_cell_data_func (fav->priv->main_column,
+					   cell,
+				           (GtkTreeCellDataFunc) vinagre_fav_indent_level1_cell_data_func,
+				           fav,
+					   NULL);
+  g_object_set (cell,
+		"xpad", 0,
+		"visible", FALSE,
+		NULL);
+
+  /* Set up the pixbuf column */
+  cell = gtk_cell_renderer_pixbuf_new ();
+  gtk_tree_view_column_pack_start (fav->priv->main_column, cell, FALSE);
+  gtk_tree_view_column_set_cell_data_func (fav->priv->main_column,
+					   cell,
+					   (GtkTreeCellDataFunc) vinagre_fav_pixbuf_cell_data_func,
+					    fav,
+					    NULL);
+  g_object_set (cell,
+		"xpad", 8,
+		"ypad", 1,
+		"visible", FALSE,
+		NULL);
+
+  /* Set up the name column */
+  cell = gtk_cell_renderer_text_new ();
+  g_object_set (cell,
+		"ellipsize", PANGO_ELLIPSIZE_END,
+		 NULL);
+  gtk_tree_view_column_pack_start (fav->priv->main_column, cell, TRUE);
+  gtk_tree_view_column_set_cell_data_func (fav->priv->main_column,
+				           cell,
+					   (GtkTreeCellDataFunc) vinagre_fav_title_cell_data_func,
+					    fav,
+					    NULL);
+
+  /* Expander */
+  cell = gossip_cell_renderer_expander_new ();
+  gtk_tree_view_column_pack_end (fav->priv->main_column, cell, FALSE);
+  gtk_tree_view_column_set_cell_data_func (fav->priv->main_column,
+					   cell,
+				           (GtkTreeCellDataFunc) vinagre_fav_expander_cell_data_func,
+                                           fav,
+					   NULL);
 
   g_signal_connect (fav->priv->tree,
 		    "row-activated",
@@ -406,23 +696,18 @@ vinagre_fav_create_tree (VinagreFav *fav)
 		    G_CALLBACK (fav_popup_menu),
 		    fav);
 
+  gtk_widget_set_has_tooltip (fav->priv->tree, TRUE);
+  g_signal_connect (fav->priv->tree,
+		    "query-tooltip",
+		    G_CALLBACK (vinagre_fav_tooltip),
+		    fav);
 
-  vinagre_fav_update_list (fav);
+  g_idle_add ((GSourceFunc)vinagre_fav_update_list, fav);
 
   gtk_container_add (GTK_CONTAINER(scroll), fav->priv->tree);
+
   gtk_widget_show (fav->priv->tree);
   g_object_unref (G_OBJECT (fav->priv->model));
-}
-
-
-static void
-vinagre_fav_hide (GtkButton *button, VinagreFav *fav)
-{
-  GtkAction *action;
-
-  action = gtk_action_group_get_action (fav->priv->window->priv->always_sensitive_action_group,
-					"ViewBookmarks");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
 }
 
 static void
@@ -432,25 +717,17 @@ vinagre_fav_init (VinagreFav *fav)
 
   fav->priv = VINAGRE_FAV_GET_PRIVATE (fav);
 
-  /* setup label */
-  label_box = gtk_hbox_new (FALSE, 0);
-  label = gtk_label_new (_("Bookmarks"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_misc_set_padding (GTK_MISC (label), 6, 6);
-  gtk_box_pack_start (GTK_BOX(label_box), label, TRUE, TRUE, 0);
-
-  /* setup small close button */
-  close_button = vinagre_utils_create_small_close_button ();
-  gtk_box_pack_start (GTK_BOX(label_box), close_button, FALSE, FALSE, 0);
-  gtk_widget_set_tooltip_text (close_button, _("Hide bookmarks"));
-  gtk_box_pack_start (GTK_BOX(fav), label_box, FALSE, FALSE, 0);
-  g_signal_connect (close_button,
-		    "clicked",
-		    G_CALLBACK (vinagre_fav_hide),
-		    fav);
-
   /* setup the tree */
   vinagre_fav_create_tree (fav);
+
+  g_signal_connect_swapped (vinagre_bookmarks_get_default (),
+                            "changed",
+                            G_CALLBACK (vinagre_fav_update_list),
+                            fav);
+  g_signal_connect_swapped (vinagre_mdns_get_default (),
+                            "changed",
+                            G_CALLBACK (vinagre_fav_update_list),
+                            fav);
 }
 
 GtkWidget *
@@ -463,41 +740,108 @@ vinagre_fav_new (VinagreWindow *window)
 				   NULL));
 }
 
-void
+gboolean
 vinagre_fav_update_list (VinagreFav *fav)
 {
-  GtkTreeIter        iter;
-  GtkListStore      *store;
-  GList             *list;
-  VinagreConnection *conn;
-  gchar             *name;
+  GtkTreeIter        iter, parent_iter;
+  GtkTreeStore      *store;
+  GSList            *list, *l, *next;
   GdkPixbuf         *pixbuf;
+  GtkTreePath       *path;
+    
+  g_return_val_if_fail (VINAGRE_IS_FAV (fav), FALSE);
 
-  g_return_if_fail (VINAGRE_IS_FAV (fav));
+  store = GTK_TREE_STORE (fav->priv->model);
+  gtk_tree_store_clear (store);
 
-  store = GTK_LIST_STORE (fav->priv->model);
-  gtk_list_store_clear (store);
+  /* bookmarks */
+  list = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
 
-  list = vinagre_bookmarks_get_all ();
-  while (list)
+  gtk_tree_store_append (store, &parent_iter, NULL);
+  gtk_tree_store_set (store, &parent_iter,
+                      NAME_COL, _("Bookmarks"),
+                      IS_GROUP_COL, TRUE,
+                      IS_FOLDER_COL, FALSE,
+                      IS_AVAHI_COL, FALSE,
+                      -1);
+
+  for (l = list; l; l = next)
     {
-      conn = (VinagreConnection *) list->data;
-      name = vinagre_connection_best_name (conn);
+      gchar *name = NULL;
+      VinagreConnection *conn;
 
+      next = l->next;
+
+      conn = (VinagreConnection *) l->data;
+      g_assert (VINAGRE_IS_CONNECTION (conn));
+
+      name = vinagre_connection_get_best_name (conn);
       pixbuf = vinagre_connection_get_icon (conn);
 
-      gtk_list_store_append (store, &iter);
-      gtk_list_store_set (store, &iter,
+      gtk_tree_store_append (store, &iter, &parent_iter);
+      gtk_tree_store_set (store, &iter,
                           IMAGE_COL, pixbuf,
                           NAME_COL, name,
                           CONN_COL, conn,
+                          IS_FOLDER_COL, FALSE,
+                          IS_GROUP_COL, FALSE,
+                          IS_AVAHI_COL, FALSE,
                           -1);
-      list = list->next;
-      g_free (name);
+      if (name)
+        g_free (name);
       if (pixbuf != NULL)
 	g_object_unref (pixbuf);
     }
 
-  g_list_free (list);
+  path = gtk_tree_path_new_from_string ("0");
+  gtk_tree_view_expand_row (GTK_TREE_VIEW (fav->priv->tree), path, FALSE);
+  g_free (path);
+
+  /* avahi */
+  list = vinagre_mdns_get_all (vinagre_mdns_get_default ());
+  if (!list)
+    return FALSE;
+
+  gtk_tree_store_append (store, &parent_iter, NULL);
+  gtk_tree_store_set (store, &parent_iter,
+                      NAME_COL, _("Hosts near to me"),
+                      IS_GROUP_COL, TRUE,
+                      IS_FOLDER_COL, FALSE,
+                      IS_AVAHI_COL, FALSE,
+                      -1);
+
+  for (l = list; l; l = next)
+    {
+      gchar *name = NULL;
+      VinagreConnection *conn;
+
+      next = l->next;
+
+      conn = (VinagreConnection *) l->data;
+      g_assert (VINAGRE_IS_CONNECTION (conn));
+
+      name = vinagre_connection_get_best_name (conn);
+      pixbuf = vinagre_connection_get_icon (conn);
+
+      gtk_tree_store_append (store, &iter, &parent_iter);
+      gtk_tree_store_set (store, &iter,
+                          IMAGE_COL, pixbuf,
+                          NAME_COL, name,
+                          CONN_COL, conn,
+                          IS_FOLDER_COL, FALSE,
+                          IS_GROUP_COL, FALSE,
+                          IS_AVAHI_COL, TRUE,
+                          -1);
+      if (name)
+        g_free (name);
+      if (pixbuf != NULL)
+	g_object_unref (pixbuf);
+    }
+
+  path = gtk_tree_path_new_from_string ("1");
+  gtk_tree_view_expand_row (GTK_TREE_VIEW (fav->priv->tree), path, FALSE);
+  g_free (path);
+
+  return FALSE;
 }
 /* vim: ts=8 */

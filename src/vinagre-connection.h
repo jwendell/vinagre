@@ -24,44 +24,75 @@
 #include <glib.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
+G_BEGIN_DECLS
+
+#define VINAGRE_TYPE_CONNECTION             (vinagre_connection_get_type ())
+#define VINAGRE_CONNECTION(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), VINAGRE_TYPE_CONNECTION, VinagreConnection))
+#define VINAGRE_CONNECTION_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), VINAGRE_TYPE_CONNECTION, VinagreConnectionClass))
+#define VINAGRE_IS_CONNECTION(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), VINAGRE_TYPE_CONNECTION))
+#define VINAGRE_IS_CONNECTION_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), VINAGRE_TYPE_CONNECTION))
+#define VINAGRE_CONNECTION_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), VINAGRE_TYPE_CONNECTION, VinagreConnectionClass))
+
+typedef struct _VinagreConnectionClass   VinagreConnectionClass;
+typedef struct _VinagreConnection        VinagreConnection;
+typedef struct _VinagreConnectionPrivate VinagreConnectionPrivate;
+
 typedef enum
 {
-  VINAGRE_CONNECTION_TYPE_VNC = 0
-} VinagreConnectionType;
+  VINAGRE_CONNECTION_PROTOCOL_VNC = 1,
+  VINAGRE_CONNECTION_PROTOCOL_RDP,
+  VINAGRE_CONNECTION_PROTOCOL_INVALID
+} VinagreConnectionProtocol;
 
-typedef struct
+struct _VinagreConnectionClass
 {
-  char *host;
-  int   port;
-  char *name;
-  char *password;
-  char *desktop_name;
-  VinagreConnectionType type;
-} VinagreConnection;
+  GObjectClass parent_class;
+};
+
+struct _VinagreConnection
+{
+  GObject parent_instance;
+  VinagreConnectionPrivate *priv;
+};
+
+GType vinagre_connection_get_type (void) G_GNUC_CONST;
 
 VinagreConnection *vinagre_connection_new (void);
 
-void		   vinagre_connection_set_host		(VinagreConnection *conn,
-							 const char *host);
-void		   vinagre_connection_set_port		(VinagreConnection *conn,
-							 int port);
-void		   vinagre_connection_set_password	(VinagreConnection *conn,
-							 const char *password);
-void		   vinagre_connection_set_name		(VinagreConnection *conn,
-							 const char *name);
-void		   vinagre_connection_set_desktop_name	(VinagreConnection *conn,
-							 const char *desktop_name);
+VinagreConnectionProtocol vinagre_connection_get_protocol (VinagreConnection *conn);
+void		          vinagre_connection_set_protocol (VinagreConnection *conn,
+							   VinagreConnectionProtocol protocol);
 
-void               vinagre_connection_free		(VinagreConnection *conn);
+const gchar*	    vinagre_connection_get_host		(VinagreConnection *conn);
+void		    vinagre_connection_set_host		(VinagreConnection *conn,
+							 const gchar *host);
 
-gchar             *vinagre_connection_best_name		(VinagreConnection *conn);
+gint		    vinagre_connection_get_port		(VinagreConnection *conn);
+void		    vinagre_connection_set_port		(VinagreConnection *conn,
+							 gint port);
 
-VinagreConnection *vinagre_connection_clone		(VinagreConnection *conn);
+const gchar*	    vinagre_connection_get_password	(VinagreConnection *conn);
+void		    vinagre_connection_set_password	(VinagreConnection *conn,
+							 const gchar *password);
 
-VinagreConnection *vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg);
-VinagreConnection *vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg);
+const gchar*	    vinagre_connection_get_name         (VinagreConnection *conn);
+void		    vinagre_connection_set_name	        (VinagreConnection *conn,
+							 const gchar *name);
 
-GdkPixbuf         *vinagre_connection_get_icon		(VinagreConnection *conn);
+const gchar*	    vinagre_connection_get_desktop_name	(VinagreConnection *conn);
+void		    vinagre_connection_set_desktop_name	(VinagreConnection *conn,
+							 const gchar *desktop_name);
+
+gchar*		    vinagre_connection_get_best_name	(VinagreConnection *conn);
+
+VinagreConnection*  vinagre_connection_clone		(VinagreConnection *conn);
+
+VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg);
+VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg);
+
+GdkPixbuf*          vinagre_connection_get_icon	(VinagreConnection *conn);
+
+G_END_DECLS
 
 #endif /* __VINAGRE_CONNECTION_H__  */
 /* vim: ts=8 */

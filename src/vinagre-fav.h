@@ -2,7 +2,7 @@
  * vinagre-fav.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,18 +50,18 @@ struct _VinagreFavClass
   GtkVBoxClass parent_class;
 
   /* Signals */
-  void		(* fav_activated)		(VinagreFav *fav,
-						 VinagreConnection *conn);
+  void	(* fav_activated)   (VinagreFav *fav,
+			     VinagreConnection *conn);
 
-  void		(* fav_selected)		(VinagreFav *fav,
-						 VinagreConnection *conn);
+  void	(* fav_selected)    (VinagreFav *fav,
+			    VinagreConnection *conn);
 };
 
-GType 		vinagre_fav_get_type 		(void) G_GNUC_CONST;
+GType 	    vinagre_fav_get_type    (void) G_GNUC_CONST;
 
-GtkWidget 	*vinagre_fav_new 		(VinagreWindow *window);
+GtkWidget   *vinagre_fav_new        (VinagreWindow *window);
 
-void		vinagre_fav_update_list		(VinagreFav *fav);
+gboolean    vinagre_fav_update_list (VinagreFav *fav);
 
 G_END_DECLS
 

@@ -1,3 +1,64 @@
+2008-04-09  Jonh Wendell <jwendell@gnome.org>
+
+	Show avahi-found hosts in side panel and bookmark menu. Closes #512918.
+	
+	* configure.ac:
+	 - Bump avahi dependency to 0.6.22
+	 - Bump gtk-vnc dependency to 0.3.5
+	 - Avahi dependency is mandatory now
+	 - Also depends on avahi-gobject
+	* src/vinagre-mdns.[ch]: New files, mdns class
+	* vinagre-window.[ch],
+	* vinagre-fav.c: Make use of new mdns class
+
+2008-04-03  Jonh Wendell <jwendell@gnome.org>
+
+	* src/vinagre-commands.c: Show an error message if running composited
+	window and try to enable scaling. Compiz doesn't work well with OpenGL
+	applications yet.
+
+2008-04-03  Jonh Wendell <jwendell@gnome.org>
+
+	* src/vinagre-tab.[ch],
+	* src/vinagre-window.[ch]: Better handles menus sensitivity.
+	* src/vinagre-bookmarks.c,
+	* src/vinagre-commands.c:
+	- Don't crash when adding a bookmark after the connection is closed. (LP: #205303).
+	- Ignore NULL hosts in bookmarks file.
+
+2008-04-03  Jonh Wendell <jwendell@gnome.org>
+
+	* src/vinagre-tab.c:
+	Changed properties types from pointer to object;
+	Use new gtk-vnc API vnc_display_force_grab() in fullscreen handling.
+
+2008-03-29  Jonh Wendell <jwendell@gnome.org>
+
+	* src/vinagre-utils.[ch],
+	* src/vinagre-main.c: Use the new debug stuff from gtk-vnc
+
+2008-03-24  Jonh Wendell <jwendell@gnome.org>
+	- Make VinagreBookmarks a GObject.
+	- Modify the side panel interface.
+
+2008-03-19  Jonh Wendell <jwendell@gnome.org>
+	Make VinagreConnection a GObject.
+
+2008-03-14  Jonh Wendell <jwendell@gnome.org>
+
+	Initial support for scaling. Closes #476942.
+
+	* configure.ac: Bump gtk-vnc version to 0.3.4
+	* README: Brief explanation on how to enable scaling
+	* src/vinagre-tab.c,
+	* src/vinagre-commands.h,
+	* src/vinagre-window.c,
+	* src/vinagre-tab.h,
+	* src/vinagre-ui.h,
+	* src/vinagre-window-private.h,
+	* src/vinagre-commands.c,
+	* data/vinagre-ui.xml: Implement scaling
+
 2008-03-12  Jonh Wendell <jwendell@gnome.org>
 
 	* configure.ac: post-release bump to 2.23.1 (#512925)

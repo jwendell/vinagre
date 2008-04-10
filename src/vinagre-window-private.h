@@ -46,6 +46,7 @@ struct _VinagreWindowPrivate
   GtkActionGroup *bookmarks_list_action_group;
   GtkActionGroup *recent_action_group;
   GtkAction      *recent_action;
+  GtkAction      *scaling_action;
   guint           bookmarks_list_menu_ui_id;
   guint           recents_menu_ui_id;
 
@@ -67,7 +68,6 @@ struct _VinagreWindowPrivate
 
   gulong	  signal_notebook;
   gulong	  signal_clipboard;
-  gint            machines_connected;
 };
 
 

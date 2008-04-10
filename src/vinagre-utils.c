@@ -156,4 +156,29 @@ vinagre_utils_show_many_errors (const gchar *message, GSList *items, GtkWindow *
   vinagre_utils_show_error (msg->str, parent);
   g_string_free (msg, TRUE);
 }
+
+
+static void _default_log (const gchar *log_domain G_GNUC_UNUSED,
+			 GLogLevelFlags log_level G_GNUC_UNUSED,
+			 const gchar *message,
+			 gpointer user_data G_GNUC_UNUSED)
+{
+  printf ("gtk-vnc: %s", message);
+}
+
+void
+vinagre_utils_handle_debug (void)
+{
+  static gboolean initialized = FALSE;
+
+  if (initialized)
+    return;
+
+  g_log_set_handler ("gtk-vnc",
+		     G_LOG_LEVEL_DEBUG,
+		     _default_log,
+		     NULL);
+
+  initialized = TRUE;
+}
 /* vim: ts=8 */

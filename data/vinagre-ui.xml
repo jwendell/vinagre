@@ -2,7 +2,7 @@
  * vinagre-ui.xml
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,9 +38,10 @@
     <menu name="ViewMenu" action="View">
       <menuitem name="ViewToolbarMenu" action="ViewToolbar"/>
       <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
-      <menuitem name="ViewBookmarksMenu" action="ViewBookmarks"/>
+      <menuitem name="ViewSidePanelMenu" action="ViewSidePanel"/>
       <separator/>
       <menuitem name="ViewFullScreenMenu" action="ViewFullScreen"/>
+      <menuitem name="ViewScalingMenu" action="ViewScaling"/>
     </menu>
 
     <menu name="BookmarksMenu" action="Bookmarks">
@@ -50,6 +51,8 @@
       <menuitem name="BookmarksDelMenu" action="BookmarksDel"/>
       <separator/>
       <placeholder name="BookmarksList"/>
+      <separator/>
+      <placeholder name="AvahiList"/>
     </menu>
 
     <menu name="HelpMenu" action="Help">

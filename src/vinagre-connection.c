@@ -21,108 +21,401 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <gtk/gtkicontheme.h>
 
 #include "vinagre-connection.h"
+#include "vinagre-enums.h"
 #include "vinagre-bookmarks.h"
+
+struct _VinagreConnectionPrivate
+{
+  VinagreConnectionProtocol protocol;
+  gchar *host;
+  gint   port;
+  gchar *name;
+  gchar *password;
+  gchar *desktop_name;
+};
+
+enum
+{
+  PROP_0,
+  PROP_PROTOCOL,
+  PROP_HOST,
+  PROP_PORT,
+  PROP_NAME,
+  PROP_PASSWORD,
+  PROP_DESKTOP_NAME,
+  PROP_BEST_NAME,
+  PROP_ICON
+};
+
+#define VINAGRE_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_CONNECTION, VinagreConnectionPrivate))
+G_DEFINE_TYPE (VinagreConnection, vinagre_connection, G_TYPE_OBJECT);
+
+static void
+vinagre_connection_init (VinagreConnection *conn)
+{
+  conn->priv = G_TYPE_INSTANCE_GET_PRIVATE (conn, VINAGRE_TYPE_CONNECTION, VinagreConnectionPrivate);
+
+  conn->priv->protocol = VINAGRE_CONNECTION_PROTOCOL_VNC;
+  conn->priv->host = NULL;
+  conn->priv->port = 0;
+  conn->priv->password = NULL;
+  conn->priv->name = NULL;
+  conn->priv->desktop_name = NULL;
+}
+
+static void
+vinagre_connection_finalize (GObject *object)
+{
+  VinagreConnection *conn = VINAGRE_CONNECTION (object);
+
+  if (conn->priv->host)
+    g_free (conn->priv->host);
+  conn->priv->host = NULL;
+
+  if (conn->priv->password)
+    g_free (conn->priv->password);
+  conn->priv->password = NULL;
+
+  if (conn->priv->name)
+    g_free (conn->priv->name);
+  conn->priv->name = NULL;
+
+  if (conn->priv->desktop_name)
+    g_free (conn->priv->desktop_name);
+  conn->priv->desktop_name = NULL;
+
+  G_OBJECT_CLASS (vinagre_connection_parent_class)->finalize (object);
+}
+
+static void
+vinagre_connection_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
+{
+  VinagreConnection *conn;
+
+  g_return_if_fail (VINAGRE_IS_CONNECTION (object));
+
+  conn = VINAGRE_CONNECTION (object);
+
+  switch (prop_id)
+    {
+      case PROP_PROTOCOL:
+	vinagre_connection_set_protocol (conn, g_value_get_enum (value));
+	break;
+
+      case PROP_HOST:
+	vinagre_connection_set_host (conn, g_value_get_string (value));
+	break;
+
+      case PROP_PORT:
+	vinagre_connection_set_port (conn, g_value_get_int (value));
+	break;
+
+      case PROP_PASSWORD:
+	vinagre_connection_set_password (conn, g_value_get_string (value));
+	break;
+
+      case PROP_NAME:
+	vinagre_connection_set_name (conn, g_value_get_string (value));
+	break;
+
+      case PROP_DESKTOP_NAME:
+	vinagre_connection_set_desktop_name (conn, g_value_get_string (value));
+	break;
+
+      default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+	break;
+    }
+}
+
+static void
+vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
+{
+  VinagreConnection *conn;
+
+  g_return_if_fail (VINAGRE_IS_CONNECTION (object));
+
+  conn = VINAGRE_CONNECTION (object);
+
+
+  switch (prop_id)
+    {
+      case PROP_PROTOCOL:
+	g_value_set_enum (value, conn->priv->protocol);
+	break;
+
+      case PROP_HOST:
+	g_value_set_string (value, conn->priv->host);
+	break;
+
+      case PROP_PORT:
+	g_value_set_int (value, conn->priv->port);
+	break;
+
+      case PROP_PASSWORD:
+	g_value_set_string (value, conn->priv->password);
+	break;
+
+      case PROP_NAME:
+	g_value_set_string (value, conn->priv->name);
+	break;
+
+      case PROP_DESKTOP_NAME:
+	g_value_set_string (value, conn->priv->desktop_name);
+	break;
+
+      case PROP_BEST_NAME:
+	g_value_set_string (value, vinagre_connection_get_best_name (conn));
+	break;
+
+      case PROP_ICON:
+	g_value_set_object (value, vinagre_connection_get_icon (conn));
+	break;
+
+      default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+	break;
+    }
+}
+
+static void
+vinagre_connection_class_init (VinagreConnectionClass *klass)
+{
+  GObjectClass* object_class = G_OBJECT_CLASS (klass);
+  GObjectClass* parent_class = G_OBJECT_CLASS (klass);
+
+  g_type_class_add_private (klass, sizeof (VinagreConnectionPrivate));
+
+  object_class->finalize = vinagre_connection_finalize;
+  object_class->set_property = vinagre_connection_set_property;
+  object_class->get_property = vinagre_connection_get_property;
+
+  g_object_class_install_property (object_class,
+                                   PROP_PROTOCOL,
+                                   g_param_spec_enum ("protocol",
+                                                      "protocol",
+	                                              "connection protocol",
+                                                      VINAGRE_TYPE_CONNECTION_PROTOCOL,
+	                                              VINAGRE_CONNECTION_PROTOCOL_VNC,
+	                                              G_PARAM_READWRITE |
+                                                      G_PARAM_CONSTRUCT |
+                                                      G_PARAM_STATIC_NICK |
+                                                      G_PARAM_STATIC_NAME |
+                                                      G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_HOST,
+                                   g_param_spec_string ("host",
+                                                        "hostname",
+	                                                "hostname or ip address of this connection",
+                                                        NULL,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_PORT,
+                                   g_param_spec_int ("port",
+                                                     "port",
+	                                              "tcp/ip port of this connection",
+                                                      0,
+                                                      G_MAXINT,
+                                                      5900,
+	                                              G_PARAM_READWRITE |
+                                                      G_PARAM_CONSTRUCT |
+                                                      G_PARAM_STATIC_NICK |
+                                                      G_PARAM_STATIC_NAME |
+                                                      G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_PASSWORD,
+                                   g_param_spec_string ("password",
+                                                        "password",
+	                                                "password (if any) necessary for complete this connection",
+                                                        NULL,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_NAME,
+                                   g_param_spec_string ("name",
+                                                        "connection name",
+	                                                "friendly name for this connection",
+                                                        NULL,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_DESKTOP_NAME,
+                                   g_param_spec_string ("desktop-name",
+                                                        "desktop-name",
+	                                                "name of this connection as reported by the server",
+                                                        NULL,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_BEST_NAME,
+                                   g_param_spec_string ("best-name",
+                                                        "best-name",
+	                                                "preferred name for this connection",
+                                                        NULL,
+	                                                G_PARAM_READABLE |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_ICON,
+                                   g_param_spec_object ("icon",
+                                                        "icon",
+	                                                "icon of this connection",
+                                                        GDK_TYPE_PIXBUF,
+	                                                G_PARAM_READABLE |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
+}
 
 VinagreConnection *
 vinagre_connection_new ()
 {
-  VinagreConnection *conn;
-
-  conn = g_new (VinagreConnection, 1);
-  conn->host = NULL;
-  conn->port = 0;
-  conn->name = NULL;
-  conn->password = NULL;
-  conn->desktop_name = NULL;
-  conn->type = VINAGRE_CONNECTION_TYPE_VNC;
-
-  return conn;
+  return g_object_new (VINAGRE_TYPE_CONNECTION, NULL);
 }
 
-void 
-vinagre_connection_set_host (VinagreConnection *conn,
-			     const char *host)
+void
+vinagre_connection_set_protocol (VinagreConnection *conn,
+			         VinagreConnectionProtocol protocol)
 {
-  if (conn->host)
-    g_free (conn->host);
-  conn->host = g_strdup (host);
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  conn->priv->protocol = protocol;
+}
+VinagreConnectionProtocol
+vinagre_connection_get_protocol (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn),
+                        VINAGRE_CONNECTION_PROTOCOL_INVALID);
+
+  return conn->priv->protocol;
+}
+
+void
+vinagre_connection_set_host (VinagreConnection *conn,
+			     const gchar *host)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  if (conn->priv->host)
+    g_free (conn->priv->host);
+  conn->priv->host = g_strdup (host);
+}
+const gchar *
+vinagre_connection_get_host (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+
+  return conn->priv->host;
 }
 
 void
 vinagre_connection_set_port (VinagreConnection *conn,
-			     int port)
+			     gint port)
 {
-  conn->port = port;
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  conn->priv->port = port;
+}
+gint
+vinagre_connection_get_port (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), 0);
+
+  return conn->priv->port;
 }
 
 void
 vinagre_connection_set_password (VinagreConnection *conn,
-				 const char *password)
+			         const gchar *password)
 {
-  if (conn->password)
-    g_free (conn->password);
-  conn->password = g_strdup (password);
-}
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-void 
-vinagre_connection_set_name (VinagreConnection *conn,
-			     const char *name)
-{
-  if (conn->name)
-    g_free (conn->name);
-  conn->name = g_strdup (name);
+  if (conn->priv->password)
+    g_free (conn->priv->password);
+  conn->priv->password = g_strdup (password);
 }
-
-void 
-vinagre_connection_set_desktop_name (VinagreConnection *conn,
-				     const char *desktop_name)
+const gchar *
+vinagre_connection_get_password (VinagreConnection *conn)
 {
-  if (conn->desktop_name)
-    g_free (conn->desktop_name);
-  conn->desktop_name = g_strdup (desktop_name);
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+
+  return conn->priv->password;
 }
 
 void
-vinagre_connection_free (VinagreConnection *conn)
+vinagre_connection_set_name (VinagreConnection *conn,
+			     const gchar *name)
 {
-  if (conn) {
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-    if (conn->host)
-      g_free (conn->host);
-    conn->host = NULL;
+  if (conn->priv->name)
+    g_free (conn->priv->name);
+  conn->priv->name = g_strdup (name);
+}
+const gchar *
+vinagre_connection_get_name (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
-    if (conn->password)
-      g_free (conn->password);
-    conn->password = NULL;
+  return conn->priv->name;
+}
 
-    if (conn->name)
-      g_free (conn->name);
-    conn->name = NULL;
+void
+vinagre_connection_set_desktop_name (VinagreConnection *conn,
+			             const gchar *desktop_name)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-    if (conn->desktop_name)
-      g_free (conn->desktop_name);
-    conn->desktop_name = NULL;
+  if (conn->priv->desktop_name)
+    g_free (conn->priv->desktop_name);
+  conn->priv->desktop_name = g_strdup (desktop_name);
+}
+const gchar *
+vinagre_connection_get_desktop_name (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
-    g_free (conn);
-    conn = NULL;
-  }
+  return conn->priv->desktop_name;
 }
 
 gchar *
-vinagre_connection_best_name (VinagreConnection *conn)
+vinagre_connection_get_best_name (VinagreConnection *conn)
 {
-  g_return_val_if_fail (conn != NULL, NULL);
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
-  if (conn->name)
-    return g_strdup (conn->name);
+  if (conn->priv->name)
+    return g_strdup (conn->priv->name);
 
-  if (conn->desktop_name)
-    return g_strdup (conn->desktop_name);
+  if (conn->priv->desktop_name)
+    return g_strdup (conn->priv->desktop_name);
 
-  if (conn->host)
-    return g_strdup_printf ("%s:%d", conn->host, conn->port);
+  if (conn->priv->host)
+        return g_strdup_printf ("%s:%d", conn->priv->host, conn->priv->port);
 
   return NULL;
 }
@@ -134,11 +427,11 @@ vinagre_connection_clone (VinagreConnection *conn)
 
   new_conn = vinagre_connection_new ();
 
-  vinagre_connection_set_host (new_conn, conn->host);
-  vinagre_connection_set_port (new_conn, conn->port);
-  vinagre_connection_set_password (new_conn, conn->password);
-  vinagre_connection_set_name (new_conn, conn->name);
-  vinagre_connection_set_desktop_name (new_conn, conn->desktop_name);
+  vinagre_connection_set_host (new_conn, vinagre_connection_get_host (conn));
+  vinagre_connection_set_port (new_conn, vinagre_connection_get_port (conn));
+  vinagre_connection_set_password (new_conn, vinagre_connection_get_password (conn));
+  vinagre_connection_set_name (new_conn, vinagre_connection_get_name (conn));
+  vinagre_connection_set_desktop_name (new_conn, vinagre_connection_get_desktop_name (conn));
 
   return new_conn;
 }
@@ -172,7 +465,9 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
   host = server[0];
   port = server[1] ? atoi (server[1]) : 5900;
 
-  conn = vinagre_bookmarks_exists (host, port);
+  conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
+                                   host,
+                                   port);
   if (!conn)
     {
       conn = vinagre_connection_new ();
@@ -235,7 +530,9 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
       port = g_key_file_get_integer (file, "connection", "port", NULL);
       if (host)
 	{
-	  conn = vinagre_bookmarks_exists (host, port);
+	  conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
+                                           host,
+                                           port);
 	  if (!conn)
 	    {
 	      conn = vinagre_connection_new ();
@@ -268,6 +565,8 @@ vinagre_connection_get_icon (VinagreConnection *conn)
 {
   GdkPixbuf         *pixbuf;
   GtkIconTheme      *icon_theme;
+
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
   icon_theme = gtk_icon_theme_get_default ();
   pixbuf = gtk_icon_theme_load_icon (icon_theme,

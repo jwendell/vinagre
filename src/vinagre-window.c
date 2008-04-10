@@ -36,6 +36,7 @@
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-ui.h"
+#include "vinagre-mdns.h"
 
 #include "vinagre-window-private.h"
 
@@ -52,7 +53,7 @@ vinagre_window_finalize (GObject *object)
 
   if (window->priv->fav_conn_selected)
     {
-      vinagre_connection_free (window->priv->fav_conn_selected);
+      g_object_unref (window->priv->fav_conn_selected);
       window->priv->fav_conn_selected = NULL;
     }
 
@@ -61,9 +62,6 @@ vinagre_window_finalize (GObject *object)
       g_object_unref (window->priv->manager);
       window->priv->manager = NULL;
     }
-
-
-  vinagre_bookmarks_finalize ();
 
   G_OBJECT_CLASS (vinagre_window_parent_class)->finalize (object);
 }
@@ -183,7 +181,8 @@ vinagre_window_key_press_cb (GtkWidget   *widget,
   switch (event->keyval)
     {
       case GDK_F11:
-	if (window->priv->active_tab)
+	if (window->priv->active_tab &&
+	    (vinagre_tab_get_state (VINAGRE_TAB (window->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED))
 	  vinagre_window_toggle_fullscreen (window);
 	return FALSE;
     }
@@ -275,7 +274,7 @@ activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
   if (conn)
     {
       vinagre_cmd_open_bookmark (window, conn);
-      vinagre_connection_free (conn);
+      g_object_unref (conn);
     }
   else
     {
@@ -384,10 +383,15 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 				vinagre_machine_connected_menu_entries,
 				G_N_ELEMENTS (vinagre_machine_connected_menu_entries),
 				window);
+  gtk_action_group_add_toggle_actions  (action_group,
+					vinagre_machine_connected_toggle_menu_entries,
+					G_N_ELEMENTS (vinagre_machine_connected_toggle_menu_entries),
+					window);
 
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
   window->priv->machine_connected_action_group = action_group;
+  window->priv->scaling_action = gtk_action_group_get_action (action_group, "ViewScaling");
 
   action = gtk_action_group_get_action (action_group, "ViewFullScreen");
   g_object_set (action, "is_important", TRUE, NULL);
@@ -465,8 +469,8 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 
 }
 
-static void
-set_machine_menu_sensitivity (VinagreWindow *window)
+void
+vinagre_window_update_machine_menu_sensitivity (VinagreWindow *window)
 {
   gboolean active;
 
@@ -475,7 +479,8 @@ set_machine_menu_sensitivity (VinagreWindow *window)
   active = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook)) > 0;
   gtk_action_group_set_sensitive (window->priv->action_group, active);
 
-  active = window->priv->machines_connected > 0;
+  active = (window->priv->active_tab) &&
+	   (vinagre_tab_get_state (VINAGRE_TAB (window->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED);
   gtk_action_group_set_sensitive (window->priv->machine_connected_action_group, active);
 }
 
@@ -514,7 +519,7 @@ fav_panel_selected (VinagreFav        *fav,
 
   if (window->priv->fav_conn_selected)
     {
-      vinagre_connection_free (window->priv->fav_conn_selected);
+      g_object_unref (window->priv->fav_conn_selected);
       window->priv->fav_conn_selected = NULL;
     }
 
@@ -537,13 +542,10 @@ void
 vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
 {
   VinagreWindowPrivate *p = window->priv;
-  GList                *actions, *l, *favs;
-  gint                  n, i;
-  guint                 id;
-  VinagreConnection    *conn;
-  gchar                *action_name, *action_label;
-  GtkAction            *action;
-  gchar                *name, *tooltip;
+  GList  *actions, *l;
+  GSList *favs, *mdnss;
+  gint   n, m, i;
+  guint  id;
 
   g_return_if_fail (p->bookmarks_list_action_group != NULL);
 
@@ -559,38 +561,42 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
       gtk_action_group_remove_action (p->bookmarks_list_action_group,
 				      GTK_ACTION (l->data));
     }
-    g_list_free (actions);
+  g_list_free (actions);
 
-  /* Get the bookmarks from file */
-  favs = vinagre_bookmarks_get_all ();
-  n = g_list_length (favs);
+  favs = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
+  mdnss = vinagre_mdns_get_all (vinagre_mdns_get_default ());
+  n = g_slist_length (favs);
+  m = g_slist_length (mdnss);
   i = 0;
 
-  id = (n > 0) ? gtk_ui_manager_new_merge_id (p->manager) : 0;
+  id = (n > 0||m > 0) ? gtk_ui_manager_new_merge_id (p->manager) : 0;
 
   while (favs)
     {
-      conn = (VinagreConnection *) favs->data;
-      name = vinagre_connection_best_name (conn);
+      VinagreConnection *conn;
+      gchar             *action_name, *action_label;
+      GtkAction         *action;
+      gchar             *name, *tooltip;
 
-      action_name = g_strdup_printf ("Fav_%d", i);
+      conn = (VinagreConnection *) favs->data;
+      g_assert (VINAGRE_IS_CONNECTION (conn));
+
+      name = vinagre_connection_get_best_name (conn);
+
+      action_name = g_strdup_printf ("Bookmark_%d", i);
       /* Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu */
-      tooltip = g_strdup_printf (_("Open %s:%d"), conn->host, conn->port);
-      action_label = vinagre_utils_escape_underscores (
-		     name,
-		     -1);
+      tooltip = g_strdup_printf (_("Open %s:%d"),
+                                 vinagre_connection_get_host (conn),
+                                 vinagre_connection_get_port (conn));
+      action_label = vinagre_utils_escape_underscores (name, -1);
       action = gtk_action_new (action_name,
 			       action_label,
 			       tooltip,
 			       NULL);
       g_object_set (G_OBJECT (action), "icon-name", "application-x-vnc", NULL);
-      g_object_set_data_full (G_OBJECT (action),
-			      "conn",
-			      conn,
-			      (GDestroyNotify) vinagre_connection_free);
+      g_object_set_data (G_OBJECT (action), "conn", conn);
       gtk_action_group_add_action (p->bookmarks_list_action_group,
 				   GTK_ACTION (action));
-
       g_signal_connect (action,
 			"activate",
 			G_CALLBACK (vinagre_cmd_bookmarks_open),
@@ -613,7 +619,55 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
       i++;
     }
 
-  g_list_free (favs);
+  /* avahi */
+  i = 0;
+  while (mdnss)
+    {
+      VinagreConnection *conn;
+      gchar             *action_name, *action_label;
+      GtkAction         *action;
+      gchar             *name, *tooltip;
+
+      conn = (VinagreConnection *) mdnss->data;
+      g_assert (VINAGRE_IS_CONNECTION (conn));
+
+      name = vinagre_connection_get_best_name (conn);
+
+      action_name = g_strdup_printf ("Avahi_%d", i);
+      /* Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu */
+        tooltip = g_strdup_printf (_("Open %s:%d"),
+                                 vinagre_connection_get_host (conn),
+                                 vinagre_connection_get_port (conn));
+      action_label = vinagre_utils_escape_underscores (name, -1);
+      action = gtk_action_new (action_name,
+			       action_label,
+			       tooltip,
+			       NULL);
+      g_object_set (G_OBJECT (action), "icon-name", "application-x-vnc", NULL);
+      g_object_set_data (G_OBJECT (action), "conn", conn);
+      gtk_action_group_add_action (p->bookmarks_list_action_group,
+				   GTK_ACTION (action));
+      g_signal_connect (action,
+			"activate",
+			G_CALLBACK (vinagre_cmd_bookmarks_open),
+			window);
+
+      gtk_ui_manager_add_ui (p->manager,
+			     id,
+			     "/MenuBar/BookmarksMenu/AvahiList",
+			     action_name, action_name,
+			     GTK_UI_MANAGER_MENUITEM,
+			     FALSE);
+
+      g_object_unref (action);
+      g_free (action_name);
+      g_free (action_label);
+      g_free (name);
+      g_free (tooltip);
+
+      mdnss = mdnss->next;
+      i++;
+    }
 
   p->bookmarks_list_menu_ui_id = id;
 }
@@ -664,7 +718,7 @@ init_widgets_visibility (VinagreWindow *window)
 
   /* fav panel visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"ViewBookmarks");
+					"ViewSidePanel");
   visible = vinagre_prefs_manager_get_side_pane_visible ();
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
@@ -758,13 +812,27 @@ vinagre_window_set_title (VinagreWindow *window)
       return;
     }
 
-  name = vinagre_connection_best_name (vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab)));
+  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab)));
   title = g_strdup_printf ("%s - %s",
 			   name,
 			   g_get_application_name ());
   gtk_window_set_title (GTK_WINDOW (window), title);
   g_free (title);
   g_free (name);
+}
+
+static void
+update_toggle_machine_items (VinagreWindow *window) {
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+
+  if (window->priv->active_tab == NULL)
+    {
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (window->priv->scaling_action), FALSE);
+      return;
+    }
+
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (window->priv->scaling_action),
+				vinagre_tab_get_scaling (VINAGRE_TAB (window->priv->active_tab)));
 }
 
 static void
@@ -781,7 +849,8 @@ vinagre_window_page_removed (GtkNotebook   *notebook,
     vinagre_window_toggle_fullscreen (window);
 
   vinagre_window_set_title (window);
-  _vinagre_window_del_machine_connected (window);
+  update_toggle_machine_items (window);
+  vinagre_window_update_machine_menu_sensitivity (window);
 }
 
 static void
@@ -795,6 +864,8 @@ vinagre_window_page_added (GtkNotebook  *notebook,
   window->priv->active_tab = child;
 
   vinagre_window_set_title (window);
+  update_toggle_machine_items (window);
+  vinagre_window_update_machine_menu_sensitivity (window);
 }
 
 static void 
@@ -814,6 +885,8 @@ vinagre_window_switch_page (GtkNotebook     *notebook,
   window->priv->active_tab = tab;
 
   vinagre_window_set_title (window);
+  update_toggle_machine_items (window);
+  vinagre_window_update_machine_menu_sensitivity (window);
 }
 
 static void
@@ -883,9 +956,6 @@ vinagre_window_init (VinagreWindow *window)
   window->priv->fav_conn_selected = NULL;
   window->priv->fullscreen = FALSE;
   window->priv->signal_notebook = 0;
-  window->priv->machines_connected = 0;
-
-  vinagre_bookmarks_init ();
 
   main_box = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), main_box);
@@ -916,9 +986,18 @@ vinagre_window_init (VinagreWindow *window)
   gtk_widget_grab_focus (window->priv->hpaned);
 
   init_widgets_visibility (window);
-  set_machine_menu_sensitivity (window);
+  vinagre_window_update_machine_menu_sensitivity (window);
 
   vinagre_window_update_bookmarks_list_menu (window);
+  g_signal_connect_swapped (vinagre_bookmarks_get_default (),
+                            "changed",
+                            G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
+                            window);
+  g_signal_connect_swapped (vinagre_mdns_get_default (),
+                            "changed",
+                            G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
+                            window);
+
   vinagre_window_init_clipboard (window);
 }
 
@@ -1049,7 +1128,7 @@ vinagre_window_close_active_tab	(VinagreWindow *window)
 }
 
 VinagreTab *
-vinagre_window_get_active_tab	(VinagreWindow *window)
+vinagre_window_get_active_tab (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
@@ -1062,27 +1141,6 @@ vinagre_window_get_ui_manager (VinagreWindow *window)
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
   return window->priv->manager;
-}
-
-void
-_vinagre_window_add_machine_connected (VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  window->priv->machines_connected++;
-  set_machine_menu_sensitivity (window);
-}
-
-void
-_vinagre_window_del_machine_connected (VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  if (window->priv->machines_connected > 0)
-    {
-      window->priv->machines_connected--;
-      set_machine_menu_sensitivity (window);
-    }
 }
 
 /* vim: ts=8 */

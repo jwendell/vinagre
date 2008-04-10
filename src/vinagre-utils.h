@@ -41,5 +41,6 @@ const gchar	*vinagre_utils_get_ui_xml_filename	(void);
 gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 							 gssize      length);
 
+void		vinagre_utils_handle_debug		(void);
 #endif  /* __VINAGRE_UTILS_H__  */
 /* vim: ts=8 */

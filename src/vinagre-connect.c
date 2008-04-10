@@ -22,18 +22,11 @@
 #include <glib/gi18n.h>
 #include <glib.h>
 #include <glade/glade.h>
+#include <avahi-ui/avahi-ui.h>
 
 #include "vinagre-connect.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#ifdef VINAGRE_HAVE_AVAHI
-#include <avahi-ui/avahi-ui.h>
-#endif
 
 typedef struct {
   GladeXML  *xml;
@@ -43,7 +36,6 @@ typedef struct {
   GtkWidget *find_button;
 } VinagreConnectDialog;
 
-#ifdef VINAGRE_HAVE_AVAHI
 static void
 vinagre_connect_find_button_cb (GtkButton            *button,
 				VinagreConnectDialog *dialog)
@@ -73,7 +65,6 @@ vinagre_connect_find_button_cb (GtkButton            *button,
 
   gtk_widget_destroy (d);
 }
-#endif
 
 VinagreConnection *vinagre_connect (VinagreWindow *window)
 {
@@ -91,13 +82,11 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   dialog.port_entry  = glade_xml_get_widget (dialog.xml, "port_entry");
   dialog.find_button = glade_xml_get_widget (dialog.xml, "find_button");
 
-#ifdef VINAGRE_HAVE_AVAHI
   gtk_widget_show (dialog.find_button);
   g_signal_connect (dialog.find_button,
 		    "clicked",
 		    G_CALLBACK (vinagre_connect_find_button_cb),
 		    &dialog);
-#endif
 
   gtk_widget_show_all (dialog.dialog);
   result = gtk_dialog_run (GTK_DIALOG (dialog.dialog));
@@ -109,7 +98,9 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
       gtk_widget_hide (GTK_WIDGET (dialog.dialog));
 
-      conn = vinagre_bookmarks_exists (host, port);
+      conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
+                                       host,
+                                       port);
       if (!conn)
 	{
 	  conn = vinagre_connection_new ();

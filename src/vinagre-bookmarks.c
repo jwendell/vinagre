@@ -2,7 +2,7 @@
  * vinagre-bookmarks.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007  Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008  Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,108 +23,187 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <glade/glade.h>
 #include <string.h>
 
-#define VINAGRE_FAVORITES_FILE  "vinagre.bookmarks"
-
-GKeyFile *bookmarks = NULL;
-
-static gchar *
-filename (void)
+struct _VinagreBookmarksPrivate
 {
-  return g_build_filename (g_get_home_dir (),
-			   ".gnome2",
-			   VINAGRE_FAVORITES_FILE,
-			   NULL);
+  GKeyFile     *file;
+  gchar        *filename;
+  GSList       *conns;
+  GFileMonitor *monitor;
+};
+
+enum
+{
+  BOOKMARK_CHANGED,
+  LAST_SIGNAL
+};
+
+#define VINAGRE_BOOKMARKS_FILE  "vinagre.bookmarks"
+
+G_DEFINE_TYPE (VinagreBookmarks, vinagre_bookmarks, G_TYPE_OBJECT);
+
+static VinagreBookmarks *book_singleton = NULL;
+static guint signals[LAST_SIGNAL] = { 0 };
+
+/* Prototypes */
+static void vinagre_bookmarks_update_file  (VinagreBookmarks *book);
+static void vinagre_bookmarks_update_conns (VinagreBookmarks *book);
+static void vinagre_bookmarks_save_file    (VinagreBookmarks *book);
+static void vinagre_bookmarks_clear_conns  (VinagreBookmarks *book);
+static void vinagre_bookmarks_file_changed (GFileMonitor     *monitor,
+		                            GFile             *file,
+		                            GFile             *other_file,
+		                            GFileMonitorEvent  event_type,
+		                            VinagreBookmarks  *book);
+
+
+static void
+vinagre_bookmarks_init (VinagreBookmarks *book)
+{
+  GFile *gfile;
+
+  book->priv = G_TYPE_INSTANCE_GET_PRIVATE (book, VINAGRE_TYPE_BOOKMARKS, VinagreBookmarksPrivate);
+
+  book->priv->conns = NULL;
+  book->priv->file = NULL;
+  book->priv->filename = g_build_filename (g_get_home_dir (),
+			                   ".gnome2",
+			                   VINAGRE_BOOKMARKS_FILE,
+			                   NULL);
+  vinagre_bookmarks_update_file (book);
+  vinagre_bookmarks_update_conns (book);
+
+  gfile = g_file_new_for_path (book->priv->filename);
+  book->priv->monitor = g_file_monitor_file (gfile,
+                                             G_FILE_MONITOR_NONE,
+                                             NULL,
+                                             NULL);
+  g_signal_connect (book->priv->monitor,
+                    "changed",
+                    G_CALLBACK (vinagre_bookmarks_file_changed),
+                    book);
+  g_object_unref (gfile);
 }
 
 static void
-vinagre_bookmarks_save_file (void)
+vinagre_bookmarks_finalize (GObject *object)
 {
-  gchar    *file;
-  gchar    *data;
-  gsize    length;
-  GError   *error;
+  VinagreBookmarks *book = VINAGRE_BOOKMARKS (object);
 
-  error = NULL;
-  data = g_key_file_to_data (bookmarks,
-			     &length,
-			     &error);
-  if (!data)
-    {
-      if (error)
-	{
-	  g_warning (_("Error while saving bookmarks: %s"), error->message);
-	  g_error_free (error);
-	}
+  g_key_file_free (book->priv->file);
+  book->priv->file = NULL;
+  vinagre_bookmarks_clear_conns (book);
 
-      return;
+  g_free (book->priv->filename);
+  book->priv->filename = NULL;
 
-    }
+  g_file_monitor_cancel (book->priv->monitor);
+  g_object_unref (book->priv->monitor);
 
-  file  = filename ();
-  error = NULL;
-
-  if (!g_file_set_contents (file,
-			    data,
-			    length,
-			    &error))
-    {
-      if (error)
-	{
-	  g_warning (_("Error while saving bookmarks: %s"), error->message);
-	  g_error_free (error);
-	}
-    }
-
-  g_free (file);
-  g_free (data);
+  G_OBJECT_CLASS (vinagre_bookmarks_parent_class)->finalize (object);
 }
 
-void
-vinagre_bookmarks_init (void)
+static void
+vinagre_bookmarks_class_init (VinagreBookmarksClass *klass)
 {
-  gchar    *file;
-  gboolean loaded;
-  GError   *error;
+  GObjectClass* object_class = G_OBJECT_CLASS (klass);
+  GObjectClass* parent_class = G_OBJECT_CLASS (klass);
 
-  g_return_if_fail (bookmarks == NULL);
+  g_type_class_add_private (klass, sizeof (VinagreBookmarksPrivate));
 
-  bookmarks = g_key_file_new ();
+  object_class->finalize = vinagre_bookmarks_finalize;
 
-  loaded = FALSE;
-  error  = NULL;
-
-  file = filename ();
-  if (g_file_test (file, G_FILE_TEST_EXISTS))
-    loaded = g_key_file_load_from_file (bookmarks,
-					file,
-					G_KEY_FILE_NONE,
-					&error);
-  g_free (file);
-
-  if (!loaded)
-    {
-      if (error)
-	{
-	  g_warning (_("Error while initializing bookmarks: %s"), error->message);
-	  g_error_free (error);
-	}
-    }
+  signals[BOOKMARK_CHANGED] =
+		g_signal_new ("changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (VinagreBookmarksClass, changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
 }
 
-void
-vinagre_bookmarks_finalize (void)
+VinagreBookmarks *
+vinagre_bookmarks_get_default (void)
 {
-  g_return_if_fail (bookmarks != NULL);
+  if (G_UNLIKELY (!book_singleton))
+    book_singleton = VINAGRE_BOOKMARKS (g_object_new (VINAGRE_TYPE_BOOKMARKS,
+                                                      NULL));
+  return book_singleton;
+}
 
-  g_key_file_free (bookmarks);
+static VinagreConnection *
+vinagre_bookmarks_find_conn (VinagreBookmarks  *book,
+                             VinagreConnection *conn)
+{
+  GSList *l, *next;
+
+  for (l = book->priv->conns; l; l = next)
+    {
+      VinagreConnection *local = VINAGRE_CONNECTION (l->data);
+
+      if ( (g_str_equal (vinagre_connection_get_host (conn),
+                         vinagre_connection_get_host (local)))
+          &&
+            (vinagre_connection_get_port (conn) == vinagre_connection_get_port (local) ) )
+        return local;
+
+      next = l->next;
+    }
+
+  return NULL;
+}
+
+static void
+vinagre_bookmarks_add_conn (VinagreBookmarks  *book,
+                            VinagreConnection *conn)
+{
+  book->priv->conns = g_slist_prepend (book->priv->conns,
+                                       vinagre_connection_clone (conn));
+  vinagre_bookmarks_save_file (book);
+}
+
+static void
+vinagre_bookmarks_edit_conn (VinagreBookmarks  *book,
+                             VinagreConnection *old_conn,
+                             VinagreConnection *conn)
+{
+  VinagreConnection *local = vinagre_bookmarks_find_conn (book, old_conn);
+
+  g_return_if_fail (VINAGRE_IS_CONNECTION (local));
+
+  g_object_unref (local);
+  book->priv->conns = g_slist_remove (book->priv->conns,
+                                      local);
+  book->priv->conns = g_slist_prepend (book->priv->conns,
+                                       vinagre_connection_clone (conn));
+  
+  vinagre_bookmarks_save_file (book);
+}
+
+static void
+vinagre_bookmarks_del_conn (VinagreBookmarks  *book,
+                            VinagreConnection *conn)
+{
+  VinagreConnection *local = vinagre_bookmarks_find_conn (book, conn);
+
+  g_return_if_fail (VINAGRE_IS_CONNECTION (local));
+
+  book->priv->conns = g_slist_remove (book->priv->conns,
+                                      local);
+  g_object_unref (local);
+  
+  vinagre_bookmarks_save_file (book);
 }
 
 gboolean
-vinagre_bookmarks_add (VinagreConnection *conn,
-		       VinagreWindow     *window)
+vinagre_bookmarks_add (VinagreBookmarks  *book,
+                       VinagreConnection *conn,
+		       GtkWindow         *window)
 {
   gint result;
   GladeXML    *xml;
@@ -132,12 +211,15 @@ vinagre_bookmarks_add (VinagreConnection *conn,
   GtkWidget   *dialog;
   const gchar *name;
 
-  g_return_val_if_fail (conn != NULL, FALSE);
+  g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), FALSE);
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
+
+  g_object_ref (conn);
 
   glade_file = vinagre_utils_get_glade_filename ();
   xml = glade_xml_new (glade_file, "add_to_bookmarks_dialog", NULL);
   dialog = glade_xml_get_widget (xml, "add_to_bookmarks_dialog");
-  gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
+  gtk_window_set_transient_for (GTK_WINDOW(dialog), window);
 
   gtk_widget_show_all (dialog);
  
@@ -147,51 +229,53 @@ vinagre_bookmarks_add (VinagreConnection *conn,
     {
       name = gtk_entry_get_text (GTK_ENTRY (glade_xml_get_widget (xml, "bookmark_name_entry")));
       if (strlen(name) < 1)
-	name = conn->host;
+	name = vinagre_connection_get_host (conn);
 
-      g_key_file_set_string (bookmarks,
+      g_key_file_set_string (book->priv->file,
 			     name,
 			     "host",
-			     conn->host);
-      g_key_file_set_integer (bookmarks,
+			     vinagre_connection_get_host (conn));
+      g_key_file_set_integer (book->priv->file,
 			      name,
 			      "port",
-			      conn->port);
+			      vinagre_connection_get_port (conn));
 
       vinagre_connection_set_name (conn, name);
-      vinagre_bookmarks_save_file ();
+      vinagre_bookmarks_add_conn (book, conn);
     }
 
   gtk_widget_destroy (GTK_WIDGET (dialog));
   g_object_unref (G_OBJECT (xml));
+  g_object_unref (conn);
 
   return (result == GTK_RESPONSE_OK);
 }
 
 gboolean
-vinagre_bookmarks_edit (VinagreConnection *conn,
-		        VinagreWindow     *window)
+vinagre_bookmarks_edit (VinagreBookmarks  *book,
+                        VinagreConnection *conn,
+		        GtkWindow         *window)
 {
   gint result;
   GladeXML    *xml;
   const gchar *glade_file;
   GtkWidget   *dialog, *host_entry, *name_entry, *port_entry;
-  const gchar *name;
 
-  g_return_val_if_fail (conn != NULL, FALSE);
+  g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), FALSE);
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
 
   glade_file = vinagre_utils_get_glade_filename ();
   xml = glade_xml_new (glade_file, "edit_bookmark_dialog", NULL);
   dialog = glade_xml_get_widget (xml, "edit_bookmark_dialog");
-  gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
+  gtk_window_set_transient_for (GTK_WINDOW(dialog), window);
 
   name_entry = glade_xml_get_widget (xml, "edit_bookmark_name_entry");
   host_entry = glade_xml_get_widget (xml, "edit_bookmark_host_entry");
   port_entry = glade_xml_get_widget (xml, "edit_bookmark_port_entry");
 
-  gtk_entry_set_text (GTK_ENTRY(name_entry), conn->name);
-  gtk_entry_set_text (GTK_ENTRY(host_entry), conn->host);
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (port_entry), conn->port);
+  gtk_entry_set_text (GTK_ENTRY(name_entry), vinagre_connection_get_name (conn));
+  gtk_entry_set_text (GTK_ENTRY(host_entry), vinagre_connection_get_host (conn));
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (port_entry), vinagre_connection_get_port (conn));
 
   gtk_widget_show_all (dialog);
  
@@ -199,27 +283,33 @@ vinagre_bookmarks_edit (VinagreConnection *conn,
 
   if (result == GTK_RESPONSE_OK)
     {
+      const gchar *name;
+      VinagreConnection *old_conn = vinagre_connection_clone (conn);
 
-      g_key_file_remove_group (bookmarks, conn->name, NULL);
+      g_key_file_remove_group (book->priv->file, vinagre_connection_get_name (conn), NULL);
 
       name = gtk_entry_get_text (GTK_ENTRY (name_entry));
       vinagre_connection_set_host (conn, gtk_entry_get_text (GTK_ENTRY (host_entry)));
       vinagre_connection_set_port (conn, gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (port_entry)));
 
-      if (strlen(conn->name) < 1)
-	name = conn->host;
+      if (strlen (name) < 1)
+        if (strlen(vinagre_connection_get_name (conn)) < 1)
+	  name = vinagre_connection_get_host (conn);
+        else
+          name = vinagre_connection_get_name (conn);
 
-      g_key_file_set_string (bookmarks,
+      g_key_file_set_string (book->priv->file,
 			     name,
 			     "host",
-			     conn->host);
-      g_key_file_set_integer (bookmarks,
+			     vinagre_connection_get_host (conn));
+      g_key_file_set_integer (book->priv->file,
 			      name,
 			      "port",
-			      conn->port);
+			      vinagre_connection_get_port (conn));
 
       vinagre_connection_set_name (conn, name);
-      vinagre_bookmarks_save_file ();
+      vinagre_bookmarks_edit_conn (book, old_conn, conn);
+      g_object_unref (old_conn);
     }
 
   gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -228,54 +318,27 @@ vinagre_bookmarks_edit (VinagreConnection *conn,
   return (result == GTK_RESPONSE_OK);
 }
 
-GList *
-vinagre_bookmarks_get_all (void)
-{
-  GList *list = NULL;
-  gsize length, i;
-  gchar **conns;
-  VinagreConnection *conn;
-  gchar *s_value;
-  gint i_value;
-
-  g_return_val_if_fail (bookmarks != NULL, NULL);
-
-  conns = g_key_file_get_groups (bookmarks, &length);
-  for (i=0; i<length; i++)
-    {
-      conn = vinagre_connection_new ();
-      vinagre_connection_set_name (conn, conns[i]);
-
-      s_value = g_key_file_get_string (bookmarks, conns[i], "host", NULL);
-      vinagre_connection_set_host (conn, s_value);
-      g_free (s_value);
-
-      i_value = g_key_file_get_integer (bookmarks, conns[i], "port", NULL);
-      vinagre_connection_set_port (conn, i_value);
-
-      list = g_list_append (list, conn);
-    }
-  g_strfreev (conns);
-
-  return list;
-}
-
 gboolean
-vinagre_bookmarks_del (VinagreConnection *conn,
-		       VinagreWindow     *window)
+vinagre_bookmarks_del (VinagreBookmarks  *book,
+                       VinagreConnection *conn,
+		       GtkWindow         *window)
 {
   gint       result;
   GtkWidget *dialog;
   gchar     *name;
   GError    *error = NULL;
 
-  g_return_val_if_fail (bookmarks != NULL, FALSE);
-  g_return_val_if_fail (conn != NULL, FALSE);
+  g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), FALSE);
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
 
-  name = vinagre_connection_best_name (conn);
-  g_return_val_if_fail (g_key_file_has_group (bookmarks, name), FALSE);
+  name = vinagre_connection_get_best_name (conn);
+  if (!g_key_file_has_group (book->priv->file, name))
+    {
+      g_free (name);
+      return FALSE;
+    }
 
-  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+  dialog = gtk_message_dialog_new (window,
 				   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				   GTK_MESSAGE_QUESTION,
 				   GTK_BUTTONS_OK_CANCEL,
@@ -290,7 +353,7 @@ vinagre_bookmarks_del (VinagreConnection *conn,
 
   if (result == GTK_RESPONSE_OK)
     {
-      g_key_file_remove_group (bookmarks, name, &error);
+      g_key_file_remove_group (book->priv->file, name, &error);
       if (error)
 	{
 	  g_warning (_("Error while removing %s from bookmarks: %s"),
@@ -300,57 +363,174 @@ vinagre_bookmarks_del (VinagreConnection *conn,
 	  g_free (name);
 	  return FALSE;
 	}
-      g_free (name);
-      vinagre_bookmarks_save_file ();
+      vinagre_bookmarks_del_conn (book, conn);
     }
 
+  g_free (name);
   return (result == GTK_RESPONSE_OK);
 }
 
 VinagreConnection *
-vinagre_bookmarks_exists (const char *host, int port)
+vinagre_bookmarks_exists (VinagreBookmarks *book,
+                          const gchar *host,
+                          gint port)
 {
   VinagreConnection *conn = NULL;
-  gsize length, i;
-  gchar **conns = NULL;
-  gchar *s_host = NULL;
-  gint  i_port;
+  GSList *l, *next;
 
-  g_return_val_if_fail (bookmarks != NULL, NULL);
+  g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), NULL);
 
-  conns = g_key_file_get_groups (bookmarks, &length);
-  for (i=0; i<length; i++)
+  for (l = book->priv->conns; l; l = next)
     {
-      s_host = g_key_file_get_string (bookmarks, conns[i], "host", NULL);
-      i_port = g_key_file_get_integer (bookmarks, conns[i], "port", NULL);
+      VinagreConnection *con = VINAGRE_CONNECTION (l->data);
 
-      if ( (g_str_equal (host, s_host)) && (port == i_port) )
-	{
-	  conn = vinagre_connection_new ();
-	  vinagre_connection_set_name (conn, conns[i]);
-
-	  vinagre_connection_set_host (conn, host);
-	  vinagre_connection_set_port (conn, port);
-
-	  g_free (s_host);
-	  s_host = NULL;
-
-	  break;
-	}
-
-      if (s_host)
+      if ( (g_str_equal (host, vinagre_connection_get_host (con))) &&
+            (port == vinagre_connection_get_port (con) ) )
         {
-	  g_free (s_host);
-          s_host = NULL;
+          conn = vinagre_connection_clone (con);
+          break;
         }
+      next = l->next;
     }
-
-  if (s_host)
-    g_free (s_host);
-
-  if (conns)
-    g_strfreev (conns);
-
+  
   return conn;
 }
+
+GSList *
+vinagre_bookmarks_get_all (VinagreBookmarks *book)
+{
+  g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), NULL);
+
+  return book->priv->conns;
+}
+
+static void
+vinagre_bookmarks_update_file (VinagreBookmarks *book)
+{
+  gboolean loaded = TRUE;
+  GError   *error = NULL;
+
+  if (book->priv->file)
+    g_key_file_free (book->priv->file);
+  book->priv->file = g_key_file_new ();
+
+  if (g_file_test (book->priv->filename, G_FILE_TEST_EXISTS))
+    loaded = g_key_file_load_from_file (book->priv->file,
+					book->priv->filename,
+					G_KEY_FILE_NONE,
+					&error);
+  if (!loaded)
+    {
+      if (error)
+	{
+	  g_warning (_("Error while initializing bookmarks: %s"), error->message);
+	  g_error_free (error);
+	}
+    }
+}
+
+static void
+vinagre_bookmarks_save_file (VinagreBookmarks *book)
+{
+  gchar    *data;
+  gsize    length;
+  GError   *error;
+
+  error = NULL;
+  data = g_key_file_to_data (book->priv->file,
+			     &length,
+			     &error);
+  if (!data)
+    {
+      if (error)
+	{
+	  g_warning (_("Error while saving bookmarks: %s"), error->message);
+	  g_error_free (error);
+	}
+
+      return;
+
+    }
+
+  error = NULL;
+
+  if (!g_file_set_contents (book->priv->filename,
+			    data,
+			    length,
+			    &error))
+    {
+      if (error)
+	{
+	  g_warning (_("Error while saving bookmarks: %s"), error->message);
+	  g_error_free (error);
+          g_free (data);
+          return;
+	}
+    }
+
+  g_free (data);
+}
+
+static void
+vinagre_bookmarks_clear_conns (VinagreBookmarks *book)
+{
+  g_slist_foreach (book->priv->conns, (GFunc) g_object_unref, NULL);
+  g_slist_free (book->priv->conns);
+
+  book->priv->conns = NULL;
+}
+
+static void
+vinagre_bookmarks_update_conns (VinagreBookmarks *book)
+{
+  gsize length, i;
+  gchar **conns;
+
+  vinagre_bookmarks_clear_conns (book);
+
+  conns = g_key_file_get_groups (book->priv->file, &length);
+  for (i=0; i<length; i++)
+    {
+      VinagreConnection *conn;
+      gchar *s_value;
+      gint i_value;
+
+      s_value = g_key_file_get_string (book->priv->file, conns[i], "host", NULL);
+      if (!s_value)
+        continue;
+
+      conn = vinagre_connection_new ();
+      vinagre_connection_set_name (conn, conns[i]);
+      vinagre_connection_set_host (conn, s_value);
+      g_free (s_value);
+
+      i_value = g_key_file_get_integer (book->priv->file, conns[i], "port", NULL);
+      if (i_value == 0)
+        i_value = 5900;
+      vinagre_connection_set_port (conn, i_value);
+
+      book->priv->conns = g_slist_prepend (book->priv->conns, conn);
+    }
+
+  g_strfreev (conns);
+}
+
+static void
+vinagre_bookmarks_file_changed (GFileMonitor      *monitor,
+		                GFile             *file,
+		                GFile             *other_file,
+		                GFileMonitorEvent  event_type,
+		                VinagreBookmarks  *book)
+{
+  if (event_type != G_FILE_MONITOR_EVENT_CHANGED &&
+      event_type != G_FILE_MONITOR_EVENT_CREATED &&
+      event_type != G_FILE_MONITOR_EVENT_DELETED)
+    return;
+
+  vinagre_bookmarks_update_file (book);
+  vinagre_bookmarks_update_conns (book);
+
+  g_signal_emit (book, signals[BOOKMARK_CHANGED], 0);
+}
+
 /* vim: ts=8 */

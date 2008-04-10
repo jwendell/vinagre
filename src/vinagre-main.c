@@ -30,6 +30,7 @@
 #include "vinagre-bookmarks.h"
 #include "vinagre-window.h"
 #include "vinagre-utils.h"
+#include <vncdisplay.h>
 
 /* command line */
 static gchar **files = NULL;
@@ -121,6 +122,7 @@ int main (int argc, char **argv) {
   context = g_option_context_new (_("- VNC Client for GNOME"));
   g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
+  g_option_context_add_group (context, vnc_display_get_option_group ());
   g_option_context_parse (context, &argc, &argv, &error);
   if (error)
     {
@@ -140,6 +142,8 @@ int main (int argc, char **argv) {
 
   main_window = vinagre_window_new ();
   gtk_widget_show (GTK_WIDGET(main_window));
+
+  vinagre_utils_handle_debug ();
 
   vinagre_main_process_command_line (main_window);
   for (l = servers; l; l = next)

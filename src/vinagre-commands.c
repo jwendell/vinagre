@@ -204,6 +204,33 @@ vinagre_cmd_view_fullscreen (GtkAction     *action,
   vinagre_window_toggle_fullscreen (window);
 }
 
+void
+vinagre_cmd_view_scaling (GtkAction     *action,
+			  VinagreWindow *window)
+{
+  gboolean active;
+
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+
+  active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+
+  if (active &&
+      gdk_screen_is_composited (gtk_widget_get_screen (GTK_WIDGET (window))))
+    {
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
+      vinagre_utils_show_error (_("Scaling does not work properly on composited windows. Disable the visual effects and try again."),
+				GTK_WINDOW (window));
+      return;
+    }
+
+  if (!vinagre_tab_set_scaling (vinagre_window_get_active_tab (window), active))
+    {
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
+      vinagre_utils_show_error (_("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
+				GTK_WINDOW (window));
+    }
+}
+
 /* Bookmarks Menu */
 void
 vinagre_cmd_open_bookmark (VinagreWindow     *window,
@@ -226,42 +253,58 @@ void
 vinagre_cmd_bookmarks_add (GtkAction     *action,
 			   VinagreWindow *window)
 {
+  GtkWidget         *tab;
   VinagreConnection *conn;
   gchar             *name;
 
-  conn = vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab));
-  g_return_if_fail (conn != NULL);
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  name = vinagre_connection_best_name (conn);
+  tab = window->priv->active_tab;
+  conn = vinagre_tab_get_conn (VINAGRE_TAB (tab));
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-  vinagre_bookmarks_add (conn, window);
-  vinagre_tab_set_title (VINAGRE_TAB (window->priv->active_tab),
-			 name);
+  vinagre_bookmarks_add (vinagre_bookmarks_get_default (),
+                         conn,
+                         GTK_WINDOW (window));
 
-  vinagre_fav_update_list (VINAGRE_FAV (window->priv->fav_panel));
-  vinagre_window_update_bookmarks_list_menu (window);
-
-  g_free (name);
+  if (window->priv->active_tab == tab)
+    {
+      name = vinagre_connection_get_best_name (conn);
+      vinagre_tab_set_title (VINAGRE_TAB (window->priv->active_tab),
+			     name);
+      g_free (name);
+    }
 }
 
 void
 vinagre_cmd_bookmarks_edit (GtkAction     *action,
 			    VinagreWindow *window)
 {
-  g_return_if_fail (window->priv->fav_conn_selected != NULL);
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+  g_return_if_fail (VINAGRE_IS_CONNECTION (window->priv->fav_conn_selected));
 
-  if (vinagre_bookmarks_edit (window->priv->fav_conn_selected, window))
-    {
-      vinagre_fav_update_list (VINAGRE_FAV (window->priv->fav_panel));
-      vinagre_window_update_bookmarks_list_menu (window);
-    }
+  vinagre_bookmarks_edit (vinagre_bookmarks_get_default (),
+                          window->priv->fav_conn_selected,
+                          GTK_WINDOW (window));
+}
+
+void
+vinagre_cmd_bookmarks_del (GtkAction     *action,
+			   VinagreWindow *window)
+{
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+  g_return_if_fail (VINAGRE_IS_CONNECTION (window->priv->fav_conn_selected));
+
+  vinagre_bookmarks_del (vinagre_bookmarks_get_default (),
+                         window->priv->fav_conn_selected,
+                         GTK_WINDOW (window));
 }
 
 void
 vinagre_cmd_bookmarks_open (GtkAction     *action,
 			    VinagreWindow *window)
 {
-  VinagreConnection *conn = NULL;
+  VinagreConnection *conn;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
@@ -269,22 +312,9 @@ vinagre_cmd_bookmarks_open (GtkAction     *action,
   if (!conn)
     conn = window->priv->fav_conn_selected;
 
-  g_return_if_fail (conn != NULL);
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
   vinagre_cmd_open_bookmark (window, conn);
-}
-
-void
-vinagre_cmd_bookmarks_del (GtkAction     *action,
-			   VinagreWindow *window)
-{
-  g_return_if_fail (window->priv->fav_conn_selected != NULL);
-
-  if (vinagre_bookmarks_del (window->priv->fav_conn_selected, window))
-    {
-      vinagre_fav_update_list (VINAGRE_FAV (window->priv->fav_panel));
-      vinagre_window_update_bookmarks_list_menu (window);
-    }
 }
 
 /* Make url in about dialog clickable */

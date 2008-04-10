@@ -44,6 +44,7 @@ struct _VinagreTabPrivate
   guint              status_id;
   gboolean           save_password;
   guint32            keyring_item_id;
+  VinagreTabState    state;
 };
 
 G_DEFINE_TYPE(VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
@@ -98,13 +99,13 @@ vinagre_tab_window_state_cb (GtkWidget           *widget,
 
   if (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN)
     {
-      vnc_display_set_pointer_grab  (VNC_DISPLAY(tab->priv->vnc), TRUE);
+      vnc_display_force_grab  (VNC_DISPLAY(tab->priv->vnc), TRUE);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				      h, v);
     }
   else
     {
-      vnc_display_set_pointer_grab  (VNC_DISPLAY(tab->priv->vnc), FALSE);
+      vnc_display_force_grab  (VNC_DISPLAY(tab->priv->vnc), FALSE);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				      GTK_POLICY_AUTOMATIC,
 				      GTK_POLICY_AUTOMATIC);
@@ -124,10 +125,10 @@ vinagre_tab_get_property (GObject    *object,
   switch (prop_id)
     {
       case PROP_CONN:
-        g_value_set_pointer (value, tab->priv->conn);
+        g_value_set_object (value, tab->priv->conn);
 	break;
       case PROP_WINDOW:
-        g_value_set_pointer (value, tab->priv->window);
+        g_value_set_object (value, tab->priv->window);
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -146,10 +147,10 @@ vinagre_tab_set_property (GObject      *object,
   switch (prop_id)
     {
       case PROP_CONN:
-        tab->priv->conn = g_value_get_pointer (value);
+        tab->priv->conn = g_value_get_object (value);
         break;
       case PROP_WINDOW:
-        tab->priv->window = g_value_get_pointer (value);
+        tab->priv->window = g_value_get_object (value);
 	g_signal_connect (tab->priv->window,
 			  "window-state-event",
 			  G_CALLBACK (vinagre_tab_window_state_cb),
@@ -173,7 +174,8 @@ vinagre_tab_finalize (GObject *object)
   g_signal_handlers_disconnect_by_func (tab->priv->window,
   					vinagre_tab_window_state_cb,
   					tab);
-  vinagre_connection_free (tab->priv->conn);
+  g_object_unref (tab->priv->conn);
+  tab->priv->conn = NULL;
 	
   G_OBJECT_CLASS (vinagre_tab_parent_class)->finalize (object);
 }
@@ -189,24 +191,26 @@ vinagre_tab_class_init (VinagreTabClass *klass)
 
   g_object_class_install_property (object_class,
 				   PROP_CONN,
-				   g_param_spec_pointer ("conn",
-							 "Connection",
-							 "The connection",
-							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY |
-							 G_PARAM_STATIC_NAME |
-							 G_PARAM_STATIC_NICK |
-							 G_PARAM_STATIC_BLURB));
+				   g_param_spec_object ("conn",
+							"Connection",
+							"The connection",
+							VINAGRE_TYPE_CONNECTION,
+							G_PARAM_READWRITE |
+							G_PARAM_CONSTRUCT_ONLY |
+							G_PARAM_STATIC_NAME |
+							G_PARAM_STATIC_NICK |
+							G_PARAM_STATIC_BLURB));
   g_object_class_install_property (object_class,
 				   PROP_WINDOW,
-				   g_param_spec_pointer ("window",
-							 "Window",
-							 "The VinagreWindow",
-							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY |
-							 G_PARAM_STATIC_NAME |
-							 G_PARAM_STATIC_NICK |
-							 G_PARAM_STATIC_BLURB));
+				   g_param_spec_object ("window",
+							"Window",
+							"The VinagreWindow",
+							VINAGRE_TYPE_WINDOW,
+							G_PARAM_READWRITE |
+							G_PARAM_CONSTRUCT_ONLY |
+							G_PARAM_STATIC_NAME |
+							G_PARAM_STATIC_NICK |
+							G_PARAM_STATIC_BLURB));
 
   signals[TAB_CONNECTED] =
 		g_signal_new ("tab-connected",
@@ -249,9 +253,9 @@ open_vnc (VinagreTab *tab)
   tab->priv->status = GTK_STATUSBAR (vinagre_window_get_statusbar (tab->priv->window));
   tab->priv->status_id = gtk_statusbar_get_context_id (tab->priv->status, "VNC Widget Messages");
   
-  port = g_strdup_printf ("%d", tab->priv->conn->port);
+  port = g_strdup_printf ("%d", vinagre_connection_get_port (tab->priv->conn));
   
-  if (!vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), tab->priv->conn->host, port))
+  if (!vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), vinagre_connection_get_host (tab->priv->conn), port))
     vinagre_utils_show_error (_("Error connecting to host."), NULL);
 
   vnc_display_set_pointer_local (VNC_DISPLAY(tab->priv->vnc), TRUE);
@@ -285,7 +289,7 @@ vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreTab *tab)
   gchar   *name;
 
   message = g_string_new (NULL);
-  name = vinagre_connection_best_name (vinagre_tab_get_conn (tab));
+  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
 
   g_string_printf (message, _("Authentication to host \"%s\" has failed"),
 		   name);
@@ -313,7 +317,7 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreTab *tab)
   gchar   *name;
 
   message = g_string_new (NULL);
-  name = vinagre_connection_best_name (vinagre_tab_get_conn (tab));
+  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
 
   g_string_printf (message, _("Authentication method to host \"%s\" is unsupported. (%u)"),
 		   name,
@@ -360,9 +364,11 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
   data = g_slice_new (GtkRecentData);
 
   uri = g_string_new (NULL);
-  g_string_printf (uri, "vnc://%s:%d", tab->priv->conn->host, tab->priv->conn->port);
+  g_string_printf (uri, "vnc://%s:%d",
+                   vinagre_connection_get_host (tab->priv->conn),
+                   vinagre_connection_get_port (tab->priv->conn));
 
-  data->display_name = vinagre_connection_best_name (tab->priv->conn);
+  data->display_name = vinagre_connection_get_best_name (tab->priv->conn);
   data->description = NULL;
   data->mime_type = g_strdup ("application/x-remote-connection");
   data->app_name = (gchar *) g_get_application_name ();
@@ -393,12 +399,12 @@ vinagre_tab_save_password (VinagreTab *tab)
                 NULL,           /* default keyring */
                 NULL,           /* user            */
                 NULL,           /* domain          */
-                tab->priv->conn->host,   /* server          */
+                vinagre_connection_get_host (tab->priv->conn),   /* server          */
                 NULL,           /* object          */
                 "rfb",          /* protocol        */
                 "vnc-password", /* authtype        */
-                tab->priv->conn->port,           /* port            */
-                tab->priv->conn->password,       /* password        */
+                vinagre_connection_get_port (tab->priv->conn),           /* port            */
+                vinagre_connection_get_password (tab->priv->conn),       /* password        */
                 &tab->priv->keyring_item_id);
 
   if (result != GNOME_KEYRING_RESULT_OK)
@@ -421,11 +427,11 @@ vinagre_tab_find_password (VinagreTab *tab)
   result = gnome_keyring_find_network_password_sync (
                 NULL,           /* user     */
 		NULL,           /* domain   */
-		tab->priv->conn->host,   /* server   */
+		vinagre_connection_get_host (tab->priv->conn),   /* server   */
 		NULL,           /* object   */
 		"rfb",          /* protocol */
 		"vnc-password", /* authtype */
-		tab->priv->conn->port,           /* port     */
+		vinagre_connection_get_port (tab->priv->conn),           /* port     */
 		&matches);
 
   if (result != GNOME_KEYRING_RESULT_OK || matches == NULL || matches->data == NULL)
@@ -450,7 +456,7 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
   vinagre_connection_set_desktop_name (tab->priv->conn,
 				       vnc_display_get_name (VNC_DISPLAY (tab->priv->vnc)));
 
-  name = vinagre_connection_best_name (tab->priv->conn);
+  name = vinagre_connection_get_best_name (tab->priv->conn);
   label = g_object_get_data (G_OBJECT (tab), "label");
   g_return_if_fail (label != NULL);
   gtk_label_set_label (label, name);
@@ -464,7 +470,8 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 		      tab->priv->status_id,
 		      _("Press Ctrl+Alt to grab the cursor"));
 
-  _vinagre_window_add_machine_connected (tab->priv->window);
+  tab->priv->state = VINAGRE_TAB_STATE_CONNECTED;
+  vinagre_window_update_machine_menu_sensitivity (tab->priv->window);
 
   /* Emits the signal saying that we have connected to the machine */
   g_signal_emit (G_OBJECT (tab),
@@ -488,7 +495,7 @@ ask_password(VinagreTab *tab)
   gtk_window_set_transient_for (GTK_WINDOW(password_dialog), GTK_WINDOW(tab->priv->window));
 
   host_label = glade_xml_get_widget (xml, "host_label");
-  name = vinagre_connection_best_name (tab->priv->conn);
+  name = vinagre_connection_get_best_name (tab->priv->conn);
   gtk_label_set_text (GTK_LABEL (host_label), name);
   g_free (name);
 
@@ -531,7 +538,6 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
 
 static void vnc_grab_cb (VncDisplay *vnc, VinagreTab *tab)
 {
-
   gtk_statusbar_pop (tab->priv->status,
 		     tab->priv->status_id);
 
@@ -572,15 +578,12 @@ static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
 static void
 vinagre_tab_init (VinagreTab *tab)
 {
-  GtkWidget *align;
   GtkWidget *viewport;
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
   tab->priv->save_password = FALSE;
   tab->priv->keyring_item_id = 0;
-
-  /* Create the alignment */
-  align = gtk_alignment_new (0.5, 0.5, 0, 0);
+  tab->priv->state = VINAGRE_TAB_STATE_INITIALIZING;
 
   /* Create the scrolled window */
   tab->priv->scroll = gtk_scrolled_window_new (NULL, NULL);
@@ -594,10 +597,9 @@ vinagre_tab_init (VinagreTab *tab)
 
   /* Create the vnc widget */
   tab->priv->vnc = vnc_display_new ();
-  gtk_container_add (GTK_CONTAINER (align), tab->priv->vnc);
 
   gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (tab->priv->scroll),
-					 align);
+					 tab->priv->vnc);
   viewport = gtk_bin_get_child (GTK_BIN (tab->priv->scroll));
   gtk_viewport_set_shadow_type(GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
 
@@ -679,8 +681,8 @@ vinagre_tab_get_tooltips (VinagreTab *tab)
 				  "<b>%s</b> %d\n"
 				  "<b>%s</b> %dx%d",
 				  _("Desktop Name:"), vnc_display_get_name (VNC_DISPLAY (tab->priv->vnc)),
-				  _("Host:"), tab->priv->conn->host,
-				  _("Port:"), tab->priv->conn->port,
+				  _("Host:"), vinagre_connection_get_host (tab->priv->conn),
+				  _("Port:"), vinagre_connection_get_port (tab->priv->conn),
 				  _("Dimensions:"), vnc_display_get_width (VNC_DISPLAY (tab->priv->vnc)), vnc_display_get_height (VNC_DISPLAY (tab->priv->vnc)));
 
   return tip;
@@ -746,7 +748,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   pix = vnc_display_get_pixbuf (VNC_DISPLAY (tab->priv->vnc));
 
   filename = NULL;
-  name = vinagre_connection_best_name (tab->priv->conn);
+  name = vinagre_connection_get_best_name (tab->priv->conn);
   suggested_filename = g_string_new (NULL);
   g_string_printf (suggested_filename, _("Screenshot of %s"), name);
   g_string_append (suggested_filename, ".png");
@@ -793,6 +795,31 @@ vinagre_tab_paste_text (VinagreTab *tab, const gchar *text)
       vnc_display_client_cut_text (VNC_DISPLAY (tab->priv->vnc), out);
       g_free (out);
     }
+}
+
+gboolean
+vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  if (vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc)) == active)
+    return TRUE;
+
+  return vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active);
+}
+
+gboolean
+vinagre_tab_get_scaling (VinagreTab *tab) {
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  return vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc));
+}
+
+VinagreTabState
+vinagre_tab_get_state (VinagreTab *tab)
+{
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  return tab->priv->state;
 }
 
 /* vim: ts=8 */
