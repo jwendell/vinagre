@@ -345,7 +345,7 @@ vinagre_bookmarks_del (VinagreBookmarks  *book,
 				   _("Confirm removal?"));
 
   gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
-					    _("Are you sure you want to exclude <i>%s</i> from bookmarks?"),
+					    _("Are you sure you want to remove <i>%s</i> from bookmarks?"),
 					    name);
  
   result = gtk_dialog_run (GTK_DIALOG (dialog));
