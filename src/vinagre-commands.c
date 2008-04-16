@@ -231,6 +231,21 @@ vinagre_cmd_view_scaling (GtkAction     *action,
     }
 }
 
+void
+vinagre_cmd_view_readonly (GtkAction     *action,
+			   VinagreWindow *window)
+{
+  gboolean active;
+  VinagreTab *tab;
+
+  tab = vinagre_window_get_active_tab (window);
+  if (!tab)
+    return;
+
+  active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+  vinagre_tab_set_readonly (tab, active);
+}
+
 /* Bookmarks Menu */
 void
 vinagre_cmd_open_bookmark (VinagreWindow     *window,

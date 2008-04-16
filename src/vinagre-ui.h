@@ -88,7 +88,10 @@ static const GtkToggleActionEntry vinagre_machine_connected_toggle_menu_entries[
 {
   { "ViewScaling", NULL, N_("S_caling"), NULL,
     N_("Fit the remote screen into the current window size"),
-    G_CALLBACK (vinagre_cmd_view_scaling), FALSE }
+    G_CALLBACK (vinagre_cmd_view_scaling), FALSE },
+  { "ViewReadOnly", NULL, N_("_Read only"), NULL,
+    N_("Disable mouse and keyboard activities"),
+    G_CALLBACK (vinagre_cmd_view_readonly), FALSE }
 };
 
 static const GtkToggleActionEntry vinagre_always_sensitive_toggle_menu_entries[] =

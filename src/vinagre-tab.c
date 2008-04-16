@@ -814,6 +814,20 @@ vinagre_tab_get_scaling (VinagreTab *tab) {
   return vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc));
 }
 
+void
+vinagre_tab_set_readonly (VinagreTab *tab, gboolean active) {
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  vnc_display_set_read_only (VNC_DISPLAY (tab->priv->vnc), active);
+}
+
+gboolean
+vinagre_tab_get_readonly (VinagreTab *tab) {
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  return vnc_display_get_read_only (VNC_DISPLAY (tab->priv->vnc));
+}
+
 VinagreTabState
 vinagre_tab_get_state (VinagreTab *tab)
 {

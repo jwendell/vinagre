@@ -391,7 +391,6 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
   window->priv->machine_connected_action_group = action_group;
-  window->priv->scaling_action = gtk_action_group_get_action (action_group, "ViewScaling");
 
   action = gtk_action_group_get_action (action_group, "ViewFullScreen");
   g_object_set (action, "is_important", TRUE, NULL);
@@ -822,17 +821,31 @@ vinagre_window_set_title (VinagreWindow *window)
 }
 
 static void
-update_toggle_machine_items (VinagreWindow *window) {
+update_toggle_machine_items (VinagreWindow *window)
+{
+  GtkAction *action;
+
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
   if (window->priv->active_tab == NULL)
     {
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (window->priv->scaling_action), FALSE);
+      action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewScaling");
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
+
+      action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewReadOnly");
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
+
       return;
     }
 
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (window->priv->scaling_action),
+  action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewScaling");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
 				vinagre_tab_get_scaling (VINAGRE_TAB (window->priv->active_tab)));
+
+  action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewReadOnly");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+				vinagre_tab_get_readonly (VINAGRE_TAB (window->priv->active_tab)));
+
 }
 
 static void
@@ -841,9 +854,14 @@ vinagre_window_page_removed (GtkNotebook   *notebook,
 			     guint         page_num,
 			     VinagreWindow *window)
 {
+  GtkNotebook *nb;
+
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  window->priv->active_tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (window->priv->notebook), gtk_notebook_get_current_page (GTK_NOTEBOOK (window->priv->notebook)));
+  nb = GTK_NOTEBOOK (window->priv->notebook);
+
+  window->priv->active_tab = gtk_notebook_get_nth_page (nb,
+							gtk_notebook_get_current_page (nb));
 
   if (!window->priv->active_tab && window->priv->fullscreen)
     vinagre_window_toggle_fullscreen (window);

@@ -52,6 +52,8 @@ void		vinagre_cmd_view_scaling	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_fullscreen	(GtkAction     *action,
 						 VinagreWindow *window);
+void		vinagre_cmd_view_readonly	(GtkAction     *action,
+						 VinagreWindow *window);
 
 void		vinagre_cmd_open_bookmark	(VinagreWindow     *window,
 						 VinagreConnection *conn);

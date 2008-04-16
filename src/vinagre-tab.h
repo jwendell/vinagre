@@ -89,6 +89,8 @@ void		  vinagre_tab_paste_text	(VinagreTab *tab,
 
 gboolean	  vinagre_tab_set_scaling	(VinagreTab *tab, gboolean active);
 gboolean	  vinagre_tab_get_scaling	(VinagreTab *tab);
+void	          vinagre_tab_set_readonly	(VinagreTab *tab, gboolean active);
+gboolean	  vinagre_tab_get_readonly	(VinagreTab *tab);
 
 VinagreTabState   vinagre_tab_get_state		(VinagreTab *tab);
 
