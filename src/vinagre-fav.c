@@ -804,7 +804,7 @@ vinagre_fav_update_list (VinagreFav *fav)
 
   gtk_tree_store_append (store, &parent_iter, NULL);
   gtk_tree_store_set (store, &parent_iter,
-                      NAME_COL, _("Hosts near to me"),
+                      NAME_COL, _("Hosts nearby"),
                       IS_GROUP_COL, TRUE,
                       IS_FOLDER_COL, FALSE,
                       IS_AVAHI_COL, FALSE,
