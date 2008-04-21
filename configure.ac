@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(vinagre, 2.23.1, http://www.gnome.org/projects/vinagre)
+AC_INIT(vinagre, 2.23.2, http://www.gnome.org/projects/vinagre)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
