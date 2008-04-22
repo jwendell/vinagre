@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-31 11:57+0000\n"
-"PO-Revision-Date: 2008-02-01 17:27+0200\n"
+"POT-Creation-Date: 2008-04-19 13:58+0000\n"
+"PO-Revision-Date: 2008-04-21 18:56+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgid "Access remote desktops"
 msgstr "Ligipääs kaugtöölaudadele"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:146
+#: ../src/vinagre-main.c:136
 msgid "Remote Desktop Viewer"
 msgstr "Kaugtöölaudade vaataja"
 
@@ -51,7 +51,7 @@ msgstr "<b>Millise masinaga soovid ühendust võtta?</b>"
 msgid "Editing a bookmark"
 msgstr "Järjehoidja redigeerimine"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:684
+#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:684
 msgid "Host:"
 msgstr "Host:"
 
@@ -91,29 +91,29 @@ msgstr "Kaugtöölaua (VNC) fail"
 msgid "Remote Desktop Connection"
 msgstr "Kaugtöölaua ühendus"
 
-#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "Viga järjehoidjate salvestamisel: %s"
+#: ../src/vinagre-bookmarks.c:345
+msgid "Confirm removal?"
+msgstr "Eemaldamise kinnitus"
 
-#: ../src/vinagre-bookmarks.c:111
+#: ../src/vinagre-bookmarks.c:348
+#, c-format
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgstr "Kas eemaldada <i>%s</i> järjehoidjate hulgast?"
+
+#: ../src/vinagre-bookmarks.c:359
+#, c-format
+msgid "Error while removing %s from bookmarks: %s"
+msgstr "Viga %s eemaldamisel järjehoidjate seast: %s"
+
+#: ../src/vinagre-bookmarks.c:426
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Viga järjehoidjate lähtestamisel: %s"
 
-#: ../src/vinagre-bookmarks.c:282
-msgid "Confirm removal?"
-msgstr "Eemaldamise kinnitus"
-
-#: ../src/vinagre-bookmarks.c:285
+#: ../src/vinagre-bookmarks.c:447 ../src/vinagre-bookmarks.c:464
 #, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
-msgstr "Soovid sa <i>%s</i> eemaldada järjehoidjate hulgast?"
-
-#: ../src/vinagre-bookmarks.c:296
-#, c-format
-msgid "Error while removing %s from bookmarks: %s"
-msgstr "Viga %s eemaldamisel järjehoidjate seast: %s"
+msgid "Error while saving bookmarks: %s"
+msgstr "Viga järjehoidjate salvestamisel: %s"
 
 #: ../src/vinagre-commands.c:90
 msgid "Choose the file"
@@ -129,11 +129,25 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Järgnevat faili pole võimalik avada:"
 msgstr[1] "Järgnevaid faile pole võimalik avada:"
 
-#: ../src/vinagre-commands.c:383
+#: ../src/vinagre-commands.c:221
+msgid ""
+"Scaling does not work properly on composited windows. Disable the visual "
+"effects and try again."
+msgstr ""
+
+#: ../src/vinagre-commands.c:229
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+
+#: ../src/vinagre-commands.c:428
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre on VNC-klient GNOME töölauale"
 
-#: ../src/vinagre-commands.c:386
+#: ../src/vinagre-commands.c:431
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -145,7 +159,7 @@ msgstr ""
 "Tarkvara Fondi poolt avaldatud; kas Litsentsi versioon number 2 või "
 "(vastavalt Teie valikule) ükskõik milline hilisem versioon."
 
-#: ../src/vinagre-commands.c:390
+#: ../src/vinagre-commands.c:435
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -157,7 +171,7 @@ msgstr ""
 "TEATUD KINDLAKS EESMÄRGIKS. Üksikasjade suhtes vaata GNU Üldist Avalikku "
 "Litsentsi."
 
-#: ../src/vinagre-commands.c:394
+#: ../src/vinagre-commands.c:439
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -165,70 +179,77 @@ msgstr ""
 "Te peaks olema saanud GNU Üldise Avaliku Litsentsi koopia koos selle "
 "programmiga; kui ei, siis vaadake aadressi <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:416
+#: ../src/vinagre-commands.c:461
 msgid "translator-credits"
 msgstr "Ivar Smolin <okul@linux.ee>, 2008."
 
-#: ../src/vinagre-commands.c:419
+#: ../src/vinagre-commands.c:464
 msgid "Vinagre Website"
 msgstr "Vinagre veebisait"
 
-#: ../src/vinagre-connect.c:53
+#: ../src/vinagre-connect.c:45
 msgid "Choose a VNC Server"
 msgstr "VNC-serveri valimine"
 
-#: ../src/vinagre-fav.c:382
-msgid "Image"
-msgstr "Pilt"
-
-#: ../src/vinagre-fav.c:389
-msgid "Name"
-msgstr "Nimi"
-
-#: ../src/vinagre-fav.c:437
-msgid "Bookmarks"
-msgstr "Järjehoidjad"
-
-#: ../src/vinagre-fav.c:445
-msgid "Hide bookmarks"
-msgstr "Järjehoidjate peitmine"
-
-#: ../src/vinagre-main.c:42
-msgid "Opens a .vnc file"
-msgstr ".vnc faili avamine"
-
-#: ../src/vinagre-main.c:42
-msgid "filename"
-msgstr "failinimi"
-
-#: ../src/vinagre-main.c:46
-msgid "[server:port]"
-msgstr "[server:port]"
-
-#: ../src/vinagre-main.c:73
-msgid "Unknown error"
-msgstr "Tundmatu viga"
-
-#: ../src/vinagre-main.c:91
+#: ../src/vinagre-connection.c:454
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "%s-protokoll pole toetatud."
 
-#: ../src/vinagre-main.c:113
+#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:685
+msgid "Port:"
+msgstr "Port:"
+
+#: ../src/vinagre-fav.c:762
+msgid "Bookmarks"
+msgstr "Järjehoidjad"
+
+#: ../src/vinagre-fav.c:807
+msgid "Hosts nearby"
+msgstr "Lähedalasuvad hostid"
+
+#: ../src/vinagre-main.c:43
+msgid "Opens a .vnc file"
+msgstr ".vnc faili avamine"
+
+#: ../src/vinagre-main.c:43
+msgid "filename"
+msgstr "failinimi"
+
+#: ../src/vinagre-main.c:47
+msgid "[server:port]"
+msgstr "[server:port]"
+
+#: ../src/vinagre-main.c:72 ../src/vinagre-main.c:91
+#: ../src/vinagre-window.c:283
+msgid "Unknown error"
+msgstr "Tundmatu viga"
+
+#: ../src/vinagre-main.c:102 ../src/vinagre-window.c:282
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Leidis aset järgmine viga:"
 msgstr[1] "Leidis aset järgmised vead:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:133
+#: ../src/vinagre-main.c:122
 msgid "- VNC Client for GNOME"
 msgstr " - VNC klient GNOME jaoks"
 
-#: ../src/vinagre-main.c:141
+#: ../src/vinagre-main.c:131
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Kõigi käsureavõtmete vaatamiseks käivita 'vinagre --help'"
+
+#: ../src/vinagre-mdns.c:118
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "Tõrge avahi hostinime lahendamisel: %s\n"
+
+#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "Tõrge hostide sirvimisel: %s\n"
 
 #: ../src/vinagre-notebook.c:98
 #, c-format
@@ -239,7 +260,7 @@ msgstr "Ühendus hostiga \"%s\" sulgeti."
 msgid "Connecting..."
 msgstr "Ühendumine..."
 
-#: ../src/vinagre-notebook.c:148
+#: ../src/vinagre-notebook.c:151
 msgid "Close connection"
 msgstr "Ühenduse sulgemine"
 
@@ -252,43 +273,39 @@ msgstr "Eelistuste haldurit pole võimalik lähtestada."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Võtmele %3$s oodati `%1$s' tüüpi väärtust, saadi aga `%2$s' tüüpi"
 
-#: ../src/vinagre-tab.c:255
+#: ../src/vinagre-tab.c:259
 msgid "Error connecting to host."
 msgstr "Viga hostiga ühendumisel."
 
-#: ../src/vinagre-tab.c:292
+#: ../src/vinagre-tab.c:294
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Tõrge autentimisel hostile \"%s\""
 
-#: ../src/vinagre-tab.c:320
+#: ../src/vinagre-tab.c:322
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Host \"%s\" ei toeta kasutatud autentimismeetodit. (%u)"
 
-#: ../src/vinagre-tab.c:376
+#: ../src/vinagre-tab.c:380
 msgid "Error saving recent connection."
 msgstr "Viga hiljutise ühenduse salvestamisel."
 
-#: ../src/vinagre-tab.c:407
+#: ../src/vinagre-tab.c:411
 msgid "Error saving the password on the keyring."
 msgstr "Viga parooli salvestamisel võtmerõngasse."
 
-#: ../src/vinagre-tab.c:467 ../src/vinagre-tab.c:563
+#: ../src/vinagre-tab.c:471 ../src/vinagre-tab.c:567
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Kursori haaramiseks vajuta Ctrl+Alt"
 
-#: ../src/vinagre-tab.c:542
+#: ../src/vinagre-tab.c:546
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Kursori vabastamiseks vajuta Ctrl+Alt"
 
 #: ../src/vinagre-tab.c:683
 msgid "Desktop Name:"
 msgstr "Töölaua nimi:"
-
-#: ../src/vinagre-tab.c:685
-msgid "Port:"
-msgstr "Port:"
 
 #: ../src/vinagre-tab.c:686
 msgid "Dimensions:"
@@ -316,7 +333,7 @@ msgstr "_Redaktor"
 msgid "_View"
 msgstr "_Vaade"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:36
 msgid "_Bookmarks"
 msgstr "_Järjehoidjad"
 
@@ -409,36 +426,56 @@ msgid "View the current machine in full screen"
 msgstr "Käesoleva masina vaatamine täisekraanil"
 
 #: ../src/vinagre-ui.h:89
+msgid "S_caling"
+msgstr "_Skaleerimine"
+
+#: ../src/vinagre-ui.h:90
+msgid "Fit the remote screen into the current window size"
+msgstr "Kaugekraani sobitamine käesolevasse aknasse"
+
+#: ../src/vinagre-ui.h:92
+msgid "_Read only"
+msgstr "_Kirjutuskaitsega"
+
+#: ../src/vinagre-ui.h:93
+msgid "Disable mouse and keyboard activities"
+msgstr "Hiire- ja klaviatuuritegevuste keelamine"
+
+#: ../src/vinagre-ui.h:99
 msgid "_Toolbar"
 msgstr "_Tööriistariba"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:100
 msgid "Show or hide the toolbar"
 msgstr "Tööriistariba näitamine või peitmine"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:103
 msgid "_Statusbar"
 msgstr "_Olekuriba"
 
-#: ../src/vinagre-ui.h:94
+#: ../src/vinagre-ui.h:104
 msgid "Show or hide the statusbar"
 msgstr "Olekuriba näitamine või peitmine"
 
-#: ../src/vinagre-ui.h:98
-msgid "Show or hide the bookmarks panel"
-msgstr "Järjehoidjate paneeli näitamine või peitmine"
+#: ../src/vinagre-ui.h:107
+msgid "Side _Panel"
+msgstr "Külg_paneel"
 
-#: ../src/vinagre-window.c:386
+#: ../src/vinagre-ui.h:108
+msgid "Show or hide the side panel"
+msgstr "Külgpaneeli näitamine või peitmine"
+
+#: ../src/vinagre-window.c:404
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Faili vinagre-ui.xml pole võimalik ühendada: %s"
 
-#: ../src/vinagre-window.c:414
+#: ../src/vinagre-window.c:432
 msgid "_Recent connections"
 msgstr "_Hiljutised ühendused"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:555
+#: ../src/vinagre-window.c:587 ../src/vinagre-window.c:637
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d avamine"
