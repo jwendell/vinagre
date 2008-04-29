@@ -38,6 +38,8 @@ void		vinagre_cmd_machine_close	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_machine_take_screenshot (GtkAction     *action,
 						     VinagreWindow *window);
+void		vinagre_cmd_machine_send_ctrlaltdel (GtkAction     *action,
+						     VinagreWindow *window);
 
 void		vinagre_cmd_machine_close_all	(GtkAction     *action,
 						 VinagreWindow *window);

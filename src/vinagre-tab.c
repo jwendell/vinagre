@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 #include <glade/glade.h>
 #include <gnome-keyring.h>
@@ -779,6 +780,16 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   gdk_pixbuf_unref (pix);
   g_string_free (suggested_filename, TRUE);
   g_free (name);
+}
+
+void
+vinagre_tab_send_ctrlaltdel (VinagreTab *tab)
+{
+  guint keys[] = { GDK_Control_L, GDK_Alt_L, GDK_Delete };
+
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  vnc_display_send_keys_ex (VNC_DISPLAY (tab->priv->vnc), keys, sizeof (keys) / sizeof (keys[0]), VNC_DISPLAY_KEY_EVENT_CLICK);
 }
 
 void

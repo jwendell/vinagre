@@ -84,6 +84,7 @@ void		  vinagre_tab_set_notebook	(VinagreTab *tab,
 VinagreNotebook   *vinagre_tab_get_notebook	(VinagreTab *tab);
 
 void		  vinagre_tab_take_screenshot	(VinagreTab *tab);
+void		  vinagre_tab_send_ctrlaltdel	(VinagreTab *tab);
 void		  vinagre_tab_paste_text	(VinagreTab *tab,
 						 const gchar *text);
 

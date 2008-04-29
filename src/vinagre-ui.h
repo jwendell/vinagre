@@ -79,6 +79,9 @@ static const GtkActionEntry vinagre_machine_connected_menu_entries[] =
   { "MachineTakeScreenshot", "applets-screenshooter", N_("Take screenshot"), NULL,
     N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_machine_take_screenshot) },
 
+  { "MachineSendCtrlAltDel", "preferences-desktop-keyboard-shortcuts", N_("Send Ctrl-Alt-Del"), NULL,
+    N_("Send Ctrl+Alt+Del to active connection"), G_CALLBACK (vinagre_cmd_machine_send_ctrlaltdel) },
+
   /* View menu */
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
     N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) },
