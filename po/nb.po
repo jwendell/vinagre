@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-19 10:20+0200\n"
-"PO-Revision-Date: 2008-04-19 10:23+0200\n"
+"POT-Creation-Date: 2008-04-30 02:17+0200\n"
+"PO-Revision-Date: 2008-04-30 02:19+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "<b>Hvilken maskin vil du koble til?</b>"
 msgid "Editing a bookmark"
 msgstr "Redigerer et bokmerke"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:684
+#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:685
 msgid "Host:"
 msgstr "Vert:"
 
@@ -115,7 +115,7 @@ msgstr "Feil under lagring av bokmerker: %s"
 msgid "Choose the file"
 msgstr "Velg fil"
 
-#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:768
 msgid "Supported formats"
 msgstr "Støttede formater"
 
@@ -125,13 +125,15 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Følgende fil kunne ikke bli åpnet:"
 msgstr[1] "Følgende filer kunne ikke bli åpnet:"
 
-#: ../src/vinagre-commands.c:221
+#: ../src/vinagre-commands.c:228
 msgid ""
 "Scaling does not work properly on composited windows. Disable the visual "
 "effects and try again."
-msgstr "Skalering virker ikke på sammensatte vinduer. Deaktiver visuelle effekter og prøv igjen."
+msgstr ""
+"Skalering virker ikke på sammensatte vinduer. Deaktiver visuelle effekter og "
+"prøv igjen."
 
-#: ../src/vinagre-commands.c:229
+#: ../src/vinagre-commands.c:236
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -140,13 +142,14 @@ msgid ""
 msgstr ""
 "Skalering er ikke støttet på denne installasjonen.\n"
 "\n"
-"Les filen README, som distribueres med Vinagre, for å finne ut hvordan du aktiverer denne funksjonen."
+"Les filen README, som distribueres med Vinagre, for å finne ut hvordan du "
+"aktiverer denne funksjonen."
 
-#: ../src/vinagre-commands.c:428
+#: ../src/vinagre-commands.c:435
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre er en VNC-klient for GNOME-skrivebordet"
 
-#: ../src/vinagre-commands.c:431
+#: ../src/vinagre-commands.c:438
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -158,7 +161,7 @@ msgstr ""
 "Software Foundation; enten versjon 2 av lisensen, eller (hvis du ønsker det) "
 "enhver senere versjon."
 
-#: ../src/vinagre-commands.c:435
+#: ../src/vinagre-commands.c:442
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -169,7 +172,7 @@ msgstr ""
 "GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET "
 "BESTEMT FORMÅL. Se GNU General Public License for detaljer."
 
-#: ../src/vinagre-commands.c:439
+#: ../src/vinagre-commands.c:446
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -177,13 +180,13 @@ msgstr ""
 "Du skal ha mottatt en kopi av GNU General Public License sammen med dette "
 "programmet. Hvis ikke, se på <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:461
+#: ../src/vinagre-commands.c:468
 msgid "translator-credits"
 msgstr ""
 "Kjartan Maraas <kmaraas@gnome.org>\n"
 "Espen Stefansen <libbe AT stefansen DOT net>"
 
-#: ../src/vinagre-commands.c:464
+#: ../src/vinagre-commands.c:471
 msgid "Vinagre Website"
 msgstr "Hjemmeside for Vinagre"
 
@@ -196,7 +199,7 @@ msgstr "Velg en VNC-tjener"
 msgid "The protocol %s is not supported."
 msgstr "Protokoll %s er ikke støttet."
 
-#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:685
+#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:686
 msgid "Port:"
 msgstr "Port:"
 
@@ -205,7 +208,7 @@ msgid "Bookmarks"
 msgstr "Bokmerker"
 
 #: ../src/vinagre-fav.c:807
-msgid "Hosts near to me"
+msgid "Hosts nearby"
 msgstr "Verter i nærheten"
 
 #: ../src/vinagre-main.c:43
@@ -242,6 +245,16 @@ msgid ""
 msgstr ""
 "Kjør 'vinagre --help' for å se en liste med tilgjengelige kommandolinjevalg"
 
+#: ../src/vinagre-mdns.c:118
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "Klarte ikke å finne avahi-vertsnavn: %s\n"
+
+#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "Klarte ikke å se etter verter: %s\n"
+
 #: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
@@ -264,50 +277,50 @@ msgstr "Kan ikke starte opp innstillingshåndtereren."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Forventet «%s», fikk «%s» for nøkkelen %s"
 
-#: ../src/vinagre-tab.c:259
+#: ../src/vinagre-tab.c:260
 msgid "Error connecting to host."
 msgstr "Feil ved tilkobling til verten."
 
-#: ../src/vinagre-tab.c:294
+#: ../src/vinagre-tab.c:295
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autentisering mot verten «%s» feilet"
 
-#: ../src/vinagre-tab.c:322
+#: ../src/vinagre-tab.c:323
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Autentiseringsmetoden mot verten «%s» er ikke støttet. (%u)"
 
-#: ../src/vinagre-tab.c:380
+#: ../src/vinagre-tab.c:381
 msgid "Error saving recent connection."
 msgstr "Feil under lagring av siste tilkobling."
 
-#: ../src/vinagre-tab.c:411
+#: ../src/vinagre-tab.c:412
 msgid "Error saving the password on the keyring."
 msgstr "Feil under lagring av passord på nøkkelringen."
 
-#: ../src/vinagre-tab.c:471 ../src/vinagre-tab.c:567
+#: ../src/vinagre-tab.c:472 ../src/vinagre-tab.c:568
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Trykk Ctrl + Alt for å fange pekeren"
 
-#: ../src/vinagre-tab.c:546
+#: ../src/vinagre-tab.c:547
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Trykk Ctrl + Alt for å slippe pekeren"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:684
 msgid "Desktop Name:"
 msgstr "Skrivebordsnavn:"
 
-#: ../src/vinagre-tab.c:686
+#: ../src/vinagre-tab.c:687
 msgid "Dimensions:"
 msgstr "Dimensjoner:"
 
-#: ../src/vinagre-tab.c:753
+#: ../src/vinagre-tab.c:754
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skjermbilde av %s"
 
-#: ../src/vinagre-tab.c:756
+#: ../src/vinagre-tab.c:757
 msgid "Save Screenshot"
 msgstr "Lagre skjermbilde"
 
@@ -412,61 +425,69 @@ msgstr "Ta skjermbilde"
 msgid "Take a screenshot of active connection"
 msgstr "Ta et skjermbilde av den aktive tilkoblingen"
 
-#: ../src/vinagre-ui.h:84
+#: ../src/vinagre-ui.h:82
+msgid "Send Ctrl-Alt-Del"
+msgstr "Sende Ctrl+alt+del"
+
+#: ../src/vinagre-ui.h:83
+msgid "Send Ctrl+Alt+Del to active connection"
+msgstr "Send Ctrl+alt+del for å aktivere tilkobling"
+
+#: ../src/vinagre-ui.h:87
 msgid "View the current machine in full screen"
 msgstr "Vis gjeldende tilkobling i fullskjerm"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:92
 msgid "S_caling"
 msgstr "S_kalering"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:93
 msgid "Fit the remote screen into the current window size"
 msgstr "Tilpass ekstern skjerm til størrelsen på aktivt vindu"
 
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:95
 msgid "_Read only"
 msgstr "Ba_re se"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:96
 msgid "Disable mouse and keyboard activities"
 msgstr "Deaktiver aktiviteter fra mus og tastatur"
 
-#: ../src/vinagre-ui.h:99
+#: ../src/vinagre-ui.h:102
 msgid "_Toolbar"
 msgstr "_Verktøylinje"
 
-#: ../src/vinagre-ui.h:100
+#: ../src/vinagre-ui.h:103
 msgid "Show or hide the toolbar"
 msgstr "Vis eller skjul verktøylinjen"
 
-#: ../src/vinagre-ui.h:103
+#: ../src/vinagre-ui.h:106
 msgid "_Statusbar"
 msgstr "_Statuslinje"
 
-#: ../src/vinagre-ui.h:104
+#: ../src/vinagre-ui.h:107
 msgid "Show or hide the statusbar"
 msgstr "Vis eller skjul statuslinjen"
 
-#: ../src/vinagre-ui.h:107
+#: ../src/vinagre-ui.h:110
 msgid "Side _Panel"
 msgstr "Side_panel"
 
-#: ../src/vinagre-ui.h:108
+#: ../src/vinagre-ui.h:111
 msgid "Show or hide the side panel"
 msgstr "Vis eller skjul sidepanelet"
 
-#: ../src/vinagre-window.c:404
+#: ../src/vinagre-window.c:406
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Klarte ikke å slå sammen vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:432
+#: ../src/vinagre-window.c:434
 msgid "_Recent connections"
 msgstr "_Siste tilkoblinger"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:587 ../src/vinagre-window.c:637
+#: ../src/vinagre-window.c:589 ../src/vinagre-window.c:639
 #, c-format
 msgid "Open %s:%d"
 msgstr "Åpne %s:%d"
