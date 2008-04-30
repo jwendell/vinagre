@@ -13,30 +13,41 @@
 			</locale>
 		</schema>
 
-        <schema>
-            <key>/schemas/desktop/gnome/url-handlers/vnc/needs_terminal</key>
-            <applyto>/desktop/gnome/url-handlers/vnc/needs_terminal</applyto>
-            <owner>vinagre</owner>
-            <type>bool</type>
-            <default>false</default>
-            <locale name="C">
-                <short></short>
-                <long></long>
-            </locale>
-        </schema>
+		<schema>
+			<key>/schemas/desktop/gnome/url-handlers/vnc/needs_terminal</key>
+			<applyto>/desktop/gnome/url-handlers/vnc/needs_terminal</applyto>
+			<owner>vinagre</owner>
+			<type>bool</type>
+			<default>false</default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
 
+		<schema>
+			<key>/schemas/desktop/gnome/url-handlers/vnc/enabled</key>
+			<applyto>/desktop/gnome/url-handlers/vnc/enabled</applyto>
+			<owner>vinagre</owner>
+			<type>bool</type>
+			<default>true</default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
 
-        <schema>
-            <key>/schemas/desktop/gnome/url-handlers/vnc/enabled</key>
-            <applyto>/desktop/gnome/url-handlers/vnc/enabled</applyto>
-            <owner>vinagre</owner>
-            <type>bool</type>
-            <default>true</default>
-            <locale name="C">
-                <short></short>
-                <long></long>
-            </locale>
-        </schema>
+		<schema>
+			<key>/schemas/apps/vinagre/shared_flag</key>
+			<applyto>/apps/vinagre/shared_flag</applyto>
+			<owner>vinagre</owner>
+			<type>bool</type>
+			<default>true</default>
+			<locale name="C">
+				<short>Whether we should leave other clients connected</short>
+				<long>When connecting to a host, the client can say to the server to leave others clients connected or to drop the existent connections. Set the value to true to share the desktop with the others clients.</long>
+			</locale>
+		</schema>
 
 	</schemalist>
 </gconfschemafile>

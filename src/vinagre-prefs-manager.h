@@ -2,7 +2,7 @@
  * vinagre-prefs-manager.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007  Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008  Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,8 @@ typedef struct _VinagrePrefsManager VinagrePrefsManager;
 #define VPM_WINDOW_HEIGHT		VINAGRE_BASE_KEY "/window_height"
 #define VPM_SIDE_PANEL_SIZE		VINAGRE_BASE_KEY "/side_panel_size"
 
+#define VPM_SHARED_FLAG			VINAGRE_BASE_KEY "/shared_flag"
+
 /* Fallback default values. Keep in sync with vinagre.schemas */
 
 #define VPM_DEFAULT_TOOLBAR_VISIBLE	1 /* TRUE */
@@ -47,6 +49,8 @@ typedef struct _VinagrePrefsManager VinagrePrefsManager;
 #define VPM_DEFAULT_WINDOW_WIDTH	650
 #define VPM_DEFAULT_WINDOW_HEIGHT	500
 #define VPM_DEFAULT_SIDE_PANEL_SIZE	200
+
+#define VPM_DEFAULT_SHARED_FLAG		1 /* TRUE */
 
 /** LIFE CYCLE MANAGEMENT FUNCTIONS **/
 
@@ -84,4 +88,10 @@ void 		 vinagre_prefs_manager_set_window_size		(gint width,
 gint	 	 vinagre_prefs_manager_get_side_panel_size	(void);
 void 		 vinagre_prefs_manager_set_side_panel_size	(gint ps);
 
+/* Shared flag */
+gboolean	vinagre_prefs_manager_get_shared_flag		(void);
+void		vinagre_prefs_manager_set_shared_flag		(gboolean sf);
+
 #endif  /* __VINAGRE_PREFS_MANAGER_H__ */
+
+/* vim: ts=8 */

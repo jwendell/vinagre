@@ -31,6 +31,7 @@
 #include "vinagre-notebook.h"
 #include "vinagre-tab.h"
 #include "vinagre-utils.h"
+#include "vinagre-prefs-manager.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
 
@@ -603,6 +604,9 @@ vinagre_tab_init (VinagreTab *tab)
 					 tab->priv->vnc);
   viewport = gtk_bin_get_child (GTK_BIN (tab->priv->scroll));
   gtk_viewport_set_shadow_type(GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
+
+  vnc_display_set_shared_flag (VNC_DISPLAY (tab->priv->vnc),
+			       vinagre_prefs_manager_get_shared_flag ());
 
   g_signal_connect (tab->priv->vnc,
 		    "vnc-connected",

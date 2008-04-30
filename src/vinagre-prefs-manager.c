@@ -2,7 +2,7 @@
  * vinagre-prefs-manager.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -247,6 +247,11 @@ DEFINE_BOOL_PREF (statusbar_visible,
 DEFINE_BOOL_PREF (side_pane_visible,
 		  VPM_SIDE_PANE_VISIBLE,
 		  VPM_DEFAULT_SIDE_PANE_VISIBLE)
+
+/* Shared flag */
+DEFINE_BOOL_PREF (shared_flag,
+		  VPM_SHARED_FLAG,
+		  VPM_DEFAULT_SHARED_FLAG)
 
 /* Window state */
 gint
@@ -520,3 +525,4 @@ gconf_client_get_int_with_default (GConfClient* client, const gchar* key,
       return def;
     }
 }
+/* vim: ts=8 */
