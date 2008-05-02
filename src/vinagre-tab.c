@@ -521,21 +521,36 @@ static void
 vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
 {
   gchar *password;
+  int i;
 
-  password = vinagre_tab_find_password (tab);
-  if (!password)
-    {
-      password = ask_password (tab);
-      if (!password) {
-        vinagre_notebook_remove_tab (tab->priv->nb, tab);
-        return;
+  if (credList == NULL)
+    return;
+
+  for (i = 0; i < credList->n_values; i++) {
+    switch (g_value_get_enum (&credList->values[i]))
+      {
+        case VNC_DISPLAY_CREDENTIAL_PASSWORD:
+          password = vinagre_tab_find_password (tab);
+          if (!password)
+            {
+              password = ask_password (tab);
+              if (!password) {
+                vinagre_notebook_remove_tab (tab->priv->nb, tab);
+                return;
+              }
+            }
+
+          vinagre_connection_set_password (tab->priv->conn, password);
+          vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
+
+          g_free (password);
+          break;
+
+        case VNC_DISPLAY_CREDENTIAL_CLIENTNAME:
+          vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_CLIENTNAME, "vinagre");
+          break;
       }
-    }
-
-  vinagre_connection_set_password (tab->priv->conn, password);
-  vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
-
-  g_free (password);
+  }
 }
 
 static void vnc_grab_cb (VncDisplay *vnc, VinagreTab *tab)
