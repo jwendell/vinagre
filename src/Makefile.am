@@ -75,4 +75,7 @@ DISTCLEANFILES = \
 	$(BUILT_SOURCES) \
 	$(NULL)
 
+dist-hook:
+	cd $(distdir) ; rm -f $(DISTCLEANFILES)
+
 $(vinagre_OBJECTS): $(BUILT_SOURCES)
