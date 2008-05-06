@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-30 02:17+0200\n"
-"PO-Revision-Date: 2008-04-30 02:19+0200\n"
+"POT-Creation-Date: 2008-05-06 19:32+0200\n"
+"PO-Revision-Date: 2008-05-06 19:33+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "<b>Hvilken maskin vil du koble til?</b>"
 msgid "Editing a bookmark"
 msgstr "Redigerer et bokmerke"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:685
+#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:732
 msgid "Host:"
 msgstr "Vert:"
 
@@ -78,6 +78,17 @@ msgstr "_Husk dette passordet"
 #: ../data/vinagre.schemas.in.h:1
 msgid "The handler for \"vnc://\" URLs"
 msgstr "Håndterer for «vnc://»-URLer"
+
+#: ../data/vinagre.schemas.in.h:2
+msgid ""
+"When connecting to a host, the client can say to the server to leave others "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the others clients."
+msgstr "Når du kobler til en vert kan klientene fortelle tjeneren om å la andre klienter forbli tilkoblet eller om disse skal droppes. Sett verdien til «true» for å dele skrivebordet med andre klienter."
+
+#: ../data/vinagre.schemas.in.h:3
+msgid "Whether we should leave other clients connected"
+msgstr "Om andre klienter skal kunne forbli tilkoblet"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -115,7 +126,7 @@ msgstr "Feil under lagring av bokmerker: %s"
 msgid "Choose the file"
 msgstr "Velg fil"
 
-#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:768
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:815
 msgid "Supported formats"
 msgstr "Støttede formater"
 
@@ -199,7 +210,7 @@ msgstr "Velg en VNC-tjener"
 msgid "The protocol %s is not supported."
 msgstr "Protokoll %s er ikke støttet."
 
-#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:686
+#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:733
 msgid "Port:"
 msgstr "Port:"
 
@@ -272,55 +283,55 @@ msgstr "Lukk tilkobling"
 msgid "Cannot initialize preferences manager."
 msgstr "Kan ikke starte opp innstillingshåndtereren."
 
-#: ../src/vinagre-prefs-manager.c:420
+#: ../src/vinagre-prefs-manager.c:425
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Forventet «%s», fikk «%s» for nøkkelen %s"
 
-#: ../src/vinagre-tab.c:260
+#: ../src/vinagre-tab.c:265
 msgid "Error connecting to host."
 msgstr "Feil ved tilkobling til verten."
 
-#: ../src/vinagre-tab.c:295
+#: ../src/vinagre-tab.c:300
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autentisering mot verten «%s» feilet"
 
-#: ../src/vinagre-tab.c:323
+#: ../src/vinagre-tab.c:328
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Autentiseringsmetoden mot verten «%s» er ikke støttet. (%u)"
 
-#: ../src/vinagre-tab.c:381
+#: ../src/vinagre-tab.c:409
 msgid "Error saving recent connection."
 msgstr "Feil under lagring av siste tilkobling."
 
-#: ../src/vinagre-tab.c:412
+#: ../src/vinagre-tab.c:440
 msgid "Error saving the password on the keyring."
 msgstr "Feil under lagring av passord på nøkkelringen."
 
-#: ../src/vinagre-tab.c:472 ../src/vinagre-tab.c:568
+#: ../src/vinagre-tab.c:500 ../src/vinagre-tab.c:611
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Trykk Ctrl + Alt for å fange pekeren"
 
-#: ../src/vinagre-tab.c:547
+#: ../src/vinagre-tab.c:590
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Trykk Ctrl + Alt for å slippe pekeren"
 
-#: ../src/vinagre-tab.c:684
+#: ../src/vinagre-tab.c:731
 msgid "Desktop Name:"
 msgstr "Skrivebordsnavn:"
 
-#: ../src/vinagre-tab.c:687
+#: ../src/vinagre-tab.c:734
 msgid "Dimensions:"
 msgstr "Dimensjoner:"
 
-#: ../src/vinagre-tab.c:754
+#: ../src/vinagre-tab.c:801
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skjermbilde av %s"
 
-#: ../src/vinagre-tab.c:757
+#: ../src/vinagre-tab.c:804
 msgid "Save Screenshot"
 msgstr "Lagre skjermbilde"
 
