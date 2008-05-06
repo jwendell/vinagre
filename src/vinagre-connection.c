@@ -461,9 +461,21 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
   else
     host = (gchar *) uri;
 
-  server = g_strsplit (host, ":", 2);
+  if (g_strrstr (host, "::") != NULL)
+    {
+      server = g_strsplit (host, "::", 2);
+      port = server[1] ? atoi (server[1]) : 5900;
+    }
+  else
+    {
+      server = g_strsplit (host, ":", 2);
+      port = server[1] ? atoi (server[1]) : 5900;
+
+      if (port < 1024)
+        port += 5900;
+    }
+
   host = server[0];
-  port = server[1] ? atoi (server[1]) : 5900;
 
   conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
                                    host,
