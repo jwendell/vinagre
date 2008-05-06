@@ -24,12 +24,13 @@
 #include <glib/goption.h>
 
 #include <config.h>
-#include "vinagre-prefs-manager.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-window.h"
 #include "vinagre-utils.h"
+#include "vinagre-prefs.h"
+#include "vinagre-mdns.h"
 #include <vncdisplay.h>
 
 /* command line */
@@ -138,8 +139,6 @@ int main (int argc, char **argv) {
   if (!g_thread_supported ())
     g_thread_init (NULL);
 
-  vinagre_prefs_manager_init ();
-
   main_window = vinagre_window_new ();
   gtk_widget_show (GTK_WIDGET(main_window));
 
@@ -157,7 +156,9 @@ int main (int argc, char **argv) {
 
   gtk_main ();
 
-  vinagre_prefs_manager_shutdown ();
+  g_object_unref (vinagre_bookmarks_get_default ());
+  g_object_unref (vinagre_mdns_get_default ());
+  g_object_unref (vinagre_prefs_get_default ());
 
   return 0;
 }

@@ -21,7 +21,6 @@ vinagre_SOURCES = \
 	vinagre-bookmarks.c vinagre-bookmarks.h		\
 	vinagre-main.c 			\
 	vinagre-notebook.c vinagre-notebook.h		\
-	vinagre-prefs-manager.c	vinagre-prefs-manager.h	\
 	vinagre-tab.c vinagre-tab.h			\
 	vinagre-utils.c vinagre-utils.h			\
 	vinagre-window.c vinagre-window.h		\
@@ -29,6 +28,7 @@ vinagre_SOURCES = \
 	vinagre-enums.h vinagre-enums.c			\
 	gossip-cell-renderer-expander.c gossip-cell-renderer-expander.h \
 	vinagre-mdns.h vinagre-mdns.c \
+	vinagre-prefs.h vinagre-prefs.c \
 	$(NULL)
 
 vinagre_LDADD = \

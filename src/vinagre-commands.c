@@ -36,7 +36,7 @@
 #include "vinagre-bookmarks.h"
 #include "vinagre-fav.h"
 #include "vinagre-window-private.h"
-#include "vinagre-prefs-manager.h"
+#include "vinagre-prefs.h"
 
 void
 vinagre_cmd_direct_connect (VinagreConnection *conn,
@@ -177,7 +177,9 @@ vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 
   vinagre_utils_toggle_widget_visible (window->priv->toolbar);
 
-  vinagre_prefs_manager_set_toolbar_visible (GTK_WIDGET_VISIBLE (window->priv->toolbar));
+  g_object_set (vinagre_prefs_get_default (),
+		"toolbar-visible", GTK_WIDGET_VISIBLE (window->priv->toolbar),
+		NULL);
 }
 
 void
@@ -188,7 +190,9 @@ vinagre_cmd_view_show_statusbar	(GtkAction     *action,
 
   vinagre_utils_toggle_widget_visible (window->priv->statusbar);
 
-  vinagre_prefs_manager_set_statusbar_visible (GTK_WIDGET_VISIBLE (window->priv->statusbar));
+  g_object_set (vinagre_prefs_get_default (),
+		"statusbar-visible", GTK_WIDGET_VISIBLE (window->priv->statusbar),
+		NULL);
 }
 
 void
@@ -199,7 +203,9 @@ vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
 
   vinagre_utils_toggle_widget_visible (window->priv->fav_panel);
 
-  vinagre_prefs_manager_set_side_pane_visible (GTK_WIDGET_VISIBLE (window->priv->fav_panel));
+  g_object_set (vinagre_prefs_get_default (),
+		"side-panel-visible", GTK_WIDGET_VISIBLE (window->priv->fav_panel),
+		NULL);
 }
 
 void

@@ -32,7 +32,7 @@
 #include "vinagre-window.h"
 #include "vinagre-notebook.h"
 #include "vinagre-fav.h"
-#include "vinagre-prefs-manager.h"
+#include "vinagre-prefs.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-ui.h"
@@ -133,20 +133,20 @@ static gboolean
 vinagre_window_state_event_cb (GtkWidget *widget,
 			       GdkEventWindowState *event)
 {
-  VinagreWindow *window;
+  VinagreWindow *window = VINAGRE_WINDOW (widget);
+
+  window->priv->window_state = event->new_window_state;
+  g_object_set (vinagre_prefs_get_default (),
+		"window-state", window->priv->window_state,
+		NULL);
 
   if ((event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) == 0)
     return FALSE;
-
-  window = VINAGRE_WINDOW (widget);
 
   if (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN)
     window->priv->fullscreen = TRUE;
   else
     window->priv->fullscreen = FALSE;
-
-  window->priv->window_state = event->new_window_state;
-  vinagre_prefs_manager_set_window_state (window->priv->window_state);
 
   vinagre_window_show_hide_controls (window);
 
@@ -165,8 +165,10 @@ vinagre_window_configure_event (GtkWidget         *widget,
   window->priv->width  = event->width;
   window->priv->height = event->height;
 
-  vinagre_prefs_manager_set_window_size (window->priv->width,
-					 window->priv->height);
+  g_object_set (vinagre_prefs_get_default (),
+		"window-width", window->priv->width,
+		"window-height", window->priv->height,
+		NULL);
 
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->configure_event (widget, event);
 }
@@ -492,7 +494,9 @@ fav_panel_size_allocate (GtkWidget     *widget,
 {
   window->priv->side_panel_size = allocation->width;
   if (window->priv->side_panel_size > 0)
-    vinagre_prefs_manager_set_side_panel_size (window->priv->side_panel_size);
+    g_object_set (vinagre_prefs_get_default (),
+		  "side-panel-size", window->priv->side_panel_size,
+		  NULL);
 }
 
 static void
@@ -683,7 +687,9 @@ create_side_panel (VinagreWindow *window)
 		   FALSE, 
 		   FALSE);
 
-  window->priv->side_panel_size = vinagre_prefs_manager_get_side_panel_size ();
+  g_object_get (vinagre_prefs_get_default (),
+		"side-panel-size", &(window->priv->side_panel_size),
+		NULL);
   gtk_paned_set_position (GTK_PANED (window->priv->hpaned), window->priv->side_panel_size);
 
   g_signal_connect (window->priv->fav_panel,
@@ -707,6 +713,7 @@ init_widgets_visibility (VinagreWindow *window)
   gint w, h;
   GtkAction *action;
   gboolean visible;
+  VinagrePrefs *prefs = vinagre_prefs_get_default ();
 
   /* Remove and Edit bookmarks starts disabled */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
@@ -717,64 +724,32 @@ init_widgets_visibility (VinagreWindow *window)
 					"BookmarksEdit");
   gtk_action_set_sensitive (action, FALSE);
 
-  /* fav panel visibility */
+  /* side panel visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewSidePanel");
-  visible = vinagre_prefs_manager_get_side_pane_visible ();
+  g_object_get (prefs, "side-panel-visible", &visible, NULL);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
   /* toolbar visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewToolbar");
-  visible = vinagre_prefs_manager_get_toolbar_visible ();
+  g_object_get (prefs, "toolbar-visible", &visible, NULL);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
   /* statusbar visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewStatusbar");
-  visible = vinagre_prefs_manager_get_side_pane_visible ();
+  g_object_get (prefs, "statusbar-visible", &visible, NULL);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-				vinagre_prefs_manager_get_statusbar_visible ());
-
-//  if (vinagre_prefs_manager_get_side_pane_visible ())
-//    gtk_widget_show_all (window->priv->fav_panel);
-//  else
-//    {
-//      gtk_widget_hide (window->priv->fav_panel);
-//printf ("hiding... was visible: %d\n", GTK_WIDGET_VISIBLE(window->priv->fav_panel));
-
-//      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-//    }
-
-  /* toolbar visibility */
-//  action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-//					"ViewToolbar");
-//  if (vinagre_prefs_manager_get_toolbar_visible ())
-//    gtk_widget_show_all (window->priv->toolbar);
-//  else
-//    {
-//      gtk_widget_hide (window->priv->toolbar);
-//      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-//   }
-
-  /* toolbar visibility */
-//  action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-//					"ViewStatusbar");
-//  if (vinagre_prefs_manager_get_statusbar_visible ())
-//    gtk_widget_show_all (window->priv->statusbar);
-//  else
-//    {
- //     gtk_widget_hide (window->priv->statusbar);
-//      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
- //   }
-
-  state = vinagre_prefs_manager_get_window_state ();
-  vinagre_prefs_manager_get_window_size (&w, &h);
+  g_object_get (prefs,
+		"window-state", &state,
+		"window-width", &w,
+		"window-height", &h,
+		NULL);
 
   gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 
