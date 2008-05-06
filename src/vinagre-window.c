@@ -943,13 +943,18 @@ vinagre_window_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreWindow *w
 {
   gchar *text;
 
-  text = gtk_clipboard_wait_for_text (cb);
-  if (text) {
-    if (window->priv->active_tab)
-      vinagre_tab_paste_text (VINAGRE_TAB (window->priv->active_tab), text);
-    g_free (text);
-  }
+  if (!window->priv->active_tab)
+    return;
 
+  if (gtk_clipboard_get_owner (cb) == G_OBJECT (window->priv->active_tab))
+    return;
+
+  text = gtk_clipboard_wait_for_text (cb);
+  if (!text)
+    return;
+
+  vinagre_tab_paste_text (VINAGRE_TAB (window->priv->active_tab), text);
+  g_free (text);
 }
 
 static void

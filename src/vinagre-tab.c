@@ -47,6 +47,7 @@ struct _VinagreTabPrivate
   gboolean           save_password;
   guint32            keyring_item_id;
   VinagreTabState    state;
+  gchar             *clipboard_str;
 };
 
 G_DEFINE_TYPE(VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
@@ -178,7 +179,10 @@ vinagre_tab_finalize (GObject *object)
   					tab);
   g_object_unref (tab->priv->conn);
   tab->priv->conn = NULL;
-	
+
+  g_free (tab->priv->clipboard_str);
+  tab->priv->clipboard_str = NULL;
+
   G_OBJECT_CLASS (vinagre_tab_parent_class)->finalize (object);
 }
 
@@ -332,22 +336,45 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreTab *tab)
   vinagre_notebook_remove_tab (tab->priv->nb, tab);
 }
 
+/* text was actually requested */
+static void
+copy_cb (GtkClipboard     *clipboard,
+         GtkSelectionData *data,
+	 guint             info,
+	 VinagreTab       *tab)
+{
+  gtk_selection_data_set_text (data, tab->priv->clipboard_str, -1);
+}
+
 static void
 vnc_server_cut_text_cb (VncDisplay *vnc, const gchar *text, VinagreTab *tab)
 {
   GtkClipboard *cb;
-  gchar *out;
   gsize a, b;
+  GtkTargetEntry targets[] = {
+				{"UTF8_STRING", 0, 0},
+				{"COMPOUND_TEXT", 0, 0},
+				{"TEXT", 0, 0},
+				{"STRING", 0, 0},
+			     };
 
   if (!text)
     return;
 
-  out = g_convert (text, -1, "utf-8", "iso8859-1", &a, &b, NULL);
-  if (out) {
-    cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-    gtk_clipboard_set_text (cb, out, -1);
-    g_free (out);
-  }
+  g_free (tab->priv->clipboard_str);
+  tab->priv->clipboard_str = g_convert (text, -1, "utf-8", "iso8859-1", &a, &b, NULL);
+
+  if (tab->priv->clipboard_str)
+    {
+      cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+
+      gtk_clipboard_set_with_owner (cb,
+				    targets,
+				    G_N_ELEMENTS(targets),
+				    (GtkClipboardGetFunc) copy_cb,
+				    NULL,
+				    G_OBJECT (tab));
+    }
 }
 
 static void
@@ -601,6 +628,7 @@ vinagre_tab_init (VinagreTab *tab)
   tab->priv->save_password = FALSE;
   tab->priv->keyring_item_id = 0;
   tab->priv->state = VINAGRE_TAB_STATE_INITIALIZING;
+  tab->priv->clipboard_str = NULL;
 
   /* Create the scrolled window */
   tab->priv->scroll = gtk_scrolled_window_new (NULL, NULL);
