@@ -620,6 +620,14 @@ static void vnc_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
     gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->nb), TRUE);
 }
 
+static gboolean
+vnc_key_event ( GtkWidget   *widget G_GNUC_UNUSED,
+		GdkEventKey *key G_GNUC_UNUSED,
+		gpointer     data G_GNUC_UNUSED)
+{
+  return TRUE;
+}
+
 static void
 vinagre_tab_init (VinagreTab *tab)
 {
@@ -705,6 +713,16 @@ vinagre_tab_init (VinagreTab *tab)
 		    "vnc-bell",
 		    G_CALLBACK (vnc_bell_cb),
 		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "key-press-event",
+		    G_CALLBACK (vnc_key_event),
+		    NULL);
+
+  g_signal_connect (tab->priv->vnc,
+		    "key-release-event",
+		    G_CALLBACK (vnc_key_event),
+		    NULL);
 
   gtk_widget_show_all (GTK_WIDGET (tab));
 }
