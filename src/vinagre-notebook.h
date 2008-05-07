@@ -93,6 +93,7 @@ void		vinagre_notebook_remove_tab		(VinagreNotebook *nb,
 
 void		vinagre_notebook_remove_all_tabs 	(VinagreNotebook *nb);
 
+void		vinagre_notebook_show_hide_tabs		(VinagreNotebook *nb);
 G_END_DECLS
 
 #endif /* __VINAGRE_NOTEBOOK_H__ */

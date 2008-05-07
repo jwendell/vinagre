@@ -230,7 +230,7 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_SHARED_FLAG, TRUE));
 	break;
       case PROP_ALWAYS_SHOW_TABS:
-	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_ALWAYS_SHOW_TABS, TRUE));
+	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_ALWAYS_SHOW_TABS, FALSE));
 	break;
       case PROP_TOOLBAR_VISIBLE:
 	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_TOOLBAR_VISIBLE, TRUE));
@@ -283,7 +283,7 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 				   g_param_spec_boolean ("always-show-tabs",
 							 "Always show tabs",
 							 "Whether we should show the tabs even when there is ony one active connection",
-							 TRUE,
+							 FALSE,
 							 G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
 				   PROP_TOOLBAR_VISIBLE,

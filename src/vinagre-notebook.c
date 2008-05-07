@@ -28,6 +28,7 @@
 
 #include "vinagre-notebook.h"
 #include "vinagre-utils.h"
+#include "vinagre-prefs.h"
 
 #define VINAGRE_NOTEBOOK_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_NOTEBOOK, VinagreNotebookPrivate))
 
@@ -55,13 +56,41 @@ vinagre_notebook_new (VinagreWindow *window)
   return GTK_WIDGET (nb);
 }
 
+void
+vinagre_notebook_show_hide_tabs (VinagreNotebook *nb)
+{
+  gboolean always;
+  gint     n;
+
+  n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
+
+  g_object_get (vinagre_prefs_get_default (),
+		"always-show-tabs", &always,
+		NULL);
+
+  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (nb),
+			      (n > 1) || (always));
+}
+
 static void
 vinagre_notebook_init (VinagreNotebook *notebook)
 {
   notebook->priv = VINAGRE_NOTEBOOK_GET_PRIVATE (notebook);
 
   gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
-  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+
+  g_signal_connect (notebook,
+		    "page-added",
+		    G_CALLBACK (vinagre_notebook_show_hide_tabs),
+		    NULL);
+  g_signal_connect (notebook,
+		    "page-removed",
+		    G_CALLBACK (vinagre_notebook_show_hide_tabs),
+		    NULL);
+  g_signal_connect_swapped (vinagre_prefs_get_default (),
+			    "notify::always-show-tabs",
+			     G_CALLBACK (vinagre_notebook_show_hide_tabs),
+			     notebook);
 }
 
 static void

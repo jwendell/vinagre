@@ -124,7 +124,7 @@ vinagre_window_show_hide_controls (VinagreWindow *window)
       if (window->priv->statusbar_visible)
         gtk_widget_show_all (window->priv->statusbar);
 
-      gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), TRUE);
+      vinagre_notebook_show_hide_tabs (VINAGRE_NOTEBOOK (window->priv->notebook));
       gtk_notebook_set_show_border (GTK_NOTEBOOK (window->priv->notebook), TRUE);
     }
 }

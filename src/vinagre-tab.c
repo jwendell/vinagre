@@ -112,6 +112,7 @@ vinagre_tab_window_state_cb (GtkWidget           *widget,
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				      GTK_POLICY_AUTOMATIC,
 				      GTK_POLICY_AUTOMATIC);
+      vinagre_notebook_show_hide_tabs (tab->priv->nb);
     }
 
   return FALSE;
