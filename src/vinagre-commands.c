@@ -42,14 +42,22 @@ void
 vinagre_cmd_direct_connect (VinagreConnection *conn,
 			    VinagreWindow     *window)
 {
-  GtkWidget *tab;
+  VinagreTab *tab;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  tab = vinagre_tab_new (conn, window);
-  vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
-			    VINAGRE_TAB (tab),
-			    -1);
+  tab = vinagre_window_conn_exists (window, conn);
+  if (tab)
+    {
+      vinagre_window_set_active_tab (window, tab);
+    }
+  else
+    {
+      tab = VINAGRE_TAB (vinagre_tab_new (conn, window));
+      vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
+				VINAGRE_TAB (tab),
+				-1);
+    }
 }
 
 /* Machine Menu */
@@ -57,7 +65,7 @@ void
 vinagre_cmd_machine_connect (GtkAction     *action,
 			     VinagreWindow *window)
 {
-  GtkWidget *tab;
+  VinagreTab *tab;
   VinagreConnection *conn;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
@@ -66,10 +74,18 @@ vinagre_cmd_machine_connect (GtkAction     *action,
   if (!conn)
     return;
 
-  tab = vinagre_tab_new (conn, window);
-  vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
-			    VINAGRE_TAB (tab),
-			    -1);
+  tab = vinagre_window_conn_exists (window, conn);
+  if (tab)
+    {
+      vinagre_window_set_active_tab (window, tab);
+    }
+  else
+    {
+      tab = VINAGRE_TAB (vinagre_tab_new (conn, window));
+      vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
+				VINAGRE_TAB (tab),
+				-1);
+    }
 }
 
 void
@@ -168,6 +184,13 @@ vinagre_cmd_machine_close_all (GtkAction     *action,
   vinagre_window_close_all_tabs (window);
 }
 
+void
+vinagre_cmd_machine_quit (GtkAction     *action,
+			  VinagreWindow *window)
+{
+  gtk_widget_destroy (GTK_WIDGET (window));
+}
+
 /* View Menu */
 void
 vinagre_cmd_view_show_toolbar	(GtkAction     *action,
@@ -264,17 +287,24 @@ void
 vinagre_cmd_open_bookmark (VinagreWindow     *window,
 			   VinagreConnection *conn)
 {
-  GtkWidget *tab;
+  VinagreTab *tab;
   VinagreConnection *new_conn;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  new_conn = vinagre_connection_clone (conn);
-  tab = vinagre_tab_new (new_conn, window);
-  vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
-			    VINAGRE_TAB (tab),
-			    -1);
-  gtk_widget_show (tab);
+  tab = vinagre_window_conn_exists (window, conn);
+  if (tab)
+    {
+      vinagre_window_set_active_tab (window, tab);
+    }
+  else
+    {
+      new_conn = vinagre_connection_clone (conn);
+      tab = VINAGRE_TAB (vinagre_tab_new (new_conn, window));
+      vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
+				VINAGRE_TAB (tab),
+				-1);
+    }
 }
 
 void

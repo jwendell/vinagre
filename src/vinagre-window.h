@@ -51,9 +51,9 @@ struct _VinagreWindowClass
   GtkWindowClass parent_class;
 };
 
-GType 		 vinagre_window_get_type 			(void) G_GNUC_CONST;
+GType 		 vinagre_window_get_type 		(void) G_GNUC_CONST;
 
-VinagreWindow   *vinagre_window_new			();
+VinagreWindow   *vinagre_window_new			(void);
 
 VinagreTab	*vinagre_window_create_tab		(VinagreWindow         *window,
 							 gboolean              jump_to);
@@ -90,6 +90,11 @@ void		vinagre_window_toggle_fullscreen	(VinagreWindow *window);
 void		vinagre_window_set_title		(VinagreWindow *window);
 
 void		vinagre_window_update_machine_menu_sensitivity (VinagreWindow	*window);
+
+GList 		*vinagre_window_get_connections		(VinagreWindow *window);
+VinagreTab	*vinagre_window_conn_exists		(VinagreWindow *window,
+							 VinagreConnection *conn);
+
 G_END_DECLS
 
 #endif  /* __VINAGRE_WINDOW_H__  */

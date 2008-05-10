@@ -28,6 +28,14 @@
 #include <config.h>
 #endif
 
+/* For the workspace/viewport stuff */
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xatom.h>
+#endif
+
 GtkWidget *
 vinagre_utils_create_small_close_button ()
 {
@@ -181,4 +189,164 @@ vinagre_utils_handle_debug (void)
 
   initialized = TRUE;
 }
+
+/* the following two functions are courtesy of galeon */
+
+/**
+ * gedit_utils_get_current_workspace: Get the current workspace
+ *
+ * Get the currently visible workspace for the #GdkScreen.
+ *
+ * If the X11 window property isn't found, 0 (the first workspace)
+ * is returned.
+ */
+guint
+vinagre_utils_get_current_workspace (GdkScreen *screen)
+{
+#ifdef GDK_WINDOWING_X11
+	GdkWindow *root_win;
+	GdkDisplay *display;
+	Atom type;
+	gint format;
+	gulong nitems;
+	gulong bytes_after;
+	guint *current_desktop;
+	gint err, result;
+	guint ret = 0;
+
+	g_return_val_if_fail (GDK_IS_SCREEN (screen), 0);
+
+	root_win = gdk_screen_get_root_window (screen);
+	display = gdk_screen_get_display (screen);
+
+	gdk_error_trap_push ();
+	result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
+				     gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
+				     0, G_MAXLONG, False, XA_CARDINAL, &type, &format, &nitems,
+				     &bytes_after, (gpointer) &current_desktop);
+	err = gdk_error_trap_pop ();
+
+	if (err != Success || result != Success)
+		return ret;
+
+	if (type == XA_CARDINAL && format == 32 && nitems > 0)
+		ret = current_desktop[0];
+
+	XFree (current_desktop);
+	return ret;
+#else
+	/* FIXME: on mac etc proably there are native APIs
+	 * to get the current workspace etc */
+	return 0;
+#endif
+}
+
+/**
+ * gedit_utils_get_window_workspace: Get the workspace the window is on
+ *
+ * This function gets the workspace that the #GtkWindow is visible on,
+ * it returns GEDIT_ALL_WORKSPACES if the window is sticky, or if
+ * the window manager doesn support this function
+ */
+guint
+vinagre_utils_get_window_workspace (GtkWindow *gtkwindow)
+{
+#ifdef GDK_WINDOWING_X11
+	GdkWindow *window;
+	GdkDisplay *display;
+	Atom type;
+	gint format;
+	gulong nitems;
+	gulong bytes_after;
+	guint *workspace;
+	gint err, result;
+	guint ret = VINAGRE_ALL_WORKSPACES;
+
+	g_return_val_if_fail (GTK_IS_WINDOW (gtkwindow), 0);
+	g_return_val_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (gtkwindow)), 0);
+
+	window = GTK_WIDGET (gtkwindow)->window;
+	display = gdk_drawable_get_display (window);
+
+	gdk_error_trap_push ();
+	result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
+				     gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
+				     0, G_MAXLONG, False, XA_CARDINAL, &type, &format, &nitems,
+				     &bytes_after, (gpointer) &workspace);
+	err = gdk_error_trap_pop ();
+
+	if (err != Success || result != Success)
+		return ret;
+
+	if (type == XA_CARDINAL && format == 32 && nitems > 0)
+		ret = workspace[0];
+
+	XFree (workspace);
+	return ret;
+#else
+	/* FIXME: on mac etc proably there are native APIs
+	 * to get the current workspace etc */
+	return 0;
+#endif
+}
+
+/**
+ * gedit_utils_get_current_viewport: Get the current viewport origin
+ *
+ * Get the currently visible viewport origin for the #GdkScreen.
+ *
+ * If the X11 window property isn't found, (0, 0) is returned.
+ */
+void
+vinagre_utils_get_current_viewport (GdkScreen    *screen,
+				  gint         *x,
+				  gint         *y)
+{
+#ifdef GDK_WINDOWING_X11
+	GdkWindow *root_win;
+	GdkDisplay *display;
+	Atom type;
+	gint format;
+	gulong nitems;
+	gulong bytes_after;
+	gulong *coordinates;
+	gint err, result;
+
+	g_return_if_fail (GDK_IS_SCREEN (screen));
+	g_return_if_fail (x != NULL && y != NULL);
+
+	/* Default values for the viewport origin */
+	*x = 0;
+	*y = 0;
+
+	root_win = gdk_screen_get_root_window (screen);
+	display = gdk_screen_get_display (screen);
+
+	gdk_error_trap_push ();
+	result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
+				     gdk_x11_get_xatom_by_name_for_display (display, "_NET_DESKTOP_VIEWPORT"),
+				     0, G_MAXLONG, False, XA_CARDINAL, &type, &format, &nitems,
+				     &bytes_after, (void*) &coordinates);
+	err = gdk_error_trap_pop ();
+
+	if (err != Success || result != Success)
+		return;
+
+	if (type != XA_CARDINAL || format != 32 || nitems < 2)
+	{
+		XFree (coordinates);
+		return;
+	}
+
+	*x = coordinates[0];
+	*y = coordinates[1];
+	XFree (coordinates);
+#else
+	/* FIXME: on mac etc proably there are native APIs
+	 * to get the current workspace etc */
+	*x = 0;
+	*y = 0;
+#endif
+}
+
 /* vim: ts=8 */

@@ -43,6 +43,8 @@ void		vinagre_cmd_machine_send_ctrlaltdel (GtkAction     *action,
 
 void		vinagre_cmd_machine_close_all	(GtkAction     *action,
 						 VinagreWindow *window);
+void		vinagre_cmd_machine_quit	(GtkAction     *action,
+						 VinagreWindow *window);
 
 void		vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 						 VinagreWindow *window);

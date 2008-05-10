@@ -48,6 +48,7 @@ struct _VinagreWindowPrivate
   GtkAction      *recent_action;
   guint           bookmarks_list_menu_ui_id;
   guint           recents_menu_ui_id;
+  guint           update_recents_menu_ui_id;
 
   GtkWidget       *toolbar;
   GtkWidget       *menubar;

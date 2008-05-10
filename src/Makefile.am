@@ -29,6 +29,9 @@ vinagre_SOURCES = \
 	gossip-cell-renderer-expander.c gossip-cell-renderer-expander.h \
 	vinagre-mdns.h vinagre-mdns.c \
 	vinagre-prefs.h vinagre-prefs.c \
+	bacon-message-connection.h bacon-message-connection.c \
+	vinagre-app.h vinagre-app.c \
+	vinagre-bacon.h vinagre-bacon.c \
 	$(NULL)
 
 vinagre_LDADD = \

@@ -28,20 +28,26 @@
 #include "vinagre-commands.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-window.h"
+#include "vinagre-app.h"
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
 #include "vinagre-mdns.h"
+#include "vinagre-bacon.h"
 #include <vncdisplay.h>
 
 /* command line */
 static gchar **files = NULL;
 static gchar **remaining_args = NULL;
 static GSList *servers = NULL;
+static gboolean new_window = FALSE;
 
 static const GOptionEntry options [] =
 {
   { "file", 'f', 0, G_OPTION_ARG_FILENAME_ARRAY, &files,
     N_("Opens a .vnc file"), N_("filename")},
+
+  { "new-window", 'n', 0, G_OPTION_ARG_NONE, &new_window,
+    N_("Create a new toplevel window in an existing instance of vinagre"), NULL },
 
   { 
     G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &remaining_args,
@@ -104,7 +110,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
 						"The following errors have occurred:",
 						g_slist_length (errors)),
 				      errors,
-				      GTK_WINDOW (window));
+				      window?GTK_WINDOW (window):NULL);
       g_slist_free (errors);
     }
 }
@@ -113,7 +119,8 @@ int main (int argc, char **argv) {
   GOptionContext    *context;
   GError            *error = NULL;
   GSList            *l, *next;
-  VinagreWindow     *main_window;
+  VinagreWindow     *window;
+  VinagreApp        *app;
 
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -135,22 +142,25 @@ int main (int argc, char **argv) {
     }
 
   g_set_application_name (_("Remote Desktop Viewer"));
+  vinagre_main_process_command_line (NULL);
+
+  vinagre_bacon_start (servers, new_window);
 
   if (!g_thread_supported ())
     g_thread_init (NULL);
 
-  main_window = vinagre_window_new ();
-  gtk_widget_show (GTK_WIDGET(main_window));
+  app = vinagre_app_get_default ();
+  window = vinagre_app_create_window (app, NULL);
+  gtk_widget_show (GTK_WIDGET(window));
 
   vinagre_utils_handle_debug ();
 
-  vinagre_main_process_command_line (main_window);
   for (l = servers; l; l = next)
     {
       VinagreConnection *conn = l->data;
       
       next = l->next;
-      vinagre_cmd_direct_connect (conn, main_window);
+      vinagre_cmd_direct_connect (conn, window);
     }
   g_slist_free (servers);
 

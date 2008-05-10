@@ -32,6 +32,7 @@ G_BEGIN_DECLS
 #define VINAGRE_IS_TAB(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), VINAGRE_TYPE_TAB))
 #define VINAGRE_IS_TAB_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), VINAGRE_TYPE_TAB))
 #define VINAGRE_TAB_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), VINAGRE_TYPE_TAB, VinagreTabClass))
+#define VINAGRE_TAB_KEY               "VINAGRE_TAB_KEY"
 
 typedef struct _VinagreTabPrivate VinagreTabPrivate;
 typedef struct _VinagreTab        VinagreTab;
@@ -94,6 +95,8 @@ void	          vinagre_tab_set_readonly	(VinagreTab *tab, gboolean active);
 gboolean	  vinagre_tab_get_readonly	(VinagreTab *tab);
 
 VinagreTabState   vinagre_tab_get_state		(VinagreTab *tab);
+VinagreTab	  *vinagre_tab_get_from_connection (VinagreConnection *conn);
+
 
 G_END_DECLS
 

@@ -152,6 +152,7 @@ vinagre_tab_set_property (GObject      *object,
     {
       case PROP_CONN:
         tab->priv->conn = g_value_get_object (value);
+	g_object_set_data (G_OBJECT (tab->priv->conn), VINAGRE_TAB_KEY, tab);
         break;
       case PROP_WINDOW:
         tab->priv->window = g_value_get_object (value);
@@ -915,6 +916,18 @@ vinagre_tab_get_state (VinagreTab *tab)
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
   return tab->priv->state;
+}
+
+VinagreTab *
+vinagre_tab_get_from_connection (VinagreConnection *conn)
+{
+  gpointer res;
+	
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+	
+  res = g_object_get_data (G_OBJECT (conn), VINAGRE_TAB_KEY);
+	
+  return (res != NULL) ? VINAGRE_TAB (res) : NULL;
 }
 
 /* vim: ts=8 */

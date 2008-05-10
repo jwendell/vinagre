@@ -47,7 +47,7 @@
 G_DEFINE_TYPE(VinagreWindow, vinagre_window, GTK_TYPE_WINDOW)
 
 static void
-vinagre_window_finalize (GObject *object)
+vinagre_window_dispose (GObject *object)
 {
   VinagreWindow *window = VINAGRE_WINDOW (object);
 
@@ -63,6 +63,37 @@ vinagre_window_finalize (GObject *object)
       window->priv->manager = NULL;
     }
 
+  if (window->priv->signal_notebook != 0)
+    {
+      g_signal_handler_disconnect (window->priv->notebook,
+				   window->priv->signal_notebook);
+      window->priv->signal_notebook = 0;
+    }
+
+  if (window->priv->signal_clipboard != 0)
+    {
+      GtkClipboard  *cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);;
+
+      g_signal_handler_disconnect (cb,
+				   window->priv->signal_clipboard);
+      window->priv->signal_clipboard = 0;
+    }
+
+  if (window->priv->update_recents_menu_ui_id != 0)
+    {
+      GtkRecentManager *recent_manager = gtk_recent_manager_get_default ();
+
+      g_signal_handler_disconnect (recent_manager,
+				   window->priv->update_recents_menu_ui_id);
+      window->priv->update_recents_menu_ui_id = 0;
+    }
+
+  G_OBJECT_CLASS (vinagre_window_parent_class)->dispose (object);
+}
+
+static void
+vinagre_window_finalize (GObject *object)
+{
   G_OBJECT_CLASS (vinagre_window_parent_class)->finalize (object);
 }
 
@@ -71,20 +102,8 @@ vinagre_window_delete_event (GtkWidget   *widget,
 			     GdkEventAny *event)
 {
   VinagreWindow *window = VINAGRE_WINDOW (widget);
-  GtkClipboard  *cb;
-
-  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-
-  if (window->priv->signal_notebook > 0)
-    g_signal_handler_disconnect (window->priv->notebook,
-				 window->priv->signal_notebook);
-
-  if (window->priv->signal_clipboard > 0)
-    g_signal_handler_disconnect (cb,
-				 window->priv->signal_clipboard);
 
   vinagre_window_close_all_tabs (window);
-  gtk_main_quit ();
 
   if (GTK_WIDGET_CLASS (vinagre_window_parent_class)->delete_event)
     return GTK_WIDGET_CLASS (vinagre_window_parent_class)->delete_event (widget, event);
@@ -198,7 +217,8 @@ vinagre_window_class_init (VinagreWindowClass *klass)
   GObjectClass *object_class    = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class  = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize     = vinagre_window_finalize;
+  object_class->finalize = vinagre_window_finalize;
+  object_class->dispose  = vinagre_window_dispose;
 
   widget_class->key_press_event    = vinagre_window_key_press_cb;
   widget_class->window_state_event = vinagre_window_state_event_cb;
@@ -291,7 +311,8 @@ activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
     g_free (error);
 }
 
-static void update_recent_connections (VinagreWindow *window)
+static void
+update_recent_connections (VinagreWindow *window)
 {
   VinagreWindowPrivate *p = window->priv;
 
@@ -465,11 +486,11 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   update_recent_connections (window);
 
   recent_manager = gtk_recent_manager_get_default ();
-  g_signal_connect (recent_manager,
+  window->priv->update_recents_menu_ui_id = g_signal_connect (
+		    recent_manager,
 		    "changed",
 		    G_CALLBACK (recent_manager_changed),
 		    window);
-
 }
 
 void
@@ -1141,6 +1162,62 @@ vinagre_window_get_ui_manager (VinagreWindow *window)
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
   return window->priv->manager;
+}
+
+static void
+add_connection (VinagreTab *tab, GList **res)
+{
+  VinagreConnection *conn;
+	
+  conn = vinagre_tab_get_conn (tab);
+	
+  *res = g_list_prepend (*res, conn);
+}
+
+/* Returns a newly allocated list with all the connections in the window */
+GList *
+vinagre_window_get_connections (VinagreWindow *window)
+{
+  GList *res = NULL;
+
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+	
+  gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
+			 (GtkCallback)add_connection,
+			  &res);
+			       
+  res = g_list_reverse (res);
+	
+  return res;
+}
+
+VinagreTab *
+vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
+{
+  VinagreConnection *c;
+  VinagreTab *tab = NULL;
+  GList *l;
+
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+
+  l = vinagre_window_get_connections (window);
+
+  while (l != NULL)
+    {
+      c = VINAGRE_CONNECTION (l->data);
+
+      if (!strcmp (vinagre_connection_get_host (conn), vinagre_connection_get_host (c)) &&
+	  vinagre_connection_get_port (conn) == vinagre_connection_get_port (c))
+	{
+	  tab = g_object_get_data (G_OBJECT (c), VINAGRE_TAB_KEY);
+	  break;
+	}
+      l = l->next;
+    }
+  g_list_free (l);
+
+  return tab;
 }
 
 /* vim: ts=8 */
