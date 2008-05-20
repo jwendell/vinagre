@@ -4,14 +4,15 @@
 #
 # Reinout van Schouwen <reinouts@gnome.org>, 2007
 # Wouter Bolsterlee <wbolster@gnome.org>, 2008
+# Tino Meinen <a.t.meinen@chello.nl>, 2008
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-12 22:38+0100\n"
-"PO-Revision-Date: 2008-02-12 22:40+0100\n"
-"Last-Translator: Wouter Bolsterlee <wbolster@gnome.org>\n"
+"POT-Creation-Date: 2008-05-10 02:41+0000\n"
+"PO-Revision-Date: 2008-05-15 16:10+0200\n"
+"Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgid "Access remote desktops"
 msgstr "Toegang tot werkplekken op afstand"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:134
+#: ../src/vinagre-main.c:144
 msgid "Remote Desktop Viewer"
 msgstr "Werkplek op afstand"
 
@@ -51,7 +52,7 @@ msgstr "<b>Met welke machine wilt u verbinding maken?</b>"
 msgid "Editing a bookmark"
 msgstr "Bladwijzer bewerken"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:684
+#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:756
 msgid "Host:"
 msgstr "Host:"
 
@@ -79,9 +80,37 @@ msgstr "_Poort:"
 msgid "_Remember this password"
 msgstr "Dit wachtwoord _onthouden"
 
+# Grammatica fout:
+# http://bugzilla.gnome.org/show_bug.cgi?id=533048
 #: ../data/vinagre.schemas.in.h:1
+msgid ""
+"Set to \"true\" to always show the tabs. Setting to \"false\" will only show "
+"the tabs when there are more than one active connection."
+msgstr "Instellen op ‘true’ om altijd tabs te tonen. Instellen op ‘false’ om alleen tabs te tonen bij twee, of meer verbindingen."
+
+# De toepassing voor ‘vnc://’-adressen<
+#: ../data/vinagre.schemas.in.h:2
 msgid "The handler for \"vnc://\" URLs"
-msgstr "De afhandelaar voor ‘vnc://’-adressen"
+msgstr "De toepassing voor het openen van ‘vnc://’-adressen"
+
+#: ../data/vinagre.schemas.in.h:3
+msgid ""
+"When connecting to a host, the client can say to the server to leave others "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the others clients."
+msgstr "Bij het verbinding maken met een host, kan de cliënt de server instrueren de verbinding met andere cliënten intact te laten of de verbinding met de anderen te verbreken. Instellen op ‘true’ om het bureaublad te delen met andere cliënten."
+
+# 'we' niet vertalen!
+# Of de verbinding met andere clients/clienten intact moet blijven<
+#: ../data/vinagre.schemas.in.h:4
+msgid "Whether we should leave other clients connected"
+msgstr "Of de andere cliënten verbonden moeten blijven"
+
+# 'we' niet vertalen!
+#: ../data/vinagre.schemas.in.h:5
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "Of tabs ook getoond moeten worden als er maar één actieve verbinding is"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -91,49 +120,66 @@ msgstr "Werkblad op afstand (VNC)-bestand"
 msgid "Remote Desktop Connection"
 msgstr "Verbinding met werkblad op afstand"
 
-#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "Fout bij het opslaan van bladwijzers: %s"
-
-#: ../src/vinagre-bookmarks.c:111
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "Fout tijdens het initialiseren van bladwijzers: %s"
-
-#: ../src/vinagre-bookmarks.c:282
+#: ../src/vinagre-bookmarks.c:345
 msgid "Confirm removal?"
 msgstr "Verwijdering bevestigen?"
 
-#: ../src/vinagre-bookmarks.c:285
+#: ../src/vinagre-bookmarks.c:348
 #, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
-msgstr "Weet u zeker dat u <i>%s</i> wilt uitsluiten van de bladwijzers?"
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgstr "Weet u zeker dat u <i>%s</i> wilt verwijderen uit de bladwijzers?"
 
-#: ../src/vinagre-bookmarks.c:296
+#: ../src/vinagre-bookmarks.c:359
 #, c-format
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Fout bij het verwijderen van %s uit de bladwijzers: %s"
 
-#: ../src/vinagre-commands.c:90
+#: ../src/vinagre-bookmarks.c:426
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "Fout tijdens het initialiseren van bladwijzers: %s"
+
+#: ../src/vinagre-bookmarks.c:447 ../src/vinagre-bookmarks.c:464
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "Fout bij het opslaan van bladwijzers: %s"
+
+#: ../src/vinagre-commands.c:106
 msgid "Choose the file"
 msgstr "Kies het bestand"
 
-#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
+#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:839
 msgid "Supported formats"
 msgstr "Ondersteunde formaten"
 
-#: ../src/vinagre-commands.c:133
+#: ../src/vinagre-commands.c:149
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Het volgende bestand kon niet worden geopend:"
 msgstr[1] "De volgende bestanden konden niet worden geopend:"
 
-#: ../src/vinagre-commands.c:383
+#: ../src/vinagre-commands.c:257
+msgid ""
+"Scaling does not work properly on composited windows. Disable the visual "
+"effects and try again."
+msgstr "Schalen werkt niet goed bij vensters die ‘composite’ gebruiken. Zet de visuele effecten uit en probeer het opnieuw."
+
+#: ../src/vinagre-commands.c:265
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"Schalen is niet mogelijk op deze installatie.\n"
+"\n"
+"Lees het bestand README (meegeleverd met Vinagre) om te zien hoe u deze functie kunt aanzetten."
+
+#: ../src/vinagre-commands.c:471
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre is een VNC-client voor de Gnome-werkomgeving"
 
-#: ../src/vinagre-commands.c:386
+#: ../src/vinagre-commands.c:474
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -145,7 +191,7 @@ msgstr ""
 "door de Free Software Foundation; ofwel versie 2 van deze licentie of(zo u "
 "wilt) een latere versie."
 
-#: ../src/vinagre-commands.c:390
+#: ../src/vinagre-commands.c:478
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -157,7 +203,7 @@ msgstr ""
 "GESCHIKTHEID VOOR EEN BEPAALD DOEL.  Zie deGNU General Public License voor "
 "meer details."
 
-#: ../src/vinagre-commands.c:394
+#: ../src/vinagre-commands.c:482
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -165,7 +211,7 @@ msgstr ""
 "U zou een kopie van de GNU General Public License ontvangen moeten hebben "
 "samen met dit programma. Zoniet, kijk dan op <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:416
+#: ../src/vinagre-commands.c:504
 msgid "translator-credits"
 msgstr ""
 "Reinout van Schouwen \n"
@@ -173,140 +219,144 @@ msgstr ""
 "\n"
 "Kijk voor meer info op http://nl.gnome.org/"
 
-#: ../src/vinagre-commands.c:419
+#: ../src/vinagre-commands.c:507
 msgid "Vinagre Website"
 msgstr "Vinagre-webstek"
 
-#: ../src/vinagre-connect.c:53
+#: ../src/vinagre-connect.c:45
 msgid "Choose a VNC Server"
 msgstr "VNC-server kiezen"
 
-#: ../src/vinagre-connection.c:161
+#: ../src/vinagre-connection.c:454
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protocol ‘%s’ is niet ondersteund."
 
-#: ../src/vinagre-fav.c:382
-msgid "Image"
-msgstr "Afbeelding"
+#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:757
+msgid "Port:"
+msgstr "Poort:"
 
-#: ../src/vinagre-fav.c:389
-msgid "Name"
-msgstr "Naam"
-
-#: ../src/vinagre-fav.c:437
+#: ../src/vinagre-fav.c:762
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: ../src/vinagre-fav.c:445
-msgid "Hide bookmarks"
-msgstr "Bladwijzers verbergen"
+#: ../src/vinagre-fav.c:807
+msgid "Hosts nearby"
+msgstr "Hosts in de omgeving"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:47
 msgid "Opens a .vnc file"
 msgstr "Opent een .vnc-bestand"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:47
 msgid "filename"
 msgstr "bestandsnaam"
 
-#: ../src/vinagre-main.c:46
+# ugh, bestaande instantie
+#: ../src/vinagre-main.c:50
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "Een nieuw toplevel-venster aanmaken in het huidige vinagre-venster"
+
+#: ../src/vinagre-main.c:54
 msgid "[server:port]"
 msgstr "[server:poort]"
 
-#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
-#: ../src/vinagre-window.c:284
+#: ../src/vinagre-main.c:79 ../src/vinagre-main.c:98
+#: ../src/vinagre-window.c:305
 msgid "Unknown error"
 msgstr "Onbekende fout"
 
-#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+#: ../src/vinagre-main.c:109 ../src/vinagre-window.c:304
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "De volgende fout is opgetreden:"
 msgstr[1] "De volgende fouten zijn opgetreden:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:121
+#: ../src/vinagre-main.c:130
 msgid "- VNC Client for GNOME"
 msgstr "- VNC-client voor Gnome"
 
-#: ../src/vinagre-main.c:129
+#: ../src/vinagre-main.c:139
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Start 'vinagre --help' om een lijst met opdrachtregelopties te zien"
 
-#: ../src/vinagre-notebook.c:98
+# verwerken/ontleden
+#: ../src/vinagre-mdns.c:118
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "Ontleden van de avahi-hostnaam is mislukt: %s\n"
+
+# omgeving verkennen/doorzoeken/bladeren...
+#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "Omgeving verkennen voor hosts is mislukt: %s\n"
+
+#: ../src/vinagre-notebook.c:127
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Verbinding met host ‘%s’ is verbroken."
 
-#: ../src/vinagre-notebook.c:124
+#: ../src/vinagre-notebook.c:153
 msgid "Connecting..."
 msgstr "Verbinden…"
 
-#: ../src/vinagre-notebook.c:148
+#: ../src/vinagre-notebook.c:180
 msgid "Close connection"
 msgstr "Verbinding sluiten"
 
-#: ../src/vinagre-prefs-manager.c:124
+#: ../src/vinagre-prefs.c:154
 msgid "Cannot initialize preferences manager."
 msgstr "Kan voorkeuren-beheer niet initialiseren."
 
-#: ../src/vinagre-prefs-manager.c:420
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr "Verwacht: `%s' Ontvangen: `%s', voor sleutel %s"
-
-#: ../src/vinagre-tab.c:255
+#: ../src/vinagre-tab.c:267
 msgid "Error connecting to host."
 msgstr "Fout bij verbinding maken met host."
 
-#: ../src/vinagre-tab.c:292
+#: ../src/vinagre-tab.c:302
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Aanmelden bij host ‘%s’ is mislukt"
 
-#: ../src/vinagre-tab.c:320
+#: ../src/vinagre-tab.c:330
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Aanmeldingsmethode voor host ‘%s’ wordt niet ondersteund. (%u)"
 
-#: ../src/vinagre-tab.c:376
+#: ../src/vinagre-tab.c:411
 msgid "Error saving recent connection."
 msgstr "Er is een fout opgetreden bij het opslaan van een recente verbinding."
 
-#: ../src/vinagre-tab.c:407
+#: ../src/vinagre-tab.c:442
 msgid "Error saving the password on the keyring."
 msgstr ""
 "Er is een fout opgetreden bij het opslaan van het wachtwoord in de "
 "sleutelbos."
 
-#: ../src/vinagre-tab.c:467 ../src/vinagre-tab.c:563
+#: ../src/vinagre-tab.c:502 ../src/vinagre-tab.c:613
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Druk op Ctrl+Alt om de cursor te pakken"
 
-#: ../src/vinagre-tab.c:542
+#: ../src/vinagre-tab.c:592
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Druk op Ctrl+Alt om de cursor vrij te laten"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:755
 msgid "Desktop Name:"
 msgstr "Werkpleknaam:"
 
-#: ../src/vinagre-tab.c:685
-msgid "Port:"
-msgstr "Poort:"
-
-#: ../src/vinagre-tab.c:686
+#: ../src/vinagre-tab.c:758
 msgid "Dimensions:"
 msgstr "Afmetingen:"
 
-#: ../src/vinagre-tab.c:753
+#: ../src/vinagre-tab.c:825
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Schermafdruk van %s"
 
-#: ../src/vinagre-tab.c:756
+#: ../src/vinagre-tab.c:828
 msgid "Save Screenshot"
 msgstr "Schermafdruk opslaan"
 
@@ -323,7 +373,7 @@ msgstr "Be_werken"
 msgid "_View"
 msgstr "Beel_d"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:36
 msgid "_Bookmarks"
 msgstr "Bl_adwijzers"
 
@@ -411,41 +461,80 @@ msgstr "Een schermafdruk maken"
 msgid "Take a screenshot of active connection"
 msgstr "Maak een schermafdruk van een actieve verbinding"
 
-#: ../src/vinagre-ui.h:84
+#: ../src/vinagre-ui.h:82
+msgid "Send Ctrl-Alt-Del"
+msgstr "Ctrl-Alt-Del verzenden"
+
+#: ../src/vinagre-ui.h:83
+msgid "Send Ctrl+Alt+Del to active connection"
+msgstr "Ctrl+Alt+Del naar de actieve verbinding verzenden"
+
+#: ../src/vinagre-ui.h:87
 msgid "View the current machine in full screen"
 msgstr "De huidige machine in volledig scherm bekijken"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:92
+msgid "S_caling"
+msgstr "S_chalen"
+
+#: ../src/vinagre-ui.h:93
+msgid "Fit the remote screen into the current window size"
+msgstr "Het externe scherm in het huidige venster passen"
+
+#: ../src/vinagre-ui.h:95
+msgid "_Read only"
+msgstr "_Alleen lezen"
+
+# onmogelijk maken/uitzetten/verhinderen
+#: ../src/vinagre-ui.h:96
+msgid "Disable mouse and keyboard activities"
+msgstr "Muis- en toetsenbord-activiteiten uitzetten"
+
+#: ../src/vinagre-ui.h:102
 msgid "_Toolbar"
 msgstr "_Werkbalk"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:103
 msgid "Show or hide the toolbar"
 msgstr "De werkbalk tonen of verbergen"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:106
 msgid "_Statusbar"
 msgstr "_Statusbalk"
 
-#: ../src/vinagre-ui.h:94
+#: ../src/vinagre-ui.h:107
 msgid "Show or hide the statusbar"
 msgstr "Statusbalk weergeven/verbergen"
 
-#: ../src/vinagre-ui.h:98
-msgid "Show or hide the bookmarks panel"
-msgstr "Het bladwijzerpaneel tonen/verbergen"
+#: ../src/vinagre-ui.h:110
+msgid "Side _Panel"
+msgstr "_Zijpaneel"
 
-#: ../src/vinagre-window.c:401
+# bladwijzerpaneel/zijpaneel
+#: ../src/vinagre-ui.h:111
+msgid "Show or hide the side panel"
+msgstr "Het zijpaneel tonen/verbergen"
+
+#: ../src/vinagre-window.c:429
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Kan vinagre-ui.xml niet samenvoegen: %s"
 
-#: ../src/vinagre-window.c:429
+#: ../src/vinagre-window.c:457
 msgid "_Recent connections"
 msgstr "_Recente verbindingen"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:578
+#: ../src/vinagre-window.c:614 ../src/vinagre-window.c:664
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d openen"
+
+#~ msgid "Image"
+#~ msgstr "Afbeelding"
+
+#~ msgid "Name"
+#~ msgstr "Naam"
+
+#~ msgid "Hide bookmarks"
+#~ msgstr "Bladwijzers verbergen"
