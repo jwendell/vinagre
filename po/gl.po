@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-27 15:43+0200\n"
-"PO-Revision-Date: 2008-04-27 15:47+0200\n"
+"POT-Creation-Date: 2008-05-26 21:15+0200\n"
+"PO-Revision-Date: 2008-05-26 21:18+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgid "Access remote desktops"
 msgstr "Acceso a escritorios remotos"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:136
+#: ../src/vinagre-main.c:144
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
@@ -51,7 +51,7 @@ msgstr "<b>A que máquina quere conectarse?</b>"
 msgid "Editing a bookmark"
 msgstr "Editando un marcador"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:684
+#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:756
 msgid "Host:"
 msgstr "Equipo:"
 
@@ -80,8 +80,36 @@ msgid "_Remember this password"
 msgstr "_Recordar este contrasinal"
 
 #: ../data/vinagre.schemas.in.h:1
+msgid ""
+"Set to \"true\" to always show the tabs. Setting to \"false\" will only show "
+"the tabs when there are more than one active connection."
+msgstr ""
+"Establecer a \"true\" para mostrar sempre os separadores. Establecéndoo a "
+"\"false\" mostrará só os separadores cnado haxa maís dunha conexión activa."
+
+#: ../data/vinagre.schemas.in.h:2
 msgid "The handler for \"vnc://\" URLs"
 msgstr "O manexador para URLs \"vnc://\""
+
+#: ../data/vinagre.schemas.in.h:3
+msgid ""
+"When connecting to a host, the client can say to the server to leave others "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the others clients."
+msgstr ""
+"Ao conectarse cun computador, o cliente pode decirlle ao servidor que deixe "
+"outros clientes conectados ou que abandone as conexións existentes. "
+"Estableza o valor a verdadeiro para compartir o escritorio con outros "
+"clientes."
+
+#: ../data/vinagre.schemas.in.h:4
+msgid "Whether we should leave other clients connected"
+msgstr "Se debe deixar outros clientes conectados"
+
+#: ../data/vinagre.schemas.in.h:5
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "Se debe mostrar separadores incluso ando haxa só unha conexión activa"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -115,21 +143,21 @@ msgstr "Erro inicializando os marcadores: %s"
 msgid "Error while saving bookmarks: %s"
 msgstr "Erro gardando os marcadores: %s"
 
-#: ../src/vinagre-commands.c:90
+#: ../src/vinagre-commands.c:106
 msgid "Choose the file"
 msgstr "Escoller o ficheiro"
 
-#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:767
+#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:839
 msgid "Supported formats"
 msgstr "Formatos soportados"
 
-#: ../src/vinagre-commands.c:133
+#: ../src/vinagre-commands.c:149
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Non se puido abrir o seguinte ficheiro:"
 msgstr[1] "Non se puideron abrir os seguintes ficheiros:"
 
-#: ../src/vinagre-commands.c:221
+#: ../src/vinagre-commands.c:257
 msgid ""
 "Scaling does not work properly on composited windows. Disable the visual "
 "effects and try again."
@@ -137,7 +165,7 @@ msgstr ""
 "O escalado non funciona ben con ventás con composición. Desactive os efectos "
 "visuais e inténteo de novo."
 
-#: ../src/vinagre-commands.c:229
+#: ../src/vinagre-commands.c:265
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -149,11 +177,11 @@ msgstr ""
 "Lea o ficheiro README (proporcionado polo Vinagre) para saber como activar "
 "esta característica."
 
-#: ../src/vinagre-commands.c:428
+#: ../src/vinagre-commands.c:471
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre é un cliente de VNC para o escritorio Gnome"
 
-#: ../src/vinagre-commands.c:431
+#: ../src/vinagre-commands.c:474
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -165,7 +193,7 @@ msgstr ""
 "Foundation; xa sexa na versión 2 da Licenza como (segundo a súa escolla) en "
 "calquera versión posterior."
 
-#: ../src/vinagre-commands.c:435
+#: ../src/vinagre-commands.c:478
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -177,7 +205,7 @@ msgstr ""
 "PARA UN PROPÓSITO PARTICULAR. Para máis detalles vexa a Licenza Pública "
 "Xeral de GNU."
 
-#: ../src/vinagre-commands.c:439
+#: ../src/vinagre-commands.c:482
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -185,11 +213,11 @@ msgstr ""
 "Debeu recibir unha copia da Licenza Pública Xeral de GNU xunto con este "
 "programa. Se non, vexa <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:461
+#: ../src/vinagre-commands.c:504
 msgid "translator-credits"
 msgstr "Ignacio Casal Quinteiro  <nacho.resa@gmail.com>"
 
-#: ../src/vinagre-commands.c:464
+#: ../src/vinagre-commands.c:507
 msgid "Vinagre Website"
 msgstr "Sitio web de Vinagre"
 
@@ -202,7 +230,7 @@ msgstr "Escolla un servidor VNC"
 msgid "The protocol %s is not supported."
 msgstr "O protocolo %s non está soportado."
 
-#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:685
+#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:757
 msgid "Port:"
 msgstr "Porto:"
 
@@ -214,35 +242,40 @@ msgstr "Marcadores"
 msgid "Hosts nearby"
 msgstr "Equipos cercanos"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:47
 msgid "Opens a .vnc file"
 msgstr "Abre un ficheiro .vnc"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:47
 msgid "filename"
 msgstr "nome de ficheiro"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:50
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr ""
+"Crear unha ventá de nivel superior nunha instancia existente de vinagre"
+
+#: ../src/vinagre-main.c:54
 msgid "[server:port]"
 msgstr "[servidor:porto]"
 
-#: ../src/vinagre-main.c:72 ../src/vinagre-main.c:91
-#: ../src/vinagre-window.c:283
+#: ../src/vinagre-main.c:79 ../src/vinagre-main.c:98
+#: ../src/vinagre-window.c:305
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: ../src/vinagre-main.c:102 ../src/vinagre-window.c:282
+#: ../src/vinagre-main.c:109 ../src/vinagre-window.c:304
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Ocorreu o seguinte erro:"
 msgstr[1] "Ocorreron os seguintes erros:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:122
+#: ../src/vinagre-main.c:130
 msgid "- VNC Client for GNOME"
 msgstr "- Cliente de VNC para Gnome"
 
-#: ../src/vinagre-main.c:131
+#: ../src/vinagre-main.c:139
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
@@ -259,72 +292,67 @@ msgstr "Fallou ao resolver o nome do equipo avahi: %s\n"
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Fallou ao examinar os equipos: %s\n"
 
-#: ../src/vinagre-notebook.c:98
+#: ../src/vinagre-notebook.c:127
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "A conexión ao equipo \"%s\" foi pechada."
 
-#: ../src/vinagre-notebook.c:124
+#: ../src/vinagre-notebook.c:153
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../src/vinagre-notebook.c:151
+#: ../src/vinagre-notebook.c:180
 msgid "Close connection"
 msgstr "Pechar conexión"
 
-#: ../src/vinagre-prefs-manager.c:124
+#: ../src/vinagre-prefs.c:154
 msgid "Cannot initialize preferences manager."
 msgstr "Non se pode inicializar o xestor de preferencias."
 
-#: ../src/vinagre-prefs-manager.c:420
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr "Esperábase `%s' pero obteuse `%s' para a clave %s"
-
-#: ../src/vinagre-tab.c:259
+#: ../src/vinagre-tab.c:267
 msgid "Error connecting to host."
 msgstr "Erro conectando ao equipo."
 
-#: ../src/vinagre-tab.c:294
+#: ../src/vinagre-tab.c:302
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Fallou a autenticación ao equipo \"%s\""
 
-#: ../src/vinagre-tab.c:322
+#: ../src/vinagre-tab.c:330
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "O método de autenticación ao equipo \"%s\" non está soportado. (%u)"
 
-#: ../src/vinagre-tab.c:380
+#: ../src/vinagre-tab.c:411
 msgid "Error saving recent connection."
 msgstr "Erro ao gardar a conexión recente."
 
-#: ../src/vinagre-tab.c:411
+#: ../src/vinagre-tab.c:442
 msgid "Error saving the password on the keyring."
 msgstr "Erro ao gardar o contrasinal no anel."
 
-#: ../src/vinagre-tab.c:471 ../src/vinagre-tab.c:567
+#: ../src/vinagre-tab.c:502 ../src/vinagre-tab.c:613
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Prema Ctrl+Alt para reter o cursor"
 
-#: ../src/vinagre-tab.c:546
+#: ../src/vinagre-tab.c:592
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Prema Ctrl+Alt para liberar o cursor"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:755
 msgid "Desktop Name:"
 msgstr "Nome do escritorio:"
 
-#: ../src/vinagre-tab.c:686
+#: ../src/vinagre-tab.c:758
 msgid "Dimensions:"
 msgstr "Dimensións:"
 
-#: ../src/vinagre-tab.c:753
+#: ../src/vinagre-tab.c:825
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de pantalla de %s"
 
-#: ../src/vinagre-tab.c:756
+#: ../src/vinagre-tab.c:828
 msgid "Save Screenshot"
 msgstr "Gardar a captura de pantalla"
 
@@ -429,64 +457,75 @@ msgstr "Facer unha captura de pantalla"
 msgid "Take a screenshot of active connection"
 msgstr "Facer unha captura de pantalla da conexión activa"
 
-#: ../src/vinagre-ui.h:84
+#: ../src/vinagre-ui.h:82
+msgid "Send Ctrl-Alt-Del"
+msgstr "Enviar Ctrl-Alt-Supr"
+
+#: ../src/vinagre-ui.h:83
+msgid "Send Ctrl+Alt+Del to active connection"
+msgstr "Enviar Ctrl-Alt-Supr á conexión activa"
+
+#: ../src/vinagre-ui.h:87
 msgid "View the current machine in full screen"
 msgstr "Ver a máquina actual en pantalla completa"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:92
 msgid "S_caling"
 msgstr "Es_calando"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:93
 msgid "Fit the remote screen into the current window size"
 msgstr "Axustar a pantalla remota no tamaño actual da ventá"
 
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:95
 msgid "_Read only"
 msgstr "_Só lectura"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:96
 msgid "Disable mouse and keyboard activities"
 msgstr "Desactivar as actividades do rato e o teclado"
 
-#: ../src/vinagre-ui.h:99
+#: ../src/vinagre-ui.h:102
 msgid "_Toolbar"
 msgstr "_Barra de ferramentas"
 
-#: ../src/vinagre-ui.h:100
+#: ../src/vinagre-ui.h:103
 msgid "Show or hide the toolbar"
 msgstr "Mostrar ou ocultar a barra de ferramentas"
 
-#: ../src/vinagre-ui.h:103
+#: ../src/vinagre-ui.h:106
 msgid "_Statusbar"
 msgstr "_Barra de estado"
 
-#: ../src/vinagre-ui.h:104
+#: ../src/vinagre-ui.h:107
 msgid "Show or hide the statusbar"
 msgstr "Mostrar ou ocultar a barra de estado"
 
-#: ../src/vinagre-ui.h:107
+#: ../src/vinagre-ui.h:110
 msgid "Side _Panel"
 msgstr "_Panel lateral"
 
-#: ../src/vinagre-ui.h:108
+#: ../src/vinagre-ui.h:111
 msgid "Show or hide the side panel"
 msgstr "Mostrar ou ocultar o panel lateral"
 
-#: ../src/vinagre-window.c:404
+#: ../src/vinagre-window.c:429
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Non se puido mesturar vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:432
+#: ../src/vinagre-window.c:457
 msgid "_Recent connections"
 msgstr "Conexións _recentes"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:587 ../src/vinagre-window.c:637
+#: ../src/vinagre-window.c:614 ../src/vinagre-window.c:664
 #, c-format
 msgid "Open %s:%d"
 msgstr "Abrir %s: %d"
+
+#~ msgid "Expected `%s' got `%s' for key %s"
+#~ msgstr "Esperábase `%s' pero obteuse `%s' para a clave %s"
 
 #~ msgid "Image"
 #~ msgstr "Imaxe"
