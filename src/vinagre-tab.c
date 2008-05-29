@@ -32,6 +32,7 @@
 #include "vinagre-tab.h"
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
+#include "view/autoDrawer.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
 
@@ -48,6 +49,10 @@ struct _VinagreTabPrivate
   guint32            keyring_item_id;
   VinagreTabState    state;
   gchar             *clipboard_str;
+  GtkWidget         *layout;
+  GtkWidget         *toolbar;
+  GtkWidget         *ro_button;
+  GtkWidget         *scaling_button;
 };
 
 G_DEFINE_TYPE(VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
@@ -102,13 +107,17 @@ vinagre_tab_window_state_cb (GtkWidget           *widget,
 
   if (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN)
     {
-      vnc_display_force_grab  (VNC_DISPLAY(tab->priv->vnc), TRUE);
+      //vnc_display_force_grab  (VNC_DISPLAY(tab->priv->vnc), TRUE);
+      gtk_widget_show (tab->priv->toolbar);
+      ViewAutoDrawer_SetActive (VIEW_AUTODRAWER (tab->priv->layout), TRUE);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				      h, v);
     }
   else
     {
-      vnc_display_force_grab  (VNC_DISPLAY(tab->priv->vnc), FALSE);
+      //vnc_display_force_grab  (VNC_DISPLAY(tab->priv->vnc), FALSE);
+      gtk_widget_hide (tab->priv->toolbar);
+      ViewAutoDrawer_SetActive (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				      GTK_POLICY_AUTOMATIC,
 				      GTK_POLICY_AUTOMATIC);
@@ -630,10 +639,141 @@ vnc_key_event ( GtkWidget   *widget G_GNUC_UNUSED,
 }
 
 static void
+close_button_clicked (GtkToolButton *button,
+		      VinagreTab    *tab)
+{
+  vinagre_notebook_remove_tab (tab->priv->nb, tab);
+}
+
+static void
+fullscreen_button_clicked (GtkToolButton *button,
+			   VinagreTab    *tab)
+{
+  vinagre_window_toggle_fullscreen (tab->priv->window);
+}
+
+static void
+screenshot_button_clicked (GtkToolButton *button,
+			   VinagreTab    *tab)
+{
+  vinagre_tab_take_screenshot (tab);
+}
+
+static void
+cad_button_clicked (GtkToolButton *button,
+			   VinagreTab    *tab)
+{
+  vinagre_tab_send_ctrlaltdel (tab);
+}
+
+static void
+ro_button_clicked (GtkToggleToolButton *button,
+		   VinagreTab          *tab)
+{
+  GtkAction *action;
+
+  vinagre_tab_set_readonly (tab, gtk_toggle_tool_button_get_active (button));
+
+  action = gtk_action_group_get_action (vinagre_window_get_connected_action (tab->priv->window), "ViewReadOnly");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+				vinagre_tab_get_readonly (tab));
+}
+
+static void
+scaling_button_clicked (GtkToggleToolButton *button,
+			VinagreTab          *tab)
+{
+  GtkAction *action;
+
+  if (!vinagre_tab_set_scaling (tab, gtk_toggle_tool_button_get_active (button)))
+    gtk_toggle_tool_button_set_active (button, FALSE);
+
+  action = gtk_action_group_get_action (vinagre_window_get_connected_action (tab->priv->window), "ViewScaling");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+				vinagre_tab_get_scaling (tab));
+}
+
+static void
+setup_layout (VinagreTab *tab)
+{
+  GtkWidget  *button;
+
+  tab->priv->toolbar = gtk_toolbar_new ();
+  GTK_WIDGET_SET_FLAGS (tab->priv->toolbar, GTK_NO_SHOW_ALL);
+
+  gtk_toolbar_set_tooltips (GTK_TOOLBAR (tab->priv->toolbar), TRUE);
+  gtk_toolbar_set_style (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOLBAR_BOTH_HORIZ);
+
+  /* Leave fullscreen */
+  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_LEAVE_FULLSCREEN));
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_tool_item_set_is_important (GTK_TOOL_ITEM (button), TRUE);
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "clicked", G_CALLBACK (fullscreen_button_clicked), tab);
+
+  /* Close connection */
+  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_CLOSE));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Close connection"));
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "clicked", G_CALLBACK (close_button_clicked), tab);
+
+  /* Space */
+  button = GTK_WIDGET (gtk_separator_tool_item_new ());
+  gtk_separator_tool_item_set_draw (GTK_SEPARATOR_TOOL_ITEM (button), FALSE);
+  gtk_tool_item_set_expand (GTK_TOOL_ITEM (button), TRUE);
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+
+  /* Scaling */
+  button = GTK_WIDGET (gtk_toggle_tool_button_new ());
+  gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Scaling"));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Scaling"));
+  gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "zoom-fit-best");
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "toggled", G_CALLBACK (scaling_button_clicked), tab);
+  tab->priv->scaling_button = button;
+
+  /* Read only */
+  button = GTK_WIDGET (gtk_toggle_tool_button_new ());
+  gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Read only"));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Read only"));
+  gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "emblem-readonly");
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "toggled", G_CALLBACK (ro_button_clicked), tab);
+  tab->priv->ro_button = button;
+
+  /* Screenshot */
+  button = GTK_WIDGET (gtk_tool_button_new (NULL, NULL));
+  gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "applets-screenshooter");
+  gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Take screenshot"));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Take screenshot"));
+  g_signal_connect (button, "clicked", G_CALLBACK (screenshot_button_clicked), tab);
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+
+  /* Send Ctrl-alt-del */
+  button = GTK_WIDGET (gtk_tool_button_new (NULL, NULL));
+  gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "preferences-desktop-keyboard-shortcuts");
+  gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Send Ctrl-Alt-Del"));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Send Ctrl-Alt-Del"));
+  g_signal_connect (button, "clicked", G_CALLBACK (cad_button_clicked), tab);
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+
+  tab->priv->layout = ViewAutoDrawer_New ();
+  ViewAutoDrawer_SetActive (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
+  ViewOvBox_SetOver (VIEW_OV_BOX (tab->priv->layout), tab->priv->toolbar);
+  ViewOvBox_SetUnder (VIEW_OV_BOX (tab->priv->layout), tab->priv->scroll);
+}
+
+static void
 vinagre_tab_init (VinagreTab *tab)
 {
-  GtkWidget *viewport;
-  gboolean shared;
+  GtkWidget     *viewport;
+  gboolean       shared;
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
   tab->priv->save_password = FALSE;
@@ -648,8 +788,6 @@ vinagre_tab_init (VinagreTab *tab)
 				  GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				       GTK_SHADOW_NONE);
-
-  gtk_box_pack_end (GTK_BOX(tab), tab->priv->scroll, TRUE, TRUE, 0);
 
   /* Create the vnc widget */
   tab->priv->vnc = vnc_display_new ();
@@ -725,6 +863,9 @@ vinagre_tab_init (VinagreTab *tab)
 		    G_CALLBACK (vnc_key_event),
 		    NULL);
 
+  setup_layout (tab);
+
+  gtk_box_pack_end (GTK_BOX(tab), tab->priv->layout, TRUE, TRUE, 0);
   gtk_widget_show_all (GTK_WIDGET (tab));
 }
 
@@ -886,7 +1027,23 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
   if (vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc)) == active)
     return TRUE;
 
-  return vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active);
+  if (active &&
+      gdk_screen_is_composited (gtk_widget_get_screen (GTK_WIDGET (tab->priv->window))))
+    {
+      vinagre_utils_show_error (_("Scaling does not work properly on composited windows. Disable the visual effects and try again."),
+				GTK_WINDOW (tab->priv->window));
+      return FALSE;
+    }
+
+  if (!vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active))
+    {
+      vinagre_utils_show_error (_("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
+				GTK_WINDOW (tab->priv->window));
+      return FALSE;
+    }
+
+  gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->scaling_button), active);
+  return TRUE;
 }
 
 gboolean
@@ -901,6 +1058,7 @@ vinagre_tab_set_readonly (VinagreTab *tab, gboolean active) {
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
   vnc_display_set_read_only (VNC_DISPLAY (tab->priv->vnc), active);
+  gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->ro_button), active);
 }
 
 gboolean

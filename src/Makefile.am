@@ -1,4 +1,6 @@
-NULL =
+SUBDIRS = view
+
+NULL = 
 
 INCLUDES = 						\
 	-DBINDIR=\"$(bindir)\"			 	\
@@ -37,6 +39,7 @@ vinagre_SOURCES = \
 vinagre_LDADD = \
 	$(VINAGRE_LIBS)		\
 	$(GTKVNC_LIBS)		\
+	view/libview.la		\
 	$(NULL)
 
 vinagre_enum_headers = \

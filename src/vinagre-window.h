@@ -79,6 +79,7 @@ GtkWidget	*vinagre_window_get_fav_panel		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_notebook		(VinagreWindow	       *window);
 GtkActionGroup	*vinagre_window_get_main_action		(VinagreWindow         *window);
 GtkActionGroup	*vinagre_window_get_sensitive_action	(VinagreWindow         *window);
+GtkActionGroup	*vinagre_window_get_connected_action	(VinagreWindow         *window);
 
 void		vinagre_window_update_bookmarks_list_menu (VinagreWindow       *window);
 

@@ -250,21 +250,8 @@ vinagre_cmd_view_scaling (GtkAction     *action,
 
   active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-  if (active &&
-      gdk_screen_is_composited (gtk_widget_get_screen (GTK_WIDGET (window))))
-    {
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-      vinagre_utils_show_error (_("Scaling does not work properly on composited windows. Disable the visual effects and try again."),
-				GTK_WINDOW (window));
-      return;
-    }
-
   if (!vinagre_tab_set_scaling (vinagre_window_get_active_tab (window), active))
-    {
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-      vinagre_utils_show_error (_("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
-				GTK_WINDOW (window));
-    }
+    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
 }
 
 void

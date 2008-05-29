@@ -86,6 +86,7 @@ data/icons/Makefile
 help/Makefile
 po/Makefile.in
 src/Makefile
+src/view/Makefile
 ])
 
 #*******************************************************************************

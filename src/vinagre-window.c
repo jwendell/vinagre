@@ -1131,6 +1131,14 @@ vinagre_window_get_sensitive_action (VinagreWindow *window)
   return window->priv->always_sensitive_action_group;
 }
 
+GtkActionGroup *
+vinagre_window_get_connected_action (VinagreWindow *window)
+{
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+
+  return window->priv->machine_connected_action_group;
+}
+
 GtkWidget *
 vinagre_window_get_fav_panel (VinagreWindow *window)
 {
