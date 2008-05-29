@@ -606,6 +606,14 @@ vnc_key_event ( GtkWidget   *widget G_GNUC_UNUSED,
   return TRUE;
 }
 
+static gboolean
+vnc_scroll_event (GtkWidget *widget G_GNUC_UNUSED,
+		  GdkEventScroll *scroll G_GNUC_UNUSED,
+		  gpointer data G_GNUC_UNUSED)
+{
+  return TRUE;
+}
+
 static void
 close_button_clicked (GtkToolButton *button,
 		      VinagreTab    *tab)
@@ -830,6 +838,11 @@ vinagre_tab_init (VinagreTab *tab)
   g_signal_connect (tab->priv->vnc,
 		    "key-release-event",
 		    G_CALLBACK (vnc_key_event),
+		    NULL);
+
+  g_signal_connect (tab->priv->vnc,
+		    "scroll-event",
+		    G_CALLBACK (vnc_scroll_event),
 		    NULL);
 
   setup_layout (tab);
