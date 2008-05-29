@@ -801,7 +801,7 @@ create_statusbar (VinagreWindow *window,
 void
 vinagre_window_set_title (VinagreWindow *window)
 {
-  gchar *title, *name;
+  gchar *title, *name, *grab;
 
   if (window->priv->active_tab == NULL)
     {
@@ -809,13 +809,20 @@ vinagre_window_set_title (VinagreWindow *window)
       return;
     }
 
+  if (vinagre_tab_is_pointer_grab (VINAGRE_TAB (window->priv->active_tab)))
+    grab = g_strdup_printf (" (%s)", _("Press Ctrl+Alt to release the cursor"));
+  else
+    grab = g_strdup ("");
+
   name = vinagre_connection_get_best_name (vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab)));
-  title = g_strdup_printf ("%s - %s",
+  title = g_strdup_printf ("%s%s - %s",
 			   name,
+			   grab,
 			   g_get_application_name ());
   gtk_window_set_title (GTK_WINDOW (window), title);
   g_free (title);
   g_free (name);
+  g_free (grab);
 }
 
 static void

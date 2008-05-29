@@ -97,7 +97,7 @@ gboolean	  vinagre_tab_get_readonly	(VinagreTab *tab);
 VinagreTabState   vinagre_tab_get_state		(VinagreTab *tab);
 VinagreTab	  *vinagre_tab_get_from_connection (VinagreConnection *conn);
 
-
+gboolean	  vinagre_tab_is_pointer_grab	(VinagreTab *tab);
 G_END_DECLS
 
 #endif  /* __VINAGRE_TAB_H__  */
