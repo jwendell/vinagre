@@ -28,6 +28,7 @@
 #define VM_TOOLBAR_VISIBLE	 	VINAGRE_BASE_KEY "/toolbar_visible"
 #define VM_STATUSBAR_VISIBLE		VINAGRE_BASE_KEY "/statusbar_visible"
 #define VM_SIDE_PANEL_VISIBLE		VINAGRE_BASE_KEY "/side_pane_visible"
+#define VM_SHOW_ACCELS			VINAGRE_BASE_KEY "/show_accels"
 
 #define VM_WINDOW_STATE			VINAGRE_BASE_KEY "/window_state"
 #define VM_WINDOW_WIDTH			VINAGRE_BASE_KEY "/window_width"
@@ -51,7 +52,8 @@ enum
   PROP_WINDOW_STATE,
   PROP_WINDOW_WIDTH,
   PROP_WINDOW_HEIGHT,
-  PROP_SIDE_PANEL_SIZE
+  PROP_SIDE_PANEL_SIZE,
+  PROP_SHOW_ACCELS
 };
 
 G_DEFINE_TYPE (VinagrePrefs, vinagre_prefs, G_TYPE_OBJECT);
@@ -145,6 +147,15 @@ vinagre_prefs_always_show_tabs_notify (GConfClient           *client,
 }
 
 static void
+vinagre_prefs_show_accels_notify (GConfClient           *client,
+				  guint                  cnx_id,
+				  GConfEntry            *entry,
+				  VinagrePrefs          *prefs)
+{
+  g_object_notify (G_OBJECT (prefs), "show-accels");
+}
+
+static void
 vinagre_prefs_init (VinagrePrefs *prefs)
 {
   prefs->priv = G_TYPE_INSTANCE_GET_PRIVATE (prefs, VINAGRE_TYPE_PREFS, VinagrePrefsPrivate);
@@ -161,6 +172,10 @@ vinagre_prefs_init (VinagrePrefs *prefs)
   gconf_client_notify_add (prefs->priv->gconf_client,
 			   VM_ALWAYS_SHOW_TABS,
                            (GConfClientNotifyFunc) vinagre_prefs_always_show_tabs_notify,
+                           prefs, NULL, NULL);
+  gconf_client_notify_add (prefs->priv->gconf_client,
+			   VM_SHOW_ACCELS,
+                           (GConfClientNotifyFunc) vinagre_prefs_show_accels_notify,
                            prefs, NULL, NULL);
 
 }
@@ -213,6 +228,9 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
       case PROP_SIDE_PANEL_SIZE:
 	vinagre_prefs_set_int (prefs, VM_SIDE_PANEL_SIZE, g_value_get_int (value));
 	break;
+      case PROP_SHOW_ACCELS:
+	vinagre_prefs_set_bool (prefs, VM_SHOW_ACCELS, g_value_get_boolean (value));
+	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -252,6 +270,9 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	break;
       case PROP_SIDE_PANEL_SIZE:
 	g_value_set_int (value, vinagre_prefs_get_int (prefs, VM_SIDE_PANEL_SIZE, 200));
+	break;
+      case PROP_SHOW_ACCELS:
+	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_SHOW_ACCELS, TRUE));
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -334,6 +355,13 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 						     "The width of side panel",
 						     100, G_MAXINT, 200,
 						     G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+				   PROP_SHOW_ACCELS,
+				   g_param_spec_boolean ("show-accels",
+							 "Show menu accelerators",
+							 "Whether we should show the menu accelerators (keyboard shortcuts)",
+							 TRUE,
+							 G_PARAM_READWRITE));
 
 }
 /* vim: ts=8 */

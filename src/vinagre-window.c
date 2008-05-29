@@ -340,6 +340,19 @@ recent_manager_changed (GtkRecentManager *manager,
 }
 
 static void
+show_hide_accels (VinagreWindow *window)
+{
+  gboolean show_accels;
+
+  g_object_get (vinagre_prefs_get_default (),
+		"show-accels", &show_accels,
+		NULL);
+  g_object_set (gtk_settings_get_default (),
+		"gtk-enable-accels", show_accels,
+		NULL);
+}
+
+static void
 create_menu_bar_and_toolbar (VinagreWindow *window, 
 			     GtkWidget     *main_box)
 {
@@ -491,6 +504,12 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 		    "changed",
 		    G_CALLBACK (recent_manager_changed),
 		    window);
+
+  g_signal_connect_swapped (vinagre_prefs_get_default (),
+			    "notify::show-accels",
+			     G_CALLBACK (show_hide_accels),
+			     window);
+  show_hide_accels (window);
 }
 
 void
