@@ -192,25 +192,6 @@ vinagre_window_configure_event (GtkWidget         *widget,
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->configure_event (widget, event);
 }
 
-
-static gboolean
-vinagre_window_key_press_cb (GtkWidget   *widget,
-			     GdkEventKey *event)
-{
-  VinagreWindow *window = VINAGRE_WINDOW (widget);
-
-  switch (event->keyval)
-    {
-      case GDK_F11:
-	if (window->priv->active_tab &&
-	    (vinagre_tab_get_state (VINAGRE_TAB (window->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED))
-	  vinagre_window_toggle_fullscreen (window);
-	return FALSE;
-    }
-
-  return GTK_WIDGET_CLASS (vinagre_window_parent_class)->key_press_event (widget, event);
-}
-
 static void
 vinagre_window_class_init (VinagreWindowClass *klass)
 {
@@ -220,7 +201,6 @@ vinagre_window_class_init (VinagreWindowClass *klass)
   object_class->finalize = vinagre_window_finalize;
   object_class->dispose  = vinagre_window_dispose;
 
-  widget_class->key_press_event    = vinagre_window_key_press_cb;
   widget_class->window_state_event = vinagre_window_state_event_cb;
   widget_class->configure_event    = vinagre_window_configure_event;
   widget_class->delete_event       = vinagre_window_delete_event;
