@@ -64,13 +64,12 @@ get_accel_file (void)
 {
   const gchar *home;
 
-  home = g_get_home_dir ();
+  home = g_get_user_config_dir ();
 
   if (home)
     return g_build_filename (home,
-			     ".gnome2",
-			     "accels",
 			     "vinagre",
+			     "accels",
 			     NULL);
   return NULL;
 }
