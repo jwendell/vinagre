@@ -59,12 +59,56 @@ vinagre_app_class_init (VinagreAppClass *klass)
   g_type_class_add_private (object_class, sizeof(VinagreAppPrivate));
 }
 
+static gchar *
+get_accel_file (void)
+{
+  const gchar *home;
+
+  home = g_get_home_dir ();
+
+  if (home)
+    return g_build_filename (home,
+			     ".gnome2",
+			     "accels",
+			     "vinagre",
+			     NULL);
+  return NULL;
+}
+
+static void
+load_accels (void)
+{
+  gchar *filename;
+
+  filename = get_accel_file ();
+  if (!filename)
+    return;
+
+  gtk_accel_map_load (filename);
+  g_free (filename);
+}
+
+static void
+save_accels (void)
+{
+  gchar *filename;
+
+  filename = get_accel_file ();
+  if (!filename)
+    return;
+
+  gtk_accel_map_save (filename);
+  g_free (filename);
+}
+
 static void
 vinagre_app_init (VinagreApp *app)
 {
   app->priv = VINAGRE_APP_GET_PRIVATE (app);
   app->priv->windows = NULL;
   app->priv->active_window = NULL;
+
+  load_accels ();
 }
 
 static void
@@ -118,7 +162,10 @@ window_destroy (VinagreWindow *window,
 			       app->priv->windows->data : NULL;
 
   if (app->priv->windows == NULL)
-    g_object_unref (app);
+    {
+      save_accels ();
+      g_object_unref (app);
+    }
 }
 
 VinagreWindow *
