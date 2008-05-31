@@ -29,6 +29,7 @@
 #define VM_STATUSBAR_VISIBLE		VINAGRE_BASE_KEY "/statusbar_visible"
 #define VM_SIDE_PANEL_VISIBLE		VINAGRE_BASE_KEY "/side_pane_visible"
 #define VM_SHOW_ACCELS			VINAGRE_BASE_KEY "/show_accels"
+#define VM_HISTORY_SIZE			VINAGRE_BASE_KEY "/history_size"
 
 #define VM_WINDOW_STATE			VINAGRE_BASE_KEY "/window_state"
 #define VM_WINDOW_WIDTH			VINAGRE_BASE_KEY "/window_width"
@@ -53,7 +54,8 @@ enum
   PROP_WINDOW_WIDTH,
   PROP_WINDOW_HEIGHT,
   PROP_SIDE_PANEL_SIZE,
-  PROP_SHOW_ACCELS
+  PROP_SHOW_ACCELS,
+  PROP_HISTORY_SIZE
 };
 
 G_DEFINE_TYPE (VinagrePrefs, vinagre_prefs, G_TYPE_OBJECT);
@@ -231,6 +233,9 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
       case PROP_SHOW_ACCELS:
 	vinagre_prefs_set_bool (prefs, VM_SHOW_ACCELS, g_value_get_boolean (value));
 	break;
+      case PROP_HISTORY_SIZE:
+	vinagre_prefs_set_int (prefs, VM_HISTORY_SIZE, g_value_get_int (value));
+	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -273,6 +278,9 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	break;
       case PROP_SHOW_ACCELS:
 	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_SHOW_ACCELS, TRUE));
+	break;
+      case PROP_HISTORY_SIZE:
+	g_value_set_int (value, vinagre_prefs_get_int (prefs, VM_HISTORY_SIZE, 15));
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -362,6 +370,13 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 							 "Whether we should show the menu accelerators (keyboard shortcuts)",
 							 TRUE,
 							 G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+				   PROP_HISTORY_SIZE,
+				   g_param_spec_int ("history-size",
+						     "History size",
+						     "Max number of items in history dropdown entry",
+						     0, G_MAXINT, 15,
+						     G_PARAM_READWRITE));
 
 }
 /* vim: ts=8 */

@@ -35,6 +35,9 @@ struct _VinagreConnectionPrivate
   gchar *name;
   gchar *password;
   gchar *desktop_name;
+  gboolean view_only;
+  gboolean scaling;
+  gboolean fullscreen;
 };
 
 enum
@@ -47,7 +50,10 @@ enum
   PROP_PASSWORD,
   PROP_DESKTOP_NAME,
   PROP_BEST_NAME,
-  PROP_ICON
+  PROP_ICON,
+  PROP_VIEW_ONLY,
+  PROP_SCALING,
+  PROP_FULLSCREEN
 };
 
 #define VINAGRE_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_CONNECTION, VinagreConnectionPrivate))
@@ -64,6 +70,9 @@ vinagre_connection_init (VinagreConnection *conn)
   conn->priv->password = NULL;
   conn->priv->name = NULL;
   conn->priv->desktop_name = NULL;
+  conn->priv->view_only = FALSE;
+  conn->priv->scaling = FALSE;
+  conn->priv->fullscreen = FALSE;
 }
 
 static void
@@ -125,6 +134,18 @@ vinagre_connection_set_property (GObject *object, guint prop_id, const GValue *v
 	vinagre_connection_set_desktop_name (conn, g_value_get_string (value));
 	break;
 
+      case PROP_VIEW_ONLY:
+	vinagre_connection_set_view_only (conn, g_value_get_boolean (value));
+	break;
+
+      case PROP_SCALING:
+	vinagre_connection_set_scaling (conn, g_value_get_boolean (value));
+	break;
+
+      case PROP_FULLSCREEN:
+	vinagre_connection_set_fullscreen (conn, g_value_get_boolean (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -173,6 +194,18 @@ vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, 
 
       case PROP_ICON:
 	g_value_set_object (value, vinagre_connection_get_icon (conn));
+	break;
+
+      case PROP_VIEW_ONLY:
+	g_value_set_boolean (value, conn->priv->view_only);
+	break;
+
+      case PROP_SCALING:
+	g_value_set_boolean (value, conn->priv->scaling);
+	break;
+
+      case PROP_FULLSCREEN:
+	g_value_set_boolean (value, conn->priv->fullscreen);
 	break;
 
       default:
@@ -286,6 +319,39 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
 	                                                "icon of this connection",
                                                         GDK_TYPE_PIXBUF,
 	                                                G_PARAM_READABLE |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+  g_object_class_install_property (object_class,
+                                   PROP_VIEW_ONLY,
+                                   g_param_spec_boolean ("view-only",
+                                                        "View-only connection",
+	                                                "Whether this connection is a view-only one",
+                                                        FALSE,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+  g_object_class_install_property (object_class,
+                                   PROP_SCALING,
+                                   g_param_spec_boolean ("scaling",
+                                                        "Use scaling",
+	                                                "Whether to use scaling on this connection",
+                                                        FALSE,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+  g_object_class_install_property (object_class,
+                                   PROP_FULLSCREEN,
+                                   g_param_spec_boolean ("fullscreen",
+                                                        "Full screen connection",
+	                                                "Whether this connection is a view-only one",
+                                                        FALSE,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
                                                         G_PARAM_STATIC_NICK |
                                                         G_PARAM_STATIC_NAME |
                                                         G_PARAM_STATIC_BLURB));
@@ -589,4 +655,53 @@ vinagre_connection_get_icon (VinagreConnection *conn)
 
   return pixbuf;
 }
+
+void
+vinagre_connection_set_view_only (VinagreConnection *conn,
+				  gboolean value)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  conn->priv->view_only = value;
+}
+gboolean
+vinagre_connection_get_view_only (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
+
+  return conn->priv->view_only;
+}
+
+void
+vinagre_connection_set_scaling (VinagreConnection *conn,
+				gboolean value)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  conn->priv->scaling = value;
+}
+gboolean
+vinagre_connection_get_scaling (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
+
+  return conn->priv->scaling;
+}
+
+void
+vinagre_connection_set_fullscreen (VinagreConnection *conn,
+				  gboolean value)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  conn->priv->fullscreen = value;
+}
+gboolean
+vinagre_connection_get_fullscreen (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
+
+  return conn->priv->fullscreen;
+}
+
 /* vim: ts=8 */

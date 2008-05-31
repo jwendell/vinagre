@@ -259,18 +259,35 @@ static void
 open_vnc (VinagreTab *tab)
 {
   gchar *port;
+  gboolean scaling, view_only, fullscreen;
 
   port = g_strdup_printf ("%d", vinagre_connection_get_port (tab->priv->conn));
-  
-  if (!vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), vinagre_connection_get_host (tab->priv->conn), port))
-    vinagre_utils_show_error (_("Error connecting to host."), NULL);
 
+  g_object_get (tab->priv->conn,
+		"view-only", &view_only,
+		"scaling", &scaling,
+		"fullscreen", &fullscreen,
+		NULL);
+
+  vinagre_tab_set_scaling (tab, scaling);
+  vinagre_tab_set_readonly (tab, view_only);
   vnc_display_set_pointer_local (VNC_DISPLAY(tab->priv->vnc), TRUE);
   vnc_display_set_keyboard_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
   vnc_display_set_pointer_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
 
+  if (vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), vinagre_connection_get_host (tab->priv->conn), port))
+    {
+      gtk_widget_grab_focus (tab->priv->vnc);
+
+      if (fullscreen)
+	vinagre_window_toggle_fullscreen (tab->priv->window);
+    }
+  else
+    {
+      vinagre_utils_show_error (_("Error connecting to host."), NULL);
+    }
+
   g_free (port);
-  gtk_widget_grab_focus (tab->priv->vnc);
 }
 
 static void

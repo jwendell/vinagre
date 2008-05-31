@@ -92,6 +92,18 @@ VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **
 
 GdkPixbuf*          vinagre_connection_get_icon	(VinagreConnection *conn);
 
+gboolean	    vinagre_connection_get_view_only	(VinagreConnection *conn);
+void		    vinagre_connection_set_view_only	(VinagreConnection *conn,
+							 gboolean value);
+
+gboolean	    vinagre_connection_get_scaling	(VinagreConnection *conn);
+void		    vinagre_connection_set_scaling	(VinagreConnection *conn,
+							 gboolean value);
+
+gboolean	    vinagre_connection_get_fullscreen	(VinagreConnection *conn);
+void		    vinagre_connection_set_fullscreen	(VinagreConnection *conn,
+							 gboolean value);
+
 G_END_DECLS
 
 #endif /* __VINAGRE_CONNECTION_H__  */
