@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-31 17:55+0200\n"
-"PO-Revision-Date: 2008-05-31 17:58+0200\n"
+"POT-Creation-Date: 2008-06-01 18:01+0200\n"
+"PO-Revision-Date: 2008-06-01 18:04+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -28,14 +28,18 @@ msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
 #: ../data/vinagre.glade.h:1
+msgid "<b>Connection options</b>"
+msgstr "<b>Opcións de conexión</b>"
+
+#: ../data/vinagre.glade.h:2
 msgid "<b>Editing a bookmark</b>"
 msgstr "<b>Editando un marcador</b>"
 
-#: ../data/vinagre.glade.h:2
+#: ../data/vinagre.glade.h:3
 msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>Introduza un nome para esta conexión</b>"
 
-#: ../data/vinagre.glade.h:3
+#: ../data/vinagre.glade.h:4
 msgid ""
 "<b>In order to connect on this machine, a password is required. Please, "
 "supply it.</b>"
@@ -43,43 +47,64 @@ msgstr ""
 "<b>Necesítase un contrasinal para conectarse a esta máquina. Proporciónea.</"
 "b>"
 
-#: ../data/vinagre.glade.h:4
+#: ../data/vinagre.glade.h:5
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>A que máquina quere conectarse?</b>"
 
-#: ../data/vinagre.glade.h:5
+#: ../data/vinagre.glade.h:6
 msgid "Editing a bookmark"
 msgstr "Editando un marcador"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:879
+#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:896
 msgid "Host:"
 msgstr "Equipo:"
 
-#: ../data/vinagre.glade.h:7
+#: ../data/vinagre.glade.h:8
 msgid "Saving to bookmarks"
 msgstr "Gardando aos marcadores"
 
-#: ../data/vinagre.glade.h:8
+#: ../data/vinagre.glade.h:9
+msgid "_Full screen"
+msgstr "Pantalla _completa"
+
+#: ../data/vinagre.glade.h:10
 msgid "_Host:"
 msgstr "_Equipo:"
 
-#: ../data/vinagre.glade.h:9
+#: ../data/vinagre.glade.h:11
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:12
 msgid "_Password:"
 msgstr "_Contrasinal:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:13
 msgid "_Port:"
 msgstr "_Porto:"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:14
 msgid "_Remember this password"
 msgstr "_Recordar este contrasinal"
 
+#: ../data/vinagre.glade.h:15
+msgid "_Scaling"
+msgstr "_Escalando"
+
+#: ../data/vinagre.glade.h:16
+msgid "_View only"
+msgstr "Só _ver"
+
+#. Tooltip for host entry in connect dialog
+#: ../data/vinagre.glade.h:18
+msgid "host or host:display or host::port"
+msgstr "host ou host:pantalla ou host::porto"
+
 #: ../data/vinagre.schemas.in.h:1
+msgid "Maximum number of history items in connect dialog"
+msgstr "Número máximo de elementos de historial no diálogo de conexión"
+
+#: ../data/vinagre.schemas.in.h:2
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -89,7 +114,7 @@ msgstr ""
 "como \"true\" para activalos. Note que se están activados, esas teclas serán "
 "interceptadas polo menú e non serán enviadas ao host remoto."
 
-#: ../data/vinagre.schemas.in.h:2
+#: ../data/vinagre.schemas.in.h:3
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -97,11 +122,17 @@ msgstr ""
 "Establecer a \"true\" para mostrar sempre os separadores. Establecéndoo a "
 "\"false\" mostrará só os separadores cando haxa máis dunha conexión activa."
 
-#: ../data/vinagre.schemas.in.h:3
+#: ../data/vinagre.schemas.in.h:4
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr ""
+"Especifica o número máximo de elementos na entrada de menú despregable do "
+"host."
+
+#: ../data/vinagre.schemas.in.h:5
 msgid "The handler for \"vnc://\" URLs"
 msgstr "O manexador para URLs \"vnc://\""
 
-#: ../data/vinagre.schemas.in.h:4
+#: ../data/vinagre.schemas.in.h:6
 msgid ""
 "When connecting to a host, the client can say to the server to leave others "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -112,16 +143,16 @@ msgstr ""
 "Estableza o valor a verdadeiro para compartir o escritorio con outros "
 "clientes."
 
-#: ../data/vinagre.schemas.in.h:5
+#: ../data/vinagre.schemas.in.h:7
 msgid "Whether we should leave other clients connected"
 msgstr "Se debe deixar outros clientes conectados"
 
-#: ../data/vinagre.schemas.in.h:6
+#: ../data/vinagre.schemas.in.h:8
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr "Se debe mostrar separadores incluso ando haxa só unha conexión activa"
 
-#: ../data/vinagre.schemas.in.h:7
+#: ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Se debe mostrar os aceleradores de menú (teclas rápidas)"
 
@@ -161,7 +192,7 @@ msgstr "Erro gardando os marcadores: %s"
 msgid "Choose the file"
 msgstr "Escoller o ficheiro"
 
-#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:962
+#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:979
 msgid "Supported formats"
 msgstr "Formatos soportados"
 
@@ -215,16 +246,26 @@ msgstr "Ignacio Casal Quinteiro  <nacho.resa@gmail.com>"
 msgid "Vinagre Website"
 msgstr "Sitio web de Vinagre"
 
-#: ../src/vinagre-connect.c:45
+#: ../src/vinagre-connect.c:172
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "Erro ao gardaro ficheiro de historial: %s"
+
+#: ../src/vinagre-connect.c:183
 msgid "Choose a VNC Server"
 msgstr "Escolla un servidor VNC"
 
-#: ../src/vinagre-connection.c:454
+#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:79
+#: ../src/vinagre-main.c:98 ../src/vinagre-window.c:285
+msgid "Unknown error"
+msgstr "Erro descoñecido"
+
+#: ../src/vinagre-connection.c:520
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "O protocolo %s non está soportado."
 
-#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:880
+#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:897
 msgid "Port:"
 msgstr "Porto:"
 
@@ -252,11 +293,6 @@ msgstr ""
 #: ../src/vinagre-main.c:54
 msgid "[server:port]"
 msgstr "[servidor:porto]"
-
-#: ../src/vinagre-main.c:79 ../src/vinagre-main.c:98
-#: ../src/vinagre-window.c:285
-msgid "Unknown error"
-msgstr "Erro descoñecido"
 
 #: ../src/vinagre-main.c:109 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
@@ -295,71 +331,71 @@ msgstr "A conexión ao equipo \"%s\" foi pechada."
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:692
+#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:709
 msgid "Close connection"
 msgstr "Pechar conexión"
 
-#: ../src/vinagre-prefs.c:165
+#: ../src/vinagre-prefs.c:167
 msgid "Cannot initialize preferences manager."
 msgstr "Non se pode inicializar o xestor de preferencias."
 
-#: ../src/vinagre-tab.c:266
+#: ../src/vinagre-tab.c:287
 msgid "Error connecting to host."
 msgstr "Erro conectando ao equipo."
 
-#: ../src/vinagre-tab.c:303
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Fallou a autenticación ao equipo \"%s\""
 
-#: ../src/vinagre-tab.c:331
+#: ../src/vinagre-tab.c:348
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "O método de autenticación ao equipo \"%s\" non está soportado. (%u)"
 
-#: ../src/vinagre-tab.c:412
+#: ../src/vinagre-tab.c:429
 msgid "Error saving recent connection."
 msgstr "Erro ao gardar a conexión recente."
 
-#: ../src/vinagre-tab.c:443
+#: ../src/vinagre-tab.c:460
 msgid "Error saving the password on the keyring."
 msgstr "Erro ao gardar o contrasinal no anel."
 
-#: ../src/vinagre-tab.c:706 ../src/vinagre-tab.c:707
+#: ../src/vinagre-tab.c:723 ../src/vinagre-tab.c:724
 msgid "Scaling"
 msgstr "Escalando"
 
-#: ../src/vinagre-tab.c:716 ../src/vinagre-tab.c:717
+#: ../src/vinagre-tab.c:733 ../src/vinagre-tab.c:734
 msgid "Read only"
 msgstr "Só lectura"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:727 ../src/vinagre-tab.c:728 ../src/vinagre-ui.h:79
+#: ../src/vinagre-tab.c:744 ../src/vinagre-tab.c:745 ../src/vinagre-ui.h:79
 msgid "Take screenshot"
 msgstr "Facer unha captura de pantalla"
 
-#: ../src/vinagre-tab.c:736 ../src/vinagre-tab.c:737 ../src/vinagre-ui.h:82
+#: ../src/vinagre-tab.c:753 ../src/vinagre-tab.c:754 ../src/vinagre-ui.h:82
 msgid "Send Ctrl-Alt-Del"
 msgstr "Enviar Ctrl-Alt-Supr"
 
-#: ../src/vinagre-tab.c:878
+#: ../src/vinagre-tab.c:895
 msgid "Desktop Name:"
 msgstr "Nome do escritorio:"
 
-#: ../src/vinagre-tab.c:881
+#: ../src/vinagre-tab.c:898
 msgid "Dimensions:"
 msgstr "Dimensións:"
 
-#: ../src/vinagre-tab.c:948
+#: ../src/vinagre-tab.c:965
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de pantalla de %s"
 
-#: ../src/vinagre-tab.c:951
+#: ../src/vinagre-tab.c:968
 msgid "Save Screenshot"
 msgstr "Gardar a captura de pantalla"
 
-#: ../src/vinagre-tab.c:1015
+#: ../src/vinagre-tab.c:1032
 msgid ""
 "Scaling does not work properly on composited windows. Disable the visual "
 "effects and try again."
@@ -367,7 +403,7 @@ msgstr ""
 "O escalado non funciona ben con ventás con composición. Desactive os efectos "
 "visuais e inténteo de novo."
 
-#: ../src/vinagre-tab.c:1022
+#: ../src/vinagre-tab.c:1039
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
