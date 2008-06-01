@@ -47,7 +47,7 @@ enum {
 
 static gchar*
 history_filename () {
-  return g_build_filename (g_get_user_config_dir (),
+  return g_build_filename (g_get_user_data_dir (),
 			   "vinagre",
 			   "history",
 			   NULL);
