@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 18:01+0200\n"
-"PO-Revision-Date: 2008-06-01 18:04+0200\n"
+"POT-Creation-Date: 2008-06-01 18:22+0200\n"
+"PO-Revision-Date: 2008-06-01 18:22+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -64,24 +64,24 @@ msgid "Saving to bookmarks"
 msgstr "Gardando aos marcadores"
 
 #: ../data/vinagre.glade.h:9
+msgid "_Bookmark name:"
+msgstr "Nome do _marcador:"
+
+#: ../data/vinagre.glade.h:10
 msgid "_Full screen"
 msgstr "Pantalla _completa"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:11
 msgid "_Host:"
 msgstr "_Equipo:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:13
 msgid "_Password:"
 msgstr "_Contrasinal:"
-
-#: ../data/vinagre.glade.h:13
-msgid "_Port:"
-msgstr "_Porto:"
 
 #: ../data/vinagre.glade.h:14
 msgid "_Remember this password"
@@ -164,26 +164,26 @@ msgstr "Ficheiro de escritorio remoto (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Conexión de escritorio remoto"
 
-#: ../src/vinagre-bookmarks.c:345
+#: ../src/vinagre-bookmarks.c:390
 msgid "Confirm removal?"
 msgstr "Quere confirmar a eliminación?"
 
-#: ../src/vinagre-bookmarks.c:348
+#: ../src/vinagre-bookmarks.c:393
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Está seguro de que quere eliminar <i>%s</i> dos marcadores?"
 
-#: ../src/vinagre-bookmarks.c:359
+#: ../src/vinagre-bookmarks.c:404
 #, c-format
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Erro eliminando %s dos marcadores: %s"
 
-#: ../src/vinagre-bookmarks.c:426
+#: ../src/vinagre-bookmarks.c:471
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Erro inicializando os marcadores: %s"
 
-#: ../src/vinagre-bookmarks.c:447 ../src/vinagre-bookmarks.c:464
+#: ../src/vinagre-bookmarks.c:492 ../src/vinagre-bookmarks.c:509
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Erro gardando os marcadores: %s"
@@ -202,11 +202,11 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Non se puido abrir o seguinte ficheiro:"
 msgstr[1] "Non se puideron abrir os seguintes ficheiros:"
 
-#: ../src/vinagre-commands.c:458
+#: ../src/vinagre-commands.c:464
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre é un cliente de VNC para o escritorio Gnome"
 
-#: ../src/vinagre-commands.c:461
+#: ../src/vinagre-commands.c:467
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -218,7 +218,7 @@ msgstr ""
 "Foundation; xa sexa na versión 2 da Licenza como (segundo a súa escolla) en "
 "calquera versión posterior."
 
-#: ../src/vinagre-commands.c:465
+#: ../src/vinagre-commands.c:471
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -230,7 +230,7 @@ msgstr ""
 "PARA UN PROPÓSITO PARTICULAR. Para máis detalles vexa a Licenza Pública "
 "Xeral de GNU."
 
-#: ../src/vinagre-commands.c:469
+#: ../src/vinagre-commands.c:475
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -238,11 +238,11 @@ msgstr ""
 "Debeu recibir unha copia da Licenza Pública Xeral de GNU xunto con este "
 "programa. Se non, vexa <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-commands.c:491
+#: ../src/vinagre-commands.c:497
 msgid "translator-credits"
 msgstr "Ignacio Casal Quinteiro  <nacho.resa@gmail.com>"
 
-#: ../src/vinagre-commands.c:494
+#: ../src/vinagre-commands.c:500
 msgid "Vinagre Website"
 msgstr "Sitio web de Vinagre"
 
@@ -260,14 +260,10 @@ msgstr "Escolla un servidor VNC"
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: ../src/vinagre-connection.c:520
+#: ../src/vinagre-connection.c:530
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "O protocolo %s non está soportado."
-
-#: ../src/vinagre-fav.c:425 ../src/vinagre-tab.c:897
-msgid "Port:"
-msgstr "Porto:"
 
 #: ../src/vinagre-fav.c:762
 msgid "Bookmarks"
@@ -381,6 +377,10 @@ msgstr "Enviar Ctrl-Alt-Supr"
 #: ../src/vinagre-tab.c:895
 msgid "Desktop Name:"
 msgstr "Nome do escritorio:"
+
+#: ../src/vinagre-tab.c:897
+msgid "Port:"
+msgstr "Porto:"
 
 #: ../src/vinagre-tab.c:898
 msgid "Dimensions:"
@@ -569,14 +569,17 @@ msgid "_Recent connections"
 msgstr "Conexións _recentes"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:613 ../src/vinagre-window.c:663
+#: ../src/vinagre-window.c:610 ../src/vinagre-window.c:660
 #, c-format
 msgid "Open %s:%d"
 msgstr "Abrir %s: %d"
 
-#: ../src/vinagre-window.c:812
+#: ../src/vinagre-window.c:809
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Prema Ctrl+Alt para liberar o cursor"
+
+#~ msgid "_Port:"
+#~ msgstr "_Porto:"
 
 #~ msgid "Press Ctrl+Alt to grab the cursor"
 #~ msgstr "Prema Ctrl+Alt para reter o cursor"
