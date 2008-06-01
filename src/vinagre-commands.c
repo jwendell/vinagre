@@ -245,12 +245,17 @@ vinagre_cmd_view_scaling (GtkAction     *action,
 			  VinagreWindow *window)
 {
   gboolean active;
+  VinagreTab *tab;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
+  tab = vinagre_window_get_active_tab (window);
+  if (!tab)
+    return;
+
   active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-  if (!vinagre_tab_set_scaling (vinagre_window_get_active_tab (window), active))
+  if (!vinagre_tab_set_scaling (tab, active))
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
 }
 
@@ -278,6 +283,7 @@ vinagre_cmd_open_bookmark (VinagreWindow     *window,
   VinagreConnection *new_conn;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
   tab = vinagre_window_conn_exists (window, conn);
   if (tab)

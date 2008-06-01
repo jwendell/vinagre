@@ -1021,7 +1021,7 @@ vinagre_tab_paste_text (VinagreTab *tab, const gchar *text)
 
 gboolean
 vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
-  g_return_if_fail (VINAGRE_IS_TAB (tab));
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), FALSE);
 
   if (vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc)) == active)
     return TRUE;
@@ -1041,7 +1041,9 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
       return FALSE;
     }
 
-  gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->scaling_button), active);
+  gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->scaling_button),
+				     active);
+
   return TRUE;
 }
 
@@ -1057,7 +1059,9 @@ vinagre_tab_set_readonly (VinagreTab *tab, gboolean active) {
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
   vnc_display_set_read_only (VNC_DISPLAY (tab->priv->vnc), active);
-  gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->ro_button), active);
+  gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->ro_button),
+				     active);
+
 }
 
 gboolean

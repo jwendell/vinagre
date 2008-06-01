@@ -383,7 +383,7 @@ vinagre_fav_tooltip (GtkWidget *widget,
                      GtkTooltip *tooltip,
                      VinagreFav *fav)
 {
-  gchar *tip, *name;
+  gchar *tip, *name, *uri;
   GtkTreePath *path = NULL;
   gint bx, by;
   GtkTreeIter iter;
@@ -417,16 +417,16 @@ vinagre_fav_tooltip (GtkWidget *widget,
     return FALSE;
 
   name = vinagre_connection_get_best_name (conn);
+  uri = vinagre_connection_get_string_rep (conn, TRUE);
   tip = g_markup_printf_escaped ("<b>%s</b>\n"
-                                 "<small><b>%s</b> %s</small>\n"
-				 "<small><b>%s</b> %d</small>",
+                                 "<small><b>%s</b> %s</small>",
                                  name,
-				 _("Host:"), vinagre_connection_get_host (conn),
-				 _("Port:"), vinagre_connection_get_port (conn));
+				 _("Host:"), uri);
 
   gtk_tooltip_set_markup (tooltip, tip);
   g_free (tip);
   g_free (name);
+  g_free (uri);
 
   return TRUE;
 }

@@ -524,9 +524,6 @@ fav_panel_activated (VinagreFav        *fav,
 		     VinagreConnection *conn,
 		     VinagreWindow     *window)
 {
-  g_return_if_fail (VINAGRE_IS_FAV (fav));
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
   vinagre_cmd_open_bookmark (window, conn);
 }
 

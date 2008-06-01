@@ -200,6 +200,33 @@ vinagre_bookmarks_del_conn (VinagreBookmarks  *book,
   vinagre_bookmarks_save_file (book);
 }
 
+static void
+update_group_from_conn (VinagreBookmarks  *book,
+			VinagreConnection *conn,
+			const gchar *group)
+{
+  g_key_file_set_string (book->priv->file,
+			 group,
+			 "host",
+			 vinagre_connection_get_host (conn));
+  g_key_file_set_integer (book->priv->file,
+			  group,
+			  "port",
+			  vinagre_connection_get_port (conn));
+  g_key_file_set_boolean (book->priv->file,
+			  group,
+			  "view_only",
+			  vinagre_connection_get_view_only (conn));
+  g_key_file_set_boolean (book->priv->file,
+			  group,
+			  "scaling",
+			  vinagre_connection_get_scaling (conn));
+  g_key_file_set_boolean (book->priv->file,
+			  group,
+			  "fullscreen",
+			  vinagre_connection_get_fullscreen (conn));
+}
+
 gboolean
 vinagre_bookmarks_add (VinagreBookmarks  *book,
                        VinagreConnection *conn,
@@ -231,14 +258,7 @@ vinagre_bookmarks_add (VinagreBookmarks  *book,
       if (strlen(name) < 1)
 	name = vinagre_connection_get_host (conn);
 
-      g_key_file_set_string (book->priv->file,
-			     name,
-			     "host",
-			     vinagre_connection_get_host (conn));
-      g_key_file_set_integer (book->priv->file,
-			      name,
-			      "port",
-			      vinagre_connection_get_port (conn));
+      update_group_from_conn (book, conn, name);
 
       vinagre_connection_set_name (conn, name);
       vinagre_bookmarks_add_conn (book, conn);
@@ -259,7 +279,9 @@ vinagre_bookmarks_edit (VinagreBookmarks  *book,
   gint result;
   GladeXML    *xml;
   const gchar *glade_file;
-  GtkWidget   *dialog, *host_entry, *name_entry, *port_entry;
+  GtkWidget   *dialog, *host_entry, *name_entry;
+  GtkWidget   *fs_check, *sc_check, *vo_check;
+  gchar       *str;
 
   g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), FALSE);
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
@@ -271,11 +293,21 @@ vinagre_bookmarks_edit (VinagreBookmarks  *book,
 
   name_entry = glade_xml_get_widget (xml, "edit_bookmark_name_entry");
   host_entry = glade_xml_get_widget (xml, "edit_bookmark_host_entry");
-  port_entry = glade_xml_get_widget (xml, "edit_bookmark_port_entry");
+  fs_check   = glade_xml_get_widget (xml, "edit_fullscreen_check");
+  sc_check   = glade_xml_get_widget (xml, "edit_scaling_check");
+  vo_check   = glade_xml_get_widget (xml, "edit_viewonly_check");
 
   gtk_entry_set_text (GTK_ENTRY(name_entry), vinagre_connection_get_name (conn));
-  gtk_entry_set_text (GTK_ENTRY(host_entry), vinagre_connection_get_host (conn));
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (port_entry), vinagre_connection_get_port (conn));
+  str = vinagre_connection_get_string_rep (conn, FALSE);
+  gtk_entry_set_text (GTK_ENTRY(host_entry), str);
+  g_free (str);
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fs_check),
+				vinagre_connection_get_fullscreen (conn));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sc_check),
+				vinagre_connection_get_scaling (conn));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (vo_check),
+				vinagre_connection_get_view_only (conn));
 
   gtk_widget_show_all (dialog);
  
@@ -284,31 +316,44 @@ vinagre_bookmarks_edit (VinagreBookmarks  *book,
   if (result == GTK_RESPONSE_OK)
     {
       const gchar *name;
+      gchar *host, *error_str;
+      gint port;
       VinagreConnection *old_conn = vinagre_connection_clone (conn);
 
       g_key_file_remove_group (book->priv->file, vinagre_connection_get_name (conn), NULL);
 
       name = gtk_entry_get_text (GTK_ENTRY (name_entry));
-      vinagre_connection_set_host (conn, gtk_entry_get_text (GTK_ENTRY (host_entry)));
-      vinagre_connection_set_port (conn, gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (port_entry)));
+      if (vinagre_connection_split_string (gtk_entry_get_text (GTK_ENTRY (host_entry)),
+					   &host,
+					   &port,
+					   &error_str))
+	{
+	  vinagre_connection_set_host (conn, host);
+	  vinagre_connection_set_port (conn, port);
+	  vinagre_connection_set_view_only (conn,
+					    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (vo_check)));
+	  vinagre_connection_set_scaling (conn,
+					  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (sc_check)));
+	  vinagre_connection_set_fullscreen (conn,
+					     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (fs_check)));
 
-      if (strlen (name) < 1)
-        if (strlen(vinagre_connection_get_name (conn)) < 1)
-	  name = vinagre_connection_get_host (conn);
-        else
-          name = vinagre_connection_get_name (conn);
+	  if (strlen (name) < 1)
+	    if (strlen (vinagre_connection_get_name (conn)) < 1)
+	      name = vinagre_connection_get_host (conn);
+	    else
+	      name = vinagre_connection_get_name (conn);
 
-      g_key_file_set_string (book->priv->file,
-			     name,
-			     "host",
-			     vinagre_connection_get_host (conn));
-      g_key_file_set_integer (book->priv->file,
-			      name,
-			      "port",
-			      vinagre_connection_get_port (conn));
+	  update_group_from_conn (book, conn, name);
 
-      vinagre_connection_set_name (conn, name);
-      vinagre_bookmarks_edit_conn (book, old_conn, conn);
+	  vinagre_connection_set_name (conn, name);
+	  vinagre_bookmarks_edit_conn (book, old_conn, conn);
+	}
+      else
+	{
+	  vinagre_utils_show_error (error_str, window);
+	  g_free (error_str);
+	}
+
       g_object_unref (old_conn);
     }
 
@@ -492,8 +537,9 @@ vinagre_bookmarks_update_conns (VinagreBookmarks *book)
   for (i=0; i<length; i++)
     {
       VinagreConnection *conn;
-      gchar *s_value;
-      gint i_value;
+      gchar             *s_value;
+      gint               i_value;
+      gboolean           b_value;
 
       s_value = g_key_file_get_string (book->priv->file, conns[i], "host", NULL);
       if (!s_value)
@@ -508,6 +554,15 @@ vinagre_bookmarks_update_conns (VinagreBookmarks *book)
       if (i_value == 0)
         i_value = 5900;
       vinagre_connection_set_port (conn, i_value);
+
+      b_value = g_key_file_get_boolean (book->priv->file, conns[i], "view_only", NULL);
+      vinagre_connection_set_view_only (conn, b_value);
+
+      b_value = g_key_file_get_boolean (book->priv->file, conns[i], "fullscreen", NULL);
+      vinagre_connection_set_fullscreen (conn, b_value);
+
+      b_value = g_key_file_get_boolean (book->priv->file, conns[i], "scaling", NULL);
+      vinagre_connection_set_scaling (conn, b_value);
 
       book->priv->conns = g_slist_prepend (book->priv->conns, conn);
     }

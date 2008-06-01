@@ -104,6 +104,13 @@ gboolean	    vinagre_connection_get_fullscreen	(VinagreConnection *conn);
 void		    vinagre_connection_set_fullscreen	(VinagreConnection *conn,
 							 gboolean value);
 
+gboolean	    vinagre_connection_split_string	(const gchar *uri,
+							 gchar **host,
+							 gint *port,
+							 gchar **error_msg);
+
+gchar*		    vinagre_connection_get_string_rep	(VinagreConnection *conn,
+							 gboolean has_protocol);
 G_END_DECLS
 
 #endif /* __VINAGRE_CONNECTION_H__  */

@@ -56,6 +56,9 @@ enum
   PROP_FULLSCREEN
 };
 
+gint   vinagre_connection_default_port [VINAGRE_CONNECTION_PROTOCOL_INVALID-1] = {5900, 3389};
+gchar* vinagre_connection_protos [VINAGRE_CONNECTION_PROTOCOL_INVALID-1] = {"vnc", "rdp"};
+
 #define VINAGRE_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_CONNECTION, VinagreConnectionPrivate))
 G_DEFINE_TYPE (VinagreConnection, vinagre_connection, G_TYPE_OBJECT);
 
@@ -498,19 +501,26 @@ vinagre_connection_clone (VinagreConnection *conn)
   vinagre_connection_set_password (new_conn, vinagre_connection_get_password (conn));
   vinagre_connection_set_name (new_conn, vinagre_connection_get_name (conn));
   vinagre_connection_set_desktop_name (new_conn, vinagre_connection_get_desktop_name (conn));
+  vinagre_connection_set_view_only (new_conn, vinagre_connection_get_view_only (conn));
+  vinagre_connection_set_scaling (new_conn, vinagre_connection_get_scaling (conn));
+  vinagre_connection_set_fullscreen (new_conn, vinagre_connection_get_fullscreen (conn));
 
   return new_conn;
 }
 
-VinagreConnection *
-vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
+gboolean
+vinagre_connection_split_string (const gchar *uri,
+				 gchar **host,
+				 gint *port,
+				 gchar **error_msg)
 {
-  VinagreConnection *conn;
   gchar **server, **url;
-  gint    port;
-  gchar  *host;
+  gint    lport;
+  gchar  *lhost;
 
   *error_msg = NULL;
+  *host = NULL;
+  *port = 0;
 
   url = g_strsplit (uri, "://", 2);
   if (g_strv_length (url) == 2)
@@ -520,28 +530,47 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
 	  *error_msg = g_strdup_printf (_("The protocol %s is not supported."),
 					url[0]);
 	  g_strfreev (url);
-	  return NULL;
+	  return FALSE;
 	}
-      host = url[1];
+      lhost = url[1];
     }
   else
-    host = (gchar *) uri;
+    lhost = (gchar *) uri;
 
-  if (g_strrstr (host, "::") != NULL)
+  if (g_strrstr (lhost, "::") != NULL)
     {
-      server = g_strsplit (host, "::", 2);
-      port = server[1] ? atoi (server[1]) : 5900;
+      server = g_strsplit (lhost, "::", 2);
+      lport = server[1] ? atoi (server[1]) : 5900;
     }
   else
     {
-      server = g_strsplit (host, ":", 2);
-      port = server[1] ? atoi (server[1]) : 5900;
+      server = g_strsplit (lhost, ":", 2);
+      lport = server[1] ? atoi (server[1]) : 5900;
 
-      if (port < 1024)
-        port += 5900;
+      if (lport < 1024)
+        lport += 5900;
     }
 
-  host = server[0];
+  lhost = server[0];
+
+  *host = g_strdup (lhost);
+  *port = lport;
+
+  g_strfreev (server);
+  g_strfreev (url);
+
+  return TRUE;
+}
+
+VinagreConnection *
+vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
+{
+  VinagreConnection *conn;
+  gint    port;
+  gchar  *host;
+
+  if (!vinagre_connection_split_string (uri, &host, &port, error_msg))
+    return NULL;
 
   conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
                                    host,
@@ -553,9 +582,7 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
       vinagre_connection_set_port (conn, port);
     }
 
-  g_strfreev (server);
-  g_strfreev (url);
-
+  g_free (host);
   return conn;
 }
 
@@ -702,6 +729,34 @@ vinagre_connection_get_fullscreen (VinagreConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
 
   return conn->priv->fullscreen;
+}
+
+gchar*
+vinagre_connection_get_string_rep (VinagreConnection *conn,
+				   gboolean has_protocol)
+{
+  GString *uri;
+  gchar *result;
+
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+
+  if (has_protocol)
+    {
+      uri = g_string_new (vinagre_connection_protos [conn->priv->protocol-1]);
+      g_string_append_printf (uri, "%s", "://");
+    }
+  else
+    uri = g_string_new (NULL);
+
+  g_string_append_printf (uri, "%s", conn->priv->host);
+
+  if (vinagre_connection_default_port [conn->priv->protocol-1] != conn->priv->port)
+    g_string_append_printf (uri, "::%d", conn->priv->port);
+
+  result = g_strdup (uri->str);
+  g_string_free (uri, TRUE);
+
+  return result;
 }
 
 /* vim: ts=8 */
