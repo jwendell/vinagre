@@ -32,3 +32,11 @@ Enabling scaling
   compiled with this feature enabled.
     Simply build gtk-vnc with the flag '--with-gtkglext=yes', in the
     configure stage.
+
+Bookmarks
+=========
+
+  - In Vinagre 2.23.3 we have moved the bookmarks file location from ~/.gnome2
+  to ~/.local/share/vinagre, which is the recommended place for data files.
+  The change should be transparent, i.e., we automatically copy the old file
+  to the new place if we detect that new file does not exist yet.

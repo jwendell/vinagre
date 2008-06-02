@@ -69,14 +69,44 @@ vinagre_bookmarks_init (VinagreBookmarks *book)
 
   book->priv->conns = NULL;
   book->priv->file = NULL;
-  book->priv->filename = g_build_filename (g_get_home_dir (),
-			                   ".gnome2",
+
+  book->priv->filename = g_build_filename (g_get_user_data_dir (),
+			                   "vinagre",
 			                   VINAGRE_BOOKMARKS_FILE,
 			                   NULL);
+  gfile = g_file_new_for_path (book->priv->filename);
+
+  if (!g_file_test (book->priv->filename, G_FILE_TEST_EXISTS))
+    {
+      gchar *old;
+
+      old = g_build_filename (g_get_home_dir (),
+			      ".gnome2",
+			      VINAGRE_BOOKMARKS_FILE,
+			      NULL);
+      if (g_file_test (old, G_FILE_TEST_EXISTS))
+	{
+	  GFile *src;
+	  GError *error = NULL;
+
+	  g_message (_("Copying the bookmarks file to the new location. This operation is supposed to run only once."));
+	  src = g_file_new_for_path (old);
+
+	  if (!g_file_copy (src, gfile, G_FILE_COPY_NONE, NULL, NULL, NULL, &error))
+	    {
+	      g_warning (_("Error: %s"), error->message);
+	      g_error_free (error);
+	    }
+
+	  g_object_unref (src);
+	}
+
+      g_free (old);
+    }
+
   vinagre_bookmarks_update_file (book);
   vinagre_bookmarks_update_conns (book);
 
-  gfile = g_file_new_for_path (book->priv->filename);
   book->priv->monitor = g_file_monitor_file (gfile,
                                              G_FILE_MONITOR_NONE,
                                              NULL,
