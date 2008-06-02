@@ -32,7 +32,7 @@
 #define LIBVIEW_DRAWER_H
 
 
-#include <libview/ovBox.h>
+#include "ovBox.h"
 
 
 #define VIEW_TYPE_DRAWER            (ViewDrawer_GetType())

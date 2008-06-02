@@ -30,7 +30,7 @@
  */
 
 
-#include <libview/autoDrawer.h>
+#include "autoDrawer.h"
 
 
 struct _ViewAutoDrawerPrivate

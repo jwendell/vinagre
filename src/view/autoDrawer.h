@@ -32,7 +32,7 @@
 #define LIBVIEW_AUTODRAWER_H
 
 
-#include <libview/drawer.h>
+#include "drawer.h"
 
 
 #define VIEW_TYPE_AUTODRAWER            (ViewAutoDrawer_GetType())

@@ -73,7 +73,7 @@
  */
 
 
-#include <libview/ovBox.h>
+#include "ovBox.h"
 
 
 struct _ViewOvBoxPrivate
