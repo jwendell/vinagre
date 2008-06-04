@@ -795,7 +795,7 @@ vinagre_fav_update_list (VinagreFav *fav)
 
   path = gtk_tree_path_new_from_string ("0");
   gtk_tree_view_expand_row (GTK_TREE_VIEW (fav->priv->tree), path, FALSE);
-  g_free (path);
+  gtk_tree_path_free (path);
 
   /* avahi */
   list = vinagre_mdns_get_all (vinagre_mdns_get_default ());
@@ -840,7 +840,7 @@ vinagre_fav_update_list (VinagreFav *fav)
 
   path = gtk_tree_path_new_from_string ("1");
   gtk_tree_view_expand_row (GTK_TREE_VIEW (fav->priv->tree), path, FALSE);
-  g_free (path);
+  gtk_tree_path_free (path);
 
   return FALSE;
 }
