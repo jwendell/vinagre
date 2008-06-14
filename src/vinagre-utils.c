@@ -19,6 +19,7 @@
  */
 
 #include <string.h>
+#include <glib/gi18n.h>
 #include "vinagre-utils.h"
 
 #define VINAGRE_GLADE_FILE  "vinagre.glade"
@@ -347,6 +348,144 @@ vinagre_utils_get_current_viewport (GdkScreen    *screen,
 	*x = 0;
 	*y = 0;
 #endif
+}
+
+/* Make url in about dialog clickable */
+static void
+vinagre_about_dialog_handle_url (GtkAboutDialog *about,
+				 const char     *link,
+				 gpointer        data)
+{
+  GError   *error = NULL;
+  gchar    *address, *command;
+  gboolean  has_window = GTK_IS_WINDOW (data);
+
+  if (g_strstr_len (link, strlen (link), "@"))
+    address = g_strdup_printf ("mailto:%s", link);
+  else
+    address = g_strdup (link);
+
+  command = g_strconcat ("gnome-open ", address,  NULL);
+
+  if (has_window)
+    gdk_spawn_command_line_on_screen (gtk_window_get_screen (GTK_WINDOW (data)),
+				      command,
+				      &error);
+  else
+    g_spawn_command_line_async (command, &error);
+
+  if (error != NULL) 
+    {
+      vinagre_utils_show_error (error->message, has_window?GTK_WINDOW (data):NULL);
+      g_error_free (error);
+    }
+
+  g_free (command);
+  g_free (address);
+}
+
+void
+vinagre_utils_help_contents (GtkWindow *window)
+{
+  GError *error = NULL;
+  char *command;
+  const char *lang;
+  char *uri = NULL;
+  int i;
+  gboolean has_window = GTK_IS_WINDOW (window);
+
+  const char * const * langs = g_get_language_names ();
+
+  for (i = 0; langs[i]; i++)
+    {
+      lang = langs[i];
+      if (strchr (lang, '.')) 
+          continue;
+
+      if (uri)
+	g_free (uri);
+
+      uri = g_build_filename (DATADIR, "/gnome/help/vinagre/", lang, "/vinagre.xml", NULL);
+					
+      if (g_file_test (uri, G_FILE_TEST_EXISTS))
+          break;
+    }
+	
+  command = g_strconcat ("gnome-open ghelp://", uri,  NULL);
+	
+  if (has_window)
+    gdk_spawn_command_line_on_screen (gtk_window_get_screen (GTK_WINDOW (window)),
+				      command,
+				      &error);
+  else
+    g_spawn_command_line_async (command, &error);
+
+  if (error != NULL) 
+    {
+      vinagre_utils_show_error (error->message, has_window?window:NULL);
+      g_error_free (error);
+    }
+
+  g_free (command);
+  g_free (uri);
+}
+
+void
+vinagre_utils_help_about (GtkWindow *window)
+{
+  static const gchar * const authors[] = {
+	"Jonh Wendell <jwendell@gnome.org>",
+	NULL
+  };
+
+  static const gchar * const artists[] = {
+	"Vinicius Depizzol <vdepizzol@gmail.com>",
+	NULL
+  };
+
+  static const gchar copyright[] = \
+	"Copyright \xc2\xa9 2007 Jonh Wendell";
+
+  static const gchar comments[] = \
+	N_("Vinagre is a VNC client for the GNOME Desktop");
+
+  static const char *license[] = {
+	N_("Vinagre is free software; you can redistribute it and/or modify "
+	   "it under the terms of the GNU General Public License as published by "
+	   "the Free Software Foundation; either version 2 of the License, or "
+	   "(at your option) any later version."),
+	N_("Vinagre is distributed in the hope that it will be useful, "
+	   "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+	   "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+	   "GNU General Public License for more details."),
+	N_("You should have received a copy of the GNU General Public License "
+	   "along with this program. If not, see <http://www.gnu.org/licenses/>.")
+  };
+
+  gchar *license_trans;
+
+  license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]),
+				     _(license[2]), NULL);
+
+  /* Make URLs and email clickable in about dialog */
+  gtk_about_dialog_set_url_hook (vinagre_about_dialog_handle_url, window, NULL);
+  gtk_about_dialog_set_email_hook (vinagre_about_dialog_handle_url, window, NULL);
+
+
+  gtk_show_about_dialog (GTK_IS_WINDOW (window)?window:NULL,
+			 "authors", authors,
+			 "artists", artists,
+			 "comments", _(comments),
+			 "copyright", copyright,
+			 "license", license_trans,
+			 "wrap-license", TRUE,
+			 "logo-icon-name", "vinagre",
+			 "translator-credits", _("translator-credits"),
+			 "version", VERSION,
+			 "website", "http://www.gnome.org/projects/vinagre/",
+			 "website-label", _("Vinagre Website"),
+			 NULL);
+  g_free (license_trans);
 }
 
 /* vim: ts=8 */

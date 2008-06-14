@@ -6,7 +6,7 @@ glade_DATA = vinagre.glade
 man_MANS = vinagre.1
 
 uidir = $(datadir)/vinagre
-ui_DATA = vinagre-ui.xml
+ui_DATA = vinagre-ui.xml GNOME_VinagreApplet.xml
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir       = $(datadir)/applications
