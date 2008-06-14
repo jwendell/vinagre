@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-03 12:07+0200\n"
-"PO-Revision-Date: 2008-06-03 12:08+0200\n"
+"POT-Creation-Date: 2008-06-14 18:53+0200\n"
+"PO-Revision-Date: 2008-06-14 18:54+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,12 +18,21 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "_Sobre"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Axuda"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Acceso a escritorios remotos"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:144
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:221
+#: ../src/vinagre-applet.c:227 ../src/vinagre-main.c:144
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
@@ -164,6 +173,27 @@ msgstr "Ficheiro de escritorio remoto (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Conexión de escritorio remoto"
 
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "Un menú para acceso rápido con máquinas remotas"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Fábrica de applet Vinagre"
+
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr "Non se puido executar vinagre: %s"
+
+#: ../src/vinagre-applet.c:167
+msgid "Open Remote Desktop Viewer"
+msgstr "Abrir visor de escritorios remotos"
+
+#: ../src/vinagre-applet.c:228
+msgid "Access your bookmarks"
+msgstr "Acceder ao seus marcadores"
+
 #: ../src/vinagre-bookmarks.c:92
 msgid ""
 "Copying the bookmarks file to the new location. This operation is supposed "
@@ -214,50 +244,6 @@ msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Non se puido abrir o seguinte ficheiro:"
 msgstr[1] "Non se puideron abrir os seguintes ficheiros:"
-
-#: ../src/vinagre-commands.c:464
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre é un cliente de VNC para o escritorio Gnome"
-
-#: ../src/vinagre-commands.c:467
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"O Vinagre é software libre; pode redistribuílo ou modificadlo baixo os "
-"termos da Licenza Pública Xeral de GNU publicada pola Free Software "
-"Foundation; xa sexa na versión 2 da Licenza como (segundo a súa escolla) en "
-"calquera versión posterior."
-
-#: ../src/vinagre-commands.c:471
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"O Vinagre distribúese coa esperanza de que sexa útil, mais SEN NINGUNHA "
-"GARANTÍA; mesmo sen a garantía implícita de COMERCIALIZACIÓN ou IDONEIDADE "
-"PARA UN PROPÓSITO PARTICULAR. Para máis detalles vexa a Licenza Pública "
-"Xeral de GNU."
-
-#: ../src/vinagre-commands.c:475
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Debeu recibir unha copia da Licenza Pública Xeral de GNU xunto con este "
-"programa. Se non, vexa <http://www.gnu.org/licenses/>."
-
-#: ../src/vinagre-commands.c:497
-msgid "translator-credits"
-msgstr "Ignacio Casal Quinteiro  <nacho.resa@gmail.com>"
-
-#: ../src/vinagre-commands.c:500
-msgid "Vinagre Website"
-msgstr "Sitio web de Vinagre"
 
 #: ../src/vinagre-connect.c:172
 #, c-format
@@ -445,10 +431,6 @@ msgstr "_Ver"
 msgid "_Bookmarks"
 msgstr "_Marcadores"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Axuda"
-
 #: ../src/vinagre-ui.h:41
 msgid "Connect into a remote machine"
 msgstr "Conectar a unha máquina remota"
@@ -571,6 +553,50 @@ msgstr "_Panel lateral"
 #: ../src/vinagre-ui.h:111
 msgid "Show or hide the side panel"
 msgstr "Mostrar ou ocultar o panel lateral"
+
+#: ../src/vinagre-utils.c:450
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "Vinagre é un cliente de VNC para o escritorio Gnome"
+
+#: ../src/vinagre-utils.c:453
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"O Vinagre é software libre; pode redistribuílo ou modificadlo baixo os "
+"termos da Licenza Pública Xeral de GNU publicada pola Free Software "
+"Foundation; xa sexa na versión 2 da Licenza como (segundo a súa escolla) en "
+"calquera versión posterior."
+
+#: ../src/vinagre-utils.c:457
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"O Vinagre distribúese coa esperanza de que sexa útil, mais SEN NINGUNHA "
+"GARANTÍA; mesmo sen a garantía implícita de COMERCIALIZACIÓN ou IDONEIDADE "
+"PARA UN PROPÓSITO PARTICULAR. Para máis detalles vexa a Licenza Pública "
+"Xeral de GNU."
+
+#: ../src/vinagre-utils.c:461
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Debeu recibir unha copia da Licenza Pública Xeral de GNU xunto con este "
+"programa. Se non, vexa <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-utils.c:483
+msgid "translator-credits"
+msgstr "Ignacio Casal Quinteiro  <nacho.resa@gmail.com>"
+
+#: ../src/vinagre-utils.c:486
+msgid "Vinagre Website"
+msgstr "Sitio web de Vinagre"
 
 #: ../src/vinagre-window.c:422
 #, c-format
