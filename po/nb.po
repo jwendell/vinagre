@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-07 11:52+0200\n"
-"PO-Revision-Date: 2008-06-07 11:56+0200\n"
+"POT-Creation-Date: 2008-06-25 01:59+0200\n"
+"PO-Revision-Date: 2008-06-25 02:00+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "_Om"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Hjelp"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Bruk eksternt skrivebord"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:144
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:221
+#: ../src/vinagre-applet.c:227 ../src/vinagre-main.c:144
 msgid "Remote Desktop Viewer"
 msgstr "Visning av eksternt skrivebord"
 
@@ -105,13 +114,18 @@ msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
 "and will not be sent to the remote host."
-msgstr "Sett til «false» for å slå av menysnarveier. Sett til «true»  for å slå dem på. Merk at hvis de er slått på vil disse tastene fanges av menyen og ikke bli sendt til ekstern vert."
+msgstr ""
+"Sett til «false» for å slå av menysnarveier. Sett til «true»  for å slå dem "
+"på. Merk at hvis de er slått på vil disse tastene fanges av menyen og ikke "
+"bli sendt til ekstern vert."
 
 #: ../data/vinagre.schemas.in.h:3
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
-msgstr "Sett til «true» for å alltid vise faner. Settes denne til «false» vil faner kun vises når det er mer enn en aktiv tilkobling."
+msgstr ""
+"Sett til «true» for å alltid vise faner. Settes denne til «false» vil faner "
+"kun vises når det er mer enn en aktiv tilkobling."
 
 #: ../data/vinagre.schemas.in.h:4
 msgid "Specifies the maximum number of items in the host dropdown entry."
@@ -152,11 +166,34 @@ msgstr "Fil for eksternt skrivebord (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Ekstern skrivebordstilkobling"
 
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "En meny for å koble til en ekstern maskin raskt"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Fabrikk for vinagre panelprogram"
+
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr "Klarte ikke kjøre vinagre: %s"
+
+#: ../src/vinagre-applet.c:167
+msgid "Open Remote Desktop Viewer"
+msgstr "Åpne visning av eksternt skrivebord"
+
+#: ../src/vinagre-applet.c:228
+msgid "Access your bookmarks"
+msgstr "Åpne dine bokmerker"
+
 #: ../src/vinagre-bookmarks.c:92
 msgid ""
 "Copying the bookmarks file to the new location. This operation is supposed "
 "to run only once."
-msgstr "Kopierer bokmerkefilen til den nye lokasjonen. Denne operasjonen skal bare kjøres en gang."
+msgstr ""
+"Kopierer bokmerkefilen til den nye lokasjonen. Denne operasjonen skal bare "
+"kjøres en gang."
 
 #: ../src/vinagre-bookmarks.c:97
 #, c-format
@@ -200,51 +237,6 @@ msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Følgende fil kunne ikke bli åpnet:"
 msgstr[1] "Følgende filer kunne ikke bli åpnet:"
-
-#: ../src/vinagre-commands.c:464
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre er en VNC-klient for GNOME-skrivebordet"
-
-#: ../src/vinagre-commands.c:467
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"Vinagre er fri programvare. Du kan redistribuere og/eller endre programmet "
-"under betingelsene gitt i GNU General Public License som utgitt av Free "
-"Software Foundation; enten versjon 2 av lisensen, eller (hvis du ønsker det) "
-"enhver senere versjon."
-
-#: ../src/vinagre-commands.c:471
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"Vinagre distribueres i håp om at programmet er nyttig, men UTEN NOEN "
-"GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET "
-"BESTEMT FORMÅL. Se GNU General Public License for detaljer."
-
-#: ../src/vinagre-commands.c:475
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Du skal ha mottatt en kopi av GNU General Public License sammen med dette "
-"programmet. Hvis ikke, se på <http://www.gnu.org/licenses/>."
-
-#: ../src/vinagre-commands.c:497
-msgid "translator-credits"
-msgstr ""
-"Kjartan Maraas <kmaraas@gnome.org>\n"
-"Espen Stefansen <libbe AT stefansen DOT net>"
-
-#: ../src/vinagre-commands.c:500
-msgid "Vinagre Website"
-msgstr "Hjemmeside for Vinagre"
 
 #: ../src/vinagre-connect.c:172
 #, c-format
@@ -430,10 +422,6 @@ msgstr "_Vis"
 msgid "_Bookmarks"
 msgstr "_Bokmerker"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Hjelp"
-
 #: ../src/vinagre-ui.h:41
 msgid "Connect into a remote machine"
 msgstr "Koble til en ekstern maskin"
@@ -556,6 +544,51 @@ msgstr "Side_panel"
 #: ../src/vinagre-ui.h:111
 msgid "Show or hide the side panel"
 msgstr "Vis eller skjul sidepanelet"
+
+#: ../src/vinagre-utils.c:450
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "Vinagre er en VNC-klient for GNOME-skrivebordet"
+
+#: ../src/vinagre-utils.c:453
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"Vinagre er fri programvare. Du kan redistribuere og/eller endre programmet "
+"under betingelsene gitt i GNU General Public License som utgitt av Free "
+"Software Foundation; enten versjon 2 av lisensen, eller (hvis du ønsker det) "
+"enhver senere versjon."
+
+#: ../src/vinagre-utils.c:457
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"Vinagre distribueres i håp om at programmet er nyttig, men UTEN NOEN "
+"GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET "
+"BESTEMT FORMÅL. Se GNU General Public License for detaljer."
+
+#: ../src/vinagre-utils.c:461
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Du skal ha mottatt en kopi av GNU General Public License sammen med dette "
+"programmet. Hvis ikke, se på <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-utils.c:483
+msgid "translator-credits"
+msgstr ""
+"Kjartan Maraas <kmaraas@gnome.org>\n"
+"Espen Stefansen <libbe AT stefansen DOT net>"
+
+#: ../src/vinagre-utils.c:486
+msgid "Vinagre Website"
+msgstr "Hjemmeside for Vinagre"
 
 #: ../src/vinagre-window.c:422
 #, c-format
