@@ -1,14 +1,14 @@
 # Bulgarian translation of vinagre po-file.
-# Copyright (C) 2007 Free Software Foundation, Inc.
+# Copyright (C) 2007, 2008. Free Software Foundation, Inc.
 # This file is distributed under the same license as the vinagre package.
-# Alexander Shopov <ash@contact.bg>, 2007.
+# Alexander Shopov <ash@contact.bg>, 2007, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-20 08:23+0200\n"
-"PO-Revision-Date: 2007-11-20 08:19+0200\n"
+"POT-Creation-Date: 2008-06-29 18:41+0300\n"
+"PO-Revision-Date: 2008-06-29 09:11+0300\n"
 "Last-Translator: Alexander Shopov <ash@contact.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "Access remote desktops"
 msgstr "Достъп до отдалечени работни места"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:120
+#: ../src/vinagre-main.c:134
 msgid "Remote Desktop Viewer"
 msgstr "Отдалечени работни места"
 
@@ -48,7 +48,7 @@ msgstr "<b>Към коя машина искате да се свържете?</
 msgid "Editing a bookmark"
 msgstr "Редактиране на отметка"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:690
+#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:682
 msgid "Host:"
 msgstr "Адрес:"
 
@@ -70,11 +70,15 @@ msgstr "_Парола:"
 
 #: ../data/vinagre.glade.h:11
 msgid "_Port:"
-msgstr "П_орт:"
+msgstr "_Порт:"
 
 #: ../data/vinagre.glade.h:12
 msgid "_Remember this password"
 msgstr "_Запомняне на паролата"
+
+#: ../data/vinagre.schemas.in.h:1
+msgid "The handler for \"vnc://\" URLs"
+msgstr "Програмата за обработка на адреси от вида „vnc://“"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -108,55 +112,57 @@ msgstr "Сигурни ли сте, че искате да махнете <i>%s<
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Грешка при махането на %s от отметките: %s"
 
-#: ../src/vinagre-commands.c:89
+#: ../src/vinagre-commands.c:90
 msgid "Choose the file"
 msgstr "Изберете файла"
 
-#: ../src/vinagre-commands.c:100 ../src/vinagre-tab.c:773
+#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:765
 msgid "Supported formats"
 msgstr "Поддържани формати"
 
-#: ../src/vinagre-commands.c:132 ../src/vinagre-main.c:89
+#: ../src/vinagre-commands.c:133
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
-msgstr[0] "Следният файл не можеше да бъде отворен:"
-msgstr[1] "Следните файлове не можеха да бъдат отворени:"
+msgstr[0] "Следният файл не може да бъде отворен:"
+msgstr[1] "Следните файлове не могат да бъдат отворени:"
 
-#: ../src/vinagre-commands.c:308
+#: ../src/vinagre-commands.c:383
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre е клиент за VNC за работната среда GNOME"
 
-#: ../src/vinagre-commands.c:311
+#: ../src/vinagre-commands.c:386
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Тази програма (Vinagre) е свободен софтуер. Можете да я разпространявате "
-"според условията на версия 2 или по-висока (по ваш избор) на Общия публичен "
-"лиценз на GNU, който е публикуван от Фондацията за свободен софтуер."
+"Тази програма (Vinagre) е свободен софтуер. Можете да я разпространявате и/"
+"или променяте под условията на Общия публичен лиценз на GNU (GNU GPL), както "
+"е публикуван от Фондацията за свободен софтуер — версия 2 на лиценза или (по "
+"ваше решение) по-късна версия."
 
-#: ../src/vinagre-commands.c:315
+#: ../src/vinagre-commands.c:390
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Тази програма (Vinagre) се разпространява с надеждата да е полезна, но БЕЗ "
-"НИКАКВА ГАРАНЦИЯ, дори и подразбиращата се ПРИГОДНОСТ или ГОДНОСТ ЗА "
-"КОНКРЕТНА УПОТРЕБА. За подробности прегледайте Общия публичен лиценз на GNU."
+"Тази програма се разпространява с надеждата, че ще бъде полезна, но БЕЗ "
+"НИКАКВИ ГАРАНЦИИ, дори и косвените за ПРОДАЖБА или СЪОТВЕТСТВИЕ С КАКВАТО И "
+"ДА Е УПОТРЕБА. За подробности погледнете Общия публичен лиценз на GNU."
 
-#: ../src/vinagre-commands.c:319
+#: ../src/vinagre-commands.c:394
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
-"Трябва да сте получили копие на Общия публичен лиценз на GNU заедно с тази "
-"програма. Ако не се сте - погледнете <http://www.gnu.org/licenses/>."
+"Трябва да сте получили копие от Общия публичен лиценз на GNU (GNU GPL) "
+"заедно с тази програма. Ако не сте, погледнете <http://www.gnu.org/licenses/"
+">."
 
-#: ../src/vinagre-commands.c:337
+#: ../src/vinagre-commands.c:416
 msgid "translator-credits"
 msgstr ""
 "Александър Шопов <ash@contact.bg>\n"
@@ -165,13 +171,18 @@ msgstr ""
 "Научете повече за нас на http://gnome.cult.bg\n"
 "Докладвайте за грешки на http://gnome.cult.bg/bugs"
 
-#: ../src/vinagre-commands.c:340
+#: ../src/vinagre-commands.c:419
 msgid "Vinagre Website"
 msgstr "Уеб сайт на Vinagre"
 
 #: ../src/vinagre-connect.c:53
 msgid "Choose a VNC Server"
 msgstr "Изберете сървър за VNC"
+
+#: ../src/vinagre-connection.c:161
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "Протоколът „%s“ не се поддържа."
 
 #: ../src/vinagre-fav.c:382
 msgid "Image"
@@ -189,44 +200,51 @@ msgstr "Отметки"
 msgid "Hide bookmarks"
 msgstr "Скриване на отметките"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "Opens a .vnc file"
 msgstr "Отваряне на файл .vnc"
 
-#: ../src/vinagre-main.c:43
+#: ../src/vinagre-main.c:42
 msgid "filename"
 msgstr "име_на_файл"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:46
 msgid "[server:port]"
 msgstr "[сървър:порт]"
 
-#. Setup command line options
-#: ../src/vinagre-main.c:107
-msgid "- VNC Client for GNOME"
-msgstr "- клиент за VNC за GNOME"
+#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
+#: ../src/vinagre-window.c:284
+msgid "Unknown error"
+msgstr "Непозната грешка"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Възникна следната грешка:"
+msgstr[1] "Възникнаха следните грешки:"
+
+#. Setup command line options
+#: ../src/vinagre-main.c:121
+msgid "- VNC Client for GNOME"
+msgstr "— клиент за VNC за GNOME"
+
+#: ../src/vinagre-main.c:129
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Изпълнете „vinagre --help“, за да видите пълния списък с налични опции за "
 "командния ред"
 
-#: ../src/vinagre-main.c:126
-msgid "Could not initialize GnomeVFS\n"
-msgstr "Системата GnomeVFS не може да бъде инициализирана\n"
-
-#: ../src/vinagre-notebook.c:113
+#: ../src/vinagre-notebook.c:98
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Връзката към машината „%s“ бе прекъсната."
 
-#: ../src/vinagre-notebook.c:139
+#: ../src/vinagre-notebook.c:124
 msgid "Connecting..."
-msgstr "Свързване..."
+msgstr "Свързване…"
 
-#: ../src/vinagre-notebook.c:163
+#: ../src/vinagre-notebook.c:148
 msgid "Close connection"
 msgstr "Прекъсване на връзката"
 
@@ -245,50 +263,50 @@ msgstr ""
 msgid "Error connecting to host."
 msgstr "Грешка при свързване със сървър."
 
-#: ../src/vinagre-tab.c:293
+#: ../src/vinagre-tab.c:290
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Неуспешна идентификация пред машината „%s“"
 
-#: ../src/vinagre-tab.c:321
+#: ../src/vinagre-tab.c:318
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Методът за идентификация (%2$u) не се поддържа от машината „%1$s“."
 
-#: ../src/vinagre-tab.c:377
+#: ../src/vinagre-tab.c:374
 msgid "Error saving recent connection."
 msgstr "Грешка при запазване на скоро отваряна връзка."
 
-#: ../src/vinagre-tab.c:408
+#: ../src/vinagre-tab.c:405
 msgid "Error saving the password on the keyring."
 msgstr "Грешка при запазване на паролата в ключодържателя."
 
-#: ../src/vinagre-tab.c:468 ../src/vinagre-tab.c:564
+#: ../src/vinagre-tab.c:465 ../src/vinagre-tab.c:561
 msgid "Press Ctrl+Alt to grab the cursor"
 msgstr "Натиснете Ctrl+Alt, за да прихванете показалеца на мишката"
 
-#: ../src/vinagre-tab.c:543
+#: ../src/vinagre-tab.c:540
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Натиснете Ctrl+Alt, за да освободите показалеца на мишката"
 
-#: ../src/vinagre-tab.c:689
+#: ../src/vinagre-tab.c:681
 msgid "Desktop Name:"
 msgstr "Име на работния плот:"
 
-#: ../src/vinagre-tab.c:691
+#: ../src/vinagre-tab.c:683
 msgid "Port:"
 msgstr "Порт:"
 
-#: ../src/vinagre-tab.c:692
+#: ../src/vinagre-tab.c:684
 msgid "Dimensions:"
 msgstr "Размери:"
 
-#: ../src/vinagre-tab.c:759
+#: ../src/vinagre-tab.c:751
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Снимка на екрана на %s"
 
-#: ../src/vinagre-tab.c:762
+#: ../src/vinagre-tab.c:754
 msgid "Save Screenshot"
 msgstr "Запазване на снимката на екрана"
 
@@ -311,7 +329,7 @@ msgstr "_Отметки"
 
 #: ../src/vinagre-ui.h:37
 msgid "_Help"
-msgstr "_Помощ"
+msgstr "Помо_щ"
 
 #: ../src/vinagre-ui.h:41
 msgid "Connect into a remote machine"
@@ -369,7 +387,7 @@ msgstr "Прекъсване на текущата връзка"
 
 #: ../src/vinagre-ui.h:67
 msgid "C_lose All"
-msgstr "Прекъсване на _всички"
+msgstr "_Прекъсване на всички"
 
 #: ../src/vinagre-ui.h:68
 msgid "Close all active connections"
@@ -387,7 +405,7 @@ msgstr "Добавяне на текущата връзка към отметк�
 #. Machine menu
 #: ../src/vinagre-ui.h:79
 msgid "Take screenshot"
-msgstr "Снима на екрана"
+msgstr "Снимка на екрана"
 
 #: ../src/vinagre-ui.h:80
 msgid "Take a screenshot of active connection"
@@ -415,18 +433,19 @@ msgstr "Показване/скриване на лентата за състо�
 
 #: ../src/vinagre-ui.h:98
 msgid "Show or hide the bookmarks panel"
-msgstr "Показване/скриване на лентата за отметките"
+msgstr "Показване/скриване на панела с отметките"
 
-#: ../src/vinagre-window.c:367
+#: ../src/vinagre-window.c:401
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Файлът vinagre-ui.xml не може да бъде слян: %s"
 
-#: ../src/vinagre-window.c:395
+#: ../src/vinagre-window.c:429
 msgid "_Recent connections"
-msgstr "_Скоро отваряни връзки"
+msgstr "С_коро отваряни връзки"
 
-#: ../src/vinagre-window.c:535
+#. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
+#: ../src/vinagre-window.c:578
 #, c-format
 msgid "Open %s:%d"
 msgstr "Свързване към %s:%d"
