@@ -205,6 +205,7 @@ vinagre_applet_fill (PanelApplet *applet,
 {
   GtkWidget *image, *button;
   gchar *tmp;
+  VinagreMdns *mdns;
   static const BonoboUIVerb menu_verbs[] = {
     BONOBO_UI_VERB ("VinagreHelp", help_cb),
     BONOBO_UI_VERB ("VinagreAbout", about_cb),
@@ -236,6 +237,8 @@ vinagre_applet_fill (PanelApplet *applet,
 
   gtk_container_add (GTK_CONTAINER (applet), image);
   gtk_widget_show_all (GTK_WIDGET (applet));
+
+  mdns = vinagre_mdns_get_default ();
 
   return TRUE;
 }
