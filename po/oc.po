@@ -8,21 +8,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-09 15:22+0200\n"
+"POT-Creation-Date: 2008-07-02 09:01+0200\n"
 "PO-Revision-Date: 2008-06-11 11:56+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr ""
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Ajuda"
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Accedir a de burèus distants"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:144
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:144
 msgid "Remote Desktop Viewer"
 msgstr ""
 
@@ -150,6 +159,30 @@ msgstr "Fichièr de burèu distant (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Connexion a un burèu distant"
 
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+#
+msgid "A menu to quickly access remote machines"
+msgstr "Un menut per se connectar viste a d'ordenadors distants"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr ""
+
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr ""
+
+#: ../src/vinagre-applet.c:167
+#
+msgid "Open Remote Desktop Viewer"
+msgstr ""
+
+#: ../src/vinagre-applet.c:229
+#
+msgid "Access your bookmarks"
+msgstr ""
+
 #: ../src/vinagre-bookmarks.c:92
 msgid ""
 "Copying the bookmarks file to the new location. This operation is supposed "
@@ -195,41 +228,9 @@ msgstr "Formats gerits"
 
 #: ../src/vinagre-commands.c:149
 msgid "The following file could not be opened:"
-msgstr ""
-
-#: ../src/vinagre-commands.c:464
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr ""
-
-#: ../src/vinagre-commands.c:467
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-
-#: ../src/vinagre-commands.c:471
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-
-#: ../src/vinagre-commands.c:475
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-
-#: ../src/vinagre-commands.c:497
-msgid "translator-credits"
-msgstr "Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>"
-
-#: ../src/vinagre-commands.c:500
-msgid "Vinagre Website"
-msgstr "Sit web de Vinagre"
+msgid_plural "The following files could not be opened:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/vinagre-connect.c:172
 #, c-format
@@ -276,7 +277,9 @@ msgstr "[servidor:pòrt]"
 
 #: ../src/vinagre-main.c:109 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
-msgstr ""
+msgid_plural "The following errors have occurred:"
+msgstr[0] ""
+msgstr[1] ""
 
 #. Setup command line options
 #: ../src/vinagre-main.c:130
@@ -408,10 +411,6 @@ msgstr "_Visualizacion"
 msgid "_Bookmarks"
 msgstr "_Favorits"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Ajuda"
-
 #: ../src/vinagre-ui.h:41
 msgid "Connect into a remote machine"
 msgstr "Se connectar a un ordenador distant"
@@ -534,6 +533,40 @@ msgstr "_Panèl lateral"
 #: ../src/vinagre-ui.h:111
 msgid "Show or hide the side panel"
 msgstr "Visualizar o amagar la barra laterala"
+
+#: ../src/vinagre-utils.c:450
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr ""
+
+#: ../src/vinagre-utils.c:453
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+
+#: ../src/vinagre-utils.c:457
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+
+#: ../src/vinagre-utils.c:461
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+
+#: ../src/vinagre-utils.c:483
+msgid "translator-credits"
+msgstr "Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>"
+
+#: ../src/vinagre-utils.c:486
+msgid "Vinagre Website"
+msgstr "Sit web de Vinagre"
 
 #: ../src/vinagre-window.c:422
 #, c-format
