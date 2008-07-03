@@ -89,7 +89,7 @@ vinagre_bookmarks_init (VinagreBookmarks *book)
 	  GFile *src;
 	  GError *error = NULL;
 
-	  g_message (_("Copying the bookmarks file to the new location. This operation is supposed to run only once."));
+	  g_message (_("Copying the bookmarks file to the new location. This operation is only supposed to run once."));
 	  src = g_file_new_for_path (old);
 
 	  if (!g_file_copy (src, gfile, G_FILE_COPY_NONE, NULL, NULL, NULL, &error))

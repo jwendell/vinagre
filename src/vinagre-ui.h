@@ -38,7 +38,7 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
 
   /* Machine menu */
   { "MachineConnect", GTK_STOCK_CONNECT, NULL, "<control>N",
-    N_("Connect into a remote machine"), G_CALLBACK (vinagre_cmd_machine_connect) },
+    N_("Connect to a remote machine"), G_CALLBACK (vinagre_cmd_machine_connect) },
   { "MachineOpen", GTK_STOCK_OPEN, NULL, "<control>O",
     N_("Open a .VNC file"), G_CALLBACK (vinagre_cmd_machine_open) },
   { "MachineQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
@@ -46,7 +46,7 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
   	
   /* Bookmarks menu */
   { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
-    N_("Connect into this machine"), G_CALLBACK (vinagre_cmd_bookmarks_open) },
+    N_("Connect to this machine"), G_CALLBACK (vinagre_cmd_bookmarks_open) },
   { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit bookmark"), NULL,
     N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_cmd_bookmarks_edit) },
   { "BookmarksDel", GTK_STOCK_DELETE, N_("_Remove from bookmarks"), NULL,
@@ -93,7 +93,7 @@ static const GtkToggleActionEntry vinagre_machine_connected_toggle_menu_entries[
     N_("Fit the remote screen into the current window size"),
     G_CALLBACK (vinagre_cmd_view_scaling), FALSE },
   { "ViewReadOnly", NULL, N_("_Read only"), NULL,
-    N_("Disable mouse and keyboard activities"),
+    N_("Disable mouse and keyboard"),
     G_CALLBACK (vinagre_cmd_view_readonly), FALSE }
 };
 
