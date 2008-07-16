@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-02 14:09+0000\n"
+"POT-Creation-Date: 2008-07-03 14:33+0000\n"
 "PO-Revision-Date: 2008-04-06 17:18+0200\n"
 "Last-Translator: Mark Krapivner <mark125@gmail.com>\n"
 "Language-Team: he\n"
@@ -16,12 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "_אודות"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_עזרה"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "גישה לשולחנות עבודה מרוחקים"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:144
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:144
 msgid "Remote Desktop Viewer"
 msgstr "מציג שולחנות עבודה מרוחקים"
 
@@ -39,9 +48,9 @@ msgstr "<b>הכנס שם עבור חיבור זה</b>"
 
 #: ../data/vinagre.glade.h:4
 msgid ""
-"<b>In order to connect on this machine, a password is required. Please, "
+"<b>In order to connect on this machine, a password is required. Please "
 "supply it.</b>"
-msgstr "<b>כדי להתחבר למכונה זאת נדרשת סיסמה. נא לספק אותה.</b>"
+msgstr "<b>כדי להתחבר במכונה זאת נדרשת סיסמה. נא לספק אותה.</b>"
 
 #: ../data/vinagre.glade.h:5
 msgid "<b>Which machine do you want to connect to?</b>"
@@ -94,8 +103,7 @@ msgstr "_תצוגה בלבד"
 #. Tooltip for host entry in connect dialog
 #: ../data/vinagre.glade.h:18
 msgid "host or host:display or host::port"
-msgstr ""
-"מארח או תצוגה:מארח או שער::מארח"
+msgstr "מארח או תצוגה:מארח או שער::מארח"
 
 #: ../data/vinagre.schemas.in.h:1
 msgid "Maximum number of history items in connect dialog"
@@ -129,13 +137,13 @@ msgstr "The handler for \"vnc://\" URLs"
 
 #: ../data/vinagre.schemas.in.h:6
 msgid ""
-"When connecting to a host, the client can say to the server to leave others "
+"When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the others clients."
+"to share the desktop with the other clients."
 msgstr ""
-"When connecting to a host, the client can say to the server to leave others "
+"When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the others clients."
+"to share the desktop with the other clients."
 
 #: ../data/vinagre.schemas.in.h:7
 msgid "Whether we should leave other clients connected"
@@ -159,12 +167,34 @@ msgstr "קובץ שולחן עבודה מרוחק (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "חיבור שולחן עבודה מרוחק"
 
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "תפריט גישה מהירה למכונות מרוחקות"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Vinagre Applet Factory"
+
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, fuzzy, c-format
+msgid "Could not run vinagre: %s"
+msgstr "לא ניתן למזג את vinagre-ui.xml: ‏%s"
+
+#: ../src/vinagre-applet.c:167
+#, fuzzy
+msgid "Open Remote Desktop Viewer"
+msgstr "מציג שולחנות עבודה מרוחקים"
+
+#: ../src/vinagre-applet.c:229
+msgid "Access your bookmarks"
+msgstr "גש לסימניות שלך"
+
 #: ../src/vinagre-bookmarks.c:92
+#, fuzzy
 msgid ""
-"Copying the bookmarks file to the new location. This operation is supposed "
-"to run only once."
-msgstr ""
-"מעתיק את קובץ הסימניות למיקום החדש. פעולה זאת אמורה לרוץ פעם אחת בלבד."
+"Copying the bookmarks file to the new location. This operation is only "
+"supposed to run once."
+msgstr "מעתיק את קובץ הסימניות למיקום החדש. פעולה זאת אמורה לרוץ פעם אחת בלבד."
 
 #: ../src/vinagre-bookmarks.c:97
 #, c-format
@@ -208,55 +238,6 @@ msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "לא ניתן לפתוח את הקובץ הבא:"
 msgstr[1] "לא ניתן לפתוח את הקבצים הבאים:"
-
-#: ../src/vinagre-commands.c:464
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "‏Vinagre הוא לקוח VNC עבור שולחן העבודה של GNOME"
-
-#: ../src/vinagre-commands.c:467
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-
-#: ../src/vinagre-commands.c:471
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-
-#: ../src/vinagre-commands.c:475
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-
-#: ../src/vinagre-commands.c:497
-msgid "translator-credits"
-msgstr ""
-"מארק קרפיבנר <mark125@gmail.com>\n"
-"יאיר הרשקוביץ <yairhr@gmail.com>\n"
-"\n"
-"פרוייקט תרגום GNOME לעברית:\n"
-"‏http://gnome-il.berlios.de"
-
-#: ../src/vinagre-commands.c:500
-msgid "Vinagre Website"
-msgstr "אתר האינטרנט של Vinagre"
 
 #: ../src/vinagre-connect.c:172
 #, c-format
@@ -321,8 +302,7 @@ msgstr ""
 #: ../src/vinagre-mdns.c:118
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
-msgstr ""
-"נכשל בפתירת שם מארח avahi:‏ %s\n"
+msgstr "נכשל בפתירת שם מארח avahi:‏ %s\n"
 
 #: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
 #, c-format
@@ -383,8 +363,7 @@ msgstr "צלם תמונת מסך"
 
 #: ../src/vinagre-tab.c:753 ../src/vinagre-tab.c:754 ../src/vinagre-ui.h:82
 msgid "Send Ctrl-Alt-Del"
-msgstr ""
-"שלח Ctrl-Alt-Del"
+msgstr "שלח Ctrl-Alt-Del"
 
 #: ../src/vinagre-tab.c:895
 msgid "Desktop Name:"
@@ -442,12 +421,8 @@ msgstr "_תצוגה"
 msgid "_Bookmarks"
 msgstr "_סימניות"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_עזרה"
-
 #: ../src/vinagre-ui.h:41
-msgid "Connect into a remote machine"
+msgid "Connect to a remote machine"
 msgstr "התחבר למכונה מרוחקת"
 
 #: ../src/vinagre-ui.h:43
@@ -464,7 +439,7 @@ msgid "_Open bookmark"
 msgstr "_פתח סימנייה"
 
 #: ../src/vinagre-ui.h:49
-msgid "Connect into this machine"
+msgid "Connect to this machine"
 msgstr "התחבר למכונה זאת"
 
 #: ../src/vinagre-ui.h:50
@@ -523,8 +498,7 @@ msgstr "צלם תמונת מסך מחיבור פעיל"
 
 #: ../src/vinagre-ui.h:83
 msgid "Send Ctrl+Alt+Del to active connection"
-msgstr ""
-"שלח Ctrl+Alt+Del לחיבור הפעיל"
+msgstr "שלח Ctrl+Alt+Del לחיבור הפעיל"
 
 #: ../src/vinagre-ui.h:87
 msgid "View the current machine in full screen"
@@ -543,7 +517,7 @@ msgid "_Read only"
 msgstr "_קריאה בלבד"
 
 #: ../src/vinagre-ui.h:96
-msgid "Disable mouse and keyboard activities"
+msgid "Disable mouse and keyboard"
 msgstr "כבה את פעילויות העכבר והמקלדת"
 
 #: ../src/vinagre-ui.h:102
@@ -569,6 +543,55 @@ msgstr "_לוח צד"
 #: ../src/vinagre-ui.h:111
 msgid "Show or hide the side panel"
 msgstr "הצג או הסתר את סרגל הצד"
+
+#: ../src/vinagre-utils.c:450
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "‏Vinagre הוא לקוח VNC עבור שולחן העבודה של GNOME"
+
+#: ../src/vinagre-utils.c:453
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+
+#: ../src/vinagre-utils.c:457
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+
+#: ../src/vinagre-utils.c:461
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-utils.c:483
+msgid "translator-credits"
+msgstr ""
+"מארק קרפיבנר <mark125@gmail.com>\n"
+"יאיר הרשקוביץ <yairhr@gmail.com>\n"
+"\n"
+"פרוייקט תרגום GNOME לעברית:\n"
+"‏http://gnome-il.berlios.de"
+
+#: ../src/vinagre-utils.c:486
+msgid "Vinagre Website"
+msgstr "אתר האינטרנט של Vinagre"
 
 #: ../src/vinagre-window.c:422
 #, c-format
