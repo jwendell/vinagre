@@ -22,7 +22,7 @@
 #define __VINAGRE_NOTEBOOK_H__
 
 #include <glib.h>
-#include <gtk/gtknotebook.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -97,4 +97,4 @@ void		vinagre_notebook_show_hide_tabs		(VinagreNotebook *nb);
 G_END_DECLS
 
 #endif /* __VINAGRE_NOTEBOOK_H__ */
-/* vim: ts=8 */
+/* vim: set ts=8: */

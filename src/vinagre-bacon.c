@@ -286,4 +286,4 @@ vinagre_bacon_start (GSList *servers, gboolean new_window)
 					     NULL);
     }
 }
-/* vim: ts=8 */
+/* vim: set ts=8: */

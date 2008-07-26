@@ -20,8 +20,8 @@
 
 #include <string.h>
 #include <glib.h>
+#include <gtk/gtk.h>
 #include <panel-applet.h>
-#include <gtk/gtklabel.h>
 #include "vinagre-bookmarks.h"
 #include "vinagre-mdns.h"
 #include "vinagre-utils.h"

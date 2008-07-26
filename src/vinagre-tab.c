@@ -1098,4 +1098,4 @@ vinagre_tab_is_pointer_grab (VinagreTab *tab) {
   return tab->priv->pointer_grab;
 }
 
-/* vim: ts=8 */
+/* vim: set ts=8: */

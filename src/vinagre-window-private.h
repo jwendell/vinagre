@@ -74,4 +74,4 @@ struct _VinagreWindowPrivate
 G_END_DECLS
 
 #endif  /* __VINAGRE_WINDOW_PRIVATE_H__  */
-/* vim: ts=8 */
+/* vim: set ts=8: */

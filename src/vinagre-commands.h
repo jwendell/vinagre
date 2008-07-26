@@ -80,4 +80,4 @@ void		vinagre_cmd_help_about		(GtkAction     *action,
 G_END_DECLS
 
 #endif /* __VINAGRE_COMMANDS_H__ */ 
-/* vim: ts=8 */
+/* vim: set ts=8: */

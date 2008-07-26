@@ -317,4 +317,4 @@ vinagre_app_get_connections (VinagreApp *app)
   return NULL;
 }
 
-/* vim: ts=8 */
+/* vim: set ts=8: */

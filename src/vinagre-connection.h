@@ -114,4 +114,4 @@ gchar*		    vinagre_connection_get_string_rep	(VinagreConnection *conn,
 G_END_DECLS
 
 #endif /* __VINAGRE_CONNECTION_H__  */
-/* vim: ts=8 */
+/* vim: set ts=8: */

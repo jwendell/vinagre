@@ -18,9 +18,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
-#include <glib/gi18n.h>
 #include <glib.h>
+#include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <avahi-ui/avahi-ui.h>
 #include <string.h>
@@ -270,4 +270,4 @@ fail:
   g_object_unref (dialog.xml);
   return conn;
 }
-/* vim: ts=8 */
+/* vim: set ts=8: */

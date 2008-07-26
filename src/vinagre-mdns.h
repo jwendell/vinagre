@@ -59,4 +59,4 @@ GSList      *vinagre_mdns_get_all     (VinagreMdns *mdns);
 G_END_DECLS
 
 #endif /* _VINAGRE_MDNS_H_ */
-/* vim: ts=8 */
+/* vim: set ts=8: */

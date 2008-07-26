@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <gtk/gtkicontheme.h>
+#include <gtk/gtk.h>
 
 #include "vinagre-connection.h"
 #include "vinagre-enums.h"
@@ -759,4 +759,4 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
   return result;
 }
 
-/* vim: ts=8 */
+/* vim: set ts=8: */

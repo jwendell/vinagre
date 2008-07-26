@@ -54,4 +54,4 @@ VinagrePrefs	*vinagre_prefs_get_default (void);
 G_END_DECLS
 
 #endif /* _VINAGRE_PREFS_H_ */
-/* vim: ts=8 */
+/* vim: set ts=8: */

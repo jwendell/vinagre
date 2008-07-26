@@ -618,4 +618,4 @@ vinagre_bookmarks_file_changed (GFileMonitor      *monitor,
   g_signal_emit (book, signals[BOOKMARK_CHANGED], 0);
 }
 
-/* vim: ts=8 */
+/* vim: set ts=8: */

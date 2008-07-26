@@ -379,4 +379,4 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 						     G_PARAM_READWRITE));
 
 }
-/* vim: ts=8 */
+/* vim: set ts=8: */

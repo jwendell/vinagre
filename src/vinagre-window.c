@@ -1231,4 +1231,4 @@ vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
   return tab;
 }
 
-/* vim: ts=8 */
+/* vim: set ts=8: */

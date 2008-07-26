@@ -384,4 +384,4 @@ vinagre_cmd_help_about (GtkAction     *action,
   vinagre_utils_help_about (GTK_WINDOW (window));
 }
 
-/* vim: ts=8 */
+/* vim: set ts=8: */

@@ -844,4 +844,4 @@ vinagre_fav_update_list (VinagreFav *fav)
 
   return FALSE;
 }
-/* vim: ts=8 */
+/* vim: set ts=8: */

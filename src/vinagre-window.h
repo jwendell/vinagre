@@ -99,4 +99,4 @@ VinagreTab	*vinagre_window_conn_exists		(VinagreWindow *window,
 G_END_DECLS
 
 #endif  /* __VINAGRE_WINDOW_H__  */
-/* vim: ts=8 */
+/* vim: set ts=8: */

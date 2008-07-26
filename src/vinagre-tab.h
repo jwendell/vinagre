@@ -101,4 +101,4 @@ gboolean	  vinagre_tab_is_pointer_grab	(VinagreTab *tab);
 G_END_DECLS
 
 #endif  /* __VINAGRE_TAB_H__  */
-/* vim: ts=8 */
+/* vim: set ts=8: */

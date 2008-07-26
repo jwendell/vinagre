@@ -59,4 +59,4 @@ void		vinagre_utils_get_current_viewport	(GdkScreen    *screen,
 void		vinagre_utils_help_contents		(GtkWindow *window);
 void		vinagre_utils_help_about		(GtkWindow *window);
 #endif  /* __VINAGRE_UTILS_H__  */
-/* vim: ts=8 */
+/* vim: set ts=8: */

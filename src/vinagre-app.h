@@ -71,4 +71,4 @@ VinagreWindow	*vinagre_app_get_window_in_viewport (VinagreApp *app,
 G_END_DECLS
 
 #endif  /* __VINAGRE_APP_H__  */
-/* vim: ts=8 */
+/* vim: set ts=8: */

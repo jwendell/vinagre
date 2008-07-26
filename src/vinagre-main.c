@@ -18,12 +18,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
-#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <glib/goption.h>
+#include <gtk/gtk.h>
 
-#include <config.h>
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
 #include "vinagre-bookmarks.h"
@@ -172,4 +174,4 @@ int main (int argc, char **argv) {
 
   return 0;
 }
-/* vim: ts=8 */
+/* vim: set ts=8: */

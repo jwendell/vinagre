@@ -24,4 +24,4 @@
 void	vinagre_bacon_start (GSList *servers, gboolean new_window);
 
 #endif  /* __VINAGRE_BACON_H__  */
-/* vim: ts=8 */
+/* vim: set ts=8: */

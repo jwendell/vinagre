@@ -488,4 +488,4 @@ vinagre_utils_help_about (GtkWindow *window)
   g_free (license_trans);
 }
 
-/* vim: ts=8 */
+/* vim: set ts=8: */
