@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome 2-22\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-11 22:32+0100\n"
+"POT-Creation-Date: 2008-07-29 02:22+0100\n"
 "PO-Revision-Date: 2008-02-26 16:05+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabeyes <doc@arabeyes.org>\n"
@@ -18,12 +18,21 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
 "3\n"
 
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr ""
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "م_ساعدة"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "مكّن وصول سطح المكتب البعيد"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:144
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "عارض سطح المكتب البعيد"
 
@@ -40,8 +49,9 @@ msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>ادخل اسما لهذا الاتصال</b>"
 
 #: ../data/vinagre.glade.h:4
+#, fuzzy
 msgid ""
-"<b>In order to connect on this machine, a password is required. Please, "
+"<b>In order to connect on this machine, a password is required. Please "
 "supply it.</b>"
 msgstr "<b>للاتصال بهذا الخادوم، يجب ادخال كلمة السر.</b>"
 
@@ -127,9 +137,9 @@ msgstr "مدير عناوين \"vnc://\""
 
 #: ../data/vinagre.schemas.in.h:6
 msgid ""
-"When connecting to a host, the client can say to the server to leave others "
+"When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the others clients."
+"to share the desktop with the other clients."
 msgstr ""
 
 #: ../data/vinagre.schemas.in.h:7
@@ -153,10 +163,34 @@ msgstr "ملف (VNC) لسطح المكتب البعيد"
 msgid "Remote Desktop Connection"
 msgstr "اتصال سطح مكتب بعيد"
 
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+#, fuzzy
+msgid "A menu to quickly access remote machines"
+msgstr "اتصل بخادوم عن بعد"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr ""
+
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, fuzzy, c-format
+msgid "Could not run vinagre: %s"
+msgstr "لم يمكن ادماج vinagre-ui.xml: %s"
+
+#: ../src/vinagre-applet.c:167
+#, fuzzy
+msgid "Open Remote Desktop Viewer"
+msgstr "عارض سطح المكتب البعيد"
+
+#: ../src/vinagre-applet.c:229
+#, fuzzy
+msgid "Access your bookmarks"
+msgstr "ا_ضف لعلامات المواقع"
+
 #: ../src/vinagre-bookmarks.c:92
 msgid ""
-"Copying the bookmarks file to the new location. This operation is supposed "
-"to run only once."
+"Copying the bookmarks file to the new location. This operation is only "
+"supposed to run once."
 msgstr ""
 
 #: ../src/vinagre-bookmarks.c:97
@@ -204,48 +238,6 @@ msgstr[1] "لا يمكن فتح اذه الملف"
 msgstr[2] "لا يمكن فتح هذه الملفات"
 msgstr[3] "لا يمكن فتح هذه الملفات"
 
-#: ../src/vinagre-commands.c:464
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "فيناجري هو عميل VNC لسطح مكتب جنوم"
-
-#: ../src/vinagre-commands.c:467
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"فيناجري برنامج حر؛ بامكانك إعادة توزيعه و/أو تعديله تحت شروط الرخصة العامة "
-"لجنو والتي نشرتها منظمة البرمجيات الحرة؛ سواء كانت الإصدارة 2 للرخصة أو أي "
-"إصدارة بعدها حسب الرغبة. "
-
-#: ../src/vinagre-commands.c:471
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"يوزّع فيناجري  على أمل أن يكون مفيدال لمن يستخدمه دون أدنى مسؤولية؛ ولا حتى "
-"أيضشمان يضمن صلاحية العرض في السوق أو توافقه مع أي استخدام محدد. يمكنم "
-"مراجعة الرخصة العامة لجنو لمزيد من التفاصيل. "
-
-#: ../src/vinagre-commands.c:475
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"من المفنرض أن تكون قد استلمت نسخة من رخصة جنو العامة مع البرنامج؛ في حال عدم "
-"استلامك لذلك، يمكنك تصفح <http://www.gnu.org/licenses/>."
-
-#: ../src/vinagre-commands.c:497
-msgid "translator-credits"
-msgstr "جهاد عفيفي <djihed@gmail.com>"
-
-#: ../src/vinagre-commands.c:500
-msgid "Vinagre Website"
-msgstr "موقع فيناجري"
-
 #: ../src/vinagre-connect.c:172
 #, fuzzy, c-format
 msgid "Error while saving history file: %s"
@@ -255,8 +247,8 @@ msgstr "خطأ عند حفظ علامات الموقع: %s"
 msgid "Choose a VNC Server"
 msgstr "اختر خادوم VNC "
 
-#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:79
-#: ../src/vinagre-main.c:98 ../src/vinagre-window.c:285
+#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:81
+#: ../src/vinagre-main.c:100 ../src/vinagre-window.c:285
 msgid "Unknown error"
 msgstr "خطأ غير معروف"
 
@@ -273,23 +265,23 @@ msgstr "علامات المواقع"
 msgid "Hosts nearby"
 msgstr ""
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:49
 msgid "Opens a .vnc file"
 msgstr "يفتح ملف .vnc"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:49
 msgid "filename"
 msgstr "اسم الملف"
 
-#: ../src/vinagre-main.c:50
+#: ../src/vinagre-main.c:52
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr ""
 
-#: ../src/vinagre-main.c:54
+#: ../src/vinagre-main.c:56
 msgid "[server:port]"
 msgstr "[خادوم:منفذ]"
 
-#: ../src/vinagre-main.c:109 ../src/vinagre-window.c:284
+#: ../src/vinagre-main.c:111 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "حصل الخطأ التالي:"
@@ -298,11 +290,11 @@ msgstr[2] "حصلت الأخطاء التالية:"
 msgstr[3] "حصلت الأخطاء التالية:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:130
+#: ../src/vinagre-main.c:132
 msgid "- VNC Client for GNOME"
 msgstr "- عميل VNC لجينوم."
 
-#: ../src/vinagre-main.c:139
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "شغّل 'vinagre --help' لرئية قائمة كاملة لخيارات سطر الأوامر."
@@ -425,12 +417,9 @@ msgstr "إ_عرض"
 msgid "_Bookmarks"
 msgstr "_علامات مواقع"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "م_ساعدة"
-
 #: ../src/vinagre-ui.h:41
-msgid "Connect into a remote machine"
+#, fuzzy
+msgid "Connect to a remote machine"
 msgstr "اتصل بخادوم عن بعد"
 
 #: ../src/vinagre-ui.h:43
@@ -447,7 +436,8 @@ msgid "_Open bookmark"
 msgstr "ا_فتح علامة الموقع"
 
 #: ../src/vinagre-ui.h:49
-msgid "Connect into this machine"
+#, fuzzy
+msgid "Connect to this machine"
 msgstr "اتّصل بهذا الخادوم"
 
 #: ../src/vinagre-ui.h:50
@@ -526,7 +516,7 @@ msgid "_Read only"
 msgstr ""
 
 #: ../src/vinagre-ui.h:96
-msgid "Disable mouse and keyboard activities"
+msgid "Disable mouse and keyboard"
 msgstr ""
 
 #: ../src/vinagre-ui.h:102
@@ -553,6 +543,48 @@ msgstr ""
 #, fuzzy
 msgid "Show or hide the side panel"
 msgstr "اعرض أو إخف لوحة علامات الموقع"
+
+#: ../src/vinagre-utils.c:450
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "فيناجري هو عميل VNC لسطح مكتب جنوم"
+
+#: ../src/vinagre-utils.c:453
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"فيناجري برنامج حر؛ بامكانك إعادة توزيعه و/أو تعديله تحت شروط الرخصة العامة "
+"لجنو والتي نشرتها منظمة البرمجيات الحرة؛ سواء كانت الإصدارة 2 للرخصة أو أي "
+"إصدارة بعدها حسب الرغبة. "
+
+#: ../src/vinagre-utils.c:457
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"يوزّع فيناجري  على أمل أن يكون مفيدال لمن يستخدمه دون أدنى مسؤولية؛ ولا حتى "
+"أيضشمان يضمن صلاحية العرض في السوق أو توافقه مع أي استخدام محدد. يمكنم "
+"مراجعة الرخصة العامة لجنو لمزيد من التفاصيل. "
+
+#: ../src/vinagre-utils.c:461
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"من المفنرض أن تكون قد استلمت نسخة من رخصة جنو العامة مع البرنامج؛ في حال عدم "
+"استلامك لذلك، يمكنك تصفح <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-utils.c:483
+msgid "translator-credits"
+msgstr "جهاد عفيفي <djihed@gmail.com>"
+
+#: ../src/vinagre-utils.c:486
+msgid "Vinagre Website"
+msgstr "موقع فيناجري"
 
 #: ../src/vinagre-window.c:422
 #, c-format
