@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-04 19:28+0200\n"
-"PO-Revision-Date: 2008-06-04 19:25+0100\n"
+"POT-Creation-Date: 2008-08-08 22:59+0200\n"
+"PO-Revision-Date: 2008-08-08 22:55+0200\n"
 "Last-Translator: Petr Kovar <pknbe@volny.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,12 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "O _aplikaci"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Nápověda"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Přístup na vzdálené plochy"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:144
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Prohlížeč vzdálené plochy"
 
@@ -40,11 +49,11 @@ msgstr "<b>Zadejte název tohoto spojení</b>"
 
 #: ../data/vinagre.glade.h:4
 msgid ""
-"<b>In order to connect on this machine, a password is required. Please, "
+"<b>In order to connect on this machine, a password is required. Please "
 "supply it.</b>"
 msgstr ""
-"<b>Připojení k tomuto hostiteli vyžaduje zadání hesla. Vložte jej prosím "
-"níže.</b>"
+"<b>Připojení k tomuto stroji vyžaduje zadání hesla. Vložte jej prosím níže.</"
+"b>"
 
 #: ../data/vinagre.glade.h:5
 msgid "<b>Which machine do you want to connect to?</b>"
@@ -133,9 +142,9 @@ msgstr "Obsluha pro adresy \"vnc://\""
 
 #: ../data/vinagre.schemas.in.h:6
 msgid ""
-"When connecting to a host, the client can say to the server to leave others "
+"When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the others clients."
+"to share the desktop with the other clients."
 msgstr ""
 "Při připojování k hostiteli může klient říci serveru, že má zachovat "
 "existující připojení ostatních klientů, nebo že mají být odpojeni. Nastavte "
@@ -162,10 +171,31 @@ msgstr "Vzdálená plocha (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Připojení ke vzdálené ploše"
 
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "Nabídka pro rychlý přístup ke vzdáleným strojům"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Generátor appletu Vinagre"
+
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr "Nelze spustit vinagre: %s"
+
+#: ../src/vinagre-applet.c:167
+msgid "Open Remote Desktop Viewer"
+msgstr "Otevřít prohlížeč vzdálené plochy"
+
+#: ../src/vinagre-applet.c:229
+msgid "Access your bookmarks"
+msgstr "Přístup k záložkám"
+
 #: ../src/vinagre-bookmarks.c:92
 msgid ""
-"Copying the bookmarks file to the new location. This operation is supposed "
-"to run only once."
+"Copying the bookmarks file to the new location. This operation is only "
+"supposed to run once."
 msgstr ""
 "Kopírování souboru záložek do nového umístění. Od této operace se očekává, "
 "že poběží pouze jednou."
@@ -214,52 +244,6 @@ msgstr[0] "Následující soubor se nepodařilo otevřít:"
 msgstr[1] "Následující soubory se nepodařilo otevřít:"
 msgstr[2] "Následující soubory se nepodařilo otevřít:"
 
-#: ../src/vinagre-commands.c:464
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre je klient VNC pro prostředí GNOME"
-
-#: ../src/vinagre-commands.c:467
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"Tento program je svobodný software; můžete jej šířit a modifikovat podle "
-"ustanovení GNU General Public License, vydávané Free Software Foundation; a "
-"to buď verze 2 této licence anebo (podle vlastního uvážení) kterékoliv "
-"pozdější verze."
-
-#: ../src/vinagre-commands.c:471
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"Program Vinagre je rozšiřován v naději, že bude užitečný, avšak BEZ "
-"JAKÉKOLIV ZÁRUKY; neposkytují se ani odvozené záruky PRODEJNOSTI anebo "
-"VHODNOSTI PRO URČITÝ ÚČEL. Další podrobnosti hledejte v GNU General Public "
-"License."
-
-#: ../src/vinagre-commands.c:475
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Kopii GNU General Public License jste měl(a) obdržet spolu s tímto "
-"programem; pokud se tak nestalo, navštivte <http://www.gnu.org/licenses/>."
-
-#: ../src/vinagre-commands.c:497
-msgid "translator-credits"
-msgstr ""
-"Lucas Lommer <llommer@svn.gnome.org>\n"
-"Petr Kovář <pknbe@volny.cz>"
-
-#: ../src/vinagre-commands.c:500
-msgid "Vinagre Website"
-msgstr "Domácí stránka Vinagre"
-
 #: ../src/vinagre-connect.c:172
 #, c-format
 msgid "Error while saving history file: %s"
@@ -269,8 +253,8 @@ msgstr "Chyba při ukládání souboru s historií: %s"
 msgid "Choose a VNC Server"
 msgstr "Zvolte server VNC"
 
-#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:79
-#: ../src/vinagre-main.c:98 ../src/vinagre-window.c:285
+#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:81
+#: ../src/vinagre-main.c:100 ../src/vinagre-window.c:285
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
@@ -287,23 +271,23 @@ msgstr "Záložky"
 msgid "Hosts nearby"
 msgstr "Okolní hostitelé"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:49
 msgid "Opens a .vnc file"
 msgstr "Otevře soubor .vnc"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:49
 msgid "filename"
 msgstr "soubor"
 
-#: ../src/vinagre-main.c:50
+#: ../src/vinagre-main.c:52
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "Vytvořit nové hlavní okno v již existující instanci Vinagre"
 
-#: ../src/vinagre-main.c:54
+#: ../src/vinagre-main.c:56
 msgid "[server:port]"
 msgstr "[server:port]"
 
-#: ../src/vinagre-main.c:109 ../src/vinagre-window.c:284
+#: ../src/vinagre-main.c:111 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Došlo k následující chybě:"
@@ -311,11 +295,11 @@ msgstr[1] "Došlo k následujícím chybám:"
 msgstr[2] "Došlo k následujícím chybám:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:130
+#: ../src/vinagre-main.c:132
 msgid "- VNC Client for GNOME"
 msgstr "– klient VNC pro GNOME"
 
-#: ../src/vinagre-main.c:139
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
@@ -446,13 +430,9 @@ msgstr "_Zobrazit"
 msgid "_Bookmarks"
 msgstr "Zá_ložky"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Nápověda"
-
 #: ../src/vinagre-ui.h:41
-msgid "Connect into a remote machine"
-msgstr "Připojit se ke vzdálenému počítači"
+msgid "Connect to a remote machine"
+msgstr "Připojit se ke vzdálenému stroji"
 
 #: ../src/vinagre-ui.h:43
 msgid "Open a .VNC file"
@@ -468,8 +448,8 @@ msgid "_Open bookmark"
 msgstr "_Otevřít záložku"
 
 #: ../src/vinagre-ui.h:49
-msgid "Connect into this machine"
-msgstr "Připojit se k tomuto počítači"
+msgid "Connect to this machine"
+msgstr "Připojit se k tomuto stroji"
 
 #: ../src/vinagre-ui.h:50
 msgid "_Edit bookmark"
@@ -546,8 +526,8 @@ msgid "_Read only"
 msgstr "Jen p_ro čtení"
 
 #: ../src/vinagre-ui.h:96
-msgid "Disable mouse and keyboard activities"
-msgstr "Zakázat akce klávesnice a myši"
+msgid "Disable mouse and keyboard"
+msgstr "Zakázat klávesnici a myš"
 
 #: ../src/vinagre-ui.h:102
 msgid "_Toolbar"
@@ -572,6 +552,52 @@ msgstr "Boční _panel"
 #: ../src/vinagre-ui.h:111
 msgid "Show or hide the side panel"
 msgstr "Zobrazit nebo skrýt boční panel"
+
+#: ../src/vinagre-utils.c:450
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "Vinagre je klient VNC pro prostředí GNOME"
+
+#: ../src/vinagre-utils.c:453
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"Tento program je svobodný software; můžete jej šířit a modifikovat podle "
+"ustanovení GNU General Public License, vydávané Free Software Foundation; a "
+"to buď verze 2 této licence anebo (podle vlastního uvážení) kterékoliv "
+"pozdější verze."
+
+#: ../src/vinagre-utils.c:457
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"Program Vinagre je rozšiřován v naději, že bude užitečný, avšak BEZ "
+"JAKÉKOLIV ZÁRUKY; neposkytují se ani odvozené záruky PRODEJNOSTI anebo "
+"VHODNOSTI PRO URČITÝ ÚČEL. Další podrobnosti hledejte v GNU General Public "
+"License."
+
+#: ../src/vinagre-utils.c:461
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Kopii GNU General Public License jste měl(a) obdržet spolu s tímto "
+"programem; pokud se tak nestalo, navštivte <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-utils.c:483
+msgid "translator-credits"
+msgstr ""
+"Lucas Lommer <llommer@svn.gnome.org>\n"
+"Petr Kovář <pknbe@volny.cz>"
+
+#: ../src/vinagre-utils.c:486
+msgid "Vinagre Website"
+msgstr "Domácí stránka Vinagre"
 
 #: ../src/vinagre-window.c:422
 #, c-format
