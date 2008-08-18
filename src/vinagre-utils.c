@@ -20,6 +20,7 @@
 
 #include <string.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include "vinagre-utils.h"
 
 #define VINAGRE_GLADE_FILE  "vinagre.glade"
@@ -356,78 +357,50 @@ vinagre_about_dialog_handle_url (GtkAboutDialog *about,
 				 const char     *link,
 				 gpointer        data)
 {
-  GError   *error = NULL;
-  gchar    *address, *command;
-  gboolean  has_window = GTK_IS_WINDOW (data);
+  GError    *error = NULL;
+  gchar     *address;
+  GdkScreen *screen;
 
   if (g_strstr_len (link, strlen (link), "@"))
     address = g_strdup_printf ("mailto:%s", link);
   else
     address = g_strdup (link);
 
-  command = g_strconcat ("gnome-open ", address,  NULL);
+  screen = GTK_IS_WINDOW (data) ? gtk_window_get_screen (GTK_WINDOW (data)) : NULL;
 
-  if (has_window)
-    gdk_spawn_command_line_on_screen (gtk_window_get_screen (GTK_WINDOW (data)),
-				      command,
-				      &error);
-  else
-    g_spawn_command_line_async (command, &error);
+  gtk_show_uri (screen,
+		address,
+		GDK_CURRENT_TIME,
+		&error);
 
   if (error != NULL) 
     {
-      vinagre_utils_show_error (error->message, has_window?GTK_WINDOW (data):NULL);
+      vinagre_utils_show_error (error->message, GTK_IS_WINDOW (data) ? GTK_WINDOW (data) : NULL);
       g_error_free (error);
     }
 
-  g_free (command);
   g_free (address);
 }
 
 void
 vinagre_utils_help_contents (GtkWindow *window)
 {
-  GError *error = NULL;
-  char *command;
-  const char *lang;
-  char *uri = NULL;
-  int i;
-  gboolean has_window = GTK_IS_WINDOW (window);
+  GError    *error;
+  GdkScreen *screen;
 
-  const char * const * langs = g_get_language_names ();
+  screen = GTK_IS_WINDOW (window) ? gtk_window_get_screen (GTK_WINDOW (window)) : NULL;
+  error = NULL;
 
-  for (i = 0; langs[i]; i++)
-    {
-      lang = langs[i];
-      if (strchr (lang, '.')) 
-          continue;
-
-      if (uri)
-	g_free (uri);
-
-      uri = g_build_filename (DATADIR, "/gnome/help/vinagre/", lang, "/vinagre.xml", NULL);
-					
-      if (g_file_test (uri, G_FILE_TEST_EXISTS))
-          break;
-    }
-	
-  command = g_strconcat ("gnome-open ghelp://", uri,  NULL);
-	
-  if (has_window)
-    gdk_spawn_command_line_on_screen (gtk_window_get_screen (GTK_WINDOW (window)),
-				      command,
-				      &error);
-  else
-    g_spawn_command_line_async (command, &error);
+  gtk_show_uri (screen,
+		"ghelp:vinagre",
+		GDK_CURRENT_TIME,
+		&error);
 
   if (error != NULL) 
     {
-      vinagre_utils_show_error (error->message, has_window?window:NULL);
+      vinagre_utils_show_error (error->message, GTK_IS_WINDOW (window) ? window : NULL);
       g_error_free (error);
     }
-
-  g_free (command);
-  g_free (uri);
 }
 
 void
