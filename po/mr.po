@@ -1,14 +1,14 @@
-# translation of vinagre.HEAD.po to marathi
+# translation of mr.po to marathi
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: vinagre.HEAD\n"
+"Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-01 04:02+0000\n"
-"PO-Revision-Date: 2008-03-03 21:20+0530\n"
+"POT-Creation-Date: 2008-07-03 14:33+0000\n"
+"PO-Revision-Date: 2008-08-25 10:50+0530\n"
 "Last-Translator: Sandeep Shedmake <sandeep.shedmake@gmail.com>\n"
 "Language-Team: marathi\n"
 "MIME-Version: 1.0\n"
@@ -17,68 +17,138 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "विषयी (_A)"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "मदत (_H)"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "दूरस्थ डेस्कटॉप करीता प्रवेश"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:134
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:144
 msgid "Remote Desktop Viewer"
 msgstr "दूरस्थ डेक्टॉप प्रदर्शक"
 
 #: ../data/vinagre.glade.h:1
+msgid "<b>Connection options</b>"
+msgstr "<b>जुळवणी पर्याय</b>"
+
+#: ../data/vinagre.glade.h:2
 msgid "<b>Editing a bookmark</b>"
 msgstr "<b>ओळखचिन्ह संपादीत करीत आहे</b>"
 
-#: ../data/vinagre.glade.h:2
+#: ../data/vinagre.glade.h:3
 msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>या जुळवणी करीता नाव प्रविष्ट करा</b>"
 
-#: ../data/vinagre.glade.h:3
-msgid ""
-"<b>In order to connect on this machine, a password is required. Please, "
-"supply it.</b>"
-msgstr "<b>या संगणकाशी जुळवणीकरीता गुप्तशब्दची आवश्यकता आहे. कृपया, ते प्रविष्ट करा.</b>"
-
 #: ../data/vinagre.glade.h:4
+msgid ""
+"<b>In order to connect on this machine, a password is required. Please "
+"supply it.</b>"
+msgstr "<b>या संगणकाशी जुळवणीकरीता गुप्तशब्द आवश्यक आहे. कृपया, प्रविष्ट करा.</b>"
+
+#: ../data/vinagre.glade.h:5
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>तुम्हाला कुठल्या संगणकाशी जुळवणी करायची आहे?</b>"
 
-#: ../data/vinagre.glade.h:5
+#: ../data/vinagre.glade.h:6
 msgid "Editing a bookmark"
 msgstr "ओळखचिन्हाचे संपादन करीत आहे"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:682
+#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:896
 msgid "Host:"
 msgstr "यजमान:"
 
-#: ../data/vinagre.glade.h:7
+#: ../data/vinagre.glade.h:8
 msgid "Saving to bookmarks"
 msgstr "ओळखचिन्ह संचयीत करीत आहे"
 
-#: ../data/vinagre.glade.h:8
+#: ../data/vinagre.glade.h:9
+msgid "_Bookmark name:"
+msgstr "ओळखचिन्ह नाव (_B):"
+
+#: ../data/vinagre.glade.h:10
+msgid "_Full screen"
+msgstr "पूर्ण पडदा (_F)"
+
+#: ../data/vinagre.glade.h:11
 msgid "_Host:"
 msgstr "यजमान (_H):"
 
-#: ../data/vinagre.glade.h:9
+#: ../data/vinagre.glade.h:12
 msgid "_Name:"
 msgstr "नाव (_N):"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:13
 msgid "_Password:"
 msgstr "गुप्तशब्द(_P):"
 
-#: ../data/vinagre.glade.h:11
-msgid "_Port:"
-msgstr "पोर्ट(_P):"
-
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:14
 msgid "_Remember this password"
 msgstr "गुप्तशब्द लक्षात ठेवा(_R)"
 
+#: ../data/vinagre.glade.h:15
+msgid "_Scaling"
+msgstr "प्रमाण (_S)"
+
+#: ../data/vinagre.glade.h:16
+msgid "_View only"
+msgstr "फक्त दृश्य (_V)"
+
+#. Tooltip for host entry in connect dialog
+#: ../data/vinagre.glade.h:18
+msgid "host or host:display or host::port"
+msgstr "यजमान किंवा यजमान:दृश्य किंवा यजमान::पोर्ट"
+
 #: ../data/vinagre.schemas.in.h:1
+msgid "Maximum number of history items in connect dialog"
+msgstr "जुळवणी संवाद अंतर्गत इतिहास घटकाची कमाल संख्या"
+
+#: ../data/vinagre.schemas.in.h:2
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr "मेन्यू शॉर्टकट अकार्यान्वीत करीता \"खोटे\" असे निश्चित केले जाते. कार्यान्वीत करण्याकरीता \"खरे\" निश्चित करा. लक्षात ठेवा कार्यान्वीत असल्यावर, कि मेन्यू द्वारे वापरले जातिल व दूरस्थ यजमान त्या कि वापरू शकणार नाही."
+
+#: ../data/vinagre.schemas.in.h:3
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr "नेहमी टॅब दर्शविण्याकरीता \"खरे\" असे निश्चित केले जाते. टॅब दर्शविण्याकरीता एकापेक्षा जास्त सक्रीय जुळवणी आढळल्यास \"खोटे\" असे निश्चित केले जाते."
+
+#: ../data/vinagre.schemas.in.h:4
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr "यजमान उतरते पर्याय निवड अंतर्गत घटकांची कमाल संख्या निश्चित करतो."
+
+#: ../data/vinagre.schemas.in.h:5
 msgid "The handler for \"vnc://\" URLs"
 msgstr "\"vnc://\" URL करीता हाताळणी"
+
+#: ../data/vinagre.schemas.in.h:6
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr "यजमानशी संपर्क साधतेवेळी, क्लाऐंट सर्वरला अन्य क्लाऐंटशी जुळवणी थोडण्यास विनंती करू शकतो किंवा अस्तित्वातील जुळवणी विषमरित्या तोडण्यास विनंती करतो. अन्य क्लाऐंटशी डेस्कटॉप सहभागीय करण्याकरीता मुल्यास खरे असे निश्चित करा."
+
+#: ../data/vinagre.schemas.in.h:7
+msgid "Whether we should leave other clients connected"
+msgstr "अन्य जुळलेले क्लाऐंट करीता लक्ष्य द्यायचे"
+
+#: ../data/vinagre.schemas.in.h:8
+msgid "Whether we should show tabs even when there is only one active connection"
+msgstr "एकच सक्रीय जुळवणी अस्तित्वात असल्यावर मेन्यू प्रवेगक (शार्टकट कि) दर्शवायचे"
+
+#: ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "मेन्यू प्रवेगक (शार्टकट कि) दर्शवायचे"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -88,211 +158,237 @@ msgstr "दूरस्थ डेस्कटॅप (VNC) फाइल"
 msgid "Remote Desktop Connection"
 msgstr "दूरस्थ डेस्कटॉप जुळवणी"
 
-#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "ओळखचिन्ह संचयीत करतेवेळी त्रुटी: %s"
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "दूरस्थ मशीनशी जलद जुळवणी करीता मेन्यू"
 
-#: ../src/vinagre-bookmarks.c:111
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "ओळखचिन्ह प्रारंभ करतेवेळी त्रुटी: %s"
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Vinagre ऍपलेट फॅक्ट्री"
 
-#: ../src/vinagre-bookmarks.c:282
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr "vinagre चालवू शकले नाही: %s"
+
+#: ../src/vinagre-applet.c:167
+msgid "Open Remote Desktop Viewer"
+msgstr "मुक्त दूरस्थ डेक्टॉप प्रदर्शक"
+
+#: ../src/vinagre-applet.c:229
+msgid "Access your bookmarks"
+msgstr "ओळखचिन्ह प्राप्त करा"
+
+#: ../src/vinagre-bookmarks.c:92
+msgid ""
+"Copying the bookmarks file to the new location. This operation is only "
+"supposed to run once."
+msgstr "ओळखचिन्ह फाइल नविन स्थानावर प्रतिकृत करीत आहे. ही कार्यपद्धती फक्त एकदाच चालविले जाऊ शकते."
+
+#: ../src/vinagre-bookmarks.c:97
+#, c-format
+msgid "Error: %s"
+msgstr "त्रुटी: %s"
+
+#: ../src/vinagre-bookmarks.c:420
 msgid "Confirm removal?"
 msgstr "नक्की काढूण टाकायचे?"
 
-#: ../src/vinagre-bookmarks.c:285
+#: ../src/vinagre-bookmarks.c:423
 #, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
-msgstr "ओळखचिन्ह पासून तुम्हाला नक्की <i>%s</i> काढूण टाकायचे?"
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgstr "तुम्हाला नक्की ओळखचिन्ह पासून <i>%s</i> काढूण टाकायचे?"
 
-#: ../src/vinagre-bookmarks.c:296
+#: ../src/vinagre-bookmarks.c:434
 #, c-format
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "ओळखचिन्ह पासून %s काढूण टाकतेवेळी त्रुटी: %s"
 
-#: ../src/vinagre-commands.c:90
+#: ../src/vinagre-bookmarks.c:501
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "ओळखचिन्ह प्रारंभ करतेवेळी त्रुटी: %s"
+
+#: ../src/vinagre-bookmarks.c:522 ../src/vinagre-bookmarks.c:539
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "ओळखचिन्ह संचयीत करतेवेळी त्रुटी: %s"
+
+#: ../src/vinagre-commands.c:106
 msgid "Choose the file"
 msgstr "फाइल निवडा"
 
-#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:765
+#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:979
 msgid "Supported formats"
 msgstr "समर्थीत स्वरूपन"
 
-#: ../src/vinagre-commands.c:133
+#: ../src/vinagre-commands.c:149
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "खालील फाइल उघडले जाऊ शकले नाही:"
 msgstr[1] "खालील फाइलं उघडले जाऊ शकले नाही:"
 
-#: ../src/vinagre-commands.c:383
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "GNOME डेस्कटॉप करीता Vinagre हे एक VNC क्लाऐंट आहे"
+#: ../src/vinagre-connect.c:172
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "इतिहास फाइल संचयीत करतेवेळी त्रुटी: %s"
 
-#: ../src/vinagre-commands.c:386
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"Vinagre हे मुक्त सॉफ्टवेअर आहे; तुम्ही याचे वितरण व/किंवा संपादन "
-"Free Software Foundation प्रकाशीत GNU General Public License च्या अंतर्गत; एकतर परवानातील आवृत्ती 2 , किंवा (तुमच्या पर्यायनुसारे) पुढील कुठल्याही आवृत्तीनुसारे करू शकता."
-
-#: ../src/vinagre-commands.c:390
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr "Vinagre चा वापर लाभदायी ठरावा या हेतुने त्याचे वितरन केले आहे, पण कुठल्याही हमी विना; व्यापारहेतु अंतर्भुतीत किंवा कुठल्याही हेतुकरीता वापरकरीतायेण्याजोगी हमी विना.  अधिक माहितीकरीता GNU General Public License पहा."
-
-#: ../src/vinagre-commands.c:394
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"तुमच्याकडे या कार्यक्रमासह GNU General Public License चे एक प्रत प्राप्त झाले असावे. "
-"नसल्यास, <http://www.gnu.org/licenses/> पहा."
-
-#: ../src/vinagre-commands.c:416
-msgid "translator-credits"
-msgstr "Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2008"
-
-#: ../src/vinagre-commands.c:419
-msgid "Vinagre Website"
-msgstr "Vinagre संकेतस्थळ"
-
-#: ../src/vinagre-connect.c:53
+#: ../src/vinagre-connect.c:183
 msgid "Choose a VNC Server"
 msgstr "VNC सर्वर निवडा"
 
-#: ../src/vinagre-connection.c:161
+#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:79
+#: ../src/vinagre-main.c:98 ../src/vinagre-window.c:285
+msgid "Unknown error"
+msgstr "अपरिचीत त्रुटी"
+
+#: ../src/vinagre-connection.c:530
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "शिष्टाचार %s समर्थीत नाही."
 
-#: ../src/vinagre-fav.c:382
-msgid "Image"
-msgstr "प्रतिमा"
-
-#: ../src/vinagre-fav.c:389
-msgid "Name"
-msgstr "नाव"
-
-#: ../src/vinagre-fav.c:437
+#: ../src/vinagre-fav.c:762
 msgid "Bookmarks"
 msgstr "ओळखचिन्ह"
 
-#: ../src/vinagre-fav.c:445
-msgid "Hide bookmarks"
-msgstr "ओळखचिन्ह लपवा"
+#: ../src/vinagre-fav.c:807
+msgid "Hosts nearby"
+msgstr "जवळीक यजमान"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:47
 msgid "Opens a .vnc file"
 msgstr ".vnc फाइल उघडते"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:47
 msgid "filename"
 msgstr "फाइलनाव"
 
-#: ../src/vinagre-main.c:46
+#: ../src/vinagre-main.c:50
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "vinagre च्या वर्तमान कार्यरत पद्धतीत नविन उच्चस्तरीय चौकट बनवा"
+
+#: ../src/vinagre-main.c:54
 msgid "[server:port]"
 msgstr "[सर्वर:पोर्ट]"
 
-#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
-#: ../src/vinagre-window.c:284
-msgid "Unknown error"
-msgstr "अपरिचीत त्रुटी"
-
-#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+#: ../src/vinagre-main.c:109 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "खालील त्रुटी आढळले:"
 msgstr[1] "खालील त्रुटी आढळले:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:121
+#: ../src/vinagre-main.c:130
 msgid "- VNC Client for GNOME"
 msgstr "- GNOME करीता VNC क्लाऐंट"
 
-#: ../src/vinagre-main.c:129
+#: ../src/vinagre-main.c:139
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "उपलब्ध आदेश ओळ पर्याय पहाण्याकरीता 'vinagre --help' चालवा"
 
-#: ../src/vinagre-notebook.c:98
+#: ../src/vinagre-mdns.c:118
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "avahi यजमाननाव निर्धारण अपयशी: %s\n"
+
+#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "यजमान करीता संचारण अपयशी: %s\n"
+
+#: ../src/vinagre-notebook.c:127
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "यजमान \"%s\" करीता जुळवणी बंद केले गेली."
 
-#: ../src/vinagre-notebook.c:124
+#: ../src/vinagre-notebook.c:153
 msgid "Connecting..."
 msgstr "जोडतोय..."
 
-#: ../src/vinagre-notebook.c:148
+#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:709
 msgid "Close connection"
 msgstr "जुळवणी बंद करा"
 
-#: ../src/vinagre-prefs-manager.c:124
+#: ../src/vinagre-prefs.c:167
 msgid "Cannot initialize preferences manager."
 msgstr "प्राधान्य क्रम व्यवस्थापक मुळापासून सुरू करणे अशक्य आहे."
 
-#: ../src/vinagre-prefs-manager.c:420
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr "अपेक्षित '%1s' '%3s' करीता %2s प्राप्त झाले"
-
-#: ../src/vinagre-tab.c:255
+#: ../src/vinagre-tab.c:287
 msgid "Error connecting to host."
 msgstr "यजमानशी जुळवणी स्थापीत करतेवेळी त्रुटी."
 
-#: ../src/vinagre-tab.c:290
+#: ../src/vinagre-tab.c:320
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "यजमान \"%s\" करीता अधिप्रमाणन अपयशी"
 
-#: ../src/vinagre-tab.c:318
+#: ../src/vinagre-tab.c:348
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "यजमान \"%s\" करीताचे अधिप्रमाणन पध्दती असमर्थीत आहे. (%u)"
 
-#: ../src/vinagre-tab.c:374
+#: ../src/vinagre-tab.c:429
 msgid "Error saving recent connection."
 msgstr "अलिकडील जुळवणी संचयीत करतेवेळी त्रुटी."
 
-#: ../src/vinagre-tab.c:405
+#: ../src/vinagre-tab.c:460
 msgid "Error saving the password on the keyring."
 msgstr "किरींगवरील गुप्तशब्द संचयीत करतेवेळी त्रुटी."
 
-#: ../src/vinagre-tab.c:465 ../src/vinagre-tab.c:561
-msgid "Press Ctrl+Alt to grab the cursor"
-msgstr "कर्सर कार्यान्वीत करीता Ctrl+Alt दाबा"
+#: ../src/vinagre-tab.c:723 ../src/vinagre-tab.c:724
+msgid "Scaling"
+msgstr "प्रमाण"
 
-#: ../src/vinagre-tab.c:540
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "कर्सर अकार्यान्वीत करण्याकरीता Ctrl+Alt दाबू नका"
+#: ../src/vinagre-tab.c:733 ../src/vinagre-tab.c:734
+msgid "Read only"
+msgstr "फक्त वाचणीय"
 
-#: ../src/vinagre-tab.c:681
+#. Machine menu
+#: ../src/vinagre-tab.c:744 ../src/vinagre-tab.c:745 ../src/vinagre-ui.h:79
+msgid "Take screenshot"
+msgstr "स्क्रीनशॉट घ्या"
+
+#: ../src/vinagre-tab.c:753 ../src/vinagre-tab.c:754 ../src/vinagre-ui.h:82
+msgid "Send Ctrl-Alt-Del"
+msgstr "Ctrl-Alt-Del पाठवा"
+
+#: ../src/vinagre-tab.c:895
 msgid "Desktop Name:"
 msgstr "डेस्कटॉपचे नाव:"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:897
 msgid "Port:"
 msgstr "पोर्ट:"
 
-#: ../src/vinagre-tab.c:684
+#: ../src/vinagre-tab.c:898
 msgid "Dimensions:"
 msgstr "परिमाण:"
 
-#: ../src/vinagre-tab.c:751
+#: ../src/vinagre-tab.c:965
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s चे स्क्रीनशॉट"
 
-#: ../src/vinagre-tab.c:754
+#: ../src/vinagre-tab.c:968
 msgid "Save Screenshot"
 msgstr "स्क्रीनशॉट संचयीत करा"
+
+#: ../src/vinagre-tab.c:1032
+msgid ""
+"Scaling does not work properly on composited windows. Disable the visual "
+"effects and try again."
+msgstr "संयोजीत चौकट वर प्रमाण योग्यरित्या कार्य करीत नाही. दृश्यास्पद प्रभाव अकार्यान्वीत करून पुन्हा प्रयत्न करा."
+
+#: ../src/vinagre-tab.c:1039
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"प्रमाण या प्रतिष्ठापन करीता समर्थीत नाही.\n"
+"\n"
+"हे गुणविशेष कार्यान्वीत करण्याकरीता README फाइल (Vinagre सह संग्रहीत केलेले) वाचा."
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -307,17 +403,13 @@ msgstr "संपादन (_E)"
 msgid "_View"
 msgstr "दृश्य (_V)"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:36
 msgid "_Bookmarks"
 msgstr "ओळखचिन्ह(_B)"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "मदत (_H)"
-
 #: ../src/vinagre-ui.h:41
-msgid "Connect into a remote machine"
-msgstr "दूरस्थ संगणकाशी जुळवणी करा"
+msgid "Connect to a remote machine"
+msgstr "दूरस्थ मशीनसह जुळवणी स्थापीत करा"
 
 #: ../src/vinagre-ui.h:43
 msgid "Open a .VNC file"
@@ -333,8 +425,8 @@ msgid "_Open bookmark"
 msgstr "ओळखचिन्ह उघडा (_O)"
 
 #: ../src/vinagre-ui.h:49
-msgid "Connect into this machine"
-msgstr "या संगणाशी जुळवणी स्थापीत करा"
+msgid "Connect to this machine"
+msgstr "या मशीनसह जुळवणी स्थापीत करा"
 
 #: ../src/vinagre-ui.h:50
 msgid "_Edit bookmark"
@@ -386,51 +478,116 @@ msgstr "ओळखचिन्ह करीता जोडा (_A)"
 msgid "Add current connection to your bookmarks"
 msgstr "ओळखचिन्ह करीता सद्याची जुळवणी जोडा"
 
-#. Machine menu
-#: ../src/vinagre-ui.h:79
-msgid "Take screenshot"
-msgstr "स्क्रीनशॉट घ्या"
-
 #: ../src/vinagre-ui.h:80
 msgid "Take a screenshot of active connection"
 msgstr "सक्रीय जुळवणीचे स्क्रीनशॉट घ्या"
 
-#: ../src/vinagre-ui.h:84
+#: ../src/vinagre-ui.h:83
+msgid "Send Ctrl+Alt+Del to active connection"
+msgstr "जुळवणी सक्रीय करण्याकरीता Ctrl+Alt+Del पाठवा"
+
+#: ../src/vinagre-ui.h:87
 msgid "View the current machine in full screen"
 msgstr "सद्याचे मशीन पूर्ण पडद्यावर पहा"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:92
+msgid "S_caling"
+msgstr "प्रमाणकृत (_c)"
+
+#: ../src/vinagre-ui.h:93
+msgid "Fit the remote screen into the current window size"
+msgstr "दूरस्थ पडदा वर्तमान चौकट आकारात बसवा"
+
+#: ../src/vinagre-ui.h:95
+msgid "_Read only"
+msgstr "फक्त वाचणीय (_R)"
+
+#: ../src/vinagre-ui.h:96
+msgid "Disable mouse and keyboard"
+msgstr "माऊस व कळफलक अकार्यान्वीत करा"
+
+#: ../src/vinagre-ui.h:102
 msgid "_Toolbar"
 msgstr "साधनपट्टी (_T)"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:103
 msgid "Show or hide the toolbar"
 msgstr "साधनपट्टी दाखवा अथवा लपवा"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:106
 msgid "_Statusbar"
 msgstr "स्थितीपट्टी(_S)"
 
-#: ../src/vinagre-ui.h:94
+#: ../src/vinagre-ui.h:107
 msgid "Show or hide the statusbar"
 msgstr "स्थितीदर्शकपट्टी दाकवा अगर लपवा"
 
-#: ../src/vinagre-ui.h:98
-msgid "Show or hide the bookmarks panel"
-msgstr "ओळखचिन्ह पटल दर्शवा किंवा लपवा"
+#: ../src/vinagre-ui.h:110
+msgid "Side _Panel"
+msgstr "बाजूचे पटल (_P)"
 
-#: ../src/vinagre-window.c:401
+#: ../src/vinagre-ui.h:111
+msgid "Show or hide the side panel"
+msgstr "बाजूचे पटल लपवा किंवा दर्शवा"
+
+#: ../src/vinagre-utils.c:450
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "GNOME डेस्कटॉप करीता Vinagre हे एक VNC क्लाऐंट आहे"
+
+#: ../src/vinagre-utils.c:453
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"Vinagre हे मुक्त सॉफ्टवेअर आहे; तुम्ही याचे वितरण व/किंवा संपादन Free Software "
+"Foundation प्रकाशीत GNU General Public License च्या अंतर्गत; एकतर परवानातील "
+"आवृत्ती 2 , किंवा (तुमच्या पर्यायनुसारे) पुढील कुठल्याही आवृत्तीनुसारे करू शकता."
+
+#: ../src/vinagre-utils.c:457
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"Vinagre चा वापर लाभदायी ठरावा या हेतुने त्याचे वितरन केले आहे, पण कुठल्याही हमी विना; "
+"व्यापारहेतु अंतर्भुतीत किंवा कुठल्याही हेतुकरीता वापरकरीतायेण्याजोगी हमी विना.  अधिक "
+"माहितीकरीता GNU General Public License पहा."
+
+#: ../src/vinagre-utils.c:461
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"तुमच्याकडे या कार्यक्रमासह GNU General Public License चे एक प्रत प्राप्त झाले असावे. "
+"नसल्यास, <http://www.gnu.org/licenses/> पहा."
+
+#: ../src/vinagre-utils.c:483
+msgid "translator-credits"
+msgstr "संदिप शेडमाके <sandeep.shedmake@gmail.com>, 2008"
+
+#: ../src/vinagre-utils.c:486
+msgid "Vinagre Website"
+msgstr "Vinagre संकेतस्थळ"
+
+#: ../src/vinagre-window.c:422
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "vinagre-ui.xml एकत्र करू शकले नाही: %s"
 
-#: ../src/vinagre-window.c:429
+#: ../src/vinagre-window.c:450
 msgid "_Recent connections"
 msgstr "अलिकडील जुळवणी (_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:578
+#: ../src/vinagre-window.c:610 ../src/vinagre-window.c:660
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s उघडा:%d"
+
+#: ../src/vinagre-window.c:809
+msgid "Press Ctrl+Alt to release the cursor"
+msgstr "कर्सर अकार्यान्वीत करण्याकरीता Ctrl+Alt दाबू नका"
 
