@@ -259,33 +259,16 @@ static void
 open_vnc (VinagreTab *tab)
 {
   gchar *port;
-  gboolean scaling, view_only, fullscreen;
+
+  vnc_display_set_force_size (VNC_DISPLAY(tab->priv->vnc),
+			      !vinagre_connection_get_scaling (tab->priv->conn));
 
   port = g_strdup_printf ("%d", vinagre_connection_get_port (tab->priv->conn));
 
-  g_object_get (tab->priv->conn,
-		"view-only", &view_only,
-		"scaling", &scaling,
-		"fullscreen", &fullscreen,
-		NULL);
-
-  vinagre_tab_set_scaling (tab, scaling);
-  vinagre_tab_set_readonly (tab, view_only);
-  vnc_display_set_pointer_local (VNC_DISPLAY(tab->priv->vnc), TRUE);
-  vnc_display_set_keyboard_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
-  vnc_display_set_pointer_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
-
   if (vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), vinagre_connection_get_host (tab->priv->conn), port))
-    {
-      gtk_widget_grab_focus (tab->priv->vnc);
-
-      if (fullscreen)
-	vinagre_window_toggle_fullscreen (tab->priv->window);
-    }
+    gtk_widget_grab_focus (tab->priv->vnc);
   else
-    {
-      vinagre_utils_show_error (_("Error connecting to host."), NULL);
-    }
+    vinagre_utils_show_error (_("Error connecting to host."), NULL);
 
   g_free (port);
 }
@@ -501,6 +484,22 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   GtkLabel *label;
   gchar    *name;
+  gboolean scaling, view_only, fullscreen;
+
+  g_object_get (tab->priv->conn,
+		"view-only", &view_only,
+		"scaling", &scaling,
+		"fullscreen", &fullscreen,
+		NULL);
+
+  vinagre_tab_set_scaling (tab, scaling);
+  vinagre_tab_set_readonly (tab, view_only);
+  vnc_display_set_pointer_local (VNC_DISPLAY(tab->priv->vnc), TRUE);
+  vnc_display_set_keyboard_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
+  vnc_display_set_pointer_grab (VNC_DISPLAY(tab->priv->vnc), TRUE);
+
+  if (fullscreen)
+    vinagre_window_toggle_fullscreen (tab->priv->window);
 
   vinagre_connection_set_desktop_name (tab->priv->conn,
 				       vnc_display_get_name (VNC_DISPLAY (tab->priv->vnc)));
@@ -1003,6 +1002,7 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
       return FALSE;
     }
 
+  vnc_display_set_force_size (VNC_DISPLAY(tab->priv->vnc), !active);
   if (!vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active))
     {
       vinagre_utils_show_error (_("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
@@ -1012,6 +1012,13 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
 
   gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->scaling_button),
 				     active);
+
+  if (active)
+    gtk_widget_set_size_request (tab->priv->vnc, 0, 0);
+  else
+    gtk_widget_set_size_request (tab->priv->vnc,
+				 vnc_display_get_width (VNC_DISPLAY (tab->priv->vnc)),
+				 vnc_display_get_height (VNC_DISPLAY (tab->priv->vnc)));
 
   return TRUE;
 }
