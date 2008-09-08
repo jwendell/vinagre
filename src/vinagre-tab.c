@@ -615,22 +615,6 @@ static void vnc_bell_cb (VncDisplay *vnc, VinagreTab *tab)
   gdk_window_beep (GTK_WIDGET (tab->priv->window)->window);
 }
 
-static gboolean
-vnc_key_event ( GtkWidget   *widget G_GNUC_UNUSED,
-		GdkEventKey *key G_GNUC_UNUSED,
-		gpointer     data G_GNUC_UNUSED)
-{
-  return TRUE;
-}
-
-static gboolean
-vnc_scroll_event (GtkWidget *widget G_GNUC_UNUSED,
-		  GdkEventScroll *scroll G_GNUC_UNUSED,
-		  gpointer data G_GNUC_UNUSED)
-{
-  return TRUE;
-}
-
 static void
 close_button_clicked (GtkToolButton *button,
 		      VinagreTab    *tab)
@@ -846,21 +830,6 @@ vinagre_tab_init (VinagreTab *tab)
 		    "vnc-bell",
 		    G_CALLBACK (vnc_bell_cb),
 		    tab);
-
-  g_signal_connect (tab->priv->vnc,
-		    "key-press-event",
-		    G_CALLBACK (vnc_key_event),
-		    NULL);
-
-  g_signal_connect (tab->priv->vnc,
-		    "key-release-event",
-		    G_CALLBACK (vnc_key_event),
-		    NULL);
-
-  g_signal_connect (tab->priv->vnc,
-		    "scroll-event",
-		    G_CALLBACK (vnc_scroll_event),
-		    NULL);
 
   setup_layout (tab);
 
