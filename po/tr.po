@@ -1,88 +1,165 @@
 # translation of Vinagre.
 # Copyright (C) 2008 THE Vinagre'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Vinagre package.
-# <>, 2008.
-# , fuzzy
-# <>, 2008.
-# Tolga GÃ¼nkut <hardheart@gmail.com>, 2008.
-# 
-# 
+#
+# Baris Cicek <baris@teamforce.name.tr>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: Vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-09 16:53+0200\n"
-"PO-Revision-Date: 2008-02-22 11:05+0200\n"
-"Last-Translator: Tolga Gunkut <hardheart@gmail.com>\n"
+"POT-Creation-Date: 2008-09-13 06:10+0300\n"
+"PO-Revision-Date: 2008-09-11 00:00+0300\n"
+"Last-Translator: Baris Cicek <baris@teamforce.name.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type:  text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "_Hakkında"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Yardım"
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Uzak masaüstüne ulaş"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:134
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Uzak Masaüstü Görüntüleyici"
 
 #: ../data/vinagre.glade.h:1
+msgid "<b>Connection options</b>"
+msgstr "<b>Bağlantı seçenekleri</b>"
+
+#: ../data/vinagre.glade.h:2
 msgid "<b>Editing a bookmark</b>"
 msgstr "<b>Bir yer imi düzenleme</b>"
 
-#: ../data/vinagre.glade.h:2
+#: ../data/vinagre.glade.h:3
 msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>Bağlantı için bir isim girin</b>"
 
-#: ../data/vinagre.glade.h:3
+#: ../data/vinagre.glade.h:4
 msgid ""
-"<b>In order to connect on this machine, a password is required. Please, "
+"<b>In order to connect on this machine, a password is required. Please "
 "supply it.</b>"
 msgstr ""
-"<b>Bu makineye bağlanmak için, bir parola gerekli. Lütfen,onu sağlayın </b>"
+"<b>Bu makineye bağlanmak için, bir parola gerekli. Lütfen,onu sağlayın.</b>"
 
-#: ../data/vinagre.glade.h:4
+#: ../data/vinagre.glade.h:5
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Hangi makinaya bağlanmak istiyorsunuz?</b>"
 
-#: ../data/vinagre.glade.h:5
+#: ../data/vinagre.glade.h:6
 msgid "Editing a bookmark"
 msgstr "Bir yer imi düzenleme"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:682
+#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:864
 msgid "Host:"
 msgstr "Ana Bilgisayar:"
 
-#: ../data/vinagre.glade.h:7
+#: ../data/vinagre.glade.h:8
 msgid "Saving to bookmarks"
 msgstr "Yer imlerini kaydetme"
 
-#: ../data/vinagre.glade.h:8
+#: ../data/vinagre.glade.h:9
+msgid "_Bookmark name:"
+msgstr "_Yer imi ismi:"
+
+#: ../data/vinagre.glade.h:10
+msgid "_Full screen"
+msgstr "_Tam ekran"
+
+#: ../data/vinagre.glade.h:11
 msgid "_Host:"
 msgstr "_Ana Bilgisayar:"
 
-#: ../data/vinagre.glade.h:9
+#: ../data/vinagre.glade.h:12
 msgid "_Name:"
 msgstr "_İsim:"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:13
 msgid "_Password:"
 msgstr "_Parola:"
 
-#: ../data/vinagre.glade.h:11
-msgid "_Port:"
-msgstr "_Port:"
-
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:14
 msgid "_Remember this password"
 msgstr "_Bu parolayı hatırla"
 
+#: ../data/vinagre.glade.h:15
+msgid "_Scaling"
+msgstr "Ö_lçekleme"
+
+#: ../data/vinagre.glade.h:16
+msgid "_View only"
+msgstr "_Sadece görünüm"
+
+#. Tooltip for host entry in connect dialog
+#: ../data/vinagre.glade.h:18
+msgid "host or host:display or host::port"
+msgstr "makine ya da makine:ekran ya da makine:port"
+
 #: ../data/vinagre.schemas.in.h:1
+msgid "Maximum number of history items in connect dialog"
+msgstr "Bağlantı penceresinde azami sayıdaki geçmiş girişi"
+
+#: ../data/vinagre.schemas.in.h:2
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr ""
+"Menü kısayollarını kapatmak için \" false\" olarak atayın. Etkinleştirmek "
+"için \"true\" atayın. Eğer etkinl olurlarda bu tuşlar menü tarafından "
+"algılanacak ve uzaktaki makineye gönderilmeyecekler."
+
+#: ../data/vinagre.schemas.in.h:3
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr ""
+"Her zaman sekmeleri göstermek için \"true\" olarak atayın. Eğer sadece "
+"birden daha fazla etkin bağlantı varken sekmelerin gösterilmesi için \"false"
+"\" olarak atayın."
+
+#: ../data/vinagre.schemas.in.h:4
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr "Makine açılan girişinde azami sayıdaki öğeleri belirler."
+
+#: ../data/vinagre.schemas.in.h:5
 msgid "The handler for \"vnc://\" URLs"
 msgstr "\"vnc://\" URL'leri için işleyici"
+
+#: ../data/vinagre.schemas.in.h:6
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr ""
+"Bir makineye bağlanılırken, istemci sunucudan diğer istemcileri bağlı "
+"bırakmasını ya da mevcut bağlantıları kesmesini isteyebilir. Değeri true "
+"olarak atayarak diğer istemcilerle masaüstünün paylaşılmasını "
+"sağlayabilirsiniz."
+
+#: ../data/vinagre.schemas.in.h:7
+msgid "Whether we should leave other clients connected"
+msgstr "Diğer istemcilerin bağlı olarak bırakılması"
+
+#: ../data/vinagre.schemas.in.h:8
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "Sadece bir etkin bağlantı olsa bile sekmelerin gösterilmesi"
+
+#: ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Menü hızlandırıcılarının (kısayol tuşları) gösterilmesi"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -92,217 +169,242 @@ msgstr "Uzak Masaüstü(VNC) dosyası"
 msgid "Remote Desktop Connection"
 msgstr "Uzak Masaüstü Bağlantısı"
 
-#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "Yer imlerini kaydederken hata: %s"
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "Uzaktaki makinelere hızlı erişim için bir menü"
 
-#: ../src/vinagre-bookmarks.c:111
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "Yer imlerini başlatırken hata: %s"
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Vinagre Uygulamacık Üreticisi"
 
-#: ../src/vinagre-bookmarks.c:282
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr "Vinagre çalıştırılamadı: %s"
+
+#: ../src/vinagre-applet.c:167
+msgid "Open Remote Desktop Viewer"
+msgstr "Uzak Masaüstü Görüntüleyici Aç"
+
+#: ../src/vinagre-applet.c:229
+msgid "Access your bookmarks"
+msgstr "Yer imlerinize erişin"
+
+#: ../src/vinagre-bookmarks.c:92
+msgid ""
+"Copying the bookmarks file to the new location. This operation is only "
+"supposed to run once."
+msgstr ""
+"Yerimleri dosyası yeni bir konuma kopyalanıyor. Bu işlem sadece bir kere "
+"çalışmalıdır."
+
+#: ../src/vinagre-bookmarks.c:97
+#, c-format
+msgid "Error: %s"
+msgstr "Hata: %s"
+
+#: ../src/vinagre-bookmarks.c:420
 msgid "Confirm removal?"
 msgstr "Kaldırmayı onayla?"
 
-#: ../src/vinagre-bookmarks.c:285
+#: ../src/vinagre-bookmarks.c:423
 #, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Yer imlerinden <i>%s</i> kaldırmayı istediğinize emin misiniz?"
 
-#: ../src/vinagre-bookmarks.c:296
+#: ../src/vinagre-bookmarks.c:434
 #, c-format
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Yer imlerinden %s'yi kaldırırken hata: %s"
 
-#: ../src/vinagre-commands.c:90
+#: ../src/vinagre-bookmarks.c:501
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "Yer imlerini başlatırken hata: %s"
+
+#: ../src/vinagre-bookmarks.c:522 ../src/vinagre-bookmarks.c:539
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "Yer imlerini kaydederken hata: %s"
+
+#: ../src/vinagre-commands.c:106
 msgid "Choose the file"
 msgstr "Dosya seçin"
 
-#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:765
+#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:947
 msgid "Supported formats"
 msgstr "Desteklenen biçimler"
 
-#: ../src/vinagre-commands.c:133
+#: ../src/vinagre-commands.c:149
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Aşağıdaki dosya açılamadı."
 
-#: ../src/vinagre-commands.c:383
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre GNOME Masaüstü için bir VNC istemcisidir."
+#: ../src/vinagre-connect.c:172
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "Geçmiş dosyası kaydederken hata: %s"
 
-#: ../src/vinagre-commands.c:386
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"Vinagre bir özgür yazılımdır; yeniden dağıtılabilir ve/veya Özgür Yazılım "
-"vakfı tarafından yayınlanan GNU Genel Kamu Lisansının sürüm 2 veya (sizin "
-"seçiminiz) daha sonrakisürümlerinin  şartları altında değiştirebilirsiniz."
-
-#: ../src/vinagre-commands.c:390
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"Vinagre faydalı olması umuduyla fakat HERHANGİ BİR GARANTİ OLMADAN;hatta "
-"ORTALAMA kalite garantisi veya BELLİ BİR AMACA UYGUNLUK ima "
-"etmedendağıtılmaktadır. Ayrıntılı bilgi için GNU Genel Kamu Lisansına "
-"bakınız."
-
-#: ../src/vinagre-commands.c:394
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Bu programla birlikte GNU Genel Kamu Lisansının bir kopyasını almış "
-"olmalısınız Eğer yoksa, <http://www.gnu.org/licenses/>adresine bakınız."
-
-#: ../src/vinagre-commands.c:416
-msgid "translator-credits"
-msgstr "Çevirici-bilgileri"
-
-#: ../src/vinagre-commands.c:419
-msgid "Vinagre Website"
-msgstr "Vinagre Web sayfası"
-
-#: ../src/vinagre-connect.c:53
+#: ../src/vinagre-connect.c:183
 msgid "Choose a VNC Server"
 msgstr "Bir VNC Sunucusu seçin"
 
-#: ../src/vinagre-connection.c:161
+#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:81
+#: ../src/vinagre-main.c:100 ../src/vinagre-window.c:285
+msgid "Unknown error"
+msgstr "Bilinmeyen hata"
+
+#: ../src/vinagre-connection.c:530
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokol %s desteklenmiyor"
 
-#: ../src/vinagre-fav.c:382
-msgid "Image"
-msgstr "Resim"
-
-#: ../src/vinagre-fav.c:389
-msgid "Name"
-msgstr "İsim"
-
-#: ../src/vinagre-fav.c:437
+#: ../src/vinagre-fav.c:762
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
-#: ../src/vinagre-fav.c:445
-msgid "Hide bookmarks"
-msgstr "Yer imlerini gizle"
+#: ../src/vinagre-fav.c:807
+msgid "Hosts nearby"
+msgstr "Yakındaki makineler"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:49
 msgid "Opens a .vnc file"
 msgstr "Bir .vnc dosyası aç"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:49
 msgid "filename"
 msgstr "dosyaismi"
 
-#: ../src/vinagre-main.c:46
+#: ../src/vinagre-main.c:52
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "Mevcut vinagra oluşumuna bir yeni üst seviye pencere oluştur"
+
+#: ../src/vinagre-main.c:56
 msgid "[server:port]"
 msgstr "[sunucu:port]"
 
-#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
-#: ../src/vinagre-window.c:284
-msgid "Unknown error"
-msgstr "Bilinmeyen hata"
-
-#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+#: ../src/vinagre-main.c:111 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Aşağıdaki hata oluştu:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:121
+#: ../src/vinagre-main.c:132
 msgid "- VNC Client for GNOME"
 msgstr "GNOME için - VNC İstemcisi"
 
-#: ../src/vinagre-main.c:129
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Mevcut komut satırı seçeneklerinin tam listesini görmek için 'vinagre --"
 "help' çalıştırın"
 
-#: ../src/vinagre-notebook.c:98
+#: ../src/vinagre-mdns.c:118
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "Avahi makine ismi çözümü başarısız oldu: %s\n"
+
+#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "Makineler için göz atma başarısız oldu: %s\n"
+
+#: ../src/vinagre-notebook.c:127
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Ana bilgisayara olan \"%s\" bağlantısı kapatıldı"
 
-#: ../src/vinagre-notebook.c:124
+#: ../src/vinagre-notebook.c:153
 msgid "Connecting..."
 msgstr "Bağlanıyor..."
 
-#: ../src/vinagre-notebook.c:148
+#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:692
 msgid "Close connection"
 msgstr "Bağlantıyı kapat"
 
-#: ../src/vinagre-prefs-manager.c:124
+#: ../src/vinagre-prefs.c:167
 msgid "Cannot initialize preferences manager."
 msgstr "Tercihler yöneticisi başlatılamadı."
 
-#: ../src/vinagre-prefs-manager.c:420
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr "%#3s anahtarı için alınan `%#2s' beklenen `%#1s'"
-
-#: ../src/vinagre-tab.c:255
+#: ../src/vinagre-tab.c:271
 msgid "Error connecting to host."
 msgstr "Ana bilgisayara bağlanırken hata."
 
-#: ../src/vinagre-tab.c:290
+#: ../src/vinagre-tab.c:303
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "%s ana bilgisayarı için yapılan kimlik doğrulaması başarısız oldu"
 
-#: ../src/vinagre-tab.c:318
+#: ../src/vinagre-tab.c:331
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "%s ana bilgisayarı için kimlik doğrulama yöntemi desteklenmiyor. (%u)"
 
-#: ../src/vinagre-tab.c:374
+#: ../src/vinagre-tab.c:412
 msgid "Error saving recent connection."
 msgstr "Son bağlantı kaydedilirken hata."
 
-#: ../src/vinagre-tab.c:405
+#: ../src/vinagre-tab.c:443
 msgid "Error saving the password on the keyring."
 msgstr "Anahtarlıktaki parolayı kaydederken hata"
 
-#: ../src/vinagre-tab.c:465 ../src/vinagre-tab.c:561
-msgid "Press Ctrl+Alt to grab the cursor"
-msgstr "İmleci yakalamak için Ctrl+Alt tuşlarına basınız "
+#: ../src/vinagre-tab.c:706 ../src/vinagre-tab.c:707
+msgid "Scaling"
+msgstr "Ölçekleme"
 
-#: ../src/vinagre-tab.c:540
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "İmleci bırakmak için Ctrl+Alt tuşlarına basınız."
+#: ../src/vinagre-tab.c:716 ../src/vinagre-tab.c:717
+msgid "Read only"
+msgstr "Salt okunur"
 
-#: ../src/vinagre-tab.c:681
+#. Machine menu
+#: ../src/vinagre-tab.c:727 ../src/vinagre-tab.c:728 ../src/vinagre-ui.h:79
+msgid "Take screenshot"
+msgstr "Ekran görüntüsü al"
+
+#: ../src/vinagre-tab.c:736 ../src/vinagre-tab.c:737 ../src/vinagre-ui.h:82
+msgid "Send Ctrl-Alt-Del"
+msgstr "Ctrl-Alt-Del Gönder"
+
+#: ../src/vinagre-tab.c:863
 msgid "Desktop Name:"
 msgstr "Masaüstü İsmi:"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:865
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:684
+#: ../src/vinagre-tab.c:866
 msgid "Dimensions:"
 msgstr "Boyutlar:"
 
-#: ../src/vinagre-tab.c:751
+#: ../src/vinagre-tab.c:933
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s'nin ekran görüntüsü"
 
-#: ../src/vinagre-tab.c:754
+#: ../src/vinagre-tab.c:936
 msgid "Save Screenshot"
 msgstr "Ekran görüntülerini kaydet"
+
+#: ../src/vinagre-tab.c:1000
+msgid ""
+"Scaling does not work properly on composited windows. Disable the visual "
+"effects and try again."
+msgstr ""
+"Kompozitli pencerelerde ölçekleme tam olarak çalışmaz. Görsel etkileri "
+"kapatın ve tekrar deneyin."
+
+#: ../src/vinagre-tab.c:1008
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"Bu kurulumda ölçekleme desteklenmiyor.\n"
+"\n"
+"Bu özelliği etkinleştirmek için README dosyasını (Vinagre ile gelen) okuyun."
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -317,17 +419,13 @@ msgstr "_Düzenle"
 msgid "_View"
 msgstr "_Görünüm"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:36
 msgid "_Bookmarks"
 msgstr "_Yer imleri"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Yardım"
-
 #: ../src/vinagre-ui.h:41
-msgid "Connect into a remote machine"
-msgstr "Uzak bir makineye bağlan"
+msgid "Connect to a remote machine"
+msgstr "Uzaktaki bir makineye bağlan"
 
 #: ../src/vinagre-ui.h:43
 msgid "Open a .VNC file"
@@ -343,7 +441,7 @@ msgid "_Open bookmark"
 msgstr "_Yer imini aç"
 
 #: ../src/vinagre-ui.h:49
-msgid "Connect into this machine"
+msgid "Connect to this machine"
 msgstr "Bu makineye bağlan"
 
 #: ../src/vinagre-ui.h:50
@@ -396,50 +494,134 @@ msgstr "_Yer imlerine ekle"
 msgid "Add current connection to your bookmarks"
 msgstr "Mevcut bağlantıyı yer imlerinize ekleyin"
 
-#. Machine menu
-#: ../src/vinagre-ui.h:79
-msgid "Take screenshot"
-msgstr "Ekran görüntüsü al"
-
 #: ../src/vinagre-ui.h:80
 msgid "Take a screenshot of active connection"
 msgstr "Etkin bağlantının bir ekran görüntüsünü al"
 
-#: ../src/vinagre-ui.h:84
+#: ../src/vinagre-ui.h:83
+msgid "Send Ctrl+Alt+Del to active connection"
+msgstr "Etkin bağlantıya Ctrl+Alt+Del gönder"
+
+#: ../src/vinagre-ui.h:87
 msgid "View the current machine in full screen"
 msgstr "Mevcut makineyi tam ekran görüntüle"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:92
+msgid "S_caling"
+msgstr "Ö_lçekleme"
+
+#: ../src/vinagre-ui.h:93
+msgid "Fit the remote screen into the current window size"
+msgstr "Uzaktaki ekranı mevcut pencere boyutuna uydur"
+
+#: ../src/vinagre-ui.h:95
+msgid "_Read only"
+msgstr "_Salt okunur"
+
+#: ../src/vinagre-ui.h:96
+msgid "Disable mouse and keyboard"
+msgstr "Fareyi ya da klavyeyi etkinsizleştir"
+
+#: ../src/vinagre-ui.h:102
 msgid "_Toolbar"
 msgstr "_Araç Çubuğu"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:103
 msgid "Show or hide the toolbar"
 msgstr "Araç çubuğunu gizle ya da göster"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:106
 msgid "_Statusbar"
 msgstr "_Durum Çubuğu"
 
-#: ../src/vinagre-ui.h:94
+#: ../src/vinagre-ui.h:107
 msgid "Show or hide the statusbar"
 msgstr "Durum çubuğunu gizle ya da göster"
 
-#: ../src/vinagre-ui.h:98
-msgid "Show or hide the bookmarks panel"
-msgstr "Yer imleri panelini gizle ya da göster"
+#: ../src/vinagre-ui.h:110
+msgid "Side _Panel"
+msgstr "Kenar _Paneli"
 
-#: ../src/vinagre-window.c:401
+#: ../src/vinagre-ui.h:111
+msgid "Show or hide the side panel"
+msgstr "Yan paneli göster ya da gizle"
+
+#: ../src/vinagre-utils.c:423
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "Vinagre GNOME Masaüstü için bir VNC istemcisidir."
+
+#: ../src/vinagre-utils.c:426
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"Vinagre bir özgür yazılımdır; yeniden dağıtılabilir ve/veya Özgür Yazılım "
+"vakfı tarafından yayınlanan GNU Genel Kamu Lisansının sürüm 2 veya (sizin "
+"seçiminiz) daha sonrakisürümlerinin  şartları altında değiştirebilirsiniz."
+
+#: ../src/vinagre-utils.c:430
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"Vinagre faydalı olması umuduyla fakat HERHANGİ BİR GARANTİ OLMADAN;hatta "
+"ORTALAMA kalite garantisi veya BELLİ BİR AMACA UYGUNLUK ima "
+"etmedendağıtılmaktadır. Ayrıntılı bilgi için GNU Genel Kamu Lisansına "
+"bakınız."
+
+#: ../src/vinagre-utils.c:434
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Bu programla birlikte GNU Genel Kamu Lisansının bir kopyasını almış "
+"olmalısınız Eğer yoksa, <http://www.gnu.org/licenses/>adresine bakınız."
+
+#: ../src/vinagre-utils.c:456
+msgid "translator-credits"
+msgstr "Barış Çiçek <baris@teamforce.name.tr>"
+
+#: ../src/vinagre-utils.c:459
+msgid "Vinagre Website"
+msgstr "Vinagre Web sayfası"
+
+#: ../src/vinagre-window.c:422
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "vinagre-ui.xml %s birleştirilemedi"
 
-#: ../src/vinagre-window.c:429
+#: ../src/vinagre-window.c:450
 msgid "_Recent connections"
 msgstr "_Son bağlantılar"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:578
+#: ../src/vinagre-window.c:610 ../src/vinagre-window.c:660
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s'yi Aç:%d"
+
+#: ../src/vinagre-window.c:809
+msgid "Press Ctrl+Alt to release the cursor"
+msgstr "İmleci bırakmak için Ctrl+Alt tuşlarına basınız."
+
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
+
+#~ msgid "Image"
+#~ msgstr "Resim"
+
+#~ msgid "Name"
+#~ msgstr "İsim"
+
+#~ msgid "Hide bookmarks"
+#~ msgstr "Yer imlerini gizle"
+
+#~ msgid "Expected `%s' got `%s' for key %s"
+#~ msgstr "%#3s anahtarı için alınan `%#2s' beklenen `%#1s'"
+
+#~ msgid "Press Ctrl+Alt to grab the cursor"
+#~ msgstr "İmleci yakalamak için Ctrl+Alt tuşlarına basınız "
