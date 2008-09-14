@@ -1,6 +1,5 @@
-# translation of lt.po to Lithuanian
 # translation of vinagre to Lithuanian
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2008 Gintautas Miliauskas
 # This file is distributed under the same license as the vinagre package.
 #
 # Gintautas Miliauskas <gintas@akl.lt>, 2008.
@@ -8,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-02 16:28+0200\n"
-"PO-Revision-Date: 2008-03-02 16:27+0200\n"
+"POT-Creation-Date: 2008-09-14 14:29+0300\n"
+"PO-Revision-Date: 2008-09-14 14:29+0300\n"
 "Last-Translator: Gintautas Miliauskas <gintas@akl.lt>\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "MIME-Version: 1.0\n"
@@ -19,70 +18,151 @@ msgstr ""
 "100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "_Apie"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Žinynas"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Junkitės prie nutolusių darbastalių"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/vinagre-main.c:134
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "Nutolusių darbastalių rodymo programa"
 
 #: ../data/vinagre.glade.h:1
+msgid "<b>Connection options</b>"
+msgstr "<b>Prisijungimo nustatymai</b>"
+
+#: ../data/vinagre.glade.h:2
 msgid "<b>Editing a bookmark</b>"
 msgstr "<b>Keičiama žymelė</b>"
 
-#: ../data/vinagre.glade.h:2
+#: ../data/vinagre.glade.h:3
 msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>Įveskite pavadinimą šiam prisijungimui</b>"
 
-#: ../data/vinagre.glade.h:3
+#: ../data/vinagre.glade.h:4
 msgid ""
-"<b>In order to connect on this machine, a password is required. Please, "
+"<b>In order to connect on this machine, a password is required. Please "
 "supply it.</b>"
 msgstr ""
 "<b>Norėdami prisijungti prie šio kompiuterio, privalote pateikti slaptažodį."
 "</b>"
 
-#: ../data/vinagre.glade.h:4
+#: ../data/vinagre.glade.h:5
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Prie kurio kompiuterio norite prisijungti?</b>"
 
-#: ../data/vinagre.glade.h:5
+#: ../data/vinagre.glade.h:6
 msgid "Editing a bookmark"
 msgstr "Keičiama žymelė"
 
-#: ../data/vinagre.glade.h:6 ../src/vinagre-tab.c:682
+#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:864
 msgid "Host:"
 msgstr "Kompiuteris:"
 
-#: ../data/vinagre.glade.h:7
+#: ../data/vinagre.glade.h:8
 msgid "Saving to bookmarks"
 msgstr "Įrašoma į žymeles"
 
-#: ../data/vinagre.glade.h:8
+#: ../data/vinagre.glade.h:9
+msgid "_Bookmark name:"
+msgstr "_Žymelės pavadinimas:"
+
+#: ../data/vinagre.glade.h:10
+msgid "_Full screen"
+msgstr "_Visame ekrane"
+
+#: ../data/vinagre.glade.h:11
 msgid "_Host:"
 msgstr "_Kompiuteris:"
 
-#: ../data/vinagre.glade.h:9
+#: ../data/vinagre.glade.h:12
 msgid "_Name:"
 msgstr "_Vardas:"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:13
 msgid "_Password:"
 msgstr "_Slaptažodis:"
 
-#: ../data/vinagre.glade.h:11
-msgid "_Port:"
-msgstr "_Prievadas:"
-
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:14
 msgid "_Remember this password"
 msgstr "Įsi_minti slaptažodį"
 
+#: ../data/vinagre.glade.h:15
+msgid "_Scaling"
+msgstr "_Mastelis"
+
+#: ../data/vinagre.glade.h:16
+msgid "_View only"
+msgstr "_Tik rodymas"
+
+#. Tooltip for host entry in connect dialog
+#: ../data/vinagre.glade.h:18
+msgid "host or host:display or host::port"
+msgstr "kompiuteris arba kompiuteris:ekranas arba kompiuteris::prievadas"
+
 #: ../data/vinagre.schemas.in.h:1
+msgid "Maximum number of history items in connect dialog"
+msgstr "Maksimalus istorijos įrašų skaičius prisijungimo dialoge"
+
+#: ../data/vinagre.schemas.in.h:2
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr ""
+"Nustatykite „false“, jei norite išjungti meniu greituosius klavišus. "
+"Nustatykite „true“, jei norite juos įjungti.  Jei šie klavišai įjungti, jie "
+"bus perimti vietinio lango ir nebus išsiųsti nutolusiam kompiuteriui."
+
+#: ../data/vinagre.schemas.in.h:3
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr ""
+"Nustatykite „true“, jei norite, kad kortelės visada būtų rodomos.  "
+"Nustatykite „false“, jei norite rodyti korteles tik jei yra daugiau negu "
+"vienas aktyvus prisijungimas."
+
+#: ../data/vinagre.schemas.in.h:4
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr ""
+"Nustato maksimalų siūlomų elementų skaičių kompiuterio pasirinkimo lauke."
+
+#: ../data/vinagre.schemas.in.h:5
 msgid "The handler for \"vnc://\" URLs"
 msgstr "\"vnc://\" adresų apdorojimo programa"
+
+#: ../data/vinagre.schemas.in.h:6
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr ""
+"Jungiantis prie serverio, klientas gali paprašyti atjungti kitus klientus "
+"arba palikti juos prijungtus.  Nustatykite „ŧrue“, jei norite dalintis "
+"darbastalį su kitais klientais."
+
+#: ../data/vinagre.schemas.in.h:7
+msgid "Whether we should leave other clients connected"
+msgstr "Ar palikti kitus klientus prijungtus"
+
+#: ../data/vinagre.schemas.in.h:8
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "Ar rodyti korteles, kai yra tik vienas aktyvus prisijungimas"
+
+#: ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Ar rodyti meniu greituosius klavišus"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -92,131 +172,123 @@ msgstr "Nutolusio darbastalio (VNC) failas"
 msgid "Remote Desktop Connection"
 msgstr "Prisijungimas prie nutolusio darbastalio"
 
-#: ../src/vinagre-bookmarks.c:58 ../src/vinagre-bookmarks.c:76
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "Klaida įrašant žymeles: %s"
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "Meniu greitai prieigai prie nutolusių kompiuterių"
 
-#: ../src/vinagre-bookmarks.c:111
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "Klaida inicializuojant žymeles: %s"
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Vinagre įtaiso gamykla"
 
-#: ../src/vinagre-bookmarks.c:282
+#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr "Nepavyko paleisti vinagre: %s"
+
+#: ../src/vinagre-applet.c:167
+msgid "Open Remote Desktop Viewer"
+msgstr "Atverti nutolusių darbastalių rodymo programą"
+
+#: ../src/vinagre-applet.c:229
+msgid "Access your bookmarks"
+msgstr "Rodyti žymeles"
+
+#: ../src/vinagre-bookmarks.c:92
+msgid ""
+"Copying the bookmarks file to the new location. This operation is only "
+"supposed to run once."
+msgstr ""
+"Žymelių failas kopijuojamas į naują vietą.  Tai turėtų būti vienkartinė "
+"operacija."
+
+#: ../src/vinagre-bookmarks.c:97
+#, c-format
+msgid "Error: %s"
+msgstr "Klaida: %s"
+
+#: ../src/vinagre-bookmarks.c:420
 msgid "Confirm removal?"
 msgstr "Patvirtinti pašalinimą?"
 
-#: ../src/vinagre-bookmarks.c:285
+#: ../src/vinagre-bookmarks.c:423
 #, c-format
-msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Ar tikrai norite pašalinti <i>%s</i> iš žymelių?"
 
-#: ../src/vinagre-bookmarks.c:296
+#: ../src/vinagre-bookmarks.c:434
 #, c-format
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Klaida šalinant %s iš žymelių: %s"
 
-#: ../src/vinagre-commands.c:90
+#: ../src/vinagre-bookmarks.c:501
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "Klaida inicializuojant žymeles: %s"
+
+#: ../src/vinagre-bookmarks.c:522 ../src/vinagre-bookmarks.c:539
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "Klaida įrašant žymeles: %s"
+
+#: ../src/vinagre-commands.c:106
 msgid "Choose the file"
 msgstr "Pasirinkite failą"
 
-#: ../src/vinagre-commands.c:101 ../src/vinagre-tab.c:765
+#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:947
 msgid "Supported formats"
 msgstr "Palaikomi formatai"
 
-#: ../src/vinagre-commands.c:133
+#: ../src/vinagre-commands.c:149
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Nepavyko atverti failo:"
 msgstr[1] "Nepavyko atverti failų:"
 msgstr[2] "Nepavyko atverti failų:"
 
-#: ../src/vinagre-commands.c:383
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre yra VNC klientas GNOME aplinkai"
+#: ../src/vinagre-connect.c:172
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "Klaida įrašant istorijos failą: %s"
 
-#: ../src/vinagre-commands.c:386
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"Vinagre yra laisva programa. Jūs galite ją platinti ir/arba "
-"modifikuotiremdamiesi Free Software Foundation paskelbtomis GNU "
-"BendrosiosViešosios licenzijos sąlygomis: 2 licenzijos versija, arba "
-"(savonuožiūra) bet kuria vėlesne versija."
-
-#: ../src/vinagre-commands.c:390
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"Vinagre platinama su viltimi, kad ji bus naudinga, bet BE JOKIŲGARANTIJŲ; be "
-"jokios numanomos PERKAMUMO ar TINKAMUMO KONKRETIEMSTIKSLAMS garantijos. "
-"Žiūrėkite GNU Bendrąją Viešąją licenziją norėdamisužinoti smulkmenas."
-
-#: ../src/vinagre-commands.c:394
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Jūs turėjote kartu su šia programa gauti ir GNU Bendrosios "
-"Viešosioslicenzijos kopija; jei ne, žiūrėkite <http://www.gnu.org/licenses/>."
-
-#: ../src/vinagre-commands.c:416
-msgid "translator-credits"
-msgstr "Gintautas Miliauskas <gintas@akl.lt>"
-
-#: ../src/vinagre-commands.c:419
-msgid "Vinagre Website"
-msgstr "Vinagre tinklalapis"
-
-#: ../src/vinagre-connect.c:53
+#: ../src/vinagre-connect.c:183
 msgid "Choose a VNC Server"
 msgstr "Pasirinkite VNC serverį"
 
-#: ../src/vinagre-connection.c:161
+#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:81
+#: ../src/vinagre-main.c:100 ../src/vinagre-window.c:285
+msgid "Unknown error"
+msgstr "Nežinoma klaida"
+
+#: ../src/vinagre-connection.c:530
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokolas %s nepalaikomas."
 
-#: ../src/vinagre-fav.c:382
-msgid "Image"
-msgstr "Paveikslėlis"
-
-#: ../src/vinagre-fav.c:389
-msgid "Name"
-msgstr "Vardas"
-
-#: ../src/vinagre-fav.c:437
+#: ../src/vinagre-fav.c:762
 msgid "Bookmarks"
 msgstr "Žymelės"
 
-#: ../src/vinagre-fav.c:445
-msgid "Hide bookmarks"
-msgstr "Slėpti žymeles"
+#: ../src/vinagre-fav.c:807
+msgid "Hosts nearby"
+msgstr "Kompiuteriai netoliese"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:49
 msgid "Opens a .vnc file"
 msgstr "Atveria .vnc failą"
 
-#: ../src/vinagre-main.c:42
+#: ../src/vinagre-main.c:49
 msgid "filename"
 msgstr "failo pavadinimas"
 
-#: ../src/vinagre-main.c:46
+#: ../src/vinagre-main.c:52
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "Kurti naują viršutinį langą esamame vinagre egzemplioriuje"
+
+#: ../src/vinagre-main.c:56
 msgid "[server:port]"
 msgstr "[serveris:prievadas]"
 
-#: ../src/vinagre-main.c:71 ../src/vinagre-main.c:90
-#: ../src/vinagre-window.c:284
-msgid "Unknown error"
-msgstr "Nežinoma klaida"
-
-#: ../src/vinagre-main.c:101 ../src/vinagre-window.c:283
+#: ../src/vinagre-main.c:111 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Įvyko klaida:"
@@ -224,89 +296,123 @@ msgstr[1] "Įvyko klaidos:"
 msgstr[2] "Įvyko klaidos:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:121
+#: ../src/vinagre-main.c:132
 msgid "- VNC Client for GNOME"
 msgstr "- VNC klientas GNOME aplinkai"
 
-#: ../src/vinagre-main.c:129
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Įvykdykite 'vinagre --help', jei norite pamatyti galimų komandinės eilutės "
 "parametrų sąrašą."
 
-#: ../src/vinagre-notebook.c:98
+#: ../src/vinagre-mdns.c:118
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "Nepavyko rasti avahi vardo: %s\n"
+
+#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "Nepavyko naršyti tinklo: %s\n"
+
+#: ../src/vinagre-notebook.c:127
 #, c-format
 msgid "Connection to host \"%s\" was closed."
 msgstr "Prisijungimas prie „%s“ buvo uždarytas."
 
-#: ../src/vinagre-notebook.c:124
+#: ../src/vinagre-notebook.c:153
 msgid "Connecting..."
 msgstr "Jungiamasi..."
 
-#: ../src/vinagre-notebook.c:148
+#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:692
 msgid "Close connection"
 msgstr "Atsijungti"
 
-#: ../src/vinagre-prefs-manager.c:124
+#: ../src/vinagre-prefs.c:167
 msgid "Cannot initialize preferences manager."
 msgstr "Nepavyko inicializuoti nustatymų valdyklės."
 
-#: ../src/vinagre-prefs-manager.c:420
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr "Tikėtasi „%s“, gauta „%s“ raktui %s"
-
-#: ../src/vinagre-tab.c:255
+#: ../src/vinagre-tab.c:271
 msgid "Error connecting to host."
 msgstr "Klaida jungiantis prie kompiuterio"
 
-#: ../src/vinagre-tab.c:290
+#: ../src/vinagre-tab.c:303
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "Autentikacija jungiantis prie „%s“ nepavyko"
 
-#: ../src/vinagre-tab.c:318
+#: ../src/vinagre-tab.c:331
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "Autentikacijos metodas kompiuteriui „%s“ nepalaikomas. (%u)"
 
-#: ../src/vinagre-tab.c:374
+#: ../src/vinagre-tab.c:412
 msgid "Error saving recent connection."
 msgstr "Klaida įrašant naują prisijungimą."
 
-#: ../src/vinagre-tab.c:405
+#: ../src/vinagre-tab.c:443
 msgid "Error saving the password on the keyring."
 msgstr "Klaida įrašant slaptažodį į raktinę."
 
-#: ../src/vinagre-tab.c:465 ../src/vinagre-tab.c:561
-msgid "Press Ctrl+Alt to grab the cursor"
-msgstr "Paspauskite Vald+Alt, jei norite pagriebti kursorių"
+#: ../src/vinagre-tab.c:706 ../src/vinagre-tab.c:707
+msgid "Scaling"
+msgstr "Mastelis"
 
-#: ../src/vinagre-tab.c:540
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "Paspauskite Vald+Alt, jei norite išlaisvinti kursorių"
+#: ../src/vinagre-tab.c:716 ../src/vinagre-tab.c:717
+msgid "Read only"
+msgstr "Tik skaitymui"
 
-#: ../src/vinagre-tab.c:681
+#. Machine menu
+#: ../src/vinagre-tab.c:727 ../src/vinagre-tab.c:728 ../src/vinagre-ui.h:79
+msgid "Take screenshot"
+msgstr "Padaryti ekrano nuotrauką"
+
+#: ../src/vinagre-tab.c:736 ../src/vinagre-tab.c:737 ../src/vinagre-ui.h:82
+msgid "Send Ctrl-Alt-Del"
+msgstr "Siųsti Ctrl-Alt-Del"
+
+#: ../src/vinagre-tab.c:863
 msgid "Desktop Name:"
 msgstr "Darbastalio pavadinimas:"
 
-#: ../src/vinagre-tab.c:683
+#: ../src/vinagre-tab.c:865
 msgid "Port:"
 msgstr "Prievadas:"
 
-#: ../src/vinagre-tab.c:684
+#: ../src/vinagre-tab.c:866
 msgid "Dimensions:"
 msgstr "Išmatavimai:"
 
-#: ../src/vinagre-tab.c:751
+#: ../src/vinagre-tab.c:933
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s ekrano nuotrauka"
 
-#: ../src/vinagre-tab.c:754
+#: ../src/vinagre-tab.c:936
 msgid "Save Screenshot"
 msgstr "Įrašyti ekrano nuotrauką"
+
+#: ../src/vinagre-tab.c:1000
+msgid ""
+"Scaling does not work properly on composited windows. Disable the visual "
+"effects and try again."
+msgstr ""
+"Mastelio keitimas neveikia su komponuojamais langais. Išjunkite vizualinius "
+"efektus ir bandykite dar kartą."
+
+#: ../src/vinagre-tab.c:1008
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"Šis įdiegimas nepalaiko mastelio keitimo.\n"
+"\n"
+"Skaitykite README failą (pridėtą prie Vinagre), jei norite sužinoti, "
+"kaipįjungti šią galimybę."
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -321,17 +427,13 @@ msgstr "_Keisti"
 msgid "_View"
 msgstr "_Rodymas"
 
-#: ../src/vinagre-ui.h:36 ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:36
 msgid "_Bookmarks"
 msgstr "Ž_ymelės"
 
-#: ../src/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Žinynas"
-
 #: ../src/vinagre-ui.h:41
-msgid "Connect into a remote machine"
-msgstr "Jungtis prie nutolusio kompiuterio"
+msgid "Connect to a remote machine"
+msgstr "Prisijungti prie nutolusio kompiuterio"
 
 #: ../src/vinagre-ui.h:43
 msgid "Open a .VNC file"
@@ -347,7 +449,7 @@ msgid "_Open bookmark"
 msgstr "_Atverti žymelę"
 
 #: ../src/vinagre-ui.h:49
-msgid "Connect into this machine"
+msgid "Connect to this machine"
 msgstr "Prisijungti prie šio kompiuterio"
 
 #: ../src/vinagre-ui.h:50
@@ -400,50 +502,134 @@ msgstr "_Pridėti prie žymelių"
 msgid "Add current connection to your bookmarks"
 msgstr "Pridėti esamą prisijungimą prie žymelių"
 
-#. Machine menu
-#: ../src/vinagre-ui.h:79
-msgid "Take screenshot"
-msgstr "Padaryti ekrano nuotrauką"
-
 #: ../src/vinagre-ui.h:80
 msgid "Take a screenshot of active connection"
 msgstr "Padaryti aktyvaus prisijungimo ekrano nuotrauką"
 
-#: ../src/vinagre-ui.h:84
+#: ../src/vinagre-ui.h:83
+msgid "Send Ctrl+Alt+Del to active connection"
+msgstr "Uždaryti visus esamus prisijungimus"
+
+#: ../src/vinagre-ui.h:87
 msgid "View the current machine in full screen"
 msgstr "Rodyti šį kompiuterį visame ekrane"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:92
+msgid "S_caling"
+msgstr "_Mastelis"
+
+#: ../src/vinagre-ui.h:93
+msgid "Fit the remote screen into the current window size"
+msgstr "Pritaikyti nutolusį ekraną prie esamo lango dydžio"
+
+#: ../src/vinagre-ui.h:95
+msgid "_Read only"
+msgstr "Tik _skaitymui"
+
+#: ../src/vinagre-ui.h:96
+msgid "Disable mouse and keyboard"
+msgstr "Išjungti pelę ir klaviatūrą"
+
+#: ../src/vinagre-ui.h:102
 msgid "_Toolbar"
 msgstr "Į_rankių juosta"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:103
 msgid "Show or hide the toolbar"
 msgstr "Rodyti arba slėpti įrankių juostą"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:106
 msgid "_Statusbar"
 msgstr "_Būsenos eilutė"
 
-#: ../src/vinagre-ui.h:94
+#: ../src/vinagre-ui.h:107
 msgid "Show or hide the statusbar"
 msgstr "Rodyti arba slėpti būsenos eilutę"
 
-#: ../src/vinagre-ui.h:98
-msgid "Show or hide the bookmarks panel"
-msgstr "Rodyti arba slėpti žymelių skydelį"
+#: ../src/vinagre-ui.h:110
+msgid "Side _Panel"
+msgstr "_Šoninis skydelis"
 
-#: ../src/vinagre-window.c:401
+#: ../src/vinagre-ui.h:111
+msgid "Show or hide the side panel"
+msgstr "Rodyti arba slėpti šoninį skydelį"
+
+#: ../src/vinagre-utils.c:423
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "Vinagre yra VNC klientas GNOME aplinkai"
+
+#: ../src/vinagre-utils.c:426
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"Vinagre yra laisva programa. Jūs galite ją platinti ir/arba "
+"modifikuotiremdamiesi Free Software Foundation paskelbtomis GNU "
+"BendrosiosViešosios licenzijos sąlygomis: 2 licenzijos versija, arba "
+"(savonuožiūra) bet kuria vėlesne versija."
+
+#: ../src/vinagre-utils.c:430
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"Vinagre platinama su viltimi, kad ji bus naudinga, bet BE JOKIŲGARANTIJŲ; be "
+"jokios numanomos PERKAMUMO ar TINKAMUMO KONKRETIEMSTIKSLAMS garantijos. "
+"Žiūrėkite GNU Bendrąją Viešąją licenziją norėdamisužinoti smulkmenas."
+
+#: ../src/vinagre-utils.c:434
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Jūs turėjote kartu su šia programa gauti ir GNU Bendrosios "
+"Viešosioslicenzijos kopija; jei ne, žiūrėkite <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-utils.c:456
+msgid "translator-credits"
+msgstr "Gintautas Miliauskas <gintas@akl.lt>"
+
+#: ../src/vinagre-utils.c:459
+msgid "Vinagre Website"
+msgstr "Vinagre tinklalapis"
+
+#: ../src/vinagre-window.c:422
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Nepavyko sulieti vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:429
+#: ../src/vinagre-window.c:450
 msgid "_Recent connections"
 msgstr "_Vėliausi prisijungimai"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:578
+#: ../src/vinagre-window.c:610 ../src/vinagre-window.c:660
 #, c-format
 msgid "Open %s:%d"
 msgstr "Atverti %s:%d"
+
+#: ../src/vinagre-window.c:809
+msgid "Press Ctrl+Alt to release the cursor"
+msgstr "Paspauskite Vald+Alt, jei norite išlaisvinti kursorių"
+
+#~ msgid "_Port:"
+#~ msgstr "_Prievadas:"
+
+#~ msgid "Image"
+#~ msgstr "Paveikslėlis"
+
+#~ msgid "Name"
+#~ msgstr "Vardas"
+
+#~ msgid "Hide bookmarks"
+#~ msgstr "Slėpti žymeles"
+
+#~ msgid "Expected `%s' got `%s' for key %s"
+#~ msgstr "Tikėtasi „%s“, gauta „%s“ raktui %s"
+
+#~ msgid "Press Ctrl+Alt to grab the cursor"
+#~ msgstr "Paspauskite Vald+Alt, jei norite pagriebti kursorių"
