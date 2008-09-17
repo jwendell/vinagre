@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-03 14:33+0000\n"
-"PO-Revision-Date: 2008-02-04 20:58+0800\n"
+"POT-Creation-Date: 2008-09-10 05:35+0000\n"
+"PO-Revision-Date: 2008-09-17 15:50+0800\n"
 "Last-Translator: Deng Xiyue <manphiz@gmail.com>\n"
 "Language-Team: i18n-zh <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "访问远程桌面"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
-#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:144
+#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:146
 msgid "Remote Desktop Viewer"
 msgstr "远程桌面查看器"
 
@@ -60,7 +60,7 @@ msgstr "<b>您想连接到哪个机器？</b>"
 msgid "Editing a bookmark"
 msgstr "编辑书签"
 
-#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:896
+#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:864
 msgid "Host:"
 msgstr "主机："
 
@@ -107,7 +107,7 @@ msgstr "主机 或 主机:显示 或 主机::端口"
 
 #: ../data/vinagre.schemas.in.h:1
 msgid "Maximum number of history items in connect dialog"
-msgstr ""
+msgstr "连接对话框中的最多历史记录条数"
 
 #: ../data/vinagre.schemas.in.h:2
 msgid ""
@@ -115,16 +115,18 @@ msgid ""
 "Note that if they are enabled, those keys will be intercepted by the menu "
 "and will not be sent to the remote host."
 msgstr ""
+"设为“false”以禁用菜单快捷键。设为“true”以启用它们。注意如果\n"
+"被启用的话，这些键将被菜单所截获，不能被发送到远程主机。"
 
 #: ../data/vinagre.schemas.in.h:3
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
-msgstr ""
+msgstr "设为“true”以总是显示标签栏。设为“false”以仅当存在多个活动连接时显示标签栏。"
 
 #: ../data/vinagre.schemas.in.h:4
 msgid "Specifies the maximum number of items in the host dropdown entry."
-msgstr ""
+msgstr "指定在主机下拉菜单中显示项的最大数目"
 
 #: ../data/vinagre.schemas.in.h:5
 msgid "The handler for \"vnc://\" URLs"
@@ -136,10 +138,12 @@ msgid ""
 "clients connected or to drop the existent connections. Set the value to true "
 "to share the desktop with the other clients."
 msgstr ""
+"当连接到主机时，客户端可以告诉服务器保持其它客户端的连接\n"
+"或丢弃已有的连接。将此值设为“true”以和其它客户端共享桌面。"
 
 #: ../data/vinagre.schemas.in.h:7
 msgid "Whether we should leave other clients connected"
-msgstr ""
+msgstr "是否应保持其它客户端的连接"
 
 #: ../data/vinagre.schemas.in.h:8
 msgid ""
@@ -183,8 +187,7 @@ msgstr "访问您的书签"
 msgid ""
 "Copying the bookmarks file to the new location. This operation is only "
 "supposed to run once."
-msgstr ""
-"将书签文件复制到新位置。此操作仅能执行一次。"
+msgstr "将书签文件复制到新位置。此操作仅能执行一次。"
 
 #: ../src/vinagre-bookmarks.c:97
 #, c-format
@@ -219,7 +222,7 @@ msgstr "保存书签时出错：%s"
 msgid "Choose the file"
 msgstr "选择文件"
 
-#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:979
+#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:947
 msgid "Supported formats"
 msgstr "支持的格式"
 
@@ -237,8 +240,8 @@ msgstr "保存历史文件时出错：%s"
 msgid "Choose a VNC Server"
 msgstr "选择 VNC 服务器"
 
-#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:79
-#: ../src/vinagre-main.c:98 ../src/vinagre-window.c:285
+#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:81
+#: ../src/vinagre-main.c:100 ../src/vinagre-window.c:285
 msgid "Unknown error"
 msgstr "未知错误"
 
@@ -255,33 +258,33 @@ msgstr "书签"
 msgid "Hosts nearby"
 msgstr "临近的主机"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:49
 msgid "Opens a .vnc file"
 msgstr "打开 .vnc 文件"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:49
 msgid "filename"
 msgstr "文件名"
 
-#: ../src/vinagre-main.c:50
+#: ../src/vinagre-main.c:52
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "在现有 vinagre 中创建新的顶级窗口"
 
-#: ../src/vinagre-main.c:54
+#: ../src/vinagre-main.c:56
 msgid "[server:port]"
 msgstr "[服务器:端口]"
 
-#: ../src/vinagre-main.c:109 ../src/vinagre-window.c:284
+#: ../src/vinagre-main.c:111 ../src/vinagre-window.c:284
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "发生下列错误："
 
 #. Setup command line options
-#: ../src/vinagre-main.c:130
+#: ../src/vinagre-main.c:132
 msgid "- VNC Client for GNOME"
 msgstr "- GNOME 的 VNC 客户端"
 
-#: ../src/vinagre-main.c:139
+#: ../src/vinagre-main.c:141
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "执行“vinagre --help”以查看可用命令行选项的完整列表"
@@ -305,7 +308,7 @@ msgstr "到主机“%s”的连接已关闭。"
 msgid "Connecting..."
 msgstr "正在连接..."
 
-#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:709
+#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:692
 msgid "Close connection"
 msgstr "关闭连接"
 
@@ -313,81 +316,82 @@ msgstr "关闭连接"
 msgid "Cannot initialize preferences manager."
 msgstr "无法初始化受选项管理器。"
 
-#: ../src/vinagre-tab.c:287
+#: ../src/vinagre-tab.c:271
 msgid "Error connecting to host."
 msgstr "连接到主机出错。"
 
-#: ../src/vinagre-tab.c:320
+#: ../src/vinagre-tab.c:303
 #, c-format
 msgid "Authentication to host \"%s\" has failed"
 msgstr "到主机“%s”的验证失败"
 
-#: ../src/vinagre-tab.c:348
+#: ../src/vinagre-tab.c:331
 #, c-format
 msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgstr "不支持到主机“%s”的验证方法。(%u)"
 
-#: ../src/vinagre-tab.c:429
+#: ../src/vinagre-tab.c:412
 msgid "Error saving recent connection."
 msgstr "保存最近连接出错。"
 
-#: ../src/vinagre-tab.c:460
+#: ../src/vinagre-tab.c:443
 msgid "Error saving the password on the keyring."
 msgstr "保存密码到密钥环出错。"
 
-#: ../src/vinagre-tab.c:723 ../src/vinagre-tab.c:724
+#: ../src/vinagre-tab.c:706 ../src/vinagre-tab.c:707
 msgid "Scaling"
 msgstr "缩放"
 
-#: ../src/vinagre-tab.c:733 ../src/vinagre-tab.c:734
+#: ../src/vinagre-tab.c:716 ../src/vinagre-tab.c:717
 msgid "Read only"
 msgstr "只读"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:744 ../src/vinagre-tab.c:745 ../src/vinagre-ui.h:79
+#: ../src/vinagre-tab.c:727 ../src/vinagre-tab.c:728 ../src/vinagre-ui.h:79
 msgid "Take screenshot"
 msgstr "抓拍屏幕截图"
 
-#: ../src/vinagre-tab.c:753 ../src/vinagre-tab.c:754 ../src/vinagre-ui.h:82
+#: ../src/vinagre-tab.c:736 ../src/vinagre-tab.c:737 ../src/vinagre-ui.h:82
 msgid "Send Ctrl-Alt-Del"
 msgstr "发送 Ctrl+Alt+Del"
 
-#: ../src/vinagre-tab.c:895
+#: ../src/vinagre-tab.c:863
 msgid "Desktop Name:"
 msgstr "桌面名称："
 
-#: ../src/vinagre-tab.c:897
+#: ../src/vinagre-tab.c:865
 msgid "Port:"
 msgstr "端口："
 
-#: ../src/vinagre-tab.c:898
+#: ../src/vinagre-tab.c:866
 msgid "Dimensions:"
 msgstr "面积："
 
-#: ../src/vinagre-tab.c:965
+#: ../src/vinagre-tab.c:933
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s 的屏幕截图"
 
-#: ../src/vinagre-tab.c:968
+#: ../src/vinagre-tab.c:936
 msgid "Save Screenshot"
 msgstr "保存屏幕截图"
 
-#: ../src/vinagre-tab.c:1032
+#: ../src/vinagre-tab.c:1000
 msgid ""
 "Scaling does not work properly on composited windows. Disable the visual "
 "effects and try again."
-msgstr ""
-"组合窗口时缩放工作不正常。请禁用视觉效果后再试一次。"
+msgstr "组合窗口时缩放工作不正常。请禁用视觉效果后再试一次。"
 
-#: ../src/vinagre-tab.c:1039
+#: ../src/vinagre-tab.c:1008
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
 "Read the README file (shipped with Vinagre) in order to know how to enable "
 "this feature."
 msgstr ""
-"此按钮不支持缩放。\n\n请阅读 Vinagre 自带的 README 文件，以便获知如何启用此特性。"
+"此按钮不支持缩放。\n"
+"\n"
+"请阅读 Vinagre 自带的 README 文件，以便获知如何启用此特性。"
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -529,11 +533,11 @@ msgstr "侧边栏(_P)"
 msgid "Show or hide the side panel"
 msgstr "显示或隐藏侧边栏"
 
-#: ../src/vinagre-utils.c:450
+#: ../src/vinagre-utils.c:423
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre 是 GNOME 桌面的 VNC 客户端"
 
-#: ../src/vinagre-utils.c:453
+#: ../src/vinagre-utils.c:426
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -543,7 +547,7 @@ msgstr ""
 "Vinagre 是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放和/"
 "或修改它；GPL 协议应该采用第二版或以后的任何版本。"
 
-#: ../src/vinagre-utils.c:457
+#: ../src/vinagre-utils.c:430
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -553,7 +557,7 @@ msgstr ""
 "Vinagre 发表的目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使"
 "用它所造成的任何直接或间接后果都不承担任何责任。请参看GNU GPL 协议中的细节。"
 
-#: ../src/vinagre-utils.c:461
+#: ../src/vinagre-utils.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -561,11 +565,11 @@ msgstr ""
 "您应该在收到 Nautilus 的同时收到了 GNU GPL 协议的副本；如果您没有收到的话，请"
 "查看 <http://www.gnu.org/licenses/>。"
 
-#: ../src/vinagre-utils.c:483
+#: ../src/vinagre-utils.c:456
 msgid "translator-credits"
 msgstr "GNOME 简体中文翻译组"
 
-#: ../src/vinagre-utils.c:486
+#: ../src/vinagre-utils.c:459
 msgid "Vinagre Website"
 msgstr "Vinagre 网站"
 
