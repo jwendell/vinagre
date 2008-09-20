@@ -1,0 +1,604 @@
+# Serbian translation of vinagre
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2008.
+#
+# Translation updated on 2008-04-22 by cp6linux team (http://cp6linux.org/)
+#
+# This file is distributed under the same license as the vinagre package.
+#
+# Maintainer: Dušan Živojnov <calvin@verat.net>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vinagre\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-20 14:02+0200\n"
+"PO-Revision-Date: 2008-09-20 14:34+0100\n"
+"Last-Translator: Goran Rakić <grakic@devbase.net>\n"
+"Language-Team:  <sr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "_O programu"
+
+#: ../data/GNOME_VinagreApplet.xml.h:2
+#: ../src/vinagre-ui.h:37
+msgid "_Help"
+msgstr "P_omoć"
+
+#: ../data/vinagre.desktop.in.in.h:1
+#: ../data/vinagre-file.desktop.in.in.h:1
+msgid "Access remote desktops"
+msgstr "Pristupi udaljenom računaru"
+
+#: ../data/vinagre.desktop.in.in.h:2
+#: ../data/vinagre-file.desktop.in.in.h:2
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2
+#: ../src/vinagre-applet.c:222
+#: ../src/vinagre-applet.c:228
+#: ../src/vinagre-main.c:146
+msgid "Remote Desktop Viewer"
+msgstr "Pregled udaljenih radnih površina"
+
+#: ../data/vinagre.glade.h:1
+msgid "<b>Connection options</b>"
+msgstr "<b>Opcije veze</b>"
+
+#: ../data/vinagre.glade.h:2
+msgid "<b>Editing a bookmark</b>"
+msgstr "<b>Prepravljanje obeleživača</b>"
+
+#: ../data/vinagre.glade.h:3
+msgid "<b>Enter a name for this connection</b>"
+msgstr "<b>Unesite ime za ovu vezu</b>"
+
+#: ../data/vinagre.glade.h:4
+msgid "<b>In order to connect on this machine, a password is required. Please supply it.</b>"
+msgstr "<b>Za pristup ovom računaru neophodna je šifra. Molim unesite je.</b>"
+
+#: ../data/vinagre.glade.h:5
+msgid "<b>Which machine do you want to connect to?</b>"
+msgstr "<b>Na koji računar želite da se povežete?</b>"
+
+#: ../data/vinagre.glade.h:6
+msgid "Editing a bookmark"
+msgstr "Prepravljanje obeleživača"
+
+#: ../data/vinagre.glade.h:7
+#: ../src/vinagre-fav.c:424
+#: ../src/vinagre-tab.c:864
+msgid "Host:"
+msgstr "Računar:"
+
+#: ../data/vinagre.glade.h:8
+msgid "Saving to bookmarks"
+msgstr "Čuvam među obeleživače"
+
+#: ../data/vinagre.glade.h:9
+msgid "_Bookmark name:"
+msgstr "_Ime obeleživača:"
+
+#: ../data/vinagre.glade.h:10
+msgid "_Full screen"
+msgstr "_Ceo ekran"
+
+#: ../data/vinagre.glade.h:11
+msgid "_Host:"
+msgstr "_Računar:"
+
+#: ../data/vinagre.glade.h:12
+msgid "_Name:"
+msgstr "_Ime:"
+
+#: ../data/vinagre.glade.h:13
+msgid "_Password:"
+msgstr "_Šifra:"
+
+#: ../data/vinagre.glade.h:14
+msgid "_Remember this password"
+msgstr "_Zapamti ovu šifru"
+
+#: ../data/vinagre.glade.h:15
+msgid "_Scaling"
+msgstr "_Razmera"
+
+#: ../data/vinagre.glade.h:16
+msgid "_View only"
+msgstr "Samo _pregled"
+
+#. Tooltip for host entry in connect dialog
+#: ../data/vinagre.glade.h:18
+msgid "host or host:display or host::port"
+msgstr "računar ili računar:ekran ili računar::port"
+
+#: ../data/vinagre.schemas.in.h:1
+msgid "Maximum number of history items in connect dialog"
+msgstr "Maksimalan broj prethodnih stavki u prozorčetu za povezivanje"
+
+#: ../data/vinagre.schemas.in.h:2
+msgid "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. Note that if they are enabled, those keys will be intercepted by the menu and will not be sent to the remote host."
+msgstr "Ako je isključeno prečice menija će biti onemogućene. Ako su prečice omogućene program će prigrabiti te kombinacije tastera i neće ih poslati udaljenoj površi."
+
+#: ../data/vinagre.schemas.in.h:3
+msgid "Set to \"true\" to always show the tabs. Set to \"false\" to only show the tabs when there is more than one active connection."
+msgstr "Ako je uključeno listovi će uvek biti prikazani. Isključite da prikažete listove samo kada postoji više aktivnih veza."
+
+#: ../data/vinagre.schemas.in.h:4
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr "Određuje maksimalan broj stavki u listi za unos imena računara. "
+
+#: ../data/vinagre.schemas.in.h:5
+msgid "The handler for \"vnc://\" URLs"
+msgstr "Program za korišćenje URL-ova tipa \"vnc://\""
+
+#: ../data/vinagre.schemas.in.h:6
+msgid "When connecting to a host, the client can say to the server to leave other clients connected or to drop the existent connections. Set the value to true to share the desktop with the other clients."
+msgstr "Pri povezivanju na računar, klijent može da naloži serveru da zadrži ili prekine vezu sa već povezanim klijentima. Uključite da omogućite deljenje kontrole sa drugim klijentima."
+
+#: ../data/vinagre.schemas.in.h:7
+msgid "Whether we should leave other clients connected"
+msgstr "Treba li zadržati prethodne veze ka drugim klijentima"
+
+#: ../data/vinagre.schemas.in.h:8
+msgid "Whether we should show tabs even when there is only one active connection"
+msgstr "Treba li prikazati listove kada je samo jedna veza aktivna"
+
+#: ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Treba li prikazati ubrzivače menija (prečice)"
+
+#: ../data/vinagre-mime.xml.in.h:1
+msgid "Remote Desktop (VNC) file"
+msgstr "Konfiguraciona datoteka udaljene radne površine (VNC)"
+
+#: ../data/vinagre-mime.xml.in.h:2
+msgid "Remote Desktop Connection"
+msgstr "Veza ka udaljenoj radnoj površini"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "Meni za brz pristup udaljenim računarima"
+
+#: ../src/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Fabrika vinager programčeta"
+
+#: ../src/vinagre-applet.c:98
+#: ../src/vinagre-applet.c:144
+#, c-format
+msgid "Could not run vinagre: %s"
+msgstr "Ne mogu da pokrenem vinager: %s"
+
+#: ../src/vinagre-applet.c:167
+msgid "Open Remote Desktop Viewer"
+msgstr "Otvori preglednika udaljene radne površine"
+
+#: ../src/vinagre-applet.c:229
+msgid "Access your bookmarks"
+msgstr "Pristupi obeleživačima"
+
+#: ../src/vinagre-bookmarks.c:92
+msgid "Copying the bookmarks file to the new location. This operation is only supposed to run once."
+msgstr "Umnožavam obeleživače na novu lokaciju. Ova operacija je predviđena da se obavi samo jednom."
+
+#: ../src/vinagre-bookmarks.c:97
+#, c-format
+msgid "Error: %s"
+msgstr "Greška: %s"
+
+#: ../src/vinagre-bookmarks.c:420
+msgid "Confirm removal?"
+msgstr "Da li želite da uklonite?"
+
+#: ../src/vinagre-bookmarks.c:423
+#, c-format
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgstr "Da li ste sigurni da želite da uklonite <i>%s</i> iz obeleživača?"
+
+#: ../src/vinagre-bookmarks.c:434
+#, c-format
+msgid "Error while removing %s from bookmarks: %s"
+msgstr "Javila se greška prilikom uklaljanja %s iz obeleživača: %s"
+
+#: ../src/vinagre-bookmarks.c:501
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "Javila se greška prilikom inicijalizovanja obeleživača: %s"
+
+#: ../src/vinagre-bookmarks.c:522
+#: ../src/vinagre-bookmarks.c:539
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "Javila se greška prilikom čuvanja obeleživača: %s"
+
+#: ../src/vinagre-commands.c:106
+msgid "Choose the file"
+msgstr "Izaberite datoteku"
+
+#: ../src/vinagre-commands.c:117
+#: ../src/vinagre-tab.c:947
+msgid "Supported formats"
+msgstr "Podržani formati"
+
+#: ../src/vinagre-commands.c:149
+msgid "The following file could not be opened:"
+msgid_plural "The following files could not be opened:"
+msgstr[0] "Ne mogu da otvorim sledeću datoteku:"
+msgstr[1] "Ne mogu da otvorim sledeće datoteke:"
+msgstr[2] "Ne mogu da otvorim sledeće datoteke:"
+
+#: ../src/vinagre-connect.c:172
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "Javila se greška prilikom čuvanja istorijata: %s"
+
+#: ../src/vinagre-connect.c:183
+msgid "Choose a VNC Server"
+msgstr "Izaberite VNC server"
+
+#: ../src/vinagre-connect.c:261
+#: ../src/vinagre-main.c:81
+#: ../src/vinagre-main.c:100
+#: ../src/vinagre-window.c:285
+msgid "Unknown error"
+msgstr "Javila se nepoznata greška"
+
+#: ../src/vinagre-connection.c:530
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "Protokol %s nije podržan."
+
+#: ../src/vinagre-fav.c:762
+msgid "Bookmarks"
+msgstr "Obeleživači"
+
+#: ../src/vinagre-fav.c:807
+msgid "Hosts nearby"
+msgstr "Računari u blizini"
+
+#: ../src/vinagre-main.c:49
+msgid "Opens a .vnc file"
+msgstr "Otvara datoteku sa ekstenzijom .vnc"
+
+#: ../src/vinagre-main.c:49
+msgid "filename"
+msgstr "ime datoteke"
+
+#: ../src/vinagre-main.c:52
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "Pravi novi prozor u već pokrenutom programu"
+
+#: ../src/vinagre-main.c:56
+msgid "[server:port]"
+msgstr "[server:port]"
+
+#: ../src/vinagre-main.c:111
+#: ../src/vinagre-window.c:284
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Javio se sledeći problem:"
+msgstr[1] "Javili su se sledeći problemi:"
+msgstr[2] "Javili su se sledeći problemi:"
+
+#. Setup command line options
+#: ../src/vinagre-main.c:132
+msgid "- VNC Client for GNOME"
+msgstr "- VNC klijent za GNOME"
+
+#: ../src/vinagre-main.c:141
+msgid "Run 'vinagre --help' to see a full list of available command line options"
+msgstr "Pokrenite 'vinagre --help' ako želite da vidite potpunu listu dostupnih opcija"
+
+#: ../src/vinagre-mdns.c:118
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "Ne mogu da razlučim avahi ime: %s\n"
+
+#: ../src/vinagre-mdns.c:170
+#: ../src/vinagre-mdns.c:179
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "Ne mogu da razgledam računar: %s\n"
+
+#: ../src/vinagre-notebook.c:127
+#, c-format
+msgid "Connection to host \"%s\" was closed."
+msgstr "Veza sa računarom „%s“ je zatvorena."
+
+#: ../src/vinagre-notebook.c:153
+msgid "Connecting..."
+msgstr "Povezujem se..."
+
+#: ../src/vinagre-notebook.c:180
+#: ../src/vinagre-tab.c:692
+msgid "Close connection"
+msgstr "Zatvori vezu"
+
+#: ../src/vinagre-prefs.c:167
+msgid "Cannot initialize preferences manager."
+msgstr "Ne mogu da inicijalizujem upravnika preferencija"
+
+#: ../src/vinagre-tab.c:271
+msgid "Error connecting to host."
+msgstr "Javila se greška prilikom povezivanja sa računarom."
+
+#: ../src/vinagre-tab.c:303
+#, c-format
+msgid "Authentication to host \"%s\" has failed"
+msgstr "Autentifikacija za računar \"%s\" nije uspela"
+
+#: ../src/vinagre-tab.c:331
+#, c-format
+msgid "Authentication method to host \"%s\" is unsupported. (%u)"
+msgstr "Metod autentifikacije za računar \"%s\" nije podržan. (%u)"
+
+#: ../src/vinagre-tab.c:412
+msgid "Error saving recent connection."
+msgstr "Javila se greška prilikom čuvanja nedavnih veza"
+
+#: ../src/vinagre-tab.c:443
+msgid "Error saving the password on the keyring."
+msgstr "Javila se greška prilikom čuvanja šifre u skladištu ključeva."
+
+#: ../src/vinagre-tab.c:706
+#: ../src/vinagre-tab.c:707
+msgid "Scaling"
+msgstr "Razmera"
+
+#: ../src/vinagre-tab.c:716
+#: ../src/vinagre-tab.c:717
+msgid "Read only"
+msgstr "Samo za pregled"
+
+#. Machine menu
+#: ../src/vinagre-tab.c:727
+#: ../src/vinagre-tab.c:728
+#: ../src/vinagre-ui.h:79
+msgid "Take screenshot"
+msgstr "Snimi ekran"
+
+#: ../src/vinagre-tab.c:736
+#: ../src/vinagre-tab.c:737
+#: ../src/vinagre-ui.h:82
+msgid "Send Ctrl-Alt-Del"
+msgstr "Pošalji Ctrl-Alt-Del"
+
+#: ../src/vinagre-tab.c:863
+msgid "Desktop Name:"
+msgstr "Ime radne površine:"
+
+#: ../src/vinagre-tab.c:865
+msgid "Port:"
+msgstr "Port:"
+
+#: ../src/vinagre-tab.c:866
+msgid "Dimensions:"
+msgstr "Dimenzije:"
+
+#: ../src/vinagre-tab.c:933
+#, c-format
+msgid "Screenshot of %s"
+msgstr "Snimak ekrana %s"
+
+#: ../src/vinagre-tab.c:936
+msgid "Save Screenshot"
+msgstr "Sačuvaj snimak ekrana"
+
+#: ../src/vinagre-tab.c:1000
+msgid "Scaling does not work properly on composited windows. Disable the visual effects and try again."
+msgstr "Razmera ne radi ispravno u kompozitnim prozorima. Isključite vizuelne efekte i pokušajte ponovo."
+
+#: ../src/vinagre-tab.c:1008
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable this feature."
+msgstr ""
+"Razmera nije podržana u ovoj instalaciji.\n"
+"\n"
+"Pročitajte README datoteku (isporučuje su Vinager) da bi saznali kako da omogućite ovu mogućnost."
+
+#. Toplevel
+#: ../src/vinagre-ui.h:33
+msgid "_Machine"
+msgstr "_Računar"
+
+#: ../src/vinagre-ui.h:34
+msgid "_Edit"
+msgstr "_Prepravi"
+
+#: ../src/vinagre-ui.h:35
+msgid "_View"
+msgstr "P_regledaj"
+
+#: ../src/vinagre-ui.h:36
+msgid "_Bookmarks"
+msgstr "_Obeleživači"
+
+#: ../src/vinagre-ui.h:41
+msgid "Connect to a remote machine"
+msgstr "Poveži se na udaljeni računar"
+
+#: ../src/vinagre-ui.h:43
+msgid "Open a .VNC file"
+msgstr "Otvori .vnc datoteku"
+
+#: ../src/vinagre-ui.h:45
+msgid "Quit the program"
+msgstr "Izađi iz programa"
+
+#. Bookmarks menu
+#: ../src/vinagre-ui.h:48
+msgid "_Open bookmark"
+msgstr "_Otvori obeleživače"
+
+#: ../src/vinagre-ui.h:49
+msgid "Connect to this machine"
+msgstr "Poveži se na ovaj računar"
+
+#: ../src/vinagre-ui.h:50
+msgid "_Edit bookmark"
+msgstr "_Prepravi obeleživač"
+
+#: ../src/vinagre-ui.h:51
+msgid "Edit the details of selected bookmark"
+msgstr "Prepravi detalje odabranih obeleživača"
+
+#: ../src/vinagre-ui.h:52
+msgid "_Remove from bookmarks"
+msgstr "_Ukloni iz obeleživača"
+
+#: ../src/vinagre-ui.h:53
+msgid "Remove current selected connection from bookmarks"
+msgstr "Ukloni trenutno odabranu vezu iz obeleživača"
+
+#. Help menu
+#: ../src/vinagre-ui.h:56
+msgid "_Contents"
+msgstr "_Sadržaj"
+
+#: ../src/vinagre-ui.h:57
+msgid "Open the vinagre manual"
+msgstr "Otvori korisničko uputstvo za vinager"
+
+#: ../src/vinagre-ui.h:59
+msgid "About this application"
+msgstr "O ovom programu"
+
+#: ../src/vinagre-ui.h:66
+msgid "Close the current connection"
+msgstr "Zatvori trenutnu vezu"
+
+#: ../src/vinagre-ui.h:67
+msgid "C_lose All"
+msgstr "Z_atvori sve"
+
+#: ../src/vinagre-ui.h:68
+msgid "Close all active connections"
+msgstr "Zatvori sve aktivne veze"
+
+#. Bookmarks menu
+#: ../src/vinagre-ui.h:71
+msgid "_Add to bookmarks"
+msgstr "_Dodaj u obeleživače"
+
+#: ../src/vinagre-ui.h:72
+msgid "Add current connection to your bookmarks"
+msgstr "Dodaj trenutnu vezu u obeleživače"
+
+#: ../src/vinagre-ui.h:80
+msgid "Take a screenshot of active connection"
+msgstr "Uzima snimak ekrana trenutno aktivne veze"
+
+#: ../src/vinagre-ui.h:83
+msgid "Send Ctrl+Alt+Del to active connection"
+msgstr "Pošalji Ctrl+Alt+Del tekućoj vezi"
+
+#: ../src/vinagre-ui.h:87
+msgid "View the current machine in full screen"
+msgstr "Pregledaj ovaj računar preko celog ekrana"
+
+#: ../src/vinagre-ui.h:92
+msgid "S_caling"
+msgstr "R_azmera"
+
+#: ../src/vinagre-ui.h:93
+msgid "Fit the remote screen into the current window size"
+msgstr "Uklopi udaljeni ekran u veličinu prozora"
+
+#: ../src/vinagre-ui.h:95
+msgid "_Read only"
+msgstr "_Samo pregled"
+
+#: ../src/vinagre-ui.h:96
+msgid "Disable mouse and keyboard"
+msgstr "Onemogući miša i tastaturu"
+
+#: ../src/vinagre-ui.h:102
+msgid "_Toolbar"
+msgstr "_Paleta alatki"
+
+#: ../src/vinagre-ui.h:103
+msgid "Show or hide the toolbar"
+msgstr "Prikaži ili sakrij paletu alatki"
+
+#: ../src/vinagre-ui.h:106
+msgid "_Statusbar"
+msgstr "_Statusna linija"
+
+#: ../src/vinagre-ui.h:107
+msgid "Show or hide the statusbar"
+msgstr "Prikaži ili sakrij statusnu liniju"
+
+#: ../src/vinagre-ui.h:110
+msgid "Side _Panel"
+msgstr "_Panel sa strane"
+
+#: ../src/vinagre-ui.h:111
+msgid "Show or hide the side panel"
+msgstr "Prikaži ili sakrij pano za sa strane"
+
+#: ../src/vinagre-utils.c:423
+msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgstr "Vinager je Gnomov VNC klijent"
+
+#: ../src/vinagre-utils.c:426
+msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+msgstr "Vinager je slobodan softver; možete ga prosleđivati drugima i/ili ga prepravljati pod uslovima GNU Opšte javne licence (GNU General Public License) koju objavljuje Fondacija slobodnog softvera (Free Software Foundation); i to verzije 2 ove licence ili, po vašem mišljenju, bilo koje novije verzije."
+
+#: ../src/vinagre-utils.c:430
+msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
+msgstr "Vinager se distribuira u nadi da će biti koristan, ali NEMA NIKAKVIH GARANCIJA; čak ni implicitnih garancija za UPOTREBNU VREDNOST ili NAMENE U ODREĐENE SVRHE. Pogledajte Gnuovu Opštu javnu licencu ( GNU General Public License) za više informacija."
+
+#: ../src/vinagre-utils.c:434
+msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr "Trebalo bi da ste zajedno sa ovim programom primili i kopiju GNUOVE Opšte javne licence (GNU General Public License). Ako niste, pogledajte <http://www.gnu.org/licenses/>."
+
+#: ../src/vinagre-utils.c:456
+msgid "translator-credits"
+msgstr ""
+"Marko Uskoković <marko.uskokovic@cp6linux.org>\n"
+"Goran Rakić <grakic@devbase.net>\n"
+"\n"
+"Prevod.org — prevod na srpski jezik."
+
+#: ../src/vinagre-utils.c:459
+msgid "Vinagre Website"
+msgstr "Veb mesto projekta  Vinager"
+
+#: ../src/vinagre-window.c:422
+#, c-format
+msgid "Could not merge vinagre-ui.xml: %s"
+msgstr "Ne mogu da spojim vinagre-ui.xml: %s"
+
+#: ../src/vinagre-window.c:450
+msgid "_Recent connections"
+msgstr "_Nedavne veze"
+
+#. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
+#: ../src/vinagre-window.c:610
+#: ../src/vinagre-window.c:660
+#, c-format
+msgid "Open %s:%d"
+msgstr "Otvori %s:%d"
+
+#: ../src/vinagre-window.c:809
+msgid "Press Ctrl+Alt to release the cursor"
+msgstr "Pritisnite Ctrl+Alt da biste oslobodili pokazivač."
+
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
+#~ msgid "Image"
+#~ msgstr "Slika"
+#~ msgid "Name"
+#~ msgstr "Ime"
+#~ msgid "Hide bookmarks"
+#~ msgstr "Sakrij zabeleške"
+#~ msgid "Expected `%s' got `%s' for key %s"
+#~ msgstr "Očekivao sam `%s' a dobio sam `%s' za ključ %s"
+#~ msgid "Press Ctrl+Alt to grab the cursor"
+#~ msgstr "Pritisnite Ctrl+Alt da biste zarobili pokazivač."
+
