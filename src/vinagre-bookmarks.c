@@ -86,15 +86,19 @@ vinagre_bookmarks_init (VinagreBookmarks *book)
 			      NULL);
       if (g_file_test (old, G_FILE_TEST_EXISTS))
 	{
-	  GFile *src;
+	  GFile *src, *parent;
 	  GError *error = NULL;
 
 	  g_message (_("Copying the bookmarks file to the new location. This operation is only supposed to run once."));
 	  src = g_file_new_for_path (old);
 
+	  parent = g_file_get_parent (gfile);
+	  g_file_make_directory_with_parents (parent, NULL, NULL);
+	  g_object_unref (parent);
+
 	  if (!g_file_copy (src, gfile, G_FILE_COPY_NONE, NULL, NULL, NULL, &error))
 	    {
-	      g_warning (_("Error: %s"), error->message);
+	      g_warning ("%s", error->message);
 	      g_error_free (error);
 	    }
 
