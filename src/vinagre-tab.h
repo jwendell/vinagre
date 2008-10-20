@@ -94,6 +94,10 @@ gboolean	  vinagre_tab_get_scaling	(VinagreTab *tab);
 void	          vinagre_tab_set_readonly	(VinagreTab *tab, gboolean active);
 gboolean	  vinagre_tab_get_readonly	(VinagreTab *tab);
 
+gint		  vinagre_tab_get_original_width  (VinagreTab *tab);
+gint		  vinagre_tab_get_original_height (VinagreTab *tab);
+void		  vinagre_tab_original_size	  (VinagreTab *tab);
+
 VinagreTabState   vinagre_tab_get_state		(VinagreTab *tab);
 VinagreTab	  *vinagre_tab_get_from_connection (VinagreConnection *conn);
 

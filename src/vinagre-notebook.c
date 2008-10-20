@@ -104,7 +104,7 @@ close_button_clicked_cb (GtkWidget *widget,
 }
 
 static void
-tab_initialized_cb (VinagreTab *tab, VinagreNotebook *nb)
+tab_size_changed_cb (VinagreTab *tab, VinagreNotebook *nb)
 {
   char *str;
   GtkWidget *label;
@@ -217,9 +217,10 @@ build_tab_label (VinagreNotebook *nb,
   g_object_set_data (G_OBJECT (tab),  "close-button", close_button);
 
   g_signal_connect (tab,
-		    "tab-initialized",
-		    G_CALLBACK (tab_initialized_cb),
+		    "notify::original-width",
+		    G_CALLBACK (tab_size_changed_cb),
 		    nb);
+
   g_signal_connect (tab,
 		    "tab-disconnected",
 		    G_CALLBACK (tab_disconnected_cb),

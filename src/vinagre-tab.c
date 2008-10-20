@@ -71,6 +71,8 @@ enum
   PROP_0,
   PROP_CONN,
   PROP_WINDOW,
+  PROP_ORIGINAL_WIDTH,
+  PROP_ORIGINAL_HEIGHT
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
@@ -139,6 +141,12 @@ vinagre_tab_get_property (GObject    *object,
 	break;
       case PROP_WINDOW:
         g_value_set_object (value, tab->priv->window);
+	break;
+      case PROP_ORIGINAL_WIDTH:
+        g_value_set_int (value, vinagre_tab_get_original_width (tab));
+	break;
+      case PROP_ORIGINAL_HEIGHT:
+        g_value_set_int (value, vinagre_tab_get_original_height (tab));
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -221,6 +229,28 @@ vinagre_tab_class_init (VinagreTabClass *klass)
 							G_PARAM_STATIC_NAME |
 							G_PARAM_STATIC_NICK |
 							G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+				   PROP_ORIGINAL_WIDTH,
+				   g_param_spec_int ("original-width",
+						     "Original width",
+						     "The original width of the remote screen",
+						     -1, G_MAXINT, 0,
+						      G_PARAM_READABLE |
+						      G_PARAM_STATIC_NAME |
+						      G_PARAM_STATIC_NICK |
+						      G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+				   PROP_ORIGINAL_HEIGHT,
+				   g_param_spec_int ("original-height",
+						     "Original height",
+						     "The original height of the remote screen",
+						     -1, G_MAXINT, 0,
+						      G_PARAM_READABLE |
+						      G_PARAM_STATIC_NAME |
+						      G_PARAM_STATIC_NICK |
+						      G_PARAM_STATIC_BLURB));
 
   signals[TAB_CONNECTED] =
 		g_signal_new ("tab-connected",
@@ -609,9 +639,17 @@ vnc_pointer_ungrab_cb (VncDisplay *vnc, VinagreTab *tab)
   vinagre_window_set_title (tab->priv->window);
 }
 
-static void vnc_bell_cb (VncDisplay *vnc, VinagreTab *tab)
+static void
+vnc_bell_cb (VncDisplay *vnc, VinagreTab *tab)
 {
   gdk_window_beep (GTK_WIDGET (tab->priv->window)->window);
+}
+
+static void
+vnc_desktop_resize_cb (VncDisplay *vnc, int x, int y, VinagreTab *tab)
+{
+  g_object_notify (G_OBJECT (tab), "original-width");
+  g_object_notify (G_OBJECT (tab), "original-height");
 }
 
 static void
@@ -637,7 +675,7 @@ screenshot_button_clicked (GtkToolButton *button,
 
 static void
 cad_button_clicked (GtkToolButton *button,
-			   VinagreTab    *tab)
+		    VinagreTab    *tab)
 {
   vinagre_tab_send_ctrlaltdel (tab);
 }
@@ -828,6 +866,11 @@ vinagre_tab_init (VinagreTab *tab)
   g_signal_connect (tab->priv->vnc,
 		    "vnc-bell",
 		    G_CALLBACK (vnc_bell_cb),
+		    tab);
+
+  g_signal_connect (tab->priv->vnc,
+		    "vnc-desktop-resize",
+		    G_CALLBACK (vnc_desktop_resize_cb),
 		    tab);
 
   setup_layout (tab);
@@ -1025,7 +1068,7 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
 
 gboolean
 vinagre_tab_get_scaling (VinagreTab *tab) {
-  g_return_if_fail (VINAGRE_IS_TAB (tab));
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), FALSE);
 
   return vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc));
 }
@@ -1042,7 +1085,7 @@ vinagre_tab_set_readonly (VinagreTab *tab, gboolean active) {
 
 gboolean
 vinagre_tab_get_readonly (VinagreTab *tab) {
-  g_return_if_fail (VINAGRE_IS_TAB (tab));
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), FALSE);
 
   return vnc_display_get_read_only (VNC_DISPLAY (tab->priv->vnc));
 }
@@ -1050,7 +1093,7 @@ vinagre_tab_get_readonly (VinagreTab *tab) {
 VinagreTabState
 vinagre_tab_get_state (VinagreTab *tab)
 {
-  g_return_if_fail (VINAGRE_IS_TAB (tab));
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), VINAGRE_TAB_STATE_INVALID);
 
   return tab->priv->state;
 }
@@ -1068,10 +1111,90 @@ vinagre_tab_get_from_connection (VinagreConnection *conn)
 }
 
 gboolean
-vinagre_tab_is_pointer_grab (VinagreTab *tab) {
-  g_return_if_fail (VINAGRE_IS_TAB (tab));
+vinagre_tab_is_pointer_grab (VinagreTab *tab)
+{
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), FALSE);
 
   return tab->priv->pointer_grab;
+}
+
+gint
+vinagre_tab_get_original_height (VinagreTab *tab)
+{
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), -1);
+
+  if (VNC_IS_DISPLAY (tab->priv->vnc))
+    return vnc_display_get_height (VNC_DISPLAY (tab->priv->vnc));
+  else
+    return -1;
+}
+
+gint
+vinagre_tab_get_original_width (VinagreTab *tab)
+{
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), -1);
+
+  if (VNC_IS_DISPLAY (tab->priv->vnc))
+    return vnc_display_get_width (VNC_DISPLAY (tab->priv->vnc));
+  else
+    return -1;
+}
+
+
+typedef struct _VinagrePrefSize {
+  gint width, height;
+  gulong sig_id;
+} VinagrePrefSize;
+
+static gboolean
+cb_unset_size (gpointer data)
+{
+  GtkWidget *widget = data;
+
+  gtk_widget_queue_resize_no_redraw (widget);
+
+  return FALSE;
+}
+
+static void
+cb_set_preferred_size (GtkWidget *widget, GtkRequisition *req,
+		       gpointer data)
+{
+  VinagrePrefSize *size = data;
+
+  req->width = size->width;
+  req->height = size->height;
+
+  g_signal_handler_disconnect (widget, size->sig_id);
+  g_free (size);
+  g_idle_add (cb_unset_size, widget);
+}
+
+void
+vinagre_widget_set_preferred_size (GtkWidget *widget, gint width,
+				 gint height)
+{
+  VinagrePrefSize *size = g_new (VinagrePrefSize, 1);
+
+  size->width = width;
+  size->height = height;
+  size->sig_id = g_signal_connect (widget, "size-request",
+				   G_CALLBACK (cb_set_preferred_size),
+				   size);
+
+  gtk_widget_queue_resize (widget);
+}
+
+void
+vinagre_tab_original_size (VinagreTab *tab)
+{
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  gtk_window_unmaximize (GTK_WINDOW (tab->priv->window));
+  gtk_window_resize (GTK_WINDOW (tab->priv->window), 1, 1);
+  vinagre_widget_set_preferred_size (GTK_WIDGET (tab),
+				     vinagre_tab_get_original_width (tab),
+				     vinagre_tab_get_original_height (tab));
 }
 
 /* vim: set ts=8: */

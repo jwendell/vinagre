@@ -85,6 +85,10 @@ static const GtkActionEntry vinagre_machine_connected_menu_entries[] =
   /* View menu */
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
     N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) },
+
+  { "ViewOriginalSize", "zoom-original", N_("_Original size"), NULL,
+    N_("Adjusts the window to the remote desktop's size"), G_CALLBACK (vinagre_cmd_view_original_size) },
+
 };
 
 static const GtkToggleActionEntry vinagre_machine_connected_toggle_menu_entries[] =

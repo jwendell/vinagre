@@ -241,6 +241,15 @@ vinagre_cmd_view_fullscreen (GtkAction     *action,
 }
 
 void
+vinagre_cmd_view_original_size (GtkAction     *action,
+				VinagreWindow *window)
+{
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+
+  vinagre_tab_original_size (vinagre_window_get_active_tab (window));
+}
+
+void
 vinagre_cmd_view_scaling (GtkAction     *action,
 			  VinagreWindow *window)
 {

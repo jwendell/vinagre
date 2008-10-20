@@ -152,7 +152,7 @@ save_history (GtkWidget *combo) {
   content = g_string_new (NULL);
 
   for (i=0; i<history->len; i++)
-    g_string_append_printf (content, "%s\n", g_ptr_array_index (history, i));
+    g_string_append_printf (content, "%s\n", (char *) g_ptr_array_index (history, i));
 
   filename = history_filename ();
   path = g_path_get_dirname (filename);

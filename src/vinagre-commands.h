@@ -54,6 +54,8 @@ void		vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_scaling	(GtkAction     *action,
 						 VinagreWindow *window);
+void		vinagre_cmd_view_original_size	(GtkAction     *action,
+						 VinagreWindow *window);
 void		vinagre_cmd_view_fullscreen	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_readonly	(GtkAction     *action,
