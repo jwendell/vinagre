@@ -15,6 +15,7 @@ INCLUDES = 						\
 	-DVINAGRE_DATADIR=\""$(datadir)/vinagre"\"	\
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\"	\
 	$(VINAGRE_CFLAGS)				\
+	$(AVAHI_CFLAGS)					\
 	$(NULL)
 
 bin_PROGRAMS = vinagre
@@ -33,15 +34,19 @@ vinagre_SOURCES = \
 	vinagre-ui.h vinagre-window-private.h		\
 	vinagre-enums.h vinagre-enums.c			\
 	gossip-cell-renderer-expander.c gossip-cell-renderer-expander.h \
-	vinagre-mdns.h vinagre-mdns.c \
 	vinagre-prefs.h vinagre-prefs.c \
 	bacon-message-connection.h bacon-message-connection.c \
 	vinagre-app.h vinagre-app.c \
 	vinagre-bacon.h vinagre-bacon.c \
 	$(NULL)
 
+if AVAHI
+vinagre_SOURCES += vinagre-mdns.h vinagre-mdns.c
+endif
+
 vinagre_LDADD = \
 	$(VINAGRE_LIBS)		\
+	$(AVAHI_LIBS)		\
 	$(GTKVNC_LIBS)		\
 	view/libview.la		\
 	$(NULL)
@@ -70,6 +75,7 @@ libexec_PROGRAMS = vinagre-applet
 
 vinagre_applet_CFLAGS =			\
 	$(APPLET_CFLAGS)		\
+	$(AVAHI_CFLAGS)			\
 	$(NULL)
 
 vinagre_applet_SOURCES =		\
@@ -78,12 +84,16 @@ vinagre_applet_SOURCES =		\
 	vinagre-connection.h vinagre-connection.c	\
 	vinagre-utils.h vinagre-utils.c			\
 	vinagre-enums.h vinagre-enums.c			\
-	vinagre-mdns.h vinagre-mdns.c			\
 	$(NULL)
+
+if AVAHI
+vinagre_applet_SOURCES += vinagre-mdns.h vinagre-mdns.c
+endif
 
 vinagre_applet_LDADD =			\
 	$(APPLET_LIBS)			\
 	$(VINAGRE_LIBS)			\
+	$(AVAHI_LIBS)			\
 	$(NULL)
 
 

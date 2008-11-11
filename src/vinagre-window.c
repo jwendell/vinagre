@@ -36,9 +36,11 @@
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-ui.h"
-#include "vinagre-mdns.h"
-
 #include "vinagre-window-private.h"
+
+#ifdef VINAGRE_ENABLE_AVAHI
+#include "vinagre-mdns.h"
+#endif
 
 #define VINAGRE_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					 VINAGRE_TYPE_WINDOW,                    \
@@ -565,7 +567,10 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
 {
   VinagreWindowPrivate *p = window->priv;
   GList  *actions, *l;
-  GSList *favs, *mdnss;
+  GSList *favs;
+#ifdef VINAGRE_ENABLE_AVAHI
+  GSList *mdnss;
+#endif
   gint   n, m, i;
   guint  id;
 
@@ -586,9 +591,14 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
   g_list_free (actions);
 
   favs = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
-  mdnss = vinagre_mdns_get_all (vinagre_mdns_get_default ());
   n = g_slist_length (favs);
+
+#ifdef VINAGRE_ENABLE_AVAHI
+  mdnss = vinagre_mdns_get_all (vinagre_mdns_get_default ());
   m = g_slist_length (mdnss);
+#else
+  m = 0;
+#endif
   i = 0;
 
   id = (n > 0||m > 0) ? gtk_ui_manager_new_merge_id (p->manager) : 0;
@@ -641,7 +651,7 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
       i++;
     }
 
-  /* avahi */
+#ifdef VINAGRE_ENABLE_AVAHI
   i = 0;
   while (mdnss)
     {
@@ -690,6 +700,7 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
       mdnss = mdnss->next;
       i++;
     }
+#endif
 
   p->bookmarks_list_menu_ui_id = id;
 }
@@ -1017,11 +1028,12 @@ vinagre_window_init (VinagreWindow *window)
                             "changed",
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
+#ifdef VINAGRE_ENABLE_AVAHI
   g_signal_connect_swapped (vinagre_mdns_get_default (),
                             "changed",
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
-
+#endif
   vinagre_window_init_clipboard (window);
 }
 

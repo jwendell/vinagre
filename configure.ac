@@ -42,6 +42,23 @@ GTK_VNC_REQUIRED=0.3.7
 AVAHI_REQUIRED=0.6.22
 PANEL_REQUIRED_VERSION=2.0.0
 
+# Check for avahi
+AC_ARG_ENABLE(avahi,
+              AC_HELP_STRING([--disable-avahi],
+                             [Do not use avahi for auto-discover machines [default=yes]]),
+              enable_avahi=no,
+              enable_avahi=yes)
+
+if test "x$enable_avahi" = "xyes" ; then
+  PKG_CHECK_MODULES(AVAHI,\
+  avahi-ui >= $AVAHI_REQUIRED\
+  avahi-gobject >= $AVAHI_REQUIRED)
+  AC_SUBST(AVAHI_CFLAGS)
+  AC_SUBST(AVAHI_LIBS)
+  AC_DEFINE([VINAGRE_ENABLE_AVAHI],[1],[We want avahi support])
+fi
+AM_CONDITIONAL(AVAHI, test "x$enable_avahi" = "xyes")
+
 PKG_CHECK_MODULES(VINAGRE, \ 
   glib-2.0 >= $GLIB_REQUIRED \
   gio-2.0 >= $GLIB_REQUIRED \
@@ -50,9 +67,7 @@ PKG_CHECK_MODULES(VINAGRE, \
   gconf-2.0 >= $GCONF_REQUIRED \
   gthread-2.0 >= $GTHREAD_REQUIRED \
   gnome-keyring-1 \
-  gtk-vnc-1.0 >= $GTK_VNC_REQUIRED \
-  avahi-ui >= $AVAHI_REQUIRED \
-  avahi-gobject >= $AVAHI_REQUIRED)
+  gtk-vnc-1.0 >= $GTK_VNC_REQUIRED)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
 
@@ -107,4 +122,6 @@ Configure summary:
 
 	Compiler ...................:  ${CC} 
 	Compiler Flags .............:  ${CFLAGS}
+
+	Avahi enabled ..............:  ${enable_avahi}
 "

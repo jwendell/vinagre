@@ -26,9 +26,12 @@
 #include "vinagre-fav.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
-#include "vinagre-mdns.h"
 #include "vinagre-window-private.h"
 #include "gossip-cell-renderer-expander.h"
+
+#ifdef VINAGRE_ENABLE_AVAHI
+#include "vinagre-mdns.h"
+#endif
  
 #define VINAGRE_FAV_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_FAV, VinagreFavPrivate))
 
@@ -724,10 +727,12 @@ vinagre_fav_init (VinagreFav *fav)
                             "changed",
                             G_CALLBACK (vinagre_fav_update_list),
                             fav);
+#ifdef VINAGRE_ENABLE_AVAHI
   g_signal_connect_swapped (vinagre_mdns_get_default (),
                             "changed",
                             G_CALLBACK (vinagre_fav_update_list),
                             fav);
+#endif
 }
 
 GtkWidget *
@@ -797,7 +802,7 @@ vinagre_fav_update_list (VinagreFav *fav)
   gtk_tree_view_expand_row (GTK_TREE_VIEW (fav->priv->tree), path, FALSE);
   gtk_tree_path_free (path);
 
-  /* avahi */
+#ifdef VINAGRE_ENABLE_AVAHI
   list = vinagre_mdns_get_all (vinagre_mdns_get_default ());
   if (!list)
     return FALSE;
@@ -841,6 +846,7 @@ vinagre_fav_update_list (VinagreFav *fav)
   path = gtk_tree_path_new_from_string ("1");
   gtk_tree_view_expand_row (GTK_TREE_VIEW (fav->priv->tree), path, FALSE);
   gtk_tree_path_free (path);
+#endif
 
   return FALSE;
 }

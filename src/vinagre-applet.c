@@ -23,11 +23,14 @@
 #include <gtk/gtk.h>
 #include <panel-applet.h>
 #include "vinagre-bookmarks.h"
-#include "vinagre-mdns.h"
 #include "vinagre-utils.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
 #include <config.h>
+
+#ifdef VINAGRE_ENABLE_AVAHI
+#include "vinagre-mdns.h"
+#endif
 
 static void
 menu_position (GtkMenu    *menu,
@@ -173,8 +176,10 @@ click_cb (GtkWidget      *applet,
   all = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
   fill_menu (all, menu);
 
+#ifdef VINAGRE_ENABLE_AVAHI
   all = vinagre_mdns_get_all (vinagre_mdns_get_default ());
   fill_menu (all, menu);
+#endif
 
   gtk_widget_show_all (menu);
   gtk_menu_popup (GTK_MENU (menu), NULL, NULL, (GtkMenuPositionFunc) menu_position, applet, 
@@ -205,12 +210,15 @@ vinagre_applet_fill (PanelApplet *applet,
 {
   GtkWidget *image, *button;
   gchar *tmp;
-  VinagreMdns *mdns;
   static const BonoboUIVerb menu_verbs[] = {
     BONOBO_UI_VERB ("VinagreHelp", help_cb),
     BONOBO_UI_VERB ("VinagreAbout", about_cb),
     BONOBO_UI_VERB_END
   };
+
+#ifdef VINAGRE_ENABLE_AVAHI
+  VinagreMdns *mdns;
+#endif
 
   if (strcmp (iid, "OAFIID:GNOME_VinagreApplet") != 0)
     return FALSE;
@@ -238,7 +246,9 @@ vinagre_applet_fill (PanelApplet *applet,
   gtk_container_add (GTK_CONTAINER (applet), image);
   gtk_widget_show_all (GTK_WIDGET (applet));
 
+#ifdef VINAGRE_ENABLE_AVAHI
   mdns = vinagre_mdns_get_default ();
+#endif
 
   return TRUE;
 }

@@ -33,9 +33,12 @@
 #include "vinagre-app.h"
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
-#include "vinagre-mdns.h"
 #include "vinagre-bacon.h"
 #include <vncdisplay.h>
+
+#ifdef VINAGRE_ENABLE_AVAHI
+#include "vinagre-mdns.h"
+#endif
 
 /* command line */
 static gchar **files = NULL;
@@ -169,8 +172,10 @@ int main (int argc, char **argv) {
   gtk_main ();
 
   g_object_unref (vinagre_bookmarks_get_default ());
-  g_object_unref (vinagre_mdns_get_default ());
   g_object_unref (vinagre_prefs_get_default ());
+#ifdef VINAGRE_ENABLE_AVAHI
+  g_object_unref (vinagre_mdns_get_default ());
+#endif
 
   return 0;
 }

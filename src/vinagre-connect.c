@@ -18,12 +18,19 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
-#include <avahi-ui/avahi-ui.h>
 #include <string.h>
+
+#ifdef VINAGRE_ENABLE_AVAHI
+#include <avahi-ui/avahi-ui.h>
+#endif
 
 #include "vinagre-connect.h"
 #include "vinagre-utils.h"
@@ -174,6 +181,7 @@ save_history (GtkWidget *combo) {
   }
 }
 
+#ifdef VINAGRE_ENABLE_AVAHI
 static void
 vinagre_connect_find_button_cb (GtkButton            *button,
 				VinagreConnectDialog *dialog)
@@ -208,6 +216,7 @@ vinagre_connect_find_button_cb (GtkButton            *button,
 
   gtk_widget_destroy (d);
 }
+#endif
 
 VinagreConnection *vinagre_connect (VinagreWindow *window)
 {
@@ -227,10 +236,15 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
   setup_combo (dialog.host_entry);
 
+#ifdef VINAGRE_ENABLE_AVAHI
   g_signal_connect (dialog.find_button,
 		    "clicked",
 		    G_CALLBACK (vinagre_connect_find_button_cb),
 		    &dialog);
+#else
+  gtk_widget_hide (dialog.find_button);
+  gtk_widget_set_no_show_all (dialog.find_button, TRUE);
+#endif
 
   gtk_widget_show_all (dialog.dialog);
   result = gtk_dialog_run (GTK_DIALOG (dialog.dialog));
