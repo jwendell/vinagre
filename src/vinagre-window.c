@@ -331,6 +331,7 @@ show_hide_accels (VinagreWindow *window)
 		NULL);
   g_object_set (gtk_settings_get_default (),
 		"gtk-enable-accels", show_accels,
+		"gtk-enable-mnemonics", show_accels,
 		NULL);
 }
 
