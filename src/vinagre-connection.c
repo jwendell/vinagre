@@ -33,6 +33,7 @@ struct _VinagreConnectionPrivate
   gchar *host;
   gint   port;
   gchar *name;
+  gchar *username;
   gchar *password;
   gchar *desktop_name;
   gboolean view_only;
@@ -47,6 +48,7 @@ enum
   PROP_HOST,
   PROP_PORT,
   PROP_NAME,
+  PROP_USERNAME,
   PROP_PASSWORD,
   PROP_DESKTOP_NAME,
   PROP_BEST_NAME,
@@ -71,6 +73,7 @@ vinagre_connection_init (VinagreConnection *conn)
   conn->priv->host = NULL;
   conn->priv->port = 0;
   conn->priv->password = NULL;
+  conn->priv->username = NULL;
   conn->priv->name = NULL;
   conn->priv->desktop_name = NULL;
   conn->priv->view_only = FALSE;
@@ -83,20 +86,19 @@ vinagre_connection_finalize (GObject *object)
 {
   VinagreConnection *conn = VINAGRE_CONNECTION (object);
 
-  if (conn->priv->host)
-    g_free (conn->priv->host);
+  g_free (conn->priv->host);
   conn->priv->host = NULL;
 
-  if (conn->priv->password)
-    g_free (conn->priv->password);
+  g_free (conn->priv->username);
+  conn->priv->username = NULL;
+
+  g_free (conn->priv->password);
   conn->priv->password = NULL;
 
-  if (conn->priv->name)
-    g_free (conn->priv->name);
+  g_free (conn->priv->name);
   conn->priv->name = NULL;
 
-  if (conn->priv->desktop_name)
-    g_free (conn->priv->desktop_name);
+  g_free (conn->priv->desktop_name);
   conn->priv->desktop_name = NULL;
 
   G_OBJECT_CLASS (vinagre_connection_parent_class)->finalize (object);
@@ -123,6 +125,10 @@ vinagre_connection_set_property (GObject *object, guint prop_id, const GValue *v
 
       case PROP_PORT:
 	vinagre_connection_set_port (conn, g_value_get_int (value));
+	break;
+
+      case PROP_USERNAME:
+	vinagre_connection_set_username (conn, g_value_get_string (value));
 	break;
 
       case PROP_PASSWORD:
@@ -177,6 +183,10 @@ vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, 
 
       case PROP_PORT:
 	g_value_set_int (value, conn->priv->port);
+	break;
+
+      case PROP_USERNAME:
+	g_value_set_string (value, conn->priv->username);
 	break;
 
       case PROP_PASSWORD:
@@ -267,6 +277,18 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
                                                       G_PARAM_STATIC_NICK |
                                                       G_PARAM_STATIC_NAME |
                                                       G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_NAME,
+                                   g_param_spec_string ("username",
+                                                        "username",
+	                                                "username (if any) necessary for complete this connection",
+                                                        NULL,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
 
   g_object_class_install_property (object_class,
                                    PROP_PASSWORD,
@@ -419,13 +441,29 @@ vinagre_connection_get_port (VinagreConnection *conn)
 }
 
 void
+vinagre_connection_set_username (VinagreConnection *conn,
+			     const gchar *username)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  g_free (conn->priv->username);
+  conn->priv->username = g_strdup (username);
+}
+const gchar *
+vinagre_connection_get_username (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+
+  return conn->priv->username;
+}
+
+void
 vinagre_connection_set_password (VinagreConnection *conn,
 			         const gchar *password)
 {
   g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-  if (conn->priv->password)
-    g_free (conn->priv->password);
+  g_free (conn->priv->password);
   conn->priv->password = g_strdup (password);
 }
 const gchar *
@@ -442,8 +480,7 @@ vinagre_connection_set_name (VinagreConnection *conn,
 {
   g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-  if (conn->priv->name)
-    g_free (conn->priv->name);
+  g_free (conn->priv->name);
   conn->priv->name = g_strdup (name);
 }
 const gchar *
@@ -460,8 +497,7 @@ vinagre_connection_set_desktop_name (VinagreConnection *conn,
 {
   g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-  if (conn->priv->desktop_name)
-    g_free (conn->priv->desktop_name);
+  g_free (conn->priv->desktop_name);
   conn->priv->desktop_name = g_strdup (desktop_name);
 }
 const gchar *
@@ -498,6 +534,7 @@ vinagre_connection_clone (VinagreConnection *conn)
 
   vinagre_connection_set_host (new_conn, vinagre_connection_get_host (conn));
   vinagre_connection_set_port (new_conn, vinagre_connection_get_port (conn));
+  vinagre_connection_set_username (new_conn, vinagre_connection_get_username (conn));
   vinagre_connection_set_password (new_conn, vinagre_connection_get_password (conn));
   vinagre_connection_set_name (new_conn, vinagre_connection_get_name (conn));
   vinagre_connection_set_desktop_name (new_conn, vinagre_connection_get_desktop_name (conn));
