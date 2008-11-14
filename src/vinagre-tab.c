@@ -289,11 +289,20 @@ static void
 open_vnc (VinagreTab *tab)
 {
   gchar *port;
+  gint  shared;
 
   vnc_display_set_force_size (VNC_DISPLAY(tab->priv->vnc),
 			      !vinagre_connection_get_scaling (tab->priv->conn));
 
   port = g_strdup_printf ("%d", vinagre_connection_get_port (tab->priv->conn));
+
+  shared = vinagre_connection_get_shared (tab->priv->conn);
+  if (shared == -1)
+    g_object_get (vinagre_prefs_get_default (),
+		  "shared-flag", &shared,
+		  NULL);
+  vnc_display_set_shared_flag (VNC_DISPLAY (tab->priv->vnc),
+			       shared);
 
   if (vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), vinagre_connection_get_host (tab->priv->conn), port))
     gtk_widget_grab_focus (tab->priv->vnc);
@@ -637,10 +646,20 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
     switch (g_value_get_enum (&credList->values[i]))
       {
 	case VNC_DISPLAY_CREDENTIAL_USERNAME:
+	  if (vinagre_connection_get_username (tab->priv->conn))
+	    {
+	      vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_USERNAME, vinagre_connection_get_username (tab->priv->conn));
+	      break;
+	    }
 	  need_username= TRUE;
 	  break;
 
 	case VNC_DISPLAY_CREDENTIAL_PASSWORD:
+	  if (vinagre_connection_get_password (tab->priv->conn))
+	    {
+	      vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, vinagre_connection_get_password (tab->priv->conn));
+	      break;
+	    }
 	  need_password = TRUE;
 	  break;
 
@@ -839,8 +858,7 @@ setup_layout (VinagreTab *tab)
 static void
 vinagre_tab_init (VinagreTab *tab)
 {
-  GtkWidget     *viewport;
-  gboolean       shared;
+  GtkWidget *viewport;
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
   tab->priv->save_credential = FALSE;
@@ -864,12 +882,6 @@ vinagre_tab_init (VinagreTab *tab)
 					 tab->priv->vnc);
   viewport = gtk_bin_get_child (GTK_BIN (tab->priv->scroll));
   gtk_viewport_set_shadow_type(GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
-
-  g_object_get (vinagre_prefs_get_default (),
-		"shared-flag", &shared,
-		NULL);
-  vnc_display_set_shared_flag (VNC_DISPLAY (tab->priv->vnc),
-			       shared);
 
   g_signal_connect (tab->priv->vnc,
 		    "vnc-connected",

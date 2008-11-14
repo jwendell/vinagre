@@ -36,6 +36,7 @@ struct _VinagreConnectionPrivate
   gchar *username;
   gchar *password;
   gchar *desktop_name;
+  gint   shared;
   gboolean view_only;
   gboolean scaling;
   gboolean fullscreen;
@@ -55,7 +56,8 @@ enum
   PROP_ICON,
   PROP_VIEW_ONLY,
   PROP_SCALING,
-  PROP_FULLSCREEN
+  PROP_FULLSCREEN,
+  PROP_SHARED,
 };
 
 gint   vinagre_connection_default_port [VINAGRE_CONNECTION_PROTOCOL_INVALID-1] = {5900, 3389};
@@ -79,6 +81,7 @@ vinagre_connection_init (VinagreConnection *conn)
   conn->priv->view_only = FALSE;
   conn->priv->scaling = FALSE;
   conn->priv->fullscreen = FALSE;
+  conn->priv->shared = -1;
 }
 
 static void
@@ -155,6 +158,10 @@ vinagre_connection_set_property (GObject *object, guint prop_id, const GValue *v
 	vinagre_connection_set_fullscreen (conn, g_value_get_boolean (value));
 	break;
 
+      case PROP_SHARED:
+	vinagre_connection_set_shared (conn, g_value_get_int (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -219,6 +226,10 @@ vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, 
 
       case PROP_FULLSCREEN:
 	g_value_set_boolean (value, conn->priv->fullscreen);
+	break;
+
+      case PROP_SHARED:
+	g_value_set_int (value, conn->priv->shared);
 	break;
 
       default:
@@ -381,6 +392,20 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
                                                         G_PARAM_STATIC_NAME |
                                                         G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property (object_class,
+                                   PROP_PORT,
+                                   g_param_spec_int ("shared",
+                                                     "shared flag",
+	                                              "if the server should allow more than one client connected",
+                                                      -1,
+                                                      1,
+                                                      -1,
+	                                              G_PARAM_READWRITE |
+                                                      G_PARAM_CONSTRUCT |
+                                                      G_PARAM_STATIC_NICK |
+                                                      G_PARAM_STATIC_NAME |
+                                                      G_PARAM_STATIC_BLURB));
+
 }
 
 VinagreConnection *
@@ -525,6 +550,23 @@ vinagre_connection_get_best_name (VinagreConnection *conn)
   return NULL;
 }
 
+void
+vinagre_connection_set_shared (VinagreConnection *conn,
+			       gint value)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+  g_return_if_fail (value >=0 && value <=1);
+
+  conn->priv->shared = value;
+}
+gint
+vinagre_connection_get_shared (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), -1);
+
+  return conn->priv->shared;
+}
+
 VinagreConnection *
 vinagre_connection_clone (VinagreConnection *conn)
 {
@@ -627,16 +669,20 @@ VinagreConnection *
 vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
 {
   GKeyFile          *file;
-  GError            *error = NULL;
+  GError            *error;
   gboolean           loaded;
-  VinagreConnection *conn = NULL;
-  gchar             *host = NULL;
+  VinagreConnection *conn;
+  gchar             *host, *actual_host, *data;
   gint               port;
   int                file_size;
-  char              *data = NULL;
   GFile             *file_a;
 
   *error_msg = NULL;
+  host = NULL;
+  data = NULL;
+  conn = NULL;
+  error = NULL;
+  file = NULL;
 
   file_a = g_file_new_for_commandline_arg (uri);
   loaded = g_file_load_contents (file_a,
@@ -652,12 +698,10 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
 	  *error_msg = g_strdup (error->message);
 	  g_error_free (error);
 	}
+      else
+	*error_msg = g_strdup (_("Could not open the file."));
 
-      if (data)
-	g_free (data);
-
-      g_object_unref (file_a);
-      return NULL;
+      goto the_end;
     }
 
   file = g_key_file_new ();
@@ -666,38 +710,71 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
 				      file_size,
 				      G_KEY_FILE_NONE,
 				      &error);
-  if (loaded)
-    {
-      host = g_key_file_get_string (file, "connection", "host", NULL);
-      port = g_key_file_get_integer (file, "connection", "port", NULL);
-      if (host)
-	{
-	  conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
-                                           host,
-                                           port);
-	  if (!conn)
-	    {
-	      conn = vinagre_connection_new ();
-	      vinagre_connection_set_host (conn, host);
-	      vinagre_connection_set_port (conn, port);
-	    }
-	  g_free (host);
-	}
-    }
-  else
+  if (!loaded)
     {
       if (error)
 	{
 	  *error_msg = g_strdup (error->message);
 	  g_error_free (error);
 	}
+      else
+	*error_msg = g_strdup (_("Could not parse the file."));
+
+      goto the_end;
     }
 
-  if (data)
-    g_free (data);
+  host = g_key_file_get_string (file, "connection", "host", NULL);
+  port = g_key_file_get_integer (file, "connection", "port", NULL);
+  if (host)
+    {
+      if (!port)
+	{
+	  if (!vinagre_connection_split_string (host, &actual_host, &port, error_msg))
+	    goto the_end;
 
-  g_key_file_free (file);
+	  g_free (host);
+	  host = actual_host;
+	}
+
+      conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (), host, port);
+      if (!conn)
+	{
+	  gchar *username, *password;
+	  gint shared;
+	  GError *e = NULL;
+
+	  conn = vinagre_connection_new ();
+	  vinagre_connection_set_host (conn, host);
+	  vinagre_connection_set_port (conn, port);
+
+	  username = g_key_file_get_string  (file, "connection", "username", NULL);
+	  vinagre_connection_set_username (conn, username);
+	  g_free (username);
+
+	  password = g_key_file_get_string  (file, "connection", "password", NULL);
+	  vinagre_connection_set_password (conn, password);
+	  g_free (password);
+
+	  shared = g_key_file_get_integer (file, "options", "shared", &e);
+	  if (e)
+	    g_error_free (e);
+	  else
+	    if (shared == 0 || shared == 1)
+	      vinagre_connection_set_shared (conn, shared);
+	    else
+	      g_message (_("Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."), shared);
+	}
+
+      g_free (host);
+    }
+  else
+    *error_msg = g_strdup (_("Could not find the host address in the file."));
+
+the_end:
+  g_free (data);
   g_object_unref (file_a);
+  if (file)
+    g_key_file_free (file);
 
   return conn;
 }

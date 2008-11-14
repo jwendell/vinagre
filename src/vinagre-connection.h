@@ -108,6 +108,10 @@ gboolean	    vinagre_connection_get_fullscreen	(VinagreConnection *conn);
 void		    vinagre_connection_set_fullscreen	(VinagreConnection *conn,
 							 gboolean value);
 
+gint		    vinagre_connection_get_shared	(VinagreConnection *conn);
+void		    vinagre_connection_set_shared	(VinagreConnection *conn,
+							 gint value);
+
 gboolean	    vinagre_connection_split_string	(const gchar *uri,
 							 gchar **host,
 							 gint *port,
