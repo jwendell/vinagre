@@ -388,7 +388,7 @@ vinagre_bookmarks_edit (VinagreBookmarks  *book,
 	}
       else
 	{
-	  vinagre_utils_show_error (error_str, window);
+	  vinagre_utils_show_error (NULL, error_str, window);
 	  g_free (error_str);
 	}
 

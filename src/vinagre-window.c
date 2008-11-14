@@ -271,7 +271,7 @@ static void
 activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
 {
   VinagreConnection *conn;
-  gchar             *error, *msg;
+  gchar             *error;
 
   conn = vinagre_connection_new_from_string (gtk_recent_chooser_get_current_uri (action),
 					     &error);
@@ -281,16 +281,9 @@ activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
       g_object_unref (conn);
     }
   else
-    {
-      msg = g_strdup_printf ("%s %s",
-			     _("The following error has occurred:"),
-			     error ? error : _("Unknown error"));
-      vinagre_utils_show_error (msg, GTK_WINDOW (window));
-      g_free (msg);
-    }
+    vinagre_utils_show_error (NULL, error ? error : _("Unknown error"), GTK_WINDOW (window));
 
-  if (error)
-    g_free (error);
+  g_free (error);
 }
 
 static void

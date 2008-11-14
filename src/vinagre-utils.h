@@ -33,10 +33,11 @@ enum { VINAGRE_ALL_WORKSPACES = 0xffffffff };
 
 GtkWidget	*vinagre_utils_create_small_close_button (void);
 
-void		vinagre_utils_show_error		(const gchar *message,
+void		vinagre_utils_show_error		(const gchar *title,
+							 const gchar *message,
 							 GtkWindow *parent);
 
-void		vinagre_utils_show_many_errors		(const gchar *message,
+void		vinagre_utils_show_many_errors		(const gchar *title,
 							 GSList *items,
 							 GtkWindow *parent);
 

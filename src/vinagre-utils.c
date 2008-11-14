@@ -65,22 +65,49 @@ vinagre_utils_create_small_close_button ()
 }
 
 void
-vinagre_utils_show_error (const gchar *message, GtkWindow *parent)
+vinagre_utils_show_error (const gchar *title, const gchar *message, GtkWindow *parent)
 {
   GtkWidget *d;
+  gchar     *t;
+
+  if (title)
+    t = g_strdup (title);
+  else
+    t = g_strdup (_("An error has occurred:"));
 
   d = gtk_message_dialog_new (parent,
 			      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			      GTK_MESSAGE_ERROR,
 			      GTK_BUTTONS_CLOSE,
 			      "%s",
-			      message);
+			      t);
+  g_free (t);
+
+  if (message)
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
+					      "%s",
+					      message);
 
   g_signal_connect_swapped (d,
 			    "response", 
 			    G_CALLBACK (gtk_widget_destroy),
 			    d);
   gtk_widget_show_all (GTK_WIDGET(d));
+}
+
+void
+vinagre_utils_show_many_errors (const gchar *title, GSList *items, GtkWindow *parent)
+{
+  GString *msg;
+  GSList  *l;
+
+  msg = g_string_new (NULL);
+
+  for (l = items; l; l = l->next)
+    g_string_append_printf (msg, "%s\n", (gchar *)l->data);
+
+  vinagre_utils_show_error (title, msg->str, parent);
+  g_string_free (msg, TRUE);
 }
 
 void
@@ -151,23 +178,6 @@ vinagre_utils_escape_underscores (const gchar* text,
 
 	return g_string_free (str, FALSE);
 }
-
-void
-vinagre_utils_show_many_errors (const gchar *message, GSList *items, GtkWindow *parent)
-{
-  GString *msg;
-  GSList  *l;
-
-  msg = g_string_new (message);
-  g_string_append_c (msg, '\n');
-
-  for (l = items; l; l = l->next)
-    g_string_append_printf (msg, "\n%s", (gchar *)l->data);
-
-  vinagre_utils_show_error (msg->str, parent);
-  g_string_free (msg, TRUE);
-}
-
 
 static void _default_log (const gchar *log_domain G_GNUC_UNUSED,
 			 GLogLevelFlags log_level G_GNUC_UNUSED,
@@ -376,7 +386,7 @@ vinagre_about_dialog_handle_url (GtkAboutDialog *about,
 
   if (error != NULL) 
     {
-      vinagre_utils_show_error (error->message, GTK_IS_WINDOW (data) ? GTK_WINDOW (data) : NULL);
+      vinagre_utils_show_error (NULL, error->message, GTK_IS_WINDOW (data) ? GTK_WINDOW (data) : NULL);
       g_error_free (error);
     }
 
@@ -399,7 +409,7 @@ vinagre_utils_help_contents (GtkWindow *window)
 
   if (error != NULL) 
     {
-      vinagre_utils_show_error (error->message, GTK_IS_WINDOW (window) ? window : NULL);
+      vinagre_utils_show_error (NULL, error->message, GTK_IS_WINDOW (window) ? window : NULL);
       g_error_free (error);
     }
 }

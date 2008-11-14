@@ -307,7 +307,7 @@ open_vnc (VinagreTab *tab)
   if (vnc_display_open_host (VNC_DISPLAY(tab->priv->vnc), vinagre_connection_get_host (tab->priv->conn), port))
     gtk_widget_grab_focus (tab->priv->vnc);
   else
-    vinagre_utils_show_error (_("Error connecting to host."), NULL);
+    vinagre_utils_show_error (NULL, _("Error connecting to host."), NULL);
 
   g_free (port);
 }
@@ -345,7 +345,7 @@ vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreTab *tab)
   	g_string_append_printf (message, " (%s)", msg);
   g_string_append_printf (message, ".");
 
-  vinagre_utils_show_error (message->str, GTK_WINDOW (tab->priv->window));
+  vinagre_utils_show_error (_("Authentication failed"), message->str, GTK_WINDOW (tab->priv->window));
   g_string_free (message, TRUE);
   g_free (name);
 
@@ -371,7 +371,7 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreTab *tab)
 		   name,
 		   auth_type);
 
-  vinagre_utils_show_error (message->str, GTK_WINDOW (tab->priv->window));
+  vinagre_utils_show_error (_("Authentication unsupported"), message->str, GTK_WINDOW (tab->priv->window));
   g_string_free (message, TRUE);
   g_free (name);
 
@@ -448,7 +448,8 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
   data->is_private = FALSE;
 
   if (!gtk_recent_manager_add_full (manager, uri->str, data))
-    vinagre_utils_show_error (_("Error saving recent connection."),
+    vinagre_utils_show_error (NULL,
+			      _("Error saving recent connection."),
 			      GTK_WINDOW (tab->priv->window));
 
   g_string_free (uri, TRUE);
@@ -479,7 +480,8 @@ vinagre_tab_save_credential (VinagreTab *tab)
                 &tab->priv->keyring_item_id);
 
   if (result != GNOME_KEYRING_RESULT_OK)
-    vinagre_utils_show_error (_("Error saving the credential on the keyring."),
+    vinagre_utils_show_error (NULL,
+			      _("Error saving the credential on the keyring."),
 			      GTK_WINDOW (tab->priv->window));
 
   tab->priv->save_credential = FALSE;
@@ -1105,7 +1107,7 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
   if (active &&
       gdk_screen_is_composited (gtk_widget_get_screen (GTK_WIDGET (tab->priv->window))))
     {
-      vinagre_utils_show_error (_("Scaling does not work properly on composited windows. Disable the visual effects and try again."),
+      vinagre_utils_show_error (NULL, _("Scaling does not work properly on composited windows. Disable the visual effects and try again."),
 				GTK_WINDOW (tab->priv->window));
       return FALSE;
     }
@@ -1113,7 +1115,7 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
   vnc_display_set_force_size (VNC_DISPLAY(tab->priv->vnc), !active);
   if (!vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active))
     {
-      vinagre_utils_show_error (_("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
+      vinagre_utils_show_error (NULL, _("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
 				GTK_WINDOW (tab->priv->window));
       return FALSE;
     }

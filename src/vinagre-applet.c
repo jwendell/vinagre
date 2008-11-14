@@ -96,13 +96,8 @@ open_connection_cb (GtkMenuItem *item,
 			    NULL,
 			    &err))
     {
-      gchar *tmp;
-
-      tmp = g_strdup_printf (_("Could not run vinagre: %s"), err->message);
-      vinagre_utils_show_error (tmp, NULL);
-
+      vinagre_utils_show_error (_("Could not run vinagre:"), err->message, NULL);
       g_error_free (err);
-      g_free (tmp);
     }
 
   g_strfreev (argv);
@@ -142,13 +137,8 @@ open_vinagre_cb (GtkMenuItem *item,
 
   if (!g_spawn_command_line_async ("vinagre", &err))
     {
-      gchar *tmp;
-
-      tmp = g_strdup_printf (_("Could not run vinagre: %s"), err->message);
-      vinagre_utils_show_error (tmp, NULL);
-
+      vinagre_utils_show_error (_("Could not run vinagre:"), err->message, NULL);
       g_error_free (err);
-      g_free (tmp);
     }
 }
 
