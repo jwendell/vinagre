@@ -20,7 +20,9 @@
 
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
+#include <glade/glade.h>
 #include "vinagre-prefs.h"
+#include "vinagre-utils.h"
 
 #define VINAGRE_BASE_KEY		"/apps/vinagre"
 #define VM_ALWAYS_SHOW_TABS		VINAGRE_BASE_KEY "/always_show_tabs"
@@ -368,7 +370,7 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 				   g_param_spec_boolean ("show-accels",
 							 "Show menu accelerators",
 							 "Whether we should show the menu accelerators (keyboard shortcuts)",
-							 TRUE,
+							 FALSE,
 							 G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
 				   PROP_HISTORY_SIZE,
@@ -378,5 +380,87 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 						     0, G_MAXINT, 15,
 						     G_PARAM_READWRITE));
 
+}
+
+/* Preferences dialog */
+
+typedef struct {
+  GladeXML  *xml;
+  GtkWidget *dialog;
+  GtkWidget *show_tabs;
+  GtkWidget *show_accels;
+} VinagrePrefsDialog;
+
+static void
+vinagre_prefs_dialog_setup (VinagrePrefsDialog *dialog)
+{
+  gboolean show_accels, show_tabs;
+
+  g_object_get (vinagre_prefs_get_default (),
+		"show-accels", &show_accels,
+		"always-show-tabs", &show_tabs,
+		NULL);
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->show_accels), show_accels);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->show_tabs), show_tabs);
+}
+
+static void
+vinagre_prefs_dialog_quit (VinagrePrefsDialog *dialog)
+{
+  gtk_widget_destroy (dialog->dialog);
+  g_object_unref (dialog->xml);
+  g_free (dialog);
+  dialog = NULL;
+}
+
+static void
+vinagre_prefs_dialog_show_tabs_cb (VinagrePrefsDialog *dialog)
+{
+  g_object_set (vinagre_prefs_get_default (),
+		"always-show-tabs", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->show_tabs)),
+		NULL);
+}
+
+static void
+vinagre_prefs_dialog_show_accels_cb (VinagrePrefsDialog *dialog)
+{
+  g_object_set (vinagre_prefs_get_default (),
+		"show-accels", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->show_accels)),
+		NULL);
+}
+
+void
+vinagre_prefs_dialog_show (VinagreWindow *window)
+{
+  VinagrePrefsDialog *dialog;
+
+  dialog = g_new (VinagrePrefsDialog, 1);
+
+  dialog->xml = glade_xml_new (vinagre_utils_get_glade_filename (), NULL, NULL);
+  dialog->dialog = glade_xml_get_widget (dialog->xml, "preferences_dialog");
+  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (window));
+
+  dialog->show_tabs = glade_xml_get_widget (dialog->xml, "always_show_tabs_check");
+  dialog->show_accels = glade_xml_get_widget (dialog->xml, "show_accels_check");
+
+  vinagre_prefs_dialog_setup (dialog);
+
+  g_signal_connect_swapped (dialog->dialog,
+			    "response", 
+                            G_CALLBACK (vinagre_prefs_dialog_quit),
+                            dialog);
+
+  g_signal_connect_swapped (dialog->show_tabs,
+			    "toggled",
+			     G_CALLBACK (vinagre_prefs_dialog_show_tabs_cb),
+			     dialog);
+
+  g_signal_connect_swapped (dialog->show_accels,
+			    "toggled",
+			     G_CALLBACK (vinagre_prefs_dialog_show_accels_cb),
+			     dialog);
+
+  gtk_widget_show_all (dialog->dialog);
 }
 /* vim: set ts=8: */

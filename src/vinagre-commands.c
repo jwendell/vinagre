@@ -191,6 +191,14 @@ vinagre_cmd_machine_quit (GtkAction     *action,
   gtk_widget_destroy (GTK_WIDGET (window));
 }
 
+/* Edit Menu */
+void
+vinagre_cmd_edit_preferences (GtkAction     *action,
+			      VinagreWindow *window)
+{
+  vinagre_prefs_dialog_show (window);
+}
+
 /* View Menu */
 void
 vinagre_cmd_view_show_toolbar	(GtkAction     *action,

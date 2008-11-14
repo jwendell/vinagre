@@ -43,6 +43,10 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
     N_("Open a .VNC file"), G_CALLBACK (vinagre_cmd_machine_open) },
   { "MachineQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
     N_("Quit the program"), G_CALLBACK (vinagre_cmd_machine_quit) },
+
+  /* Edit menu */
+  { "EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
+    N_("Edit the application preferences"), G_CALLBACK (vinagre_cmd_edit_preferences) },
   	
   /* Bookmarks menu */
   { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
