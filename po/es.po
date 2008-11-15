@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&amp;component=general\n"
-"POT-Creation-Date: 2008-11-14 18:27+0000\n"
-"PO-Revision-Date: 2008-11-14 21:09+0100\n"
+"POT-Creation-Date: 2008-11-14 23:52+0000\n"
+"PO-Revision-Date: 2008-11-15 11:55+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,59 +53,90 @@ msgid "<b>Enter a name for this connection</b>"
 msgstr "<b>Introduzca un nombre para esta conexión</b>"
 
 #: ../data/vinagre.glade.h:5
+msgid "<b>Interface</b>"
+msgstr "<b>Interfaz</b>"
+
+#: ../data/vinagre.glade.h:6
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>¿A qué máquina quiere conectarse?</b>"
 
-#: ../data/vinagre.glade.h:6
+#: ../data/vinagre.glade.h:7
 msgid "Editing a bookmark"
 msgstr "Editando un marcador"
 
-#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:427 ../src/vinagre-tab.c:974
+#: ../data/vinagre.glade.h:8 ../src/vinagre-fav.c:427 ../src/vinagre-tab.c:974
 msgid "Host:"
 msgstr "Equipo:"
 
-#: ../data/vinagre.glade.h:8
+#: ../data/vinagre.glade.h:9
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: ../data/vinagre.glade.h:10
 msgid "Saving to bookmarks"
 msgstr "Guardando a los marcadores"
 
-#: ../data/vinagre.glade.h:9
+#: ../data/vinagre.glade.h:11 ../data/vinagre.schemas.in.h:8
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr ""
+"Indica si se deben mostrar las solapas incluso cuando sólo hay una conexión "
+"activa"
+
+#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Indica si se deben mostrar los aceleradores de menú (teclas rápidas)"
+
+#: ../data/vinagre.glade.h:13
+msgid "_Always show tabs"
+msgstr "Mostrar _siempre las solapas"
+
+#: ../data/vinagre.glade.h:14
 msgid "_Bookmark name:"
 msgstr "Nombre del _marcador:"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:15
 msgid "_Full screen"
 msgstr "_Pantalla completa"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:16
 msgid "_Host:"
 msgstr "_Equipo:"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:17
 msgid "_Name:"
 msgstr "_Nombre:"
 
-#: ../data/vinagre.glade.h:13
+#: ../data/vinagre.glade.h:18
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:19
 msgid "_Remember this credential"
 msgstr "_Recordar estas credenciales"
 
-#: ../data/vinagre.glade.h:15
+#: ../data/vinagre.glade.h:20
 msgid "_Scaling"
 msgstr "E_scalado"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:21
+msgid "_Show menu shortcuts"
+msgstr "_Mostrar los atajos de menú"
+
+#: ../data/vinagre.glade.h:22
 msgid "_Username:"
 msgstr "_Usuario:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:23
 msgid "_View only"
 msgstr "Sólo _visión"
 
+#: ../data/vinagre.glade.h:24
+msgid "gtk-close"
+msgstr "gtk-close"
+
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:26
 msgid "host or host:display or host::port"
 msgstr "equipo o equipo:pantalla o equipo::puerto"
 
@@ -155,17 +186,6 @@ msgstr ""
 #: ../data/vinagre.schemas.in.h:7
 msgid "Whether we should leave other clients connected"
 msgstr "Indica si se deben dejar otros clientes conectados"
-
-#: ../data/vinagre.schemas.in.h:8
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr ""
-"Indica si se deben mostrar las solapas incluso cuando sólo hay una conexión "
-"activa"
-
-#: ../data/vinagre.schemas.in.h:9
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "Indica si se deben mostrar los aceleradores de menú (teclas rápidas)"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -351,7 +371,7 @@ msgstr "Conectando..."
 msgid "Close connection"
 msgstr "Cerrar la conexión"
 
-#: ../src/vinagre-prefs.c:167
+#: ../src/vinagre-prefs.c:169
 msgid "Cannot initialize preferences manager."
 msgstr "No se pudo inicializar el gestor de preferencias."
 
@@ -395,11 +415,11 @@ msgid "Read only"
 msgstr "Sólo lectura"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:839 ../src/vinagre-tab.c:840 ../src/vinagre-ui.h:79
+#: ../src/vinagre-tab.c:839 ../src/vinagre-tab.c:840 ../src/vinagre-ui.h:83
 msgid "Take screenshot"
 msgstr "Capturar pantalla"
 
-#: ../src/vinagre-tab.c:848 ../src/vinagre-tab.c:849 ../src/vinagre-ui.h:82
+#: ../src/vinagre-tab.c:848 ../src/vinagre-tab.c:849 ../src/vinagre-ui.h:86
 msgid "Send Ctrl-Alt-Del"
 msgstr "Enviar Ctrl-Alt-Del"
 
@@ -473,122 +493,126 @@ msgstr "Abrir un archivo .VNC"
 msgid "Quit the program"
 msgstr "Salir del programa"
 
+#: ../src/vinagre-ui.h:49
+msgid "Edit the application preferences"
+msgstr "Editar las preferencias de la aplicación"
+
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:48
+#: ../src/vinagre-ui.h:52
 msgid "_Open bookmark"
 msgstr "_Abrir marcador"
 
-#: ../src/vinagre-ui.h:49
+#: ../src/vinagre-ui.h:53
 msgid "Connect to this machine"
 msgstr "Conectar con esta máquina"
 
-#: ../src/vinagre-ui.h:50
+#: ../src/vinagre-ui.h:54
 msgid "_Edit bookmark"
 msgstr "_Editar marcador"
 
-#: ../src/vinagre-ui.h:51
+#: ../src/vinagre-ui.h:55
 msgid "Edit the details of selected bookmark"
 msgstr "Editar los detalles del marcador seleccionado"
 
-#: ../src/vinagre-ui.h:52
+#: ../src/vinagre-ui.h:56
 msgid "_Remove from bookmarks"
 msgstr "_Quitar de los marcadores"
 
-#: ../src/vinagre-ui.h:53
+#: ../src/vinagre-ui.h:57
 msgid "Remove current selected connection from bookmarks"
 msgstr "Eliminar la conexión actualmente seleccionada de los marcadores"
 
 #. Help menu
-#: ../src/vinagre-ui.h:56
+#: ../src/vinagre-ui.h:60
 msgid "_Contents"
 msgstr "_Índice"
 
-#: ../src/vinagre-ui.h:57
+#: ../src/vinagre-ui.h:61
 msgid "Open the vinagre manual"
 msgstr "Abrir el manual de vinagre"
 
-#: ../src/vinagre-ui.h:59
+#: ../src/vinagre-ui.h:63
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
-#: ../src/vinagre-ui.h:66
+#: ../src/vinagre-ui.h:70
 msgid "Close the current connection"
 msgstr "Cerrar la conexión actual"
 
-#: ../src/vinagre-ui.h:67
+#: ../src/vinagre-ui.h:71
 msgid "C_lose All"
 msgstr "Cerrar _todo"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:72
 msgid "Close all active connections"
 msgstr "Cierra todas las conexiones activas"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:71
+#: ../src/vinagre-ui.h:75
 msgid "_Add to bookmarks"
 msgstr "_Añadir marcador"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:76
 msgid "Add current connection to your bookmarks"
 msgstr "Añadir la conexión actual a los marcadores"
 
-#: ../src/vinagre-ui.h:80
+#: ../src/vinagre-ui.h:84
 msgid "Take a screenshot of active connection"
 msgstr "Toma una captura de pantalla de la conexión activa"
 
-#: ../src/vinagre-ui.h:83
+#: ../src/vinagre-ui.h:87
 msgid "Send Ctrl+Alt+Del to active connection"
 msgstr "Enviar Ctrl+Alt+Del a la conexión activa"
 
-#: ../src/vinagre-ui.h:87
+#: ../src/vinagre-ui.h:91
 msgid "View the current machine in full screen"
 msgstr "Ver la máquina actual a pantalla completa"
 
-#: ../src/vinagre-ui.h:89
+#: ../src/vinagre-ui.h:93
 msgid "_Original size"
 msgstr "Tamaño _original"
 
-#: ../src/vinagre-ui.h:90
+#: ../src/vinagre-ui.h:94
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Ajustar la ventana al tamaño del escritorio remoto"
 
-#: ../src/vinagre-ui.h:96
+#: ../src/vinagre-ui.h:100
 msgid "S_caling"
 msgstr "Es_calado"
 
-#: ../src/vinagre-ui.h:97
+#: ../src/vinagre-ui.h:101
 msgid "Fit the remote screen into the current window size"
 msgstr "Ajustar la pantalla remota en el tamaño actual de ventana"
 
-#: ../src/vinagre-ui.h:99
+#: ../src/vinagre-ui.h:103
 msgid "_Read only"
 msgstr "Sólo _lectura"
 
-#: ../src/vinagre-ui.h:100
+#: ../src/vinagre-ui.h:104
 msgid "Disable mouse and keyboard"
 msgstr "Desactivar el teclado y el ratón"
 
-#: ../src/vinagre-ui.h:106
+#: ../src/vinagre-ui.h:110
 msgid "_Toolbar"
 msgstr "Barra de _herramientas"
 
-#: ../src/vinagre-ui.h:107
+#: ../src/vinagre-ui.h:111
 msgid "Show or hide the toolbar"
 msgstr "Mostrar u ocultar la barra de herramientas"
 
-#: ../src/vinagre-ui.h:110
+#: ../src/vinagre-ui.h:114
 msgid "_Statusbar"
 msgstr "Barra de e_stado"
 
-#: ../src/vinagre-ui.h:111
+#: ../src/vinagre-ui.h:115
 msgid "Show or hide the statusbar"
 msgstr "Mostrar u ocultar la barra de estado"
 
-#: ../src/vinagre-ui.h:114
+#: ../src/vinagre-ui.h:118
 msgid "Side _Panel"
 msgstr "_Panel lateral"
 
-#: ../src/vinagre-ui.h:115
+#: ../src/vinagre-ui.h:119
 msgid "Show or hide the side panel"
 msgstr "Mostrar u ocultar el panel lateral"
 
