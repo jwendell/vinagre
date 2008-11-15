@@ -339,11 +339,11 @@ vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreTab *tab)
   message = g_string_new (NULL);
   name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
 
-  g_string_printf (message, _("Authentication to host \"%s\" has failed"),
+  g_string_printf (message, _("Authentication to host <i>%s</i> has failed"),
 		   name);
   if (msg)
   	g_string_append_printf (message, " (%s)", msg);
-  g_string_append_printf (message, ".");
+  g_string_append_c (message, '.');
 
   vinagre_utils_show_error (_("Authentication failed"), message->str, GTK_WINDOW (tab->priv->window));
   g_string_free (message, TRUE);
@@ -367,7 +367,7 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreTab *tab)
   message = g_string_new (NULL);
   name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
 
-  g_string_printf (message, _("Authentication method to host \"%s\" is unsupported. (%u)"),
+  g_string_printf (message, _("Authentication method to host <i>%s</i> is unsupported. (%u)"),
 		   name,
 		   auth_type);
 

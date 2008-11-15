@@ -708,7 +708,7 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
   loaded = g_key_file_load_from_data (file,
 				      data,
 				      file_size,
-				      G_KEY_FILE_NONE,
+				      G_KEY_FILE_MATCH_INSENSITIVE,
 				      &error);
   if (!loaded)
     {
