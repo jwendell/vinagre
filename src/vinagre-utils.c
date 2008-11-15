@@ -84,7 +84,7 @@ vinagre_utils_show_error (const gchar *title, const gchar *message, GtkWindow *p
   g_free (t);
 
   if (message)
-    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
+    gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (d),
 					      "%s",
 					      message);
 

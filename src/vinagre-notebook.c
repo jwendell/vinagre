@@ -124,7 +124,7 @@ tab_disconnected_cb (VinagreTab *tab, VinagreNotebook *nb)
   gchar *message, *name;
 
   name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
-  message = g_strdup_printf (_("Connection to host \"%s\" was closed."),
+  message = g_strdup_printf (_("Connection to host <i>%s</i> was closed."),
 			     name);
   vinagre_utils_show_error (_("Connection closed"), message, GTK_WINDOW (nb->priv->window));
   g_free (message);

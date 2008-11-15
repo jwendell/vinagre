@@ -79,7 +79,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
 	  else
 	    {
 	      errors = g_slist_prepend (errors,
-					g_strdup_printf ("%s: %s",
+					g_strdup_printf ("<i>%s</i>: %s",
 							files[i],
 							error ? error : _("Unknown error")));
 	      if (error)
@@ -98,7 +98,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
 	    servers = g_slist_prepend (servers, conn);
 	  else
 	    errors = g_slist_prepend (errors,
-				      g_strdup_printf ("%s: %s",
+				      g_strdup_printf ("<i>%s</i>: %s",
 						       remaining_args[i],
 						       error ? error : _("Unknown error")));
 

@@ -88,6 +88,12 @@ vinagre_cmd_machine_connect (GtkAction     *action,
     }
 }
 
+static void
+vinagre_cmd_free_string_list (gpointer str, gpointer user_data)
+{
+  g_free (str);
+}
+
 void
 vinagre_cmd_machine_open (GtkAction     *action,
 			  VinagreWindow *window)
@@ -98,7 +104,7 @@ vinagre_cmd_machine_open (GtkAction     *action,
   GtkFileFilter     *filter;
   GSList            *files, *l;
   gchar             *uri;
-  gchar             *error;
+  gchar             *error = NULL;
   GSList            *errors = NULL;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
@@ -135,9 +141,8 @@ vinagre_cmd_machine_open (GtkAction     *action,
 	    }
 	  else
 	    {
-	      errors = g_slist_append (errors, g_strdup (uri));
-	      if (error)
-	        g_free (error);
+	      errors = g_slist_append (errors, g_strdup_printf ("<i>%s</i>: %s", uri, error?error:_("Unknown error")));
+	      g_free (error);
 	    }
 
 	  g_free (uri);
@@ -146,14 +151,17 @@ vinagre_cmd_machine_open (GtkAction     *action,
     }
 
   if (errors)
-    vinagre_utils_show_many_errors (ngettext ("The following file could not be opened:",
-					      "The following files could not be opened:",
-					      g_slist_length (errors)),
-				    errors,
-				    GTK_WINDOW (window));
+    {
+      vinagre_utils_show_many_errors (ngettext ("The following file could not be opened:",
+						 "The following files could not be opened:",
+						 g_slist_length (errors)),
+				      errors,
+				      GTK_WINDOW (window));
+      g_slist_foreach (errors, vinagre_cmd_free_string_list, NULL);
+      g_slist_free (errors);
+    }
 
   gtk_widget_destroy (dialog);
-
 }
 
 void
