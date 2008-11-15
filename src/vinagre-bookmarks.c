@@ -268,9 +268,9 @@ vinagre_bookmarks_add (VinagreBookmarks  *book,
 {
   gint result;
   GladeXML    *xml;
-  const gchar *glade_file;
+  const gchar *glade_file, *name;
   GtkWidget   *dialog, *name_entry;
-  const gchar *name;
+  gchar       *tmp;
 
   g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), FALSE);
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), FALSE);
@@ -283,8 +283,10 @@ vinagre_bookmarks_add (VinagreBookmarks  *book,
   name_entry = glade_xml_get_widget (xml, "bookmark_name_entry");
   gtk_window_set_transient_for (GTK_WINDOW(dialog), window);
 
-  gtk_entry_set_text (GTK_ENTRY (name_entry), vinagre_connection_get_best_name(conn));
+  tmp = vinagre_connection_get_best_name(conn);
+  gtk_entry_set_text (GTK_ENTRY (name_entry), tmp);
   gtk_editable_set_position (GTK_EDITABLE (name_entry), -1);
+  g_free (tmp);
 
   gtk_widget_show_all (dialog);
  
@@ -292,7 +294,7 @@ vinagre_bookmarks_add (VinagreBookmarks  *book,
 
   if (result == GTK_RESPONSE_OK)
     {
-      name = name = gtk_entry_get_text (GTK_ENTRY (name_entry));
+      name = gtk_entry_get_text (GTK_ENTRY (name_entry));
       if (strlen(name) < 1)
 	name = vinagre_connection_get_host (conn);
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Fri Nov 14 17:51:08 2008 -->
+<!--Generated with glade3 3.4.5 on Fri Nov 14 21:12:10 2008 -->
 <glade-interface>
   <widget class="GtkDialog" id="connect_dialog">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -38,32 +38,19 @@
             <property name="column_spacing">6</property>
             <property name="row_spacing">6</property>
             <child>
-              <widget class="GtkComboBoxEntry" id="host_entry">
-                <property name="width_request">250</property>
+              <widget class="GtkButton" id="find_button">
                 <property name="visible">True</property>
-                <property name="tooltip" translatable="yes" comments="Tooltip for host entry in connect dialog">host or host:display or host::port</property>
-                <child internal-child="entry">
-                  <widget class="GtkEntry" id="comboboxentry-entry1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="activates_default">True</property>
-                  </widget>
-                </child>
-              </widget>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
-                <property name="y_options"></property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="label2">
-                <property name="visible">True</property>
+                <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label">  </property>
+                <property name="label">gtk-find</property>
+                <property name="use_stock">True</property>
+                <property name="focus_on_click">False</property>
+                <property name="response_id">0</property>
               </widget>
               <packing>
-                <property name="x_options">GTK_FILL</property>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
+                <property name="x_options"></property>
                 <property name="y_options"></property>
               </packing>
             </child>
@@ -83,19 +70,32 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkButton" id="find_button">
+              <widget class="GtkLabel" id="label2">
                 <property name="visible">True</property>
-                <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label">gtk-find</property>
-                <property name="use_stock">True</property>
-                <property name="focus_on_click">False</property>
-                <property name="response_id">0</property>
+                <property name="label">  </property>
               </widget>
               <packing>
-                <property name="left_attach">3</property>
-                <property name="right_attach">4</property>
-                <property name="x_options"></property>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkComboBoxEntry" id="host_entry">
+                <property name="width_request">250</property>
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes" comments="Tooltip for host entry in connect dialog">host or host:display or host::port</property>
+                <child internal-child="entry">
+                  <widget class="GtkEntry" id="comboboxentry-entry1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="activates_default">True</property>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
                 <property name="y_options"></property>
               </packing>
             </child>
@@ -134,10 +134,21 @@
               <placeholder/>
             </child>
             <child>
-              <widget class="GtkCheckButton" id="scaling_check">
+              <widget class="GtkLabel" id="label6">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label">  </property>
+              </widget>
+              <packing>
+                <property name="x_options"></property>
+                <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkCheckButton" id="fullscreen_check">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="label" translatable="yes">_Scaling</property>
+                <property name="label" translatable="yes">_Full screen</property>
                 <property name="use_underline">True</property>
                 <property name="response_id">0</property>
                 <property name="draw_indicator">True</property>
@@ -145,8 +156,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
@@ -166,10 +175,10 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkCheckButton" id="fullscreen_check">
+              <widget class="GtkCheckButton" id="scaling_check">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="label" translatable="yes">_Full screen</property>
+                <property name="label" translatable="yes">_Scaling</property>
                 <property name="use_underline">True</property>
                 <property name="response_id">0</property>
                 <property name="draw_indicator">True</property>
@@ -177,17 +186,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="label6">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label">  </property>
-              </widget>
-              <packing>
-                <property name="x_options"></property>
-                <property name="y_options"></property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
               </packing>
             </child>
           </widget>
@@ -289,61 +289,40 @@
                   <placeholder/>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label19">
+                  <widget class="GtkLabel" id="label12">
                     <property name="visible">True</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Host:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">password_entry</property>
+                    <property name="label">   </property>
                   </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                  </packing>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="password_label">
-                    <property name="visible">True</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">_Password:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">password_entry</property>
-                  </widget>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkEntry" id="password_entry">
+                  <widget class="GtkEntry" id="username_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="max_length">8</property>
-                    <property name="visibility">False</property>
+                    <property name="max_length">254</property>
                     <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="right_attach">3</property>
-                    <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="host_label">
+                  <widget class="GtkLabel" id="username_label">
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="xalign">0</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">_Username:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">username_entry</property>
                   </widget>
                   <packing>
-                    <property name="left_attach">2</property>
-                    <property name="right_attach">3</property>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
                   </packing>
                 </child>
                 <child>
@@ -364,41 +343,62 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="username_label">
+                  <widget class="GtkLabel" id="host_label">
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">_Username:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">username_entry</property>
+                    <property name="use_markup">True</property>
                   </widget>
                   <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
+                    <property name="left_attach">2</property>
+                    <property name="right_attach">3</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkEntry" id="username_entry">
+                  <widget class="GtkEntry" id="password_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="max_length">254</property>
+                    <property name="max_length">8</property>
+                    <property name="visibility">False</property>
                     <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="right_attach">3</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkLabel" id="label12">
+                  <widget class="GtkLabel" id="password_label">
                     <property name="visible">True</property>
-                    <property name="label">   </property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">_Password:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">password_entry</property>
                   </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label19">
+                    <property name="visible">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Host:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">password_entry</property>
+                  </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                  </packing>
                 </child>
               </widget>
               <packing>
@@ -452,6 +452,7 @@
     </child>
   </widget>
   <widget class="GtkDialog" id="add_to_bookmarks_dialog">
+    <property name="width_request">380</property>
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Saving to bookmarks</property>
@@ -470,10 +471,12 @@
           <widget class="GtkVBox" id="vbox2">
             <property name="visible">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="spacing">2</property>
             <child>
               <widget class="GtkLabel" id="label8">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
                 <property name="label" translatable="yes">&lt;b&gt;Enter a name for this connection&lt;/b&gt;</property>
                 <property name="use_markup">True</property>
               </widget>
@@ -492,8 +495,12 @@
                   <widget class="GtkLabel" id="label10">
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="xalign">0</property>
                     <property name="label">  </property>
                   </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                  </packing>
                 </child>
                 <child>
                   <widget class="GtkLabel" id="label9">
@@ -529,6 +536,7 @@
             </child>
           </widget>
           <packing>
+            <property name="expand">False</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -614,32 +622,24 @@
               <placeholder/>
             </child>
             <child>
-              <widget class="GtkEntry" id="edit_bookmark_host_entry">
+              <widget class="GtkLabel" id="label16">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="tooltip" translatable="yes">host or host:display or host::port</property>
-                <property name="activates_default">True</property>
+                <property name="label">  </property>
               </widget>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
-              </packing>
             </child>
             <child>
-              <widget class="GtkEntry" id="edit_bookmark_name_entry">
-                <property name="width_request">250</property>
+              <widget class="GtkLabel" id="label14">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="is_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="activates_default">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">_Bookmark name:</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">edit_bookmark_name_entry</property>
               </widget>
               <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
               </packing>
             </child>
             <child>
@@ -659,25 +659,33 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label14">
+              <widget class="GtkEntry" id="edit_bookmark_name_entry">
+                <property name="width_request">250</property>
                 <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="is_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">_Bookmark name:</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">edit_bookmark_name_entry</property>
+                <property name="activates_default">True</property>
               </widget>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label16">
+              <widget class="GtkEntry" id="edit_bookmark_host_entry">
                 <property name="visible">True</property>
+                <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label">  </property>
+                <property name="tooltip" translatable="yes">host or host:display or host::port</property>
+                <property name="activates_default">True</property>
               </widget>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
             </child>
           </widget>
           <packing>
@@ -713,10 +721,21 @@
               <placeholder/>
             </child>
             <child>
-              <widget class="GtkCheckButton" id="edit_scaling_check">
+              <widget class="GtkLabel" id="label11">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label">  </property>
+              </widget>
+              <packing>
+                <property name="x_options"></property>
+                <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkCheckButton" id="edit_fullscreen_check">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="label" translatable="yes">_Scaling</property>
+                <property name="label" translatable="yes">_Full screen</property>
                 <property name="use_underline">True</property>
                 <property name="response_id">0</property>
                 <property name="draw_indicator">True</property>
@@ -724,8 +743,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
@@ -745,10 +762,10 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkCheckButton" id="edit_fullscreen_check">
+              <widget class="GtkCheckButton" id="edit_scaling_check">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="label" translatable="yes">_Full screen</property>
+                <property name="label" translatable="yes">_Scaling</property>
                 <property name="use_underline">True</property>
                 <property name="response_id">0</property>
                 <property name="draw_indicator">True</property>
@@ -756,17 +773,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="label11">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label">  </property>
-              </widget>
-              <packing>
-                <property name="x_options"></property>
-                <property name="y_options"></property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
               </packing>
             </child>
           </widget>
