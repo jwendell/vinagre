@@ -274,7 +274,8 @@ activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
   gchar             *error;
 
   conn = vinagre_connection_new_from_string (gtk_recent_chooser_get_current_uri (action),
-					     &error);
+					     &error,
+					     TRUE);
   if (conn)
     {
       vinagre_cmd_open_bookmark (window, conn);

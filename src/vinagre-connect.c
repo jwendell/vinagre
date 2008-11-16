@@ -261,7 +261,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
       save_history (dialog.host_entry);
 
-      conn = vinagre_connection_new_from_string (host, &error_msg);
+      conn = vinagre_connection_new_from_string (host, &error_msg, TRUE);
       if (conn)
 	{
 	  g_object_set (conn,

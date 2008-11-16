@@ -73,7 +73,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
     {
       for (i = 0; files[i]; i++) 
 	{
-	  conn = vinagre_connection_new_from_file (files[i], &error);
+	  conn = vinagre_connection_new_from_file (files[i], &error, FALSE);
 	  if (conn)
 	    servers = g_slist_prepend (servers, conn);
 	  else
@@ -93,7 +93,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
     {
       for (i = 0; remaining_args[i]; i++) 
 	{
-	  conn = vinagre_connection_new_from_string (remaining_args[i], &error);
+	  conn = vinagre_connection_new_from_string (remaining_args[i], &error, TRUE);
 	  if (conn)
 	    servers = g_slist_prepend (servers, conn);
 	  else

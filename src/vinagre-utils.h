@@ -29,6 +29,17 @@
 #define GPOINTER_TO_BOOLEAN(i) ((gboolean) ((((gint)(i)) == 2) ? TRUE : FALSE))
 #define IS_VALID_BOOLEAN(v) (((v == TRUE) || (v == FALSE)) ? TRUE : FALSE)
 
+enum {
+  TARGET_VINAGRE,
+  TARGET_STRING
+};
+
+static GtkTargetEntry vinagre_target_list[] = {
+  { "VINAGRE", 0, TARGET_VINAGRE },
+  { "text/plain", 0, TARGET_STRING }
+};
+static guint vinagre_n_targets = G_N_ELEMENTS (vinagre_target_list);
+
 enum { VINAGRE_ALL_WORKSPACES = 0xffffffff };
 
 GtkWidget	*vinagre_utils_create_small_close_button (void);

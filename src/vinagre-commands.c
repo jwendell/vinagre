@@ -130,7 +130,7 @@ vinagre_cmd_machine_open (GtkAction     *action,
       for (l = files; l; l = l->next)
         {
 	  uri = (gchar *)l->data;
-	  conn = vinagre_connection_new_from_file (uri, &error);
+	  conn = vinagre_connection_new_from_file (uri, &error, FALSE);
 
 	  if (conn)
 	    {

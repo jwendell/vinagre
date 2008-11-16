@@ -91,8 +91,8 @@ gchar*		    vinagre_connection_get_best_name	(VinagreConnection *conn);
 
 VinagreConnection*  vinagre_connection_clone		(VinagreConnection *conn);
 
-VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg);
-VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg);
+VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg, gboolean use_bookmarks);
+VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg, gboolean use_bookmarks);
 
 GdkPixbuf*          vinagre_connection_get_icon	(VinagreConnection *conn);
 

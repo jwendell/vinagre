@@ -73,6 +73,47 @@ vinagre_notebook_show_hide_tabs (VinagreNotebook *nb)
 }
 
 static void
+drag_data_get_handl (GtkWidget *widget,
+		     GdkDragContext *context,
+		     GtkSelectionData *selection_data,
+		     guint target_type,
+		     guint time,
+		     VinagreTab *tab)
+{
+  gchar *uri, *name, *data;
+  VinagreConnection *conn;
+
+  g_assert (selection_data != NULL);
+
+  switch (target_type)
+    {
+      case TARGET_VINAGRE:
+	conn = vinagre_tab_get_conn (tab);
+	uri = vinagre_connection_get_string_rep (conn, TRUE);
+	name = vinagre_connection_get_best_name (conn);
+	data = g_strdup_printf ("%s||%s", name, uri);
+
+	gtk_selection_data_set (selection_data,
+				selection_data->target,
+				8,
+				(guchar*) data,
+				strlen (data));
+
+	g_free (data);
+	g_free (name);
+	g_free (uri);
+	break;
+
+      case TARGET_STRING:
+	/*FIXME: Create a .VNC file*/
+	break;
+
+      default:
+	g_assert_not_reached ();
+    }
+}
+
+static void
 vinagre_notebook_init (VinagreNotebook *notebook)
 {
   notebook->priv = VINAGRE_NOTEBOOK_GET_PRIVATE (notebook);
@@ -225,6 +266,16 @@ build_tab_label (VinagreNotebook *nb,
 		    "tab-disconnected",
 		    G_CALLBACK (tab_disconnected_cb),
 		    nb);
+
+  gtk_drag_source_set ( GTK_WIDGET (hbox),
+			GDK_BUTTON1_MASK,
+			vinagre_target_list,
+			vinagre_n_targets,
+			GDK_ACTION_COPY );
+  g_signal_connect (hbox,
+		    "drag-data-get",
+		    G_CALLBACK (drag_data_get_handl),
+		    tab);
 
   return hbox;
 }

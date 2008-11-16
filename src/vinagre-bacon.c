@@ -119,9 +119,12 @@ vinagre_bacon_message_received (const char *message,
 
 	  for (j = 0; j < n_uris; j++)
 	    {
-	      conn = vinagre_connection_new_from_string (uris[j], &error);
+	      conn = vinagre_connection_new_from_string (uris[j], &error, TRUE);
 	      if (conn)
 		servers = g_slist_prepend (servers, conn);
+	      else
+		/*FIXME: Show a dialog error?*/
+		g_free (error);
 	    }
 
 	  g_strfreev (uris);

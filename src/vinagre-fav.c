@@ -714,6 +714,96 @@ vinagre_fav_create_tree (VinagreFav *fav)
 }
 
 static void
+drag_data_received_handl (GtkWidget *widget,
+			  GdkDragContext *context,
+			  gint x,
+			  gint y,
+			  GtkSelectionData *selection_data,
+			  guint target_type,
+			  guint time,
+			  VinagreFav *fav)
+{
+  gchar *_sdata;
+  gboolean success = FALSE;
+
+  if ((selection_data != NULL) && (selection_data->length >= 0))
+    {
+      switch (target_type)
+	{
+	  case TARGET_VINAGRE:
+	    _sdata = (gchar*)selection_data-> data;
+	    success = TRUE;
+	   break;
+
+	  default:
+	    g_print ("nothing good");
+	}
+    }
+
+  gtk_drag_finish (context, success, FALSE, time);
+
+  if (success)
+    {
+      VinagreConnection *conn;
+      gchar **info;
+      gchar *error = NULL;
+
+      info = g_strsplit (_sdata, "||", 2);
+      if (g_strv_length (info) != 2)
+	{
+	  vinagre_utils_show_error (_("Invalid operation"),
+				    _("Data received from drag&drop operation is invalid."),
+				    GTK_WINDOW (fav->priv->window));
+	  return;
+	}
+
+      conn = vinagre_connection_new_from_string (info[1], &error, FALSE);
+      if (!conn)
+	{
+	  g_strfreev (info);
+	  vinagre_utils_show_error (NULL,
+				    error ? error : _("Unknown error"),
+				    GTK_WINDOW (fav->priv->window));
+	  return;
+	}
+
+      vinagre_connection_set_name (conn, info[0]);
+      vinagre_bookmarks_add (vinagre_bookmarks_get_default (),
+			     conn,
+			     GTK_WINDOW (fav->priv->window));
+
+      g_strfreev (info);
+      g_object_unref (conn);
+    }
+}
+
+static gboolean
+drag_drop_handl (GtkWidget *widget,
+		 GdkDragContext *context,
+		 gint x,
+		 gint y,
+		 guint time,
+		 gpointer user_data)
+{
+  gboolean is_valid_drop_site;
+  GdkAtom  target_type;
+
+  is_valid_drop_site = FALSE;
+
+  if (context->targets)
+    {
+      target_type = GDK_POINTER_TO_ATOM (g_list_nth_data (context->targets, TARGET_VINAGRE));
+      gtk_drag_get_data (widget,
+			 context,
+			 target_type,
+			 time);
+      is_valid_drop_site = TRUE;
+    }
+
+  return  is_valid_drop_site;
+}
+
+static void
 vinagre_fav_init (VinagreFav *fav)
 {
   GtkWidget *label_box, *label, *close_button;
@@ -722,6 +812,21 @@ vinagre_fav_init (VinagreFav *fav)
 
   /* setup the tree */
   vinagre_fav_create_tree (fav);
+
+  gtk_drag_dest_set (fav->priv->tree,
+		     GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT,
+		     vinagre_target_list,
+		     vinagre_n_targets,
+		     GDK_ACTION_COPY);
+
+  g_signal_connect (fav->priv->tree,
+		    "drag-data-received",
+		    G_CALLBACK(drag_data_received_handl),
+		    fav);
+  g_signal_connect (fav->priv->tree,
+		    "drag-drop",
+		    G_CALLBACK (drag_drop_handl),
+		    NULL);
 
   g_signal_connect_swapped (vinagre_bookmarks_get_default (),
                             "changed",

@@ -642,18 +642,19 @@ vinagre_connection_split_string (const gchar *uri,
 }
 
 VinagreConnection *
-vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
+vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolean use_bookmarks)
 {
-  VinagreConnection *conn;
+  VinagreConnection *conn = NULL;
   gint    port;
   gchar  *host;
 
   if (!vinagre_connection_split_string (uri, &host, &port, error_msg))
     return NULL;
 
-  conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
-                                   host,
-                                   port);
+  if (use_bookmarks)
+    conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (),
+				     host,
+				     port);
   if (!conn)
     {
       conn = vinagre_connection_new ();
@@ -666,7 +667,7 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg)
 }
 
 VinagreConnection *
-vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
+vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg, gboolean use_bookmarks)
 {
   GKeyFile          *file;
   GError            *error;
@@ -683,6 +684,7 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
   conn = NULL;
   error = NULL;
   file = NULL;
+  conn = NULL;
 
   file_a = g_file_new_for_commandline_arg (uri);
   loaded = g_file_load_contents (file_a,
@@ -736,7 +738,8 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg)
 	  host = actual_host;
 	}
 
-      conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (), host, port);
+      if (use_bookmarks)
+        conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (), host, port);
       if (!conn)
 	{
 	  gchar *username, *password;
@@ -857,12 +860,12 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
   if (has_protocol)
     {
       uri = g_string_new (vinagre_connection_protos [conn->priv->protocol-1]);
-      g_string_append_printf (uri, "%s", "://");
+      g_string_append (uri, "://");
     }
   else
     uri = g_string_new (NULL);
 
-  g_string_append_printf (uri, "%s", conn->priv->host);
+  g_string_append (uri, conn->priv->host);
 
   if (vinagre_connection_default_port [conn->priv->protocol-1] != conn->priv->port)
     g_string_append_printf (uri, "::%d", conn->priv->port);
