@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&amp;component=general\n"
-"POT-Creation-Date: 2008-11-14 23:52+0000\n"
-"PO-Revision-Date: 2008-11-15 11:55+0100\n"
+"POT-Creation-Date: 2008-11-15 19:49+0000\n"
+"PO-Revision-Date: 2008-11-16 12:05+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -223,39 +223,45 @@ msgstr ""
 "Copiando el archivo de marcadores a la nueva ubicación. Se supone que esta "
 "operación sólo se ejecuta una vez."
 
-#: ../src/vinagre-bookmarks.c:428
+#: ../src/vinagre-bookmarks.c:430
 msgid "Confirm removal?"
 msgstr "¿Confirmar eliminación?"
 
-#: ../src/vinagre-bookmarks.c:431
+#: ../src/vinagre-bookmarks.c:433
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "¿Está seguro de que quiere quitar <i>%s</i> de los marcadores?"
 
-#: ../src/vinagre-bookmarks.c:442
+#: ../src/vinagre-bookmarks.c:444
 #, c-format
 msgid "Error while removing %s from bookmarks: %s"
 msgstr "Error al eliminar %s de los marcadores: %s"
 
-#: ../src/vinagre-bookmarks.c:509
+#: ../src/vinagre-bookmarks.c:511
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Error al inicializar los marcadores: %s"
 
-#: ../src/vinagre-bookmarks.c:530 ../src/vinagre-bookmarks.c:547
+#: ../src/vinagre-bookmarks.c:532 ../src/vinagre-bookmarks.c:549
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Error al guardar los marcadores: %s"
 
-#: ../src/vinagre-commands.c:106
+#: ../src/vinagre-commands.c:112
 msgid "Choose the file"
 msgstr "Elegir el archivo"
 
-#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:1057
+#: ../src/vinagre-commands.c:123 ../src/vinagre-tab.c:1057
 msgid "Supported formats"
 msgstr "Formatos soportados"
 
-#: ../src/vinagre-commands.c:149
+#: ../src/vinagre-commands.c:144 ../src/vinagre-connect.c:275
+#: ../src/vinagre-main.c:84 ../src/vinagre-main.c:103
+#: ../src/vinagre-window.c:284
+msgid "Unknown error"
+msgstr "Error desconocido"
+
+#: ../src/vinagre-commands.c:155
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "No se pudo abrir el siguiente archivo:"
@@ -269,11 +275,6 @@ msgstr "Error al guardar el archivo de histórico: %s"
 #: ../src/vinagre-connect.c:191
 msgid "Choose a VNC Server"
 msgstr "Elija un servidor VNC"
-
-#: ../src/vinagre-connect.c:275 ../src/vinagre-main.c:84
-#: ../src/vinagre-main.c:103 ../src/vinagre-window.c:284
-msgid "Unknown error"
-msgstr "Error desconocido"
 
 #: ../src/vinagre-connection.c:609
 #, c-format
@@ -356,8 +357,8 @@ msgstr "Falló al examinar los equipos: %s\n"
 
 #: ../src/vinagre-notebook.c:127
 #, c-format
-msgid "Connection to host \"%s\" was closed."
-msgstr "Se cerró la conexión con el equipo «%s»."
+msgid "Connection to host <i>%s</i> was closed."
+msgstr "Se cerró la conexión con el equipo <i>%s</i>."
 
 #: ../src/vinagre-notebook.c:129
 msgid "Connection closed"
@@ -381,8 +382,8 @@ msgstr "Error al conectar con el equipo."
 
 #: ../src/vinagre-tab.c:342
 #, c-format
-msgid "Authentication to host \"%s\" has failed"
-msgstr "La autenticación contra el equipo «%s» ha fallado"
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "La autenticación contra el equipo <i>%s</i> ha fallado"
 
 #: ../src/vinagre-tab.c:348
 msgid "Authentication failed"
@@ -390,9 +391,9 @@ msgstr "Falló la autenticación"
 
 #: ../src/vinagre-tab.c:370
 #, c-format
-msgid "Authentication method to host \"%s\" is unsupported. (%u)"
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
 msgstr ""
-"El método de autenticación contra el equipo «%s» no está soportado. (%u)"
+"El método de autenticación contra el equipo <i>%s</i> no está soportado. (%u)"
 
 #: ../src/vinagre-tab.c:374
 msgid "Authentication unsupported"
