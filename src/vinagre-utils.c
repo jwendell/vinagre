@@ -63,6 +63,7 @@ vinagre_utils_show_error (const gchar *message, GtkWindow *parent)
 			      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			      GTK_MESSAGE_ERROR,
 			      GTK_BUTTONS_CLOSE,
+			      "%s",
 			      message);
 
   g_signal_connect_swapped (d,
