@@ -191,20 +191,12 @@ vinagre_bookmarks_tree_init (VinagreBookmarksTree *tree)
 }
 
 static void
-vinagre_bookmarks_tree_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (vinagre_bookmarks_tree_parent_class)->finalize (object);
-}
-
-static void
 vinagre_bookmarks_tree_class_init (VinagreBookmarksTreeClass *klass)
 {
   GObjectClass* object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = vinagre_bookmarks_tree_finalize;
   g_type_class_add_private (object_class, sizeof (VinagreBookmarksTreePrivate));
 }
-
 
 GtkWidget *
 vinagre_bookmarks_tree_new (void)

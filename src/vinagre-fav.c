@@ -74,12 +74,6 @@ enum
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
-vinagre_fav_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (vinagre_fav_parent_class)->finalize (object);
-}
-
-static void
 vinagre_fav_set_property (GObject      *object,
 			  guint         prop_id,
 			  const GValue *value,
@@ -124,7 +118,6 @@ vinagre_fav_class_init (VinagreFavClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = vinagre_fav_finalize;
   object_class->get_property = vinagre_fav_get_property;
   object_class->set_property = vinagre_fav_set_property;
 
@@ -312,9 +305,6 @@ show_popup_menu (VinagreFav      *fav,
 		      fav,
 		      0, 
 		      gtk_get_current_event_time ());
-
-      //gtk_menu_shell_select_first (GTK_MENU_SHELL (menu), FALSE);
-
     }
 
   return TRUE;

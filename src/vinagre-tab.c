@@ -186,16 +186,27 @@ vinagre_tab_finalize (GObject *object)
 {
   VinagreTab *tab = VINAGRE_TAB (object);
 
-  g_signal_handlers_disconnect_by_func (tab->priv->window,
-  					vinagre_tab_window_state_cb,
-  					tab);
-  g_object_unref (tab->priv->conn);
-  tab->priv->conn = NULL;
-
   g_free (tab->priv->clipboard_str);
-  tab->priv->clipboard_str = NULL;
 
   G_OBJECT_CLASS (vinagre_tab_parent_class)->finalize (object);
+}
+
+static void
+vinagre_tab_dispose (GObject *object)
+{
+  VinagreTab *tab = VINAGRE_TAB (object);
+
+  if (tab->priv->conn)
+    {
+      g_signal_handlers_disconnect_by_func (tab->priv->window,
+  					    vinagre_tab_window_state_cb,
+  					    tab);
+
+      g_object_unref (tab->priv->conn);
+      tab->priv->conn = NULL;
+    }
+
+  G_OBJECT_CLASS (vinagre_tab_parent_class)->dispose (object);
 }
 
 static void 
@@ -204,6 +215,7 @@ vinagre_tab_class_init (VinagreTabClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = vinagre_tab_finalize;
+  object_class->dispose  = vinagre_tab_dispose;
   object_class->get_property = vinagre_tab_get_property;
   object_class->set_property = vinagre_tab_set_property;
 
@@ -789,7 +801,6 @@ setup_layout (VinagreTab *tab)
   tab->priv->toolbar = gtk_toolbar_new ();
   GTK_WIDGET_SET_FLAGS (tab->priv->toolbar, GTK_NO_SHOW_ALL);
 
-  gtk_toolbar_set_tooltips (GTK_TOOLBAR (tab->priv->toolbar), TRUE);
   gtk_toolbar_set_style (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOLBAR_BOTH_HORIZ);
 
   /* Leave fullscreen */
@@ -1066,7 +1077,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   }
 
   gtk_widget_destroy (dialog);
-  gdk_pixbuf_unref (pix);
+  g_object_unref (pix);
   g_string_free (suggested_filename, TRUE);
   g_free (name);
 }

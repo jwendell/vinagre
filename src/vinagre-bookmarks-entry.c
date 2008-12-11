@@ -44,25 +44,12 @@ vinagre_bookmarks_entry_init (VinagreBookmarksEntry *entry)
 }
 
 static void
-vinagre_bookmarks_entry_clear (VinagreBookmarksEntry *entry)
-{
-  if (entry->priv->node == VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER)
-    {
-	g_free (entry->priv->name);
-	g_slist_free (entry->priv->children);
-    }
-}
-
-static void
 vinagre_bookmarks_entry_finalize (GObject *object)
 {
   VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (object);
 
   if (entry->priv->node == VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER)
-    {
-	g_free (entry->priv->name);
-	g_slist_free (entry->priv->children);
-    }
+    g_free (entry->priv->name);
 
   G_OBJECT_CLASS (vinagre_bookmarks_entry_parent_class)->finalize (object);
 }
@@ -86,6 +73,7 @@ vinagre_bookmarks_entry_dispose (GObject *object)
 	if (entry->priv->children)
 	  {
 	    g_slist_foreach (entry->priv->children, (GFunc) g_object_unref, NULL);
+	    g_slist_free (entry->priv->children);
 	    entry->priv->children = NULL;
 	  }
 	break;

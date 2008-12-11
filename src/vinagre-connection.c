@@ -90,19 +90,10 @@ vinagre_connection_finalize (GObject *object)
   VinagreConnection *conn = VINAGRE_CONNECTION (object);
 
   g_free (conn->priv->host);
-  conn->priv->host = NULL;
-
   g_free (conn->priv->username);
-  conn->priv->username = NULL;
-
   g_free (conn->priv->password);
-  conn->priv->password = NULL;
-
   g_free (conn->priv->name);
-  conn->priv->name = NULL;
-
   g_free (conn->priv->desktop_name);
-  conn->priv->desktop_name = NULL;
 
   G_OBJECT_CLASS (vinagre_connection_parent_class)->finalize (object);
 }

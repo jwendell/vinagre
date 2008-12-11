@@ -187,25 +187,30 @@ vinagre_mdns_init (VinagreMdns *mdns)
 }
 
 static void
-vinagre_mdns_clear_entries (VinagreMdns *mdns)
-{
-  g_slist_foreach (mdns->priv->entries, (GFunc) g_object_unref, NULL);
-  g_slist_free (mdns->priv->entries);
-
-  mdns->priv->entries = NULL;
-}
-
-static void
-vinagre_mdns_finalize (GObject *object)
+vinagre_mdns_dispose (GObject *object)
 {
   VinagreMdns *mdns = VINAGRE_MDNS (object);
 
-  g_object_unref (mdns->priv->browser);
-  g_object_unref (mdns->priv->client);
+  if (mdns->priv->browser)
+    {
+      g_object_unref (mdns->priv->browser);
+      mdns->priv->browser = NULL;
+    }
 
-  vinagre_mdns_clear_entries (mdns);
+  if (mdns->priv->client)
+    {
+      g_object_unref (mdns->priv->client);
+      mdns->priv->client = NULL;
+    }
 
-  G_OBJECT_CLASS (vinagre_mdns_parent_class)->finalize (object);
+  if (mdns->priv->entries)
+    {
+      g_slist_foreach (mdns->priv->entries, (GFunc) g_object_unref, NULL);
+      g_slist_free (mdns->priv->entries);
+      mdns->priv->entries = NULL;
+    }
+
+  G_OBJECT_CLASS (vinagre_mdns_parent_class)->dispose (object);
 }
 
 static void
@@ -216,7 +221,7 @@ vinagre_mdns_class_init (VinagreMdnsClass *klass)
 
   g_type_class_add_private (klass, sizeof (VinagreMdnsPrivate));
 
-  object_class->finalize = vinagre_mdns_finalize;
+  object_class->dispose = vinagre_mdns_dispose;
 
   signals[MDNS_CHANGED] =
 		g_signal_new ("changed",

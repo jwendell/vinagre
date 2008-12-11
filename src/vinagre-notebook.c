@@ -208,7 +208,7 @@ build_tab_label (VinagreNotebook *nb,
   rcstyle = gtk_rc_style_new ();
   rcstyle->xthickness = rcstyle->ythickness = 0;
   gtk_widget_modify_style (close_button, rcstyle);
-  gtk_rc_style_unref (rcstyle);
+  g_object_unref (rcstyle);
   gint w, h;
   gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
   gtk_widget_set_size_request (GTK_WIDGET (close_button), w+2, h+2);

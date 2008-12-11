@@ -54,7 +54,7 @@ vinagre_utils_create_small_close_button ()
   rcstyle = gtk_rc_style_new ();
   rcstyle->xthickness = rcstyle->ythickness = 0;
   gtk_widget_modify_style (close_button, rcstyle);
-  gtk_rc_style_unref (rcstyle),
+  g_object_unref (rcstyle),
 
   image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
 				    GTK_ICON_SIZE_MENU);

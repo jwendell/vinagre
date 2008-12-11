@@ -185,20 +185,6 @@ vinagre_prefs_init (VinagrePrefs *prefs)
 }
 
 static void
-vinagre_prefs_finalize (GObject *object)
-{
-  VinagrePrefs *prefs = VINAGRE_PREFS (object);
-
-  gconf_client_remove_dir (prefs->priv->gconf_client,
-			   VINAGRE_BASE_KEY,
-			   NULL);
-  g_object_unref (prefs->priv->gconf_client);
-  prefs->priv->gconf_client = NULL;
-
-  G_OBJECT_CLASS (vinagre_prefs_parent_class)->finalize (object);
-}
-
-static void
 vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
   VinagrePrefs *prefs = VINAGRE_PREFS (object);
@@ -291,6 +277,24 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 }
 
 static void
+vinagre_prefs_dispose (GObject *object)
+{
+  VinagrePrefs *prefs = VINAGRE_PREFS (object);
+
+  if (prefs->priv->gconf_client)
+    {
+      gconf_client_remove_dir (prefs->priv->gconf_client,
+			       VINAGRE_BASE_KEY,
+			       NULL);
+      g_object_unref (prefs->priv->gconf_client);
+      prefs->priv->gconf_client = NULL;
+    }
+
+  G_OBJECT_CLASS (vinagre_prefs_parent_class)->dispose (object);
+}
+
+
+static void
 vinagre_prefs_class_init (VinagrePrefsClass *klass)
 {
   GObjectClass* object_class = G_OBJECT_CLASS (klass);
@@ -298,7 +302,7 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 
   g_type_class_add_private (klass, sizeof (VinagrePrefsPrivate));
 
-  object_class->finalize = vinagre_prefs_finalize;
+  object_class->dispose = vinagre_prefs_dispose;
   object_class->set_property = vinagre_prefs_set_property;
   object_class->get_property = vinagre_prefs_get_property;
 

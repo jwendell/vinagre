@@ -94,12 +94,6 @@ vinagre_window_dispose (GObject *object)
   G_OBJECT_CLASS (vinagre_window_parent_class)->dispose (object);
 }
 
-static void
-vinagre_window_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (vinagre_window_parent_class)->finalize (object);
-}
-
 static gboolean
 vinagre_window_delete_event (GtkWidget   *widget,
 			     GdkEventAny *event)
@@ -201,7 +195,6 @@ vinagre_window_class_init (VinagreWindowClass *klass)
   GObjectClass *object_class    = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class  = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = vinagre_window_finalize;
   object_class->dispose  = vinagre_window_dispose;
 
   widget_class->window_state_event = vinagre_window_state_event_cb;
