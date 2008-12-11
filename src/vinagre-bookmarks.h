@@ -22,10 +22,15 @@
 #define __VINAGRE_BOOKMARKS_H__
 
 #include <glib.h>
+#include <glib-object.h>
 
 #include "vinagre-connection.h"
+#include "vinagre-bookmarks-entry.h"
 
 G_BEGIN_DECLS
+
+#define VINAGRE_BOOKMARKS_FILE      "vinagre-bookmarks.xml"
+#define VINAGRE_BOOKMARKS_FILE_OLD  "vinagre.bookmarks"
 
 #define VINAGRE_TYPE_BOOKMARKS             (vinagre_bookmarks_get_type ())
 #define VINAGRE_BOOKMARKS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), VINAGRE_TYPE_BOOKMARKS, VinagreBookmarks))
@@ -56,19 +61,15 @@ struct _VinagreBookmarks
 
 GType vinagre_bookmarks_get_type (void) G_GNUC_CONST;
 
-VinagreBookmarks   *vinagre_bookmarks_get_default (void);
+VinagreBookmarks   *vinagre_bookmarks_get_default  (void);
+GSList             *vinagre_bookmarks_get_all      (VinagreBookmarks *book);
+void                vinagre_bookmarks_save_to_file (VinagreBookmarks *book);
+void                vinagre_bookmarks_add_entry    (VinagreBookmarks      *book,
+                                                    VinagreBookmarksEntry *entry,
+                                                    VinagreBookmarksEntry *parent);
+gboolean           vinagre_bookmarks_remove_entry  (VinagreBookmarks      *book,
+                                                    VinagreBookmarksEntry *entry);
 
-gboolean            vinagre_bookmarks_add   (VinagreBookmarks  *book,
-                                             VinagreConnection *conn,
-                                             GtkWindow         *window);
-gboolean            vinagre_bookmarks_del   (VinagreBookmarks  *book,
-                                             VinagreConnection *conn,
-                                             GtkWindow         *window);
-gboolean            vinagre_bookmarks_edit  (VinagreBookmarks  *book,
-                                             VinagreConnection *conn,
-                                             GtkWindow         *window);
-
-GSList             *vinagre_bookmarks_get_all (VinagreBookmarks *book);
 VinagreConnection  *vinagre_bookmarks_exists  (VinagreBookmarks *book,
                                                const gchar *host,
                                                gint port);

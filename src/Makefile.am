@@ -21,23 +21,26 @@ INCLUDES = 						\
 bin_PROGRAMS = vinagre
 
 vinagre_SOURCES = \
-	vinagre-commands.c vinagre-commands.h		\
-	vinagre-connect.c vinagre-connect.h		\
-	vinagre-connection.c vinagre-connection.h	\
-	vinagre-fav.c vinagre-fav.h			\
-	vinagre-bookmarks.c vinagre-bookmarks.h		\
-	vinagre-main.c 			\
-	vinagre-notebook.c vinagre-notebook.h		\
-	vinagre-tab.c vinagre-tab.h			\
-	vinagre-utils.c vinagre-utils.h			\
-	vinagre-window.c vinagre-window.h		\
-	vinagre-ui.h vinagre-window-private.h		\
-	vinagre-enums.h vinagre-enums.c			\
-	gossip-cell-renderer-expander.c gossip-cell-renderer-expander.h \
-	vinagre-prefs.h vinagre-prefs.c \
-	bacon-message-connection.h bacon-message-connection.c \
-	vinagre-app.h vinagre-app.c \
-	vinagre-bacon.h vinagre-bacon.c \
+	vinagre-commands.c vinagre-commands.h			\
+	vinagre-connect.c vinagre-connect.h			\
+	vinagre-connection.c vinagre-connection.h		\
+	vinagre-fav.c vinagre-fav.h				\
+	vinagre-bookmarks.c vinagre-bookmarks.h			\
+	vinagre-main.c 						\
+	vinagre-notebook.c vinagre-notebook.h			\
+	vinagre-tab.c vinagre-tab.h				\
+	vinagre-utils.c vinagre-utils.h				\
+	vinagre-window.c vinagre-window.h			\
+	vinagre-ui.h vinagre-window-private.h			\
+	vinagre-enums.h vinagre-enums.c				\
+	vinagre-prefs.h vinagre-prefs.c				\
+	bacon-message-connection.h bacon-message-connection.c	\
+	vinagre-app.h vinagre-app.c 				\
+	vinagre-bacon.h vinagre-bacon.c 			\
+	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\
+	vinagre-bookmarks-tree.h vinagre-bookmarks-tree.c	\
+	vinagre-bookmarks-ui.h vinagre-bookmarks-ui.c		\
+	vinagre-bookmarks-migration.h vinagre-bookmarks-migration.c \
 	$(NULL)
 
 if AVAHI
@@ -78,12 +81,15 @@ vinagre_applet_CFLAGS =			\
 	$(AVAHI_CFLAGS)			\
 	$(NULL)
 
-vinagre_applet_SOURCES =		\
-	vinagre-applet.c		\
-	vinagre-bookmarks.h vinagre-bookmarks.c		\
-	vinagre-connection.h vinagre-connection.c	\
-	vinagre-utils.h vinagre-utils.c			\
-	vinagre-enums.h vinagre-enums.c			\
+vinagre_applet_SOURCES =					\
+	vinagre-applet.c					\
+	vinagre-bookmarks.h vinagre-bookmarks.c			\
+	vinagre-connection.h vinagre-connection.c		\
+	vinagre-utils.h vinagre-utils.c				\
+	vinagre-enums.h vinagre-enums.c				\
+	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\
+	vinagre-bookmarks-tree.h vinagre-bookmarks-tree.c	\
+	vinagre-bookmarks-migration.h vinagre-bookmarks-migration.c \
 	$(NULL)
 
 if AVAHI

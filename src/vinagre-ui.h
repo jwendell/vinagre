@@ -55,6 +55,8 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
     N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_cmd_bookmarks_edit) },
   { "BookmarksDel", GTK_STOCK_DELETE, N_("_Remove from bookmarks"), NULL,
     N_("Remove current selected connection from bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_del) },
+  { "BookmarksNewFolder", "folder-new", N_("_New Folder"), NULL,
+    N_("Create a new folder"), G_CALLBACK (vinagre_cmd_bookmarks_new_folder) },
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",

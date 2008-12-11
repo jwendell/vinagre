@@ -22,7 +22,7 @@
 #define __VINAGRE_FAV_H__
 
 #include <gtk/gtk.h>
-#include "vinagre-connection.h"
+#include "vinagre-bookmarks-entry.h"
 #include "vinagre-window.h"
 
 G_BEGIN_DECLS
@@ -51,10 +51,10 @@ struct _VinagreFavClass
 
   /* Signals */
   void	(* fav_activated)   (VinagreFav *fav,
-			     VinagreConnection *conn);
+			     VinagreBookmarksEntry *entry);
 
   void	(* fav_selected)    (VinagreFav *fav,
-			    VinagreConnection *conn);
+			    VinagreBookmarksEntry *entry);
 };
 
 GType 	    vinagre_fav_get_type    (void) G_GNUC_CONST;

@@ -20,13 +20,14 @@
 
 #include "vinagre-mdns.h"
 #include "vinagre-connection.h"
+#include "vinagre-bookmarks-entry.h"
 #include <avahi-gobject/ga-service-browser.h>
 #include <avahi-gobject/ga-service-resolver.h>
 #include <glib/gi18n.h>
 
 struct _VinagreMdnsPrivate
 {
-  GSList           *conns;
+  GSList           *entries;
   GaServiceBrowser *browser;
   GaClient         *client;
 };
@@ -56,7 +57,8 @@ mdns_resolver_found (GaServiceResolver *resolver,
                      GaLookupResultFlags flags,
                      VinagreMdns         *mdns)
 {
-  VinagreConnection *conn;
+  VinagreConnection     *conn;
+  VinagreBookmarksEntry *entry;
 
   conn = vinagre_connection_new ();
   g_object_set (conn,
@@ -64,11 +66,14 @@ mdns_resolver_found (GaServiceResolver *resolver,
                 "port", port,
                 "host", host_name,
                 NULL);
+  entry = vinagre_bookmarks_entry_new_conn (conn);
+  g_object_unref (conn);
 
-  mdns->priv->conns = g_slist_prepend (mdns->priv->conns, conn);
+  mdns->priv->entries = g_slist_insert_sorted (mdns->priv->entries,
+					       entry,
+					       (GCompareFunc)vinagre_bookmarks_entry_compare);
 
   g_object_unref (resolver);
-
   g_signal_emit (mdns, signals[MDNS_CHANGED], 0);
 }
 
@@ -132,16 +137,16 @@ mdns_browser_del_cb (GaServiceBrowser   *browser,
 {
   GSList *l;
 
-  for (l = mdns->priv->conns; l; l = l->next)
+  for (l = mdns->priv->entries; l; l = l->next)
     {
-      VinagreConnection *conn = VINAGRE_CONNECTION (l->data);
-      if (strcmp (vinagre_connection_get_name (conn), name) == 0)
-        {
-          g_object_unref (conn);
-          mdns->priv->conns = g_slist_remove (mdns->priv->conns, conn);
-          g_signal_emit (mdns, signals[MDNS_CHANGED], 0);
-          return;
-        }
+      VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
+      if (strcmp (vinagre_connection_get_name (vinagre_bookmarks_entry_get_conn (entry)), name) == 0)
+	{
+	  mdns->priv->entries = g_slist_remove (mdns->priv->entries, entry);
+	  g_object_unref (entry);
+	  g_signal_emit (mdns, signals[MDNS_CHANGED], 0);
+	  return;
+	}
     }
 }
 
@@ -152,7 +157,7 @@ vinagre_mdns_init (VinagreMdns *mdns)
 
   mdns->priv = G_TYPE_INSTANCE_GET_PRIVATE (mdns, VINAGRE_TYPE_MDNS, VinagreMdnsPrivate);
 
-  mdns->priv->conns = NULL;
+  mdns->priv->entries = NULL;
   mdns->priv->browser = ga_service_browser_new ("_rfb._tcp");
   mdns->priv->client = ga_client_new (GA_CLIENT_FLAG_NO_FLAGS);
 
@@ -182,12 +187,12 @@ vinagre_mdns_init (VinagreMdns *mdns)
 }
 
 static void
-vinagre_mdns_clear_conns (VinagreMdns *mdns)
+vinagre_mdns_clear_entries (VinagreMdns *mdns)
 {
-  g_slist_foreach (mdns->priv->conns, (GFunc) g_object_unref, NULL);
-  g_slist_free (mdns->priv->conns);
+  g_slist_foreach (mdns->priv->entries, (GFunc) g_object_unref, NULL);
+  g_slist_free (mdns->priv->entries);
 
-  mdns->priv->conns = NULL;
+  mdns->priv->entries = NULL;
 }
 
 static void
@@ -198,7 +203,7 @@ vinagre_mdns_finalize (GObject *object)
   g_object_unref (mdns->priv->browser);
   g_object_unref (mdns->priv->client);
 
-  vinagre_mdns_clear_conns (mdns);
+  vinagre_mdns_clear_entries (mdns);
 
   G_OBJECT_CLASS (vinagre_mdns_parent_class)->finalize (object);
 }
@@ -239,5 +244,5 @@ vinagre_mdns_get_all (VinagreMdns *mdns)
 {
   g_return_val_if_fail (VINAGRE_IS_MDNS (mdns), NULL);
 
-  return mdns->priv->conns;
+  return mdns->priv->entries;
 }

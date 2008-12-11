@@ -37,6 +37,7 @@
 #include "vinagre-bookmarks.h"
 #include "vinagre-ui.h"
 #include "vinagre-window-private.h"
+#include "vinagre-bookmarks-entry.h"
 
 #ifdef VINAGRE_ENABLE_AVAHI
 #include "vinagre-mdns.h"
@@ -53,10 +54,10 @@ vinagre_window_dispose (GObject *object)
 {
   VinagreWindow *window = VINAGRE_WINDOW (object);
 
-  if (window->priv->fav_conn_selected)
+  if (window->priv->fav_entry_selected)
     {
-      g_object_unref (window->priv->fav_conn_selected);
-      window->priv->fav_conn_selected = NULL;
+      g_object_unref (window->priv->fav_entry_selected);
+      window->priv->fav_entry_selected = NULL;
     }
 
   if (window->priv->manager)
@@ -517,17 +518,19 @@ fav_panel_size_allocate (GtkWidget     *widget,
 }
 
 static void
-fav_panel_activated (VinagreFav        *fav,
-		     VinagreConnection *conn,
-		     VinagreWindow     *window)
+fav_panel_activated (VinagreFav            *fav,
+		     VinagreBookmarksEntry *entry,
+		     VinagreWindow         *window)
 {
-  vinagre_cmd_open_bookmark (window, conn);
+  g_return_if_fail (vinagre_bookmarks_entry_get_node (entry) == VINAGRE_BOOKMARKS_ENTRY_NODE_CONN);
+
+  vinagre_cmd_open_bookmark (window, vinagre_bookmarks_entry_get_conn (entry));
 }
 
 static void
-fav_panel_selected (VinagreFav        *fav,
-		    VinagreConnection *conn,
-		    VinagreWindow     *window)
+fav_panel_selected (VinagreFav            *fav,
+		    VinagreBookmarksEntry *entry,
+		    VinagreWindow         *window)
 {
   GtkAction *action1, *action2;
 
@@ -536,15 +539,15 @@ fav_panel_selected (VinagreFav        *fav,
   action2 = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					 "BookmarksEdit");
 
-  if (window->priv->fav_conn_selected)
+  if (window->priv->fav_entry_selected)
     {
-      g_object_unref (window->priv->fav_conn_selected);
-      window->priv->fav_conn_selected = NULL;
+      g_object_unref (window->priv->fav_entry_selected);
+      window->priv->fav_entry_selected = NULL;
     }
 
-  if (conn)
+  if (entry)
     {
-      window->priv->fav_conn_selected = vinagre_connection_clone (conn);
+      window->priv->fav_entry_selected = g_object_ref (entry);
       gtk_action_set_sensitive (action1, TRUE);
       gtk_action_set_sensitive (action2, TRUE);
       /* TODO: Change the menuitem label */
@@ -557,17 +560,107 @@ fav_panel_selected (VinagreFav        *fav,
     }
 }
 
+static void
+vinagre_window_populate_bookmarks (VinagreWindow *window,
+				   const gchar   *group,
+				   GSList        *entries,
+				   const gchar   *parent)
+{
+  static guint           i = 0;
+  GSList                *l;
+  VinagreBookmarksEntry *entry;
+  gchar                 *action_name, *action_label, *path, *tooltip;
+  GtkAction             *action;
+  VinagreWindowPrivate  *p = window->priv;
+  VinagreConnection     *conn;
+
+  for (l = entries; l; l = l->next)
+    {
+      entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
+      switch (vinagre_bookmarks_entry_get_node (entry))
+	{
+	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
+	    action_label = vinagre_utils_escape_underscores (vinagre_bookmarks_entry_get_name (entry), -1);
+	    action_name = g_strdup_printf ("BOOKMARK_FOLDER_ACTION_%d", ++i);
+	    action = gtk_action_new (action_name,
+				     action_label,
+				     NULL,
+				     NULL);
+	    g_object_set (G_OBJECT (action), "icon-name", "folder", "hide-if-empty", FALSE, NULL);
+	    gtk_action_group_add_action (p->bookmarks_list_action_group,
+					 action);
+	    g_object_unref (action);
+
+	    path = g_strdup_printf ("/MenuBar/BookmarksMenu/%s%s", group, parent?parent:"");
+	    gtk_ui_manager_add_ui (p->manager,
+				   p->bookmarks_list_menu_ui_id,
+				   path,
+				   action_label, action_name,
+				   GTK_UI_MANAGER_MENU,
+				   FALSE);
+	    g_free (path);
+    	    g_free (action_name);
+
+	    path = g_strdup_printf ("%s/%s", parent?parent:"", action_label);
+	    g_free (action_label);
+
+	    vinagre_window_populate_bookmarks (window, group, vinagre_bookmarks_entry_get_children (entry), path);
+	    g_free (path);
+	    break;
+
+	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
+	    conn = vinagre_bookmarks_entry_get_conn (entry);
+
+	    action_name = vinagre_connection_get_best_name (conn);
+	    action_label = vinagre_utils_escape_underscores (action_name, -1);
+	    g_free (action_name);
+
+	    action_name = g_strdup_printf ("BOOKMARK_ITEM_ACTION_%d", ++i);
+
+	    /* Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu */
+	    tooltip = g_strdup_printf (_("Open %s:%d"),
+					vinagre_connection_get_host (conn),
+					vinagre_connection_get_port (conn));
+	    action = gtk_action_new (action_name,
+				     action_label,
+				     tooltip,
+				     NULL);
+	    g_object_set (G_OBJECT (action), "icon-name", "application-x-vnc", NULL);
+	    g_object_set_data (G_OBJECT (action), "conn", conn);
+	    gtk_action_group_add_action (p->bookmarks_list_action_group,
+					 action);
+	    g_signal_connect (action,
+			     "activate",
+			     G_CALLBACK (vinagre_cmd_bookmarks_open),
+			     window);
+
+	    path = g_strdup_printf ("/MenuBar/BookmarksMenu/%s%s", group, parent?parent:"");
+	    gtk_ui_manager_add_ui (p->manager,
+				   p->bookmarks_list_menu_ui_id,
+				   path,
+				   action_label, action_name,
+				   GTK_UI_MANAGER_MENUITEM,
+				   FALSE);
+
+	    g_object_unref (action);
+	    g_free (action_name);
+	    g_free (action_label);
+	    g_free (tooltip);
+	    g_free (path);
+	    break;
+
+	  default:
+	    g_assert_not_reached ();
+	}
+    }
+}
+
 void
 vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
 {
   VinagreWindowPrivate *p = window->priv;
   GList  *actions, *l;
-  GSList *favs;
-#ifdef VINAGRE_ENABLE_AVAHI
-  GSList *mdnss;
-#endif
-  gint   n, m, i;
-  guint  id;
+  GSList *favs, *mdnss = NULL;
 
   g_return_if_fail (p->bookmarks_list_action_group != NULL);
 
@@ -586,118 +679,14 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
   g_list_free (actions);
 
   favs = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
-  n = g_slist_length (favs);
 
 #ifdef VINAGRE_ENABLE_AVAHI
   mdnss = vinagre_mdns_get_all (vinagre_mdns_get_default ());
-  m = g_slist_length (mdnss);
-#else
-  m = 0;
-#endif
-  i = 0;
-
-  id = (n > 0||m > 0) ? gtk_ui_manager_new_merge_id (p->manager) : 0;
-
-  while (favs)
-    {
-      VinagreConnection *conn;
-      gchar             *action_name, *action_label;
-      GtkAction         *action;
-      gchar             *name, *tooltip;
-
-      conn = (VinagreConnection *) favs->data;
-      g_assert (VINAGRE_IS_CONNECTION (conn));
-
-      name = vinagre_connection_get_best_name (conn);
-
-      action_name = g_strdup_printf ("Bookmark_%d", i);
-      /* Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu */
-      tooltip = g_strdup_printf (_("Open %s:%d"),
-                                 vinagre_connection_get_host (conn),
-                                 vinagre_connection_get_port (conn));
-      action_label = vinagre_utils_escape_underscores (name, -1);
-      action = gtk_action_new (action_name,
-			       action_label,
-			       tooltip,
-			       NULL);
-      g_object_set (G_OBJECT (action), "icon-name", "application-x-vnc", NULL);
-      g_object_set_data (G_OBJECT (action), "conn", conn);
-      gtk_action_group_add_action (p->bookmarks_list_action_group,
-				   GTK_ACTION (action));
-      g_signal_connect (action,
-			"activate",
-			G_CALLBACK (vinagre_cmd_bookmarks_open),
-			window);
-
-      gtk_ui_manager_add_ui (p->manager,
-			     id,
-			     "/MenuBar/BookmarksMenu/BookmarksList",
-			     action_name, action_name,
-			     GTK_UI_MANAGER_MENUITEM,
-			     FALSE);
-
-      g_object_unref (action);
-      g_free (action_name);
-      g_free (action_label);
-      g_free (name);
-      g_free (tooltip);
-
-      favs = favs->next;
-      i++;
-    }
-
-#ifdef VINAGRE_ENABLE_AVAHI
-  i = 0;
-  while (mdnss)
-    {
-      VinagreConnection *conn;
-      gchar             *action_name, *action_label;
-      GtkAction         *action;
-      gchar             *name, *tooltip;
-
-      conn = (VinagreConnection *) mdnss->data;
-      g_assert (VINAGRE_IS_CONNECTION (conn));
-
-      name = vinagre_connection_get_best_name (conn);
-
-      action_name = g_strdup_printf ("Avahi_%d", i);
-      /* Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu */
-        tooltip = g_strdup_printf (_("Open %s:%d"),
-                                 vinagre_connection_get_host (conn),
-                                 vinagre_connection_get_port (conn));
-      action_label = vinagre_utils_escape_underscores (name, -1);
-      action = gtk_action_new (action_name,
-			       action_label,
-			       tooltip,
-			       NULL);
-      g_object_set (G_OBJECT (action), "icon-name", "application-x-vnc", NULL);
-      g_object_set_data (G_OBJECT (action), "conn", conn);
-      gtk_action_group_add_action (p->bookmarks_list_action_group,
-				   GTK_ACTION (action));
-      g_signal_connect (action,
-			"activate",
-			G_CALLBACK (vinagre_cmd_bookmarks_open),
-			window);
-
-      gtk_ui_manager_add_ui (p->manager,
-			     id,
-			     "/MenuBar/BookmarksMenu/AvahiList",
-			     action_name, action_name,
-			     GTK_UI_MANAGER_MENUITEM,
-			     FALSE);
-
-      g_object_unref (action);
-      g_free (action_name);
-      g_free (action_label);
-      g_free (name);
-      g_free (tooltip);
-
-      mdnss = mdnss->next;
-      i++;
-    }
 #endif
 
-  p->bookmarks_list_menu_ui_id = id;
+  p->bookmarks_list_menu_ui_id = (g_slist_length (favs) > 0||g_slist_length (mdnss) > 0) ? gtk_ui_manager_new_merge_id (p->manager) : 0;
+  vinagre_window_populate_bookmarks (window, "BookmarksList", favs, NULL);
+  vinagre_window_populate_bookmarks (window, "AvahiList", mdnss, NULL);
 }
 
 static void
@@ -983,7 +972,7 @@ vinagre_window_init (VinagreWindow *window)
 
   window->priv = VINAGRE_WINDOW_GET_PRIVATE (window);
   window->priv->active_tab = NULL;
-  window->priv->fav_conn_selected = NULL;
+  window->priv->fav_entry_selected = NULL;
   window->priv->fullscreen = FALSE;
   window->priv->signal_notebook = 0;
 

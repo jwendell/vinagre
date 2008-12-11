@@ -70,6 +70,8 @@ void		vinagre_cmd_bookmarks_add	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_bookmarks_open	(GtkAction     *action,
 						 VinagreWindow *window);
+void		vinagre_cmd_bookmarks_new_folder(GtkAction     *action,
+						 VinagreWindow *window);
 void		vinagre_cmd_bookmarks_edit	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_bookmarks_del	(GtkAction     *action,

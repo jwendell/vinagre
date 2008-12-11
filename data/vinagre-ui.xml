@@ -54,6 +54,7 @@
     <menu name="BookmarksMenu" action="Bookmarks">
       <menuitem name="BookmarksAddMenu" action="BookmarksAdd"/>
       <separator/>
+      <menuitem name="BookmarksNewFolderMenu" action="BookmarksNewFolder"/>
       <menuitem name="BookmarksEditMenu" action="BookmarksEdit"/>
       <menuitem name="BookmarksDelMenu" action="BookmarksDel"/>
       <separator/>
@@ -77,11 +78,24 @@
     <toolitem action="MachineSendCtrlAltDel"/>
   </toolbar>
 
-  <popup name="FavPopup" action="FavPopupAction">
+  <popup name="FavPopupConn" action="FavPopupActionConn">
     <menuitem action="BookmarksOpen"/>
     <separator/>
     <menuitem action="BookmarksEdit"/>
     <menuitem action="BookmarksDel"/>
+    <separator/>
+    <menuitem action="BookmarksNewFolder"/>
+  </popup>
+
+  <popup name="FavPopupFolder" action="FavPopupActionFolder">
+    <menuitem action="BookmarksEdit"/>
+    <menuitem action="BookmarksDel"/>
+    <separator/>
+    <menuitem action="BookmarksNewFolder"/>
+  </popup>
+
+  <popup name="FavPopupEmpty" action="FavPopupActionEmpty">
+    <menuitem action="BookmarksNewFolder"/>
   </popup>
 
 </ui>
