@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 #include <panel-applet.h>
 #include "vinagre-bookmarks.h"
+#include "vinagre-bookmarks-entry.h"
 #include "vinagre-utils.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
@@ -104,6 +105,54 @@ open_connection_cb (GtkMenuItem *item,
 }
 
 static void
+fill_recursive_menu (GSList *entries, GtkWidget *menu)
+{
+  GSList    *l;
+  GtkWidget *item, *image, *child;
+
+  for (l = entries; l; l = l->next)
+    {
+      VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
+      VinagreConnection     *conn;
+
+      switch (vinagre_bookmarks_entry_get_node (entry))
+	{
+	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
+	    image = gtk_image_new_from_icon_name ("folder", GTK_ICON_SIZE_MENU);
+	    item = gtk_image_menu_item_new_with_label (vinagre_bookmarks_entry_get_name (entry));
+	    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
+					   image);
+	    gtk_menu_shell_append (GTK_MENU_SHELL (menu),
+				   item);
+
+	    child = gtk_menu_new ();
+	    gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), child);
+
+	    fill_recursive_menu (vinagre_bookmarks_entry_get_children (entry),
+				 child);
+	    break;
+
+	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
+	    conn = vinagre_bookmarks_entry_get_conn (entry);
+	    image = gtk_image_new_from_icon_name ("application-x-vnc", GTK_ICON_SIZE_MENU);
+	    item = gtk_image_menu_item_new_with_label (vinagre_connection_get_name (conn));
+	    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
+					   image);
+
+	    gtk_menu_shell_append (GTK_MENU_SHELL (menu),
+				   item);
+	    g_object_set_data (G_OBJECT (item), "conn", conn);
+	    g_signal_connect (item, "activate", G_CALLBACK (open_connection_cb), NULL);
+	    break;
+
+	  default:
+	    g_assert_not_reached ();
+	}
+    }
+
+}
+
+static void
 fill_menu (GSList *all, GtkWidget *menu)
 {
   GtkWidget *item, *image;
@@ -115,18 +164,7 @@ fill_menu (GSList *all, GtkWidget *menu)
   item = gtk_separator_menu_item_new ();
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
-  for (; all; all=all->next)
-    {
-      image = gtk_image_new_from_icon_name ("application-x-vnc", GTK_ICON_SIZE_MENU);
-      item = gtk_image_menu_item_new_with_label (vinagre_connection_get_name (all->data));
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
-				     image);
-
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu),
-			     item);
-      g_object_set_data (G_OBJECT (item), "conn", all->data);
-      g_signal_connect (item, "activate", G_CALLBACK (open_connection_cb), NULL);
-    }
+  fill_recursive_menu (all, menu);
 }
 
 static void
