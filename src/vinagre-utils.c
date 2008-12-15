@@ -465,7 +465,7 @@ vinagre_utils_help_about (GtkWindow *window)
 			 "logo-icon-name", "vinagre",
 			 "translator-credits", _("translator-credits"),
 			 "version", VERSION,
-			 "website", "http://www.gnome.org/projects/vinagre/",
+			 "website", "http://projects.gnome.org/vinagre/",
 			 "website-label", _("Vinagre Website"),
 			 NULL);
   g_free (license_trans);
