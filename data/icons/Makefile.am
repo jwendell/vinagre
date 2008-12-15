@@ -23,6 +23,10 @@ public_icons = \
 	hicolor_mimetypes_48x48_application-x-vnc.png \
 	hicolor_mimetypes_scalable_application-x-remote-connection.svg \
 	hicolor_mimetypes_scalable_application-x-vnc.svg \
+	hicolor_status_16x16_view-minimize.png \
+	hicolor_status_22x22_view-minimize.png \
+	hicolor_status_32x32_view-minimize.png \
+	hicolor_status_48x48_view-minimize.png \
 	$(NULL)
 
 private_icons = \

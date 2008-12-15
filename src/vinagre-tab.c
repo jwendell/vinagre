@@ -746,6 +746,13 @@ close_button_clicked (GtkToolButton *button,
 }
 
 static void
+minimize_button_clicked (GtkToolButton *button,
+			 VinagreTab    *tab)
+{
+  gtk_window_iconify (GTK_WINDOW (tab->priv->window));
+}
+
+static void
 fullscreen_button_clicked (GtkToolButton *button,
 			   VinagreTab    *tab)
 {
@@ -803,19 +810,26 @@ setup_layout (VinagreTab *tab)
 
   gtk_toolbar_set_style (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOLBAR_BOTH_HORIZ);
 
-  /* Leave fullscreen */
-  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_LEAVE_FULLSCREEN));
-  gtk_widget_show (GTK_WIDGET (button));
-  gtk_tool_item_set_is_important (GTK_TOOL_ITEM (button), TRUE);
-  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
-  g_signal_connect (button, "clicked", G_CALLBACK (fullscreen_button_clicked), tab);
-
   /* Close connection */
   button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_CLOSE));
   gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Close connection"));
   gtk_widget_show (GTK_WIDGET (button));
   gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
   g_signal_connect (button, "clicked", G_CALLBACK (close_button_clicked), tab);
+
+  /* Leave fullscreen */
+  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_LEAVE_FULLSCREEN));
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "clicked", G_CALLBACK (fullscreen_button_clicked), tab);
+
+  /* Minimize window */
+  button = GTK_WIDGET (gtk_tool_button_new (NULL, NULL));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Minimize window"));
+  gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "view-minimize");
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "clicked", G_CALLBACK (minimize_button_clicked), tab);
 
   /* Space */
   button = GTK_WIDGET (gtk_separator_tool_item_new ());
