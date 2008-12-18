@@ -1129,14 +1129,6 @@ vinagre_tab_set_scaling (VinagreTab *tab, gboolean active) {
   if (vnc_display_get_scaling (VNC_DISPLAY (tab->priv->vnc)) == active)
     return TRUE;
 
-  if (active &&
-      gdk_screen_is_composited (gtk_widget_get_screen (GTK_WIDGET (tab->priv->window))))
-    {
-      vinagre_utils_show_error (NULL, _("Scaling does not work properly on composited windows. Disable the visual effects and try again."),
-				GTK_WINDOW (tab->priv->window));
-      return FALSE;
-    }
-
   vnc_display_set_force_size (VNC_DISPLAY(tab->priv->vnc), !active);
   if (!vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active))
     {

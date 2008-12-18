@@ -28,13 +28,14 @@ Who is behind Vinagre?
 Enabling scaling
 ================
 
-  - In order to enable scaling in Vinagre, gtk-vnc widget must have been
-  compiled with this feature enabled.
-    Simply build gtk-vnc with the flag '--with-gtkglext=yes', in the
-    configure stage.
-    Notice that this version of Vinagre (2.24.x) requires gtk-vnc 0.3.7. Newer
-  gtk-vnc versions don't use GtkGL for scaling anymore and thus break Vinagre
-  scaling.
+ - Current version (2.25 an up):
+  Scaling should be working out-of-the-box, as it relies on cairo, and cairo
+  is present on most platforms. Note that gtk-vnc >= 0.3.8 is required.
+
+ - Older versions (2.24 and earlier):
+  In order to enable scaling in Vinagre, gtk-vnc widget must have been
+  compiled with this feature enabled. Just build gtk-vnc with the flag
+  '--with-gtkglext=yes', in the configure stage.
 
 Bookmarks
 =========
