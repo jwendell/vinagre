@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-22 09:29+0100\n"
-"PO-Revision-Date: 2009-01-22 09:33+0100\n"
+"POT-Creation-Date: 2009-01-26 15:48+0100\n"
+"PO-Revision-Date: 2009-01-26 15:53+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -33,11 +33,11 @@ msgstr "Få åtkomst till fjärrskrivbord"
 #: ../data/vinagre.desktop.in.in.h:2
 #: ../data/vinagre-file.desktop.in.in.h:2
 #: ../src/GNOME_VinagreApplet.server.in.in.h:2
-#: ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264
+#: ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473
 #: ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
-msgstr "Fjärrskrivbordsvisare"
+msgstr "Fjärrskrivbordsklient"
 
 #: ../data/vinagre.glade.h:1
 msgid "<b>Authentication is required</b>"
@@ -117,9 +117,8 @@ msgid "_Password:"
 msgstr "_Lösenord:"
 
 #: ../data/vinagre.glade.h:19
-#, fuzzy
 msgid "_Remember this credential"
-msgstr "_Kom ihåg detta lösenord"
+msgstr "_Kom ihåg denna inloggningsuppgift"
 
 #: ../data/vinagre.glade.h:20
 msgid "_Scaling"
@@ -186,16 +185,16 @@ msgstr "En meny för att snabbt komma åt fjärrdatorer"
 msgid "Vinagre Applet Factory"
 msgstr "Panelprogramsfabrik för Vinagre"
 
-#: ../src/vinagre-applet.c:100
-#: ../src/vinagre-applet.c:178
+#: ../src/vinagre-applet.c:271
+#: ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "Kunde inte köra vinagre:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
-msgstr "Öppna fjärrskrivbordsvisare"
+msgstr "Öppna fjärrskrivbordsklient"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "Kom åt dina bokmärken"
 
@@ -217,31 +216,26 @@ msgid "Unknown error"
 msgstr "Okänt fel"
 
 #: ../src/vinagre-bookmarks.c:351
-#, fuzzy
 msgid "Error while initializing bookmarks: The file seems to be empty"
-msgstr "Fel vid initiering av bokmärken: %s"
+msgstr "Fel vid initiering av bokmärken: Filen verkar vara tom"
 
 #: ../src/vinagre-bookmarks.c:358
-#, fuzzy
 msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
-msgstr "Fel vid initiering av bokmärken: %s"
+msgstr "Fel vid initiering av bokmärken: Filen är inte en bokmärkesfil för vinagre"
 
 #: ../src/vinagre-bookmarks.c:420
 #: ../src/vinagre-bookmarks.c:427
-#, fuzzy
 msgid "Error while saving bookmarks: Failed to create the XML structure"
-msgstr "Fel när bokmärken sparades: %s"
+msgstr "Fel vid sparande av bokmärken: Misslyckades med att skapa XML-strukturen"
 
 #: ../src/vinagre-bookmarks.c:434
 #: ../src/vinagre-bookmarks.c:441
-#, fuzzy
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
-msgstr "Fel när bokmärken sparades: %s"
+msgstr "Fel vid sparande av bokmärken: Misslyckades med att initiera XML-strukturen"
 
 #: ../src/vinagre-bookmarks.c:450
-#, fuzzy
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr "Fel när bokmärken sparades: %s"
+msgstr "Fel vid sparande av bokmärken: Misslyckades med att färdigställa XML-strukturen"
 
 #: ../src/vinagre-bookmarks.c:459
 #, c-format
@@ -251,36 +245,35 @@ msgstr "Fel när bokmärken sparades: %s"
 #: ../src/vinagre-bookmarks-migration.c:93
 #: ../src/vinagre-bookmarks-migration.c:100
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
-msgstr ""
+msgstr "Fel vid migrering av bokmärken: Misslyckades med att skapa XML-strukturen"
 
 #: ../src/vinagre-bookmarks-migration.c:107
 #: ../src/vinagre-bookmarks-migration.c:114
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
-msgstr ""
+msgstr "Fel vid migrering av bokmärken: Misslyckades med att initiera XML-strukturen"
 
 #: ../src/vinagre-bookmarks-migration.c:123
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
-msgstr ""
+msgstr "Fel vid migrering av bokmärken: Misslyckades med att färdigställa XML-strukturen"
 
 #: ../src/vinagre-bookmarks-migration.c:133
 #: ../src/vinagre-bookmarks-migration.c:231
-#, fuzzy, c-format
+#, c-format
 msgid "Error while migrating bookmarks: %s"
-msgstr "Fel när bokmärken sparades: %s"
+msgstr "Fel vid migrering av bokmärken: %s"
 
 #: ../src/vinagre-bookmarks-migration.c:231
 msgid "Failed to create the directory"
 msgstr "Misslyckades med att skapa katalogen"
 
 #: ../src/vinagre-bookmarks-migration.c:255
-#, fuzzy
 msgid "Migrating the bookmarks file to the new format. This operation is only supposed to run once."
-msgstr "Kopierar bokmärkesfilen till den nya platsen. Denna åtgärd är endast tänkt att köras en gång."
+msgstr "Migrerar bokmärkesfilen till det nya formatet. Denna åtgärd är endast tänkt att köras en gång."
 
 #: ../src/vinagre-bookmarks-migration.c:263
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening old bookmarks file: %s"
-msgstr "Fel när bokmärken sparades: %s"
+msgstr "Fel vid öppning av gammal bokmärkesfil: %s"
 
 #: ../src/vinagre-bookmarks-migration.c:264
 #: ../src/vinagre-bookmarks-migration.c:276
@@ -310,16 +303,15 @@ msgstr "Ta bort mapp?"
 
 #: ../src/vinagre-bookmarks-ui.c:242
 msgid "Notice that all its subfolders and items will be removed as well."
-msgstr ""
+msgstr "Observera att alla dess undermappar och objekt även kommer att tas bort."
 
 #: ../src/vinagre-bookmarks-ui.c:247
 msgid "Remove Item?"
 msgstr "Ta bort objekt?"
 
 #: ../src/vinagre-bookmarks-ui.c:264
-#, fuzzy
 msgid "Error removing bookmark: Entry not found"
-msgstr "Fel när bokmärken sparades: %s"
+msgstr "Fel vid borttagning av bokmärke: Posten hittades inte"
 
 #: ../src/vinagre-bookmarks-ui.c:281
 msgid "New Folder"
@@ -365,7 +357,7 @@ msgstr "Kunde inte tolka filen."
 #: ../src/vinagre-connection.c:759
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr ""
+msgstr "Felaktigt värde för \"shared\"-flagga: %d. Det ska vara 0 eller 1. Ignorerar det."
 
 #: ../src/vinagre-connection.c:765
 msgid "Could not find the host address in the file."
@@ -377,7 +369,7 @@ msgstr "Ogiltig åtgärd"
 
 #: ../src/vinagre-fav.c:668
 msgid "Data received from drag&drop operation is invalid."
-msgstr ""
+msgstr "Data som togs emot från dra&släpp-åtgärd är ogiltig."
 
 #: ../src/vinagre-fav.c:861
 msgid "Hosts nearby"
@@ -474,9 +466,8 @@ msgid "Error saving recent connection."
 msgstr "Fel när senaste anslutningen sparades."
 
 #: ../src/vinagre-tab.c:496
-#, fuzzy
 msgid "Error saving the credential on the keyring."
-msgstr "Fel när lösenordet sparades i nyckelringen."
+msgstr "Fel när inloggningsuppgifter sparades i nyckelringen."
 
 #: ../src/vinagre-tab.c:828
 msgid "Minimize window"
@@ -654,7 +645,7 @@ msgstr "_Ursprunglig storlek"
 
 #: ../src/vinagre-ui.h:96
 msgid "Adjusts the window to the remote desktop's size"
-msgstr ""
+msgstr "Justerar fönstret till storleken för fjärrskrivbordet"
 
 #: ../src/vinagre-ui.h:102
 msgid "S_caling"
