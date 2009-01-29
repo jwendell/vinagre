@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-12 15:45+0100\n"
-"PO-Revision-Date: 2009-01-12 15:50+0100\n"
+"POT-Creation-Date: 2009-01-29 16:19+0100\n"
+"PO-Revision-Date: 2009-01-29 16:20+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -29,8 +29,8 @@ msgid "Access remote desktops"
 msgstr "Bruk eksternt skrivebord"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264 ../src/vinagre-main.c:151
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "Visning av eksternt skrivebord"
 
@@ -128,12 +128,8 @@ msgstr "Br_ukernavn:"
 msgid "_View only"
 msgstr "Ba_re se"
 
-#: ../data/vinagre.glade.h:24
-msgid "gtk-close"
-msgstr ""
-
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:26
+#: ../data/vinagre.glade.h:25
 msgid "host or host:display or host::port"
 msgstr "vert, vert:skjerm eller vert::port"
 
@@ -197,15 +193,15 @@ msgstr "En meny for å koble til en ekstern maskin raskt"
 msgid "Vinagre Applet Factory"
 msgstr "Fabrikk for vinagre panelprogram"
 
-#: ../src/vinagre-applet.c:100 ../src/vinagre-applet.c:178
+#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "Kunne ikke kjøre vinagre:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "Åpne visning av eksternt skrivebord"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "Åpne dine bokmerker"
 
@@ -229,7 +225,8 @@ msgstr "Feil under initiering av bokmerker: Filen ser ut til å være tom"
 #: ../src/vinagre-bookmarks.c:358
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
-msgstr "Feil under initiering av bokmerkene: Filen er ikke en bokmerkefil fra vinagre"
+msgstr ""
+"Feil under initiering av bokmerkene: Filen er ikke en bokmerkefil fra vinagre"
 
 #: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
 msgid "Error while saving bookmarks: Failed to create the XML structure"
@@ -241,7 +238,8 @@ msgstr "Feil under lagring av bokmerker: Klarte ikke å initiere XML-strukturen"
 
 #: ../src/vinagre-bookmarks.c:450
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr "Feil under lagring av bokmerker: Klarte ikke å sluttføre XML-strukturen"
+msgstr ""
+"Feil under lagring av bokmerker: Klarte ikke å sluttføre XML-strukturen"
 
 #: ../src/vinagre-bookmarks.c:459
 #, c-format
@@ -256,11 +254,13 @@ msgstr "Feil under migrering av bokmerker: Klarte ikke å lage XML-strukturen"
 #: ../src/vinagre-bookmarks-migration.c:107
 #: ../src/vinagre-bookmarks-migration.c:114
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
-msgstr "Feil udner migrering av bokmerker: Klarte ikke å initiere XML-strukturen"
+msgstr ""
+"Feil udner migrering av bokmerker: Klarte ikke å initiere XML-strukturen"
 
 #: ../src/vinagre-bookmarks-migration.c:123
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
-msgstr "Feil under migrering av bokmerker: Klarte ikke å sluttføre XML-strukturen"
+msgstr ""
+"Feil under migrering av bokmerker: Klarte ikke å sluttføre XML-strukturen"
 
 #: ../src/vinagre-bookmarks-migration.c:133
 #: ../src/vinagre-bookmarks-migration.c:231
@@ -276,7 +276,9 @@ msgstr "Klarte ikke å lage katalogen"
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
-msgstr "Migrerer bokmerkefilen til det nye formatet. Denne operasjonen skal bare kjøres en gang."
+msgstr ""
+"Migrerer bokmerkefilen til det nye formatet. Denne operasjonen skal bare "
+"kjøres en gang."
 
 #: ../src/vinagre-bookmarks-migration.c:263
 #, c-format
@@ -365,7 +367,7 @@ msgstr "Kunne ikke lese filen."
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr ""
+msgstr "Ugyldig verdi for flagget «shared»: %d. Verdien skal være 0 eller 1. Overser den."
 
 #: ../src/vinagre-connection.c:765
 msgid "Could not find the host address in the file."
@@ -377,7 +379,7 @@ msgstr "Ugyldig operasjon"
 
 #: ../src/vinagre-fav.c:668
 msgid "Data received from drag&drop operation is invalid."
-msgstr ""
+msgstr "Data mottatt fra dra-og-slipp operasjon er ugyldig."
 
 #: ../src/vinagre-fav.c:861
 msgid "Hosts nearby"
