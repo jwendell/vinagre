@@ -46,8 +46,8 @@ PANEL_REQUIRED_VERSION=2.0.0
 # Check for avahi
 AC_ARG_ENABLE(avahi,
               AC_HELP_STRING([--disable-avahi],
-                             [Do not use avahi for auto-discover machines [default=yes]]),
-              enable_avahi=no,
+                             [Do not use avahi for auto-discover machines [default=no]]),
+              enable_avahi=${enableval},
               enable_avahi=yes)
 
 if test "x$enable_avahi" = "xyes" ; then
