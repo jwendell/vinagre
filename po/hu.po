@@ -1,16 +1,16 @@
 # Hungarian translation of Vinagre
-# Copyright (C) 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2007, 2008, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Vinagre package.
 #
-# Gabor Kelemen <kelemeng@gnome.hu>, 2007, 2008.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2007, 2008, 2009.
 # Nyitrai István <sianis@gmail.com>, 2008.
 # Mate Ory <orymate@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-03 14:33+0000\n"
-"PO-Revision-Date: 2008-09-19 03:54+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
+"POT-Creation-Date: 2009-01-12 14:52+0000\n"
+"PO-Revision-Date: 2009-02-08 14:39+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
@@ -32,79 +32,110 @@ msgid "Access remote desktops"
 msgstr "Távoli asztalok elérése"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
-#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:144
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:258
+#: ../src/vinagre-applet.c:264 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "Távoli asztalok megjelenítése"
 
 #: ../data/vinagre.glade.h:1
+msgid "<b>Authentication is required</b>"
+msgstr "<b>Hitelesítés szükséges</b>"
+
+#: ../data/vinagre.glade.h:2
 msgid "<b>Connection options</b>"
 msgstr "<b>Kapcsolódási beállítások</b>"
 
-#: ../data/vinagre.glade.h:2
-msgid "<b>Editing a bookmark</b>"
-msgstr "<b>Könyvjelző szerkesztése</b>"
-
 #: ../data/vinagre.glade.h:3
-msgid "<b>Enter a name for this connection</b>"
-msgstr "<b>Adja meg a kapcsolat nevét</b>"
+#| msgid "<b>Connection options</b>"
+msgid "<b>Connection</b>"
+msgstr "<b>Csatlakozás</b>"
 
 #: ../data/vinagre.glade.h:4
-msgid ""
-"<b>In order to connect on this machine, a password is required. Please "
-"supply it.</b>"
-msgstr "<b>A géphez kapcsolódáshoz jelszó szükséges. Adja meg a jelszót.</b>"
+msgid "<b>Folder</b>"
+msgstr "<b>Mappa</b>"
 
 #: ../data/vinagre.glade.h:5
+msgid "<b>Interface</b>"
+msgstr "<b>Felület</b>"
+
+#: ../data/vinagre.glade.h:6
+#| msgid "<b>Connection options</b>"
+msgid "<b>Options</b>"
+msgstr "<b>Beállítások</b>"
+
+#: ../data/vinagre.glade.h:7
+msgid "<b>Parent Folder</b>"
+msgstr "<b>Szülőmappa</b>"
+
+#: ../data/vinagre.glade.h:8
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Melyik géphez kíván kapcsolódni?</b>"
 
-#: ../data/vinagre.glade.h:6
-msgid "Editing a bookmark"
-msgstr "Könyvjelző szerkesztése"
+#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+msgid "Bookmarks"
+msgstr "Könyvjelzők"
 
-#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:896
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:999
 msgid "Host:"
 msgstr "Gépnév:"
 
-#: ../data/vinagre.glade.h:8
-msgid "Saving to bookmarks"
-msgstr "Mentés a könyvjelzők közé"
+#: ../data/vinagre.glade.h:11
+msgid "Preferences"
+msgstr "Beállítások"
 
-#: ../data/vinagre.glade.h:9
-msgid "_Bookmark name:"
-msgstr "Könyvjelző ne_ve:"
+#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+msgid "Whether we should show tabs even when there is only one active connection"
+msgstr "Akkor is megjelenjenek-e a fülek, ha csak egy aktív kapcsolat van"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Jelenjenek-e meg a menügyorsítók"
+
+#: ../data/vinagre.glade.h:14
+msgid "_Always show tabs"
+msgstr "A lapok _mindig láthatók"
+
+#: ../data/vinagre.glade.h:15
 msgid "_Full screen"
 msgstr "_Teljes képernyő"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:16
 msgid "_Host:"
 msgstr "_Gép:"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:17
 msgid "_Name:"
 msgstr "_Név:"
 
-#: ../data/vinagre.glade.h:13
+#: ../data/vinagre.glade.h:18
 msgid "_Password:"
 msgstr "_Jelszó:"
 
-#: ../data/vinagre.glade.h:14
-msgid "_Remember this password"
-msgstr "_Emlékezzen erre a jelszóra"
+#: ../data/vinagre.glade.h:19
+#| msgid "_Remember this password"
+msgid "_Remember this credential"
+msgstr "_Emlékezzen a hitelesítési adatokra"
 
-#: ../data/vinagre.glade.h:15
+#: ../data/vinagre.glade.h:20
 msgid "_Scaling"
 msgstr "_Méretezés"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:21
+msgid "_Show menu shortcuts"
+msgstr "M_enügyorsítók megjelenítése"
+
+#: ../data/vinagre.glade.h:22
+#| msgid "_Name:"
+msgid "_Username:"
+msgstr "_Felhasználónév:"
+
+#: ../data/vinagre.glade.h:23
 msgid "_View only"
 msgstr "_Csak megtekintés"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:25
 msgid "host or host:display or host::port"
 msgstr "gépnév vagy gépnév:kijelző vagy gépnév::port"
 
@@ -144,20 +175,13 @@ msgid ""
 "clients connected or to drop the existent connections. Set the value to true "
 "to share the desktop with the other clients."
 msgstr ""
-"Egy géphez való kapcsolódáskor a kliens megadhatja, hogy a kiszolgálóhoz kapcsolódó többi kliens kapcsolata meghagyandó vagy bontandó. Állítsa igazra, ha meg szeretné "
-"osztani az asztalt a többi klienssel."
+"Egy géphez való kapcsolódáskor a kliens megadhatja, hogy a kiszolgálóhoz "
+"kapcsolódó többi kliens kapcsolata meghagyandó vagy bontandó. Állítsa "
+"igazra, ha meg szeretné osztani az asztalt a többi klienssel."
 
 #: ../data/vinagre.schemas.in.h:7
 msgid "Whether we should leave other clients connected"
 msgstr "Más kliensek maradjanak-e kapcsolódva"
-
-#: ../data/vinagre.schemas.in.h:8
-msgid "Whether we should show tabs even when there is only one active connection"
-msgstr "Akkor is megjelenjenek-e a fülek, ha csak egy aktív kapcsolat van"
-
-#: ../data/vinagre.schemas.in.h:9
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "Jelenjenek-e meg a menügyorsítók"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -175,224 +199,348 @@ msgstr "Menü távoli gépekhez való gyors kapcsolódáshoz"
 msgid "Vinagre Applet Factory"
 msgstr "Vinagre kisalkalmazás factory"
 
-#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
-#, c-format
-msgid "Could not run vinagre: %s"
-msgstr "A vinagre nem futtatható: %s"
+#: ../src/vinagre-applet.c:100 ../src/vinagre-applet.c:178
+#| msgid "Could not run vinagre: %s"
+msgid "Could not run vinagre:"
+msgstr "A vinagre nem futtatható:"
 
-#: ../src/vinagre-applet.c:167
+#: ../src/vinagre-applet.c:198
 msgid "Open Remote Desktop Viewer"
 msgstr "A távoliasztal-megjelenítő megnyitása"
 
-#: ../src/vinagre-applet.c:229
+#: ../src/vinagre-applet.c:265
 msgid "Access your bookmarks"
 msgstr "Könyvjelzők elérése"
 
-#: ../src/vinagre-bookmarks.c:92
-msgid ""
-"Copying the bookmarks file to the new location. This operation is only "
-"supposed to run once."
-msgstr "A könyvjelzőfájl új helyre másolása. Ez a művelet csak egyszer fog lefutni."
-
-#: ../src/vinagre-bookmarks.c:97
-#, c-format
-msgid "Error: %s"
-msgstr "Hiba: %s"
-
-#: ../src/vinagre-bookmarks.c:420
-msgid "Confirm removal?"
-msgstr "Megerősíti a törlést?"
-
-#: ../src/vinagre-bookmarks.c:423
-#, c-format
-msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
-msgstr "Biztosan törölni akarja a következőt a könyvjelzők közül: <i>%s</i>?"
-
-#: ../src/vinagre-bookmarks.c:434
-#, c-format
-msgid "Error while removing %s from bookmarks: %s"
-msgstr "Hiba a(z) %s eltávolítása közben a könyvjelzők közül: %s"
-
-#: ../src/vinagre-bookmarks.c:501
+#: ../src/vinagre-bookmarks.c:344
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Hiba a könyvjelzők előkészítésekor: %s"
 
-#: ../src/vinagre-bookmarks.c:522 ../src/vinagre-bookmarks.c:539
+#: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
+#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
+#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
+#: ../src/vinagre-window.c:279
+msgid "Unknown error"
+msgstr "Ismeretlen hiba"
+
+#: ../src/vinagre-bookmarks.c:351
+#| msgid "Error while initializing bookmarks: %s"
+msgid "Error while initializing bookmarks: The file seems to be empty"
+msgstr "Hiba a könyvjelzők előkészítésekor: A fájl üresnek tűnik"
+
+#: ../src/vinagre-bookmarks.c:358
+#| msgid "Error while initializing bookmarks: %s"
+msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+msgstr "Hiba a könyvjelzők előkészítésekor: A fájl nem egy vinagre könyvjelzőfájl"
+
+#: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
+#| msgid "Error while saving bookmarks: %s"
+msgid "Error while saving bookmarks: Failed to create the XML structure"
+msgstr "Hiba a könyvjelzők mentése közben: Az XML-struktúra létrehozása meghiúsult"
+
+#: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
+#| msgid "Error while saving bookmarks: %s"
+msgid "Error while saving bookmarks: Failed to initialize the XML structure"
+msgstr "Hiba a könyvjelzők mentése közben: Az XML-struktúra előkészítése meghiúsult"
+
+#: ../src/vinagre-bookmarks.c:450
+#| msgid "Error while saving bookmarks: %s"
+msgid "Error while saving bookmarks: Failed to finalize the XML structure"
+msgstr "Hiba a könyvjelzők mentése közben: Az XML-struktúra befejezése meghiúsult"
+
+#: ../src/vinagre-bookmarks.c:459
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Hiba a könyvjelzők mentése közben: %s"
 
-#: ../src/vinagre-commands.c:106
+#: ../src/vinagre-bookmarks-migration.c:93
+#: ../src/vinagre-bookmarks-migration.c:100
+msgid "Error while migrating bookmarks: Failed to create the XML structure"
+msgstr "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra létrehozása meghiúsult"
+
+#: ../src/vinagre-bookmarks-migration.c:107
+#: ../src/vinagre-bookmarks-migration.c:114
+msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
+msgstr "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra előkészítése meghiúsult"
+
+#: ../src/vinagre-bookmarks-migration.c:123
+msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
+msgstr "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra befejezése meghiúsult"
+
+#: ../src/vinagre-bookmarks-migration.c:133
+#: ../src/vinagre-bookmarks-migration.c:231
+#, c-format
+#| msgid "Error while saving bookmarks: %s"
+msgid "Error while migrating bookmarks: %s"
+msgstr "Hiba a könyvjelzők átköltöztetése közben: %s"
+
+#: ../src/vinagre-bookmarks-migration.c:231
+msgid "Failed to create the directory"
+msgstr "A könyvtár létrehozása meghiúsult"
+
+#: ../src/vinagre-bookmarks-migration.c:255
+#| msgid ""
+#| "Copying the bookmarks file to the new location. This operation is only "
+#| "supposed to run once."
+msgid ""
+"Migrating the bookmarks file to the new format. This operation is only "
+"supposed to run once."
+msgstr "A könyvjelzőfájl új formátumra alakítása. Ez a művelet csak egyszer fog lefutni."
+
+#: ../src/vinagre-bookmarks-migration.c:263
+#, c-format
+#| msgid "Error while saving bookmarks: %s"
+msgid "Error opening old bookmarks file: %s"
+msgstr "Hiba a régi könyvjelzőfájl megnyitása közben: %s"
+
+#: ../src/vinagre-bookmarks-migration.c:264
+#: ../src/vinagre-bookmarks-migration.c:276
+msgid "Migration cancelled"
+msgstr "Az átköltöztetés megszakítva"
+
+#: ../src/vinagre-bookmarks-migration.c:273
+msgid "Could not remove the old bookmarks file"
+msgstr "A régi könyvjelzőfájl nem távolítható el"
+
+#: ../src/vinagre-bookmarks-tree.c:120
+msgid "Root Folder"
+msgstr "Gyökérmappa"
+
+#: ../src/vinagre-bookmarks-ui.c:66
+msgid "Invalid name for this folder"
+msgstr "A mappanév érvénytelen"
+
+#: ../src/vinagre-bookmarks-ui.c:236
+#, c-format
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgstr "Biztosan törölni akarja a következőt a könyvjelzők közül: <i>%s</i>?"
+
+#: ../src/vinagre-bookmarks-ui.c:241
+msgid "Remove Folder?"
+msgstr "Eltávolítja a mappát?"
+
+#: ../src/vinagre-bookmarks-ui.c:242
+msgid "Notice that all its subfolders and items will be removed as well."
+msgstr "Ne feledje, hogy az almappái és fájljai is eltávolításra kerülnek."
+
+#: ../src/vinagre-bookmarks-ui.c:247
+msgid "Remove Item?"
+msgstr "Eltávolítja az elemet?"
+
+#: ../src/vinagre-bookmarks-ui.c:264
+#| msgid "Error while saving bookmarks: %s"
+msgid "Error removing bookmark: Entry not found"
+msgstr "Hiba a könyvjelző eltávolítása közben: A bejegyzés nem található"
+
+#: ../src/vinagre-bookmarks-ui.c:281
+msgid "New Folder"
+msgstr "Új mappa"
+
+#: ../src/vinagre-commands.c:113
 msgid "Choose the file"
 msgstr "Válassza ki a fájlt"
 
-#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:979
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1082
 msgid "Supported formats"
 msgstr "Támogatott formátumok"
 
-#: ../src/vinagre-commands.c:149
+#: ../src/vinagre-commands.c:156
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "A következő fájl nem nyitható meg:"
 msgstr[1] "A következő fájlok nem nyithatók meg:"
 
-#: ../src/vinagre-connect.c:172
+#: ../src/vinagre-connect.c:179
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Hiba a történet mentése közben: %s"
 
-#: ../src/vinagre-connect.c:183
+#: ../src/vinagre-connect.c:191
 msgid "Choose a VNC Server"
 msgstr "Válasszon VNC kiszolgálót"
 
-#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:79
-#: ../src/vinagre-main.c:98 ../src/vinagre-window.c:285
-msgid "Unknown error"
-msgstr "Ismeretlen hiba"
-
-#: ../src/vinagre-connection.c:530
+#: ../src/vinagre-connection.c:600
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "A(z) %s protokoll nem támogatott."
 
-#: ../src/vinagre-fav.c:762
-msgid "Bookmarks"
-msgstr "Könyvjelzők"
+#: ../src/vinagre-connection.c:695
+#| msgid "Choose the file"
+msgid "Could not open the file."
+msgstr "A fájl nem nyitható meg."
 
-#: ../src/vinagre-fav.c:807
+#: ../src/vinagre-connection.c:714
+#| msgid "Choose the file"
+msgid "Could not parse the file."
+msgstr "A fájl nem dolgozható fel."
+
+#: ../src/vinagre-connection.c:759
+#, c-format
+msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr "A „shared” jelző értéke hibás: %d. Az értéke 0 vagy 1 lehetne, figyelmen kívül marad."
+
+#: ../src/vinagre-connection.c:765
+msgid "Could not find the host address in the file."
+msgstr "Nem található gépcím a fájlban."
+
+#: ../src/vinagre-fav.c:667
+msgid "Invalid operation"
+msgstr "Érvénytelen művelet"
+
+#: ../src/vinagre-fav.c:668
+msgid "Data received from drag&drop operation is invalid."
+msgstr "A fogd és vidd műveletből fogadott adatok érvénytelenek."
+
+#: ../src/vinagre-fav.c:861
 msgid "Hosts nearby"
 msgstr "Közeli gépek"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:53
 msgid "Opens a .vnc file"
 msgstr ".vnc fájl megnyitása"
 
-#: ../src/vinagre-main.c:47
+#: ../src/vinagre-main.c:53
 msgid "filename"
 msgstr "fájlnév"
 
-#: ../src/vinagre-main.c:50
+#: ../src/vinagre-main.c:56
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "Egy új főablak nyitása a vinagre létező előfordulásában"
 
-#: ../src/vinagre-main.c:54
+#: ../src/vinagre-main.c:60
 msgid "[server:port]"
 msgstr "[kiszolgáló:port]"
 
-#: ../src/vinagre-main.c:109 ../src/vinagre-window.c:284
+#: ../src/vinagre-main.c:115
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "A következő hiba keletkezett:"
 msgstr[1] "A következő hibák keletkeztek:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:130
+#: ../src/vinagre-main.c:137
 msgid "- VNC Client for GNOME"
 msgstr "– VNC kliens a GNOME-hoz"
 
-#: ../src/vinagre-main.c:139
+#: ../src/vinagre-main.c:146
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Futtassa a „vinagre --help” parancsot az elérhető parancssori lehetőségek "
 "teljes listájáért"
 
-#: ../src/vinagre-mdns.c:118
+#: ../src/vinagre-mdns.c:123
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Avahi gépnév feloldása sikertelen: %s\n"
 
-#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#: ../src/vinagre-mdns.c:175 ../src/vinagre-mdns.c:184
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Gépek böngészése sikertelen: %s\n"
 
-#: ../src/vinagre-notebook.c:127
+#: ../src/vinagre-notebook.c:168
 #, c-format
-msgid "Connection to host \"%s\" was closed."
-msgstr "A kapcsolat lezárva következő géphez: „%s”."
+#| msgid "Connection to host \"%s\" was closed."
+msgid "Connection to host <i>%s</i> was closed."
+msgstr "A kapcsolat lezárva következő géphez: <i>%s</i>."
 
-#: ../src/vinagre-notebook.c:153
+#: ../src/vinagre-notebook.c:170
+#| msgid "Connection to host \"%s\" was closed."
+msgid "Connection closed"
+msgstr "A kapcsolat lezárva"
+
+#: ../src/vinagre-notebook.c:194
 msgid "Connecting..."
 msgstr "Kapcsolódás…"
 
-#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:709
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
 msgid "Close connection"
 msgstr "Kapcsolat lezárása"
 
-#: ../src/vinagre-prefs.c:167
+#: ../src/vinagre-prefs.c:169
 msgid "Cannot initialize preferences manager."
 msgstr "A beállításkezelő nem indítható el."
 
-#: ../src/vinagre-tab.c:287
+#: ../src/vinagre-tab.c:322
 msgid "Error connecting to host."
 msgstr "Hiba a géphez csatlakozás közben."
 
-#: ../src/vinagre-tab.c:320
+#: ../src/vinagre-tab.c:354
 #, c-format
-msgid "Authentication to host \"%s\" has failed"
-msgstr "A hitelesítés meghiúsult a következő géphez: „%s”"
+#| msgid "Authentication to host \"%s\" has failed"
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "A hitelesítés meghiúsult a következő géphez: <i>%s</i>"
 
-#: ../src/vinagre-tab.c:348
+#: ../src/vinagre-tab.c:360
+#| msgid "Authentication to host \"%s\" has failed"
+msgid "Authentication failed"
+msgstr "A hitelesítés meghiúsult"
+
+#: ../src/vinagre-tab.c:382
 #, c-format
-msgid "Authentication method to host \"%s\" is unsupported. (%u)"
-msgstr "A hitelesítési módszer a géphez (”%s”) nem támogatott. (%u)"
+#| msgid "Authentication method to host \"%s\" is unsupported. (%u)"
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "A hitelesítési módszer a géphez (<i>%s</i>) nem támogatott. (%u)"
 
-#: ../src/vinagre-tab.c:429
+#: ../src/vinagre-tab.c:386
+#| msgid "Authentication method to host \"%s\" is unsupported. (%u)"
+msgid "Authentication unsupported"
+msgstr "A hitelesítés nem támogatott"
+
+#: ../src/vinagre-tab.c:464
 msgid "Error saving recent connection."
 msgstr "Hiba a legutóbbi kapcsolat mentésekor."
 
-#: ../src/vinagre-tab.c:460
-msgid "Error saving the password on the keyring."
-msgstr "Hiba a jelszó kulcstartóra mentésekor."
+#: ../src/vinagre-tab.c:496
+#| msgid "Error saving the password on the keyring."
+msgid "Error saving the credential on the keyring."
+msgstr "Hiba a hitelesítési adatok kulcstartóra mentésekor."
 
-#: ../src/vinagre-tab.c:723 ../src/vinagre-tab.c:724
+#: ../src/vinagre-tab.c:828
+msgid "Minimize window"
+msgstr "Ablak minimalizálása"
+
+#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
 msgid "Scaling"
 msgstr "Méretezés"
 
-#: ../src/vinagre-tab.c:733 ../src/vinagre-tab.c:734
+#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
 msgid "Read only"
 msgstr "Csak olvasható"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:744 ../src/vinagre-tab.c:745 ../src/vinagre-ui.h:79
+#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Képernyőkép készítése"
 
-#: ../src/vinagre-tab.c:753 ../src/vinagre-tab.c:754 ../src/vinagre-ui.h:82
+#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl+Alt+Del küldése"
 
-#: ../src/vinagre-tab.c:895
+#: ../src/vinagre-tab.c:998
 msgid "Desktop Name:"
 msgstr "Munkaasztal neve:"
 
-#: ../src/vinagre-tab.c:897
+#: ../src/vinagre-tab.c:1000
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:898
+#: ../src/vinagre-tab.c:1001
 msgid "Dimensions:"
 msgstr "Dimenziók:"
 
-#: ../src/vinagre-tab.c:965
+#: ../src/vinagre-tab.c:1068
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s képernyőképe"
 
-#: ../src/vinagre-tab.c:968
+#: ../src/vinagre-tab.c:1071
 msgid "Save Screenshot"
 msgstr "Képernyőkép mentése"
 
-#: ../src/vinagre-tab.c:1032
-msgid ""
-"Scaling does not work properly on composited windows. Disable the visual "
-"effects and try again."
-msgstr ""
-"A méretezés nem működik helyesen kompozitablakokon. Tiltsa le a vizuális "
-"effekteket és próbálja újra."
-
-#: ../src/vinagre-tab.c:1039
+#: ../src/vinagre-tab.c:1135
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -433,122 +581,148 @@ msgstr "Egy .VNC fájl megnyitása"
 msgid "Quit the program"
 msgstr "Kilépés a programból"
 
+#: ../src/vinagre-ui.h:49
+msgid "Edit the application preferences"
+msgstr "Az alkalmazás beállításainak szerkesztése"
+
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:48
+#: ../src/vinagre-ui.h:52
 msgid "_Open bookmark"
 msgstr "_Könyvjelző megnyitása"
 
-#: ../src/vinagre-ui.h:49
+#: ../src/vinagre-ui.h:53
 msgid "Connect to this machine"
 msgstr "Kapcsolódás ehhez a géphez"
 
-#: ../src/vinagre-ui.h:50
+#: ../src/vinagre-ui.h:54
 msgid "_Edit bookmark"
 msgstr "Könyvjelző s_zerkesztése"
 
-#: ../src/vinagre-ui.h:51
+#: ../src/vinagre-ui.h:55
 msgid "Edit the details of selected bookmark"
 msgstr "A kijelölt könyvjelző részleteinek szerkesztése"
 
-#: ../src/vinagre-ui.h:52
+#: ../src/vinagre-ui.h:56
 msgid "_Remove from bookmarks"
 msgstr "_Eltávolítás a könyvjelzők közül"
 
-#: ../src/vinagre-ui.h:53
+#: ../src/vinagre-ui.h:57
 msgid "Remove current selected connection from bookmarks"
 msgstr "A jelenleg kiválasztott kapcsolat eltávolítása a könyvjelzők közül"
 
+#: ../src/vinagre-ui.h:58
+msgid "_New Folder"
+msgstr "Új _mappa"
+
+#: ../src/vinagre-ui.h:59
+msgid "Create a new folder"
+msgstr "Új mappa létrehozása"
+
 #. Help menu
-#: ../src/vinagre-ui.h:56
+#: ../src/vinagre-ui.h:62
 msgid "_Contents"
 msgstr "_Tartalom"
 
-#: ../src/vinagre-ui.h:57
+#: ../src/vinagre-ui.h:63
 msgid "Open the vinagre manual"
 msgstr "A Vinagre kézikönyvének megnyitása"
 
-#: ../src/vinagre-ui.h:59
+#: ../src/vinagre-ui.h:65
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
-#: ../src/vinagre-ui.h:66
+#: ../src/vinagre-ui.h:72
 msgid "Close the current connection"
 msgstr "A jelenlegi kapcsolat bezárása"
 
-#: ../src/vinagre-ui.h:67
+#: ../src/vinagre-ui.h:73
 msgid "C_lose All"
 msgstr "Összes be_zárása"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:74
 msgid "Close all active connections"
 msgstr "Az összes aktív kapcsolat bezárása"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:71
+#: ../src/vinagre-ui.h:77
 msgid "_Add to bookmarks"
 msgstr "Hozzá_adás a könyvjelzőkhöz"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:78
 msgid "Add current connection to your bookmarks"
 msgstr "A jelenlegi kapcsolat hozzáadása a könyvjelzőkhöz"
 
-#: ../src/vinagre-ui.h:80
+#: ../src/vinagre-ui.h:86
 msgid "Take a screenshot of active connection"
 msgstr "Képernyőkép készítése az aktív kapcsolatról"
 
-#: ../src/vinagre-ui.h:83
+#: ../src/vinagre-ui.h:89
 msgid "Send Ctrl+Alt+Del to active connection"
 msgstr "Ctrl+Alt+Del küldése az aktív kapcsolatnak"
 
-#: ../src/vinagre-ui.h:87
+#: ../src/vinagre-ui.h:93
 msgid "View the current machine in full screen"
 msgstr "A jelenlegi gép megjelenítése teljes képernyőn"
 
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:95
+msgid "_Original size"
+msgstr "_Eredeti méret"
+
+#: ../src/vinagre-ui.h:96
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "Az ablak igazítása a távoli asztal méretéhez"
+
+#: ../src/vinagre-ui.h:102
 msgid "S_caling"
 msgstr "_Méretezés"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:103
 msgid "Fit the remote screen into the current window size"
 msgstr "A távoli képernyő nyújtása a jelenlegi ablak méretére"
 
-#: ../src/vinagre-ui.h:95
+#: ../src/vinagre-ui.h:105
 msgid "_Read only"
 msgstr "_Csak olvasható"
 
-#: ../src/vinagre-ui.h:96
+#: ../src/vinagre-ui.h:106
 msgid "Disable mouse and keyboard"
 msgstr "Egér és billentyűzet tiltása"
 
-#: ../src/vinagre-ui.h:102
+#: ../src/vinagre-ui.h:112
 msgid "_Toolbar"
 msgstr "_Eszköztár"
 
-#: ../src/vinagre-ui.h:103
+#: ../src/vinagre-ui.h:113
 msgid "Show or hide the toolbar"
 msgstr "Eszköztár megjelenítése vagy elrejtése"
 
-#: ../src/vinagre-ui.h:106
+#: ../src/vinagre-ui.h:116
 msgid "_Statusbar"
 msgstr "Á_llapotsor"
 
-#: ../src/vinagre-ui.h:107
+#: ../src/vinagre-ui.h:117
 msgid "Show or hide the statusbar"
 msgstr "Állapotsor megjelenítése vagy elrejtése"
 
-#: ../src/vinagre-ui.h:110
+#: ../src/vinagre-ui.h:120
 msgid "Side _Panel"
 msgstr "Oldalsó _ablaktábla"
 
-#: ../src/vinagre-ui.h:111
+#: ../src/vinagre-ui.h:121
 msgid "Show or hide the side panel"
 msgstr "Az oldalsó ablaktábla megjelenítése vagy elrejtése"
 
-#: ../src/vinagre-utils.c:450
+#: ../src/vinagre-utils.c:75
+#| msgid "The following error has occurred:"
+#| msgid_plural "The following errors have occurred:"
+msgid "An error has occurred:"
+msgstr "Hiba történt:"
+
+#: ../src/vinagre-utils.c:433
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "A Vinagre egy VNC kliens a GNOME asztali környezethez"
 
-#: ../src/vinagre-utils.c:453
+#: ../src/vinagre-utils.c:436
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -559,7 +733,7 @@ msgstr ""
 "Foundation által kiadott GNU General Public License második (vagy bármely "
 "későbbi) változatában foglaltak alapján."
 
-#: ../src/vinagre-utils.c:457
+#: ../src/vinagre-utils.c:440
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -571,7 +745,7 @@ msgstr ""
 "alkalmas-e a KÖZREADÁSRA vagy EGY BIZONYOS FELADAT ELVÉGZÉSÉRE. További "
 "részletekért tanulmányozza a GNU GPL licencet."
 
-#: ../src/vinagre-utils.c:461
+#: ../src/vinagre-utils.c:444
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -579,33 +753,33 @@ msgstr ""
 "A programhoz a GNU General Public License egy példánya is jár, ha nem kapta "
 "meg, akkor keresse fel a <http://www.gnu.org/licenses/> oldalt."
 
-#: ../src/vinagre-utils.c:483
+#: ../src/vinagre-utils.c:466
 msgid "translator-credits"
 msgstr ""
 "Kelemen Gábor <kelemeng@gnome.hu>\n"
 "Nyitrai István <sianis@gmail.com>\n"
 "Őry Máté <orymate@gmail.com>"
 
-#: ../src/vinagre-utils.c:486
+#: ../src/vinagre-utils.c:469
 msgid "Vinagre Website"
 msgstr "A Vinagre weboldala"
 
-#: ../src/vinagre-window.c:422
+#: ../src/vinagre-window.c:413
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "A vinagre-ui.xml nem fésülhető össze: %s"
 
-#: ../src/vinagre-window.c:450
+#: ../src/vinagre-window.c:441
 msgid "_Recent connections"
 msgstr "_Legutóbbi kapcsolatok"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:610 ../src/vinagre-window.c:660
+#: ../src/vinagre-window.c:614
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d megnyitása"
 
-#: ../src/vinagre-window.c:809
+#: ../src/vinagre-window.c:797
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "A kurzor elengedéséhez nyomja meg a Ctrl+Alt kombinációt"
 
