@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007, 200, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=vinagre&amp;component=general\n"
-"POT-Creation-Date: 2008-12-15 23:25+0000\n"
-"PO-Revision-Date: 2008-12-17 13:26+0100\n"
+"product=vinagre&component=general\n"
+"POT-Creation-Date: 2009-02-13 14:55+0000\n"
+"PO-Revision-Date: 2009-02-13 21:39+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,8 +31,8 @@ msgid "Access remote desktops"
 msgstr "Acceder a escritorios remotos"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264 ../src/vinagre-main.c:151
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
@@ -132,12 +132,8 @@ msgstr "_Usuario:"
 msgid "_View only"
 msgstr "Sólo _visión"
 
-#: ../data/vinagre.glade.h:24
-msgid "gtk-close"
-msgstr "gtk-close"
-
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:26
+#: ../data/vinagre.glade.h:25
 msgid "host or host:display or host::port"
 msgstr "equipo o equipo:pantalla o equipo::puerto"
 
@@ -204,15 +200,15 @@ msgstr "Un menú para acceder rápidamente a una máquina remota"
 msgid "Vinagre Applet Factory"
 msgstr "Factoría de miniaplicaciones de Vinagre"
 
-#: ../src/vinagre-applet.c:100 ../src/vinagre-applet.c:178
+#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "No se pudo ejecutar vinagre:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "Abrir el visor de escritorios remotos"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "Acceder a sus marcadores"
 
@@ -341,7 +337,7 @@ msgstr "Carpeta nueva"
 msgid "Choose the file"
 msgstr "Elegir el archivo"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1082
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
 msgid "Supported formats"
 msgstr "Formatos soportados"
 
@@ -528,24 +524,21 @@ msgstr "Puerto:"
 msgid "Dimensions:"
 msgstr "Dimensiones:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1067
+#| msgid "Take a screenshot of active connection"
+msgid "Could not get a screenshot of the connection."
+msgstr "No se pudo obtener una captura de la conexión."
+
+#: ../src/vinagre-tab.c:1075
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de pantalla de %s"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1078
 msgid "Save Screenshot"
 msgstr "Guardar la captura de pantalla"
 
-#: ../src/vinagre-tab.c:1135
-msgid ""
-"Scaling does not work properly on composited windows. Disable the visual "
-"effects and try again."
-msgstr ""
-"El escalado no funciona correctamente en ventanas compuestas. Desactive los "
-"efectos visuales e inténtelo de nuevo."
-
-#: ../src/vinagre-tab.c:1143
+#: ../src/vinagre-tab.c:1142
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -783,6 +776,16 @@ msgstr "Abrir %s: %d"
 #: ../src/vinagre-window.c:797
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Pulse Ctrl+Alt para liberar el cursor"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid ""
+#~ "Scaling does not work properly on composited windows. Disable the visual "
+#~ "effects and try again."
+#~ msgstr ""
+#~ "El escalado no funciona correctamente en ventanas compuestas. Desactive "
+#~ "los efectos visuales e inténtelo de nuevo."
 
 #~ msgid "<b>Editing a bookmark</b>"
 #~ msgstr "<b>Editando un marcador</b>"
