@@ -1061,6 +1061,13 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
   pix = vnc_display_get_pixbuf (VNC_DISPLAY (tab->priv->vnc));
+  if (!pix)
+    {
+      vinagre_utils_show_error (NULL,
+				_("Could not get a screenshot of the connection."),
+				GTK_WINDOW (tab->priv->window));
+      return;
+    }
 
   filename = NULL;
   name = vinagre_connection_get_best_name (tab->priv->conn);
