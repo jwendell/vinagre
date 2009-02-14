@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vinagre 2.24.0\n"
+"Project-Id-Version: vinagre 2.25.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-17 09:20+0800\n"
-"PO-Revision-Date: 2008-09-18 12:25+0800\n"
-"Last-Translator: Y.C.Liu <hialan.liu@gmail.com>\n"
+"POT-Creation-Date: 2009-02-14 17:43+0800\n"
+"PO-Revision-Date: 2009-02-14 17:44+0800\n"
+"Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,93 +20,116 @@ msgstr ""
 msgid "_About"
 msgstr "關於(_A)"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2
-#: ../src/vinagre-ui.h:37
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
 msgid "_Help"
-msgstr "說明(_H)"
+msgstr "求助(_H)"
 
-#: ../data/vinagre.desktop.in.in.h:1
-#: ../data/vinagre-file.desktop.in.in.h:1
+#: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "存取遠端桌面"
 
-#: ../data/vinagre.desktop.in.in.h:2
-#: ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2
-#: ../src/vinagre-applet.c:222
-#: ../src/vinagre-applet.c:228
-#: ../src/vinagre-main.c:146
+#: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "遠端桌面檢視器"
 
 #: ../data/vinagre.glade.h:1
+msgid "<b>Authentication is required</b>"
+msgstr "<b>需要驗證</b>"
+
+#: ../data/vinagre.glade.h:2
 msgid "<b>Connection options</b>"
 msgstr "<b>連線選項</b>"
 
-#: ../data/vinagre.glade.h:2
-msgid "<b>Editing a bookmark</b>"
-msgstr "<b>編輯書籤</b>"
-
 #: ../data/vinagre.glade.h:3
-msgid "<b>Enter a name for this connection</b>"
-msgstr "<b>為這個連線輸入名稱</b>"
+msgid "<b>Connection</b>"
+msgstr "<b>連線</b>"
 
 #: ../data/vinagre.glade.h:4
-msgid "<b>In order to connect on this machine, a password is required. Please supply it.</b>"
-msgstr "<b>為了能夠連線到此機器，需要輸入密碼。請提供。</b>"
+msgid "<b>Folder</b>"
+msgstr "<b>資料夾</b>"
 
 #: ../data/vinagre.glade.h:5
+msgid "<b>Interface</b>"
+msgstr "<b>介面</b>"
+
+#: ../data/vinagre.glade.h:6
+msgid "<b>Options</b>"
+msgstr "<b>選項</b>"
+
+#: ../data/vinagre.glade.h:7
+msgid "<b>Parent Folder</b>"
+msgstr "<b>上層資料夾</b>"
+
+#: ../data/vinagre.glade.h:8
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>你想連線到哪個機器？</b>"
 
-#: ../data/vinagre.glade.h:6
-msgid "Editing a bookmark"
-msgstr "編輯書籤"
+#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+msgid "Bookmarks"
+msgstr "書籤"
 
-#: ../data/vinagre.glade.h:7
-#: ../src/vinagre-fav.c:424
-#: ../src/vinagre-tab.c:864
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:999
 msgid "Host:"
 msgstr "主機："
 
-#: ../data/vinagre.glade.h:8
-msgid "Saving to bookmarks"
-msgstr "保存到書籤"
+#: ../data/vinagre.glade.h:11
+msgid "Preferences"
+msgstr "偏好設定"
 
-#: ../data/vinagre.glade.h:9
-msgid "_Bookmark name:"
-msgstr "書籤名稱(_B):"
+#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "是否要在只使用一個連線時顯示分頁"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "是否顯示選單加速鍵（捷徑鍵）"
+
+#: ../data/vinagre.glade.h:14
+msgid "_Always show tabs"
+msgstr "永遠顯示分頁(_A)"
+
+#: ../data/vinagre.glade.h:15
 msgid "_Full screen"
 msgstr "全螢幕(_F)"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:16
 msgid "_Host:"
-msgstr "主機(_H)："
+msgstr "主機(_H):"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:17
 msgid "_Name:"
-msgstr "名稱(_N)："
+msgstr "名稱(_N):"
 
-#: ../data/vinagre.glade.h:13
+#: ../data/vinagre.glade.h:18
 msgid "_Password:"
-msgstr "密碼(_P)："
+msgstr "密碼(_P):"
 
-#: ../data/vinagre.glade.h:14
-msgid "_Remember this password"
-msgstr "記住此密碼(_R)"
+#: ../data/vinagre.glade.h:19
+msgid "_Remember this credential"
+msgstr "記住這個證書(_R)"
 
-#: ../data/vinagre.glade.h:15
+#: ../data/vinagre.glade.h:20
 msgid "_Scaling"
 msgstr "縮放(_S)"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:21
+msgid "_Show menu shortcuts"
+msgstr "顯示選單捷徑鍵(_S)"
+
+#: ../data/vinagre.glade.h:22
+msgid "_Username:"
+msgstr "使用者名稱(_U):"
+
+#: ../data/vinagre.glade.h:23
 msgid "_View only"
 msgstr "只有檢視(_V)"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:25
 msgid "host or host:display or host::port"
 msgstr "主機 或 主機:畫面 或 主機::連接埠"
 
@@ -115,11 +138,16 @@ msgid "Maximum number of history items in connect dialog"
 msgstr "連線對話盒最歷史紀錄項目的最大數量"
 
 #: ../data/vinagre.schemas.in.h:2
-msgid "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. Note that if they are enabled, those keys will be intercepted by the menu and will not be sent to the remote host."
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
 msgstr "設為「false」會停用選單捷徑鍵。設為「true」則會啟用它們。注意如果啟用它們，這些捷徑鍵會被選單攔截，而不會傳送至遠端主機。"
 
 #: ../data/vinagre.schemas.in.h:3
-msgid "Set to \"true\" to always show the tabs. Set to \"false\" to only show the tabs when there is more than one active connection."
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
 msgstr "設為「true」則永遠顯示分頁。設為「false」則只有在同時使用一個以上的連線時顯示分頁。"
 
 #: ../data/vinagre.schemas.in.h:4
@@ -131,20 +159,15 @@ msgid "The handler for \"vnc://\" URLs"
 msgstr "「vnc://」網址的處理程式"
 
 #: ../data/vinagre.schemas.in.h:6
-msgid "When connecting to a host, the client can say to the server to leave other clients connected or to drop the existent connections. Set the value to true to share the desktop with the other clients."
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
 msgstr "當連線到主機時，此客戶端程式可以要求該伺服器保留其他已連線的客戶端或者中斷既存的連線。將這個數值設為 true 可以與其他客戶端程式共同使用桌面。"
 
 #: ../data/vinagre.schemas.in.h:7
 msgid "Whether we should leave other clients connected"
 msgstr "是否保留其他已連線的客戶端程式"
-
-#: ../data/vinagre.schemas.in.h:8
-msgid "Whether we should show tabs even when there is only one active connection"
-msgstr "是否要在只使用一個連線時顯示分頁"
-
-#: ../data/vinagre.schemas.in.h:9
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "是否顯示選單加速鍵（捷徑鍵）"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -162,234 +185,339 @@ msgstr "用來快速連線到遠端機器的選單"
 msgid "Vinagre Applet Factory"
 msgstr " Vinagre 面板程式工廠"
 
-#: ../src/vinagre-applet.c:98
-#: ../src/vinagre-applet.c:144
-#, c-format
-msgid "Could not run vinagre: %s"
-msgstr "無法執行 vinagre：%s"
+#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
+msgid "Could not run vinagre:"
+msgstr "無法執行 vinagre:"
 
-#: ../src/vinagre-applet.c:167
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "開啟遠端桌面檢視器"
 
-#: ../src/vinagre-applet.c:229
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "存取你的書籤"
 
-#: ../src/vinagre-bookmarks.c:92
-msgid "Copying the bookmarks file to the new location. This operation is only supposed to run once."
-msgstr "正在複製書籤檔案到新的位置。這個操作只能執行一次。"
-
-#: ../src/vinagre-bookmarks.c:97
-#, c-format
-msgid "Error: %s"
-msgstr "錯誤：%s"
-
-#: ../src/vinagre-bookmarks.c:420
-msgid "Confirm removal?"
-msgstr "確認移除？"
-
-#: ../src/vinagre-bookmarks.c:423
-#, c-format
-msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
-msgstr "你確認想從書籤中移除<i>%s</i>？"
-
-#: ../src/vinagre-bookmarks.c:434
-#, c-format
-msgid "Error while removing %s from bookmarks: %s"
-msgstr "從書籤移除 %s 時錯誤：%s"
-
-#: ../src/vinagre-bookmarks.c:501
+#: ../src/vinagre-bookmarks.c:344
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "初始化書籤時錯誤：%s"
 
-#: ../src/vinagre-bookmarks.c:522
-#: ../src/vinagre-bookmarks.c:539
+#: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
+#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
+#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
+#: ../src/vinagre-window.c:279
+msgid "Unknown error"
+msgstr "不明的錯誤"
+
+#: ../src/vinagre-bookmarks.c:351
+msgid "Error while initializing bookmarks: The file seems to be empty"
+msgstr "初始化書籤時發生錯誤：該檔案似乎是空的"
+
+#: ../src/vinagre-bookmarks.c:358
+msgid ""
+"Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+msgstr "初始化書籤時發生錯誤：該檔案並非 vinagre 書籤檔案"
+
+#: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
+msgid "Error while saving bookmarks: Failed to create the XML structure"
+msgstr "儲存書籤時發生錯誤：建立 XML 結構失敗"
+
+#: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
+msgid "Error while saving bookmarks: Failed to initialize the XML structure"
+msgstr "儲存書籤時發生錯誤：初始化 XML 結構失敗"
+
+#: ../src/vinagre-bookmarks.c:450
+msgid "Error while saving bookmarks: Failed to finalize the XML structure"
+msgstr "儲存書籤時發生錯誤：結束 XML 結構失敗"
+
+#: ../src/vinagre-bookmarks.c:459
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "儲存書籤時錯誤：%s"
 
-#: ../src/vinagre-commands.c:106
+#: ../src/vinagre-bookmarks-migration.c:93
+#: ../src/vinagre-bookmarks-migration.c:100
+msgid "Error while migrating bookmarks: Failed to create the XML structure"
+msgstr "在轉移書籤時發生錯誤：建立 XML 結構失敗"
+
+#: ../src/vinagre-bookmarks-migration.c:107
+#: ../src/vinagre-bookmarks-migration.c:114
+msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
+msgstr "在轉移書籤時發生錯誤：初始化 XML 結構失敗"
+
+#: ../src/vinagre-bookmarks-migration.c:123
+msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
+msgstr "在轉移書籤時發生錯誤：結束 XML 結構失敗"
+
+#: ../src/vinagre-bookmarks-migration.c:133
+#: ../src/vinagre-bookmarks-migration.c:231
+#, c-format
+msgid "Error while migrating bookmarks: %s"
+msgstr "轉移書籤時發生錯誤：%s"
+
+#: ../src/vinagre-bookmarks-migration.c:231
+msgid "Failed to create the directory"
+msgstr "建立目錄失敗"
+
+#: ../src/vinagre-bookmarks-migration.c:255
+msgid ""
+"Migrating the bookmarks file to the new format. This operation is only "
+"supposed to run once."
+msgstr "正在將書籤檔案轉移為新的格式。這個操作只能執行一次。"
+
+#: ../src/vinagre-bookmarks-migration.c:263
+#, c-format
+msgid "Error opening old bookmarks file: %s"
+msgstr "開啟舊的書籤檔案時發生錯誤：%s"
+
+#: ../src/vinagre-bookmarks-migration.c:264
+#: ../src/vinagre-bookmarks-migration.c:276
+msgid "Migration cancelled"
+msgstr "轉移程序已取消"
+
+#: ../src/vinagre-bookmarks-migration.c:273
+msgid "Could not remove the old bookmarks file"
+msgstr "無法移除舊的書籤檔案"
+
+#: ../src/vinagre-bookmarks-tree.c:120
+msgid "Root Folder"
+msgstr "根資料夾"
+
+#: ../src/vinagre-bookmarks-ui.c:66
+msgid "Invalid name for this folder"
+msgstr "這個資料夾的名稱無效"
+
+#: ../src/vinagre-bookmarks-ui.c:236
+#, c-format
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgstr "你確認想從書籤中移除<i>%s</i>？"
+
+#: ../src/vinagre-bookmarks-ui.c:241
+msgid "Remove Folder?"
+msgstr "是否移除資料夾？"
+
+#: ../src/vinagre-bookmarks-ui.c:242
+msgid "Notice that all its subfolders and items will be removed as well."
+msgstr "注意它所有的子資料夾和項目也會被移除。"
+
+#: ../src/vinagre-bookmarks-ui.c:247
+msgid "Remove Item?"
+msgstr "是否移除項目？"
+
+#: ../src/vinagre-bookmarks-ui.c:264
+msgid "Error removing bookmark: Entry not found"
+msgstr "移除書籤時發生錯誤：找不到項目"
+
+#: ../src/vinagre-bookmarks-ui.c:281
+msgid "New Folder"
+msgstr "新增資料夾"
+
+#: ../src/vinagre-commands.c:113
 msgid "Choose the file"
 msgstr "選擇文件"
 
-#: ../src/vinagre-commands.c:117
-#: ../src/vinagre-tab.c:947
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
 msgid "Supported formats"
 msgstr "支援的格式"
 
-#: ../src/vinagre-commands.c:149
+#: ../src/vinagre-commands.c:156
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "無法開啟下列文件："
 msgstr[1] "無法開啟下列文件："
 
-#: ../src/vinagre-connect.c:172
+#: ../src/vinagre-connect.c:179
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "儲存歷史紀錄檔案時發生錯誤：%s"
 
-#: ../src/vinagre-connect.c:183
+#: ../src/vinagre-connect.c:191
 msgid "Choose a VNC Server"
 msgstr "選擇 VNC 伺服器"
 
-#: ../src/vinagre-connect.c:261
-#: ../src/vinagre-main.c:81
-#: ../src/vinagre-main.c:100
-#: ../src/vinagre-window.c:285
-msgid "Unknown error"
-msgstr "未知的錯誤"
-
-#: ../src/vinagre-connection.c:530
+#: ../src/vinagre-connection.c:600
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "未支援通訊協定 %s 。"
 
-#: ../src/vinagre-fav.c:762
-msgid "Bookmarks"
-msgstr "書籤"
+#: ../src/vinagre-connection.c:695
+msgid "Could not open the file."
+msgstr "無法開啟該檔案。"
 
-#: ../src/vinagre-fav.c:807
+#: ../src/vinagre-connection.c:714
+msgid "Could not parse the file."
+msgstr "無法解析該檔案。"
+
+#: ../src/vinagre-connection.c:759
+#, c-format
+msgid ""
+"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr "「shared」旗標數值錯誤：%d。它應該為 0 或 1。只能忽略此數值。"
+
+#: ../src/vinagre-connection.c:765
+msgid "Could not find the host address in the file."
+msgstr "在該檔案中找不到主機位址。"
+
+#: ../src/vinagre-fav.c:667
+msgid "Invalid operation"
+msgstr "無效的操作"
+
+#: ../src/vinagre-fav.c:668
+msgid "Data received from drag&drop operation is invalid."
+msgstr "從拖放操作中取回的資料是無效的。"
+
+#: ../src/vinagre-fav.c:861
 msgid "Hosts nearby"
 msgstr "臨近的主機"
 
-#: ../src/vinagre-main.c:49
+#: ../src/vinagre-main.c:53
 msgid "Opens a .vnc file"
 msgstr "開啟 .vnc 文件"
 
-#: ../src/vinagre-main.c:49
+#: ../src/vinagre-main.c:53
 msgid "filename"
 msgstr "檔案名稱"
 
-#: ../src/vinagre-main.c:52
+#: ../src/vinagre-main.c:56
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "在既存的 vinagre 實體中建立新的頂層視窗"
 
-#: ../src/vinagre-main.c:56
+#: ../src/vinagre-main.c:60
 msgid "[server:port]"
 msgstr "[伺服器:埠口]"
 
-#: ../src/vinagre-main.c:111
-#: ../src/vinagre-window.c:284
+#: ../src/vinagre-main.c:115
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "發生下列錯誤："
 msgstr[1] "發生下列錯誤："
 
 #. Setup command line options
-#: ../src/vinagre-main.c:132
+#: ../src/vinagre-main.c:137
 msgid "- VNC Client for GNOME"
 msgstr "- GNOME 的 VNC 客戶端"
 
-#: ../src/vinagre-main.c:141
-msgid "Run 'vinagre --help' to see a full list of available command line options"
+#: ../src/vinagre-main.c:146
+msgid ""
+"Run 'vinagre --help' to see a full list of available command line options"
 msgstr "執行「vinagre --help」以查看可用命令行選項的完整列表"
 
-#: ../src/vinagre-mdns.c:118
+#: ../src/vinagre-mdns.c:123
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "解析 avahi 主機名稱失敗：%s\n"
 
-#: ../src/vinagre-mdns.c:170
-#: ../src/vinagre-mdns.c:179
+#: ../src/vinagre-mdns.c:175 ../src/vinagre-mdns.c:184
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "瀏覽主機失敗：%s\n"
 
-#: ../src/vinagre-notebook.c:127
+#: ../src/vinagre-notebook.c:168
 #, c-format
-msgid "Connection to host \"%s\" was closed."
-msgstr "到主機「%s」的連線已關閉。"
+msgid "Connection to host <i>%s</i> was closed."
+msgstr "到主機 <i>%s</i> 的連線已關閉。"
 
-#: ../src/vinagre-notebook.c:153
+#: ../src/vinagre-notebook.c:170
+msgid "Connection closed"
+msgstr "連線已關閉"
+
+#: ../src/vinagre-notebook.c:194
 msgid "Connecting..."
 msgstr "正在連線..."
 
-#: ../src/vinagre-notebook.c:180
-#: ../src/vinagre-tab.c:692
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
 msgid "Close connection"
 msgstr "關閉連線"
 
-#: ../src/vinagre-prefs.c:167
+#: ../src/vinagre-prefs.c:169
 msgid "Cannot initialize preferences manager."
 msgstr "無法初始化偏好設定管理員。"
 
-#: ../src/vinagre-tab.c:271
+#: ../src/vinagre-tab.c:322
 msgid "Error connecting to host."
 msgstr "連線到主機時錯誤。"
 
-#: ../src/vinagre-tab.c:303
+#: ../src/vinagre-tab.c:354
 #, c-format
-msgid "Authentication to host \"%s\" has failed"
-msgstr "到主機「%s」的驗證失敗"
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "到主機 <i>%s</i> 的驗證失敗"
 
-#: ../src/vinagre-tab.c:331
+#: ../src/vinagre-tab.c:360
+msgid "Authentication failed"
+msgstr "驗證失敗"
+
+#: ../src/vinagre-tab.c:382
 #, c-format
-msgid "Authentication method to host \"%s\" is unsupported. (%u)"
-msgstr "不支持到主機「%s」的驗證方法。(%u)"
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "不支持到主機 <i>%s</i> 的驗證方法。(%u)"
 
-#: ../src/vinagre-tab.c:412
+#: ../src/vinagre-tab.c:386
+msgid "Authentication unsupported"
+msgstr "不支援的驗證方法"
+
+#: ../src/vinagre-tab.c:464
 msgid "Error saving recent connection."
 msgstr "儲存最近連線時錯誤。"
 
-#: ../src/vinagre-tab.c:443
-msgid "Error saving the password on the keyring."
-msgstr "儲存密碼到密碼匙圈時出錯。"
+#: ../src/vinagre-tab.c:496
+msgid "Error saving the credential on the keyring."
+msgstr "儲存證書到密碼匙圈時發生錯誤。"
 
-#: ../src/vinagre-tab.c:706
-#: ../src/vinagre-tab.c:707
+#: ../src/vinagre-tab.c:828
+msgid "Minimize window"
+msgstr "最小化視窗"
+
+#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
 msgid "Scaling"
 msgstr "正在縮放"
 
-#: ../src/vinagre-tab.c:716
-#: ../src/vinagre-tab.c:717
+#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
 msgid "Read only"
 msgstr "唯讀"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:727
-#: ../src/vinagre-tab.c:728
-#: ../src/vinagre-ui.h:79
+#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "擷取畫面快照"
 
-#: ../src/vinagre-tab.c:736
-#: ../src/vinagre-tab.c:737
-#: ../src/vinagre-ui.h:82
+#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "傳送 Ctrl-Alt-Del"
 
-#: ../src/vinagre-tab.c:863
+#: ../src/vinagre-tab.c:998
 msgid "Desktop Name:"
 msgstr "桌面名稱："
 
-#: ../src/vinagre-tab.c:865
+#: ../src/vinagre-tab.c:1000
 msgid "Port:"
-msgstr "埠口："
+msgstr "連接埠:"
 
-#: ../src/vinagre-tab.c:866
+#: ../src/vinagre-tab.c:1001
 msgid "Dimensions:"
 msgstr "尺寸:"
 
-#: ../src/vinagre-tab.c:933
+#: ../src/vinagre-tab.c:1067
+#, fuzzy
+#| msgid "Take a screenshot of active connection"
+msgid "Could not get a screenshot of the connection."
+msgstr "擷取活動連線的畫面快照"
+
+#: ../src/vinagre-tab.c:1075
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s 的畫面快照"
 
-#: ../src/vinagre-tab.c:936
+#: ../src/vinagre-tab.c:1078
 msgid "Save Screenshot"
 msgstr "儲存畫面快照"
 
-#: ../src/vinagre-tab.c:1000
-msgid "Scaling does not work properly on composited windows. Disable the visual effects and try again."
-msgstr "縮放功能在組合式視窗中無法正確運作。請停用視覺效果後再試一次。"
-
-#: ../src/vinagre-tab.c:1008
+#: ../src/vinagre-tab.c:1142
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
-"Read the README file (shipped with Vinagre) in order to know how to enable this feature."
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
 msgstr ""
 "縮放功能在這個安裝狀態下並不支援。\n"
 "\n"
@@ -422,177 +550,248 @@ msgstr "開啟 .VNC 文件"
 
 #: ../src/vinagre-ui.h:45
 msgid "Quit the program"
-msgstr "離開程式"
+msgstr "結束程式"
+
+#: ../src/vinagre-ui.h:49
+msgid "Edit the application preferences"
+msgstr "編輯應用程式偏好設定"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:48
+#: ../src/vinagre-ui.h:52
 msgid "_Open bookmark"
 msgstr "開啟書籤(_O)"
 
-#: ../src/vinagre-ui.h:49
+#: ../src/vinagre-ui.h:53
 msgid "Connect to this machine"
 msgstr "連線到此機器"
 
-#: ../src/vinagre-ui.h:50
+#: ../src/vinagre-ui.h:54
 msgid "_Edit bookmark"
 msgstr "編輯書籤(_E)"
 
-#: ../src/vinagre-ui.h:51
+#: ../src/vinagre-ui.h:55
 msgid "Edit the details of selected bookmark"
 msgstr "編輯所選擇書籤的細節"
 
-#: ../src/vinagre-ui.h:52
+#: ../src/vinagre-ui.h:56
 msgid "_Remove from bookmarks"
 msgstr "從書籤中移除(_R)"
 
-#: ../src/vinagre-ui.h:53
+#: ../src/vinagre-ui.h:57
 msgid "Remove current selected connection from bookmarks"
 msgstr "從書籤中移除當前選擇的連線"
 
+#: ../src/vinagre-ui.h:58
+msgid "_New Folder"
+msgstr "新增資料夾(_N)"
+
+#: ../src/vinagre-ui.h:59
+msgid "Create a new folder"
+msgstr "建立新的資料夾"
+
 #. Help menu
-#: ../src/vinagre-ui.h:56
+#: ../src/vinagre-ui.h:62
 msgid "_Contents"
 msgstr "內容(_C)"
 
-#: ../src/vinagre-ui.h:57
+#: ../src/vinagre-ui.h:63
 msgid "Open the vinagre manual"
 msgstr "開啟 vinagre 手冊"
 
-#: ../src/vinagre-ui.h:59
+#: ../src/vinagre-ui.h:65
 msgid "About this application"
 msgstr "關於此程式"
 
-#: ../src/vinagre-ui.h:66
+#: ../src/vinagre-ui.h:72
 msgid "Close the current connection"
 msgstr "關閉當前連線"
 
-#: ../src/vinagre-ui.h:67
+#: ../src/vinagre-ui.h:73
 msgid "C_lose All"
 msgstr "全部關閉(_L)"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:74
 msgid "Close all active connections"
 msgstr "關閉全部活動中的連線"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:71
+#: ../src/vinagre-ui.h:77
 msgid "_Add to bookmarks"
 msgstr "新增至書籤(_A)"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:78
 msgid "Add current connection to your bookmarks"
 msgstr "新增目前連線至你的書籤"
 
-#: ../src/vinagre-ui.h:80
+#: ../src/vinagre-ui.h:86
 msgid "Take a screenshot of active connection"
 msgstr "擷取活動連線的畫面快照"
 
-#: ../src/vinagre-ui.h:83
+#: ../src/vinagre-ui.h:89
 msgid "Send Ctrl+Alt+Del to active connection"
 msgstr "傳送 Ctrl+Alt+Del 到活動中的連線"
 
-#: ../src/vinagre-ui.h:87
+#: ../src/vinagre-ui.h:93
 msgid "View the current machine in full screen"
 msgstr "以全螢幕檢視當前機器"
 
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:95
+msgid "_Original size"
+msgstr "原始大小(_O)"
+
+#: ../src/vinagre-ui.h:96
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "將視窗調整為遠端桌面的大小"
+
+#: ../src/vinagre-ui.h:102
 msgid "S_caling"
 msgstr "縮放(_C)"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:103
 msgid "Fit the remote screen into the current window size"
 msgstr "讓遠端螢幕能符合目前的視窗大小"
 
-#: ../src/vinagre-ui.h:95
+#: ../src/vinagre-ui.h:105
 msgid "_Read only"
 msgstr "唯讀(_R)"
 
-#: ../src/vinagre-ui.h:96
+#: ../src/vinagre-ui.h:106
 msgid "Disable mouse and keyboard"
 msgstr "停用滑鼠與鍵盤"
 
-#: ../src/vinagre-ui.h:102
+#: ../src/vinagre-ui.h:112
 msgid "_Toolbar"
 msgstr "工具列(_T)"
 
-#: ../src/vinagre-ui.h:103
+#: ../src/vinagre-ui.h:113
 msgid "Show or hide the toolbar"
 msgstr "顯示或隱藏工具列"
 
-#: ../src/vinagre-ui.h:106
+#: ../src/vinagre-ui.h:116
 msgid "_Statusbar"
 msgstr "狀態列(_S)"
 
-#: ../src/vinagre-ui.h:107
+#: ../src/vinagre-ui.h:117
 msgid "Show or hide the statusbar"
 msgstr "顯示或隱藏狀態列"
 
-#: ../src/vinagre-ui.h:110
+#: ../src/vinagre-ui.h:120
 msgid "Side _Panel"
 msgstr "側邊面板(_P)"
 
-#: ../src/vinagre-ui.h:111
+#: ../src/vinagre-ui.h:121
 msgid "Show or hide the side panel"
 msgstr "顯示或隱藏側邊面板"
 
-#: ../src/vinagre-utils.c:423
+#: ../src/vinagre-utils.c:75
+msgid "An error has occurred:"
+msgstr "發生錯誤："
+
+#: ../src/vinagre-utils.c:433
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre 是 GNOME 桌面的 VNC 客戶端"
 
-#: ../src/vinagre-utils.c:426
-msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+#: ../src/vinagre-utils.c:436
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
 msgstr "Vinagre 是自由軟件；你可以在自由軟件基金會發行的 GNU 通用公共許可的條款下重新分發它和/或修改它；無論此許可的版本2，或者(以你的選擇)任何更新的版本。"
 
-#: ../src/vinagre-utils.c:430
-msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
+#: ../src/vinagre-utils.c:440
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
 msgstr "Vinagre 被發佈是希望它能夠有所用處，但「沒有任何保證」；甚至沒有隱含「可銷售」或者「用於特定用途」的保證。請查看 GNU 通用公共許可以獲得更多細節。"
 
-#: ../src/vinagre-utils.c:434
-msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr "你應該隨本程序收到 GNU 通用公共許可的副本。如果沒有，請查看 <http://www.gnu.org/licenses/>。"
+#: ../src/vinagre-utils.c:444
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr "你應該已經和程式一起收到一份 GNU 通用公共許可證的副本。如果還沒有，請參訪 <http://www.gnu.org/licenses/>。"
 
-#: ../src/vinagre-utils.c:456
+#: ../src/vinagre-utils.c:466
 msgid "translator-credits"
 msgstr ""
 "GNOME 程式中文化郵件論壇\n"
-"community@linuxhall.org\n"
+"zh-l10n@lists.linux.org.tw\n"
 "\n"
 "Hialan Liu <hialan.liu@gmail.com>, 2008"
 
-#: ../src/vinagre-utils.c:459
+#: ../src/vinagre-utils.c:469
 msgid "Vinagre Website"
 msgstr "Vinagre 網站"
 
-#: ../src/vinagre-window.c:422
+#: ../src/vinagre-window.c:413
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "無法合併 vinagre-ui.xml：%s"
 
-#: ../src/vinagre-window.c:450
+#: ../src/vinagre-window.c:441
 msgid "_Recent connections"
 msgstr "最近連線(_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:610
-#: ../src/vinagre-window.c:660
+#: ../src/vinagre-window.c:614
 #, c-format
 msgid "Open %s:%d"
 msgstr "開啟 %s：%d"
 
-#: ../src/vinagre-window.c:809
+#: ../src/vinagre-window.c:797
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "按 Ctrl+Alt 以釋放游標"
 
+#~ msgid "<b>Editing a bookmark</b>"
+#~ msgstr "<b>編輯書籤</b>"
+
+#~ msgid "<b>Enter a name for this connection</b>"
+#~ msgstr "<b>為這個連線輸入名稱</b>"
+
+#~ msgid ""
+#~ "<b>In order to connect on this machine, a password is required. Please "
+#~ "supply it.</b>"
+#~ msgstr "<b>為了能夠連線到此機器，需要輸入密碼。請提供。</b>"
+
+#~ msgid "Editing a bookmark"
+#~ msgstr "編輯書籤"
+
+#~ msgid "Saving to bookmarks"
+#~ msgstr "保存到書籤"
+
+#~ msgid "_Bookmark name:"
+#~ msgstr "書籤名稱(_B):"
+
+#~ msgid "Error: %s"
+#~ msgstr "錯誤：%s"
+
+#~ msgid "Confirm removal?"
+#~ msgstr "確認移除？"
+
+#~ msgid "Error while removing %s from bookmarks: %s"
+#~ msgstr "從書籤移除 %s 時錯誤：%s"
+
+#~ msgid ""
+#~ "Scaling does not work properly on composited windows. Disable the visual "
+#~ "effects and try again."
+#~ msgstr "縮放功能在組合式視窗中無法正確運作。請停用視覺效果後再試一次。"
+
 #~ msgid "_Port:"
-#~ msgstr "埠口(_P)："
+#~ msgstr "連接埠(_P):"
+
 #~ msgid "Image"
-#~ msgstr "影像"
+#~ msgstr "圖片"
+
 #~ msgid "Name"
 #~ msgstr "名稱"
+
 #~ msgid "Hide bookmarks"
 #~ msgstr "隱藏書籤"
+
 #~ msgid "Expected `%s' got `%s' for key %s"
-#~ msgstr "需要得到「%s」卻得到「%s」，於鍵值 %s"
+#~ msgstr "設定鍵 %3$s 的值應該是「%1$s」但實際上是「%2$s」"
+
 #~ msgid "Press Ctrl+Alt to grab the cursor"
 #~ msgstr "按 Ctrl+Alt 以取得游標"
-
