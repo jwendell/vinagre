@@ -6,15 +6,15 @@
 # Og Maciel <ogmaciel@gnome.org>, 2007.
 # Taylon Silmer <taylonsilva@gmail.com>, 2009.
 #
+# Jonh Wendell <jwendell@gnome.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 0.1\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=vinagre&amp;component=general\n"
-"POT-Creation-Date: 2008-12-18 14:43+0000\n"
-"PO-Revision-Date: 2009-01-03 21:19-0300\n"
-"Last-Translator: Taylon <taylonsilva@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-16 12:07-0300\n"
+"PO-Revision-Date: 2009-02-16 11:46-0300\n"
+"Last-Translator: Jonh Wendell <jwendell@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,8 +35,8 @@ msgid "Access remote desktops"
 msgstr "Acesse áreas de trabalho remotas"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264 ../src/vinagre-main.c:151
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "Visualizador de Área de Trabalho Remota"
 
@@ -98,11 +98,11 @@ msgstr "Se os aceleradores de menu deverão ser mostrados (teclas de atalho)"
 
 #: ../data/vinagre.glade.h:14
 msgid "_Always show tabs"
-msgstr "Sempre mostrar _abas"
+msgstr "_Sempre mostrar abas"
 
 #: ../data/vinagre.glade.h:15
 msgid "_Full screen"
-msgstr "Tela _cheia"
+msgstr "_Tela cheia"
 
 #: ../data/vinagre.glade.h:16
 msgid "_Host:"
@@ -114,19 +114,19 @@ msgstr "_Nome:"
 
 #: ../data/vinagre.glade.h:18
 msgid "_Password:"
-msgstr "S_enha:"
+msgstr "_Senha:"
 
 #: ../data/vinagre.glade.h:19
 msgid "_Remember this credential"
-msgstr "Lemb_rar esta credencial"
+msgstr "_Lembrar esta credencial"
 
 #: ../data/vinagre.glade.h:20
 msgid "_Scaling"
-msgstr "E_scalonamento"
+msgstr "_Escalonamento"
 
 #: ../data/vinagre.glade.h:21
 msgid "_Show menu shortcuts"
-msgstr "Mo_strar atalhos do menu"
+msgstr "_Mostrar atalhos do menu"
 
 #: ../data/vinagre.glade.h:22
 msgid "_Username:"
@@ -134,14 +134,10 @@ msgstr "_Nome de usuário:"
 
 #: ../data/vinagre.glade.h:23
 msgid "_View only"
-msgstr "_Ver apenas"
-
-#: ../data/vinagre.glade.h:24
-msgid "gtk-close"
-msgstr "gtk-close"
+msgstr "_Apenas visualização"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:26
+#: ../data/vinagre.glade.h:25
 msgid "host or host:display or host::port"
 msgstr "máquina ou máquina:tela ou máquina::porta"
 
@@ -205,15 +201,15 @@ msgstr "Um menu para acessar rapidamente máquinas remotas"
 msgid "Vinagre Applet Factory"
 msgstr "Fábrica de miniaplicativo do Vinagre"
 
-#: ../src/vinagre-applet.c:100 ../src/vinagre-applet.c:178
+#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "Não foi possível executar o vinagre:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
-msgstr "Abrir Visualizador de Área de Trabalho Remota"
+msgstr "Abrir o Visualizador de Área de Trabalho Remota"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "Acesse os seus marcadores"
 
@@ -287,8 +283,8 @@ msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
 msgstr ""
-"Migrando o arquivo de marcadores para o novo formato. Supõe-se que esta "
-"operação seja executada apenas uma vez."
+"Migrando o arquivo de marcadores para o novo formato. Esta operação só deve "
+"ser executada uma vez."
 
 #: ../src/vinagre-bookmarks-migration.c:263
 #, c-format
@@ -323,7 +319,7 @@ msgstr "Remover a pasta?"
 
 #: ../src/vinagre-bookmarks-ui.c:242
 msgid "Notice that all its subfolders and items will be removed as well."
-msgstr "Observe que todas as subpastas e itens serão removidos também."
+msgstr "Note que todas as suas subpastas e itens também serão removidos."
 
 #: ../src/vinagre-bookmarks-ui.c:247
 msgid "Remove Item?"
@@ -341,9 +337,9 @@ msgstr "Nova pasta"
 msgid "Choose the file"
 msgstr "Escolha o arquivo"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1082
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
 msgid "Supported formats"
-msgstr "Formatos com suporte"
+msgstr "Formatos suportados"
 
 #: ../src/vinagre-commands.c:156
 msgid "The following file could not be opened:"
@@ -363,7 +359,7 @@ msgstr "Escolha um servidor VNC"
 #: ../src/vinagre-connection.c:600
 #, c-format
 msgid "The protocol %s is not supported."
-msgstr "Sem suporte ao protocolo %s."
+msgstr "O protocolo %s não é suportado."
 
 #: ../src/vinagre-connection.c:695
 msgid "Could not open the file."
@@ -374,12 +370,12 @@ msgid "Could not parse the file."
 msgstr "Não foi possível analisar o arquivo."
 
 #: ../src/vinagre-connection.c:759
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr ""
-"Valor incorreto para o sinalizador 'shared'.  Supões-se que seja 0 ou 1. "
-"Ignora-lo."
+"Valor incorreto para a flag 'shared': %d. É esperado um valor 0 ou 1. "
+"Ignorando-o."
 
 #: ../src/vinagre-connection.c:765
 msgid "Could not find the host address in the file."
@@ -390,9 +386,8 @@ msgid "Invalid operation"
 msgstr "Operação inválida"
 
 #: ../src/vinagre-fav.c:668
-#, fuzzy
 msgid "Data received from drag&drop operation is invalid."
-msgstr "Dados obtidos a partir do drag&drop operação inválida."
+msgstr "Dados inválidos recebidos da operação drag&drop."
 
 #: ../src/vinagre-fav.c:861
 msgid "Hosts nearby"
@@ -429,8 +424,8 @@ msgstr "- Cliente VNC para o GNOME"
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
-"Execute \"vinagre --help\" para ver uma lista completa das opções "
-"disponíveis de linha de comando"
+"Execute \"vinagre --help\" para ver uma lista completa das opções de linha "
+"de comando"
 
 #: ../src/vinagre-mdns.c:123
 #, c-format
@@ -526,23 +521,27 @@ msgstr "Porta:"
 msgid "Dimensions:"
 msgstr "Dimensões:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1067
+msgid "Could not get a screenshot of the connection."
+msgstr "Não foi possível capturar uma imagem da conexão"
+
+#: ../src/vinagre-tab.c:1075
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de tela de %s"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1078
 msgid "Save Screenshot"
 msgstr "Salvar captura de tela"
 
-#: ../src/vinagre-tab.c:1135
+#: ../src/vinagre-tab.c:1142
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
 "Read the README file (shipped with Vinagre) in order to know how to enable "
 "this feature."
 msgstr ""
-"Esta instalção não tem suporte a escalonamento.\n"
+"Esta instalação não tem suporte a escalonamento.\n"
 "\n"
 "Leia o arquivo README (distribuído com o Vinagre) para saber como habilitar "
 "este recurso."
@@ -776,6 +775,9 @@ msgstr "Abre %s:%d"
 #: ../src/vinagre-window.c:797
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Pressione Ctrl+Alt para liberar o cursor"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
 
 #~ msgid "<b>Editing a bookmark</b>"
 #~ msgstr "<b>Editando um marcador</b>"
