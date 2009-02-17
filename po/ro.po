@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-01-12 14:52+0000\n"
-"PO-Revision-Date: 2009-01-14 05:49+0200\n"
+"POT-Creation-Date: 2009-02-13 19:39+0000\n"
+"PO-Revision-Date: 2009-02-17 03:05+0200\n"
 "Last-Translator: Adi Roiban <adi@roiban.ro>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,8 +35,8 @@ msgstr "Acces calculatoare la distanță"
 #: ../data/vinagre.desktop.in.in.h:2
 #: ../data/vinagre-file.desktop.in.in.h:2
 #: ../src/GNOME_VinagreApplet.server.in.in.h:2
-#: ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264
+#: ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473
 #: ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "Vizualizator Remote Desktop"
@@ -116,12 +116,11 @@ msgstr "_Nume:"
 
 #: ../data/vinagre.glade.h:18
 msgid "_Password:"
-msgstr "_Parola:"
+msgstr "_Parolă:"
 
 #: ../data/vinagre.glade.h:19
-#, fuzzy
 msgid "_Remember this credential"
-msgstr "Memo_rează această parolă"
+msgstr "Memo_rează această certificare"
 
 #: ../data/vinagre.glade.h:20
 msgid "_Scaling"
@@ -186,18 +185,18 @@ msgstr "Un meniul pentru a accesa rapid mașini la distanță"
 
 #: ../src/GNOME_VinagreApplet.server.in.in.h:3
 msgid "Vinagre Applet Factory"
-msgstr ""
+msgstr "Șablon miniaplicație Vinagre"
 
-#: ../src/vinagre-applet.c:100
-#: ../src/vinagre-applet.c:178
+#: ../src/vinagre-applet.c:271
+#: ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "Nu s-a putut porni vinagre:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "Deschide vizualizatorul de desktop la distanță"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "Accesare favorite"
 
@@ -325,7 +324,7 @@ msgid "Choose the file"
 msgstr "Alegeți fișierul"
 
 #: ../src/vinagre-commands.c:124
-#: ../src/vinagre-tab.c:1082
+#: ../src/vinagre-tab.c:1089
 msgid "Supported formats"
 msgstr "Formate suportate"
 
@@ -409,7 +408,7 @@ msgstr "- client VNC pentru GNOME"
 
 #: ../src/vinagre-main.c:146
 msgid "Run 'vinagre --help' to see a full list of available command line options"
-msgstr "Rulați 'vinagre --help' pentru a vedea lista completă a opțiunilor din linia de comandă"
+msgstr "Rulați „vinagre --help” pentru a vedea lista completă a opțiunilor din linia de comandă"
 
 #: ../src/vinagre-mdns.c:123
 #, c-format
@@ -471,9 +470,8 @@ msgid "Error saving recent connection."
 msgstr "Eroare la salvarea conexiunii recente."
 
 #: ../src/vinagre-tab.c:496
-#, fuzzy
 msgid "Error saving the credential on the keyring."
-msgstr "Eroare la salvarea parolei în inelul e chei."
+msgstr "Eroare la salvarea certificării în inelul e chei."
 
 #: ../src/vinagre-tab.c:828
 msgid "Minimize window"
@@ -514,16 +512,21 @@ msgstr "Port:"
 msgid "Dimensions:"
 msgstr "Dimensiuni:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1067
+#| msgid "Take a screenshot of active connection"
+msgid "Could not get a screenshot of the connection."
+msgstr "Nu s-a putut obține o captură de ecran pentru conexiune."
+
+#: ../src/vinagre-tab.c:1075
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captură de ecran pentru %s"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1078
 msgid "Save Screenshot"
 msgstr "Salvează captura de ecran"
 
-#: ../src/vinagre-tab.c:1135
+#: ../src/vinagre-tab.c:1142
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
