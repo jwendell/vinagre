@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-01-12 14:52+0000\n"
-"PO-Revision-Date: 2009-02-08 14:39+0100\n"
+"POT-Creation-Date: 2009-02-13 14:55+0000\n"
+"PO-Revision-Date: 2009-02-17 22:59+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
@@ -32,8 +32,8 @@ msgid "Access remote desktops"
 msgstr "Távoli asztalok elérése"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264 ../src/vinagre-main.c:151
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "Távoli asztalok megjelenítése"
 
@@ -46,7 +46,6 @@ msgid "<b>Connection options</b>"
 msgstr "<b>Kapcsolódási beállítások</b>"
 
 #: ../data/vinagre.glade.h:3
-#| msgid "<b>Connection options</b>"
 msgid "<b>Connection</b>"
 msgstr "<b>Csatlakozás</b>"
 
@@ -59,7 +58,6 @@ msgid "<b>Interface</b>"
 msgstr "<b>Felület</b>"
 
 #: ../data/vinagre.glade.h:6
-#| msgid "<b>Connection options</b>"
 msgid "<b>Options</b>"
 msgstr "<b>Beállítások</b>"
 
@@ -113,7 +111,6 @@ msgid "_Password:"
 msgstr "_Jelszó:"
 
 #: ../data/vinagre.glade.h:19
-#| msgid "_Remember this password"
 msgid "_Remember this credential"
 msgstr "_Emlékezzen a hitelesítési adatokra"
 
@@ -126,7 +123,6 @@ msgid "_Show menu shortcuts"
 msgstr "M_enügyorsítók megjelenítése"
 
 #: ../data/vinagre.glade.h:22
-#| msgid "_Name:"
 msgid "_Username:"
 msgstr "_Felhasználónév:"
 
@@ -199,16 +195,15 @@ msgstr "Menü távoli gépekhez való gyors kapcsolódáshoz"
 msgid "Vinagre Applet Factory"
 msgstr "Vinagre kisalkalmazás factory"
 
-#: ../src/vinagre-applet.c:100 ../src/vinagre-applet.c:178
-#| msgid "Could not run vinagre: %s"
+#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "A vinagre nem futtatható:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "A távoliasztal-megjelenítő megnyitása"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "Könyvjelzők elérése"
 
@@ -226,27 +221,22 @@ msgid "Unknown error"
 msgstr "Ismeretlen hiba"
 
 #: ../src/vinagre-bookmarks.c:351
-#| msgid "Error while initializing bookmarks: %s"
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Hiba a könyvjelzők előkészítésekor: A fájl üresnek tűnik"
 
 #: ../src/vinagre-bookmarks.c:358
-#| msgid "Error while initializing bookmarks: %s"
 msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "Hiba a könyvjelzők előkészítésekor: A fájl nem egy vinagre könyvjelzőfájl"
 
 #: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "Hiba a könyvjelzők mentése közben: Az XML-struktúra létrehozása meghiúsult"
 
 #: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "Hiba a könyvjelzők mentése közben: Az XML-struktúra előkészítése meghiúsult"
 
 #: ../src/vinagre-bookmarks.c:450
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "Hiba a könyvjelzők mentése közben: Az XML-struktúra befejezése meghiúsult"
 
@@ -258,21 +248,26 @@ msgstr "Hiba a könyvjelzők mentése közben: %s"
 #: ../src/vinagre-bookmarks-migration.c:93
 #: ../src/vinagre-bookmarks-migration.c:100
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
-msgstr "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra létrehozása meghiúsult"
+msgstr ""
+"Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra létrehozása "
+"meghiúsult"
 
 #: ../src/vinagre-bookmarks-migration.c:107
 #: ../src/vinagre-bookmarks-migration.c:114
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
-msgstr "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra előkészítése meghiúsult"
+msgstr ""
+"Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra előkészítése "
+"meghiúsult"
 
 #: ../src/vinagre-bookmarks-migration.c:123
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
-msgstr "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra befejezése meghiúsult"
+msgstr ""
+"Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra befejezése "
+"meghiúsult"
 
 #: ../src/vinagre-bookmarks-migration.c:133
 #: ../src/vinagre-bookmarks-migration.c:231
 #, c-format
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while migrating bookmarks: %s"
 msgstr "Hiba a könyvjelzők átköltöztetése közben: %s"
 
@@ -281,17 +276,15 @@ msgid "Failed to create the directory"
 msgstr "A könyvtár létrehozása meghiúsult"
 
 #: ../src/vinagre-bookmarks-migration.c:255
-#| msgid ""
-#| "Copying the bookmarks file to the new location. This operation is only "
-#| "supposed to run once."
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
-msgstr "A könyvjelzőfájl új formátumra alakítása. Ez a művelet csak egyszer fog lefutni."
+msgstr ""
+"A könyvjelzőfájl új formátumra alakítása. Ez a művelet csak egyszer fog "
+"lefutni."
 
 #: ../src/vinagre-bookmarks-migration.c:263
 #, c-format
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error opening old bookmarks file: %s"
 msgstr "Hiba a régi könyvjelzőfájl megnyitása közben: %s"
 
@@ -330,7 +323,6 @@ msgid "Remove Item?"
 msgstr "Eltávolítja az elemet?"
 
 #: ../src/vinagre-bookmarks-ui.c:264
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error removing bookmark: Entry not found"
 msgstr "Hiba a könyvjelző eltávolítása közben: A bejegyzés nem található"
 
@@ -342,7 +334,7 @@ msgstr "Új mappa"
 msgid "Choose the file"
 msgstr "Válassza ki a fájlt"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1082
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
 msgid "Supported formats"
 msgstr "Támogatott formátumok"
 
@@ -367,19 +359,19 @@ msgid "The protocol %s is not supported."
 msgstr "A(z) %s protokoll nem támogatott."
 
 #: ../src/vinagre-connection.c:695
-#| msgid "Choose the file"
 msgid "Could not open the file."
 msgstr "A fájl nem nyitható meg."
 
 #: ../src/vinagre-connection.c:714
-#| msgid "Choose the file"
 msgid "Could not parse the file."
 msgstr "A fájl nem dolgozható fel."
 
 #: ../src/vinagre-connection.c:759
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr "A „shared” jelző értéke hibás: %d. Az értéke 0 vagy 1 lehetne, figyelmen kívül marad."
+msgstr ""
+"A „shared” jelző értéke hibás: %d. Az értéke 0 vagy 1 lehetne, figyelmen "
+"kívül marad."
 
 #: ../src/vinagre-connection.c:765
 msgid "Could not find the host address in the file."
@@ -442,12 +434,10 @@ msgstr "Gépek böngészése sikertelen: %s\n"
 
 #: ../src/vinagre-notebook.c:168
 #, c-format
-#| msgid "Connection to host \"%s\" was closed."
 msgid "Connection to host <i>%s</i> was closed."
 msgstr "A kapcsolat lezárva következő géphez: <i>%s</i>."
 
 #: ../src/vinagre-notebook.c:170
-#| msgid "Connection to host \"%s\" was closed."
 msgid "Connection closed"
 msgstr "A kapcsolat lezárva"
 
@@ -469,23 +459,19 @@ msgstr "Hiba a géphez csatlakozás közben."
 
 #: ../src/vinagre-tab.c:354
 #, c-format
-#| msgid "Authentication to host \"%s\" has failed"
 msgid "Authentication to host <i>%s</i> has failed"
 msgstr "A hitelesítés meghiúsult a következő géphez: <i>%s</i>"
 
 #: ../src/vinagre-tab.c:360
-#| msgid "Authentication to host \"%s\" has failed"
 msgid "Authentication failed"
 msgstr "A hitelesítés meghiúsult"
 
 #: ../src/vinagre-tab.c:382
 #, c-format
-#| msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
 msgstr "A hitelesítési módszer a géphez (<i>%s</i>) nem támogatott. (%u)"
 
 #: ../src/vinagre-tab.c:386
-#| msgid "Authentication method to host \"%s\" is unsupported. (%u)"
 msgid "Authentication unsupported"
 msgstr "A hitelesítés nem támogatott"
 
@@ -494,7 +480,6 @@ msgid "Error saving recent connection."
 msgstr "Hiba a legutóbbi kapcsolat mentésekor."
 
 #: ../src/vinagre-tab.c:496
-#| msgid "Error saving the password on the keyring."
 msgid "Error saving the credential on the keyring."
 msgstr "Hiba a hitelesítési adatok kulcstartóra mentésekor."
 
@@ -531,16 +516,21 @@ msgstr "Port:"
 msgid "Dimensions:"
 msgstr "Dimenziók:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1067
+#| msgid "Take a screenshot of active connection"
+msgid "Could not get a screenshot of the connection."
+msgstr "Nem készíthető képernyőkép az aktív kapcsolatról."
+
+#: ../src/vinagre-tab.c:1075
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s képernyőképe"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1078
 msgid "Save Screenshot"
 msgstr "Képernyőkép mentése"
 
-#: ../src/vinagre-tab.c:1135
+#: ../src/vinagre-tab.c:1142
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -713,8 +703,6 @@ msgid "Show or hide the side panel"
 msgstr "Az oldalsó ablaktábla megjelenítése vagy elrejtése"
 
 #: ../src/vinagre-utils.c:75
-#| msgid "The following error has occurred:"
-#| msgid_plural "The following errors have occurred:"
 msgid "An error has occurred:"
 msgstr "Hiba történt:"
 
