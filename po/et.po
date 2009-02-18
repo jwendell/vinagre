@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&amp;component=general\n"
-"POT-Creation-Date: 2008-12-23 11:38+0000\n"
-"PO-Revision-Date: 2008-12-26 13:21+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
+"POT-Creation-Date: 2009-02-13 14:55+0000\n"
+"PO-Revision-Date: 2009-02-15 20:45+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -38,8 +38,8 @@ msgstr "Ligipääs kaugtöölaudadele"
 #: ../data/vinagre.desktop.in.in.h:2
 #: ../data/vinagre-file.desktop.in.in.h:2
 #: ../src/GNOME_VinagreApplet.server.in.in.h:2
-#: ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264
+#: ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473
 #: ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "Kaugtöölaudade vaataja"
@@ -141,12 +141,8 @@ msgstr "_Kasutajanimi:"
 msgid "_View only"
 msgstr "_Kirjutuskaitsega"
 
-#: ../data/vinagre.glade.h:24
-msgid "gtk-close"
-msgstr "gtk-close"
-
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:26
+#: ../data/vinagre.glade.h:25
 msgid "host or host:display or host::port"
 msgstr "host või host:kuva või host::port"
 
@@ -194,16 +190,16 @@ msgstr "Kaugmasinaga kiirelt ühenduse võtmise menüü"
 msgid "Vinagre Applet Factory"
 msgstr "Vinagre rakendi Factory"
 
-#: ../src/vinagre-applet.c:100
-#: ../src/vinagre-applet.c:178
+#: ../src/vinagre-applet.c:271
+#: ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "Vinagret pole võimalik käivitada:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "Kaugtöölaudade vaataja avamine"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "Ligipääs järjehoidjatele"
 
@@ -331,7 +327,7 @@ msgid "Choose the file"
 msgstr "Faili valimine"
 
 #: ../src/vinagre-commands.c:124
-#: ../src/vinagre-tab.c:1082
+#: ../src/vinagre-tab.c:1089
 msgid "Supported formats"
 msgstr "Toetatud vormingud"
 
@@ -517,16 +513,21 @@ msgstr "Port:"
 msgid "Dimensions:"
 msgstr "Mõõtmed:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1067
+#| msgid "Take a screenshot of active connection"
+msgid "Could not get a screenshot of the connection."
+msgstr "Ühendusest pole võimalik ekraanitõmmist võtta."
+
+#: ../src/vinagre-tab.c:1075
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Masina %s ekraanitõmmis"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1078
 msgid "Save Screenshot"
 msgstr "Ekraanitõmmise salvestamine"
 
-#: ../src/vinagre-tab.c:1135
+#: ../src/vinagre-tab.c:1142
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -746,6 +747,8 @@ msgstr "%s:%d avamine"
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Kursori vabastamiseks vajuta Ctrl+Alt"
 
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
 #~ msgid "<b>Editing a bookmark</b>"
 #~ msgstr "<b>Järjehoidja redigeerimine</b>"
 #~ msgid "<b>Enter a name for this connection</b>"
