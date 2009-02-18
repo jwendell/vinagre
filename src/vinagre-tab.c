@@ -579,6 +579,24 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreTab *tab)
 		 0);
 }
 
+typedef struct {
+  GtkWidget *uname, *pw, *button;
+} ControlOKButton;
+
+static void
+control_ok_button (GtkEditable *entry, ControlOKButton *data)
+{
+  gboolean enabled = TRUE;
+
+  if (GTK_WIDGET_VISIBLE (data->uname))
+    enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->uname)) > 0;
+
+  if (GTK_WIDGET_VISIBLE (data->pw))
+    enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->pw)) > 0;
+
+  gtk_widget_set_sensitive (data->button, enabled);
+}
+
 static gboolean
 ask_credential (VinagreTab *tab,
 		gboolean    need_username,
@@ -586,15 +604,13 @@ ask_credential (VinagreTab *tab,
 		gchar     **username,
 		gchar     **password)
 {
-  GladeXML   *xml;
-  const char *glade_file;
-  GtkWidget  *password_dialog, *password_entry, *host_label, *save_credential_check;
-  GtkWidget  *password_label, *username_label, *username_entry;
-  gchar      *name, *label;
-  int         result;
-
-  *username = NULL;
-  *password = NULL;
+  GladeXML        *xml;
+  const char      *glade_file;
+  GtkWidget       *password_dialog, *host_label, *save_credential_check;
+  GtkWidget       *password_label, *username_label, *image;
+  gchar           *name, *label;
+  int             result;
+  ControlOKButton control;
 
   glade_file = vinagre_utils_get_glade_filename ();
   xml = glade_xml_new (glade_file, NULL, NULL);
@@ -609,29 +625,56 @@ ask_credential (VinagreTab *tab,
   g_free (name);
   g_free (label);
 
-  password_entry = glade_xml_get_widget (xml, "password_entry");
-  username_entry = glade_xml_get_widget (xml, "username_entry");
+  control.uname  = glade_xml_get_widget (xml, "username_entry");
+  control.pw     = glade_xml_get_widget (xml, "password_entry");
+  control.button = glade_xml_get_widget (xml, "ok_button");
   password_label = glade_xml_get_widget (xml, "password_label");
   username_label = glade_xml_get_widget (xml, "username_label");
   save_credential_check = glade_xml_get_widget (xml, "save_credential_check");
 
-  if (!need_username)
+  image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_BUTTON);
+  gtk_button_set_image (GTK_BUTTON (control.button), image);
+
+  g_signal_connect (control.uname, "changed", G_CALLBACK (control_ok_button), &control);
+  g_signal_connect (control.pw, "changed", G_CALLBACK (control_ok_button), &control);
+
+  if (need_username)
+    {
+      if (*username)
+        gtk_entry_set_text (GTK_ENTRY (control.uname), *username);
+    }
+  else
     {
       gtk_widget_hide (username_label);
-      gtk_widget_hide (username_entry);
+      gtk_widget_hide (control.uname);
     }
 
-  if (!need_password)
+  if (need_password)
+    {
+      if (*password)
+        gtk_entry_set_text (GTK_ENTRY (control.pw), *password);
+    }
+  else
     {
       gtk_widget_hide (password_label);
-      gtk_widget_hide (password_entry);
+      gtk_widget_hide (control.pw);
     }
 
   result = gtk_dialog_run (GTK_DIALOG (password_dialog));
   if (result == -5)
     {
-      *username = g_strdup (gtk_entry_get_text (GTK_ENTRY (username_entry)));
-      *password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
+      g_free (*username);
+      if (gtk_entry_get_text_length (GTK_ENTRY (control.uname)) > 0)
+	*username = g_strdup (gtk_entry_get_text (GTK_ENTRY (control.uname)));
+      else
+	*username = NULL;
+
+      g_free (*password);
+      if (gtk_entry_get_text_length (GTK_ENTRY (control.pw)) > 0)
+	*password = g_strdup (gtk_entry_get_text (GTK_ENTRY (control.pw)));
+      else
+	*password = NULL;
+
       tab->priv->save_credential = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (save_credential_check));
     }
 
@@ -685,27 +728,51 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
 
   if (need_password || need_username)
     {
-      if (!vinagre_tab_find_credentials (tab, &username, &password))
+      vinagre_tab_find_credentials (tab, &username, &password);
+      if (!username || !password)
 	{
 	  if (!ask_credential (tab, need_username, need_password, &username, &password))
 	    {
 	      vinagre_notebook_remove_tab (tab->priv->nb, tab);
-	      return;
+	      goto out;
 	    }
 	}
 
-      if (need_username && username)
+      if (need_username)
 	{
-	  vinagre_connection_set_username (tab->priv->conn, username);
-	  vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_USERNAME, username);
+	  if (username)
+	    {
+	      vinagre_connection_set_username (tab->priv->conn, username);
+	      vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_USERNAME, username);
+	    }
+	  else
+	    {
+	      vinagre_notebook_remove_tab (tab->priv->nb, tab);
+	      vinagre_utils_show_error (_("Authentication error"),
+					_("A username is required in order to access this machine."),
+					GTK_WINDOW (tab->priv->window));
+	      goto out;
+	    }
 	}
 
-      if (need_password && password)
+      if (need_password)
 	{
-	  vinagre_connection_set_password (tab->priv->conn, password);
-	  vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
+	  if (password)
+	    {
+	      vinagre_connection_set_password (tab->priv->conn, password);
+	      vnc_display_set_credential (vnc, VNC_DISPLAY_CREDENTIAL_PASSWORD, password);
+	    }
+	  else
+	    {
+	      vinagre_notebook_remove_tab (tab->priv->nb, tab);
+	      vinagre_utils_show_error (_("Authentication error"),
+					_("A password is required in order to access this machine."),
+					GTK_WINDOW (tab->priv->window));
+	      goto out;
+	    }
 	}
 
+out:
       g_free (username);
       g_free (password);
     }
