@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 09:24+0100\n"
-"PO-Revision-Date: 2009-02-14 09:24+0100\n"
+"POT-Creation-Date: 2009-02-19 00:34+0100\n"
+"PO-Revision-Date: 2009-02-19 00:35+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -72,72 +72,81 @@ msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Vilken dator vill du ansluta till?</b>"
 
 #: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>Alla fält ovan är obligatoriska</small></i>"
+
+#: ../data/vinagre.glade.h:10
 #: ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:11
 #: ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../src/vinagre-tab.c:1066
 msgid "Host:"
 msgstr "Värd:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:13
 #: ../data/vinagre.schemas.in.h:8
 msgid "Whether we should show tabs even when there is only one active connection"
 msgstr "Huruvida vi ska visa flikar även om det endast finns en aktiv anslutning"
 
-#: ../data/vinagre.glade.h:13
+#: ../data/vinagre.glade.h:14
 #: ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Huruvida vi ska visa menysnabbtangenter (genvägstangenter)"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "Visa _alltid flikar"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "_Autentisera"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "_Helskärm"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_Värd:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_Namn:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_Lösenord:"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "_Kom ihåg denna inloggningsuppgift"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "_Skalning"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "_Visa menygenvägar"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "_Visa endast"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "värd eller värd:display eller värd::port"
 
@@ -322,7 +331,7 @@ msgid "Choose the file"
 msgstr "Välj filen"
 
 #: ../src/vinagre-commands.c:124
-#: ../src/vinagre-tab.c:1089
+#: ../src/vinagre-tab.c:1156
 msgid "Supported formats"
 msgstr "Format som stöds"
 
@@ -431,7 +440,7 @@ msgid "Connecting..."
 msgstr "Ansluter..."
 
 #: ../src/vinagre-notebook.c:221
-#: ../src/vinagre-tab.c:815
+#: ../src/vinagre-tab.c:882
 msgid "Close connection"
 msgstr "Stäng anslutning"
 
@@ -469,59 +478,72 @@ msgstr "Fel när senaste anslutningen sparades."
 msgid "Error saving the credential on the keyring."
 msgstr "Fel när inloggningsuppgifter sparades i nyckelringen."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:751
+#: ../src/vinagre-tab.c:768
+msgid "Authentication error"
+msgstr "Autentiseringsfel"
+
+#: ../src/vinagre-tab.c:752
+msgid "A username is required in order to access this machine."
+msgstr "Ett användarnamn krävs för att komma åt denna dator."
+
+#: ../src/vinagre-tab.c:769
+msgid "A password is required in order to access this machine."
+msgstr "Ett lösenord krävs för att komma åt denna dator."
+
+#: ../src/vinagre-tab.c:895
 msgid "Minimize window"
 msgstr "Minimera fönster"
 
-#: ../src/vinagre-tab.c:843
-#: ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:910
+#: ../src/vinagre-tab.c:911
 msgid "Scaling"
 msgstr "Skalning"
 
-#: ../src/vinagre-tab.c:853
-#: ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:920
+#: ../src/vinagre-tab.c:921
 msgid "Read only"
 msgstr "Skrivskyddad"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864
-#: ../src/vinagre-tab.c:865
+#: ../src/vinagre-tab.c:931
+#: ../src/vinagre-tab.c:932
 #: ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Ta skärmbild"
 
-#: ../src/vinagre-tab.c:873
-#: ../src/vinagre-tab.c:874
+#: ../src/vinagre-tab.c:940
+#: ../src/vinagre-tab.c:941
 #: ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Skicka Ctrl-Alt-Del"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1065
 msgid "Desktop Name:"
 msgstr "Skrivbordsnamn:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1067
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1068
 msgid "Dimensions:"
 msgstr "Dimensioner:"
 
-#: ../src/vinagre-tab.c:1067
+#: ../src/vinagre-tab.c:1134
 msgid "Could not get a screenshot of the connection."
 msgstr "Kunde inte få en skärmbild på anslutningen."
 
-#: ../src/vinagre-tab.c:1075
+#: ../src/vinagre-tab.c:1142
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skärmbild för %s"
 
-#: ../src/vinagre-tab.c:1078
+#: ../src/vinagre-tab.c:1145
 msgid "Save Screenshot"
 msgstr "Spara skärmbild"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1209
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
