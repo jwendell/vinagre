@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-02-13 14:55+0000\n"
-"PO-Revision-Date: 2009-02-17 22:59+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-19 14:05+0100\n"
+"PO-Revision-Date: 2009-02-19 14:06+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
@@ -69,69 +69,78 @@ msgstr "<b>Szülőmappa</b>"
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Melyik géphez kíván kapcsolódni?</b>"
 
-#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>Minden fenti mező kötelező</small></i>"
+
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1066
 msgid "Host:"
 msgstr "Gépnév:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
 msgid "Whether we should show tabs even when there is only one active connection"
 msgstr "Akkor is megjelenjenek-e a fülek, ha csak egy aktív kapcsolat van"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Jelenjenek-e meg a menügyorsítók"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "A lapok _mindig láthatók"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "_Hitelesítés"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "_Teljes képernyő"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_Gép:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_Név:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_Jelszó:"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "_Emlékezzen a hitelesítési adatokra"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "_Méretezés"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "M_enügyorsítók megjelenítése"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "_Felhasználónév:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "_Csak megtekintés"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "gépnév vagy gépnév:kijelző vagy gépnév::port"
 
@@ -334,7 +343,7 @@ msgstr "Új mappa"
 msgid "Choose the file"
 msgstr "Válassza ki a fájlt"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
 msgid "Supported formats"
 msgstr "Támogatott formátumok"
 
@@ -445,7 +454,7 @@ msgstr "A kapcsolat lezárva"
 msgid "Connecting..."
 msgstr "Kapcsolódás…"
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
 msgid "Close connection"
 msgstr "Kapcsolat lezárása"
 
@@ -483,54 +492,65 @@ msgstr "Hiba a legutóbbi kapcsolat mentésekor."
 msgid "Error saving the credential on the keyring."
 msgstr "Hiba a hitelesítési adatok kulcstartóra mentésekor."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:751 ../src/vinagre-tab.c:768
+msgid "Authentication error"
+msgstr "Hitelesítési hiba"
+
+#: ../src/vinagre-tab.c:752
+msgid "A username is required in order to access this machine."
+msgstr "A számítógép eléréséhez felhasználónév szükséges."
+
+#: ../src/vinagre-tab.c:769
+msgid "A password is required in order to access this machine."
+msgstr "A számítógép eléréséhez jelszó szükséges."
+
+#: ../src/vinagre-tab.c:895
 msgid "Minimize window"
 msgstr "Ablak minimalizálása"
 
-#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
 msgid "Scaling"
 msgstr "Méretezés"
 
-#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
 msgid "Read only"
 msgstr "Csak olvasható"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Képernyőkép készítése"
 
-#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl+Alt+Del küldése"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1065
 msgid "Desktop Name:"
 msgstr "Munkaasztal neve:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1067
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1068
 msgid "Dimensions:"
 msgstr "Dimenziók:"
 
-#: ../src/vinagre-tab.c:1067
-#| msgid "Take a screenshot of active connection"
+#: ../src/vinagre-tab.c:1134
 msgid "Could not get a screenshot of the connection."
 msgstr "Nem készíthető képernyőkép az aktív kapcsolatról."
 
-#: ../src/vinagre-tab.c:1075
+#: ../src/vinagre-tab.c:1142
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s képernyőképe"
 
-#: ../src/vinagre-tab.c:1078
+#: ../src/vinagre-tab.c:1145
 msgid "Save Screenshot"
 msgstr "Képernyőkép mentése"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1209
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
