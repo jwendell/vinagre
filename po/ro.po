@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-02-13 19:39+0000\n"
-"PO-Revision-Date: 2009-02-17 03:05+0200\n"
+"POT-Creation-Date: 2009-02-18 20:37+0000\n"
+"PO-Revision-Date: 2009-02-19 15:22+0200\n"
 "Last-Translator: Adi Roiban <adi@roiban.ro>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -74,72 +74,82 @@ msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>La ce calculator doriți să vă conectați?</b>"
 
 #: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>Toate câmpurile de mai sus sunt obligatorii</small></i>"
+
+#: ../data/vinagre.glade.h:10
 #: ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "Favorite"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:11
 #: ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../src/vinagre-tab.c:1066
 msgid "Host:"
 msgstr "Gazdă:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "Preferințe"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:13
 #: ../data/vinagre.schemas.in.h:8
 msgid "Whether we should show tabs even when there is only one active connection"
 msgstr "Dacă trebuie afișate taburile, chiar și atunci când există doar o conexiune activă."
 
-#: ../data/vinagre.glade.h:13
+#: ../data/vinagre.glade.h:14
 #: ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Dacă trebuie afișăți acceleratorii din meniuri (scurtăturile)"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "_Afișează întotdeauna taburile"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+#| msgid "Authentication failed"
+msgid "_Authenticate"
+msgstr "_Autentifică"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "_Pe tot ecranul"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_Gazdă:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_Nume:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_Parolă:"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "Memo_rează această certificare"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "_Scalare"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "Afișeză _scurtăturile meniului"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "Nume _utilizator:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "Doar _vizualizare"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "gazdă sau gazdă:ecran sau gazdă::port"
 
@@ -324,7 +334,7 @@ msgid "Choose the file"
 msgstr "Alegeți fișierul"
 
 #: ../src/vinagre-commands.c:124
-#: ../src/vinagre-tab.c:1089
+#: ../src/vinagre-tab.c:1156
 msgid "Supported formats"
 msgstr "Formate suportate"
 
@@ -435,7 +445,7 @@ msgid "Connecting..."
 msgstr "Se conectează..."
 
 #: ../src/vinagre-notebook.c:221
-#: ../src/vinagre-tab.c:815
+#: ../src/vinagre-tab.c:882
 msgid "Close connection"
 msgstr "Închide conexiune"
 
@@ -473,60 +483,73 @@ msgstr "Eroare la salvarea conexiunii recente."
 msgid "Error saving the credential on the keyring."
 msgstr "Eroare la salvarea certificării în inelul e chei."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:751
+#: ../src/vinagre-tab.c:768
+#| msgid "Authentication failed"
+msgid "Authentication error"
+msgstr "Eroare autentificare"
+
+#: ../src/vinagre-tab.c:752
+msgid "A username is required in order to access this machine."
+msgstr "Este nevoie de un nume de utilizator pentru a accesa acest calculator."
+
+#: ../src/vinagre-tab.c:769
+msgid "A password is required in order to access this machine."
+msgstr "Este nevoie de o parolă pentru a accesa acest calculator."
+
+#: ../src/vinagre-tab.c:895
 msgid "Minimize window"
 msgstr "Minimizare fereastră"
 
-#: ../src/vinagre-tab.c:843
-#: ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:910
+#: ../src/vinagre-tab.c:911
 msgid "Scaling"
 msgstr "Scalare"
 
-#: ../src/vinagre-tab.c:853
-#: ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:920
+#: ../src/vinagre-tab.c:921
 msgid "Read only"
 msgstr "Doar citire"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864
-#: ../src/vinagre-tab.c:865
+#: ../src/vinagre-tab.c:931
+#: ../src/vinagre-tab.c:932
 #: ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Capturează ecranul"
 
-#: ../src/vinagre-tab.c:873
-#: ../src/vinagre-tab.c:874
+#: ../src/vinagre-tab.c:940
+#: ../src/vinagre-tab.c:941
 #: ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Trimite Ctrl-Alt-Del"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1065
 msgid "Desktop Name:"
 msgstr "Nume birou:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1067
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1068
 msgid "Dimensions:"
 msgstr "Dimensiuni:"
 
-#: ../src/vinagre-tab.c:1067
-#| msgid "Take a screenshot of active connection"
+#: ../src/vinagre-tab.c:1134
 msgid "Could not get a screenshot of the connection."
 msgstr "Nu s-a putut obține o captură de ecran pentru conexiune."
 
-#: ../src/vinagre-tab.c:1075
+#: ../src/vinagre-tab.c:1142
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captură de ecran pentru %s"
 
-#: ../src/vinagre-tab.c:1078
+#: ../src/vinagre-tab.c:1145
 msgid "Save Screenshot"
 msgstr "Salvează captura de ecran"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1209
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
