@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-10 20:45+0100\n"
-"PO-Revision-Date: 2009-02-10 20:52+0100\n"
+"POT-Creation-Date: 2009-02-19 20:09+0100\n"
+"PO-Revision-Date: 2009-02-19 20:11+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -67,69 +67,78 @@ msgstr "<b>Karpeta gurasoa</b>"
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Zein ordenagailurekin konektatzea nahi duzu?</b>"
 
-#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>Gaineko eremu guztiak derrigorrezkoak dira</small></i>"
+
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1066
 msgid "Host:"
 msgstr "Ostalaria:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "Hobespenak"
 
-#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
 msgid "Whether we should show tabs even when there is only one active connection"
 msgstr "Fitxatek erakutsi behar diren ala ez (nahiz eta konexio aktibo bakarra egon)"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Menuaren bizkortzaileak (laster-teklak) erakutsi behar diren ala ez"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "_Beti erakutsi fitxak"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "_Autentifikatu"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "_Pantaila osoa"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_Ostalaria:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_Izena:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_Pasahitza:"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "_Gogoratu kredentzial hau"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "_Eskalatzea"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "_Erakutsi menuko lasterbideak"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "_Erabiltzaile-izena:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "_Ikusteko soilik"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "ostalaria edo ostalaria:pantaila edo ostalaria:ataka"
 
@@ -227,7 +236,9 @@ msgstr "Errorea laster-markak hasieratzean: fitxategia hutsik dagoela dirudi"
 
 #: ../src/vinagre-bookmarks.c:358
 msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
-msgstr "Errorea laster-markak hasieratzean: fitxategia ez da vinagre-ren laster-marken fitxategia"
+msgstr ""
+"Errorea laster-markak hasieratzean: fitxategia ez da vinagre-ren laster-"
+"marken fitxategia"
 
 #: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
 msgid "Error while saving bookmarks: Failed to create the XML structure"
@@ -275,8 +286,8 @@ msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
 msgstr ""
-"Laster-marken fitxategia formatu berrira migratzen. Eragiketa hau "
-"behin bakarrik exekutatzen dela suposatzen da."
+"Laster-marken fitxategia formatu berrira migratzen. Eragiketa hau behin "
+"bakarrik exekutatzen dela suposatzen da."
 
 #: ../src/vinagre-bookmarks-migration.c:263
 #, c-format
@@ -329,7 +340,7 @@ msgstr "Karpeta berria"
 msgid "Choose the file"
 msgstr "Aukeratu fitxategia"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1082
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
 msgid "Supported formats"
 msgstr "Onartutako formatuak"
 
@@ -440,7 +451,7 @@ msgstr "Konexioa itxi egin da"
 msgid "Connecting..."
 msgstr "Konektatzen..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
 msgid "Close connection"
 msgstr "Itxi konexioa"
 
@@ -478,49 +489,65 @@ msgstr "Errorea azken konexioa gordetzean."
 msgid "Error saving the credential on the keyring."
 msgstr "Errorea kredentziala gako-sortan gordetzean."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:751 ../src/vinagre-tab.c:768
+msgid "Authentication error"
+msgstr "Errorea autentifikatzean"
+
+#: ../src/vinagre-tab.c:752
+msgid "A username is required in order to access this machine."
+msgstr "Erabiltzaile-izena behar da ordenagailu honetara sarbidetzeko."
+
+#: ../src/vinagre-tab.c:769
+msgid "A password is required in order to access this machine."
+msgstr "Pasahitza behar da ordenagailu honetara sarbidetzeko."
+
+#: ../src/vinagre-tab.c:895
 msgid "Minimize window"
 msgstr "Ikonotu leihoa"
 
-#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
 msgid "Scaling"
 msgstr "Eskalatzea"
 
-#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
 msgid "Read only"
 msgstr "Irakurtzeko soilik"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Egin pantaila-argazkia"
 
-#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Bidali Ktrl+Alt+Ezab"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1065
 msgid "Desktop Name:"
 msgstr "Mahaigainaren izena:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1067
 msgid "Port:"
 msgstr "Ataka:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1068
 msgid "Dimensions:"
 msgstr "Dimentsioak:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1134
+msgid "Could not get a screenshot of the connection."
+msgstr "Ezin izan da konexioaren pantaila-argazkia lortu."
+
+#: ../src/vinagre-tab.c:1142
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s(r)en pantaila-argazkia"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1145
 msgid "Save Screenshot"
 msgstr "Gorde pantaila-argazkia"
 
-#: ../src/vinagre-tab.c:1135
+#: ../src/vinagre-tab.c:1209
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
