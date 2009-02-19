@@ -1,3 +1,12 @@
+2009-02-19  Jonh Wendell  <jwendell@gnome.org>
+
+	* src/vinagre-connection.c,
+	* src/vinagre-tab.c: Allow IPv6 address in command line as well in
+	the connection dialog. The address must be enclosed by square braces,
+	for instance: [::a:b:c:d]. This is the same syntax used by RealVNC.
+	Closes Ubuntu #290394. The command line help and man page should be
+	updated to reflect this, though.
+
 2009-02-18  Jonh Wendell  <jwendell@gnome.org>
 
 	* data/vinagre.glade,

@@ -436,7 +436,7 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
 {
   GtkRecentManager *manager;
   GtkRecentData    *data;
-  GString          *uri;
+  gchar            *uri;
 
   static gchar *groups[2] = {
 		"vinagre",
@@ -446,11 +446,7 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
   manager = gtk_recent_manager_get_default ();
   data = g_slice_new (GtkRecentData);
 
-  uri = g_string_new (NULL);
-  g_string_printf (uri, "vnc://%s:%d",
-                   vinagre_connection_get_host (tab->priv->conn),
-                   vinagre_connection_get_port (tab->priv->conn));
-
+  uri = vinagre_connection_get_string_rep (tab->priv->conn, TRUE);
   data->display_name = vinagre_connection_get_best_name (tab->priv->conn);
   data->description = NULL;
   data->mime_type = g_strdup ("application/x-remote-connection");
@@ -459,12 +455,12 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
   data->groups = groups;
   data->is_private = FALSE;
 
-  if (!gtk_recent_manager_add_full (manager, uri->str, data))
+  if (!gtk_recent_manager_add_full (manager, uri, data))
     vinagre_utils_show_error (NULL,
 			      _("Error saving recent connection."),
 			      GTK_WINDOW (tab->priv->window));
 
-  g_string_free (uri, TRUE);
+  g_free (uri);
   g_free (data->app_exec);
   g_free (data->mime_type);
   g_free (data->display_name);

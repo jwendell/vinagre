@@ -587,6 +587,7 @@ vinagre_connection_split_string (const gchar *uri,
   gchar **server, **url;
   gint    lport;
   gchar  *lhost;
+  gchar   ipv6_host[255] = {0,};
 
   *error_msg = NULL;
   *host = NULL;
@@ -607,6 +608,18 @@ vinagre_connection_split_string (const gchar *uri,
   else
     lhost = (gchar *) uri;
 
+  if (lhost[0] == '[')
+    {
+      int i;
+      for (i = 1; lhost[i] && lhost[i] != ']'; i++)
+	{
+	  ipv6_host[i-1] = lhost[i];
+	  lhost[i-1] = '_';
+	}
+      ipv6_host[i-1] = '\0';
+      lhost[i] = '_';
+    }
+
   if (g_strrstr (lhost, "::") != NULL)
     {
       server = g_strsplit (lhost, "::", 2);
@@ -621,7 +634,7 @@ vinagre_connection_split_string (const gchar *uri,
         lport += 5900;
     }
 
-  lhost = server[0];
+  lhost = ipv6_host[0] ? ipv6_host : server[0];
 
   *host = g_strdup (lhost);
   *port = lport;
@@ -845,8 +858,11 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
 {
   GString *uri;
   gchar *result;
+  gboolean is_ipv6;
 
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+
+  is_ipv6 = g_strstr_len (conn->priv->host, -1, ":") != NULL;
 
   if (has_protocol)
     {
@@ -856,13 +872,17 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
   else
     uri = g_string_new (NULL);
 
+  if (is_ipv6)
+    g_string_append_c (uri, '[');
   g_string_append (uri, conn->priv->host);
+  if (is_ipv6)
+    g_string_append_c (uri, ']');
 
   if (vinagre_connection_default_port [conn->priv->protocol-1] != conn->priv->port)
     g_string_append_printf (uri, "::%d", conn->priv->port);
 
-  result = g_strdup (uri->str);
-  g_string_free (uri, TRUE);
+  result = uri->str;
+  g_string_free (uri, FALSE);
 
   return result;
 }
