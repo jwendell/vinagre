@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-18 10:17+0700\n"
-"PO-Revision-Date: 2009-02-18 11:25+0700\n"
+"POT-Creation-Date: 2009-02-19 16:16+0700\n"
+"PO-Revision-Date: 2009-02-19 16:20+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -66,70 +66,79 @@ msgstr "<b>โฟลเดอร์แม่</b>"
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>คุณต้องการเชื่อมต่อไปยังเครื่องไหน?</b>"
 
-#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>ต้องกรอกข้อมูลในช่องข้างบนให้ครบทั้งหมด</small></i>"
+
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "ที่คั่นหน้า"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1066
 msgid "Host:"
 msgstr "โฮสต์:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "ปรับแต่ง"
 
-#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr "จะแสดงแท็บแม้จะมีการเชื่อมต่อแค่รายการเดียวหรือไม่"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "จะแสดงคีย์ด่วนสำหรับเลือกรายการในเมนูหรือไม่"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "แสดงแ_ท็บเสมอ"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "ยืนยัน_ตัวบุคคล"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "เ_ต็มจอ"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_โฮสต์:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_ชื่อ:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_รหัสผ่าน:"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "_จำรหัสลับนี้ไว้"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "ปรับ_ขนาด"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "แสดงปุ่ม_ลัดของเมนู"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "_ชื่อผู้ใช้:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "ดูอย่างเ_ดียว"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "โฮสต์ หรือ โฮสต์:ดิสเพลย์ หรือ โฮสต์::พอร์ต"
 
@@ -323,7 +332,7 @@ msgstr "โฟลเดอร์ใหม่"
 msgid "Choose the file"
 msgstr "เลือกแฟ้ม"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
 msgid "Supported formats"
 msgstr "รูปแบบที่รองรับ"
 
@@ -430,7 +439,7 @@ msgstr "การเชื่อมต่อถูกปิด"
 msgid "Connecting..."
 msgstr "กำลังเชื่อมต่อ..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
 msgid "Close connection"
 msgstr "ปิดการเชื่อมต่อ"
 
@@ -468,53 +477,65 @@ msgstr "เกิดข้อผิดพลาดขณะบันทึกก
 msgid "Error saving the credential on the keyring."
 msgstr "เกิดข้อผิดพลาดขณะบันทึกรหัสลับลงในพวงกุญแจ"
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:751 ../src/vinagre-tab.c:768
+msgid "Authentication error"
+msgstr "ข้อผิดพลาดในการยืนยันตัวบุคคล"
+
+#: ../src/vinagre-tab.c:752
+msgid "A username is required in order to access this machine."
+msgstr "ต้องกรอกชื่อผู้ใช้เพื่อจะเข้าใช้เครื่องนี้"
+
+#: ../src/vinagre-tab.c:769
+msgid "A password is required in order to access this machine."
+msgstr "ต้องกรอกรหัสผ่านเพื่อจะเข้าใช้เครื่องนี้"
+
+#: ../src/vinagre-tab.c:895
 msgid "Minimize window"
 msgstr "ย่อเก็บหน้าต่าง"
 
-#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
 msgid "Scaling"
 msgstr "ปรับขนาด"
 
-#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
 msgid "Read only"
 msgstr "ดูอย่างเดียว"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "จับภาพหน้าจอ"
 
-#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "ส่ง Ctrl-Alt-Del"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1065
 msgid "Desktop Name:"
 msgstr "ชื่อพื้นโต๊ะ:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1067
 msgid "Port:"
 msgstr "พอร์ต:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1068
 msgid "Dimensions:"
 msgstr "ขนาด:"
 
-#: ../src/vinagre-tab.c:1067
+#: ../src/vinagre-tab.c:1134
 msgid "Could not get a screenshot of the connection."
 msgstr "ไม่สามารถจับภาพหน้าจอของการเชื่อมต่อ"
 
-#: ../src/vinagre-tab.c:1075
+#: ../src/vinagre-tab.c:1142
 #, c-format
 msgid "Screenshot of %s"
 msgstr "ภาพหน้าจอของ %s"
 
-#: ../src/vinagre-tab.c:1078
+#: ../src/vinagre-tab.c:1145
 msgid "Save Screenshot"
 msgstr "จับภาพหน้าจอ"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1209
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
