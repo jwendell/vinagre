@@ -134,6 +134,8 @@ setup_combo (GtkWidget *combo)
   gtk_entry_completion_set_inline_completion (completion, TRUE);
   gtk_entry_set_completion (GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo))), completion);
   g_object_unref (completion);
+
+  gtk_entry_set_activates_default (GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo))), TRUE);
 }
 
 void
