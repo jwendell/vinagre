@@ -725,7 +725,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreTab *tab)
   if (need_password || need_username)
     {
       vinagre_tab_find_credentials (tab, &username, &password);
-      if (!username || !password)
+      if ( (need_username && !username) || (need_password && !password) )
 	{
 	  if (!ask_credential (tab, need_username, need_password, &username, &password))
 	    {
