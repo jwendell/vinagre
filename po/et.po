@@ -1,20 +1,20 @@
 # Vinagre eesti keele tõlge.
 # Estonian translation of Vinagre.
 #
-# Copyright (C) 2008 The Gnome Project.
+# Copyright (C) 2008, 2009 The Gnome Project.
 # This file is distributed under the same license as the vinagre package.
 #
-# Ivar Smolin <okul linux ee>, 2008.
-# Mattias Põldaru <mahfiaz gmail com>, 2008.
+# Ivar Smolin <okul linux ee>, 2008, 2009.
+# Mattias Põldaru <mahfiaz gmail com>, 2008, 2009.
 # Priit Laes <plaes plaes org>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-02-13 14:55+0000\n"
-"PO-Revision-Date: 2009-02-15 20:45+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2009-02-20 23:01+0000\n"
+"PO-Revision-Date: 2009-02-22 12:07+0200\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,72 +77,81 @@ msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Millise masinaga soovid ühendust võtta?</b>"
 
 #: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>Kõik ülemised väljad on kohustuslikud.</small></i>"
+
+#: ../data/vinagre.glade.h:10
 #: ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "Järjehoidjad"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:11
 #: ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "Host:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "Eelistused"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:13
 #: ../data/vinagre.schemas.in.h:8
 msgid "Whether we should show tabs even when there is only one active connection"
 msgstr "Kas ainult ühe aktiivse ühenduse korral näidatakse sakke või mitte"
 
-#: ../data/vinagre.glade.h:13
+#: ../data/vinagre.glade.h:14
 #: ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Kas näidata menüüdes kiirklahve või mitte"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "_Alati näidatakse sakke"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "_Autendi"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "_Täisekraan"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_Host:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_Nimi:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_Parool:"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "See _tõend jäetakse meelde"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "_Skaleerimine"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "_Menüüs näidatakse kiirklahve"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "_Kirjutuskaitsega"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "host või host:kuva või host::port"
 
@@ -212,7 +221,7 @@ msgstr "Viga järjehoidjate lähtestamisel: %s"
 #: ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133
 #: ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275
+#: ../src/vinagre-connect.c:277
 #: ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85
 #: ../src/vinagre-main.c:104
@@ -327,7 +336,7 @@ msgid "Choose the file"
 msgstr "Faili valimine"
 
 #: ../src/vinagre-commands.c:124
-#: ../src/vinagre-tab.c:1089
+#: ../src/vinagre-tab.c:1152
 msgid "Supported formats"
 msgstr "Toetatud vormingud"
 
@@ -337,34 +346,34 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Järgnevat faili pole võimalik avada:"
 msgstr[1] "Järgnevaid faile pole võimalik avada:"
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Viga ajaloofaili salvestamisel: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "VNC-serveri valimine"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "%s-protokoll pole toetatud."
 
-#: ../src/vinagre-connection.c:695
+#: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
 msgstr "Faili pole võimalik avada."
 
-#: ../src/vinagre-connection.c:714
+#: ../src/vinagre-connection.c:727
 msgid "Could not parse the file."
 msgstr "Faili pole võimalik töödelda."
 
-#: ../src/vinagre-connection.c:759
+#: ../src/vinagre-connection.c:772
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr " 'shared' lipul on sobimatu väärtus: %d. See peaks olema 0 või 1. Lippu ignoreeritakse."
+msgstr " 'shared' lipul on sobimatu väärtus: %d. See peaks olema 0 või 1. Lippu eiratakse."
 
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:778
 msgid "Could not find the host address in the file."
 msgstr "Failist ei leitud hosti aadressi."
 
@@ -436,7 +445,7 @@ msgid "Connecting..."
 msgstr "Ühendumine..."
 
 #: ../src/vinagre-notebook.c:221
-#: ../src/vinagre-tab.c:815
+#: ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "Ühenduse sulgemine"
 
@@ -466,68 +475,80 @@ msgstr "Host <i>%s</i> ei toeta kasutatud autentimismeetodit. (%u)"
 msgid "Authentication unsupported"
 msgstr "Toetamata autentimismeetod"
 
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "Viga hiljutise ühenduse salvestamisel."
 
-#: ../src/vinagre-tab.c:496
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
 msgstr "Viga tõendite salvestamisel võtmerõngasse."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:747
+#: ../src/vinagre-tab.c:764
+msgid "Authentication error"
+msgstr "Viga autentimisel"
+
+#: ../src/vinagre-tab.c:748
+msgid "A username is required in order to access this machine."
+msgstr "Ligipääsuks sellele masinale on vaja kasutajanime."
+
+#: ../src/vinagre-tab.c:765
+msgid "A password is required in order to access this machine."
+msgstr "Sellele masinale ligipääsuks on vaja parooli."
+
+#: ../src/vinagre-tab.c:891
 msgid "Minimize window"
 msgstr "Minimeeri aken"
 
-#: ../src/vinagre-tab.c:843
-#: ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:906
+#: ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "Skaleerimine"
 
-#: ../src/vinagre-tab.c:853
-#: ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:916
+#: ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "Kirjutuskaitsega"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864
-#: ../src/vinagre-tab.c:865
+#: ../src/vinagre-tab.c:927
+#: ../src/vinagre-tab.c:928
 #: ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Võta ekraanitõmmis"
 
-#: ../src/vinagre-tab.c:873
-#: ../src/vinagre-tab.c:874
+#: ../src/vinagre-tab.c:936
+#: ../src/vinagre-tab.c:937
 #: ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Saada Ctrl+Alt+Del"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "Töölaua nimi:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "Mõõtmed:"
 
-#: ../src/vinagre-tab.c:1067
-#| msgid "Take a screenshot of active connection"
+#: ../src/vinagre-tab.c:1130
 msgid "Could not get a screenshot of the connection."
 msgstr "Ühendusest pole võimalik ekraanitõmmist võtta."
 
-#: ../src/vinagre-tab.c:1075
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Masina %s ekraanitõmmis"
 
-#: ../src/vinagre-tab.c:1078
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "Ekraanitõmmise salvestamine"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -721,8 +742,8 @@ msgstr "Te peaks olema saanud GNU Üldise Avaliku Litsentsi koopia koos selle pr
 msgid "translator-credits"
 msgstr ""
 "Ivar Smolin <okul@linux.ee>, 2008.\n"
-"Mattias Põldaru <mahfiaz@gmail.com>, 2008.\n"
-"Priit Laes <plaes@plaes.org>, 2008."
+"Mattias Põldaru <mahfiaz@gmail.com>, 2008, 2009.\n"
+"Priit Laes <plaes@plaes.org>, 2008, 2009."
 
 #: ../src/vinagre-utils.c:469
 msgid "Vinagre Website"
@@ -747,8 +768,6 @@ msgstr "%s:%d avamine"
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Kursori vabastamiseks vajuta Ctrl+Alt"
 
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
 #~ msgid "<b>Editing a bookmark</b>"
 #~ msgstr "<b>Järjehoidja redigeerimine</b>"
 #~ msgid "<b>Enter a name for this connection</b>"
@@ -775,6 +794,3 @@ msgstr "Kursori vabastamiseks vajuta Ctrl+Alt"
 #~ msgstr ""
 #~ "<b>Selle masinaga ühenduse loomiseks on vaja parooli. Palun sisesta see.</"
 #~ "b>"
-#~ msgid "Error: %s"
-#~ msgstr "Viga: %s"
-
