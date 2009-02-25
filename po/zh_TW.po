@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vinagre 2.25.91\n"
+"Project-Id-Version: vinagre 2.25.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 17:43+0800\n"
-"PO-Revision-Date: 2009-02-14 09:00+0800\n"
+"POT-Creation-Date: 2009-02-25 21:20+0800\n"
+"PO-Revision-Date: 2009-02-23 22:24+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Traditional) <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -66,70 +66,79 @@ msgstr "<b>上層資料夾</b>"
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>您想連線到哪個機器？</b>"
 
-#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>上面所有欄位都是必要的</small></i>"
+
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "主機："
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "偏好設定"
 
-#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr "是否要在只使用一個連線時顯示分頁"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "是否顯示選單加速鍵（捷徑鍵）"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "永遠顯示分頁(_A)"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "驗證(_A)"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "全螢幕(_F)"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "主機(_H):"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "名稱(_N):"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "密碼(_P):"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "記住這個憑證(_R)"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "縮放(_S)"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "顯示選單捷徑鍵(_S)"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "使用者名稱(_U):"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "只有檢視(_V)"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "主機 或 主機:畫面 或 主機::連接埠"
 
@@ -210,7 +219,7 @@ msgstr "初始化書籤時錯誤：%s"
 
 #: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
 #: ../src/vinagre-window.c:279
 msgid "Unknown error"
@@ -323,7 +332,7 @@ msgstr "新增資料夾"
 msgid "Choose the file"
 msgstr "選擇文件"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
 msgstr "支援的格式"
 
@@ -333,35 +342,35 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "無法開啟下列文件："
 msgstr[1] "無法開啟下列文件："
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "儲存歷史紀錄檔案時發生錯誤：%s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "選擇 VNC 伺服器"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "未支援通訊協定 %s 。"
 
-#: ../src/vinagre-connection.c:695
+#: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
 msgstr "無法開啟該檔案。"
 
-#: ../src/vinagre-connection.c:714
+#: ../src/vinagre-connection.c:727
 msgid "Could not parse the file."
 msgstr "無法解析該檔案。"
 
-#: ../src/vinagre-connection.c:759
+#: ../src/vinagre-connection.c:772
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr "「shared」旗標數值錯誤：%d。它應該為 0 或 1。只能忽略此數值。"
 
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:778
 msgid "Could not find the host address in the file."
 msgstr "在該檔案中找不到主機位址。"
 
@@ -432,7 +441,7 @@ msgstr "連線已關閉"
 msgid "Connecting..."
 msgstr "正在連線..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "關閉連線"
 
@@ -462,63 +471,73 @@ msgstr "不支持到主機 <i>%s</i> 的驗證方法。(%u)"
 msgid "Authentication unsupported"
 msgstr "不支援的驗證方法"
 
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "儲存最近連線時錯誤。"
 
-#: ../src/vinagre-tab.c:496
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
 msgstr "儲存憑證到鑰匙圈時發生錯誤。"
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
+msgid "Authentication error"
+msgstr "驗證錯誤"
+
+#: ../src/vinagre-tab.c:748
+msgid "A username is required in order to access this machine."
+msgstr "為了存取這個電腦需要使用者名稱。"
+
+#: ../src/vinagre-tab.c:765
+msgid "A password is required in order to access this machine."
+msgstr "為了存取這個電腦需要密碼。"
+
+#: ../src/vinagre-tab.c:891
 msgid "Minimize window"
 msgstr "最小化視窗"
 
-#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "正在縮放"
 
-#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "唯讀"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "擷取畫面快照"
 
-#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "傳送 Ctrl-Alt-Del"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "桌面名稱："
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "連接埠:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "尺寸:"
 
-#: ../src/vinagre-tab.c:1067
-#, fuzzy
-#| msgid "Take a screenshot of active connection"
+#: ../src/vinagre-tab.c:1130
 msgid "Could not get a screenshot of the connection."
-msgstr "擷取活動連線的畫面快照"
+msgstr "無法取得此連線的畫面快照。"
 
-#: ../src/vinagre-tab.c:1075
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s 的畫面快照"
 
-#: ../src/vinagre-tab.c:1078
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "儲存畫面快照"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
