@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-18 09:13+0900\n"
-"PO-Revision-Date: 2009-02-18 09:14+0900\n"
+"POT-Creation-Date: 2009-02-26 15:58+0900\n"
+"PO-Revision-Date: 2009-02-26 15:59+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@list.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -72,70 +72,79 @@ msgstr "<b>상위 폴더</b>"
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>어느 컴퓨터에 연결하시겠습니까?</b>"
 
-#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>위의 모든 항목은 필수 항목입니다</small></i>"
+
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "책갈피"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "호스트:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "기본 설정"
 
-#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr "사용 중인 연결이 하나밖에 없을 경우에도 탭을 표시할 지 여부"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "메뉴 단축 키를 표시할 지 여부"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "항상 탭 표시(_A)"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "인증(_A)"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "전체 화면(_F)"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "호스트(_H):"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "이름(_N):"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "암호(_P):"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "이 암호를 기억(_R)"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "크기 조정(_S)"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "메뉴 바로 가기 표시(_S)"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "사용자 이름(_U):"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "보기만 가능(_V)"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "<호스트> 혹은 <호스트>:<디스플레이> 혹은 <호스트>::<포트번호>"
 
@@ -218,7 +227,7 @@ msgstr "책갈피를 초기화하는 중 오류: %s"
 
 #: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
 #: ../src/vinagre-window.c:279
 msgid "Unknown error"
@@ -331,7 +340,7 @@ msgstr "새 폴더"
 msgid "Choose the file"
 msgstr "파일을 선택하십시오"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1089
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
 msgstr "지원하는 형식"
 
@@ -340,29 +349,29 @@ msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "다음 파일은 열 수 없습니다:"
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "기록 파일을 저장하는 중 오류: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "VNC 서버를 선택하십시오"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "%s 프로토콜을 지원하지 않습니다."
 
-#: ../src/vinagre-connection.c:695
+#: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
 msgstr "파일을 열 수 없습니다."
 
-#: ../src/vinagre-connection.c:714
+#: ../src/vinagre-connection.c:727
 msgid "Could not parse the file."
 msgstr "파일을 파싱할 수 없습니다."
 
-#: ../src/vinagre-connection.c:759
+#: ../src/vinagre-connection.c:772
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -370,7 +379,7 @@ msgstr ""
 "'shared' 플래그의 값이 잘못되었습니다: %d. 이 값은 0이나 1이어야 합니다. 무시"
 "합니다."
 
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:778
 msgid "Could not find the host address in the file."
 msgstr "파일에서 호스트 주소를 찾을 수 없습니다."
 
@@ -440,7 +449,7 @@ msgstr "연결이 끊겼습니다"
 msgid "Connecting..."
 msgstr "연결하는 중..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "연결 끊기"
 
@@ -470,61 +479,73 @@ msgstr "<i>%s</i> 호스트가 해당 인증 방식을 지원하지 않습니다
 msgid "Authentication unsupported"
 msgstr "인증 방식을 지원하지 않습니다"
 
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "최근 연결을 저장하는 중 오류."
 
-#: ../src/vinagre-tab.c:496
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
 msgstr "키 모음에 암호를 저장하는 중 오류."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
+msgid "Authentication error"
+msgstr "인증 오류"
+
+#: ../src/vinagre-tab.c:748
+msgid "A username is required in order to access this machine."
+msgstr "이 컴퓨터에 연결하려면 사용자 이름이 필요합니다."
+
+#: ../src/vinagre-tab.c:765
+msgid "A password is required in order to access this machine."
+msgstr "이 컴퓨터에 연결하려면 암호가 필요합니다."
+
+#: ../src/vinagre-tab.c:891
 msgid "Minimize window"
 msgstr "창 최소화"
 
-#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "크기 조정"
 
-#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "읽기 전용"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "스크린샷 찍기"
 
-#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl-Alt-Del 보내기"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "데스크탑 이름:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "포트:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "크기:"
 
-#: ../src/vinagre-tab.c:1067
+#: ../src/vinagre-tab.c:1130
 msgid "Could not get a screenshot of the connection."
 msgstr "해당 연결의 스크린샷을 찍을 수 없습니다."
 
-#: ../src/vinagre-tab.c:1075
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s의 스크린샷"
 
-#: ../src/vinagre-tab.c:1078
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "스크린샷 저장"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
