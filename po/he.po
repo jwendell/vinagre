@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-01-12 14:52+0000\n"
-"PO-Revision-Date: 2008-04-06 17:18+0200\n"
-"Last-Translator: Mark Krapivner <mark125@gmail.com>\n"
+"POT-Creation-Date: 2009-03-07 16:23+0000\n"
+"PO-Revision-Date: 2009-03-08 01:08+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,8 +30,8 @@ msgid "Access remote desktops"
 msgstr "גישה לשולחנות עבודה מרוחקים"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:258
-#: ../src/vinagre-applet.c:264 ../src/vinagre-main.c:151
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "מציג שולחנות עבודה מרוחקים"
 
@@ -44,12 +44,10 @@ msgid "<b>Connection options</b>"
 msgstr "<b>אפשרויות חיבור</b>"
 
 #: ../data/vinagre.glade.h:3
-#| msgid "<b>Connection options</b>"
 msgid "<b>Connection</b>"
 msgstr "<b>חיבור</b>"
 
 #: ../data/vinagre.glade.h:4
-#| msgid "<b>Interface</b>"
 msgid "<b>Folder</b>"
 msgstr "<b>תיקייה</b>"
 
@@ -58,12 +56,10 @@ msgid "<b>Interface</b>"
 msgstr "<b>מנשק</b>"
 
 #: ../data/vinagre.glade.h:6
-#| msgid "<b>Connection options</b>"
 msgid "<b>Options</b>"
 msgstr "<b>אפשרויות</b>"
 
 #: ../data/vinagre.glade.h:7
-#| msgid "<b>Interface</b>"
 msgid "<b>Parent Folder</b>"
 msgstr "<b>תיקיית הורה</b>"
 
@@ -71,72 +67,81 @@ msgstr "<b>תיקיית הורה</b>"
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>לאיזו מכונה ברצונך להתחבר?</b>"
 
-#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>כל השדות שלהלן מחייבים</small></i>"
+
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1066
 msgid "Host:"
 msgstr "מארח:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "העדפות"
 
-#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr ""
 "Whether we should show tabs even when there is only one active connection"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Whether we should show the menu accelerators (shortcut keys)"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "_תמיד להציג לשוניות"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+#| msgid "Authentication failed"
+msgid "_Authenticate"
+msgstr "_הזדהה"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "_מסך מלא"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_מארח:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_שם:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_סיסמה:"
 
-#: ../data/vinagre.glade.h:19
-#, fuzzy
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
-msgstr "_זכור את הסיסמה"
+msgstr "_זכור פרטי זיהוי אלה"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "ה_תאמה"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "_הצג קיצורי תפריטים"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "_שם משתמש:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "_תצוגה בלבד"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "מארח או תצוגה:מארח או שער::מארח"
 
@@ -201,15 +206,15 @@ msgid "Vinagre Applet Factory"
 msgstr "Vinagre Applet Factory"
 
 # c-format
-#: ../src/vinagre-applet.c:100 ../src/vinagre-applet.c:178
+#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
 msgstr "לא ניתן להריץ את vinagre:"
 
-#: ../src/vinagre-applet.c:198
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "פתח את מציג שולחנות העבודה המרוחקים"
 
-#: ../src/vinagre-applet.c:265
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "גש לסימניות שלך"
 
@@ -227,31 +232,25 @@ msgid "Unknown error"
 msgstr "שגיאה לא ידועה"
 
 #: ../src/vinagre-bookmarks.c:351
-#| msgid "Error while initializing bookmarks: %s"
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "שגיאה באתחול הסימניות: נראה שהקובץ ריק"
 
 #: ../src/vinagre-bookmarks.c:358
-#| msgid "Error while initializing bookmarks: %s"
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "שגיאה באתחול הסימניות: הקובץ אינו קובץ סימניות של vinagre"
 
 #: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while saving bookmarks: Failed to create the XML structure"
-msgstr "שגיאה בשמירת הסימניות: נכשל ביצירת מבנה ה-XML"
+msgstr "שגיאה בשמירת הסימניות: נכשל ביצירת מבנה ה־XML"
 
 #: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
-msgstr ""
-"שגיאה בשמירת הסימניות: נכשל באתחול מבנה ה-XML"
+msgstr "שגיאה בשמירת הסימניות: נכשל באתחול מבנה ה־XML"
 
 #: ../src/vinagre-bookmarks.c:450
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr "שגיאה בשמירת הסימניות: נכשל בסיום מבנה ה-XML"
+msgstr "שגיאה בשמירת הסימניות: נכשל בסיום מבנה ה־XML"
 
 #: ../src/vinagre-bookmarks.c:459
 #, c-format
@@ -261,21 +260,20 @@ msgstr "שגיאה בשמירת הסימניות: %s"
 #: ../src/vinagre-bookmarks-migration.c:93
 #: ../src/vinagre-bookmarks-migration.c:100
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
-msgstr "שגיאה בהמרת הסימניות: נכשל ביצירת מבנה ה-XML"
+msgstr "שגיאה בהמרת הסימניות: נכשל ביצירת מבנה ה־XML"
 
 #: ../src/vinagre-bookmarks-migration.c:107
 #: ../src/vinagre-bookmarks-migration.c:114
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
-msgstr "שגיאה בהמרת הסימניות: נכשל באתחול מבנה ה-XML"
+msgstr "שגיאה בהמרת הסימניות: נכשל באתחול מבנה ה־XML"
 
 #: ../src/vinagre-bookmarks-migration.c:123
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
-msgstr "שגיאה בהמרת הסימניות: נכשל בסיום מבנה ה-XML"
+msgstr "שגיאה בהמרת הסימניות: נכשל בסיום מבנה ה־XML"
 
 #: ../src/vinagre-bookmarks-migration.c:133
 #: ../src/vinagre-bookmarks-migration.c:231
 #, c-format
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while migrating bookmarks: %s"
 msgstr "שגיאה בהמרת הסימניות: %s"
 
@@ -284,9 +282,6 @@ msgid "Failed to create the directory"
 msgstr "נכשל ביצירת הספרייה"
 
 #: ../src/vinagre-bookmarks-migration.c:255
-#| msgid ""
-#| "Copying the bookmarks file to the new location. This operation is only "
-#| "supposed to run once."
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -294,7 +289,6 @@ msgstr "ממיר את קובץ הסימניות לתצורה החדשה. פעו�
 
 #: ../src/vinagre-bookmarks-migration.c:263
 #, c-format
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error opening old bookmarks file: %s"
 msgstr "שגיאה בפתיחת קובץ הסימניות הישן: %s"
 
@@ -304,7 +298,6 @@ msgid "Migration cancelled"
 msgstr "ההמרה בוטלה"
 
 #: ../src/vinagre-bookmarks-migration.c:273
-#| msgid "Could not open the file."
 msgid "Could not remove the old bookmarks file"
 msgstr "לא ניתן להסיר את קובץ הסימניות הישן."
 
@@ -327,14 +320,13 @@ msgstr "להסיר את התיקייה?"
 
 #: ../src/vinagre-bookmarks-ui.c:242
 msgid "Notice that all its subfolders and items will be removed as well."
-msgstr "שים לב שכל תת-התיקיות והפריטים שלה יוסרו גם הם."
+msgstr "שים לב שכל תת־התיקיות והפריטים שלה יוסרו גם הם."
 
 #: ../src/vinagre-bookmarks-ui.c:247
 msgid "Remove Item?"
 msgstr "להסיר את הפריט"
 
 #: ../src/vinagre-bookmarks-ui.c:264
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error removing bookmark: Entry not found"
 msgstr "שגיאה בהסרת הסימנייה: הסימנייה לא נמצאה"
 
@@ -346,7 +338,7 @@ msgstr "תיקייה חדשה"
 msgid "Choose the file"
 msgstr "בחר את הקובץ"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1082
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
 msgid "Supported formats"
 msgstr "תצורות נתמכות"
 
@@ -457,7 +449,7 @@ msgstr "החיבור נסגר"
 msgid "Connecting..."
 msgstr "מתחבר..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
 msgid "Close connection"
 msgstr "סגור חיבור"
 
@@ -491,54 +483,69 @@ msgstr "שיטת האימות לא נתמכת"
 msgid "Error saving recent connection."
 msgstr "שגיאה בשמירת החיבור האחרון."
 
-#: ../src/vinagre-tab.c:496
-#, fuzzy
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
-msgstr "שגיאה בשמירת הסיסמה בקבוצת המפתחות."
+msgstr "שגיאה בשמירת פרטי הזיהוי במחזיק המפתחות."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
+msgid "Authentication error"
+msgstr "שגיאת אימות"
+
+#: ../src/vinagre-tab.c:752
+msgid "A username is required in order to access this machine."
+msgstr "נדרש שם משתמש לצורך גישה למכונה זאת."
+
+#: ../src/vinagre-tab.c:769
+msgid "A password is required in order to access this machine."
+msgstr "נדרשת סיסמה לצורך גישה למכונה זאת."
+
+#: ../src/vinagre-tab.c:895
 msgid "Minimize window"
 msgstr "הסתר חלון"
 
-#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
 msgid "Scaling"
 msgstr "התאמה"
 
-#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
 msgid "Read only"
 msgstr "קריאה בלבד"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "צלם תמונת מסך"
 
-#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "שלח Ctrl-Alt-Del"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1065
 msgid "Desktop Name:"
 msgstr "שם שולחן עבודה:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1067
 msgid "Port:"
 msgstr "שער:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1068
 msgid "Dimensions:"
 msgstr "מימדים:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1130
+msgid "Could not get a screenshot of the connection."
+msgstr "לא ניתן לקבל צילום מסך של החיבור."
+
+#: ../src/vinagre-tab.c:1142
 #, c-format
 msgid "Screenshot of %s"
 msgstr "תמונת מסך של %s"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1145
 msgid "Save Screenshot"
 msgstr "שמור תמונת מסך"
 
-#: ../src/vinagre-tab.c:1135
+#: ../src/vinagre-tab.c:1209
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -547,7 +554,7 @@ msgid ""
 msgstr ""
 "התאמה אינה נתמכת בהתקנה זאת.\n"
 "\n"
-"קרא את הקובץ README (המצורף ל-Vinagre) כדי לדעת איך להפעיל את תכונה זאת."
+"קרא את הקובץ README (המצורף ל־Vinagre) כדי לדעת איך להפעיל את תכונה זאת."
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -754,6 +761,7 @@ msgid "translator-credits"
 msgstr ""
 "מארק קרפיבנר <mark125@gmail.com>\n"
 "יאיר הרשקוביץ <yairhr@gmail.com>\n"
+"Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "\n"
 "פרוייקט תרגום GNOME לעברית:\n"
 "‏http://gnome-il.berlios.de"
