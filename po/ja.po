@@ -1,14 +1,14 @@
 # vinagre ja.po.
-# Copyright (C) 2008 Free Software Foundation, Inc.
+# Copyright (C) 2008,2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the vinagre package.
-# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2008.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2008,2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-08 22:58+0900\n"
-"PO-Revision-Date: 2008-09-08 22:57+0900\n"
+"POT-Creation-Date: 2009-03-11 22:36+0900\n"
+"PO-Revision-Date: 2009-03-11 22:23+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -29,79 +29,116 @@ msgid "Access remote desktops"
 msgstr "リモートのデスクトップにアクセスします"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:222
-#: ../src/vinagre-applet.c:228 ../src/vinagre-main.c:146
+#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
 msgid "Remote Desktop Viewer"
 msgstr "リモート・デスクトップのビューア"
 
 #: ../data/vinagre.glade.h:1
+msgid "<b>Authentication is required</b>"
+msgstr "<b>認証が必要です</b>"
+
+#: ../data/vinagre.glade.h:2
 msgid "<b>Connection options</b>"
 msgstr "<b>接続のオプション</b>"
 
-#: ../data/vinagre.glade.h:2
-msgid "<b>Editing a bookmark</b>"
-msgstr "<b>ブックマークの編集</b>"
-
 #: ../data/vinagre.glade.h:3
-msgid "<b>Enter a name for this connection</b>"
-msgstr "<b>この接続に付与する名前を入力して下さい</b>"
+msgid "<b>Connection</b>"
+msgstr "<b>接続</b>"
 
 #: ../data/vinagre.glade.h:4
-msgid ""
-"<b>In order to connect on this machine, a password is required. Please "
-"supply it.</b>"
-msgstr "<b>このマシンに接続するにはパスワードが必要です</b>"
+msgid "<b>Folder</b>"
+msgstr "<b>フォルダ</b>"
 
 #: ../data/vinagre.glade.h:5
+msgid "<b>Interface</b>"
+msgstr "<b>インタフェース</b>"
+
+#: ../data/vinagre.glade.h:6
+msgid "<b>Options</b>"
+msgstr "<b>オプション</b>"
+
+#: ../data/vinagre.glade.h:7
+msgid "<b>Parent Folder</b>"
+msgstr "<b>親のフォルダ</b>"
+
+#: ../data/vinagre.glade.h:8
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>どのマシンに接続しますか？</b>"
 
-#: ../data/vinagre.glade.h:6
-msgid "Editing a bookmark"
-msgstr "ブックマークの編集"
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>全ての項目を入力して下さい</small></i>"
 
-#: ../data/vinagre.glade.h:7 ../src/vinagre-fav.c:424 ../src/vinagre-tab.c:896
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
+msgid "Bookmarks"
+msgstr "ブックマーク"
+
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "ホスト名:"
 
-#: ../data/vinagre.glade.h:8
-msgid "Saving to bookmarks"
-msgstr "ブックマークの保存"
+#: ../data/vinagre.glade.h:12
+msgid "Preferences"
+msgstr "設定"
 
-#: ../data/vinagre.glade.h:9
-msgid "_Bookmark name:"
-msgstr "ブックマークの名前(_B):"
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "１個の接続の場合でも複数個のタブをダイアログに表示するかどうか"
 
-#: ../data/vinagre.glade.h:10
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "メニューにショートカット・キーを表示するかどうか"
+
+#: ../data/vinagre.glade.h:15
+msgid "_Always show tabs"
+msgstr "常にタブを表示する(_A)"
+
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "認証(_A)"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
-msgstr "フルスクリーン(_F)"
+msgstr "フルスクリーン表示にする(_F)"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "ホスト名(_H):"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "名前(_N):"
 
-#: ../data/vinagre.glade.h:13
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "パスワード(_P):"
 
-#: ../data/vinagre.glade.h:14
-msgid "_Remember this password"
-msgstr "このパスワードを記憶する(_R)"
+#: ../data/vinagre.glade.h:22
+msgid "_Remember this credential"
+msgstr "この証明書を保持する(_R)"
 
-#: ../data/vinagre.glade.h:15
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
-msgstr "サイズ変更(_S)"
+msgstr "スクリーンのサイズを変更する(_S)"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:24
+msgid "_Show menu shortcuts"
+msgstr "ショートカット・キーを表示する(_S)"
+
+#: ../data/vinagre.glade.h:25
+msgid "_Username:"
+msgstr "ユーザ名(_U):"
+
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "表示のみ(_V)"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr ""
 "ホスト名またはホスト名:ディスプレイ番号またはホスト名::ポート番号を入力して下"
@@ -154,15 +191,6 @@ msgstr ""
 msgid "Whether we should leave other clients connected"
 msgstr "他のクライアントの接続をそのままにしておくかどうか"
 
-#: ../data/vinagre.schemas.in.h:8
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr "１個の接続の場合でも複数個のタブをダイアログに表示するかどうか"
-
-#: ../data/vinagre.schemas.in.h:9
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "メニューにショートカット・キーを表示するかどうか"
-
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "リモート・デスクトップ (VNC) のファイル"
@@ -179,227 +207,361 @@ msgstr "リモートのマシンに素早く接続します"
 msgid "Vinagre Applet Factory"
 msgstr "Vinagre アプレットのファクトリ"
 
-#: ../src/vinagre-applet.c:98 ../src/vinagre-applet.c:144
-#, c-format
-msgid "Could not run vinagre: %s"
-msgstr "Vinagre を起動できませんでした: %s"
+#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
+msgid "Could not run vinagre:"
+msgstr "Vinagre を起動できませんでした:"
 
-#: ../src/vinagre-applet.c:167
+#: ../src/vinagre-applet.c:369
 msgid "Open Remote Desktop Viewer"
 msgstr "リモート・デスクトップのビューアを開く"
 
-#: ../src/vinagre-applet.c:229
+#: ../src/vinagre-applet.c:419
 msgid "Access your bookmarks"
 msgstr "ブックマークにアクセスします"
 
-#: ../src/vinagre-bookmarks.c:92
-msgid ""
-"Copying the bookmarks file to the new location. This operation is only "
-"supposed to run once."
-msgstr ""
-"ブックマークを新しい場所にコピーしています (この操作は一度に１回しか実施でき"
-"ません)"
-
-#: ../src/vinagre-bookmarks.c:97
-#, c-format
-msgid "Error: %s"
-msgstr "エラー: %s"
-
-#: ../src/vinagre-bookmarks.c:420
-msgid "Confirm removal?"
-msgstr "本当に削除しますか？"
-
-#: ../src/vinagre-bookmarks.c:423
-#, c-format
-msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
-msgstr "本当にブックマークから <i>%s</i> を削除しますか？"
-
-#: ../src/vinagre-bookmarks.c:434
-#, c-format
-msgid "Error while removing %s from bookmarks: %s"
-msgstr "ブックマークから %s を削除する際にエラーが発生しました: %s"
-
-#: ../src/vinagre-bookmarks.c:501
+#: ../src/vinagre-bookmarks.c:344
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "ブックマークを初期化する際にエラーが発生しました: %s"
 
-#: ../src/vinagre-bookmarks.c:522 ../src/vinagre-bookmarks.c:539
+#: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
+#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
+#: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
+#: ../src/vinagre-window.c:279
+msgid "Unknown error"
+msgstr "原因不明のエラーです"
+
+#: ../src/vinagre-bookmarks.c:351
+msgid "Error while initializing bookmarks: The file seems to be empty"
+msgstr ""
+"ブックマークを初期化する際にエラーが発生しました: ファイルが空のようです"
+
+#: ../src/vinagre-bookmarks.c:358
+msgid ""
+"Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+msgstr ""
+"ブックマークを初期化する際にエラーが発生しました: Vinagre のブックマーク・"
+"ファイルではないようです"
+
+#: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
+msgid "Error while saving bookmarks: Failed to create the XML structure"
+msgstr ""
+"ブックマークを保存する際にエラーが発生しました: XML 構造体の生成に失敗しまし"
+"た"
+
+#: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
+msgid "Error while saving bookmarks: Failed to initialize the XML structure"
+msgstr ""
+"ブックマークを保存する際にエラーが発生しました: XML 構造体の初期化に失敗しま"
+"した"
+
+#: ../src/vinagre-bookmarks.c:450
+msgid "Error while saving bookmarks: Failed to finalize the XML structure"
+msgstr ""
+"ブックマークを保存する際にエラーが発生しました: XML 構造体を破棄できませんで"
+"した"
+
+#: ../src/vinagre-bookmarks.c:459
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "ブックマークを保存する際にエラーが発生しました: %s"
 
-#: ../src/vinagre-commands.c:106
+#: ../src/vinagre-bookmarks-migration.c:93
+#: ../src/vinagre-bookmarks-migration.c:100
+msgid "Error while migrating bookmarks: Failed to create the XML structure"
+msgstr ""
+"ブックマークの移行でエラーが発生しました: XML 構造体の生成に失敗しました"
+
+#: ../src/vinagre-bookmarks-migration.c:107
+#: ../src/vinagre-bookmarks-migration.c:114
+msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
+msgstr ""
+"ブックマークの移行でエラーが発生しました: XML 構造体の初期化に失敗しました"
+
+#: ../src/vinagre-bookmarks-migration.c:123
+msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
+msgstr ""
+"ブックマークの移行でエラーが発生しました: XML 構造体を破棄できませんでした"
+
+#: ../src/vinagre-bookmarks-migration.c:133
+#: ../src/vinagre-bookmarks-migration.c:231
+#, c-format
+msgid "Error while migrating bookmarks: %s"
+msgstr "ブックマークの移行でエラーが発生しました: %s"
+
+#: ../src/vinagre-bookmarks-migration.c:231
+msgid "Failed to create the directory"
+msgstr "ディレクトリの生成に失敗しました"
+
+#: ../src/vinagre-bookmarks-migration.c:255
+msgid ""
+"Migrating the bookmarks file to the new format. This operation is only "
+"supposed to run once."
+msgstr ""
+"ブックマークを新しい形式に変換します (この操作は一度しか実施できません)"
+
+#: ../src/vinagre-bookmarks-migration.c:263
+#, c-format
+msgid "Error opening old bookmarks file: %s"
+msgstr "古いブックマーク・ファイルを開く際にエラーが発生しました: %s"
+
+#: ../src/vinagre-bookmarks-migration.c:264
+#: ../src/vinagre-bookmarks-migration.c:276
+msgid "Migration cancelled"
+msgstr "移行をキャンセルしました"
+
+#: ../src/vinagre-bookmarks-migration.c:273
+msgid "Could not remove the old bookmarks file"
+msgstr "古いブックマーク・ファイルを削除できませんでした"
+
+#: ../src/vinagre-bookmarks-tree.c:120
+msgid "Root Folder"
+msgstr "ルートのフォルダ"
+
+#: ../src/vinagre-bookmarks-ui.c:66
+msgid "Invalid name for this folder"
+msgstr "このフォルダの名前が間違っています"
+
+#: ../src/vinagre-bookmarks-ui.c:236
+#, c-format
+msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgstr "本当にブックマークから <i>%s</i> を削除しますか？"
+
+#: ../src/vinagre-bookmarks-ui.c:241
+msgid "Remove Folder?"
+msgstr "フォルダを削除しますか？"
+
+#: ../src/vinagre-bookmarks-ui.c:242
+msgid "Notice that all its subfolders and items will be removed as well."
+msgstr "この中にあるサブフォルダとそのアイテムが全て削除されます。"
+
+#: ../src/vinagre-bookmarks-ui.c:247
+msgid "Remove Item?"
+msgstr "アイテムを削除しますか？"
+
+#: ../src/vinagre-bookmarks-ui.c:264
+msgid "Error removing bookmark: Entry not found"
+msgstr "ブックマークを削除する際にエラーが発生しました: エントリがありません"
+
+#: ../src/vinagre-bookmarks-ui.c:281
+msgid "New Folder"
+msgstr "新しいフォルダ"
+
+#: ../src/vinagre-commands.c:113
 msgid "Choose the file"
 msgstr "ファイルの選択"
 
-#: ../src/vinagre-commands.c:117 ../src/vinagre-tab.c:979
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
-msgstr "サポートしている書式"
+msgstr "サポートしているファイル"
 
-#: ../src/vinagre-commands.c:149
+#: ../src/vinagre-commands.c:156
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "次のファイルは開けません"
 msgstr[1] "次のファイルは開けません"
 
-#: ../src/vinagre-connect.c:172
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "履歴ファイルを保存する際にエラーが発生しました: %s"
 
-#: ../src/vinagre-connect.c:183
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "VNC サーバの選択"
 
-#: ../src/vinagre-connect.c:261 ../src/vinagre-main.c:81
-#: ../src/vinagre-main.c:100 ../src/vinagre-window.c:285
-msgid "Unknown error"
-msgstr "原因不明のエラーです"
-
-#: ../src/vinagre-connection.c:530
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "%s というプロトコルはサポートしていません。"
 
-#: ../src/vinagre-fav.c:762
-msgid "Bookmarks"
-msgstr "ブックマーク"
+#: ../src/vinagre-connection.c:708
+msgid "Could not open the file."
+msgstr "ファイルを開けませんでした"
 
-#: ../src/vinagre-fav.c:807
+#: ../src/vinagre-connection.c:727
+msgid "Could not parse the file."
+msgstr "ファイルを解析できませんでした"
+
+#: ../src/vinagre-connection.c:772
+#, c-format
+msgid ""
+"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr ""
+"'shared' フラグの値が間違っています (0 または 1 のどちらかです): %d (無視しま"
+"す)"
+
+#: ../src/vinagre-connection.c:778
+msgid "Could not find the host address in the file."
+msgstr "ホストのアドレスが見つかりませんでした"
+
+#: ../src/vinagre-fav.c:667
+msgid "Invalid operation"
+msgstr "間違った操作です"
+
+#: ../src/vinagre-fav.c:668
+msgid "Data received from drag&drop operation is invalid."
+msgstr "ドラッグ＆ドロップで受け取ったデータが間違っています"
+
+#: ../src/vinagre-fav.c:861
 msgid "Hosts nearby"
 msgstr "近くにあるホスト"
 
-#: ../src/vinagre-main.c:49
+#: ../src/vinagre-main.c:53
 msgid "Opens a .vnc file"
 msgstr "指定した .vnc ファイルを開く"
 
-#: ../src/vinagre-main.c:49
+#: ../src/vinagre-main.c:53
 msgid "filename"
 msgstr "FILENAME"
 
-#: ../src/vinagre-main.c:52
+#: ../src/vinagre-main.c:56
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "既存の vinagre を使って新しいウィンドウを生成する"
 
-#: ../src/vinagre-main.c:56
+#: ../src/vinagre-main.c:60
 msgid "[server:port]"
 msgstr "[サーバ:ポート番号]"
 
-#: ../src/vinagre-main.c:111 ../src/vinagre-window.c:284
+#: ../src/vinagre-main.c:115
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "次のエラーが発生しました:"
 msgstr[1] "次のエラーが発生しました:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:132
+#: ../src/vinagre-main.c:137
 msgid "- VNC Client for GNOME"
 msgstr "- GNOME 向けの VNC クライアント"
 
-#: ../src/vinagre-main.c:141
+#: ../src/vinagre-main.c:146
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "利用可能なコマンドライン・オプションの一覧を表示する際は 'vinagre --help' し"
 "て下さい"
 
-#: ../src/vinagre-mdns.c:118
+#: ../src/vinagre-mdns.c:123
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "avahi でホスト名を解決できませんでした: %s\n"
 
-#: ../src/vinagre-mdns.c:170 ../src/vinagre-mdns.c:179
+#: ../src/vinagre-mdns.c:175 ../src/vinagre-mdns.c:184
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "ホストを参照できませんでした: %s\n"
 
-#: ../src/vinagre-notebook.c:127
+#: ../src/vinagre-notebook.c:168
 #, c-format
-msgid "Connection to host \"%s\" was closed."
-msgstr "\"%s\" への接続が切れました。"
+msgid "Connection to host <i>%s</i> was closed."
+msgstr "<i>%s</i> への接続が切れました。"
 
-#: ../src/vinagre-notebook.c:153
+#: ../src/vinagre-notebook.c:170
+msgid "Connection closed"
+msgstr "接続が切れました"
+
+#: ../src/vinagre-notebook.c:194
 msgid "Connecting..."
 msgstr "接続中..."
 
-#: ../src/vinagre-notebook.c:180 ../src/vinagre-tab.c:709
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "この接続を閉じます"
 
-#: ../src/vinagre-prefs.c:167
+#: ../src/vinagre-prefs.c:169
 msgid "Cannot initialize preferences manager."
 msgstr "設定マネージャを初期化できません"
 
-#: ../src/vinagre-tab.c:287
+#: ../src/vinagre-tab.c:322
 msgid "Error connecting to host."
 msgstr "ホストに接続する際にエラーが発生しました。"
 
-#: ../src/vinagre-tab.c:320
+#: ../src/vinagre-tab.c:354
 #, c-format
-msgid "Authentication to host \"%s\" has failed"
-msgstr "ホストである \"%s\" の認証に失敗しました。"
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "<i>%s</i> の認証に失敗しました。"
 
-#: ../src/vinagre-tab.c:348
+#: ../src/vinagre-tab.c:360
+msgid "Authentication failed"
+msgstr "認証に失敗しました"
+
+#: ../src/vinagre-tab.c:382
 #, c-format
-msgid "Authentication method to host \"%s\" is unsupported. (%u)"
-msgstr "ホストである \"%s\" の認証方法はサポートしていません (%u)。"
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "<i>%s</i> に対する認証方法をサポートしていません (%u)。"
 
-#: ../src/vinagre-tab.c:429
+#: ../src/vinagre-tab.c:386
+msgid "Authentication unsupported"
+msgstr "認証方法をサポートしていません"
+
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "最近開いた接続を保存する際にエラーが発生しました。"
 
-#: ../src/vinagre-tab.c:460
-msgid "Error saving the password on the keyring."
-msgstr "パスワードをキーリングに保存する際にエラーが発生しました。"
+#: ../src/vinagre-tab.c:492
+msgid "Error saving the credential on the keyring."
+msgstr "証明書をキーリングに保存する際にエラーが発生しました。"
 
-#: ../src/vinagre-tab.c:723 ../src/vinagre-tab.c:724
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
+msgid "Authentication error"
+msgstr "認証エラー"
+
+#: ../src/vinagre-tab.c:748
+msgid "A username is required in order to access this machine."
+msgstr "このマシンにアクセスするにはユーザ名が必要です。"
+
+#: ../src/vinagre-tab.c:765
+msgid "A password is required in order to access this machine."
+msgstr "このマシンにアクセスするにはパスワードが必要です。"
+
+#: ../src/vinagre-tab.c:891
+msgid "Minimize window"
+msgstr "ウィンドウの最小化"
+
+#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "サイズ変更"
 
-#: ../src/vinagre-tab.c:733 ../src/vinagre-tab.c:734
+#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "表示のみ"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:744 ../src/vinagre-tab.c:745 ../src/vinagre-ui.h:79
+#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "スクリーンショットを撮る"
 
-#: ../src/vinagre-tab.c:753 ../src/vinagre-tab.c:754 ../src/vinagre-ui.h:82
+#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl-Alt-Del を送る"
 
-#: ../src/vinagre-tab.c:895
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "デスクトップ名:"
 
-#: ../src/vinagre-tab.c:897
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "ポート番号:"
 
-#: ../src/vinagre-tab.c:898
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "画面サイズ:"
 
-#: ../src/vinagre-tab.c:965
+#: ../src/vinagre-tab.c:1130
+msgid "Could not get a screenshot of the connection."
+msgstr "接続のスクリーンショットを取得できませんでした"
+
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%sのスクリーンショット"
 
-#: ../src/vinagre-tab.c:968
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "スクリーンショットの保存"
 
-#: ../src/vinagre-tab.c:1032
-msgid ""
-"Scaling does not work properly on composited windows. Disable the visual "
-"effects and try again."
-msgstr ""
-"3D 効果付きの合成ウィンドウではサイズが正しく変更されません。3D の視覚効果を"
-"無効にしてもう一度試してみて下さい。"
-
-#: ../src/vinagre-tab.c:1039
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -440,174 +602,199 @@ msgstr ".VNC ファイルを読み込んで接続します"
 msgid "Quit the program"
 msgstr "プログラムを終了します"
 
+#: ../src/vinagre-ui.h:49
+msgid "Edit the application preferences"
+msgstr "このアプリケーションを設定します"
+
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:48
+#: ../src/vinagre-ui.h:52
 msgid "_Open bookmark"
 msgstr "ブックマークを開く(_O)"
 
-#: ../src/vinagre-ui.h:49
+#: ../src/vinagre-ui.h:53
 msgid "Connect to this machine"
 msgstr "このマシンに接続します"
 
-#: ../src/vinagre-ui.h:50
+#: ../src/vinagre-ui.h:54
 msgid "_Edit bookmark"
 msgstr "ブックマークの編集(_E)"
 
-#: ../src/vinagre-ui.h:51
+#: ../src/vinagre-ui.h:55
 msgid "Edit the details of selected bookmark"
 msgstr "この接続の詳細を編集します"
 
-#: ../src/vinagre-ui.h:52
+#: ../src/vinagre-ui.h:56
 msgid "_Remove from bookmarks"
 msgstr "ブックマークの削除(_R)"
 
-#: ../src/vinagre-ui.h:53
+#: ../src/vinagre-ui.h:57
 msgid "Remove current selected connection from bookmarks"
 msgstr "この接続をブックマークから削除します"
 
+#: ../src/vinagre-ui.h:58
+msgid "_New Folder"
+msgstr "新しいフォルダ(_N)"
+
+#: ../src/vinagre-ui.h:59
+msgid "Create a new folder"
+msgstr "新しいフォルダを生成します"
+
 #. Help menu
-#: ../src/vinagre-ui.h:56
+#: ../src/vinagre-ui.h:62
 msgid "_Contents"
 msgstr "目次(_C)"
 
-#: ../src/vinagre-ui.h:57
+#: ../src/vinagre-ui.h:63
 msgid "Open the vinagre manual"
 msgstr "Vinagre のマニュアルを開きます"
 
-#: ../src/vinagre-ui.h:59
+#: ../src/vinagre-ui.h:65
 msgid "About this application"
 msgstr "このアプリケーションについて"
 
-#: ../src/vinagre-ui.h:66
+#: ../src/vinagre-ui.h:72
 msgid "Close the current connection"
 msgstr "現在表示している接続を閉じます"
 
-#: ../src/vinagre-ui.h:67
+#: ../src/vinagre-ui.h:73
 msgid "C_lose All"
 msgstr "全て閉じる(_L)"
 
-#: ../src/vinagre-ui.h:68
+#: ../src/vinagre-ui.h:74
 msgid "Close all active connections"
 msgstr "表示している全ての接続を閉じます"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:71
+#: ../src/vinagre-ui.h:77
 msgid "_Add to bookmarks"
 msgstr "ブックマークの追加(_A)"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:78
 msgid "Add current connection to your bookmarks"
 msgstr "この接続をブックマークに追加します"
 
-#: ../src/vinagre-ui.h:80
+#: ../src/vinagre-ui.h:86
 msgid "Take a screenshot of active connection"
 msgstr "表示している接続のスクリーンショットを撮ります"
 
-#: ../src/vinagre-ui.h:83
+#: ../src/vinagre-ui.h:89
 msgid "Send Ctrl+Alt+Del to active connection"
 msgstr "作業中の接続に Ctrl+Alt+Del を送信します"
 
-#: ../src/vinagre-ui.h:87
+#: ../src/vinagre-ui.h:93
 msgid "View the current machine in full screen"
 msgstr "この接続をフルスクリーン表示にします"
 
-#: ../src/vinagre-ui.h:92
+#: ../src/vinagre-ui.h:95
+msgid "_Original size"
+msgstr "元のサイズ(_O)"
+
+#: ../src/vinagre-ui.h:96
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "ウィンドウをリモート・デスクトップのサイズに変更します"
+
+#: ../src/vinagre-ui.h:102
 msgid "S_caling"
 msgstr "サイズの変更(_C)"
 
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:103
 msgid "Fit the remote screen into the current window size"
 msgstr "リモートの画面を現在のウィンドウの大きさに合わせて変更します"
 
-#: ../src/vinagre-ui.h:95
+#: ../src/vinagre-ui.h:105
 msgid "_Read only"
 msgstr "表示のみ(_R)"
 
-#: ../src/vinagre-ui.h:96
+#: ../src/vinagre-ui.h:106
 msgid "Disable mouse and keyboard"
 msgstr "マウスとキーボードを使った操作を無効にします"
 
-#: ../src/vinagre-ui.h:102
+#: ../src/vinagre-ui.h:112
 msgid "_Toolbar"
 msgstr "ツールバー(_T)"
 
-#: ../src/vinagre-ui.h:103
+#: ../src/vinagre-ui.h:113
 msgid "Show or hide the toolbar"
 msgstr "ツールバーの表示を切り替えます"
 
-#: ../src/vinagre-ui.h:106
+#: ../src/vinagre-ui.h:116
 msgid "_Statusbar"
 msgstr "ステータスバー(_S)"
 
-#: ../src/vinagre-ui.h:107
+#: ../src/vinagre-ui.h:117
 msgid "Show or hide the statusbar"
 msgstr "ステータスバーの表示を切り替えます"
 
-#: ../src/vinagre-ui.h:110
+#: ../src/vinagre-ui.h:120
 msgid "Side _Panel"
 msgstr "サイド・パネル(_P)"
 
-#: ../src/vinagre-ui.h:111
+#: ../src/vinagre-ui.h:121
 msgid "Show or hide the side panel"
 msgstr "サイド・パネルの表示を切り替えます"
 
-#: ../src/vinagre-utils.c:423
+#: ../src/vinagre-utils.c:75
+msgid "An error has occurred:"
+msgstr "エラーが発生しました:"
+
+#: ../src/vinagre-utils.c:433
 msgid "Vinagre is a VNC client for the GNOME Desktop"
 msgstr "Vinagre は GNOME デスクトップ向けの VNC クライアントです。"
 
-#: ../src/vinagre-utils.c:426
+#: ../src/vinagre-utils.c:436
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Vinagre はフリーソフトウェアです; フリーソフトウェア財団が提供している GNU 一"
-"般公有使用許諾契約書の第二版、あるいはそれ以降の版が定める条項の下で本プログ"
-"ラムを再頒布または変更することができます。 "
+"Vinagre はフリーソフトウェアです。フリーソフトウェア財団が提供する GNU 一般公"
+"衆利用許諾契約書の第二版、あるいはそれ以降の版が定める条項の下で本プログラム"
+"を再頒布または変更することができます。"
 
-#: ../src/vinagre-utils.c:430
+#: ../src/vinagre-utils.c:440
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Vinagre は有用とは思いますが、頒布にあたっては市場性及び特定の目的、その適合"
-"性についての暗黙の保証を含めて、いかなる保証も行ないません。詳細については "
-"GNU 一般公有使用許諾契約書をご覧下さい。"
+"Vinagre 本プログラムは有用とは思いますが、頒布にあたっては市場性または特定の"
+"目的に対する適合性についての暗黙の保証を含めて、いかなる保証も行ないません。"
+"詳細には GNU 一般公衆利用許諾契約書をご覧下さい。"
 
-#: ../src/vinagre-utils.c:434
+#: ../src/vinagre-utils.c:444
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
-"あなたは本プログラムと一緒に GNU 一般公有使用許諾契約書の写しを受け取っている"
-"はずです。そうでない場合は <http://www.gnu.org/licenses/> をご覧下さい。"
+"あなたは本プログラムと一緒に GNU 一般公衆利用許諾契約書の写しを受け取っている"
+"はずです。そうでない場合は、Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA 02110-1301, USA まで連絡して下さい。"
 
-#: ../src/vinagre-utils.c:456
+#: ../src/vinagre-utils.c:466
 msgid "translator-credits"
 msgstr "相花毅 <takeshi.aihana@gmail.com>"
 
-#: ../src/vinagre-utils.c:459
+#: ../src/vinagre-utils.c:469
 msgid "Vinagre Website"
 msgstr "Vinagre のウェブサイト"
 
-#: ../src/vinagre-window.c:422
+#: ../src/vinagre-window.c:413
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "vinagre-ui.xml をマージできませんでした: %s"
 
-#: ../src/vinagre-window.c:450
+#: ../src/vinagre-window.c:441
 msgid "_Recent connections"
 msgstr "最近開いた接続(_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:610 ../src/vinagre-window.c:660
+#: ../src/vinagre-window.c:614
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d を開きます"
 
-#: ../src/vinagre-window.c:809
+#: ../src/vinagre-window.c:797
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "取得したカーソルを解放する場合は Ctrl+Alt を押下して下さい"
