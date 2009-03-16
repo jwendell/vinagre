@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-12 13:21+0200\n"
-"PO-Revision-Date: 2009-02-12 13:20+0200\n"
+"POT-Creation-Date: 2009-03-16 13:28+0200\n"
+"PO-Revision-Date: 2009-03-16 13:28+0200\n"
 "Last-Translator: Alexander Shopov <ash@contact.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -66,70 +66,79 @@ msgstr "<b>Родителска папка</b>"
 msgid "<b>Which machine do you want to connect to?</b>"
 msgstr "<b>Към коя машина искате да се свържете?</b>"
 
-#: ../data/vinagre.glade.h:9 ../src/vinagre-fav.c:846
+#: ../data/vinagre.glade.h:9
+msgid "<i><small>All fields above are mandatory</small></i>"
+msgstr "<i><small>Всички горни полета са задължителни</small></i>"
+
+#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
 msgid "Bookmarks"
 msgstr "Отметки"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:999
+#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "Адрес:"
 
-#: ../data/vinagre.glade.h:11
+#: ../data/vinagre.glade.h:12
 msgid "Preferences"
 msgstr "Настройки"
 
-#: ../data/vinagre.glade.h:12 ../data/vinagre.schemas.in.h:8
+#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr "Дали да се показват подпрозорци, дори когато има само една връзка"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:9
+#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Дали да се показват клавишните комбинации в менюто"
 
-#: ../data/vinagre.glade.h:14
+#: ../data/vinagre.glade.h:15
 msgid "_Always show tabs"
 msgstr "_Винаги да се показват табове"
 
-#: ../data/vinagre.glade.h:15
+#. This is a button label, in the authentication dialog
+#: ../data/vinagre.glade.h:17
+msgid "_Authenticate"
+msgstr "_Идентифициране"
+
+#: ../data/vinagre.glade.h:18
 msgid "_Full screen"
 msgstr "На _цял екран"
 
-#: ../data/vinagre.glade.h:16
+#: ../data/vinagre.glade.h:19
 msgid "_Host:"
 msgstr "_Адрес:"
 
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.glade.h:20
 msgid "_Name:"
 msgstr "_Име:"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.glade.h:21
 msgid "_Password:"
 msgstr "_Парола:"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.glade.h:22
 msgid "_Remember this credential"
 msgstr "_Запомняне на паролата"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.glade.h:23
 msgid "_Scaling"
 msgstr "_Мащабиране"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.glade.h:24
 msgid "_Show menu shortcuts"
 msgstr "_Показване на клавишните комбинации в менюто"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.glade.h:25
 msgid "_Username:"
 msgstr "Потребителско _име:"
 
-#: ../data/vinagre.glade.h:23
+#: ../data/vinagre.glade.h:26
 msgid "_View only"
 msgstr "_Без контрол"
 
 #. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.glade.h:28
 msgid "host or host:display or host::port"
 msgstr "машина или машина:дисплей, или машина::порт"
 
@@ -215,7 +224,7 @@ msgstr "Грешка при инициализирането на отметки
 
 #: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
 #: ../src/vinagre-window.c:279
 msgid "Unknown error"
@@ -340,7 +349,7 @@ msgstr "Нова папка"
 msgid "Choose the file"
 msgstr "Изберете файла"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1082
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
 msgstr "Поддържани формати"
 
@@ -350,29 +359,29 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Следният файл не може да бъде отворен:"
 msgstr[1] "Следните файлове не могат да бъдат отворени:"
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Грешка при запазване на файла с отметки: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "Изберете сървър за VNC"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Протоколът „%s“ не се поддържа."
 
-#: ../src/vinagre-connection.c:695
+#: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
 msgstr "Файлът не може да бъде отворен."
 
-#: ../src/vinagre-connection.c:714
+#: ../src/vinagre-connection.c:727
 msgid "Could not parse the file."
 msgstr "Файлът не може да бъде инициализиран."
 
-#: ../src/vinagre-connection.c:759
+#: ../src/vinagre-connection.c:772
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -380,7 +389,7 @@ msgstr ""
 "Неправилна стойност за флага „shared“ (споделяне): %d, а трябва да бъде „0“ "
 "или „1“. Стойността няма да се ползва."
 
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:778
 msgid "Could not find the host address in the file."
 msgstr "Адресът на машината не може да бъде открит във файла."
 
@@ -453,7 +462,7 @@ msgstr "Връзката бе прекъсната"
 msgid "Connecting..."
 msgstr "Свързване…"
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:815
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "Прекъсване на връзката"
 
@@ -484,57 +493,73 @@ msgstr ""
 msgid "Authentication unsupported"
 msgstr "Методът за идентификация не се поддържа"
 
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "Грешка при запазване на скоро отваряна връзка."
 
-#: ../src/vinagre-tab.c:496
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
 msgstr "Грешка при запазване на паролата в ключодържателя."
 
-#: ../src/vinagre-tab.c:828
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
+msgid "Authentication error"
+msgstr "Грешка в идентификацията"
+
+#: ../src/vinagre-tab.c:748
+msgid "A username is required in order to access this machine."
+msgstr "За достъп до машината се изисква потребителско име."
+
+#: ../src/vinagre-tab.c:765
+msgid "A password is required in order to access this machine."
+msgstr "За достъп до машината се изисква парола."
+
+#: ../src/vinagre-tab.c:891
 msgid "Minimize window"
 msgstr "Минимизиране на прозореца"
 
-#: ../src/vinagre-tab.c:843 ../src/vinagre-tab.c:844
+#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "Мащабиране"
 
-#: ../src/vinagre-tab.c:853 ../src/vinagre-tab.c:854
+#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "Без контрол"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:864 ../src/vinagre-tab.c:865 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Снимка на екрана"
 
-#: ../src/vinagre-tab.c:873 ../src/vinagre-tab.c:874 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Изпращане на „Ctrl-Alt-Del“"
 
-#: ../src/vinagre-tab.c:998
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "Име на работния плот:"
 
-#: ../src/vinagre-tab.c:1000
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "Порт:"
 
-#: ../src/vinagre-tab.c:1001
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "Размери:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1130
+msgid "Could not get a screenshot of the connection."
+msgstr "Не може да се заснеме снимка на екрана на връзката."
+
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Снимка на екрана на %s"
 
-#: ../src/vinagre-tab.c:1071
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "Запазване на снимката на екрана"
 
-#: ../src/vinagre-tab.c:1135
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
