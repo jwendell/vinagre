@@ -519,4 +519,39 @@ vinagre_bookmarks_remove_entry (VinagreBookmarks      *book,
   return FALSE;
 }
 
+
+VinagreBookmarksEntry *
+vinagre_bookmarks_name_exists (VinagreBookmarks      *book,
+                               VinagreBookmarksEntry *parent,
+                               const gchar           *name)
+{
+  GSList *entries, *l;
+
+  g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), FALSE);
+
+  if (parent)
+    entries = vinagre_bookmarks_entry_get_children (parent);
+  else
+    entries = book->priv->entries;
+
+  for (l = entries; l; l = l->next)
+    {
+      VinagreBookmarksEntry *e = (VinagreBookmarksEntry *) l->data;
+
+      if (vinagre_bookmarks_entry_get_node (e) == VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER)
+	{
+	  if (g_strcmp0 (vinagre_bookmarks_entry_get_name (e), name) == 0)
+	    return e;
+	}
+      else
+	{
+	  VinagreConnection *conn = vinagre_bookmarks_entry_get_conn (e);
+	  if (g_strcmp0 (vinagre_connection_get_name (conn), name) == 0)
+	    return e;
+	}
+    }
+
+  return NULL;
+}
+
 /* vim: set ts=8: */

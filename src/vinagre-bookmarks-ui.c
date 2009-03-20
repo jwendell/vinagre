@@ -27,13 +27,20 @@
 #include "vinagre-bookmarks-tree.h"
 
 static void
+control_save_button_visibility (GtkEntry *ed, GtkWidget *bt)
+{
+  gtk_widget_set_sensitive (bt,
+			    gtk_entry_get_text_length (ed) > 0);
+}
+
+static void
 show_dialog_folder (VinagreBookmarks      *book,
 		    GtkWindow             *window,
 		    VinagreBookmarksEntry *entry,
 		    gboolean               is_add)
 {
   GladeXML    *xml;
-  GtkWidget   *dialog, *box, *tree, *name_entry;
+  GtkWidget   *dialog, *box, *tree, *name_entry, *save_button;
   const gchar *name;
 
   xml = glade_xml_new (vinagre_utils_get_glade_filename (),
@@ -42,10 +49,12 @@ show_dialog_folder (VinagreBookmarks      *book,
   dialog     = glade_xml_get_widget (xml, "bookmarks_add_edit_folder_dialog");
   name_entry = glade_xml_get_widget (xml, "edit_bookmark_folder_name_entry");
   box        = glade_xml_get_widget (xml, "folder_box1");
+  save_button= glade_xml_get_widget (xml, "save_button");
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
   gtk_entry_set_text (GTK_ENTRY (name_entry), vinagre_bookmarks_entry_get_name (entry));
   gtk_editable_set_position (GTK_EDITABLE (name_entry), -1);
+  g_signal_connect (name_entry, "changed", G_CALLBACK (control_save_button_visibility), save_button);
 
   tree = vinagre_bookmarks_tree_new ();
   vinagre_bookmarks_tree_select_entry  (VINAGRE_BOOKMARKS_TREE (tree),
@@ -53,20 +62,40 @@ show_dialog_folder (VinagreBookmarks      *book,
   gtk_box_pack_end (GTK_BOX (box), tree, TRUE, TRUE, 0);
 
   gtk_widget_show_all (dialog);
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_OK)
+  while (TRUE)
     {
-      if (is_add)
-        g_object_unref (entry);
-      goto finalize;
-    }
+      VinagreBookmarksEntry *existing_entry;
 
-  name = gtk_entry_get_text (GTK_ENTRY (name_entry));
-  if (strlen (name) < 1)
-    {
-      vinagre_utils_show_error (NULL, _("Invalid name for this folder"), window);
-      if (is_add)
-        g_object_unref (entry);
-      goto finalize;
+      if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_OK)
+	{
+	  if (is_add)
+	    g_object_unref (entry);
+	  goto finalize;
+	}
+
+      name = gtk_entry_get_text (GTK_ENTRY (name_entry));
+      if (strlen (name) < 1)
+        {
+	  vinagre_utils_show_error (NULL, _("Invalid name for this folder"), GTK_WINDOW (dialog));
+	  gtk_widget_grab_focus (name_entry);
+	  continue;
+	}
+
+      existing_entry = vinagre_bookmarks_name_exists (book,
+						      vinagre_bookmarks_tree_get_selected_entry (VINAGRE_BOOKMARKS_TREE (tree)),
+						      name);
+      if (existing_entry && existing_entry != entry)
+	{
+	  gchar *str = g_strdup_printf (_("The name \"%s\" is already used in this folder. Please use a different name."), name);
+	  vinagre_utils_show_error (_("Invalid name for this item"),
+				    str,
+				    GTK_WINDOW (dialog));
+	  g_free (str);
+	  gtk_widget_grab_focus (name_entry);
+	  continue;
+	}
+
+      break;
     }
 
   vinagre_bookmarks_entry_set_name (entry, name);
@@ -95,7 +124,7 @@ show_dialog_conn (VinagreBookmarks      *book,
   GladeXML          *xml;
   GtkWidget         *dialog, *host_entry, *name_entry;
   GtkWidget         *fs_check, *sc_check, *vo_check;
-  GtkWidget         *box, *tree;
+  GtkWidget         *box, *tree, *save_button;
   VinagreConnection *conn;
   const gchar       *name;
 
@@ -109,6 +138,7 @@ show_dialog_conn (VinagreBookmarks      *book,
   sc_check   = glade_xml_get_widget (xml, "edit_scaling_check");
   vo_check   = glade_xml_get_widget (xml, "edit_viewonly_check");
   box        = glade_xml_get_widget (xml, "folder_box");
+  save_button= glade_xml_get_widget (xml, "save_button");
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
   conn = vinagre_bookmarks_entry_get_conn (entry);
@@ -129,25 +159,59 @@ show_dialog_conn (VinagreBookmarks      *book,
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (vo_check),
 				vinagre_connection_get_view_only (conn));
 
+  g_signal_connect (name_entry, "changed", G_CALLBACK (control_save_button_visibility), save_button);
+
   tree = vinagre_bookmarks_tree_new ();
   vinagre_bookmarks_tree_select_entry  (VINAGRE_BOOKMARKS_TREE (tree),
 					vinagre_bookmarks_entry_get_parent (entry));
   gtk_box_pack_end (GTK_BOX (box), tree, TRUE, TRUE, 0);
 
   gtk_widget_show_all (dialog);
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_OK)
-    goto finalize;
 
-  if (!vinagre_connection_split_string (gtk_entry_get_text (GTK_ENTRY (host_entry)),
-					&host,
-					&port,
-					&error_str))
+  while (TRUE)
     {
-      vinagre_utils_show_error (NULL, error_str, window);
-      g_free (error_str);
-      goto finalize;
+      VinagreBookmarksEntry *existing_entry;
+
+      if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_OK)
+	goto finalize;
+
+      name = gtk_entry_get_text (GTK_ENTRY (name_entry));
+      if (strlen (name) < 1)
+        {
+	  vinagre_utils_show_error (NULL, _("Invalid name for this item"), GTK_WINDOW (dialog));
+	  gtk_widget_grab_focus (name_entry);
+	  continue;
+	}
+
+      existing_entry = vinagre_bookmarks_name_exists (book,
+						      vinagre_bookmarks_tree_get_selected_entry (VINAGRE_BOOKMARKS_TREE (tree)),
+						      name);
+      if (existing_entry && existing_entry != entry)
+	{
+	  gchar *str = g_strdup_printf (_("The name \"%s\" is already used in this folder. Please use a different name."), name);
+	  vinagre_utils_show_error (_("Invalid name for this item"),
+				    str,
+				    GTK_WINDOW (dialog));
+	  g_free (str);
+	  gtk_widget_grab_focus (name_entry);
+	  continue;
+	}
+
+      if (!vinagre_connection_split_string (gtk_entry_get_text (GTK_ENTRY (host_entry)),
+					    &host,
+					    &port,
+					    &error_str))
+        {
+	  vinagre_utils_show_error (NULL, error_str, GTK_WINDOW (dialog));
+	  g_free (error_str);
+	  gtk_widget_grab_focus (host_entry);
+	  continue;
+	}
+
+      break;
     }
 
+  vinagre_connection_set_name (conn, name);
   vinagre_connection_set_host (conn, host);
   vinagre_connection_set_port (conn, port);
   vinagre_connection_set_view_only  (conn,
@@ -156,14 +220,6 @@ show_dialog_conn (VinagreBookmarks      *book,
 				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (sc_check)));
   vinagre_connection_set_fullscreen (conn,
 				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (fs_check)));
-
-  name = gtk_entry_get_text (GTK_ENTRY (name_entry));
-  if (strlen (name) < 1)
-    if (strlen (vinagre_connection_get_name (conn)) < 1)
-      name = vinagre_connection_get_host (conn);
-    else
-      name = vinagre_connection_get_name (conn);
-  vinagre_connection_set_name (conn, name);
 
   if (!is_add)
     {

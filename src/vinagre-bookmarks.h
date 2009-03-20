@@ -70,9 +70,13 @@ void                vinagre_bookmarks_add_entry    (VinagreBookmarks      *book,
 gboolean           vinagre_bookmarks_remove_entry  (VinagreBookmarks      *book,
                                                     VinagreBookmarksEntry *entry);
 
-VinagreConnection  *vinagre_bookmarks_exists  (VinagreBookmarks *book,
-                                               const gchar *host,
-                                               gint port);
+VinagreConnection  *vinagre_bookmarks_exists       (VinagreBookmarks *book,
+                                                    const gchar *host,
+                                                    gint port);
+
+VinagreBookmarksEntry *vinagre_bookmarks_name_exists (VinagreBookmarks      *book,
+                                                      VinagreBookmarksEntry *parent,
+                                                      const gchar           *name);
 
 G_END_DECLS
 #endif  /* __VINAGRE_BOOKMARKS_H__ */
