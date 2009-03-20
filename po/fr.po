@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-26 22:24+0100\n"
-"PO-Revision-Date: 2009-02-26 22:27+0100\n"
+"POT-Creation-Date: 2009-03-20 23:14+0100\n"
+"PO-Revision-Date: 2009-03-20 23:15+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -327,32 +327,44 @@ msgstr "Impossible de supprimer l'ancien fichier de signets"
 msgid "Root Folder"
 msgstr "Dossier racine"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "Le nom pour ce dossier est incorrect"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#, c-format
+msgid ""
+"The name \"%s\" is already used in this folder. Please use a different name."
+msgstr ""
+"Le nom « %s » est déjà utilisé dans ce dossier. Veuillez choisir un autre nom."
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
+#: ../src/vinagre-bookmarks-ui.c:192
+msgid "Invalid name for this item"
+msgstr "Le nom de cet élément est incorrect"
+
+#: ../src/vinagre-bookmarks-ui.c:292
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Voulez-vous vraiment retirer <i>%s</i> des signets ?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:297
 msgid "Remove Folder?"
 msgstr "Enlever le dossier ?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:298
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "Note : tous les sous-répertoires et objets seront aussi supprimés."
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Item?"
 msgstr "Enlever l'élément ?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
+#: ../src/vinagre-bookmarks-ui.c:320
 msgid "Error removing bookmark: Entry not found"
 msgstr "Erreur lors de l'effacement du signet : entrée non trouvée"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:337
 msgid "New Folder"
 msgstr "Nouveau dossier"
 
@@ -524,7 +536,8 @@ msgstr "Erreur d'authentification"
 
 #: ../src/vinagre-tab.c:748
 msgid "A username is required in order to access this machine."
-msgstr "Un nom d'utilisateur est obligatoire pour avoir accès à cet ordinateur."
+msgstr ""
+"Un nom d'utilisateur est obligatoire pour avoir accès à cet ordinateur."
 
 #: ../src/vinagre-tab.c:765
 msgid "A password is required in order to access this machine."
