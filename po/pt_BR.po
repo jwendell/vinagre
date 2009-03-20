@@ -5,13 +5,12 @@
 # Vladimir Melo <vladimirmelo.psi@gmail.com>, 2007, 2008.
 # Og Maciel <ogmaciel@gnome.org>, 2007.
 # Taylon Silmer <taylonsilva@gmail.com>, 2009.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-20 15:01-0300\n"
-"PO-Revision-Date: 2009-02-20 15:00-0300\n"
+"POT-Creation-Date: 2009-03-20 20:35-0300\n"
+"PO-Revision-Date: 2009-03-20 20:35-0300\n"
 "Last-Translator: Jonh Wendell <jwendell@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -228,7 +227,7 @@ msgstr "Erro ao inicializar marcadores: %s"
 
 #: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
 #: ../src/vinagre-window.c:279
 msgid "Unknown error"
@@ -312,32 +311,43 @@ msgstr "Não foi possível remover o arquivo de marcadores antigo"
 msgid "Root Folder"
 msgstr "Pasta raiz"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "Nome inválido para esta pasta"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#, c-format
+msgid ""
+"The name \"%s\" is already used in this folder. Please use a different name."
+msgstr "O nome \"%s\" já é usado nesta pasta. Por favor use um nome diferente."
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
+#: ../src/vinagre-bookmarks-ui.c:192
+msgid "Invalid name for this item"
+msgstr "Nome inválido para este item"
+
+#: ../src/vinagre-bookmarks-ui.c:292
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Tem certeza que quer remover <i>%s</i> dos marcadores?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:297
 msgid "Remove Folder?"
 msgstr "Remover a pasta?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:298
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "Note que todas as suas subpastas e itens também serão removidos."
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Item?"
 msgstr "Remover o item?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
+#: ../src/vinagre-bookmarks-ui.c:320
 msgid "Error removing bookmark: Entry not found"
 msgstr "Erro ao remover o marcador: Entrada não localizada"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:337
 msgid "New Folder"
 msgstr "Nova pasta"
 
@@ -355,12 +365,12 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Não foi possível abrir o seguinte arquivo:"
 msgstr[1] "Não foi possível abrir os seguintes arquivos:"
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Erro ao salvar o arquivo de histórico: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "Escolha um servidor VNC"
 
