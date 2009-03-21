@@ -6,10 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-02-19 18:06+0000\n"
-"PO-Revision-Date: 2009-02-19 19:59+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-21 14:04+0100\n"
+"PO-Revision-Date: 2009-03-21 14:05+0100\n"
 "Last-Translator: Joan Duran <jodufi@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +75,7 @@ msgid "Bookmarks"
 msgstr "Adreces d'interès"
 
 #: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1066
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "Ordinador:"
 
@@ -227,7 +226,7 @@ msgstr "S'ha produït un error en inicialitzar les adreces d'interès: %s"
 
 #: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
 #: ../src/vinagre-window.c:279
 msgid "Unknown error"
@@ -326,35 +325,47 @@ msgstr "No s'ha pogut suprimir el fitxer d'adreces d'interès antic"
 msgid "Root Folder"
 msgstr "Carpeta arrel"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "El nom per a aquesta carpeta no és vàlid"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#, c-format
+msgid ""
+"The name \"%s\" is already used in this folder. Please use a different name."
+msgstr ""
+"Ja s'utilitza el nom «%s» en aquest directori. Utilitzeu-ne un altre."
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
+#: ../src/vinagre-bookmarks-ui.c:192
+msgid "Invalid name for this item"
+msgstr "El nom per a aquest element no és vàlid"
+
+#: ../src/vinagre-bookmarks-ui.c:292
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Segur que voleu suprimir <i>%s</i> de les adreces d'interès?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:297
 msgid "Remove Folder?"
 msgstr "Voleu suprimir la carpeta?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:298
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr ""
 "Tingueu en compte que també se suprimiran totes les subcarpetes i elements."
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Item?"
 msgstr "Voleu suprimir l'element?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
+#: ../src/vinagre-bookmarks-ui.c:320
 msgid "Error removing bookmark: Entry not found"
 msgstr ""
 "S'ha produït un error en suprimir l'adreça d'interès: no s'ha trobat "
 "l'entrada"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:337
 msgid "New Folder"
 msgstr "Carpeta nova"
 
@@ -362,7 +373,7 @@ msgstr "Carpeta nova"
 msgid "Choose the file"
 msgstr "Seleccioneu el fitxer"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
 msgstr "Formats admesos"
 
@@ -372,29 +383,29 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "No s'ha pogut obrir el fitxer següent:"
 msgstr[1] "No s'han pogut obrir els fitxers següents:"
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "S'ha produït un error en desar el fitxer de l'historial: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "Seleccioneu un servidor de VNC"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "El protocol %s no és compatible."
 
-#: ../src/vinagre-connection.c:695
+#: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
 msgstr "No s'ha pogut obrir el fitxer."
 
-#: ../src/vinagre-connection.c:714
+#: ../src/vinagre-connection.c:727
 msgid "Could not parse the file."
 msgstr "No s'ha pogut analitzar el fitxer."
 
-#: ../src/vinagre-connection.c:759
+#: ../src/vinagre-connection.c:772
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -402,7 +413,7 @@ msgstr ""
 "Valor incorrecte per a l'indicador «compartit»: %d. Hauria de ser 0 o 1. "
 "S'ignorarà."
 
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:778
 msgid "Could not find the host address in the file."
 msgstr "No s'ha pogut trobar l'adreça de l'ordinador al fitxer."
 
@@ -477,7 +488,7 @@ msgstr "S'ha tancat la connexió"
 msgid "Connecting..."
 msgstr "S'està connectant..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "Tanca la connexió"
 
@@ -508,73 +519,73 @@ msgstr ""
 msgid "Authentication unsupported"
 msgstr "Autenticació no compatible"
 
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "S'ha produït un error en desar la connexió recent."
 
-#: ../src/vinagre-tab.c:496
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
 msgstr "S'ha produït un error en desar la credencial a l'anell de claus."
 
-#: ../src/vinagre-tab.c:751 ../src/vinagre-tab.c:768
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
 msgid "Authentication error"
 msgstr "Error d'autenticació"
 
-#: ../src/vinagre-tab.c:752
+#: ../src/vinagre-tab.c:748
 msgid "A username is required in order to access this machine."
 msgstr "Cal un nom d'usuari per a poder accedir a aquest ordinador."
 
-#: ../src/vinagre-tab.c:769
+#: ../src/vinagre-tab.c:765
 msgid "A password is required in order to access this machine."
 msgstr "Cal una contrasenya per a poder accedir a aquest ordinador."
 
-#: ../src/vinagre-tab.c:895
+#: ../src/vinagre-tab.c:891
 msgid "Minimize window"
 msgstr "Minimitza la finestra"
 
-#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
+#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "Escalat"
 
-#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
+#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "Només lectura"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Fes una captura de pantalla"
 
-#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Envia Ctrl-Alt-Supr"
 
-#: ../src/vinagre-tab.c:1065
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "Nom de l'escriptori:"
 
-#: ../src/vinagre-tab.c:1067
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "Port:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "Dimensions:"
 
-#: ../src/vinagre-tab.c:1134
+#: ../src/vinagre-tab.c:1130
 msgid "Could not get a screenshot of the connection."
 msgstr "No s'ha pogut obtenir una captura de pantalla de la connexió."
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Captura de pantalla de %s"
 
-#: ../src/vinagre-tab.c:1145
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "Desa la captura de pantalla"
 
-#: ../src/vinagre-tab.c:1209
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
