@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-02-18 20:37+0000\n"
-"PO-Revision-Date: 2009-03-20 22:15+0000\n"
+"POT-Creation-Date: 2009-03-20 20:31+0000\n"
+"PO-Revision-Date: 2009-03-22 17:21+0000\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjab-l10n@list.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgid "Bookmarks"
 msgstr "ਬੁੱਕਮਾਰਕ"
 
 #: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1066
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "ਹੋਸਟ:"
 
@@ -99,7 +99,6 @@ msgstr "ਹਮੇਸ਼ਾ ਟੈਬਾਂ ਵੇਖੋ(_A)"
 
 #. This is a button label, in the authentication dialog
 #: ../data/vinagre.glade.h:17
-#| msgid "Authentication failed"
 msgid "_Authenticate"
 msgstr "ਪਰਮਾਣਕਿਤਾ(_A)"
 
@@ -223,7 +222,7 @@ msgstr "ਬੁੱਕਮਾਰਕ ਸ਼ੁਰੂ ਕਰਨ ਦੌਰਾਨ ਗ�
 
 #: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
 #: ../src/vinagre-window.c:279
 msgid "Unknown error"
@@ -302,32 +301,43 @@ msgstr "ਪੁਰਾਣੀ ਬੁੱਕਮਾਰਕ ਫਾਇਲ ਹਟਾਈ �
 msgid "Root Folder"
 msgstr "ਰੂਟ ਫੋਲਡਰ"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "ਇਹ ਫੋਲਡਰ ਲਈ ਗਲਤ ਨਾਂ"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#, c-format
+msgid "The name \"%s\" is already used in this folder. Please use a different name."
+msgstr "ਇਸ ਫੋਲਡਰ ਵਿੱਚ \"%s\" ਨਾਂ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਵੱਖਰਾ ਨਾਂ ਚੁਣੋ ਜੀ।"
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
+#: ../src/vinagre-bookmarks-ui.c:192
+#| msgid "Invalid name for this folder"
+msgid "Invalid name for this item"
+msgstr "ਇਸ ਆਈਟਮ ਲਈ ਅਢੁੱਕਵਾਂ ਨਾਂ"
+
+#: ../src/vinagre-bookmarks-ui.c:292
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "ਕੀ ਤੁਸੀਂ <i>%s</i> ਨੂੰ ਬੁੱਕਮਾਰਕਾਂ ਵਿੱਚੋਂ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:297
 msgid "Remove Folder?"
 msgstr "ਫੋਲਡਰ ਹਟਾਉਣਾ ਹੈ?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:298
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "ਸਭ ਅੰਦਰੂਨੀ ਫੋਲਡਰ ਅਤੇ ਆਈਟਮਾਂ ਨੂੰ ਵੀ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇ।"
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Item?"
 msgstr "ਆਈਟਮ ਹਟਾਉਣੀ ਹੈ?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
+#: ../src/vinagre-bookmarks-ui.c:320
 msgid "Error removing bookmark: Entry not found"
 msgstr "ਬੁੱਕਮਾਰਕ ਹਟਾਉਣ ਦੌਰਾਨ ਗਲਤੀ: ਐਂਟਰੀ ਨਹੀਂ ਲੱਭੀ"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:337
 msgid "New Folder"
 msgstr "ਨਵਾਂ ਫੋਲਡਰ"
 
@@ -335,7 +345,7 @@ msgstr "ਨਵਾਂ ਫੋਲਡਰ"
 msgid "Choose the file"
 msgstr "ਫਾਇਲ ਚੁਣੋ"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
 msgstr "ਸਹਾਇਕ ਫਾਰਮੈਟ"
 
@@ -345,34 +355,34 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "ਅੱਗੇ ਦਿੱਤੀ ਫਾਇਲ ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ:"
 msgstr[1] "ਅੱਗੇ ਦਿੱਤੀਆਂ ਫਾਇਲਾਂ ਖੋਲ੍ਹੀਆਂ ਨਹੀਂ ਜਾ ਸਕੀਆਂ:"
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "ਅਤੀਤ ਫਾਇਲ ਖੋਲ੍ਹਣ ਦੌਰਾਨ ਗਲਤੀ: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "ਇੱਕ VNC ਸਰਵਰ ਚੁਣੋ"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "ਪਰੋਟੋਕਾਲ %s ਸਹਿਯੋਗੀ ਨਹੀਂ ਹੈ।"
 
-#: ../src/vinagre-connection.c:695
+#: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
 msgstr "ਫਾਇਲ ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ।"
 
-#: ../src/vinagre-connection.c:714
+#: ../src/vinagre-connection.c:727
 msgid "Could not parse the file."
 msgstr "ਫਾਇਲ ਪਾਰਸ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ।"
 
-#: ../src/vinagre-connection.c:759
+#: ../src/vinagre-connection.c:772
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr "'shared' ਨਿਸ਼ਾਨ ਲਈ ਗਲਤ ਮੁੱਲ: %d। ਇਸ ਲਈ 0 ਜਾਂ 1 ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਇਹ ਅਣਡਿੱਠਾ ਕੀਤਾ।"
 
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:778
 msgid "Could not find the host address in the file."
 msgstr "ਫਾਇਲ ਵਿੱਚ ਹੋਸਟ ਐਡਰੈੱਸ ਨਹੀਂ ਲੱਭਿਆ ਜਾ ਸਕਿਆ।"
 
@@ -442,7 +452,7 @@ msgstr "ਕੁਨੈਕਸ਼ਨ ਬੰਦ ਕੀਤਾ"
 msgid "Connecting..."
 msgstr "ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਬੰਦ"
 
@@ -472,75 +482,73 @@ msgstr "ਹੋਸਟ <i>%s</i> ਲਈ ਪਰਮਾਣਕਿਤਾ ਢੰਗ ਗ�
 msgid "Authentication unsupported"
 msgstr "ਪਰਮਾਣਕਿਤਾ ਗ਼ੈਰ-ਸਹਾਇਕ"
 
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "ਤਾਜ਼ਾ ਕੁਨੈਕਸ਼ਨ ਸੰਭਾਲਣ ਦੌਰਾਨ ਗਲਤੀ"
 
-#: ../src/vinagre-tab.c:496
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
 msgstr "ਕੀਰਿੰਗ ਵਿੱਚ ਸਨਦ ਸੰਭਾਲਣ ਦੌਰਾਨ ਗਲਤੀ ਹੈ।"
 
-#: ../src/vinagre-tab.c:751 ../src/vinagre-tab.c:768
-#| msgid "Authentication failed"
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
 msgid "Authentication error"
 msgstr "ਪਰਮਾਣਕਿਤਾ ਗਲਤੀ"
 
-#: ../src/vinagre-tab.c:752
+#: ../src/vinagre-tab.c:748
 msgid "A username is required in order to access this machine."
 msgstr "ਇਸ ਮਸ਼ੀਨ ਦੀ ਵਰਤੋਂ ਕਰਨ ਵਾਸਤੇ ਇੱਕ ਯੂਜ਼ਰ ਨਾਂ ਚਾਹੀਦਾ ਹੈ।"
 
-#: ../src/vinagre-tab.c:769
+#: ../src/vinagre-tab.c:765
 msgid "A password is required in order to access this machine."
 msgstr "ਇਸ ਮਸ਼ੀਨ ਦੀ ਵਰਤੋਂ ਕਰਨ ਵਾਸਤੇ ਇੱਕ ਪਾਸਵਰਡ ਚਾਹੀਦਾ ਹੈ।"
 
-#: ../src/vinagre-tab.c:895
+#: ../src/vinagre-tab.c:891
 msgid "Minimize window"
 msgstr "ਵਿੰਡੋ ਘੱਟੋ-ਘੱਟ"
 
-#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
+#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "ਸਕੇਲਿੰਗ"
 
-#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
+#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "ਕੇਵਲ ਪੜ੍ਹਨ ਲਈ"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "ਸਕਰੀਨਸ਼ਾਟ ਲਵੋ"
 
-#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl-Alt-Del ਭੇਜੋ"
 
-#: ../src/vinagre-tab.c:1065
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "ਡੈਸਕਟਾਪ ਨਾਂ:"
 
-#: ../src/vinagre-tab.c:1067
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "ਪੋਰਟ:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "ਮਾਪ:"
 
-#: ../src/vinagre-tab.c:1134
-#| msgid "Take a screenshot of active connection"
+#: ../src/vinagre-tab.c:1130
 msgid "Could not get a screenshot of the connection."
 msgstr "ਕੁਨੈਕਸ਼ਨ ਥਈ ਸਕਰੀਨ-ਸ਼ਾਟ ਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s ਦਾ ਸਕਰੀਨਸ਼ਾਟ"
 
-#: ../src/vinagre-tab.c:1145
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "ਸਕਰੀਨ-ਸ਼ਾਟ ਸੰਭਾਲੋ"
 
-#: ../src/vinagre-tab.c:1209
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
