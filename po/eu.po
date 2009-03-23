@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-19 20:09+0100\n"
-"PO-Revision-Date: 2009-02-19 20:11+0100\n"
+"POT-Creation-Date: 2009-03-23 13:24+0100\n"
+"PO-Revision-Date: 2009-03-23 13:25+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgid "Bookmarks"
 msgstr "Laster-markak"
 
 #: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1066
+#: ../src/vinagre-tab.c:1062
 msgid "Host:"
 msgstr "Ostalaria:"
 
@@ -224,7 +224,7 @@ msgstr "Errorea laster-markak hasieratzean: %s"
 
 #: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
 #: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
 #: ../src/vinagre-window.c:279
 msgid "Unknown error"
@@ -307,32 +307,42 @@ msgstr "Ezin izan da laster-marken fitxategi zaharra kendu"
 msgid "Root Folder"
 msgstr "Erroko karpeta"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "Izen baliogabea karpeta honentzako"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#, c-format
+msgid "The name \"%s\" is already used in this folder. Please use a different name."
+msgstr "Karpeta honetan \"%s\" izena erabilita dago jadanik. Erabili bestelako izen bat."
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
+#: ../src/vinagre-bookmarks-ui.c:192
+msgid "Invalid name for this item"
+msgstr "Izen baliogabea elementu honentzako"
+
+#: ../src/vinagre-bookmarks-ui.c:292
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Ziur zaude laster-marketatik <i>%s</i> kentzea nahi duzula?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:297
 msgid "Remove Folder?"
 msgstr "Kendu karpeta?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:298
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "Jakin ezazu bere azpikarpeta eta elementu guztiak ere kendu egingo direla."
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Item?"
 msgstr "Kendu elementua?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
+#: ../src/vinagre-bookmarks-ui.c:320
 msgid "Error removing bookmark: Entry not found"
 msgstr "Errorea laster-marka kentzean: ez da sarrera aurkitu"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:337
 msgid "New Folder"
 msgstr "Karpeta berria"
 
@@ -340,7 +350,7 @@ msgstr "Karpeta berria"
 msgid "Choose the file"
 msgstr "Aukeratu fitxategia"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
+#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
 msgstr "Onartutako formatuak"
 
@@ -350,36 +360,36 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Ezin da honako fitxategia ireki:"
 msgstr[1] "Ezin dira honako fitxategiak ireki:"
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Errorea historiaren fitxategia gordetzean: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "Aukeratu VNC zerbitzaria"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "%s protokoloa ez dago onartuta."
 
-#: ../src/vinagre-connection.c:695
+#: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
 msgstr "Ezin izan da fitxategia ireki."
 
-#: ../src/vinagre-connection.c:714
+#: ../src/vinagre-connection.c:727
 msgid "Could not parse the file."
 msgstr "Ezin izan da fitxategia analizatu."
 
-#: ../src/vinagre-connection.c:759
+#: ../src/vinagre-connection.c:772
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr ""
 "Okerreko balioa 'partekatua' banderarentzako: %d. 0 edo 1 izan behar duela "
 "suposatzen da. Ez ikusi egiten."
 
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:778
 msgid "Could not find the host address in the file."
 msgstr "Ezin izan da ostalariaren helbidea aurkitu fitxategian."
 
@@ -451,7 +461,7 @@ msgstr "Konexioa itxi egin da"
 msgid "Connecting..."
 msgstr "Konektatzen..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
+#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
 msgid "Close connection"
 msgstr "Itxi konexioa"
 
@@ -481,73 +491,73 @@ msgstr "<i>%s</i> ostalariaren autentifikazio-metodoa ez dago onartuta. (%u)"
 msgid "Authentication unsupported"
 msgstr "Autentifikazioa ez dago onartuta"
 
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
 msgstr "Errorea azken konexioa gordetzean."
 
-#: ../src/vinagre-tab.c:496
+#: ../src/vinagre-tab.c:492
 msgid "Error saving the credential on the keyring."
 msgstr "Errorea kredentziala gako-sortan gordetzean."
 
-#: ../src/vinagre-tab.c:751 ../src/vinagre-tab.c:768
+#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
 msgid "Authentication error"
 msgstr "Errorea autentifikatzean"
 
-#: ../src/vinagre-tab.c:752
+#: ../src/vinagre-tab.c:748
 msgid "A username is required in order to access this machine."
 msgstr "Erabiltzaile-izena behar da ordenagailu honetara sarbidetzeko."
 
-#: ../src/vinagre-tab.c:769
+#: ../src/vinagre-tab.c:765
 msgid "A password is required in order to access this machine."
 msgstr "Pasahitza behar da ordenagailu honetara sarbidetzeko."
 
-#: ../src/vinagre-tab.c:895
+#: ../src/vinagre-tab.c:891
 msgid "Minimize window"
 msgstr "Ikonotu leihoa"
 
-#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
+#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
 msgid "Scaling"
 msgstr "Eskalatzea"
 
-#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
+#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
 msgid "Read only"
 msgstr "Irakurtzeko soilik"
 
 #. Machine menu
-#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
 msgid "Take screenshot"
 msgstr "Egin pantaila-argazkia"
 
-#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
+#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
 msgid "Send Ctrl-Alt-Del"
 msgstr "Bidali Ktrl+Alt+Ezab"
 
-#: ../src/vinagre-tab.c:1065
+#: ../src/vinagre-tab.c:1061
 msgid "Desktop Name:"
 msgstr "Mahaigainaren izena:"
 
-#: ../src/vinagre-tab.c:1067
+#: ../src/vinagre-tab.c:1063
 msgid "Port:"
 msgstr "Ataka:"
 
-#: ../src/vinagre-tab.c:1068
+#: ../src/vinagre-tab.c:1064
 msgid "Dimensions:"
 msgstr "Dimentsioak:"
 
-#: ../src/vinagre-tab.c:1134
+#: ../src/vinagre-tab.c:1130
 msgid "Could not get a screenshot of the connection."
 msgstr "Ezin izan da konexioaren pantaila-argazkia lortu."
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:1138
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s(r)en pantaila-argazkia"
 
-#: ../src/vinagre-tab.c:1145
+#: ../src/vinagre-tab.c:1141
 msgid "Save Screenshot"
 msgstr "Gorde pantaila-argazkia"
 
-#: ../src/vinagre-tab.c:1209
+#: ../src/vinagre-tab.c:1205
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
