@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-03-09 07:05+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-06 21:37+0530\n"
 "PO-Revision-Date: 2009-03-09 12:41+0530\n"
 "Last-Translator: I. Felix <ifelix@redhat.com>\n"
 "Language-Team: Tamil <fedora-trans-ta@redhat.com>\n"
@@ -44,11 +44,11 @@ msgstr "தொலை பணிமேடை காட்டி"
 
 #: ../data/vinagre.glade.h:1
 msgid "<b>Authentication is required</b>"
-msgstr "<b> அங்கீகாரம் அவசியம்</b>"
+msgstr "<b>அங்கீகாரம் அவசியம்</b>"
 
 #: ../data/vinagre.glade.h:2
 msgid "<b>Connection options</b>"
-msgstr "<b> இணைப்பு தேர்வுகள்</b>"
+msgstr "<b>இணைப்பு தேர்வுகள்</b>"
 
 #: ../data/vinagre.glade.h:3
 msgid "<b>Connection</b>"
@@ -92,7 +92,8 @@ msgid "Preferences"
 msgstr "விருப்பங்கள்"
 
 #: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
-msgid "Whether we should show tabs even when there is only one active connection"
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
 msgstr "ஒரே ஒரு இணைப்பு மட்டும் செயலில் உள்ளபோதும் கீற்றுகளை காட்டலாமா"
 
 #: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
@@ -105,7 +106,6 @@ msgstr "(_A) எப்போதும் கீற்றுகளை காட�
 
 #. This is a button label, in the authentication dialog
 #: ../data/vinagre.glade.h:17
-#| msgid "Authentication failed"
 msgid "_Authenticate"
 msgstr "அனுமதித்தல் (_A)"
 
@@ -240,8 +240,10 @@ msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "புத்தகக்குறி ஆரம்பிக்கும் போது பிழை: கோப்பு காலியாக உள்ளது போலிருக்கிறது"
 
 #: ../src/vinagre-bookmarks.c:358
-msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
-msgstr "புத்தகக்குறி ஆரம்பிக்கும் போது பிழை: இந்த கோப்பு வினாக்ரே புத்தகக்குறிப்பு கோப்பு அல்ல"
+msgid ""
+"Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+msgstr ""
+"புத்தகக்குறி ஆரம்பிக்கும் போது பிழை: இந்த கோப்பு வினாக்ரே புத்தகக்குறிப்பு கோப்பு அல்ல"
 
 #: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
 msgid "Error while saving bookmarks: Failed to create the XML structure"
@@ -253,7 +255,8 @@ msgstr "புத்தகக்குறிகளை சேமிக்கு�
 
 #: ../src/vinagre-bookmarks.c:450
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr "புத்தகக்குறிகளை சேமிக்கும் போது பிழை: எக்ஸ்எம்எல் கட்டமைப்பை இறுதியாக்க முடியவில்லை"
+msgstr ""
+"புத்தகக்குறிகளை சேமிக்கும் போது பிழை: எக்ஸ்எம்எல் கட்டமைப்பை இறுதியாக்க முடியவில்லை"
 
 #: ../src/vinagre-bookmarks.c:459
 #, c-format
@@ -310,32 +313,44 @@ msgstr "பழைய புத்தகக்குறிகள் கோப்�
 msgid "Root Folder"
 msgstr "மூல அடைவு"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "இந்த அடைவுக்கு செல்லுபடியாகாத பெயர்"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#, c-format
+msgid ""
+"The name \"%s\" is already used in this folder. Please use a different name."
+msgstr "இந்த அடைவில்  \"%s\" என்ற பெயர் ஏற்கெனவே பயனில் உள்ளது. தயை செய்து வேறு பெயரை யன்படுத்துக."
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
+#: ../src/vinagre-bookmarks-ui.c:192
+
+msgid "Invalid name for this item"
+msgstr "இந்த உருப்படிக்கு செல்லுபடியாகாத பெயர்"
+
+#: ../src/vinagre-bookmarks-ui.c:292
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "நீங்கள் புத்தகக்குறியிலிருந்து <i>%s</i>ஐ நிச்சயம் நீக்க வேண்டுமா?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:297
 msgid "Remove Folder?"
 msgstr "அடைவை நீக்கவா?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:298
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "துணை அடைவுகளும் மற்ற எல்லா உருப்படிகளும் நீக்கப்படும் என அறியவும்"
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Item?"
 msgstr "உருப்படியை நீக்கவா?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
+#: ../src/vinagre-bookmarks-ui.c:320
 msgid "Error removing bookmark: Entry not found"
 msgstr "புத்தகக்குறிகளை சேமிக்கும் போது பிழை: உள்ளீட்டை காணவில்லை"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:337
 msgid "New Folder"
 msgstr "புதிய அடைவு"
 
@@ -377,7 +392,8 @@ msgstr "கோப்பினை அலகிட முடியவில்ல�
 
 #: ../src/vinagre-connection.c:772
 #, c-format
-msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgid ""
+"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr ""
 "பகிர்ந்த குறிக்கு பிழையான மதிப்பு: %d. அது 0 அல்லது 1 ஆக இருக்க வேண்டும். "
 "உதாசீனப்படுத்தப்படுகிறது"
@@ -426,8 +442,10 @@ msgid "- VNC Client for GNOME"
 msgstr "- க்னோம்க்கு விஎன்சி(VNC) சார்ந்தோன் "
 
 #: ../src/vinagre-main.c:146
-msgid "Run 'vinagre --help' to see a full list of available command line options"
-msgstr "'vinagre --help' என இயக்கினால் இருக்கும் கட்டளைவரி விருப்பங்களின் பட்டியலை கொடுக்கவும்"
+msgid ""
+"Run 'vinagre --help' to see a full list of available command line options"
+msgstr ""
+"'vinagre --help' என இயக்கினால் இருக்கும் கட்டளைவரி விருப்பங்களின் பட்டியலை கொடுக்கவும்"
 
 #: ../src/vinagre-mdns.c:123
 #, c-format
@@ -491,7 +509,6 @@ msgid "Error saving the credential on the keyring."
 msgstr "விசை வளையத்தில் அறிமுக ஆவணம் சேமிக்கும் போது பிழை."
 
 #: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
-#| msgid "Authentication failed"
 msgid "Authentication error"
 msgstr "அனுமதித்தல் பிழை"
 
@@ -760,7 +777,8 @@ msgstr ""
 
 #: ../src/vinagre-utils.c:466
 msgid "translator-credits"
-msgstr "Dr. T. Vasudevan <agnihot3@gmail.com>, I. Felix <ifelix25@gmail.com> 2008"
+msgstr ""
+"Dr. T. Vasudevan <agnihot3@gmail.com> 2009, I. Felix <ifelix25@gmail.com> 2008"
 
 #: ../src/vinagre-utils.c:469
 msgid "Vinagre Website"
@@ -784,4 +802,3 @@ msgstr "%s ஐ திற:%d"
 #: ../src/vinagre-window.c:797
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "கண்ட்ரோல் ஆல்ட் விசைகளை அழுத்தி நிலைகாட்டியை விடுவிக்கவும்"
-
