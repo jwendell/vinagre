@@ -42,6 +42,7 @@ GTHREAD_REQUIRED=2.0.0
 GTK_VNC_REQUIRED=0.3.8
 AVAHI_REQUIRED=0.6.22
 PANEL_REQUIRED_VERSION=2.0.0
+TELEPATHY_GLIB_REQUIRED=0.7.31
 
 # Check for avahi
 AC_ARG_ENABLE(avahi,
@@ -71,6 +72,33 @@ PKG_CHECK_MODULES(VINAGRE, \
   gtk-vnc-1.0 >= $GTK_VNC_REQUIRED)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
+
+# Check for telepathy
+AC_ARG_ENABLE(telepathy,
+              AS_HELP_STRING([--enable-telepathy=@<:@no/yes/auto@:>@],
+                             [Enable telepathy checking]), ,
+                             enable_telepathy=auto)
+
+if test "x$enable_telepathy" != "xno"; then
+   PKG_CHECK_MODULES(TELEPATHY,
+   [
+      telepathy-glib >= $TELEPATHY_GLIB_REQUIRED
+   ], have_telepathy="yes", have_telepathy="no")
+   if test "x$have_telepathy" = "xyes"; then
+      AC_SUBST(TELEPATHY_CFLAGS)
+      AC_SUBST(TELEPATHY_LIBS)
+      AC_DEFINE(HAVE_TELEPATHY, [], [Define if you have telepathy])
+   fi
+else
+   have_telepathy=no
+fi
+
+if test "x$enable_telepathy" = "xyes" -a "x$have_telepathy" != "xyes"; then
+   AC_MSG_ERROR([Couldn't find telepathy dependencies.])
+fi
+
+AM_CONDITIONAL(TELEPATHY, test "x$have_telepathy" = "xyes")
+
 
 PKG_CHECK_MODULES(APPLET, \ 
   libpanelapplet-2.0 >= $PANEL_REQUIRED_VERSION)
@@ -125,4 +153,5 @@ Configure summary:
 	Compiler Flags .............:  ${CFLAGS}
 
 	Avahi enabled ..............:  ${enable_avahi}
+	Telepathy support ..........:  ${have_telepathy}
 "
