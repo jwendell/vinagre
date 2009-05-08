@@ -127,6 +127,7 @@ show_dialog_conn (VinagreBookmarks      *book,
   GtkWidget         *box, *tree, *save_button;
   VinagreConnection *conn;
   const gchar       *name;
+  VinagreConnectionProtocol protocol;
 
   xml = glade_xml_new (vinagre_utils_get_glade_filename (),
 		       "bookmarks_add_edit_conn_dialog",
@@ -152,12 +153,14 @@ show_dialog_conn (VinagreBookmarks      *book,
   gtk_entry_set_text (GTK_ENTRY (host_entry), str);
   g_free (str);
 
+/*
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fs_check),
 				vinagre_connection_get_fullscreen (conn));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sc_check),
 				vinagre_connection_get_scaling (conn));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (vo_check),
 				vinagre_connection_get_view_only (conn));
+*/
 
   g_signal_connect (name_entry, "changed", G_CALLBACK (control_save_button_visibility), save_button);
 
@@ -198,6 +201,7 @@ show_dialog_conn (VinagreBookmarks      *book,
 	}
 
       if (!vinagre_connection_split_string (gtk_entry_get_text (GTK_ENTRY (host_entry)),
+					    &protocol,
 					    &host,
 					    &port,
 					    &error_str))
@@ -214,10 +218,12 @@ show_dialog_conn (VinagreBookmarks      *book,
   vinagre_connection_set_name (conn, name);
   vinagre_connection_set_host (conn, host);
   vinagre_connection_set_port (conn, port);
+/*
   vinagre_connection_set_view_only  (conn,
 				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (vo_check)));
   vinagre_connection_set_scaling    (conn,
 				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (sc_check)));
+*/
   vinagre_connection_set_fullscreen (conn,
 				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (fs_check)));
 

@@ -2,7 +2,7 @@
  * vinagre-bacon.c
  * This file is part of vinagre
  *
- * Copyright (C) 2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -156,7 +156,9 @@ vinagre_bacon_message_received (const char *message,
       
       next = l->next;
       vinagre_cmd_direct_connect (conn, window);
+      g_object_unref (conn);
     }
+  g_slist_free (servers);
 
   /* set the proper interaction time on the window.
    * Fall back to roundtripping to the X server when we

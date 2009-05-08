@@ -23,6 +23,7 @@
 
 #include "vinagre-window.h"
 #include "vinagre-bookmarks-entry.h"
+#include "vinagre-notebook.h"
 
 G_BEGIN_DECLS
 
@@ -30,7 +31,7 @@ G_BEGIN_DECLS
 
 struct _VinagreWindowPrivate
 {
-  GtkWidget       *notebook;
+  VinagreNotebook *notebook;
   GtkWidget       *fav_panel;
   GtkWidget       *statusbar;	
   guint           generic_message_cid;
@@ -40,9 +41,11 @@ struct _VinagreWindowPrivate
 
   /* Menus & Toolbars */
   GtkUIManager   *manager;
-  GtkActionGroup *action_group;
+
   GtkActionGroup *always_sensitive_action_group;
   GtkActionGroup *machine_connected_action_group;
+  GtkActionGroup *machine_initialized_action_group;
+
   GtkActionGroup *bookmarks_list_action_group;
   GtkActionGroup *recent_action_group;
   GtkAction      *recent_action;
@@ -53,7 +56,6 @@ struct _VinagreWindowPrivate
   GtkWidget       *toolbar;
   GtkWidget       *menubar;
 
-  GtkWidget       *active_tab;
   VinagreBookmarksEntry *fav_entry_selected;
 	
   gint            width;
@@ -66,7 +68,6 @@ struct _VinagreWindowPrivate
   gboolean        statusbar_visible;
   gboolean        fav_panel_visible;
 
-  gulong	  signal_notebook;
   gulong	  signal_clipboard;
 };
 

@@ -2,7 +2,7 @@
  * vinagre-bookmarks.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008  Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009  Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
 #include "vinagre-bookmarks.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-bookmarks-migration.h"
+#include "vinagre-connection.h"
 
 struct _VinagreBookmarksPrivate
 {
@@ -144,7 +145,10 @@ vinagre_bookmarks_class_init (VinagreBookmarksClass *klass)
 }
 
 static VinagreConnection *
-find_conn_by_host (GSList *entries, const gchar *host, gint port)
+find_conn_by_host (GSList *entries,
+		   VinagreConnectionProtocol protocol,
+		   const gchar *host,
+		   gint port)
 {
   GSList *l;
   VinagreConnection *conn;
@@ -157,15 +161,17 @@ find_conn_by_host (GSList *entries, const gchar *host, gint port)
 	{
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
 	    if ((conn = find_conn_by_host (vinagre_bookmarks_entry_get_children (entry),
-					  host,
-					  port)))
+					   protocol,
+					   host,
+					   port)))
 	      return conn;
 	    break;
 
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 	    if ( (g_str_equal (host, vinagre_connection_get_host (conn))) &&
-		 (port == vinagre_connection_get_port (conn) ) )
+		 (port == vinagre_connection_get_port (conn)) &&
+		 (protocol == vinagre_connection_get_protocol (conn)) )
 	      return g_object_ref (conn);
 	    break;
 
@@ -178,6 +184,7 @@ find_conn_by_host (GSList *entries, const gchar *host, gint port)
 
 VinagreConnection *
 vinagre_bookmarks_exists (VinagreBookmarks *book,
+                          VinagreConnectionProtocol protocol,
                           const gchar *host,
                           gint port)
 {
@@ -187,7 +194,7 @@ vinagre_bookmarks_exists (VinagreBookmarks *book,
   g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), NULL);
   g_return_val_if_fail (host != NULL, NULL);
 
-  return find_conn_by_host (book->priv->entries, host, port);
+  return find_conn_by_host (book->priv->entries, protocol, host, port);
 }
 
 static void
@@ -214,13 +221,7 @@ vinagre_bookmarks_save_fill_xml (GSList *list, xmlTextWriter *writer)
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 
 	    xmlTextWriterStartElement (writer, "item");
-	    xmlTextWriterWriteElement (writer, "name", vinagre_connection_get_name (conn));
-	    xmlTextWriterWriteElement (writer, "host", vinagre_connection_get_host (conn));
-	    xmlTextWriterWriteFormatElement (writer, "port", "%d", vinagre_connection_get_port (conn));
-	    xmlTextWriterWriteFormatElement (writer, "view_only", "%d", vinagre_connection_get_view_only (conn));
-	    xmlTextWriterWriteFormatElement (writer, "scaling", "%d", vinagre_connection_get_scaling (conn));
-	    xmlTextWriterWriteFormatElement (writer, "fullscreen", "%d", vinagre_connection_get_fullscreen (conn));
-
+	    vinagre_connection_fill_writer (conn, writer);
 	    xmlTextWriterEndElement (writer);
 	    break;
 
@@ -230,15 +231,6 @@ vinagre_bookmarks_save_fill_xml (GSList *list, xmlTextWriter *writer)
     }
 }
 
-static gboolean
-vinagre_bookmarks_parse_boolean (const gchar* value)
-{
-  if (g_ascii_strcasecmp (value, "true") == 0 || strcmp (value, "1") == 0)
-    return TRUE;
-
-  return FALSE;
-}
-
 static VinagreBookmarksEntry *
 vinagre_bookmarks_parse_item (xmlNode *root)
 {
@@ -246,31 +238,22 @@ vinagre_bookmarks_parse_item (xmlNode *root)
   VinagreConnection     *conn;
   xmlNode               *curr;
   xmlChar               *s_value;
+  VinagreConnectionProtocol protocol = VINAGRE_CONNECTION_PROTOCOL_VNC;
 
-  conn = vinagre_connection_new ();
-
+  /* Loop to discover the protocol */
   for (curr = root->children; curr; curr = curr->next)
     {
+      if (xmlStrcmp(curr->name, (const xmlChar *)"protocol"))
+        continue;
+
       s_value = xmlNodeGetContent (curr);
-
-      if (!xmlStrcmp(curr->name, (const xmlChar *)"host"))
-	vinagre_connection_set_host (conn, s_value);
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"name"))
-	vinagre_connection_set_name (conn, s_value);
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"port"))
-	vinagre_connection_set_port (conn, atoi (s_value));
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"view_only"))
-	vinagre_connection_set_view_only (conn, vinagre_bookmarks_parse_boolean (s_value));
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"scaling"))
-	vinagre_connection_set_scaling (conn, vinagre_bookmarks_parse_boolean (s_value));
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"fullscreen"))
-	vinagre_connection_set_fullscreen (conn, vinagre_bookmarks_parse_boolean (s_value));
-
+      protocol = vinagre_connection_protocol_by_name ((const gchar *)s_value);
       xmlFree (s_value);
+      break;
     }
 
-  if (vinagre_connection_get_port (conn) <= 0)
-    vinagre_connection_set_port (conn, 5900);
+  conn = vinagre_connection_new (protocol);
+  vinagre_connection_parse_item (conn, root);
 
   if (vinagre_connection_get_host (conn))
     entry = vinagre_bookmarks_entry_new_conn (conn);

@@ -70,5 +70,8 @@ void		vinagre_utils_get_current_viewport	(GdkScreen    *screen,
 
 void		vinagre_utils_help_contents		(GtkWindow *window);
 void		vinagre_utils_help_about		(GtkWindow *window);
+
+gboolean	vinagre_utils_parse_boolean		(const gchar* value);
+
 #endif  /* __VINAGRE_UTILS_H__  */
 /* vim: set ts=8: */

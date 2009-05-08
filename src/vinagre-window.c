@@ -2,7 +2,7 @@
  * vinagre-window.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,16 +66,9 @@ vinagre_window_dispose (GObject *object)
       window->priv->manager = NULL;
     }
 
-  if (window->priv->signal_notebook != 0)
-    {
-      g_signal_handler_disconnect (window->priv->notebook,
-				   window->priv->signal_notebook);
-      window->priv->signal_notebook = 0;
-    }
-
   if (window->priv->signal_clipboard != 0)
     {
-      GtkClipboard  *cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);;
+      GtkClipboard  *cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
 
       g_signal_handler_disconnect (cb,
 				   window->priv->signal_clipboard);
@@ -350,16 +343,17 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   gtk_window_add_accel_group (GTK_WINDOW (window),
 			      gtk_ui_manager_get_accel_group (manager));
 
+  /* Normal actions */
   action_group = gtk_action_group_new ("VinagreWindowAlwaysSensitiveActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
   gtk_action_group_add_actions (action_group,
-				vinagre_always_sensitive_menu_entries,
-				G_N_ELEMENTS (vinagre_always_sensitive_menu_entries),
+				vinagre_always_sensitive_entries,
+				G_N_ELEMENTS (vinagre_always_sensitive_entries),
 				window);
   
   gtk_action_group_add_toggle_actions (action_group,
-				       vinagre_always_sensitive_toggle_menu_entries,
-				       G_N_ELEMENTS (vinagre_always_sensitive_toggle_menu_entries),
+				       vinagre_always_sensitive_toggle_entries,
+				       G_N_ELEMENTS (vinagre_always_sensitive_toggle_entries),
 				       window);
 
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
@@ -369,41 +363,36 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   action = gtk_action_group_get_action (action_group, "MachineConnect");
   g_object_set (action, "is_important", TRUE, NULL);
 
-  action_group = gtk_action_group_new ("VinagreWindowActions");
-  gtk_action_group_set_translation_domain (action_group, NULL);
-  gtk_action_group_add_actions (action_group,
-				vinagre_menu_entries,
-				G_N_ELEMENTS (vinagre_menu_entries),
-				window);
-
-  gtk_ui_manager_insert_action_group (manager, action_group, 0);
-  g_object_unref (action_group);
-  window->priv->action_group = action_group;
-
-  action = gtk_action_group_get_action (action_group, "MachineClose");
-  g_object_set (action, "is_important", TRUE, NULL);
-
   /* Machine connected actions */
   action_group = gtk_action_group_new ("VinagreWindowMachineConnectedActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
   gtk_action_group_add_actions (action_group,
-				vinagre_machine_connected_menu_entries,
-				G_N_ELEMENTS (vinagre_machine_connected_menu_entries),
+				vinagre_machine_connected_entries,
+				G_N_ELEMENTS (vinagre_machine_connected_entries),
 				window);
-  gtk_action_group_add_toggle_actions  (action_group,
-					vinagre_machine_connected_toggle_menu_entries,
-					G_N_ELEMENTS (vinagre_machine_connected_toggle_menu_entries),
-					window);
-
+  gtk_action_group_set_sensitive (action_group, FALSE);
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
   window->priv->machine_connected_action_group = action_group;
 
+  action = gtk_action_group_get_action (action_group, "MachineClose");
+  g_object_set (action, "is_important", TRUE, NULL);
+
+  /* Machine initialized actions */
+  action_group = gtk_action_group_new ("VinagreWindowMachineInitializedActions");
+  gtk_action_group_set_translation_domain (action_group, NULL);
+  gtk_action_group_add_actions (action_group,
+				vinagre_machine_initialized_entries,
+				G_N_ELEMENTS (vinagre_machine_initialized_entries),
+				window);
+  gtk_action_group_set_sensitive (action_group, FALSE);
+  gtk_ui_manager_insert_action_group (manager, action_group, 0);
+  g_object_unref (action_group);
+  window->priv->machine_initialized_action_group = action_group;
+
   action = gtk_action_group_get_action (action_group, "ViewFullScreen");
   g_object_set (action, "is_important", TRUE, NULL);
   action = gtk_action_group_get_action (action_group, "MachineTakeScreenshot");
-  g_object_set (action, "is_important", TRUE, NULL);
-  action = gtk_action_group_get_action (action_group, "MachineSendCtrlAltDel");
   g_object_set (action, "is_important", TRUE, NULL);
 
   /* now load the UI definition */
@@ -481,21 +470,6 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 			     G_CALLBACK (show_hide_accels),
 			     window);
   show_hide_accels (window);
-}
-
-void
-vinagre_window_update_machine_menu_sensitivity (VinagreWindow *window)
-{
-  gboolean active;
-
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  active = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook)) > 0;
-  gtk_action_group_set_sensitive (window->priv->action_group, active);
-
-  active = (window->priv->active_tab) &&
-	   (vinagre_tab_get_state (VINAGRE_TAB (window->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED);
-  gtk_action_group_set_sensitive (window->priv->machine_connected_action_group, active);
 }
 
 static void
@@ -782,149 +756,20 @@ create_statusbar (VinagreWindow *window,
 		    0);
 }
 
-void
-vinagre_window_set_title (VinagreWindow *window)
-{
-  gchar *title, *name, *grab;
-
-  if (window->priv->active_tab == NULL)
-    {
-      gtk_window_set_title (GTK_WINDOW (window), g_get_application_name ());
-      return;
-    }
-
-  if (vinagre_tab_is_pointer_grab (VINAGRE_TAB (window->priv->active_tab)))
-    grab = g_strdup_printf (" (%s)", _("Press Ctrl+Alt to release the cursor"));
-  else
-    grab = g_strdup ("");
-
-  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (VINAGRE_TAB (window->priv->active_tab)));
-  title = g_strdup_printf ("%s%s - %s",
-			   name,
-			   grab,
-			   g_get_application_name ());
-  gtk_window_set_title (GTK_WINDOW (window), title);
-  g_free (title);
-  g_free (name);
-  g_free (grab);
-}
-
-static void
-update_toggle_machine_items (VinagreWindow *window)
-{
-  GtkAction *action;
-
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  if (window->priv->active_tab == NULL)
-    {
-      action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewScaling");
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-
-      action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewReadOnly");
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-
-      return;
-    }
-
-  action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewScaling");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-				vinagre_tab_get_scaling (VINAGRE_TAB (window->priv->active_tab)));
-
-  action = gtk_action_group_get_action (window->priv->machine_connected_action_group, "ViewReadOnly");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-				vinagre_tab_get_readonly (VINAGRE_TAB (window->priv->active_tab)));
-
-}
-
-static void
-vinagre_window_page_removed (GtkNotebook   *notebook,
-			     GtkWidget     *child,
-			     guint         page_num,
-			     VinagreWindow *window)
-{
-  GtkNotebook *nb;
-
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  nb = GTK_NOTEBOOK (window->priv->notebook);
-
-  window->priv->active_tab = gtk_notebook_get_nth_page (nb,
-							gtk_notebook_get_current_page (nb));
-
-  if (!window->priv->active_tab && window->priv->fullscreen)
-    vinagre_window_toggle_fullscreen (window);
-
-  vinagre_window_set_title (window);
-  update_toggle_machine_items (window);
-  vinagre_window_update_machine_menu_sensitivity (window);
-}
-
-static void
-vinagre_window_page_added (GtkNotebook  *notebook,
-			   GtkWidget     *child,
-			   guint         page_num,
-			   VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  window->priv->active_tab = child;
-
-  vinagre_window_set_title (window);
-  update_toggle_machine_items (window);
-  vinagre_window_update_machine_menu_sensitivity (window);
-}
-
-static void 
-vinagre_window_switch_page (GtkNotebook     *notebook, 
-			    GtkNotebookPage *pg,
-			    gint            page_num, 
-			    VinagreWindow   *window)
-{
-  GtkWidget *tab;
-
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  tab = gtk_notebook_get_nth_page (notebook, page_num);
-  if (tab == window->priv->active_tab)
-    return;
-
-  window->priv->active_tab = tab;
-
-  vinagre_window_set_title (window);
-  update_toggle_machine_items (window);
-  vinagre_window_update_machine_menu_sensitivity (window);
-}
-
 static void
 create_notebook (VinagreWindow *window)
 {
   window->priv->notebook = vinagre_notebook_new (window);
 
   gtk_paned_pack2 (GTK_PANED (window->priv->hpaned), 
-  		   window->priv->notebook,
+  		   GTK_WIDGET (window->priv->notebook),
   		   TRUE, 
   		   FALSE);
 
-  window->priv->signal_notebook =
-   g_signal_connect_after (window->priv->notebook,
-		          "page-removed",
-		          G_CALLBACK (vinagre_window_page_removed),
-		          window);
-
-  g_signal_connect_after (window->priv->notebook,
-		          "page-added",
-		          G_CALLBACK (vinagre_window_page_added),
-		          window);
-
-  g_signal_connect (window->priv->notebook,
-		    "switch_page",
-		    G_CALLBACK (vinagre_window_switch_page),
-		    window);
-
-  gtk_widget_show (window->priv->notebook);
+  gtk_widget_show (GTK_WIDGET (window->priv->notebook));
 }
 
+/*
 static void
 vinagre_window_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreWindow *window)
 {
@@ -940,7 +785,7 @@ vinagre_window_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreWindow *w
   if (!text)
     return;
 
-  vinagre_tab_paste_text (VINAGRE_TAB (window->priv->active_tab), text);
+//  vinagre_tab_paste_text (VINAGRE_TAB (window->priv->active_tab), text);
   g_free (text);
 }
 
@@ -955,6 +800,7 @@ vinagre_window_init_clipboard (VinagreWindow *window)
 						     G_CALLBACK (vinagre_window_clipboard_cb),
 						     window);
 }
+*/
 
 static void
 vinagre_window_init (VinagreWindow *window)
@@ -964,10 +810,8 @@ vinagre_window_init (VinagreWindow *window)
   gtk_window_set_default_icon_name ("vinagre");
 
   window->priv = VINAGRE_WINDOW_GET_PRIVATE (window);
-  window->priv->active_tab = NULL;
   window->priv->fav_entry_selected = NULL;
   window->priv->fullscreen = FALSE;
-  window->priv->signal_notebook = 0;
 
   main_box = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), main_box);
@@ -998,7 +842,7 @@ vinagre_window_init (VinagreWindow *window)
   gtk_widget_grab_focus (window->priv->hpaned);
 
   init_widgets_visibility (window);
-  vinagre_window_update_machine_menu_sensitivity (window);
+//  vinagre_window_merge_tab_ui (window);
 
   vinagre_window_update_bookmarks_list_menu (window);
   g_signal_connect_swapped (vinagre_bookmarks_get_default (),
@@ -1011,10 +855,10 @@ vinagre_window_init (VinagreWindow *window)
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
 #endif
-  vinagre_window_init_clipboard (window);
+  //vinagre_window_init_clipboard (window);
 }
 
-GtkWidget *
+VinagreNotebook *
 vinagre_window_get_notebook (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
@@ -1023,24 +867,12 @@ vinagre_window_get_notebook (VinagreWindow *window)
 }
 
 void
-vinagre_window_close_tab (VinagreWindow *window,
-			  VinagreTab    *tab)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-  g_return_if_fail (VINAGRE_IS_TAB (tab));
-	
-  vinagre_notebook_remove_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
-			       tab);
-}
-
-void
 vinagre_window_close_all_tabs (VinagreWindow *window)
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  vinagre_notebook_remove_all_tabs (VINAGRE_NOTEBOOK (window->priv->notebook));
+  vinagre_notebook_close_all_tabs (VINAGRE_NOTEBOOK (window->priv->notebook));
 }
-
 
 void
 vinagre_window_set_active_tab (VinagreWindow *window,
@@ -1108,15 +940,15 @@ vinagre_window_get_menubar (VinagreWindow *window)
 }
 
 GtkActionGroup *
-vinagre_window_get_main_action (VinagreWindow *window)
+vinagre_window_get_initialized_action (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
-  return window->priv->action_group;
+  return window->priv->machine_initialized_action_group;
 }
 
 GtkActionGroup *
-vinagre_window_get_sensitive_action (VinagreWindow *window)
+vinagre_window_get_always_sensitive_action (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
@@ -1144,8 +976,7 @@ vinagre_window_close_active_tab	(VinagreWindow *window)
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  vinagre_window_close_tab (window,
-			    VINAGRE_TAB (window->priv->active_tab));
+  vinagre_notebook_close_active_tab (window->priv->notebook);
 }
 
 VinagreTab *
@@ -1153,7 +984,7 @@ vinagre_window_get_active_tab (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
-  return VINAGRE_TAB (window->priv->active_tab);
+  return vinagre_notebook_get_active_tab (window->priv->notebook);
 }
 
 GtkUIManager *
@@ -1208,7 +1039,8 @@ vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
       c = VINAGRE_CONNECTION (l->data);
 
       if (!strcmp (vinagre_connection_get_host (conn), vinagre_connection_get_host (c)) &&
-	  vinagre_connection_get_port (conn) == vinagre_connection_get_port (c))
+	  vinagre_connection_get_port (conn) == vinagre_connection_get_port (c) &&
+	  vinagre_connection_get_protocol (conn) == vinagre_connection_get_protocol (c))
 	{
 	  tab = g_object_get_data (G_OBJECT (c), VINAGRE_TAB_KEY);
 	  break;

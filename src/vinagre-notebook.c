@@ -2,7 +2,7 @@
  * vinagre-notebook.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,7 @@
 #include <config.h>
 #endif
 
-#include <glib-object.h>
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
 
 #include "vinagre-notebook.h"
 #include "vinagre-utils.h"
@@ -35,25 +33,93 @@
 struct _VinagreNotebookPrivate
 {
   VinagreWindow *window;
+  GtkUIManager  *manager;
+  guint         ui_merge_id;
+  VinagreTab    *active_tab;
+};
+
+/* Properties */
+enum
+{
+  PROP_0,
+  PROP_WINDOW
 };
 
 G_DEFINE_TYPE(VinagreNotebook, vinagre_notebook, GTK_TYPE_NOTEBOOK)
+
+static void
+vinagre_notebook_get_property (GObject    *object,
+			       guint       prop_id,
+			       GValue     *value,
+			       GParamSpec *pspec)
+{
+  VinagreNotebook *nb = VINAGRE_NOTEBOOK (object);
+
+  switch (prop_id)
+    {
+      case PROP_WINDOW:
+        g_value_set_object (value, nb->priv->window);
+	break;
+      default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+	break;			
+    }
+}
+
+static void
+vinagre_notebook_set_window (VinagreNotebook *nb, VinagreWindow *window)
+{
+  nb->priv->window = window;
+  nb->priv->manager = vinagre_window_get_ui_manager (window);
+  nb->priv->ui_merge_id = gtk_ui_manager_new_merge_id (nb->priv->manager);
+}
+
+static void
+vinagre_notebook_set_property (GObject      *object,
+			       guint         prop_id,
+			       const GValue *value,
+			       GParamSpec   *pspec)
+{
+  VinagreNotebook *nb = VINAGRE_NOTEBOOK (object);
+
+  switch (prop_id)
+    {
+      case PROP_WINDOW:
+	vinagre_notebook_set_window (nb, VINAGRE_WINDOW (g_value_get_object (value)));
+        break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;			
+    }
+}
 
 static void
 vinagre_notebook_class_init (VinagreNotebookClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  object_class->get_property = vinagre_notebook_get_property;
+  object_class->set_property = vinagre_notebook_set_property;
+
+  g_object_class_install_property (object_class,
+				   PROP_WINDOW,
+				   g_param_spec_object ("window",
+							"Window",
+							"The VinagreWindow",
+							VINAGRE_TYPE_WINDOW,
+							G_PARAM_READWRITE |
+							G_PARAM_CONSTRUCT_ONLY |
+							G_PARAM_STATIC_NAME |
+							G_PARAM_STATIC_NICK |
+							G_PARAM_STATIC_BLURB));
+
   g_type_class_add_private (object_class, sizeof(VinagreNotebookPrivate));
 }
 
-GtkWidget *
+VinagreNotebook *
 vinagre_notebook_new (VinagreWindow *window)
 {
-  VinagreNotebook *nb = g_object_new (VINAGRE_TYPE_NOTEBOOK, NULL);
-
-  nb->priv->window = window;
-  return GTK_WIDGET (nb);
+  return VINAGRE_NOTEBOOK (g_object_new (VINAGRE_TYPE_NOTEBOOK, "window", window, NULL));
 }
 
 void
@@ -114,24 +180,189 @@ drag_data_get_handl (GtkWidget *widget,
 }
 
 static void
-vinagre_notebook_init (VinagreNotebook *notebook)
+vinagre_notebook_update_ui_sentitivity (VinagreNotebook *nb)
 {
-  notebook->priv = VINAGRE_NOTEBOOK_GET_PRIVATE (notebook);
+  gboolean       active;
+  GtkActionGroup *action_group;
 
-  gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
+  active = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb)) > 0;
+  action_group = vinagre_window_get_connected_action (nb->priv->window);
+  gtk_action_group_set_sensitive (action_group, active);
 
-  g_signal_connect (notebook,
+  action_group = vinagre_window_get_initialized_action (nb->priv->window);
+  active = (nb->priv->active_tab) &&
+	   (vinagre_tab_get_state (VINAGRE_TAB (nb->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED);
+  gtk_action_group_set_sensitive (action_group, active);
+}
+
+static void
+vinagre_notebook_update_window_title (VinagreNotebook *nb)
+{
+  gchar *title, *name, *extra;
+
+  if (nb->priv->active_tab == NULL)
+    {
+      gtk_window_set_title (GTK_WINDOW (nb->priv->window), g_get_application_name ());
+      return;
+    }
+
+  extra = vinagre_tab_get_extra_title (nb->priv->active_tab);
+  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (nb->priv->active_tab));
+  if (extra)
+    title = g_strdup_printf ("%s %s - %s",
+			     name,
+			     extra,
+			     g_get_application_name ());
+  else
+    title = g_strdup_printf ("%s - %s",
+			     name,
+			     g_get_application_name ());
+
+  gtk_window_set_title (GTK_WINDOW (nb->priv->window), title);
+  g_free (title);
+  g_free (extra);
+  g_free (name);
+}
+
+static void
+insert_actions_ui (VinagreNotebook *nb, GtkActionGroup *action_group, const GSList *actions)
+{
+  VinagreTabUiAction *action;
+  const gchar        *name;
+  gint               i;
+
+  while (actions)
+    {
+      action = (VinagreTabUiAction *) actions->data;
+      name = gtk_action_get_name (action->action);
+
+      gtk_action_group_add_action (action_group, action->action);
+
+      for (i = 0; i < g_strv_length (action->paths); i++)
+	gtk_ui_manager_add_ui (nb->priv->manager,
+			       nb->priv->ui_merge_id,
+			       action->paths[i],
+			       name,
+			       name,
+			       GTK_UI_MANAGER_AUTO,
+			       FALSE);
+
+      actions = actions->next;
+    }
+}
+
+static void
+merge_tab_ui (VinagreNotebook *nb)
+{
+  const GSList   *actions;
+  GtkActionGroup *action_group;
+
+  if (!nb->priv->active_tab)
+    return;
+
+  /* Always sensitive actions */
+  action_group = vinagre_window_get_always_sensitive_action (nb->priv->window);
+  actions = vinagre_tab_get_always_sensitive_actions (nb->priv->active_tab);
+  insert_actions_ui (nb, action_group, actions);
+
+  /* Connected actions */
+  action_group = vinagre_window_get_connected_action (nb->priv->window);
+  actions = vinagre_tab_get_connected_actions (nb->priv->active_tab);
+  insert_actions_ui (nb, action_group, actions);
+
+  /* Initialized actions */
+  action_group = vinagre_window_get_initialized_action (nb->priv->window);
+  actions = vinagre_tab_get_initialized_actions (nb->priv->active_tab);
+  insert_actions_ui (nb, action_group, actions);
+}
+
+static void
+remove_actions_ui (VinagreNotebook *nb, GtkActionGroup *action_group, const GSList *actions)
+{
+  VinagreTabUiAction *action;
+
+  while (actions)
+    {
+      action = (VinagreTabUiAction *) actions->data;
+
+      gtk_action_group_remove_action (action_group, action->action);
+      actions = actions->next;
+    }
+}
+
+static void
+unmerge_tab_ui (VinagreNotebook *nb)
+{
+  const GSList   *actions;
+  GtkActionGroup *action_group;
+
+  if (!nb->priv->active_tab)
+    return;
+
+  gtk_ui_manager_remove_ui (nb->priv->manager,
+			    nb->priv->ui_merge_id);
+
+  /* Always sensitive actions */
+  action_group = vinagre_window_get_always_sensitive_action (nb->priv->window);
+  actions = vinagre_tab_get_always_sensitive_actions (nb->priv->active_tab);
+  remove_actions_ui (nb, action_group, actions);
+
+  /* Connected actions */
+  action_group = vinagre_window_get_connected_action (nb->priv->window);
+  actions = vinagre_tab_get_connected_actions (nb->priv->active_tab);
+  remove_actions_ui (nb, action_group, actions);
+
+  /* Initialized actions */
+  action_group = vinagre_window_get_initialized_action (nb->priv->window);
+  actions = vinagre_tab_get_initialized_actions (nb->priv->active_tab);
+  remove_actions_ui (nb, action_group, actions);
+}
+
+static void 
+vinagre_notebook_page_switched (GtkNotebook     *notebook,
+				GtkNotebookPage *pg,
+				gint            page_num, 
+				gpointer        data)
+{
+  VinagreNotebook *nb = VINAGRE_NOTEBOOK (notebook);
+  VinagreTab *tab;
+
+  tab = VINAGRE_TAB (gtk_notebook_get_nth_page (notebook, page_num));
+  if (tab == nb->priv->active_tab)
+    return;
+
+  unmerge_tab_ui (nb);
+  nb->priv->active_tab = tab;
+  merge_tab_ui (nb);
+
+  vinagre_notebook_update_window_title (nb);
+  vinagre_notebook_update_ui_sentitivity (nb);
+}
+
+static void
+vinagre_notebook_init (VinagreNotebook *nb)
+{
+  nb->priv = VINAGRE_NOTEBOOK_GET_PRIVATE (nb);
+  nb->priv->active_tab = NULL;
+
+  gtk_notebook_set_scrollable (GTK_NOTEBOOK (nb), TRUE);
+
+  g_signal_connect (nb,
 		    "page-added",
 		    G_CALLBACK (vinagre_notebook_show_hide_tabs),
 		    NULL);
-  g_signal_connect (notebook,
+  g_signal_connect (nb,
 		    "page-removed",
 		    G_CALLBACK (vinagre_notebook_show_hide_tabs),
+		    NULL);
+  g_signal_connect (nb,
+		    "switch-page",
+		    G_CALLBACK (vinagre_notebook_page_switched),
 		    NULL);
   g_signal_connect_swapped (vinagre_prefs_get_default (),
 			    "notify::always-show-tabs",
 			     G_CALLBACK (vinagre_notebook_show_hide_tabs),
-			     notebook);
+			     nb);
 }
 
 static void
@@ -141,7 +372,7 @@ close_button_clicked_cb (GtkWidget *widget,
   VinagreNotebook *notebook;
 
   notebook = VINAGRE_NOTEBOOK (gtk_widget_get_parent (tab));
-  vinagre_notebook_remove_tab (notebook, VINAGRE_TAB (tab));
+  vinagre_notebook_close_tab (notebook, VINAGRE_TAB (tab));
 }
 
 static void
@@ -153,7 +384,7 @@ tab_size_changed_cb (VinagreTab *tab, VinagreNotebook *nb)
   label = GTK_WIDGET (g_object_get_data (G_OBJECT (tab), "label-ebox"));
   g_return_if_fail (label != NULL);
 
-  str = vinagre_tab_get_tooltips (tab);
+  str = vinagre_tab_get_tooltip (tab);
   gtk_widget_set_tooltip_markup (label, str);
 
   g_free (str);
@@ -171,7 +402,42 @@ tab_disconnected_cb (VinagreTab *tab, VinagreNotebook *nb)
   g_free (message);
   g_free (name);
 
-  vinagre_notebook_remove_tab (nb, tab);
+  vinagre_notebook_close_tab (nb, tab);
+}
+
+static void
+tab_auth_failed_cb (VinagreTab *tab, const gchar *msg, VinagreNotebook *nb)
+{
+  GString *message;
+  gchar   *name;
+
+  message = g_string_new (NULL);
+  name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
+
+  g_string_printf (message, _("Authentication to host <i>%s</i> has failed"),
+		   name);
+  if (msg)
+  	g_string_append_printf (message, " (%s)", msg);
+  g_string_append_c (message, '.');
+
+  vinagre_utils_show_error (_("Authentication failed"), message->str, GTK_WINDOW (nb->priv->window));
+  g_string_free (message, TRUE);
+  g_free (name);
+
+  // TODO: Remover se der pau
+  //if (tab->priv->keyring_item_id > 0)
+  //  {
+   //   gnome_keyring_item_delete_sync (NULL, tab->priv->keyring_item_id);
+   //   tab->priv->keyring_item_id = 0;
+  //  }
+
+  vinagre_notebook_close_tab (nb, tab);
+}
+
+static void
+tab_initialized_cb (VinagreTab *tab, VinagreNotebook *nb)
+{
+  vinagre_notebook_update_ui_sentitivity (nb);
 }
 
 static GtkWidget *
@@ -257,16 +523,6 @@ build_tab_label (VinagreNotebook *nb,
   g_object_set_data (G_OBJECT (hbox), "close-button", close_button);
   g_object_set_data (G_OBJECT (tab),  "close-button", close_button);
 
-  g_signal_connect (tab,
-		    "notify::original-width",
-		    G_CALLBACK (tab_size_changed_cb),
-		    nb);
-
-  g_signal_connect (tab,
-		    "tab-disconnected",
-		    G_CALLBACK (tab_disconnected_cb),
-		    nb);
-
   gtk_drag_source_set ( GTK_WIDGET (hbox),
 			GDK_BUTTON1_MASK,
 			vinagre_target_list,
@@ -285,14 +541,23 @@ vinagre_notebook_add_tab (VinagreNotebook *nb,
 			  VinagreTab      *tab,
 			  gint           position)
 {
-  GtkWidget *label;
-  int pos;
+  GtkWidget      *label;
+  GtkActionGroup *action_group;
+  int            pos;
 
   g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
-  label = build_tab_label (nb, tab);
+  /* Unmerge the UI for the current tab */
+  unmerge_tab_ui (nb);
 
+  nb->priv->active_tab = tab;  
+  
+  /* Merge the UI for the new tab */
+  merge_tab_ui (nb);
+
+  /* Actually add the new tab */
+  label = build_tab_label (nb, tab);
   pos = gtk_notebook_insert_page (GTK_NOTEBOOK (nb), 
 				  GTK_WIDGET (tab),
 				  label, 
@@ -300,40 +565,103 @@ vinagre_notebook_add_tab (VinagreNotebook *nb,
 
   gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), pos);
   vinagre_tab_set_notebook (tab, nb);
-}
 
-static void
-remove_tab (VinagreTab *tab,
-	    VinagreNotebook *nb)
-{
-  vinagre_notebook_remove_tab (nb, tab);
+  g_signal_connect (tab,
+		    "notify::original-width",
+		    G_CALLBACK (tab_size_changed_cb),
+		    nb);
+
+  g_signal_connect (tab,
+		    "tab-disconnected",
+		    G_CALLBACK (tab_disconnected_cb),
+		    nb);
+
+  g_signal_connect (tab,
+		    "tab-auth-failed",
+		    G_CALLBACK (tab_auth_failed_cb),
+		    nb);
+
+  g_signal_connect (tab,
+		    "tab-initialized",
+		    G_CALLBACK (tab_initialized_cb),
+		    nb);
+
+  vinagre_notebook_update_window_title (nb);
+  vinagre_notebook_update_ui_sentitivity (nb);
 }
 
 void
-vinagre_notebook_remove_tab (VinagreNotebook *nb,
-			     VinagreTab      *tab)
+vinagre_notebook_close_tab (VinagreNotebook *nb,
+			    VinagreTab      *tab)
 {
-  gint position;
+  gint           position;
+  GtkActionGroup *action_group;
+  GtkNotebook    *notebook;
 
   g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
-  position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
+  notebook = GTK_NOTEBOOK (nb);
 
   g_signal_handlers_disconnect_by_func (tab,
 					G_CALLBACK (tab_disconnected_cb),
 					nb);
+  g_signal_handlers_disconnect_by_func (tab,
+					G_CALLBACK (tab_auth_failed_cb),
+					nb);
 
-  gtk_notebook_remove_page (GTK_NOTEBOOK (nb), position);
+  /* If it's closing the current tab, unmerge the UI */
+  if (nb->priv->active_tab == tab)
+    unmerge_tab_ui (nb);
+
+  position = gtk_notebook_page_num (notebook, GTK_WIDGET (tab));
+  g_signal_handlers_block_by_func (notebook, vinagre_notebook_page_switched, NULL);
+  gtk_notebook_remove_page (notebook, position);
+  g_signal_handlers_unblock_by_func (notebook, vinagre_notebook_page_switched, NULL);
+  
+  position = gtk_notebook_get_current_page (notebook);
+  nb->priv->active_tab = VINAGRE_TAB (gtk_notebook_get_nth_page (notebook,
+								 position));
+
+  /* Merge the UI for the new tab (if one exists) */
+  merge_tab_ui (nb);
+
+  vinagre_notebook_update_window_title (nb);
+  vinagre_notebook_update_ui_sentitivity (nb);
+}
+
+static void
+close_tab (VinagreTab *tab,
+	    VinagreNotebook *nb)
+{
+  vinagre_notebook_close_tab (nb, tab);
 }
 
 void
-vinagre_notebook_remove_all_tabs (VinagreNotebook *nb)
+vinagre_notebook_close_all_tabs (VinagreNotebook *nb)
 {	
   g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
 	
   gtk_container_foreach (GTK_CONTAINER (nb),
-			(GtkCallback) remove_tab,
+			(GtkCallback) close_tab,
 			 nb);
 }
+
+void
+vinagre_notebook_close_active_tab (VinagreNotebook *nb)
+{
+  g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
+  g_return_if_fail (nb->priv->active_tab != NULL);
+
+  vinagre_notebook_close_tab (nb, nb->priv->active_tab);
+}
+
+VinagreTab *
+vinagre_notebook_get_active_tab (VinagreNotebook *nb)
+{
+  g_return_val_if_fail (VINAGRE_IS_NOTEBOOK (nb), NULL);
+
+  return nb->priv->active_tab;
+}
+
 /* vim: set ts=8: */

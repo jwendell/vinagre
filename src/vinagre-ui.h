@@ -2,7 +2,7 @@
  * vinagre-ui.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
+static const GtkActionEntry vinagre_always_sensitive_entries[] =
 {
   /* Toplevel */
   { "Machine", NULL, N_("_Machine") },
@@ -65,7 +65,22 @@ static const GtkActionEntry vinagre_always_sensitive_menu_entries[] =
     N_("About this application"), G_CALLBACK (vinagre_cmd_help_about) }
 };
 
-static const GtkActionEntry vinagre_menu_entries[] =
+static const GtkToggleActionEntry vinagre_always_sensitive_toggle_entries[] =
+{
+  { "ViewToolbar", NULL, N_("_Toolbar"), NULL,
+    N_("Show or hide the toolbar"),
+    G_CALLBACK (vinagre_cmd_view_show_toolbar), FALSE },
+
+  { "ViewStatusbar", NULL, N_("_Statusbar"), NULL,
+    N_("Show or hide the statusbar"),
+    G_CALLBACK (vinagre_cmd_view_show_statusbar), FALSE },
+
+  { "ViewSidePanel", NULL, N_("Side _Panel"), "F9",
+    N_("Show or hide the side panel"),
+    G_CALLBACK (vinagre_cmd_view_show_fav_panel), FALSE }
+};
+
+static const GtkActionEntry vinagre_machine_connected_entries[] =
 {
   /* Machine menu */
   { "MachineClose", GTK_STOCK_CLOSE, NULL, "<control>W",
@@ -79,47 +94,20 @@ static const GtkActionEntry vinagre_menu_entries[] =
 
 };
 
-static const GtkActionEntry vinagre_machine_connected_menu_entries[] =
+static const GtkActionEntry vinagre_machine_initialized_entries[] =
 {
   /* Machine menu */
   { "MachineTakeScreenshot", "applets-screenshooter", N_("Take screenshot"), NULL,
     N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_machine_take_screenshot) },
 
-  { "MachineSendCtrlAltDel", "preferences-desktop-keyboard-shortcuts", N_("Send Ctrl-Alt-Del"), NULL,
-    N_("Send Ctrl+Alt+Del to active connection"), G_CALLBACK (vinagre_cmd_machine_send_ctrlaltdel) },
-
   /* View menu */
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
-    N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) },
-
-  { "ViewOriginalSize", "zoom-original", N_("_Original size"), NULL,
-    N_("Adjusts the window to the remote desktop's size"), G_CALLBACK (vinagre_cmd_view_original_size) },
-
+    N_("View the current machine in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) }
 };
 
-static const GtkToggleActionEntry vinagre_machine_connected_toggle_menu_entries[] =
+static const GtkToggleActionEntry vinagre_machine_initialized_toggle_entries[] =
 {
-  { "ViewScaling", NULL, N_("S_caling"), NULL,
-    N_("Fit the remote screen into the current window size"),
-    G_CALLBACK (vinagre_cmd_view_scaling), FALSE },
-  { "ViewReadOnly", NULL, N_("_Read only"), NULL,
-    N_("Disable mouse and keyboard"),
-    G_CALLBACK (vinagre_cmd_view_readonly), FALSE }
-};
-
-static const GtkToggleActionEntry vinagre_always_sensitive_toggle_menu_entries[] =
-{
-  { "ViewToolbar", NULL, N_("_Toolbar"), NULL,
-    N_("Show or hide the toolbar"),
-    G_CALLBACK (vinagre_cmd_view_show_toolbar), FALSE },
-
-  { "ViewStatusbar", NULL, N_("_Statusbar"), NULL,
-    N_("Show or hide the statusbar"),
-    G_CALLBACK (vinagre_cmd_view_show_statusbar), FALSE },
-
-  { "ViewSidePanel", NULL, N_("Side _Panel"), "F9",
-    N_("Show or hide the side panel"),
-    G_CALLBACK (vinagre_cmd_view_show_fav_panel), FALSE }
+ 0,
 };
 
 G_END_DECLS

@@ -1,8 +1,9 @@
 /*
  * vinagre-connection.h
+ * Abstract base class for all types of connections: VNC, RDP, etc.
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +24,7 @@
 
 #include <glib.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <libxml/xmlwriter.h>
 
 G_BEGIN_DECLS
 
@@ -46,7 +48,13 @@ typedef enum
 
 struct _VinagreConnectionClass
 {
-  GObjectClass parent_class;
+  GObjectClass	parent_class;
+
+  /* Virtual functions */
+  void		(*impl_fill_writer)		(VinagreConnection *conn, xmlTextWriter *writer);
+  void		(*impl_parse_item)		(VinagreConnection *conn, xmlNode *root);
+  gchar *	(*impl_get_best_name)		(VinagreConnection *conn);
+  void		(*impl_fill_conn_from_file)	(VinagreConnection *conn, GKeyFile *file);
 };
 
 struct _VinagreConnection
@@ -55,12 +63,15 @@ struct _VinagreConnection
   VinagreConnectionPrivate *priv;
 };
 
+
 GType vinagre_connection_get_type (void) G_GNUC_CONST;
 
-VinagreConnection *vinagre_connection_new (void);
+VinagreConnection *vinagre_connection_new (VinagreConnectionProtocol protocol);
+VinagreConnectionProtocol vinagre_connection_protocol_by_name (const gchar *protocol);
 
 VinagreConnectionProtocol vinagre_connection_get_protocol (VinagreConnection *conn);
-void		          vinagre_connection_set_protocol (VinagreConnection *conn,
+const gchar*		  vinagre_connection_get_protocol_as_string (VinagreConnection *conn);
+void			  vinagre_connection_set_protocol (VinagreConnection *conn,
 							   VinagreConnectionProtocol protocol);
 
 const gchar*	    vinagre_connection_get_host		(VinagreConnection *conn);
@@ -79,46 +90,42 @@ const gchar*	    vinagre_connection_get_password	(VinagreConnection *conn);
 void		    vinagre_connection_set_password	(VinagreConnection *conn,
 							 const gchar *password);
 
-const gchar*	    vinagre_connection_get_name         (VinagreConnection *conn);
-void		    vinagre_connection_set_name	        (VinagreConnection *conn,
+const gchar*	    vinagre_connection_get_name		(VinagreConnection *conn);
+void		    vinagre_connection_set_name		(VinagreConnection *conn,
 							 const gchar *name);
-
-const gchar*	    vinagre_connection_get_desktop_name	(VinagreConnection *conn);
-void		    vinagre_connection_set_desktop_name	(VinagreConnection *conn,
-							 const gchar *desktop_name);
-
-gchar*		    vinagre_connection_get_best_name	(VinagreConnection *conn);
-
-VinagreConnection*  vinagre_connection_clone		(VinagreConnection *conn);
-
-VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg, gboolean use_bookmarks);
-VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg, gboolean use_bookmarks);
-
-GdkPixbuf*          vinagre_connection_get_icon	(VinagreConnection *conn);
-
-gboolean	    vinagre_connection_get_view_only	(VinagreConnection *conn);
-void		    vinagre_connection_set_view_only	(VinagreConnection *conn,
-							 gboolean value);
-
-gboolean	    vinagre_connection_get_scaling	(VinagreConnection *conn);
-void		    vinagre_connection_set_scaling	(VinagreConnection *conn,
-							 gboolean value);
 
 gboolean	    vinagre_connection_get_fullscreen	(VinagreConnection *conn);
 void		    vinagre_connection_set_fullscreen	(VinagreConnection *conn,
 							 gboolean value);
 
-gint		    vinagre_connection_get_shared	(VinagreConnection *conn);
-void		    vinagre_connection_set_shared	(VinagreConnection *conn,
-							 gint value);
+VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg, gboolean use_bookmarks);
+VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg, gboolean use_bookmarks);
 
 gboolean	    vinagre_connection_split_string	(const gchar *uri,
+							 VinagreConnectionProtocol *protocol,
 							 gchar **host,
 							 gint *port,
 							 gchar **error_msg);
 
 gchar*		    vinagre_connection_get_string_rep	(VinagreConnection *conn,
 							 gboolean has_protocol);
+
+GdkPixbuf*          vinagre_connection_get_icon		(VinagreConnection *conn);
+
+/* Methods that can be overrided */
+
+/* vinagre_connection_fill_writer(): Used to fill a xml writer when saving bookmarks.
+   subclasses must inherit from it and call super() */
+void                vinagre_connection_fill_writer	(VinagreConnection *conn,
+							 xmlTextWriter *writer);
+
+/* vinagre_connection_parse_item(): Used to parse a xml item when loading bookmarks.
+   subclasses must inherit from it and call super() */
+void                vinagre_connection_parse_item	(VinagreConnection *conn,
+							 xmlNode *root);
+
+gchar*		    vinagre_connection_get_best_name    (VinagreConnection *conn);
+
 G_END_DECLS
 
 #endif /* __VINAGRE_CONNECTION_H__  */

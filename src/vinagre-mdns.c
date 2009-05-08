@@ -60,7 +60,7 @@ mdns_resolver_found (GaServiceResolver *resolver,
   VinagreConnection     *conn;
   VinagreBookmarksEntry *entry;
 
-  conn = vinagre_connection_new ();
+  conn = vinagre_connection_new (VINAGRE_CONNECTION_PROTOCOL_VNC);
   g_object_set (conn,
                 "name", name,
                 "port", port,

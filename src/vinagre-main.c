@@ -2,7 +2,7 @@
  * vinagre-main.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -168,6 +168,7 @@ int main (int argc, char **argv) {
       
       next = l->next;
       vinagre_cmd_direct_connect (conn, window);
+      g_object_unref (conn);
     }
   g_slist_free (servers);
 

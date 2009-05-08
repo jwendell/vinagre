@@ -2,7 +2,7 @@
  * vinagre-window.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,9 +55,6 @@ GType 		 vinagre_window_get_type 		(void) G_GNUC_CONST;
 
 VinagreWindow   *vinagre_window_new			(void);
 
-VinagreTab	*vinagre_window_create_tab		(VinagreWindow         *window,
-							 gboolean              jump_to);
-							 
 void		 vinagre_window_close_tab		(VinagreWindow         *window,
 							 VinagreTab            *tab);
 void		 vinagre_window_close_active_tab	(VinagreWindow         *window);
@@ -76,9 +73,9 @@ GtkWidget	*vinagre_window_get_statusbar		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_toolbar		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_menubar		(VinagreWindow         *window);
 GtkWidget	*vinagre_window_get_fav_panel		(VinagreWindow         *window);
-GtkWidget	*vinagre_window_get_notebook		(VinagreWindow	       *window);
-GtkActionGroup	*vinagre_window_get_main_action		(VinagreWindow         *window);
-GtkActionGroup	*vinagre_window_get_sensitive_action	(VinagreWindow         *window);
+VinagreNotebook	*vinagre_window_get_notebook		(VinagreWindow	       *window);
+GtkActionGroup	*vinagre_window_get_initialized_action	(VinagreWindow         *window);
+GtkActionGroup	*vinagre_window_get_always_sensitive_action (VinagreWindow     *window);
 GtkActionGroup	*vinagre_window_get_connected_action	(VinagreWindow         *window);
 
 void		vinagre_window_update_bookmarks_list_menu (VinagreWindow       *window);
@@ -88,9 +85,8 @@ GtkUIManager	*vinagre_window_get_ui_manager		(VinagreWindow         *window);
 gboolean	vinagre_window_is_fullscreen		(VinagreWindow         *window);
 
 void		vinagre_window_toggle_fullscreen	(VinagreWindow *window);
-void		vinagre_window_set_title		(VinagreWindow *window);
 
-void		vinagre_window_update_machine_menu_sensitivity (VinagreWindow	*window);
+void		vinagre_window_merge_tab_ui (VinagreWindow	*window);
 
 GList 		*vinagre_window_get_connections		(VinagreWindow *window);
 VinagreTab	*vinagre_window_conn_exists		(VinagreWindow *window,

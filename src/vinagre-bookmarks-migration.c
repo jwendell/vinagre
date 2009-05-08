@@ -61,8 +61,8 @@ fill_xml (GSList *list, xmlTextWriter *writer)
 	    xmlTextWriterWriteElement (writer, "name", vinagre_connection_get_name (conn));
 	    xmlTextWriterWriteElement (writer, "host", vinagre_connection_get_host (conn));
 	    xmlTextWriterWriteFormatElement (writer, "port", "%d", vinagre_connection_get_port (conn));
-	    xmlTextWriterWriteFormatElement (writer, "view_only", "%d", vinagre_connection_get_view_only (conn));
-	    xmlTextWriterWriteFormatElement (writer, "scaling", "%d", vinagre_connection_get_scaling (conn));
+	    //xmlTextWriterWriteFormatElement (writer, "view_only", "%d", vinagre_connection_get_view_only (conn));
+	    //xmlTextWriterWriteFormatElement (writer, "scaling", "%d", vinagre_connection_get_scaling (conn));
 	    xmlTextWriterWriteFormatElement (writer, "fullscreen", "%d", vinagre_connection_get_fullscreen (conn));
 
 	    xmlTextWriterEndElement (writer);
@@ -167,7 +167,7 @@ create_list (GKeyFile *kf)
       if (!s_value)
         continue;
 
-      conn = vinagre_connection_new ();
+      conn = vinagre_connection_new (VINAGRE_CONNECTION_PROTOCOL_VNC);
       vinagre_connection_set_name (conn, conns[i]);
       vinagre_connection_set_host (conn, s_value);
       g_free (s_value);
@@ -178,13 +178,13 @@ create_list (GKeyFile *kf)
       vinagre_connection_set_port (conn, i_value);
 
       b_value = g_key_file_get_boolean (kf, conns[i], "view_only", NULL);
-      vinagre_connection_set_view_only (conn, b_value);
+      //vinagre_connection_set_view_only (conn, b_value);
 
       b_value = g_key_file_get_boolean (kf, conns[i], "fullscreen", NULL);
       vinagre_connection_set_fullscreen (conn, b_value);
 
       b_value = g_key_file_get_boolean (kf, conns[i], "scaling", NULL);
-      vinagre_connection_set_scaling (conn, b_value);
+      //vinagre_connection_set_scaling (conn, b_value);
 
       entries = g_slist_insert_sorted  (entries,
 					vinagre_bookmarks_entry_new_conn (conn),

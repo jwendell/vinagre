@@ -2,7 +2,7 @@
  * vinagre-commands.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -87,6 +87,8 @@ vinagre_cmd_machine_connect (GtkAction     *action,
 				VINAGRE_TAB (tab),
 				-1);
     }
+
+  g_object_unref (conn);
 }
 
 static void
@@ -129,7 +131,7 @@ vinagre_cmd_machine_open (GtkAction     *action,
     {
       files = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dialog));
       for (l = files; l; l = l->next)
-        {
+	{
 	  uri = (gchar *)l->data;
 	  conn = vinagre_connection_new_from_file (uri, &error, FALSE);
 
@@ -137,8 +139,9 @@ vinagre_cmd_machine_open (GtkAction     *action,
 	    {
 	      tab = vinagre_tab_new (conn, window);
 	      vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
-				        VINAGRE_TAB (tab),
-				        -1);
+					VINAGRE_TAB (tab),
+					-1);
+	      g_object_unref (conn);
 	    }
 	  else
 	    {
@@ -177,13 +180,6 @@ vinagre_cmd_machine_take_screenshot (GtkAction     *action,
 				     VinagreWindow *window)
 {
   vinagre_tab_take_screenshot (vinagre_window_get_active_tab (window));
-}
-
-void
-vinagre_cmd_machine_send_ctrlaltdel (GtkAction     *action,
-				     VinagreWindow *window)
-{
-  vinagre_tab_send_ctrlaltdel (vinagre_window_get_active_tab (window));
 }
 
 void
@@ -257,49 +253,6 @@ vinagre_cmd_view_fullscreen (GtkAction     *action,
   vinagre_window_toggle_fullscreen (window);
 }
 
-void
-vinagre_cmd_view_original_size (GtkAction     *action,
-				VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  vinagre_tab_original_size (vinagre_window_get_active_tab (window));
-}
-
-void
-vinagre_cmd_view_scaling (GtkAction     *action,
-			  VinagreWindow *window)
-{
-  gboolean active;
-  VinagreTab *tab;
-
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  tab = vinagre_window_get_active_tab (window);
-  if (!tab)
-    return;
-
-  active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-
-  if (!vinagre_tab_set_scaling (tab, active))
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
-}
-
-void
-vinagre_cmd_view_readonly (GtkAction     *action,
-			   VinagreWindow *window)
-{
-  gboolean active;
-  VinagreTab *tab;
-
-  tab = vinagre_window_get_active_tab (window);
-  if (!tab)
-    return;
-
-  active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-  vinagre_tab_set_readonly (tab, active);
-}
-
 /* Bookmarks Menu */
 void
 vinagre_cmd_open_bookmark (VinagreWindow     *window,
@@ -318,8 +271,7 @@ vinagre_cmd_open_bookmark (VinagreWindow     *window,
     }
   else
     {
-      new_conn = vinagre_connection_clone (conn);
-      tab = VINAGRE_TAB (vinagre_tab_new (new_conn, window));
+      tab = VINAGRE_TAB (vinagre_tab_new (conn, window));
       vinagre_notebook_add_tab (VINAGRE_NOTEBOOK (window->priv->notebook),
 				VINAGRE_TAB (tab),
 				-1);
@@ -336,14 +288,15 @@ vinagre_cmd_bookmarks_add (GtkAction     *action,
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  tab = window->priv->active_tab;
+  //tab = window->priv->active_tab;
   conn = vinagre_tab_get_conn (VINAGRE_TAB (tab));
-  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+  //g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
   vinagre_bookmarks_add (vinagre_bookmarks_get_default (),
                          conn,
                          GTK_WINDOW (window));
 
+/*
   if (window->priv->active_tab == tab)
     {
       name = vinagre_connection_get_best_name (conn);
@@ -351,6 +304,7 @@ vinagre_cmd_bookmarks_add (GtkAction     *action,
 			     name);
       g_free (name);
     }
+*/
 }
 
 void

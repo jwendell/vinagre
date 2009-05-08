@@ -71,6 +71,7 @@ gboolean           vinagre_bookmarks_remove_entry  (VinagreBookmarks      *book,
                                                     VinagreBookmarksEntry *entry);
 
 VinagreConnection  *vinagre_bookmarks_exists       (VinagreBookmarks *book,
+                                                    VinagreConnectionProtocol protocol,
                                                     const gchar *host,
                                                     gint port);
 

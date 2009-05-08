@@ -24,11 +24,13 @@ vinagre_SOURCES = \
 	vinagre-commands.c vinagre-commands.h			\
 	vinagre-connect.c vinagre-connect.h			\
 	vinagre-connection.c vinagre-connection.h		\
+	vinagre-vnc-connection.c vinagre-vnc-connection.h	\
 	vinagre-fav.c vinagre-fav.h				\
 	vinagre-bookmarks.c vinagre-bookmarks.h			\
 	vinagre-main.c 						\
 	vinagre-notebook.c vinagre-notebook.h			\
 	vinagre-tab.c vinagre-tab.h				\
+	vinagre-vnc-tab.c vinagre-vnc-tab.h			\
 	vinagre-utils.c vinagre-utils.h				\
 	vinagre-window.c vinagre-window.h			\
 	vinagre-ui.h vinagre-window-private.h			\
@@ -85,6 +87,7 @@ vinagre_applet_SOURCES =					\
 	vinagre-applet.c					\
 	vinagre-bookmarks.h vinagre-bookmarks.c			\
 	vinagre-connection.h vinagre-connection.c		\
+	vinagre-vnc-connection.c vinagre-vnc-connection.h	\
 	vinagre-utils.h vinagre-utils.c				\
 	vinagre-enums.h vinagre-enums.c				\
 	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\

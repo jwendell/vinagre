@@ -471,4 +471,14 @@ vinagre_utils_help_about (GtkWindow *window)
   g_free (license_trans);
 }
 
+gboolean
+vinagre_utils_parse_boolean (const gchar* value)
+{
+  if (g_ascii_strcasecmp (value, "true") == 0 || strcmp (value, "1") == 0)
+    return TRUE;
+
+  return FALSE;
+}
+
+
 /* vim: set ts=8: */

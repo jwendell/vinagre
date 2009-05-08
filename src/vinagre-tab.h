@@ -1,8 +1,9 @@
 /*
  * vinagre-tab.h
+ * Abstract base class for all types of tabs: VNC, RDP, etc.
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,52 +57,86 @@ struct _VinagreTab
   VinagreTabPrivate *priv;
 };
 
+typedef struct
+{
+  gchar     **paths; /* NULL-terminated array of strings */
+  GtkAction *action;
+} VinagreTabUiAction;
+
 struct _VinagreTabClass 
 {
   GtkVBoxClass parent_class;
 
   /* Signals */
-  void		(* tab_connected)		(VinagreTab *tab);
-  void		(* tab_disconnected)		(VinagreTab *tab);
-  void		(* tab_initialized)		(VinagreTab *tab);
+  void		(* tab_connected)			(VinagreTab *tab);
+  void		(* tab_disconnected)			(VinagreTab *tab);
+  void		(* tab_initialized)			(VinagreTab *tab);
+  void		(* tab_auth_failed)			(VinagreTab *tab, const gchar *msg);
+
+  /* Virtual functions */
+  void		(* impl_get_dimensions)			(VinagreTab *tab, int *w, int *h);
+  const GSList *(* impl_get_always_sensitive_actions)	(VinagreTab *tab);
+  const GSList *(* impl_get_connected_actions)		(VinagreTab *tab);
+  const GSList *(* impl_get_initialized_actions)	(VinagreTab *tab);
+  gchar *	(* impl_get_extra_title)		(VinagreTab *tab);
+
+  /* Abstract functions */
+  gchar *	(* impl_get_tooltip)			(VinagreTab *tab);
+  GdkPixbuf *	(* impl_get_screenshot)			(VinagreTab *tab);
 };
 
-GType 		  vinagre_tab_get_type		(void) G_GNUC_CONST;
+GType			vinagre_tab_get_type		(void) G_GNUC_CONST;
 
-GtkWidget 	  *vinagre_tab_new 		(VinagreConnection *conn,
-						 VinagreWindow     *window);
+GtkWidget *		vinagre_tab_new 		(VinagreConnection *conn,
+							 VinagreWindow     *window);
 
-VinagreConnection *vinagre_tab_get_conn		(VinagreTab *tab);
+VinagreConnection *	vinagre_tab_get_conn		(VinagreTab *tab);
+VinagreWindow *		vinagre_tab_get_window		(VinagreTab *tab);
 
-GtkWidget         *vinagre_tab_get_vnc		(VinagreTab *tab);
+void			vinagre_tab_add_view		(VinagreTab *tab, GtkWidget *view);
+GtkWidget *		vinagre_tab_get_view		(VinagreTab *tab);
 
-gchar             *vinagre_tab_get_tooltips     (VinagreTab *tab);
+void			vinagre_tab_set_title		(VinagreTab *tab,
+							 const char *title);
 
-void		  vinagre_tab_set_title		(VinagreTab *tab,
-						 const char *title);
+void			vinagre_tab_set_notebook	(VinagreTab *tab,
+							 VinagreNotebook *nb);
+VinagreNotebook *	vinagre_tab_get_notebook	(VinagreTab *tab);
 
-void		  vinagre_tab_set_notebook	(VinagreTab *tab,
-						 VinagreNotebook *nb);
-VinagreNotebook   *vinagre_tab_get_notebook	(VinagreTab *tab);
+VinagreTabState		vinagre_tab_get_state		(VinagreTab *tab);
+VinagreTab *		vinagre_tab_get_from_connection	(VinagreConnection *conn);
 
-void		  vinagre_tab_take_screenshot	(VinagreTab *tab);
-void		  vinagre_tab_send_ctrlaltdel	(VinagreTab *tab);
-void		  vinagre_tab_paste_text	(VinagreTab *tab,
-						 const gchar *text);
+void			vinagre_tab_take_screenshot	(VinagreTab *tab);
+gchar *			vinagre_tab_get_tooltip		(VinagreTab *tab);
+void			vinagre_tab_get_dimensions	(VinagreTab *tab, int *w, int *h);
 
-gboolean	  vinagre_tab_set_scaling	(VinagreTab *tab, gboolean active);
-gboolean	  vinagre_tab_get_scaling	(VinagreTab *tab);
-void	          vinagre_tab_set_readonly	(VinagreTab *tab, gboolean active);
-gboolean	  vinagre_tab_get_readonly	(VinagreTab *tab);
+const GSList *		vinagre_tab_get_always_sensitive_actions(VinagreTab *tab);
+const GSList *		vinagre_tab_get_connected_actions	(VinagreTab *tab);
+const GSList *		vinagre_tab_get_initialized_actions	(VinagreTab *tab);
+GtkActionGroup *	vinagre_tab_get_action_group		(VinagreTab *tab);
 
-gint		  vinagre_tab_get_original_width  (VinagreTab *tab);
-gint		  vinagre_tab_get_original_height (VinagreTab *tab);
-void		  vinagre_tab_original_size	  (VinagreTab *tab);
+gchar *			vinagre_tab_get_extra_title	(VinagreTab *tab);
+GtkWidget *		vinagre_tab_get_toolbar		(VinagreTab *tab);
 
-VinagreTabState   vinagre_tab_get_state		(VinagreTab *tab);
-VinagreTab	  *vinagre_tab_get_from_connection (VinagreConnection *conn);
+void			vinagre_tab_free_actions	(GSList *actions);
 
-gboolean	  vinagre_tab_is_pointer_grab	(VinagreTab *tab);
+/* Protected functions */
+void			vinagre_tab_save_credentials_in_keyring (VinagreTab *tab);
+gboolean		vinagre_tab_find_credentials_in_keyring	(VinagreTab *tab,
+								 gchar **username,
+								 gchar **password);
+
+void			vinagre_tab_remove_from_notebook	(VinagreTab *tab);
+void			vinagre_tab_add_recent_used		(VinagreTab *tab);
+void			vinagre_tab_set_state			(VinagreTab *tab,
+								 VinagreTabState state);
+
+void			vinagre_tab_add_actions			(VinagreTab *tab,
+								 const GtkActionEntry *entries,
+								 guint n_entries);
+void			vinagre_tab_add_toggle_actions		(VinagreTab *tab,
+								 const GtkToggleActionEntry *entries,
+								 guint n_entries);
 G_END_DECLS
 
 #endif  /* __VINAGRE_TAB_H__  */
