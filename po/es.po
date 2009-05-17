@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-05-08 19:08+0000\n"
-"PO-Revision-Date: 2009-05-09 10:47+0200\n"
+"POT-Creation-Date: 2009-05-16 13:05+0000\n"
+"PO-Revision-Date: 2009-05-17 20:48+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -77,6 +77,7 @@ msgid "Bookmarks"
 msgstr "Marcadores"
 
 #: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
+#: ../src/vinagre-vnc-tab.c:133
 msgid "Host:"
 msgstr "Equipo:"
 
@@ -136,7 +137,7 @@ msgstr "_Mostrar los atajos de menú"
 msgid "_Username:"
 msgstr "_Usuario:"
 
-#: ../data/vinagre.glade.h:26
+#: ../data/vinagre.glade.h:26 ../src/vinagre-vnc-tab.c:629
 msgid "_View only"
 msgstr "Sólo _visión"
 
@@ -499,7 +500,6 @@ msgid "Take screenshot"
 msgstr "Capturar pantalla"
 
 #: ../src/vinagre-tab.c:697
-#| msgid "Error saving the credential on the keyring."
 msgid "Error saving the credentials on the keyring."
 msgstr "Error al guardar las credenciales en el depósito de claves."
 
@@ -696,6 +696,104 @@ msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2007-2008"
 msgid "Vinagre Website"
 msgstr "Página web de Vinagre"
 
+#: ../src/vinagre-vnc-connection.c:198
+#, c-format
+msgid ""
+"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr ""
+"Valor incorrecto para la opción «compartida»: %d. Se supone que debería ser 0 "
+"ó 1. Ignorándola."
+
+#: ../src/vinagre-vnc-tab.c:132
+msgid "Desktop Name:"
+msgstr "Nombre del escritorio:"
+
+#: ../src/vinagre-vnc-tab.c:134
+msgid "Port:"
+msgstr "Puerto:"
+
+#: ../src/vinagre-vnc-tab.c:135
+msgid "Dimensions:"
+msgstr "Dimensiones:"
+
+#: ../src/vinagre-vnc-tab.c:245
+msgid "Error connecting to host."
+msgstr "Error al conectar con el equipo."
+
+#: ../src/vinagre-vnc-tab.c:280
+#, c-format
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr ""
+"El método de autenticación contra el equipo <i>%s</i> no está soportado. (%u)"
+
+#: ../src/vinagre-vnc-tab.c:284
+msgid "Authentication unsupported"
+msgstr "No se soporta la autenticación"
+
+#: ../src/vinagre-vnc-tab.c:550 ../src/vinagre-vnc-tab.c:567
+msgid "Authentication error"
+msgstr "Error de autenticación"
+
+#: ../src/vinagre-vnc-tab.c:551
+msgid "A username is required in order to access this machine."
+msgstr "Se necesita un usuario para acceder a esta máquina."
+
+#: ../src/vinagre-vnc-tab.c:568
+msgid "A password is required in order to access this machine."
+msgstr "Se necesita una contraseña para acceder a esta máquina."
+
+#: ../src/vinagre-vnc-tab.c:617
+msgid "S_caling"
+msgstr "Es_calado"
+
+#: ../src/vinagre-vnc-tab.c:618
+#| msgid "Fit the remote screen into the current window size"
+msgid "Fits the remote screen into the current window size"
+msgstr "Ajustar la pantalla remota en el tamaño actual de ventana"
+
+#: ../src/vinagre-vnc-tab.c:630
+#| msgid "Disable mouse and keyboard"
+msgid "Does not send mouse and keyboard events"
+msgstr "No enviar eventos del teclado y del ratón"
+
+#: ../src/vinagre-vnc-tab.c:641
+msgid "_Original size"
+msgstr "Tamaño _original"
+
+#: ../src/vinagre-vnc-tab.c:642
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "Ajustar la ventana al tamaño del escritorio remoto"
+
+#: ../src/vinagre-vnc-tab.c:664 ../src/vinagre-vnc-tab.c:740
+#: ../src/vinagre-vnc-tab.c:741
+msgid "Send Ctrl-Alt-Del"
+msgstr "Enviar Ctrl-Alt-Del"
+
+#: ../src/vinagre-vnc-tab.c:665
+#| msgid "Send Ctrl+Alt+Del to active connection"
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "Enviar Ctrl+Alt+Del al equipo remoto"
+
+#: ../src/vinagre-vnc-tab.c:719 ../src/vinagre-vnc-tab.c:720
+msgid "Scaling"
+msgstr "Escalado"
+
+#: ../src/vinagre-vnc-tab.c:729 ../src/vinagre-vnc-tab.c:730
+msgid "Read only"
+msgstr "Sólo lectura"
+
+#: ../src/vinagre-vnc-tab.c:869
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"No se soporta el escalado en esta instalación.\n"
+"\n"
+"Lea el archivo README (empaquetado con Vinagre) para saber cómo activar esta "
+"característica."
+
 #: ../src/vinagre-window.c:402
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
@@ -711,81 +809,8 @@ msgstr "Conexiones _recientes"
 msgid "Open %s:%d"
 msgstr "Abrir %s: %d"
 
-#~ msgid ""
-#~ "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-#~ msgstr ""
-#~ "Valor incorrecto para la opción «compartida»: %d. Se supone que debería "
-#~ "ser 0 ó 1. Ignorándola."
-
-#~ msgid "Error connecting to host."
-#~ msgstr "Error al conectar con el equipo."
-
-#~ msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-#~ msgstr ""
-#~ "El método de autenticación contra el equipo <i>%s</i> no está soportado. "
-#~ "(%u)"
-
-#~ msgid "Authentication unsupported"
-#~ msgstr "No se soporta la autenticación"
-
-#~ msgid "Authentication error"
-#~ msgstr "Error de autenticación"
-
-#~ msgid "A username is required in order to access this machine."
-#~ msgstr "Se necesita un usuario para acceder a esta máquina."
-
-#~ msgid "A password is required in order to access this machine."
-#~ msgstr "Se necesita una contraseña para acceder a esta máquina."
-
-#~ msgid "Scaling"
-#~ msgstr "Escalado"
-
-#~ msgid "Read only"
-#~ msgstr "Sólo lectura"
-
-#~ msgid "Send Ctrl-Alt-Del"
-#~ msgstr "Enviar Ctrl-Alt-Del"
-
-#~ msgid "Desktop Name:"
-#~ msgstr "Nombre del escritorio:"
-
-#~ msgid "Port:"
-#~ msgstr "Puerto:"
-
-#~ msgid "Dimensions:"
-#~ msgstr "Dimensiones:"
-
-#~ msgid ""
-#~ "Scaling is not supported on this installation.\n"
-#~ "\n"
-#~ "Read the README file (shipped with Vinagre) in order to know how to "
-#~ "enable this feature."
-#~ msgstr ""
-#~ "No se soporta el escalado en esta instalación.\n"
-#~ "\n"
-#~ "Lea el archivo README (empaquetado con Vinagre) para saber cómo activar "
-#~ "esta característica."
-
-#~ msgid "Send Ctrl+Alt+Del to active connection"
-#~ msgstr "Enviar Ctrl+Alt+Del a la conexión activa"
-
-#~ msgid "_Original size"
-#~ msgstr "Tamaño _original"
-
-#~ msgid "Adjusts the window to the remote desktop's size"
-#~ msgstr "Ajustar la ventana al tamaño del escritorio remoto"
-
-#~ msgid "S_caling"
-#~ msgstr "Es_calado"
-
-#~ msgid "Fit the remote screen into the current window size"
-#~ msgstr "Ajustar la pantalla remota en el tamaño actual de ventana"
-
 #~ msgid "_Read only"
 #~ msgstr "Sólo _lectura"
-
-#~ msgid "Disable mouse and keyboard"
-#~ msgstr "Desactivar el teclado y el ratón"
 
 #~ msgid "Press Ctrl+Alt to release the cursor"
 #~ msgstr "Pulse Ctrl+Alt para liberar el cursor"
