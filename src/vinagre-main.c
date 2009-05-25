@@ -35,6 +35,9 @@
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
 #include "vinagre-bacon.h"
+#ifdef HAVE_TELEPATHY
+#include "vinagre-tubes-manager.h"
+#endif
 #include <vncdisplay.h>
 
 #ifdef VINAGRE_ENABLE_AVAHI
@@ -127,6 +130,9 @@ int main (int argc, char **argv) {
   GSList            *l, *next;
   VinagreWindow     *window;
   VinagreApp        *app;
+#ifdef HAVE_TELEPATHY
+  VinagreTubesManager *vinagre_tubes_manager;
+#endif
 
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -172,8 +178,15 @@ int main (int argc, char **argv) {
     }
   g_slist_free (servers);
 
+#ifdef HAVE_TELEPATHY
+   vinagre_tubes_manager = vinagre_tubes_manager_new (window);
+#endif
+
   gtk_main ();
 
+#ifdef HAVE_TELEPATHY
+  g_object_unref (vinagre_tubes_manager);
+#endif
   g_object_unref (vinagre_bookmarks_get_default ());
   g_object_unref (vinagre_prefs_get_default ());
 #ifdef VINAGRE_ENABLE_AVAHI
