@@ -524,8 +524,8 @@ protocol_by_name (const gchar *protocol)
 {
   gint i;
 
-  for (i=0; i<VINAGRE_CONNECTION_PROTOCOL_INVALID; i++)
-    if (g_strcmp0 (vinagre_connection_protos[i], protocol) == 0)
+  for (i=1; i<VINAGRE_CONNECTION_PROTOCOL_INVALID; i++)
+    if (g_strcmp0 (vinagre_connection_protos[i-1], protocol) == 0)
       return i;
 
   return VINAGRE_CONNECTION_PROTOCOL_INVALID;
