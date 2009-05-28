@@ -37,10 +37,9 @@ struct _VinagreVncTabPrivate
   GtkWidget  *vnc;
   gboolean   pointer_grab;
   gchar      *clipboard_str;
-  GSList     *connected_actions;
-  GSList     *initialized_actions;
-  GtkWidget  *viewonly_button;
-  GtkWidget  *scaling_button;
+  GSList     *connected_actions, *initialized_actions;
+  GtkWidget  *viewonly_button, *scaling_button;
+  GtkAction  *scaling_action, *viewonly_action, *original_size_action;
 };
 
 G_DEFINE_TYPE (VinagreVncTab, vinagre_vnc_tab, VINAGRE_TYPE_TAB)
@@ -347,8 +346,8 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
 		"fullscreen", &fullscreen,
 		NULL);
 
-  vinagre_vnc_tab_set_scaling (vnc_tab, scaling);
-  vinagre_vnc_tab_set_viewonly (vnc_tab, view_only);
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->scaling_action), scaling);
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->viewonly_action), view_only);
   vnc_display_set_pointer_local (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
   vnc_display_set_keyboard_grab (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
   vnc_display_set_pointer_grab (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
@@ -610,27 +609,33 @@ create_connected_actions (VinagreVncTab *tab)
 
   /* View->Scaling */
   a = g_new (VinagreTabUiAction, 1);
-  a->paths = g_new (gchar *, 2);
+  a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
-  a->paths[1] = NULL;
+  a->paths[1] = g_strdup ("/ToolBar");
+  a->paths[2] = NULL;
   a->action = GTK_ACTION (gtk_toggle_action_new ("VNCViewScaling",
 						 _("S_caling"),
 						 _("Fits the remote screen into the current window size"),
-						 NULL));
+						 "zoom-fit-best"));
+  gtk_action_set_icon_name (a->action, "zoom-fit-best");
   g_signal_connect (a->action, "activate", G_CALLBACK (view_scaling_cb), tab);
   list = g_slist_append (list, a);
+  tab->priv->scaling_action = a->action;
 
   /* View->View Only */
   a = g_new (VinagreTabUiAction, 1);
-  a->paths = g_new (gchar *, 2);
+  a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
-  a->paths[1] = NULL;
+  a->paths[1] = g_strdup ("/ToolBar");
+  a->paths[2] = NULL;
   a->action = GTK_ACTION (gtk_toggle_action_new ("VNCViewViewOnly",
 						 _("_View only"),
 						 _("Does not send mouse and keyboard events"),
-						 NULL));
+						 "emblem-readonly"));
+  gtk_action_set_icon_name (a->action, "emblem-readonly");
   g_signal_connect (a->action, "activate", G_CALLBACK (view_viewonly_cb), tab);
   list = g_slist_append (list, a);
+  tab->priv->viewonly_action = a->action;
 
   /* View->Original Size */
   a = g_new (VinagreTabUiAction, 1);
@@ -644,6 +649,7 @@ create_connected_actions (VinagreVncTab *tab)
   gtk_action_set_icon_name (a->action, "zoom-original");
   g_signal_connect (a->action, "activate", G_CALLBACK (view_original_size_cb), tab);
   list = g_slist_append (list, a);
+  tab->priv->original_size_action = a->action;
 
   return list;
 }
@@ -676,13 +682,9 @@ static void
 viewonly_button_clicked (GtkToggleToolButton *button,
 			 VinagreVncTab       *vnc_tab)
 {
-  GtkAction *action;
-
   vinagre_vnc_tab_set_viewonly (vnc_tab, gtk_toggle_tool_button_get_active (button));
 
-  action = gtk_action_group_get_action (vinagre_window_get_connected_action (vinagre_tab_get_window (VINAGRE_TAB (vnc_tab))),
-					"VNCViewReadOnly");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->viewonly_action),
 				vinagre_vnc_tab_get_viewonly (vnc_tab));
 }
 
@@ -690,14 +692,10 @@ static void
 scaling_button_clicked (GtkToggleToolButton *button,
 			VinagreVncTab       *vnc_tab)
 {
-  GtkAction *action;
-
   if (!vinagre_vnc_tab_set_scaling (vnc_tab, gtk_toggle_tool_button_get_active (button)))
     gtk_toggle_tool_button_set_active (button, FALSE);
 
-  action = gtk_action_group_get_action (vinagre_window_get_connected_action (vinagre_tab_get_window (VINAGRE_TAB (vnc_tab))),
-					"VNCViewScaling");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->scaling_action),
 				vinagre_vnc_tab_get_scaling (vnc_tab));
 }
 
