@@ -40,6 +40,7 @@ struct _VinagreVncTabPrivate
   GSList     *connected_actions, *initialized_actions;
   GtkWidget  *viewonly_button, *scaling_button;
   GtkAction  *scaling_action, *viewonly_action, *original_size_action;
+  gulong     signal_clipboard;
 };
 
 G_DEFINE_TYPE (VinagreVncTab, vinagre_vnc_tab, VINAGRE_TYPE_TAB)
@@ -167,6 +168,15 @@ vinagre_vnc_tab_dispose (GObject *object)
     {
       vinagre_tab_free_actions (vnc_tab->priv->initialized_actions);
       vnc_tab->priv->initialized_actions = NULL;
+    }
+
+  if (vnc_tab->priv->signal_clipboard != 0)
+    {
+      GtkClipboard  *cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+
+      g_signal_handler_disconnect (cb,
+				   vnc_tab->priv->signal_clipboard);
+      vnc_tab->priv->signal_clipboard = 0;
     }
 
   G_OBJECT_CLASS (vinagre_vnc_tab_parent_class)->dispose (object);
@@ -743,9 +753,30 @@ setup_toolbar (VinagreVncTab *vnc_tab)
 }
 
 static void
+vnc_tab_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreVncTab *vnc_tab)
+{
+  VinagreTab *tab = VINAGRE_TAB (vnc_tab);
+  gchar *text;
+
+  if (vinagre_notebook_get_active_tab (vinagre_tab_get_notebook (tab)) != tab)
+    return;
+
+  if (VINAGRE_IS_TAB (gtk_clipboard_get_owner (cb)))
+    return;
+
+  text = gtk_clipboard_wait_for_text (cb);
+  if (!text)
+    return;
+
+  vinagre_vnc_tab_paste_text (vnc_tab, text);
+  g_free (text);
+}
+
+static void
 vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 {
   GtkAction *action;
+  GtkClipboard *cb;
 
   vnc_tab->priv = VINAGRE_VNC_TAB_GET_PRIVATE (vnc_tab);
   vnc_tab->priv->clipboard_str = NULL;
@@ -812,6 +843,14 @@ vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 		    "vnc-desktop-resize",
 		    G_CALLBACK (vnc_desktop_resize_cb),
 		    vnc_tab);
+
+  /* Setup the clipboard */
+  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+  vnc_tab->priv->signal_clipboard =  g_signal_connect (cb,
+						       "owner-change",
+						       G_CALLBACK (vnc_tab_clipboard_cb),
+						       vnc_tab);
+
 
   gtk_widget_show_all (GTK_WIDGET (vnc_tab));
 }

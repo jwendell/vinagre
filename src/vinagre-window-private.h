@@ -67,8 +67,6 @@ struct _VinagreWindowPrivate
   gboolean        toolbar_visible;
   gboolean        statusbar_visible;
   gboolean        fav_panel_visible;
-
-  gulong	  signal_clipboard;
 };
 
 

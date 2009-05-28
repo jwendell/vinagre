@@ -66,15 +66,6 @@ vinagre_window_dispose (GObject *object)
       window->priv->manager = NULL;
     }
 
-  if (window->priv->signal_clipboard != 0)
-    {
-      GtkClipboard  *cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-
-      g_signal_handler_disconnect (cb,
-				   window->priv->signal_clipboard);
-      window->priv->signal_clipboard = 0;
-    }
-
   if (window->priv->update_recents_menu_ui_id != 0)
     {
       GtkRecentManager *recent_manager = gtk_recent_manager_get_default ();
@@ -769,39 +760,6 @@ create_notebook (VinagreWindow *window)
   gtk_widget_show (GTK_WIDGET (window->priv->notebook));
 }
 
-/*
-static void
-vinagre_window_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreWindow *window)
-{
-  gchar *text;
-
-  if (!window->priv->active_tab)
-    return;
-
-  if (gtk_clipboard_get_owner (cb) == G_OBJECT (window->priv->active_tab))
-    return;
-
-  text = gtk_clipboard_wait_for_text (cb);
-  if (!text)
-    return;
-
-//  vinagre_tab_paste_text (VINAGRE_TAB (window->priv->active_tab), text);
-  g_free (text);
-}
-
-static void
-vinagre_window_init_clipboard (VinagreWindow *window)
-{
-  GtkClipboard *cb;
-
-  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-  window->priv->signal_clipboard = g_signal_connect (cb,
-						     "owner-change",
-						     G_CALLBACK (vinagre_window_clipboard_cb),
-						     window);
-}
-*/
-
 static void
 vinagre_window_init (VinagreWindow *window)
 {
@@ -855,7 +813,6 @@ vinagre_window_init (VinagreWindow *window)
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
 #endif
-  //vinagre_window_init_clipboard (window);
 }
 
 VinagreNotebook *
