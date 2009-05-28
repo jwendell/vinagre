@@ -597,11 +597,13 @@ vinagre_notebook_close_tab (VinagreNotebook *nb,
   gint           position;
   GtkActionGroup *action_group;
   GtkNotebook    *notebook;
+  VinagreTab     *previous_active_tab;
 
   g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
   notebook = GTK_NOTEBOOK (nb);
+  previous_active_tab = nb->priv->active_tab;
 
   g_signal_handlers_disconnect_by_func (tab,
 					G_CALLBACK (tab_disconnected_cb),
@@ -624,10 +626,12 @@ vinagre_notebook_close_tab (VinagreNotebook *nb,
 								 position));
 
   /* Merge the UI for the new tab (if one exists) */
-  merge_tab_ui (nb);
-
-  vinagre_notebook_update_window_title (nb);
-  vinagre_notebook_update_ui_sentitivity (nb);
+  if (nb->priv->active_tab != previous_active_tab)
+    {
+      merge_tab_ui (nb);
+      vinagre_notebook_update_window_title (nb);
+      vinagre_notebook_update_ui_sentitivity (nb);
+    }
 }
 
 static void
