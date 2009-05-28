@@ -581,12 +581,12 @@ vinagre_connection_split_string (const gchar *uri,
   if (g_strrstr (lhost, "::") != NULL)
     {
       server = g_strsplit (lhost, "::", 2);
-      lport = server[1] ? atoi (server[1]) : vinagre_connection_default_port [*protocol];
+      lport = server[1] ? atoi (server[1]) : vinagre_connection_default_port [*protocol-1];
     }
   else
     {
       server = g_strsplit (lhost, ":", 2);
-      lport = server[1] ? atoi (server[1]) : vinagre_connection_default_port [*protocol];
+      lport = server[1] ? atoi (server[1]) : vinagre_connection_default_port [*protocol-1];
 
       if ((*protocol == VINAGRE_CONNECTION_PROTOCOL_VNC) && (lport < 1024))
         lport += 5900;
