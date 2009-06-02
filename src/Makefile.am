@@ -145,6 +145,26 @@ BUILT_SOURCES = \
 	vinagre-enums.h \
 	$(NULL)
 
+##############################
+# Telepathy stuff
+##############################
+
+if TELEPATHY
+
+INCLUDES += $(TELEPATHY_CFLAGS)
+vinagre_LDADD += $(TELEPATHY_LIBS)
+vinagre_SOURCES += \
+	vinagre-tubes-manager.c vinagre-tubes-manager.h		\
+	vinagre-tube-handler.c vinagre-tube-handler.h		\
+	$(NULL)
+
+dbus-interface-glue.h: tube-handler.xml
+	dbus-binding-tool --prefix=vinagre_tubes_manager --mode=glib-server tube-handler.xml > dbus-interface-glue.h
+
+BUILT_SOURCES += dbus-interface-glue.h
+
+endif
+
 DISTCLEANFILES =		\
 	$(BUILT_SOURCES)	\
 	$(server_in_files)	\
