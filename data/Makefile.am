@@ -47,6 +47,19 @@ EXTRA_DIST = \
 	$(MIMEFILES) \
 	$(schemas_in_files)
 
+if TELEPATHY
+
+servicedir = $(datadir)/dbus-1/services
+service_DATA = org.gnome.Empathy.StreamTubeHandler.x_vnc.service
+
+org.gnome.Empathy.StreamTubeHandler.x_vnc.service: org.gnome.Empathy.StreamTubeHandler.x_vnc.service.in \
+		Makefile
+	@sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
+
+CLEANFILES += $(service_DATA)
+
+endif
+
 UPDATE_MIME = \
         if [ -f $(DESTDIR)$(datadir)/mime/packages/freedesktop.org.xml ] ; then \
                 if which update-mime-database>/dev/null 2>&1; then \
