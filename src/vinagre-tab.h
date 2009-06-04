@@ -121,10 +121,12 @@ GtkWidget *		vinagre_tab_get_toolbar		(VinagreTab *tab);
 void			vinagre_tab_free_actions	(GSList *actions);
 
 /* Protected functions */
+void			vinagre_tab_set_save_credentials	(VinagreTab *tab, gboolean value);
 void			vinagre_tab_save_credentials_in_keyring (VinagreTab *tab);
 gboolean		vinagre_tab_find_credentials_in_keyring	(VinagreTab *tab,
 								 gchar **username,
 								 gchar **password);
+void			vinagre_tab_remove_credentials_from_keyring (VinagreTab *tab);
 
 void			vinagre_tab_remove_from_notebook	(VinagreTab *tab);
 void			vinagre_tab_add_recent_used		(VinagreTab *tab);

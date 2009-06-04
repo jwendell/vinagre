@@ -21,7 +21,6 @@
 
 #include <glib/gi18n.h>
 #include <glade/glade.h>
-#include <gnome-keyring.h>
 #include <vncdisplay.h>
 #include <gdk/gdkkeysyms.h>
 
@@ -273,6 +272,7 @@ vnc_disconnected_cb (VncDisplay *vnc, VinagreVncTab *tab)
 static void
 vnc_auth_failed_cb (VncDisplay *vnc, const gchar *msg, VinagreVncTab *vnc_tab)
 {
+  vinagre_tab_remove_credentials_from_keyring (VINAGRE_TAB (vnc_tab));
   g_signal_emit_by_name (vnc_tab, "tab-auth-failed", msg);
 }
 
@@ -480,7 +480,8 @@ ask_credential (VinagreVncTab *vnc_tab,
       else
 	*password = NULL;
 
-      //tab->priv->save_credential = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (save_credential_check));
+      vinagre_tab_set_save_credentials (tab,
+					gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (save_credential_check)));
     }
 
   gtk_widget_destroy (GTK_WIDGET (password_dialog));
