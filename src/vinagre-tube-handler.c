@@ -24,13 +24,19 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <dbus/dbus-glib.h>
 #include <telepathy-glib/contact.h>
 #include <telepathy-glib/util.h>
+#include <telepathy-glib/dbus.h>
 
 #include "vinagre-tube-handler.h"
 #include "vinagre-commands.h"
 #include "vinagre-tab.h"
 #include "vinagre-notebook.h"
+
+#define MC_DBUS_SERVICE "org.freedesktop.Telepathy.MissionControl"
+#define MC_DBUS_SERVICE_PATH "/org/freedesktop/Telepathy/MissionControl"
 
 G_DEFINE_TYPE (VinagreTubeHandler, vinagre_tube_handler, G_TYPE_OBJECT);
 
@@ -289,6 +295,84 @@ vinagre_tube_handler_dialog_response_cb (GtkDialog *dialog,
   gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
+static gchar *
+vinagre_tube_handler_contact_get_avatar_filename (TpContact *contact,
+    const gchar *token,
+    VinagreTubeHandler *self)
+{
+  TpConnection *connection;
+  gchar *avatar_path;
+  gchar *avatar_file;
+  gchar *token_escaped;
+  gchar *contact_escaped;
+  gchar *mc_account_unique_name;
+  GError *error = NULL;
+  DBusGProxy *proxy;
+
+  connection = tp_contact_get_connection (contact);
+
+  proxy = dbus_g_proxy_new_for_name (tp_get_bus (), MC_DBUS_SERVICE,
+      MC_DBUS_SERVICE_PATH, MC_DBUS_SERVICE);
+
+  /* Have to do that while waiting for mission control 5 because
+  there is no mc API in telepathy-glib */
+  if (!dbus_g_proxy_call (proxy, "GetAccountForConnection", &error,
+      G_TYPE_STRING, tp_proxy_get_object_path (connection),
+      G_TYPE_INVALID,
+      G_TYPE_STRING, &mc_account_unique_name,
+      G_TYPE_INVALID))
+    {
+      g_printerr ("Failed to request name: %s",
+          error ? error->message : "No error given");
+      g_clear_error (&error);
+      return NULL;
+    }
+
+  contact_escaped = tp_escape_as_identifier (tp_contact_get_identifier
+      (contact));
+
+  token_escaped = tp_escape_as_identifier (token);
+  connection = tp_contact_get_connection (contact);
+
+  avatar_path = g_build_filename (g_get_user_cache_dir (),
+      "Empathy", "avatars", mc_account_unique_name,
+      contact_escaped, NULL);
+
+  avatar_file = g_build_filename (avatar_path, token_escaped, NULL);
+
+  g_free (contact_escaped);
+  g_free (token_escaped);
+  g_free (avatar_path);
+  g_object_unref (proxy);
+
+  return avatar_file;
+}
+
+static GdkPixbuf*
+vinagre_tube_handler_pixbuf_scale_down_if_necessary (GdkPixbuf *pixbuf,
+    gint max_size)
+{
+  gint width, height;
+  gdouble factor;
+
+  width = gdk_pixbuf_get_width (pixbuf);
+  height = gdk_pixbuf_get_height (pixbuf);
+
+  if (width > 0 && (width > max_size || height > max_size))
+    {
+      factor = (gdouble) max_size / MAX (width, height);
+
+      width = width * factor;
+      height = height * factor;
+
+      return gdk_pixbuf_scale_simple (pixbuf,
+          width, height,
+          GDK_INTERP_HYPER);
+    }
+
+  return g_object_ref (pixbuf);
+}
+
 static void
 vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
     guint n_contacts,
@@ -300,9 +384,14 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
     GObject *weak_object)
 {
   GtkWidget *dialog;
+  GdkPixbuf *pixbuf_view;
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
-  TpContact * contact;
-  const gchar * alias;
+  TpContact *contact;
+  const gchar *alias;
+  const gchar *token;
+  gchar *filename;
+  GtkWidget *image;
+  GError *error_failed = NULL;
 
   if (error != NULL)
     {
@@ -312,12 +401,53 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
     }
 
   contact = contacts[0];
+
   alias = tp_contact_get_alias (contact);
+  token = tp_contact_get_avatar_token (contact);
+
+  if (!tp_strdiff (token, ""))
+    {
+      image = gtk_image_new_from_icon_name ("stock_person",
+          GTK_ICON_SIZE_DIALOG);
+    }
+  else
+    {
+      filename = vinagre_tube_handler_contact_get_avatar_filename (contact,
+          token, self);
+
+      if (filename == NULL)
+        {
+          image = gtk_image_new_from_icon_name ("stock_person",
+              GTK_ICON_SIZE_DIALOG);
+        }
+      else
+        {
+          pixbuf_view = gdk_pixbuf_new_from_file (filename, &error_failed);
+
+          if (pixbuf_view == NULL)
+            {
+              g_printerr ("Impossible to get the avatar: %s\n",
+                  error_failed->message);
+              image = gtk_image_new_from_icon_name ("stock_person",
+                  GTK_ICON_SIZE_DIALOG);
+            }
+          else
+            {
+              pixbuf_view = vinagre_tube_handler_pixbuf_scale_down_if_necessary
+                 (pixbuf_view, 64);
+              image = gtk_image_new_from_pixbuf (pixbuf_view);
+              g_object_unref (pixbuf_view);
+            }
+          g_free (filename);
+        }
+    }
 
   dialog = gtk_message_dialog_new (GTK_WINDOW (priv->window),
       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION,
       GTK_BUTTONS_OK_CANCEL, _("%s wants to share his desktop with you."),
       alias);
+
+  gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
 
   gtk_window_set_title (GTK_WINDOW (dialog), _("Desktop sharing invitation"));
 
@@ -333,17 +463,18 @@ vinagre_tube_handler_constructed (GObject *object)
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (object);
   TpConnection *connection;
   TpHandle handle;
-  TpContactFeature features[] = { TP_CONTACT_FEATURE_ALIAS };
+  TpContactFeature features[] = { TP_CONTACT_FEATURE_ALIAS,
+      TP_CONTACT_FEATURE_AVATAR_TOKEN };
 
   g_debug (" -- New Tube handler --\n");
 
-  g_object_get (priv->channel, "connection", &connection, NULL);
+  connection = tp_channel_borrow_connection (priv->channel);
 
   handle = tp_channel_get_handle (priv->channel, NULL);
 
-  tp_connection_get_contacts_by_handle (connection, 1, &handle, 1,
-      features, vinagre_tube_handler_factory_handle_cb,
-      object, NULL, NULL);
+  tp_connection_get_contacts_by_handle (connection, 1, &handle,
+      G_N_ELEMENTS(features), features,
+      vinagre_tube_handler_factory_handle_cb, object, NULL, NULL);
 }
 
 static void
