@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-02-18 20:37+0000\n"
-"PO-Revision-Date: 2009-03-10 14:55+0530\n"
+"POT-Creation-Date: 2009-06-10 12:54+0000\n"
+"PO-Revision-Date: 2009-06-12 20:04+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <discuss@lists.ankur.org.in>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,6 @@ msgid "<b>Connection options</b>"
 msgstr "<b>সংযোগ সংক্রান্ত বিকল্প</b>"
 
 #: ../data/vinagre.glade.h:3
-#| msgid "<b>Connection options</b>"
 msgid "<b>Connection</b>"
 msgstr "<b>সংযোগ</b>"
 
@@ -59,7 +58,6 @@ msgid "<b>Interface</b>"
 msgstr "<b>প্রেক্ষাপট</b>"
 
 #: ../data/vinagre.glade.h:6
-#| msgid "<b>Connection options</b>"
 msgid "<b>Options</b>"
 msgstr "<b>বিকল্প</b>"
 
@@ -80,7 +78,7 @@ msgid "Bookmarks"
 msgstr "বুকমার্ক সংকলন"
 
 #: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1066
+#: ../src/vinagre-vnc-tab.c:132
 msgid "Host:"
 msgstr "হোস্ট:"
 
@@ -122,7 +120,6 @@ msgid "_Password:"
 msgstr "পাসওয়ার্ড:(_P)"
 
 #: ../data/vinagre.glade.h:22
-#| msgid "_Remember this password"
 msgid "_Remember this credential"
 msgstr "এই পরিচয় মনে রাখা হবে (_R)"
 
@@ -135,11 +132,10 @@ msgid "_Show menu shortcuts"
 msgstr "মেনুর শর্ট-কাট প্রদর্শন করা হবে (_S)"
 
 #: ../data/vinagre.glade.h:25
-#| msgid "_Name:"
 msgid "_Username:"
 msgstr "ব্যবহারকারীর নাম: (_U)"
 
-#: ../data/vinagre.glade.h:26
+#: ../data/vinagre.glade.h:26 ../src/vinagre-vnc-tab.c:643
 msgid "_View only"
 msgstr "শুধুমাত্র প্রদর্শন (_V)"
 
@@ -160,7 +156,7 @@ msgid ""
 msgstr ""
 "মেনু শর্ট-কাট নিষ্ক্রিয় করার জন্য \"false\" নির্ধারণ করুন। শর্ট-কাট সক্রিয় করার জন্য "
 "\"true\" নির্ধারণ করুন। উল্লেখ্য, এইগুলি সক্রিয় করা হলে, মেনু দ্বারা এই কি-গুলির কর্ম "
-"সনাক্ত ও গ্রহণ করা হবে এবং দূরবর্তী হোস্টকে প্রেরণ করা হবে না।"
+"সনাক্ত ও গ্রহণ করা হবে এবং দূরবর্তী হোস্টকে পাঠানো হবে না।"
 
 #: ../data/vinagre.schemas.in.h:3
 msgid ""
@@ -209,7 +205,6 @@ msgid "Vinagre Applet Factory"
 msgstr "Vinagre অ্যাপলেট ফ্যাক্টরি"
 
 #: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
-#| msgid "Could not run vinagre: %s"
 msgid "Could not run vinagre:"
 msgstr "vinagre চালাতে ব্যর্থ:"
 
@@ -221,45 +216,40 @@ msgstr "দূরবর্তী ডেস্কটপ প্রদর্শন 
 msgid "Access your bookmarks"
 msgstr "বুকমার্ক প্রয়োগ করুন"
 
-#: ../src/vinagre-bookmarks.c:344
+#: ../src/vinagre-bookmarks.c:327
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "বুকমার্ক শুরু করতে ত্রুটি ঘটেছে: %s"
 
-#: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
-#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:275 ../src/vinagre-fav.c:678
+#: ../src/vinagre-bookmarks.c:327 ../src/vinagre-bookmarks.c:442
+#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:148
+#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
-#: ../src/vinagre-window.c:279
+#: ../src/vinagre-window.c:263
 msgid "Unknown error"
 msgstr "অজানা ত্রুটি"
 
-#: ../src/vinagre-bookmarks.c:351
-#| msgid "Error while initializing bookmarks: %s"
+#: ../src/vinagre-bookmarks.c:334
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "বুকমার্ক প্রারম্ভ করতে ব্যর্থ: ফাইলটি সম্ভবত ফাঁকা"
 
-#: ../src/vinagre-bookmarks.c:358
-#| msgid "Error while initializing bookmarks: %s"
+#: ../src/vinagre-bookmarks.c:341
 msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "বুকমার্ক প্রারম্ভ করতে ব্যর্থ: এটি vinagre বুকমার্ক ফাইল নয়"
 
-#: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
-#| msgid "Error while saving bookmarks: %s"
+#: ../src/vinagre-bookmarks.c:403 ../src/vinagre-bookmarks.c:410
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "বুকমার্ক সংরক্ষণ করতে ব্যর্থ: XML বিন্যাস গঠন করতে ব্যর্থ"
 
-#: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
-#| msgid "Error while saving bookmarks: %s"
+#: ../src/vinagre-bookmarks.c:417 ../src/vinagre-bookmarks.c:424
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "বুকমার্ক সংরক্ষণ করতে ব্যর্থ: XML বিন্যাস আরম্ভ করতে ব্যর্থ"
 
-#: ../src/vinagre-bookmarks.c:450
-#| msgid "Error while saving bookmarks: %s"
+#: ../src/vinagre-bookmarks.c:433
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "বুকমার্ক সংরক্ষণ করতে ব্যর্থ: XML বিন্যাস নির্ধারণ করতে ব্যর্থ"
 
-#: ../src/vinagre-bookmarks.c:459
+#: ../src/vinagre-bookmarks.c:442
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "বুকমার্ক সংরক্ষণে ত্রুটি ঘটেছে: %s"
@@ -281,7 +271,6 @@ msgstr "বুকমার্ক মাইগ্রেট করতে ব্য
 #: ../src/vinagre-bookmarks-migration.c:133
 #: ../src/vinagre-bookmarks-migration.c:231
 #, c-format
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error while migrating bookmarks: %s"
 msgstr "বুকমার্ক মাইগ্রেট করতে সমস্যা: %s"
 
@@ -290,17 +279,15 @@ msgid "Failed to create the directory"
 msgstr "ডিরেক্টরি নির্মাণ করতে ব্যর্থ"
 
 #: ../src/vinagre-bookmarks-migration.c:255
-#| msgid ""
-#| "Copying the bookmarks file to the new location. This operation is only "
-#| "supposed to run once."
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
-msgstr "নতুন ফাইলের বিন্যাসে বুকমার্কগুলি মাইগ্রেট করা হচ্ছে। এই কর্ম শুধুমাত্র একবার সঞ্চালিত হবে।"
+msgstr ""
+"নতুন ফাইলের বিন্যাসে বুকমার্কগুলি মাইগ্রেট করা হচ্ছে। এই কর্ম শুধুমাত্র একবার সঞ্চালিত "
+"হবে।"
 
 #: ../src/vinagre-bookmarks-migration.c:263
 #, c-format
-#| msgid "Error while saving bookmarks: %s"
 msgid "Error opening old bookmarks file: %s"
 msgstr "বুকমার্কের পুরোনো ফাইল খুলতে ব্যর্থ: %s"
 
@@ -317,80 +304,84 @@ msgstr "পুরোনো বুকমার্কের ফাইল মুছ
 msgid "Root Folder"
 msgstr "Root ফোল্ডার"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "ফোল্ডারের নাম বৈধ নয়"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:194
+#, c-format
+msgid "The name \"%s\" is already used in this folder. Please use a different name."
+msgstr ""
+"এই ফোল্ডারের মধ্যে \"%s\" নামটি বর্তমানে ব্যবহৃত হচ্ছে। অনুগ্রহ করে একটি ভিন্ন নাম "
+"প্রয়োগ করুন।"
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:184
+#: ../src/vinagre-bookmarks-ui.c:195
+msgid "Invalid name for this item"
+msgstr "এই বস্তুর জন্য এই নাম বৈধ নয়"
+
+#: ../src/vinagre-bookmarks-ui.c:298
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "আপনি কি নিশ্চিতরূপে <i>%s</i>-কে বুকমার্কের তালিকা থেকে সরিয়ে ফেলতে ইচ্ছুক?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Folder?"
 msgstr "ফোল্ডার মুছে ফেলা হবে কি?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:304
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "উল্লেখ্য, ডিরেক্টরির মধ্যে উপস্থিত সকল সাব-ফোল্ডার"
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:309
 msgid "Remove Item?"
 msgstr "বস্তু মুছে ফেলা হবে কি?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
-#| msgid "Error while saving bookmarks: %s"
+#: ../src/vinagre-bookmarks-ui.c:326
 msgid "Error removing bookmark: Entry not found"
 msgstr "বুকমার্ক সরিয়ে ফেলতে ব্যর্থ: এনট্রি পাওয়া যায়নি"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:343
 msgid "New Folder"
 msgstr "নতুন ফোল্ডার"
 
-#: ../src/vinagre-commands.c:113
+#: ../src/vinagre-commands.c:115
 msgid "Choose the file"
 msgstr "ফাইল বেছে নিন"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1156
+#: ../src/vinagre-commands.c:126 ../src/vinagre-tab.c:703
 msgid "Supported formats"
 msgstr "সমর্থিত বিন্যাস"
 
-#: ../src/vinagre-commands.c:156
+#: ../src/vinagre-commands.c:159
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "নিম্নলিখিত ফাইল খোলা যায়নি:"
 msgstr[1] ""
 
-#: ../src/vinagre-connect.c:179
+#: ../src/vinagre-connect.c:181
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "পূর্ববর্তী তথ্যের ফাইল সংরক্ষণ করতে সমস্যা: %s"
 
-#: ../src/vinagre-connect.c:191
+#: ../src/vinagre-connect.c:193
 msgid "Choose a VNC Server"
 msgstr "একটি VNC সার্ভার পছন্দ করুন"
 
-#: ../src/vinagre-connection.c:600
+#: ../src/vinagre-connection.c:556
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "প্রোটোকল %s সমর্থিত নয়"
 
-#: ../src/vinagre-connection.c:695
-#| msgid "Choose the file"
+#: ../src/vinagre-connection.c:669
 msgid "Could not open the file."
 msgstr "ফাইল খুলতে ব্যর্থ।"
 
-#: ../src/vinagre-connection.c:714
-#| msgid "Choose the file"
+#: ../src/vinagre-connection.c:688
 msgid "Could not parse the file."
 msgstr "ফাইল পার্স করতে ব্যর্থ।"
 
-#: ../src/vinagre-connection.c:759
-#, c-format
-msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr "'shared' শীর্ষক ফ্ল্যাগের মান সঠিক নয়: %d। এই ক্ষেত্রে 0 (০) অথবা 1 (১) মান হওয়া উচিত। উল্লিখিত মান উপেক্ষা করা হবে।"
-
-#: ../src/vinagre-connection.c:765
+#: ../src/vinagre-connection.c:733
 msgid "Could not find the host address in the file."
 msgstr "ফাইলের মধ্যে উপস্থিত হোস্ট ঠিকানা সন্ধান করতে ব্যর্থ।"
 
@@ -447,22 +438,29 @@ msgstr "avahi হোস্ট-নেম মীমাংসা করতে ব�
 msgid "Failed to browse for hosts: %s\n"
 msgstr "হোস্ট ব্রাউজ করতে ব্যর্থ: %s\n"
 
-#: ../src/vinagre-notebook.c:168
+#: ../src/vinagre-notebook.c:399
 #, c-format
-#| msgid "Connection to host \"%s\" was closed."
 msgid "Connection to host <i>%s</i> was closed."
 msgstr "হোস্ট  <i>%s</i>-র সাথে সংযোগ বিচ্ছিন্ন হয়েছে"
 
-#: ../src/vinagre-notebook.c:170
-#| msgid "Connection to host \"%s\" was closed."
+#: ../src/vinagre-notebook.c:401
 msgid "Connection closed"
 msgstr "সংযোগ বিচ্ছিন্ন হয়েছে"
 
-#: ../src/vinagre-notebook.c:194
+#: ../src/vinagre-notebook.c:417
+#, c-format
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "হোস্ট <i>%s</i>-এ পরিচয় প্রমাণ করতে ব্যর্থ"
+
+#: ../src/vinagre-notebook.c:423
+msgid "Authentication failed"
+msgstr "পরিচয় প্রমাণ করতে ব্যর্থ"
+
+#: ../src/vinagre-notebook.c:460
 msgid "Connecting..."
 msgstr "সংযোগ স্থাপন করা হচ্ছে..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:882
+#: ../src/vinagre-notebook.c:487 ../src/vinagre-tab.c:379
 msgid "Close connection"
 msgstr "সংযোগ সমাপ্ত করুন"
 
@@ -470,111 +468,35 @@ msgstr "সংযোগ সমাপ্ত করুন"
 msgid "Cannot initialize preferences manager."
 msgstr "বিবিধ পছন্দের তালিকা শুরু করা সম্ভব হয়নি"
 
-#: ../src/vinagre-tab.c:322
-msgid "Error connecting to host."
-msgstr "হোস্টের সাথে সংযোগ স্থাপনে ত্রুটি ঘটেছে"
-
-#: ../src/vinagre-tab.c:354
-#, c-format
-#| msgid "Authentication to host \"%s\" has failed"
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "হোস্ট <i>%s</i>-এ পরিচয় প্রমাণ করতে ব্যর্থ"
-
-#: ../src/vinagre-tab.c:360
-#| msgid "Authentication to host \"%s\" has failed"
-msgid "Authentication failed"
-msgstr "পরিচয় প্রমাণ করতে ব্যর্থ"
-
-#: ../src/vinagre-tab.c:382
-#, c-format
-#| msgid "Authentication method to host \"%s\" is unsupported. (%u)"
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "হোস্ট <i>%s</i>-র সাথে পরিচয় প্রমাণের পদ্ধতি সমর্থিত নয়। (%u)"
-
-#: ../src/vinagre-tab.c:386
-#| msgid "Authentication method to host \"%s\" is unsupported. (%u)"
-msgid "Authentication unsupported"
-msgstr "অনুমোদনের পদ্ধতি সমর্থিত নয়"
-
-#: ../src/vinagre-tab.c:464
+#: ../src/vinagre-tab.c:329
 msgid "Error saving recent connection."
 msgstr "বর্তমান সংযোগ সংরক্ষণে ত্রুটি ঘটেছে।"
 
-#: ../src/vinagre-tab.c:496
-#| msgid "Error saving the password on the keyring."
-msgid "Error saving the credential on the keyring."
-msgstr "কি-রিং এ পরিচয় সংরক্ষণে সমস্যা।"
-
-#: ../src/vinagre-tab.c:751 ../src/vinagre-tab.c:768
-msgid "Authentication error"
-msgstr "অনুমোদন সংক্রান্ত সমস্যা"
-
-#: ../src/vinagre-tab.c:752
-msgid "A username is required in order to access this machine."
-msgstr "এই মেশিনটি ব্যবহারের জন্য ব্যবহারকারীর নাম প্রয়োগ করা আবশ্যক।"
-
-#: ../src/vinagre-tab.c:769
-msgid "A password is required in order to access this machine."
-msgstr "এই মেশিনটি ব্যবহারের জন্য পাসওয়ার্ড প্রয়োগ করা আবশ্যক।"
-
-#: ../src/vinagre-tab.c:895
+#: ../src/vinagre-tab.c:393
 msgid "Minimize window"
 msgstr "উইন্ডো আড়াল করুন"
 
-#: ../src/vinagre-tab.c:910 ../src/vinagre-tab.c:911
-msgid "Scaling"
-msgstr "মাপ নির্ধারণ"
-
-#: ../src/vinagre-tab.c:920 ../src/vinagre-tab.c:921
-msgid "Read only"
-msgstr "শুধুমাত্র পাঠযোগ্য"
-
 #. Machine menu
-#: ../src/vinagre-tab.c:931 ../src/vinagre-tab.c:932 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:409 ../src/vinagre-tab.c:410 ../src/vinagre-ui.h:100
 msgid "Take screenshot"
 msgstr "স্ক্রিন-শট নিন"
 
-#: ../src/vinagre-tab.c:940 ../src/vinagre-tab.c:941 ../src/vinagre-ui.h:88
-msgid "Send Ctrl-Alt-Del"
-msgstr "Ctrl-Alt-Del প্রেরণ করা হবে"
+#: ../src/vinagre-tab.c:641
+msgid "Error saving the credentials on the keyring."
+msgstr "কি-রিং এ পরিচয় সংরক্ষণে সমস্যা।"
 
-#: ../src/vinagre-tab.c:1065
-msgid "Desktop Name:"
-msgstr "ডেস্কটপের নাম:"
-
-#: ../src/vinagre-tab.c:1067
-msgid "Port:"
-msgstr "পোর্ট:"
-
-#: ../src/vinagre-tab.c:1068
-msgid "Dimensions:"
-msgstr "দিকমাত্রা:"
-
-#: ../src/vinagre-tab.c:1134
-#| msgid "Take a screenshot of active connection"
+#: ../src/vinagre-tab.c:681
 msgid "Could not get a screenshot of the connection."
 msgstr "বর্তমান সংযোগের স্ক্রিন-শট প্রাপ্ত করা সম্ভব হয়নি।"
 
-#: ../src/vinagre-tab.c:1142
+#: ../src/vinagre-tab.c:689
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s-র স্ক্রিন-শট"
 
-#: ../src/vinagre-tab.c:1145
+#: ../src/vinagre-tab.c:692
 msgid "Save Screenshot"
 msgstr "স্ক্রিন-শট সংরক্ষণ করুন"
-
-#: ../src/vinagre-tab.c:1209
-msgid ""
-"Scaling is not supported on this installation.\n"
-"\n"
-"Read the README file (shipped with Vinagre) in order to know how to enable "
-"this feature."
-msgstr ""
-"বর্তমান ইনস্টলেশনের ক্ষেত্রে মাপ নির্ধারণ সমর্থিত নয়।\n"
-"\n"
-"এই বৈশিষ্ট্য সক্রিয় করার প্রণালী সম্বন্ধে জানার জন্য (Vinagre-র সাথে উপলব্ধ) README "
-"ফাইল পড়ুন।"
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -655,90 +577,60 @@ msgstr "vinagre-র সহায়িকা খুলুন"
 msgid "About this application"
 msgstr "অ্যাপ্লিকেশন পরিচিতি"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:70
+msgid "_Toolbar"
+msgstr "টুল-বার (_T)"
+
+#: ../src/vinagre-ui.h:71
+msgid "Show or hide the toolbar"
+msgstr "টুল-বার প্রদর্শন করুন অথবা আড়াল করুন"
+
+#: ../src/vinagre-ui.h:74
+msgid "_Statusbar"
+msgstr "স্ট্যাটাস-বার(_S)"
+
+#: ../src/vinagre-ui.h:75
+msgid "Show or hide the statusbar"
+msgstr "স্ট্যাটাস-বার প্রদর্শন করুন অথবা আড়াল করুন"
+
+#: ../src/vinagre-ui.h:78
+msgid "Side _Panel"
+msgstr "পার্শ্ববর্তী প্যানেল (_P)"
+
+#: ../src/vinagre-ui.h:79
+msgid "Show or hide the side panel"
+msgstr "পার্শ্ববর্তী প্যানেল প্রদর্শন করুন অথবা আড়াল করুন"
+
+#: ../src/vinagre-ui.h:87
 msgid "Close the current connection"
 msgstr "বর্তমান সংযোগটি বন্ধ করুন"
 
-#: ../src/vinagre-ui.h:73
+#: ../src/vinagre-ui.h:88
 msgid "C_lose All"
 msgstr "সমগ্র বন্ধ করুন (_l)"
 
-#: ../src/vinagre-ui.h:74
+#: ../src/vinagre-ui.h:89
 msgid "Close all active connections"
 msgstr "সকল সক্রিয় সংযোগ বন্ধ করুন"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:77
+#: ../src/vinagre-ui.h:92
 msgid "_Add to bookmarks"
 msgstr "বুকমার্কে যোগ করুন (_A)"
 
-#: ../src/vinagre-ui.h:78
+#: ../src/vinagre-ui.h:93
 msgid "Add current connection to your bookmarks"
 msgstr "বর্তমান সংযোগটি বুকমার্কে যোগ করুন"
 
-#: ../src/vinagre-ui.h:86
+#: ../src/vinagre-ui.h:101
 msgid "Take a screenshot of active connection"
 msgstr "বর্তমান সংযোগের স্ক্রিন-শট নিন"
 
-#: ../src/vinagre-ui.h:89
-msgid "Send Ctrl+Alt+Del to active connection"
-msgstr "সক্রিয় সংযোগের জন্য Ctrl+Alt+Del প্রেরণ করুন"
-
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:105
 msgid "View the current machine in full screen"
 msgstr "বর্তমান মেশিনটিকে সম্পূর্ণ পর্দা জুড়ে প্রদর্শন করুন"
 
-#: ../src/vinagre-ui.h:95
-msgid "_Original size"
-msgstr "মূল মাপ (_O)"
-
-#: ../src/vinagre-ui.h:96
-msgid "Adjusts the window to the remote desktop's size"
-msgstr "দূরবর্তী ডেস্কটপের মাপ অনুযায়ী উইন্ডোর মাপ নির্ধারণ করতে ব্যবহৃত হয়"
-
-#: ../src/vinagre-ui.h:102
-msgid "S_caling"
-msgstr "মাপ নির্ধারণ (_c)"
-
-#: ../src/vinagre-ui.h:103
-msgid "Fit the remote screen into the current window size"
-msgstr "দূরবর্তী পর্দাটি বর্তমান উইন্ডোর মাপ অনুযায়ী নির্ধারণ করা হবে"
-
-#: ../src/vinagre-ui.h:105
-msgid "_Read only"
-msgstr "শুধুমাত্র পাঠযোগ্য (_R)"
-
-#: ../src/vinagre-ui.h:106
-msgid "Disable mouse and keyboard"
-msgstr "মাউস ও কি-বোর্ড নিষ্ক্রিয় করা হবে"
-
-#: ../src/vinagre-ui.h:112
-msgid "_Toolbar"
-msgstr "টুল-বার (_T)"
-
-#: ../src/vinagre-ui.h:113
-msgid "Show or hide the toolbar"
-msgstr "টুল-বার প্রদর্শন করুন অথবা আড়াল করুন"
-
-#: ../src/vinagre-ui.h:116
-msgid "_Statusbar"
-msgstr "স্ট্যাটাস-বার(_S)"
-
-#: ../src/vinagre-ui.h:117
-msgid "Show or hide the statusbar"
-msgstr "স্ট্যাটাস-বার প্রদর্শন করুন অথবা আড়াল করুন"
-
-#: ../src/vinagre-ui.h:120
-msgid "Side _Panel"
-msgstr "পার্শ্ববর্তী প্যানেল (_P)"
-
-#: ../src/vinagre-ui.h:121
-msgid "Show or hide the side panel"
-msgstr "পার্শ্ববর্তী প্যানেল প্রদর্শন করুন অথবা আড়াল করুন"
-
 #: ../src/vinagre-utils.c:75
-#| msgid "The following error has occurred:"
-#| msgid_plural "The following errors have occurred:"
 msgid "An error has occurred:"
 msgstr "ত্রুটি উৎপন্ন হয়েছে:"
 
@@ -784,22 +676,111 @@ msgstr "সঙ্কর্ষণ মুখোপাধ্যায় (sankarshan.m
 msgid "Vinagre Website"
 msgstr "Vinagre ওয়েবসাইট"
 
-#: ../src/vinagre-window.c:413
+#: ../src/vinagre-vnc-connection.c:198
+#, c-format
+msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr ""
+"'shared' শীর্ষক ফ্ল্যাগের মান সঠিক নয়: %d। এই ক্ষেত্রে 0 (০) অথবা 1 (১) মান হওয়া "
+"উচিত। উল্লিখিত মান উপেক্ষা করা হবে।"
+
+#: ../src/vinagre-vnc-tab.c:131
+msgid "Desktop Name:"
+msgstr "ডেস্কটপের নাম:"
+
+#: ../src/vinagre-vnc-tab.c:133
+msgid "Port:"
+msgstr "পোর্ট:"
+
+#: ../src/vinagre-vnc-tab.c:134
+msgid "Dimensions:"
+msgstr "দিকমাত্রা:"
+
+#: ../src/vinagre-vnc-tab.c:253
+msgid "Error connecting to host."
+msgstr "হোস্টের সাথে সংযোগ স্থাপনে ত্রুটি ঘটেছে"
+
+#: ../src/vinagre-vnc-tab.c:289
+#, c-format
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "হোস্ট <i>%s</i>-র সাথে পরিচয় প্রমাণের পদ্ধতি সমর্থিত নয়। (%u)"
+
+#: ../src/vinagre-vnc-tab.c:293
+msgid "Authentication unsupported"
+msgstr "অনুমোদনের পদ্ধতি সমর্থিত নয়"
+
+#: ../src/vinagre-vnc-tab.c:560 ../src/vinagre-vnc-tab.c:577
+msgid "Authentication error"
+msgstr "অনুমোদন সংক্রান্ত সমস্যা"
+
+#: ../src/vinagre-vnc-tab.c:561
+msgid "A username is required in order to access this machine."
+msgstr "এই মেশিনটি ব্যবহারের জন্য ব্যবহারকারীর নাম প্রয়োগ করা আবশ্যক।"
+
+#: ../src/vinagre-vnc-tab.c:578
+msgid "A password is required in order to access this machine."
+msgstr "এই মেশিনটি ব্যবহারের জন্য পাসওয়ার্ড প্রয়োগ করা আবশ্যক।"
+
+#: ../src/vinagre-vnc-tab.c:628
+msgid "S_caling"
+msgstr "মাপ নির্ধারণ (_c)"
+
+#: ../src/vinagre-vnc-tab.c:629
+msgid "Fits the remote screen into the current window size"
+msgstr "দূরবর্তী পর্দাটি বর্তমান উইন্ডোর মাপ অনুযায়ী নির্ধারণ করা হবে"
+
+#: ../src/vinagre-vnc-tab.c:644
+msgid "Does not send mouse and keyboard events"
+msgstr "মাউস ও কি-বোর্ড থেকে উৎপন্ন ইভেন্ট পাঠানো হবে না"
+
+#: ../src/vinagre-vnc-tab.c:657
+msgid "_Original size"
+msgstr "মূল মাপ (_O)"
+
+#: ../src/vinagre-vnc-tab.c:658
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "দূরবর্তী ডেস্কটপের মাপ অনুযায়ী উইন্ডোর মাপ নির্ধারণ করতে ব্যবহৃত হয়"
+
+#: ../src/vinagre-vnc-tab.c:681 ../src/vinagre-vnc-tab.c:749
+#: ../src/vinagre-vnc-tab.c:750
+msgid "Send Ctrl-Alt-Del"
+msgstr "Ctrl-Alt-Del পাঠানো হবে"
+
+#: ../src/vinagre-vnc-tab.c:682
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "দূরবর্তী মেশিনে Ctrl+Alt+Del সংকেত পাঠানো হয়"
+
+#: ../src/vinagre-vnc-tab.c:728 ../src/vinagre-vnc-tab.c:729
+msgid "Scaling"
+msgstr "মাপ নির্ধারণ"
+
+#: ../src/vinagre-vnc-tab.c:738 ../src/vinagre-vnc-tab.c:739
+msgid "Read only"
+msgstr "শুধুমাত্র পাঠযোগ্য"
+
+#: ../src/vinagre-vnc-tab.c:907
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"বর্তমান ইনস্টলেশনের ক্ষেত্রে মাপ নির্ধারণ সমর্থিত নয়।\n"
+"\n"
+"এই বৈশিষ্ট্য সক্রিয় করার প্রণালী সম্বন্ধে জানার জন্য (Vinagre-র সাথে উপলব্ধ) README "
+"ফাইল পড়ুন।"
+
+#: ../src/vinagre-window.c:393
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "vinagre-ui.xml একত্রিত করা যায়নি: %s "
 
-#: ../src/vinagre-window.c:441
+#: ../src/vinagre-window.c:421
 msgid "_Recent connections"
 msgstr "সম্প্রতি ব্যবহৃত সংযোগ (_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:614
+#: ../src/vinagre-window.c:579
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s খুলুন:%d"
-
-#: ../src/vinagre-window.c:797
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "কার্সারের জন্য Ctrl+Alt ব্যবহার করুন"
 
