@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-20 22:35+0100\n"
-"PO-Revision-Date: 2009-03-20 22:36+0100\n"
+"POT-Creation-Date: 2009-06-14 11:19+0200\n"
+"PO-Revision-Date: 2009-06-14 11:20+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "Bokmärken"
 
 #: ../data/vinagre.glade.h:11
 #: ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1062
+#: ../src/vinagre-vnc-tab.c:132
 msgid "Host:"
 msgstr "Värd:"
 
@@ -142,6 +142,7 @@ msgid "_Username:"
 msgstr "_Användarnamn:"
 
 #: ../data/vinagre.glade.h:26
+#: ../src/vinagre-vnc-tab.c:643
 msgid "_View only"
 msgstr "_Visa endast"
 
@@ -207,46 +208,46 @@ msgstr "Öppna fjärrskrivbordsklient"
 msgid "Access your bookmarks"
 msgstr "Kom åt dina bokmärken"
 
-#: ../src/vinagre-bookmarks.c:344
+#: ../src/vinagre-bookmarks.c:327
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Fel vid initiering av bokmärken: %s"
 
-#: ../src/vinagre-bookmarks.c:344
-#: ../src/vinagre-bookmarks.c:459
+#: ../src/vinagre-bookmarks.c:327
+#: ../src/vinagre-bookmarks.c:442
 #: ../src/vinagre-bookmarks-migration.c:133
-#: ../src/vinagre-commands.c:145
+#: ../src/vinagre-commands.c:148
 #: ../src/vinagre-connect.c:277
 #: ../src/vinagre-fav.c:678
 #: ../src/vinagre-main.c:85
 #: ../src/vinagre-main.c:104
-#: ../src/vinagre-window.c:279
+#: ../src/vinagre-window.c:263
 msgid "Unknown error"
 msgstr "Okänt fel"
 
-#: ../src/vinagre-bookmarks.c:351
+#: ../src/vinagre-bookmarks.c:334
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Fel vid initiering av bokmärken: Filen verkar vara tom"
 
-#: ../src/vinagre-bookmarks.c:358
+#: ../src/vinagre-bookmarks.c:341
 msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "Fel vid initiering av bokmärken: Filen är inte en bokmärkesfil för vinagre"
 
-#: ../src/vinagre-bookmarks.c:420
-#: ../src/vinagre-bookmarks.c:427
+#: ../src/vinagre-bookmarks.c:403
+#: ../src/vinagre-bookmarks.c:410
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "Fel vid sparande av bokmärken: Misslyckades med att skapa XML-strukturen"
 
-#: ../src/vinagre-bookmarks.c:434
-#: ../src/vinagre-bookmarks.c:441
+#: ../src/vinagre-bookmarks.c:417
+#: ../src/vinagre-bookmarks.c:424
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "Fel vid sparande av bokmärken: Misslyckades med att initiera XML-strukturen"
 
-#: ../src/vinagre-bookmarks.c:450
+#: ../src/vinagre-bookmarks.c:433
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "Fel vid sparande av bokmärken: Misslyckades med att färdigställa XML-strukturen"
 
-#: ../src/vinagre-bookmarks.c:459
+#: ../src/vinagre-bookmarks.c:442
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Fel när bokmärken sparades: %s"
@@ -302,52 +303,52 @@ msgid "Invalid name for this folder"
 msgstr "Ogiltigt namn för denna mapp"
 
 #: ../src/vinagre-bookmarks-ui.c:89
-#: ../src/vinagre-bookmarks-ui.c:191
+#: ../src/vinagre-bookmarks-ui.c:194
 #, c-format
 msgid "The name \"%s\" is already used in this folder. Please use a different name."
 msgstr "Namnet \"%s\" används redan i denna mapp. Använd ett annat namn."
 
 #: ../src/vinagre-bookmarks-ui.c:90
-#: ../src/vinagre-bookmarks-ui.c:181
-#: ../src/vinagre-bookmarks-ui.c:192
+#: ../src/vinagre-bookmarks-ui.c:184
+#: ../src/vinagre-bookmarks-ui.c:195
 msgid "Invalid name for this item"
 msgstr "Ogiltigt namn för detta objekt"
 
-#: ../src/vinagre-bookmarks-ui.c:292
+#: ../src/vinagre-bookmarks-ui.c:298
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Är du säker på att du vill ta bort <i>%s</i> från dina bokmärken?"
 
-#: ../src/vinagre-bookmarks-ui.c:297
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Folder?"
 msgstr "Ta bort mapp?"
 
-#: ../src/vinagre-bookmarks-ui.c:298
+#: ../src/vinagre-bookmarks-ui.c:304
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "Observera att alla dess undermappar och objekt även kommer att tas bort."
 
-#: ../src/vinagre-bookmarks-ui.c:303
+#: ../src/vinagre-bookmarks-ui.c:309
 msgid "Remove Item?"
 msgstr "Ta bort objekt?"
 
-#: ../src/vinagre-bookmarks-ui.c:320
+#: ../src/vinagre-bookmarks-ui.c:326
 msgid "Error removing bookmark: Entry not found"
 msgstr "Fel vid borttagning av bokmärke: Posten hittades inte"
 
-#: ../src/vinagre-bookmarks-ui.c:337
+#: ../src/vinagre-bookmarks-ui.c:343
 msgid "New Folder"
 msgstr "Ny mapp"
 
-#: ../src/vinagre-commands.c:113
+#: ../src/vinagre-commands.c:115
 msgid "Choose the file"
 msgstr "Välj filen"
 
-#: ../src/vinagre-commands.c:124
-#: ../src/vinagre-tab.c:1152
+#: ../src/vinagre-commands.c:126
+#: ../src/vinagre-tab.c:703
 msgid "Supported formats"
 msgstr "Format som stöds"
 
-#: ../src/vinagre-commands.c:156
+#: ../src/vinagre-commands.c:159
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Följande fil kunde inte öppnas:"
@@ -362,25 +363,20 @@ msgstr "Fel när historikfil sparades: %s"
 msgid "Choose a VNC Server"
 msgstr "Välj en VNC-server"
 
-#: ../src/vinagre-connection.c:601
+#: ../src/vinagre-connection.c:556
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokollet %s stöds inte."
 
-#: ../src/vinagre-connection.c:708
+#: ../src/vinagre-connection.c:669
 msgid "Could not open the file."
 msgstr "Kunde inte öppna filen."
 
-#: ../src/vinagre-connection.c:727
+#: ../src/vinagre-connection.c:688
 msgid "Could not parse the file."
 msgstr "Kunde inte tolka filen."
 
-#: ../src/vinagre-connection.c:772
-#, c-format
-msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr "Felaktigt värde för \"shared\"-flagga: %d. Det ska vara 0 eller 1. Ignorerar det."
-
-#: ../src/vinagre-connection.c:778
+#: ../src/vinagre-connection.c:733
 msgid "Could not find the host address in the file."
 msgstr "Kunde inte hitta värdadressen i filen."
 
@@ -438,21 +434,30 @@ msgstr "Misslyckades med att slå upp avahi-värdnamn: %s\n"
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Misslyckades med att söka efter värdar: %s\n"
 
-#: ../src/vinagre-notebook.c:168
+#: ../src/vinagre-notebook.c:399
 #, c-format
 msgid "Connection to host <i>%s</i> was closed."
 msgstr "Anslutningen till värden <i>%s</i> stängdes."
 
-#: ../src/vinagre-notebook.c:170
+#: ../src/vinagre-notebook.c:401
 msgid "Connection closed"
 msgstr "Anslutningen stängdes"
 
-#: ../src/vinagre-notebook.c:194
+#: ../src/vinagre-notebook.c:417
+#, c-format
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "Autentisering mot värden <i>%s</i> misslyckades"
+
+#: ../src/vinagre-notebook.c:423
+msgid "Authentication failed"
+msgstr "Autentisering misslyckades"
+
+#: ../src/vinagre-notebook.c:460
 msgid "Connecting..."
 msgstr "Ansluter..."
 
-#: ../src/vinagre-notebook.c:221
-#: ../src/vinagre-tab.c:878
+#: ../src/vinagre-notebook.c:487
+#: ../src/vinagre-tab.c:379
 msgid "Close connection"
 msgstr "Stäng anslutning"
 
@@ -460,110 +465,37 @@ msgstr "Stäng anslutning"
 msgid "Cannot initialize preferences manager."
 msgstr "Kan inte initiera inställningshanteraren."
 
-#: ../src/vinagre-tab.c:322
-msgid "Error connecting to host."
-msgstr "Fel vid anslutning till värden."
-
-#: ../src/vinagre-tab.c:354
-#, c-format
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "Autentisering mot värden <i>%s</i> misslyckades"
-
-#: ../src/vinagre-tab.c:360
-msgid "Authentication failed"
-msgstr "Autentisering misslyckades"
-
-#: ../src/vinagre-tab.c:382
-#, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "Autentiseringsmetod mot värden <i>%s</i> stöds inte. (%u)"
-
-#: ../src/vinagre-tab.c:386
-msgid "Authentication unsupported"
-msgstr "Autentisering stöds inte"
-
-#: ../src/vinagre-tab.c:460
+#: ../src/vinagre-tab.c:329
 msgid "Error saving recent connection."
 msgstr "Fel när senaste anslutningen sparades."
 
-#: ../src/vinagre-tab.c:492
-msgid "Error saving the credential on the keyring."
-msgstr "Fel när inloggningsuppgifter sparades i nyckelringen."
-
-#: ../src/vinagre-tab.c:747
-#: ../src/vinagre-tab.c:764
-msgid "Authentication error"
-msgstr "Autentiseringsfel"
-
-#: ../src/vinagre-tab.c:748
-msgid "A username is required in order to access this machine."
-msgstr "Ett användarnamn krävs för att komma åt denna dator."
-
-#: ../src/vinagre-tab.c:765
-msgid "A password is required in order to access this machine."
-msgstr "Ett lösenord krävs för att komma åt denna dator."
-
-#: ../src/vinagre-tab.c:891
+#: ../src/vinagre-tab.c:393
 msgid "Minimize window"
 msgstr "Minimera fönster"
 
-#: ../src/vinagre-tab.c:906
-#: ../src/vinagre-tab.c:907
-msgid "Scaling"
-msgstr "Skalning"
-
-#: ../src/vinagre-tab.c:916
-#: ../src/vinagre-tab.c:917
-msgid "Read only"
-msgstr "Skrivskyddad"
-
 #. Machine menu
-#: ../src/vinagre-tab.c:927
-#: ../src/vinagre-tab.c:928
-#: ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:409
+#: ../src/vinagre-tab.c:410
+#: ../src/vinagre-ui.h:100
 msgid "Take screenshot"
 msgstr "Ta skärmbild"
 
-#: ../src/vinagre-tab.c:936
-#: ../src/vinagre-tab.c:937
-#: ../src/vinagre-ui.h:88
-msgid "Send Ctrl-Alt-Del"
-msgstr "Skicka Ctrl-Alt-Del"
+#: ../src/vinagre-tab.c:641
+msgid "Error saving the credentials on the keyring."
+msgstr "Fel när inloggningsuppgifter sparades i nyckelringen."
 
-#: ../src/vinagre-tab.c:1061
-msgid "Desktop Name:"
-msgstr "Skrivbordsnamn:"
-
-#: ../src/vinagre-tab.c:1063
-msgid "Port:"
-msgstr "Port:"
-
-#: ../src/vinagre-tab.c:1064
-msgid "Dimensions:"
-msgstr "Dimensioner:"
-
-#: ../src/vinagre-tab.c:1130
+#: ../src/vinagre-tab.c:681
 msgid "Could not get a screenshot of the connection."
 msgstr "Kunde inte få en skärmbild på anslutningen."
 
-#: ../src/vinagre-tab.c:1138
+#: ../src/vinagre-tab.c:689
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Skärmbild för %s"
 
-#: ../src/vinagre-tab.c:1141
+#: ../src/vinagre-tab.c:692
 msgid "Save Screenshot"
 msgstr "Spara skärmbild"
-
-#: ../src/vinagre-tab.c:1205
-msgid ""
-"Scaling is not supported on this installation.\n"
-"\n"
-"Read the README file (shipped with Vinagre) in order to know how to enable this feature."
-msgstr ""
-"Skalning stöds inte för denna installation.\n"
-"\n"
-"Läs filen README (kommer med Vinagre) för information om hur man aktiverar denna funktion."
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -644,86 +576,58 @@ msgstr "Öppna handboken för Vinagre"
 msgid "About this application"
 msgstr "Om det här programmet"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:70
+msgid "_Toolbar"
+msgstr "_Verktygsrad"
+
+#: ../src/vinagre-ui.h:71
+msgid "Show or hide the toolbar"
+msgstr "Visa eller dölj verktygsraden"
+
+#: ../src/vinagre-ui.h:74
+msgid "_Statusbar"
+msgstr "_Statusrad"
+
+#: ../src/vinagre-ui.h:75
+msgid "Show or hide the statusbar"
+msgstr "Visa eller dölj statusraden"
+
+#: ../src/vinagre-ui.h:78
+msgid "Side _Panel"
+msgstr "Sido_panel"
+
+#: ../src/vinagre-ui.h:79
+msgid "Show or hide the side panel"
+msgstr "Visa eller dölj sidopanelen"
+
+#: ../src/vinagre-ui.h:87
 msgid "Close the current connection"
 msgstr "Stäng aktuell anslutning"
 
-#: ../src/vinagre-ui.h:73
+#: ../src/vinagre-ui.h:88
 msgid "C_lose All"
 msgstr "S_täng alla"
 
-#: ../src/vinagre-ui.h:74
+#: ../src/vinagre-ui.h:89
 msgid "Close all active connections"
 msgstr "Stäng alla aktiva anslutningar"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:77
+#: ../src/vinagre-ui.h:92
 msgid "_Add to bookmarks"
 msgstr "_Lägg till bokmärke"
 
-#: ../src/vinagre-ui.h:78
+#: ../src/vinagre-ui.h:93
 msgid "Add current connection to your bookmarks"
 msgstr "Lägg till aktuell anslutning till dina bokmärken"
 
-#: ../src/vinagre-ui.h:86
+#: ../src/vinagre-ui.h:101
 msgid "Take a screenshot of active connection"
 msgstr "Ta en skärmbild på aktiv anslutning"
 
-#: ../src/vinagre-ui.h:89
-msgid "Send Ctrl+Alt+Del to active connection"
-msgstr "Skicka Ctrl+Alt+Del till aktiv anslutning"
-
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:105
 msgid "View the current machine in full screen"
 msgstr "Visa den aktuella datorn i helskärm"
-
-#: ../src/vinagre-ui.h:95
-msgid "_Original size"
-msgstr "_Ursprunglig storlek"
-
-#: ../src/vinagre-ui.h:96
-msgid "Adjusts the window to the remote desktop's size"
-msgstr "Justerar fönstret till storleken för fjärrskrivbordet"
-
-#: ../src/vinagre-ui.h:102
-msgid "S_caling"
-msgstr "Ska_lning"
-
-#: ../src/vinagre-ui.h:103
-msgid "Fit the remote screen into the current window size"
-msgstr "Passa in fjärrskärmen i den aktuella fönsterstorleken"
-
-#: ../src/vinagre-ui.h:105
-msgid "_Read only"
-msgstr "S_krivskyddad"
-
-#: ../src/vinagre-ui.h:106
-msgid "Disable mouse and keyboard"
-msgstr "Inaktivera mus och tangentbord"
-
-#: ../src/vinagre-ui.h:112
-msgid "_Toolbar"
-msgstr "_Verktygsrad"
-
-#: ../src/vinagre-ui.h:113
-msgid "Show or hide the toolbar"
-msgstr "Visa eller dölj verktygsraden"
-
-#: ../src/vinagre-ui.h:116
-msgid "_Statusbar"
-msgstr "_Statusrad"
-
-#: ../src/vinagre-ui.h:117
-msgid "Show or hide the statusbar"
-msgstr "Visa eller dölj statusraden"
-
-#: ../src/vinagre-ui.h:120
-msgid "Side _Panel"
-msgstr "Sido_panel"
-
-#: ../src/vinagre-ui.h:121
-msgid "Show or hide the side panel"
-msgstr "Visa eller dölj sidopanelen"
 
 #: ../src/vinagre-utils.c:75
 msgid "An error has occurred:"
@@ -757,25 +661,118 @@ msgstr ""
 msgid "Vinagre Website"
 msgstr "Webbplats för Vinagre"
 
-#: ../src/vinagre-window.c:413
+#: ../src/vinagre-vnc-connection.c:198
+#, c-format
+msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr "Felaktigt värde för \"shared\"-flagga: %d. Det ska vara 0 eller 1. Ignorerar det."
+
+#: ../src/vinagre-vnc-tab.c:131
+msgid "Desktop Name:"
+msgstr "Skrivbordsnamn:"
+
+#: ../src/vinagre-vnc-tab.c:133
+msgid "Port:"
+msgstr "Port:"
+
+#: ../src/vinagre-vnc-tab.c:134
+msgid "Dimensions:"
+msgstr "Dimensioner:"
+
+#: ../src/vinagre-vnc-tab.c:253
+msgid "Error connecting to host."
+msgstr "Fel vid anslutning till värden."
+
+#: ../src/vinagre-vnc-tab.c:289
+#, c-format
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "Autentiseringsmetod mot värden <i>%s</i> stöds inte. (%u)"
+
+#: ../src/vinagre-vnc-tab.c:293
+msgid "Authentication unsupported"
+msgstr "Autentisering stöds inte"
+
+#: ../src/vinagre-vnc-tab.c:560
+#: ../src/vinagre-vnc-tab.c:577
+msgid "Authentication error"
+msgstr "Autentiseringsfel"
+
+#: ../src/vinagre-vnc-tab.c:561
+msgid "A username is required in order to access this machine."
+msgstr "Ett användarnamn krävs för att komma åt denna dator."
+
+#: ../src/vinagre-vnc-tab.c:578
+msgid "A password is required in order to access this machine."
+msgstr "Ett lösenord krävs för att komma åt denna dator."
+
+#: ../src/vinagre-vnc-tab.c:628
+msgid "S_caling"
+msgstr "Ska_lning"
+
+#: ../src/vinagre-vnc-tab.c:629
+msgid "Fits the remote screen into the current window size"
+msgstr "Passar in fjärrskärmen i den aktuella fönsterstorleken"
+
+#: ../src/vinagre-vnc-tab.c:644
+msgid "Does not send mouse and keyboard events"
+msgstr "Skickar inte mus- och tangentbordshändelser"
+
+#: ../src/vinagre-vnc-tab.c:657
+msgid "_Original size"
+msgstr "_Ursprunglig storlek"
+
+#: ../src/vinagre-vnc-tab.c:658
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "Justerar fönstret till storleken för fjärrskrivbordet"
+
+#: ../src/vinagre-vnc-tab.c:681
+#: ../src/vinagre-vnc-tab.c:749
+#: ../src/vinagre-vnc-tab.c:750
+msgid "Send Ctrl-Alt-Del"
+msgstr "Skicka Ctrl-Alt-Del"
+
+#: ../src/vinagre-vnc-tab.c:682
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "Skickar Ctrl+Alt+Del till fjärrdatorn"
+
+#: ../src/vinagre-vnc-tab.c:728
+#: ../src/vinagre-vnc-tab.c:729
+msgid "Scaling"
+msgstr "Skalning"
+
+#: ../src/vinagre-vnc-tab.c:738
+#: ../src/vinagre-vnc-tab.c:739
+msgid "Read only"
+msgstr "Skrivskyddad"
+
+#: ../src/vinagre-vnc-tab.c:907
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable this feature."
+msgstr ""
+"Skalning stöds inte för denna installation.\n"
+"\n"
+"Läs filen README (kommer med Vinagre) för information om hur man aktiverar denna funktion."
+
+#: ../src/vinagre-window.c:393
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Kunde inte sammanfoga vinagre-ui.xml: %s"
 
-#: ../src/vinagre-window.c:441
+#: ../src/vinagre-window.c:421
 msgid "_Recent connections"
 msgstr "_Tidigare anslutningar"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:614
+#: ../src/vinagre-window.c:579
 #, c-format
 msgid "Open %s:%d"
 msgstr "Öppna %s:%d"
 
-#: ../src/vinagre-window.c:797
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "Tryck på Ctrl+Alt för att släppa muspekaren"
-
+#~ msgid "_Read only"
+#~ msgstr "S_krivskyddad"
+#~ msgid "Press Ctrl+Alt to release the cursor"
+#~ msgstr "Tryck på Ctrl+Alt för att släppa muspekaren"
 #~ msgid "<b>Editing a bookmark</b>"
 #~ msgstr "<b>Redigering av bokmärke</b>"
 #~ msgid "<b>Enter a name for this connection</b>"
