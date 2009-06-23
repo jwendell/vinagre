@@ -1,4 +1,4 @@
-.TH VINAGRE "1" "November 23rd 2008" "User Commands"
+.TH VINAGRE "1" "June 23rd 2009" "User Commands"
 .SH "NAME"
 vinagre \- a VNC client for the GNOME Desktop
 .SH "SYNOPSYS"
@@ -50,7 +50,12 @@ Run 'vinagre \fB\-\-help\fR' to see a full list of available command line option
 The following operands are supported:
 .TP
 \fB\fB\fIserver\fR[:\fIport\fR]\fR\fR
-Specifies the VNC server to connect with\&. The VNC server name or IP address is followed by a colon (:) character, and then followed by the VNC port number\&. The port specification is optional\&. If it is not specified, default value of 5900 will be used\&. If the value is lower than 1024, it will add 5900\&. For example, ":0" means "5900" and ":1" means ":5901"\&.
+Specifies the VNC server to connect to\&. The VNC server can be either a
+hostname, or an IP address. If the server is an IPv6 address, it must be
+enclosed by square brackets. The address can optionally be followed by a
+colon (:) character and the VNC port number\&. If a port is not specified,
+default value of 5900 will be used\&. If the value is lower than 1024, 5900
+will be added to it\&. For example, ":0" means "5900" and ":1" means ":5901"\&.
 .SH "EXAMPLES"
 .PP
 \fBExample 1: Start vinagre from the command line\fR
@@ -74,7 +79,21 @@ example% \fBvinagre \-\-new-window\fR
 example% \fBvinagre snoopy:5900\fR
 .fi
 .PP
-\fBExample 4: Connect to a VNC server specified by a \&.vnc file\fR
+\fBExample 4: Connect to a specified IPv4 address and port\fR
+.PP
+.PP
+.nf
+example% \fBvinagre 192.168.1.35:2700
+.fi
+.PP
+\fBExample 5: Connect to a specified IPv6 address and port\fR
+.PP
+.PP
+.nf
+example% \fBvinagre [2001:0db8:0:0:0:0:1428:57ab]:2700
+.fi
+.PP
+\fBExample 6: Connect to a VNC server specified by a \&.vnc file\fR
 .PP
 .PP
 .nf
