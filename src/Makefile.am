@@ -2,10 +2,6 @@ SUBDIRS = view
 
 NULL = 
 
-##############################
-# The main binary
-##############################
-
 INCLUDES = 						\
 	-DBINDIR=\"$(bindir)\"			 	\
 	-DDATADIR=\"$(datadir)\"			\
@@ -18,16 +14,19 @@ INCLUDES = 						\
 	$(AVAHI_CFLAGS)					\
 	$(NULL)
 
-bin_PROGRAMS = vinagre
+##############################
+# The main library
+##############################
 
-vinagre_SOURCES = \
+noinst_LTLIBRARIES = libvinagre.la
+
+libvinagre_la_SOURCES = \
 	vinagre-commands.c vinagre-commands.h			\
 	vinagre-connect.c vinagre-connect.h			\
 	vinagre-connection.c vinagre-connection.h		\
 	vinagre-vnc-connection.c vinagre-vnc-connection.h	\
 	vinagre-fav.c vinagre-fav.h				\
 	vinagre-bookmarks.c vinagre-bookmarks.h			\
-	vinagre-main.c 						\
 	vinagre-notebook.c vinagre-notebook.h			\
 	vinagre-tab.c vinagre-tab.h				\
 	vinagre-vnc-tab.c vinagre-vnc-tab.h			\
@@ -46,14 +45,27 @@ vinagre_SOURCES = \
 	$(NULL)
 
 if AVAHI
-vinagre_SOURCES += vinagre-mdns.h vinagre-mdns.c
+libvinagre_la_SOURCES += vinagre-mdns.h vinagre-mdns.c
 endif
+
+libvinagre_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
+
+libvinagre_la_LIBADD = view/libview.la
+
+##############################
+# The main binary
+##############################
+
+bin_PROGRAMS = vinagre
+
+vinagre_SOURCES = \
+  vinagre-main.c
 
 vinagre_LDADD = \
 	$(VINAGRE_LIBS)		\
 	$(AVAHI_LIBS)		\
 	$(GTKVNC_LIBS)		\
-	view/libview.la		\
+	libvinagre.la \
 	$(NULL)
 
 ##############################
@@ -153,7 +165,7 @@ if TELEPATHY
 
 INCLUDES += $(TELEPATHY_CFLAGS)
 vinagre_LDADD += $(TELEPATHY_LIBS)
-vinagre_SOURCES += \
+libvinagre_la_SOURCES += \
 	vinagre-tubes-manager.c vinagre-tubes-manager.h		\
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
 	$(NULL)
@@ -173,6 +185,8 @@ DISTCLEANFILES =		\
 
 EXTRA_DIST =					\
 	GNOME_VinagreApplet.server.in.in	\
+  libvinagre.a \
+  libvinagre.la \
 	$(NULL)
 
 dist-hook:
