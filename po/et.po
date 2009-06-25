@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-03-20 20:31+0000\n"
-"PO-Revision-Date: 2009-03-26 18:32+0300\n"
+"POT-Creation-Date: 2009-06-04 15:04+0000\n"
+"PO-Revision-Date: 2009-06-24 23:05+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -247,7 +247,6 @@ msgid ""
 "The name \"%s\" is already used in this folder. Please use a different name."
 msgstr "Nime \"%s\" on selles kaustas juba kasutatud. Vali muu nimi."
 
-#| msgid "Invalid name for this folder"
 msgid "Invalid name for this item"
 msgstr "Kirje nimi on sobimatu"
 
@@ -297,13 +296,6 @@ msgstr "Faili pole võimalik avada."
 
 msgid "Could not parse the file."
 msgstr "Faili pole võimalik töödelda."
-
-#, c-format
-msgid ""
-"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr ""
-" 'shared' lipul on sobimatu väärtus: %d. See peaks olema 0 või 1. Lippu "
-"eiratakse."
 
 msgid "Could not find the host address in the file."
 msgstr "Failist ei leitud hosti aadressi."
@@ -357,6 +349,13 @@ msgstr "Ühendus hostiga <i>%s</i> suleti."
 msgid "Connection closed"
 msgstr "Ühendus suleti"
 
+#, c-format
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "Autentimine hostile \"%s\" nurjus"
+
+msgid "Authentication failed"
+msgstr "Autentimine nurjus"
+
 msgid "Connecting..."
 msgstr "Ühendumine..."
 
@@ -366,62 +365,19 @@ msgstr "Ühenduse sulgemine"
 msgid "Cannot initialize preferences manager."
 msgstr "Eelistuste haldurit pole võimalik lähtestada."
 
-msgid "Error connecting to host."
-msgstr "Viga hostiga ühendumisel."
-
-#, c-format
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "Autentimine hostile \"%s\" nurjus"
-
-msgid "Authentication failed"
-msgstr "Autentimine nurjus"
-
-#, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "Host <i>%s</i> ei toeta kasutatud autentimismeetodit. (%u)"
-
-msgid "Authentication unsupported"
-msgstr "Toetamata autentimismeetod"
-
 msgid "Error saving recent connection."
 msgstr "Viga hiljutise ühenduse salvestamisel."
 
-msgid "Error saving the credential on the keyring."
-msgstr "Viga tõendite salvestamisel võtmerõngasse."
-
-msgid "Authentication error"
-msgstr "Viga autentimisel"
-
-msgid "A username is required in order to access this machine."
-msgstr "Ligipääsuks sellele masinale on vaja kasutajanime."
-
-msgid "A password is required in order to access this machine."
-msgstr "Sellele masinale ligipääsuks on vaja parooli."
-
 msgid "Minimize window"
 msgstr "Minimeeri aken"
-
-msgid "Scaling"
-msgstr "Skaleerimine"
-
-msgid "Read only"
-msgstr "Kirjutuskaitsega"
 
 #. Machine menu
 msgid "Take screenshot"
 msgstr "Võta ekraanitõmmis"
 
-msgid "Send Ctrl-Alt-Del"
-msgstr "Saada Ctrl+Alt+Del"
-
-msgid "Desktop Name:"
-msgstr "Töölaua nimi:"
-
-msgid "Port:"
-msgstr "Port:"
-
-msgid "Dimensions:"
-msgstr "Mõõtmed:"
+#| msgid "Error saving the credential on the keyring."
+msgid "Error saving the credentials on the keyring."
+msgstr "Viga tõendite salvestamisel võtmerõngasse."
 
 msgid "Could not get a screenshot of the connection."
 msgstr "Ühendusest pole võimalik ekraanitõmmist võtta."
@@ -432,17 +388,6 @@ msgstr "Masina %s ekraanitõmmis"
 
 msgid "Save Screenshot"
 msgstr "Ekraanitõmmise salvestamine"
-
-msgid ""
-"Scaling is not supported on this installation.\n"
-"\n"
-"Read the README file (shipped with Vinagre) in order to know how to enable "
-"this feature."
-msgstr ""
-"Selles paigalduses ei ole skaleerimine toetatud.\n"
-"\n"
-"Selle võimaluse sisselülitamist on kirjeldatud README failis (tuleb "
-"Vinagre'ga kaasa)."
 
 #. Toplevel
 msgid "_Machine"
@@ -504,6 +449,24 @@ msgstr "Vinage käsiraamatu avamine"
 msgid "About this application"
 msgstr "Sellest rakendusest lähemalt"
 
+msgid "_Toolbar"
+msgstr "_Tööriistariba"
+
+msgid "Show or hide the toolbar"
+msgstr "Tööriistariba näitamine või peitmine"
+
+msgid "_Statusbar"
+msgstr "_Olekuriba"
+
+msgid "Show or hide the statusbar"
+msgstr "Olekuriba näitamine või peitmine"
+
+msgid "Side _Panel"
+msgstr "Külg_paneel"
+
+msgid "Show or hide the side panel"
+msgstr "Külgpaneeli näitamine või peitmine"
+
 msgid "Close the current connection"
 msgstr "Käesoleva ühenduse sulgemine"
 
@@ -523,47 +486,8 @@ msgstr "Käesoleva ühenduse lisamine järjehoidjate hulka"
 msgid "Take a screenshot of active connection"
 msgstr "Aktiivsest ühendusest ekraanitõmmise võtmine"
 
-msgid "Send Ctrl+Alt+Del to active connection"
-msgstr "Kõigile aktiivsetele ühendustele Ctrl+Alt+Del saatmine"
-
 msgid "View the current machine in full screen"
 msgstr "Käesoleva masina vaatamine täisekraanil"
-
-msgid "_Original size"
-msgstr "_Algne suurus"
-
-msgid "Adjusts the window to the remote desktop's size"
-msgstr "Akna suurus sobitatakse kaugtöölaua suurusega"
-
-msgid "S_caling"
-msgstr "_Skaleerimine"
-
-msgid "Fit the remote screen into the current window size"
-msgstr "Kaugekraani sobitamine käesolevasse aknasse"
-
-msgid "_Read only"
-msgstr "_Kirjutuskaitsega"
-
-msgid "Disable mouse and keyboard"
-msgstr "Hiire ja klaviatuuri keelamine"
-
-msgid "_Toolbar"
-msgstr "_Tööriistariba"
-
-msgid "Show or hide the toolbar"
-msgstr "Tööriistariba näitamine või peitmine"
-
-msgid "_Statusbar"
-msgstr "_Olekuriba"
-
-msgid "Show or hide the statusbar"
-msgstr "Olekuriba näitamine või peitmine"
-
-msgid "Side _Panel"
-msgstr "Külg_paneel"
-
-msgid "Show or hide the side panel"
-msgstr "Külgpaneeli näitamine või peitmine"
 
 msgid "An error has occurred:"
 msgstr "Esines järgmine viga:"
@@ -610,6 +534,82 @@ msgid "Vinagre Website"
 msgstr "Vinagre veebisait"
 
 #, c-format
+msgid ""
+"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr ""
+" 'shared' lipul on sobimatu väärtus: %d. See peaks olema 0 või 1. Lippu "
+"eiratakse."
+
+msgid "Desktop Name:"
+msgstr "Töölaua nimi:"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid "Dimensions:"
+msgstr "Mõõtmed:"
+
+msgid "Error connecting to host."
+msgstr "Viga hostiga ühendumisel."
+
+#, c-format
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "Host <i>%s</i> ei toeta kasutatud autentimismeetodit. (%u)"
+
+msgid "Authentication unsupported"
+msgstr "Toetamata autentimismeetod"
+
+msgid "Authentication error"
+msgstr "Viga autentimisel"
+
+msgid "A username is required in order to access this machine."
+msgstr "Ligipääsuks sellele masinale on vaja kasutajanime."
+
+msgid "A password is required in order to access this machine."
+msgstr "Sellele masinale ligipääsuks on vaja parooli."
+
+msgid "S_caling"
+msgstr "_Skaleerimine"
+
+#| msgid "Fit the remote screen into the current window size"
+msgid "Fits the remote screen into the current window size"
+msgstr "Kaugekraani sobitamine käesolevasse aknasse"
+
+#| msgid "Disable mouse and keyboard"
+msgid "Does not send mouse and keyboard events"
+msgstr "Hiire- ja klaviatuurisündmuseid ei saadeta"
+
+msgid "_Original size"
+msgstr "_Algne suurus"
+
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "Akna suurus sobitatakse kaugtöölaua suurusega"
+
+msgid "Send Ctrl-Alt-Del"
+msgstr "Saada Ctrl+Alt+Del"
+
+#| msgid "Send Ctrl+Alt+Del to active connection"
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "Kaugmasinale Ctrl+Alt+Del saatmine"
+
+msgid "Scaling"
+msgstr "Skaleerimine"
+
+msgid "Read only"
+msgstr "Kirjutuskaitsega"
+
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"Selles paigalduses ei ole skaleerimine toetatud.\n"
+"\n"
+"Selle võimaluse sisselülitamist on kirjeldatud README failis (tuleb "
+"Vinagre'ga kaasa)."
+
+#, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Faili vinagre-ui.xml pole võimalik ühendada: %s"
 
@@ -620,41 +620,3 @@ msgstr "_Hiljutised ühendused"
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d avamine"
-
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "Kursori vabastamiseks vajuta Ctrl+Alt"
-
-#~ msgid "<b>Editing a bookmark</b>"
-#~ msgstr "<b>Järjehoidja redigeerimine</b>"
-
-#~ msgid "<b>Enter a name for this connection</b>"
-#~ msgstr "<b>Sisesta sellele ühendusele nimi</b>"
-
-#~ msgid "Editing a bookmark"
-#~ msgstr "Järjehoidja redigeerimine"
-
-#~ msgid "Saving to bookmarks"
-#~ msgstr "Järjehoidjatesse salvestamine"
-
-#~ msgid "_Bookmark name:"
-#~ msgstr "_Järjehoidja nimi:"
-
-#~ msgid "Confirm removal?"
-#~ msgstr "Eemaldamise kinnitus"
-
-#~ msgid "Error while removing %s from bookmarks: %s"
-#~ msgstr "Viga %s eemaldamisel järjehoidjate seast: %s"
-
-#~ msgid ""
-#~ "Scaling does not work properly on composited windows. Disable the visual "
-#~ "effects and try again."
-#~ msgstr ""
-#~ "Skaleerimine ei tööta komposiitakendes õigesti. Keela kuvaefektid ja "
-#~ "proovi uuesti."
-
-#~ msgid ""
-#~ "<b>In order to connect on this machine, a password is required. Please "
-#~ "supply it.</b>"
-#~ msgstr ""
-#~ "<b>Selle masinaga ühenduse loomiseks on vaja parooli. Palun sisesta see.</"
-#~ "b>"
