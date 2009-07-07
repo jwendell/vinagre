@@ -127,18 +127,43 @@ if test "x$enable_rebuilds" = "xyes" && \
 fi
 AC_SUBST(REBUILD)
 
+# Plugins
 #*******************************************************************************
+#
+dnl active plugins for vinagre.schemas
+ACTIVE_PLUGINS="dummy"
+AC_SUBST(ACTIVE_PLUGINS)
 
+VINAGRE_IMPLIB=""
+PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
+LOADER_LIBTOOL_FLAGS="-module -avoid-version"
+
+AC_SUBST(VINAGRE_IMPLIB)
+AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
+AC_SUBST(LOADER_LIBTOOL_FLAGS)
+
+VINAGRE_PLUGINS_DATA_DIR="$datadir/vinagre/plugins"
+AC_SUBST(VINAGRE_PLUGINS_DATA_DIR)
+
+VINAGRE_PLUGINS_LIBS_DIR="$libdir/vinagre/plugins"
+AC_SUBST(VINAGRE_PLUGINS_LIBS_DIR)
+
+#*******************************************************************************
 AC_OUTPUT([
 Makefile
 data/Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
 data/icons/Makefile
+data/pixmaps/Makefile
 help/Makefile
 po/Makefile.in
-src/Makefile
-src/view/Makefile
+plugin-loaders/Makefile
+plugin-loaders/c/Makefile
+plugins/Makefile
+plugins/dummy/Makefile
+vinagre/Makefile
+vinagre/view/Makefile
 ])
 
 #*******************************************************************************

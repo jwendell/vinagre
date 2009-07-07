@@ -3,8 +3,8 @@ NULL =
 INCLUDES =                                  \
         -I$(top_srcdir)                     \
         -I$(top_builddir)                   \
-        -I$(top_srcdir)/src                 \
-        -I$(top_builddir)/src               \
+        -I$(top_srcdir)/vinagre             \
+        -I$(top_builddir)/vinagre           \
         $(VINAGRE_CFLAGS)                   \
         $(NULL)
 

@@ -1,4 +1,5 @@
-SUBDIRS = src help po data
+#SUBDIRS = vinagre plugins help po data 
+SUBDIRS = vinagre help po data 
 
 vinagredocdir = ${datadir}/doc/vinagre
 vinagredoc_DATA = \

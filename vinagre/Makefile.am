@@ -39,6 +39,7 @@ libvinagre_la_SOURCES = \
   \
   vinagre-debug.h vinagre-debug.c \
   vinagre-dirs.h vinagre-dirs.c \
+  vinagre-object-module.h vinagre-object-module.c \
   vinagre-plugin.h vinagre-plugin.c \
   vinagre-plugin-manager.h vinagre-plugin-manager.c \
   vinagre-plugin-info.h vinagre-plugin-info-priv.h vinagre-plugin-info.c \
@@ -132,7 +133,7 @@ vinagre_applet_LDADD =			\
 ##############################
 
 vinagre_enum_headers = \
-	$(top_srcdir)/src/vinagre-connection.h \
+	$(top_srcdir)/vinagre/vinagre-connection.h \
 	$(NULL)
 
 vinagre-enums.c: @REBUILD@ $(vinagre_enum_headers)
