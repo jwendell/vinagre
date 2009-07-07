@@ -35,10 +35,11 @@
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
 #include "vinagre-bacon.h"
+#include "vinagre-plugins-engine.h"
+
 #ifdef HAVE_TELEPATHY
 #include "vinagre-tubes-manager.h"
 #endif
-#include <vncdisplay.h>
 
 #ifdef VINAGRE_ENABLE_AVAHI
 #include "vinagre-mdns.h"
@@ -52,9 +53,6 @@ static gboolean new_window = FALSE;
 
 static const GOptionEntry options [] =
 {
-  { "file", 'f', 0, G_OPTION_ARG_FILENAME_ARRAY, &files,
-    N_("Opens a .vnc file"), N_("filename")},
-
   { "new-window", 'n', 0, G_OPTION_ARG_NONE, &new_window,
     N_("Create a new toplevel window in an existing instance of vinagre"), NULL },
 
@@ -125,25 +123,37 @@ vinagre_main_process_command_line (VinagreWindow *window)
 }
 
 int main (int argc, char **argv) {
-  GOptionContext    *context;
-  GError            *error = NULL;
-  GSList            *l, *next;
-  VinagreWindow     *window;
-  VinagreApp        *app;
+  GOptionContext       *context;
+  GError               *error = NULL;
+  GSList               *l, *next;
+  VinagreWindow        *window;
+  VinagreApp           *app;
+  VinagrePluginsEngine *engine;
 #ifdef HAVE_TELEPATHY
   VinagreTubesManager *vinagre_tubes_manager;
 #endif
+
+  if (!g_thread_supported ())
+    g_thread_init (NULL);
+  g_type_init();
+
+  /* Setup debugging */
+  vinagre_debug_init ();
+  vinagre_debug_message (DEBUG_APP, "Startup");
 
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  /* Init plugins engine */
+  vinagre_debug_message (DEBUG_APP, "Init plugins");
+  engine = vinagre_plugins_engine_get_default ();
+
   /* Setup command line options */
-  context = g_option_context_new (_("- VNC Client for GNOME"));
+  context = g_option_context_new (_("- Remote Desktop Viewer"));
   g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
-  g_option_context_add_group (context, vnc_display_get_option_group ());
   g_option_context_parse (context, &argc, &argv, &error);
   if (error)
     {
@@ -158,9 +168,6 @@ int main (int argc, char **argv) {
   vinagre_main_process_command_line (NULL);
 
   vinagre_bacon_start (servers, new_window);
-
-  if (!g_thread_supported ())
-    g_thread_init (NULL);
 
   app = vinagre_app_get_default ();
   window = vinagre_app_create_window (app, NULL);

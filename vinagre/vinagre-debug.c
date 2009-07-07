@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include "vinagre-debug.h"
 
-#define ENABLE_PROFILING
+/* #define ENABLE_PROFILING */
 
 #ifdef ENABLE_PROFILING
 static GTimer *timer = NULL;
@@ -37,27 +37,29 @@ static VinagreDebugSection debug = VINAGRE_NO_DEBUG;
 void
 vinagre_debug_init ()
 {
-	if (g_getenv ("VINAGRE_DEBUG") != NULL)
-	{
-		/* enable all debugging */
-		debug = ~VINAGRE_NO_DEBUG;
-		goto out;
-	}
+  if (g_getenv ("VINAGRE_DEBUG") != NULL)
+    {
+      /* enable all debugging */
+      debug = ~VINAGRE_NO_DEBUG;
+      goto out;
+    }
 
-	if (g_getenv ("VINAGRE_DEBUG_VIEW") != NULL)
-		debug = debug | VINAGRE_DEBUG_VIEW;
-	if (g_getenv ("VINAGRE_DEBUG_PREFS") != NULL)
-		debug = debug | VINAGRE_DEBUG_PREFS;
-	if (g_getenv ("VINAGRE_DEBUG_PRINT") != NULL)
-		debug = debug | VINAGRE_DEBUG_PRINT;
-	if (g_getenv ("VINAGRE_DEBUG_PLUGINS") != NULL)
-		debug = debug | VINAGRE_DEBUG_PLUGINS;
-	if (g_getenv ("VINAGRE_DEBUG_UTILS") != NULL)
-		debug = debug | VINAGRE_DEBUG_UTILS;
-	if (g_getenv ("VINAGRE_DEBUG_WINDOW") != NULL)
-		debug = debug | VINAGRE_DEBUG_WINDOW;
-	if (g_getenv ("VINAGRE_DEBUG_LOADER") != NULL)
-		debug = debug | VINAGRE_DEBUG_LOADER;
+  if (g_getenv ("VINAGRE_DEBUG_VIEW") != NULL)
+    debug = debug | VINAGRE_DEBUG_VIEW;
+  if (g_getenv ("VINAGRE_DEBUG_PREFS") != NULL)
+    debug = debug | VINAGRE_DEBUG_PREFS;
+  if (g_getenv ("VINAGRE_DEBUG_PRINT") != NULL)
+    debug = debug | VINAGRE_DEBUG_PRINT;
+  if (g_getenv ("VINAGRE_DEBUG_PLUGINS") != NULL)
+    debug = debug | VINAGRE_DEBUG_PLUGINS;
+  if (g_getenv ("VINAGRE_DEBUG_UTILS") != NULL)
+    debug = debug | VINAGRE_DEBUG_UTILS;
+  if (g_getenv ("VINAGRE_DEBUG_WINDOW") != NULL)
+    debug = debug | VINAGRE_DEBUG_WINDOW;
+  if (g_getenv ("VINAGRE_DEBUG_LOADER") != NULL)
+    debug = debug | VINAGRE_DEBUG_LOADER;
+  if (g_getenv ("VINAGRE_DEBUG_APP") != NULL)
+    debug = debug | VINAGRE_DEBUG_APP;
 
 out:		
 
@@ -70,62 +72,62 @@ out:
 
 void
 vinagre_debug_message (VinagreDebugSection  section,
-		     const gchar       *file,
-		     gint               line,
-		     const gchar       *function,
-		     const gchar       *format, ...)
+		       const gchar       *file,
+		       gint               line,
+		       const gchar       *function,
+		       const gchar       *format, ...)
 {
-	if (G_UNLIKELY (debug & section))
-	{	
+  if (G_UNLIKELY (debug & section))
+    {	
 #ifdef ENABLE_PROFILING
-		gdouble seconds;
+      gdouble seconds;
 #endif
 
-		va_list args;
-		gchar *msg;
+      va_list args;
+      gchar *msg;
 
-		g_return_if_fail (format != NULL);
+      g_return_if_fail (format != NULL);
 
-		va_start (args, format);
-		msg = g_strdup_vprintf (format, args);
-		va_end (args);
+      va_start (args, format);
+      msg = g_strdup_vprintf (format, args);
+      va_end (args);
 
 #ifdef ENABLE_PROFILING
-		g_return_if_fail (timer != NULL);
+      g_return_if_fail (timer != NULL);
 
-		seconds = g_timer_elapsed (timer, NULL);
-		g_print ("[%f (%f)] %s:%d (%s) %s\n", 
-			 seconds, seconds - last,  file, line, function, msg);
-		last = seconds;			 
+      seconds = g_timer_elapsed (timer, NULL);
+      g_print ("[%f (%f)] %s:%d (%s) %s\n", 
+		 seconds, seconds - last,  file, line, function, msg);
+      last = seconds;			 
 #else
-		g_print ("%s:%d (%s) %s\n", file, line, function, msg);	
+      g_print ("%s:%d (%s) %s\n", file, line, function, msg);	
 #endif
 
-		fflush (stdout);
-
-		g_free (msg);
-	}
+      fflush (stdout);
+      g_free (msg);
+    }
 }
 
 void vinagre_debug (VinagreDebugSection  section,
-		  const gchar       *file,
-		  gint               line,
-		  const gchar       *function)
+		    const gchar       *file,
+		    gint               line,
+		    const gchar       *function)
 {
-	if (G_UNLIKELY (debug & section))
-	{
+  if (G_UNLIKELY (debug & section))
+    {
 #ifdef ENABLE_PROFILING
-		gdouble seconds;
+      gdouble seconds;
 
-		g_return_if_fail (timer != NULL);
+      g_return_if_fail (timer != NULL);
 
-		seconds = g_timer_elapsed (timer, NULL);		
-		g_print ("[%f (%f)] %s:%d (%s)\n", 
-			 seconds, seconds - last, file, line, function);
-		last = seconds;
+      seconds = g_timer_elapsed (timer, NULL);		
+      g_print ("[%f (%f)] %s:%d (%s)\n", 
+	       seconds, seconds - last, file, line, function);
+      last = seconds;
 #else
-		g_print ("%s:%d (%s)\n", file, line, function);
+      g_print ("%s:%d (%s)\n", file, line, function);
 #endif		
-		fflush (stdout);
-	}
+      fflush (stdout);
+    }
 }
+/* vim: set ts=8: */

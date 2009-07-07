@@ -37,30 +37,32 @@ typedef enum {
 	VINAGRE_DEBUG_UTILS    = 1 << 4,
 	VINAGRE_DEBUG_WINDOW   = 1 << 5,
 	VINAGRE_DEBUG_LOADER   = 1 << 6,
+	VINAGRE_DEBUG_APP      = 1 << 7,
 } VinagreDebugSection;
 
 
-#define	DEBUG_VIEW   	VINAGRE_DEBUG_VIEW,    __FILE__, __LINE__, G_STRFUNC
-#define	DEBUG_PRINT	  VINAGRE_DEBUG_PRINT,   __FILE__, __LINE__, G_STRFUNC
-#define	DEBUG_PREFS	  VINAGRE_DEBUG_PREFS,   __FILE__, __LINE__, G_STRFUNC
+#define	DEBUG_VIEW	VINAGRE_DEBUG_VIEW,    __FILE__, __LINE__, G_STRFUNC
+#define	DEBUG_PRINT	VINAGRE_DEBUG_PRINT,   __FILE__, __LINE__, G_STRFUNC
+#define	DEBUG_PREFS	VINAGRE_DEBUG_PREFS,   __FILE__, __LINE__, G_STRFUNC
 #define	DEBUG_PLUGINS	VINAGRE_DEBUG_PLUGINS, __FILE__, __LINE__, G_STRFUNC
-#define	DEBUG_UTILS	  VINAGRE_DEBUG_UTILS,   __FILE__, __LINE__, G_STRFUNC
+#define	DEBUG_UTILS	VINAGRE_DEBUG_UTILS,   __FILE__, __LINE__, G_STRFUNC
 #define	DEBUG_WINDOW	VINAGRE_DEBUG_WINDOW,  __FILE__, __LINE__, G_STRFUNC
 #define	DEBUG_LOADER	VINAGRE_DEBUG_LOADER,  __FILE__, __LINE__, G_STRFUNC
+#define	DEBUG_APP	VINAGRE_DEBUG_APP,  __FILE__, __LINE__, G_STRFUNC
 
 void vinagre_debug_init (void);
 
 void vinagre_debug (VinagreDebugSection  section,
-		  const gchar       *file,
-		  gint               line,
-		  const gchar       *function);
+		    const gchar         *file,
+		    gint                 line,
+		    const gchar         *function);
 
 void vinagre_debug_message (VinagreDebugSection  section,
-			  const gchar       *file,
-			  gint               line,
-			  const gchar       *function,
-			  const gchar       *format, ...) G_GNUC_PRINTF(5, 6);
+			    const gchar         *file,
+			    gint                 line,
+			    const gchar         *function,
+			    const gchar         *format, ...) G_GNUC_PRINTF(5, 6);
 
 
 #endif /* __VINAGRE_DEBUG_H__ */
-
+/* vim: set ts=8: */

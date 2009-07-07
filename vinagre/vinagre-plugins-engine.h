@@ -40,57 +40,56 @@ typedef struct _VinagrePluginsEnginePrivate	VinagrePluginsEnginePrivate;
 
 struct _VinagrePluginsEngine
 {
-	GObject parent;
-	VinagrePluginsEnginePrivate *priv;
+  GObject parent;
+  VinagrePluginsEnginePrivate *priv;
 };
 
-typedef struct _VinagrePluginsEngineClass		VinagrePluginsEngineClass;
+typedef struct _VinagrePluginsEngineClass	VinagrePluginsEngineClass;
 
 struct _VinagrePluginsEngineClass
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 
-	void	 (* activate_plugin)		(VinagrePluginsEngine *engine,
-						 VinagrePluginInfo    *info);
+  void	 (* activate_plugin)		(VinagrePluginsEngine *engine,
+					 VinagrePluginInfo    *info);
 
-	void	 (* deactivate_plugin)		(VinagrePluginsEngine *engine,
-						 VinagrePluginInfo    *info);
+  void	 (* deactivate_plugin)		(VinagrePluginsEngine *engine,
+					 VinagrePluginInfo    *info);
 };
 
 GType			 vinagre_plugins_engine_get_type		(void) G_GNUC_CONST;
 
-VinagrePluginsEngine	*vinagre_plugins_engine_get_default	(void);
+VinagrePluginsEngine	*vinagre_plugins_engine_get_default		(void);
 
-void		 vinagre_plugins_engine_garbage_collect	(VinagrePluginsEngine *engine);
+void			 vinagre_plugins_engine_garbage_collect		(VinagrePluginsEngine *engine);
 
-const GList	*vinagre_plugins_engine_get_plugin_list 	(VinagrePluginsEngine *engine);
+const GList		*vinagre_plugins_engine_get_plugin_list 	(VinagrePluginsEngine *engine);
 
-VinagrePluginInfo	*vinagre_plugins_engine_get_plugin_info	(VinagrePluginsEngine *engine,
-							 const gchar        *name);
+VinagrePluginInfo	*vinagre_plugins_engine_get_plugin_info		(VinagrePluginsEngine *engine,
+									 const gchar        *name);
 
 /* plugin load and unloading (overall, for all windows) */
 gboolean 	 vinagre_plugins_engine_activate_plugin 	(VinagrePluginsEngine *engine,
-							 VinagrePluginInfo    *info);
+								 VinagrePluginInfo    *info);
 gboolean 	 vinagre_plugins_engine_deactivate_plugin	(VinagrePluginsEngine *engine,
-							 VinagrePluginInfo    *info);
+								 VinagrePluginInfo    *info);
 
 void	 	 vinagre_plugins_engine_configure_plugin	(VinagrePluginsEngine *engine,
-							 VinagrePluginInfo    *info,
-							 GtkWindow          *parent);
+								 VinagrePluginInfo    *info,
+								 GtkWindow            *parent);
 
 /* plugin activation/deactivation per window, private to VinagreWindow */
-void 		 vinagre_plugins_engine_activate_plugins   (VinagrePluginsEngine *engine,
-							  VinagreWindow        *window);
-void 		 vinagre_plugins_engine_deactivate_plugins (VinagrePluginsEngine *engine,
-							  VinagreWindow        *window);
-void		 vinagre_plugins_engine_update_plugins_ui  (VinagrePluginsEngine *engine,
-							  VinagreWindow        *window);
+void 		 vinagre_plugins_engine_activate_plugins 	 (VinagrePluginsEngine *engine,
+								  VinagreWindow        *window);
+void 		 vinagre_plugins_engine_deactivate_plugins	 (VinagrePluginsEngine *engine,
+								  VinagreWindow        *window);
+void		 vinagre_plugins_engine_update_plugins_ui	 (VinagrePluginsEngine *engine,
+								  VinagreWindow        *window);
 
 /* private for gconf notification */
-void		 vinagre_plugins_engine_active_plugins_changed
-							(VinagrePluginsEngine *engine);
+void		 vinagre_plugins_engine_active_plugins_changed	(VinagrePluginsEngine *engine);
 
-void		 vinagre_plugins_engine_rescan_plugins	(VinagrePluginsEngine *engine);
+void		 vinagre_plugins_engine_rescan_plugins		(VinagrePluginsEngine *engine);
 
 G_END_DECLS
 
