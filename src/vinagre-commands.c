@@ -38,7 +38,7 @@
 #include "vinagre-fav.h"
 #include "vinagre-window-private.h"
 #include "vinagre-prefs.h"
-
+#include "vinagre-plugin-manager.h"
 void
 vinagre_cmd_direct_connect (VinagreConnection *conn,
 			    VinagreWindow     *window)
@@ -202,6 +202,18 @@ vinagre_cmd_edit_preferences (GtkAction     *action,
 			      VinagreWindow *window)
 {
   vinagre_prefs_dialog_show (window);
+}
+
+void
+vinagre_cmd_edit_plugins (GtkAction     *action,
+                          VinagreWindow *window)
+{
+  g_return_if_fail (VINAGRE_IS_WINDOW (window));
+  GtkWidget *widget;
+
+  widget = vinagre_plugin_manager_new ();
+
+  gtk_widget_show_all (widget);
 }
 
 /* View Menu */

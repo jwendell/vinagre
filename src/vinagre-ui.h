@@ -47,7 +47,9 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
   /* Edit menu */
   { "EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
     N_("Edit the application preferences"), G_CALLBACK (vinagre_cmd_edit_preferences) },
-  	
+  { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
+    N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
+ 	
   /* Bookmarks menu */
   { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
     N_("Connect to this machine"), G_CALLBACK (vinagre_cmd_bookmarks_open) },

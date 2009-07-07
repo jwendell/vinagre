@@ -21,6 +21,7 @@ INCLUDES = 						\
 noinst_LTLIBRARIES = libvinagre.la
 
 libvinagre_la_SOURCES = \
+	bacon-message-connection.h bacon-message-connection.c	\
 	vinagre-commands.c vinagre-commands.h			\
 	vinagre-connect.c vinagre-connect.h			\
 	vinagre-connection.c vinagre-connection.h		\
@@ -35,7 +36,15 @@ libvinagre_la_SOURCES = \
 	vinagre-ui.h vinagre-window-private.h			\
 	vinagre-enums.h vinagre-enums.c				\
 	vinagre-prefs.h vinagre-prefs.c				\
-	bacon-message-connection.h bacon-message-connection.c	\
+  \
+  vinagre-debug.h vinagre-debug.c \
+  vinagre-dirs.h vinagre-dirs.c \
+  vinagre-plugin.h vinagre-plugin.c \
+  vinagre-plugin-manager.h vinagre-plugin-manager.c \
+  vinagre-plugin-info.h vinagre-plugin-info-priv.h vinagre-plugin-info.c \
+  vinagre-plugin-loader.h vinagre-plugin-loader.c \
+  vinagre-plugins-engine.h vinagre-plugins-engine.c \
+  \
 	vinagre-app.h vinagre-app.c 				\
 	vinagre-bacon.h vinagre-bacon.c 			\
 	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\
