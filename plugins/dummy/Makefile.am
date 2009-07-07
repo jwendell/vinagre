@@ -16,8 +16,8 @@ libdummy_la_SOURCES = \
 libdummy_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libdummy_la_LIBADD  = $(VINAGRE_LIBS)
 
-uidir = $(VINAGRE_PLUGINS_DATA_DIR)/dummy
-ui_DATA = dummy.ui
+#uidir = $(VINAGRE_PLUGINS_DATA_DIR)/dummy
+#ui_DATA = dummy.ui
 
 plugin_in_files = dummy.vinagre-plugin.desktop.in
 
@@ -25,7 +25,8 @@ dummy.vinagre-plugin: dummy.vinagre-plugin.desktop.in $(INTLTOOL_MERGE) $(wildca
 
 plugin_DATA = $(plugin_in_files:.vinagre-plugin.desktop.in=.vinagre-plugin)
 
-EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
+#EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
+EXTRA_DIST = $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)
