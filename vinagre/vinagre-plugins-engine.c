@@ -31,7 +31,7 @@
 #include "vinagre-plugin.h"
 #include "vinagre-debug.h"
 #include "vinagre-app.h"
-#include "vinagre-prefs-manager.h"
+//#include "vinagre-prefs-manager.h"
 #include "vinagre-plugin-loader.h"
 #include "vinagre-object-module.h"
 #include "vinagre-dirs.h"
@@ -91,7 +91,7 @@ load_dir_real (VinagrePluginsEngine *engine,
 
 	g_return_val_if_fail (dir != NULL, TRUE);
 
-	gedit_debug_message (DEBUG_PLUGINS, "DIR: %s", dir);
+	vinagre_debug_message (DEBUG_PLUGINS, "DIR: %s", dir);
 
 	d = g_dir_open (dir, 0, &error);
 	if (!d)
@@ -129,27 +129,27 @@ load_plugin_info (VinagrePluginsEngine *engine,
 {
 	VinagrePluginInfo *info;
 	
-	info = _gedit_plugin_info_new (filename);
+	info = _vinagre_plugin_info_new (filename);
 
 	if (info == NULL)
 		return TRUE;
 
 	/* If a plugin with this name has already been loaded
 	 * drop this one (user plugins override system plugins) */
-	if (vinagre_plugins_engine_get_plugin_info (engine, gedit_plugin_info_get_module_name (info)) != NULL)
+	if (vinagre_plugins_engine_get_plugin_info (engine, vinagre_plugin_info_get_module_name (info)) != NULL)
 	{
-		gedit_debug_message (DEBUG_PLUGINS, "Two or more plugins named '%s'. "
+		vinagre_debug_message (DEBUG_PLUGINS, "Two or more plugins named '%s'. "
 				     "Only the first will be considered.\n",
-				     gedit_plugin_info_get_module_name (info));
+				     vinagre_plugin_info_get_module_name (info));
 
-		_gedit_plugin_info_unref (info);
+		_vinagre_plugin_info_unref (info);
 
 		return TRUE;
 	}
 
 	engine->priv->plugin_list = g_list_prepend (engine->priv->plugin_list, info);
 
-	gedit_debug_message (DEBUG_PLUGINS, "Plugin %s loaded", info->name);
+	vinagre_debug_message (DEBUG_PLUGINS, "Plugin %s loaded", info->name);
 	return TRUE;
 }
 
@@ -160,7 +160,7 @@ load_all_plugins (VinagrePluginsEngine *engine)
 	const gchar *pdirs_env = NULL;
 
 	/* load user plugins */
-	plugin_dir = gedit_dirs_get_user_plugins_dir ();
+	plugin_dir = vinagre_dirs_get_user_plugins_dir ();
 	if (g_file_test (plugin_dir, G_FILE_TEST_IS_DIR))
 	{
 		load_dir_real (engine,
@@ -175,7 +175,7 @@ load_all_plugins (VinagrePluginsEngine *engine)
 	/* load system plugins */
 	pdirs_env = g_getenv ("VINAGRE_PLUGINS_PATH");
 
-	gedit_debug_message (DEBUG_PLUGINS, "VINAGRE_PLUGINS_PATH=%s", pdirs_env);
+	vinagre_debug_message (DEBUG_PLUGINS, "VINAGRE_PLUGINS_PATH=%s", pdirs_env);
 
 	if (pdirs_env != NULL)
 	{
@@ -200,7 +200,7 @@ load_all_plugins (VinagrePluginsEngine *engine)
 	}
 	else
 	{
-		plugin_dir = gedit_dirs_get_vinagre_plugins_dir ();
+		plugin_dir = vinagre_dirs_get_vinagre_plugins_dir ();
 
 		load_dir_real (engine,
 			       plugin_dir,
@@ -260,11 +260,11 @@ add_loader (VinagrePluginsEngine *engine,
 static void
 vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
 {
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	if (!g_module_supported ())
 	{
-		g_warning ("gedit is not able to initialize the plugins engine.");
+		g_warning ("vinagre is not able to initialize the plugins engine.");
 		return;
 	}
 
@@ -290,7 +290,7 @@ loader_garbage_collect (const char *id,
                         LoaderInfo *info)
 {
 	if (info->loader)
-		gedit_plugin_loader_garbage_collect (info->loader);
+		vinagre_plugin_loader_garbage_collect (info->loader);
 }
 
 void
@@ -307,14 +307,14 @@ vinagre_plugins_engine_finalize (GObject *object)
 	VinagrePluginsEngine *engine = VINAGRE_PLUGINS_ENGINE (object);
 	GList *item;
 	
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	/* Firs deactivate all plugins */
 	for (item = engine->priv->plugin_list; item; item = item->next)
 	{
 		VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (item->data);
 		
-		if (gedit_plugin_info_is_active (info))
+		if (vinagre_plugin_info_is_active (info))
 			vinagre_plugins_engine_deactivate_plugin_real (engine, info);
 	}
 	
@@ -326,7 +326,7 @@ vinagre_plugins_engine_finalize (GObject *object)
 	{
 		VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (item->data);
 
-		_gedit_plugin_info_unref (info);
+		_vinagre_plugin_info_unref (info);
 	}
 
 	g_list_free (engine->priv->plugin_list);
@@ -385,9 +385,9 @@ load_loader (VinagrePluginsEngine *engine,
 	base = g_path_get_basename (filename);
 
 	/* for now they are all resident */
-	module = gedit_object_module_new (base,
+	module = vinagre_object_module_new (base,
 					  path,
-					  "register_gedit_plugin_loader",
+					  "register_vinagre_plugin_loader",
 					  TRUE);
 
 	g_free (base);
@@ -404,8 +404,8 @@ load_loader (VinagrePluginsEngine *engine,
 
 	/* get the exported type and check the name as exported by the 
 	 * loader interface */
-	type = gedit_object_module_get_object_type (module);
-	id = gedit_plugin_loader_type_get_id (type);
+	type = vinagre_object_module_get_object_type (module);
+	id = vinagre_plugin_loader_type_get_id (type);
 	
 	add_loader (engine, id, module);	
 	g_type_module_unuse (G_TYPE_MODULE (module));
@@ -420,7 +420,7 @@ ensure_loader (LoaderInfo *info)
 	{
 		/* create a new loader object */
 		VinagrePluginLoader *loader;
-		loader = (VinagrePluginLoader *)gedit_object_module_new_object (info->module, NULL);
+		loader = (VinagrePluginLoader *)vinagre_object_module_new_object (info->module, NULL);
 	
 		if (loader == NULL || !VINAGRE_IS_PLUGIN_LOADER (loader))
 		{
@@ -453,7 +453,7 @@ get_plugin_loader (VinagrePluginsEngine *engine,
 	{
 		gchar *loader_dir;
 
-		loader_dir = gedit_dirs_get_gedit_plugin_loaders_dir ();
+		loader_dir = vinagre_dirs_get_vinagre_plugin_loaders_dir ();
 
 		/* loader could not be found in the hash, try to find it by 
 		   scanning */
@@ -495,7 +495,7 @@ vinagre_plugins_engine_get_default (void)
 const GList *
 vinagre_plugins_engine_get_plugin_list (VinagrePluginsEngine *engine)
 {
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	return engine->priv->plugin_list;
 }
@@ -504,7 +504,7 @@ static gint
 compare_plugin_info_and_name (VinagrePluginInfo *info,
 			      const gchar *module_name)
 {
-	return strcmp (gedit_plugin_info_get_module_name (info), module_name);
+	return strcmp (vinagre_plugin_info_get_module_name (info), module_name);
 }
 
 VinagrePluginInfo *
@@ -528,14 +528,14 @@ save_active_plugin_list (VinagrePluginsEngine *engine)
 	{
 		VinagrePluginInfo *info = (VinagrePluginInfo *) l->data;
 
-		if (gedit_plugin_info_is_active (info))
+		if (vinagre_plugin_info_is_active (info))
 		{
 			active_plugins = g_slist_prepend (active_plugins,
-							  (gpointer)gedit_plugin_info_get_module_name (info));
+							  (gpointer)vinagre_plugin_info_get_module_name (info));
 		}
 	}
 
-	gedit_prefs_manager_set_active_plugins (active_plugins);
+// AQUI:	vinagre_prefs_manager_set_active_plugins (active_plugins);
 
 	g_slist_free (active_plugins);
 }
@@ -547,10 +547,10 @@ load_plugin (VinagrePluginsEngine *engine,
 	VinagrePluginLoader *loader;
 	gchar *path;
 
-	if (gedit_plugin_info_is_active (info))
+	if (vinagre_plugin_info_is_active (info))
 		return TRUE;
 	
-	if (!gedit_plugin_info_is_available (info))
+	if (!vinagre_plugin_info_is_available (info))
 		return FALSE;
 
 	loader = get_plugin_loader (engine, info);
@@ -565,7 +565,7 @@ load_plugin (VinagrePluginsEngine *engine,
 	path = g_path_get_dirname (info->file);
 	g_return_val_if_fail (path != NULL, FALSE);
 
-	info->plugin = gedit_plugin_loader_load (loader, info, path);
+	info->plugin = vinagre_plugin_loader_load (loader, info, path);
 	
 	g_free (path);
 	
@@ -587,44 +587,44 @@ vinagre_plugins_engine_activate_plugin_real (VinagrePluginsEngine *engine,
 		return;
 
 	/* activate plugin for all windows */
-	const GList *wins = gedit_app_get_windows (gedit_app_get_default ());
+	const GList *wins = vinagre_app_get_windows (vinagre_app_get_default ());
 	for (; wins != NULL; wins = wins->next)
-		gedit_plugin_activate (info->plugin, VINAGRE_WINDOW (wins->data));
+		vinagre_plugin_activate (info->plugin, VINAGRE_WINDOW (wins->data));
 }
 
 gboolean
 vinagre_plugins_engine_activate_plugin (VinagrePluginsEngine *engine,
                           				      VinagrePluginInfo    *info)
 {
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	g_return_val_if_fail (info != NULL, FALSE);
 
-	if (!gedit_plugin_info_is_available (info))
+	if (!vinagre_plugin_info_is_available (info))
 		return FALSE;
 		
-	if (gedit_plugin_info_is_active (info))
+	if (vinagre_plugin_info_is_active (info))
 		return TRUE;
 
 	g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
 
-	if (gedit_plugin_info_is_active (info))
+	if (vinagre_plugin_info_is_active (info))
 		save_active_plugin_list (engine);
 
-	return gedit_plugin_info_is_active (info);
+	return vinagre_plugin_info_is_active (info);
 }
 
 static void
 call_plugin_deactivate (VinagrePlugin *plugin, 
                   			VinagreWindow *window)
 {
-	gedit_plugin_deactivate (plugin, window);
+	vinagre_plugin_deactivate (plugin, window);
 
 	/* ensure update of ui manager, because we suspect it does something
 	   with expected static strings in the type module (when unloaded the
 	   strings don't exist anymore, and ui manager updates in an idle
 	   func) */
-	gtk_ui_manager_ensure_update (gedit_window_get_ui_manager (window));
+	gtk_ui_manager_ensure_update (vinagre_window_get_ui_manager (window));
 }
 
 static void
@@ -634,11 +634,11 @@ vinagre_plugins_engine_deactivate_plugin_real (VinagrePluginsEngine *engine,
 	const GList *wins;
 	VinagrePluginLoader *loader;
 
-	if (!gedit_plugin_info_is_active (info) || 
-	    !gedit_plugin_info_is_available (info))
+	if (!vinagre_plugin_info_is_active (info) || 
+	    !vinagre_plugin_info_is_available (info))
 		return;
 
-	wins = gedit_app_get_windows (gedit_app_get_default ());
+	wins = vinagre_app_get_windows (vinagre_app_get_default ());
 	for (; wins != NULL; wins = wins->next)
 		call_plugin_deactivate (info->plugin, VINAGRE_WINDOW (wins->data));
 
@@ -648,8 +648,8 @@ vinagre_plugins_engine_deactivate_plugin_real (VinagrePluginsEngine *engine,
 	/* find the loader and tell it to gc and unload the plugin */
 	loader = get_plugin_loader (engine, info);
 	
-	gedit_plugin_loader_garbage_collect (loader);
-	gedit_plugin_loader_unload (loader, info);
+	vinagre_plugin_loader_garbage_collect (loader);
+	vinagre_plugin_loader_unload (loader, info);
 	
 	info->plugin = NULL;
 }
@@ -658,18 +658,18 @@ gboolean
 vinagre_plugins_engine_deactivate_plugin (VinagrePluginsEngine *engine,
                                 					VinagrePluginInfo    *info)
 {
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	g_return_val_if_fail (info != NULL, FALSE);
 
-	if (!gedit_plugin_info_is_active (info))
+	if (!vinagre_plugin_info_is_active (info))
 		return TRUE;
 
 	g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
-	if (!gedit_plugin_info_is_active (info))
+	if (!vinagre_plugin_info_is_active (info))
 		save_active_plugin_list (engine);
 
-	return !gedit_plugin_info_is_active (info);
+	return !vinagre_plugin_info_is_active (info);
 }
 
 void
@@ -679,7 +679,7 @@ vinagre_plugins_engine_activate_plugins (VinagrePluginsEngine *engine,
 	GSList *active_plugins = NULL;
 	GList *pl;
 
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	g_return_if_fail (VINAGRE_IS_PLUGINS_ENGINE (engine));
 	g_return_if_fail (VINAGRE_IS_WINDOW (window));
@@ -687,7 +687,7 @@ vinagre_plugins_engine_activate_plugins (VinagrePluginsEngine *engine,
 	/* the first time, we get the 'active' plugins from gconf */
 	if (engine->priv->activate_from_prefs)
 	{
-		active_plugins = gedit_prefs_manager_get_active_plugins ();
+//AQUI		active_plugins = vinagre_prefs_manager_get_active_plugins ();
 	}
 
 	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
@@ -696,17 +696,17 @@ vinagre_plugins_engine_activate_plugins (VinagrePluginsEngine *engine,
 		
 		if (engine->priv->activate_from_prefs && 
 		    g_slist_find_custom (active_plugins,
-					 gedit_plugin_info_get_module_name (info),
+					 vinagre_plugin_info_get_module_name (info),
 					 (GCompareFunc)strcmp) == NULL)
 			continue;
 		
 		/* If plugin is not active, don't try to activate/load it */
 		if (!engine->priv->activate_from_prefs && 
-		    !gedit_plugin_info_is_active (info))
+		    !vinagre_plugin_info_is_active (info))
 			continue;
 
 		if (load_plugin (engine, info))
-			gedit_plugin_activate (info->plugin,
+			vinagre_plugin_activate (info->plugin,
 					       window);
 	}
 	
@@ -717,7 +717,7 @@ vinagre_plugins_engine_activate_plugins (VinagrePluginsEngine *engine,
 		engine->priv->activate_from_prefs = FALSE;
 	}
 	
-	gedit_debug_message (DEBUG_PLUGINS, "End");
+	vinagre_debug_message (DEBUG_PLUGINS, "End");
 
 	/* also call update_ui after activation */
 	vinagre_plugins_engine_update_plugins_ui (engine, window);
@@ -729,7 +729,7 @@ vinagre_plugins_engine_deactivate_plugins (VinagrePluginsEngine *engine,
 {
 	GList *pl;
 	
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	g_return_if_fail (VINAGRE_IS_PLUGINS_ENGINE (engine));
 	g_return_if_fail (VINAGRE_IS_WINDOW (window));
@@ -739,14 +739,14 @@ vinagre_plugins_engine_deactivate_plugins (VinagrePluginsEngine *engine,
 		VinagrePluginInfo *info = (VinagrePluginInfo*)pl->data;
 		
 		/* check if the plugin is actually active */
-		if (!gedit_plugin_info_is_active (info))
+		if (!vinagre_plugin_info_is_active (info))
 			continue;
 		
 		/* call deactivate for the plugin for this window */
-		gedit_plugin_deactivate (info->plugin, window);
+		vinagre_plugin_deactivate (info->plugin, window);
 	}
 	
-	gedit_debug_message (DEBUG_PLUGINS, "End");
+	vinagre_debug_message (DEBUG_PLUGINS, "End");
 }
 
 void
@@ -755,7 +755,7 @@ vinagre_plugins_engine_update_plugins_ui (VinagrePluginsEngine *engine,
 {
 	GList *pl;
 
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	g_return_if_fail (VINAGRE_IS_PLUGINS_ENGINE (engine));
 	g_return_if_fail (VINAGRE_IS_WINDOW (window));
@@ -765,11 +765,11 @@ vinagre_plugins_engine_update_plugins_ui (VinagrePluginsEngine *engine,
 	{
 		VinagrePluginInfo *info = (VinagrePluginInfo*)pl->data;
 
-		if (!gedit_plugin_info_is_active (info))
+		if (!vinagre_plugin_info_is_active (info))
 			continue;
 			
-	       	gedit_debug_message (DEBUG_PLUGINS, "Updating UI of %s", info->name);
-		gedit_plugin_update_ui (info->plugin, window);
+	       	vinagre_debug_message (DEBUG_PLUGINS, "Updating UI of %s", info->name);
+		vinagre_plugin_update_ui (info->plugin, window);
 	}
 }
 
@@ -782,11 +782,11 @@ vinagre_plugins_engine_configure_plugin (VinagrePluginsEngine *engine,
 	
 	GtkWindowGroup *wg;
 	
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
 	g_return_if_fail (info != NULL);
 
-	conf_dlg = gedit_plugin_create_configure_dialog (info->plugin);
+	conf_dlg = vinagre_plugin_create_configure_dialog (info->plugin);
 	g_return_if_fail (conf_dlg != NULL);
 	gtk_window_set_transient_for (GTK_WINDOW (conf_dlg),
 				      parent);
@@ -812,24 +812,24 @@ vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
 	GSList *active_plugins;
 	GList *pl;
 
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 
-	active_plugins = gedit_prefs_manager_get_active_plugins ();
+//AQUI	active_plugins = vinagre_prefs_manager_get_active_plugins ();
 
 	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{
 		VinagrePluginInfo *info = (VinagrePluginInfo*)pl->data;
 
-		if (!gedit_plugin_info_is_available (info))
+		if (!vinagre_plugin_info_is_available (info))
 			continue;
 
 		to_activate = (g_slist_find_custom (active_plugins,
-						    gedit_plugin_info_get_module_name (info),
+						    vinagre_plugin_info_get_module_name (info),
 						    (GCompareFunc)strcmp) != NULL);
 
-		if (!gedit_plugin_info_is_active (info) && to_activate)
+		if (!vinagre_plugin_info_is_active (info) && to_activate)
 			g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
-		else if (gedit_plugin_info_is_active (info) && !to_activate)
+		else if (vinagre_plugin_info_is_active (info) && !to_activate)
 			g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
 	}
 
@@ -840,7 +840,7 @@ vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
 void
 vinagre_plugins_engine_rescan_plugins (VinagrePluginsEngine *engine)
 {
-	gedit_debug (DEBUG_PLUGINS);
+	vinagre_debug (DEBUG_PLUGINS);
 	
 	load_all_plugins (engine);
 }

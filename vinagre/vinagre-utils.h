@@ -73,5 +73,7 @@ void		vinagre_utils_help_about		(GtkWindow *window);
 
 gboolean	vinagre_utils_parse_boolean		(const gchar* value);
 
+GtkWidget      *vinagre_gtk_button_new_with_stock_icon   (const gchar *label,
+                                                         const gchar *stock_id);
 #endif  /* __VINAGRE_UTILS_H__  */
 /* vim: set ts=8: */

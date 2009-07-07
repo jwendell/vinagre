@@ -480,5 +480,18 @@ vinagre_utils_parse_boolean (const gchar* value)
   return FALSE;
 }
 
+GtkWidget *
+vinagre_gtk_button_new_with_stock_icon (const gchar *label,
+                                        const gchar *stock_id)
+{
+  GtkWidget *button;
+
+  button = gtk_button_new_with_mnemonic (label);
+  gtk_button_set_image (GTK_BUTTON (button),
+            gtk_image_new_from_stock (stock_id,
+              GTK_ICON_SIZE_BUTTON));
+
+        return button;
+}
 
 /* vim: set ts=8: */
