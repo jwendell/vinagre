@@ -2,6 +2,9 @@
 
 AC_INIT(vinagre, 2.27.2, http://projects.gnome.org/vinagre/)
 
+VINAGRE_API_VERSION=1.0
+AC_SUBST(VINAGRE_API_VERSION)
+
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
@@ -134,7 +137,7 @@ dnl active plugins for vinagre.schemas
 ACTIVE_PLUGINS="dummy"
 AC_SUBST(ACTIVE_PLUGINS)
 
-VINAGRE_IMPLIB=""
+VINAGRE_IMPLIB="-lvinagre-${VINAGRE_API_VERSION}"
 PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
 LOADER_LIBTOOL_FLAGS="-module -avoid-version"
 
@@ -154,6 +157,7 @@ Makefile
 data/Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
+data/vinagre.pc
 data/icons/Makefile
 data/pixmaps/Makefile
 help/Makefile

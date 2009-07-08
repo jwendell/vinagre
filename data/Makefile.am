@@ -5,6 +5,12 @@ glade_DATA = vinagre.glade
 
 man_MANS = vinagre.1
 
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = vinagre-@VINAGRE_API_VERSION@.pc
+
+vinagre-@VINAGRE_API_VERSION@.pc: vinagre.pc
+	cp vinagre.pc vinagre-@VINAGRE_API_VERSION@.pc
+
 uidir = $(datadir)/vinagre
 ui_DATA = vinagre-ui.xml GNOME_VinagreApplet.xml
 
@@ -37,7 +43,8 @@ endif
 CLEANFILES = \
 	$(desktop_DATA) \
 	$(mime_DATA) \
-	$(schemas_DATA)
+	$(schemas_DATA) \
+	$(pkgconfig_DATA)
 
 EXTRA_DIST = \
 	$(glade_DATA) \
@@ -45,7 +52,8 @@ EXTRA_DIST = \
 	$(ui_DATA) \
 	$(desktop_in_files) \
 	$(MIMEFILES) \
-	$(schemas_in_files)
+	$(schemas_in_files) \
+	vinagre.pc.in
 
 if TELEPATHY
 
