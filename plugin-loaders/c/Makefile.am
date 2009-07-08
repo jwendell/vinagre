@@ -1,6 +1,6 @@
 # C plugin loader
 
-loaderdir = $(libdir)/vinagre/plugin-loaders
+loaderdir = $(libdir)/vinagre-1/plugin-loaders
 
 INCLUDES = \
 	-I$(top_srcdir) 						\

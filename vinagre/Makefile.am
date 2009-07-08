@@ -14,6 +14,47 @@ INCLUDES = 						\
 	$(AVAHI_CFLAGS)					\
 	$(NULL)
 
+NOINST_H_FILES = \
+  bacon-message-connection.h \
+  vinagre-enums.h \
+  vinagre-object-module.h \
+  vinagre-plugin-info.h \
+  vinagre-plugin-info-priv.h \
+  vinagre-plugin-loader.h \
+  vinagre-plugin-manager.h \
+  vinagre-plugins-engine.h \
+  vinagre-window-private.h \
+  $(NULL)
+
+INST_H_FILES = \
+  vinagre-app.h \
+  vinagre-bacon.h \
+  vinagre-bookmarks-entry.h \
+  vinagre-bookmarks.h \
+  vinagre-bookmarks-migration.h \
+  vinagre-bookmarks-tree.h \
+  vinagre-bookmarks-ui.h \
+  vinagre-commands.h \
+  vinagre-connect.h \
+  vinagre-connection.h \
+  vinagre-debug.h \
+  vinagre-dirs.h \
+  vinagre-fav.h \
+  vinagre-notebook.h \
+  vinagre-plugin.h \
+  vinagre-plugin-loader.h \
+  vinagre-prefs.h \
+  vinagre-tab.h \
+  vinagre-ui.h \
+  vinagre-utils.h \
+  vinagre-vnc-connection.h \
+  vinagre-vnc-tab.h \
+  vinagre-window.h \
+  $(NULL)
+
+headerdir = $(prefix)/include/vinagre-@VINAGRE_API_VERSION@/vinagre
+header_DATA = $(INST_H_FILES)
+
 ##############################
 # The main library
 ##############################
@@ -21,38 +62,37 @@ INCLUDES = 						\
 noinst_LTLIBRARIES = libvinagre.la
 
 libvinagre_la_SOURCES = \
-	bacon-message-connection.h bacon-message-connection.c	\
-	vinagre-commands.c vinagre-commands.h			\
-	vinagre-connect.c vinagre-connect.h			\
-	vinagre-connection.c vinagre-connection.h		\
-	vinagre-vnc-connection.c vinagre-vnc-connection.h	\
-	vinagre-fav.c vinagre-fav.h				\
-	vinagre-bookmarks.c vinagre-bookmarks.h			\
-	vinagre-notebook.c vinagre-notebook.h			\
-	vinagre-tab.c vinagre-tab.h				\
-	vinagre-vnc-tab.c vinagre-vnc-tab.h			\
-	vinagre-utils.c vinagre-utils.h				\
-	vinagre-window.c vinagre-window.h			\
-	vinagre-ui.h vinagre-window-private.h			\
-	vinagre-enums.h vinagre-enums.c				\
-	vinagre-prefs.h vinagre-prefs.c				\
-  \
-  vinagre-debug.h vinagre-debug.c \
-  vinagre-dirs.h vinagre-dirs.c \
-  vinagre-object-module.h vinagre-object-module.c \
-  vinagre-plugin.h vinagre-plugin.c \
-  vinagre-plugin-manager.h vinagre-plugin-manager.c \
-  vinagre-plugin-info.h vinagre-plugin-info-priv.h vinagre-plugin-info.c \
-  vinagre-plugin-loader.h vinagre-plugin-loader.c \
-  vinagre-plugins-engine.h vinagre-plugins-engine.c \
-  \
-	vinagre-app.h vinagre-app.c 				\
-	vinagre-bacon.h vinagre-bacon.c 			\
-	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\
-	vinagre-bookmarks-tree.h vinagre-bookmarks-tree.c	\
-	vinagre-bookmarks-ui.h vinagre-bookmarks-ui.c		\
-	vinagre-bookmarks-migration.h vinagre-bookmarks-migration.c \
-	$(NULL)
+  bacon-message-connection.c  \
+  vinagre-app.c \
+  vinagre-bacon.c \
+  vinagre-bookmarks.c \
+  vinagre-bookmarks-entry.c \
+  vinagre-bookmarks-migration.c \
+  vinagre-bookmarks-tree.c \
+  vinagre-bookmarks-ui.c \
+  vinagre-commands.c \
+  vinagre-connect.c \
+  vinagre-connection.c \
+  vinagre-debug.c \
+  vinagre-dirs.c \
+  vinagre-enums.c \
+  vinagre-fav.c \
+  vinagre-notebook.c \
+  vinagre-object-module.c \
+  vinagre-plugin.c \
+  vinagre-plugin-info.c \
+  vinagre-plugin-loader.c \
+  vinagre-plugin-manager.c \
+  vinagre-plugins-engine.c \
+  vinagre-prefs.c \
+  vinagre-tab.c \
+  vinagre-utils.c \
+  vinagre-vnc-connection.c \
+  vinagre-vnc-tab.c \
+  vinagre-window.c \
+  $(NOINST_H_FILES) \
+  $(INST_H_FILES) \
+  $(NULL)
 
 if AVAHI
 libvinagre_la_SOURCES += vinagre-mdns.h vinagre-mdns.c

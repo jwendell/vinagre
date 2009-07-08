@@ -145,10 +145,10 @@ AC_SUBST(VINAGRE_IMPLIB)
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 AC_SUBST(LOADER_LIBTOOL_FLAGS)
 
-VINAGRE_PLUGINS_DATA_DIR="$datadir/vinagre/plugins"
+VINAGRE_PLUGINS_DATA_DIR="$datadir/vinagre-1/plugins"
 AC_SUBST(VINAGRE_PLUGINS_DATA_DIR)
 
-VINAGRE_PLUGINS_LIBS_DIR="$libdir/vinagre/plugins"
+VINAGRE_PLUGINS_LIBS_DIR="$libdir/vinagre-1/plugins"
 AC_SUBST(VINAGRE_PLUGINS_LIBS_DIR)
 
 #*******************************************************************************
