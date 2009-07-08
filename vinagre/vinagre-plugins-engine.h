@@ -63,7 +63,7 @@ VinagrePluginsEngine	*vinagre_plugins_engine_get_default		(void);
 
 void			 vinagre_plugins_engine_garbage_collect		(VinagrePluginsEngine *engine);
 
-const GList		*vinagre_plugins_engine_get_plugin_list 	(VinagrePluginsEngine *engine);
+const GSList		*vinagre_plugins_engine_get_plugin_list 	(VinagrePluginsEngine *engine);
 
 VinagrePluginInfo	*vinagre_plugins_engine_get_plugin_info		(VinagrePluginsEngine *engine,
 									 const gchar        *name);

@@ -263,7 +263,7 @@ row_activated_cb (GtkTreeView       *tree_view,
 static void
 plugin_manager_populate_lists (VinagrePluginManager *pm)
 {
-	const GList *plugins;
+	const GSList *plugins;
 	GtkListStore *model;
 	GtkTreeIter iter;
 

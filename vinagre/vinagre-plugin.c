@@ -3,6 +3,7 @@
  * This file is part of vinagre
  *
  * Copyright (C) 2009 Jorge Pereira <jorge@jorgepereira.com.br>
+ * Copyright (C) 2009 Jonh Wendell <wendell@bani.com.br>
  * 
  * vinagre-plugin.c is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -48,13 +49,19 @@ G_DEFINE_TYPE(VinagrePlugin, vinagre_plugin, G_TYPE_OBJECT)
 static void
 dummy (VinagrePlugin *plugin, VinagreWindow *window)
 {
-	/* Empty */
+  /* Empty */
 }
 
 static GtkWidget *
 create_configure_dialog	(VinagrePlugin *plugin)
 {
-	return NULL;
+  return NULL;
+}
+
+static GOptionGroup *
+default_context_group (VinagrePlugin *plugin)
+{
+  return NULL;
 }
 
 static gboolean
@@ -123,6 +130,7 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->activate = dummy;
 	klass->deactivate = dummy;
 	klass->update_ui = dummy;
+	klass->get_context_group = default_context_group;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -248,12 +256,11 @@ vinagre_plugin_get_data_dir (VinagrePlugin *plugin)
  */
 void
 vinagre_plugin_activate (VinagrePlugin *plugin,
-		       VinagreWindow *window)
+			 VinagreWindow *window)
 {
-	g_return_if_fail (VINAGRE_IS_PLUGIN (plugin));
-	g_return_if_fail (VINAGRE_IS_WINDOW (window));
+  g_return_if_fail (VINAGRE_IS_PLUGIN (plugin));
 	
-	VINAGRE_PLUGIN_GET_CLASS (plugin)->activate (plugin, window);
+  VINAGRE_PLUGIN_GET_CLASS (plugin)->activate (plugin, window);
 }
 
 /**
@@ -264,13 +271,12 @@ vinagre_plugin_activate (VinagrePlugin *plugin,
  * Deactivates the plugin.
  */
 void
-vinagre_plugin_deactivate	(VinagrePlugin *plugin,
-			 VinagreWindow *window)
+vinagre_plugin_deactivate (VinagrePlugin *plugin,
+			   VinagreWindow *window)
 {
-	g_return_if_fail (VINAGRE_IS_PLUGIN (plugin));
-	g_return_if_fail (VINAGRE_IS_WINDOW (window));
+  g_return_if_fail (VINAGRE_IS_PLUGIN (plugin));
 
-	VINAGRE_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, window);
+  VINAGRE_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, window);
 }
 
 /**
@@ -318,7 +324,22 @@ vinagre_plugin_is_configurable (VinagrePlugin *plugin)
 GtkWidget *
 vinagre_plugin_create_configure_dialog (VinagrePlugin *plugin)
 {
-	g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
 	
-	return VINAGRE_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
+}
+
+/**
+ * vinagre_plugin_get_context_group
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: a context group to be used on command line, if available
+ */
+GOptionGroup *
+vinagre_plugin_get_context_group (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+	
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_context_group (plugin);
 }

@@ -27,6 +27,7 @@
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <gmodule.h>
+#include <vncdisplay.h>
 
 #include <vinagre/vinagre-debug.h>
 #include <vinagre/vinagre-utils.h>
@@ -56,6 +57,14 @@ impl_update_ui (VinagrePlugin *plugin,
   vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Update UI");
 }
 
+static GOptionGroup *
+impl_get_context_group (VinagrePlugin *plugin)
+{
+  vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Get Context Group");
+
+  return vnc_display_get_option_group ();
+}
+
 static void
 vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
 {
@@ -81,5 +90,6 @@ vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
   plugin_class->activate   = impl_activate;
   plugin_class->deactivate = impl_deactivate;
   plugin_class->update_ui  = impl_update_ui;
+  plugin_class->get_context_group = impl_get_context_group;
 }
 /* vim: set ts=8: */

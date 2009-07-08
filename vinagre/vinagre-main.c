@@ -36,6 +36,8 @@
 #include "vinagre-prefs.h"
 #include "vinagre-bacon.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-plugin-info.h"
+#include "vinagre-plugin-info-priv.h"
 
 #ifdef HAVE_TELEPATHY
 #include "vinagre-tubes-manager.h"
@@ -125,7 +127,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
 int main (int argc, char **argv) {
   GOptionContext       *context;
   GError               *error = NULL;
-  GSList               *l, *next;
+  GSList               *l, *next, *plugins;
   VinagreWindow        *window;
   VinagreApp           *app;
   VinagrePluginsEngine *engine;
@@ -149,11 +151,23 @@ int main (int argc, char **argv) {
   /* Init plugins engine */
   vinagre_debug_message (DEBUG_APP, "Init plugins");
   engine = vinagre_plugins_engine_get_default ();
+  plugins = (const GSList *) vinagre_plugins_engine_get_plugin_list (engine);
 
   /* Setup command line options */
   context = g_option_context_new (_("- Remote Desktop Viewer"));
   g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
+
+  for (l = plugins; l; l = l->next)
+    {
+      GOptionGroup      *group;
+      VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (l->data);
+
+      group = vinagre_plugin_get_context_group (info->plugin);
+      if (group)
+	g_option_context_add_group (context, group);
+    }
+
   g_option_context_parse (context, &argc, &argv, &error);
   if (error)
     {

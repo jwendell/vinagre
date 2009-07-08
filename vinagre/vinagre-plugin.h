@@ -48,7 +48,7 @@ typedef struct _VinagrePlugin VinagrePlugin;
 
 struct _VinagrePlugin 
 {
-	GObject parent;
+  GObject parent;
 };
 
 /*
@@ -58,52 +58,52 @@ typedef struct _VinagrePluginClass VinagrePluginClass;
 
 struct _VinagrePluginClass 
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 
-	/* Virtual public methods */
-	
-	void 		(*activate)		(VinagrePlugin *plugin,
+  /* Virtual public methods */
+  void 		(*activate)			(VinagrePlugin *plugin,
 						 VinagreWindow *window);
-	void 		(*deactivate)		(VinagrePlugin *plugin,
-						 VinagreWindow *window);
-
-	void 		(*update_ui)		(VinagrePlugin *plugin,
+  void 		(*deactivate)			(VinagrePlugin *plugin,
 						 VinagreWindow *window);
 
-	GtkWidget 	*(*create_configure_dialog)
-						(VinagrePlugin *plugin);
+  void 		(*update_ui)			(VinagrePlugin *plugin,
+						 VinagreWindow *window);
 
-	/* Plugins should not override this, it's handled automatically by
-	   the VinagrePluginClass */
-	gboolean 	(*is_configurable)
-						(VinagrePlugin *plugin);
+  GtkWidget 	*(*create_configure_dialog)	(VinagrePlugin *plugin);
 
-	/* Padding for future expansion */
-	void		(*_vinagre_reserved1)	(void);
-	void		(*_vinagre_reserved2)	(void);
-	void		(*_vinagre_reserved3)	(void);
-	void		(*_vinagre_reserved4)	(void);
+  GOptionGroup *(*get_context_group)		(VinagrePlugin *plugin);
+
+  /* Plugins should not override this, it's handled automatically by
+     the VinagrePluginClass */
+  gboolean 	(*is_configurable)		(VinagrePlugin *plugin);
+
+  /* Padding for future expansion */
+  void		(*_vinagre_reserved1)		(void);
+  void		(*_vinagre_reserved2)		(void);
+  void		(*_vinagre_reserved3)		(void);
+  void		(*_vinagre_reserved4)		(void);
 };
 
 /*
  * Public methods
  */
-GType 		 vinagre_plugin_get_type 		(void) G_GNUC_CONST;
+GType 		 vinagre_plugin_get_type		(void) G_GNUC_CONST;
 
-gchar 		*vinagre_plugin_get_install_dir	(VinagrePlugin *plugin);
-gchar 		*vinagre_plugin_get_data_dir	(VinagrePlugin *plugin);
+gchar 		*vinagre_plugin_get_install_dir		(VinagrePlugin *plugin);
+gchar 		*vinagre_plugin_get_data_dir		(VinagrePlugin *plugin);
 
 void 		 vinagre_plugin_activate		(VinagrePlugin *plugin,
-						 VinagreWindow *window);
-void 		 vinagre_plugin_deactivate	(VinagrePlugin *plugin,
-						 VinagreWindow *window);
+							 VinagreWindow *window);
+void 		 vinagre_plugin_deactivate		(VinagrePlugin *plugin,
+							 VinagreWindow *window);
 				 
 void 		 vinagre_plugin_update_ui		(VinagrePlugin *plugin,
-						 VinagreWindow *window);
+							 VinagreWindow *window);
 
-gboolean	 vinagre_plugin_is_configurable	(VinagrePlugin *plugin);
-GtkWidget	*vinagre_plugin_create_configure_dialog		
-						(VinagrePlugin *plugin);
+gboolean	 vinagre_plugin_is_configurable		(VinagrePlugin *plugin);
+GtkWidget	*vinagre_plugin_create_configure_dialog	(VinagrePlugin *plugin);
+
+GOptionGroup *	 vinagre_plugin_get_context_group	(VinagrePlugin *plugin);
 
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):

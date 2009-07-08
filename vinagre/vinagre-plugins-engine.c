@@ -61,7 +61,7 @@ G_DEFINE_TYPE(VinagrePluginsEngine, vinagre_plugins_engine, G_TYPE_OBJECT)
 
 struct _VinagrePluginsEnginePrivate
 {
-  GList *plugin_list;
+  GSList *plugin_list;
   GHashTable *loaders;
 
   gboolean activate_from_prefs;
@@ -146,7 +146,7 @@ load_plugin_info (VinagrePluginsEngine *engine,
 		return TRUE;
 	}
 
-	engine->priv->plugin_list = g_list_prepend (engine->priv->plugin_list, info);
+	engine->priv->plugin_list = g_slist_prepend (engine->priv->plugin_list, info);
 
 	vinagre_debug_message (DEBUG_PLUGINS, "Plugin %s loaded", info->name);
 	return TRUE;
@@ -259,7 +259,7 @@ add_loader (VinagrePluginsEngine *engine,
 static void
 activate_engine_plugins (VinagrePluginsEngine *engine)
 {
-  GList *item;
+  GSList *item;
 
   vinagre_debug_message (DEBUG_PLUGINS, "Activating engine plugins");
   for (item = engine->priv->plugin_list; item; item = item->next)
@@ -321,7 +321,7 @@ static void
 vinagre_plugins_engine_finalize (GObject *object)
 {
 	VinagrePluginsEngine *engine = VINAGRE_PLUGINS_ENGINE (object);
-	GList *item;
+	GSList *item;
 	
 	vinagre_debug (DEBUG_PLUGINS);
 
@@ -345,7 +345,7 @@ vinagre_plugins_engine_finalize (GObject *object)
 		_vinagre_plugin_info_unref (info);
 	}
 
-	g_list_free (engine->priv->plugin_list);
+	g_slist_free (engine->priv->plugin_list);
 
 	G_OBJECT_CLASS (vinagre_plugins_engine_parent_class)->finalize (object);
 }
@@ -508,7 +508,7 @@ vinagre_plugins_engine_get_default (void)
   return default_engine;
 }
 
-const GList *
+const GSList *
 vinagre_plugins_engine_get_plugin_list (VinagrePluginsEngine *engine)
 {
   vinagre_debug (DEBUG_PLUGINS);
@@ -526,9 +526,9 @@ VinagrePluginInfo *
 vinagre_plugins_engine_get_plugin_info (VinagrePluginsEngine *engine,
 					const gchar          *name)
 {
-  GList *l = g_list_find_custom (engine->priv->plugin_list,
-				 name,
-				 (GCompareFunc) compare_plugin_info_and_name);
+  GSList *l = g_slist_find_custom (engine->priv->plugin_list,
+				   name,
+				   (GCompareFunc) compare_plugin_info_and_name);
 
   return l == NULL ? NULL : (VinagrePluginInfo *) l->data;
 }
@@ -536,8 +536,7 @@ vinagre_plugins_engine_get_plugin_info (VinagrePluginsEngine *engine,
 static void
 save_active_plugin_list (VinagrePluginsEngine *engine)
 {
-  GSList *active_plugins = NULL;
-  GList *l;
+  GSList *l, *active_plugins = NULL;
 
   for (l = engine->priv->plugin_list; l != NULL; l = l->next)
     {
@@ -602,6 +601,12 @@ vinagre_plugins_engine_activate_plugin_real (VinagrePluginsEngine *engine,
 
   if (!load_plugin (engine, info))
     return;
+
+  if (vinagre_plugin_info_is_engine (info))
+    {
+      vinagre_plugin_activate (info->plugin, NULL);
+      return;
+    }
 
   /* activate plugin for all windows */
   wins = vinagre_app_get_windows (vinagre_app_get_default ());
@@ -693,8 +698,7 @@ void
 vinagre_plugins_engine_activate_plugins (VinagrePluginsEngine *engine,
 					 VinagreWindow        *window)
 {
-  GSList *active_plugins = NULL;
-  GList *pl;
+  GSList *pl, *active_plugins = NULL;
 
   vinagre_debug (DEBUG_PLUGINS);
 
@@ -745,7 +749,7 @@ void
 vinagre_plugins_engine_deactivate_plugins (VinagrePluginsEngine *engine,
                               					   VinagreWindow        *window)
 {
-	GList *pl;
+	GSList *pl;
 	
 	vinagre_debug (DEBUG_PLUGINS);
 
@@ -771,7 +775,7 @@ void
 vinagre_plugins_engine_update_plugins_ui (VinagrePluginsEngine *engine,
                                           VinagreWindow        *window)
 {
-	GList *pl;
+	GSList *pl;
 
 	vinagre_debug (DEBUG_PLUGINS);
 
@@ -827,8 +831,7 @@ void
 vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
 {
 	gboolean to_activate;
-	GSList *active_plugins;
-	GList *pl;
+	GSList *pl, *active_plugins;
 
 	vinagre_debug (DEBUG_PLUGINS);
 

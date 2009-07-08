@@ -169,7 +169,7 @@ vinagre_dirs_get_vinagre_lib_dir (void)
 
 #ifndef G_OS_WIN32
 	lib_dir = g_build_filename (LIBDIR,
-				    "vinagre",
+				    "vinagre-1",
 				    NULL);
 #else
 	gchar *win32_dir;
@@ -178,7 +178,7 @@ vinagre_dirs_get_vinagre_lib_dir (void)
 
 	lib_dir = g_build_filename (win32_dir,
 				    "lib",
-				    "vinagre",
+				    "vinagre-1",
 				    NULL);
 	
 	g_free (win32_dir);
