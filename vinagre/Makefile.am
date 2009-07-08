@@ -101,6 +101,9 @@ endif
 libvinagre_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
 libvinagre_la_LIBADD = view/libview.la
+# VINAGRE_LIBS must be the last to ensure correct order on some platforms
+libvinagre_la_LIBADD += $(VINAGRE_LIBS)
+
 
 ##############################
 # The main binary
@@ -117,6 +120,8 @@ vinagre_LDADD = \
 	$(GTKVNC_LIBS)		\
 	libvinagre.la \
 	$(NULL)
+
+vinagre_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
 ##############################
 # Bonobo .server
@@ -243,3 +248,5 @@ dist-hook:
 	cd $(distdir) ; rm -f $(DISTCLEANFILES)
 
 $(vinagre_OBJECTS): $(BUILT_SOURCES)
+
+-include $(top_srcdir)/git.mk

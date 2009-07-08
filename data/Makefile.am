@@ -90,3 +90,5 @@ install-data-hook:
 uninstall-hook: 
 	$(UPDATE_MIME)
 	$(UPDATE_DESKTOP)
+
+-include $(top_srcdir)/git.mk
