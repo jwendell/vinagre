@@ -26,33 +26,33 @@
 
 struct _VinagrePluginInfo
 {
-	gint               refcount;
+  gint               refcount;
 
-	VinagrePlugin     *plugin;
-	gchar             *file;
+  VinagrePlugin     *plugin;
+  gchar             *file;
 
-	gchar             *module_name;
-	gchar		          *loader;
-	gchar            **dependencies;
+  gchar             *module_name;
+  gchar	            *loader;
+  gchar            **dependencies;
 
-	gchar             *name;
-	gchar             *desc;
-	gchar             *icon_name;
-	gchar            **authors;
-	gchar             *copyright;
-	gchar             *website;
-	gchar             *version;
+  gchar             *name;
+  gchar             *desc;
+  gchar             *icon_name;
+  gchar            **authors;
+  gchar             *copyright;
+  gchar             *website;
+  gchar             *version;
 
-	/* A plugin is unavailable if it is not possible to activate it
-	   due to an error loading the plugin module (e.g. for Python plugins
-	   when the interpreter has not been correctly initializated) */
-	gint               available : 1;
+  /* A plugin is unavailable if it is not possible to activate it
+     due to an error loading the plugin module (e.g. for Python plugins
+     when the interpreter has not been correctly initializated) */
+  gint               available : 1;
+  gint               engine : 1;
 };
 
-VinagrePluginInfo		*_vinagre_plugin_info_new		(const gchar *file);
-void			 _vinagre_plugin_info_ref		(VinagrePluginInfo *info);
+VinagrePluginInfo	*_vinagre_plugin_info_new	(const gchar *file);
+void			 _vinagre_plugin_info_ref	(VinagrePluginInfo *info);
 void			 _vinagre_plugin_info_unref	(VinagrePluginInfo *info);
 
-
 #endif /* __VINAGRE_PLUGIN_INFO_PRIV_H__ */
-
+/* vim: set ts=8: */

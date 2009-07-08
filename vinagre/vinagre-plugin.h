@@ -228,3 +228,4 @@ object_name##_register_type (GTypeModule *type_module)				\
 G_END_DECLS
 
 #endif  /* __VINAGRE_PLUGIN_H__ */
+/* vim: set ts=8: */

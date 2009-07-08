@@ -2,7 +2,7 @@
  * vinagre-prefs.c
  * This file is part of vinagre
  *
- * Copyright (C) Jonh Wendell 2008 <wendell@bani.com.br>
+ * Copyright (C) Jonh Wendell 2008,2009 <wendell@bani.com.br>
  * 
  * vinagre-prefs.c is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -38,6 +38,9 @@
 #define VM_WINDOW_HEIGHT		VINAGRE_BASE_KEY "/window_height"
 #define VM_SIDE_PANEL_SIZE		VINAGRE_BASE_KEY "/side_panel_size"
 
+#define VINAGRE_PLUGINS_DIR		VINAGRE_BASE_KEY "/plugins"
+#define VM_ACTIVE_PLUGINS		VINAGRE_PLUGINS_DIR "/active-plugins"
+
 struct _VinagrePrefsPrivate
 {
   GConfClient *gconf_client;
@@ -57,7 +60,8 @@ enum
   PROP_WINDOW_HEIGHT,
   PROP_SIDE_PANEL_SIZE,
   PROP_SHOW_ACCELS,
-  PROP_HISTORY_SIZE
+  PROP_HISTORY_SIZE,
+  PROP_ACTIVE_PLUGINS
 };
 
 G_DEFINE_TYPE (VinagrePrefs, vinagre_prefs, G_TYPE_OBJECT);
@@ -123,6 +127,15 @@ vinagre_prefs_get_int (VinagrePrefs *prefs, const gchar* key, gint def)
       return def;
 }
 
+static GSList *
+vinagre_prefs_get_list (VinagrePrefs *prefs, const gchar* key)
+{
+  return gconf_client_get_list (prefs->priv->gconf_client,
+				key,
+				GCONF_VALUE_STRING,
+				NULL);
+}
+
 static void		 
 vinagre_prefs_set_bool (VinagrePrefs *prefs, const gchar* key, gboolean value)
 {
@@ -139,6 +152,19 @@ vinagre_prefs_set_int (VinagrePrefs *prefs, const gchar* key, gint value)
 		    prefs->priv->gconf_client, key, NULL));
 			
   gconf_client_set_int (prefs->priv->gconf_client, key, value, NULL);
+}
+
+static void
+vinagre_prefs_set_list (VinagrePrefs *prefs, const gchar* key, GSList *list)
+{
+  g_return_if_fail (gconf_client_key_is_writable (
+		    prefs->priv->gconf_client, key, NULL));
+
+  gconf_client_set_list (prefs->priv->gconf_client,
+			 key,
+			 GCONF_VALUE_STRING,
+			 list,
+			 NULL);
 }
 
 static void
@@ -224,6 +250,9 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
       case PROP_HISTORY_SIZE:
 	vinagre_prefs_set_int (prefs, VM_HISTORY_SIZE, g_value_get_int (value));
 	break;
+      case PROP_ACTIVE_PLUGINS:
+	vinagre_prefs_set_list (prefs, VM_ACTIVE_PLUGINS, g_value_get_pointer (value));
+	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -269,6 +298,9 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	break;
       case PROP_HISTORY_SIZE:
 	g_value_set_int (value, vinagre_prefs_get_int (prefs, VM_HISTORY_SIZE, 15));
+	break;
+      case PROP_ACTIVE_PLUGINS:
+	g_value_set_pointer (value, vinagre_prefs_get_list (prefs, VM_ACTIVE_PLUGINS));
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -383,6 +415,13 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 						     "Max number of items in history dropdown entry",
 						     0, G_MAXINT, 15,
 						     G_PARAM_READWRITE));
+
+  g_object_class_install_property (object_class,
+				   PROP_ACTIVE_PLUGINS,
+				   g_param_spec_pointer ("active-plugins",
+							 "Active plugins",
+							 "The list of active plugins",
+							 G_PARAM_READWRITE));
 
 }
 

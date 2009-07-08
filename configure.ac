@@ -134,7 +134,7 @@ AC_SUBST(REBUILD)
 #*******************************************************************************
 #
 dnl active plugins for vinagre.schemas
-ACTIVE_PLUGINS="dummy"
+ACTIVE_PLUGINS="vnc"
 AC_SUBST(ACTIVE_PLUGINS)
 
 VINAGRE_IMPLIB="-lvinagre-${VINAGRE_API_VERSION}"
@@ -158,6 +158,7 @@ data/Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
 data/vinagre.pc
+data/vinagre.schemas.in
 data/icons/Makefile
 data/pixmaps/Makefile
 help/Makefile
@@ -166,6 +167,7 @@ plugin-loaders/Makefile
 plugin-loaders/c/Makefile
 plugins/Makefile
 plugins/dummy/Makefile
+plugins/vnc/Makefile
 vinagre/Makefile
 vinagre/view/Makefile
 ])

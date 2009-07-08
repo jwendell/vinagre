@@ -53,7 +53,8 @@ EXTRA_DIST = \
 	$(desktop_in_files) \
 	$(MIMEFILES) \
 	$(schemas_in_files) \
-	vinagre.pc.in
+	vinagre.pc.in \
+	vinagre.schemas.in.in
 
 if TELEPATHY
 

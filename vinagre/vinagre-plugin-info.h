@@ -33,7 +33,7 @@ typedef struct _VinagrePluginInfo			VinagrePluginInfo;
 GType		 vinagre_plugin_info_get_type		(void) G_GNUC_CONST;
 
 gboolean 	 vinagre_plugin_info_is_active		(VinagrePluginInfo *info);
-gboolean 	 vinagre_plugin_info_is_available		(VinagrePluginInfo *info);
+gboolean 	 vinagre_plugin_info_is_available	(VinagrePluginInfo *info);
 gboolean	 vinagre_plugin_info_is_configurable	(VinagrePluginInfo *info);
 
 const gchar	*vinagre_plugin_info_get_module_name	(VinagrePluginInfo *info);
@@ -41,12 +41,13 @@ const gchar	*vinagre_plugin_info_get_module_name	(VinagrePluginInfo *info);
 const gchar	*vinagre_plugin_info_get_name		(VinagrePluginInfo *info);
 const gchar	*vinagre_plugin_info_get_description	(VinagrePluginInfo *info);
 const gchar	*vinagre_plugin_info_get_icon_name	(VinagrePluginInfo *info);
-const gchar    **vinagre_plugin_info_get_authors		(VinagrePluginInfo *info);
-const gchar	*vinagre_plugin_info_get_website		(VinagrePluginInfo *info);
+const gchar    **vinagre_plugin_info_get_authors	(VinagrePluginInfo *info);
+const gchar	*vinagre_plugin_info_get_website	(VinagrePluginInfo *info);
 const gchar	*vinagre_plugin_info_get_copyright	(VinagrePluginInfo *info);
-const gchar	*vinagre_plugin_info_get_version		(VinagrePluginInfo *info);
+const gchar	*vinagre_plugin_info_get_version	(VinagrePluginInfo *info);
+gboolean	 vinagre_plugin_info_is_engine		(VinagrePluginInfo *info);
 
 G_END_DECLS
 
 #endif /* __VINAGRE_PLUGIN_INFO_H__ */
-
+/* vim: set ts=8: */

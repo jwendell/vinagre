@@ -30,7 +30,7 @@
 #include "vinagre-plugin.h"
 #include "vinagre-debug.h"
 #include "vinagre-app.h"
-//#include "vinagre-prefs-manager.h"
+#include "vinagre-prefs.h"
 #include "vinagre-plugin-loader.h"
 #include "vinagre-object-module.h"
 #include "vinagre-dirs.h"
@@ -78,10 +78,10 @@ typedef gboolean (*LoadDirCallback)(VinagrePluginsEngine *engine, const gchar *f
 
 static gboolean
 load_dir_real (VinagrePluginsEngine *engine,
-      	       const gchar        *dir,
-	             const gchar        *suffix,
-      	       LoadDirCallback     callback,
-	             gpointer            userdata)
+	       const gchar          *dir,
+	       const gchar          *suffix,
+	       LoadDirCallback      callback,
+	       gpointer             userdata)
 {
 	GError *error = NULL;
 	GDir *d;
@@ -257,6 +257,21 @@ add_loader (VinagrePluginsEngine *engine,
 }
 
 static void
+activate_engine_plugins (VinagrePluginsEngine *engine)
+{
+  GList *item;
+
+  vinagre_debug_message (DEBUG_PLUGINS, "Activating engine plugins");
+  for (item = engine->priv->plugin_list; item; item = item->next)
+    {
+      VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (item->data);
+
+      if (vinagre_plugin_info_is_engine (info))
+	vinagre_plugins_engine_activate_plugin (engine, info);
+    }
+}
+
+static void
 vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
 {
 	vinagre_debug (DEBUG_PLUGINS);
@@ -282,6 +297,8 @@ vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
 						       equal_lowercase,
 						       (GDestroyNotify)g_free,
 						       (GDestroyNotify)loader_destroy);
+
+	activate_engine_plugins (engine);
 }
 
 static void
@@ -507,7 +524,7 @@ compare_plugin_info_and_name (VinagrePluginInfo *info,
 
 VinagrePluginInfo *
 vinagre_plugins_engine_get_plugin_info (VinagrePluginsEngine *engine,
-                          				      const gchar        *name)
+					const gchar          *name)
 {
   GList *l = g_list_find_custom (engine->priv->plugin_list,
 				 name,
@@ -519,23 +536,23 @@ vinagre_plugins_engine_get_plugin_info (VinagrePluginsEngine *engine,
 static void
 save_active_plugin_list (VinagrePluginsEngine *engine)
 {
-	GSList *active_plugins = NULL;
-	GList *l;
+  GSList *active_plugins = NULL;
+  GList *l;
 
-	for (l = engine->priv->plugin_list; l != NULL; l = l->next)
-	{
-		VinagrePluginInfo *info = (VinagrePluginInfo *) l->data;
+  for (l = engine->priv->plugin_list; l != NULL; l = l->next)
+    {
+      VinagrePluginInfo *info = (VinagrePluginInfo *) l->data;
 
-		if (vinagre_plugin_info_is_active (info))
-		{
-			active_plugins = g_slist_prepend (active_plugins,
-							  (gpointer)vinagre_plugin_info_get_module_name (info));
-		}
-	}
+      if (vinagre_plugin_info_is_active (info))
+	active_plugins = g_slist_prepend (active_plugins,
+					  (gpointer)vinagre_plugin_info_get_module_name (info));
+    }
 
-// AQUI:	vinagre_prefs_manager_set_active_plugins (active_plugins);
+  g_object_set (vinagre_prefs_get_default (),
+		"active-plugins", active_plugins,
+		NULL);
 
-	g_slist_free (active_plugins);
+  g_slist_free (active_plugins);
 }
 
 static gboolean
@@ -579,77 +596,79 @@ load_plugin (VinagrePluginsEngine *engine,
 
 static void
 vinagre_plugins_engine_activate_plugin_real (VinagrePluginsEngine *engine,
-			                                		   VinagrePluginInfo *info)
+					     VinagrePluginInfo    *info)
 {
-	if (!load_plugin (engine, info))
-		return;
+  const GList *wins;
 
-	/* activate plugin for all windows */
-	const GList *wins = vinagre_app_get_windows (vinagre_app_get_default ());
-	for (; wins != NULL; wins = wins->next)
-		vinagre_plugin_activate (info->plugin, VINAGRE_WINDOW (wins->data));
+  if (!load_plugin (engine, info))
+    return;
+
+  /* activate plugin for all windows */
+  wins = vinagre_app_get_windows (vinagre_app_get_default ());
+  for (; wins != NULL; wins = wins->next)
+    vinagre_plugin_activate (info->plugin, VINAGRE_WINDOW (wins->data));
 }
 
 gboolean
 vinagre_plugins_engine_activate_plugin (VinagrePluginsEngine *engine,
-                          				      VinagrePluginInfo    *info)
+					VinagrePluginInfo    *info)
 {
-	vinagre_debug (DEBUG_PLUGINS);
+  vinagre_debug (DEBUG_PLUGINS);
 
-	g_return_val_if_fail (info != NULL, FALSE);
+  g_return_val_if_fail (info != NULL, FALSE);
 
-	if (!vinagre_plugin_info_is_available (info))
-		return FALSE;
+  if (!vinagre_plugin_info_is_available (info))
+    return FALSE;
 		
-	if (vinagre_plugin_info_is_active (info))
-		return TRUE;
+  if (vinagre_plugin_info_is_active (info))
+    return TRUE;
 
-	g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
+  g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
 
-	if (vinagre_plugin_info_is_active (info))
-		save_active_plugin_list (engine);
+  if (vinagre_plugin_info_is_active (info))
+    save_active_plugin_list (engine);
 
-	return vinagre_plugin_info_is_active (info);
+  return vinagre_plugin_info_is_active (info);
 }
 
 static void
 call_plugin_deactivate (VinagrePlugin *plugin, 
-                  			VinagreWindow *window)
+			VinagreWindow *window)
 {
-	vinagre_plugin_deactivate (plugin, window);
+  vinagre_plugin_deactivate (plugin, window);
 
-	/* ensure update of ui manager, because we suspect it does something
-	   with expected static strings in the type module (when unloaded the
-	   strings don't exist anymore, and ui manager updates in an idle
-	   func) */
-	gtk_ui_manager_ensure_update (vinagre_window_get_ui_manager (window));
+  /* ensure update of ui manager, because we suspect it does something
+     with expected static strings in the type module (when unloaded the
+     strings don't exist anymore, and ui manager updates in an idle
+     func) */
+  gtk_ui_manager_ensure_update (vinagre_window_get_ui_manager (window));
 }
 
 static void
 vinagre_plugins_engine_deactivate_plugin_real (VinagrePluginsEngine *engine,
-                                					     VinagrePluginInfo *info)
+					       VinagrePluginInfo    *info)
 {
-	const GList *wins;
-	VinagrePluginLoader *loader;
+  const GList *wins;
+  VinagrePluginLoader *loader;
 
-	if (!vinagre_plugin_info_is_active (info) || 
-	    !vinagre_plugin_info_is_available (info))
-		return;
+  if (!vinagre_plugin_info_is_active (info) || 
+      !vinagre_plugin_info_is_available (info))
+    return;
 
-	wins = vinagre_app_get_windows (vinagre_app_get_default ());
-	for (; wins != NULL; wins = wins->next)
-		call_plugin_deactivate (info->plugin, VINAGRE_WINDOW (wins->data));
+  wins = vinagre_app_get_windows (vinagre_app_get_default ());
+  for (; wins != NULL; wins = wins->next)
+    call_plugin_deactivate (info->plugin, VINAGRE_WINDOW (wins->data));
 
-	/* first unref the plugin (the loader still has one) */
-	g_object_unref (info->plugin);
+  /* first unref the plugin (the loader still has one) */
+  g_object_unref (info->plugin);
 	
-	/* find the loader and tell it to gc and unload the plugin */
-	loader = get_plugin_loader (engine, info);
+  /* find the loader and tell it to gc and unload the plugin */
+  loader = get_plugin_loader (engine, info);
 	
-	vinagre_plugin_loader_garbage_collect (loader);
-	vinagre_plugin_loader_unload (loader, info);
+  vinagre_plugin_loader_garbage_collect (loader);
+  vinagre_plugin_loader_unload (loader, info);
 	
-	info->plugin = NULL;
+  info->plugin = NULL;
 }
 
 gboolean
@@ -685,7 +704,9 @@ vinagre_plugins_engine_activate_plugins (VinagrePluginsEngine *engine,
   /* the first time, we get the 'active' plugins from gconf */
   if (engine->priv->activate_from_prefs)
     {
-      //AQUI: active_plugins = vinagre_prefs_manager_get_active_plugins ();
+      g_object_get (vinagre_prefs_get_default (),
+		    "active-plugins", &active_plugins,
+		    NULL);
     }
 
   for (pl = engine->priv->plugin_list; pl; pl = pl->next)
@@ -811,7 +832,9 @@ vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
 
 	vinagre_debug (DEBUG_PLUGINS);
 
-//AQUI	active_plugins = vinagre_prefs_manager_get_active_plugins ();
+	g_object_get (vinagre_prefs_get_default (),
+		      "active-plugins", &active_plugins,
+		      NULL);
 
 	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{
@@ -841,4 +864,4 @@ vinagre_plugins_engine_rescan_plugins (VinagrePluginsEngine *engine)
 	
 	load_all_plugins (engine);
 }
-
+/* vim: set ts=8: */
