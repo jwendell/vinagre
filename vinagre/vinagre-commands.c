@@ -209,11 +209,26 @@ vinagre_cmd_edit_plugins (GtkAction     *action,
                           VinagreWindow *window)
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
-  GtkWidget *widget;
+  // AQUI: 
+  GtkWidget *dialog, *manager;
+  
+  dialog = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  
+  gtk_container_set_border_width (GTK_CONTAINER (dialog), 10);
 
-  widget = vinagre_plugin_manager_new ();
+  gtk_window_set_title (GTK_WINDOW(dialog), N_("Plugins Manager"));
 
-  gtk_widget_show_all (widget);
+  gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
+
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ALWAYS);
+   
+  manager = vinagre_plugin_manager_new ();
+  
+  gtk_container_add (GTK_CONTAINER (dialog), manager);
+
+  gtk_window_set_modal (GTK_WINDOW(dialog), TRUE);
+
+  gtk_widget_show_all (dialog);
 }
 
 /* View Menu */
