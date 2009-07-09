@@ -1,4 +1,4 @@
-SUBDIRS = icons
+SUBDIRS = icons pixmaps
 
 gladedir   = $(datadir)/vinagre
 glade_DATA = vinagre.glade

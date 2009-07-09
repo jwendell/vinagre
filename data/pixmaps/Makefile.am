@@ -1,4 +1,4 @@
-icondir = $(datadir)/vinagre/icons
+icondir = $(datadir)/icons
 icon_DATA = vinagre-plugin.png
 
 EXTRA_DIST = $(icon_DATA)
