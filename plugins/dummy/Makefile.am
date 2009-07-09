@@ -1,4 +1,4 @@
-# dummy plugin
+# dummy plugin by Jorge Pereira <jpereira@gnome.org>
 plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
@@ -25,11 +25,9 @@ dummy.vinagre-plugin: dummy.vinagre-plugin.desktop.in $(INTLTOOL_MERGE) $(wildca
 
 plugin_DATA = $(plugin_in_files:.vinagre-plugin.desktop.in=.vinagre-plugin)
 
-#EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
 EXTRA_DIST = $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)
-
 
 -include $(top_srcdir)/git.mk

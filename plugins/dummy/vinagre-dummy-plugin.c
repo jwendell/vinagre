@@ -2,7 +2,7 @@
  * vinagre-dummy-plugin.c
  * This file is part of vinagre
  *
- * Copyright (C) 2009 Jorge Pereira <jorge@jorgepereira.com.br>
+ * Copyright (C) 2009 Jonh Wendell <wendell@bani.com.br>
  * 
  * vinagre-dummy-plugin.c is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -31,7 +31,7 @@
 #include <vinagre/vinagre-debug.h>
 #include <vinagre/vinagre-utils.h>
 
-#define VINAGRE_SORT_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_SORT_PLUGIN, VinagreDummyPluginPrivate))
+#define VINAGRE_DUMMY_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_DUMMY_PLUGIN, VinagreDummyPluginPrivate))
 
 VINAGRE_PLUGIN_REGISTER_TYPE(VinagreDummyPlugin, vinagre_dummy_plugin)
 
@@ -54,6 +54,14 @@ impl_update_ui (VinagrePlugin *plugin,
                 VinagreWindow *window)
 {
   vinagre_debug_message (DEBUG_PLUGINS, "VinagreDummyPlugin Update UI");
+}
+
+static GOptionGroup *
+impl_get_context_group (VinagrePlugin *plugin)
+{
+  vinagre_debug_message (DEBUG_PLUGINS, "VinagreDummyPlugin Get Context Group");
+
+  return NULL; //dummy_display_get_option_group ();
 }
 
 static void
@@ -81,5 +89,6 @@ vinagre_dummy_plugin_class_init (VinagreDummyPluginClass *klass)
   plugin_class->activate   = impl_activate;
   plugin_class->deactivate = impl_deactivate;
   plugin_class->update_ui  = impl_update_ui;
+  plugin_class->get_context_group = impl_get_context_group;
 }
-
+/* vim: set ts=8: */
