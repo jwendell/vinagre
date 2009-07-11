@@ -39,13 +39,6 @@ typedef struct _VinagreConnectionClass   VinagreConnectionClass;
 typedef struct _VinagreConnection        VinagreConnection;
 typedef struct _VinagreConnectionPrivate VinagreConnectionPrivate;
 
-typedef enum
-{
-  VINAGRE_CONNECTION_PROTOCOL_VNC = 1,
-  VINAGRE_CONNECTION_PROTOCOL_RDP,
-  VINAGRE_CONNECTION_PROTOCOL_INVALID
-} VinagreConnectionProtocol;
-
 struct _VinagreConnectionClass
 {
   GObjectClass	parent_class;
@@ -66,13 +59,9 @@ struct _VinagreConnection
 
 GType vinagre_connection_get_type (void) G_GNUC_CONST;
 
-VinagreConnection *vinagre_connection_new (VinagreConnectionProtocol protocol);
-VinagreConnectionProtocol vinagre_connection_protocol_by_name (const gchar *protocol);
-
-VinagreConnectionProtocol vinagre_connection_get_protocol (VinagreConnection *conn);
-const gchar*		  vinagre_connection_get_protocol_as_string (VinagreConnection *conn);
-void			  vinagre_connection_set_protocol (VinagreConnection *conn,
-							   VinagreConnectionProtocol protocol);
+const gchar*	    vinagre_connection_get_protocol	(VinagreConnection *conn);
+void		    vinagre_connection_set_protocol	(VinagreConnection *conn,
+							 const gchar       *protocol);
 
 const gchar*	    vinagre_connection_get_host		(VinagreConnection *conn);
 void		    vinagre_connection_set_host		(VinagreConnection *conn,
@@ -102,9 +91,9 @@ VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar 
 VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg, gboolean use_bookmarks);
 
 gboolean	    vinagre_connection_split_string	(const gchar *uri,
-							 VinagreConnectionProtocol *protocol,
+							 gchar **protocol,
 							 gchar **host,
-							 gint *port,
+							 gint   *port,
 							 gchar **error_msg);
 
 gchar*		    vinagre_connection_get_string_rep	(VinagreConnection *conn,

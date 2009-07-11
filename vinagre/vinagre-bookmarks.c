@@ -28,6 +28,8 @@
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-bookmarks-migration.h"
 #include "vinagre-connection.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 struct _VinagreBookmarksPrivate
 {
@@ -145,10 +147,10 @@ vinagre_bookmarks_class_init (VinagreBookmarksClass *klass)
 }
 
 static VinagreConnection *
-find_conn_by_host (GSList *entries,
-		   VinagreConnectionProtocol protocol,
+find_conn_by_host (GSList      *entries,
+		   const gchar *protocol,
 		   const gchar *host,
-		   gint port)
+		   gint         port)
 {
   GSList *l;
   VinagreConnection *conn;
@@ -171,7 +173,7 @@ find_conn_by_host (GSList *entries,
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 	    if ( (g_str_equal (host, vinagre_connection_get_host (conn))) &&
 		 (port == vinagre_connection_get_port (conn)) &&
-		 (protocol == vinagre_connection_get_protocol (conn)) )
+		 (g_str_equal (protocol, vinagre_connection_get_protocol (conn))) )
 	      return g_object_ref (conn);
 	    break;
 
@@ -184,9 +186,9 @@ find_conn_by_host (GSList *entries,
 
 VinagreConnection *
 vinagre_bookmarks_exists (VinagreBookmarks *book,
-                          VinagreConnectionProtocol protocol,
-                          const gchar *host,
-                          gint port)
+                          const gchar      *protocol,
+                          const gchar      *host,
+                          gint              port)
 {
   VinagreConnection *conn = NULL;
   GSList *l, *next;
@@ -238,7 +240,8 @@ vinagre_bookmarks_parse_item (xmlNode *root)
   VinagreConnection     *conn;
   xmlNode               *curr;
   xmlChar               *s_value;
-  VinagreConnectionProtocol protocol = VINAGRE_CONNECTION_PROTOCOL_VNC;
+  gchar                 *protocol = NULL;
+  VinagrePlugin         *plugin;
 
   /* Loop to discover the protocol */
   for (curr = root->children; curr; curr = curr->next)
@@ -247,12 +250,23 @@ vinagre_bookmarks_parse_item (xmlNode *root)
         continue;
 
       s_value = xmlNodeGetContent (curr);
-      protocol = vinagre_connection_protocol_by_name ((const gchar *)s_value);
+      protocol = g_strdup ((const gchar *)s_value);
       xmlFree (s_value);
       break;
     }
 
-  conn = vinagre_connection_new (protocol);
+  if (!protocol)
+    protocol = g_strdup ("vnc");
+
+  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
+				protocol);
+  if (!plugin)
+    {
+      g_warning (_("The protocol %s is not supported."), protocol);
+      goto out;
+    }
+
+  conn = vinagre_plugin_new_connection (plugin);
   vinagre_connection_parse_item (conn, root);
 
   if (vinagre_connection_get_host (conn))
@@ -260,6 +274,8 @@ vinagre_bookmarks_parse_item (xmlNode *root)
 
   g_object_unref (conn);
 
+out:
+  g_free (protocol);
   return entry;
 }
 

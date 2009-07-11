@@ -24,8 +24,8 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include "vinagre-connection.h"
-#include "vinagre-bookmarks-entry.h"
+#include <vinagre/vinagre-connection.h>
+#include <vinagre/vinagre-bookmarks-entry.h>
 
 G_BEGIN_DECLS
 
@@ -57,8 +57,6 @@ struct _VinagreBookmarks
   VinagreBookmarksPrivate *priv;
 };
 
-#include "vinagre-window.h"
-
 GType vinagre_bookmarks_get_type (void) G_GNUC_CONST;
 
 VinagreBookmarks   *vinagre_bookmarks_get_default  (void);
@@ -71,9 +69,9 @@ gboolean           vinagre_bookmarks_remove_entry  (VinagreBookmarks      *book,
                                                     VinagreBookmarksEntry *entry);
 
 VinagreConnection  *vinagre_bookmarks_exists       (VinagreBookmarks *book,
-                                                    VinagreConnectionProtocol protocol,
-                                                    const gchar *host,
-                                                    gint port);
+                                                    const gchar      *protocol,
+                                                    const gchar      *host,
+                                                    gint              port);
 
 VinagreBookmarksEntry *vinagre_bookmarks_name_exists (VinagreBookmarks      *book,
                                                       VinagreBookmarksEntry *parent,

@@ -72,9 +72,16 @@ PKG_CHECK_MODULES(VINAGRE, \
   gconf-2.0 >= $GCONF_REQUIRED \
   gthread-2.0 >= $GTHREAD_REQUIRED \
   gnome-keyring-1 \
-  gtk-vnc-1.0 >= $GTK_VNC_REQUIRED)
+)
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
+
+PKG_CHECK_MODULES(VNC, \
+  gtk-vnc-1.0 >= $GTK_VNC_REQUIRED \
+  libxml-2.0
+)
+AC_SUBST(VNC_CFLAGS)
+AC_SUBST(VNC_LIBS)
 
 # Check for telepathy
 AC_ARG_ENABLE(telepathy,

@@ -38,8 +38,8 @@ typedef struct _VinagrePluginPrivate VinagrePluginPrivate;
 
 struct _VinagrePluginPrivate
 {
-	gchar *install_dir;
-	gchar *data_dir_name;
+  gchar *install_dir;
+  gchar *data_dir_name;
 };
 
 #define VINAGRE_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_PLUGIN, VinagrePluginPrivate))
@@ -62,6 +62,33 @@ static GOptionGroup *
 default_context_group (VinagrePlugin *plugin)
 {
   return NULL;
+}
+
+static const gchar *
+default_get_protocol (VinagrePlugin *plugin)
+{
+  return NULL;
+}
+
+static VinagreConnection *
+default_new_connection (VinagrePlugin *plugin)
+{
+  return NULL;
+}
+
+static VinagreConnection *
+default_new_connection_from_file (VinagrePlugin *plugin,
+				  const gchar   *data,
+				  gboolean       use_bookmarks,
+				  gchar        **error_msg)
+{
+  return NULL;
+}
+
+static gint
+default_get_default_port (VinagrePlugin *plugin)
+{
+  return -1;
 }
 
 static gboolean
@@ -131,6 +158,10 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->deactivate = dummy;
 	klass->update_ui = dummy;
 	klass->get_context_group = default_context_group;
+	klass->get_protocol = default_get_protocol;
+	klass->get_default_port = default_get_default_port;
+	klass->new_connection = default_new_connection;
+	klass->new_connection_from_file = default_new_connection_from_file;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -343,3 +374,68 @@ vinagre_plugin_get_context_group (VinagrePlugin *plugin)
 	
   return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_context_group (plugin);
 }
+
+/**
+ * vinagre_plugin_get_protocol
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: a protocol, like "vnc" or "rdp"
+ */
+const gchar *
+vinagre_plugin_get_protocol (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+	
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_protocol (plugin);
+}
+
+/**
+ * vinagre_plugin_new_connection
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: a subclass of the Connection class
+ */
+VinagreConnection *
+vinagre_plugin_new_connection (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+	
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->new_connection (plugin);
+}
+
+/**
+ * vinagre_plugin_new_connection_from_file
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: a subclass of the Connection class
+ */
+VinagreConnection *
+vinagre_plugin_new_connection_from_file (VinagrePlugin *plugin,
+					 const gchar   *data,
+					 gboolean       use_bookmarks,
+					 gchar        **error_msg)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+	
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->new_connection_from_file (plugin, data, use_bookmarks, error_msg);
+}
+
+/**
+ * vinagre_plugin_get_default_port
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: the default port (ex: 5900 for vnc)
+ */
+gint
+vinagre_plugin_get_default_port (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), -1);
+	
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_default_port (plugin);
+}
+
+/* vim: set ts=8: */

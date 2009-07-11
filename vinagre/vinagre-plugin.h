@@ -71,7 +71,16 @@ struct _VinagrePluginClass
 
   GtkWidget 	*(*create_configure_dialog)	(VinagrePlugin *plugin);
 
-  GOptionGroup *(*get_context_group)		(VinagrePlugin *plugin);
+
+  /* Virtual methods specific to 'engine' plugins */
+  GOptionGroup	*(*get_context_group)		(VinagrePlugin *plugin);
+  const gchar	*(*get_protocol)		(VinagrePlugin *plugin);
+  gint		(*get_default_port)		(VinagrePlugin *plugin);
+  VinagreConnection *(*new_connection)		(VinagrePlugin *plugin);
+  VinagreConnection *(*new_connection_from_file)(VinagrePlugin *plugin,
+						 const gchar   *data,
+						 gboolean       use_bookmarks,
+						 gchar        **error_msg);
 
   /* Plugins should not override this, it's handled automatically by
      the VinagrePluginClass */
@@ -103,7 +112,14 @@ void 		 vinagre_plugin_update_ui		(VinagrePlugin *plugin,
 gboolean	 vinagre_plugin_is_configurable		(VinagrePlugin *plugin);
 GtkWidget	*vinagre_plugin_create_configure_dialog	(VinagrePlugin *plugin);
 
-GOptionGroup *	 vinagre_plugin_get_context_group	(VinagrePlugin *plugin);
+GOptionGroup	*vinagre_plugin_get_context_group	(VinagrePlugin *plugin);
+const gchar	*vinagre_plugin_get_protocol		(VinagrePlugin *plugin);
+gint		 vinagre_plugin_get_default_port	(VinagrePlugin *plugin);
+VinagreConnection *vinagre_plugin_new_connection	(VinagrePlugin *plugin);
+VinagreConnection *vinagre_plugin_new_connection_from_file (VinagrePlugin *plugin,
+							    const gchar   *data,
+							    gboolean       use_bookmarks,
+							    gchar        **error_msg);
 
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):

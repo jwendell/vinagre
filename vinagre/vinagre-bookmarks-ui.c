@@ -119,7 +119,7 @@ show_dialog_conn (VinagreBookmarks      *book,
 		  VinagreBookmarksEntry *entry,
 		  gboolean               is_add)
 {
-  gchar             *str, *host, *error_str;
+  gchar             *str, *host, *error_str, *protocol;
   gint               port;
   GladeXML          *xml;
   GtkWidget         *dialog, *host_entry, *name_entry;
@@ -127,7 +127,6 @@ show_dialog_conn (VinagreBookmarks      *book,
   GtkWidget         *box, *tree, *save_button;
   VinagreConnection *conn;
   const gchar       *name;
-  VinagreConnectionProtocol protocol;
 
   xml = glade_xml_new (vinagre_utils_get_glade_filename (),
 		       "bookmarks_add_edit_conn_dialog",

@@ -20,6 +20,7 @@
  */
 
 #include <glib/gi18n.h>
+#include <vinagre/vinagre-utils.h>
 #include "vinagre-vnc-connection.h"
 
 struct _VinagreVncConnectionPrivate
@@ -47,7 +48,6 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
 {
   conn->priv = G_TYPE_INSTANCE_GET_PRIVATE (conn, VINAGRE_TYPE_VNC_CONNECTION, VinagreVncConnectionPrivate);
 
-  vinagre_connection_set_protocol (VINAGRE_CONNECTION (conn), VINAGRE_CONNECTION_PROTOCOL_VNC);
   conn->priv->desktop_name = NULL;
   conn->priv->view_only = FALSE;
   conn->priv->scaling = FALSE;
@@ -136,8 +136,8 @@ vnc_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
   VinagreVncConnection *vnc_conn = VINAGRE_VNC_CONNECTION (conn);
   VINAGRE_CONNECTION_CLASS (vinagre_vnc_connection_parent_class)->impl_fill_writer (conn, writer);
 
-  xmlTextWriterWriteFormatElement (writer, "view_only", "%d", vnc_conn->priv->view_only);
-  xmlTextWriterWriteFormatElement (writer, "scaling", "%d", vnc_conn->priv->scaling);
+  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"view_only", "%d", vnc_conn->priv->view_only);
+  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"scaling", "%d", vnc_conn->priv->scaling);
 }
 
 static void
@@ -154,9 +154,9 @@ vnc_parse_item (VinagreConnection *conn, xmlNode *root)
       s_value = xmlNodeGetContent (curr);
 
       if (!xmlStrcmp(curr->name, (const xmlChar *)"view_only"))
-	vinagre_vnc_connection_set_view_only (vnc_conn, vinagre_utils_parse_boolean (s_value));
+	vinagre_vnc_connection_set_view_only (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"scaling"))
-	vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean (s_value));
+	vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 
       xmlFree (s_value);
     }

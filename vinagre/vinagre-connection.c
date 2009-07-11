@@ -26,11 +26,12 @@
 #include "vinagre-connection.h"
 #include "vinagre-enums.h"
 #include "vinagre-bookmarks.h"
-#include "vinagre-vnc-connection.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 struct _VinagreConnectionPrivate
 {
-  VinagreConnectionProtocol protocol;
+  gchar *protocol;
   gchar *host;
   gint   port;
   gchar *username;
@@ -53,9 +54,6 @@ enum
   PROP_FULLSCREEN
 };
 
-gint   vinagre_connection_default_port [VINAGRE_CONNECTION_PROTOCOL_INVALID-1] = {5900, 3389};
-gchar* vinagre_connection_protos [VINAGRE_CONNECTION_PROTOCOL_INVALID-1] = {"vnc", "rdp"};
-
 #define VINAGRE_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_CONNECTION, VinagreConnectionPrivate))
 G_DEFINE_ABSTRACT_TYPE (VinagreConnection, vinagre_connection, G_TYPE_OBJECT);
 
@@ -64,7 +62,7 @@ vinagre_connection_init (VinagreConnection *conn)
 {
   conn->priv = G_TYPE_INSTANCE_GET_PRIVATE (conn, VINAGRE_TYPE_CONNECTION, VinagreConnectionPrivate);
 
-  conn->priv->protocol = VINAGRE_CONNECTION_PROTOCOL_INVALID;
+  conn->priv->protocol = NULL;
   conn->priv->host = NULL;
   conn->priv->port = 0;
   conn->priv->password = NULL;
@@ -78,6 +76,7 @@ vinagre_connection_finalize (GObject *object)
 {
   VinagreConnection *conn = VINAGRE_CONNECTION (object);
 
+  g_free (conn->priv->protocol);
   g_free (conn->priv->host);
   g_free (conn->priv->username);
   g_free (conn->priv->password);
@@ -98,7 +97,7 @@ vinagre_connection_set_property (GObject *object, guint prop_id, const GValue *v
   switch (prop_id)
     {
       case PROP_PROTOCOL:
-	vinagre_connection_set_protocol (conn, g_value_get_enum (value));
+	vinagre_connection_set_protocol (conn, g_value_get_string (value));
 	break;
 
       case PROP_HOST:
@@ -144,7 +143,7 @@ vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, 
   switch (prop_id)
     {
       case PROP_PROTOCOL:
-	g_value_set_enum (value, conn->priv->protocol);
+	g_value_set_string (value, conn->priv->protocol);
 	break;
 
       case PROP_HOST:
@@ -216,8 +215,9 @@ default_parse_item (VinagreConnection *conn, xmlNode *root)
       xmlFree (s_value);
     }
 
-  if (conn->priv->port <= 0)
-    vinagre_connection_set_port (conn, vinagre_connection_default_port [conn->priv->protocol-1]);
+// TODO:
+//  if (conn->priv->port <= 0)
+//    vinagre_connection_set_port (conn, vinagre_connection_default_port [conn->priv->protocol-1]);
 
 }
 
@@ -251,16 +251,15 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
 
   g_object_class_install_property (object_class,
                                    PROP_PROTOCOL,
-                                   g_param_spec_enum ("protocol",
-                                                      "protocol",
-	                                              "connection protocol",
-                                                      VINAGRE_TYPE_CONNECTION_PROTOCOL,
-	                                              VINAGRE_CONNECTION_PROTOCOL_VNC,
-	                                              G_PARAM_READWRITE |
-                                                      G_PARAM_CONSTRUCT |
-                                                      G_PARAM_STATIC_NICK |
-                                                      G_PARAM_STATIC_NAME |
-                                                      G_PARAM_STATIC_BLURB));
+                                   g_param_spec_string ("protocol",
+                                                        "protocol",
+	                                                "connection protocol",
+                                                        NULL,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
 
   g_object_class_install_property (object_class,
                                    PROP_HOST,
@@ -361,39 +360,19 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
 
 void
 vinagre_connection_set_protocol (VinagreConnection *conn,
-			         VinagreConnectionProtocol protocol)
+			         const gchar       *protocol)
 {
   g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
-  conn->priv->protocol = protocol;
+  g_free (conn->priv->protocol);
+  conn->priv->protocol = g_strdup (protocol);
 }
-VinagreConnectionProtocol
-vinagre_connection_get_protocol (VinagreConnection *conn)
-{
-  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn),
-                        VINAGRE_CONNECTION_PROTOCOL_INVALID);
-
-  return conn->priv->protocol;
-}
-
 const gchar *
-vinagre_connection_get_protocol_as_string (VinagreConnection *conn)
+vinagre_connection_get_protocol (VinagreConnection *conn)
 {
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
-  return vinagre_connection_protos [conn->priv->protocol-1];
-}
-
-VinagreConnectionProtocol
-vinagre_connection_protocol_by_name (const gchar *protocol)
-{
-  int i;
-
-  for (i = VINAGRE_CONNECTION_PROTOCOL_VNC; i <= VINAGRE_CONNECTION_PROTOCOL_INVALID; i++)
-    if (g_strcmp0 (vinagre_connection_protos [i-1], protocol) == 0)
-      return i;
-
-  return VINAGRE_CONNECTION_PROTOCOL_INVALID;
+  return conn->priv->protocol;
 }
 
 void
@@ -499,6 +478,7 @@ vinagre_connection_get_name (VinagreConnection *conn)
 GdkPixbuf *
 vinagre_connection_get_icon (VinagreConnection *conn)
 {
+/*
   GdkPixbuf         *pixbuf;
   GtkIconTheme      *icon_theme;
   gchar             *icon_name;
@@ -517,31 +497,23 @@ vinagre_connection_get_icon (VinagreConnection *conn)
 
   g_free (icon_name);
   return pixbuf;
-}
-
-VinagreConnectionProtocol
-protocol_by_name (const gchar *protocol)
-{
-  gint i;
-
-  for (i=1; i<VINAGRE_CONNECTION_PROTOCOL_INVALID; i++)
-    if (g_strcmp0 (vinagre_connection_protos[i-1], protocol) == 0)
-      return i;
-
-  return VINAGRE_CONNECTION_PROTOCOL_INVALID;
+*/
+ // TODO:
+  return NULL;
 }
 
 gboolean
 vinagre_connection_split_string (const gchar *uri,
-				 VinagreConnectionProtocol *protocol,
-				 gchar **host,
-				 gint *port,
-				 gchar **error_msg)
+				 gchar       **protocol,
+				 gchar       **host,
+				 gint         *port,
+				 gchar       **error_msg)
 {
   gchar **server, **url;
   gint    lport;
   gchar  *lhost;
   gchar   ipv6_host[255] = {0,};
+  VinagrePlugin *plugin;
 
   *error_msg = NULL;
   *host = NULL;
@@ -550,20 +522,23 @@ vinagre_connection_split_string (const gchar *uri,
   url = g_strsplit (uri, "://", 2);
   if (g_strv_length (url) == 2)
     {
-      *protocol = protocol_by_name (url[0]);
-      if (*protocol == VINAGRE_CONNECTION_PROTOCOL_INVALID)
-	{
-	  *error_msg = g_strdup_printf (_("The protocol %s is not supported."),
-					url[0]);
-	  g_strfreev (url);
-	  return FALSE;
-	}
+      *protocol = g_strdup (url[0]);
       lhost = url[1];
     }
   else
     {
-      *protocol = VINAGRE_CONNECTION_PROTOCOL_VNC;
+      *protocol = g_strdup ("vnc");
       lhost = (gchar *) uri;
+    }
+
+  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
+				*protocol);
+  if (!plugin)
+    {
+      *error_msg = g_strdup_printf (_("The protocol %s is not supported."), *protocol);
+      g_free (*protocol);
+      g_strfreev (url);
+      return FALSE;
     }
 
   if (lhost[0] == '[')
@@ -581,14 +556,14 @@ vinagre_connection_split_string (const gchar *uri,
   if (g_strrstr (lhost, "::") != NULL)
     {
       server = g_strsplit (lhost, "::", 2);
-      lport = server[1] ? atoi (server[1]) : vinagre_connection_default_port [*protocol-1];
+      lport = server[1] ? atoi (server[1]) : vinagre_plugin_get_default_port (plugin);
     }
   else
     {
       server = g_strsplit (lhost, ":", 2);
-      lport = server[1] ? atoi (server[1]) : vinagre_connection_default_port [*protocol-1];
+      lport = server[1] ? atoi (server[1]) : vinagre_plugin_get_default_port (plugin);
 
-      if ((*protocol == VINAGRE_CONNECTION_PROTOCOL_VNC) && (lport < 1024))
+      if ((g_str_equal (*protocol, "vnc")) && (lport < 1024))
         lport += 5900;
     }
 
@@ -607,9 +582,9 @@ VinagreConnection *
 vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolean use_bookmarks)
 {
   VinagreConnection *conn = NULL;
-  VinagreConnectionProtocol protocol;
   gint    port;
-  gchar  *host;
+  gchar  *host, *protocol;
+  VinagrePlugin *plugin;
 
   if (!vinagre_connection_split_string (uri, &protocol, &host, &port, error_msg))
     return NULL;
@@ -621,7 +596,9 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolea
 				     port);
   if (!conn)
     {
-      conn = vinagre_connection_new (protocol);
+      plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
+				    protocol);
+      conn = vinagre_plugin_new_connection (plugin);
       vinagre_connection_set_host (conn, host);
       vinagre_connection_set_port (conn, port);
     }
@@ -633,32 +610,26 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolea
 VinagreConnection *
 vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg, gboolean use_bookmarks)
 {
-  GKeyFile          *file;
-  GError            *error;
-  gboolean           loaded;
   VinagreConnection *conn;
-  gchar             *host, *actual_host, *data;
-  gint               port;
-  int                file_size;
+  gchar             *data;
   GFile             *file_a;
-  VinagreConnectionProtocol protocol;
+  GError            *error;
+  GHashTable        *plugins;
+  GHashTableIter     iter;
+  gpointer           plugin;
 
   *error_msg = NULL;
-  host = NULL;
   data = NULL;
   conn = NULL;
   error = NULL;
-  file = NULL;
-  conn = NULL;
 
   file_a = g_file_new_for_commandline_arg (uri);
-  loaded = g_file_load_contents (file_a,
-				 NULL,
-				 &data,
-				 &file_size,
-				 NULL,
-				 &error);
-  if (!loaded)
+  if (!g_file_load_contents (file_a,
+			     NULL,
+			     &data,
+			     NULL,
+			     NULL,
+			     &error));
     {
       if (error)
 	{
@@ -671,72 +642,26 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg, gboolean 
       goto the_end;
     }
 
-  file = g_key_file_new ();
-  loaded = g_key_file_load_from_data (file,
-				      data,
-				      file_size,
-				      0,
-				      &error);
-  if (!loaded)
+  plugins = vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
+  g_hash_table_iter_init (&iter, plugins);
+  while (g_hash_table_iter_next (&iter, NULL, &plugin))
     {
-      if (error)
-	{
-	  *error_msg = g_strdup (error->message);
-	  g_error_free (error);
-	}
-      else
-	*error_msg = g_strdup (_("Could not parse the file."));
-
-      goto the_end;
+      conn = vinagre_plugin_new_connection_from_file (VINAGRE_PLUGIN (plugin),
+						      data,
+						      use_bookmarks,
+						      error_msg);
+      g_free (*error_msg);
+      *error_msg = NULL;
+      if (conn)
+	break;
     }
-
-  host = g_key_file_get_string (file, "connection", "host", NULL);
-  port = g_key_file_get_integer (file, "connection", "port", NULL);
-  if (host)
-    {
-      if (!port)
-	{
-	  if (!vinagre_connection_split_string (host, &protocol, &actual_host, &port, error_msg))
-	    goto the_end;
-
-	  g_free (host);
-	  host = actual_host;
-	}
-
-      if (use_bookmarks)
-        conn = vinagre_bookmarks_exists (vinagre_bookmarks_get_default (), protocol, host, port);
-      if (!conn)
-	{
-	  gchar *username, *password;
-	  gint shared;
-	  GError *e = NULL;
-
-	  conn = vinagre_connection_new (protocol);
-	  vinagre_connection_set_host (conn, host);
-	  vinagre_connection_set_port (conn, port);
-
-	  username = g_key_file_get_string  (file, "connection", "username", NULL);
-	  vinagre_connection_set_username (conn, username);
-	  g_free (username);
-
-	  password = g_key_file_get_string  (file, "connection", "password", NULL);
-	  vinagre_connection_set_password (conn, password);
-	  g_free (password);
-
-	  if (VINAGRE_CONNECTION_GET_CLASS (conn)->impl_fill_conn_from_file)
-	    VINAGRE_CONNECTION_GET_CLASS (conn)->impl_fill_conn_from_file (conn, file);
-	}
-
-      g_free (host);
-    }
-  else
-    *error_msg = g_strdup (_("Could not find the host address in the file."));
 
 the_end:
   g_free (data);
   g_object_unref (file_a);
-  if (file)
-    g_key_file_free (file);
+
+  if (!conn)
+    *error_msg = g_strdup (_("The file was not recognized by any of the plugins."));
 
   return conn;
 }
@@ -748,6 +673,7 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
   GString *uri;
   gchar *result;
   gboolean is_ipv6;
+  VinagrePlugin *plugin;
 
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
@@ -755,7 +681,7 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
 
   if (has_protocol)
     {
-      uri = g_string_new (vinagre_connection_protos [conn->priv->protocol-1]);
+      uri = g_string_new (conn->priv->protocol);
       g_string_append (uri, "://");
     }
   else
@@ -767,23 +693,16 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
   if (is_ipv6)
     g_string_append_c (uri, ']');
 
-  if (vinagre_connection_default_port [conn->priv->protocol-1] != conn->priv->port)
-    g_string_append_printf (uri, "::%d", conn->priv->port);
+  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
+				conn->priv->protocol);
+  if (plugin)
+    if (vinagre_plugin_get_default_port (plugin) != conn->priv->port)
+      g_string_append_printf (uri, "::%d", conn->priv->port);
 
   result = uri->str;
   g_string_free (uri, FALSE);
 
   return result;
-}
-
-VinagreConnection *
-vinagre_connection_new (VinagreConnectionProtocol protocol)
-{
-  switch (protocol)
-    {
-      case VINAGRE_CONNECTION_PROTOCOL_VNC: return vinagre_vnc_connection_new ();
-      default: g_assert_not_reached ();
-    }
 }
 
 void

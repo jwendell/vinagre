@@ -3,18 +3,20 @@ plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 				\
-	$(VINAGRE_CFLAGS) 				\
+	$(VNC_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)	
 
 plugin_LTLIBRARIES = libvnc.la
 
-libvnc_la_SOURCES = \
-	vinagre-vnc-plugin.h	\
-	vinagre-vnc-plugin.c
+libvnc_la_SOURCES = 			\
+	vinagre-vnc-plugin.h		\
+	vinagre-vnc-plugin.c		\
+	vinagre-vnc-connection.h	\
+	vinagre-vnc-connection.c
 
 libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-libvnc_la_LIBADD  = $(VINAGRE_LIBS)
+libvnc_la_LIBADD  = $(VNC_LIBS)
 
 #uidir = $(VINAGRE_PLUGINS_DATA_DIR)/vnc
 #ui_DATA = vnc.ui

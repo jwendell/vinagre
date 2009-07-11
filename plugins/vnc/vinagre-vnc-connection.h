@@ -22,7 +22,7 @@
 #ifndef __VINAGRE_VNC_CONNECTION_H__
 #define __VINAGRE_VNC_CONNECTION_H__
 
-#include "vinagre-connection.h"
+#include <vinagre/vinagre-connection.h>
 
 G_BEGIN_DECLS
 

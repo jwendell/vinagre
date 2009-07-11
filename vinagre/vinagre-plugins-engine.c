@@ -63,6 +63,7 @@ struct _VinagrePluginsEnginePrivate
 {
   GSList *plugin_list;
   GHashTable *loaders;
+  GHashTable *protocols;
 
   gboolean activate_from_prefs;
 };
@@ -274,31 +275,32 @@ activate_engine_plugins (VinagrePluginsEngine *engine)
 static void
 vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
 {
-	vinagre_debug (DEBUG_PLUGINS);
+  vinagre_debug (DEBUG_PLUGINS);
 
-	if (!g_module_supported ())
-	{
-		g_warning ("vinagre is not able to initialize the plugins engine.");
-		return;
-	}
+  if (!g_module_supported ())
+    {
+      g_warning ("vinagre is not able to initialize the plugins engine.");
+      return;
+    }
 
-	engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
-						    VINAGRE_TYPE_PLUGINS_ENGINE,
-						    VinagrePluginsEnginePrivate);
+  engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
+					      VINAGRE_TYPE_PLUGINS_ENGINE,
+					      VinagrePluginsEnginePrivate);
 
-	load_all_plugins (engine);
+  load_all_plugins (engine);
 
-	/* make sure that the first reactivation will read active plugins
-	   from the prefs */
-	engine->priv->activate_from_prefs = TRUE;
+  /* make sure that the first reactivation will read active plugins
+     from the prefs */
+  engine->priv->activate_from_prefs = TRUE;
 
-	/* mapping from loadername -> loader object */
-	engine->priv->loaders = g_hash_table_new_full (hash_lowercase,
-						       equal_lowercase,
-						       (GDestroyNotify)g_free,
-						       (GDestroyNotify)loader_destroy);
+  /* mapping from loadername -> loader object */
+  engine->priv->loaders = g_hash_table_new_full (hash_lowercase,
+						 equal_lowercase,
+						 (GDestroyNotify)g_free,
+						 (GDestroyNotify)loader_destroy);
 
-	activate_engine_plugins (engine);
+  engine->priv->protocols = g_hash_table_new (g_str_hash, g_str_equal);
+  activate_engine_plugins (engine);
 }
 
 static void
@@ -336,6 +338,8 @@ vinagre_plugins_engine_finalize (GObject *object)
 	
 	/* unref the loaders */	
 	g_hash_table_destroy (engine->priv->loaders);
+
+	g_hash_table_destroy (engine->priv->protocols);
 
 	/* and finally free the infos */
 	for (item = engine->priv->plugin_list; item; item = item->next)
@@ -598,13 +602,26 @@ vinagre_plugins_engine_activate_plugin_real (VinagrePluginsEngine *engine,
 					     VinagrePluginInfo    *info)
 {
   const GList *wins;
+  const gchar *protocol;
+  VinagrePluginInfo *plugin_protocol;
 
   if (!load_plugin (engine, info))
     return;
 
   if (vinagre_plugin_info_is_engine (info))
     {
+      protocol = vinagre_plugin_get_protocol (info->plugin);
+      plugin_protocol = g_hash_table_lookup (engine->priv->protocols, protocol);
+      if (plugin_protocol)
+	{
+	  g_warning ("The protocol %s was already registered by the plugin %s",
+		     protocol,
+		     vinagre_plugin_info_get_name (plugin_protocol));
+	  return;
+	}
+
       vinagre_plugin_activate (info->plugin, NULL);
+      g_hash_table_insert (engine->priv->protocols, (gpointer)protocol, info->plugin);
       return;
     }
 
@@ -660,9 +677,18 @@ vinagre_plugins_engine_deactivate_plugin_real (VinagrePluginsEngine *engine,
       !vinagre_plugin_info_is_available (info))
     return;
 
-  wins = vinagre_app_get_windows (vinagre_app_get_default ());
-  for (; wins != NULL; wins = wins->next)
-    call_plugin_deactivate (info->plugin, VINAGRE_WINDOW (wins->data));
+  if (vinagre_plugin_info_is_engine (info))
+    {
+      g_hash_table_remove (engine->priv->protocols,
+			   vinagre_plugin_get_protocol (info->plugin));
+      vinagre_plugin_deactivate (info->plugin, NULL);
+    }
+  else
+    {
+      wins = vinagre_app_get_windows (vinagre_app_get_default ());
+      for (; wins != NULL; wins = wins->next)
+	call_plugin_deactivate (info->plugin, VINAGRE_WINDOW (wins->data));
+    }
 
   /* first unref the plugin (the loader still has one) */
   g_object_unref (info->plugin);
@@ -867,4 +893,11 @@ vinagre_plugins_engine_rescan_plugins (VinagrePluginsEngine *engine)
 	
 	load_all_plugins (engine);
 }
+
+GHashTable *
+vinagre_plugin_engine_get_plugins_by_protocol (VinagrePluginsEngine *engine)
+{
+  return engine->priv->protocols;
+}
+
 /* vim: set ts=8: */

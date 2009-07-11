@@ -22,9 +22,10 @@
 #define __VINAGRE_PLUGINS_ENGINE_H__
 
 #include <glib.h>
-#include "vinagre-window.h"
-#include "vinagre-plugin-info.h"
-#include "vinagre-plugin.h"
+#include <vinagre/vinagre-window.h>
+#include <vinagre/vinagre-plugin-info.h>
+#include <vinagre/vinagre-plugin.h>
+#include <vinagre/vinagre-connection.h>
 
 G_BEGIN_DECLS
 
@@ -69,27 +70,29 @@ VinagrePluginInfo	*vinagre_plugins_engine_get_plugin_info		(VinagrePluginsEngine
 									 const gchar        *name);
 
 /* plugin load and unloading (overall, for all windows) */
-gboolean 	 vinagre_plugins_engine_activate_plugin 	(VinagrePluginsEngine *engine,
-								 VinagrePluginInfo    *info);
-gboolean 	 vinagre_plugins_engine_deactivate_plugin	(VinagrePluginsEngine *engine,
-								 VinagrePluginInfo    *info);
+gboolean 		 vinagre_plugins_engine_activate_plugin 	(VinagrePluginsEngine *engine,
+									 VinagrePluginInfo    *info);
+gboolean 		 vinagre_plugins_engine_deactivate_plugin	(VinagrePluginsEngine *engine,
+									 VinagrePluginInfo    *info);
 
-void	 	 vinagre_plugins_engine_configure_plugin	(VinagrePluginsEngine *engine,
-								 VinagrePluginInfo    *info,
-								 GtkWindow            *parent);
+void		 	 vinagre_plugins_engine_configure_plugin	(VinagrePluginsEngine *engine,
+									 VinagrePluginInfo    *info,
+									 GtkWindow            *parent);
 
 /* plugin activation/deactivation per window, private to VinagreWindow */
-void 		 vinagre_plugins_engine_activate_plugins 	 (VinagrePluginsEngine *engine,
-								  VinagreWindow        *window);
-void 		 vinagre_plugins_engine_deactivate_plugins	 (VinagrePluginsEngine *engine,
-								  VinagreWindow        *window);
-void		 vinagre_plugins_engine_update_plugins_ui	 (VinagrePluginsEngine *engine,
-								  VinagreWindow        *window);
+void 			 vinagre_plugins_engine_activate_plugins 	 (VinagrePluginsEngine *engine,
+									  VinagreWindow        *window);
+void 			 vinagre_plugins_engine_deactivate_plugins	 (VinagrePluginsEngine *engine,
+									  VinagreWindow        *window);
+void			 vinagre_plugins_engine_update_plugins_ui	 (VinagrePluginsEngine *engine,
+									  VinagreWindow        *window);
 
 /* private for gconf notification */
-void		 vinagre_plugins_engine_active_plugins_changed	(VinagrePluginsEngine *engine);
+void			 vinagre_plugins_engine_active_plugins_changed	(VinagrePluginsEngine *engine);
 
-void		 vinagre_plugins_engine_rescan_plugins		(VinagrePluginsEngine *engine);
+void			 vinagre_plugins_engine_rescan_plugins		(VinagrePluginsEngine *engine);
+
+GHashTable		*vinagre_plugin_engine_get_plugins_by_protocol	(VinagrePluginsEngine *engine);
 
 G_END_DECLS
 

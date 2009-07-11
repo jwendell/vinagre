@@ -47,7 +47,6 @@ INST_H_FILES = \
   vinagre-tab.h \
   vinagre-ui.h \
   vinagre-utils.h \
-  vinagre-vnc-connection.h \
   vinagre-vnc-tab.h \
   vinagre-window.h \
   $(NULL)
@@ -87,7 +86,6 @@ libvinagre_la_SOURCES = \
   vinagre-prefs.c \
   vinagre-tab.c \
   vinagre-utils.c \
-  vinagre-vnc-connection.c \
   vinagre-vnc-tab.c \
   vinagre-window.c \
   $(NOINST_H_FILES) \
@@ -154,7 +152,6 @@ vinagre_applet_SOURCES =					\
 	vinagre-applet.c					\
 	vinagre-bookmarks.h vinagre-bookmarks.c			\
 	vinagre-connection.h vinagre-connection.c		\
-	vinagre-vnc-connection.c vinagre-vnc-connection.h	\
 	vinagre-utils.h vinagre-utils.c				\
 	vinagre-enums.h vinagre-enums.c				\
 	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\

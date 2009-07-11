@@ -33,6 +33,8 @@
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks-migration.h"
 #include "vinagre-bookmarks.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 static void
 fill_xml (GSList *list, xmlTextWriter *writer)
@@ -153,6 +155,15 @@ create_list (GKeyFile *kf)
   GSList *entries;
   gchar **conns;
   gsize   length, i;
+  VinagrePlugin *plugin;
+
+  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
+				"vnc");
+  if (!plugin)
+    {
+      g_warning (_("Error while migrating bookmarks: VNC plugin is not activated"));
+      return NULL;
+    }
 
   entries = NULL;
   conns = g_key_file_get_groups (kf, &length);
@@ -167,29 +178,25 @@ create_list (GKeyFile *kf)
       if (!s_value)
         continue;
 
-      conn = vinagre_connection_new (VINAGRE_CONNECTION_PROTOCOL_VNC);
-      vinagre_connection_set_name (conn, conns[i]);
-      vinagre_connection_set_host (conn, s_value);
-      g_free (s_value);
-
+      conn = vinagre_plugin_new_connection (plugin);
       i_value = g_key_file_get_integer (kf, conns[i], "port", NULL);
       if (i_value == 0)
         i_value = 5900;
-      vinagre_connection_set_port (conn, i_value);
 
-      b_value = g_key_file_get_boolean (kf, conns[i], "view_only", NULL);
-      //vinagre_connection_set_view_only (conn, b_value);
-
-      b_value = g_key_file_get_boolean (kf, conns[i], "fullscreen", NULL);
-      vinagre_connection_set_fullscreen (conn, b_value);
-
-      b_value = g_key_file_get_boolean (kf, conns[i], "scaling", NULL);
-      //vinagre_connection_set_scaling (conn, b_value);
+      g_object_set (conn,
+		    "name", conns[i],
+		    "host", s_value,
+		    "port", i_value,
+		    "view-only", g_key_file_get_boolean (kf, conns[i], "view_only", NULL),
+		    "fullscreen", g_key_file_get_boolean (kf, conns[i], "fullscreen", NULL),
+		    "scaling", g_key_file_get_boolean (kf, conns[i], "scaling", NULL),
+		    NULL);
 
       entries = g_slist_insert_sorted  (entries,
 					vinagre_bookmarks_entry_new_conn (conn),
 					(GCompareFunc)vinagre_bookmarks_entry_compare);
       g_object_unref (conn);
+      g_free (s_value);
     }
 
   g_strfreev (conns);
