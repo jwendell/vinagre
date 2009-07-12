@@ -53,6 +53,8 @@ enum
   PROP_ORIGINAL_HEIGHT
 };
 
+static void open_vnc (VinagreVncTab *vnc_tab);
+
 static void
 vinagre_vnc_tab_get_property (GObject    *object,
 			  guint       prop_id,
@@ -181,6 +183,12 @@ vinagre_vnc_tab_dispose (GObject *object)
   G_OBJECT_CLASS (vinagre_vnc_tab_parent_class)->dispose (object);
 }
 
+static void
+vinagre_vnc_tab_constructed (GObject *object)
+{
+  open_vnc (VINAGRE_VNC_TAB (object));
+}
+
 static void 
 vinagre_vnc_tab_class_init (VinagreVncTabClass *klass)
 {
@@ -190,6 +198,7 @@ vinagre_vnc_tab_class_init (VinagreVncTabClass *klass)
   object_class->finalize = vinagre_vnc_tab_finalize;
   object_class->dispose = vinagre_vnc_tab_dispose;
   object_class->get_property = vinagre_vnc_tab_get_property;
+  object_class->constructed = vinagre_vnc_tab_constructed;
 
   tab_class->impl_get_tooltip = vnc_tab_get_tooltip;
   tab_class->impl_get_connected_actions = vnc_get_connected_actions;
@@ -856,16 +865,14 @@ vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 }
 
 GtkWidget *
-vinagre_vnc_tab_new (VinagreConnection *conn, VinagreWindow *window)
+vinagre_vnc_tab_new (VinagreConnection *conn,
+		     VinagreWindow     *window)
 {
-  VinagreVncTab *tab = g_object_new (VINAGRE_TYPE_VNC_TAB, 
-				     "conn", conn,
-				     "window", window,
-				     NULL);
-  open_vnc (tab);
-  return GTK_WIDGET (tab);
+  return GTK_WIDGET (g_object_new (VINAGRE_TYPE_VNC_TAB,
+				   "conn", conn,
+				   "window", window,
+				   NULL));
 }
-
 
 void
 vinagre_vnc_tab_send_ctrlaltdel (VinagreVncTab *tab)

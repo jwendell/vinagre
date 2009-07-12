@@ -24,6 +24,7 @@
 
 #include "vinagre-vnc-plugin.h"
 #include "vinagre-vnc-connection.h"
+#include "vinagre-vnc-tab.h"
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
@@ -179,6 +180,14 @@ the_end:
 
 }
 
+static GtkWidget *
+impl_new_tab (VinagrePlugin *plugin,
+	      VinagreConnection *conn,
+	      VinagreWindow     *window)
+{
+  return vinagre_vnc_tab_new (conn, window);
+}
+
 static void
 vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
 {
@@ -209,5 +218,6 @@ vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
   plugin_class->new_connection = impl_new_connection;
   plugin_class->new_connection_from_file = impl_new_connection_from_file;
   plugin_class->get_mdns_service  = impl_get_mdns_service;
+  plugin_class->new_tab = impl_new_tab;
 }
 /* vim: set ts=8: */

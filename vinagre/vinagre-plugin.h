@@ -82,6 +82,9 @@ struct _VinagrePluginClass
 						 gboolean       use_bookmarks,
 						 gchar        **error_msg);
   const gchar	*(*get_mdns_service)		(VinagrePlugin *plugin);
+  GtkWidget 	*(*new_tab)			(VinagrePlugin     *plugin,
+						 VinagreConnection *conn,
+						 VinagreWindow     *window);
 
   /* Plugins should not override this, it's handled automatically by
      the VinagrePluginClass */
@@ -122,6 +125,10 @@ VinagreConnection *vinagre_plugin_new_connection_from_file (VinagrePlugin *plugi
 							    gboolean       use_bookmarks,
 							    gchar        **error_msg);
 const gchar	*vinagre_plugin_get_mdns_service	(VinagrePlugin *plugin);
+
+GtkWidget 	*vinagre_plugin_new_tab			(VinagrePlugin     *plugin,
+							 VinagreConnection *conn,
+							 VinagreWindow     *window);
 
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):

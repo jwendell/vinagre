@@ -76,6 +76,14 @@ default_new_connection (VinagrePlugin *plugin)
   return NULL;
 }
 
+static GtkWidget *
+default_new_tab (VinagrePlugin *plugin,
+		 VinagreConnection *conn,
+		 VinagreWindow     *window)
+{
+  return NULL;
+}
+
 static VinagreConnection *
 default_new_connection_from_file (VinagrePlugin *plugin,
 				  const gchar   *data,
@@ -163,6 +171,7 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->new_connection = default_new_connection;
 	klass->new_connection_from_file = default_new_connection_from_file;
 	klass->get_mdns_service = default_get_protocol;
+	klass->new_tab = default_new_tab;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -452,6 +461,23 @@ vinagre_plugin_get_mdns_service (VinagrePlugin *plugin)
   g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
 	
   return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_mdns_service (plugin);
+}
+
+/**
+ * vinagre_plugin_new_tab
+ * @plugin: a #VinagreTab
+ *
+ *
+ * Returns: a subclass of the Tab class
+ */
+GtkWidget *
+vinagre_plugin_new_tab (VinagrePlugin     *plugin,
+			VinagreConnection *conn,
+			VinagreWindow     *window)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->new_tab (plugin, conn, window);
 }
 
 /* vim: set ts=8: */

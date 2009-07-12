@@ -32,6 +32,8 @@
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
 #include "view/autoDrawer.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
 
@@ -443,14 +445,19 @@ vinagre_tab_init (VinagreTab *tab)
 GtkWidget *
 vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
 {
-/*  switch (vinagre_connection_get_protocol (conn))
+  VinagrePlugin *plugin;
+  GtkWidget     *tab;
+  const gchar   *protocol = vinagre_connection_get_protocol (conn);
+
+  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
+				protocol);
+  if (!plugin)
     {
-      case VINAGRE_CONNECTION_PROTOCOL_VNC: return GTK_WIDGET (vinagre_vnc_tab_new (conn, window));
-      default: g_assert_not_reached ();
+      g_warning (_("The protocol %s is not supported."), protocol);
+      return NULL;
     }
-*/
-// TODO:
-  return NULL;
+
+  return vinagre_plugin_new_tab (plugin, conn, window);
 }
 
 gchar *
