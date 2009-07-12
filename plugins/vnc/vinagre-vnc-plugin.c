@@ -72,6 +72,12 @@ impl_get_protocol (VinagrePlugin *plugin)
   return "vnc";
 }
 
+static const gchar *
+impl_get_mdns_service (VinagrePlugin *plugin)
+{
+  return "_rfb._tcp";
+}
+
 static VinagreConnection *
 impl_new_connection (VinagrePlugin *plugin)
 {
@@ -202,5 +208,6 @@ vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
   plugin_class->get_protocol  = impl_get_protocol;
   plugin_class->new_connection = impl_new_connection;
   plugin_class->new_connection_from_file = impl_new_connection_from_file;
+  plugin_class->get_mdns_service  = impl_get_mdns_service;
 }
 /* vim: set ts=8: */

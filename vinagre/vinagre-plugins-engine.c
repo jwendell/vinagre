@@ -260,13 +260,23 @@ add_loader (VinagrePluginsEngine *engine,
 static void
 activate_engine_plugins (VinagrePluginsEngine *engine)
 {
-  GSList *item;
+  GSList *active_plugins, *l;
 
   vinagre_debug_message (DEBUG_PLUGINS, "Activating engine plugins");
-  for (item = engine->priv->plugin_list; item; item = item->next)
-    {
-      VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (item->data);
 
+  g_object_get (vinagre_prefs_get_default (),
+		"active-plugins", &active_plugins,
+		NULL);
+
+  for (l = engine->priv->plugin_list; l; l = l->next)
+    {
+      VinagrePluginInfo *info = (VinagrePluginInfo*)l->data;
+		
+      if (g_slist_find_custom (active_plugins,
+			       vinagre_plugin_info_get_module_name (info),
+			       (GCompareFunc)strcmp) == NULL)
+	continue;
+		
       if (vinagre_plugin_info_is_engine (info))
 	vinagre_plugins_engine_activate_plugin (engine, info);
     }

@@ -162,6 +162,7 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->get_default_port = default_get_default_port;
 	klass->new_connection = default_new_connection;
 	klass->new_connection_from_file = default_new_connection_from_file;
+	klass->get_mdns_service = default_get_protocol;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -436,6 +437,21 @@ vinagre_plugin_get_default_port (VinagrePlugin *plugin)
   g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), -1);
 	
   return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_default_port (plugin);
+}
+
+/**
+ * vinagre_plugin_get_mdns_service
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: a mDNS service for this plugin, like rfb.tcp
+ */
+const gchar *
+vinagre_plugin_get_mdns_service (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+	
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_mdns_service (plugin);
 }
 
 /* vim: set ts=8: */

@@ -81,6 +81,7 @@ struct _VinagrePluginClass
 						 const gchar   *data,
 						 gboolean       use_bookmarks,
 						 gchar        **error_msg);
+  const gchar	*(*get_mdns_service)		(VinagrePlugin *plugin);
 
   /* Plugins should not override this, it's handled automatically by
      the VinagrePluginClass */
@@ -120,6 +121,7 @@ VinagreConnection *vinagre_plugin_new_connection_from_file (VinagrePlugin *plugi
 							    const gchar   *data,
 							    gboolean       use_bookmarks,
 							    gchar        **error_msg);
+const gchar	*vinagre_plugin_get_mdns_service	(VinagrePlugin *plugin);
 
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):

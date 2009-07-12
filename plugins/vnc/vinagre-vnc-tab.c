@@ -24,10 +24,11 @@
 #include <vncdisplay.h>
 #include <gdk/gdkkeysyms.h>
 
+#include <vinagre/vinagre-utils.h>
+#include <vinagre/vinagre-prefs.h>
+
 #include "vinagre-vnc-tab.h"
 #include "vinagre-vnc-connection.h"
-#include "vinagre-utils.h"
-#include "vinagre-prefs.h"
 
 #define VINAGRE_VNC_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_VNC_TAB, VinagreVncTabPrivate))
 
@@ -119,7 +120,6 @@ vnc_get_initialized_actions (VinagreTab *tab)
 static gchar *
 vnc_tab_get_tooltip (VinagreTab *tab)
 {
-  gchar *tip;
   VinagreVncTab *vnc_tab = VINAGRE_VNC_TAB (tab);
   VinagreConnection *conn = vinagre_tab_get_conn (tab);
 
@@ -776,7 +776,6 @@ vnc_tab_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreVncTab *vnc_tab)
 static void
 vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 {
-  GtkAction *action;
   GtkClipboard *cb;
 
   vnc_tab->priv = VINAGRE_VNC_TAB_GET_PRIVATE (vnc_tab);
@@ -976,7 +975,7 @@ vinagre_vnc_tab_get_original_width (VinagreVncTab *tab)
     return -1;
 }
 
-
+/*
 typedef struct _VinagrePrefSize {
   gint width, height;
   gulong sig_id;
@@ -1020,6 +1019,7 @@ vinagre_widget_set_preferred_size (GtkWidget *widget, gint width,
 
   gtk_widget_queue_resize (widget);
 }
+*/
 
 void
 vinagre_vnc_tab_original_size (VinagreVncTab *tab)

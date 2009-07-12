@@ -443,11 +443,14 @@ vinagre_tab_init (VinagreTab *tab)
 GtkWidget *
 vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
 {
-  switch (vinagre_connection_get_protocol (conn))
+/*  switch (vinagre_connection_get_protocol (conn))
     {
       case VINAGRE_CONNECTION_PROTOCOL_VNC: return GTK_WIDGET (vinagre_vnc_tab_new (conn, window));
       default: g_assert_not_reached ();
     }
+*/
+// TODO:
+  return NULL;
 }
 
 gchar *
@@ -592,7 +595,7 @@ vinagre_tab_find_credentials_in_keyring (VinagreTab *tab, gchar **username, gcha
 		NULL,                                                         /* domain   */
 		vinagre_connection_get_host (tab->priv->conn),                /* server   */
 		NULL,                                                         /* object   */
-		vinagre_connection_get_protocol_as_string (tab->priv->conn),  /* protocol */
+		vinagre_connection_get_protocol (tab->priv->conn),            /* protocol */
 		NULL,                                                         /* authtype */
 		vinagre_connection_get_port (tab->priv->conn),                /* port     */
 		&matches);
@@ -631,7 +634,7 @@ vinagre_tab_save_credentials_in_keyring (VinagreTab *tab)
                 NULL,                                                        /* domain          */
                 vinagre_connection_get_host (tab->priv->conn),               /* server          */
                 NULL,                                                        /* object          */
-                vinagre_connection_get_protocol_as_string (tab->priv->conn), /* protocol        */
+                vinagre_connection_get_protocol (tab->priv->conn),           /* protocol        */
                 NULL,                                                        /* authtype        */
                 vinagre_connection_get_port (tab->priv->conn),               /* port            */
                 vinagre_connection_get_password (tab->priv->conn),           /* password        */

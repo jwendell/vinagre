@@ -18,18 +18,29 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "vinagre-mdns.h"
-#include "vinagre-connection.h"
-#include "vinagre-bookmarks-entry.h"
 #include <avahi-gobject/ga-service-browser.h>
 #include <avahi-gobject/ga-service-resolver.h>
 #include <glib/gi18n.h>
 
+#include "vinagre-mdns.h"
+#include "vinagre-connection.h"
+#include "vinagre-bookmarks-entry.h"
+#include "vinagre-plugins-engine.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugin-info.h"
+#include "vinagre-plugin-info-priv.h"
+
+typedef struct
+{
+  GaServiceBrowser  *browser;
+  VinagrePluginInfo *info;
+} BrowserEntry;
+
 struct _VinagreMdnsPrivate
 {
   GSList           *entries;
-  GaServiceBrowser *browser;
   GaClient         *client;
+  GHashTable       *browsers;
 };
 
 enum
@@ -59,8 +70,16 @@ mdns_resolver_found (GaServiceResolver *resolver,
 {
   VinagreConnection     *conn;
   VinagreBookmarksEntry *entry;
+  BrowserEntry          *b_entry;
 
-  conn = vinagre_connection_new (VINAGRE_CONNECTION_PROTOCOL_VNC);
+  b_entry = g_hash_table_lookup (mdns->priv->browsers, type);
+  if (!b_entry)
+    {
+      g_error ("Service name not found in mDNS resolver hash table. This probably is a bug somewhere.");
+      return;
+    }
+
+  conn = vinagre_plugin_new_connection (b_entry->info->plugin);
   g_object_set (conn,
                 "name", name,
                 "port", port,
@@ -151,39 +170,107 @@ mdns_browser_del_cb (GaServiceBrowser   *browser,
 }
 
 static void
-vinagre_mdns_init (VinagreMdns *mdns)
+destroy_browser_entry (BrowserEntry *entry)
 {
-  GError *error = NULL;
+  g_object_unref (entry->browser);
+  _vinagre_plugin_info_unref (entry->info);
+  g_free (entry);
+}
 
-  mdns->priv = G_TYPE_INSTANCE_GET_PRIVATE (mdns, VINAGRE_TYPE_MDNS, VinagreMdnsPrivate);
+static void
+vinagre_mdns_add_service (VinagrePluginInfo *info,
+			  VinagreMdns       *mdns)
+{
+  GaServiceBrowser *browser;
+  GError           *error = NULL;
+  const gchar      *service;
+  BrowserEntry     *entry;
+  VinagrePlugin    *plugin;
 
-  mdns->priv->entries = NULL;
-  mdns->priv->browser = ga_service_browser_new ("_rfb._tcp");
-  mdns->priv->client = ga_client_new (GA_CLIENT_FLAG_NO_FLAGS);
+  service = vinagre_plugin_get_mdns_service (info->plugin);
+  if (!service)
+    return;
 
-  g_signal_connect (mdns->priv->browser,
+  entry = g_hash_table_lookup (mdns->priv->browsers, service);
+  if (entry)
+    {
+      g_warning (_("Plugin %s has already registered a browser for service %s."),
+		 info->name,
+		 service);
+      return;
+    }
+
+  browser = ga_service_browser_new ((gchar *)service);
+  if (!browser)
+    {
+      g_warning (_("Failed to add mDNS browser for service %s."), service);
+      return;
+    }
+  g_signal_connect (browser,
                     "new-service",
                     G_CALLBACK (mdns_browser_new_cb),
                     mdns);
-  g_signal_connect (mdns->priv->browser,
+  g_signal_connect (browser,
                     "removed-service",
                     G_CALLBACK (mdns_browser_del_cb),
                     mdns);
 
-  if (!ga_client_start (mdns->priv->client, &error))
+  if (!ga_service_browser_attach (browser,
+                                  mdns->priv->client,
+                                  &error))
     {
         g_warning (_("Failed to browse for hosts: %s\n"), error->message);
         g_error_free (error);
         return;
     }
 
-  if (!ga_service_browser_attach (mdns->priv->browser,
-                                  mdns->priv->client,
-                                  &error))
+  entry = g_new (BrowserEntry, 1);
+  entry->browser = g_object_ref (browser);
+  _vinagre_plugin_info_ref (info);
+  entry->info = info;
+  g_hash_table_insert (mdns->priv->browsers, (gpointer)service, entry);
+}
+
+static void
+plugin_activated_cb (VinagrePluginsEngine *engine,
+		     VinagrePluginInfo    *info,
+		     VinagreMdns          *mdns)
+{
+  vinagre_mdns_add_service (info, mdns);
+}
+
+static void
+vinagre_mdns_init (VinagreMdns *mdns)
+{
+  GError *error = NULL;
+  GSList *plugins;
+  VinagrePluginsEngine *engine;
+
+  mdns->priv = G_TYPE_INSTANCE_GET_PRIVATE (mdns, VINAGRE_TYPE_MDNS, VinagreMdnsPrivate);
+
+  mdns->priv->entries = NULL;
+  mdns->priv->browsers = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)destroy_browser_entry);
+  mdns->priv->client = ga_client_new (GA_CLIENT_FLAG_NO_FLAGS);
+
+  if (!ga_client_start (mdns->priv->client, &error))
     {
-        g_warning (_("Failed to browse for hosts: %s\n"), error->message);
+        g_warning (_("Failed to initialize mDNS browser: %s\n"), error->message);
         g_error_free (error);
+        g_object_unref (mdns->priv->client);
+        mdns->priv->client = NULL;
+        return;
     }
+
+  engine = vinagre_plugins_engine_get_default ();
+  plugins = (GSList *)vinagre_plugins_engine_get_plugin_list (engine);
+  g_slist_foreach (plugins,
+		   (GFunc)vinagre_mdns_add_service,
+		   mdns);
+
+  g_signal_connect (engine,
+		    "activate-plugin",
+		    G_CALLBACK (plugin_activated_cb),
+		    mdns);
 }
 
 static void
@@ -191,10 +278,10 @@ vinagre_mdns_dispose (GObject *object)
 {
   VinagreMdns *mdns = VINAGRE_MDNS (object);
 
-  if (mdns->priv->browser)
+  if (mdns->priv->browsers)
     {
-      g_object_unref (mdns->priv->browser);
-      mdns->priv->browser = NULL;
+      g_hash_table_unref (mdns->priv->browsers);
+      mdns->priv->browsers = NULL;
     }
 
   if (mdns->priv->client)
@@ -251,3 +338,5 @@ vinagre_mdns_get_all (VinagreMdns *mdns)
 
   return mdns->priv->entries;
 }
+
+/* vim: set ts=8: */

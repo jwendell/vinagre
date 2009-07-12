@@ -2,7 +2,7 @@
  * vinagre-mdns.h
  * This file is part of vinagre
  *
- * Copyright (C) Jonh Wendell 2008 <wendell@bani.com.br>
+ * Copyright (C) Jonh Wendell 2008,2009 <wendell@bani.com.br>
  * 
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -51,10 +51,10 @@ struct _VinagreMdns
   VinagreMdnsPrivate *priv;
 };
 
-GType        vinagre_mdns_get_type    (void) G_GNUC_CONST;
+GType		 vinagre_mdns_get_type    (void) G_GNUC_CONST;
 
-VinagreMdns *vinagre_mdns_get_default (void);
-GSList      *vinagre_mdns_get_all     (VinagreMdns *mdns);
+VinagreMdns	*vinagre_mdns_get_default (void);
+GSList		*vinagre_mdns_get_all     (VinagreMdns *mdns);
 
 G_END_DECLS
 

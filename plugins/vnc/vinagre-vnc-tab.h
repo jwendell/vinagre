@@ -22,7 +22,7 @@
 #ifndef __VINAGRE_VNC_TAB_H__
 #define __VINAGRE_VNC_TAB_H__
 
-#include "vinagre-tab.h"
+#include <vinagre/vinagre-tab.h>
 
 G_BEGIN_DECLS
 

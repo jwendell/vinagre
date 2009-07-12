@@ -52,6 +52,8 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->view_only = FALSE;
   conn->priv->scaling = FALSE;
   conn->priv->shared = -1;
+
+  vinagre_connection_set_protocol (VINAGRE_CONNECTION (conn), "vnc");
 }
 
 static void

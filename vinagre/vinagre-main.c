@@ -151,7 +151,7 @@ int main (int argc, char **argv) {
   /* Init plugins engine */
   vinagre_debug_message (DEBUG_APP, "Init plugins");
   engine = vinagre_plugins_engine_get_default ();
-  plugins = (const GSList *) vinagre_plugins_engine_get_plugin_list (engine);
+  plugins = (GSList *) vinagre_plugins_engine_get_plugin_list (engine);
 
   /* Setup command line options */
   context = g_option_context_new (_("- Remote Desktop Viewer"));
@@ -162,6 +162,9 @@ int main (int argc, char **argv) {
     {
       GOptionGroup      *group;
       VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (l->data);
+
+      if (!vinagre_plugin_info_is_active (info))
+	continue;
 
       group = vinagre_plugin_get_context_group (info->plugin);
       if (group)

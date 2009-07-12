@@ -47,7 +47,6 @@ INST_H_FILES = \
   vinagre-tab.h \
   vinagre-ui.h \
   vinagre-utils.h \
-  vinagre-vnc-tab.h \
   vinagre-window.h \
   $(NULL)
 
@@ -86,7 +85,6 @@ libvinagre_la_SOURCES = \
   vinagre-prefs.c \
   vinagre-tab.c \
   vinagre-utils.c \
-  vinagre-vnc-tab.c \
   vinagre-window.c \
   $(NOINST_H_FILES) \
   $(INST_H_FILES) \
@@ -151,12 +149,29 @@ vinagre_applet_CFLAGS =			\
 vinagre_applet_SOURCES =					\
 	vinagre-applet.c					\
 	vinagre-bookmarks.h vinagre-bookmarks.c			\
+	vinagre-bookmarks-ui.h vinagre-bookmarks-ui.c			\
 	vinagre-connection.h vinagre-connection.c		\
 	vinagre-utils.h vinagre-utils.c				\
 	vinagre-enums.h vinagre-enums.c				\
 	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\
 	vinagre-bookmarks-tree.h vinagre-bookmarks-tree.c	\
 	vinagre-bookmarks-migration.h vinagre-bookmarks-migration.c \
+	vinagre-plugins-engine.h vinagre-plugins-engine.c \
+	vinagre-plugin.h vinagre-plugin.c \
+	vinagre-plugin-loader.h vinagre-plugin-loader.c \
+	vinagre-plugin-manager.h vinagre-plugin-manager.c \
+	vinagre-debug.h vinagre-debug.c \
+	vinagre-plugin-info.h vinagre-plugin-info.c \
+	vinagre-window.h vinagre-window.c \
+	vinagre-commands.h vinagre-commands.c \
+	vinagre-notebook.h vinagre-notebook.c \
+	vinagre-tab.h vinagre-tab.c \
+	vinagre-prefs.h vinagre-prefs.c \
+	vinagre-app.h vinagre-app.c \
+	vinagre-object-module.h vinagre-object-module.c \
+	vinagre-dirs.h vinagre-dirs.c \
+	vinagre-fav.h vinagre-fav.c \
+	vinagre-connect.h vinagre-connect.c \
 	$(NULL)
 
 if AVAHI
@@ -167,6 +182,7 @@ vinagre_applet_LDADD =			\
 	$(APPLET_LIBS)			\
 	$(VINAGRE_LIBS)			\
 	$(AVAHI_LIBS)			\
+	view/libview.la			\
 	$(NULL)
 
 
