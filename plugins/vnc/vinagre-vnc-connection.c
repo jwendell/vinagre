@@ -52,8 +52,12 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->view_only = FALSE;
   conn->priv->scaling = FALSE;
   conn->priv->shared = -1;
+}
 
-  vinagre_connection_set_protocol (VINAGRE_CONNECTION (conn), "vnc");
+static void
+vinagre_vnc_connection_constructed (GObject *object)
+{
+  vinagre_connection_set_protocol (VINAGRE_CONNECTION (object), "vnc");
 }
 
 static void
@@ -211,6 +215,7 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
   object_class->finalize = vinagre_vnc_connection_finalize;
   object_class->set_property = vinagre_vnc_connection_set_property;
   object_class->get_property = vinagre_vnc_connection_get_property;
+  object_class->constructed  = vinagre_vnc_connection_constructed;
 
   parent_class->impl_fill_writer = vnc_fill_writer;
   parent_class->impl_parse_item  = vnc_parse_item;
