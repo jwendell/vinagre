@@ -187,6 +187,9 @@ vinagre_mdns_add_service (VinagrePluginInfo *info,
   BrowserEntry     *entry;
   VinagrePlugin    *plugin;
 
+  if (!vinagre_plugin_info_is_active (info))
+    return;
+
   service = vinagre_plugin_get_mdns_service (info->plugin);
   if (!service)
     return;
@@ -232,11 +235,49 @@ vinagre_mdns_add_service (VinagrePluginInfo *info,
 }
 
 static void
+vinagre_mdns_remove_entries_by_protocol (VinagreMdns *mdns, const gchar *protocol)
+{
+  GSList *l;
+  gboolean changed = FALSE;
+
+  for (l = mdns->priv->entries; l; l = l->next)
+    {
+      VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
+      if (strcmp (vinagre_connection_get_protocol (vinagre_bookmarks_entry_get_conn (entry)), protocol) == 0)
+	{
+	  mdns->priv->entries = g_slist_remove (mdns->priv->entries, entry);
+	  g_object_unref (entry);
+	  changed = TRUE;
+	}
+    }
+
+  if (changed)
+    g_signal_emit (mdns, signals[MDNS_CHANGED], 0);
+}
+
+static void
 plugin_activated_cb (VinagrePluginsEngine *engine,
 		     VinagrePluginInfo    *info,
 		     VinagreMdns          *mdns)
 {
   vinagre_mdns_add_service (info, mdns);
+}
+
+static void
+plugin_deactivated_cb (VinagrePluginsEngine *engine,
+		       VinagrePluginInfo    *info,
+		       VinagreMdns          *mdns)
+{
+  const gchar *service;
+
+  service = vinagre_plugin_get_mdns_service (info->plugin);
+  if (!service)
+    return;
+
+  vinagre_mdns_remove_entries_by_protocol (mdns,
+					   vinagre_plugin_get_protocol (info->plugin));
+  g_hash_table_remove (mdns->priv->browsers, (gconstpointer)service);
+
 }
 
 static void
@@ -267,9 +308,13 @@ vinagre_mdns_init (VinagreMdns *mdns)
 		   (GFunc)vinagre_mdns_add_service,
 		   mdns);
 
+  g_signal_connect_after (engine,
+			  "activate-plugin",
+			  G_CALLBACK (plugin_activated_cb),
+			  mdns);
   g_signal_connect (engine,
-		    "activate-plugin",
-		    G_CALLBACK (plugin_activated_cb),
+		    "deactivate-plugin",
+		    G_CALLBACK (plugin_deactivated_cb),
 		    mdns);
 }
 
