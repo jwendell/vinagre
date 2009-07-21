@@ -1,22 +1,23 @@
 # translation of ta.po to Tamil
-# Dr.T.Vasudevan <agnihot3@gmail.com>, 2008.
-# I. Felix <ifelix@redhat.com>, 2008, 2009.
-# Dr.T.vasudevan <agnihot3@gmail.com>, 2009.
 # translation of ta.po to
 # translation of vinagre.ta.po to
+# Dr.T.Vasudevan <agnihot3@gmail.com>, 2008, 2009.
+# I. Felix <ifelix@redhat.com>, 2008, 2009.
+# Dr.T.vasudevan <agnihot3@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-06 21:37+0530\n"
-"PO-Revision-Date: 2009-03-09 12:41+0530\n"
-"Last-Translator: I. Felix <ifelix@redhat.com>\n"
-"Language-Team: Tamil <fedora-trans-ta@redhat.com>\n"
+"POT-Creation-Date: 2009-07-21 17:34+0530\n"
+"PO-Revision-Date: 2009-07-21 17:37+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
+"Language-Team: Tamil <Ubuntu-l10n-tam@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -38,7 +39,7 @@ msgstr "தொலை பணிமேடைகளை அணுகுதல்"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
-#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
+#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:157
 msgid "Remote Desktop Viewer"
 msgstr "தொலை பணிமேடை காட்டி"
 
@@ -83,7 +84,7 @@ msgid "Bookmarks"
 msgstr "புத்தகக்குறிகள்"
 
 #: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1062
+#: ../src/vinagre-vnc-tab.c:132
 msgid "Host:"
 msgstr "புரவலன்:"
 
@@ -92,8 +93,7 @@ msgid "Preferences"
 msgstr "விருப்பங்கள்"
 
 #: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
+msgid "Whether we should show tabs even when there is only one active connection"
 msgstr "ஒரே ஒரு இணைப்பு மட்டும் செயலில் உள்ளபோதும் கீற்றுகளை காட்டலாமா"
 
 #: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
@@ -141,7 +141,7 @@ msgstr "(_S) பட்டி விரைவு விசைகளை காட�
 msgid "_Username:"
 msgstr "(_U) பயனர் பெயர்:"
 
-#: ../data/vinagre.glade.h:26
+#: ../data/vinagre.glade.h:26 ../src/vinagre-vnc-tab.c:643
 msgid "_View only"
 msgstr "பார்வைக்கு மட்டும் (_V)"
 
@@ -222,43 +222,41 @@ msgstr "தொலை பணிமேடை காட்டியை திற"
 msgid "Access your bookmarks"
 msgstr "உங்கள் புத்தகக்குறிகளை அணுகுக"
 
-#: ../src/vinagre-bookmarks.c:344
+#: ../src/vinagre-bookmarks.c:327
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "புத்தகக்குறி ஆரம்பிக்கும் போது பிழை: %s"
 
-#: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
-#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
+#: ../src/vinagre-bookmarks.c:327 ../src/vinagre-bookmarks.c:442
+#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:148
 #: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
-#: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
-#: ../src/vinagre-window.c:279
+#: ../src/vinagre-main.c:88 ../src/vinagre-main.c:107
+#: ../src/vinagre-window.c:263
 msgid "Unknown error"
 msgstr "தெரியாத பிழை"
 
-#: ../src/vinagre-bookmarks.c:351
+#: ../src/vinagre-bookmarks.c:334
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "புத்தகக்குறி ஆரம்பிக்கும் போது பிழை: கோப்பு காலியாக உள்ளது போலிருக்கிறது"
 
-#: ../src/vinagre-bookmarks.c:358
-msgid ""
-"Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+#: ../src/vinagre-bookmarks.c:341
+msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr ""
 "புத்தகக்குறி ஆரம்பிக்கும் போது பிழை: இந்த கோப்பு வினாக்ரே புத்தகக்குறிப்பு கோப்பு அல்ல"
 
-#: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
+#: ../src/vinagre-bookmarks.c:403 ../src/vinagre-bookmarks.c:410
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "புத்தகக்குறிகளை சேமிக்கும் போது பிழை: எக்ஸ்எம்எல் கட்டமைப்பை உருவாக்க முடியவில்லை"
 
-#: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
+#: ../src/vinagre-bookmarks.c:417 ../src/vinagre-bookmarks.c:424
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "புத்தகக்குறிகளை சேமிக்கும் போது பிழை: எக்ஸ்எம்எல் கட்டமைப்பை துவக்க முடியவில்லை"
 
-#: ../src/vinagre-bookmarks.c:450
+#: ../src/vinagre-bookmarks.c:433
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr ""
-"புத்தகக்குறிகளை சேமிக்கும் போது பிழை: எக்ஸ்எம்எல் கட்டமைப்பை இறுதியாக்க முடியவில்லை"
+msgstr "புத்தகக்குறிகளை சேமிக்கும் போது பிழை: எக்ஸ்எம்எல் கட்டமைப்பை இறுதியாக்க முடியவில்லை"
 
-#: ../src/vinagre-bookmarks.c:459
+#: ../src/vinagre-bookmarks.c:442
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "புத்தகக்குறிகளை சேமிக்கும் போது பிழை: %s"
@@ -317,52 +315,52 @@ msgstr "மூல அடைவு"
 msgid "Invalid name for this folder"
 msgstr "இந்த அடைவுக்கு செல்லுபடியாகாத பெயர்"
 
-#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:194
 #, c-format
-msgid ""
-"The name \"%s\" is already used in this folder. Please use a different name."
-msgstr "இந்த அடைவில்  \"%s\" என்ற பெயர் ஏற்கெனவே பயனில் உள்ளது. தயை செய்து வேறு பெயரை யன்படுத்துக."
+msgid "The name \"%s\" is already used in this folder. Please use a different name."
+msgstr ""
+"இந்த அடைவில்  \"%s\" என்ற பெயர் ஏற்கெனவே பயனில் உள்ளது. தயை செய்து வேறு பெயரை "
+"யன்படுத்துக."
 
-#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
-#: ../src/vinagre-bookmarks-ui.c:192
-
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:184
+#: ../src/vinagre-bookmarks-ui.c:195
 msgid "Invalid name for this item"
 msgstr "இந்த உருப்படிக்கு செல்லுபடியாகாத பெயர்"
 
-#: ../src/vinagre-bookmarks-ui.c:292
+#: ../src/vinagre-bookmarks-ui.c:298
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "நீங்கள் புத்தகக்குறியிலிருந்து <i>%s</i>ஐ நிச்சயம் நீக்க வேண்டுமா?"
 
-#: ../src/vinagre-bookmarks-ui.c:297
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Folder?"
 msgstr "அடைவை நீக்கவா?"
 
-#: ../src/vinagre-bookmarks-ui.c:298
+#: ../src/vinagre-bookmarks-ui.c:304
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "துணை அடைவுகளும் மற்ற எல்லா உருப்படிகளும் நீக்கப்படும் என அறியவும்"
 
-#: ../src/vinagre-bookmarks-ui.c:303
+#: ../src/vinagre-bookmarks-ui.c:309
 msgid "Remove Item?"
 msgstr "உருப்படியை நீக்கவா?"
 
-#: ../src/vinagre-bookmarks-ui.c:320
+#: ../src/vinagre-bookmarks-ui.c:326
 msgid "Error removing bookmark: Entry not found"
 msgstr "புத்தகக்குறிகளை சேமிக்கும் போது பிழை: உள்ளீட்டை காணவில்லை"
 
-#: ../src/vinagre-bookmarks-ui.c:337
+#: ../src/vinagre-bookmarks-ui.c:343
 msgid "New Folder"
 msgstr "புதிய அடைவு"
 
-#: ../src/vinagre-commands.c:113
+#: ../src/vinagre-commands.c:115
 msgid "Choose the file"
 msgstr "கோப்பினை தேர்வு செய்யவும்"
 
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
+#: ../src/vinagre-commands.c:126 ../src/vinagre-tab.c:703
 msgid "Supported formats"
 msgstr "துணைபுரியும் வடிவங்கள்"
 
-#: ../src/vinagre-commands.c:156
+#: ../src/vinagre-commands.c:159
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "பின்வரும் கோப்பினை திறக்க முடியாது"
@@ -377,28 +375,20 @@ msgstr "வரலாறு கோப்பை சேமிக்கும் ப
 msgid "Choose a VNC Server"
 msgstr "ஒரு விஎன்சி(VNC) சேவையகத்தை தேர்வு செய்யவும்"
 
-#: ../src/vinagre-connection.c:601
+#: ../src/vinagre-connection.c:556
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "நெறிமுறை %s துணைபுரியவில்லை."
 
-#: ../src/vinagre-connection.c:708
+#: ../src/vinagre-connection.c:669
 msgid "Could not open the file."
 msgstr "கோப்பினை திறக்க முடியவில்லை"
 
-#: ../src/vinagre-connection.c:727
+#: ../src/vinagre-connection.c:688
 msgid "Could not parse the file."
 msgstr "கோப்பினை அலகிட முடியவில்லை"
 
-#: ../src/vinagre-connection.c:772
-#, c-format
-msgid ""
-"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr ""
-"பகிர்ந்த குறிக்கு பிழையான மதிப்பு: %d. அது 0 அல்லது 1 ஆக இருக்க வேண்டும். "
-"உதாசீனப்படுத்தப்படுகிறது"
-
-#: ../src/vinagre-connection.c:778
+#: ../src/vinagre-connection.c:733
 msgid "Could not find the host address in the file."
 msgstr "கோப்பில் புரவலன் முகவரியை கண்டு பிடிக்க முடியவில்லை."
 
@@ -414,36 +404,35 @@ msgstr "இழுத்துவிடும் செயலில் இரு�
 msgid "Hosts nearby"
 msgstr "அருகிலுள்ள புரவலன்கள்"
 
-#: ../src/vinagre-main.c:53
+#: ../src/vinagre-main.c:56
 msgid "Opens a .vnc file"
 msgstr "ஒரு .விஎன்சி  கோப்பினை திறக்கிறது"
 
-#: ../src/vinagre-main.c:53
+#: ../src/vinagre-main.c:56
 msgid "filename"
 msgstr "கோப்பு பெயர்"
 
-#: ../src/vinagre-main.c:56
+#: ../src/vinagre-main.c:59
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "இயக்கத்தில் உள்ள ஒரு வினாக்ரே வில் புதிய உயர் மட்ட  சாளரம் உருவாக்கு"
 
-#: ../src/vinagre-main.c:60
+#: ../src/vinagre-main.c:63
 msgid "[server:port]"
 msgstr "[server:port]"
 
-#: ../src/vinagre-main.c:115
+#: ../src/vinagre-main.c:118
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "பின்வரும் பிழை ஏற்பட்டுள்ளது:"
 msgstr[1] "பின்வரும் பிழைகள் ஏற்பட்டுள்ளன:"
 
 #. Setup command line options
-#: ../src/vinagre-main.c:137
+#: ../src/vinagre-main.c:143
 msgid "- VNC Client for GNOME"
 msgstr "- க்னோம்க்கு விஎன்சி(VNC) சார்ந்தோன் "
 
-#: ../src/vinagre-main.c:146
-msgid ""
-"Run 'vinagre --help' to see a full list of available command line options"
+#: ../src/vinagre-main.c:152
+msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "'vinagre --help' என இயக்கினால் இருக்கும் கட்டளைவரி விருப்பங்களின் பட்டியலை கொடுக்கவும்"
 
@@ -457,20 +446,29 @@ msgstr "ஆவாஹி புரவலன் பெயரை கண்டறி
 msgid "Failed to browse for hosts: %s\n"
 msgstr "புரவலன்களுக்கு உலாவல் தோற்றது : %s\n"
 
-#: ../src/vinagre-notebook.c:168
+#: ../src/vinagre-notebook.c:399
 #, c-format
 msgid "Connection to host <i>%s</i> was closed."
 msgstr "புரவலன் <i>%s</i> உடன் உள்ள இணைப்பு துண்டிக்கப்பட்டது."
 
-#: ../src/vinagre-notebook.c:170
+#: ../src/vinagre-notebook.c:401
 msgid "Connection closed"
 msgstr "இணைப்பு துண்டிக்கப்பட்டது."
 
-#: ../src/vinagre-notebook.c:194
+#: ../src/vinagre-notebook.c:417
+#, c-format
+msgid "Authentication to host <i>%s</i> has failed"
+msgstr "புரவலன் <i>%s</i> க்கு உரிமப்படுத்த முடியவில்லை"
+
+#: ../src/vinagre-notebook.c:423
+msgid "Authentication failed"
+msgstr "அனுமதித்தல் தோல்வி"
+
+#: ../src/vinagre-notebook.c:460
 msgid "Connecting..."
 msgstr "இணைக்கிறது..."
 
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
+#: ../src/vinagre-notebook.c:487 ../src/vinagre-tab.c:379
 msgid "Close connection"
 msgstr "இணைப்பை துண்டிக்கவும்"
 
@@ -478,104 +476,35 @@ msgstr "இணைப்பை துண்டிக்கவும்"
 msgid "Cannot initialize preferences manager."
 msgstr "முன்னுரிமைகள் மேலாளரை துவக்க முடியவில்லை."
 
-#: ../src/vinagre-tab.c:322
-msgid "Error connecting to host."
-msgstr "புரவலனுடன் இணைக்கும் போது பிழை"
-
-#: ../src/vinagre-tab.c:354
-#, c-format
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "புரவலன் <i>%s</i> க்கு உரிமப்படுத்த முடியவில்லை"
-
-#: ../src/vinagre-tab.c:360
-msgid "Authentication failed"
-msgstr "அனுமதித்தல் தோல்வி"
-
-#: ../src/vinagre-tab.c:382
-#, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "புரவலன் <i>%s</i> க்கு உரிம முறை துணைபுரியவில்லை. (%u)"
-
-#: ../src/vinagre-tab.c:386
-msgid "Authentication unsupported"
-msgstr "உரிம முறை துணைபுரியவில்லை."
-
-#: ../src/vinagre-tab.c:460
+#: ../src/vinagre-tab.c:329
 msgid "Error saving recent connection."
 msgstr "சமீபத்திய இணைப்பை சேமிக்கும் போது பிழை"
 
-#: ../src/vinagre-tab.c:492
-msgid "Error saving the credential on the keyring."
-msgstr "விசை வளையத்தில் அறிமுக ஆவணம் சேமிக்கும் போது பிழை."
-
-#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
-msgid "Authentication error"
-msgstr "அனுமதித்தல் பிழை"
-
-#: ../src/vinagre-tab.c:748
-msgid "A username is required in order to access this machine."
-msgstr "இந்த கணினியை அணுக ஒரு பயனர் பெயர் தேவைப்படுகிறது."
-
-#: ../src/vinagre-tab.c:765
-msgid "A password is required in order to access this machine."
-msgstr "இந்த கணினியை அணுக ஒரு கடவுச்சொல் தேவைப்படுகிறது."
-
-#: ../src/vinagre-tab.c:891
+#: ../src/vinagre-tab.c:393
 msgid "Minimize window"
 msgstr "சாளரத்தை சிறிதாக்கு"
 
-#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
-msgid "Scaling"
-msgstr "அளவு மாற்றுதல் "
-
-#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
-msgid "Read only"
-msgstr "படிக்க மட்டும்"
-
 #. Machine menu
-#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
+#: ../src/vinagre-tab.c:409 ../src/vinagre-tab.c:410 ../src/vinagre-ui.h:100
 msgid "Take screenshot"
 msgstr "திரைபிடிப்பு எடுக்கவும்"
 
-#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
-msgid "Send Ctrl-Alt-Del"
-msgstr "அனுப்பு Ctrl Alt Del"
+#: ../src/vinagre-tab.c:641
+msgid "Error saving the credentials on the keyring."
+msgstr "விசை வளையத்தில் அறிமுக ஆவணம் சேமிக்கும் போது பிழை."
 
-#: ../src/vinagre-tab.c:1061
-msgid "Desktop Name:"
-msgstr "பணிமேடை பெயர்:"
-
-#: ../src/vinagre-tab.c:1063
-msgid "Port:"
-msgstr "துறை:"
-
-#: ../src/vinagre-tab.c:1064
-msgid "Dimensions:"
-msgstr "பரிமாணங்கள்:"
-
-#: ../src/vinagre-tab.c:1130
+#: ../src/vinagre-tab.c:681
 msgid "Could not get a screenshot of the connection."
 msgstr "இணைப்பின் திரைவெட்டை பிடிக்க முடியவில்லை"
 
-#: ../src/vinagre-tab.c:1138
+#: ../src/vinagre-tab.c:689
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s இன் திரைப்பிடிப்பு"
 
-#: ../src/vinagre-tab.c:1141
+#: ../src/vinagre-tab.c:692
 msgid "Save Screenshot"
 msgstr "திரைப்பிடிப்பை சேமிக்கவும்"
-
-#: ../src/vinagre-tab.c:1205
-msgid ""
-"Scaling is not supported on this installation.\n"
-"\n"
-"Read the README file (shipped with Vinagre) in order to know how to enable "
-"this feature."
-msgstr ""
-"அளவு மாற்றுதல்  இந்த நிறுவலில் இயங்காது.\n"
-"\n"
-" இதை எப்படி கையாளுவது என அறிய வினாக்ரேவுடன் வந்த 'என்னைப்படி' கோப்பை பார்க்க. "
 
 #. Toplevel
 #: ../src/vinagre-ui.h:33
@@ -656,86 +585,58 @@ msgstr "வினாக்ரே  கையேட்டை திறக்கவ
 msgid "About this application"
 msgstr "இந்தப் பயன்பாடு பற்றி"
 
-#: ../src/vinagre-ui.h:72
+#: ../src/vinagre-ui.h:70
+msgid "_Toolbar"
+msgstr "கருவிப்பட்டை (_T)"
+
+#: ../src/vinagre-ui.h:71
+msgid "Show or hide the toolbar"
+msgstr "கருவிப்பட்டையைக் காட்டவும் அல்லது மறைக்கவும்"
+
+#: ../src/vinagre-ui.h:74
+msgid "_Statusbar"
+msgstr "நிலைப்பட்டி (_S)"
+
+#: ../src/vinagre-ui.h:75
+msgid "Show or hide the statusbar"
+msgstr "நிலைப்பட்டையைக் காட்டவும் அல்லது மறைக்கவும்"
+
+#: ../src/vinagre-ui.h:78
+msgid "Side _Panel"
+msgstr "(_P) பக்க பலகம்"
+
+#: ../src/vinagre-ui.h:79
+msgid "Show or hide the side panel"
+msgstr "பக்க பலகத்தை காட்டவும் அல்லது மறைக்கவும்"
+
+#: ../src/vinagre-ui.h:87
 msgid "Close the current connection"
 msgstr "நடப்பு இணைப்பை துண்டிக்கவும்"
 
-#: ../src/vinagre-ui.h:73
+#: ../src/vinagre-ui.h:88
 msgid "C_lose All"
 msgstr "அனைத்தையும் மூடவும் (_l)"
 
-#: ../src/vinagre-ui.h:74
+#: ../src/vinagre-ui.h:89
 msgid "Close all active connections"
 msgstr "அனைத்து செயலிலுள்ள இணைப்பை துண்டித்தல்"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:77
+#: ../src/vinagre-ui.h:92
 msgid "_Add to bookmarks"
 msgstr "புத்தகக்குறிகளில் சேர்த்தல் (_A)"
 
-#: ../src/vinagre-ui.h:78
+#: ../src/vinagre-ui.h:93
 msgid "Add current connection to your bookmarks"
 msgstr "நடப்பு இணைப்புகளை உங்கள் புத்தகக்குறிகளில் சேர்த்தல்"
 
-#: ../src/vinagre-ui.h:86
+#: ../src/vinagre-ui.h:101
 msgid "Take a screenshot of active connection"
 msgstr "செயலிலுள்ள இணைப்பை திரைப்பிடிப்பு செய்யவும்"
 
-#: ../src/vinagre-ui.h:89
-msgid "Send Ctrl+Alt+Del to active connection"
-msgstr "செயலிலுள்ள இணைப்புக்கு  Ctrl+Alt+Del அனுப்புக"
-
-#: ../src/vinagre-ui.h:93
+#: ../src/vinagre-ui.h:105
 msgid "View the current machine in full screen"
 msgstr "நடப்பு கணினியை முழுத்திரையில் பார்க்கவும்"
-
-#: ../src/vinagre-ui.h:95
-msgid "_Original size"
-msgstr "(_O) அசல் அளவு"
-
-#: ../src/vinagre-ui.h:96
-msgid "Adjusts the window to the remote desktop's size"
-msgstr "சாளரத்தை தொலை மேல்மேசை அளவுக்கு மாற்றுக"
-
-#: ../src/vinagre-ui.h:102
-msgid "S_caling"
-msgstr "(_c) அளவு மாற்றுதல்"
-
-#: ../src/vinagre-ui.h:103
-msgid "Fit the remote screen into the current window size"
-msgstr "தொலை திரையை த்ற்போதைய சாளர அளவுக்கு பொருத்து "
-
-#: ../src/vinagre-ui.h:105
-msgid "_Read only"
-msgstr "வாசிப்பு மட்டும் (_R)"
-
-#: ../src/vinagre-ui.h:106
-msgid "Disable mouse and keyboard"
-msgstr "சொடுக்கி  மற்றும் விசைப்பலகையை முடமாக்குக"
-
-#: ../src/vinagre-ui.h:112
-msgid "_Toolbar"
-msgstr "கருவிப்பட்டை (_T)"
-
-#: ../src/vinagre-ui.h:113
-msgid "Show or hide the toolbar"
-msgstr "கருவிப்பட்டையைக் காட்டவும் அல்லது மறைக்கவும்"
-
-#: ../src/vinagre-ui.h:116
-msgid "_Statusbar"
-msgstr "நிலைப்பட்டி (_S)"
-
-#: ../src/vinagre-ui.h:117
-msgid "Show or hide the statusbar"
-msgstr "நிலைப்பட்டையைக் காட்டவும் அல்லது மறைக்கவும்"
-
-#: ../src/vinagre-ui.h:120
-msgid "Side _Panel"
-msgstr "(_P) பக்க பலகம்"
-
-#: ../src/vinagre-ui.h:121
-msgid "Show or hide the side panel"
-msgstr "பக்க பலகத்தை காட்டவும் அல்லது மறைக்கவும்"
 
 #: ../src/vinagre-utils.c:75
 msgid "An error has occurred:"
@@ -778,27 +679,122 @@ msgstr ""
 #: ../src/vinagre-utils.c:466
 msgid "translator-credits"
 msgstr ""
-"Dr. T. Vasudevan <agnihot3@gmail.com> 2009, I. Felix <ifelix25@gmail.com> 2008"
+"Dr. T. Vasudevan <agnihot3@gmail.com> 2009, I. Felix <ifelix25@gmail.com> "
+"2008"
 
 #: ../src/vinagre-utils.c:469
 msgid "Vinagre Website"
 msgstr "வினாக்ரே  இணையதளம்"
 
-#: ../src/vinagre-window.c:413
+#: ../src/vinagre-vnc-connection.c:198
+#, c-format
+msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr ""
+"பகிர்ந்த குறிக்கு பிழையான மதிப்பு: %d. அது 0 அல்லது 1 ஆக இருக்க வேண்டும். "
+"உதாசீனப்படுத்தப்படுகிறது"
+
+#: ../src/vinagre-vnc-tab.c:131
+msgid "Desktop Name:"
+msgstr "பணிமேடை பெயர்:"
+
+#: ../src/vinagre-vnc-tab.c:133
+msgid "Port:"
+msgstr "துறை:"
+
+#: ../src/vinagre-vnc-tab.c:134
+msgid "Dimensions:"
+msgstr "பரிமாணங்கள்:"
+
+#: ../src/vinagre-vnc-tab.c:253
+msgid "Error connecting to host."
+msgstr "புரவலனுடன் இணைக்கும் போது பிழை"
+
+#: ../src/vinagre-vnc-tab.c:289
+#, c-format
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "புரவலன் <i>%s</i> க்கு உரிம முறை துணைபுரியவில்லை. (%u)"
+
+#: ../src/vinagre-vnc-tab.c:293
+msgid "Authentication unsupported"
+msgstr "உரிம முறை துணைபுரியவில்லை."
+
+#: ../src/vinagre-vnc-tab.c:560 ../src/vinagre-vnc-tab.c:577
+msgid "Authentication error"
+msgstr "அனுமதித்தல் பிழை"
+
+#: ../src/vinagre-vnc-tab.c:561
+msgid "A username is required in order to access this machine."
+msgstr "இந்த கணினியை அணுக ஒரு பயனர் பெயர் தேவைப்படுகிறது."
+
+#: ../src/vinagre-vnc-tab.c:578
+msgid "A password is required in order to access this machine."
+msgstr "இந்த கணினியை அணுக ஒரு கடவுச்சொல் தேவைப்படுகிறது."
+
+#: ../src/vinagre-vnc-tab.c:628
+msgid "S_caling"
+msgstr "(_c) அளவு மாற்றுதல்"
+
+#: ../src/vinagre-vnc-tab.c:629
+msgid "Fits the remote screen into the current window size"
+msgstr "தொலை திரையை தற்போதைய சாளர அளவுக்கு பொருத்துகிறது"
+
+#: ../src/vinagre-vnc-tab.c:644
+msgid "Does not send mouse and keyboard events"
+msgstr "சொடுக்கி  மற்றும் விசைப்பலகை நிகழ்ச்சிகளை அனுப்பாதீர்கள்"
+
+#: ../src/vinagre-vnc-tab.c:657
+msgid "_Original size"
+msgstr "(_O) அசல் அளவு"
+
+#: ../src/vinagre-vnc-tab.c:658
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "சாளரத்தை தொலை மேல்மேசை அளவுக்கு மாற்றுக"
+
+#: ../src/vinagre-vnc-tab.c:681 ../src/vinagre-vnc-tab.c:749
+#: ../src/vinagre-vnc-tab.c:750
+msgid "Send Ctrl-Alt-Del"
+msgstr "அனுப்பு Ctrl Alt Del"
+
+#: ../src/vinagre-vnc-tab.c:682
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "தொலை கணினிக்கு  Ctrl+Alt+Del அனுப்புகிறது"
+
+#: ../src/vinagre-vnc-tab.c:728 ../src/vinagre-vnc-tab.c:729
+msgid "Scaling"
+msgstr "அளவு மாற்றுதல் "
+
+#: ../src/vinagre-vnc-tab.c:738 ../src/vinagre-vnc-tab.c:739
+msgid "Read only"
+msgstr "படிக்க மட்டும்"
+
+#: ../src/vinagre-vnc-tab.c:907
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"அளவு மாற்றுதல்  இந்த நிறுவலில் இயங்காது.\n"
+"\n"
+" இதை எப்படி கையாளுவது என அறிய வினாக்ரேவுடன் வந்த 'என்னைப்படி' கோப்பை பார்க்க. "
+
+#: ../src/vinagre-window.c:393
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "vinagre-ui.xml ஐ இணைக்க முடியவில்லை: %s"
 
-#: ../src/vinagre-window.c:441
+#: ../src/vinagre-window.c:421
 msgid "_Recent connections"
 msgstr "சமீபத்திய இணைப்புகள் (_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:614
+#: ../src/vinagre-window.c:579
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s ஐ திற:%d"
 
-#: ../src/vinagre-window.c:797
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "கண்ட்ரோல் ஆல்ட் விசைகளை அழுத்தி நிலைகாட்டியை விடுவிக்கவும்"
+#~ msgid "_Read only"
+#~ msgstr "வாசிப்பு மட்டும் (_R)"
+
+#~ msgid "Press Ctrl+Alt to release the cursor"
+#~ msgstr "கண்ட்ரோல் ஆல்ட் விசைகளை அழுத்தி நிலைகாட்டியை விடுவிக்கவும்"
