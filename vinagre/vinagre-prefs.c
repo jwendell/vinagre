@@ -37,6 +37,7 @@
 #define VM_WINDOW_WIDTH			VINAGRE_BASE_KEY "/window_width"
 #define VM_WINDOW_HEIGHT		VINAGRE_BASE_KEY "/window_height"
 #define VM_SIDE_PANEL_SIZE		VINAGRE_BASE_KEY "/side_panel_size"
+#define VM_LAST_PROTOCOL		VINAGRE_BASE_KEY "/last_protocol"
 
 #define VINAGRE_PLUGINS_DIR		VINAGRE_BASE_KEY "/plugins"
 #define VM_ACTIVE_PLUGINS		VINAGRE_PLUGINS_DIR "/active-plugins"
@@ -61,7 +62,8 @@ enum
   PROP_SIDE_PANEL_SIZE,
   PROP_SHOW_ACCELS,
   PROP_HISTORY_SIZE,
-  PROP_ACTIVE_PLUGINS
+  PROP_ACTIVE_PLUGINS,
+  PROP_LAST_PROTOCOL
 };
 
 G_DEFINE_TYPE (VinagrePrefs, vinagre_prefs, G_TYPE_OBJECT);
@@ -127,6 +129,31 @@ vinagre_prefs_get_int (VinagrePrefs *prefs, const gchar* key, gint def)
       return def;
 }
 
+static const gchar *
+vinagre_prefs_get_string (VinagrePrefs *prefs, const gchar *key, const gchar *def)
+{
+  GError* error = NULL;
+  GConfValue* val;
+
+  val = gconf_client_get (prefs->priv->gconf_client, key, &error);
+
+  if (val != NULL)
+    {
+      const gchar *retval = def;
+
+      g_return_val_if_fail (error == NULL, retval);
+
+      if (val->type == GCONF_VALUE_STRING)
+        retval = gconf_value_get_string (val);
+
+      gconf_value_free (val);
+
+      return retval;
+    }
+  else
+      return def;
+}
+
 static GSList *
 vinagre_prefs_get_list (VinagrePrefs *prefs, const gchar* key)
 {
@@ -136,22 +163,31 @@ vinagre_prefs_get_list (VinagrePrefs *prefs, const gchar* key)
 				NULL);
 }
 
-static void		 
+static void
 vinagre_prefs_set_bool (VinagrePrefs *prefs, const gchar* key, gboolean value)
 {
   g_return_if_fail (gconf_client_key_is_writable (
 		    prefs->priv->gconf_client, key, NULL));
-			
+
   gconf_client_set_bool (prefs->priv->gconf_client, key, value, NULL);
 }
 
-static void		 
+static void
 vinagre_prefs_set_int (VinagrePrefs *prefs, const gchar* key, gint value)
 {
   g_return_if_fail (gconf_client_key_is_writable (
 		    prefs->priv->gconf_client, key, NULL));
-			
+
   gconf_client_set_int (prefs->priv->gconf_client, key, value, NULL);
+}
+
+static void
+vinagre_prefs_set_string (VinagrePrefs *prefs, const gchar *key, const gchar *value)
+{
+  g_return_if_fail (gconf_client_key_is_writable (
+		    prefs->priv->gconf_client, key, NULL));
+
+  gconf_client_set_string (prefs->priv->gconf_client, key, value, NULL);
 }
 
 static void
@@ -253,6 +289,9 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
       case PROP_ACTIVE_PLUGINS:
 	vinagre_prefs_set_list (prefs, VM_ACTIVE_PLUGINS, g_value_get_pointer (value));
 	break;
+      case PROP_LAST_PROTOCOL:
+	vinagre_prefs_set_string (prefs, VM_LAST_PROTOCOL, g_value_get_string (value));
+	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -301,6 +340,9 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	break;
       case PROP_ACTIVE_PLUGINS:
 	g_value_set_pointer (value, vinagre_prefs_get_list (prefs, VM_ACTIVE_PLUGINS));
+	break;
+      case PROP_LAST_PROTOCOL:
+	g_value_set_string (value, vinagre_prefs_get_string (prefs, VM_LAST_PROTOCOL, NULL));
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -422,6 +464,14 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 							 "Active plugins",
 							 "The list of active plugins",
 							 G_PARAM_READWRITE));
+
+  g_object_class_install_property (object_class,
+				   PROP_LAST_PROTOCOL,
+				   g_param_spec_string ("last-protocol",
+							"Last Protocol",
+							"The last protocol used in connect dialog",
+							NULL,
+							G_PARAM_READWRITE));
 
 }
 
