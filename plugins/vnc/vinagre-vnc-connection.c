@@ -205,6 +205,25 @@ vnc_fill_conn_from_file (VinagreConnection *conn, GKeyFile *file)
 }
 
 static void
+vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
+{
+  GtkWidget *view_only, *scaling;
+
+  view_only = g_object_get_data (G_OBJECT (widget), "view_only");
+  scaling = g_object_get_data (G_OBJECT (widget), "scaling");
+  if (!view_only || !scaling)
+    {
+      g_warning ("Wrong widget passed to vnc_parse_options_widget()");
+      return;
+    }
+
+  g_object_set (conn,
+		"view-only", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (view_only)),
+		"scaling", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (scaling)),
+		NULL);
+}
+
+static void
 vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
 {
   GObjectClass* object_class = G_OBJECT_CLASS (klass);
@@ -221,6 +240,7 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
   parent_class->impl_parse_item  = vnc_parse_item;
   parent_class->impl_get_best_name = vnc_get_best_name;
   parent_class->impl_fill_conn_from_file = vnc_fill_conn_from_file;
+  parent_class->impl_parse_options_widget = vnc_parse_options_widget;
 
   g_object_class_install_property (object_class,
                                    PROP_DESKTOP_NAME,

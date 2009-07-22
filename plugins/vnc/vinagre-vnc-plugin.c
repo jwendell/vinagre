@@ -73,6 +73,18 @@ impl_get_protocol (VinagrePlugin *plugin)
   return "vnc";
 }
 
+static gchar **
+impl_get_public_description (VinagrePlugin *plugin)
+{
+  gchar **result = g_new (gchar *, 3);
+
+  result[0] = g_strdup ("VNC");
+  result[1] = g_strdup ("Access Unix/Linux, Windows and other machines.");
+  result[2] = NULL;
+
+  return result;
+}
+
 static const gchar *
 impl_get_mdns_service (VinagrePlugin *plugin)
 {
@@ -188,6 +200,35 @@ impl_new_tab (VinagrePlugin *plugin,
   return vinagre_vnc_tab_new (conn, window);
 }
 
+static GtkWidget *
+impl_get_connect_widget (VinagrePlugin *plugin)
+{
+  GtkWidget *box, *check, *label;
+  GtkTable  *table;
+
+  box = gtk_vbox_new (TRUE, 0);
+
+  label = gtk_label_new (_("<b>VNC Options</b>"));
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  table = GTK_TABLE (gtk_table_new (2, 2, FALSE));
+  label = gtk_label_new ("  ");
+  gtk_table_attach (table, label, 0, 1, 0, 1, GTK_SHRINK, GTK_SHRINK, 0, 0);
+
+  check = gtk_check_button_new_with_mnemonic ("_View only");
+  g_object_set_data (G_OBJECT (box), "view_only", check);
+  gtk_table_attach_defaults (table, check, 1, 2, 0, 1);
+
+  check = gtk_check_button_new_with_mnemonic ("_Scaling");
+  g_object_set_data (G_OBJECT (box), "scaling", check);
+  gtk_table_attach_defaults (table, check, 1, 2, 1, 2);
+
+  gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (table), TRUE, TRUE, 0);
+  return box;
+}
+
 static void
 vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
 {
@@ -215,9 +256,11 @@ vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
   plugin_class->update_ui  = impl_update_ui;
   plugin_class->get_context_group = impl_get_context_group;
   plugin_class->get_protocol  = impl_get_protocol;
+  plugin_class->get_public_description  = impl_get_public_description;
   plugin_class->new_connection = impl_new_connection;
   plugin_class->new_connection_from_file = impl_new_connection_from_file;
   plugin_class->get_mdns_service  = impl_get_mdns_service;
   plugin_class->new_tab = impl_new_tab;
+  plugin_class->get_connect_widget = impl_get_connect_widget;
 }
 /* vim: set ts=8: */
