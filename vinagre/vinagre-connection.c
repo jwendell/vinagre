@@ -214,11 +214,6 @@ default_parse_item (VinagreConnection *conn, xmlNode *root)
 
       xmlFree (s_value);
     }
-
-// TODO:
-//  if (conn->priv->port <= 0)
-//    vinagre_connection_set_port (conn, vinagre_connection_default_port [conn->priv->protocol-1]);
-
 }
 
 static gchar *
@@ -231,6 +226,11 @@ default_get_best_name (VinagreConnection *conn)
     return vinagre_connection_get_string_rep (conn, FALSE);
 
   return NULL;
+}
+
+static void
+default_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
+{
 }
 
 static void
@@ -248,6 +248,7 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
   klass->impl_parse_item = default_parse_item;
   klass->impl_get_best_name = default_get_best_name;
   klass->impl_fill_conn_from_file = NULL;
+  klass->impl_parse_options_widget = default_parse_options_widget;
 
   g_object_class_install_property (object_class,
                                    PROP_PROTOCOL,
@@ -707,14 +708,14 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
 
 void
 vinagre_connection_fill_writer (VinagreConnection *conn,
-				xmlTextWriter *writer)
+				xmlTextWriter     *writer)
 {
   VINAGRE_CONNECTION_GET_CLASS (conn)->impl_fill_writer (conn, writer);
 }
 
 void
 vinagre_connection_parse_item (VinagreConnection *conn,
-			       xmlNode *root)
+			       xmlNode           *root)
 {
   VINAGRE_CONNECTION_GET_CLASS (conn)->impl_parse_item (conn, root);
 }
@@ -723,5 +724,12 @@ gchar*
 vinagre_connection_get_best_name (VinagreConnection *conn)
 {
   return VINAGRE_CONNECTION_GET_CLASS (conn)->impl_get_best_name (conn);
+}
+
+void
+vinagre_connection_parse_options_widget (VinagreConnection *conn,
+					 GtkWidget         *widget)
+{
+  VINAGRE_CONNECTION_GET_CLASS (conn)->impl_parse_options_widget (conn, widget);
 }
 /* vim: set ts=8: */

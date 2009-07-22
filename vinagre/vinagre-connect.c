@@ -36,20 +36,32 @@
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-prefs.h"
+#include "vinagre-plugins-engine.h"
+#include "vinagre-plugin.h"
 
 typedef struct {
   GladeXML  *xml;
   GtkWidget *dialog;
+  GtkWidget *protocol_combo;
+  GtkWidget *protocol_description_label;
+  GtkListStore *protocol_store;
   GtkWidget *host_entry;
   GtkWidget *find_button;
   GtkWidget *fullscreen_check;
-  GtkWidget *scaling_check;
-  GtkWidget *viewonly_check;
 } VinagreConnectDialog;
 
 enum {
   COLUMN_TEXT,
   N_COLUMNS
+};
+
+enum {
+  PROTOCOL_NAME,
+  PROTOCOL_DESCRIPTION,
+  PROTOCOL_MDNS,
+  PROTOCOL_OPTIONS,
+  PROTOCOL_PLUGIN,
+  N_PROTOCOLS
 };
 
 static gchar*
@@ -58,6 +70,109 @@ history_filename () {
 			   "vinagre",
 			   "history",
 			   NULL);
+}
+
+static void
+protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
+{
+  GtkTreeIter tree_iter;
+  gchar       *description, *label, *service;
+  GtkWidget   *options, *vbox;
+
+  if (!gtk_combo_box_get_active_iter (combo, &tree_iter))
+    {
+      g_warning (_("Could not get the active protocol in the protocol list."));
+      return;
+    }
+
+  gtk_tree_model_get (GTK_TREE_MODEL (dialog->protocol_store), &tree_iter,
+		      PROTOCOL_DESCRIPTION, &description,
+		      PROTOCOL_MDNS, &service,
+		      PROTOCOL_OPTIONS, &options,
+		      -1);
+
+  label = g_strdup_printf ("<i><small>%s</small></i>", description);
+  gtk_label_set_markup (GTK_LABEL (dialog->protocol_description_label),
+			label);
+
+#ifdef VINAGRE_ENABLE_AVAHI
+  if (service)
+    gtk_widget_show (dialog->find_button);
+  else
+    gtk_widget_hide (dialog->find_button);
+#endif
+
+  vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog->dialog));
+  if (options)
+    {
+      gtk_box_pack_end (GTK_BOX (vbox), options, TRUE, TRUE, 0);
+      g_object_unref (options);
+    }
+
+  g_free (label);
+  g_free (description);
+  g_free (service);
+}
+
+static void
+setup_protocol (VinagreConnectDialog *dialog)
+{
+  GHashTable      *plugins;
+  GHashTableIter  hash_iter;
+  gpointer        key, value;
+  GtkTreeIter     tree_iter;
+  GtkCellRenderer *rend;
+  gchar           *last_protocol;
+  gint            selected, i;
+
+  dialog->protocol_store = gtk_list_store_new (N_PROTOCOLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_OBJECT, G_TYPE_OBJECT);
+  plugins = vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
+  g_object_get (vinagre_prefs_get_default (), "last-protocol", &last_protocol, NULL);
+
+  g_hash_table_iter_init (&hash_iter, plugins);
+  selected = 0;
+  i = 0;
+  while (g_hash_table_iter_next (&hash_iter, &key, &value)) 
+    {
+      gchar         **description;
+      VinagrePlugin *plugin = VINAGRE_PLUGIN (value);
+      GtkWidget     *widget;
+
+      description = vinagre_plugin_get_public_description (plugin);
+      if (!description || !description[0])
+	continue;
+
+      widget = vinagre_plugin_get_connect_widget (plugin);
+
+      gtk_list_store_append (dialog->protocol_store, &tree_iter);
+      gtk_list_store_set (dialog->protocol_store, &tree_iter,
+			  PROTOCOL_NAME, description[0],
+			  PROTOCOL_DESCRIPTION, description[1],
+			  PROTOCOL_MDNS, vinagre_plugin_get_mdns_service (plugin),
+			  PROTOCOL_OPTIONS, widget,
+			  PROTOCOL_PLUGIN, plugin,
+			  -1);
+
+      if (last_protocol && g_str_equal (last_protocol, description[0]))
+        selected = i;
+
+      g_strfreev (description);
+      g_object_unref (widget);
+      i++;
+    }
+
+  gtk_combo_box_set_model (GTK_COMBO_BOX (dialog->protocol_combo),
+			   GTK_TREE_MODEL (dialog->protocol_store));
+  rend = gtk_cell_renderer_text_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (dialog->protocol_combo), rend, TRUE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (dialog->protocol_combo), rend, "text", 0);
+
+  g_signal_connect (dialog->protocol_combo,
+		    "changed",
+		    G_CALLBACK (protocol_combo_changed),
+		    dialog);
+  gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->protocol_combo), selected);
+  g_free (last_protocol);
 }
 
 static GPtrArray *
@@ -138,7 +253,7 @@ setup_combo (GtkWidget *combo)
   gtk_entry_set_activates_default (GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo))), TRUE);
 }
 
-void
+static void
 save_history (GtkWidget *combo) {
   gchar *host;
   GPtrArray *history;
@@ -188,9 +303,24 @@ static void
 vinagre_connect_find_button_cb (GtkButton            *button,
 				VinagreConnectDialog *dialog)
 {
-  GtkWidget *d;
+  GtkWidget   *d;
+  GtkTreeIter tree_iter;
+  gchar       *service;
 
-  d = aui_service_dialog_new (_("Choose a VNC Server"),
+  if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->protocol_combo),
+				      &tree_iter))
+    {
+      g_warning (_("Could not get the active protocol in the protocol list."));
+      return;
+    }
+
+  gtk_tree_model_get (GTK_TREE_MODEL (dialog->protocol_store), &tree_iter,
+		      PROTOCOL_MDNS, &service,
+		      -1);
+  if (!service)
+    return;
+
+  d = aui_service_dialog_new (_("Choose a Remote Desktop"),
 				GTK_WINDOW(dialog->dialog),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
@@ -199,7 +329,7 @@ vinagre_connect_find_button_cb (GtkButton            *button,
   aui_service_dialog_set_resolve_service (AUI_SERVICE_DIALOG(d), TRUE);
   aui_service_dialog_set_resolve_host_name (AUI_SERVICE_DIALOG(d), TRUE);
   aui_service_dialog_set_browse_service_types (AUI_SERVICE_DIALOG(d),
-					       "_rfb._tcp",
+					       service,
 					       NULL);
 
   if (gtk_dialog_run(GTK_DIALOG(d)) == GTK_RESPONSE_ACCEPT)
@@ -216,6 +346,7 @@ vinagre_connect_find_button_cb (GtkButton            *button,
       g_free (tmp);
     }
 
+  g_free (service);
   gtk_widget_destroy (d);
 }
 #endif
@@ -230,12 +361,13 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   dialog.dialog = glade_xml_get_widget (dialog.xml, "connect_dialog");
   gtk_window_set_transient_for (GTK_WINDOW (dialog.dialog), GTK_WINDOW (window));
 
+  dialog.protocol_combo = glade_xml_get_widget (dialog.xml, "protocol_combo");
+  dialog.protocol_description_label = glade_xml_get_widget (dialog.xml, "protocol_description_label");
   dialog.host_entry  = glade_xml_get_widget (dialog.xml, "host_entry");
   dialog.find_button = glade_xml_get_widget (dialog.xml, "find_button");
   dialog.fullscreen_check = glade_xml_get_widget (dialog.xml, "fullscreen_check");
-  dialog.viewonly_check = glade_xml_get_widget (dialog.xml, "viewonly_check");
-  dialog.scaling_check = glade_xml_get_widget (dialog.xml, "scaling_check");
 
+  setup_protocol (&dialog);
   setup_combo (dialog.host_entry);
 
 #ifdef VINAGRE_ENABLE_AVAHI
@@ -253,7 +385,11 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
   if (result == GTK_RESPONSE_OK)
     {
-      gchar *host = NULL, *error_msg = NULL;
+      gchar         *host = NULL, *error_msg = NULL, *protocol = NULL, *actual_host;
+      gint          port;
+      VinagrePlugin *plugin;
+      GtkWidget     *options;
+      GtkTreeIter   iter;
 
       host = gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog.host_entry));
       gtk_widget_hide (GTK_WIDGET (dialog.dialog));
@@ -263,20 +399,44 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
       save_history (dialog.host_entry);
 
-      conn = vinagre_connection_new_from_string (host, &error_msg, TRUE);
-      if (conn)
+      if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog.protocol_combo), &iter))
+	{
+	  g_warning (_("Could not get the active protocol in the protocol list."));
+	  goto fail;
+	}
+
+      gtk_tree_model_get (GTK_TREE_MODEL (dialog.protocol_store), &iter,
+			  PROTOCOL_NAME, &protocol,
+			  PROTOCOL_OPTIONS, &options,
+			  PROTOCOL_PLUGIN, &plugin,
+		      -1);
+
+      g_object_set (vinagre_prefs_get_default (), "last-protocol", protocol, NULL);
+      g_free (protocol);
+
+      conn = vinagre_plugin_new_connection (plugin);
+      if (vinagre_connection_split_string (host, &protocol, &actual_host, &port, &error_msg))
 	{
 	  g_object_set (conn,
-			"scaling", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.scaling_check)),
-			"view-only", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.viewonly_check)),
+			"host", actual_host,
+			"port", port,
 			"fullscreen", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.fullscreen_check)),
 			NULL);
+
+	  vinagre_connection_parse_options_widget (conn, options);
+
+	  g_free (protocol);
+	  g_free (actual_host);
 	}
       else
 	{
 	  vinagre_utils_show_error (NULL, error_msg ? error_msg : _("Unknown error"),
 				    GTK_WINDOW (window));
 	}
+
+      g_object_unref (plugin);
+      g_object_unref (options);
+
 fail:
       g_free (host);
       g_free (error_msg);

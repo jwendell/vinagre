@@ -23,6 +23,7 @@
 #define __VINAGRE_CONNECTION_H__
 
 #include <glib.h>
+#include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libxml/xmlwriter.h>
 
@@ -48,6 +49,7 @@ struct _VinagreConnectionClass
   void		(*impl_parse_item)		(VinagreConnection *conn, xmlNode *root);
   gchar *	(*impl_get_best_name)		(VinagreConnection *conn);
   void		(*impl_fill_conn_from_file)	(VinagreConnection *conn, GKeyFile *file);
+  void		(*impl_parse_options_widget)	(VinagreConnection *conn, GtkWidget *widget);
 };
 
 struct _VinagreConnection
@@ -114,6 +116,8 @@ void                vinagre_connection_parse_item	(VinagreConnection *conn,
 							 xmlNode *root);
 
 gchar*		    vinagre_connection_get_best_name    (VinagreConnection *conn);
+
+void                vinagre_connection_parse_options_widget (VinagreConnection *conn, GtkWidget *widget);
 
 G_END_DECLS
 

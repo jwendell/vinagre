@@ -70,6 +70,12 @@ default_get_protocol (VinagrePlugin *plugin)
   return NULL;
 }
 
+static gchar **
+default_get_public_description (VinagrePlugin *plugin)
+{
+  return NULL;
+}
+
 static VinagreConnection *
 default_new_connection (VinagrePlugin *plugin)
 {
@@ -167,11 +173,13 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->update_ui = dummy;
 	klass->get_context_group = default_context_group;
 	klass->get_protocol = default_get_protocol;
+	klass->get_public_description = default_get_public_description;
 	klass->get_default_port = default_get_default_port;
 	klass->new_connection = default_new_connection;
 	klass->new_connection_from_file = default_new_connection_from_file;
 	klass->get_mdns_service = default_get_protocol;
 	klass->new_tab = default_new_tab;
+	klass->get_connect_widget = create_configure_dialog;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -401,6 +409,23 @@ vinagre_plugin_get_protocol (VinagrePlugin *plugin)
 }
 
 /**
+ * vinagre_plugin_get_public_description
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: an array of strings:
+ * [0] -> the protocol name, like VNC, or SSH
+ * [1] -> the protocol description, like "A secure shell access"
+ */
+gchar **
+vinagre_plugin_get_public_description (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+	
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_public_description (plugin);
+}
+
+/**
  * vinagre_plugin_new_connection
  * @plugin: a #VinagrePlugin
  *
@@ -478,6 +503,21 @@ vinagre_plugin_new_tab (VinagrePlugin     *plugin,
   g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
 
   return VINAGRE_PLUGIN_GET_CLASS (plugin)->new_tab (plugin, conn, window);
+}
+
+/**
+ * vinagre_plugin_get_connect_widget
+ * @plugin: a #VinagreTab
+ *
+ *
+ * Returns: a widget to be put inside connect dialog
+ */
+GtkWidget *
+vinagre_plugin_get_connect_widget (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_connect_widget (plugin);
 }
 
 /* vim: set ts=8: */

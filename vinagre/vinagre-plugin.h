@@ -75,6 +75,7 @@ struct _VinagrePluginClass
   /* Virtual methods specific to 'engine' plugins */
   GOptionGroup	*(*get_context_group)		(VinagrePlugin *plugin);
   const gchar	*(*get_protocol)		(VinagrePlugin *plugin);
+  gchar		**(*get_public_description)	(VinagrePlugin *plugin);
   gint		(*get_default_port)		(VinagrePlugin *plugin);
   VinagreConnection *(*new_connection)		(VinagrePlugin *plugin);
   VinagreConnection *(*new_connection_from_file)(VinagrePlugin *plugin,
@@ -85,6 +86,8 @@ struct _VinagrePluginClass
   GtkWidget 	*(*new_tab)			(VinagrePlugin     *plugin,
 						 VinagreConnection *conn,
 						 VinagreWindow     *window);
+
+  GtkWidget 	*(*get_connect_widget)		(VinagrePlugin     *plugin);
 
   /* Plugins should not override this, it's handled automatically by
      the VinagrePluginClass */
@@ -118,6 +121,7 @@ GtkWidget	*vinagre_plugin_create_configure_dialog	(VinagrePlugin *plugin);
 
 GOptionGroup	*vinagre_plugin_get_context_group	(VinagrePlugin *plugin);
 const gchar	*vinagre_plugin_get_protocol		(VinagrePlugin *plugin);
+gchar		**vinagre_plugin_get_public_description	(VinagrePlugin *plugin);
 gint		 vinagre_plugin_get_default_port	(VinagrePlugin *plugin);
 VinagreConnection *vinagre_plugin_new_connection	(VinagrePlugin *plugin);
 VinagreConnection *vinagre_plugin_new_connection_from_file (VinagrePlugin *plugin,
@@ -129,6 +133,8 @@ const gchar	*vinagre_plugin_get_mdns_service	(VinagrePlugin *plugin);
 GtkWidget 	*vinagre_plugin_new_tab			(VinagrePlugin     *plugin,
 							 VinagreConnection *conn,
 							 VinagreWindow     *window);
+
+GtkWidget 	*vinagre_plugin_get_connect_widget	(VinagrePlugin     *plugin);
 
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):
