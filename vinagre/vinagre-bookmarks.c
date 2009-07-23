@@ -34,7 +34,7 @@
 struct _VinagreBookmarksPrivate
 {
   gchar        *filename;
-  GSList       *entries, *conns;
+  GSList       *entries;
   GFileMonitor *monitor;
 };
 
