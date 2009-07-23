@@ -93,6 +93,8 @@ void			 vinagre_plugins_engine_active_plugins_changed	(VinagrePluginsEngine *eng
 void			 vinagre_plugins_engine_rescan_plugins		(VinagrePluginsEngine *engine);
 
 GHashTable		*vinagre_plugin_engine_get_plugins_by_protocol	(VinagrePluginsEngine *engine);
+VinagrePlugin		*vinagre_plugins_engine_get_plugin_by_protocol	(VinagrePluginsEngine *engine,
+									 const gchar          *protocol);
 
 G_END_DECLS
 

@@ -910,4 +910,13 @@ vinagre_plugin_engine_get_plugins_by_protocol (VinagrePluginsEngine *engine)
   return engine->priv->protocols;
 }
 
+VinagrePlugin *
+vinagre_plugins_engine_get_plugin_by_protocol (VinagrePluginsEngine *engine,
+					      const gchar          *protocol)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGINS_ENGINE (engine), NULL);
+
+  return g_hash_table_lookup (engine->priv->protocols, (gconstpointer) protocol);
+}
+
 /* vim: set ts=8: */
