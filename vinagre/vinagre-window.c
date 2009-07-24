@@ -527,7 +527,7 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
   static guint           i = 0;
   GSList                *l;
   VinagreBookmarksEntry *entry;
-  gchar                 *action_name, *action_label, *path, *tooltip;
+  gchar                 *action_name, *action_label, *path, *tooltip, *icon_name;
   GtkAction             *action;
   VinagreWindowPrivate  *p = window->priv;
   VinagreConnection     *conn;
@@ -583,7 +583,9 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 				     action_label,
 				     tooltip,
 				     NULL);
-	    g_object_set (G_OBJECT (action), "icon-name", "application-x-vnc", NULL);
+	    icon_name = g_strdup_printf ("application-x-%s", vinagre_connection_get_protocol (conn));
+	    g_object_set (G_OBJECT (action), "icon-name", icon_name, NULL);
+	    g_free (icon_name);
 	    g_object_set_data (G_OBJECT (action), "conn", conn);
 	    gtk_action_group_add_action (p->bookmarks_list_action_group,
 					 action);

@@ -479,16 +479,13 @@ vinagre_connection_get_name (VinagreConnection *conn)
 GdkPixbuf *
 vinagre_connection_get_icon (VinagreConnection *conn)
 {
-/*
   GdkPixbuf         *pixbuf;
   GtkIconTheme      *icon_theme;
   gchar             *icon_name;
 
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
-  g_return_val_if_fail (conn->priv->protocol != VINAGRE_CONNECTION_PROTOCOL_INVALID, NULL);
 
-  icon_name = g_strdup_printf ("application-x-%s",
-			       vinagre_connection_protos [conn->priv->protocol-1]);
+  icon_name = g_strdup_printf ("application-x-%s", conn->priv->protocol);
   icon_theme = gtk_icon_theme_get_default ();
   pixbuf = gtk_icon_theme_load_icon (icon_theme,
 				     icon_name,
@@ -498,9 +495,6 @@ vinagre_connection_get_icon (VinagreConnection *conn)
 
   g_free (icon_name);
   return pixbuf;
-*/
- // TODO:
-  return NULL;
 }
 
 gboolean
