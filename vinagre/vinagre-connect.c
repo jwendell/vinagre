@@ -48,6 +48,7 @@ typedef struct {
   GtkWidget *host_entry;
   GtkWidget *find_button;
   GtkWidget *fullscreen_check;
+  GtkWidget *plugin_box;
 } VinagreConnectDialog;
 
 enum {
@@ -77,7 +78,8 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
 {
   GtkTreeIter tree_iter;
   gchar       *description, *label, *service;
-  GtkWidget   *options, *vbox;
+  GtkWidget   *options;
+  GList       *children, *l;
 
   if (!gtk_combo_box_get_active_iter (combo, &tree_iter))
     {
@@ -102,12 +104,19 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
     gtk_widget_hide (dialog->find_button);
 #endif
 
-  vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog->dialog));
+  children = gtk_container_get_children (GTK_CONTAINER (dialog->plugin_box));
+  for (l = children; l; l = l->next)
+    gtk_container_remove (GTK_CONTAINER (dialog->plugin_box), GTK_WIDGET (l->data));
+  g_list_free (children);
+
   if (options)
     {
-      gtk_box_pack_end (GTK_BOX (vbox), options, TRUE, TRUE, 0);
+      gtk_box_pack_start (GTK_BOX (dialog->plugin_box), options, TRUE, TRUE, 0);
       g_object_unref (options);
+      gtk_widget_show (dialog->plugin_box);
     }
+  else
+    gtk_widget_hide (dialog->plugin_box);
 
   g_free (label);
   g_free (description);
@@ -357,7 +366,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   gint                  result;
   VinagreConnectDialog  dialog;
 
-  dialog.xml = glade_xml_new (vinagre_utils_get_glade_filename (), NULL, NULL);
+  dialog.xml = glade_xml_new (vinagre_utils_get_glade_filename (), "connect_dialog", NULL);
   dialog.dialog = glade_xml_get_widget (dialog.xml, "connect_dialog");
   gtk_window_set_transient_for (GTK_WINDOW (dialog.dialog), GTK_WINDOW (window));
 
@@ -366,6 +375,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   dialog.host_entry  = glade_xml_get_widget (dialog.xml, "host_entry");
   dialog.find_button = glade_xml_get_widget (dialog.xml, "find_button");
   dialog.fullscreen_check = glade_xml_get_widget (dialog.xml, "fullscreen_check");
+  dialog.plugin_box = glade_xml_get_widget (dialog.xml, "plugin_options_vbox");
 
   setup_protocol (&dialog);
   setup_combo (dialog.host_entry);
