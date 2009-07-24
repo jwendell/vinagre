@@ -2,6 +2,8 @@
  * vinagre-plugins-manager.c
  * This file is part of vinagre
  *
+ * Based on gedit plugin system
+ * Copyright (C) 2002-2005 Paolo Maggi
  * Copyright (C) 2009 Jorge Pereira <jorge@jorgepereira.com.br>
  * 
  * vinagre-plugins-manager.c is free software: you can redistribute it and/or modify it

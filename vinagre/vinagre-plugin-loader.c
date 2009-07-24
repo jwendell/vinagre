@@ -2,6 +2,7 @@
  * vinagre-plugin-loader.c
  * This file is part of vinagre
  *
+ * Based on gedit plugin system
  * Copyright (C) 2008 - Jesse van den Kieboom
  *
  * This program is free software; you can redistribute it and/or modify

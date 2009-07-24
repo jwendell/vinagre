@@ -2,7 +2,9 @@
  * vinagre-plugin.h
  * This file is part of vinagre
  *
- * Copyright (C) 2009 Jorge Pereira <jorge@jorgepereira.com.br>
+ * Based on gedit plugin system
+ * Copyright (C) 2002-2005 Paolo Maggi
+ * Copyright (C) 2009 Jonh Wendell <wendell@bani.com.br>s
  * 
  * vinagre-plugin.h is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
