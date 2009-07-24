@@ -142,7 +142,7 @@ setup_protocol (VinagreConnectDialog *dialog)
       if (!description || !description[0])
 	continue;
 
-      widget = vinagre_plugin_get_connect_widget (plugin);
+      widget = vinagre_plugin_get_connect_widget (plugin, NULL);
 
       gtk_list_store_append (dialog->protocol_store, &tree_iter);
       gtk_list_store_set (dialog->protocol_store, &tree_iter,
