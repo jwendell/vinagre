@@ -731,6 +731,9 @@ void
 vinagre_connection_parse_options_widget (VinagreConnection *conn,
 					 GtkWidget         *widget)
 {
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
   VINAGRE_CONNECTION_GET_CLASS (conn)->impl_parse_options_widget (conn, widget);
 }
 /* vim: set ts=8: */
