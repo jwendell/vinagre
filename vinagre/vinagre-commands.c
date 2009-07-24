@@ -309,29 +309,27 @@ void
 vinagre_cmd_bookmarks_add (GtkAction     *action,
 			   VinagreWindow *window)
 {
-  GtkWidget         *tab;
+  VinagreTab        *tab;
   VinagreConnection *conn;
-  gchar             *name;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  //tab = window->priv->active_tab;
-  conn = vinagre_tab_get_conn (VINAGRE_TAB (tab));
-  //g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+  tab = vinagre_window_get_active_tab (window);
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  conn = vinagre_tab_get_conn (tab);
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
   vinagre_bookmarks_add (vinagre_bookmarks_get_default (),
                          conn,
                          GTK_WINDOW (window));
 
-/*
-  if (window->priv->active_tab == tab)
+  if (vinagre_window_get_active_tab (window) == tab)
     {
-      name = vinagre_connection_get_best_name (conn);
-      vinagre_tab_set_title (VINAGRE_TAB (window->priv->active_tab),
-			     name);
+      gchar *name = vinagre_connection_get_best_name (conn);
+      vinagre_tab_set_title (tab, name);
       g_free (name);
     }
-*/
 }
 
 void
