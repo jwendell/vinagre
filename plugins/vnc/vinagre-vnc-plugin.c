@@ -235,6 +235,12 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
   return box;
 }
 
+static gint
+impl_get_default_port (VinagrePlugin *plugin)
+{
+  return 5900;
+}
+
 static void
 vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
 {
@@ -268,5 +274,6 @@ vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
   plugin_class->get_mdns_service  = impl_get_mdns_service;
   plugin_class->new_tab = impl_new_tab;
   plugin_class->get_connect_widget = impl_get_connect_widget;
+  plugin_class->get_default_port = impl_get_default_port;
 }
 /* vim: set ts=8: */
