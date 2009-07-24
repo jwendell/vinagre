@@ -532,12 +532,13 @@ vinagre_connection_split_string (const gchar *uri,
       lhost = (gchar *) uri;
     }
 
-  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
-				*protocol);
+  plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+							  *protocol);
   if (!plugin)
     {
       *error_msg = g_strdup_printf (_("The protocol %s is not supported."), *protocol);
       g_free (*protocol);
+      *protocol = NULL;
       g_strfreev (url);
       return FALSE;
     }
