@@ -87,7 +87,8 @@ struct _VinagrePluginClass
 						 VinagreConnection *conn,
 						 VinagreWindow     *window);
 
-  GtkWidget 	*(*get_connect_widget)		(VinagrePlugin     *plugin);
+  GtkWidget 	*(*get_connect_widget)		(VinagrePlugin     *plugin,
+						 VinagreConnection *initial_settings);
 
   /* Plugins should not override this, it's handled automatically by
      the VinagrePluginClass */
@@ -134,7 +135,8 @@ GtkWidget 	*vinagre_plugin_new_tab			(VinagrePlugin     *plugin,
 							 VinagreConnection *conn,
 							 VinagreWindow     *window);
 
-GtkWidget 	*vinagre_plugin_get_connect_widget	(VinagrePlugin     *plugin);
+GtkWidget 	*vinagre_plugin_get_connect_widget	(VinagrePlugin     *plugin,
+							 VinagreConnection *initial_settings);
 
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):

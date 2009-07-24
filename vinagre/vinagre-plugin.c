@@ -112,6 +112,13 @@ is_configurable (VinagrePlugin *plugin)
 		create_configure_dialog);
 }
 
+static GtkWidget *
+default_get_connect_widget (VinagrePlugin     *plugin,
+			    VinagreConnection *initial_settings)
+{
+  return NULL;
+}
+
 static void
 vinagre_plugin_get_property (GObject    *object,
 			   guint       prop_id,
@@ -179,7 +186,7 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->new_connection_from_file = default_new_connection_from_file;
 	klass->get_mdns_service = default_get_protocol;
 	klass->new_tab = default_new_tab;
-	klass->get_connect_widget = create_configure_dialog;
+	klass->get_connect_widget = default_get_connect_widget;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -507,17 +514,19 @@ vinagre_plugin_new_tab (VinagrePlugin     *plugin,
 
 /**
  * vinagre_plugin_get_connect_widget
- * @plugin: a #VinagreTab
+ * @plugin: a #VinagrePlugin
+ * @initial_settings: a #VinagreConnection object, or NULL
  *
  *
  * Returns: a widget to be put inside connect dialog
  */
 GtkWidget *
-vinagre_plugin_get_connect_widget (VinagrePlugin *plugin)
+vinagre_plugin_get_connect_widget (VinagrePlugin     *plugin,
+				   VinagreConnection *initial_settings)
 {
   g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
 
-  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_connect_widget (plugin);
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_connect_widget (plugin, initial_settings);
 }
 
 /* vim: set ts=8: */
