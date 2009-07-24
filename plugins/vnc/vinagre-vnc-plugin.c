@@ -201,7 +201,7 @@ impl_new_tab (VinagrePlugin *plugin,
 }
 
 static GtkWidget *
-impl_get_connect_widget (VinagrePlugin *plugin)
+impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 {
   GtkWidget *box, *check, *label;
   GtkTable  *table;
@@ -220,10 +220,16 @@ impl_get_connect_widget (VinagrePlugin *plugin)
   check = gtk_check_button_new_with_mnemonic ("_View only");
   g_object_set_data (G_OBJECT (box), "view_only", check);
   gtk_table_attach_defaults (table, check, 1, 2, 0, 1);
+  if (VINAGRE_IS_VNC_CONNECTION (conn))
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
+				  vinagre_vnc_connection_get_view_only (VINAGRE_VNC_CONNECTION (conn)));
 
   check = gtk_check_button_new_with_mnemonic ("_Scaling");
   g_object_set_data (G_OBJECT (box), "scaling", check);
   gtk_table_attach_defaults (table, check, 1, 2, 1, 2);
+  if (VINAGRE_IS_VNC_CONNECTION (conn))
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
+				  vinagre_vnc_connection_get_scaling (VINAGRE_VNC_CONNECTION (conn)));
 
   gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (table), TRUE, TRUE, 0);
   return box;
