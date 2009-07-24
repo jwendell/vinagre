@@ -25,6 +25,8 @@
 #include "vinagre-bookmarks-ui.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks-tree.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 static void
 control_save_button_visibility (GtkEntry *ed, GtkWidget *bt)
@@ -122,23 +124,25 @@ show_dialog_conn (VinagreBookmarks      *book,
   gchar             *str, *host, *error_str, *protocol;
   gint               port;
   GladeXML          *xml;
-  GtkWidget         *dialog, *host_entry, *name_entry;
-  GtkWidget         *fs_check, *sc_check, *vo_check;
-  GtkWidget         *box, *tree, *save_button;
+  GtkWidget         *dialog, *host_entry, *name_entry, *fs_check;
+  GtkWidget         *folder_box, *tree, *save_button, *plugin_box;
+  GtkWidget         *plugin_options, *protocol_label;
   VinagreConnection *conn;
   const gchar       *name;
+  VinagrePlugin     *plugin;
+  gchar             **props;
 
   xml = glade_xml_new (vinagre_utils_get_glade_filename (),
 		       "bookmarks_add_edit_conn_dialog",
 		       NULL);
-  dialog     = glade_xml_get_widget (xml, "bookmarks_add_edit_conn_dialog");
-  name_entry = glade_xml_get_widget (xml, "edit_bookmark_name_entry");
-  host_entry = glade_xml_get_widget (xml, "edit_bookmark_host_entry");
-  fs_check   = glade_xml_get_widget (xml, "edit_fullscreen_check");
-  sc_check   = glade_xml_get_widget (xml, "edit_scaling_check");
-  vo_check   = glade_xml_get_widget (xml, "edit_viewonly_check");
-  box        = glade_xml_get_widget (xml, "folder_box");
-  save_button= glade_xml_get_widget (xml, "save_button");
+  dialog         = glade_xml_get_widget (xml, "bookmarks_add_edit_conn_dialog");
+  name_entry     = glade_xml_get_widget (xml, "edit_bookmark_name_entry");
+  host_entry     = glade_xml_get_widget (xml, "edit_bookmark_host_entry");
+  fs_check       = glade_xml_get_widget (xml, "fullscreen_check");
+  folder_box     = glade_xml_get_widget (xml, "folder_box");
+  plugin_box     = glade_xml_get_widget (xml, "plugin_options_vbox");
+  save_button    = glade_xml_get_widget (xml, "save_button");
+  protocol_label = glade_xml_get_widget (xml, "protocol_label");
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
   conn = vinagre_bookmarks_entry_get_conn (entry);
@@ -146,27 +150,34 @@ show_dialog_conn (VinagreBookmarks      *book,
   str = vinagre_connection_get_best_name (conn);
   gtk_entry_set_text (GTK_ENTRY (name_entry), str);
   gtk_editable_set_position (GTK_EDITABLE (name_entry), -1);
+  g_signal_connect (name_entry, "changed", G_CALLBACK (control_save_button_visibility), save_button);
   g_free (str);
 
   str = vinagre_connection_get_string_rep (conn, FALSE);
   gtk_entry_set_text (GTK_ENTRY (host_entry), str);
   g_free (str);
 
-/*
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fs_check),
 				vinagre_connection_get_fullscreen (conn));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sc_check),
-				vinagre_connection_get_scaling (conn));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (vo_check),
-				vinagre_connection_get_view_only (conn));
-*/
 
-  g_signal_connect (name_entry, "changed", G_CALLBACK (control_save_button_visibility), save_button);
+  plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+							  vinagre_connection_get_protocol (conn));
+  plugin_options = vinagre_plugin_get_connect_widget (plugin, conn);
+  if (plugin_options)
+    gtk_box_pack_start (GTK_BOX (plugin_box), plugin_options, TRUE, TRUE, 0);
+  else
+    gtk_widget_hide (plugin_box);
+
+  props = vinagre_plugin_get_public_description (plugin);
+  str = g_strdup_printf (_("<small>(Protocol: <i>%s</i>)</small>"), props[0]);
+  gtk_label_set_markup (GTK_LABEL (protocol_label), str);
+  g_free (str);
+  g_strfreev (props);
 
   tree = vinagre_bookmarks_tree_new ();
   vinagre_bookmarks_tree_select_entry  (VINAGRE_BOOKMARKS_TREE (tree),
 					vinagre_bookmarks_entry_get_parent (entry));
-  gtk_box_pack_end (GTK_BOX (box), tree, TRUE, TRUE, 0);
+  gtk_box_pack_end (GTK_BOX (folder_box), tree, TRUE, TRUE, 0);
 
   gtk_widget_show_all (dialog);
 
@@ -190,7 +201,7 @@ show_dialog_conn (VinagreBookmarks      *book,
 						      name);
       if (existing_entry && existing_entry != entry)
 	{
-	  gchar *str = g_strdup_printf (_("The name \"%s\" is already used in this folder. Please use a different name."), name);
+	  str = g_strdup_printf (_("The name \"%s\" is already used in this folder. Please use a different name."), name);
 	  vinagre_utils_show_error (_("Invalid name for this item"),
 				    str,
 				    GTK_WINDOW (dialog));
@@ -214,17 +225,18 @@ show_dialog_conn (VinagreBookmarks      *book,
       break;
     }
 
-  vinagre_connection_set_name (conn, name);
-  vinagre_connection_set_host (conn, host);
-  vinagre_connection_set_port (conn, port);
-/*
-  vinagre_connection_set_view_only  (conn,
-				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (vo_check)));
-  vinagre_connection_set_scaling    (conn,
-				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (sc_check)));
-*/
-  vinagre_connection_set_fullscreen (conn,
-				     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (fs_check)));
+  g_object_set (conn,
+		"name", name,
+		"host", host,
+		"port", port,
+		"fullscreen", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (fs_check)),
+		NULL);
+
+  if (plugin_options)
+    vinagre_connection_parse_options_widget (conn, plugin_options);
+
+  g_free (protocol);
+  g_free (host);
 
   if (!is_add)
     {
