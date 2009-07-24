@@ -159,6 +159,7 @@ drag_data_get_handl (GtkWidget *widget,
 	name = vinagre_connection_get_best_name (conn);
 	data = g_strdup_printf ("%s||%s", name, uri);
 
+	/*FIXME: Set other properties of the connection*/
 	gtk_selection_data_set (selection_data,
 				selection_data->target,
 				8,
