@@ -2,7 +2,7 @@
  * vinagre-utils.c
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -427,10 +427,10 @@ vinagre_utils_help_about (GtkWindow *window)
   };
 
   static const gchar copyright[] = \
-	"Copyright \xc2\xa9 2007 Jonh Wendell";
+	"Copyright \xc2\xa9 2007-2009 Jonh Wendell";
 
   static const gchar comments[] = \
-	N_("Vinagre is a VNC client for the GNOME Desktop");
+	N_("Vinagre is a remote desktop viewer for the GNOME Desktop");
 
   static const char *license[] = {
 	N_("Vinagre is free software; you can redistribute it and/or modify "
