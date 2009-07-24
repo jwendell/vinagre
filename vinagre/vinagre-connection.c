@@ -598,14 +598,19 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolea
 				     port);
   if (!conn)
     {
-      plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
-				    protocol);
+      plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+							      protocol);
+      if (!plugin)
+	goto finalize;
+
       conn = vinagre_plugin_new_connection (plugin);
       vinagre_connection_set_host (conn, host);
       vinagre_connection_set_port (conn, port);
     }
 
+finalize:
   g_free (host);
+  g_free (protocol);
   return conn;
 }
 
