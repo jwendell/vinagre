@@ -677,6 +677,7 @@ drag_data_received_handl (GtkWidget *widget,
 	  vinagre_utils_show_error (NULL,
 				    error ? error : _("Unknown error"),
 				    GTK_WINDOW (fav->priv->window));
+	  g_free (error);
 	  return;
 	}
 
