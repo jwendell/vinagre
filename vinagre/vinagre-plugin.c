@@ -121,6 +121,12 @@ default_get_connect_widget (VinagrePlugin     *plugin,
   return NULL;
 }
 
+static GtkFileFilter *
+default_get_file_filter (VinagrePlugin *plugin)
+{
+  return NULL;
+}
+
 static void
 vinagre_plugin_get_property (GObject    *object,
 			   guint       prop_id,
@@ -189,6 +195,7 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->get_mdns_service = default_get_protocol;
 	klass->new_tab = default_new_tab;
 	klass->get_connect_widget = default_get_connect_widget;
+	klass->get_file_filter = default_get_file_filter;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -529,6 +536,21 @@ vinagre_plugin_get_connect_widget (VinagrePlugin     *plugin,
   g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
 
   return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_connect_widget (plugin, initial_settings);
+}
+
+/**
+ * vinagre_plugin_get_file_filter
+ * @plugin: a #VinagrePlugin
+ *
+ *
+ * Returns: a filter to be used at Open File dialog
+ */
+GtkFileFilter *
+vinagre_plugin_get_file_filter (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_file_filter (plugin);
 }
 
 /* vim: set ts=8: */

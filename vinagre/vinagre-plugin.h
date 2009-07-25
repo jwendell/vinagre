@@ -92,6 +92,8 @@ struct _VinagrePluginClass
   GtkWidget 	*(*get_connect_widget)		(VinagrePlugin     *plugin,
 						 VinagreConnection *initial_settings);
 
+  GtkFileFilter	*(*get_file_filter)		(VinagrePlugin     *plugin);
+
   /* Plugins should not override this, it's handled automatically by
      the VinagrePluginClass */
   gboolean 	(*is_configurable)		(VinagrePlugin *plugin);
@@ -139,6 +141,8 @@ GtkWidget 	*vinagre_plugin_new_tab			(VinagrePlugin     *plugin,
 
 GtkWidget 	*vinagre_plugin_get_connect_widget	(VinagrePlugin     *plugin,
 							 VinagreConnection *initial_settings);
+
+GtkFileFilter 	*vinagre_plugin_get_file_filter		(VinagrePlugin     *plugin);
 
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):
