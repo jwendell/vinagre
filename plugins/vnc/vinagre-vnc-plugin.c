@@ -241,6 +241,19 @@ impl_get_default_port (VinagrePlugin *plugin)
   return 5900;
 }
 
+static GtkFileFilter *
+impl_get_file_filter (VinagrePlugin *plugin)
+{
+  GtkFileFilter *filter;
+
+  filter = gtk_file_filter_new ();
+  /* Translators: this is a pattern to open *.vnc files in a open dialog. */
+  gtk_file_filter_set_name (filter, _("VNC Files"));
+  gtk_file_filter_add_pattern (filter, "*.vnc");
+
+  return filter;
+}
+
 static void
 vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
 {
@@ -275,5 +288,6 @@ vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
   plugin_class->new_tab = impl_new_tab;
   plugin_class->get_connect_widget = impl_get_connect_widget;
   plugin_class->get_default_port = impl_get_default_port;
+  plugin_class->get_file_filter = impl_get_file_filter;
 }
 /* vim: set ts=8: */
