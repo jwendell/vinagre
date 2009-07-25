@@ -982,7 +982,7 @@ vinagre_vnc_tab_get_original_width (VinagreVncTab *tab)
     return -1;
 }
 
-/*
+
 typedef struct _VinagrePrefSize {
   gint width, height;
   gulong sig_id;
@@ -1012,13 +1012,14 @@ cb_set_preferred_size (GtkWidget *widget, GtkRequisition *req,
   g_idle_add (cb_unset_size, widget);
 }
 
-void
-vinagre_widget_set_preferred_size (GtkWidget *widget, gint width,
-				 gint height)
+static void
+vinagre_widget_set_preferred_size (GtkWidget *widget,
+				   gint      width,
+				   gint      height)
 {
   VinagrePrefSize *size = g_new (VinagrePrefSize, 1);
 
-  size->width = width;
+  size->width  = width;
   size->height = height;
   size->sig_id = g_signal_connect (widget, "size-request",
 				   G_CALLBACK (cb_set_preferred_size),
@@ -1026,20 +1027,21 @@ vinagre_widget_set_preferred_size (GtkWidget *widget, gint width,
 
   gtk_widget_queue_resize (widget);
 }
-*/
+
 
 void
 vinagre_vnc_tab_original_size (VinagreVncTab *tab)
 {
-/*
+  GtkWindow *window;
   g_return_if_fail (VINAGRE_IS_VNC_TAB (tab));
 
-  gtk_window_unmaximize (GTK_WINDOW (tab->priv->window));
-  gtk_window_resize (GTK_WINDOW (tab->priv->window), 1, 1);
+  window = GTK_WINDOW (vinagre_tab_get_window (VINAGRE_TAB (tab)));
+
+  gtk_window_unmaximize (window);
+  gtk_window_resize (window, 1, 1);
   vinagre_widget_set_preferred_size (GTK_WIDGET (tab),
 				     vinagre_vnc_tab_get_original_width (tab),
 				     vinagre_vnc_tab_get_original_height (tab));
-*/
 }
 
 /* vim: set ts=8: */
