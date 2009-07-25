@@ -39,6 +39,11 @@
 #include "vinagre-window-private.h"
 #include "vinagre-prefs.h"
 #include "vinagre-plugin-manager.h"
+#include "vinagre-plugins-engine.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugin-info.h"
+#include "vinagre-plugin-info-priv.h"
+
 void
 vinagre_cmd_direct_connect (VinagreConnection *conn,
 			    VinagreWindow     *window)
@@ -108,7 +113,8 @@ vinagre_cmd_machine_open (GtkAction     *action,
   GSList            *files, *l;
   gchar             *uri;
   gchar             *error = NULL;
-  GSList            *errors = NULL;
+  GSList            *plugins, *errors = NULL;
+  gint              i;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
@@ -122,10 +128,27 @@ vinagre_cmd_machine_open (GtkAction     *action,
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), FALSE);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), TRUE);
 
-  filter = gtk_file_filter_new ();
-  gtk_file_filter_set_name (filter, _("Supported formats"));
-  gtk_file_filter_add_pattern (filter, "*.vnc");
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+  plugins = (GSList *) vinagre_plugins_engine_get_plugin_list (vinagre_plugins_engine_get_default ());
+  i = 0;
+  for (; plugins; plugins = plugins->next)
+    {
+      VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (plugins->data);
+
+      if (!vinagre_plugin_info_is_active (info))
+	continue;
+
+      filter = vinagre_plugin_get_file_filter (info->plugin);
+      if (filter)
+	{
+	  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+	  i++;
+	}
+    }
+  if (i == 0)
+    {
+      vinagre_utils_show_error (_("There are none supported files"), _("None of the active plugins offer a supported file to be open. Activate some plugins and try again."), GTK_WINDOW (window));
+      goto finalize;
+    }
 
   if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
     {
@@ -165,6 +188,7 @@ vinagre_cmd_machine_open (GtkAction     *action,
       g_slist_free (errors);
     }
 
+finalize:
   gtk_widget_destroy (dialog);
 }
 
