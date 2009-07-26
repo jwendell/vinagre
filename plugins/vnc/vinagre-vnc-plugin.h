@@ -30,12 +30,12 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define VINAGRE_TYPE_SORT_PLUGIN		(vinagre_vnc_plugin_get_type ())
-#define VINAGRE_SORT_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), VINAGRE_TYPE_SORT_PLUGIN, VinagreVncPlugin))
-#define VINAGRE_SORT_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), VINAGRE_TYPE_SORT_PLUGIN, VinagreVncPluginClass))
-#define VINAGRE_IS_SORT_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), VINAGRE_TYPE_SORT_PLUGIN))
-#define VINAGRE_IS_SORT_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), VINAGRE_TYPE_SORT_PLUGIN))
-#define VINAGRE_SORT_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), VINAGRE_TYPE_SORT_PLUGIN, VinagreVncPluginClass))
+#define VINAGRE_TYPE_VNC_PLUGIN                 (vinagre_vnc_plugin_get_type ())
+#define VINAGRE_VNC_PLUGIN(o)                   (G_TYPE_CHECK_INSTANCE_CAST ((o), VINAGRE_TYPE_VNC_PLUGIN, VinagreVncPlugin))
+#define VINAGRE_VNC_PLUGIN_CLASS(k)             (G_TYPE_CHECK_CLASS_CAST((k), VINAGRE_TYPE_VNC_PLUGIN, VinagreVncPluginClass))
+#define VINAGRE_IS_VNC_PLUGIN(o)                (G_TYPE_CHECK_INSTANCE_TYPE ((o), VINAGRE_TYPE_VNC_PLUGIN))
+#define VINAGRE_IS_VNC_PLUGIN_CLASS(k)          (G_TYPE_CHECK_CLASS_TYPE ((k), VINAGRE_TYPE_VNC_PLUGIN))
+#define VINAGRE_VNC_PLUGIN_GET_CLASS(o)         (G_TYPE_INSTANCE_GET_CLASS ((o), VINAGRE_TYPE_VNC_PLUGIN, VinagreVncPluginClass))
 
 /* Private structure type */
 typedef struct _VinagreVncPluginPrivate	VinagreVncPluginPrivate;
