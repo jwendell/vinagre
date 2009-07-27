@@ -48,6 +48,7 @@ INST_H_FILES = \
   vinagre-ui.h \
   vinagre-utils.h \
   vinagre-window.h \
+  vinagre-dnd.h \
   $(NULL)
 
 headerdir = $(prefix)/include/vinagre-@VINAGRE_API_VERSION@/vinagre

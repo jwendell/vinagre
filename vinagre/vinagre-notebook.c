@@ -26,6 +26,7 @@
 
 #include "vinagre-notebook.h"
 #include "vinagre-utils.h"
+#include "vinagre-dnd.h"
 #include "vinagre-prefs.h"
 
 #define VINAGRE_NOTEBOOK_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_NOTEBOOK, VinagreNotebookPrivate))
@@ -520,7 +521,7 @@ build_tab_label (VinagreNotebook *nb,
   gtk_drag_source_set ( GTK_WIDGET (hbox),
 			GDK_BUTTON1_MASK,
 			vinagre_target_list,
-			vinagre_n_targets,
+			G_N_ELEMENTS (vinagre_target_list),
 			GDK_ACTION_COPY );
   g_signal_connect (hbox,
 		    "drag-data-get",

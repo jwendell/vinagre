@@ -25,6 +25,7 @@
 #include <glib/gi18n.h>
 #include "vinagre-fav.h"
 #include "vinagre-utils.h"
+#include "vinagre-dnd.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
@@ -730,7 +731,7 @@ vinagre_fav_init (VinagreFav *fav)
   gtk_drag_dest_set (fav->priv->tree,
 		     GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT,
 		     vinagre_target_list,
-		     vinagre_n_targets,
+		     G_N_ELEMENTS (vinagre_target_list),
 		     GDK_ACTION_COPY);
 
   g_signal_connect (fav->priv->tree,

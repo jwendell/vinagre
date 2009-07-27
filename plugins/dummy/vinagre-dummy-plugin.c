@@ -27,7 +27,6 @@
 #include <gmodule.h>
 
 #include <vinagre/vinagre-debug.h>
-#include <vinagre/vinagre-utils.h>
 
 #include "vinagre-dummy-plugin.h"
 

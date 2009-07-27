@@ -22,10 +22,6 @@
 #include <config.h>
 #endif
 
-#include "vinagre-vnc-plugin.h"
-#include "vinagre-vnc-connection.h"
-#include "vinagre-vnc-tab.h"
-
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <gmodule.h>
@@ -33,6 +29,10 @@
 
 #include <vinagre/vinagre-debug.h>
 #include <vinagre/vinagre-utils.h>
+
+#include "vinagre-vnc-plugin.h"
+#include "vinagre-vnc-connection.h"
+#include "vinagre-vnc-tab.h"
 
 #define VINAGRE_VNC_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_VNC_PLUGIN, VinagreVncPluginPrivate))
 
