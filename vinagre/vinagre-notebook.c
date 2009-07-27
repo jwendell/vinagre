@@ -425,13 +425,6 @@ tab_auth_failed_cb (VinagreTab *tab, const gchar *msg, VinagreNotebook *nb)
   g_string_free (message, TRUE);
   g_free (name);
 
-  // TODO: Remover se der pau
-  //if (tab->priv->keyring_item_id > 0)
-  //  {
-   //   gnome_keyring_item_delete_sync (NULL, tab->priv->keyring_item_id);
-   //   tab->priv->keyring_item_id = 0;
-  //  }
-
   vinagre_notebook_close_tab (nb, tab);
 }
 
