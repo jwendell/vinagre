@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-06-04 15:04+0000\n"
-"PO-Revision-Date: 2009-06-24 23:05+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2009-07-27 12:15+0000\n"
+"PO-Revision-Date: 2009-07-27 21:57+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,11 +96,11 @@ msgstr "_Nimi:"
 msgid "_Password:"
 msgstr "_Parool:"
 
+msgid "_Protocol:"
+msgstr "_Protokoll:"
+
 msgid "_Remember this credential"
 msgstr "See _tõend jäetakse meelde"
-
-msgid "_Scaling"
-msgstr "_Skaleerimine"
 
 msgid "_Show menu shortcuts"
 msgstr "_Menüüs näidatakse kiirklahve"
@@ -108,12 +108,18 @@ msgstr "_Menüüs näidatakse kiirklahve"
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
 
-msgid "_View only"
-msgstr "_Kirjutuskaitsega"
-
 #. Tooltip for host entry in connect dialog
 msgid "host or host:display or host::port"
 msgstr "host või host:kuva või host::port"
+
+msgid "Active plugins"
+msgstr "Aktiivsed pluginad"
+
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
 
 msgid "Maximum number of history items in connect dialog"
 msgstr "Ühendusdialoogi ajalookirjete suurim hulk"
@@ -159,6 +165,118 @@ msgstr "Kaugtöölaua (VNC) fail"
 msgid "Remote Desktop Connection"
 msgstr "Kaugtöölaua ühendus"
 
+msgid "Dummy"
+msgstr ""
+
+msgid "Dummy Plugin"
+msgstr ""
+
+msgid "<b>DUMMY Options</b>"
+msgstr ""
+
+#. Translators: this is a pattern to open *.dummy files in a open dialog.
+msgid "DUMMY Files"
+msgstr ""
+
+#, c-format
+msgid ""
+"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
+msgstr ""
+" 'shared' lipul on sobimatu väärtus: %d. See peaks olema 0 või 1. Lippu "
+"eiratakse."
+
+msgid "Could not parse the file."
+msgstr "Faili pole võimalik töödelda."
+
+msgid "The file is not a VNC one: Missing the group \"connection\"."
+msgstr ""
+
+msgid "The file is not a VNC one: Missing the key \"host\"."
+msgstr ""
+
+msgid "<b>VNC Options</b>"
+msgstr "<b>VNC Valikud</b>"
+
+#. Translators: this is a pattern to open *.vnc files in a open dialog.
+msgid "VNC Files"
+msgstr "VNC failid"
+
+msgid "Desktop Name:"
+msgstr "Töölaua nimi:"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid "Dimensions:"
+msgstr "Mõõtmed:"
+
+msgid "Error connecting to host."
+msgstr "Viga hostiga ühendumisel."
+
+#, c-format
+msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgstr "Host <i>%s</i> ei toeta kasutatud autentimismeetodit. (%u)"
+
+msgid "Authentication unsupported"
+msgstr "Toetamata autentimismeetod"
+
+msgid "Authentication error"
+msgstr "Viga autentimisel"
+
+msgid "A username is required in order to access this machine."
+msgstr "Ligipääsuks sellele masinale on vaja kasutajanime."
+
+msgid "A password is required in order to access this machine."
+msgstr "Sellele masinale ligipääsuks on vaja parooli."
+
+msgid "S_caling"
+msgstr "_Skaleerimine"
+
+msgid "Fits the remote screen into the current window size"
+msgstr "Kaugekraani sobitamine käesolevasse aknasse"
+
+msgid "_View only"
+msgstr "_Kirjutuskaitsega"
+
+msgid "Does not send mouse and keyboard events"
+msgstr "Hiire- ja klaviatuurisündmuseid ei saadeta"
+
+msgid "_Original size"
+msgstr "_Algne suurus"
+
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "Akna suurus sobitatakse kaugtöölaua suurusega"
+
+msgid "Send Ctrl-Alt-Del"
+msgstr "Saada Ctrl+Alt+Del"
+
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "Kaugmasinale Ctrl+Alt+Del saatmine"
+
+msgid "Scaling"
+msgstr "Skaleerimine"
+
+msgid "Read only"
+msgstr "Kirjutuskaitsega"
+
+msgid ""
+"Scaling is not supported on this installation.\n"
+"\n"
+"Read the README file (shipped with Vinagre) in order to know how to enable "
+"this feature."
+msgstr ""
+"Selles paigalduses ei ole skaleerimine toetatud.\n"
+"\n"
+"Selle võimaluse sisselülitamist on kirjeldatud README failis (tuleb "
+"Vinagre'ga kaasa)."
+
+#. vim: set ts=8:
+msgid "VNC"
+msgstr "VNC"
+
+msgid "VNC support"
+msgstr "VNC tugi"
+
 msgid "A menu to quickly access remote machines"
 msgstr "Kaugmasinaga kiirelt ühenduse võtmise menüü"
 
@@ -173,6 +291,10 @@ msgstr "Kaugtöölaudade vaataja avamine"
 
 msgid "Access your bookmarks"
 msgstr "Ligipääs järjehoidjatele"
+
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "%s-protokoll pole toetatud."
 
 #, c-format
 msgid "Error while initializing bookmarks: %s"
@@ -216,6 +338,9 @@ msgstr ""
 msgid "Error while migrating bookmarks: %s"
 msgstr "Viga järjehoidjate vormingu uuendamisel: %s"
 
+msgid "Error while migrating bookmarks: VNC plugin is not activated"
+msgstr "Viga järjehoidjate migreerimisel: VNC plugin pole aktiveeritud"
+
 msgid "Failed to create the directory"
 msgstr "Kausta loomine nurjus"
 
@@ -251,6 +376,10 @@ msgid "Invalid name for this item"
 msgstr "Kirje nimi on sobimatu"
 
 #, c-format
+msgid "<small>(Protocol: <i>%s</i>)</small>"
+msgstr "<small>(Protokoll: <i>%s</i>)</small>"
+
+#, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Kas eemaldada <i>%s</i> järjehoidjate hulgast?"
 
@@ -272,33 +401,37 @@ msgstr "Uus kaust"
 msgid "Choose the file"
 msgstr "Faili valimine"
 
-msgid "Supported formats"
-msgstr "Toetatud vormingud"
+msgid "There are none supported files"
+msgstr ""
+
+msgid ""
+"None of the active plugins offer a supported file to be open. Activate some "
+"plugins and try again."
+msgstr ""
 
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Järgnevat faili pole võimalik avada:"
 msgstr[1] "Järgnevaid faile pole võimalik avada:"
 
+msgid "Plugins Manager"
+msgstr "Pluginahaldur"
+
+msgid "Could not get the active protocol in the protocol list."
+msgstr ""
+
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Viga ajaloofaili salvestamisel: %s"
 
-msgid "Choose a VNC Server"
-msgstr "VNC-serveri valimine"
-
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "%s-protokoll pole toetatud."
+msgid "Choose a Remote Desktop"
+msgstr "Kaugtöölaua valimine"
 
 msgid "Could not open the file."
 msgstr "Faili pole võimalik avada."
 
-msgid "Could not parse the file."
-msgstr "Faili pole võimalik töödelda."
-
-msgid "Could not find the host address in the file."
-msgstr "Failist ei leitud hosti aadressi."
+msgid "The file was not recognized by any of the plugins."
+msgstr ""
 
 msgid "Invalid operation"
 msgstr "Sobimatu tegevus"
@@ -308,12 +441,6 @@ msgstr "Aknasse lohistatud andmed ei ole sobivad."
 
 msgid "Hosts nearby"
 msgstr "Lähedalasuvad hostid"
-
-msgid "Opens a .vnc file"
-msgstr ".vnc faili avamine"
-
-msgid "filename"
-msgstr "failinimi"
 
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "Olemasolevale vinagre instantsile uue ülataseme akna loomine"
@@ -327,8 +454,8 @@ msgstr[0] "Leidis aset järgmine viga:"
 msgstr[1] "Leidsid aset järgmised vead:"
 
 #. Setup command line options
-msgid "- VNC Client for GNOME"
-msgstr " - VNC klient GNOME jaoks"
+msgid "- Remote Desktop Viewer"
+msgstr "- Kaugtöölaudade vaataja"
 
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
@@ -339,8 +466,20 @@ msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Tõrge avahi hostinime lahendamisel: %s\n"
 
 #, c-format
+msgid "Plugin %s has already registered a browser for service %s."
+msgstr ""
+
+#, c-format
+msgid "Failed to add mDNS browser for service %s."
+msgstr "Tõrge mDNS-i sirvija lisamisel teenusele %s."
+
+#, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Tõrge hostide sirvimisel: %s\n"
+
+#, c-format
+msgid "Failed to initialize mDNS browser: %s\n"
+msgstr "Tõrge mDNS-i sirvija lähtestamisel: %s\n"
 
 #, c-format
 msgid "Connection to host <i>%s</i> was closed."
@@ -362,6 +501,30 @@ msgstr "Ühendumine..."
 msgid "Close connection"
 msgstr "Ühenduse sulgemine"
 
+msgid "Plugin"
+msgstr "Plugin"
+
+msgid "Enabled"
+msgstr "Lubatud"
+
+msgid "C_onfigure"
+msgstr "_Seadista"
+
+msgid "A_ctivate"
+msgstr "_Aktiveeri"
+
+msgid "Ac_tivate All"
+msgstr "Aktiveeri _kõik"
+
+msgid "_Deactivate All"
+msgstr "_Deaktiveeri kõik"
+
+msgid "_About Plugin"
+msgstr "_Pluginast lähemalt"
+
+msgid "C_onfigure Plugin"
+msgstr "_Seadista pluginat"
+
 msgid "Cannot initialize preferences manager."
 msgstr "Eelistuste haldurit pole võimalik lähtestada."
 
@@ -375,7 +538,6 @@ msgstr "Minimeeri aken"
 msgid "Take screenshot"
 msgstr "Võta ekraanitõmmis"
 
-#| msgid "Error saving the credential on the keyring."
 msgid "Error saving the credentials on the keyring."
 msgstr "Viga tõendite salvestamisel võtmerõngasse."
 
@@ -388,6 +550,16 @@ msgstr "Masina %s ekraanitõmmis"
 
 msgid "Save Screenshot"
 msgstr "Ekraanitõmmise salvestamine"
+
+msgid "Supported formats"
+msgstr "Toetatud vormingud"
+
+#, c-format
+msgid "%s wants to share his desktop with you."
+msgstr "%s soovib oma töölauda sinuga jagada."
+
+msgid "Desktop sharing invitation"
+msgstr "Töölaua jagamise kutse"
 
 #. Toplevel
 msgid "_Machine"
@@ -413,6 +585,12 @@ msgstr "Programmist väljumine"
 
 msgid "Edit the application preferences"
 msgstr "Redigeeri rakenduse eelistusi"
+
+msgid "_Plugins"
+msgstr "_Pluginad"
+
+msgid "Select plugins"
+msgstr "Pluginate valimine"
 
 #. Bookmarks menu
 msgid "_Open bookmark"
@@ -492,8 +670,8 @@ msgstr "Käesoleva masina vaatamine täisekraanil"
 msgid "An error has occurred:"
 msgstr "Esines järgmine viga:"
 
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "Vinagre on GNOME töölaua VNC-klient"
+msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
+msgstr "Vinagre on kaugtöölaudade vaataja GNOME töölauale"
 
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
@@ -534,82 +712,6 @@ msgid "Vinagre Website"
 msgstr "Vinagre veebisait"
 
 #, c-format
-msgid ""
-"Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
-msgstr ""
-" 'shared' lipul on sobimatu väärtus: %d. See peaks olema 0 või 1. Lippu "
-"eiratakse."
-
-msgid "Desktop Name:"
-msgstr "Töölaua nimi:"
-
-msgid "Port:"
-msgstr "Port:"
-
-msgid "Dimensions:"
-msgstr "Mõõtmed:"
-
-msgid "Error connecting to host."
-msgstr "Viga hostiga ühendumisel."
-
-#, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "Host <i>%s</i> ei toeta kasutatud autentimismeetodit. (%u)"
-
-msgid "Authentication unsupported"
-msgstr "Toetamata autentimismeetod"
-
-msgid "Authentication error"
-msgstr "Viga autentimisel"
-
-msgid "A username is required in order to access this machine."
-msgstr "Ligipääsuks sellele masinale on vaja kasutajanime."
-
-msgid "A password is required in order to access this machine."
-msgstr "Sellele masinale ligipääsuks on vaja parooli."
-
-msgid "S_caling"
-msgstr "_Skaleerimine"
-
-#| msgid "Fit the remote screen into the current window size"
-msgid "Fits the remote screen into the current window size"
-msgstr "Kaugekraani sobitamine käesolevasse aknasse"
-
-#| msgid "Disable mouse and keyboard"
-msgid "Does not send mouse and keyboard events"
-msgstr "Hiire- ja klaviatuurisündmuseid ei saadeta"
-
-msgid "_Original size"
-msgstr "_Algne suurus"
-
-msgid "Adjusts the window to the remote desktop's size"
-msgstr "Akna suurus sobitatakse kaugtöölaua suurusega"
-
-msgid "Send Ctrl-Alt-Del"
-msgstr "Saada Ctrl+Alt+Del"
-
-#| msgid "Send Ctrl+Alt+Del to active connection"
-msgid "Sends Ctrl+Alt+Del to the remote machine"
-msgstr "Kaugmasinale Ctrl+Alt+Del saatmine"
-
-msgid "Scaling"
-msgstr "Skaleerimine"
-
-msgid "Read only"
-msgstr "Kirjutuskaitsega"
-
-msgid ""
-"Scaling is not supported on this installation.\n"
-"\n"
-"Read the README file (shipped with Vinagre) in order to know how to enable "
-"this feature."
-msgstr ""
-"Selles paigalduses ei ole skaleerimine toetatud.\n"
-"\n"
-"Selle võimaluse sisselülitamist on kirjeldatud README failis (tuleb "
-"Vinagre'ga kaasa)."
-
-#, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "Faili vinagre-ui.xml pole võimalik ühendada: %s"
 
@@ -620,3 +722,15 @@ msgstr "_Hiljutised ühendused"
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d avamine"
+
+#~ msgid "_Scaling"
+#~ msgstr "_Skaleerimine"
+
+#~ msgid "Choose a VNC Server"
+#~ msgstr "VNC-serveri valimine"
+
+#~ msgid "Could not find the host address in the file."
+#~ msgstr "Failist ei leitud hosti aadressi."
+
+#~ msgid "- VNC Client for GNOME"
+#~ msgstr " - VNC klient GNOME jaoks"
