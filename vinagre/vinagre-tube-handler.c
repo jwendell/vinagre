@@ -34,6 +34,7 @@
 #include "vinagre-commands.h"
 #include "vinagre-tab.h"
 #include "vinagre-notebook.h"
+#include "vinagre-debug.h"
 
 #define MC_DBUS_SERVICE "org.freedesktop.Telepathy.MissionControl"
 #define MC_DBUS_SERVICE_PATH "/org/freedesktop/Telepathy/MissionControl"
@@ -75,7 +76,7 @@ vinagre_tube_handler_dispose (GObject *object)
 {
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE(object);
 
-  g_debug ("-- Destruction of a Tube handler --\n");
+  vinagre_debug_message (DEBUG_TUBE, "-- Destruction of a Tube handler --\n");
 
   if (priv->channel != NULL)
     {
@@ -180,7 +181,7 @@ vinagre_tube_handler_tab_disconnected_cb (GtkNotebook *notebook,
 
   if (priv->tab == tab)
     {
-      g_debug ("Tab has been destroyed. Closing the tube handler.");
+      vinagre_debug_message (DEBUG_TUBE,"Tab has been destroyed. Closing the tube handler.");
       vinagre_tube_handler_fire_disconnected (self);
     }
 }
@@ -194,7 +195,7 @@ vinagre_tube_handler_tube_invalidated (TpProxy *channel,
 {
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
 
-  g_debug ("Tube is invalidated : %s\n", message);
+  vinagre_debug_message (DEBUG_TUBE,"Tube is invalidated : %s\n", message);
 
   g_object_unref (priv->channel);
   priv->channel = NULL;
@@ -466,7 +467,7 @@ vinagre_tube_handler_constructed (GObject *object)
   TpContactFeature features[] = { TP_CONTACT_FEATURE_ALIAS,
       TP_CONTACT_FEATURE_AVATAR_TOKEN };
 
-  g_debug (" -- New Tube handler --\n");
+  vinagre_debug_message (DEBUG_TUBE," -- New Tube handler --\n");
 
   connection = tp_channel_borrow_connection (priv->channel);
 

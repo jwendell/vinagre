@@ -32,6 +32,7 @@
 
 #include "vinagre-tubes-manager.h"
 #include "vinagre-tube-handler.h"
+#include "vinagre-debug.h"
 
 #define BUS_NAME "org.gnome.Empathy.StreamTubeHandler.x_vnc"
 #define OBJECT_PATH "/org/gnome/Empathy/StreamTubeHandler/x_vnc"
@@ -171,7 +172,7 @@ vinagre_tubes_manager_channel_ready_cb (TpChannel *channel,
 
   if (error != NULL)
     {
-      g_debug ("channel has been invalidated: %s", error->message);
+      vinagre_debug_message (DEBUG_TUBE,"channel has been invalidated: %s", error->message);
       vinagre_tubes_manager_tube_ready_destroy_notify (data);
       g_object_unref (channel);
       return;
@@ -197,7 +198,7 @@ vinagre_tubes_manager_connection_ready_cb (TpConnection *connection,
 
   if (error != NULL)
     {
-      g_debug ("connection has been invalidated: %s", error->message);
+      vinagre_debug_message (DEBUG_TUBE,"connection has been invalidated: %s", error->message);
       vinagre_tubes_manager_tube_ready_destroy_notify (data);
       g_object_unref (connection);
       return;
@@ -217,7 +218,7 @@ vinagre_tubes_manager_handle_tube_idle_cb (gpointer data)
   TpConnection *connection;
   static TpDBusDaemon *daemon = NULL;
 
-  g_debug ("New tube to be handled");
+  vinagre_debug_message (DEBUG_TUBE,"New tube to be handled");
 
   if (!daemon)
     daemon = tp_dbus_daemon_new (tp_get_bus ());
@@ -273,13 +274,13 @@ vinagre_tubes_manager_register_tube_handler (GObject *object)
       G_TYPE_STRING, BUS_NAME, G_TYPE_UINT, DBUS_NAME_FLAG_DO_NOT_QUEUE,
       G_TYPE_INVALID, G_TYPE_UINT, &result, G_TYPE_INVALID))
     {
-      g_debug ("Failed to request name: %s",
+      vinagre_debug_message (DEBUG_TUBE,"Failed to request name: %s",
           error ? error->message : "No error given");
       g_clear_error (&error);
       goto OUT;
     }
 
-  g_debug ("Creating tube handler %s object_path:%s\n", BUS_NAME,
+  vinagre_debug_message (DEBUG_TUBE,"Creating tube handler %s object_path:%s\n", BUS_NAME,
       OBJECT_PATH);
   dbus_g_connection_register_g_object (tp_get_bus (), OBJECT_PATH,
       G_OBJECT (object));
