@@ -1,7 +1,7 @@
 DIST_SUBDIRS =		\
-  dummy vnc
+  vnc
 
 SUBDIRS = 		\
-  dummy vnc
+  vnc
 
 -include $(top_srcdir)/git.mk
