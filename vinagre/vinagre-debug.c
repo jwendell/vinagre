@@ -2,7 +2,10 @@
  * vinagre-debug.c
  * This file is part of vinagre
  *
- * Copyright (C) 2009 Jorge Pereira <jorge@jorgepereira.com.br>
+ * Based on gedit code
+ * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi
+ * Copyright (C) 2002 - 2005 Paolo Maggi
  * 
  * vinagre-debug.c is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
