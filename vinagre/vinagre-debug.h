@@ -41,6 +41,7 @@ typedef enum {
 	VINAGRE_DEBUG_WINDOW   = 1 << 5,
 	VINAGRE_DEBUG_LOADER   = 1 << 6,
 	VINAGRE_DEBUG_APP      = 1 << 7,
+	VINAGRE_DEBUG_TUBE     = 1 << 8
 } VinagreDebugSection;
 
 
@@ -51,7 +52,8 @@ typedef enum {
 #define	DEBUG_UTILS	VINAGRE_DEBUG_UTILS,   __FILE__, __LINE__, G_STRFUNC
 #define	DEBUG_WINDOW	VINAGRE_DEBUG_WINDOW,  __FILE__, __LINE__, G_STRFUNC
 #define	DEBUG_LOADER	VINAGRE_DEBUG_LOADER,  __FILE__, __LINE__, G_STRFUNC
-#define	DEBUG_APP	VINAGRE_DEBUG_APP,  __FILE__, __LINE__, G_STRFUNC
+#define	DEBUG_APP	VINAGRE_DEBUG_APP,     __FILE__, __LINE__, G_STRFUNC
+#define	DEBUG_TUBE	VINAGRE_DEBUG_TUBE,    __FILE__, __LINE__, G_STRFUNC
 
 void vinagre_debug_init (void);
 

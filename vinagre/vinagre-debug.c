@@ -63,6 +63,8 @@ vinagre_debug_init ()
     debug = debug | VINAGRE_DEBUG_LOADER;
   if (g_getenv ("VINAGRE_DEBUG_APP") != NULL)
     debug = debug | VINAGRE_DEBUG_APP;
+  if (g_getenv ("VINAGRE_DEBUG_TUBE") != NULL)
+    debug = debug | VINAGRE_DEBUG_TUBE;
 
 out:		
 
