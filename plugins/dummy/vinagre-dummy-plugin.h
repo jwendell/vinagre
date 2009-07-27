@@ -63,7 +63,7 @@ struct _VinagreDummyPluginClass
 /*
  * Public methods
  */
-GType	vinagre_dummy_plugin_get_type		(void) G_GNUC_CONST;
+GType vinagre_dummy_plugin_get_type		(void) G_GNUC_CONST;
 
 /* All the plugins must implement this function */
 G_MODULE_EXPORT GType register_vinagre_plugin (GTypeModule *module);
@@ -72,3 +72,4 @@ G_END_DECLS
 
 #endif /* __VINAGRE_DUMMY_PLUGIN_H__ */
 /* vim: set ts=8: */
+
