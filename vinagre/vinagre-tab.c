@@ -24,7 +24,6 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <glade/glade.h>
 #include <gnome-keyring.h>
 
 #include "vinagre-tab.h"

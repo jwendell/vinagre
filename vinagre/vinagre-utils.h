@@ -43,7 +43,7 @@ void		vinagre_utils_show_many_errors		(const gchar *title,
 
 void		vinagre_utils_toggle_widget_visible	(GtkWidget *widget);
 
-const gchar	*vinagre_utils_get_glade_filename	(void);
+const gchar	*vinagre_utils_get_ui_filename		(void);
 const gchar	*vinagre_utils_get_ui_xml_filename	(void);
 
 gchar		*vinagre_utils_escape_underscores	(const gchar *text,

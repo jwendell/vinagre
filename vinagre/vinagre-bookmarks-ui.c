@@ -18,7 +18,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <glade/glade.h>
 #include <string.h>
 #include <glib/gi18n.h>
 
@@ -41,17 +40,22 @@ show_dialog_folder (VinagreBookmarks      *book,
 		    VinagreBookmarksEntry *entry,
 		    gboolean               is_add)
 {
-  GladeXML    *xml;
+  GtkBuilder  *xml;
   GtkWidget   *dialog, *box, *tree, *name_entry, *save_button;
   const gchar *name;
 
-  xml = glade_xml_new (vinagre_utils_get_glade_filename (),
-		       "bookmarks_add_edit_folder_dialog",
-		       NULL);
-  dialog     = glade_xml_get_widget (xml, "bookmarks_add_edit_folder_dialog");
-  name_entry = glade_xml_get_widget (xml, "edit_bookmark_folder_name_entry");
-  box        = glade_xml_get_widget (xml, "folder_box1");
-  save_button= glade_xml_get_widget (xml, "save_button");
+  GError* error = NULL;
+  xml = gtk_builder_new ();
+  if (!gtk_builder_add_from_file (xml, vinagre_utils_get_ui_filename (), &error))
+    {
+      g_warning (_("Couldn't load builder file: &s"), error->message);
+      g_error_free (error);
+    }
+
+  dialog     = GTK_WIDGET (gtk_builder_get_object (xml, "bookmarks_add_edit_folder_dialog"));
+  name_entry = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_folder_name_entry"));
+  box        = GTK_WIDGET (gtk_builder_get_object (xml, "folder_box1"));
+  save_button= GTK_WIDGET (gtk_builder_get_object (xml, "save_button"));
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
   gtk_entry_set_text (GTK_ENTRY (name_entry), vinagre_bookmarks_entry_get_name (entry));
@@ -123,7 +127,7 @@ show_dialog_conn (VinagreBookmarks      *book,
 {
   gchar             *str, *host, *error_str, *protocol;
   gint               port;
-  GladeXML          *xml;
+  GtkBuilder        *xml;
   GtkWidget         *dialog, *host_entry, *name_entry, *fs_check;
   GtkWidget         *folder_box, *tree, *save_button, *plugin_box;
   GtkWidget         *plugin_options, *protocol_label;
@@ -132,17 +136,22 @@ show_dialog_conn (VinagreBookmarks      *book,
   VinagrePlugin     *plugin;
   gchar             **props;
 
-  xml = glade_xml_new (vinagre_utils_get_glade_filename (),
-		       "bookmarks_add_edit_conn_dialog",
-		       NULL);
-  dialog         = glade_xml_get_widget (xml, "bookmarks_add_edit_conn_dialog");
-  name_entry     = glade_xml_get_widget (xml, "edit_bookmark_name_entry");
-  host_entry     = glade_xml_get_widget (xml, "edit_bookmark_host_entry");
-  fs_check       = glade_xml_get_widget (xml, "fullscreen_check");
-  folder_box     = glade_xml_get_widget (xml, "folder_box");
-  plugin_box     = glade_xml_get_widget (xml, "plugin_options_vbox");
-  save_button    = glade_xml_get_widget (xml, "save_button");
-  protocol_label = glade_xml_get_widget (xml, "protocol_label");
+  GError* error = NULL;
+  xml = gtk_builder_new ();
+  if (!gtk_builder_add_from_file (xml, vinagre_utils_get_ui_filename (), &error))
+    {
+      g_warning (_("Couldn't load builder file: &s"), error->message);
+      g_error_free (error);
+    }
+
+  dialog         = GTK_WIDGET (gtk_builder_get_object (xml, "bookmarks_add_edit_conn_dialog"));
+  name_entry     = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_name_entry"));
+  host_entry     = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_host_entry"));
+  fs_check       = GTK_WIDGET (gtk_builder_get_object (xml, "fullscreen_check"));
+  folder_box     = GTK_WIDGET (gtk_builder_get_object (xml, "folder_box"));
+  plugin_box     = GTK_WIDGET (gtk_builder_get_object (xml, "plugin_options_vbox"));
+  save_button    = GTK_WIDGET (gtk_builder_get_object (xml, "save_button"));
+  protocol_label = GTK_WIDGET (gtk_builder_get_object (xml, "protocol_label"));
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
   conn = vinagre_bookmarks_entry_get_conn (entry);

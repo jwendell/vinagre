@@ -25,7 +25,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <string.h>
 
 #ifdef VINAGRE_ENABLE_AVAHI
@@ -40,7 +39,7 @@
 #include "vinagre-plugin.h"
 
 typedef struct {
-  GladeXML  *xml;
+  GtkBuilder *xml;
   GtkWidget *dialog;
   GtkWidget *protocol_combo;
   GtkWidget *protocol_description_label;
@@ -366,16 +365,23 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   gint                  result;
   VinagreConnectDialog  dialog;
 
-  dialog.xml = glade_xml_new (vinagre_utils_get_glade_filename (), "connect_dialog", NULL);
-  dialog.dialog = glade_xml_get_widget (dialog.xml, "connect_dialog");
+  GError* error = NULL;
+  dialog.xml = gtk_builder_new ();
+  if (!gtk_builder_add_from_file (dialog.xml, vinagre_utils_get_ui_filename (), &error))
+    {
+      g_warning (_("Couldn't load builder file: &s"), error->message);
+      g_error_free (error);
+    }
+
+  dialog.dialog = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "connect_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW (dialog.dialog), GTK_WINDOW (window));
 
-  dialog.protocol_combo = glade_xml_get_widget (dialog.xml, "protocol_combo");
-  dialog.protocol_description_label = glade_xml_get_widget (dialog.xml, "protocol_description_label");
-  dialog.host_entry  = glade_xml_get_widget (dialog.xml, "host_entry");
-  dialog.find_button = glade_xml_get_widget (dialog.xml, "find_button");
-  dialog.fullscreen_check = glade_xml_get_widget (dialog.xml, "fullscreen_check");
-  dialog.plugin_box = glade_xml_get_widget (dialog.xml, "plugin_options_vbox");
+  dialog.protocol_combo = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "protocol_combo"));
+  dialog.protocol_description_label = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "protocol_description_label"));
+  dialog.host_entry  = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "host_entry"));
+  dialog.find_button = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "find_button"));
+  dialog.fullscreen_check = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "fullscreen_check"));
+  dialog.plugin_box = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "plugin_options_vbox"));
 
   setup_protocol (&dialog);
   setup_combo (dialog.host_entry);

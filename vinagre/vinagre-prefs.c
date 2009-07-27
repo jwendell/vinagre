@@ -20,7 +20,6 @@
 
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
-#include <glade/glade.h>
 #include "vinagre-prefs.h"
 #include "vinagre-utils.h"
 
@@ -478,10 +477,10 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 /* Preferences dialog */
 
 typedef struct {
-  GladeXML  *xml;
-  GtkWidget *dialog;
-  GtkWidget *show_tabs;
-  GtkWidget *show_accels;
+  GtkBuilder  *xml;
+  GtkWidget   *dialog;
+  GtkWidget   *show_tabs;
+  GtkWidget   *show_accels;
 } VinagrePrefsDialog;
 
 static void
@@ -530,12 +529,19 @@ vinagre_prefs_dialog_show (VinagreWindow *window)
 
   dialog = g_new (VinagrePrefsDialog, 1);
 
-  dialog->xml = glade_xml_new (vinagre_utils_get_glade_filename (), NULL, NULL);
-  dialog->dialog = glade_xml_get_widget (dialog->xml, "preferences_dialog");
+  GError* error = NULL;
+  dialog->xml = gtk_builder_new ();
+  if (!gtk_builder_add_from_file (dialog->xml, vinagre_utils_get_ui_filename (), &error))
+    {
+      g_warning (_("Couldn't load builder file: &s"), error->message);
+      g_error_free (error);
+    }
+
+  dialog->dialog = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "preferences_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (window));
 
-  dialog->show_tabs = glade_xml_get_widget (dialog->xml, "always_show_tabs_check");
-  dialog->show_accels = glade_xml_get_widget (dialog->xml, "show_accels_check");
+  dialog->show_tabs = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "always_show_tabs_check"));
+  dialog->show_accels = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "show_accels_check"));
 
   vinagre_prefs_dialog_setup (dialog);
 

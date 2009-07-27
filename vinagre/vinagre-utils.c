@@ -22,7 +22,7 @@
 #include <glib/gi18n.h>
 #include "vinagre-utils.h"
 
-#define VINAGRE_GLADE_FILE  "vinagre.glade"
+#define VINAGRE_UI_FILE  "vinagre.ui"
 #define VINAGRE_UI_XML_FILE "vinagre-ui.xml"
 
 #ifdef HAVE_CONFIG_H
@@ -119,12 +119,12 @@ vinagre_utils_toggle_widget_visible (GtkWidget *widget)
 }
 
 const gchar *
-vinagre_utils_get_glade_filename (void)
+vinagre_utils_get_ui_filename (void)
 {
-  if (g_file_test (VINAGRE_GLADE_FILE, G_FILE_TEST_EXISTS))
-    return VINAGRE_GLADE_FILE;
+  if (g_file_test (VINAGRE_UI_FILE, G_FILE_TEST_EXISTS))
+    return VINAGRE_UI_FILE;
   else
-    return VINAGRE_DATADIR "/" VINAGRE_GLADE_FILE;
+    return VINAGRE_DATADIR "/" VINAGRE_UI_FILE;
 }
 
 const gchar *

@@ -1,7 +1,7 @@
 SUBDIRS = icons pixmaps
 
-gladedir   = $(datadir)/vinagre
-glade_DATA = vinagre.glade
+gtkbuilderdir   = $(datadir)/vinagre
+gtkbuilder_DATA = vinagre.ui
 
 man_MANS = vinagre.1
 

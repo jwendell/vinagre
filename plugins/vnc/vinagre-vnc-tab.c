@@ -20,7 +20,6 @@
  */
 
 #include <glib/gi18n.h>
-#include <glade/glade.h>
 #include <vncdisplay.h>
 #include <gdk/gdkkeysyms.h>
 
@@ -415,8 +414,8 @@ ask_credential (VinagreVncTab *vnc_tab,
 		gchar         **username,
 		gchar         **password)
 {
-  GladeXML        *xml;
-  const char      *glade_file;
+  GtkBuilder      *xml;
+  const char      *ui_file;
   GtkWidget       *password_dialog, *host_label, *save_credential_check;
   GtkWidget       *password_label, *username_label, *image;
   gchar           *name, *label;
@@ -425,26 +424,33 @@ ask_credential (VinagreVncTab *vnc_tab,
   VinagreTab      *tab = VINAGRE_TAB (vnc_tab);
   VinagreConnection *conn = vinagre_tab_get_conn (tab);
 
-  glade_file = vinagre_utils_get_glade_filename ();
-  xml = glade_xml_new (glade_file, NULL, NULL);
+  ui_file = vinagre_utils_get_ui_filename ();
+  
+  GError* error = NULL;
+  xml = gtk_builder_new ();
+  if (!gtk_builder_add_from_file (xml, ui_file, &error))
+    {
+      g_warning (_("Couldn't load builder file: &s"), error->message);
+      g_error_free (error);
+    }
 
-  password_dialog = glade_xml_get_widget (xml, "auth_required_dialog");
+  password_dialog = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW(password_dialog),
 				GTK_WINDOW(vinagre_tab_get_window (tab)));
 
-  host_label = glade_xml_get_widget (xml, "host_label");
+  host_label = GTK_WIDGET (gtk_builder_get_object (xml, "host_label"));
   name = vinagre_connection_get_best_name (conn);
   label = g_strdup_printf ("<i>%s</i>", name);
   gtk_label_set_markup (GTK_LABEL (host_label), label);
   g_free (name);
   g_free (label);
 
-  control.uname  = glade_xml_get_widget (xml, "username_entry");
-  control.pw     = glade_xml_get_widget (xml, "password_entry");
-  control.button = glade_xml_get_widget (xml, "ok_button");
-  password_label = glade_xml_get_widget (xml, "password_label");
-  username_label = glade_xml_get_widget (xml, "username_label");
-  save_credential_check = glade_xml_get_widget (xml, "save_credential_check");
+  control.uname  = GTK_WIDGET (gtk_builder_get_object (xml, "username_entry"));
+  control.pw     = GTK_WIDGET (gtk_builder_get_object (xml, "password_entry"));
+  control.button = GTK_WIDGET (gtk_builder_get_object (xml, "ok_button"));
+  password_label = GTK_WIDGET (gtk_builder_get_object (xml, "password_label"));
+  username_label = GTK_WIDGET (gtk_builder_get_object (xml, "username_label"));
+  save_credential_check = GTK_WIDGET (gtk_builder_get_object (xml, "save_credential_check"));
 
   image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_BUTTON);
   gtk_button_set_image (GTK_BUTTON (control.button), image);
