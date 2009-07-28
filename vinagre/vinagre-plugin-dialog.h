@@ -21,13 +21,10 @@
 #ifndef __VINAGRE_PLUGIN_DIALOG_H__
 #define __VINAGRE_PLUGIN_DIALOG_H__
 
-#include "vinagre-window.h"
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-/*
- * Type checking and casting macros
- */
 #define VINAGRE_TYPE_PLUGIN_DIALOG              (vinagre_plugin_dialog_get_type())
 #define VINAGRE_PLUGIN_DIALOG(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), VINAGRE_TYPE_PLUGIN_DIALOG, VinagrePluginDialog))
 #define VINAGRE_PLUGIN_DIALOG_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), VINAGRE_TYPE_PLUGIN_DIALOG, VinagrePluginDialog const))
@@ -36,41 +33,26 @@ G_BEGIN_DECLS
 #define VINAGRE_IS_PLUGIN_DIALOG_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), VINAGRE_TYPE_PLUGIN_DIALOG))
 #define VINAGRE_PLUGIN_DIALOG_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj),  VINAGRE_TYPE_PLUGIN_DIALOG, VinagrePluginDialogClass))
 
-
-/* Private structure type */
 typedef struct _VinagrePluginDialogPrivate VinagrePluginDialogPrivate;
-
-/*
- * Main object structure
- */
 typedef struct _VinagrePluginDialog VinagrePluginDialog;
+typedef struct _VinagrePluginDialogClass VinagrePluginDialogClass;
 
 struct _VinagrePluginDialog 
 {
-	GtkDialog dialog;
-	
-	/*< private > */
-	VinagrePluginDialogPrivate *priv;
+  GtkDialog dialog;
+  VinagrePluginDialogPrivate *priv;
 };
-
-/*
- * Class definition
- */
-typedef struct _VinagrePluginDialogClass VinagrePluginDialogClass;
 
 struct _VinagrePluginDialogClass 
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType		 vinagre_plugin_dialog_get_type	(void) G_GNUC_CONST;
+GType	vinagre_plugin_dialog_get_type	(void) G_GNUC_CONST;
 
-void		 vinagre_plugin_dialog_show (VinagreWindow *parent);
+void	vinagre_plugin_dialog_show	(GtkWindow *parent);
 
 G_END_DECLS
 
 #endif /* __VINAGRE_PLUGIN_DIALOG_H__ */
-
+/* vim: set ts=8: */

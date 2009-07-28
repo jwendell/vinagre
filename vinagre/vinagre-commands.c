@@ -237,7 +237,7 @@ vinagre_cmd_edit_plugins (GtkAction     *action,
 
   vinagre_debug (DEBUG_PLUGINS);
 
-  vinagre_plugin_dialog_show (window);
+  vinagre_plugin_dialog_show (GTK_WINDOW (window));
 }
 
 /* View Menu */
