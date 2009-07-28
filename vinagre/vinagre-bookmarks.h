@@ -24,8 +24,8 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <vinagre/vinagre-connection.h>
-#include <vinagre/vinagre-bookmarks-entry.h>
+#include "vinagre-connection.h"
+#include "vinagre-bookmarks-entry.h"
 
 G_BEGIN_DECLS
 

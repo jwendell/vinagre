@@ -24,10 +24,10 @@
 #define __VINAGRE_PLUGINS_ENGINE_H__
 
 #include <glib.h>
-#include <vinagre/vinagre-window.h>
-#include <vinagre/vinagre-plugin-info.h>
-#include <vinagre/vinagre-plugin.h>
-#include <vinagre/vinagre-connection.h>
+#include "vinagre-window.h"
+#include "vinagre-plugin-info.h"
+#include "vinagre-plugin.h"
+#include "vinagre-connection.h"
 
 G_BEGIN_DECLS
 

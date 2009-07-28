@@ -25,8 +25,7 @@
 
 #include <glib-object.h>
 
-#include <vinagre/vinagre-window.h>
-#include <vinagre/vinagre-debug.h>
+#include "vinagre-window.h"
 
 /* TODO: add a .h file that includes all the .h files normally needed to
  * develop a plugin */ 

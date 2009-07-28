@@ -25,8 +25,8 @@
 #define __VINAGRE_PLUGIN_LOADER_H__
 
 #include <glib-object.h>
-#include <vinagre/vinagre-plugin.h>
-#include <vinagre/vinagre-plugin-info.h>
+#include "vinagre-plugin.h"
+#include "vinagre-plugin-info.h"
 
 G_BEGIN_DECLS
 
