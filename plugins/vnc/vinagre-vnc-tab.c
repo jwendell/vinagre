@@ -415,7 +415,6 @@ ask_credential (VinagreVncTab *vnc_tab,
 		gchar         **password)
 {
   GtkBuilder      *xml;
-  const char      *ui_file;
   GtkWidget       *password_dialog, *host_label, *save_credential_check;
   GtkWidget       *password_label, *username_label, *image;
   gchar           *name, *label;
@@ -424,15 +423,7 @@ ask_credential (VinagreVncTab *vnc_tab,
   VinagreTab      *tab = VINAGRE_TAB (vnc_tab);
   VinagreConnection *conn = vinagre_tab_get_conn (tab);
 
-  ui_file = vinagre_utils_get_ui_filename ();
-  
-  GError* error = NULL;
-  xml = gtk_builder_new ();
-  if (!gtk_builder_add_from_file (xml, ui_file, &error))
-    {
-      g_warning (_("Couldn't load builder file: &s"), error->message);
-      g_error_free (error);
-    }
+  xml = vinagre_utils_get_builder ();
 
   password_dialog = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW(password_dialog),

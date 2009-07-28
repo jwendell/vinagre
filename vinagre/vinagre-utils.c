@@ -136,6 +136,26 @@ vinagre_utils_get_ui_xml_filename (void)
     return VINAGRE_DATADIR "/" VINAGRE_UI_XML_FILE;
 }
 
+GtkBuilder *
+vinagre_utils_get_builder (void)
+{
+  GtkBuilder *xml;
+  GError     *error = NULL;
+
+  xml = gtk_builder_new ();
+  if (!gtk_builder_add_from_file (xml,
+				  vinagre_utils_get_ui_filename (),
+				  &error))
+    {
+      g_error (_("Could not load builder file: %s"), error->message);
+      g_error_free (error);
+      g_object_unref (xml);
+      return NULL;
+    }
+
+  return xml;
+}
+
 /*
  * Doubles underscore to avoid spurious menu accels.
  */

@@ -44,14 +44,7 @@ show_dialog_folder (VinagreBookmarks      *book,
   GtkWidget   *dialog, *box, *tree, *name_entry, *save_button;
   const gchar *name;
 
-  GError* error = NULL;
-  xml = gtk_builder_new ();
-  if (!gtk_builder_add_from_file (xml, vinagre_utils_get_ui_filename (), &error))
-    {
-      g_warning (_("Couldn't load builder file: &s"), error->message);
-      g_error_free (error);
-    }
-
+  xml = vinagre_utils_get_builder ();
   dialog     = GTK_WIDGET (gtk_builder_get_object (xml, "bookmarks_add_edit_folder_dialog"));
   name_entry = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_folder_name_entry"));
   box        = GTK_WIDGET (gtk_builder_get_object (xml, "folder_box1"));
@@ -136,14 +129,7 @@ show_dialog_conn (VinagreBookmarks      *book,
   VinagrePlugin     *plugin;
   gchar             **props;
 
-  GError* error = NULL;
-  xml = gtk_builder_new ();
-  if (!gtk_builder_add_from_file (xml, vinagre_utils_get_ui_filename (), &error))
-    {
-      g_warning (_("Couldn't load builder file: &s"), error->message);
-      g_error_free (error);
-    }
-
+  xml = vinagre_utils_get_builder ();
   dialog         = GTK_WIDGET (gtk_builder_get_object (xml, "bookmarks_add_edit_conn_dialog"));
   name_entry     = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_name_entry"));
   host_entry     = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_host_entry"));

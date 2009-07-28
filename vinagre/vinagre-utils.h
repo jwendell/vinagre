@@ -45,6 +45,7 @@ void		vinagre_utils_toggle_widget_visible	(GtkWidget *widget);
 
 const gchar	*vinagre_utils_get_ui_filename		(void);
 const gchar	*vinagre_utils_get_ui_xml_filename	(void);
+GtkBuilder	*vinagre_utils_get_builder		(void);
 
 gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 							 gssize      length);

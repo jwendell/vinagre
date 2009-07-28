@@ -529,14 +529,7 @@ vinagre_prefs_dialog_show (VinagreWindow *window)
 
   dialog = g_new (VinagrePrefsDialog, 1);
 
-  GError* error = NULL;
-  dialog->xml = gtk_builder_new ();
-  if (!gtk_builder_add_from_file (dialog->xml, vinagre_utils_get_ui_filename (), &error))
-    {
-      g_warning (_("Couldn't load builder file: &s"), error->message);
-      g_error_free (error);
-    }
-
+  dialog->xml = vinagre_utils_get_builder ();
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "preferences_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (window));
 
