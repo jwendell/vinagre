@@ -257,8 +257,6 @@ DISTCLEANFILES =		\
 
 EXTRA_DIST =					\
 	GNOME_VinagreApplet.server.in.in	\
-  libvinagre.a \
-  libvinagre.la \
 	$(NULL)
 
 dist-hook:
