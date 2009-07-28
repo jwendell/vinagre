@@ -66,6 +66,7 @@ org.gnome.Empathy.StreamTubeHandler.x_vnc.service: org.gnome.Empathy.StreamTubeH
 	@sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
 
 CLEANFILES += $(service_DATA)
+EXTRA_DIST += org.gnome.Empathy.StreamTubeHandler.x_vnc.service.in
 
 endif
 
