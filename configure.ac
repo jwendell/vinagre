@@ -176,7 +176,6 @@ po/Makefile.in
 plugin-loaders/Makefile
 plugin-loaders/c/Makefile
 plugins/Makefile
-plugins/dummy/Makefile
 plugins/vnc/Makefile
 vinagre/Makefile
 vinagre/view/Makefile
