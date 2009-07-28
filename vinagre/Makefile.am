@@ -22,6 +22,7 @@ NOINST_H_FILES = \
   vinagre-plugin-info-priv.h \
   vinagre-plugin-loader.h \
   vinagre-plugin-manager.h \
+  vinagre-plugin-dialog.h \
   vinagre-plugins-engine.h \
   vinagre-window-private.h \
   $(NULL)
@@ -80,6 +81,7 @@ libvinagre_la_SOURCES = \
   vinagre-object-module.c \
   vinagre-plugin.c \
   vinagre-plugin-info.c \
+  vinagre-plugin-dialog.c \
   vinagre-plugin-loader.c \
   vinagre-plugin-manager.c \
   vinagre-plugins-engine.c \
@@ -161,6 +163,7 @@ vinagre_applet_SOURCES =					\
 	vinagre-plugin.h vinagre-plugin.c \
 	vinagre-plugin-loader.h vinagre-plugin-loader.c \
 	vinagre-plugin-manager.h vinagre-plugin-manager.c \
+	vinagre-plugin-dialog.h vinagre-plugin-dialog.c \
 	vinagre-debug.h vinagre-debug.c \
 	vinagre-plugin-info.h vinagre-plugin-info.c \
 	vinagre-window.h vinagre-window.c \
