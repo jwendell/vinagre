@@ -38,6 +38,7 @@
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin-info.h"
 #include "vinagre-plugin-info-priv.h"
+#include "vinagre-debug.h"
 
 #ifdef HAVE_TELEPATHY
 #include "vinagre-tubes-manager.h"

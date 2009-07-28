@@ -235,8 +235,6 @@ vinagre_cmd_edit_plugins (GtkAction     *action,
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  vinagre_debug (DEBUG_PLUGINS);
-
   vinagre_plugin_dialog_show (GTK_WINDOW (window));
 }
 
