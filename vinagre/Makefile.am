@@ -114,10 +114,10 @@ vinagre_SOURCES = \
   vinagre-main.c
 
 vinagre_LDADD = \
+	libvinagre.la \
 	$(VINAGRE_LIBS)		\
 	$(AVAHI_LIBS)		\
 	$(GTKVNC_LIBS)		\
-	libvinagre.la \
 	$(NULL)
 
 vinagre_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
@@ -183,10 +183,10 @@ vinagre_applet_SOURCES += vinagre-mdns.h vinagre-mdns.c
 endif
 
 vinagre_applet_LDADD =			\
+	view/libview.la			\
 	$(APPLET_LIBS)			\
 	$(VINAGRE_LIBS)			\
 	$(AVAHI_LIBS)			\
-	view/libview.la			\
 	$(NULL)
 vinagre_applet_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
