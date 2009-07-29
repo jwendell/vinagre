@@ -243,7 +243,7 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
 
   port_s = g_strdup_printf ("%u", port);
 
-  host = g_strconcat (hostname, ":", port_s, NULL);
+  host = g_strconcat ("vnc://", hostname, ":", port_s, NULL);
 
   conn = vinagre_connection_new_from_string (host, &error_conn_msg, TRUE);
 
