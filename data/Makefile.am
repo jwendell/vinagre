@@ -1,4 +1,4 @@
-SUBDIRS = icons pixmaps
+SUBDIRS = icons
 
 gtkbuilderdir   = $(datadir)/vinagre
 gtkbuilder_DATA = vinagre.ui

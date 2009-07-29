@@ -167,7 +167,6 @@ data/vinagre-file.desktop.in
 data/vinagre.pc
 data/vinagre.schemas.in
 data/icons/Makefile
-data/pixmaps/Makefile
 help/Makefile
 po/Makefile.in
 plugin-loaders/Makefile
