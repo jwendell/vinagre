@@ -76,7 +76,8 @@ vinagre_tube_handler_dispose (GObject *object)
 {
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE(object);
 
-  vinagre_debug_message (DEBUG_TUBE, "-- Destruction of a Tube handler --\n");
+  vinagre_debug_message (DEBUG_TUBE,
+      "-- Destruction of a Tube handler --\n");
 
   if (priv->channel != NULL)
     {
@@ -181,7 +182,8 @@ vinagre_tube_handler_tab_disconnected_cb (GtkNotebook *notebook,
 
   if (priv->tab == tab)
     {
-      vinagre_debug_message (DEBUG_TUBE,"Tab has been destroyed. Closing the tube handler.");
+      vinagre_debug_message (DEBUG_TUBE,
+          "Tab has been destroyed. Closing the tube handler.\n");
       vinagre_tube_handler_fire_disconnected (self);
     }
 }
@@ -195,7 +197,7 @@ vinagre_tube_handler_tube_invalidated (TpProxy *channel,
 {
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
 
-  vinagre_debug_message (DEBUG_TUBE,"Tube is invalidated : %s\n", message);
+  vinagre_debug_message (DEBUG_TUBE, "Tube is invalidated : %s\n", message);
 
   g_object_unref (priv->channel);
   priv->channel = NULL;
@@ -215,15 +217,19 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
   gchar *port_s;
   gchar *host;
   gchar *error_msg = NULL;
+  gchar *error_conn_msg = NULL;
   VinagreConnection *conn = NULL;
-  GtkWidget *window;
 
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
 
   if (error != NULL)
     {
-      g_printerr ("Impossible to accept the stream tube: %s\n",
+      error_msg = g_strdup_printf
+          (_("Impossible to accept the stream tube: %s"),
           error->message);
+      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+          GTK_WINDOW (priv->window));
+      g_free (error_msg);
       g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
       return ;
     }
@@ -239,7 +245,7 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
 
   host = g_strconcat (hostname, ":", port_s, NULL);
 
-  conn = vinagre_connection_new_from_string (host, &error_msg, TRUE);
+  conn = vinagre_connection_new_from_string (host, &error_conn_msg, TRUE);
 
   g_free (port_s);
   g_free (hostname);
@@ -247,17 +253,15 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
 
   if (conn == NULL)
     {
-      window = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-          GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-          "Impossible to create the connection: %s", error_msg);
-      gtk_dialog_run (GTK_DIALOG (window));
-      gtk_widget_destroy (window);
-      g_printerr ("Impossible to create the connection: %s\n",
-          error_msg);
+      error_msg = g_strdup_printf
+          (_("Impossible to create the connection: %s"), error_conn_msg);
+      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+          GTK_WINDOW (priv->window));
       g_signal_handler_disconnect (G_OBJECT (priv->channel),
         priv->signal_invalidated_id);
-      g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
+      g_free (error_conn_msg);
       g_free (error_msg);
+      g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
       return ;
     }
 
@@ -317,6 +321,8 @@ vinagre_tube_handler_contact_get_avatar_filename (TpContact *contact,
   gchar *mc_account_unique_name;
   GError *error = NULL;
   DBusGProxy *proxy;
+  gchar *error_msg = NULL;
+  VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
 
   connection = tp_contact_get_connection (contact);
 
@@ -331,8 +337,12 @@ vinagre_tube_handler_contact_get_avatar_filename (TpContact *contact,
       G_TYPE_STRING, &mc_account_unique_name,
       G_TYPE_INVALID))
     {
-      g_printerr ("Failed to request name: %s",
-          error ? error->message : "No error given");
+      error_msg = g_strdup_printf
+          (_("Failed to request name: %s"),
+          error ? error->message : _("No error given"));
+      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+          GTK_WINDOW (priv->window));
+      g_free (error_msg);
       g_clear_error (&error);
       return NULL;
     }
@@ -401,10 +411,15 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
   gchar *filename;
   GtkWidget *image;
   GError *error_failed = NULL;
+  gchar *error_msg = NULL;
 
   if (error != NULL)
     {
-      g_printerr ("Impossible to get the contact name: %s\n", error->message);
+      error_msg = g_strdup_printf
+          (_("Impossible to get the contact name: %s"), error->message);
+      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+          GTK_WINDOW (priv->window));
+      g_free (error_msg);
       g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
       return;
     }
@@ -435,8 +450,12 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
 
           if (pixbuf_view == NULL)
             {
-              g_printerr ("Impossible to get the avatar: %s\n",
+              error_msg = g_strdup_printf
+                  (_("Impossible to get the avatar: %s"),
                   error_failed->message);
+              vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+                  GTK_WINDOW (priv->window));
+              g_free (error_msg);
               image = gtk_image_new_from_icon_name ("stock_person",
                   GTK_ICON_SIZE_DIALOG);
             }
@@ -475,7 +494,7 @@ vinagre_tube_handler_constructed (GObject *object)
   TpContactFeature features[] = { TP_CONTACT_FEATURE_ALIAS,
       TP_CONTACT_FEATURE_AVATAR_TOKEN };
 
-  vinagre_debug_message (DEBUG_TUBE," -- New Tube handler --\n");
+  vinagre_debug_message (DEBUG_TUBE, "-- New Tube handler --\n");
 
   connection = tp_channel_borrow_connection (priv->channel);
 
