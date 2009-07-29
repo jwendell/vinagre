@@ -731,7 +731,7 @@ vinagre_tab_get_always_sensitive_actions (VinagreTab *tab)
 {
   g_return_val_if_fail (VINAGRE_IS_TAB (tab), NULL);
 
-  VINAGRE_TAB_GET_CLASS (tab)->impl_get_always_sensitive_actions (tab);
+  return VINAGRE_TAB_GET_CLASS (tab)->impl_get_always_sensitive_actions (tab);
 }
 
 const GSList *
@@ -739,7 +739,7 @@ vinagre_tab_get_connected_actions (VinagreTab *tab)
 {
   g_return_val_if_fail (VINAGRE_IS_TAB (tab), NULL);
 
-  VINAGRE_TAB_GET_CLASS (tab)->impl_get_connected_actions (tab);
+  return VINAGRE_TAB_GET_CLASS (tab)->impl_get_connected_actions (tab);
 }
 
 const GSList *
@@ -747,7 +747,7 @@ vinagre_tab_get_initialized_actions (VinagreTab *tab)
 {
   g_return_val_if_fail (VINAGRE_IS_TAB (tab), NULL);
 
-  VINAGRE_TAB_GET_CLASS (tab)->impl_get_initialized_actions (tab);
+  return VINAGRE_TAB_GET_CLASS (tab)->impl_get_initialized_actions (tab);
 }
 
 static void
