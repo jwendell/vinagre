@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-07-28 15:07+0000\n"
-"PO-Revision-Date: 2009-07-28 20:21+0300\n"
+"POT-Creation-Date: 2009-07-29 01:51+0000\n"
+"PO-Revision-Date: 2009-07-29 10:23+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -34,48 +34,41 @@ msgstr "Ligipääs kaugtöölaudadele"
 msgid "Remote Desktop Viewer"
 msgstr "Kaugtöölaudade vaataja"
 
-msgid "<b>Authentication is required</b>"
-msgstr "<b>Autentimine on vajalik</b>"
+msgid "All fields above are mandatory"
+msgstr "Kõik ülemised väljad on kohustuslikud"
 
-msgid "<b>Connection options</b>"
-msgstr "<b>Ühenduse valikud</b>"
-
-msgid "<b>Connection</b>"
-msgstr "<b>Ühendus</b>"
-
-msgid "<b>Folder</b>"
-msgstr "<b>Kataloog</b>"
-
-msgid "<b>Interface</b>"
-msgstr "<b>Kasutajakeskkond</b>"
-
-msgid "<b>Options</b>"
-msgstr "<b>Valikud</b>"
-
-msgid "<b>Parent Folder</b>"
-msgstr "<b>Ülemine kataloog</b>"
-
-msgid "<b>Which machine do you want to connect to?</b>"
-msgstr "<b>Millise masinaga soovid ühendust võtta?</b>"
-
-msgid "<i><small>All fields above are mandatory</small></i>"
-msgstr "<i><small>Kõik ülemised väljad on kohustuslikud.</small></i>"
+msgid "Authentication is required"
+msgstr "Autentimine on vajalik"
 
 msgid "Bookmarks"
 msgstr "Järjehoidjad"
 
+msgid "Connection"
+msgstr "Ühendus"
+
+msgid "Connection options"
+msgstr "Ühenduse valikud"
+
+msgid "Folder"
+msgstr "Kaus"
+
 msgid "Host:"
 msgstr "Host:"
+
+msgid "Interface"
+msgstr "Kasutajakeskkond"
+
+msgid "Options"
+msgstr "Valikud"
+
+msgid "Parent Folder"
+msgstr "Ülemine kataloog"
 
 msgid "Preferences"
 msgstr "Eelistused"
 
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr "Kas ainult ühe aktiivse ühenduse korral näidatakse sakke või mitte"
-
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "Kas näidata menüüdes kiirklahve või mitte"
+msgid "Which machine do you want to connect to?"
+msgstr "Millise masinaga soovid ühendust võtta?"
 
 msgid "_Always show tabs"
 msgstr "_Alati näidatakse sakke"
@@ -107,10 +100,6 @@ msgstr "_Menüüs näidatakse kiirklahve"
 
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
-
-#. Tooltip for host entry in connect dialog
-msgid "host or host:display or host::port"
-msgstr "host või host:kuva või host::port"
 
 msgid "Active plugins"
 msgstr "Aktiivsed pluginad"
@@ -161,6 +150,13 @@ msgstr ""
 msgid "Whether we should leave other clients connected"
 msgstr "Kas teised kliendid tuleb jätta ühendatuks või mitte"
 
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "Kas ainult ühe aktiivse ühenduse korral näidatakse sakke või mitte"
+
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Kas näidata menüüdes kiirklahve või mitte"
+
 msgid "Remote Desktop (VNC) file"
 msgstr "Kaugtöölaua (VNC) fail"
 
@@ -183,8 +179,8 @@ msgstr "See pole VNC fail: puudub grupp \"connection\"."
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "See pole VNC fail: puudub võti \"host\"."
 
-msgid "<b>VNC Options</b>"
-msgstr "<b>VNC Valikud</b>"
+msgid "VNC Options"
+msgstr "VNC Valikud"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
 msgid "VNC Files"
@@ -202,9 +198,10 @@ msgstr "Mõõtmed:"
 msgid "Error connecting to host."
 msgstr "Viga hostiga ühendumisel."
 
+#. Translators: %s is a host name or IP address; %u is a code error (number).
 #, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "Host <i>%s</i> ei toeta kasutatud autentimismeetodit. (%u)"
+msgid "Authentication method to host %s is unsupported. (%u)"
+msgstr "Hosti <i>%s</i> autentimismeetod pole toetatud. (%u)"
 
 msgid "Authentication unsupported"
 msgstr "Toetamata autentimismeetod"
@@ -364,13 +361,15 @@ msgstr "Nime \"%s\" on selles kaustas juba kasutatud. Vali muu nimi."
 msgid "Invalid name for this item"
 msgstr "Kirje nimi on sobimatu"
 
+#. Translators: %s is a protocol name, like VNC or SSH
 #, c-format
-msgid "<small>(Protocol: <i>%s</i>)</small>"
-msgstr "<small>(Protokoll: <i>%s</i>)</small>"
+msgid "(Protocol: %s)"
+msgstr "(Protokoll: %s)"
 
+#. Translators: %s is a bookmark entry name
 #, c-format
-msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
-msgstr "Kas eemaldada <i>%s</i> järjehoidjate hulgast?"
+msgid "Are you sure you want to remove %s from bookmarks?"
+msgstr "Kas eemaldada %s järjehoidjate hulgast?"
 
 msgid "Remove Folder?"
 msgstr "Kas kaust eemaldada?"
@@ -469,16 +468,18 @@ msgstr "Tõrge hostide sirvimisel: %s\n"
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Tõrge mDNS-i sirvija lähtestamisel: %s\n"
 
+#. Translators: %s is a host name or IP address.
 #, c-format
-msgid "Connection to host <i>%s</i> was closed."
-msgstr "Ühendus hostiga <i>%s</i> suleti."
+msgid "Connection to host %s was closed."
+msgstr "Ühendus hostiga %s suleti."
 
 msgid "Connection closed"
 msgstr "Ühendus suleti"
 
+#. Translators: %s is a host name or IP address.
 #, c-format
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "Autentimine hostile \"%s\" nurjus"
+msgid "Authentication to host %s has failed"
+msgstr "Autentimine hostile %s nurjus"
 
 msgid "Authentication failed"
 msgstr "Autentimine nurjus"
@@ -661,6 +662,10 @@ msgstr "Käesoleva masina vaatamine täisekraanil"
 msgid "An error has occurred:"
 msgstr "Esines järgmine viga:"
 
+#, c-format
+msgid "Could not load builder file: %s"
+msgstr "Ehitusfaili pole võimalik avada: %s"
+
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Vinagre on kaugtöölaudade vaataja GNOME töölauale"
 
@@ -713,15 +718,3 @@ msgstr "_Hiljutised ühendused"
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d avamine"
-
-#~ msgid "_Scaling"
-#~ msgstr "_Skaleerimine"
-
-#~ msgid "Choose a VNC Server"
-#~ msgstr "VNC-serveri valimine"
-
-#~ msgid "Could not find the host address in the file."
-#~ msgstr "Failist ei leitud hosti aadressi."
-
-#~ msgid "- VNC Client for GNOME"
-#~ msgstr " - VNC klient GNOME jaoks"
