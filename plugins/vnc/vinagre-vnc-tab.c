@@ -288,14 +288,16 @@ static void
 vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreVncTab *vnc_tab)
 {
   GString *message;
-  gchar   *name;
+  gchar   *name, *emphasis;
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
 
   message = g_string_new (NULL);
   name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
+  emphasis = g_strdup_printf ("<i>%s</i>", name);
 
-  g_string_printf (message, _("Authentication method to host <i>%s</i> is unsupported. (%u)"),
-		   name,
+  /* Translators: %s is a host name or IP address; %u is a code error (number). */
+  g_string_printf (message, _("Authentication method to host %s is unsupported. (%u)"),
+		   emphasis,
 		   auth_type);
 
   vinagre_utils_show_error (_("Authentication unsupported"),
@@ -303,6 +305,7 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreVncTab *vnc_ta
 			    GTK_WINDOW (vinagre_tab_get_window (tab)));
   g_string_free (message, TRUE);
   g_free (name);
+  g_free (emphasis);
 
   vinagre_tab_remove_from_notebook (tab);
 }
@@ -417,7 +420,7 @@ ask_credential (VinagreVncTab *vnc_tab,
   GtkBuilder      *xml;
   GtkWidget       *password_dialog, *host_label, *save_credential_check;
   GtkWidget       *password_label, *username_label, *image;
-  gchar           *name, *label;
+  gchar           *name;
   int             result;
   ControlOKButton control;
   VinagreTab      *tab = VINAGRE_TAB (vnc_tab);
@@ -431,10 +434,8 @@ ask_credential (VinagreVncTab *vnc_tab,
 
   host_label = GTK_WIDGET (gtk_builder_get_object (xml, "host_label"));
   name = vinagre_connection_get_best_name (conn);
-  label = g_strdup_printf ("<i>%s</i>", name);
-  gtk_label_set_markup (GTK_LABEL (host_label), label);
+  gtk_label_set_label (GTK_LABEL (host_label), name);
   g_free (name);
-  g_free (label);
 
   control.uname  = GTK_WIDGET (gtk_builder_get_object (xml, "username_entry"));
   control.pw     = GTK_WIDGET (gtk_builder_get_object (xml, "password_entry"));

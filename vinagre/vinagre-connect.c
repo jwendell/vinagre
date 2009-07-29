@@ -76,7 +76,7 @@ static void
 protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
 {
   GtkTreeIter tree_iter;
-  gchar       *description, *label, *service;
+  gchar       *description, *service;
   GtkWidget   *options;
   GList       *children, *l;
 
@@ -92,9 +92,8 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
 		      PROTOCOL_OPTIONS, &options,
 		      -1);
 
-  label = g_strdup_printf ("<i><small>%s</small></i>", description);
-  gtk_label_set_markup (GTK_LABEL (dialog->protocol_description_label),
-			label);
+  gtk_label_set_label (GTK_LABEL (dialog->protocol_description_label),
+		       description);
 
 #ifdef VINAGRE_ENABLE_AVAHI
   if (service)
@@ -117,7 +116,6 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
   else
     gtk_widget_hide (dialog->plugin_box);
 
-  g_free (label);
   g_free (description);
   g_free (service);
 }

@@ -164,8 +164,9 @@ show_dialog_conn (VinagreBookmarks      *book,
     gtk_widget_hide (plugin_box);
 
   props = vinagre_plugin_get_public_description (plugin);
-  str = g_strdup_printf (_("<small>(Protocol: <i>%s</i>)</small>"), props[0]);
-  gtk_label_set_markup (GTK_LABEL (protocol_label), str);
+  /* Translators: %s is a protocol name, like VNC or SSH */
+  str = g_strdup_printf (_("(Protocol: %s)"), props[0]);
+  gtk_label_set_label (GTK_LABEL (protocol_label), str);
   g_free (str);
   g_strfreev (props);
 
@@ -301,7 +302,10 @@ vinagre_bookmarks_del (VinagreBookmarks      *book,
   g_return_if_fail (VINAGRE_IS_BOOKMARKS (book));
   g_return_if_fail (VINAGRE_IS_BOOKMARKS_ENTRY (entry));
 
-  msg1 = g_strdup (_("Are you sure you want to remove <i>%s</i> from bookmarks?"));
+  name = g_strdup ("<i>%s</i>");
+  /* Translators: %s is a bookmark entry name*/
+  msg1 = g_strdup_printf (_("Are you sure you want to remove %s from bookmarks?"), name);
+  g_free (name);
 
   if (vinagre_bookmarks_entry_get_node (entry) == VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER)
     {

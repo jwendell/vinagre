@@ -205,10 +205,13 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 {
   GtkWidget *box, *check, *label;
   GtkTable  *table;
+  gchar     *str;
 
   box = gtk_vbox_new (TRUE, 0);
 
-  label = gtk_label_new (_("<b>VNC Options</b>"));
+  str = g_strdup_printf ("<b>%s</b>", _("VNC Options"));
+  label = gtk_label_new (str);
+  g_free (str);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
