@@ -216,6 +216,7 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
   gchar *host;
   gchar *error_msg = NULL;
   VinagreConnection *conn = NULL;
+  GtkWidget *window;
 
   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
 
@@ -246,8 +247,15 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
 
   if (conn == NULL)
     {
+      window = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+          GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+          "Impossible to create the connection: %s", error_msg);
+      gtk_dialog_run (GTK_DIALOG (window));
+      gtk_widget_destroy (window);
       g_printerr ("Impossible to create the connection: %s\n",
           error_msg);
+      g_signal_handler_disconnect (G_OBJECT (priv->channel),
+        priv->signal_invalidated_id);
       g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
       g_free (error_msg);
       return ;
