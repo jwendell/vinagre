@@ -216,7 +216,7 @@ _vinagre_plugin_info_new (const gchar *file)
   if (str)
     info->icon_name = str;
   else
-    vinagre_debug_message (DEBUG_PLUGINS, "Could not find 'Icon' in %s, using 'vinagre-plugin'", file);
+    vinagre_debug_message (DEBUG_PLUGINS, "Could not find 'Icon' in %s, using 'vinagre'", file);
 	
   /* Get Authors */
   info->authors = g_key_file_get_string_list (plugin_file,
@@ -351,7 +351,7 @@ vinagre_plugin_info_get_icon_name (VinagrePluginInfo *info)
 			       info->icon_name))
     return info->icon_name;
   else
-    return "vinagre-plugin";
+    return "vinagre";
 }
 
 const gchar **
