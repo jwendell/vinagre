@@ -110,8 +110,7 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
   if (options)
     {
       gtk_box_pack_start (GTK_BOX (dialog->plugin_box), options, TRUE, TRUE, 0);
-      g_object_unref (options);
-      gtk_widget_show (dialog->plugin_box);
+      gtk_widget_show_all (dialog->plugin_box);
     }
   else
     gtk_widget_hide (dialog->plugin_box);
@@ -163,7 +162,8 @@ setup_protocol (VinagreConnectDialog *dialog)
         selected = i;
 
       g_strfreev (description);
-      g_object_unref (widget);
+      if (widget)
+	g_object_unref (widget);
       i++;
     }
 
@@ -373,7 +373,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   dialog.host_entry  = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "host_entry"));
   dialog.find_button = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "find_button"));
   dialog.fullscreen_check = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "fullscreen_check"));
-  dialog.plugin_box = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "plugin_options_vbox"));
+  dialog.plugin_box = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "plugin_options_connect_vbox"));
 
   setup_protocol (&dialog);
   setup_combo (dialog.host_entry);
