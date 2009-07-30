@@ -94,7 +94,8 @@ AC_ARG_ENABLE(ssh,
 
 if test "x$enable_ssh" = "xyes" ; then
   PKG_CHECK_MODULES(SSH,\
-  vte >= $VTE_REQUIRED)
+  vte >= $VTE_REQUIRED \
+  libxml-2.0 >= $XML_REQUIRED)
   AC_SUBST(VTE_CFLAGS)
   AC_SUBST(VTE_LIBS)
   AC_DEFINE([VINAGRE_ENABLE_SSH],[1],[We want ssh support])
@@ -191,6 +192,7 @@ plugin-loaders/Makefile
 plugin-loaders/c/Makefile
 plugins/Makefile
 plugins/vnc/Makefile
+plugins/ssh/Makefile
 vinagre/Makefile
 vinagre/view/Makefile
 ])
