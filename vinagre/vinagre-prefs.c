@@ -128,29 +128,16 @@ vinagre_prefs_get_int (VinagrePrefs *prefs, const gchar* key, gint def)
       return def;
 }
 
-static const gchar *
+static gchar *
 vinagre_prefs_get_string (VinagrePrefs *prefs, const gchar *key, const gchar *def)
 {
-  GError* error = NULL;
-  GConfValue* val;
+  gchar *result;
 
-  val = gconf_client_get (prefs->priv->gconf_client, key, &error);
+  result = gconf_client_get_string (prefs->priv->gconf_client, key, NULL);
+  if (!result)
+    result = g_strdup (def);
 
-  if (val != NULL)
-    {
-      const gchar *retval = def;
-
-      g_return_val_if_fail (error == NULL, retval);
-
-      if (val->type == GCONF_VALUE_STRING)
-        retval = gconf_value_get_string (val);
-
-      gconf_value_free (val);
-
-      return retval;
-    }
-  else
-      return def;
+  return result;
 }
 
 static GSList *
@@ -301,6 +288,7 @@ static void
 vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
   VinagrePrefs *prefs = VINAGRE_PREFS (object);
+  gchar        *str;
 
   switch (prop_id)
     {
@@ -341,7 +329,9 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	g_value_set_pointer (value, vinagre_prefs_get_list (prefs, VM_ACTIVE_PLUGINS));
 	break;
       case PROP_LAST_PROTOCOL:
-	g_value_set_string (value, vinagre_prefs_get_string (prefs, VM_LAST_PROTOCOL, NULL));
+	str = vinagre_prefs_get_string (prefs, VM_LAST_PROTOCOL, NULL);
+	g_value_set_string (value, str);
+	g_free (str);
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
