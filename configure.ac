@@ -47,6 +47,7 @@ AVAHI_REQUIRED=0.6.22
 PANEL_REQUIRED_VERSION=2.0.0
 TELEPATHY_GLIB_REQUIRED=0.7.31
 XML_REQUIRED=2.6.31
+VTE_REQUIRED=0.20
 
 # Check for avahi
 AC_ARG_ENABLE(avahi,
@@ -83,6 +84,22 @@ PKG_CHECK_MODULES(VNC, \
 )
 AC_SUBST(VNC_CFLAGS)
 AC_SUBST(VNC_LIBS)
+
+# Check for SSH
+AC_ARG_ENABLE(ssh,
+              AS_HELP_STRING([--enable-ssh],
+                             [Enable SSH plugin (default=no)]),
+              enable_ssh=${enableval},
+              enable_ssh=no)
+
+if test "x$enable_ssh" = "xyes" ; then
+  PKG_CHECK_MODULES(SSH,\
+  vte >= $VTE_REQUIRED)
+  AC_SUBST(VTE_CFLAGS)
+  AC_SUBST(VTE_LIBS)
+  AC_DEFINE([VINAGRE_ENABLE_SSH],[1],[We want ssh support])
+fi
+AM_CONDITIONAL(SSH, test "x$enable_ssh" = "xyes")
 
 # Check for telepathy
 AC_ARG_ENABLE(telepathy,
@@ -191,4 +208,5 @@ Configure summary:
 
 	Avahi enabled ..............:  ${enable_avahi}
 	Telepathy support ..........:  ${have_telepathy}
+	SSH plugin .................:  ${enable_ssh}
 "
