@@ -431,7 +431,8 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 			"fullscreen", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.fullscreen_check)),
 			NULL);
 
-	  vinagre_connection_parse_options_widget (conn, options);
+	  if (options)
+	    vinagre_connection_parse_options_widget (conn, options);
 
 	  g_free (protocol);
 	  g_free (actual_host);
@@ -443,7 +444,8 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 	}
 
       g_object_unref (plugin);
-      g_object_unref (options);
+      if (options)
+	g_object_unref (options);
 
 fail:
       g_free (host);
