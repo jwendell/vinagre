@@ -38,9 +38,6 @@ struct _VinagreSshTabPrivate
 
 G_DEFINE_TYPE (VinagreSshTab, vinagre_ssh_tab, VINAGRE_TYPE_TAB)
 
-
-static void open_ssh (VinagreSshTab *ssh_tab);
-
 static gchar *
 ssh_tab_get_tooltip (VinagreTab *tab)
 {
@@ -62,7 +59,26 @@ ssh_tab_get_screenshot (VinagreTab *tab)
 static void
 vinagre_ssh_tab_constructed (GObject *object)
 {
-  open_ssh (VINAGRE_SSH_TAB (object));
+  gchar **arg;
+  VinagreSshTab *ssh_tab = VINAGRE_SSH_TAB (object);
+
+  arg = g_new (gchar *, 5);
+  arg[0] = g_strdup ("ssh");
+  arg[1] = g_strdup (vinagre_connection_get_host (vinagre_tab_get_conn (VINAGRE_TAB (ssh_tab))));
+  arg[2] = g_strdup ("-p");
+  arg[3] = g_strdup_printf ("%d", vinagre_connection_get_port (vinagre_tab_get_conn (VINAGRE_TAB (ssh_tab))));
+  arg[4] = NULL;
+
+  vte_terminal_fork_command (VTE_TERMINAL (ssh_tab->priv->vte),
+			     "ssh",
+			     arg,
+			     NULL,
+			     NULL,
+			     FALSE,
+			     FALSE,
+			     FALSE);
+  g_strfreev (arg);
+  gtk_widget_show_all (GTK_WIDGET (ssh_tab));
 }
 
 static void 
@@ -77,31 +93,6 @@ vinagre_ssh_tab_class_init (VinagreSshTabClass *klass)
   tab_class->impl_get_screenshot = ssh_tab_get_screenshot;
 
   g_type_class_add_private (object_class, sizeof (VinagreSshTabPrivate));
-}
-
-static void
-open_ssh (VinagreSshTab *ssh_tab)
-{
-  gchar **arg;
-
-  arg = g_new (gchar *, 5);
-  arg[0] = g_strdup ("ssh");
-  arg[1] = g_strdup (vinagre_connection_get_host (vinagre_tab_get_conn (VINAGRE_TAB (ssh_tab))));
-  arg[3] = g_strdup ("-p");
-  arg[4] = g_strdup_printf ("%d", vinagre_connection_get_port (vinagre_tab_get_conn (VINAGRE_TAB (ssh_tab))));
-  arg[5] = NULL;
-
-  vte_terminal_fork_command (VTE_TERMINAL (ssh_tab->priv->vte),
-			     "ssh",
-			     arg,
-			     NULL,
-			     NULL,
-			     FALSE,
-			     FALSE,
-			     FALSE);
-  g_strfreev (arg);
-
-  gtk_widget_show_all (GTK_WIDGET (ssh_tab));
 }
 
 static void
