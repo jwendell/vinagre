@@ -143,6 +143,9 @@ GtkWidget 	*vinagre_plugin_get_connect_widget	(VinagrePlugin     *plugin,
 
 GtkFileFilter 	*vinagre_plugin_get_file_filter		(VinagrePlugin     *plugin);
 
+GdkPixbuf	*vinagre_plugin_get_icon		(VinagrePlugin *plugin,
+							 gint          size);
+
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):
  *

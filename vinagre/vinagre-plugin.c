@@ -26,6 +26,7 @@
 #endif
 
 #include "vinagre-plugin.h"
+#include "vinagre-plugin-info.h"
 #include "vinagre-dirs.h"
 
 /* properties */
@@ -551,6 +552,23 @@ vinagre_plugin_get_file_filter (VinagrePlugin *plugin)
   g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
 
   return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_file_filter (plugin);
+}
+
+GdkPixbuf *
+vinagre_plugin_get_icon (VinagrePlugin *plugin, gint size)
+{
+  VinagrePluginInfo *info;
+
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+
+  info = g_object_get_data (G_OBJECT (plugin), "info");
+  g_return_val_if_fail (info != NULL, NULL);
+
+  return gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+				   vinagre_plugin_info_get_icon_name (info),
+				   size,
+				   0,
+				   NULL);
 }
 
 /* vim: set ts=8: */
