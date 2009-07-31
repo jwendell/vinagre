@@ -207,6 +207,7 @@ show_dialog_conn (VinagreBookmarks      *book,
 	}
 
       if (!vinagre_connection_split_string (gtk_entry_get_text (GTK_ENTRY (host_entry)),
+					    vinagre_connection_get_protocol (conn),
 					    &protocol,
 					    &host,
 					    &port,
