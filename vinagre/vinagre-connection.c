@@ -187,6 +187,8 @@ vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, 
 static void
 default_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
 {
+  if (conn->priv->protocol)
+    xmlTextWriterWriteElement (writer, "protocol", conn->priv->protocol);
   xmlTextWriterWriteElement (writer, "name", conn->priv->name);
   xmlTextWriterWriteElement (writer, "host", conn->priv->host);
   xmlTextWriterWriteFormatElement (writer, "port", "%d", conn->priv->port);
