@@ -145,7 +145,7 @@ GtkFileFilter 	*vinagre_plugin_get_file_filter		(VinagrePlugin     *plugin);
 
 GdkPixbuf	*vinagre_plugin_get_icon		(VinagrePlugin *plugin,
 							 gint          size);
-
+const gchar	*vinagre_plugin_get_icon_name		(VinagrePlugin *plugin);
 /**
  * VINAGRE_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):
  *

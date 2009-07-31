@@ -571,4 +571,17 @@ vinagre_plugin_get_icon (VinagrePlugin *plugin, gint size)
 				   NULL);
 }
 
+const gchar *
+vinagre_plugin_get_icon_name (VinagrePlugin *plugin)
+{
+  VinagrePluginInfo *info;
+
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+
+  info = g_object_get_data (G_OBJECT (plugin), "info");
+  g_return_val_if_fail (info != NULL, NULL);
+
+  return vinagre_plugin_info_get_icon_name (info);
+}
+
 /* vim: set ts=8: */
