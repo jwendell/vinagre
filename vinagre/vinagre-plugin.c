@@ -553,4 +553,12 @@ vinagre_plugin_get_file_filter (VinagrePlugin *plugin)
   return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_file_filter (plugin);
 }
 
+VinagrePluginInfo *
+vinagre_plugin_get_info (VinagrePlugin *plugin)
+{
+  g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
+
+  return g_object_get_data (G_OBJECT (plugin), "info");
+}
+
 /* vim: set ts=8: */
