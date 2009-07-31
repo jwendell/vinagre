@@ -605,7 +605,9 @@ load_plugin (VinagrePluginsEngine *engine,
 		info->available = FALSE;
 		return FALSE;
 	}
-	
+
+	g_object_set_data (G_OBJECT (info->plugin), "info", info);
+
 	return TRUE;
 }
 
