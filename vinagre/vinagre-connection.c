@@ -499,6 +499,7 @@ vinagre_connection_get_icon (VinagreConnection *conn)
 
 gboolean
 vinagre_connection_split_string (const gchar *uri,
+				 const gchar *known_protocol,
 				 gchar       **protocol,
 				 gchar       **host,
 				 gint         *port,
@@ -517,12 +518,18 @@ vinagre_connection_split_string (const gchar *uri,
   url = g_strsplit (uri, "://", 2);
   if (g_strv_length (url) == 2)
     {
-      *protocol = g_strdup (url[0]);
+      if (known_protocol)
+	*protocol = g_strdup (known_protocol);
+      else
+	*protocol = g_strdup (url[0]);
       lhost = url[1];
     }
   else
     {
-      *protocol = g_strdup ("vnc");
+      if (known_protocol)
+	*protocol = g_strdup (known_protocol);
+      else
+	*protocol = g_strdup ("vnc");
       lhost = (gchar *) uri;
     }
 
@@ -582,7 +589,7 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolea
   gchar  *host, *protocol;
   VinagrePlugin *plugin;
 
-  if (!vinagre_connection_split_string (uri, &protocol, &host, &port, error_msg))
+  if (!vinagre_connection_split_string (uri, NULL, &protocol, &host, &port, error_msg))
     return NULL;
 
   if (use_bookmarks)
