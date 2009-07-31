@@ -93,10 +93,11 @@ VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar 
 VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg, gboolean use_bookmarks);
 
 gboolean	    vinagre_connection_split_string	(const gchar *uri,
-							 gchar **protocol,
-							 gchar **host,
-							 gint   *port,
-							 gchar **error_msg);
+							 const gchar *known_protocol,
+							 gchar       **protocol,
+							 gchar       **host,
+							 gint        *port,
+							 gchar       **error_msg);
 
 gchar*		    vinagre_connection_get_string_rep	(VinagreConnection *conn,
 							 gboolean has_protocol);

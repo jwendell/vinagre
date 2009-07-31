@@ -423,7 +423,12 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
       g_free (protocol);
 
       conn = vinagre_plugin_new_connection (plugin);
-      if (vinagre_connection_split_string (host, &protocol, &actual_host, &port, &error_msg))
+      if (vinagre_connection_split_string (host,
+					   vinagre_connection_get_protocol (conn),
+					   &protocol,
+					   &actual_host,
+					   &port,
+					   &error_msg))
 	{
 	  g_object_set (conn,
 			"host", actual_host,
