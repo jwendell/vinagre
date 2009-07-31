@@ -26,7 +26,6 @@
 #include <glib-object.h>
 
 #include "vinagre-window.h"
-#include "vinagre-plugin-info.h"
 
 /* TODO: add a .h file that includes all the .h files normally needed to
  * develop a plugin */ 
@@ -112,7 +111,6 @@ GType 		 vinagre_plugin_get_type		(void) G_GNUC_CONST;
 
 gchar 		*vinagre_plugin_get_install_dir		(VinagrePlugin *plugin);
 gchar 		*vinagre_plugin_get_data_dir		(VinagrePlugin *plugin);
-VinagrePluginInfo *vinagre_plugin_get_info		(VinagrePlugin *plugin);
 
 void 		 vinagre_plugin_activate		(VinagrePlugin *plugin,
 							 VinagreWindow *window);
