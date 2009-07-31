@@ -497,6 +497,19 @@ vinagre_connection_get_icon (VinagreConnection *conn)
   return pixbuf;
 }
 
+/**
+ * vinagre_connection_split_string:
+ * @uri: The URI to be splitted.
+ * @known_protocol: The protocol, if it's known. NULL otherwise.
+ * @protocol: Will hold the protocol of this URI
+ * @host: Will hold the host of this URI
+ * @port: Will hold the port of this URI
+ * @error_msg: Will hold an error message in case of fail
+ *
+ * Splits a URI into its several parts.
+ *
+ * Returns: %TRUE if the URI is splitted successfuly. FALSE otherwise.
+ */
 gboolean
 vinagre_connection_split_string (const gchar *uri,
 				 const gchar *known_protocol,
