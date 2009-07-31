@@ -50,7 +50,6 @@ enum
   PROP_PASSWORD,
   PROP_NAME,
   PROP_BEST_NAME,
-  PROP_ICON,
   PROP_FULLSCREEN
 };
 
@@ -160,10 +159,6 @@ vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, 
 
       case PROP_PASSWORD:
 	g_value_set_string (value, conn->priv->password);
-	break;
-
-      case PROP_ICON:
-	g_value_set_object (value, vinagre_connection_get_icon (conn));
 	break;
 
       case PROP_FULLSCREEN:
@@ -338,16 +333,6 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
                                                         G_PARAM_STATIC_BLURB));
 
   g_object_class_install_property (object_class,
-                                   PROP_ICON,
-                                   g_param_spec_object ("icon",
-                                                        "icon",
-	                                                "icon of this connection",
-                                                        GDK_TYPE_PIXBUF,
-	                                                G_PARAM_READABLE |
-                                                        G_PARAM_STATIC_NICK |
-                                                        G_PARAM_STATIC_NAME |
-                                                        G_PARAM_STATIC_BLURB));
-  g_object_class_install_property (object_class,
                                    PROP_FULLSCREEN,
                                    g_param_spec_boolean ("fullscreen",
                                                         "Full screen connection",
@@ -476,27 +461,6 @@ vinagre_connection_get_name (VinagreConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
   return conn->priv->name;
-}
-
-GdkPixbuf *
-vinagre_connection_get_icon (VinagreConnection *conn)
-{
-  GdkPixbuf         *pixbuf;
-  GtkIconTheme      *icon_theme;
-  gchar             *icon_name;
-
-  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
-
-  icon_name = g_strdup_printf ("application-x-%s", conn->priv->protocol);
-  icon_theme = gtk_icon_theme_get_default ();
-  pixbuf = gtk_icon_theme_load_icon (icon_theme,
-				     icon_name,
-				     16,
-				     0,
-				     NULL);
-
-  g_free (icon_name);
-  return pixbuf;
 }
 
 /**
