@@ -29,6 +29,8 @@
 #include "vinagre-bookmarks.h"
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 #ifdef VINAGRE_ENABLE_AVAHI
 #include "vinagre-mdns.h"
@@ -774,6 +776,8 @@ vinagre_fav_fill_bookmarks (GtkTreeStore *store, GSList *list, GtkTreeIter *pare
   VinagreBookmarksEntry *entry;
   GSList                *l;
   GtkTreeIter            iter;
+  VinagreConnection     *conn;
+  VinagrePlugin         *plugin;
 
  for (l = list; l; l = l->next)
     {
@@ -804,8 +808,12 @@ vinagre_fav_fill_bookmarks (GtkTreeStore *store, GSList *list, GtkTreeIter *pare
 	    break;
 
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
-	    name = vinagre_connection_get_best_name (vinagre_bookmarks_entry_get_conn (entry));
-	    pixbuf = vinagre_connection_get_icon (vinagre_bookmarks_entry_get_conn (entry));
+	    conn = vinagre_bookmarks_entry_get_conn (entry);
+	    name = vinagre_connection_get_best_name (conn);
+	    plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+								    vinagre_connection_get_protocol (conn));
+
+	    pixbuf = vinagre_plugin_get_icon (plugin, 16);
 
 	    gtk_tree_store_append (store, &iter, parent_iter);
 	    gtk_tree_store_set (store, &iter,

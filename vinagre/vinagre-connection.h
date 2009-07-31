@@ -24,7 +24,6 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libxml/xmlwriter.h>
 
 G_BEGIN_DECLS
@@ -101,8 +100,6 @@ gboolean	    vinagre_connection_split_string	(const gchar *uri,
 
 gchar*		    vinagre_connection_get_string_rep	(VinagreConnection *conn,
 							 gboolean has_protocol);
-
-GdkPixbuf*          vinagre_connection_get_icon		(VinagreConnection *conn);
 
 /* Methods that can be overrided */
 

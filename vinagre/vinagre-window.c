@@ -38,6 +38,8 @@
 #include "vinagre-ui.h"
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 #ifdef VINAGRE_ENABLE_AVAHI
 #include "vinagre-mdns.h"
@@ -527,10 +529,11 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
   static guint           i = 0;
   GSList                *l;
   VinagreBookmarksEntry *entry;
-  gchar                 *action_name, *action_label, *path, *tooltip, *icon_name;
+  gchar                 *action_name, *action_label, *path, *tooltip;
   GtkAction             *action;
   VinagreWindowPrivate  *p = window->priv;
   VinagreConnection     *conn;
+  VinagrePlugin         *plugin;
 
   for (l = entries; l; l = l->next)
     {
@@ -568,6 +571,8 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
+	    plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+								    vinagre_connection_get_protocol (conn));
 
 	    action_name = vinagre_connection_get_best_name (conn);
 	    action_label = vinagre_utils_escape_underscores (action_name, -1);
@@ -583,9 +588,10 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 				     action_label,
 				     tooltip,
 				     NULL);
-	    icon_name = g_strdup_printf ("application-x-%s", vinagre_connection_get_protocol (conn));
-	    g_object_set (G_OBJECT (action), "icon-name", icon_name, NULL);
-	    g_free (icon_name);
+	    g_object_set (G_OBJECT (action),
+			  "icon-name",
+			  vinagre_plugin_get_icon_name (plugin),
+			  NULL);
 	    g_object_set_data (G_OBJECT (action), "conn", conn);
 	    gtk_action_group_add_action (p->bookmarks_list_action_group,
 					 action);
