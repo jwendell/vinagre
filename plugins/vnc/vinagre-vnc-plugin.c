@@ -150,7 +150,7 @@ impl_new_connection_from_file (VinagrePlugin *plugin,
   port = g_key_file_get_integer (file, "connection", "port", NULL);
   if (!port)
     {
-      if (!vinagre_connection_split_string (host, &protocol, &actual_host, &port, error_msg))
+      if (!vinagre_connection_split_string (host, "vnc", &protocol, &actual_host, &port, error_msg))
 	goto the_end;
 
       g_free (host);
