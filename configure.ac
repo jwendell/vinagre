@@ -128,11 +128,18 @@ fi
 
 AM_CONDITIONAL(TELEPATHY, test "x$have_telepathy" = "xyes")
 
+# Enable/disable gnome-panel applet
+AC_ARG_ENABLE(applet,
+              AS_HELP_STRING([--disable-applet], [Do not build the panel applet @<:@default=enabled@:>@]),
+              enable_applet=$enableval,
+              enable_applet=yes)
 
-PKG_CHECK_MODULES(APPLET, \ 
-  libpanelapplet-2.0 >= $PANEL_REQUIRED_VERSION)
-AC_SUBST(APPLET_CFLAGS)
-AC_SUBST(APPLET_LIBS)
+if test "x$enable_applet" = "xyes";then
+   PKG_CHECK_MODULES(APPLET, libpanelapplet-2.0 >= $PANEL_REQUIRED_VERSION)
+   AC_SUBST(APPLET_CFLAGS)
+   AC_SUBST(APPLET_LIBS)
+fi
+AM_CONDITIONAL(APPLET, test "x$enable_applet" = "xyes")
 
 dnl ================================================================
 dnl GConf related settings
@@ -209,6 +216,7 @@ Configure summary:
 	Compiler Flags .............:  ${CFLAGS}
 
 	Avahi enabled ..............:  ${enable_avahi}
+	GNOME Panel applet..........:  ${enable_applet}
 	Telepathy support ..........:  ${have_telepathy}
 	SSH plugin .................:  ${enable_ssh}
 "
