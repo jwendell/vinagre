@@ -61,12 +61,13 @@ vinagre_ssh_tab_constructed (GObject *object)
 {
   gchar **arg;
   VinagreSshTab *ssh_tab = VINAGRE_SSH_TAB (object);
+  VinagreTab    *tab = VINAGRE_TAB (object);
 
   arg = g_new (gchar *, 5);
   arg[0] = g_strdup ("ssh");
-  arg[1] = g_strdup (vinagre_connection_get_host (vinagre_tab_get_conn (VINAGRE_TAB (ssh_tab))));
+  arg[1] = g_strdup (vinagre_connection_get_host (vinagre_tab_get_conn (tab)));
   arg[2] = g_strdup ("-p");
-  arg[3] = g_strdup_printf ("%d", vinagre_connection_get_port (vinagre_tab_get_conn (VINAGRE_TAB (ssh_tab))));
+  arg[3] = g_strdup_printf ("%d", vinagre_connection_get_port (vinagre_tab_get_conn (tab)));
   arg[4] = NULL;
 
   vte_terminal_fork_command (VTE_TERMINAL (ssh_tab->priv->vte),
@@ -79,6 +80,10 @@ vinagre_ssh_tab_constructed (GObject *object)
 			     FALSE);
   g_strfreev (arg);
   gtk_widget_show_all (GTK_WIDGET (ssh_tab));
+
+  vinagre_tab_add_recent_used (tab);
+  vinagre_tab_set_state (tab, VINAGRE_TAB_STATE_CONNECTED);
+  g_signal_emit_by_name (G_OBJECT (tab), "tab-initialized");
 }
 
 static void 
