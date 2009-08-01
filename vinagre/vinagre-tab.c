@@ -67,7 +67,8 @@ enum
 {
   PROP_0,
   PROP_CONN,
-  PROP_WINDOW
+  PROP_WINDOW,
+  PROP_TOOLTIP
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
@@ -136,6 +137,8 @@ vinagre_tab_get_property (GObject    *object,
       case PROP_WINDOW:
         g_value_set_object (value, tab->priv->window);
 	break;
+      case PROP_TOOLTIP:
+	g_value_take_string (value, vinagre_tab_get_tooltip (tab));
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;			
@@ -253,6 +256,17 @@ vinagre_tab_class_init (VinagreTabClass *klass)
 							VINAGRE_TYPE_WINDOW,
 							G_PARAM_READWRITE |
 							G_PARAM_CONSTRUCT_ONLY |
+							G_PARAM_STATIC_NAME |
+							G_PARAM_STATIC_NICK |
+							G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+				   PROP_TOOLTIP,
+				   g_param_spec_string ("tooltip",
+							"Tooltip",
+							"The tooltip of this tab",
+							NULL,
+							G_PARAM_READABLE |
 							G_PARAM_STATIC_NAME |
 							G_PARAM_STATIC_NICK |
 							G_PARAM_STATIC_BLURB));
