@@ -56,6 +56,13 @@ ssh_tab_get_screenshot (VinagreTab *tab)
   return NULL;
 }
 
+static gboolean
+emit_delayed_signal (GObject *object)
+{
+  g_signal_emit_by_name (object, "tab-initialized");
+  return FALSE;
+}
+
 static void
 vinagre_ssh_tab_constructed (GObject *object)
 {
@@ -83,7 +90,7 @@ vinagre_ssh_tab_constructed (GObject *object)
 
   vinagre_tab_add_recent_used (tab);
   vinagre_tab_set_state (tab, VINAGRE_TAB_STATE_CONNECTED);
-  g_signal_emit_by_name (G_OBJECT (tab), "tab-initialized");
+  g_idle_add ((GSourceFunc)emit_delayed_signal, object);
 }
 
 static void 
