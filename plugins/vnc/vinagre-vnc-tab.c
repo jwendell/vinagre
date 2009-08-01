@@ -617,6 +617,7 @@ vnc_desktop_resize_cb (VncDisplay *vnc, int x, int y, VinagreVncTab *tab)
 {
   g_object_notify (G_OBJECT (tab), "original-width");
   g_object_notify (G_OBJECT (tab), "original-height");
+  g_object_notify (G_OBJECT (tab), "tooltip");
 }
 
 static GSList *
