@@ -378,10 +378,10 @@ close_button_clicked_cb (GtkWidget *widget,
 }
 
 static void
-tab_size_changed_cb (VinagreTab *tab, VinagreNotebook *nb)
+vinagre_notebook_update_tab_tooltip (VinagreNotebook *nb, VinagreTab *tab)
 {
-  char *str;
-  GtkWidget *label;
+  char       *str;
+  GtkWidget  *label;
 
   label = GTK_WIDGET (g_object_get_data (G_OBJECT (tab), "label-ebox"));
   g_return_if_fail (label != NULL);
@@ -390,6 +390,12 @@ tab_size_changed_cb (VinagreTab *tab, VinagreNotebook *nb)
   gtk_widget_set_tooltip_markup (label, str);
 
   g_free (str);
+}
+
+static void
+tab_tooltip_changed_cb (GObject *object, GParamSpec *pspec, VinagreNotebook *nb)
+{
+  vinagre_notebook_update_tab_tooltip (nb, VINAGRE_TAB (object));
 }
 
 static void
@@ -439,6 +445,7 @@ static void
 tab_initialized_cb (VinagreTab *tab, VinagreNotebook *nb)
 {
   vinagre_notebook_update_ui_sentitivity (nb);
+  vinagre_notebook_update_tab_tooltip (nb, tab);
 }
 
 static GtkWidget *
@@ -568,8 +575,8 @@ vinagre_notebook_add_tab (VinagreNotebook *nb,
   vinagre_tab_set_notebook (tab, nb);
 
   g_signal_connect (tab,
-		    "notify::original-width",
-		    G_CALLBACK (tab_size_changed_cb),
+		    "notify::tooltip",
+		    G_CALLBACK (tab_tooltip_changed_cb),
 		    nb);
 
   g_signal_connect (tab,
