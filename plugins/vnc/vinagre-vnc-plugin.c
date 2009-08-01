@@ -78,8 +78,8 @@ impl_get_public_description (VinagrePlugin *plugin)
 {
   gchar **result = g_new (gchar *, 3);
 
-  result[0] = g_strdup ("VNC");
-  result[1] = g_strdup ("Access Unix/Linux, Windows and other machines.");
+  result[0] = g_strdup (_("VNC"));
+  result[1] = g_strdup (_("Access Unix/Linux, Windows and other machines."));
   result[2] = NULL;
 
   return result;
@@ -220,14 +220,14 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
   label = gtk_label_new ("  ");
   gtk_table_attach (table, label, 0, 1, 0, 1, GTK_SHRINK, GTK_SHRINK, 0, 0);
 
-  check = gtk_check_button_new_with_mnemonic ("_View only");
+  check = gtk_check_button_new_with_mnemonic (_("_View only"));
   g_object_set_data (G_OBJECT (box), "view_only", check);
   gtk_table_attach_defaults (table, check, 1, 2, 0, 1);
   if (VINAGRE_IS_VNC_CONNECTION (conn))
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				  vinagre_vnc_connection_get_view_only (VINAGRE_VNC_CONNECTION (conn)));
 
-  check = gtk_check_button_new_with_mnemonic ("_Scaling");
+  check = gtk_check_button_new_with_mnemonic (_("_Scaling"));
   g_object_set_data (G_OBJECT (box), "scaling", check);
   gtk_table_attach_defaults (table, check, 1, 2, 1, 2);
   if (VINAGRE_IS_VNC_CONNECTION (conn))
