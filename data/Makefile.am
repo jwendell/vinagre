@@ -1,8 +1,5 @@
 SUBDIRS = icons
 
-gtkbuilderdir   = $(datadir)/vinagre
-gtkbuilder_DATA = vinagre.ui
-
 man_MANS = vinagre.1
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -12,7 +9,7 @@ vinagre-@VINAGRE_API_VERSION@.pc: vinagre.pc
 	cp vinagre.pc vinagre-@VINAGRE_API_VERSION@.pc
 
 uidir = $(datadir)/vinagre
-ui_DATA = vinagre-ui.xml GNOME_VinagreApplet.xml
+ui_DATA = vinagre-ui.xml GNOME_VinagreApplet.xml vinagre.ui
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir       = $(datadir)/applications
