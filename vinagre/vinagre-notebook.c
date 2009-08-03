@@ -500,7 +500,8 @@ build_tab_label (VinagreNotebook *nb,
 		    tab);
 
   /* setup site icon, empty by default */
-  icon = gtk_image_new ();
+  icon = gtk_image_new_from_icon_name (vinagre_tab_get_icon_name (tab),
+				       GTK_ICON_SIZE_MENU);
   gtk_box_pack_start (GTK_BOX (label_hbox), icon, FALSE, FALSE, 0);
 	
   /* setup label */
