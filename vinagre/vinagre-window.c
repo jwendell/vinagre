@@ -431,7 +431,6 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 		"show-tips", TRUE,
 		"sort-type", GTK_RECENT_SORT_MRU,
 		NULL);
-  gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (window->priv->recent_action), FALSE);
   g_signal_connect (window->priv->recent_action,
 		    "item-activated",
 		    G_CALLBACK (activate_recent_cb),
