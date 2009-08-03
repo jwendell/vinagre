@@ -781,4 +781,20 @@ vinagre_tab_free_actions (GSList *actions)
   g_slist_free (actions);
 }
 
+const gchar *
+vinagre_tab_get_icon_name (VinagreTab *tab)
+{
+  const gchar   *protocol;
+  VinagrePlugin *plugin;
+
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), NULL);
+
+  protocol = vinagre_connection_get_protocol (tab->priv->conn);
+  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
+				protocol);
+  g_return_val_if_fail (plugin != NULL, NULL);
+
+  return vinagre_plugin_get_icon_name (plugin);
+}
+
 /* vim: set ts=8: */

@@ -119,6 +119,7 @@ gchar *			vinagre_tab_get_extra_title	(VinagreTab *tab);
 GtkWidget *		vinagre_tab_get_toolbar		(VinagreTab *tab);
 
 void			vinagre_tab_free_actions	(GSList *actions);
+const gchar		*vinagre_tab_get_icon_name	(VinagreTab *tab);
 
 /* Protected functions */
 void			vinagre_tab_set_save_credentials	(VinagreTab *tab, gboolean value);
