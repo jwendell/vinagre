@@ -251,9 +251,10 @@ static void
 activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
 {
   VinagreConnection *conn;
-  gchar             *error;
+  gchar             *error, *uri;
 
-  conn = vinagre_connection_new_from_string (gtk_recent_chooser_get_current_uri (action),
+  uri = gtk_recent_chooser_get_current_uri (action);
+  conn = vinagre_connection_new_from_string (uri,
 					     &error,
 					     TRUE);
   if (conn)
@@ -265,6 +266,7 @@ activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
     vinagre_utils_show_error (NULL, error ? error : _("Unknown error"), GTK_WINDOW (window));
 
   g_free (error);
+  g_free (uri);
 }
 
 static void
