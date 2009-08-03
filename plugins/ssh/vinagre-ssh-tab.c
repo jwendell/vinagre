@@ -59,7 +59,10 @@ ssh_tab_get_screenshot (VinagreTab *tab)
 static gboolean
 emit_delayed_signal (GObject *object)
 {
+  VinagreSshTab *ssh_tab = VINAGRE_SSH_TAB (object);
+
   g_signal_emit_by_name (object, "tab-initialized");
+  gtk_widget_grab_focus (ssh_tab->priv->vte);
   return FALSE;
 }
 
