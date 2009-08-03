@@ -126,9 +126,10 @@ vinagre_notebook_new (VinagreWindow *window)
 void
 vinagre_notebook_show_hide_tabs (VinagreNotebook *nb)
 {
-  gboolean always;
+  gboolean always, fs;
   gint     n;
 
+  fs = vinagre_window_is_fullscreen (nb->priv->window);
   n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
 
   g_object_get (vinagre_prefs_get_default (),
@@ -136,7 +137,7 @@ vinagre_notebook_show_hide_tabs (VinagreNotebook *nb)
 		NULL);
 
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (nb),
-			      (n > 1) || (always));
+			      ((n > 1) || (always)) && !fs);
 }
 
 static void
@@ -342,6 +343,18 @@ vinagre_notebook_page_switched (GtkNotebook     *notebook,
 }
 
 static void
+vinagre_notebook_page_removed_cb (VinagreNotebook *nb)
+{
+  gint n;
+
+  if ((gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb)) == 0) &&
+      (vinagre_window_is_fullscreen (nb->priv->window)))
+    vinagre_window_toggle_fullscreen (nb->priv->window);
+
+vinagre_notebook_show_hide_tabs (nb);
+}
+
+static void
 vinagre_notebook_init (VinagreNotebook *nb)
 {
   nb->priv = VINAGRE_NOTEBOOK_GET_PRIVATE (nb);
@@ -355,7 +368,7 @@ vinagre_notebook_init (VinagreNotebook *nb)
 		    NULL);
   g_signal_connect (nb,
 		    "page-removed",
-		    G_CALLBACK (vinagre_notebook_show_hide_tabs),
+		    G_CALLBACK (vinagre_notebook_page_removed_cb),
 		    NULL);
   g_signal_connect (nb,
 		    "switch-page",
