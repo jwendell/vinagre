@@ -21,7 +21,10 @@
 #include <string.h>
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <locale.h>
+#include <glib/gi18n.h>
 #include <panel-applet.h>
+
 #include "vinagre-bookmarks.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-utils.h"
@@ -29,6 +32,7 @@
 #include "vinagre-commands.h"
 #include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
+
 #include <config.h>
 
 #ifdef VINAGRE_ENABLE_AVAHI
@@ -418,6 +422,11 @@ vinagre_applet_init (VinagreApplet *applet)
   VinagreMdns *mdns;
 #endif
 
+  setlocale (LC_ALL, "");
+  bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+
   applet->size = 0;
   applet->icon = NULL;
 
@@ -473,9 +482,6 @@ vinagre_applet_fill (PanelApplet *_applet,
   if (strcmp (iid, VINAGRE_APPLET_OAFID) != 0)
     return FALSE;
 
-  bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
   gtk_window_set_default_icon_name ("vinagre");
   g_set_application_name (_("Remote Desktop Viewer"));
 
