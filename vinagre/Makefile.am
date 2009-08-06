@@ -25,6 +25,7 @@ NOINST_H_FILES = \
   vinagre-plugin-dialog.h \
   vinagre-plugins-engine.h \
   vinagre-window-private.h \
+  vinagre-spinner.h \
   $(NULL)
 
 INST_H_FILES = \
@@ -89,6 +90,7 @@ libvinagre_la_SOURCES = \
   vinagre-tab.c \
   vinagre-utils.c \
   vinagre-window.c \
+  vinagre-spinner.c \
   $(NOINST_H_FILES) \
   $(INST_H_FILES) \
   $(NULL)
@@ -178,6 +180,7 @@ vinagre_applet_SOURCES =					\
 	vinagre-dirs.h vinagre-dirs.c \
 	vinagre-fav.h vinagre-fav.c \
 	vinagre-connect.h vinagre-connect.c \
+	vinagre-spinner.h vinagre-spinner.c \
 	$(NULL)
 
 if AVAHI

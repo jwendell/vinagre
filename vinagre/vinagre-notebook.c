@@ -28,6 +28,7 @@
 #include "vinagre-utils.h"
 #include "vinagre-dnd.h"
 #include "vinagre-prefs.h"
+#include "vinagre-spinner.h"
 
 #define VINAGRE_NOTEBOOK_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_NOTEBOOK, VinagreNotebookPrivate))
 
@@ -196,6 +197,27 @@ vinagre_notebook_update_ui_sentitivity (VinagreNotebook *nb)
   active = (nb->priv->active_tab) &&
 	   (vinagre_tab_get_state (VINAGRE_TAB (nb->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED);
   gtk_action_group_set_sensitive (action_group, active);
+
+  if (nb->priv->active_tab)
+    {
+      GtkWidget *spinner, *icon;
+
+      spinner = g_object_get_data (G_OBJECT (nb->priv->active_tab), "spinner");
+      icon = g_object_get_data (G_OBJECT (nb->priv->active_tab), "icon");
+
+      if (vinagre_tab_get_state (VINAGRE_TAB (nb->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED)
+	{
+	  gtk_widget_hide (spinner);
+	  vinagre_spinner_stop (VINAGRE_SPINNER (spinner));
+	  gtk_widget_show (icon);
+	}
+      else
+	{
+	  gtk_widget_hide (icon);
+	  gtk_widget_show (spinner);
+	  vinagre_spinner_start (VINAGRE_SPINNER (spinner));
+	}
+    }
 }
 
 static void
@@ -467,7 +489,7 @@ build_tab_label (VinagreNotebook *nb,
 {
   GtkWidget *hbox, *label_hbox, *label_ebox;
   GtkWidget *label, *dummy_label;
-  GtkWidget *close_button;
+  GtkWidget *close_button, *spinner;
   GtkRcStyle *rcstyle;
   GtkWidget *image;
   GtkWidget *icon;
@@ -512,7 +534,12 @@ build_tab_label (VinagreNotebook *nb,
 		    G_CALLBACK (close_button_clicked_cb),
 		    tab);
 
-  /* setup site icon, empty by default */
+  /* setup spinner */
+  spinner = vinagre_spinner_new ();
+  vinagre_spinner_set_size (VINAGRE_SPINNER (spinner), GTK_ICON_SIZE_MENU);
+  gtk_box_pack_start (GTK_BOX (label_hbox), spinner, FALSE, FALSE, 0);
+
+  /* setup site icon */
   icon = gtk_image_new_from_icon_name (vinagre_tab_get_icon_name (tab),
 				       GTK_ICON_SIZE_MENU);
   gtk_box_pack_start (GTK_BOX (label_hbox), icon, FALSE, FALSE, 0);
@@ -535,13 +562,13 @@ build_tab_label (VinagreNotebook *nb,
   gtk_widget_show (dummy_label);	
   gtk_widget_show (image);
   gtk_widget_show (close_button);
-  gtk_widget_show (icon);
   
   g_object_set_data (G_OBJECT (hbox), "label", label);
   g_object_set_data (G_OBJECT (tab),  "label", label);
   g_object_set_data (G_OBJECT (hbox), "label-ebox", label_ebox);
   g_object_set_data (G_OBJECT (tab),  "label-ebox", label_ebox);
-  g_object_set_data (G_OBJECT (hbox), "icon", icon);
+  g_object_set_data (G_OBJECT (tab), "spinner", spinner);
+  g_object_set_data (G_OBJECT (tab), "icon", icon);
   g_object_set_data (G_OBJECT (hbox), "close-button", close_button);
   g_object_set_data (G_OBJECT (tab),  "close-button", close_button);
 
