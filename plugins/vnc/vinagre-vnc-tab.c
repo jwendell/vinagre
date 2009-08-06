@@ -887,15 +887,21 @@ void
 vinagre_vnc_tab_paste_text (VinagreVncTab *tab, const gchar *text)
 {
   gchar *out;
-  size_t a, b;
+  gsize a, b;
+  GError *error = NULL;
+
   g_return_if_fail (VINAGRE_IS_VNC_TAB (tab));
 
-  out = g_convert (text, -1, "iso8859-1", "utf-8", &a, &b, NULL);
-
+  out = g_convert_with_fallback (text, -1, "iso8859-1//TRANSLIT", "utf-8", NULL, &a, &b, &error);
   if (out)
     {
       vnc_display_client_cut_text (VNC_DISPLAY (tab->priv->vnc), out);
       g_free (out);
+    }
+  else
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
 }
 
