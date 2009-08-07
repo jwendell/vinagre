@@ -688,14 +688,60 @@ vinagre_tab_remove_from_notebook (VinagreTab *tab)
   vinagre_notebook_close_tab (tab->priv->nb, tab);
 }
 
+static void
+add_if_writable (GdkPixbufFormat *data, GSList **list)
+{
+  if (gdk_pixbuf_format_is_writable (data))
+    *list = g_slist_prepend (*list, data);
+}
+
+static GSList *
+get_supported_image_formats (void)
+{
+  GSList *formats = gdk_pixbuf_get_formats ();
+  GSList *writable_formats = NULL;
+
+  g_slist_foreach (formats, (GFunc)add_if_writable, &writable_formats);
+  g_slist_free (formats);
+
+  return writable_formats;
+}
+
+static void
+filter_changed_cb (GObject *object, GParamSpec *pspec, VinagreTab *tab)
+{
+  GtkFileFilter  *filter;
+  gchar          *extension, *filename, *basename, *newbase;
+  GtkFileChooser *chooser = GTK_FILE_CHOOSER (object);
+  int            i;
+
+  filter = gtk_file_chooser_get_filter (chooser);
+  extension = g_object_get_data (G_OBJECT (filter), "extension");
+
+  filename = gtk_file_chooser_get_filename (chooser);
+  basename = g_path_get_basename (filename);
+  for (i = strlen (basename)-1; i>=0; i--)
+    if (basename[i] == '.')
+      break;
+  basename[i] = '\0';
+  newbase = g_strdup_printf ("%s.%s", basename, extension);
+
+  gtk_file_chooser_set_current_name (chooser, newbase);
+
+  g_free (filename);
+  g_free (basename);
+  g_free (newbase);
+}
+
 void
 vinagre_tab_take_screenshot (VinagreTab *tab)
 {
   GdkPixbuf     *pix;
   GtkWidget     *dialog;
   GString       *suggested_filename;
-  gchar         *filename, *name;
-  GtkFileFilter *filter;
+  gchar         *name;
+  GtkFileFilter *filter, *initial_filter;
+  GSList        *formats, *l;
 
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
@@ -708,12 +754,6 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
       return;
     }
 
-  filename = NULL;
-  name = vinagre_connection_get_best_name (tab->priv->conn);
-  suggested_filename = g_string_new (NULL);
-  g_string_printf (suggested_filename, _("Screenshot of %s"), name);
-  g_string_append (suggested_filename, ".png");
-
   dialog = gtk_file_chooser_dialog_new (_("Save Screenshot"),
 				      GTK_WINDOW (tab->priv->window),
 				      GTK_FILE_CHOOSER_ACTION_SAVE,
@@ -721,25 +761,71 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
 				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
 				      NULL);
   gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
-  gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), suggested_filename->str);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
 
-  filter = gtk_file_filter_new ();
-  gtk_file_filter_set_name (filter, _("Supported formats"));
-  gtk_file_filter_add_pixbuf_formats (filter);
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+  name = vinagre_connection_get_best_name (tab->priv->conn);
+  suggested_filename = g_string_new (NULL);
+  g_string_printf (suggested_filename, _("Screenshot of %s"), name);
+  g_string_append (suggested_filename, ".png");
+  g_free (name);
+  gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), suggested_filename->str);
+  g_string_free (suggested_filename, TRUE);
+
+  formats = get_supported_image_formats ();
+  for (l = formats; l; l = l->next)
+    {
+      GdkPixbufFormat *data = (GdkPixbufFormat *)l->data;
+      gchar **exts;
+      int i;
+
+      filter = gtk_file_filter_new ();
+
+      name = gdk_pixbuf_format_get_description (data);
+      gtk_file_filter_set_name (filter, name);
+      g_free (name);
+
+      exts = gdk_pixbuf_format_get_extensions (data);
+      g_object_set_data_full (G_OBJECT (filter), "extension", g_strdup (exts[0]), g_free);
+      if (strcmp (exts[0], "png") == 0)
+	initial_filter = filter;
+
+      for (i = 0; exts[i]; i++)
+	{
+	  name = g_strdup_printf ("*.%s", exts[i]);
+	  gtk_file_filter_add_pattern (filter, name);
+	  g_free (name);
+	}
+      g_strfreev (exts);
+
+      gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+    }
+  g_slist_free (formats);
+
+  gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), initial_filter);
+  g_signal_connect (dialog, "notify::filter", G_CALLBACK (filter_changed_cb), tab);
 
   if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
     {
-      filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-      gdk_pixbuf_save (pix, filename, "png", NULL, NULL);
+      GError *error = NULL;
+      gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+
+      filter = gtk_file_chooser_get_filter (GTK_FILE_CHOOSER (dialog));
+      name = g_object_get_data (G_OBJECT (filter), "extension");
+      if (!name)
+	name = "png";
+
+      if (!gdk_pixbuf_save (pix, filename, name, &error, NULL))
+	{
+	  vinagre_utils_show_error (_("Error saving screenshot"),
+				    error->message,
+				    GTK_WINDOW (tab->priv->window));
+	  g_error_free (error);
+	}
       g_free (filename);
   }
 
   gtk_widget_destroy (dialog);
   g_object_unref (pix);
-  g_string_free (suggested_filename, TRUE);
-  g_free (name);
 }
 
 const GSList *
