@@ -385,6 +385,7 @@ setup_layout (VinagreTab *tab)
   GtkWidget  *button;
 
   tab->priv->toolbar = gtk_toolbar_new ();
+  gtk_toolbar_set_show_arrow (GTK_TOOLBAR (tab->priv->toolbar), FALSE);
   GTK_WIDGET_SET_FLAGS (tab->priv->toolbar, GTK_NO_SHOW_ALL);
 
   gtk_toolbar_set_style (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOLBAR_BOTH_HORIZ);
@@ -413,7 +414,6 @@ setup_layout (VinagreTab *tab)
 
   /* Space */
   button = GTK_WIDGET (gtk_separator_tool_item_new ());
-  gtk_separator_tool_item_set_draw (GTK_SEPARATOR_TOOL_ITEM (button), FALSE);
   gtk_tool_item_set_expand (GTK_TOOL_ITEM (button), TRUE);
   gtk_widget_show (GTK_WIDGET (button));
   gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
@@ -431,6 +431,8 @@ setup_layout (VinagreTab *tab)
   ViewAutoDrawer_SetActive (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
   ViewOvBox_SetOver (VIEW_OV_BOX (tab->priv->layout), tab->priv->toolbar);
   ViewOvBox_SetUnder (VIEW_OV_BOX (tab->priv->layout), tab->priv->scroll);
+  ViewAutoDrawer_SetOffset (VIEW_AUTODRAWER (tab->priv->layout), -1);
+  ViewAutoDrawer_SetFill (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
 }
 
 static void
