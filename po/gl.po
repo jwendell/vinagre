@@ -1,4 +1,4 @@
-# translation of gl.po to Galego
+# translation of vinagre.gnome-2-26.gl.po to Galician
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
@@ -6,19 +6,22 @@
 # Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2007, 2008.
 # Fran Diéguez <fran.dieguez@mabishu.com>, 2009.
 # Mancomún - Centro de Referencia e Servizos de Software Libre <g11n@mancomun.org>, 2009.
+# Suso Baleato <suso.baleato@xunta.es>,2009.
+# Antón Méixome <meixome@mancomun.org>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: gl\n"
+"Project-Id-Version: vinagre.gnome-2-26.gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-17 15:17+0100\n"
-"PO-Revision-Date: 2009-03-10 20:17+0000\n"
-"Last-Translator: Suso Baleato <suso.baleato@xunta.es>\n"
-"Language-Team: Galego <proxecto@trasno.net>\n"
+"POT-Creation-Date: 2009-08-10 16:22+0200\n"
+"PO-Revision-Date: 2009-06-23 12:32+0200\n"
+"Last-Translator: Antón Méixome <meixome@mancomun.org>\n"
+"Language-Team: Galician <gnome@mancomun.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../data/GNOME_VinagreApplet.xml.h:1
 msgid "_About"
@@ -209,7 +212,7 @@ msgstr "Un menú para acceder rapidamente a máquinas remotas"
 
 #: ../src/GNOME_VinagreApplet.server.in.in.h:3
 msgid "Vinagre Applet Factory"
-msgstr "Fábrica de miniaplicacións Vinagre"
+msgstr "Fábrica de miniaplicativos Vinagre"
 
 #: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
 msgid "Could not run vinagre:"
@@ -326,34 +329,46 @@ msgstr "Non se puido eliminar o ficheiro antigo de marcadores"
 msgid "Root Folder"
 msgstr "Cartafol Raíz"
 
-#: ../src/vinagre-bookmarks-ui.c:66
+#: ../src/vinagre-bookmarks-ui.c:79
 msgid "Invalid name for this folder"
 msgstr "O nome non é válido para este cartafol"
 
-#: ../src/vinagre-bookmarks-ui.c:236
+#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
+#, c-format
+msgid ""
+"The name \"%s\" is already used in this folder. Please use a different name."
+msgstr ""
+"O nome \"%s\" xa foi usado neste cartafol. Por favor use un nome diferente."
+
+#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
+#: ../src/vinagre-bookmarks-ui.c:192
+msgid "Invalid name for this item"
+msgstr "O nome non é válido para este ítem"
+
+#: ../src/vinagre-bookmarks-ui.c:292
 #, c-format
 msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgstr "Está seguro de que quere eliminar <i>%s</i> dos marcadores?"
 
-#: ../src/vinagre-bookmarks-ui.c:241
+#: ../src/vinagre-bookmarks-ui.c:297
 msgid "Remove Folder?"
 msgstr "Quere eliminar o cartafol?"
 
-#: ../src/vinagre-bookmarks-ui.c:242
+#: ../src/vinagre-bookmarks-ui.c:298
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr ""
 "Teña en conta que tamén se eliminarán todos os seus subcartafoles e "
 "elementos."
 
-#: ../src/vinagre-bookmarks-ui.c:247
+#: ../src/vinagre-bookmarks-ui.c:303
 msgid "Remove Item?"
 msgstr "Quere eliminar o elemento?"
 
-#: ../src/vinagre-bookmarks-ui.c:264
+#: ../src/vinagre-bookmarks-ui.c:320
 msgid "Error removing bookmark: Entry not found"
 msgstr "Produciuse un erro ao eliminar o marcador: non se encontrou a entrada"
 
-#: ../src/vinagre-bookmarks-ui.c:281
+#: ../src/vinagre-bookmarks-ui.c:337
 msgid "New Folder"
 msgstr "Cartafol novo"
 
@@ -363,7 +378,7 @@ msgstr "Seleccione o ficheiro"
 
 #: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
 msgid "Supported formats"
-msgstr "Formatos soportados"
+msgstr "Formatos compatíbeis"
 
 #: ../src/vinagre-commands.c:156
 msgid "The following file could not be opened:"
@@ -383,7 +398,7 @@ msgstr "Escolla un servidor VNC"
 #: ../src/vinagre-connection.c:601
 #, c-format
 msgid "The protocol %s is not supported."
-msgstr "O protocolo %s non se soporta."
+msgstr "O protocolo %s non é compatíbel."
 
 #: ../src/vinagre-connection.c:708
 msgid "Could not open the file."
@@ -407,12 +422,11 @@ msgstr "Non se puido encontrar o enderezo do host no ficheiro."
 
 #: ../src/vinagre-fav.c:667
 msgid "Invalid operation"
-msgstr "Operación non válida"
+msgstr "A operación non é válida"
 
 #: ../src/vinagre-fav.c:668
 msgid "Data received from drag&drop operation is invalid."
-msgstr ""
-"Os datos recibidos desde a operación arrastrar e soltar non son válidos."
+msgstr "Os datos recibidos da operación arrastrar e soltar non son válidos."
 
 #: ../src/vinagre-fav.c:861
 msgid "Hosts nearby"
@@ -451,7 +465,7 @@ msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Execute 'vinagre --help' para ver unha lista completa das opcións "
-"dispoñíbeis de liña de comandos"
+"dispoñíbeis de liña de ordes"
 
 #: ../src/vinagre-mdns.c:123
 #, c-format
@@ -500,11 +514,11 @@ msgstr "Fallou a autenticación"
 #: ../src/vinagre-tab.c:382
 #, c-format
 msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "O método de autenticación co host <i>%s</i> non é soportado. (%u)"
+msgstr "O método de autenticación co host <i>%s</i> non é compatíbel. (%u)"
 
 #: ../src/vinagre-tab.c:386
 msgid "Authentication unsupported"
-msgstr "Autenticación non soportada"
+msgstr "Autenticación non compatíbel"
 
 #: ../src/vinagre-tab.c:460
 msgid "Error saving recent connection."
@@ -579,7 +593,7 @@ msgid ""
 "Read the README file (shipped with Vinagre) in order to know how to enable "
 "this feature."
 msgstr ""
-"O escalado non se soporta nesta instalación.\n"
+"O escalado non é posíbel nesta instalación.\n"
 "\n"
 "Lea o ficheiro README (distribuído co Vinagre) para saber como activar esta "
 "característica."
@@ -615,7 +629,7 @@ msgstr "Saír do programa"
 
 #: ../src/vinagre-ui.h:49
 msgid "Edit the application preferences"
-msgstr "Editar as preferencias da aplicación"
+msgstr "Editar as preferencias do aplicativo"
 
 #. Bookmarks menu
 #: ../src/vinagre-ui.h:52
@@ -661,7 +675,7 @@ msgstr "Abrir o manual do Vinagre"
 
 #: ../src/vinagre-ui.h:65
 msgid "About this application"
-msgstr "Sobre esta aplicación"
+msgstr "Sobre este aplicativo"
 
 #: ../src/vinagre-ui.h:72
 msgid "Close the current connection"
@@ -809,73 +823,3 @@ msgstr "Abrir %s:%d"
 #: ../src/vinagre-window.c:797
 msgid "Press Ctrl+Alt to release the cursor"
 msgstr "Prema Ctrl+Alt para soltar o cursor"
-
-#~ msgid "<b>Editing a bookmark</b>"
-#~ msgstr "<b>Editar un marcador</b>"
-
-#~ msgid "<b>Enter a name for this connection</b>"
-#~ msgstr "<b>Introducir un nome para esta conexión</b>"
-
-#~ msgid ""
-#~ "<b>In order to connect on this machine, a password is required. Please, "
-#~ "supply it.</b>"
-#~ msgstr ""
-#~ "<b>Requírese un contrasinal para conectarse con esta máquina. Introduza o "
-#~ "contrasinal.</b>"
-
-#~ msgid "Editing a bookmark"
-#~ msgstr "Editando un marcador"
-
-#~ msgid "Saving to bookmarks"
-#~ msgstr "Gardando en marcadores"
-
-#~ msgid "_Port:"
-#~ msgstr "_Porto:"
-
-#~ msgid "_Remember this password"
-#~ msgstr "_Recordar este contrasinal"
-
-#~ msgid "Confirm removal?"
-#~ msgstr "Confirma a eliminación?"
-
-#~ msgid "Are you sure you want to exclude <i>%s</i> from bookmarks?"
-#~ msgstr "Está seguro de que quere excluír <i>%s</i> dos marcadores?"
-
-#~ msgid "Error while removing %s from bookmarks: %s"
-#~ msgstr "Houbo un erro ao eliminar %s dos marcadores: %s"
-
-#~ msgid "Image"
-#~ msgstr "Imaxe"
-
-#~ msgid "Name"
-#~ msgstr "Nome"
-
-#~ msgid "Hide bookmarks"
-#~ msgstr "Ocultar os marcadores"
-
-#~ msgid "Connection to host \"%s\" was closed."
-#~ msgstr "Pechouse a conexión co host \"%s\"."
-
-#~ msgid "Expected `%s' got `%s' for key %s"
-#~ msgstr "Esperábase `%s' obtívose `%s' para a chave %s"
-
-#~ msgid "Authentication to host \"%s\" has failed"
-#~ msgstr "Fallou a autenticación para o host \"%s\""
-
-#~ msgid "Authentication method to host \"%s\" is unsupported. (%u)"
-#~ msgstr "Non se soporta o método de autenticación para o host \"%s\". (%u)"
-
-#~ msgid "Error saving the password on the keyring."
-#~ msgstr "Erro ao gardar o contrasinal no anel de chaves."
-
-#~ msgid "Press Ctrl+Alt to grab the cursor"
-#~ msgstr "Prema Ctrl+Alt para capturar o cursor"
-
-#~ msgid "Connect into a remote machine"
-#~ msgstr "Conectar cunha máquina remota"
-
-#~ msgid "Connect into this machine"
-#~ msgstr "Conectarse con esta máquina"
-
-#~ msgid "Show or hide the bookmarks panel"
-#~ msgstr "Mostrar ou ocultar o panel dos marcadores"
