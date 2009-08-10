@@ -53,9 +53,13 @@ static gchar **files = NULL;
 static gchar **remaining_args = NULL;
 static GSList *servers = NULL;
 static gboolean new_window = FALSE;
+static gboolean fullscreen = FALSE;
 
 static const GOptionEntry options [] =
 {
+  { "fullscreen", 'f', 0, G_OPTION_ARG_NONE, &fullscreen,
+    N_("Open vinagre in fullscreen mode"), NULL },
+
   { "new-window", 'n', 0, G_OPTION_ARG_NONE, &new_window,
     N_("Create a new toplevel window in an existing instance of vinagre"), NULL },
 
@@ -128,7 +132,7 @@ vinagre_main_process_command_line (VinagreWindow *window)
 int main (int argc, char **argv) {
   GOptionContext       *context;
   GError               *error = NULL;
-  GSList               *l, *next, *plugins;
+  GSList               *l, *plugins;
   VinagreWindow        *window;
   VinagreApp           *app;
   VinagrePluginsEngine *engine;
@@ -193,11 +197,11 @@ int main (int argc, char **argv) {
 
   vinagre_utils_handle_debug ();
 
-  for (l = servers; l; l = next)
+  for (l = servers; l; l = l->next)
     {
       VinagreConnection *conn = l->data;
-      
-      next = l->next;
+
+      vinagre_connection_set_fullscreen (conn, fullscreen);
       vinagre_cmd_direct_connect (conn, window);
       g_object_unref (conn);
     }
