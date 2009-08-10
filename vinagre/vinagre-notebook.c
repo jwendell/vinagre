@@ -479,8 +479,13 @@ tab_auth_failed_cb (VinagreTab *tab, const gchar *msg, VinagreNotebook *nb)
 static void
 tab_initialized_cb (VinagreTab *tab, VinagreNotebook *nb)
 {
+  VinagreConnection *conn = vinagre_tab_get_conn (tab);
+
   vinagre_notebook_update_ui_sentitivity (nb);
   vinagre_notebook_update_tab_tooltip (nb, tab);
+
+  if (vinagre_connection_get_fullscreen (conn) && (!vinagre_window_is_fullscreen (nb->priv->window)))
+    vinagre_window_toggle_fullscreen (nb->priv->window);
 }
 
 static GtkWidget *

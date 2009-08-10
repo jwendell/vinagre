@@ -359,7 +359,6 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
   gboolean scaling, view_only, fullscreen;
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
   VinagreConnection *conn = vinagre_tab_get_conn (tab);
-  VinagreWindow *window = vinagre_tab_get_window (tab);
 
   g_object_get (conn,
 		"view-only", &view_only,
@@ -372,9 +371,6 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
   vnc_display_set_pointer_local (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
   vnc_display_set_keyboard_grab (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
   vnc_display_set_pointer_grab (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
-
-  if (fullscreen)
-    vinagre_window_toggle_fullscreen (window);
 
   vinagre_vnc_connection_set_desktop_name (VINAGRE_VNC_CONNECTION (conn),
 					   vnc_display_get_name (VNC_DISPLAY (vnc_tab->priv->vnc)));
