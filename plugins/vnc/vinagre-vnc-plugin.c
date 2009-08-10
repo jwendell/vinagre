@@ -114,6 +114,7 @@ impl_new_connection_from_file (VinagrePlugin *plugin,
   conn = NULL;
   host = NULL;
   protocol = NULL;
+  error = NULL;
 
   file = g_key_file_new ();
   loaded = g_key_file_load_from_data (file,
