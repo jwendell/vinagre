@@ -246,9 +246,11 @@ vinagre_bacon_send_message (BaconMessageConnection *connection,
       for (l = servers; l != NULL; l = l->next)
 	{
 	  VinagreConnection *conn = l->data;
-	  g_string_append_printf (command, "%s:%d",
-					   vinagre_connection_get_host (conn),
-					   vinagre_connection_get_port (conn));
+	  gchar             *uri = vinagre_connection_get_string_rep (conn, TRUE);
+
+	  g_string_append (command, uri);
+	  g_free (uri);
+
 	  if (l->next != NULL)
 	    command = g_string_append_c (command, ' ');
 	}
