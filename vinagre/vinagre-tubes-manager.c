@@ -34,8 +34,8 @@
 #include "vinagre-tube-handler.h"
 #include "vinagre-debug.h"
 
-#define BUS_NAME "org.gnome.Empathy.StreamTubeHandler.x_vnc"
-#define OBJECT_PATH "/org/gnome/Empathy/StreamTubeHandler/x_vnc"
+#define BUS_NAME "org.gnome.Empathy.StreamTubeHandler.rfb"
+#define OBJECT_PATH "/org/gnome/Empathy/StreamTubeHandler/rfb"
 
 static gboolean
 vinagre_tubes_manager_handle_tube (VinagreTubesManager *object,

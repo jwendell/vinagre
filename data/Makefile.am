@@ -56,14 +56,14 @@ EXTRA_DIST = \
 if TELEPATHY
 
 servicedir = $(datadir)/dbus-1/services
-service_DATA = org.gnome.Empathy.StreamTubeHandler.x_vnc.service
+service_DATA = org.gnome.Empathy.StreamTubeHandler.rfb.service
 
-org.gnome.Empathy.StreamTubeHandler.x_vnc.service: org.gnome.Empathy.StreamTubeHandler.x_vnc.service.in \
+org.gnome.Empathy.StreamTubeHandler.rfb.service: org.gnome.Empathy.StreamTubeHandler.rfb.service.in \
 		Makefile
 	@sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
 
 CLEANFILES += $(service_DATA)
-EXTRA_DIST += org.gnome.Empathy.StreamTubeHandler.x_vnc.service.in
+EXTRA_DIST += org.gnome.Empathy.StreamTubeHandler.rfb.service.in
 
 endif
 
