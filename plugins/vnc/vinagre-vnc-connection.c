@@ -162,7 +162,10 @@ vnc_parse_item (VinagreConnection *conn, xmlNode *root)
       if (!xmlStrcmp(curr->name, (const xmlChar *)"view_only"))
 	vinagre_vnc_connection_set_view_only (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"scaling"))
-	vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+	{
+	  if (!scaling_command_line)
+	    vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+	}
 
       xmlFree (s_value);
     }

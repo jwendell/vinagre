@@ -59,12 +59,33 @@ impl_update_ui (VinagrePlugin *plugin,
   vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Update UI");
 }
 
+static const GOptionEntry vinagre_vnc_args[] =
+{
+  { "vnc-scale", 0, 0, G_OPTION_ARG_NONE, &scaling_command_line,
+  /* Translators: this is a command line option (run vinagre --help) */
+  N_("Enable scaled mode"), 0 },
+  { NULL }
+};
+
 static GOptionGroup *
 impl_get_context_group (VinagrePlugin *plugin)
 {
+  GOptionGroup *group;
+
   vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Get Context Group");
 
-  return vnc_display_get_option_group ();
+  scaling_command_line = FALSE;
+  group = g_option_group_new ("vnc",
+			      /* Translators: this is a command line option (run vinagre --help) */
+			      _("VNC Options:"),
+			      /* Translators: this is a command line option (run vinagre --help) */
+			      _("Show VNC Options"),
+			      NULL,
+			      NULL);
+  g_option_group_add_entries (group, vinagre_vnc_args);
+  g_option_group_add_entries (group, vnc_display_get_option_entries ());
+
+  return group;
 }
 
 static const gchar *
@@ -94,7 +115,13 @@ impl_get_mdns_service (VinagrePlugin *plugin)
 static VinagreConnection *
 impl_new_connection (VinagrePlugin *plugin)
 {
-  return vinagre_vnc_connection_new ();
+  VinagreConnection *conn;
+
+  conn = vinagre_vnc_connection_new ();
+  vinagre_vnc_connection_set_scaling (VINAGRE_VNC_CONNECTION (conn),
+				      scaling_command_line);
+
+  return conn;
 }
 
 static VinagreConnection *
