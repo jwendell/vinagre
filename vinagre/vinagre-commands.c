@@ -39,8 +39,6 @@
 #include "vinagre-window-private.h"
 #include "vinagre-prefs.h"
 #include "vinagre-plugin.h"
-#include "vinagre-plugin-dialog.h"
-#include "vinagre-plugin-manager.h"
 #include "vinagre-plugin-info.h"
 #include "vinagre-plugin-info-priv.h"
 #include "vinagre-plugins-engine.h"
@@ -229,6 +227,8 @@ vinagre_cmd_edit_preferences (GtkAction     *action,
   vinagre_prefs_dialog_show (window);
 }
 
+/*
+FIXME: Study this dialog for next release
 void
 vinagre_cmd_edit_plugins (GtkAction     *action,
                           VinagreWindow *window)
@@ -237,6 +237,7 @@ vinagre_cmd_edit_plugins (GtkAction     *action,
 
   vinagre_plugin_dialog_show (GTK_WINDOW (window));
 }
+*/
 
 /* View Menu */
 void

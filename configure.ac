@@ -168,6 +168,9 @@ AC_SUBST(REBUILD)
 #
 dnl active plugins for vinagre.schemas
 ACTIVE_PLUGINS="vnc"
+if test "x$enable_ssh" = "xyes" ; then
+ACTIVE_PLUGINS="$ACTIVE_PLUGINS,ssh"
+fi
 AC_SUBST(ACTIVE_PLUGINS)
 
 VINAGRE_IMPLIB="-lvinagre-${VINAGRE_API_VERSION}"

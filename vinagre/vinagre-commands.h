@@ -46,9 +46,10 @@ void		vinagre_cmd_machine_quit	(GtkAction     *action,
 
 void		vinagre_cmd_edit_preferences	(GtkAction     *action,
 						 VinagreWindow *window);
+/*FIXME: Study this dialog for next release
 void		vinagre_cmd_edit_plugins	(GtkAction     *action,
 						 VinagreWindow *window);
-
+*/
 void		vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_show_statusbar	(GtkAction     *action,
