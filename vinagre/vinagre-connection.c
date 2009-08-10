@@ -616,7 +616,7 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg, gboolean 
 			     &data,
 			     NULL,
 			     NULL,
-			     &error));
+			     &error))
     {
       if (error)
 	{
@@ -647,7 +647,7 @@ the_end:
   g_free (data);
   g_object_unref (file_a);
 
-  if (!conn)
+  if (!conn && !*error_msg)
     *error_msg = g_strdup (_("The file was not recognized by any of the plugins."));
 
   return conn;
