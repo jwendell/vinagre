@@ -61,8 +61,8 @@ create_configure_dialog	(VinagrePlugin *plugin)
   return NULL;
 }
 
-static GOptionGroup *
-default_context_group (VinagrePlugin *plugin)
+static GSList *
+default_context_groups (VinagrePlugin *plugin)
 {
   return NULL;
 }
@@ -187,7 +187,7 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->activate = dummy;
 	klass->deactivate = dummy;
 	klass->update_ui = dummy;
-	klass->get_context_group = default_context_group;
+	klass->get_context_groups = default_context_groups;
 	klass->get_protocol = default_get_protocol;
 	klass->get_public_description = default_get_public_description;
 	klass->get_default_port = default_get_default_port;
@@ -396,18 +396,18 @@ vinagre_plugin_create_configure_dialog (VinagrePlugin *plugin)
 }
 
 /**
- * vinagre_plugin_get_context_group
+ * vinagre_plugin_get_context_groups
  * @plugin: a #VinagrePlugin
  *
  *
- * Returns: a context group to be used on command line, if available
+ * Returns: a list of context groups to be used on command line, if available
  */
-GOptionGroup *
-vinagre_plugin_get_context_group (VinagrePlugin *plugin)
+GSList *
+vinagre_plugin_get_context_groups (VinagrePlugin *plugin)
 {
   g_return_val_if_fail (VINAGRE_IS_PLUGIN (plugin), NULL);
 	
-  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_context_group (plugin);
+  return VINAGRE_PLUGIN_GET_CLASS (plugin)->get_context_groups (plugin);
 }
 
 /**

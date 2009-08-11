@@ -74,7 +74,7 @@ struct _VinagrePluginClass
 
 
   /* Virtual methods specific to 'engine' plugins */
-  GOptionGroup	*(*get_context_group)		(VinagrePlugin *plugin);
+  GSList	*(*get_context_groups)		(VinagrePlugin *plugin);
   const gchar	*(*get_protocol)		(VinagrePlugin *plugin);
   gchar		**(*get_public_description)	(VinagrePlugin *plugin);
   gint		(*get_default_port)		(VinagrePlugin *plugin);
@@ -123,7 +123,7 @@ void 		 vinagre_plugin_update_ui		(VinagrePlugin *plugin,
 gboolean	 vinagre_plugin_is_configurable		(VinagrePlugin *plugin);
 GtkWidget	*vinagre_plugin_create_configure_dialog	(VinagrePlugin *plugin);
 
-GOptionGroup	*vinagre_plugin_get_context_group	(VinagrePlugin *plugin);
+GSList		*vinagre_plugin_get_context_groups	(VinagrePlugin *plugin);
 const gchar	*vinagre_plugin_get_protocol		(VinagrePlugin *plugin);
 gchar		**vinagre_plugin_get_public_description	(VinagrePlugin *plugin);
 gint		 vinagre_plugin_get_default_port	(VinagrePlugin *plugin);
