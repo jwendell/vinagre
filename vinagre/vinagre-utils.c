@@ -203,7 +203,7 @@ static void _default_log (const gchar *log_domain G_GNUC_UNUSED,
 			 const gchar *message,
 			 gpointer user_data G_GNUC_UNUSED)
 {
-  printf ("gtk-vnc: %s", message);
+  printf ("gtk-vnc: %s\n", message);
 }
 
 void
