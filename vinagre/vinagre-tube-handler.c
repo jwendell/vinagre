@@ -29,12 +29,15 @@
 #include <telepathy-glib/contact.h>
 #include <telepathy-glib/util.h>
 #include <telepathy-glib/dbus.h>
+#include <telepathy-glib/interfaces.h>
 
 #include "vinagre-tube-handler.h"
 #include "vinagre-commands.h"
 #include "vinagre-tab.h"
 #include "vinagre-notebook.h"
 #include "vinagre-debug.h"
+#include "vinagre-plugin.h"
+#include "vinagre-plugins-engine.h"
 
 #define MC_DBUS_SERVICE "org.freedesktop.Telepathy.MissionControl"
 #define MC_DBUS_SERVICE_PATH "/org/freedesktop/Telepathy/MissionControl"
@@ -54,6 +57,8 @@ struct _VinagreTubeHandlerPrivate
   VinagreNotebook *nb;
   gulong signal_disconnect_id;
   gulong signal_invalidated_id;
+  gchar *hostname;
+  guint port;
 };
 
 enum
@@ -206,49 +211,76 @@ vinagre_tube_handler_tube_invalidated (TpProxy *channel,
 }
 
 static void
-vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
-    const GValue *address,
+vinagre_tube_handler_call_service_cb (TpProxy *channel,
+    const GValue *service,
     const GError *error,
     gpointer self,
     GObject *weak_object)
 {
-  gchar *hostname;
-  guint port;
-  gchar *port_s;
-  gchar *host;
+  VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
   gchar *error_msg = NULL;
   gchar *error_conn_msg = NULL;
   VinagreConnection *conn = NULL;
-
-  VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
+  gchar *port_s;
+  gchar *host;
+  const gchar *service_s;
+  VinagrePlugin *plugin;
 
   if (error != NULL)
     {
       error_msg = g_strdup_printf
-          (_("Impossible to accept the stream tube: %s"),
+          (_("Impossible to get service property: %s"),
           error->message);
       vinagre_utils_show_error (NULL, (const gchar *) error_msg,
           GTK_WINDOW (priv->window));
+      g_free (priv->hostname);
       g_free (error_msg);
       g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
-      return ;
+      return;
     }
 
-  priv->signal_invalidated_id = g_signal_connect (G_OBJECT (channel),
+  service_s = g_value_get_string (service);
+
+  vinagre_debug_message (DEBUG_TUBE, "service name = %s\n",
+      service_s);
+
+  if (!g_strcmp0 (service_s, "rfb"))
+    service_s = "vnc";
+
+  plugin = vinagre_plugins_engine_get_plugin_by_protocol
+      (vinagre_plugins_engine_get_default (), service_s);
+
+  if (plugin == NULL)
+    {
+      error_msg = g_strdup_printf
+          (_("The protocol %s is not supported."), service_s);
+      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+          GTK_WINDOW (priv->window));
+      g_free (priv->hostname);
+      g_free (error_msg);
+      g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
+      return;
+    }
+
+  priv->signal_invalidated_id = g_signal_connect (G_OBJECT (priv->channel),
       "invalidated", G_CALLBACK (vinagre_tube_handler_tube_invalidated),
       self);
 
-  dbus_g_type_struct_get (address, 0, &hostname, 1, &port,
-      G_MAXUINT);
+  port_s = g_strdup_printf ("%u", priv->port);
 
-  port_s = g_strdup_printf ("%u", port);
+  host = g_strconcat (vinagre_plugin_get_protocol (plugin), "://",
+      priv->hostname, ":", port_s,
+      NULL);
 
-  host = g_strconcat ("vnc://", hostname, ":", port_s, NULL);
-
-  conn = vinagre_connection_new_from_string (host, &error_conn_msg, TRUE);
+  vinagre_debug_message (DEBUG_TUBE, "Host = %s\n",
+      host);
 
   g_free (port_s);
-  g_free (hostname);
+  g_free (priv->hostname);
+
+  conn = vinagre_connection_new_from_string (host, &error_conn_msg,
+      TRUE);
+
   g_free (host);
 
   if (conn == NULL)
@@ -262,7 +294,7 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
       g_free (error_conn_msg);
       g_free (error_msg);
       g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
-      return ;
+      return;
     }
 
   vinagre_cmd_direct_connect (conn, priv->window);
@@ -278,6 +310,37 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
   priv->signal_disconnect_id = g_signal_connect (G_OBJECT (priv->nb),
       "page-removed", G_CALLBACK
       (vinagre_tube_handler_tab_disconnected_cb), self);
+}
+
+static void
+vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
+    const GValue *address,
+    const GError *error,
+    gpointer self,
+    GObject *weak_object)
+{
+  gchar *error_msg = NULL;
+  VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
+
+  if (error != NULL)
+    {
+      error_msg = g_strdup_printf
+          (_("Impossible to accept the stream tube: %s"),
+          error->message);
+      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+          GTK_WINDOW (priv->window));
+      g_free (error_msg);
+      g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
+      return ;
+    }
+
+  dbus_g_type_struct_get (address, 0, &priv->hostname, 1, &priv->port,
+      G_MAXUINT);
+
+  tp_cli_dbus_properties_call_get (channel,
+      -1, TP_IFACE_CHANNEL_TYPE_STREAM_TUBE, "Service",
+      vinagre_tube_handler_call_service_cb,
+      self, NULL, NULL);
 }
 
 static void
