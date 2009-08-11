@@ -173,14 +173,16 @@ int main (int argc, char **argv) {
   for (l = plugins; l; l = l->next)
     {
       GOptionGroup      *group;
+      GSList            *groups, *l2;
       VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (l->data);
 
       if (!vinagre_plugin_info_is_active (info))
 	continue;
 
-      group = vinagre_plugin_get_context_group (info->plugin);
-      if (group)
-	g_option_context_add_group (context, group);
+      groups = vinagre_plugin_get_context_groups (info->plugin);
+      for (l2 = groups; l2; l2 = l2->next)
+	g_option_context_add_group (context, (GOptionGroup *)l2->data);
+      g_slist_free (groups);
     }
 
   g_option_context_parse (context, &argc, &argv, &error);
