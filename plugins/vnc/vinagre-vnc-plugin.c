@@ -67,10 +67,11 @@ static const GOptionEntry vinagre_vnc_args[] =
   { NULL }
 };
 
-static GOptionGroup *
-impl_get_context_group (VinagrePlugin *plugin)
+static GSList *
+impl_get_context_groups (VinagrePlugin *plugin)
 {
   GOptionGroup *group;
+  GSList       *groups = NULL;
 
   vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Get Context Group");
 
@@ -83,9 +84,11 @@ impl_get_context_group (VinagrePlugin *plugin)
 			      NULL,
 			      NULL);
   g_option_group_add_entries (group, vinagre_vnc_args);
-  g_option_group_add_entries (group, vnc_display_get_option_entries ());
 
-  return group;
+  groups = g_slist_append (groups, group);
+  groups = g_slist_append (groups, vnc_display_get_option_group ());
+
+  return groups;
 }
 
 static const gchar *
@@ -310,7 +313,7 @@ vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
   plugin_class->activate   = impl_activate;
   plugin_class->deactivate = impl_deactivate;
   plugin_class->update_ui  = impl_update_ui;
-  plugin_class->get_context_group = impl_get_context_group;
+  plugin_class->get_context_groups = impl_get_context_groups;
   plugin_class->get_protocol  = impl_get_protocol;
   plugin_class->get_public_description  = impl_get_public_description;
   plugin_class->new_connection = impl_new_connection;
