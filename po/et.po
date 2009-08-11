@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-08-06 18:26+0000\n"
-"PO-Revision-Date: 2009-08-06 22:44+0300\n"
+"POT-Creation-Date: 2009-08-10 18:19+0000\n"
+"PO-Revision-Date: 2009-08-10 21:37+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -446,9 +446,22 @@ msgstr "Aknasse lohistatud andmed ei ole sobivad."
 msgid "Hosts nearby"
 msgstr "Lähedalasuvad hostid"
 
+#. Translators: this is a command line option (run vinagre --help)
+msgid "Open vinagre in fullscreen mode"
+msgstr "Vinagre avamine täisekraani režiimis"
+
+#. Translators: this is a command line option (run vinagre --help)
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "Olemasolevale vinagre instantsile uue ülataseme akna loomine"
 
+#. Translators: this is a command line option (run vinagre --help)
+msgid "Open a file recognized by vinagre"
+msgstr "Vinagrele tuntud vormingus faili avamine"
+
+msgid "filename"
+msgstr "failinimi"
+
+#. Translators: this is a command line option (run vinagre --help)
 msgid "[server:port]"
 msgstr "[server:port]"
 
@@ -553,15 +566,15 @@ msgstr "Viga tõendite salvestamisel võtmerõngasse."
 msgid "Could not get a screenshot of the connection."
 msgstr "Ühendusest pole võimalik ekraanitõmmist võtta."
 
+msgid "Save Screenshot"
+msgstr "Ekraanitõmmise salvestamine"
+
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Masina %s ekraanitõmmis"
 
-msgid "Save Screenshot"
-msgstr "Ekraanitõmmise salvestamine"
-
-msgid "Supported formats"
-msgstr "Toetatud vormingud"
+msgid "Error saving screenshot"
+msgstr "Viga kuvatõmmise salvestamisel"
 
 #, c-format
 msgid "Impossible to accept the stream tube: %s"
@@ -618,12 +631,10 @@ msgstr "Programmist väljumine"
 msgid "Edit the application preferences"
 msgstr "Redigeeri rakenduse eelistusi"
 
-msgid "_Plugins"
-msgstr "_Pluginad"
-
-msgid "Select plugins"
-msgstr "Pluginate valimine"
-
+#. FIXME: Study this dialog for next release
+#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
+#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
+#.
 #. Bookmarks menu
 msgid "_Open bookmark"
 msgstr "_Ava järjehoidja"
