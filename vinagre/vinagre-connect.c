@@ -48,6 +48,7 @@ typedef struct {
   GtkWidget *find_button;
   GtkWidget *fullscreen_check;
   GtkWidget *plugin_box;
+  GtkWidget *connect_button;
 } VinagreConnectDialog;
 
 enum {
@@ -220,14 +221,23 @@ saved_history (void)
 }
 
 static void
-setup_combo (GtkWidget *combo)
+control_connect_button (GtkEditable *entry, VinagreConnectDialog *dialog)
+{
+  gtk_widget_set_sensitive (dialog->connect_button,
+			    gtk_entry_get_text_length (GTK_ENTRY (entry)) > 0);
+}
+
+static void
+setup_combo (VinagreConnectDialog *dialog)
 {
   GtkListStore *store;
   GtkTreeIter   iter;
   GtkEntryCompletion *completion;
   GPtrArray    *history;
   gint          i, size;
+  GtkEntry     *entry;
 
+  entry = GTK_ENTRY (gtk_bin_get_child (GTK_BIN (dialog->host_entry)));
   store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING);
 
   history = saved_history ();
@@ -244,19 +254,20 @@ setup_combo (GtkWidget *combo)
     }
   g_ptr_array_free (history, TRUE);
 
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo),
+  gtk_combo_box_set_model (GTK_COMBO_BOX (dialog->host_entry),
 			   GTK_TREE_MODEL (store));
-  gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (combo),
+  gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (dialog->host_entry),
 				       0);
 
   completion = gtk_entry_completion_new ();
   gtk_entry_completion_set_model (completion, GTK_TREE_MODEL (store));
   gtk_entry_completion_set_text_column (completion, 0);
   gtk_entry_completion_set_inline_completion (completion, TRUE);
-  gtk_entry_set_completion (GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo))), completion);
+  gtk_entry_set_completion (entry, completion);
   g_object_unref (completion);
 
-  gtk_entry_set_activates_default (GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo))), TRUE);
+  gtk_entry_set_activates_default (entry, TRUE);
+  g_signal_connect (entry, "changed", G_CALLBACK (control_connect_button), dialog);
 }
 
 static void
@@ -374,9 +385,10 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   dialog.find_button = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "find_button"));
   dialog.fullscreen_check = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "fullscreen_check"));
   dialog.plugin_box = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "plugin_options_connect_vbox"));
+  dialog.connect_button = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "connect_button"));
 
   setup_protocol (&dialog);
-  setup_combo (dialog.host_entry);
+  setup_combo (&dialog);
 
 #ifdef VINAGRE_ENABLE_AVAHI
   g_signal_connect (dialog.find_button,
