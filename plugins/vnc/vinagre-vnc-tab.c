@@ -53,6 +53,7 @@ enum
 };
 
 static void open_vnc (VinagreVncTab *vnc_tab);
+static void setup_toolbar (VinagreVncTab *vnc_tab);
 
 static void
 vinagre_vnc_tab_get_property (GObject    *object,
@@ -185,10 +186,13 @@ vinagre_vnc_tab_dispose (GObject *object)
 static void
 vinagre_vnc_tab_constructed (GObject *object)
 {
+  VinagreVncTab *vnc_tab = VINAGRE_VNC_TAB (object);
+
   if (G_OBJECT_CLASS (vinagre_vnc_tab_parent_class)->constructed)
     G_OBJECT_CLASS (vinagre_vnc_tab_parent_class)->constructed (object);
 
-  open_vnc (VINAGRE_VNC_TAB (object));
+  setup_toolbar (vnc_tab);
+  open_vnc (vnc_tab);
 }
 
 static void 
@@ -730,13 +734,19 @@ setup_toolbar (VinagreVncTab *vnc_tab)
   GtkWidget *toolbar = vinagre_tab_get_toolbar (VINAGRE_TAB (vnc_tab));
   GtkWidget *button;
 
+  /* Space */
+  button = GTK_WIDGET (gtk_separator_tool_item_new ());
+  gtk_tool_item_set_expand (GTK_TOOL_ITEM (button), TRUE);
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (button), -1);
+
   /* Scaling */
   button = GTK_WIDGET (gtk_toggle_tool_button_new ());
   gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Scaling"));
   gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Scaling"));
   gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "zoom-fit-best");
   gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (button), 0);
+  gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (button), -1);
   g_signal_connect (button, "toggled", G_CALLBACK (scaling_button_clicked), vnc_tab);
   vnc_tab->priv->scaling_button = button;
 
@@ -746,7 +756,7 @@ setup_toolbar (VinagreVncTab *vnc_tab)
   gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Read only"));
   gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "emblem-readonly");
   gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (button), 0);
+  gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (button), -1);
   g_signal_connect (button, "toggled", G_CALLBACK (viewonly_button_clicked), vnc_tab);
   vnc_tab->priv->viewonly_button = button;
 
@@ -757,7 +767,7 @@ setup_toolbar (VinagreVncTab *vnc_tab)
   gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Send Ctrl-Alt-Del"));
   g_signal_connect (button, "clicked", G_CALLBACK (cad_button_clicked), vnc_tab);
   gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (button), 0);
+  gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (button), -1);
 }
 
 static void
@@ -793,8 +803,6 @@ vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
   /* Create the vnc widget */
   vnc_tab->priv->vnc = vnc_display_new ();
   vinagre_tab_add_view (VINAGRE_TAB (vnc_tab), vnc_tab->priv->vnc);
-
-  setup_toolbar (vnc_tab);
 
   g_signal_connect (vnc_tab->priv->vnc,
 		    "vnc-connected",
