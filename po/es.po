@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-08-10 17:31+0000\n"
-"PO-Revision-Date: 2009-08-10 20:11+0200\n"
+"POT-Creation-Date: 2009-08-11 18:56+0000\n"
+"PO-Revision-Date: 2009-08-13 16:13+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Acceda a escritorios remotos"
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
 #: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
-#: ../vinagre/vinagre-main.c:196
+#: ../vinagre/vinagre-main.c:198
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
@@ -226,8 +226,8 @@ msgstr "Puerto:"
 msgid "SSH support"
 msgstr "Soporte para SSH"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:204
-#: ../plugins/vnc/vinagre-vnc-plugin.c:184
+#: ../plugins/vnc/vinagre-vnc-connection.c:207
+#: ../plugins/vnc/vinagre-vnc-plugin.c:214
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -235,43 +235,60 @@ msgstr ""
 "Valor incorrecto para la opción «compartida»: %d. Se supone que debería ser 0 "
 "ó 1. Ignorándola."
 
-#. vim: set ts=8:
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:66
+msgid "Enable scaled mode"
+msgstr "Activar el modo escalado"
+
+#. Translators: this is a command line option (run vinagre --help)
 #: ../plugins/vnc/vinagre-vnc-plugin.c:81
+#| msgid "VNC Options"
+msgid "VNC Options:"
+msgstr "Opciones de VNC:"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+#| msgid "VNC Options"
+msgid "Show VNC Options"
+msgstr "Mostrar las opciones de VNC"
+
+#. vim: set ts=8:
+#: ../plugins/vnc/vinagre-vnc-plugin.c:105
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:82
+#: ../plugins/vnc/vinagre-vnc-plugin.c:106
 msgid "Access Unix/Linux, Windows and other machines."
 msgstr "Acceder a equipos UNIX/Linux, Windows y otros."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:133
+#: ../plugins/vnc/vinagre-vnc-plugin.c:163
 msgid "Could not parse the file."
 msgstr "No se pudo analizar el archivo."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:140
+#: ../plugins/vnc/vinagre-vnc-plugin.c:170
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "El archivo no es de VNC: Falta el grupo «connection»."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:146
+#: ../plugins/vnc/vinagre-vnc-plugin.c:176
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "El archivo no es de VNC: Falta la clave «host»."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:213
+#: ../plugins/vnc/vinagre-vnc-plugin.c:243
 msgid "VNC Options"
 msgstr "Opciones de VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:224
+#: ../plugins/vnc/vinagre-vnc-plugin.c:254
 #: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "_View only"
 msgstr "Sólo _visión"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:231
+#: ../plugins/vnc/vinagre-vnc-plugin.c:261
 msgid "_Scaling"
 msgstr "E_scalado"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:255
+#: ../plugins/vnc/vinagre-vnc-plugin.c:285
 msgid "VNC Files"
 msgstr "Archivos de VNC"
 
@@ -626,7 +643,7 @@ msgstr[1] "Han ocurrido los siguientes errores:"
 msgid "- Remote Desktop Viewer"
 msgstr "- Visor de escritorios remotos"
 
-#: ../vinagre/vinagre-main.c:191
+#: ../vinagre/vinagre-main.c:193
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
