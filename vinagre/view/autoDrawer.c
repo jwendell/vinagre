@@ -217,7 +217,7 @@ ViewAutoDrawerUpdate(ViewAutoDrawer *that, // IN
       if (!grabbed) {
          grabbed = gtk_grab_get_current();
       }
-      g_assert(grabbed);
+//      g_assert(grabbed);
 
       if (GTK_IS_MENU(grabbed)) {
          /*
