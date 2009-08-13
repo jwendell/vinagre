@@ -38,6 +38,7 @@ struct _VinagreNotebookPrivate
   GtkUIManager  *manager;
   guint         ui_merge_id;
   VinagreTab    *active_tab;
+  GSList        *tabs;
 };
 
 /* Properties */
@@ -96,12 +97,27 @@ vinagre_notebook_set_property (GObject      *object,
 }
 
 static void
+vinagre_notebook_finalize (GObject *object)
+{
+  VinagreNotebook *nb = VINAGRE_NOTEBOOK (object);
+
+  if (nb->priv->tabs)
+    {
+      g_slist_free (nb->priv->tabs);
+      nb->priv->tabs = NULL;
+    }
+
+  G_OBJECT_CLASS (vinagre_notebook_parent_class)->finalize (object);
+}
+
+static void
 vinagre_notebook_class_init (VinagreNotebookClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->get_property = vinagre_notebook_get_property;
   object_class->set_property = vinagre_notebook_set_property;
+  object_class->finalize = vinagre_notebook_finalize;
 
   g_object_class_install_property (object_class,
 				   PROP_WINDOW,
@@ -381,6 +397,7 @@ vinagre_notebook_init (VinagreNotebook *nb)
 {
   nb->priv = VINAGRE_NOTEBOOK_GET_PRIVATE (nb);
   nb->priv->active_tab = NULL;
+  nb->priv->tabs = NULL;
 
   gtk_notebook_set_scrollable (GTK_NOTEBOOK (nb), TRUE);
 
@@ -605,7 +622,8 @@ vinagre_notebook_add_tab (VinagreNotebook *nb,
   /* Unmerge the UI for the current tab */
   unmerge_tab_ui (nb);
 
-  nb->priv->active_tab = tab;  
+  nb->priv->active_tab = tab;
+  nb->priv->tabs = g_slist_append (nb->priv->tabs, tab);
   
   /* Merge the UI for the new tab */
   merge_tab_ui (nb);
@@ -678,6 +696,7 @@ vinagre_notebook_close_tab (VinagreNotebook *nb,
   position = gtk_notebook_get_current_page (notebook);
   nb->priv->active_tab = VINAGRE_TAB (gtk_notebook_get_nth_page (notebook,
 								 position));
+  nb->priv->tabs = g_slist_remove (nb->priv->tabs, tab);
 
   /* Merge the UI for the new tab (if one exists) */
   if (nb->priv->active_tab != previous_active_tab)
@@ -720,6 +739,14 @@ vinagre_notebook_get_active_tab (VinagreNotebook *nb)
   g_return_val_if_fail (VINAGRE_IS_NOTEBOOK (nb), NULL);
 
   return nb->priv->active_tab;
+}
+
+GSList *
+vinagre_notebook_get_tabs (VinagreNotebook *nb)
+{
+  g_return_val_if_fail (VINAGRE_IS_NOTEBOOK (nb), NULL);
+
+  return nb->priv->tabs;
 }
 
 /* vim: set ts=8: */

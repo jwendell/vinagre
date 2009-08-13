@@ -64,6 +64,8 @@ void			vinagre_notebook_close_active_tab	(VinagreNotebook *nb);
 void			vinagre_notebook_show_hide_tabs		(VinagreNotebook *nb);
 
 VinagreTab *		vinagre_notebook_get_active_tab		(VinagreNotebook *nb);
+GSList *		vinagre_notebook_get_tabs		(VinagreNotebook *nb);
+
 G_END_DECLS
 
 #endif /* __VINAGRE_NOTEBOOK_H__ */
