@@ -185,6 +185,9 @@ vinagre_vnc_tab_dispose (GObject *object)
 static void
 vinagre_vnc_tab_constructed (GObject *object)
 {
+  if (G_OBJECT_CLASS (vinagre_vnc_tab_parent_class)->constructed)
+    G_OBJECT_CLASS (vinagre_vnc_tab_parent_class)->constructed (object);
+
   open_vnc (VINAGRE_VNC_TAB (object));
 }
 

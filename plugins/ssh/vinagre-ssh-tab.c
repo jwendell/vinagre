@@ -73,6 +73,9 @@ vinagre_ssh_tab_constructed (GObject *object)
   VinagreSshTab *ssh_tab = VINAGRE_SSH_TAB (object);
   VinagreTab    *tab = VINAGRE_TAB (object);
 
+  if (G_OBJECT_CLASS (vinagre_ssh_tab_parent_class)->constructed)
+    G_OBJECT_CLASS (vinagre_ssh_tab_parent_class)->constructed (object);
+
   arg = g_new (gchar *, 5);
   arg[0] = g_strdup ("ssh");
   arg[1] = g_strdup (vinagre_connection_get_host (vinagre_tab_get_conn (tab)));
