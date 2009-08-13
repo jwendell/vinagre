@@ -220,6 +220,156 @@ default_get_extra_title (VinagreTab *tab)
   return NULL;
 }
 
+static void
+menu_position (GtkMenu    *menu,
+	       gint       *x,
+	       gint       *y,
+	       gboolean   *push_in,
+	       VinagreTab *tab)
+{
+  int width, height;
+  GdkWindow *window;
+
+  window = gtk_widget_get_window (tab->priv->toolbar);
+
+  gdk_window_get_origin (window, x, y);
+  gdk_drawable_get_size (window, &width, &height);
+
+  *push_in = TRUE;
+  *y += height;
+}
+
+static void
+open_connection_cb (GtkMenuItem *item,
+		    VinagreTab  *tab)
+{
+  vinagre_window_set_active_tab (tab->priv->window, tab);
+}
+
+static void
+active_connections_button_clicked  (GtkToolButton *button,
+				    VinagreTab    *tab)
+{
+  GSList            *connections, *l;
+  VinagrePlugin     *plugin;
+  VinagreConnection *conn;
+  GtkWidget         *menu, *item, *image;
+  gchar             *str, *label;
+
+  menu = gtk_menu_new ();
+
+  connections = vinagre_notebook_get_tabs (tab->priv->nb);
+  for (l = connections; l; l = l->next)
+    {
+      conn = VINAGRE_TAB (l->data)->priv->conn;
+      plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+							      vinagre_connection_get_protocol (conn));
+      item = gtk_image_menu_item_new_with_label ("");
+      image = gtk_image_new_from_icon_name (vinagre_plugin_get_icon_name (plugin),
+					    GTK_ICON_SIZE_MENU);
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+
+      label = vinagre_connection_get_best_name (conn);
+      if ((l->data == tab) && (GTK_IS_LABEL (GTK_BIN (item)->child)))
+	{
+	  str = g_strdup_printf ("<b>%s</b>", label);
+	  gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (item)->child), TRUE);
+	  g_free (label);
+	  label = str;
+	}
+      gtk_menu_item_set_label (GTK_MENU_ITEM (item), label);
+      g_free (label);
+
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      g_signal_connect (item, "activate", G_CALLBACK (open_connection_cb), l->data);
+    }
+
+  gtk_widget_show_all (menu);
+  gtk_menu_popup (GTK_MENU (menu),
+		  NULL,
+		  NULL,
+		  (GtkMenuPositionFunc) menu_position,
+		  tab,
+		  0,
+		  gtk_get_current_event_time ());
+}
+
+static void
+close_button_clicked (GtkToolButton *button,
+		      VinagreTab    *tab)
+{
+  vinagre_notebook_close_tab (tab->priv->nb, tab);
+}
+
+static void
+fullscreen_button_clicked (GtkToolButton *button,
+			   VinagreTab    *tab)
+{
+  vinagre_window_toggle_fullscreen (tab->priv->window);
+}
+
+static void
+setup_layout (VinagreTab *tab)
+{
+  GtkWidget  *button;
+  gchar      *str;
+
+  tab->priv->toolbar = gtk_toolbar_new ();
+  gtk_toolbar_set_show_arrow (GTK_TOOLBAR (tab->priv->toolbar), FALSE);
+  GTK_WIDGET_SET_FLAGS (tab->priv->toolbar, GTK_NO_SHOW_ALL);
+
+  gtk_toolbar_set_style (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOLBAR_BOTH_HORIZ);
+
+  /* Close connection */
+  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_CLOSE));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Close connection"));
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "clicked", G_CALLBACK (close_button_clicked), tab);
+
+  /* Connection name/menu */
+  str = vinagre_connection_get_best_name (tab->priv->conn);
+  button = GTK_WIDGET (gtk_tool_button_new (NULL, str));
+  g_free (str);
+
+  str = vinagre_connection_get_string_rep (tab->priv->conn, TRUE);
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), str);
+  g_free (str);
+
+  gtk_tool_item_set_is_important (GTK_TOOL_ITEM (button), TRUE);
+  g_signal_connect (button, "clicked", G_CALLBACK (active_connections_button_clicked), tab);
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+
+  /* Leave fullscreen */
+  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_LEAVE_FULLSCREEN));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Leave fullscreen"));
+  gtk_widget_show (GTK_WIDGET (button));
+  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
+  g_signal_connect (button, "clicked", G_CALLBACK (fullscreen_button_clicked), tab);
+
+  tab->priv->layout = ViewAutoDrawer_New ();
+  ViewAutoDrawer_SetActive (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
+  ViewOvBox_SetOver (VIEW_OV_BOX (tab->priv->layout), tab->priv->toolbar);
+  ViewOvBox_SetUnder (VIEW_OV_BOX (tab->priv->layout), tab->priv->scroll);
+  ViewAutoDrawer_SetOffset (VIEW_AUTODRAWER (tab->priv->layout), -1);
+  ViewAutoDrawer_SetFill (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
+
+  gtk_box_pack_end (GTK_BOX(tab), tab->priv->layout, TRUE, TRUE, 0);
+  gtk_widget_show_all (GTK_WIDGET (tab));
+}
+
+static void
+vinagre_tab_constructed (GObject *object)
+{
+  VinagreTab *tab = VINAGRE_TAB (object);
+
+  if (G_OBJECT_CLASS (vinagre_tab_parent_class)->constructed)
+    G_OBJECT_CLASS (vinagre_tab_parent_class)->constructed (object);
+
+  setup_layout (tab);
+}
+
 static void 
 vinagre_tab_class_init (VinagreTabClass *klass)
 {
@@ -228,6 +378,7 @@ vinagre_tab_class_init (VinagreTabClass *klass)
   object_class->dispose  = vinagre_tab_dispose;
   object_class->get_property = vinagre_tab_get_property;
   object_class->set_property = vinagre_tab_set_property;
+  object_class->constructed = vinagre_tab_constructed;
 
   klass->impl_get_tooltip = NULL;
   klass->impl_get_screenshot = NULL;
@@ -352,90 +503,6 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
 }
 
 static void
-close_button_clicked (GtkToolButton *button,
-		      VinagreTab    *tab)
-{
-  vinagre_notebook_close_tab (tab->priv->nb, tab);
-}
-
-static void
-minimize_button_clicked (GtkToolButton *button,
-			 VinagreTab    *tab)
-{
-  gtk_window_iconify (GTK_WINDOW (tab->priv->window));
-}
-
-static void
-fullscreen_button_clicked (GtkToolButton *button,
-			   VinagreTab    *tab)
-{
-  vinagre_window_toggle_fullscreen (tab->priv->window);
-}
-
-static void
-screenshot_button_clicked (GtkToolButton *button,
-			   VinagreTab    *tab)
-{
-  vinagre_tab_take_screenshot (tab);
-}
-
-static void
-setup_layout (VinagreTab *tab)
-{
-  GtkWidget  *button;
-
-  tab->priv->toolbar = gtk_toolbar_new ();
-  gtk_toolbar_set_show_arrow (GTK_TOOLBAR (tab->priv->toolbar), FALSE);
-  GTK_WIDGET_SET_FLAGS (tab->priv->toolbar, GTK_NO_SHOW_ALL);
-
-  gtk_toolbar_set_style (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOLBAR_BOTH_HORIZ);
-
-  /* Close connection */
-  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_CLOSE));
-  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Close connection"));
-  gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
-  g_signal_connect (button, "clicked", G_CALLBACK (close_button_clicked), tab);
-
-  /* Leave fullscreen */
-  button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_LEAVE_FULLSCREEN));
-  g_object_set (button, "is-important", TRUE, NULL);
-  gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
-  g_signal_connect (button, "clicked", G_CALLBACK (fullscreen_button_clicked), tab);
-
-  /* Minimize window */
-  button = GTK_WIDGET (gtk_tool_button_new (NULL, NULL));
-  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Minimize window"));
-  gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "view-minimize");
-  gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
-  g_signal_connect (button, "clicked", G_CALLBACK (minimize_button_clicked), tab);
-
-  /* Space */
-  button = GTK_WIDGET (gtk_separator_tool_item_new ());
-  gtk_tool_item_set_expand (GTK_TOOL_ITEM (button), TRUE);
-  gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
-
-  /* Screenshot */
-  button = GTK_WIDGET (gtk_tool_button_new (NULL, NULL));
-  gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "applets-screenshooter");
-  gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Take screenshot"));
-  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Take screenshot"));
-  g_signal_connect (button, "clicked", G_CALLBACK (screenshot_button_clicked), tab);
-  gtk_widget_show (GTK_WIDGET (button));
-  gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
-
-  tab->priv->layout = ViewAutoDrawer_New ();
-  ViewAutoDrawer_SetActive (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
-  ViewOvBox_SetOver (VIEW_OV_BOX (tab->priv->layout), tab->priv->toolbar);
-  ViewOvBox_SetUnder (VIEW_OV_BOX (tab->priv->layout), tab->priv->scroll);
-  ViewAutoDrawer_SetOffset (VIEW_AUTODRAWER (tab->priv->layout), -1);
-  ViewAutoDrawer_SetFill (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
-}
-
-static void
 vinagre_tab_init (VinagreTab *tab)
 {
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
@@ -450,11 +517,6 @@ vinagre_tab_init (VinagreTab *tab)
 				  GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (tab->priv->scroll),
 				       GTK_SHADOW_NONE);
-
-  setup_layout (tab);
-
-  gtk_box_pack_end (GTK_BOX(tab), tab->priv->layout, TRUE, TRUE, 0);
-  gtk_widget_show_all (GTK_WIDGET (tab));
 }
 
 GtkWidget *
