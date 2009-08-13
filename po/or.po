@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.master.or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-06-24 02:28+0000\n"
-"PO-Revision-Date: 2009-07-01 19:11+0530\n"
+"POT-Creation-Date: 2009-08-11 18:56+0000\n"
+"PO-Revision-Date: 2009-08-12 14:10+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,13 +19,14 @@ msgstr ""
 "\n"
 "\n"
 "\n"
+"\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1
+#: ../data/GNOME_VinagreApplet.xml.h:1 ../vinagre/vinagre-plugin-manager.c:495
 msgid "_About"
 msgstr "ବିବରଣୀ (_A)"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
 msgid "_Help"
 msgstr "ସାହାଯ୍ୟ (_H)"
 
@@ -34,123 +35,136 @@ msgid "Access remote desktops"
 msgstr "ସୁଦୂର ଡେସ୍କଟପ ଗୁଡିକୁ ଅଭିଗମ କରନ୍ତୁ"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
-#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:157
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
+#: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
+#: ../vinagre/vinagre-main.c:198
 msgid "Remote Desktop Viewer"
 msgstr "ସୁଦୂର ଡେସ୍କଟପ ଦର୍ଶକ"
 
-#: ../data/vinagre.glade.h:1
-msgid "<b>Authentication is required</b>"
-msgstr "<b>ପ୍ରାଧିକରଣ ଆବଶ୍ୟକ</b>"
-
-#: ../data/vinagre.glade.h:2
-msgid "<b>Connection options</b>"
-msgstr "<b>ସଂଯୋଗ ବିକଳ୍ପଗୁଡ଼ିକ</b>"
-
-#: ../data/vinagre.glade.h:3
-msgid "<b>Connection</b>"
-msgstr "<b>ସଂଯୋଗ</b>"
-
-#: ../data/vinagre.glade.h:4
-msgid "<b>Folder</b>"
-msgstr "<b>ପୋଲଡ଼ର</b>"
-
-#: ../data/vinagre.glade.h:5
-msgid "<b>Interface</b>"
-msgstr "<b>ଅନ୍ତରାପୃଷ୍ଠ</b>"
-
-#: ../data/vinagre.glade.h:6
-msgid "<b>Options</b>"
-msgstr "<b>ବିକଳ୍ପଗୁଡ଼ିକ</b>"
-
-#: ../data/vinagre.glade.h:7
-msgid "<b>Parent Folder</b>"
-msgstr "<b>ମୁଖ୍ୟ ଫୋଲଡର</b>"
-
-#: ../data/vinagre.glade.h:8
-msgid "<b>Which machine do you want to connect to?</b>"
-msgstr "<b>କେଉଁ ଯନ୍ତ୍ର ସହିତ ଆପଣ ସଂଯୁକ୍ତ ହେବା ପାଇଁ ଚାହୁଁଛନ୍ତି ?</b>"
-
-#: ../data/vinagre.glade.h:9
-msgid "<i><small>All fields above are mandatory</small></i>"
+#: ../data/vinagre.ui.h:1
+#, fuzzy
+#| msgid "<i><small>All fields above are mandatory</small></i>"
+msgid "All fields above are mandatory"
 msgstr "<i><small>ଉପର ଲିଖିତ ସମସ୍ତ କ୍ଷେତ୍ରଗୁଡ଼ିକ ବାଧ୍ୟତାମୁଳକ</small></i>"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
+#: ../data/vinagre.ui.h:2
+#, fuzzy
+#| msgid "<b>Authentication is required</b>"
+msgid "Authentication is required"
+msgstr "<b>ପ୍ରାଧିକରଣ ଆବଶ୍ୟକ</b>"
+
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:856
 msgid "Bookmarks"
 msgstr "ଚିହ୍ନିତ ସ୍ଥାନଗୁଡିକ"
 
-#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-vnc-tab.c:132
+#: ../data/vinagre.ui.h:4
+#, fuzzy
+#| msgid "Connecting..."
+msgid "Connection"
+msgstr "ସଂଯୋଗ କରୁଅଛି..."
+
+#: ../data/vinagre.ui.h:5
+#, fuzzy
+#| msgid "<b>Connection options</b>"
+msgid "Connection options"
+msgstr "<b>ସଂଯୋଗ ବିକଳ୍ପଗୁଡ଼ିକ</b>"
+
+#: ../data/vinagre.ui.h:6
+#, fuzzy
+#| msgid "New Folder"
+msgid "Folder"
+msgstr "ନୂତନ ଫୋଲଡ଼ର"
+
+#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
+#: ../plugins/vnc/vinagre-vnc-tab.c:133 ../vinagre/vinagre-fav.c:425
 msgid "Host:"
 msgstr "ଆଧାର:"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.ui.h:8
+#, fuzzy
+#| msgid "<b>Interface</b>"
+msgid "Interface"
+msgstr "<b>ଅନ୍ତରାପୃଷ୍ଠ</b>"
+
+#: ../data/vinagre.ui.h:9
+#, fuzzy
+#| msgid "<b>Options</b>"
+msgid "Options"
+msgstr "<b>ବିକଳ୍ପଗୁଡ଼ିକ</b>"
+
+#: ../data/vinagre.ui.h:10
+#, fuzzy
+#| msgid "<b>Parent Folder</b>"
+msgid "Parent Folder"
+msgstr "<b>ମୁଖ୍ୟ ଫୋଲଡର</b>"
+
+#: ../data/vinagre.ui.h:11
 msgid "Preferences"
 msgstr "ପସନ୍ଦଗୁଡ଼ିକ"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
-msgid "Whether we should show tabs even when there is only one active connection"
-msgstr "କେବଳ ଗୋଟିଏ ସକ୍ରିୟ ସଂଯୋଗ ଥିବା ସମୟରେ ଆମର ଟେବ ଗୁଡିକୁ ଦେଖାଇବା ଉଚିତ କି ନୁହ"
+#: ../data/vinagre.ui.h:12
+#, fuzzy
+#| msgid "<b>Which machine do you want to connect to?</b>"
+msgid "Which machine do you want to connect to?"
+msgstr "<b>କେଉଁ ଯନ୍ତ୍ର ସହିତ ଆପଣ ସଂଯୁକ୍ତ ହେବା ପାଇଁ ଚାହୁଁଛନ୍ତି ?</b>"
 
-#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "ଆମର ତାଲିକା ତ୍ୱରକଗୁଡ଼ିକୁ ଦର୍ଶାଇବା ଉଚିତ କି (ସଂକ୍ଷିପ୍ତ ପଥ କିଗୁଡ଼ିକ)"
-
-#: ../data/vinagre.glade.h:15
+#: ../data/vinagre.ui.h:13
 msgid "_Always show tabs"
 msgstr "ସର୍ବଦା ଟ୍ୟାବଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ (_A)"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.ui.h:15
 msgid "_Authenticate"
 msgstr "ବୈଧିକରଣ କରନ୍ତୁ (_A)"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.ui.h:16
 msgid "_Full screen"
 msgstr "ସମ୍ପୂର୍ଣ୍ଣ ପରଦା (_F)"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.ui.h:17
 msgid "_Host:"
 msgstr "ଆଧାର (_H):"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.ui.h:18
 msgid "_Name:"
 msgstr "ନାମ(_N):"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.ui.h:19
 msgid "_Password:"
 msgstr "ପ୍ରବେଶ ସଙ୍କେତ(_P):"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.ui.h:20
+msgid "_Protocol:"
+msgstr ""
+
+#: ../data/vinagre.ui.h:21
 msgid "_Remember this credential"
 msgstr "ଏହି ପ୍ରମାଣ ପତ୍ରକୁ ମନେରଖନ୍ତୁ (_R)"
 
-#: ../data/vinagre.glade.h:23
-msgid "_Scaling"
-msgstr "ପରିମାପ (_S)"
-
-#: ../data/vinagre.glade.h:24
+#: ../data/vinagre.ui.h:22
 msgid "_Show menu shortcuts"
 msgstr "ତାଲିକା ସଂକ୍ଷିପ୍ତ ପଥଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ (_S)"
 
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.ui.h:23
 msgid "_Username:"
 msgstr "ଚାଳକ ନାମ(_U):"
 
-#: ../data/vinagre.glade.h:26 ../src/vinagre-vnc-tab.c:643
-msgid "_View only"
-msgstr "କେବଳ ଦର୍ଶନୀୟ (_V)"
+#: ../data/vinagre.schemas.in.in.h:1 ../vinagre/vinagre-plugin-manager.c:795
+msgid "Active plugins"
+msgstr "ସକ୍ରିୟ ପ୍ଲଗ-ଇନ"
 
-#. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:28
-msgid "host or host:display or host::port"
-msgstr "ଆଧାର କିମ୍ବା ଆଧାର:ପ୍ରଦର୍ଶନ କିମ୍ବା ଆଧାର::ସଂଯୋଗିକୀ"
+#: ../data/vinagre.schemas.in.in.h:2
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
 
-#: ../data/vinagre.schemas.in.h:1
+#: ../data/vinagre.schemas.in.in.h:3
 msgid "Maximum number of history items in connect dialog"
 msgstr "ସଂଳାପ ସଂଯୋଗରେ ସର୍ବାଧିକ ସଂଖ୍ୟକ ଇତିହାସ ବସ୍ତୁ"
 
-#: ../data/vinagre.schemas.in.h:2
+#: ../data/vinagre.schemas.in.in.h:4
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -160,7 +174,7 @@ msgstr ""
 "ସେଟକରନ୍ତୁ. ଲକ୍ଷ୍ୟକରନ୍ତୁ ଯେ ଯଦି ସେମାନେ ସକ୍ରିୟ ଅଛନ୍ତି, ତେବେ ସେହି କି ଗୁଡ଼ିକ ତାଲିକା ଦ୍ୱାରା "
 "ବନ୍ଦକରାଯିବ ଏବଂ ସୁଦୂର ଆଧାର ପାଖକୁ ପଠାଯିବ ନାହିଁ."
 
-#: ../data/vinagre.schemas.in.h:3
+#: ../data/vinagre.schemas.in.in.h:5
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -168,15 +182,15 @@ msgstr ""
 "ସବୁ ସମୟରେ ଟେବ ଗୁଡିକୁ ଦେଖାଇବା ପାଇଁ \"true୍ୟ\" ସେଟ କରନ୍.ୁ। falseମିଥ୍ୟା\" ସେଟ କରିବା "
 "ଦ୍ୱାରାକେବଳ ଏକରୁ ଅଧିକ ସଂଯୋଗ ଥିବା ସମୟରେହିଁ ଦେଖାଇଥାଏ।"
 
-#: ../data/vinagre.schemas.in.h:4
+#: ../data/vinagre.schemas.in.in.h:6
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "ଆଧାର ଡ୍ରପଡାଉନ ଭରଣରେ ସର୍ବାଧିକ ସଂଖ୍ୟକ ବସ୍ତୁ ଉଲ୍ଲେଖ କରନ୍ତୁ."
 
-#: ../data/vinagre.schemas.in.h:5
+#: ../data/vinagre.schemas.in.in.h:7
 msgid "The handler for \"vnc://\" URLs"
 msgstr "\"vnc://\" ୟୁ.ଆର.ଏଲସ ପାଇଁ ଚାଳକ"
 
-#: ../data/vinagre.schemas.in.h:6
+#: ../data/vinagre.schemas.in.in.h:8
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -186,9 +200,17 @@ msgstr ""
 "ଛାଡିଦେବା ପାଇଁ ଗ୍ରାହକ ପରିସେବକ କୁ କହିପାରନ୍ତି। ଡେସ୍କଟପ କୁ ଅନ୍ୟ ଗ୍ରାହକ ମାନଙ୍କ ସହିତ ସହଭାଗୀ କରିବା "
 "ପାଇଁ ଏହାର ମୂଲ୍ୟ true ସେଟ କରନ୍ତୁ।"
 
-#: ../data/vinagre.schemas.in.h:7
+#: ../data/vinagre.schemas.in.in.h:9
 msgid "Whether we should leave other clients connected"
 msgstr "ଅନ୍ୟ ଗ୍ରାହକ ମାନଙ୍କୁ ସଂଯୁକ୍ତ ଅବସ୍ଥାରେ ଆମର ଛାଡିଯିବାଟା ଉଚିତ କି ନୁହଁ"
+
+#: ../data/vinagre.schemas.in.in.h:10
+msgid "Whether we should show tabs even when there is only one active connection"
+msgstr "କେବଳ ଗୋଟିଏ ସକ୍ରିୟ ସଂଯୋଗ ଥିବା ସମୟରେ ଆମର ଟେବ ଗୁଡିକୁ ଦେଖାଇବା ଉଚିତ କି ନୁହ"
+
+#: ../data/vinagre.schemas.in.in.h:11
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "ଆମର ତାଲିକା ତ୍ୱରକଗୁଡ଼ିକୁ ଦର୍ଶାଇବା ଉଚିତ କି (ସଂକ୍ଷିପ୍ତ ପଥ କିଗୁଡ଼ିକ)"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -198,566 +220,159 @@ msgstr "ସୁଦୂର ଡେସ୍କଟପ (VNC) ଫାଇଲ"
 msgid "Remote Desktop Connection"
 msgstr "ସୁଦୂର ଡେସ୍କଟପ ସଂଯୋଗ"
 
-#: ../src/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "ସୁଦୂର ଯନ୍ତ୍ର ସହିତ ତୁରନ୍ତ ଅଭିଗମ କରିବା ପାଇଁ ଗୋଟିଏ ତାଲିକା"
-
-#: ../src/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Vinagre Applet କାରଖାନା"
-
-#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
-msgid "Could not run vinagre:"
-msgstr "vinagre ଚଲାଇପାରିଲା ନାହିଁ:"
-
-#: ../src/vinagre-applet.c:369
-msgid "Open Remote Desktop Viewer"
-msgstr "ସୁଦୂର ଡେସ୍କଟପ ପ୍ରଦର୍ଶକକୁ ଖୋଲନ୍ତୁ"
-
-#: ../src/vinagre-applet.c:419
-msgid "Access your bookmarks"
-msgstr "ଆପଣଙ୍କର ଚିହ୍ନିତସ୍ଥାନକୁ ଅଭିଗମନ କରନ୍ତୁ"
-
-#: ../src/vinagre-bookmarks.c:327
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ପ୍ରାରମ୍ଭ କରିବାବା ସମୟରେ ତ୍ରୁଟି:%s"
-
-#: ../src/vinagre-bookmarks.c:327 ../src/vinagre-bookmarks.c:442
-#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:148
-#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
-#: ../src/vinagre-main.c:88 ../src/vinagre-main.c:107
-#: ../src/vinagre-window.c:263
-msgid "Unknown error"
-msgstr "ଅଜଣା ତ୍ରୁଟି"
-
-#: ../src/vinagre-bookmarks.c:334
-msgid "Error while initializing bookmarks: The file seems to be empty"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ପ୍ରାରମ୍ଭ କରିବା ସମୟରେ ତ୍ରୁଟି: ଫାଇଲଟି ଖାଲିଥିବା ପରି ଲାଗୁଛି"
-
-#: ../src/vinagre-bookmarks.c:341
-msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ପ୍ରାରମ୍ଭ କରିବାବା ସମୟରେ ତ୍ରୁଟି: ଫାଇଲଟି ଗୋଟିଏ vinagre ଚିହ୍ନିତ ଫାଇଲ ନୁହଁ"
-
-#: ../src/vinagre-bookmarks.c:403 ../src/vinagre-bookmarks.c:410
-msgid "Error while saving bookmarks: Failed to create the XML structure"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନ ନିର୍ମାଣ କରିବାରେ ବିଫଳ"
-
-#: ../src/vinagre-bookmarks.c:417 ../src/vinagre-bookmarks.c:424
-msgid "Error while saving bookmarks: Failed to initialize the XML structure"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ଆରମ୍ଭ କରିବାରେ ବିଫଳ"
-
-#: ../src/vinagre-bookmarks.c:433
-msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ସିଦ୍ଧାନ୍ତ କରିବାରେ ବିଫଳ"
-
-#: ../src/vinagre-bookmarks.c:442
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି:%s"
-
-#: ../src/vinagre-bookmarks-migration.c:93
-#: ../src/vinagre-bookmarks-migration.c:100
-msgid "Error while migrating bookmarks: Failed to create the XML structure"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନ ନିର୍ମାଣ କରିବାରେ ବିଫଳ"
-
-#: ../src/vinagre-bookmarks-migration.c:107
-#: ../src/vinagre-bookmarks-migration.c:114
-msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ଆରମ୍ଭ କରିବାରେ ବିଫଳ"
-
-#: ../src/vinagre-bookmarks-migration.c:123
-msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ସିଦ୍ଧାନ୍ତ କରିବାରେ ବିଫଳ"
-
-#: ../src/vinagre-bookmarks-migration.c:133
-#: ../src/vinagre-bookmarks-migration.c:231
-#, c-format
-msgid "Error while migrating bookmarks: %s"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି:%s"
-
-#: ../src/vinagre-bookmarks-migration.c:231
-msgid "Failed to create the directory"
-msgstr "ଡିରେକ୍ଟୋରୀ ନିର୍ମାଣ କରିବାରେ ବିଫଳ"
-
-#: ../src/vinagre-bookmarks-migration.c:255
-msgid ""
-"Migrating the bookmarks file to the new format. This operation is only "
-"supposed to run once."
-msgstr "ଚିହ୍ନିତ ଫାଇଲକୁ ଗୋଟିଏ ନୂତନ ଶୈଳୀରେ ନକଲ କରୁଅଛି। ଏହି ପ୍ରୟୋଗଟି କେବଳ ଥରେ ଚଲାଇବା ଉଚିତ।"
-
-#: ../src/vinagre-bookmarks-migration.c:263
-#, c-format
-msgid "Error opening old bookmarks file: %s"
-msgstr "ପୁରୁଣା ଚିହ୍ନିତ ଫାଇଲକୁ ଖୋଲିବା ସମୟରେ ତ୍ରୁଟି:%s"
-
-#: ../src/vinagre-bookmarks-migration.c:264
-#: ../src/vinagre-bookmarks-migration.c:276
-msgid "Migration cancelled"
-msgstr "ସ୍ଥାନାନ୍ତରଣ ବାତିଲ ହୋଇଛି"
-
-#: ../src/vinagre-bookmarks-migration.c:273
-msgid "Could not remove the old bookmarks file"
-msgstr "ପୁରୁଣା ଚିହ୍ନିତ ଫାଇଲକୁ କଢାଯାଇପାରିଲା ନାହିଁ"
-
-#: ../src/vinagre-bookmarks-tree.c:120
-msgid "Root Folder"
-msgstr "ମୁଖ୍ୟ ଚାଳକ ଫୋଲଡ଼ର"
-
-#: ../src/vinagre-bookmarks-ui.c:79
-msgid "Invalid name for this folder"
-msgstr "ଏହି ଫୋଲଡ଼ର ପାଇଁ ଅବୈଧ ନାମ"
-
-#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:194
-#, c-format
-msgid "The name \"%s\" is already used in this folder. Please use a different name."
-msgstr "ନାମ \"%s\" କୁ ଏହି ଫୋଲଡରରେ ପୂର୍ବରୁ ବ୍ୟବହାର କରାଯାଇଛି। ଦୟାକରି ଭିନ୍ନ ଏକ ନାମ ବ୍ୟବହାର କରନ୍ତୁ।"
-
-#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:184
-#: ../src/vinagre-bookmarks-ui.c:195
-msgid "Invalid name for this item"
-msgstr "ଏହି ବସ୍ତୁ ପାଇଁ ଅବୈଧ ନାମ"
-
-#: ../src/vinagre-bookmarks-ui.c:298
-#, c-format
-msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
-msgstr "କଣ ଆପଣ ସୁନିଶ୍ଚିତ କି ଆପଣ ଚିହ୍ନିତ ସ୍ଥାନରୁ <i>%s</i> କୁ ହଟାଇବାକୁ ଚାହୁଁଛନ୍ତି?"
-
-#: ../src/vinagre-bookmarks-ui.c:303
-msgid "Remove Folder?"
-msgstr "ଫୋଲଡ଼ରକୁ କାଢ଼ିବେ କି?"
-
-#: ../src/vinagre-bookmarks-ui.c:304
-msgid "Notice that all its subfolders and items will be removed as well."
-msgstr "ଦେଖନ୍ତୁ ଯେ ଏହାର ସମସ୍ତ ଉପ ଫୋଲଡ଼ର ଏବଂ ବସ୍ତୁଗୁଡ଼ିକୁ ମଧ୍ଯ କଢ଼ାଯିବ।"
-
-#: ../src/vinagre-bookmarks-ui.c:309
-msgid "Remove Item?"
-msgstr "ବସ୍ତୁଗୁଡ଼ିକୁ କାଢ଼ିବେ କି?"
-
-#: ../src/vinagre-bookmarks-ui.c:326
-msgid "Error removing bookmark: Entry not found"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ କାଢ଼ିବା ସମୟରେ ତ୍ରୁଟି: ଭରଣ ମିଳୁନାହିଁ"
-
-#: ../src/vinagre-bookmarks-ui.c:343
-msgid "New Folder"
-msgstr "ନୂତନ ଫୋଲଡ଼ର"
-
-#: ../src/vinagre-commands.c:115
-msgid "Choose the file"
-msgstr "ଫାଇଲ କୁ ବାଛନ୍ତୁ"
-
-#: ../src/vinagre-commands.c:126 ../src/vinagre-tab.c:703
-msgid "Supported formats"
-msgstr "ସମର୍ଥିତ ଶୈଳୀ"
-
-#: ../src/vinagre-commands.c:159
-msgid "The following file could not be opened:"
-msgid_plural "The following files could not be opened:"
-msgstr[0] "ନିମ୍ନଲିଖିତ ଫାଇଲ କୁ ଖୋଲାଯାଇ ପାରିବ ନାହିଁ:"
-msgstr[1] "ନିମ୍ନଲିଖିତ ଫାଇଲ କୁ ଖୋଲାଯାଇ ପାରିବ ନାହିଁ:"
-
-#: ../src/vinagre-connect.c:181
-#, c-format
-msgid "Error while saving history file: %s"
-msgstr "ଇତିହାସ ଫାଇଲକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି:%s"
-
-#: ../src/vinagre-connect.c:193
-msgid "Choose a VNC Server"
-msgstr "ଗୋଟିଏ VNC ସର୍ଭର ବାଛନ୍ତୁ"
-
-#: ../src/vinagre-connection.c:556
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "ପ୍ରୋଟୋକଲ %s ଟି ସମର୍ଥିତ ନୁହଁ।"
-
-#: ../src/vinagre-connection.c:669
-msgid "Could not open the file."
-msgstr "ଫାଇଲକୁ ଖୋଲିପାରିଲା ନାହିଁ।"
-
-#: ../src/vinagre-connection.c:688
-msgid "Could not parse the file."
-msgstr "ଫାଇଲକୁ ବିଶ୍ଳେଷଣ କରିପାରିଲା ନାହିଁ।"
-
-#: ../src/vinagre-connection.c:733
-msgid "Could not find the host address in the file."
-msgstr "ଏହି ଫାଇଲରେ ଆଧାର ଠିକଣା ମିଳିଲା ନାହିଁ।"
-
-#: ../src/vinagre-fav.c:667
-msgid "Invalid operation"
-msgstr "ଅବୈଧ ପ୍ରୟୋଗ"
-
-#: ../src/vinagre-fav.c:668
-msgid "Data received from drag&drop operation is invalid."
-msgstr "drag&drop ପ୍ରୟୋଗରୁ ମିଳିଥିବା ତଥ୍ୟଟି ଅବୈଧ ଅଟେ।"
-
-#: ../src/vinagre-fav.c:861
-msgid "Hosts nearby"
-msgstr "ପାଖରେ ଥିବା ହୋଷ୍ଟ ଗୁଡିକ"
-
-#: ../src/vinagre-main.c:56
-msgid "Opens a .vnc file"
-msgstr "ଗୋଟିଏ .vnc ଫାଇଲ ଖୋଲେ"
-
-#: ../src/vinagre-main.c:56
-msgid "filename"
-msgstr "ଫାଇଲ ନାମ"
-
-#: ../src/vinagre-main.c:59
-msgid "Create a new toplevel window in an existing instance of vinagre"
-msgstr "vinagreର ସ୍ଥିତବାନ ଦୃଷ୍ଟାନ୍ତରେ ଗୋଟିଏ ନୂତନ ଉଚ୍ଚସ୍ତରୀୟ ୱିଣ୍ଡୋ ନିର୍ମାଣକରନ୍ତୁ"
-
-#: ../src/vinagre-main.c:63
-msgid "[server:port]"
-msgstr "[ସର୍ଭର:ସଂଯୋଗିକୀ]"
-
-#: ../src/vinagre-main.c:118
-msgid "The following error has occurred:"
-msgid_plural "The following errors have occurred:"
-msgstr[0] "ନିମ୍ନଲିଖିତ ତ୍ରୁଟି ଗୁଡିକ ଘଟିଯାଇଛି:"
-msgstr[1] "ନିମ୍ନଲିଖିତ ତ୍ରୁଟି ଗୁଡିକ ଘଟିଯାଇଛି:"
-
-#. Setup command line options
-#: ../src/vinagre-main.c:143
-msgid "- VNC Client for GNOME"
-msgstr "GNOME ପାଇଁ -VNC ଗ୍ରାହକ"
-
-#: ../src/vinagre-main.c:152
-msgid "Run 'vinagre --help' to see a full list of available command line options"
-msgstr "ଉପଲବ୍ଧ ନିର୍ଦ୍ଦେଶ ନାମା ବିକଳ୍ପ ଗୁଡିକର ସଂପୂର୍ଣ୍ଣ ତାଲିକା ଦେଖିବା ପାଇଁ 'ଭିନାଗ୍ରେ--ସାହାଯ୍ୟ' କୁ ଚଲାନ୍ତୁ"
-
-#: ../src/vinagre-mdns.c:123
-#, c-format
-msgid "Failed to resolve avahi hostname: %s\n"
-msgstr "ଆଭାହି ହୋଷ୍ଟନାମକୁ ସମାଧାନ କରିବାରେ ବିଫଳ ହେଲା: %s\n"
-
-#: ../src/vinagre-mdns.c:175 ../src/vinagre-mdns.c:184
-#, c-format
-msgid "Failed to browse for hosts: %s\n"
-msgstr "ହୋଷ୍ଟ ଗୁଡିକୁ ଖୋଜିବୁଲିବାରେ ବିଫଳ ହେଲା: %s\n"
-
-#: ../src/vinagre-notebook.c:399
-#, c-format
-msgid "Connection to host <i>%s</i> was closed."
-msgstr "ହୋଷ୍ଟ <i>%s</i> ସହିତ ସଂଯୋଗ ବନ୍ଦ ହୋଇଯାଇଛି।"
-
-#: ../src/vinagre-notebook.c:401
-msgid "Connection closed"
-msgstr "ସଂଯୋଗ ବନ୍ଦ ହୋଇଯାଇଛି"
-
-#: ../src/vinagre-notebook.c:417
-#, c-format
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "ହୋଷ୍ଟ <i>%s</i> ର ବୈଧିକରଣ ବିଫଳ ହେଲା"
-
-#: ../src/vinagre-notebook.c:423
-msgid "Authentication failed"
-msgstr "ବୈଧିକରଣ ବିଫଳ ହେଲା"
-
-#: ../src/vinagre-notebook.c:460
-msgid "Connecting..."
-msgstr "ସଂଯୋଗ କରୁଅଛି..."
-
-#: ../src/vinagre-notebook.c:487 ../src/vinagre-tab.c:379
-msgid "Close connection"
-msgstr "ସଂଯୋଗ ବନ୍ଦ କରନ୍ତୁ"
-
-#: ../src/vinagre-prefs.c:169
-msgid "Cannot initialize preferences manager."
-msgstr "ପସନ୍ଦ ପରିଚାଳକକୁ ଆରମ୍ଭ କରାଯାଇପାରିବ ନାହିଁ।"
-
-#: ../src/vinagre-tab.c:329
-msgid "Error saving recent connection."
-msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗକୁ ସଂରକ୍ଷଣ କରିବାରେ ତ୍ରୁଟି।"
-
-#: ../src/vinagre-tab.c:393
-msgid "Minimize window"
-msgstr "ସର୍ବନିମ୍ନ ୱିଣ୍ଡୋ"
-
-#. Machine menu
-#: ../src/vinagre-tab.c:409 ../src/vinagre-tab.c:410 ../src/vinagre-ui.h:100
-msgid "Take screenshot"
-msgstr "ପରଦା ପ୍ରତିଛବି ନିଅନ୍ତୁ"
-
-#: ../src/vinagre-tab.c:641
-#| msgid "Error saving the credential on the keyring."
-msgid "Error saving the credentials on the keyring."
-msgstr "କି-ରିଙ୍ଗରେ ପ୍ରବେଶାନୁମତୀ ସଂରକ୍ଷଣ କରିବାରେ ତ୍ରୁଟି।"
-
-#: ../src/vinagre-tab.c:681
-msgid "Could not get a screenshot of the connection."
-msgstr "ସଂଯୋଗର ପରଦା ପ୍ରତିଛବି ପାଇଲା ନାହିଁ।"
-
-#: ../src/vinagre-tab.c:689
-#, c-format
-msgid "Screenshot of %s"
-msgstr "%s ର ପରଦା ପ୍ରତିଛବି"
-
-#: ../src/vinagre-tab.c:692
-msgid "Save Screenshot"
-msgstr "ପରଦା ପ୍ରତିଛବି କୁ ସଂରକ୍ଷଣ କରନ୍ତୁ"
-
-#. Toplevel
-#: ../src/vinagre-ui.h:33
-msgid "_Machine"
-msgstr "ଯନ୍ତ୍ର(_M)"
-
-#: ../src/vinagre-ui.h:34
-msgid "_Edit"
-msgstr "ସମ୍ପାଦନ (_E)"
-
-#: ../src/vinagre-ui.h:35
-msgid "_View"
-msgstr "ଦୃଶ୍ୟ (_V)"
-
-#: ../src/vinagre-ui.h:36
-msgid "_Bookmarks"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନଗୁଡିକ (_B)"
-
-#: ../src/vinagre-ui.h:41
-msgid "Connect to a remote machine"
-msgstr "ସୁଦୂର ଯନ୍ତ୍ର ସହିତ ସଂଯୋଗ କରନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:43
-msgid "Open a .VNC file"
-msgstr "ଗୋଟିଏ .VNC ଫାଇଲ ଖୋଲନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:45
-msgid "Quit the program"
-msgstr "କାରିକା କୁ ଛାଡି ଦିଅନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:49
-msgid "Edit the application preferences"
-msgstr "ପ୍ରୟୋଗ ପସନ୍ଦଗୁଡ଼ିକୁ ସମ୍ପାଦନ କରନ୍ତୁ"
-
-#. Bookmarks menu
-#: ../src/vinagre-ui.h:52
-msgid "_Open bookmark"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ଖୋଲନ୍ତୁ (_O)"
-
-#: ../src/vinagre-ui.h:53
-msgid "Connect to this machine"
-msgstr "ଏହି ଯନ୍ତ୍ର ସହିତ ସଂଯୋଗ କରନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:54
-msgid "_Edit bookmark"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନଟିକୁ ସମ୍ପାଦନ କରନ୍ତୁ(_E)"
-
-#: ../src/vinagre-ui.h:55
-msgid "Edit the details of selected bookmark"
-msgstr "ବଚ୍ଛିତ ଚିହ୍ନିତ ସ୍ଥାନର ବିସ୍ତୃତ ବିବରଣୀ ଗୁଡିକୁ ସମ୍ପାଦନ କରନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:56
-msgid "_Remove from bookmarks"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନଗୁଡିକରୁ ହଟାଇ ନିଅନ୍ତୁ (_R)"
-
-#: ../src/vinagre-ui.h:57
-msgid "Remove current selected connection from bookmarks"
-msgstr "ସାମ୍ପ୍ରତିକ ବଚ୍ଛିତ ସଂଯୋଗ ଗୁଡିକୁ ଚିହ୍ନିତ ସ୍ଥାନରୁ ହଟାଇଦିଅନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:58
-msgid "_New Folder"
-msgstr "ନୂତନ ଫୋଲଡ଼ର (_N)"
-
-#: ../src/vinagre-ui.h:59
-msgid "Create a new folder"
-msgstr "ଗୋଟିଏ ନୂତନ ଫୋଲଡ଼ର ନିର୍ମାଣ କରନ୍ତୁ"
-
-#. Help menu
-#: ../src/vinagre-ui.h:62
-msgid "_Contents"
-msgstr "ସୂଚୀପତ୍ର (_C)"
-
-#: ../src/vinagre-ui.h:63
-msgid "Open the vinagre manual"
-msgstr "ଭିନାଗ୍ରେ ସହାୟକ ପୁସ୍ତକ କୁ ଖୋଲନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:65
-msgid "About this application"
-msgstr "ଏହି ପ୍ରୟୋଗ ସମ୍ପର୍କରେ"
-
-#: ../src/vinagre-ui.h:70
-msgid "_Toolbar"
-msgstr "ସାଧନ ପଟି (_T)"
-
-#: ../src/vinagre-ui.h:71
-msgid "Show or hide the toolbar"
-msgstr "ସାଧନ ପଟିକୁ ଦେଖାନ୍ତୁ ଅବା ଲୁଚାନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:74
-msgid "_Statusbar"
-msgstr "ଅବସ୍ଥିତି ପଟି (_S)"
-
-#: ../src/vinagre-ui.h:75
-msgid "Show or hide the statusbar"
-msgstr "ଅବସ୍ଥିତି ପଟିକୁ ଦେଖାନ୍ତୁ ଅବା ଲୁଚାନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:78
-msgid "Side _Panel"
-msgstr "ପାର୍ଶ୍ୱ ଫଳକ(_P)"
-
-#: ../src/vinagre-ui.h:79
-msgid "Show or hide the side panel"
-msgstr "ପାର୍ଶ୍ୱ ଫଳକକୁ ଦେଖାନ୍ତୁ ଅବା ଲୁଚାନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:87
-msgid "Close the current connection"
-msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗକୁ ବନ୍ଦ କରନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:88
-msgid "C_lose All"
-msgstr "ସମସ୍ତଙ୍କୁ ବନ୍ଦ କରନ୍ତୁ (_C)"
-
-#: ../src/vinagre-ui.h:89
-msgid "Close all active connections"
-msgstr "ସମସ୍ତ ସକ୍ରିୟ ସଂଯୋଗ ଗୁଡିକୁ ବନ୍ଦ କରନ୍ତୁ"
-
-#. Bookmarks menu
-#: ../src/vinagre-ui.h:92
-msgid "_Add to bookmarks"
-msgstr "ଚିହ୍ନିତ ସ୍ଥାନରେ ଯୋଗ କରନ୍ତୁ (_A)"
-
-#: ../src/vinagre-ui.h:93
-msgid "Add current connection to your bookmarks"
-msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗକୁ ଚିହ୍ନିତ ସ୍ଥାନରେ ଯୋଗ କରନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:101
-msgid "Take a screenshot of active connection"
-msgstr "ଗୋଟିଏ ସକ୍ରିୟ ସଂଯୋଗର ପରଦା ପ୍ରତିଛବି ନିଅନ୍ତୁ"
-
-#: ../src/vinagre-ui.h:105
-msgid "View the current machine in full screen"
-msgstr "ସାମ୍ପ୍ରତିକ ଯନ୍ତ୍ରକୁ ସମ୍ପୂର୍ଣ୍ଣ ପରଦାରେ ଦେଖନ୍ତୁ"
-
-#: ../src/vinagre-utils.c:75
-msgid "An error has occurred:"
-msgstr "ଗୋଟିଏ ତ୍ରୁଟି ଘଟିଯାଇଛି:"
-
-#: ../src/vinagre-utils.c:433
-msgid "Vinagre is a VNC client for the GNOME Desktop"
-msgstr "ଭିନାଗ୍ରେ GNOME ଡେସ୍କଟପ ପାଇଁ ଗୋଟିଏ VNC ଗ୍ରାହକ"
-
-#: ../src/vinagre-utils.c:436
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
+#. vim: set ts=8:
+#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
+msgid "SSH"
+msgstr "SSH"
+
+#. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
+#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+msgid "Access Unix/Linux terminals"
 msgstr ""
-"ଭିନାଗ୍ରେ ଗୋଟିଏ ମୁକ୍ତ ସଫ୍ଟୱେର; ମୁକ୍ତ ସଫ୍ଟୱେର ପ୍ରତିଷ୍ଠାନ ଦ୍ୱାରା ପ୍ରକାଶିତ GNU ଜେନେରାଲ ପବ୍ଲିକ "
-"ଲାଇସେନ୍ସ ନିୟମାବଳୀ ଅନୁସାରେ ଆପଣ ଏହାକୁ ପୁନଃବଣ୍ଟନ କରିପାରିବେ ଏବଂ/ ଅଥବା ରୂପାନ୍ତର କରିପାରିବେ; "
-"ଲାଇସେନ୍ସର ସଂସ୍କରଣ ୨ ଅଥବା (ଆପଣଙ୍କ ବିକଳ୍ପ ଅନୁସାରେ) ଯେକୌଣସି ପରବର୍ତ୍ତୀ ସଂସ୍କରଣରେ।"
 
-#: ../src/vinagre-utils.c:440
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:134
+msgid "Port:"
+msgstr "ସଂଯୋଗିକୀ:"
+
+#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
+msgid "SSH support"
 msgstr ""
-"ଭିନାଗ୍ରେ ଟି ଫଳବତୀ ହେବା ଆଶାରେ ବଣ୍ଟନ କରାଯାଇଥାଏ, କିନ୍ତୁ ବିନା କୌଣସି ନିର୍ଭରୋକ୍ତିରେ; ବିକ୍ରୟଯୋଗ୍ୟତା "
-"କିମ୍ବା କୌଣସି ଏକ ଲଖ୍ୟ ପାଇଁ ସକ୍ଷମତା ର ସୂଚିତ ନିର୍ଭରୋକ୍ତି ବିନା ମଧ୍ଯ। ଅଧିକ ବିସ୍ତୃତ ବିବରଣୀ ପାଇଁ GNU "
-"ଜେନେରାଲ ପବ୍ଲିକ ଲାଇସେନ୍ସ ଦେଖନ୍ତୁ।"
 
-#: ../src/vinagre-utils.c:444
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"ଆପଣ ଏହି କାରିକା ସହିତ GNU ଜେନେରାଲ ପବ୍ଲିକ ଲାଇସେନ୍ସ ର ଗୋଟିଏ ନକଲ ଗ୍ରହଣ କରିଥିବା ଉଚିତ। ଯଦି ନୁହଁ, "
-"ତେବେ<http://www.gnu.org/licenses/> କୁ ଦେଖନ୍ତୁ।"
-
-#: ../src/vinagre-utils.c:466
-msgid "translator-credits"
-msgstr "ଅନୁବାଦକ-ପ୍ରତିପତ୍ତି"
-
-#: ../src/vinagre-utils.c:469
-msgid "Vinagre Website"
-msgstr "ଭିନାଗ୍ରେ ୱେବସାଇଟ"
-
-#: ../src/vinagre-vnc-connection.c:198
+#: ../plugins/vnc/vinagre-vnc-connection.c:207
+#: ../plugins/vnc/vinagre-vnc-plugin.c:214
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr "'shared' ସୂଚକ ପାଇଁ ଖରାପ ମୂଲ୍ୟ: %d. ଏହା 0 କିମ୍ବା 1 ହୋଇଥିବା ଉଚିତ। ଏହାକୁ ଅଗ୍ରାହ୍ୟ କରନ୍ତୁ।"
 
-#: ../src/vinagre-vnc-tab.c:131
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:66
+msgid "Enable scaled mode"
+msgstr ""
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:81
+msgid "VNC Options:"
+msgstr ""
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+msgid "Show VNC Options"
+msgstr ""
+
+#. vim: set ts=8:
+#: ../plugins/vnc/vinagre-vnc-plugin.c:105
+#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
+msgid "VNC"
+msgstr "VNC"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:106
+msgid "Access Unix/Linux, Windows and other machines."
+msgstr ""
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:163
+msgid "Could not parse the file."
+msgstr "ଫାଇଲକୁ ବିଶ୍ଳେଷଣ କରିପାରିଲା ନାହିଁ।"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:170
+msgid "The file is not a VNC one: Missing the group \"connection\"."
+msgstr ""
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:176
+msgid "The file is not a VNC one: Missing the key \"host\"."
+msgstr ""
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:243
+msgid "VNC Options"
+msgstr ""
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:254
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
+msgid "_View only"
+msgstr "କେବଳ ଦର୍ଶନୀୟ (_V)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:261
+msgid "_Scaling"
+msgstr "ପରିମାପ (_S)"
+
+#. Translators: this is a pattern to open *.vnc files in a open dialog.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:285
+msgid "VNC Files"
+msgstr ""
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:132
 msgid "Desktop Name:"
 msgstr "ଡେସ୍କଟପ ନାମ:"
 
-#: ../src/vinagre-vnc-tab.c:133
-msgid "Port:"
-msgstr "ସଂଯୋଗିକୀ:"
-
-#: ../src/vinagre-vnc-tab.c:134
+#: ../plugins/vnc/vinagre-vnc-tab.c:135
 msgid "Dimensions:"
 msgstr "ପରିସର:"
 
-#: ../src/vinagre-vnc-tab.c:253
+#: ../plugins/vnc/vinagre-vnc-tab.c:261
 msgid "Error connecting to host."
 msgstr "ହୋଷ୍ଟ ସହିତ ସଂଯୋଗରେ ତ୍ରୁଟି।"
 
-#: ../src/vinagre-vnc-tab.c:289
-#, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+#. Translators: %s is a host name or IP address; %u is a code error (number).
+#: ../plugins/vnc/vinagre-vnc-tab.c:299
+#, fuzzy, c-format
+#| msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "ହୋଷ୍ଟ <i>%s</i> ର ବୈଧିକରଣ ପ୍ରକ୍ରିୟାଟି ସମର୍ଥିତ ନୁହଁ। (%u)"
 
-#: ../src/vinagre-vnc-tab.c:293
+#: ../plugins/vnc/vinagre-vnc-tab.c:303
 msgid "Authentication unsupported"
 msgstr "ବୈଧିକରଣ ପ୍ରକ୍ରିୟାଟି ସମର୍ଥିତ ନୁହଁ"
 
-#: ../src/vinagre-vnc-tab.c:560 ../src/vinagre-vnc-tab.c:577
+#: ../plugins/vnc/vinagre-vnc-tab.c:563 ../plugins/vnc/vinagre-vnc-tab.c:580
 msgid "Authentication error"
 msgstr "ବୈଧିକରଣ ତ୍ରୁଟି"
 
-#: ../src/vinagre-vnc-tab.c:561
+#: ../plugins/vnc/vinagre-vnc-tab.c:564
 msgid "A username is required in order to access this machine."
 msgstr "ଏହି ଯନ୍ତ୍ରକୁ ବ୍ୟବହାର କରିବା ପାଇଁ ଗୋଟିଏ ଚାଳକ ନାମ ଆବଶ୍ୟକ।"
 
-#: ../src/vinagre-vnc-tab.c:578
+#: ../plugins/vnc/vinagre-vnc-tab.c:581
 msgid "A password is required in order to access this machine."
 msgstr "ଏହି ଯନ୍ତ୍ରକୁ ବ୍ୟବହାର କରିବା ପାଇଁ ଗୋଟିଏ ପ୍ରବେଶ ସଂକେତ ଆବଶ୍ୟକ।"
 
-#: ../src/vinagre-vnc-tab.c:628
+#: ../plugins/vnc/vinagre-vnc-tab.c:632
 msgid "S_caling"
 msgstr "ପରିମାପ (_c)"
 
-#: ../src/vinagre-vnc-tab.c:629
-#| msgid "Fit the remote screen into the current window size"
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Fits the remote screen into the current window size"
 msgstr "ସାମ୍ପ୍ରତିକ ୱିଣ୍ଡୋ ଆକାରରେ ସୂଦୁର ପରଦାକୁ ମେଳାନ୍ତୁ"
 
-#: ../src/vinagre-vnc-tab.c:644
-#| msgid "Disable mouse and keyboard"
+#: ../plugins/vnc/vinagre-vnc-tab.c:648
 msgid "Does not send mouse and keyboard events"
 msgstr "ମାଉସ ଏବଂ କିବୋର୍ଡ ଘଟଣାକୁ ପଠାଇନଥାଏ"
 
-#: ../src/vinagre-vnc-tab.c:657
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
 msgid "_Original size"
 msgstr "ପ୍ରକୃତ ଆକାର (_O)"
 
-#: ../src/vinagre-vnc-tab.c:658
+#: ../plugins/vnc/vinagre-vnc-tab.c:662
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "ସୁଦୂର ଡେସ୍କଟପର ଆକାର ସହିତ ଏହି ୱିଣ୍ଡୋକୁ ମେଳାନ୍ତୁ "
 
-#: ../src/vinagre-vnc-tab.c:681 ../src/vinagre-vnc-tab.c:749
-#: ../src/vinagre-vnc-tab.c:750
+#: ../plugins/vnc/vinagre-vnc-tab.c:685 ../plugins/vnc/vinagre-vnc-tab.c:753
+#: ../plugins/vnc/vinagre-vnc-tab.c:754
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl-Alt-Del ପଠାନ୍ତୁ"
 
-#: ../src/vinagre-vnc-tab.c:682
-#| msgid "Send Ctrl+Alt+Del to active connection"
+#: ../plugins/vnc/vinagre-vnc-tab.c:686
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "ସୁଦୂର ଯନ୍ତ୍ରକୁ Ctrl-Alt-Del ପଠାନ୍ତୁ"
 
-#: ../src/vinagre-vnc-tab.c:728 ../src/vinagre-vnc-tab.c:729
+#: ../plugins/vnc/vinagre-vnc-tab.c:732 ../plugins/vnc/vinagre-vnc-tab.c:733
 msgid "Scaling"
 msgstr "ପରିମାପ"
 
-#: ../src/vinagre-vnc-tab.c:738 ../src/vinagre-vnc-tab.c:739
+#: ../plugins/vnc/vinagre-vnc-tab.c:742 ../plugins/vnc/vinagre-vnc-tab.c:743
 msgid "Read only"
 msgstr "କେବଳ ପଠନୀୟ"
 
-#: ../src/vinagre-vnc-tab.c:907
+#: ../plugins/vnc/vinagre-vnc-tab.c:914
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -769,17 +384,649 @@ msgstr ""
 "ଏହି ଫିଚରକୁ କେମିତି ସକ୍ରିୟ କରିବାକୁ ହେବ ଜାାଣିବ ପାଇଁା README ଫାଇଲ କୁ ପଢନ୍ତୁ(ଭିନାଗ୍ରେ ସହିତ ସିପ "
 "ହୋଇଥିବା। "
 
-#: ../src/vinagre-window.c:393
+#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
+msgid "VNC support"
+msgstr ""
+
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "ସୁଦୂର ଯନ୍ତ୍ର ସହିତ ତୁରନ୍ତ ଅଭିଗମ କରିବା ପାଇଁ ଗୋଟିଏ ତାଲିକା"
+
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Vinagre Applet କାରଖାନା"
+
+#: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
+msgid "Could not run vinagre:"
+msgstr "vinagre ଚଲାଇପାରିଲା ନାହିଁ:"
+
+#: ../vinagre/vinagre-applet.c:380
+msgid "Open Remote Desktop Viewer"
+msgstr "ସୁଦୂର ଡେସ୍କଟପ ପ୍ରଦର୍ଶକକୁ ଖୋଲନ୍ତୁ"
+
+#: ../vinagre/vinagre-applet.c:435
+msgid "Access your bookmarks"
+msgstr "ଆପଣଙ୍କର ଚିହ୍ନିତସ୍ଥାନକୁ ଅଭିଗମନ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
+#: ../vinagre/vinagre-tab.c:471
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "ପ୍ରୋଟୋକଲ %s ଟି ସମର୍ଥିତ ନୁହଁ।"
+
+#: ../vinagre/vinagre-bookmarks.c:343
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ପ୍ରାରମ୍ଭ କରିବାବା ସମୟରେ ତ୍ରୁଟି:%s"
+
+#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:447
+#: ../vinagre/vinagre-fav.c:681 ../vinagre/vinagre-main.c:100
+#: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
+msgid "Unknown error"
+msgstr "ଅଜଣା ତ୍ରୁଟି"
+
+#: ../vinagre/vinagre-bookmarks.c:350
+msgid "Error while initializing bookmarks: The file seems to be empty"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ପ୍ରାରମ୍ଭ କରିବା ସମୟରେ ତ୍ରୁଟି: ଫାଇଲଟି ଖାଲିଥିବା ପରି ଲାଗୁଛି"
+
+#: ../vinagre/vinagre-bookmarks.c:357
+msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ପ୍ରାରମ୍ଭ କରିବାବା ସମୟରେ ତ୍ରୁଟି: ଫାଇଲଟି ଗୋଟିଏ vinagre ଚିହ୍ନିତ ଫାଇଲ ନୁହଁ"
+
+#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+msgid "Error while saving bookmarks: Failed to create the XML structure"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନ ନିର୍ମାଣ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+msgid "Error while saving bookmarks: Failed to initialize the XML structure"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ଆରମ୍ଭ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-bookmarks.c:449
+msgid "Error while saving bookmarks: Failed to finalize the XML structure"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ସିଦ୍ଧାନ୍ତ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-bookmarks.c:458
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି:%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:95
+#: ../vinagre/vinagre-bookmarks-migration.c:102
+msgid "Error while migrating bookmarks: Failed to create the XML structure"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନ ନିର୍ମାଣ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:109
+#: ../vinagre/vinagre-bookmarks-migration.c:116
+msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ଆରମ୍ଭ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:125
+msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: XML ଗଠନକୁ ସିଦ୍ଧାନ୍ତ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-bookmarks-migration.c:238
+#, c-format
+msgid "Error while migrating bookmarks: %s"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି:%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:164
+#, fuzzy
+#| msgid "Error while migrating bookmarks: %s"
+msgid "Error while migrating bookmarks: VNC plugin is not activated"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନର ସ୍ଥାନ ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି:%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:238
+msgid "Failed to create the directory"
+msgstr "ଡିରେକ୍ଟୋରୀ ନିର୍ମାଣ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:262
+msgid ""
+"Migrating the bookmarks file to the new format. This operation is only "
+"supposed to run once."
+msgstr "ଚିହ୍ନିତ ଫାଇଲକୁ ଗୋଟିଏ ନୂତନ ଶୈଳୀରେ ନକଲ କରୁଅଛି। ଏହି ପ୍ରୟୋଗଟି କେବଳ ଥରେ ଚଲାଇବା ଉଚିତ।"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:270
+#, c-format
+msgid "Error opening old bookmarks file: %s"
+msgstr "ପୁରୁଣା ଚିହ୍ନିତ ଫାଇଲକୁ ଖୋଲିବା ସମୟରେ ତ୍ରୁଟି:%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:271
+#: ../vinagre/vinagre-bookmarks-migration.c:283
+msgid "Migration cancelled"
+msgstr "ସ୍ଥାନାନ୍ତରଣ ବାତିଲ ହୋଇଛି"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:280
+msgid "Could not remove the old bookmarks file"
+msgstr "ପୁରୁଣା ଚିହ୍ନିତ ଫାଇଲକୁ କଢାଯାଇପାରିଲା ନାହିଁ"
+
+#: ../vinagre/vinagre-bookmarks-tree.c:120
+msgid "Root Folder"
+msgstr "ମୁଖ୍ୟ ଚାଳକ ଫୋଲଡ଼ର"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:78
+msgid "Invalid name for this folder"
+msgstr "ଏହି ଫୋଲଡ଼ର ପାଇଁ ଅବୈଧ ନାମ"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:88 ../vinagre/vinagre-bookmarks-ui.c:200
+#, c-format
+msgid "The name \"%s\" is already used in this folder. Please use a different name."
+msgstr "ନାମ \"%s\" କୁ ଏହି ଫୋଲଡରରେ ପୂର୍ବରୁ ବ୍ୟବହାର କରାଯାଇଛି। ଦୟାକରି ଭିନ୍ନ ଏକ ନାମ ବ୍ୟବହାର କରନ୍ତୁ।"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:89 ../vinagre/vinagre-bookmarks-ui.c:190
+#: ../vinagre/vinagre-bookmarks-ui.c:201
+msgid "Invalid name for this item"
+msgstr "ଏହି ବସ୍ତୁ ପାଇଁ ଅବୈଧ ନାମ"
+
+#. Translators: %s is a protocol name, like VNC or SSH
+#: ../vinagre/vinagre-bookmarks-ui.c:168
+#, c-format
+msgid "(Protocol: %s)"
+msgstr ""
+
+#. Translators: %s is a bookmark entry name
+#: ../vinagre/vinagre-bookmarks-ui.c:308
+#, fuzzy, c-format
+#| msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgid "Are you sure you want to remove %s from bookmarks?"
+msgstr "କଣ ଆପଣ ସୁନିଶ୍ଚିତ କି ଆପଣ ଚିହ୍ନିତ ସ୍ଥାନରୁ <i>%s</i> କୁ ହଟାଇବାକୁ ଚାହୁଁଛନ୍ତି?"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:314
+msgid "Remove Folder?"
+msgstr "ଫୋଲଡ଼ରକୁ କାଢ଼ିବେ କି?"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:315
+msgid "Notice that all its subfolders and items will be removed as well."
+msgstr "ଦେଖନ୍ତୁ ଯେ ଏହାର ସମସ୍ତ ଉପ ଫୋଲଡ଼ର ଏବଂ ବସ୍ତୁଗୁଡ଼ିକୁ ମଧ୍ଯ କଢ଼ାଯିବ।"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:320
+msgid "Remove Item?"
+msgstr "ବସ୍ତୁଗୁଡ଼ିକୁ କାଢ଼ିବେ କି?"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:337
+msgid "Error removing bookmark: Entry not found"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ କାଢ଼ିବା ସମୟରେ ତ୍ରୁଟି: ଭରଣ ମିଳୁନାହିଁ"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:354
+msgid "New Folder"
+msgstr "ନୂତନ ଫୋଲଡ଼ର"
+
+#: ../vinagre/vinagre-commands.c:120
+msgid "Choose the file"
+msgstr "ଫାଇଲ କୁ ବାଛନ୍ତୁ"
+
+#: ../vinagre/vinagre-commands.c:148
+msgid "There are none supported files"
+msgstr ""
+
+#: ../vinagre/vinagre-commands.c:148
+msgid ""
+"None of the active plugins offer a supported file to be open. Activate some "
+"plugins and try again."
+msgstr ""
+
+#: ../vinagre/vinagre-commands.c:181
+msgid "The following file could not be opened:"
+msgid_plural "The following files could not be opened:"
+msgstr[0] "ନିମ୍ନଲିଖିତ ଫାଇଲ କୁ ଖୋଲାଯାଇ ପାରିବ ନାହିଁ:"
+msgstr[1] "ନିମ୍ନଲିଖିତ ଫାଇଲ କୁ ଖୋଲାଯାଇ ପାରିବ ନାହିଁ:"
+
+#: ../vinagre/vinagre-connect.c:85 ../vinagre/vinagre-connect.c:319
+#: ../vinagre/vinagre-connect.c:412
+msgid "Could not get the active protocol in the protocol list."
+msgstr ""
+
+#: ../vinagre/vinagre-connect.c:302
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "ଇତିହାସ ଫାଇଲକୁ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ତ୍ରୁଟି:%s"
+
+#: ../vinagre/vinagre-connect.c:329
+#, fuzzy
+#| msgid "Open Remote Desktop Viewer"
+msgid "Choose a Remote Desktop"
+msgstr "ସୁଦୂର ଡେସ୍କଟପ ପ୍ରଦର୍ଶକକୁ ଖୋଲନ୍ତୁ"
+
+#: ../vinagre/vinagre-connection.c:627
+msgid "Could not open the file."
+msgstr "ଫାଇଲକୁ ଖୋଲିପାରିଲା ନାହିଁ।"
+
+#: ../vinagre/vinagre-connection.c:651
+msgid "The file was not recognized by any of the plugins."
+msgstr ""
+
+#: ../vinagre/vinagre-fav.c:670
+msgid "Invalid operation"
+msgstr "ଅବୈଧ ପ୍ରୟୋଗ"
+
+#: ../vinagre/vinagre-fav.c:671
+msgid "Data received from drag&drop operation is invalid."
+msgstr "drag&drop ପ୍ରୟୋଗରୁ ମିଳିଥିବା ତଥ୍ୟଟି ଅବୈଧ ଅଟେ।"
+
+#: ../vinagre/vinagre-fav.c:871
+msgid "Hosts nearby"
+msgstr "ପାଖରେ ଥିବା ହୋଷ୍ଟ ଗୁଡିକ"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:62
+msgid "Open vinagre in fullscreen mode"
+msgstr ""
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:66
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "vinagreର ସ୍ଥିତବାନ ଦୃଷ୍ଟାନ୍ତରେ ଗୋଟିଏ ନୂତନ ଉଚ୍ଚସ୍ତରୀୟ ୱିଣ୍ଡୋ ନିର୍ମାଣକରନ୍ତୁ"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:70
+msgid "Open a file recognized by vinagre"
+msgstr ""
+
+#: ../vinagre/vinagre-main.c:70
+msgid "filename"
+msgstr "ଫାଇଲ ନାମ"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:75
+msgid "[server:port]"
+msgstr "[ସର୍ଭର:ସଂଯୋଗିକୀ]"
+
+#: ../vinagre/vinagre-main.c:130
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "ନିମ୍ନଲିଖିତ ତ୍ରୁଟି ଗୁଡିକ ଘଟିଯାଇଛି:"
+msgstr[1] "ନିମ୍ନଲିଖିତ ତ୍ରୁଟି ଗୁଡିକ ଘଟିଯାଇଛି:"
+
+#. Setup command line options
+#: ../vinagre/vinagre-main.c:169
+#, fuzzy
+#| msgid "Remote Desktop Viewer"
+msgid "- Remote Desktop Viewer"
+msgstr "ସୁଦୂର ଡେସ୍କଟପ ଦର୍ଶକ"
+
+#: ../vinagre/vinagre-main.c:193
+msgid "Run 'vinagre --help' to see a full list of available command line options"
+msgstr "ଉପଲବ୍ଧ ନିର୍ଦ୍ଦେଶ ନାମା ବିକଳ୍ପ ଗୁଡିକର ସଂପୂର୍ଣ୍ଣ ତାଲିକା ଦେଖିବା ପାଇଁ 'ଭିନାଗ୍ରେ--ସାହାଯ୍ୟ' କୁ ଚଲାନ୍ତୁ"
+
+#: ../vinagre/vinagre-mdns.c:142
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "ଆଭାହି ହୋଷ୍ଟନାମକୁ ସମାଧାନ କରିବାରେ ବିଫଳ ହେଲା: %s\n"
+
+#: ../vinagre/vinagre-mdns.c:200
+#, c-format
+msgid "Plugin %s has already registered a browser for service %s."
+msgstr ""
+
+#: ../vinagre/vinagre-mdns.c:209
+#, fuzzy, c-format
+#| msgid "Failed to browse for hosts: %s\n"
+msgid "Failed to add mDNS browser for service %s."
+msgstr "ହୋଷ୍ଟ ଗୁଡିକୁ ଖୋଜିବୁଲିବାରେ ବିଫଳ ହେଲା: %s\n"
+
+#: ../vinagre/vinagre-mdns.c:225
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "ହୋଷ୍ଟ ଗୁଡିକୁ ଖୋଜିବୁଲିବାରେ ବିଫଳ ହେଲା: %s\n"
+
+#: ../vinagre/vinagre-mdns.c:298
+#, fuzzy, c-format
+#| msgid "Failed to browse for hosts: %s\n"
+msgid "Failed to initialize mDNS browser: %s\n"
+msgstr "ହୋଷ୍ଟ ଗୁଡିକୁ ଖୋଜିବୁଲିବାରେ ବିଫଳ ହେଲା: %s\n"
+
+#. Translators: %s is a host name or IP address.
+#: ../vinagre/vinagre-notebook.c:444
+#, fuzzy, c-format
+#| msgid "Connection to host <i>%s</i> was closed."
+msgid "Connection to host %s was closed."
+msgstr "ହୋଷ୍ଟ <i>%s</i> ସହିତ ସଂଯୋଗ ବନ୍ଦ ହୋଇଯାଇଛି।"
+
+#: ../vinagre/vinagre-notebook.c:446
+msgid "Connection closed"
+msgstr "ସଂଯୋଗ ବନ୍ଦ ହୋଇଯାଇଛି"
+
+#. Translators: %s is a host name or IP address.
+#: ../vinagre/vinagre-notebook.c:465
+#, fuzzy, c-format
+#| msgid "Authentication to host <i>%s</i> has failed"
+msgid "Authentication to host %s has failed"
+msgstr "ହୋଷ୍ଟ <i>%s</i> ର ବୈଧିକରଣ ବିଫଳ ହେଲା"
+
+#: ../vinagre/vinagre-notebook.c:471
+msgid "Authentication failed"
+msgstr "ବୈଧିକରଣ ବିଫଳ ହେଲା"
+
+#: ../vinagre/vinagre-notebook.c:508
+msgid "Connecting..."
+msgstr "ସଂଯୋଗ କରୁଅଛି..."
+
+#: ../vinagre/vinagre-notebook.c:535 ../vinagre/vinagre-tab.c:395
+msgid "Close connection"
+msgstr "ସଂଯୋଗ ବନ୍ଦ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-plugin-dialog.c:83
+msgid "Plugin Manager"
+msgstr "ପ୍ଲଗ-ଇନ ପରିଚାଳକ"
+
+#: ../vinagre/vinagre-plugin-manager.c:45
+msgid "Plugin"
+msgstr "ପ୍ଲଗ-ଇନ"
+
+#: ../vinagre/vinagre-plugin-manager.c:46
+msgid "Enabled"
+msgstr "ସକ୍ରିୟ"
+
+#: ../vinagre/vinagre-plugin-manager.c:503
+msgid "C_onfigure"
+msgstr "ବିନ୍ୟାସ କରନ୍ତୁ (_o)"
+
+#: ../vinagre/vinagre-plugin-manager.c:512
+msgid "A_ctivate"
+msgstr "ସକ୍ରିୟ କରନ୍ତୁ (_c)"
+
+#: ../vinagre/vinagre-plugin-manager.c:523
+msgid "Ac_tivate All"
+msgstr "ସମସ୍ତଙ୍କୁ ସକ୍ରିୟ କରନ୍ତୁ (_t)"
+
+#: ../vinagre/vinagre-plugin-manager.c:528
+msgid "_Deactivate All"
+msgstr "ସମସ୍ତଙ୍କୁ ନିଷ୍କ୍ରିୟ କରନ୍ତୁ (_D)"
+
+#: ../vinagre/vinagre-plugin-manager.c:824
+#, fuzzy
+#| msgid "_About"
+msgid "_About Plugin"
+msgstr "ବିବରଣୀ (_A)"
+
+#: ../vinagre/vinagre-plugin-manager.c:828
+msgid "C_onfigure Plugin"
+msgstr "ପ୍ଲଗ୍ଇନ୍ ବିନ୍ଯାସ କରନ୍ତୁ (_o)"
+
+#: ../vinagre/vinagre-prefs.c:217
+msgid "Cannot initialize preferences manager."
+msgstr "ପସନ୍ଦ ପରିଚାଳକକୁ ଆରମ୍ଭ କରାଯାଇପାରିବ ନାହିଁ।"
+
+#: ../vinagre/vinagre-tab.c:344
+msgid "Error saving recent connection."
+msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗକୁ ସଂରକ୍ଷଣ କରିବାରେ ତ୍ରୁଟି।"
+
+#: ../vinagre/vinagre-tab.c:409
+msgid "Minimize window"
+msgstr "ସର୍ବନିମ୍ନ ୱିଣ୍ଡୋ"
+
+#. Machine menu
+#: ../vinagre/vinagre-tab.c:424 ../vinagre/vinagre-tab.c:425
+#: ../vinagre/vinagre-ui.h:104
+msgid "Take screenshot"
+msgstr "ପରଦା ପ୍ରତିଛବି ନିଅନ୍ତୁ"
+
+#: ../vinagre/vinagre-tab.c:666
+msgid "Error saving the credentials on the keyring."
+msgstr "କି-ରିଙ୍ଗରେ ପ୍ରବେଶାନୁମତୀ ସଂରକ୍ଷଣ କରିବାରେ ତ୍ରୁଟି।"
+
+#: ../vinagre/vinagre-tab.c:752
+msgid "Could not get a screenshot of the connection."
+msgstr "ସଂଯୋଗର ପରଦା ପ୍ରତିଛବି ପାଇଲା ନାହିଁ।"
+
+#: ../vinagre/vinagre-tab.c:757
+msgid "Save Screenshot"
+msgstr "ପରଦା ପ୍ରତିଛବି କୁ ସଂରକ୍ଷଣ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-tab.c:768
+#, c-format
+msgid "Screenshot of %s"
+msgstr "%s ର ପରଦା ପ୍ରତିଛବି"
+
+#: ../vinagre/vinagre-tab.c:819
+#, fuzzy
+#| msgid "Error saving recent connection."
+msgid "Error saving screenshot"
+msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗକୁ ସଂରକ୍ଷଣ କରିବାରେ ତ୍ରୁଟି।"
+
+#: ../vinagre/vinagre-tube-handler.c:228
+#, c-format
+msgid "Impossible to accept the stream tube: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:257
+#, fuzzy, c-format
+#| msgid "Failed to create the directory"
+msgid "Impossible to create the connection: %s"
+msgstr "ଡିରେକ୍ଟୋରୀ ନିର୍ମାଣ କରିବାରେ ବିଫଳ"
+
+#: ../vinagre/vinagre-tube-handler.c:341
+#, fuzzy, c-format
+#| msgid "Failed to resolve avahi hostname: %s\n"
+msgid "Failed to request name: %s"
+msgstr "ଆଭାହି ହୋଷ୍ଟନାମକୁ ସମାଧାନ କରିବାରେ ବିଫଳ ହେଲା: %s\n"
+
+#: ../vinagre/vinagre-tube-handler.c:342
+msgid "No error given"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:419
+#, c-format
+msgid "Impossible to get the contact name: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:454
+#, c-format
+msgid "Impossible to get the avatar: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:475
+#, c-format
+msgid "%s wants to share his desktop with you."
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:480
+msgid "Desktop sharing invitation"
+msgstr ""
+
+#. Toplevel
+#: ../vinagre/vinagre-ui.h:33
+msgid "_Machine"
+msgstr "ଯନ୍ତ୍ର(_M)"
+
+#: ../vinagre/vinagre-ui.h:34
+msgid "_Edit"
+msgstr "ସମ୍ପାଦନ (_E)"
+
+#: ../vinagre/vinagre-ui.h:35
+msgid "_View"
+msgstr "ଦୃଶ୍ୟ (_V)"
+
+#: ../vinagre/vinagre-ui.h:36
+msgid "_Bookmarks"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନଗୁଡିକ (_B)"
+
+#: ../vinagre/vinagre-ui.h:41
+msgid "Connect to a remote machine"
+msgstr "ସୁଦୂର ଯନ୍ତ୍ର ସହିତ ସଂଯୋଗ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:43
+msgid "Open a .VNC file"
+msgstr "ଗୋଟିଏ .VNC ଫାଇଲ ଖୋଲନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:45
+msgid "Quit the program"
+msgstr "କାରିକା କୁ ଛାଡି ଦିଅନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:49
+msgid "Edit the application preferences"
+msgstr "ପ୍ରୟୋଗ ପସନ୍ଦଗୁଡ଼ିକୁ ସମ୍ପାଦନ କରନ୍ତୁ"
+
+#. FIXME: Study this dialog for next release
+#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
+#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
+#.
+#. Bookmarks menu
+#: ../vinagre/vinagre-ui.h:56
+msgid "_Open bookmark"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନକୁ ଖୋଲନ୍ତୁ (_O)"
+
+#: ../vinagre/vinagre-ui.h:57
+msgid "Connect to this machine"
+msgstr "ଏହି ଯନ୍ତ୍ର ସହିତ ସଂଯୋଗ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:58
+msgid "_Edit bookmark"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନଟିକୁ ସମ୍ପାଦନ କରନ୍ତୁ(_E)"
+
+#: ../vinagre/vinagre-ui.h:59
+msgid "Edit the details of selected bookmark"
+msgstr "ବଚ୍ଛିତ ଚିହ୍ନିତ ସ୍ଥାନର ବିସ୍ତୃତ ବିବରଣୀ ଗୁଡିକୁ ସମ୍ପାଦନ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:60
+msgid "_Remove from bookmarks"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନଗୁଡିକରୁ ହଟାଇ ନିଅନ୍ତୁ (_R)"
+
+#: ../vinagre/vinagre-ui.h:61
+msgid "Remove current selected connection from bookmarks"
+msgstr "ସାମ୍ପ୍ରତିକ ବଚ୍ଛିତ ସଂଯୋଗ ଗୁଡିକୁ ଚିହ୍ନିତ ସ୍ଥାନରୁ ହଟାଇଦିଅନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:62
+msgid "_New Folder"
+msgstr "ନୂତନ ଫୋଲଡ଼ର (_N)"
+
+#: ../vinagre/vinagre-ui.h:63
+msgid "Create a new folder"
+msgstr "ଗୋଟିଏ ନୂତନ ଫୋଲଡ଼ର ନିର୍ମାଣ କରନ୍ତୁ"
+
+#. Help menu
+#: ../vinagre/vinagre-ui.h:66
+msgid "_Contents"
+msgstr "ସୂଚୀପତ୍ର (_C)"
+
+#: ../vinagre/vinagre-ui.h:67
+msgid "Open the vinagre manual"
+msgstr "ଭିନାଗ୍ରେ ସହାୟକ ପୁସ୍ତକ କୁ ଖୋଲନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:69
+msgid "About this application"
+msgstr "ଏହି ପ୍ରୟୋଗ ସମ୍ପର୍କରେ"
+
+#: ../vinagre/vinagre-ui.h:74
+msgid "_Toolbar"
+msgstr "ସାଧନ ପଟି (_T)"
+
+#: ../vinagre/vinagre-ui.h:75
+msgid "Show or hide the toolbar"
+msgstr "ସାଧନ ପଟିକୁ ଦେଖାନ୍ତୁ ଅବା ଲୁଚାନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:78
+msgid "_Statusbar"
+msgstr "ଅବସ୍ଥିତି ପଟି (_S)"
+
+#: ../vinagre/vinagre-ui.h:79
+msgid "Show or hide the statusbar"
+msgstr "ଅବସ୍ଥିତି ପଟିକୁ ଦେଖାନ୍ତୁ ଅବା ଲୁଚାନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:82
+msgid "Side _Panel"
+msgstr "ପାର୍ଶ୍ୱ ଫଳକ(_P)"
+
+#: ../vinagre/vinagre-ui.h:83
+msgid "Show or hide the side panel"
+msgstr "ପାର୍ଶ୍ୱ ଫଳକକୁ ଦେଖାନ୍ତୁ ଅବା ଲୁଚାନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:91
+msgid "Close the current connection"
+msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗକୁ ବନ୍ଦ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:92
+msgid "C_lose All"
+msgstr "ସମସ୍ତଙ୍କୁ ବନ୍ଦ କରନ୍ତୁ (_C)"
+
+#: ../vinagre/vinagre-ui.h:93
+msgid "Close all active connections"
+msgstr "ସମସ୍ତ ସକ୍ରିୟ ସଂଯୋଗ ଗୁଡିକୁ ବନ୍ଦ କରନ୍ତୁ"
+
+#. Bookmarks menu
+#: ../vinagre/vinagre-ui.h:96
+msgid "_Add to bookmarks"
+msgstr "ଚିହ୍ନିତ ସ୍ଥାନରେ ଯୋଗ କରନ୍ତୁ (_A)"
+
+#: ../vinagre/vinagre-ui.h:97
+msgid "Add current connection to your bookmarks"
+msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗକୁ ଚିହ୍ନିତ ସ୍ଥାନରେ ଯୋଗ କରନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:105
+msgid "Take a screenshot of active connection"
+msgstr "ଗୋଟିଏ ସକ୍ରିୟ ସଂଯୋଗର ପରଦା ପ୍ରତିଛବି ନିଅନ୍ତୁ"
+
+#: ../vinagre/vinagre-ui.h:109
+msgid "View the current machine in full screen"
+msgstr "ସାମ୍ପ୍ରତିକ ଯନ୍ତ୍ରକୁ ସମ୍ପୂର୍ଣ୍ଣ ପରଦାରେ ଦେଖନ୍ତୁ"
+
+#: ../vinagre/vinagre-utils.c:75
+msgid "An error has occurred:"
+msgstr "ଗୋଟିଏ ତ୍ରୁଟି ଘଟିଯାଇଛି:"
+
+#: ../vinagre/vinagre-utils.c:150
+#, fuzzy, c-format
+#| msgid "Could not open the file."
+msgid "Could not load builder file: %s"
+msgstr "ଫାଇଲକୁ ଖୋଲିପାରିଲା ନାହିଁ।"
+
+#: ../vinagre/vinagre-utils.c:453
+#, fuzzy
+#| msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
+msgstr "ଭିନାଗ୍ରେ GNOME ଡେସ୍କଟପ ପାଇଁ ଗୋଟିଏ VNC ଗ୍ରାହକ"
+
+#: ../vinagre/vinagre-utils.c:456
+msgid ""
+"Vinagre is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version."
+msgstr ""
+"ଭିନାଗ୍ରେ ଗୋଟିଏ ମୁକ୍ତ ସଫ୍ଟୱେର; ମୁକ୍ତ ସଫ୍ଟୱେର ପ୍ରତିଷ୍ଠାନ ଦ୍ୱାରା ପ୍ରକାଶିତ GNU ଜେନେରାଲ ପବ୍ଲିକ "
+"ଲାଇସେନ୍ସ ନିୟମାବଳୀ ଅନୁସାରେ ଆପଣ ଏହାକୁ ପୁନଃବଣ୍ଟନ କରିପାରିବେ ଏବଂ/ ଅଥବା ରୂପାନ୍ତର କରିପାରିବେ; "
+"ଲାଇସେନ୍ସର ସଂସ୍କରଣ ୨ ଅଥବା (ଆପଣଙ୍କ ବିକଳ୍ପ ଅନୁସାରେ) ଯେକୌଣସି ପରବର୍ତ୍ତୀ ସଂସ୍କରଣରେ।"
+
+#: ../vinagre/vinagre-utils.c:460
+msgid ""
+"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details."
+msgstr ""
+"ଭିନାଗ୍ରେ ଟି ଫଳବତୀ ହେବା ଆଶାରେ ବଣ୍ଟନ କରାଯାଇଥାଏ, କିନ୍ତୁ ବିନା କୌଣସି ନିର୍ଭରୋକ୍ତିରେ; ବିକ୍ରୟଯୋଗ୍ୟତା "
+"କିମ୍ବା କୌଣସି ଏକ ଲଖ୍ୟ ପାଇଁ ସକ୍ଷମତା ର ସୂଚିତ ନିର୍ଭରୋକ୍ତି ବିନା ମଧ୍ଯ। ଅଧିକ ବିସ୍ତୃତ ବିବରଣୀ ପାଇଁ GNU "
+"ଜେନେରାଲ ପବ୍ଲିକ ଲାଇସେନ୍ସ ଦେଖନ୍ତୁ।"
+
+#: ../vinagre/vinagre-utils.c:464
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"ଆପଣ ଏହି କାରିକା ସହିତ GNU ଜେନେରାଲ ପବ୍ଲିକ ଲାଇସେନ୍ସ ର ଗୋଟିଏ ନକଲ ଗ୍ରହଣ କରିଥିବା ଉଚିତ। ଯଦି ନୁହଁ, "
+"ତେବେ<http://www.gnu.org/licenses/> କୁ ଦେଖନ୍ତୁ।"
+
+#: ../vinagre/vinagre-utils.c:486
+msgid "translator-credits"
+msgstr "ଅନୁବାଦକ-ପ୍ରତିପତ୍ତି"
+
+#: ../vinagre/vinagre-utils.c:489
+msgid "Vinagre Website"
+msgstr "ଭିନାଗ୍ରେ ୱେବସାଇଟ"
+
+#: ../vinagre/vinagre-window.c:397
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "vinagre-ui.xml ରେ ମିଶ୍ରଣ କରିପାରିଲା ନାହିଁ: %s"
 
-#: ../src/vinagre-window.c:421
+#: ../vinagre/vinagre-window.c:425
 msgid "_Recent connections"
 msgstr "ସାମ୍ପ୍ରତିକ ସଂଯୋଗ ଗୁଡିକ(_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:579
+#: ../vinagre/vinagre-window.c:585
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s ଖୋଲନ୍ତୁ:%d"
