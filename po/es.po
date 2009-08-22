@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-08-13 14:54+0000\n"
-"PO-Revision-Date: 2009-08-13 19:17+0200\n"
+"POT-Creation-Date: 2009-08-18 12:06+0000\n"
+"PO-Revision-Date: 2009-08-22 11:54+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -398,7 +398,7 @@ msgid "Access your bookmarks"
 msgstr "Acceder a sus marcadores"
 
 #: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
-#: ../vinagre/vinagre-tab.c:533
+#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:256
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "El protocolo %s no está soportado."
@@ -410,7 +410,7 @@ msgstr "Error al inicializar los marcadores: %s"
 
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:447
+#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:459
 #: ../vinagre/vinagre-fav.c:681 ../vinagre/vinagre-main.c:100
 #: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
 msgid "Unknown error"
@@ -570,17 +570,17 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "No se pudo abrir el siguiente archivo:"
 msgstr[1] "No se pudieron abrir los siguientes archivos:"
 
-#: ../vinagre/vinagre-connect.c:85 ../vinagre/vinagre-connect.c:319
-#: ../vinagre/vinagre-connect.c:412
+#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
+#: ../vinagre/vinagre-connect.c:424
 msgid "Could not get the active protocol in the protocol list."
 msgstr "No se pudo obtener el protocolo activo en la lista de protocolos."
 
-#: ../vinagre/vinagre-connect.c:302
+#: ../vinagre/vinagre-connect.c:313
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Error al guardar el archivo de histórico: %s"
 
-#: ../vinagre/vinagre-connect.c:329
+#: ../vinagre/vinagre-connect.c:340
 msgid "Choose a Remote Desktop"
 msgstr "Elegir un escritorio remoto"
 
@@ -742,7 +742,6 @@ msgid "Cannot initialize preferences manager."
 msgstr "No se pudo inicializar el gestor de preferencias."
 
 #: ../vinagre/vinagre-tab.c:346
-#| msgid "_Full screen"
 msgid "Leave fullscreen"
 msgstr "Abandonar pantalla completa"
 
@@ -771,41 +770,47 @@ msgstr "Captura de pantalla de %s"
 msgid "Error saving screenshot"
 msgstr "Error al guardar la captura de pantalla"
 
-#: ../vinagre/vinagre-tube-handler.c:228
+#: ../vinagre/vinagre-tube-handler.c:232
 #, c-format
-msgid "Impossible to accept the stream tube: %s"
-msgstr "No se puede aceptar el tubo de flujo: %s"
+#| msgid "Impossible to get the avatar: %s"
+msgid "Impossible to get service property: %s"
+msgstr "Imposible obtener la propiedad del servicio: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:257
+#: ../vinagre/vinagre-tube-handler.c:289
 #, c-format
 msgid "Impossible to create the connection: %s"
 msgstr "No se puede crear la conexión: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:341
+#: ../vinagre/vinagre-tube-handler.c:328
+#, c-format
+msgid "Impossible to accept the stream tube: %s"
+msgstr "No se puede aceptar el tubo de flujo: %s"
+
+#: ../vinagre/vinagre-tube-handler.c:404
 #, c-format
 msgid "Failed to request name: %s"
 msgstr "Falló al consultar el nombre: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:342
+#: ../vinagre/vinagre-tube-handler.c:405
 msgid "No error given"
 msgstr "No se proporcionó ningún error"
 
-#: ../vinagre/vinagre-tube-handler.c:419
+#: ../vinagre/vinagre-tube-handler.c:482
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "No se puede obtener el nombre de contacto: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:454
+#: ../vinagre/vinagre-tube-handler.c:517
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "No se puede obtener el avatar: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:475
+#: ../vinagre/vinagre-tube-handler.c:538
 #, c-format
 msgid "%s wants to share his desktop with you."
 msgstr "%s quiere compartir su escritorio con usted."
 
-#: ../vinagre/vinagre-tube-handler.c:480
+#: ../vinagre/vinagre-tube-handler.c:543
 msgid "Desktop sharing invitation"
 msgstr "Invitación para compartir el escritorio"
 
