@@ -39,9 +39,6 @@
 #include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
 
-#define MC_DBUS_SERVICE "org.freedesktop.Telepathy.MissionControl"
-#define MC_DBUS_SERVICE_PATH "/org/freedesktop/Telepathy/MissionControl"
-
 G_DEFINE_TYPE (VinagreTubeHandler, vinagre_tube_handler, G_TYPE_OBJECT);
 
 #define VINAGRE_TUBE_HANDLER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE \
@@ -376,56 +373,40 @@ vinagre_tube_handler_contact_get_avatar_filename (TpContact *contact,
     const gchar *token,
     VinagreTubeHandler *self)
 {
-  TpConnection *connection;
   gchar *avatar_path;
   gchar *avatar_file;
   gchar *token_escaped;
-  gchar *contact_escaped;
-  gchar *mc_account_unique_name;
-  GError *error = NULL;
-  DBusGProxy *proxy;
-  gchar *error_msg = NULL;
-  VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
+  TpConnection *connection;
+  gchar *cm;
+  gchar *protocol;
+
+  if (contact == NULL)
+    return NULL;
+
+  token_escaped = tp_escape_as_identifier (token);
 
   connection = tp_contact_get_connection (contact);
 
-  proxy = dbus_g_proxy_new_for_name (tp_get_bus (), MC_DBUS_SERVICE,
-      MC_DBUS_SERVICE_PATH, MC_DBUS_SERVICE);
-
-  /* Have to do that while waiting for mission control 5 because
-  there is no mc API in telepathy-glib */
-  if (!dbus_g_proxy_call (proxy, "GetAccountForConnection", &error,
-      G_TYPE_STRING, tp_proxy_get_object_path (connection),
-      G_TYPE_INVALID,
-      G_TYPE_STRING, &mc_account_unique_name,
-      G_TYPE_INVALID))
+  if (!tp_connection_parse_object_path (connection, &protocol, &cm))
     {
-      error_msg = g_strdup_printf
-          (_("Failed to request name: %s"),
-          error ? error->message : _("No error given"));
-      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
-          GTK_WINDOW (priv->window));
-      g_free (error_msg);
-      g_clear_error (&error);
+      vinagre_debug_message (DEBUG_TUBE, "Impossible to parse object path\n");
       return NULL;
     }
 
-  contact_escaped = tp_escape_as_identifier (tp_contact_get_identifier
-      (contact));
-
-  token_escaped = tp_escape_as_identifier (token);
-  connection = tp_contact_get_connection (contact);
-
   avatar_path = g_build_filename (g_get_user_cache_dir (),
-      "Empathy", "avatars", mc_account_unique_name,
-      contact_escaped, NULL);
+      "telepathy",
+      "avatars",
+      cm,
+      protocol,
+      NULL);
+  g_mkdir_with_parents (avatar_path, 0700);
 
   avatar_file = g_build_filename (avatar_path, token_escaped, NULL);
 
-  g_free (contact_escaped);
   g_free (token_escaped);
   g_free (avatar_path);
-  g_object_unref (proxy);
+  g_free (cm);
+  g_free (protocol);
 
   return avatar_file;
 }
