@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(vinagre, 2.27.90, http://projects.gnome.org/vinagre/)
+AC_INIT(vinagre, 2.27.91, http://projects.gnome.org/vinagre/)
 
 VINAGRE_API_VERSION=1.0
 AC_SUBST(VINAGRE_API_VERSION)
@@ -42,7 +42,7 @@ GLIB_REQUIRED=2.17.0
 GTK_REQUIRED=2.13.1
 GCONF_REQUIRED=2.16.0
 GTHREAD_REQUIRED=2.0.0
-GTK_VNC_REQUIRED=0.3.8
+GTK_VNC_REQUIRED=0.3.9
 AVAHI_REQUIRED=0.6.22
 PANEL_REQUIRED_VERSION=2.0.0
 TELEPATHY_GLIB_REQUIRED=0.7.31
