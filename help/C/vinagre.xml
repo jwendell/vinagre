@@ -5,8 +5,8 @@
   <!ENTITY GFDL  SYSTEM "fdl-appendix.xml">
   <!ENTITY app "Vinagre">
   <!ENTITY application "<application>&app;</application>">
-  <!ENTITY appversion "0.4">
-  <!ENTITY manrevision "0.4">
+  <!ENTITY appversion "2.28">
+  <!ENTITY manrevision "2.28">
 ]>
 <!--
       (Do not remove this comment block.)
@@ -29,7 +29,7 @@
       </para>
     </abstract>
     <copyright>
-      <year>2007, 2008</year>
+      <year>2007, 2008, 2009</year>
       <holder>Jonh Wendell (wendell@bani.com.br)</holder>
     </copyright>
 
@@ -58,7 +58,13 @@
       <author>
         <firstname>Vinicius</firstname>
         <surname>Depizzol</surname>
-				<email>vdepizzol@gmail.com</email>
+        <email>vdepizzol@gmail.com</email>
+      </author>
+
+      <author>
+        <firstname>Jonh</firstname>
+        <surname>Wendell</surname>
+        <email>wendell@bani.com.br</email>
       </author>
 
 <!-- This is appropriate place for other contributors: translators,
@@ -76,6 +82,15 @@
     </authorgroup>
 
     <revhistory>
+      <revision>
+        <revnumber>0.3</revnumber>
+        <date>2009-08-23</date>
+        <revdescription>
+          <para role="author">Jonh Wendell
+            <email>wendell@bani.com.br</email>
+          </para>
+        </revdescription>
+      </revision>
       <revision>
         <revnumber>0.2</revnumber>
         <date>2008-01-15</date>
@@ -101,9 +116,9 @@
       <title>Feedback</title>
       <para>
         To report a bug or make a suggestion regarding the &app; application or
-        this manual, follow the directions in the 
-        <ulink url="http://www.gnome.org/projects/vinagre/"
-	  type="http">&application; Contact Page</ulink>.
+        this manual, please file a bug at
+        <ulink url="http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre"
+	  type="http">GNOME bugzilla page</ulink>.
       </para>
 <!-- Translators may also add here feedback address for translations -->
     </legalnotice>
@@ -129,7 +144,7 @@
     <tertiary>vinagre</tertiary>
   </indexterm>
 
-  <para>The &app; application is a Remote Desktop Viewer for the <systemitem>GNOME desktop</systemitem> that uses Virtual Network Computing (VNC) system to remotely control another computer.</para>
+  <para>The &app; application is a Remote Desktop Viewer for the <systemitem>GNOME desktop</systemitem> that uses Virtual Network Computing (VNC) system (and possibly other protocols) to remotely control another computer.</para>
   <para><application>&app;</application> provides the following features:</para>
   <itemizedlist>
   	<listitem>
@@ -139,7 +154,13 @@
   		<para>Store recently connections and allows to bookmark them.</para>
   	</listitem>
   	<listitem>
-  		<para>Browse local network for VNC Servers.</para>
+  		<para>Browse local network for machines.</para>
+  	</listitem>
+  	<listitem>
+  		<para>Provide a GNOME Panel applet to quickly access your bookmarked machines.</para>
+  	</listitem>
+  	<listitem>
+  		<para>Extensible through its plugin structure.</para>
   	</listitem>
   </itemizedlist>
 
@@ -151,7 +172,7 @@
 
 <!-- ============= To Start vinagre ========================== -->
 
-	<section id="to-start">
+	<section id="getting-started-to-start">
 		<title>Starting &app;</title>
 		<para>You can start <application>&app;</application> in the following ways:</para>
 		<variablelist>
@@ -169,8 +190,19 @@
     		</varlistentry>
 		</variablelist>
 	</section>
-	
-	<section id="the-window">
+
+<!-- ============= To Start vinagre in command-line ======== -->
+	<section id="getting-started-run-from-cmd-line">
+		<title>Starting &app; from a command line</title>
+		<para>You can run <application>&app;</application> from a command line and connect to a single machine or multiple machines. To connect to a machine from a command line, type the following command, then press <keycap>Return</keycap>:</para>
+		<para><command>vinagre <replaceable>hostname_or_ip_address</replaceable></command></para>
+		<para>For more information on how to run <application>&app;</application> from a command line, see the unix manual page for &app;, <ulink url="man:vinagre" type="man"><citerefentry><refentrytitle>&app;</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.</para>
+	</section>
+
+
+<!-- ============= vinagre window ========================== -->
+
+	<section id="getting-started-the-window">
 		<title>The &app; Window</title>
 		<figure id="vinagre-window">
 			<title>&app; window</title>
@@ -216,10 +248,25 @@
 			<varlistentry>
 				<term>Side Pane</term>
 				<listitem>
-					<para>The side pane contains a list of bookmarked connections.</para>
+					<para>The side pane contains a list of bookmarked connections and (if available) a list of auto-discovered network machines.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
+	</section>
+
+<!-- ============= notes about vinagre ========================== -->
+	<section id="getting-started-notes">
+		<title>Some notes about &app;</title>
+		<para>As a tool to access other machines, &app; behaves slightly different than other <systemitem>GNOME</systemitem> applications in its default installation.</para>
+		<para>&app; comes with menu accelerators and keyboard shortcuts disabled by default. This avoids keys being intercepted by &app; when you wanted to send those keys to the remote machine.</para>
+		<para>For instance, the keyboard shortcut to close a tab is <guilabel>Ctrl+W</guilabel>, but that key combination will be sent to the remote machine by default.</para>
+		<para>If you want to change this behavior, go to &app; preferences in
+			<menuchoice>
+	  			<guimenu>Edit</guimenu>
+	  			<guimenuitem>Preferences</guimenuitem>
+	  		</menuchoice>.
+
+		</para>
 	</section>
 
 </section>
@@ -228,28 +275,65 @@
   <title>Using &app;</title>
   
   <section id="connect">
-  	<title>To connect with a remote machine</title>
+  	<title>To connect to a remote machine</title>
   
 	  <section id="connect-informing-data">
-	  	<title>Informing Host address</title>
+	  	<title>Informing a host address</title>
 	  	<para>To connect with a remote machine, choose 
 		  	<menuchoice>
 		  		<shortcut><keycombo><keycap>Ctrl</keycap><keycap>N</keycap></keycombo></shortcut>
 		  		<guimenu>Machine</guimenu>
 		  		<guimenuitem>Connect</guimenuitem>
 		  	</menuchoice>. The <guilabel>Connection Dialog</guilabel> is displayed. 
-		  	Inform the <guilabel>Host</guilabel> and the <guilabel>Port</guilabel> of 
-		  	the connection and click the <guibutton>Connect</guibutton> button. You can 
-		  	also use the <guibutton>Find</guibutton> button to browse available machines on local network.
+		  	Inform the <guilabel>Protocol</guilabel> and the <guilabel>Host</guilabel> of 
+		  	the connection and click the <guibutton>Connect</guibutton> button. You will see a bunch of
+		  	options depending on what protocol you have selected.
+		  </para>
+
+		<figure id="connect-dialog">
+			<title>Connect dialog</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/vinagre-connect-dialog.png" format="PNG"/>
+					 </imageobject>
+				<textobject> <phrase>Shows the connect dialog.</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+
+		  <para>
+		  You can also use the <guibutton>Find</guibutton> button to browse available machines on local network.
 		  </para>
 		  <note>
 		  	<para>
-			  	Some machines may require a secure connection. In this case, a 
-			  	<guilabel>Password</guilabel> dialog will be displayed asking for the connection password. 
-			  	If you check <guilabel>Remember this password</guilabel>, <application>&app;</application> will store 
-			  	the secure information using <application>GNOME Keyring Manager</application>.
+			  	The availabity of the <guibutton>Find</guibutton> button depends on the protocol you
+			  	have selected. &app; relies on <application>Avahi</application> service to browse for
+			  	machines in your local network. Also, notice that &app; can be compiled without
+			  	<application>Avahi</application> support. In this case, this button will not be available.
 		  	</para>
 		  </note>
+
+	  	<para>
+		  	Some machines may require a secure connection. In this case, an 
+		  	<guilabel>Authentication</guilabel> dialog will be displayed asking for the credentials.
+		  	The type of credentials depends on the server. It may be a password and an username.
+		  	If you check <guilabel>Remember this credential</guilabel>, <application>&app;</application> will store 
+		  	the secure information using <application>GNOME Keyring Manager</application>.
+	  	</para>
+		<figure id="connect-auth-needed">
+			<title>Authentication dialog</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/vinagre-auth-needed.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>Shows the authentication dialog.</phrase></textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+
 		  <para>
 		  	If the connection has been used previously, you can also access it by 
 		  	<menuchoice>
@@ -278,46 +362,32 @@
 	  		</para>
 	  	</tip>
 	  </section>
-	</section>
-	
-	<section id="bookmark-add">
-		<title>To Create a New Bookmark</title>
-		<para>To bookmark the currently viewed connection, choose 
-			<menuchoice>
-				<shortcut><keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo></shortcut>
-				<guimenu>Bookmarks</guimenu>
-				<guimenuitem>Add to Bookmarks</guimenuitem>
-			</menuchoice>. The <guilabel>Saving to Bookmarks</guilabel> dialog is displayed. 
-			Inform the name of the connection and click <guibutton>Ok</guibutton>.
-		</para>
-	</section>
-	
-	<section id="bookmark-remove">
-		<title>To Remove a Bookmark</title>
-		<para>
-			To remove a bookmark, choose <guimenuitem>Remove</guimenuitem> from the context menu 
-			of the bookmark in the Side Pane.
-		</para>
-	</section>
-	
-	<section id="bookmark-edit">
-		<title>To Edit a Bookmark's Properties</title>
-		<para>
-			To edit a bookmark's properties, such as it's name and host, choose <guimenuitem>Edit</guimenuitem> 
-			from the context menu of the bookmark in the Side Pane.
-		</para>
+
+	  <section id="connect-using-bookmarks">
+	  	<title>Using Bookmarks</title>
+	  	<para>You can access your mostly used connections through bookmarks. See the
+	  	<link linkend="bookmarks">Bookmarks chapter</link>.
+	  	</para>
+	  </section>
+
 	</section>
 	
 	<section id="fullscreen">
-	  <title>To Use Full Screen Mode</title>
-	  <para>To zoom the Display Area to full screen mode, choose 
-		  <menuchoice>
-			  <shortcut><keycap>F11</keycap></shortcut>
-			  <guimenu>View</guimenu>
-			  <guimenuitem>Full Screen</guimenuitem>
-		  </menuchoice>. To exit full screen mode, press <keycap>F11</keycap>
-		   or <keycombo><keycap>Ctrl</keycap><keycap>Alt</keycap></keycombo>.
-	  </para>
+		<title>To Use Full Screen Mode</title>
+		<para>To zoom the Display Area to full screen mode, choose 
+			<menuchoice>
+				<shortcut><keycap>F11</keycap></shortcut>
+				<guimenu>View</guimenu>
+				<guimenuitem>Full Screen</guimenuitem>
+			</menuchoice> or the corresponding tool bar button.
+		</para>
+		<note>
+			<para>
+				While in full screen mode, move the mouse to the top center of the screen
+				to show a hidden tool bar, which has buttons to leave full screen mode,
+				close the connection and other options.
+			</para>
+		</note>
 	</section>
 	 
 	<section id="close">
@@ -345,13 +415,136 @@
 </section>
 
 
+<section id="bookmarks">
+	<title>Using Bookmarks</title>
+
+	<section id="bookmarks-using">
+		<title>Using Bookmarks</title>
+		<para>Bookmarks are a resource to keep around machines you access frequently.
+		They are visible at side panel or in the <guimenu>Bookmarks</guimenu> menu.
+		</para>
+
+		<figure id="bookmarks-side-panel">
+			<title>Bookmarks at side panel</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/vinagre-bookmarks-side-panel.png" format="PNG"/>
+					 </imageobject>
+				<textobject> <phrase>Shows bookmarks at side panel.</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+
+		<para>As you move the mouse around the entries, a tooltip will show you the hostname
+		of the connection. To connect to a machine, just double click on a entry.
+		</para>
+
+	</section>
+
+	<section id="bookmarks-add">
+		<title>To Create a New Bookmark</title>
+		<para>To bookmark the currently viewed connection, choose 
+			<menuchoice>
+				<shortcut><keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo></shortcut>
+				<guimenu>Bookmarks</guimenu>
+				<guimenuitem>Add to Bookmarks</guimenuitem>
+			</menuchoice>. The <guilabel>Saving to Bookmarks</guilabel> dialog is displayed. 
+			Inform the name of the connection and optionally other data, such as the folder and click <guibutton>Save</guibutton>.
+		</para>
+
+		<figure id="bookmarks-saving">
+			<title>Saving a bookmark</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/vinagre-saving-bookmarks.png" format="PNG"/>
+					 </imageobject>
+				<textobject> <phrase>Shows the Saving to Bookmarks dialog.</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+
+		<note>
+			<para>You can use folders to organize your bookmarks. To create a folder, right click
+			in the side panel and choose the option <guimenu>New Folder</guimenu> in the context menu,
+			or go to menu
+				<menuchoice>
+					<guimenu>Bookmarks</guimenu>
+					<guimenu>New Folder</guimenu>
+				</menuchoice>.
+			</para>
+		</note>
+
+	</section>
+	
+	<section id="bookmarks-edit">
+		<title>To Edit a Bookmark's Properties</title>
+		<para>
+			To edit a bookmark's properties, such as it's name and host, choose <guimenuitem>Edit bookmark</guimenuitem> 
+			from the context menu of the bookmark in the Side Pane. The same dialog as shown above will be displayed.
+		</para>
+
+		<figure id="bookmarks-editing">
+			<title>Editing a bookmark</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/vinagre-editing-bookmarks.png" format="PNG"/>
+					 </imageobject>
+				<textobject> <phrase>Context menu option to edit a bookmark</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+
+		<note><para>You can also edit a folder.</para></note>
+	</section>
+
+	<section id="bookmarks-remove">
+		<title>To Remove a Bookmark</title>
+		<para>
+			To remove a bookmark, choose <guilabel>Remove from bookmarks</guilabel> from the context menu 
+			of the bookmark in the Side Pane.
+		</para>
+		<note><para>You can also remove a folder. Notice that removing a folder will remove all its entries. A confirmation dialog will be shown.</para></note>
+	</section>
+
+</section>
+
+<section id="preferences">
+	<title>Preferences</title>
+	<para>To configure <application>&app;</application>, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</guimenuitem> </menuchoice>. The <guilabel>Preferences</guilabel> dialog contains the following items:</para>
+
+	<variablelist>
+		<varlistentry>
+			<term><guilabel>Always show tabs</guilabel></term>
+			<listitem>
+				<para>Select this option to make the tabs always visible, even when only one connection is active.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term><guilabel>Show menu shortcuts</guilabel></term>
+			<listitem>
+				<para>By selecting this option, keyboard shortcuts, like <guilabel>Ctrl+D</guilabel>
+				and menu accelerators, like <guilabel>Alt+M</guilabel> to access the Machine menu, will be enabled.
+				This means that &app; will catch those key combinations, instead of sending them to the remote machine. Because most of the time you will be
+				working on the remote machine, this option comes <guilabel>disabled</guilabel> by default.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>
+
 <section id="about">
   <title>About</title>
   <para>
     &app; was written by Jonh Wendell <email>wendell@bani.com.br</email>.
     To find more information about &app;, please visit the
-    <ulink url="http://www.gnome.org/projects/vinagre" type="http">
-    &application; web page</ulink>.
+    <ulink url="http://projects.gnome.org/vinagre/" type="http">&application; web page</ulink>.
   </para>
   <para>
     To report a bug or make a suggestion regarding this application you can file
