@@ -15,3 +15,5 @@ libview_la_SOURCES = \
 	drawer.h drawer.c \
 	ovBox.h ovBox.c \
 	$(NULL)
+
+-include $(top_srcdir)/git.mk

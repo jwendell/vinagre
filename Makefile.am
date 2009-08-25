@@ -21,6 +21,22 @@ DISTCLEANFILES =		\
 	intltool-merge		\
 	intltool-update
 
+MAINTAINERCLEANFILES = 		\
+	compile			\
+	aclocal.m4		\
+	config.guess		\
+	config.h.in		\
+	config.sub		\
+	depcomp			\
+	gnome-doc-utils.make	\
+	install-sh		\
+	ltmain.sh		\
+	missing			\
+	mkinstalldirs		\
+	omf.make		\
+	xmldocs.make		\
+	`find "$(srcdir)" -type f -name Makefile.in -print`
+
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 # Copy all the spec files. Of cource, only one is actually used.
@@ -31,3 +47,4 @@ dist-hook:
 		fi \
 	done
 
+-include $(top_srcdir)/git.mk
