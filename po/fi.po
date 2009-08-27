@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-14 16:51+0300\n"
-"PO-Revision-Date: 2009-08-14 17:07+0300\n"
+"POT-Creation-Date: 2009-08-27 22:15+0300\n"
+"PO-Revision-Date: 2009-08-27 22:15+0300\n"
 "Last-Translator: Tommi Vainikainen <thv@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,10 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .vinagre-plugin file for obtaining the \"Location\" of a given "
 "plugin."
-msgstr "Luettelo aktiivista liitännäisistä. Se sisältää aktiivisten liitännäisten ”sijainnin” (”Location”). Katso tiedostosta .vinagre-plugin kuinka selvität annetun liitännäisen ”sijainnin”."
+msgstr ""
+"Luettelo aktiivista liitännäisistä. Se sisältää aktiivisten liitännäisten "
+"”sijainnin” (”Location”). Katso tiedostosta .vinagre-plugin kuinka selvität "
+"annetun liitännäisen ”sijainnin”."
 
 #: ../data/vinagre.schemas.in.in.h:3
 msgid "Maximum number of history items in connect dialog"
@@ -389,7 +392,7 @@ msgid "Access your bookmarks"
 msgstr "Avaa kirjanmerkkisi"
 
 #: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
-#: ../vinagre/vinagre-tab.c:533
+#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokolla %s ei ole tuettu."
@@ -551,7 +554,9 @@ msgstr "Ei ole yhtään tuettua tiedostoa"
 msgid ""
 "None of the active plugins offer a supported file to be open. Activate some "
 "plugins and try again."
-msgstr "Mikään aktiivista liitännäisistä ei tarjoutunut avaamaan tiedostoa. Ota käyttöön lisää liitännäisiä ja yritä uudelleen."
+msgstr ""
+"Mikään aktiivista liitännäisistä ei tarjoutunut avaamaan tiedostoa. Ota "
+"käyttöön lisää liitännäisiä ja yritä uudelleen."
 
 #: ../vinagre/vinagre-commands.c:181
 msgid "The following file could not be opened:"
@@ -756,41 +761,37 @@ msgstr "Kuvakaappaus yhteydestä %s"
 msgid "Error saving screenshot"
 msgstr "Virhe tallennettaessa kuvakaappausta"
 
-#: ../vinagre/vinagre-tube-handler.c:228
+#: ../vinagre/vinagre-tube-handler.c:229
 #, c-format
-msgid "Impossible to accept the stream tube: %s"
-msgstr "Mahdotonta hyväksyä virtatuubia: %s"
+msgid "Impossible to get service property: %s"
+msgstr "Mahdotonta saada palveluominaisuutta: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:257
+#: ../vinagre/vinagre-tube-handler.c:286
 #, c-format
 msgid "Impossible to create the connection: %s"
 msgstr "Mahdotonta luoda yhteyttä: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:341
+#: ../vinagre/vinagre-tube-handler.c:325
 #, c-format
-msgid "Failed to request name: %s"
-msgstr "Nimipyyntö epäonnistui: %s"
+msgid "Impossible to accept the stream tube: %s"
+msgstr "Mahdotonta hyväksyä virtatuubia: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:342
-msgid "No error given"
-msgstr "Ei annettua virhettä"
-
-#: ../vinagre/vinagre-tube-handler.c:419
+#: ../vinagre/vinagre-tube-handler.c:463
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Mahdotonta saada yhteystiedon nimeä: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:454
+#: ../vinagre/vinagre-tube-handler.c:498
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "Mahdotonta saada avatarta: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:475
+#: ../vinagre/vinagre-tube-handler.c:519
 #, c-format
 msgid "%s wants to share his desktop with you."
 msgstr "%s haluaa jakaa työpöytänsä kanssasi."
 
-#: ../vinagre/vinagre-tube-handler.c:480
+#: ../vinagre/vinagre-tube-handler.c:524
 msgid "Desktop sharing invitation"
 msgstr "Työpöydän jakokutsu"
 
@@ -1006,6 +1007,12 @@ msgstr "_Viimeisimmät yhteydet"
 #, c-format
 msgid "Open %s:%d"
 msgstr "Avaa %s:%d"
+
+#~ msgid "Failed to request name: %s"
+#~ msgstr "Nimipyyntö epäonnistui: %s"
+
+#~ msgid "No error given"
+#~ msgstr "Ei annettua virhettä"
 
 #~ msgid "<b>Connection</b>"
 #~ msgstr "<b>Yhteys</b>"
