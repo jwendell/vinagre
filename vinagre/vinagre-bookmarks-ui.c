@@ -133,7 +133,7 @@ show_dialog_conn (VinagreBookmarks      *book,
   dialog         = GTK_WIDGET (gtk_builder_get_object (xml, "bookmarks_add_edit_conn_dialog"));
   name_entry     = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_name_entry"));
   host_entry     = GTK_WIDGET (gtk_builder_get_object (xml, "edit_bookmark_host_entry"));
-  fs_check       = GTK_WIDGET (gtk_builder_get_object (xml, "fullscreen_check"));
+  fs_check       = GTK_WIDGET (gtk_builder_get_object (xml, "bookmark_fullscreen_check"));
   folder_box     = GTK_WIDGET (gtk_builder_get_object (xml, "folder_box"));
   plugin_box     = GTK_WIDGET (gtk_builder_get_object (xml, "plugin_options_vbox"));
   save_button    = GTK_WIDGET (gtk_builder_get_object (xml, "save_button"));
