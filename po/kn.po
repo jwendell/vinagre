@@ -1,14 +1,14 @@
-# translation of vinagre.gnome-2-26.kn.po to Kannada
+# translation of vinagre.master.kn.po to Kannada
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Shankar Prasad <svenkate@redhat.com>, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: vinagre.gnome-2-26.kn\n"
+"Project-Id-Version: vinagre.master.kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-04-21 13:21+0000\n"
-"PO-Revision-Date: 2009-04-28 12:30+0530\n"
+"POT-Creation-Date: 2009-08-18 12:06+0000\n"
+"PO-Revision-Date: 2009-09-01 11:38+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1
+#: ../data/GNOME_VinagreApplet.xml.h:1 ../vinagre/vinagre-plugin-manager.c:495
 msgid "_About"
 msgstr "ಬಗ್ಗೆ(_A)"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
 msgid "_Help"
 msgstr "ನೆರವು(_H)"
 
@@ -30,123 +30,127 @@ msgid "Access remote desktops"
 msgstr "ದೂರಸ್ಥ ಗಣಕತೆರೆಗಳನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಿ"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
-#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
+#: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
+#: ../vinagre/vinagre-main.c:198
 msgid "Remote Desktop Viewer"
 msgstr "ದೂರಸ್ಥ ಗಣಕತೆರೆಗಳ ವೀಕ್ಷಕ"
 
-#: ../data/vinagre.glade.h:1
-msgid "<b>Authentication is required</b>"
-msgstr "<b>ದೃಢೀಕರಣದ ಅಗತ್ಯವಿದೆ</b>"
+#: ../data/vinagre.ui.h:1
+#| msgid "<i><small>All fields above are mandatory</small></i>"
+msgid "All fields above are mandatory"
+msgstr "ಮೇಲಿನ ಎಲ್ಲಾ ಕ್ಷೇತ್ರಗಳು ಖಡ್ಡಾಯವಾಗಿವೆ"
 
-#: ../data/vinagre.glade.h:2
-msgid "<b>Connection options</b>"
-msgstr "<b>ಸಂಪರ್ಕದ ಆಯ್ಕೆಗಳು</b>"
+#: ../data/vinagre.ui.h:2
+#| msgid "<b>Authentication is required</b>"
+msgid "Authentication is required"
+msgstr "ದೃಢೀಕರಣದ ಅಗತ್ಯವಿದೆ"
 
-#: ../data/vinagre.glade.h:3
-msgid "<b>Connection</b>"
-msgstr "<b>ಸಂಪರ್ಕ</b>"
-
-#: ../data/vinagre.glade.h:4
-msgid "<b>Folder</b>"
-msgstr "<b>ಕಡತಕೋಶ</b>"
-
-#: ../data/vinagre.glade.h:5
-msgid "<b>Interface</b>"
-msgstr "<b>ಸಂಪರ್ಕಸಾಧನ</b>"
-
-#: ../data/vinagre.glade.h:6
-msgid "<b>Options</b>"
-msgstr "<b>ಆಯ್ಕೆಗಳು</b>"
-
-#: ../data/vinagre.glade.h:7
-msgid "<b>Parent Folder</b>"
-msgstr "<b>ಮೂಲ ಕಡತಕೋಶ</b>"
-
-#: ../data/vinagre.glade.h:8
-msgid "<b>Which machine do you want to connect to?</b>"
-msgstr "<b>ಯಾವ ಗಣಕಕ್ಕೆ ನೀವು ಸಂಪರ್ಕಿತಗೊಳ್ಳಲು ಬಯಸುತ್ತೀರಿ?</b>"
-
-#: ../data/vinagre.glade.h:9
-msgid "<i><small>All fields above are mandatory</small></i>"
-msgstr "<i><small>ಮೇಲಿನ ಎಲ್ಲಾ ಕ್ಷೇತ್ರಗಳು ಖಡ್ಡಾಯವಾಗಿವೆ</small></i>"
-
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:856
 msgid "Bookmarks"
 msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳು"
 
-#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1062
+#: ../data/vinagre.ui.h:4
+#| msgid "Connecting..."
+msgid "Connection"
+msgstr "ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../data/vinagre.ui.h:5
+#| msgid "<b>Connection options</b>"
+msgid "Connection options"
+msgstr "ಸಂಪರ್ಕದ ಆಯ್ಕೆಗಳು"
+
+#: ../data/vinagre.ui.h:6
+#| msgid "New Folder"
+msgid "Folder"
+msgstr "ಕಡತಕೋಶ"
+
+#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
+#: ../plugins/vnc/vinagre-vnc-tab.c:134 ../vinagre/vinagre-fav.c:425
 msgid "Host:"
 msgstr "ಅತಿಥೇಯ:"
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.ui.h:8
+#| msgid "<b>Interface</b>"
+msgid "Interface"
+msgstr "ಸಂಪರ್ಕಸಾಧನ"
+
+#: ../data/vinagre.ui.h:9
+#| msgid "<b>Options</b>"
+msgid "Options"
+msgstr "ಆಯ್ಕೆಗಳು"
+
+#: ../data/vinagre.ui.h:10
+#| msgid "<b>Parent Folder</b>"
+msgid "Parent Folder"
+msgstr "ಮೂಲ ಕಡತಕೋಶ"
+
+#: ../data/vinagre.ui.h:11
 msgid "Preferences"
 msgstr "ಆದ್ಯತೆಗಳು"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
-msgid "Whether we should show tabs even when there is only one active connection"
-msgstr "ಕೇವಲ ಒಂದು ಸಕ್ರಿಯ ಸಂಪರ್ಕವಿದ್ದಾಗಲೂ ಸಹ ನಾವು ಹಾಳೆಗಳನ್ನು ತೋರಿಸಬೇಕೆ"
+#: ../data/vinagre.ui.h:12
+#| msgid "<b>Which machine do you want to connect to?</b>"
+msgid "Which machine do you want to connect to?"
+msgstr "ಯಾವ ಗಣಕಕ್ಕೆ ನೀವು ಸಂಪರ್ಕಿತಗೊಳ್ಳಲು ಬಯಸುತ್ತೀರಿ?"
 
-#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "ನಾವು ಮೆನು ವೇಗವರ್ಧಕಗಳನ್ನು ತೋರಿಸಬೇಕೆ (ಶಾರ್ಟ್-ಕಟ್‌ ಕೀಲಿಗಳು)"
-
-#: ../data/vinagre.glade.h:15
+#: ../data/vinagre.ui.h:13
 msgid "_Always show tabs"
 msgstr "ಯಾವಾಗಲೂ ಹಾಳೆಗಳನ್ನು ತೋರಿಸು(_A)"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.ui.h:15
 msgid "_Authenticate"
 msgstr "ದೃಢೀಕರಿಸು(_A)"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.ui.h:16
 msgid "_Full screen"
 msgstr "ಪೂರ್ಣತೆರೆ(_F)"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.ui.h:17
 msgid "_Host:"
 msgstr "ಅತಿಥೇಯ(_H):"
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.ui.h:18
 msgid "_Name:"
 msgstr "ಹೆಸರು(_N):"
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.ui.h:19
 msgid "_Password:"
 msgstr "ಗುಪ್ತಪದ(_P):"
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.ui.h:20
+msgid "_Protocol:"
+msgstr ""
+
+#: ../data/vinagre.ui.h:21
 msgid "_Remember this credential"
 msgstr "ಈ ಪರಿಚಯನ್ನು ನೆನನಪಿಟ್ಟುಕೊ (_R)"
 
-#: ../data/vinagre.glade.h:23
-msgid "_Scaling"
-msgstr "ಅಳತೆ ಬದಲಾವಣೆ(_S)"
-
-#: ../data/vinagre.glade.h:24
+#: ../data/vinagre.ui.h:22
 msgid "_Show menu shortcuts"
 msgstr "ಮೆನು ಶಾರ್ಟ್-ಕಟ್‌ಗಳನ್ನು ತೋರಿಸು(_S)"
 
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.ui.h:23
 msgid "_Username:"
 msgstr "ಬಳಕೆದಾರ ಹೆಸರು(_U):"
 
-#: ../data/vinagre.glade.h:26
-msgid "_View only"
-msgstr "ನೋಟ ಮಾತ್ರ(_V)"
+#: ../data/vinagre.schemas.in.in.h:1 ../vinagre/vinagre-plugin-manager.c:795
+msgid "Active plugins"
+msgstr "ಸಕ್ರಿಯ ಪ್ಲಗ್ಗಿನ್ನುಗಳು"
 
-#. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:28
-msgid "host or host:display or host::port"
-msgstr "host ಅಥವ host:display ಅಥವ host::port"
+#: ../data/vinagre.schemas.in.in.h:2
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
 
-#: ../data/vinagre.schemas.in.h:1
+#: ../data/vinagre.schemas.in.in.h:3
 msgid "Maximum number of history items in connect dialog"
 msgstr "ಸಂಪರ್ಕ ಸಂವಾದದಲ್ಲಿನ ಗರಿಷ್ಟ ಸಂಖ್ಯೆಯ ಇತಿಹಾಸದ ಅಂಶಗಳು"
 
-#: ../data/vinagre.schemas.in.h:2
+#: ../data/vinagre.schemas.in.in.h:4
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -156,7 +160,7 @@ msgstr ""
 "ಬದಲಾಯಿಸಿ. ಅವುಗಳನ್ನು ಶಕ್ತಗೊಳಿಸಿದಲ್ಲಿ, ಆ ಕೀಲಿಗಳನ್ನು ಮೆನುವಿನಿಂದ ಅರ್ಥೈಸಿಕೊಳ್ಳಲಾಗುತ್ತದೆ "
 "ಹಾಗು ಅವನ್ನು ದೂರಸ್ಥ ಅತಿಥೇಯಕ್ಕೆ ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ."
 
-#: ../data/vinagre.schemas.in.h:3
+#: ../data/vinagre.schemas.in.in.h:5
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -164,15 +168,15 @@ msgstr ""
 "ಹಾಳೆಗಳನ್ನು ಯಾವಾಗಲೂ ತೋರಿಸಲು \"true\" ಗೆ ಬದಲಾಯಿಸಿ. ಒಂದಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಸಕ್ರಿಯ "
 "ಸಂಪರ್ಕವು ಇದ್ದಲ್ಲಿ ಹಾಳೆಗಳನ್ನು ತೋರಿಸಲು \"false\" ಗೆ ಬದಲಾಯಿಸಿ."
 
-#: ../data/vinagre.schemas.in.h:4
+#: ../data/vinagre.schemas.in.in.h:6
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "ಅತಿಥೇಯದ ಬೀಳಿಕೆ ನಮೂದಿನಲ್ಲಿನ ಗರಿಷ್ಟ ಸಂಖ್ಯೆಯ ಅಂಶಗಳನ್ನು ಸೂಚಿಸುತ್ತದೆ."
 
-#: ../data/vinagre.schemas.in.h:5
+#: ../data/vinagre.schemas.in.in.h:7
 msgid "The handler for \"vnc://\" URLs"
 msgstr "\"vnc://\" URL ಗಳ ಹ್ಯಾಂಡ್ಲರ್"
 
-#: ../data/vinagre.schemas.in.h:6
+#: ../data/vinagre.schemas.in.in.h:8
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -182,9 +186,17 @@ msgstr ""
 "ಅಥವ ಈಗಿರುವ ಸಂಪರ್ಕಗಳನ್ನು ಬಿಟ್ಟುಬಿಡು ಎಂದು ಪರಿಚಾರಕಕ್ಕೆ ಕ್ಲೈಂಟ್‌ ಹೇಳಬಹುದು. ಗಣಕತೆರೆಯನ್ನು "
 "ಇತರೆ ಕ್ಲೈಂಟಿನೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಲು ಮೌಲ್ಯವನ್ನು true ಗೆ ಹೊಂದಿಸು."
 
-#: ../data/vinagre.schemas.in.h:7
+#: ../data/vinagre.schemas.in.in.h:9
 msgid "Whether we should leave other clients connected"
 msgstr "ಬೇರೆ ಕ್ಲೈಂಟ್‌ಗಳು ಸಂಪರ್ಕಿತಗೊಂಡಿರಲು ನಾವು ಬಿಡಬೇಕೆ"
+
+#: ../data/vinagre.schemas.in.in.h:10
+msgid "Whether we should show tabs even when there is only one active connection"
+msgstr "ಕೇವಲ ಒಂದು ಸಕ್ರಿಯ ಸಂಪರ್ಕವಿದ್ದಾಗಲೂ ಸಹ ನಾವು ಹಾಳೆಗಳನ್ನು ತೋರಿಸಬೇಕೆ"
+
+#: ../data/vinagre.schemas.in.in.h:11
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "ನಾವು ಮೆನು ವೇಗವರ್ಧಕಗಳನ್ನು ತೋರಿಸಬೇಕೆ (ಶಾರ್ಟ್-ಕಟ್‌ ಕೀಲಿಗಳು)"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -194,364 +206,166 @@ msgstr "ದೂರಸ್ಥ ಗಣಕತೆರೆ (VNC) ಕಡತ"
 msgid "Remote Desktop Connection"
 msgstr "ದೂರಸ್ಥ ಗಣಕತೆರೆ ಸಂಪರ್ಕ"
 
-#: ../src/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "ದೂರಸ್ಥ ಗಣಕಗಳನ್ನು ತಕ್ಷಣ ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಬಳಸಲಾಗುವ ಒಂದು ಮೆನು"
+#. vim: set ts=8:
+#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
+msgid "SSH"
+msgstr "SSH"
 
-#: ../src/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Vinagre ಆಪ್ಲೆಟ್ ಫ್ಯಾಕ್ಟರಿ"
-
-#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
-msgid "Could not run vinagre:"
-msgstr "vinagre ಅನ್ನು ಚಲಾಯಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ:"
-
-#: ../src/vinagre-applet.c:369
-msgid "Open Remote Desktop Viewer"
-msgstr "ದೂರಸ್ಥ ಗಣಕತೆರೆ ವೀಕ್ಷಕವನ್ನು ತೆರೆ"
-
-#: ../src/vinagre-applet.c:419
-msgid "Access your bookmarks"
-msgstr "ನಿಮ್ಮ ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಿ"
-
-#: ../src/vinagre-bookmarks.c:344
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ: %s"
-
-#: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
-#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
-#: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
-#: ../src/vinagre-window.c:279
-msgid "Unknown error"
-msgstr "ಗೊತ್ತಿಲ್ಲದ ದೋಷ"
-
-#: ../src/vinagre-bookmarks.c:351
-msgid "Error while initializing bookmarks: The file seems to be empty"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ: ಕಡತವು ಖಾಲಿ ಇರುವಂತೆ ತೋರುತ್ತಿದೆ"
-
-#: ../src/vinagre-bookmarks.c:358
-msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ: ಕಡತವು ಒಂದು ಮಾನ್ಯವಾದ vinagre ಬುಕ್‌ಮಾರ್ಕ್ ಕಡತವಾಗಿಲ್ಲ"
-
-#: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
-msgid "Error while saving bookmarks: Failed to create the XML structure"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ನಿರ್ಮಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
-msgid "Error while saving bookmarks: Failed to initialize the XML structure"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಆರಂಭಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-bookmarks.c:450
-msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಅಂತ್ಯಗೊಳಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-bookmarks.c:459
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: %s"
-
-#: ../src/vinagre-bookmarks-migration.c:93
-#: ../src/vinagre-bookmarks-migration.c:100
-msgid "Error while migrating bookmarks: Failed to create the XML structure"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ನಿರ್ಮಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-bookmarks-migration.c:107
-#: ../src/vinagre-bookmarks-migration.c:114
-msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-bookmarks-migration.c:123
-msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಅಂತ್ಯಗೊಳಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-bookmarks-migration.c:133
-#: ../src/vinagre-bookmarks-migration.c:231
-#, c-format
-msgid "Error while migrating bookmarks: %s"
-msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
-
-#: ../src/vinagre-bookmarks-migration.c:231
-msgid "Failed to create the directory"
-msgstr "ಕೋಶವನ್ನು ನಿರ್ಮಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-bookmarks-migration.c:255
-msgid ""
-"Migrating the bookmarks file to the new format. This operation is only "
-"supposed to run once."
+#. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
+#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+msgid "Access Unix/Linux terminals"
 msgstr ""
-"ಬುಕ್‌ಮಾರ್ಕುಗಳ ಕಡತವನ್ನು ಹೊಸ ರಚನೆಗೆ ವರ್ಗಾಯಿಸಲಾಗುತ್ತಿದೆ. ಈ ಕಾರ್ಯವು ಕೇವಲ ಒಮ್ಮೆ ಮಾತ್ರ "
-"ಚಲಾಯಿತಗೊಳ್ಳಬೇಕು."
 
-#: ../src/vinagre-bookmarks-migration.c:263
-#, c-format
-msgid "Error opening old bookmarks file: %s"
-msgstr "ಹಳೆಯ ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ತೆರೆಯುವಲ್ಲಿ ದೋಷ: %s"
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:135
+msgid "Port:"
+msgstr "ಸಂಪರ್ಕಸ್ಥಾನ:"
 
-#: ../src/vinagre-bookmarks-migration.c:264
-#: ../src/vinagre-bookmarks-migration.c:276
-msgid "Migration cancelled"
-msgstr "ವರ್ಗಾವಣೆಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ"
+#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
+msgid "SSH support"
+msgstr ""
 
-#: ../src/vinagre-bookmarks-migration.c:273
-msgid "Could not remove the old bookmarks file"
-msgstr "ಹಳೆಯ ಬುಕ್‌ಮಾರ್ಕ್ ಕಡತವನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಲಿಲ್ಲ"
-
-#: ../src/vinagre-bookmarks-tree.c:120
-msgid "Root Folder"
-msgstr "ರೂಟ್‌ ಕಡತಕೋಶ"
-
-#: ../src/vinagre-bookmarks-ui.c:79
-msgid "Invalid name for this folder"
-msgstr "ಈ ಕಡತಕೋಶದ ಅಮಾನ್ಯವಾದ ಹೆಸರು"
-
-#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
-#, c-format
-msgid "The name \"%s\" is already used in this folder. Please use a different name."
-msgstr "ಹೆಸರು \"%s\" ಅನ್ನು ಈಗಾಗಲೆ ಈ ಕಡತಕೋಶದಲ್ಲಿ ಬಳಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಬೇರೊಂದು ಹೆಸರನ್ನು ಬಳಸಿ."
-
-#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
-#: ../src/vinagre-bookmarks-ui.c:192
-#| msgid "Invalid name for this folder"
-msgid "Invalid name for this item"
-msgstr "ಈ ಅಂಶದ ಅಮಾನ್ಯವಾದ ಹೆಸರು"
-
-#: ../src/vinagre-bookmarks-ui.c:292
-#, c-format
-msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
-msgstr "ನೀವು ನಿಜವಾಗಲು ಬುಕ್‌ಮಾರ್ಕಿನಿಂದ <i>%s</i> ಅನ್ನು ತೆಗೆದು ಹಾಕಲು ಬಯಸುತ್ತೀರೆ?"
-
-#: ../src/vinagre-bookmarks-ui.c:297
-msgid "Remove Folder?"
-msgstr "ಕಡತಕೋಶವನ್ನು ತೆಗೆದುಹಾಕಬೇಕೆ?"
-
-#: ../src/vinagre-bookmarks-ui.c:298
-msgid "Notice that all its subfolders and items will be removed as well."
-msgstr "ಅದರೊಳಿಗಿನ ಎಲ್ಲಾ ಉಪಕಡತಕೋಶಗಳು ಹಾಗು ಅಂಶಗಳು ತೆಗೆಯಲ್ಪಡುತ್ತವೆ ಎಂಬುದನ್ನು ನೆನಪಿಡಿ."
-
-#: ../src/vinagre-bookmarks-ui.c:303
-msgid "Remove Item?"
-msgstr "ಅಂಶವನ್ನು ತೆಗೆದುಹಾಕಬೇಕೆ?"
-
-#: ../src/vinagre-bookmarks-ui.c:320
-msgid "Error removing bookmark: Entry not found"
-msgstr "ಬುಕ್‌ಮಾರ್ಕನ್ನು ತೆಗೆದು ಹಾಕುವಲ್ಲಿ ದೋಷ: ನಮೂದು ಕಂಡುಬಂದಿಲ್ಲ"
-
-#: ../src/vinagre-bookmarks-ui.c:337
-msgid "New Folder"
-msgstr "ಹೊಸ ಕಡತಕೋಶ"
-
-#: ../src/vinagre-commands.c:113
-msgid "Choose the file"
-msgstr "ಕಡತವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
-
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
-msgid "Supported formats"
-msgstr "ಬೆಂಬಲವಿರುವ ವಿನ್ಯಾಸಗಳು"
-
-#: ../src/vinagre-commands.c:156
-msgid "The following file could not be opened:"
-msgid_plural "The following files could not be opened:"
-msgstr[0] "ಈ ಕೆಳಗಿನ ಕಡತವನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ:"
-msgstr[1] "ಈ ಕೆಳಗಿನ ಕಡತಗಳನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ:"
-
-#: ../src/vinagre-connect.c:181
-#, c-format
-msgid "Error while saving history file: %s"
-msgstr "ಇತಿಹಾಸ ಕಡತವನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: %s"
-
-#: ../src/vinagre-connect.c:193
-msgid "Choose a VNC Server"
-msgstr "ಒಂದು VNC ಪರಿಚಾರಕವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
-
-#: ../src/vinagre-connection.c:601
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "ಪ್ರೋಟೋಕಾಲ್ %s ಬೆಂಬಲಿತವಾಗಿಲ್ಲ."
-
-#: ../src/vinagre-connection.c:708
-msgid "Could not open the file."
-msgstr "ಕಡತವನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
-
-#: ../src/vinagre-connection.c:727
-msgid "Could not parse the file."
-msgstr "ಕಡತವನ್ನು ಪಾರ್ಸ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
-
-#: ../src/vinagre-connection.c:772
+#: ../plugins/vnc/vinagre-vnc-connection.c:207
+#: ../plugins/vnc/vinagre-vnc-plugin.c:214
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr ""
 "'ಹಂಚಲಾದ' ಫ್ಲಾಗಿಗೆ ಸರಿಯಲ್ಲದ ಮೌಲ್ಯ: %d. ಅದು 0 ಅಥವ 1 ಆಗಿರಬೇಕು. ಅದನ್ನು "
 "ನಿರ್ಲಕ್ಷಿಸಲಾಗುತ್ತಿದೆ."
 
-#: ../src/vinagre-connection.c:778
-msgid "Could not find the host address in the file."
-msgstr "ಕಡತದಲ್ಲಿ ಅತಿಥೇಐದ ವಿಳಾಸವನ್ನು ಪತ್ತೆಮಾಡಲಾಗಲಿಲ್ಲ."
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:66
+msgid "Enable scaled mode"
+msgstr ""
 
-#: ../src/vinagre-fav.c:667
-msgid "Invalid operation"
-msgstr "ಅಮಾನ್ಯವಾದ ಕಾರ್ಯ"
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:81
+msgid "VNC Options:"
+msgstr ""
 
-#: ../src/vinagre-fav.c:668
-msgid "Data received from drag&drop operation is invalid."
-msgstr "ಎಳೆದು ಸೇರಿಸುವ ಕ್ರಿಯೆಯಿಂದ ಪಡೆಯಲಾದ ದತ್ತಾಂಶವು ಅಮಾನ್ಯವಾಗಿದೆ."
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+msgid "Show VNC Options"
+msgstr ""
 
-#: ../src/vinagre-fav.c:861
-msgid "Hosts nearby"
-msgstr "ಸಮೀಪದ ಅತಿಥೇಯಗಳು"
+#. vim: set ts=8:
+#: ../plugins/vnc/vinagre-vnc-plugin.c:105
+#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
+msgid "VNC"
+msgstr ""
 
-#: ../src/vinagre-main.c:53
-msgid "Opens a .vnc file"
-msgstr "ಒಂದು .vnc ಕಡತವನ್ನು ತೆರೆಯುತ್ತದೆ"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:106
+msgid "Access Unix/Linux, Windows and other machines."
+msgstr ""
 
-#: ../src/vinagre-main.c:53
-msgid "filename"
-msgstr "ಕಡತದಹೆಸರು"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:163
+msgid "Could not parse the file."
+msgstr "ಕಡತವನ್ನು ಪಾರ್ಸ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
 
-#: ../src/vinagre-main.c:56
-msgid "Create a new toplevel window in an existing instance of vinagre"
-msgstr "vinagre ನ ಈಗಿರುವ ಒಂದು ಪ್ರಸಂಗದಲ್ಲಿ ಒಂದು ಹೊಸ ಮೇಲ್ಮಟ್ಟದ ವಿಂಡೋವನ್ನು ನಿರ್ಮಿಸಿ"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:170
+msgid "The file is not a VNC one: Missing the group \"connection\"."
+msgstr ""
 
-#: ../src/vinagre-main.c:60
-msgid "[server:port]"
-msgstr "[server:port]"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:176
+msgid "The file is not a VNC one: Missing the key \"host\"."
+msgstr ""
 
-#: ../src/vinagre-main.c:115
-msgid "The following error has occurred:"
-msgid_plural "The following errors have occurred:"
-msgstr[0] "ಈ ಕೆಳಗಿನ ದೋಷವು ಸಂಭವಿಸಿದೆ:"
-msgstr[1] "ಈ ಕೆಳಗಿನ ದೋಷಗಳು ಸಂಭವಿಸಿವೆ:"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:243
+msgid "VNC Options"
+msgstr ""
 
-#. Setup command line options
-#: ../src/vinagre-main.c:137
-msgid "- VNC Client for GNOME"
-msgstr "- GNOME ಗಾಗಿನ VNC ಕ್ಲೈಂಟ್‌"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:254
+#: ../plugins/vnc/vinagre-vnc-tab.c:654
+msgid "_View only"
+msgstr "ನೋಟ ಮಾತ್ರ(_V)"
 
-#: ../src/vinagre-main.c:146
-msgid "Run 'vinagre --help' to see a full list of available command line options"
-msgstr "ಲಭ್ಯವಿರುವ ಆಜ್ಞಾ ಸಾಲಿನ ಆಯ್ಕೆಗಳ ಸಂಪೂರ್ಣ ಪಟ್ಟಿಗಾಗಿ 'vinagre --help' ಅನ್ನು ಚಲಾಯಿಸಿ"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:261
+msgid "_Scaling"
+msgstr "ಅಳತೆ ಬದಲಾವಣೆ(_S)"
 
-#: ../src/vinagre-mdns.c:123
-#, c-format
-msgid "Failed to resolve avahi hostname: %s\n"
-msgstr "avahi ಅತಿಥೇಯದ ಹೆಸರನ್ನು ಪರಿಹರಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ: %s\n"
+#. Translators: this is a pattern to open *.vnc files in a open dialog.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:285
+msgid "VNC Files"
+msgstr ""
 
-#: ../src/vinagre-mdns.c:175 ../src/vinagre-mdns.c:184
-#, c-format
-msgid "Failed to browse for hosts: %s\n"
-msgstr "ಅತಿಥಿಗಳಿಗಾಗಿ ಹುಡುಕುವುದಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ: %s\n"
-
-#: ../src/vinagre-notebook.c:168
-#, c-format
-msgid "Connection to host <i>%s</i> was closed."
-msgstr "ಅತಿಥೇಯ <i>%s</i> ದೊಂದಿಗಿನ ಸಂಪರ್ಕವು ಕಡಿದು ಹೋಗಿದೆ."
-
-#: ../src/vinagre-notebook.c:170
-msgid "Connection closed"
-msgstr "ಸಂಪರ್ಕವು ಕಡಿದು ಹೋಗಿದೆ"
-
-#: ../src/vinagre-notebook.c:194
-msgid "Connecting..."
-msgstr "ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ..."
-
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
-msgid "Close connection"
-msgstr "ಸಂಪರ್ಕವನ್ನು ಮುಚ್ಚು"
-
-#: ../src/vinagre-prefs.c:169
-msgid "Cannot initialize preferences manager."
-msgstr "ಆದ್ಯತೆಗಳ ನಿರ್ವಾಹಕನನ್ನು ಆರಂಭಿಸಲಾಗಿಲ್ಲ."
-
-#: ../src/vinagre-tab.c:322
-msgid "Error connecting to host."
-msgstr "ಅತಿಥೇಯಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸುವಲ್ಲಿ ದೋಷ."
-
-#: ../src/vinagre-tab.c:354
-#, c-format
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "ಅತಿಥೇಯ \"%s\"ದ ದೃಢೀಕರಣವು ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-tab.c:360
-msgid "Authentication failed"
-msgstr "ದೃಢೀಕರಣವು ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/vinagre-tab.c:382
-#, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "ಅತಿಥೇಯ <i>%s</i>ಕ್ಕಾಗಿನ ದೃಢೀಕರಣ ವಿಧಾನಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ. (%u)"
-
-#: ../src/vinagre-tab.c:386
-msgid "Authentication unsupported"
-msgstr "ದೃಢೀಕರಣವು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ"
-
-#: ../src/vinagre-tab.c:460
-msgid "Error saving recent connection."
-msgstr "ಇತ್ತೀಚಿನ ಸಂಪರ್ಕವನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ."
-
-#: ../src/vinagre-tab.c:492
-msgid "Error saving the credential on the keyring."
-msgstr "ಕೀಲಿ ಸುರುಳಿಯಲ್ಲಿ ಪರಿಚಯವನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ."
-
-#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
-msgid "Authentication error"
-msgstr "ದೃಢೀಕರಣದ ದೋಷ"
-
-#: ../src/vinagre-tab.c:748
-msgid "A username is required in order to access this machine."
-msgstr "ಈ ಗಣಕವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಬಳಕೆದಾರರ ಹೆಸರಿನ ಅಗತ್ಯವಿದೆ."
-
-#: ../src/vinagre-tab.c:765
-msgid "A password is required in order to access this machine."
-msgstr "ಈ ಗಣಕವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಬಳಕೆದಾರರ ಒಂದು ಗುಪ್ತಪದದ ಅಗತ್ಯವಿದೆ."
-
-#: ../src/vinagre-tab.c:891
-msgid "Minimize window"
-msgstr "ವಿಂಡೊವನ್ನು ಕುಗ್ಗಿಸು"
-
-#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
-msgid "Scaling"
-msgstr "ಅಳತೆ ಬದಲಾವಣೆ"
-
-#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
-msgid "Read only"
-msgstr "ಓದಲು ಮಾತ್ರ"
-
-#. Machine menu
-#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
-msgid "Take screenshot"
-msgstr "ತೆರೆಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ"
-
-#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
-msgid "Send Ctrl-Alt-Del"
-msgstr "Ctrl-Alt-Del ಅನ್ನು ಕಳುಹಿಸಿ"
-
-#: ../src/vinagre-tab.c:1061
+#: ../plugins/vnc/vinagre-vnc-tab.c:133
 msgid "Desktop Name:"
 msgstr "ಗಣಕತೆರೆ ಹೆಸರು:"
 
-#: ../src/vinagre-tab.c:1063
-msgid "Port:"
-msgstr "ಸಂಪರ್ಕಸ್ಥಾನ:"
-
-#: ../src/vinagre-tab.c:1064
+#: ../plugins/vnc/vinagre-vnc-tab.c:136
 msgid "Dimensions:"
 msgstr "ಆಯಾಮಗಳು:"
 
-#: ../src/vinagre-tab.c:1130
-msgid "Could not get a screenshot of the connection."
-msgstr "ಸಂಪರ್ಕದ ಒಂದು ತೆರೆಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊಳ್ಳಲಾಗಲಿಲ್ಲ."
+#: ../plugins/vnc/vinagre-vnc-tab.c:268
+msgid "Error connecting to host."
+msgstr "ಅತಿಥೇಯಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸುವಲ್ಲಿ ದೋಷ."
 
-#: ../src/vinagre-tab.c:1138
+#. Translators: %s is a host name or IP address; %u is a code error (number).
+#: ../plugins/vnc/vinagre-vnc-tab.c:306
 #, c-format
-msgid "Screenshot of %s"
-msgstr "%s ನ ತೆರೆಚಿತ್ರ"
+#| msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgid "Authentication method to host %s is unsupported. (%u)"
+msgstr "ಅತಿಥೇಯ %s ಕ್ಕಾಗಿನ ದೃಢೀಕರಣ ವಿಧಾನಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ. (%u)"
 
-#: ../src/vinagre-tab.c:1141
-msgid "Save Screenshot"
-msgstr "ತೆರೆಚಿತ್ರವನ್ನು ಉಳಿಸು"
+#: ../plugins/vnc/vinagre-vnc-tab.c:310
+msgid "Authentication unsupported"
+msgstr "ದೃಢೀಕರಣವು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ"
 
-#: ../src/vinagre-tab.c:1205
+#: ../plugins/vnc/vinagre-vnc-tab.c:570 ../plugins/vnc/vinagre-vnc-tab.c:587
+msgid "Authentication error"
+msgstr "ದೃಢೀಕರಣದ ದೋಷ"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:571
+msgid "A username is required in order to access this machine."
+msgstr "ಈ ಗಣಕವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಬಳಕೆದಾರರ ಹೆಸರಿನ ಅಗತ್ಯವಿದೆ."
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:588
+msgid "A password is required in order to access this machine."
+msgstr "ಈ ಗಣಕವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಬಳಕೆದಾರರ ಒಂದು ಗುಪ್ತಪದದ ಅಗತ್ಯವಿದೆ."
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:639
+msgid "S_caling"
+msgstr "ಗಾತ್ರದ ಹೊಂದಿಕೆ(_c)"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:640
+#| msgid "Fit the remote screen into the current window size"
+msgid "Fits the remote screen into the current window size"
+msgstr "ದೂರಸ್ಥ ತೆರೆಯನ್ನು ಪ್ರಸಕ್ತ ವಿಂಡೋ ಗಾತ್ರಕ್ಕೆ ಸರಿಹೊಂದಿಸುತ್ತದೆ"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:655
+#, fuzzy
+#| msgid "Disable mouse and keyboard"
+msgid "Does not send mouse and keyboard events"
+msgstr "ಮೌಸ್ ಹಾಗು ಕೀಲಿಮಣೆಯನ್ನು ಅಶಕ್ತಗೊಳಿಸು"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:668
+msgid "_Original size"
+msgstr "ಮೂಲ ಗಾತ್ರ(_O)"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:669
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "ವಿಂಡೋವನ್ನು ದೂರಸ್ಥ ಗಣಕತೆರೆಯ ಗಾತ್ರಕ್ಕೆ ಹೊಂದಿಸುತ್ತದೆ"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:692 ../plugins/vnc/vinagre-vnc-tab.c:766
+#: ../plugins/vnc/vinagre-vnc-tab.c:767
+msgid "Send Ctrl-Alt-Del"
+msgstr "Ctrl-Alt-Del ಅನ್ನು ಕಳುಹಿಸಿ"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:693
+#, fuzzy
+#| msgid "Send Ctrl+Alt+Del to active connection"
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "ಸಕ್ರಿಯ ಸಂಪರ್ಕಕ್ಕಾಗಿ Ctrl+Alt+Del ಅನ್ನು ಕಳುಹಿಸು"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:745 ../plugins/vnc/vinagre-vnc-tab.c:746
+msgid "Scaling"
+msgstr "ಅಳತೆ ಬದಲಾವಣೆ"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:755 ../plugins/vnc/vinagre-vnc-tab.c:756
+msgid "Read only"
+msgstr "ಓದಲು ಮಾತ್ರ"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:925
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -563,175 +377,606 @@ msgstr ""
 "ಈ ಸವಲತ್ತನ್ನು ಹೇಗೆ ಶಕ್ತಗೊಳಿಸುವುದು ಎಂಬುದನ್ನು ಅರಿಯಲು README ಕಡತವನ್ನು (Vinagre "
 "ನೊಂದಿಗೆ ನೀಡಲಾದ) ಓದಿ."
 
+#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
+msgid "VNC support"
+msgstr ""
+
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "ದೂರಸ್ಥ ಗಣಕಗಳನ್ನು ತಕ್ಷಣ ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಬಳಸಲಾಗುವ ಒಂದು ಮೆನು"
+
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Vinagre ಆಪ್ಲೆಟ್ ಫ್ಯಾಕ್ಟರಿ"
+
+#: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
+msgid "Could not run vinagre:"
+msgstr "vinagre ಅನ್ನು ಚಲಾಯಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ:"
+
+#: ../vinagre/vinagre-applet.c:380
+msgid "Open Remote Desktop Viewer"
+msgstr "ದೂರಸ್ಥ ಗಣಕತೆರೆ ವೀಕ್ಷಕವನ್ನು ತೆರೆ"
+
+#: ../vinagre/vinagre-applet.c:435
+msgid "Access your bookmarks"
+msgstr "ನಿಮ್ಮ ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಿ"
+
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
+#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:256
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "ಪ್ರೋಟೋಕಾಲ್ %s ಬೆಂಬಲಿತವಾಗಿಲ್ಲ."
+
+#: ../vinagre/vinagre-bookmarks.c:343
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ: %s"
+
+#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:459
+#: ../vinagre/vinagre-fav.c:681 ../vinagre/vinagre-main.c:100
+#: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
+msgid "Unknown error"
+msgstr "ಗೊತ್ತಿಲ್ಲದ ದೋಷ"
+
+#: ../vinagre/vinagre-bookmarks.c:350
+msgid "Error while initializing bookmarks: The file seems to be empty"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ: ಕಡತವು ಖಾಲಿ ಇರುವಂತೆ ತೋರುತ್ತಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks.c:357
+msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ: ಕಡತವು ಒಂದು ಮಾನ್ಯವಾದ vinagre ಬುಕ್‌ಮಾರ್ಕ್ ಕಡತವಾಗಿಲ್ಲ"
+
+#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+msgid "Error while saving bookmarks: Failed to create the XML structure"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ನಿರ್ಮಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+msgid "Error while saving bookmarks: Failed to initialize the XML structure"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಆರಂಭಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks.c:449
+msgid "Error while saving bookmarks: Failed to finalize the XML structure"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಅಂತ್ಯಗೊಳಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks.c:458
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: %s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:95
+#: ../vinagre/vinagre-bookmarks-migration.c:102
+msgid "Error while migrating bookmarks: Failed to create the XML structure"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ನಿರ್ಮಿಸಲು ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:109
+#: ../vinagre/vinagre-bookmarks-migration.c:116
+msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:125
+msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: XML ರಚನೆಯನ್ನು ಅಂತ್ಯಗೊಳಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-bookmarks-migration.c:238
+#, c-format
+msgid "Error while migrating bookmarks: %s"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:164
+#| msgid "Error while migrating bookmarks: %s"
+msgid "Error while migrating bookmarks: VNC plugin is not activated"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ವರ್ಗಾಯಿಸುವಲ್ಲಿ ದೋಷ: VNC ಪ್ಲಗ್‌ಇನ್ ಸಕ್ರಿಯಗೊಂಡಿಲ್ಲ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:238
+msgid "Failed to create the directory"
+msgstr "ಕೋಶವನ್ನು ನಿರ್ಮಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:262
+msgid ""
+"Migrating the bookmarks file to the new format. This operation is only "
+"supposed to run once."
+msgstr ""
+"ಬುಕ್‌ಮಾರ್ಕುಗಳ ಕಡತವನ್ನು ಹೊಸ ರಚನೆಗೆ ವರ್ಗಾಯಿಸಲಾಗುತ್ತಿದೆ. ಈ ಕಾರ್ಯವು ಕೇವಲ ಒಮ್ಮೆ ಮಾತ್ರ "
+"ಚಲಾಯಿತಗೊಳ್ಳಬೇಕು."
+
+#: ../vinagre/vinagre-bookmarks-migration.c:270
+#, c-format
+msgid "Error opening old bookmarks file: %s"
+msgstr "ಹಳೆಯ ಬುಕ್‌ಮಾರ್ಕುಗಳನ್ನು ತೆರೆಯುವಲ್ಲಿ ದೋಷ: %s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:271
+#: ../vinagre/vinagre-bookmarks-migration.c:283
+msgid "Migration cancelled"
+msgstr "ವರ್ಗಾವಣೆಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:280
+msgid "Could not remove the old bookmarks file"
+msgstr "ಹಳೆಯ ಬುಕ್‌ಮಾರ್ಕ್ ಕಡತವನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಲಿಲ್ಲ"
+
+#: ../vinagre/vinagre-bookmarks-tree.c:120
+msgid "Root Folder"
+msgstr "ರೂಟ್‌ ಕಡತಕೋಶ"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:78
+msgid "Invalid name for this folder"
+msgstr "ಈ ಕಡತಕೋಶದ ಅಮಾನ್ಯವಾದ ಹೆಸರು"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:88 ../vinagre/vinagre-bookmarks-ui.c:200
+#, c-format
+msgid "The name \"%s\" is already used in this folder. Please use a different name."
+msgstr "ಹೆಸರು \"%s\" ಅನ್ನು ಈ ಕಡತಕೋಶದಲ್ಲಿ ಈಗಾಗಲೆ ಬಳಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಬೇರೊಂದು ಹೆಸರನ್ನು ಬಳಸಿ"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:89 ../vinagre/vinagre-bookmarks-ui.c:190
+#: ../vinagre/vinagre-bookmarks-ui.c:201
+#| msgid "Invalid name for this folder"
+msgid "Invalid name for this item"
+msgstr "ಈ ಅಂಶದ ಅಮಾನ್ಯವಾದ ಹೆಸರು"
+
+#. Translators: %s is a protocol name, like VNC or SSH
+#: ../vinagre/vinagre-bookmarks-ui.c:168
+#, c-format
+msgid "(Protocol: %s)"
+msgstr "(ಪ್ರೊಟೊಕಾಲ್: %s)"
+
+#. Translators: %s is a bookmark entry name
+#: ../vinagre/vinagre-bookmarks-ui.c:308
+#, c-format
+#| msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgid "Are you sure you want to remove %s from bookmarks?"
+msgstr "ನೀವು ನಿಜವಾಗಲು ಬುಕ್‌ಮಾರ್ಕಿನಿಂದ %s ಅನ್ನು ತೆಗೆದು ಹಾಕಲು ಬಯಸುತ್ತೀರೆ?"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:314
+msgid "Remove Folder?"
+msgstr "ಕಡತಕೋಶವನ್ನು ತೆಗೆದುಹಾಕಬೇಕೆ?"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:315
+msgid "Notice that all its subfolders and items will be removed as well."
+msgstr "ಅದರೊಳಿಗಿನ ಎಲ್ಲಾ ಉಪಕಡತಕೋಶಗಳು ಹಾಗು ಅಂಶಗಳು ತೆಗೆಯಲ್ಪಡುತ್ತವೆ ಎಂಬುದನ್ನು ನೆನಪಿಡಿ."
+
+#: ../vinagre/vinagre-bookmarks-ui.c:320
+msgid "Remove Item?"
+msgstr "ಅಂಶವನ್ನು ತೆಗೆದುಹಾಕಬೇಕೆ?"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:337
+msgid "Error removing bookmark: Entry not found"
+msgstr "ಬುಕ್‌ಮಾರ್ಕನ್ನು ತೆಗೆದು ಹಾಕುವಲ್ಲಿ ದೋಷ: ನಮೂದು ಕಂಡುಬಂದಿಲ್ಲ"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:354
+msgid "New Folder"
+msgstr "ಹೊಸ ಕಡತಕೋಶ"
+
+#: ../vinagre/vinagre-commands.c:120
+msgid "Choose the file"
+msgstr "ಕಡತವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
+
+#: ../vinagre/vinagre-commands.c:148
+msgid "There are none supported files"
+msgstr ""
+
+#: ../vinagre/vinagre-commands.c:148
+msgid ""
+"None of the active plugins offer a supported file to be open. Activate some "
+"plugins and try again."
+msgstr ""
+
+#: ../vinagre/vinagre-commands.c:181
+msgid "The following file could not be opened:"
+msgid_plural "The following files could not be opened:"
+msgstr[0] "ಈ ಕೆಳಗಿನ ಕಡತವನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ:"
+msgstr[1] "ಈ ಕೆಳಗಿನ ಕಡತಗಳನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ:"
+
+#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
+#: ../vinagre/vinagre-connect.c:424
+msgid "Could not get the active protocol in the protocol list."
+msgstr ""
+
+#: ../vinagre/vinagre-connect.c:313
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "ಇತಿಹಾಸ ಕಡತವನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ: %s"
+
+#: ../vinagre/vinagre-connect.c:340
+#| msgid "Open Remote Desktop Viewer"
+msgid "Choose a Remote Desktop"
+msgstr "ದೂರಸ್ಥ ಗಣಕತೆರೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
+
+#: ../vinagre/vinagre-connection.c:627
+msgid "Could not open the file."
+msgstr "ಕಡತವನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
+
+#: ../vinagre/vinagre-connection.c:651
+msgid "The file was not recognized by any of the plugins."
+msgstr ""
+
+#: ../vinagre/vinagre-fav.c:670
+msgid "Invalid operation"
+msgstr "ಅಮಾನ್ಯವಾದ ಕಾರ್ಯ"
+
+#: ../vinagre/vinagre-fav.c:671
+msgid "Data received from drag&drop operation is invalid."
+msgstr "ಎಳೆದು ಸೇರಿಸುವ ಕ್ರಿಯೆಯಿಂದ ಪಡೆಯಲಾದ ದತ್ತಾಂಶವು ಅಮಾನ್ಯವಾಗಿದೆ."
+
+#: ../vinagre/vinagre-fav.c:871
+msgid "Hosts nearby"
+msgstr "ಸಮೀಪದ ಅತಿಥೇಯಗಳು"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:62
+msgid "Open vinagre in fullscreen mode"
+msgstr ""
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:66
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "vinagre ನ ಈಗಿರುವ ಒಂದು ಪ್ರಸಂಗದಲ್ಲಿ ಒಂದು ಹೊಸ ಮೇಲ್ಮಟ್ಟದ ವಿಂಡೋವನ್ನು ನಿರ್ಮಿಸಿ"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:70
+msgid "Open a file recognized by vinagre"
+msgstr ""
+
+#: ../vinagre/vinagre-main.c:70
+msgid "filename"
+msgstr "ಕಡತದಹೆಸರು"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:75
+msgid "[server:port]"
+msgstr "[server:port]"
+
+#: ../vinagre/vinagre-main.c:130
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "ಈ ಕೆಳಗಿನ ದೋಷವು ಸಂಭವಿಸಿದೆ:"
+msgstr[1] "ಈ ಕೆಳಗಿನ ದೋಷಗಳು ಸಂಭವಿಸಿವೆ:"
+
+#. Setup command line options
+#: ../vinagre/vinagre-main.c:169
+#| msgid "Remote Desktop Viewer"
+msgid "- Remote Desktop Viewer"
+msgstr "- ದೂರಸ್ಥ ಗಣಕತೆರೆಗಳ ವೀಕ್ಷಕ"
+
+#: ../vinagre/vinagre-main.c:193
+msgid "Run 'vinagre --help' to see a full list of available command line options"
+msgstr "ಲಭ್ಯವಿರುವ ಆಜ್ಞಾ ಸಾಲಿನ ಆಯ್ಕೆಗಳ ಸಂಪೂರ್ಣ ಪಟ್ಟಿಗಾಗಿ 'vinagre --help' ಅನ್ನು ಚಲಾಯಿಸಿ"
+
+#: ../vinagre/vinagre-mdns.c:142
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "avahi ಅತಿಥೇಯದ ಹೆಸರನ್ನು ಪರಿಹರಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ: %s\n"
+
+#: ../vinagre/vinagre-mdns.c:200
+#, c-format
+msgid "Plugin %s has already registered a browser for service %s."
+msgstr ""
+
+#: ../vinagre/vinagre-mdns.c:209
+#, fuzzy, c-format
+#| msgid "Failed to browse for hosts: %s\n"
+msgid "Failed to add mDNS browser for service %s."
+msgstr "ಅತಿಥಿಗಳಿಗಾಗಿ ಹುಡುಕುವುದಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ: %s\n"
+
+#: ../vinagre/vinagre-mdns.c:225
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "ಅತಿಥಿಗಳಿಗಾಗಿ ಹುಡುಕುವುದಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ: %s\n"
+
+#: ../vinagre/vinagre-mdns.c:298
+#, fuzzy, c-format
+#| msgid "Failed to browse for hosts: %s\n"
+msgid "Failed to initialize mDNS browser: %s\n"
+msgstr "ಅತಿಥಿಗಳಿಗಾಗಿ ಹುಡುಕುವುದಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ: %s\n"
+
+#. Translators: %s is a host name or IP address.
+#: ../vinagre/vinagre-notebook.c:461
+#, c-format
+#| msgid "Connection to host <i>%s</i> was closed."
+msgid "Connection to host %s was closed."
+msgstr "ಅತಿಥೇಯ %s ದೊಂದಿಗಿನ ಸಂಪರ್ಕವು ಕಡಿದು ಹೋಗಿದೆ."
+
+#: ../vinagre/vinagre-notebook.c:463
+msgid "Connection closed"
+msgstr "ಸಂಪರ್ಕವು ಕಡಿದು ಹೋಗಿದೆ"
+
+#. Translators: %s is a host name or IP address.
+#: ../vinagre/vinagre-notebook.c:482
+#, c-format
+#| msgid "Authentication to host <i>%s</i> has failed"
+msgid "Authentication to host %s has failed"
+msgstr "ಅತಿಥೇಯ %s ದ ದೃಢೀಕರಣವು ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-notebook.c:488
+msgid "Authentication failed"
+msgstr "ದೃಢೀಕರಣವು ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-notebook.c:525
+msgid "Connecting..."
+msgstr "ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ..."
+
+#: ../vinagre/vinagre-notebook.c:552 ../vinagre/vinagre-tab.c:325
+msgid "Close connection"
+msgstr "ಸಂಪರ್ಕವನ್ನು ಮುಚ್ಚು"
+
+#: ../vinagre/vinagre-plugin-dialog.c:83
+msgid "Plugin Manager"
+msgstr "ಪ್ಲಗ್‌ಇನ್‌ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: ../vinagre/vinagre-plugin-manager.c:45
+msgid "Plugin"
+msgstr "ಪ್ಲಗ್ಇನ್"
+
+#: ../vinagre/vinagre-plugin-manager.c:46
+msgid "Enabled"
+msgstr "ಸಕ್ರಿಯಗೊಂಡ"
+
+#: ../vinagre/vinagre-plugin-manager.c:503
+msgid "C_onfigure"
+msgstr "ಸಂರಚಿಸು(_o)"
+
+#: ../vinagre/vinagre-plugin-manager.c:512
+msgid "A_ctivate"
+msgstr "ಸಕ್ರಿಯಗೊಳಿಸು(_c)"
+
+#: ../vinagre/vinagre-plugin-manager.c:523
+msgid "Ac_tivate All"
+msgstr "ಎಲ್ಲವನ್ನೂ ಸಕ್ರಿಯಗೊಳಿಸು(_t)"
+
+#: ../vinagre/vinagre-plugin-manager.c:528
+msgid "_Deactivate All"
+msgstr "ಎಲ್ಲವನ್ನೂ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸು(_D)"
+
+#: ../vinagre/vinagre-plugin-manager.c:824
+#| msgid "_About"
+msgid "_About Plugin"
+msgstr "ಪ್ಲಗ್ಇನ್‍ನ ಬಗ್ಗೆ(_A)"
+
+#: ../vinagre/vinagre-plugin-manager.c:828
+msgid "C_onfigure Plugin"
+msgstr "ಪ್ಲಗ್ಇನ್ ಅನ್ನು ಸಂರಚಿಸು(_o)"
+
+#: ../vinagre/vinagre-prefs.c:217
+msgid "Cannot initialize preferences manager."
+msgstr "ಆದ್ಯತೆಗಳ ನಿರ್ವಾಹಕನನ್ನು ಆರಂಭಿಸಲಾಗಿಲ್ಲ."
+
+#: ../vinagre/vinagre-tab.c:346
+#| msgid "_Full screen"
+msgid "Leave fullscreen"
+msgstr "ಪೂರ್ಣತೆರೆಯಿಂದ ನಿರ್ಗಮಿಸು"
+
+#: ../vinagre/vinagre-tab.c:495
+msgid "Error saving recent connection."
+msgstr "ಇತ್ತೀಚಿನ ಸಂಪರ್ಕವನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ."
+
+#: ../vinagre/vinagre-tab.c:728
+#| msgid "Error saving the credential on the keyring."
+msgid "Error saving the credentials on the keyring."
+msgstr "ಕೀಲಿ ಸುರುಳಿಯಲ್ಲಿ ಪರಿಚಯಗಳನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ."
+
+#: ../vinagre/vinagre-tab.c:814
+msgid "Could not get a screenshot of the connection."
+msgstr "ಸಂಪರ್ಕದ ಒಂದು ತೆರೆಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊಳ್ಳಲಾಗಲಿಲ್ಲ."
+
+#: ../vinagre/vinagre-tab.c:819
+msgid "Save Screenshot"
+msgstr "ತೆರೆಚಿತ್ರವನ್ನು ಉಳಿಸು"
+
+#: ../vinagre/vinagre-tab.c:830
+#, c-format
+msgid "Screenshot of %s"
+msgstr "%s ನ ತೆರೆಚಿತ್ರ"
+
+#: ../vinagre/vinagre-tab.c:881
+#, fuzzy
+#| msgid "Error saving recent connection."
+msgid "Error saving screenshot"
+msgstr "ಇತ್ತೀಚಿನ ಸಂಪರ್ಕವನ್ನು ಉಳಿಸುವಲ್ಲಿ ದೋಷ."
+
+#: ../vinagre/vinagre-tube-handler.c:232
+#, c-format
+msgid "Impossible to get service property: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:289
+#, fuzzy, c-format
+#| msgid "Failed to create the directory"
+msgid "Impossible to create the connection: %s"
+msgstr "ಕೋಶವನ್ನು ನಿರ್ಮಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
+
+#: ../vinagre/vinagre-tube-handler.c:328
+#, c-format
+msgid "Impossible to accept the stream tube: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:404
+#, fuzzy, c-format
+#| msgid "Failed to resolve avahi hostname: %s\n"
+msgid "Failed to request name: %s"
+msgstr "avahi ಅತಿಥೇಯದ ಹೆಸರನ್ನು ಪರಿಹರಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ: %s\n"
+
+#: ../vinagre/vinagre-tube-handler.c:405
+msgid "No error given"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:482
+#, c-format
+msgid "Impossible to get the contact name: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:517
+#, c-format
+msgid "Impossible to get the avatar: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:538
+#, c-format
+msgid "%s wants to share his desktop with you."
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:543
+msgid "Desktop sharing invitation"
+msgstr ""
+
 #. Toplevel
-#: ../src/vinagre-ui.h:33
+#: ../vinagre/vinagre-ui.h:33
 msgid "_Machine"
 msgstr "ಗಣಕ(_M)"
 
-#: ../src/vinagre-ui.h:34
+#: ../vinagre/vinagre-ui.h:34
 msgid "_Edit"
 msgstr "ಸಂಪಾದನೆ(_E)"
 
-#: ../src/vinagre-ui.h:35
+#: ../vinagre/vinagre-ui.h:35
 msgid "_View"
 msgstr "ನೋಟ(_V)"
 
-#: ../src/vinagre-ui.h:36
+#: ../vinagre/vinagre-ui.h:36
 msgid "_Bookmarks"
 msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳು(_B)"
 
-#: ../src/vinagre-ui.h:41
+#: ../vinagre/vinagre-ui.h:41
 msgid "Connect to a remote machine"
 msgstr "ದೂರಸ್ಥ ಗಣಕಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು"
 
-#: ../src/vinagre-ui.h:43
+#: ../vinagre/vinagre-ui.h:43
 msgid "Open a .VNC file"
 msgstr "ಒಂದು .VNC ಕಡತವನ್ನು ತೆರೆ"
 
-#: ../src/vinagre-ui.h:45
+#: ../vinagre/vinagre-ui.h:45
 msgid "Quit the program"
 msgstr "ಪ್ರೋಗ್ರಾಂನಿಂದ ಹೊರನಡೆ"
 
-#: ../src/vinagre-ui.h:49
+#: ../vinagre/vinagre-ui.h:49
 msgid "Edit the application preferences"
 msgstr "ಅನ್ವಯದ ಆದ್ಯತೆಗಳನ್ನು ಸಂಪಾದಿಸಿ"
 
+#. FIXME: Study this dialog for next release
+#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
+#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
+#.
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:52
+#: ../vinagre/vinagre-ui.h:56
 msgid "_Open bookmark"
 msgstr "ಬುಕ್‌ಮಾರ್ಕನ್ನು ತೆರೆ(_O)"
 
-#: ../src/vinagre-ui.h:53
+#: ../vinagre/vinagre-ui.h:57
 msgid "Connect to this machine"
 msgstr "ಈ ಗಣಕಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು"
 
-#: ../src/vinagre-ui.h:54
+#: ../vinagre/vinagre-ui.h:58
 msgid "_Edit bookmark"
 msgstr "ಬುಕ್‌ಮಾರ್ಕನ್ನು ಸಂಪಾದಿಸು(_E)"
 
-#: ../src/vinagre-ui.h:55
+#: ../vinagre/vinagre-ui.h:59
 msgid "Edit the details of selected bookmark"
 msgstr "ಆಯ್ಕೆ ಮಾಡಲಾದ ಬುಕ್‌ಮಾರ್ಕಿನ ವಿವರಗಳನ್ನು ಸಂಪಾದಿಸಿ"
 
-#: ../src/vinagre-ui.h:56
+#: ../vinagre/vinagre-ui.h:60
 msgid "_Remove from bookmarks"
 msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳಿಂದ ತೆಗೆದುಹಾಕಿ(_R)"
 
-#: ../src/vinagre-ui.h:57
+#: ../vinagre/vinagre-ui.h:61
 msgid "Remove current selected connection from bookmarks"
 msgstr "ಪ್ರಸಕ್ತ ಆಯ್ಕೆ ಮಾಡಲಾದ ಸಂಪರ್ಕವನ್ನು ಬುಕ್‌ಮಾರ್ಕುಗಳಿಂದ ತೆಗೆದು ಹಾಕಿ"
 
-#: ../src/vinagre-ui.h:58
+#: ../vinagre/vinagre-ui.h:62
 msgid "_New Folder"
 msgstr "ಹೊಸ ಕಡತಕೋಶ(_N)"
 
-#: ../src/vinagre-ui.h:59
+#: ../vinagre/vinagre-ui.h:63
 msgid "Create a new folder"
 msgstr "ಒಂದು ಹೊಸ ಕಡತಕೋಶವನ್ನು ನಿರ್ಮಿಸಿ"
 
 #. Help menu
-#: ../src/vinagre-ui.h:62
+#: ../vinagre/vinagre-ui.h:66
 msgid "_Contents"
 msgstr "ಒಳವಿಷಯಗಳು(_C)"
 
-#: ../src/vinagre-ui.h:63
+#: ../vinagre/vinagre-ui.h:67
 msgid "Open the vinagre manual"
 msgstr "vinagre ಕೈಪಿಡಿಯನ್ನು ತೆರೆ"
 
-#: ../src/vinagre-ui.h:65
+#: ../vinagre/vinagre-ui.h:69
 msgid "About this application"
 msgstr "ಈ ಅನ್ವಯದ ಬಗ್ಗೆ"
 
-#: ../src/vinagre-ui.h:72
+#: ../vinagre/vinagre-ui.h:74
+msgid "_Toolbar"
+msgstr "ಉಪಕರಣಪಟ್ಟಿ(_T)"
+
+#: ../vinagre/vinagre-ui.h:75
+msgid "Show or hide the toolbar"
+msgstr "ಉಪಕರಣಪಟ್ಟಿಯನ್ನು ತೋರಿಸು ಅಥವ ಅಡಗಿಸು"
+
+#: ../vinagre/vinagre-ui.h:78
+msgid "_Statusbar"
+msgstr "ಸ್ಥಿತಿಪಟ್ಟಿ(_S)"
+
+#: ../vinagre/vinagre-ui.h:79
+msgid "Show or hide the statusbar"
+msgstr "ಸ್ಥಿತಿಪಟ್ಟಿಯನ್ನು ತೋರಿಸು ಅಥವ ಅಡಗಿಸು"
+
+#: ../vinagre/vinagre-ui.h:82
+msgid "Side _Panel"
+msgstr "ಬದಿಯ ಫಲಕ(_P)"
+
+#: ../vinagre/vinagre-ui.h:83
+msgid "Show or hide the side panel"
+msgstr "ಬದಿಯ ಫಲಕವನ್ನು ತೋರಿಸು ಅಥವ ಅಡಗಿಸು"
+
+#: ../vinagre/vinagre-ui.h:91
 msgid "Close the current connection"
 msgstr "ಪ್ರಸಕ್ತ ಸಂಪರ್ಕವನ್ನು ಮುಚ್ಚು"
 
-#: ../src/vinagre-ui.h:73
+#: ../vinagre/vinagre-ui.h:92
 msgid "C_lose All"
 msgstr "ಎಲ್ಲವನ್ನೂ ಮುಚ್ಚು(_l)"
 
-#: ../src/vinagre-ui.h:74
+#: ../vinagre/vinagre-ui.h:93
 msgid "Close all active connections"
 msgstr "ಎಲ್ಲಾ ಸಕ್ರಿಯ ಸಂಪರ್ಕಗಳನ್ನು ಮುಚ್ಚು"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:77
+#: ../vinagre/vinagre-ui.h:96
 msgid "_Add to bookmarks"
 msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳಿಗೆ ಸೇರಿಸು(_A)"
 
-#: ../src/vinagre-ui.h:78
+#: ../vinagre/vinagre-ui.h:97
 msgid "Add current connection to your bookmarks"
 msgstr "ನಿಮ್ಮ ಬುಕ್‌ಮಾರ್ಕುಗಳಿಗೆ ಪ್ರಸಕ್ತ ಸಂಪರ್ಕವನ್ನು ಸೇರಿಸಿ"
 
-#: ../src/vinagre-ui.h:86
+#. Machine menu
+#: ../vinagre/vinagre-ui.h:104
+msgid "Take screenshot"
+msgstr "ತೆರೆಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ"
+
+#: ../vinagre/vinagre-ui.h:105
 msgid "Take a screenshot of active connection"
 msgstr "ಸಕ್ರಿಯ ಸಂಪರ್ಕದ ಒಂದು ತೆರೆಚಿತ್ರವನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ"
 
-#: ../src/vinagre-ui.h:89
-msgid "Send Ctrl+Alt+Del to active connection"
-msgstr "ಸಕ್ರಿಯ ಸಂಪರ್ಕಕ್ಕಾಗಿ Ctrl+Alt+Del ಅನ್ನು ಕಳುಹಿಸು"
-
-#: ../src/vinagre-ui.h:93
+#: ../vinagre/vinagre-ui.h:109
 msgid "View the current machine in full screen"
 msgstr "ಪ್ರಸಕ್ತ ಗಣಕವನ್ನು ಸಂಪೂರ್ಣತೆರೆಯಲ್ಲಿ ನೋಡು"
 
-#: ../src/vinagre-ui.h:95
-msgid "_Original size"
-msgstr "ಮೂಲ ಗಾತ್ರ(_O)"
-
-#: ../src/vinagre-ui.h:96
-msgid "Adjusts the window to the remote desktop's size"
-msgstr "ವಿಂಡೋವನ್ನು ದೂರಸ್ಥ ಗಣಕತೆರೆಯ ಗಾತ್ರಕ್ಕೆ ಹೊಂದಿಸುತ್ತದೆ"
-
-#: ../src/vinagre-ui.h:102
-msgid "S_caling"
-msgstr "ಗಾತ್ರದ ಹೊಂದಿಕೆ(_c)"
-
-#: ../src/vinagre-ui.h:103
-msgid "Fit the remote screen into the current window size"
-msgstr "ದೂರಸ್ಥ ತೆರೆಯನ್ನು ಪ್ರಸಕ್ತ ವಿಂಡೋ ಗಾತ್ರಕ್ಕೆ ಸರಿಹೊಂದಿಸು"
-
-#: ../src/vinagre-ui.h:105
-msgid "_Read only"
-msgstr "ಓದಲು ಮಾತ್ರ(_R)"
-
-#: ../src/vinagre-ui.h:106
-msgid "Disable mouse and keyboard"
-msgstr "ಮೌಸ್ ಹಾಗು ಕೀಲಿಮಣೆಯನ್ನು ಅಶಕ್ತಗೊಳಿಸು"
-
-#: ../src/vinagre-ui.h:112
-msgid "_Toolbar"
-msgstr "ಉಪಕರಣಪಟ್ಟಿ(_T)"
-
-#: ../src/vinagre-ui.h:113
-msgid "Show or hide the toolbar"
-msgstr "ಉಪಕರಣಪಟ್ಟಿಯನ್ನು ತೋರಿಸು ಅಥವ ಅಡಗಿಸು"
-
-#: ../src/vinagre-ui.h:116
-msgid "_Statusbar"
-msgstr "ಸ್ಥಿತಿಪಟ್ಟಿ(_S)"
-
-#: ../src/vinagre-ui.h:117
-msgid "Show or hide the statusbar"
-msgstr "ಸ್ಥಿತಿಪಟ್ಟಿಯನ್ನು ತೋರಿಸು ಅಥವ ಅಡಗಿಸು"
-
-#: ../src/vinagre-ui.h:120
-msgid "Side _Panel"
-msgstr "ಬದಿಯ ಫಲಕ(_P)"
-
-#: ../src/vinagre-ui.h:121
-msgid "Show or hide the side panel"
-msgstr "ಬದಿಯ ಫಲಕವನ್ನು ತೋರಿಸು ಅಥವ ಅಡಗಿಸು"
-
-#: ../src/vinagre-utils.c:75
+#: ../vinagre/vinagre-utils.c:75
 msgid "An error has occurred:"
 msgstr "ಒಂದು ದೋಷವು ಸಂಭವಿಸಿದೆ:"
 
-#: ../src/vinagre-utils.c:433
-msgid "Vinagre is a VNC client for the GNOME Desktop"
+#: ../vinagre/vinagre-utils.c:150
+#, fuzzy, c-format
+#| msgid "Could not open the file."
+msgid "Could not load builder file: %s"
+msgstr "ಕಡತವನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
+
+#: ../vinagre/vinagre-utils.c:453
+#, fuzzy
+#| msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Vinagre ಎನ್ನುವುದು GNOME Desktop ಗಾಗಿನ VNC ಕ್ಲೈಂಟ್ ಆಗಿದೆ"
 
-#: ../src/vinagre-utils.c:436
+#: ../vinagre/vinagre-utils.c:456
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -743,7 +988,7 @@ msgstr ""
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 
-#: ../src/vinagre-utils.c:440
+#: ../vinagre/vinagre-utils.c:460
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -755,7 +1000,7 @@ msgstr ""
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 
-#: ../src/vinagre-utils.c:444
+#: ../vinagre/vinagre-utils.c:464
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -763,30 +1008,26 @@ msgstr ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
 
-#: ../src/vinagre-utils.c:466
+#: ../vinagre/vinagre-utils.c:486
 msgid "translator-credits"
 msgstr "ಶಂಕರ್ ಪ್ರಸಾದ್ ಎಂ. ವಿ. <svenkate@redhat.com>"
 
-#: ../src/vinagre-utils.c:469
+#: ../vinagre/vinagre-utils.c:489
 msgid "Vinagre Website"
 msgstr "Vinagre ಜಾಲತಾಣ"
 
-#: ../src/vinagre-window.c:413
+#: ../vinagre/vinagre-window.c:397
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "vinagre-ui.xml ಅನ್ನು ಒಗ್ಗೂಡಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ: %s"
 
-#: ../src/vinagre-window.c:441
+#: ../vinagre/vinagre-window.c:425
 msgid "_Recent connections"
 msgstr "ಇತ್ತೀಚಿನ ಸಂಪರ್ಕಗಳು(_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:614
+#: ../vinagre/vinagre-window.c:585
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s ಅನ್ನು ತೆರೆ:%d"
-
-#: ../src/vinagre-window.c:797
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "ತೆರೆಸೂಚಕವನ್ನು ಬಿಡುಗಡೆಗೊಳಿಸಲು Ctrl+Alt ಅನ್ನು ಒತ್ತಿ"
 
