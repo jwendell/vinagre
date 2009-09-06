@@ -62,7 +62,7 @@ mdns_resolver_found (GaServiceResolver *resolver,
                      gchar               *type,
                      gchar               *domain,
                      gchar               *host_name,
-                     AvahiAddress        *a,
+                     AvahiAddress        *address,
                      gint                 port,
                      AvahiStringList     *txt,
                      GaLookupResultFlags flags,
@@ -71,6 +71,7 @@ mdns_resolver_found (GaServiceResolver *resolver,
   VinagreConnection     *conn;
   VinagreBookmarksEntry *entry;
   BrowserEntry          *b_entry;
+  char                  a[AVAHI_ADDRESS_STR_MAX];
 
   b_entry = g_hash_table_lookup (mdns->priv->browsers, type);
   if (!b_entry)
@@ -79,11 +80,12 @@ mdns_resolver_found (GaServiceResolver *resolver,
       return;
     }
 
+  avahi_address_snprint (a, sizeof(a), address);
   conn = vinagre_plugin_new_connection (b_entry->info->plugin);
   g_object_set (conn,
                 "name", name,
                 "port", port,
-                "host", host_name,
+                "host", a,
                 NULL);
   entry = vinagre_bookmarks_entry_new_conn (conn);
   g_object_unref (conn);
