@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(vinagre, 2.27.91, http://projects.gnome.org/vinagre/)
+AC_INIT(vinagre, 2.27.92, http://projects.gnome.org/vinagre/)
 
 VINAGRE_API_VERSION=1.0
 AC_SUBST(VINAGRE_API_VERSION)
