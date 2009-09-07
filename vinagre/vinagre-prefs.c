@@ -152,41 +152,51 @@ vinagre_prefs_get_list (VinagrePrefs *prefs, const gchar* key)
 static void
 vinagre_prefs_set_bool (VinagrePrefs *prefs, const gchar* key, gboolean value)
 {
-  g_return_if_fail (gconf_client_key_is_writable (
-		    prefs->priv->gconf_client, key, NULL));
+  GError *error = NULL;
 
-  gconf_client_set_bool (prefs->priv->gconf_client, key, value, NULL);
+  if (!gconf_client_set_bool (prefs->priv->gconf_client, key, value, &error))
+    {
+      g_warning ("Setting key %s failed: %s", key, error->message);
+      g_error_free (error);
+    }
 }
 
 static void
 vinagre_prefs_set_int (VinagrePrefs *prefs, const gchar* key, gint value)
 {
-  g_return_if_fail (gconf_client_key_is_writable (
-		    prefs->priv->gconf_client, key, NULL));
+  GError *error = NULL;
 
-  gconf_client_set_int (prefs->priv->gconf_client, key, value, NULL);
+  if (!gconf_client_set_int (prefs->priv->gconf_client, key, value, &error))
+    {
+      g_warning ("Setting key %s failed: %s", key, error->message);
+      g_error_free (error);
+    }
 }
 
 static void
 vinagre_prefs_set_string (VinagrePrefs *prefs, const gchar *key, const gchar *value)
 {
-  g_return_if_fail (gconf_client_key_is_writable (
-		    prefs->priv->gconf_client, key, NULL));
+  GError *error = NULL;
 
-  gconf_client_set_string (prefs->priv->gconf_client, key, value, NULL);
+  if (!gconf_client_set_string (prefs->priv->gconf_client, key, value, &error))
+    {
+      g_warning ("Setting key %s failed: %s", key, error->message);
+      g_error_free (error);
+    }
 }
 
 static void
 vinagre_prefs_set_list (VinagrePrefs *prefs, const gchar* key, GSList *list)
 {
-  g_return_if_fail (gconf_client_key_is_writable (
-		    prefs->priv->gconf_client, key, NULL));
+  GError *error = NULL;
 
-  gconf_client_set_list (prefs->priv->gconf_client,
-			 key,
-			 GCONF_VALUE_STRING,
-			 list,
-			 NULL);
+  if (!gconf_client_set_list (prefs->priv->gconf_client, key,
+			      GCONF_VALUE_STRING, list,
+			      &error))
+    {
+      g_warning ("Setting key %s failed: %s", key, error->message);
+      g_error_free (error);
+    }
 }
 
 static void
