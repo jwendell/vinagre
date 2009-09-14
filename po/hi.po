@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-09-01 06:12+0000\n"
-"PO-Revision-Date: 2009-09-10 12:49+0530\n"
+"POT-Creation-Date: 2009-09-10 07:18+0000\n"
+"PO-Revision-Date: 2009-09-14 09:33+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Hindi <hindi.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -45,7 +46,6 @@ msgid "All fields above are mandatory"
 msgstr "ऊपर सभी क्षेत्र अनिवार्य हैं"
 
 #: ../data/vinagre.ui.h:2
-#| msgid "<b>Authentication is required</b>"
 msgid "Authentication is required"
 msgstr "सत्यापन जरूरी है"
 
@@ -54,17 +54,14 @@ msgid "Bookmarks"
 msgstr "पसंद"
 
 #: ../data/vinagre.ui.h:4
-#| msgid "Connecting..."
 msgid "Connection"
 msgstr "कनेक्शन"
 
 #: ../data/vinagre.ui.h:5
-#| msgid "<b>Connection options</b>"
 msgid "Connection options"
 msgstr "कनेक्शन विकल्प"
 
 #: ../data/vinagre.ui.h:6
-#| msgid "New Folder"
 msgid "Folder"
 msgstr "फ़ोल्डर"
 
@@ -74,17 +71,14 @@ msgid "Host:"
 msgstr "होस्टः"
 
 #: ../data/vinagre.ui.h:8
-#| msgid "<b>Interface</b>"
 msgid "Interface"
 msgstr "अंतरफलक"
 
 #: ../data/vinagre.ui.h:9
-#| msgid "<b>Options</b>"
 msgid "Options"
 msgstr "विकल्प"
 
 #: ../data/vinagre.ui.h:10
-#| msgid "<b>Parent Folder</b>"
 msgid "Parent Folder"
 msgstr "जनक फ़ोल्डर"
 
@@ -147,6 +141,8 @@ msgid ""
 "See the .vinagre-plugin file for obtaining the \"Location\" of a given "
 "plugin."
 msgstr ""
+"सक्रिय प्लगिन की सूची. यह सक्रिय प्लगिन का \"Location\" समाहित करता है. "
+".vinagre-plugin फ़ाइल देखें दिए गए प्लगिन का \"Location\" पाने के लिए."
 
 #: ../data/vinagre.schemas.in.in.h:3
 msgid "Maximum number of history items in connect dialog"
@@ -158,12 +154,14 @@ msgid ""
 "Note that if they are enabled, those keys will be intercepted by the menu "
 "and will not be sent to the remote host."
 msgstr ""
+"\"false\" पर सेट करें मेन्यू शॉर्टकट को निष्क्रिय करने के लिए. \"true\" पर उन्हें सक्रिय करने के लिए सेट करें. "
+"नोट करें कि यदि वे सक्रिय हैं, वे कुंजियाँ मेन्यू के द्वारा बाधित होंगी और दूरस्थ मेजबान को नहीं भेजी जाएँगी."
 
 #: ../data/vinagre.schemas.in.in.h:5
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
-msgstr ""
+msgstr "\"true\" पर सेट करें टैब को हमेशा दिखाने के लिए. \"false\" पर सेट करें केवल तभी टैब दिखाने के लिए जब एक से अधिक सक्रिय कनेक्शन हो."
 
 #: ../data/vinagre.schemas.in.in.h:6
 msgid "Specifies the maximum number of items in the host dropdown entry."
@@ -178,7 +176,7 @@ msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
 "to share the desktop with the other clients."
-msgstr ""
+msgstr "जब मेजबान से कनेक्ट किया जाता है, क्लाइंट सर्वर से कह सकता है दूसरे क्लाइंट को कनेक्टेड रहने या मौजूदा कनेक्शन छोड़ने के लिए. सही पर मान सेट करें डेस्कटॉप को दूसरे क्लाइंट के साथ साझा करने के लिए."
 
 #: ../data/vinagre.schemas.in.in.h:9
 msgid "Whether we should leave other clients connected"
@@ -186,7 +184,7 @@ msgstr "क्या हमें दूसरे क्लाइंट को �
 
 #: ../data/vinagre.schemas.in.in.h:10
 msgid "Whether we should show tabs even when there is only one active connection"
-msgstr ""
+msgstr "क्या हमें टैब दिखाना चाहिए जब केवल एक सक्रिय कनेक्शन रहता है"
 
 #: ../data/vinagre.schemas.in.in.h:11
 msgid "Whether we should show the menu accelerators (shortcut keys)"
@@ -295,7 +293,6 @@ msgstr "होस्ट से जुड़ने में त्रुटि"
 #. Translators: %s is a host name or IP address; %u is a code error (number).
 #: ../plugins/vnc/vinagre-vnc-tab.c:306
 #, c-format
-#| msgid "Authentication unsupported"
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "सत्यापन विधि %s को होस्ट करने के लिए समर्थित है. (%u)"
 
@@ -324,7 +321,6 @@ msgid "Fits the remote screen into the current window size"
 msgstr "मौजूदा विंडो आकार में दूरस्थ स्क्रीन को फिट करता है"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:655
-#| msgid "Disable mouse and keyboard"
 msgid "Does not send mouse and keyboard events"
 msgstr "माउस और कुंजीपट घटना का नहीं भेजता है"
 
@@ -342,7 +338,6 @@ msgid "Send Ctrl-Alt-Del"
 msgstr "भेजें Ctrl-Alt-Del"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:693
-#| msgid "Send Ctrl+Alt+Del to active connection"
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Ctrl+Alt+Del को सक्रिय कनेक्शन में भेजता है"
 
@@ -361,6 +356,9 @@ msgid ""
 "Read the README file (shipped with Vinagre) in order to know how to enable "
 "this feature."
 msgstr ""
+"अनुमापन इस संस्थापन पर समर्थित नहीं है.\n"
+"\n"
+"README फ़ाइल पढ़ें (वीनाग्रे के साथ संलग्न) इस विशेषता को सक्रिय करने के बारे में जानने के लिए."
 
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
 msgid "VNC support"
@@ -399,7 +397,7 @@ msgstr "पुस्तचिह्न आरंभ करने के दौ�
 
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:459
+#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:463
 #: ../vinagre/vinagre-fav.c:681 ../vinagre/vinagre-main.c:100
 #: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
 msgid "Unknown error"
@@ -462,7 +460,9 @@ msgstr "निर्देशिका बनाने में विफल"
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
-msgstr "नए प्रारूप में पुस्तचिह्न फ़ाइल को उत्प्रवासित कर रहा है. यह ऑपरेशन केवल एक बार चलने के लिए माना गया है."
+msgstr ""
+"नए प्रारूप में पुस्तचिह्न फ़ाइल को उत्प्रवासित कर रहा है. यह ऑपरेशन केवल एक बार चलने के लिए "
+"माना गया है."
 
 #: ../vinagre/vinagre-bookmarks-migration.c:270
 #, c-format
@@ -493,7 +493,6 @@ msgstr "इस फ़ोल्डर में नाम \"%s\" का उपय
 
 #: ../vinagre/vinagre-bookmarks-ui.c:89 ../vinagre/vinagre-bookmarks-ui.c:190
 #: ../vinagre/vinagre-bookmarks-ui.c:201
-#| msgid "Invalid name for this folder"
 msgid "Invalid name for this item"
 msgstr "इस मद के लिए अवैध नाम"
 
@@ -506,7 +505,6 @@ msgstr "(प्रोटोकॉल: %s)"
 #. Translators: %s is a bookmark entry name
 #: ../vinagre/vinagre-bookmarks-ui.c:308
 #, c-format
-#| msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
 msgid "Are you sure you want to remove %s from bookmarks?"
 msgstr "क्या आप निश्चित हैं कि आप %s को पुस्तचिह्न से हटाना चाहते हैं?"
 
@@ -542,7 +540,9 @@ msgstr "कोई समर्थित फ़ाइल नहीं है"
 msgid ""
 "None of the active plugins offer a supported file to be open. Activate some "
 "plugins and try again."
-msgstr "कोई भी सक्रिय प्लगिन खोलने के लिए कोई समर्थित फ़ाइल नहीं देता है. कुछ प्लगिन सक्रिय करें और फिर कोशिश करें."
+msgstr ""
+"कोई भी सक्रिय प्लगिन खोलने के लिए कोई समर्थित फ़ाइल नहीं देता है. कुछ प्लगिन सक्रिय करें "
+"और फिर कोशिश करें."
 
 #: ../vinagre/vinagre-commands.c:181
 msgid "The following file could not be opened:"
@@ -551,7 +551,7 @@ msgstr[0] "निम्नलिखित फ़ाइल नहीं खोल
 msgstr[1] "निम्नलिखित फ़ाइलें नहीं खोली जा सकी:"
 
 #: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
-#: ../vinagre/vinagre-connect.c:424
+#: ../vinagre/vinagre-connect.c:428
 msgid "Could not get the active protocol in the protocol list."
 msgstr "प्रोटोकॉल सूची में कोई सक्रिय प्रोटोकॉल नहीं पा सका."
 
@@ -561,7 +561,6 @@ msgid "Error while saving history file: %s"
 msgstr "इतिहास फ़ाइल सहेजने के दौरान त्रुटि: %s"
 
 #: ../vinagre/vinagre-connect.c:340
-#| msgid "Open Remote Desktop Viewer"
 msgid "Choose a Remote Desktop"
 msgstr "दूरस्थ डेस्कटॉप चुनें"
 
@@ -617,7 +616,6 @@ msgstr[1] "नीचे दी गयी त्रुटि आयी:"
 
 #. Setup command line options
 #: ../vinagre/vinagre-main.c:169
-#| msgid "Remote Desktop Viewer"
 msgid "- Remote Desktop Viewer"
 msgstr "- दूरस्थ डेस्कटॉप प्रदर्शक"
 
@@ -625,27 +623,27 @@ msgstr "- दूरस्थ डेस्कटॉप प्रदर्शक"
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "'vinagre --help' को कमांड लाइन विकल्प की पूरी सूची देखने के लिए चलाएँ"
 
-#: ../vinagre/vinagre-mdns.c:142
+#: ../vinagre/vinagre-mdns.c:144
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "अवही मेजबाननाम हल करने में विफल: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:200
+#: ../vinagre/vinagre-mdns.c:202
 #, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "प्लगिन %s सेवा %s के लिए किसी ब्राउज़र के साथ पहले से पंजीकृत है."
 
-#: ../vinagre/vinagre-mdns.c:209
+#: ../vinagre/vinagre-mdns.c:211
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "mDNS ब्राउज़र को %s सेवा के लिए जोड़ने में विफल."
 
-#: ../vinagre/vinagre-mdns.c:225
+#: ../vinagre/vinagre-mdns.c:227
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "मेजबान के लिए ब्राउज करने में विफल: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:298
+#: ../vinagre/vinagre-mdns.c:300
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "mDNS ब्राउजर आरंभ करने में विफल: %s\n"
@@ -653,7 +651,6 @@ msgstr "mDNS ब्राउजर आरंभ करने में विफ
 #. Translators: %s is a host name or IP address.
 #: ../vinagre/vinagre-notebook.c:461
 #, c-format
-#| msgid "Connection closed"
 msgid "Connection to host %s was closed."
 msgstr "मेजबान %s में कनेक्शन बंद हो गया."
 
@@ -664,7 +661,6 @@ msgstr "कनेक्शन बन्द"
 #. Translators: %s is a host name or IP address.
 #: ../vinagre/vinagre-notebook.c:482
 #, c-format
-#| msgid "Authentication failed"
 msgid "Authentication to host %s has failed"
 msgstr "मेजबान %s में सत्यापन विफल रहा"
 
@@ -709,7 +705,6 @@ msgid "_Deactivate All"
 msgstr "सभी निष्क्रिय करें (_D)"
 
 #: ../vinagre/vinagre-plugin-manager.c:824
-#| msgid "_About"
 msgid "_About Plugin"
 msgstr "प्लगइन परिचय (_A)"
 
@@ -717,12 +712,11 @@ msgstr "प्लगइन परिचय (_A)"
 msgid "C_onfigure Plugin"
 msgstr "प्लगइन कॉन्फ़िगर करें (_o)"
 
-#: ../vinagre/vinagre-prefs.c:217
+#: ../vinagre/vinagre-prefs.c:227
 msgid "Cannot initialize preferences manager."
 msgstr "वरीयता प्रबंधक प्रारंभ नहीं कर सकता."
 
 #: ../vinagre/vinagre-tab.c:346
-#| msgid "_Full screen"
 msgid "Leave fullscreen"
 msgstr "पूर्ण स्क्रीन छोड़ें"
 
@@ -748,7 +742,6 @@ msgid "Screenshot of %s"
 msgstr "%s का स्क्रीनशॉट"
 
 #: ../vinagre/vinagre-tab.c:881
-#| msgid "Take screenshot"
 msgid "Error saving screenshot"
 msgstr "स्क्रीनशॉट सहेजने में त्रुटि"
 
@@ -759,7 +752,6 @@ msgstr "सेवा गुण पाना असंभव: %s"
 
 #: ../vinagre/vinagre-tube-handler.c:286
 #, c-format
-#| msgid "Failed to create the directory"
 msgid "Impossible to create the connection: %s"
 msgstr "कनेक्शन बनाना असंभव: %s"
 
@@ -934,7 +926,6 @@ msgstr "एक त्रुटि आई:"
 
 #: ../vinagre/vinagre-utils.c:150
 #, c-format
-#| msgid "Could not open the file."
 msgid "Could not load builder file: %s"
 msgstr "बिल्डर फ़ाइल नहीं लोड कर सका: %s"
 
