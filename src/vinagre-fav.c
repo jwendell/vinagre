@@ -139,7 +139,7 @@ vinagre_fav_class_init (VinagreFavClass *klass)
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      G_TYPE_POINTER);
+			      G_TYPE_OBJECT);
 
   signals[FAV_SELECTED] =
 		g_signal_new ("fav-selected",
@@ -150,7 +150,7 @@ vinagre_fav_class_init (VinagreFavClass *klass)
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      G_TYPE_POINTER);
+			      G_TYPE_OBJECT);
 
   g_type_class_add_private (object_class, sizeof (VinagreFavPrivate));
 }
