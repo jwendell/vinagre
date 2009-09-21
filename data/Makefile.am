@@ -54,18 +54,16 @@ EXTRA_DIST = \
 	vinagre.schemas.in.in
 
 if TELEPATHY
-
 servicedir = $(datadir)/dbus-1/services
 service_DATA = org.gnome.Empathy.StreamTubeHandler.rfb.service
 
 org.gnome.Empathy.StreamTubeHandler.rfb.service: org.gnome.Empathy.StreamTubeHandler.rfb.service.in \
 		Makefile
 	@sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
+endif
 
 CLEANFILES += $(service_DATA)
 EXTRA_DIST += org.gnome.Empathy.StreamTubeHandler.rfb.service.in
-
-endif
 
 UPDATE_MIME = \
         if [ -f $(DESTDIR)$(datadir)/mime/packages/freedesktop.org.xml ] ; then \
