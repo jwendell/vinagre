@@ -41,7 +41,8 @@ CLEANFILES = \
 	$(desktop_DATA) \
 	$(mime_DATA) \
 	$(schemas_DATA) \
-	$(pkgconfig_DATA)
+	$(pkgconfig_DATA) \
+	org.gnome.Empathy.StreamTubeHandler.rfb.service
 
 EXTRA_DIST = \
 	$(glade_DATA) \
@@ -51,7 +52,8 @@ EXTRA_DIST = \
 	$(MIMEFILES) \
 	$(schemas_in_files) \
 	vinagre.pc.in \
-	vinagre.schemas.in.in
+	vinagre.schemas.in.in \
+	org.gnome.Empathy.StreamTubeHandler.rfb.service.in
 
 if TELEPATHY
 
@@ -61,9 +63,6 @@ service_DATA = org.gnome.Empathy.StreamTubeHandler.rfb.service
 org.gnome.Empathy.StreamTubeHandler.rfb.service: org.gnome.Empathy.StreamTubeHandler.rfb.service.in \
 		Makefile
 	@sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
-
-CLEANFILES += $(service_DATA)
-EXTRA_DIST += org.gnome.Empathy.StreamTubeHandler.rfb.service.in
 
 endif
 
