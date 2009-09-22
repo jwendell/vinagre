@@ -992,21 +992,31 @@ VinagreTab *
 vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
 {
   VinagreConnection *c;
-  VinagreTab *tab = NULL;
+  VinagreTab *tab;
+  const gchar *host, *protocol;
+  gint port;
   GList *l;
 
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
+  host = vinagre_connection_get_host (conn);
+  protocol = vinagre_connection_get_protocol (conn);
+  port = vinagre_connection_get_port (conn);
+
+  if (!host || !protocol)
+    return NULL;
+
   l = vinagre_window_get_connections (window);
+  tab = NULL;
 
   while (l != NULL)
     {
       c = VINAGRE_CONNECTION (l->data);
 
-      if (!strcmp (vinagre_connection_get_host (conn), vinagre_connection_get_host (c)) &&
-	  vinagre_connection_get_port (conn) == vinagre_connection_get_port (c) &&
-	  vinagre_connection_get_protocol (conn) == vinagre_connection_get_protocol (c))
+      if (!strcmp (host, vinagre_connection_get_host (c)) &&
+	  !strcmp (protocol, vinagre_connection_get_protocol (c)) &&
+	  port == vinagre_connection_get_port (c))
 	{
 	  tab = g_object_get_data (G_OBJECT (c), VINAGRE_TAB_KEY);
 	  break;
