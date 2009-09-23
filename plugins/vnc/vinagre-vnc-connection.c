@@ -29,6 +29,7 @@ struct _VinagreVncConnectionPrivate
   gboolean view_only;
   gboolean scaling;
   gint     shared;
+  gint     fd;
 };
 
 enum
@@ -38,6 +39,7 @@ enum
   PROP_VIEW_ONLY,
   PROP_SCALING,
   PROP_SHARED,
+  PROP_FD
 };
 
 #define VINAGRE_VNC_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_VNC_CONNECTION, VinagreVncConnectionPrivate))
@@ -52,6 +54,7 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->view_only = FALSE;
   conn->priv->scaling = FALSE;
   conn->priv->shared = -1;
+  conn->priv->fd = 0;
 }
 
 static void
@@ -97,6 +100,10 @@ vinagre_vnc_connection_set_property (GObject *object, guint prop_id, const GValu
 	vinagre_vnc_connection_set_shared (conn, g_value_get_int (value));
 	break;
 
+      case PROP_FD:
+	vinagre_vnc_connection_set_fd (conn, g_value_get_int (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -128,6 +135,10 @@ vinagre_vnc_connection_get_property (GObject *object, guint prop_id, GValue *val
 
       case PROP_SHARED:
 	g_value_set_int (value, conn->priv->shared);
+	break;
+
+      case PROP_FD:
+	g_value_set_int (value, conn->priv->fd);
 	break;
 
       default:
@@ -294,6 +305,20 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
                                                       G_PARAM_STATIC_NAME |
                                                       G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property (object_class,
+                                   PROP_FD,
+                                   g_param_spec_int ("fd",
+                                                     "file descriptor",
+	                                              "the file descriptor for this connection",
+                                                      0,
+                                                      G_MAXINT,
+                                                      0,
+	                                              G_PARAM_READWRITE |
+                                                      G_PARAM_CONSTRUCT |
+                                                      G_PARAM_STATIC_NICK |
+                                                      G_PARAM_STATIC_NAME |
+                                                      G_PARAM_STATIC_BLURB));
+
 }
 
 VinagreConnection *
@@ -366,6 +391,23 @@ vinagre_vnc_connection_get_scaling (VinagreVncConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), FALSE);
 
   return conn->priv->scaling;
+}
+
+void
+vinagre_vnc_connection_set_fd (VinagreVncConnection *conn,
+			       gint                 value)
+{
+  g_return_if_fail (VINAGRE_IS_VNC_CONNECTION (conn));
+  g_return_if_fail (value >= 0);
+
+  conn->priv->fd = value;
+}
+gint
+vinagre_vnc_connection_get_fd (VinagreVncConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), 0);
+
+  return conn->priv->fd;
 }
 
 /* vim: set ts=8: */
