@@ -634,7 +634,6 @@ vinagre_plugins_engine_activate_plugin_real (VinagrePluginsEngine *engine,
 	  return;
 	}
 
-      vinagre_plugin_activate (info->plugin, NULL);
       g_hash_table_insert (engine->priv->protocols, (gpointer)protocol, info->plugin);
       return;
     }
