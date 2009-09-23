@@ -62,6 +62,13 @@ vinagre_window_dispose (GObject *object)
       window->priv->fav_entry_selected = NULL;
     }
 
+  if (!window->priv->dispose_has_run)
+    {
+      vinagre_plugins_engine_deactivate_plugins (vinagre_plugins_engine_get_default (),
+						 window);
+      window->priv->dispose_has_run = TRUE;
+    }
+
   if (window->priv->manager)
     {
       g_object_unref (window->priv->manager);
@@ -779,6 +786,7 @@ vinagre_window_init (VinagreWindow *window)
   window->priv = VINAGRE_WINDOW_GET_PRIVATE (window);
   window->priv->fav_entry_selected = NULL;
   window->priv->fullscreen = FALSE;
+  window->priv->dispose_has_run = FALSE;
 
   main_box = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), main_box);
@@ -822,6 +830,10 @@ vinagre_window_init (VinagreWindow *window)
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
 #endif
+
+  vinagre_plugins_engine_activate_plugins (vinagre_plugins_engine_get_default (),
+					   window);
+
 }
 
 VinagreNotebook *

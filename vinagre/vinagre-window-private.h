@@ -67,6 +67,7 @@ struct _VinagreWindowPrivate
   gboolean        toolbar_visible;
   gboolean        statusbar_visible;
   gboolean        fav_panel_visible;
+  gboolean        dispose_has_run;
 };
 
 
