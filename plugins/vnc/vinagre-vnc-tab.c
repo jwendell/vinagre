@@ -240,8 +240,8 @@ static void
 open_vnc (VinagreVncTab *vnc_tab)
 {
   gchar      *host, *port_str;
-  gint       port, shared;
-  gboolean   scaling;
+  gint       port, shared, fd;
+  gboolean   scaling, success;
   VncDisplay *vnc = VNC_DISPLAY (vnc_tab->priv->vnc);
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
 
@@ -250,6 +250,7 @@ open_vnc (VinagreVncTab *vnc_tab)
 		"host", &host,
 		"scaling", &scaling,
 		"shared", &shared,
+		"fd", &fd,
 		NULL);
 
   port_str = g_strdup_printf ("%d", port);
@@ -261,7 +262,12 @@ open_vnc (VinagreVncTab *vnc_tab)
   vnc_display_set_shared_flag (vnc, shared);
   vnc_display_set_force_size (vnc, !scaling);
 
-  if (vnc_display_open_host (vnc, host, port_str))
+  if (fd > 0)
+    success = vnc_display_open_fd (vnc, fd);
+  else
+    success = vnc_display_open_host (vnc, host, port_str);
+
+  if (success)
     gtk_widget_grab_focus (GTK_WIDGET (vnc));
   else
     vinagre_utils_show_error (NULL,
@@ -429,7 +435,7 @@ ask_credential (VinagreVncTab *vnc_tab,
   VinagreTab      *tab = VINAGRE_TAB (vnc_tab);
   VinagreConnection *conn = vinagre_tab_get_conn (tab);
 
-  xml = vinagre_utils_get_builder ();
+  xml = vinagre_utils_get_builder (NULL, NULL);
 
   password_dialog = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW(password_dialog),
