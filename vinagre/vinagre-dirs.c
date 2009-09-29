@@ -119,7 +119,7 @@ vinagre_dirs_get_vinagre_data_dir (void)
 
 #ifndef G_OS_WIN32
 	data_dir = g_build_filename (DATADIR,
-				     "vinagre",
+				     "vinagre-1",
 				     NULL);
 #else
 	gchar *win32_dir;
@@ -128,7 +128,7 @@ vinagre_dirs_get_vinagre_data_dir (void)
 
 	data_dir = g_build_filename (win32_dir,
 				     "share",
-				     "vinagre",
+				     "vinagre-1",
 				     NULL);
 	
 	g_free (win32_dir);
