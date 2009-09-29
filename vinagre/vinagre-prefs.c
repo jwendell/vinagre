@@ -31,6 +31,7 @@
 #define VM_SIDE_PANEL_VISIBLE		VINAGRE_BASE_KEY "/side_pane_visible"
 #define VM_SHOW_ACCELS			VINAGRE_BASE_KEY "/show_accels"
 #define VM_HISTORY_SIZE			VINAGRE_BASE_KEY "/history_size"
+#define VM_ALWAYS_ENABLE_LISTENING	VINAGRE_BASE_KEY "/always_enable_listening"
 
 #define VM_WINDOW_STATE			VINAGRE_BASE_KEY "/window_state"
 #define VM_WINDOW_WIDTH			VINAGRE_BASE_KEY "/window_width"
@@ -62,7 +63,8 @@ enum
   PROP_SHOW_ACCELS,
   PROP_HISTORY_SIZE,
   PROP_ACTIVE_PLUGINS,
-  PROP_LAST_PROTOCOL
+  PROP_LAST_PROTOCOL,
+  PROP_ALWAYS_ENABLE_LISTENING
 };
 
 G_DEFINE_TYPE (VinagrePrefs, vinagre_prefs, G_TYPE_OBJECT);
@@ -288,6 +290,9 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
       case PROP_LAST_PROTOCOL:
 	vinagre_prefs_set_string (prefs, VM_LAST_PROTOCOL, g_value_get_string (value));
 	break;
+      case PROP_ALWAYS_ENABLE_LISTENING:
+	vinagre_prefs_set_bool (prefs, VM_ALWAYS_ENABLE_LISTENING, g_value_get_boolean (value));
+	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -342,6 +347,9 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	str = vinagre_prefs_get_string (prefs, VM_LAST_PROTOCOL, NULL);
 	g_value_set_string (value, str);
 	g_free (str);
+	break;
+      case PROP_ALWAYS_ENABLE_LISTENING:
+	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_ALWAYS_ENABLE_LISTENING, FALSE));
 	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -471,6 +479,14 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 							"The last protocol used in connect dialog",
 							NULL,
 							G_PARAM_READWRITE));
+
+  g_object_class_install_property (object_class,
+				   PROP_ALWAYS_ENABLE_LISTENING,
+				   g_param_spec_boolean ("always-enable-listening",
+							 "Always enable listening",
+							 "Whether we always should listen for reverse connections",
+							 FALSE,
+							 G_PARAM_READWRITE));
 
 }
 
