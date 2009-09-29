@@ -23,6 +23,7 @@
 
 #include <gtk/gtk.h>
 #include <glib.h>
+#include "vinagre-plugin.h"
 
 /* useful macro */
 #define GBOOLEAN_TO_POINTER(i) ((gpointer) ((i) ? 2 : 1))
@@ -45,7 +46,7 @@ void		vinagre_utils_toggle_widget_visible	(GtkWidget *widget);
 
 const gchar	*vinagre_utils_get_ui_filename		(void);
 const gchar	*vinagre_utils_get_ui_xml_filename	(void);
-GtkBuilder	*vinagre_utils_get_builder		(void);
+GtkBuilder	*vinagre_utils_get_builder		(VinagrePlugin *plugin, const gchar *filename);
 
 gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 							 gssize      length);

@@ -136,23 +136,56 @@ vinagre_utils_get_ui_xml_filename (void)
     return VINAGRE_DATADIR "/" VINAGRE_UI_XML_FILE;
 }
 
+/**
+ * vinagre_utils_get_builder:
+ * @plugin: a #VinagrePlugin or NULL
+ * @filename: the filename of the UI file for the plugin, or NULL if plugin is NULL
+ *
+ * This function gets a #GtkBuilder object for a UI file.
+ * Supply a plugin and a filename in order to get a #GtkBuilder for the plugin.
+ * Supply NULL to both arguments to get the main Vinagre #GtkBuilder
+ *
+ * Returns a #GtkBuilder on success (free with #g_object_unref) or NULL
+ *  if the file cannot be found. In this case an error dialog will be shown.
+ */
 GtkBuilder *
-vinagre_utils_get_builder (void)
+vinagre_utils_get_builder (VinagrePlugin *plugin, const gchar *filename)
 {
-  GtkBuilder *xml;
+  GtkBuilder *xml = NULL;
   GError     *error = NULL;
+  gchar      *actual_filename, *plugin_datadir;
+
+  if (plugin)
+    {
+      plugin_datadir = vinagre_plugin_get_data_dir (plugin);
+      actual_filename = g_build_filename (plugin_datadir, filename, NULL);
+      g_free (plugin_datadir);
+    }
+  else
+    actual_filename = g_strdup (vinagre_utils_get_ui_filename ());
 
   xml = gtk_builder_new ();
   if (!gtk_builder_add_from_file (xml,
-				  vinagre_utils_get_ui_filename (),
+				  actual_filename,
 				  &error))
     {
-      g_error (_("Could not load builder file: %s"), error->message);
+      GString *str = g_string_new (NULL);
+
+      if (plugin)
+	g_string_append (str, _("A plugin tried to open an UI file but did not succeed, with the error message:"));
+      else
+	g_string_append (str, _("The program tried to open an UI file but did not succeed, with the error message:"));
+
+      g_string_append_printf (str, "\n\n%s\n\n", error->message);
+      g_string_append (str, _("Please check your installation."));
+      vinagre_utils_show_error (_("Error loading UI file"), str->str, NULL);
       g_error_free (error);
+      g_string_free (str, TRUE);
       g_object_unref (xml);
-      return NULL;
+      xml = NULL;
     }
 
+  g_free (actual_filename);
   return xml;
 }
 
