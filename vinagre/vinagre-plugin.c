@@ -284,7 +284,7 @@ vinagre_plugin_get_data_dir (VinagrePlugin *plugin)
 	 * so it's under $prefix/share/vinagre-2/plugins/data_dir_name
 	 * where data_dir_name usually it's the name of the plugin
 	 */
-//	vinagre_lib_dir = vinagre_dirs_get_vinagre_lib_dir ();
+	vinagre_lib_dir = vinagre_dirs_get_vinagre_lib_dir ();
 
 	/* CHECK: is checking the prefix enough or should we be more
 	 * careful about normalizing paths etc? */
@@ -292,7 +292,7 @@ vinagre_plugin_get_data_dir (VinagrePlugin *plugin)
 	{
 		gchar *vinagre_data_dir;
 
-//		vinagre_data_dir = vinagre_dirs_get_vinagre_data_dir ();
+		vinagre_data_dir = vinagre_dirs_get_vinagre_data_dir ();
 
 		data_dir = g_build_filename (vinagre_data_dir,
 					     "plugins",
