@@ -378,7 +378,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   gint                  result;
   VinagreConnectDialog  dialog;
 
-  dialog.xml = vinagre_utils_get_builder ();
+  dialog.xml = vinagre_utils_get_builder (NULL, NULL);
 
   dialog.dialog = GTK_WIDGET (gtk_builder_get_object (dialog.xml, "connect_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW (dialog.dialog), GTK_WINDOW (window));

@@ -529,7 +529,7 @@ vinagre_prefs_dialog_show (VinagreWindow *window)
 
   dialog = g_new (VinagrePrefsDialog, 1);
 
-  dialog->xml = vinagre_utils_get_builder ();
+  dialog->xml = vinagre_utils_get_builder (NULL, NULL);
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "preferences_dialog"));
   gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (window));
 
