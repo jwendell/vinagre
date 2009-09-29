@@ -500,6 +500,7 @@ tab_initialized_cb (VinagreTab *tab, VinagreNotebook *nb)
 
   vinagre_notebook_update_ui_sentitivity (nb);
   vinagre_notebook_update_tab_tooltip (nb, tab);
+  vinagre_notebook_update_window_title (nb);
 
   if (vinagre_connection_get_fullscreen (conn) && (!vinagre_window_is_fullscreen (nb->priv->window)))
     vinagre_window_toggle_fullscreen (nb->priv->window);
