@@ -20,6 +20,7 @@
  */
 
 #include <glib/gi18n.h>
+#include <stdlib.h>
 #include <vinagre/vinagre-utils.h>
 #include "vinagre-vnc-connection.h"
 
@@ -30,6 +31,7 @@ struct _VinagreVncConnectionPrivate
   gboolean scaling;
   gint     shared;
   gint     fd;
+  gint     depth_profile;
 };
 
 enum
@@ -39,7 +41,8 @@ enum
   PROP_VIEW_ONLY,
   PROP_SCALING,
   PROP_SHARED,
-  PROP_FD
+  PROP_FD,
+  PROP_DEPTH_PROFILE
 };
 
 #define VINAGRE_VNC_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_VNC_CONNECTION, VinagreVncConnectionPrivate))
@@ -55,6 +58,7 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->scaling = FALSE;
   conn->priv->shared = -1;
   conn->priv->fd = 0;
+  conn->priv->depth_profile = 0;
 }
 
 static void
@@ -104,6 +108,10 @@ vinagre_vnc_connection_set_property (GObject *object, guint prop_id, const GValu
 	vinagre_vnc_connection_set_fd (conn, g_value_get_int (value));
 	break;
 
+      case PROP_DEPTH_PROFILE:
+	vinagre_vnc_connection_set_depth_profile (conn, g_value_get_int (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -141,6 +149,10 @@ vinagre_vnc_connection_get_property (GObject *object, guint prop_id, GValue *val
 	g_value_set_int (value, conn->priv->fd);
 	break;
 
+      case PROP_DEPTH_PROFILE:
+	g_value_set_int (value, conn->priv->depth_profile);
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -155,6 +167,7 @@ vnc_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
 
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"view_only", "%d", vnc_conn->priv->view_only);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"scaling", "%d", vnc_conn->priv->scaling);
+  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"depth_profile", "%d", vnc_conn->priv->depth_profile);
 }
 
 static void
@@ -177,6 +190,8 @@ vnc_parse_item (VinagreConnection *conn, xmlNode *root)
 	  if (!scaling_command_line)
 	    vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
+      else if (!xmlStrcmp(curr->name, (const xmlChar *)"depth_profile"))
+	vinagre_vnc_connection_set_depth_profile (vnc_conn, atoi((const char *)s_value));
 
       xmlFree (s_value);
     }
@@ -319,6 +334,20 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
                                                       G_PARAM_STATIC_NAME |
                                                       G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property (object_class,
+                                   PROP_DEPTH_PROFILE,
+                                   g_param_spec_int ("depth-profile",
+                                                     "Depth Profile",
+	                                              "The profile of depth color to be used in gtk-vnc widget",
+                                                      0,
+                                                      5,
+                                                      0,
+	                                              G_PARAM_READWRITE |
+                                                      G_PARAM_CONSTRUCT |
+                                                      G_PARAM_STATIC_NICK |
+                                                      G_PARAM_STATIC_NAME |
+                                                      G_PARAM_STATIC_BLURB));
+
 }
 
 VinagreConnection *
@@ -408,6 +437,23 @@ vinagre_vnc_connection_get_fd (VinagreVncConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), 0);
 
   return conn->priv->fd;
+}
+
+void
+vinagre_vnc_connection_set_depth_profile (VinagreVncConnection *conn,
+					  gint                 value)
+{
+  g_return_if_fail (VINAGRE_IS_VNC_CONNECTION (conn));
+  g_return_if_fail (value >= 0);
+
+  conn->priv->depth_profile = value;
+}
+gint
+vinagre_vnc_connection_get_depth_profile (VinagreVncConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), 0);
+
+  return conn->priv->depth_profile;
 }
 
 /* vim: set ts=8: */

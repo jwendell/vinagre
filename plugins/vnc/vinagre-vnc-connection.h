@@ -75,6 +75,10 @@ gint		    vinagre_vnc_connection_get_fd           (VinagreVncConnection *conn);
 void		    vinagre_vnc_connection_set_fd           (VinagreVncConnection *conn,
 							     gint value);
 
+gint		    vinagre_vnc_connection_get_depth_profile (VinagreVncConnection *conn);
+void		    vinagre_vnc_connection_set_depth_profile (VinagreVncConnection *conn,
+							      gint value);
+
 G_END_DECLS
 
 #endif /* __VINAGRE_VNC_CONNECTION_H__  */
