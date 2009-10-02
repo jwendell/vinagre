@@ -340,20 +340,22 @@ impl_new_tab (VinagrePlugin *plugin,
 static GtkWidget *
 impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 {
-  GtkWidget *box, *check, *label;
+  GtkWidget *box, *check, *label, *combo, *depth_box;
   GtkTable  *table;
   gchar     *str;
+  gint      depth_profile;
 
-  box = gtk_vbox_new (TRUE, 0);
+  box = gtk_vbox_new (FALSE, 0);
 
   str = g_strdup_printf ("<b>%s</b>", _("VNC Options"));
   label = gtk_label_new (str);
   g_free (str);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+  gtk_misc_set_padding (GTK_MISC (label), 0, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
-  table = GTK_TABLE (gtk_table_new (2, 2, FALSE));
+  table = GTK_TABLE (gtk_table_new (3, 2, FALSE));
   label = gtk_label_new ("  ");
   gtk_table_attach (table, label, 0, 1, 0, 1, GTK_SHRINK, GTK_SHRINK, 0, 0);
 
@@ -371,7 +373,29 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				  vinagre_vnc_connection_get_scaling (VINAGRE_VNC_CONNECTION (conn)));
 
-  gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (table), TRUE, TRUE, 0);
+  depth_box = gtk_hbox_new (FALSE, 4);
+  label = gtk_label_new_with_mnemonic (_("_Depth Color:"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_box_pack_start (GTK_BOX (depth_box), GTK_WIDGET (label), FALSE, FALSE, 0);
+
+  if (VINAGRE_IS_VNC_CONNECTION (conn))
+    depth_profile = vinagre_vnc_connection_get_depth_profile (VINAGRE_VNC_CONNECTION (conn));
+  else
+    depth_profile = 0;
+
+  combo = gtk_combo_box_new_text ();
+  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Use Server Settings"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("True Color (24 bits)"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("High Color (16 bits)"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Low Color (8 bits)"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Ultra Low Color (3 bits)"));
+  gtk_combo_box_set_active (GTK_COMBO_BOX (combo), depth_profile);
+  g_object_set_data (G_OBJECT (box), "depth_combo", combo);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
+  gtk_box_pack_start (GTK_BOX (depth_box), GTK_WIDGET (combo), FALSE, FALSE, 0);
+  gtk_table_attach_defaults (table, depth_box, 1, 2, 2, 3);
+
+  gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (table), FALSE, FALSE, 0);
   return box;
 }
 

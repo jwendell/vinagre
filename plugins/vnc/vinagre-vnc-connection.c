@@ -236,11 +236,12 @@ vnc_fill_conn_from_file (VinagreConnection *conn, GKeyFile *file)
 static void
 vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
 {
-  GtkWidget *view_only, *scaling;
+  GtkWidget *view_only, *scaling, *depth_combo;
 
   view_only = g_object_get_data (G_OBJECT (widget), "view_only");
   scaling = g_object_get_data (G_OBJECT (widget), "scaling");
-  if (!view_only || !scaling)
+  depth_combo = g_object_get_data (G_OBJECT (widget), "depth_combo");
+  if (!view_only || !scaling || !depth_combo)
     {
       g_warning ("Wrong widget passed to vnc_parse_options_widget()");
       return;
@@ -249,6 +250,7 @@ vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
   g_object_set (conn,
 		"view-only", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (view_only)),
 		"scaling", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (scaling)),
+		"depth-profile", gtk_combo_box_get_active (GTK_COMBO_BOX (depth_combo)),
 		NULL);
 }
 

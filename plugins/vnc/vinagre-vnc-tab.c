@@ -240,7 +240,7 @@ static void
 open_vnc (VinagreVncTab *vnc_tab)
 {
   gchar      *host, *port_str;
-  gint       port, shared, fd;
+  gint       port, shared, fd, depth_profile;
   gboolean   scaling, success;
   VncDisplay *vnc = VNC_DISPLAY (vnc_tab->priv->vnc);
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
@@ -251,6 +251,7 @@ open_vnc (VinagreVncTab *vnc_tab)
 		"scaling", &scaling,
 		"shared", &shared,
 		"fd", &fd,
+		"depth-profile", &depth_profile,
 		NULL);
 
   port_str = g_strdup_printf ("%d", port);
@@ -261,6 +262,7 @@ open_vnc (VinagreVncTab *vnc_tab)
 
   vnc_display_set_shared_flag (vnc, shared);
   vnc_display_set_force_size (vnc, !scaling);
+  vnc_display_set_depth (vnc, depth_profile);
 
   if (fd > 0)
     success = vnc_display_open_fd (vnc, fd);
