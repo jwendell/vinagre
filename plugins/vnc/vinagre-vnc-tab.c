@@ -381,12 +381,12 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
 
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->scaling_action), scaling);
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->viewonly_action), view_only);
-  vnc_display_set_pointer_local (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
-  vnc_display_set_keyboard_grab (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
-  vnc_display_set_pointer_grab (VNC_DISPLAY(vnc_tab->priv->vnc), TRUE);
+  vnc_display_set_pointer_local (vnc, TRUE);
+  vnc_display_set_keyboard_grab (vnc, TRUE);
+  vnc_display_set_pointer_grab (vnc, TRUE);
 
   vinagre_vnc_connection_set_desktop_name (VINAGRE_VNC_CONNECTION (conn),
-					   vnc_display_get_name (VNC_DISPLAY (vnc_tab->priv->vnc)));
+					   vnc_display_get_name (vnc));
 
   name = vinagre_connection_get_best_name (conn);
   label = g_object_get_data (G_OBJECT (tab), "label");
