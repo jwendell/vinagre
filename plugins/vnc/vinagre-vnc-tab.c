@@ -103,6 +103,12 @@ view_original_size_cb (GtkAction *action, VinagreVncTab *vnc_tab)
   vinagre_vnc_tab_original_size (vnc_tab);
 }
 
+static void
+view_refresh_cb (GtkAction *action, VinagreVncTab *vnc_tab)
+{
+  vnc_display_request_update (VNC_DISPLAY (vnc_tab->priv->vnc));
+}
+
 const static GSList *
 vnc_get_connected_actions (VinagreTab *tab)
 {
@@ -680,6 +686,19 @@ create_connected_actions (VinagreVncTab *tab)
   g_signal_connect (a->action, "activate", G_CALLBACK (view_original_size_cb), tab);
   list = g_slist_append (list, a);
   tab->priv->original_size_action = a->action;
+
+  /* View->Refresh */
+  a = g_new (VinagreTabUiAction, 1);
+  a->paths = g_new (gchar *, 2);
+  a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
+  a->paths[1] = NULL;
+  a->action = gtk_action_new ("VNCViewRefresh",
+			      _("_Refresh Screen"),
+			      _("Requests an update of the screen"),
+			      "gtk-refresh");
+  gtk_action_set_icon_name (a->action, "gtk-refresh");
+  g_signal_connect (a->action, "activate", G_CALLBACK (view_refresh_cb), tab);
+  list = g_slist_append (list, a);
 
   return list;
 }
