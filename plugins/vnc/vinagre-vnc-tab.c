@@ -796,10 +796,52 @@ vnc_tab_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreVncTab *vnc_tab)
   g_free (text);
 }
 
+/*
+ * Called when the main container widget's size has been set.
+ * It attempts to fit the VNC widget into this space while
+ * maintaining aspect ratio
+ *
+ * Code borrowed from from virt-viewer, thanks Daniel Berrange :)
+ */
+static void
+vnc_tab_resize_align (GtkWidget *widget,
+		      GtkAllocation *alloc,
+		      VinagreVncTab *vnc_tab)
+{
+  double desktopAspect = (double)vnc_display_get_width (VNC_DISPLAY (vnc_tab->priv->vnc)) / (double)vnc_display_get_height (VNC_DISPLAY (vnc_tab->priv->vnc));
+  double scrollAspect = (double)alloc->width / (double)alloc->height;
+  int height, width;
+  GtkAllocation child;
+  int dx = 0, dy = 0;
+
+  if (!vnc_display_is_open (VNC_DISPLAY (vnc_tab->priv->vnc)))
+    return;
+
+  if (scrollAspect > desktopAspect)
+    {
+      width = alloc->height * desktopAspect;
+      dx = (alloc->width - width) / 2;
+      height = alloc->height;
+    }
+  else
+    {
+      width = alloc->width;
+      height = alloc->width / desktopAspect;
+      dy = (alloc->height - height) / 2;
+    }
+
+  child.x = alloc->x + dx;
+  child.y = alloc->y + dy;
+  child.width = width;
+  child.height = height;
+  gtk_widget_size_allocate(vnc_tab->priv->vnc, &child);
+}
+
 static void
 vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 {
   GtkClipboard *cb;
+  GtkWidget *align;
 
   vnc_tab->priv = VINAGRE_VNC_TAB_GET_PRIVATE (vnc_tab);
   vnc_tab->priv->clipboard_str = NULL;
@@ -808,7 +850,13 @@ vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 
   /* Create the vnc widget */
   vnc_tab->priv->vnc = vnc_display_new ();
-  vinagre_tab_add_view (VINAGRE_TAB (vnc_tab), vnc_tab->priv->vnc);
+  align = gtk_alignment_new (0.5, 0.5, 1, 1);
+
+  g_signal_connect(align, "size-allocate",
+		  G_CALLBACK (vnc_tab_resize_align), vnc_tab);
+  gtk_container_add (GTK_CONTAINER (align), vnc_tab->priv->vnc);
+
+  vinagre_tab_add_view (VINAGRE_TAB (vnc_tab), align);
 
   g_signal_connect (vnc_tab->priv->vnc,
 		    "vnc-connected",
