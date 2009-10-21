@@ -197,7 +197,7 @@ vinagre_fav_selection_changed_cb (GtkTreeSelection *selection,
 				  VinagreFav       *fav)
 {
   GtkTreeIter iter;
-  VinagreBookmarksEntry *entry;
+  VinagreBookmarksEntry *entry = NULL;
   gboolean avahi;
 
   if (gtk_tree_selection_get_selected (selection, NULL, &iter))
@@ -207,10 +207,9 @@ vinagre_fav_selection_changed_cb (GtkTreeSelection *selection,
 			  ENTRY_COL, &entry,
                           IS_AVAHI_COL, &avahi,
 			  -1);
+      if (avahi)
+	entry = NULL;
     }
-
-  if (avahi)
-    entry = NULL;
 
   /* Emits the signal saying that user has selected a bookmark */
   g_signal_emit (G_OBJECT (fav), 
