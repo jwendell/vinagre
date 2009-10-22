@@ -32,6 +32,7 @@ struct _VinagreVncConnectionPrivate
   gint     shared;
   gint     fd;
   gint     depth_profile;
+  gboolean lossy_encoding;
 };
 
 enum
@@ -42,7 +43,8 @@ enum
   PROP_SCALING,
   PROP_SHARED,
   PROP_FD,
-  PROP_DEPTH_PROFILE
+  PROP_DEPTH_PROFILE,
+  PROP_LOSSY_ENCODING
 };
 
 #define VINAGRE_VNC_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_VNC_CONNECTION, VinagreVncConnectionPrivate))
@@ -59,6 +61,7 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->shared = -1;
   conn->priv->fd = 0;
   conn->priv->depth_profile = 0;
+  conn->priv->lossy_encoding = FALSE;
 }
 
 static void
@@ -112,6 +115,10 @@ vinagre_vnc_connection_set_property (GObject *object, guint prop_id, const GValu
 	vinagre_vnc_connection_set_depth_profile (conn, g_value_get_int (value));
 	break;
 
+      case PROP_LOSSY_ENCODING:
+	vinagre_vnc_connection_set_lossy_encoding (conn, g_value_get_boolean (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -153,6 +160,10 @@ vinagre_vnc_connection_get_property (GObject *object, guint prop_id, GValue *val
 	g_value_set_int (value, conn->priv->depth_profile);
 	break;
 
+      case PROP_LOSSY_ENCODING:
+	g_value_set_boolean (value, conn->priv->lossy_encoding);
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -168,6 +179,7 @@ vnc_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"view_only", "%d", vnc_conn->priv->view_only);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"scaling", "%d", vnc_conn->priv->scaling);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"depth_profile", "%d", vnc_conn->priv->depth_profile);
+  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"lossy_encoding", "%d", vnc_conn->priv->lossy_encoding);
 }
 
 static void
@@ -184,14 +196,22 @@ vnc_parse_item (VinagreConnection *conn, xmlNode *root)
       s_value = xmlNodeGetContent (curr);
 
       if (!xmlStrcmp(curr->name, (const xmlChar *)"view_only"))
-	vinagre_vnc_connection_set_view_only (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+	{
+	  vinagre_vnc_connection_set_view_only (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+	}
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"scaling"))
 	{
 	  if (!scaling_command_line)
 	    vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"depth_profile"))
-	vinagre_vnc_connection_set_depth_profile (vnc_conn, atoi((const char *)s_value));
+	{
+	  vinagre_vnc_connection_set_depth_profile (vnc_conn, atoi((const char *)s_value));
+	}
+      else if (!xmlStrcmp(curr->name, (const xmlChar *)"lossy_encoding"))
+	{
+	  vinagre_vnc_connection_set_lossy_encoding (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+	}
 
       xmlFree (s_value);
     }
@@ -350,6 +370,18 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
                                                       G_PARAM_STATIC_NAME |
                                                       G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property (object_class,
+                                   PROP_LOSSY_ENCODING,
+                                   g_param_spec_boolean ("lossy-encoding",
+                                                        "Lossy encoding",
+	                                                "Whether to use a lossy encoding",
+                                                        FALSE,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
 }
 
 VinagreConnection *
@@ -456,6 +488,22 @@ vinagre_vnc_connection_get_depth_profile (VinagreVncConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), 0);
 
   return conn->priv->depth_profile;
+}
+
+void
+vinagre_vnc_connection_set_lossy_encoding (VinagreVncConnection *conn,
+					   gboolean value)
+{
+  g_return_if_fail (VINAGRE_IS_VNC_CONNECTION (conn));
+
+  conn->priv->lossy_encoding = value;
+}
+gboolean
+vinagre_vnc_connection_get_lossy_encoding (VinagreVncConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), FALSE);
+
+  return conn->priv->lossy_encoding;
 }
 
 /* vim: set ts=8: */
