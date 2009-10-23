@@ -790,9 +790,8 @@ setup_toolbar (VinagreVncTab *vnc_tab)
   vnc_tab->priv->viewonly_button = button;
 
   /* Send Ctrl-alt-del */
-  button = GTK_WIDGET (gtk_tool_button_new (NULL, NULL));
+  button = GTK_WIDGET (gtk_tool_button_new (NULL, _("Send Ctrl-Alt-Del")));
   gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (button), "preferences-desktop-keyboard-shortcuts");
-  gtk_tool_button_set_label (GTK_TOOL_BUTTON (button), _("Send Ctrl-Alt-Del"));
   gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Send Ctrl-Alt-Del"));
   g_signal_connect (button, "clicked", G_CALLBACK (cad_button_clicked), vnc_tab);
   gtk_widget_show (GTK_WIDGET (button));
