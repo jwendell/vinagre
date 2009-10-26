@@ -172,7 +172,11 @@ enable_reverse_toggled_cb (GtkToggleButton *button, VncListenDialog *dialog)
   if (gtk_toggle_button_get_active (button))
     vinagre_vnc_listener_start (listener);
   else
-    vinagre_vnc_listener_stop (listener);
+    {
+      vinagre_vnc_listener_stop (listener);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->always_enabled_check),
+				    FALSE);
+    }
 
   update_ui_sensitivity (dialog);
 }
