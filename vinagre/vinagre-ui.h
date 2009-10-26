@@ -47,20 +47,8 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
   /* Edit menu */
   { "EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
     N_("Edit the application preferences"), G_CALLBACK (vinagre_cmd_edit_preferences) },
-/*FIXME: Study this dialog for next release
   { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
     N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
-*/
-
-  /* Bookmarks menu */
-  { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
-    N_("Connect to this machine"), G_CALLBACK (vinagre_cmd_bookmarks_open) },
-  { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit bookmark"), NULL,
-    N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_cmd_bookmarks_edit) },
-  { "BookmarksDel", GTK_STOCK_DELETE, N_("_Remove from bookmarks"), NULL,
-    N_("Remove current selected connection from bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_del) },
-  { "BookmarksNewFolder", "folder-new", N_("_New Folder"), NULL,
-    N_("Create a new folder"), G_CALLBACK (vinagre_cmd_bookmarks_new_folder) },
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",

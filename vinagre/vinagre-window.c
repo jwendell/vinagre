@@ -56,12 +56,6 @@ vinagre_window_dispose (GObject *object)
 {
   VinagreWindow *window = VINAGRE_WINDOW (object);
 
-  if (window->priv->fav_entry_selected)
-    {
-      g_object_unref (window->priv->fav_entry_selected);
-      window->priv->fav_entry_selected = NULL;
-    }
-
   if (!window->priv->dispose_has_run)
     {
       vinagre_plugins_engine_deactivate_plugins (vinagre_plugins_engine_get_default (),
@@ -401,8 +395,9 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   gtk_ui_manager_add_ui_from_file (manager, vinagre_utils_get_ui_xml_filename (), &error);
   if (error != NULL)
     {
-      g_warning (_("Could not merge vinagre-ui.xml: %s"), error->message);
+      g_critical (_("Could not merge UI XML file: %s"), error->message);
       g_error_free (error);
+      return;
     }
 
   /* Bookmarks */
@@ -486,49 +481,6 @@ fav_panel_size_allocate (GtkWidget     *widget,
 }
 
 static void
-fav_panel_activated (VinagreFav            *fav,
-		     VinagreBookmarksEntry *entry,
-		     VinagreWindow         *window)
-{
-  g_return_if_fail (vinagre_bookmarks_entry_get_node (entry) == VINAGRE_BOOKMARKS_ENTRY_NODE_CONN);
-
-  vinagre_cmd_open_bookmark (window, vinagre_bookmarks_entry_get_conn (entry));
-}
-
-static void
-fav_panel_selected (VinagreFav            *fav,
-		    VinagreBookmarksEntry *entry,
-		    VinagreWindow         *window)
-{
-  GtkAction *action1, *action2;
-
-  action1 = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					 "BookmarksDel");
-  action2 = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					 "BookmarksEdit");
-
-  if (window->priv->fav_entry_selected)
-    {
-      g_object_unref (window->priv->fav_entry_selected);
-      window->priv->fav_entry_selected = NULL;
-    }
-
-  if (entry)
-    {
-      window->priv->fav_entry_selected = g_object_ref (entry);
-      gtk_action_set_sensitive (action1, TRUE);
-      gtk_action_set_sensitive (action2, TRUE);
-      /* TODO: Change the menuitem label */
-    }
-  else
-    {
-      /* TODO: Change the menuitem label */
-      gtk_action_set_sensitive (action1, FALSE);
-      gtk_action_set_sensitive (action2, FALSE);
-    }
-}
-
-static void
 vinagre_window_populate_bookmarks (VinagreWindow *window,
 				   const gchar   *group,
 				   GSList        *entries,
@@ -605,8 +557,8 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 					 action);
 	    g_signal_connect (action,
 			     "activate",
-			     G_CALLBACK (vinagre_cmd_bookmarks_open),
-			     window);
+			     G_CALLBACK (vinagre_fav_bookmarks_open),
+			     window->priv->fav_panel);
 
 	    path = g_strdup_printf ("/MenuBar/BookmarksMenu/%s%s", group, parent?parent:"");
 	    gtk_ui_manager_add_ui (p->manager,
@@ -645,8 +597,8 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
   for (l = actions; l != NULL; l = l->next)
     {
       g_signal_handlers_disconnect_by_func (GTK_ACTION (l->data),
-					    G_CALLBACK (vinagre_cmd_bookmarks_open),
-					    window);
+					    G_CALLBACK (vinagre_fav_bookmarks_open),
+					    window->priv->fav_panel);
       gtk_action_group_remove_action (p->bookmarks_list_action_group,
 				      GTK_ACTION (l->data));
     }
@@ -682,14 +634,6 @@ create_side_panel (VinagreWindow *window)
 		    "size-allocate",
 		    G_CALLBACK (fav_panel_size_allocate),
 		    window);
-  g_signal_connect (window->priv->fav_panel,
-		    "fav-activated",
-		    G_CALLBACK (fav_panel_activated),
-		    window);
-  g_signal_connect (window->priv->fav_panel,
-		    "fav-selected",
-		    G_CALLBACK (fav_panel_selected),
-		    window);
 }
 
 static void
@@ -700,15 +644,6 @@ init_widgets_visibility (VinagreWindow *window)
   GtkAction *action;
   gboolean visible;
   VinagrePrefs *prefs = vinagre_prefs_get_default ();
-
-  /* Remove and Edit bookmarks starts disabled */
-  action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"BookmarksDel");
-  gtk_action_set_sensitive (action, FALSE);
-
-  action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"BookmarksEdit");
-  gtk_action_set_sensitive (action, FALSE);
 
   /* side panel visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
@@ -784,7 +719,6 @@ vinagre_window_init (VinagreWindow *window)
   gtk_window_set_default_icon_name ("vinagre");
 
   window->priv = VINAGRE_WINDOW_GET_PRIVATE (window);
-  window->priv->fav_entry_selected = NULL;
   window->priv->fullscreen = FALSE;
   window->priv->dispose_has_run = FALSE;
 

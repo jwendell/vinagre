@@ -35,17 +35,21 @@
 #ifdef VINAGRE_ENABLE_AVAHI
 #include "vinagre-mdns.h"
 #endif
- 
+
+#define VINAGRE_FAV_UI_XML_FILE "vinagre-fav-ui.xml"
 #define VINAGRE_FAV_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_FAV, VinagreFavPrivate))
 
 struct _VinagreFavPrivate
 {
-  VinagreWindow     *window;
-  GtkWidget         *tree;
-  GtkTreeModel      *model;
+  VinagreWindow         *window;
+  GtkWidget             *tree;
+  GtkTreeModel          *model;
+  GtkActionGroup        *action_group, *always_sensitive_action_group;
+  VinagreBookmarksEntry *selected;
+  GtkBox                *box;
 };
 
-G_DEFINE_TYPE(VinagreFav, vinagre_fav, GTK_TYPE_VBOX)
+G_DEFINE_TYPE(VinagreFav, vinagre_fav, GTK_TYPE_FRAME)
 
 /* Signals */
 enum
@@ -116,48 +120,6 @@ vinagre_fav_get_property (GObject    *object,
     }
 }
 
-static void 
-vinagre_fav_class_init (VinagreFavClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  object_class->get_property = vinagre_fav_get_property;
-  object_class->set_property = vinagre_fav_set_property;
-
-  g_object_class_install_property (object_class,
-				   PROP_WINDOW,
-				   g_param_spec_object ("window",
-							"Window",
-							"The VinagreWindow this panel is associated with",
-							 VINAGRE_TYPE_WINDOW,
-							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY));	
-
-  signals[FAV_ACTIVATED] =
-		g_signal_new ("fav-activated",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (VinagreFavClass, fav_activated),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__OBJECT,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_OBJECT);
-
-  signals[FAV_SELECTED] =
-		g_signal_new ("fav-selected",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (VinagreFavClass, fav_selected),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__OBJECT,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_OBJECT);
-
-  g_type_class_add_private (object_class, sizeof (VinagreFavPrivate));
-}
-
 static void
 vinagre_fav_row_activated_cb (GtkTreeView       *treeview,
 			      GtkTreePath       *path,
@@ -185,6 +147,9 @@ vinagre_fav_row_activated_cb (GtkTreeView       *treeview,
       return;
     }
 
+  vinagre_cmd_open_bookmark (fav->priv->window,
+			     vinagre_bookmarks_entry_get_conn (entry));
+
   /* Emits the signal saying that user has activated a bookmark */
   g_signal_emit (G_OBJECT (fav), 
 		 signals[FAV_ACTIVATED],
@@ -210,6 +175,11 @@ vinagre_fav_selection_changed_cb (GtkTreeSelection *selection,
       if (avahi)
 	entry = NULL;
     }
+
+  fav->priv->selected = entry;
+
+  gtk_action_group_set_sensitive (fav->priv->action_group,
+				  entry != NULL);
 
   /* Emits the signal saying that user has selected a bookmark */
   g_signal_emit (G_OBJECT (fav), 
@@ -541,6 +511,110 @@ vinagre_fav_title_cell_data_func (GtkTreeViewColumn *column,
 }
 
 static void
+vinagre_fav_bookmarks_new_folder (GtkAction  *action,
+				  VinagreFav *fav)
+{
+  vinagre_bookmarks_new_folder (vinagre_bookmarks_get_default (),
+				GTK_WINDOW (fav->priv->window));
+}
+
+static void
+vinagre_fav_bookmarks_edit (GtkAction  *action,
+			    VinagreFav *fav)
+{
+  vinagre_bookmarks_edit (vinagre_bookmarks_get_default (),
+                          fav->priv->selected,
+                          GTK_WINDOW (fav->priv->window));
+}
+
+static void
+vinagre_fav_bookmarks_del (GtkAction  *action,
+			   VinagreFav *fav)
+{
+  vinagre_bookmarks_del (vinagre_bookmarks_get_default (),
+                         fav->priv->selected,
+                         GTK_WINDOW (fav->priv->window));
+}
+
+void
+vinagre_fav_bookmarks_open (GtkAction  *action,
+			    VinagreFav *fav)
+{
+  VinagreConnection *conn;
+
+  conn = g_object_get_data (G_OBJECT (action), "conn");
+  if (!conn)
+    conn = vinagre_bookmarks_entry_get_conn (fav->priv->selected);
+
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  vinagre_cmd_open_bookmark (fav->priv->window, conn);
+}
+
+static const GtkActionEntry always_sensitive_actions[] =
+{
+  {"BookmarksNewFolder", "folder-new", N_("_New Folder"), NULL,
+    N_("Create a new folder"), G_CALLBACK (vinagre_fav_bookmarks_new_folder) },
+};
+
+static const GtkActionEntry actions[] =
+{
+  { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
+    N_("Connect to this machine"), G_CALLBACK (vinagre_fav_bookmarks_open) },
+  {"BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit bookmark"), NULL,
+    N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_fav_bookmarks_edit) },
+  {"BookmarksDel", GTK_STOCK_DELETE, N_("_Remove from bookmarks"), NULL,
+    N_("Remove current selected connection from bookmarks"), G_CALLBACK (vinagre_fav_bookmarks_del) },
+};
+
+static void
+vinagre_fav_create_toolbar (VinagreFav *fav)
+{
+  GtkWidget *toolbar;
+  GtkActionGroup *action_group;
+  GtkAction *action;
+  GtkUIManager *manager;
+  GError *error = NULL;
+
+  manager = fav->priv->window->priv->manager;
+  gtk_ui_manager_add_ui_from_file (manager,
+				   vinagre_fav_get_ui_xml_filename (),
+				   &error);
+  if (error != NULL)
+    {
+      g_critical (_("Could not merge UI XML file: %s"), error->message);
+      g_error_free (error);
+      return;
+    }
+
+  action_group = gtk_action_group_new ("BookmarksActionGroup");
+  gtk_action_group_set_translation_domain (action_group, NULL);
+  gtk_action_group_add_actions (action_group,
+				actions,
+				G_N_ELEMENTS (actions),
+				fav);
+  gtk_ui_manager_insert_action_group (manager, action_group, 0);
+  gtk_action_group_set_sensitive (action_group, FALSE);
+  fav->priv->action_group = action_group;
+
+  action_group = gtk_action_group_new ("BookmarksAlwaysSensitiveActionGroup");
+  gtk_action_group_set_translation_domain (action_group, NULL);
+  gtk_action_group_add_actions (action_group,
+				always_sensitive_actions,
+				G_N_ELEMENTS (always_sensitive_actions),
+				fav);
+  gtk_ui_manager_insert_action_group (manager, action_group, 0);
+  fav->priv->always_sensitive_action_group = action_group;
+
+  toolbar = gtk_ui_manager_get_widget (manager, "/FavToolBar");
+  gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
+  gtk_toolbar_set_icon_size (GTK_TOOLBAR (toolbar), GTK_ICON_SIZE_MENU);
+
+  gtk_widget_show (toolbar);
+  gtk_box_pack_start (fav->priv->box, toolbar, FALSE, FALSE, 0);
+}
+
+static void
 vinagre_fav_create_tree (VinagreFav *fav)
 {
   GtkCellRenderer   *cell;
@@ -557,7 +631,7 @@ vinagre_fav_create_tree (VinagreFav *fav)
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
 				       GTK_SHADOW_ETCHED_OUT);
 
-  gtk_box_pack_start (GTK_BOX(fav), scroll, TRUE, TRUE, 0);
+  gtk_box_pack_start (fav->priv->box, scroll, TRUE, TRUE, 0);
 
   /* Create the model */
   fav->priv->model = GTK_TREE_MODEL (gtk_tree_store_new (NUM_COLS,
@@ -722,11 +796,75 @@ drag_drop_handl (GtkWidget *widget,
 static void
 vinagre_fav_init (VinagreFav *fav)
 {
-  GtkWidget *label_box, *label, *close_button;
-
   fav->priv = VINAGRE_FAV_GET_PRIVATE (fav);
+  fav->priv->selected = NULL;
 
-  /* setup the tree */
+  gtk_frame_set_shadow_type (GTK_FRAME (fav), GTK_SHADOW_ETCHED_IN);
+  fav->priv->box = GTK_BOX (gtk_vbox_new (FALSE, 0));
+  gtk_container_add (GTK_CONTAINER (fav), GTK_WIDGET (fav->priv->box));
+}
+
+GtkWidget *
+vinagre_fav_new (VinagreWindow *window)
+{
+  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+
+  return GTK_WIDGET (g_object_new (VINAGRE_TYPE_FAV,
+				   "window", window,
+				   NULL));
+}
+
+static void
+vinagre_fav_hide (GtkButton *button, VinagreFav *fav)
+{
+  GtkAction *action;
+
+  action = gtk_action_group_get_action (fav->priv->window->priv->always_sensitive_action_group,
+					"ViewSidePanel");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
+}
+
+static void
+vinagre_fav_create_title (VinagreFav *fav)
+{
+  GtkWidget *box, *label, *close_button, *image, *frame;
+
+  box = gtk_hbox_new (FALSE, 0);
+
+ /* setup image */
+  image = gtk_image_new_from_icon_name ("user-bookmarks", GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_misc_set_alignment (GTK_MISC (image), 0.0, 0.5);
+  gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 0);
+
+ /* setup label */
+  label = gtk_label_new (_("Bookmarks"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_misc_set_padding (GTK_MISC (label), 6, 0);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  /* setup small close button */
+  close_button = vinagre_utils_create_small_close_button ();
+  gtk_box_pack_start (GTK_BOX (box), close_button, FALSE, FALSE, 0);
+  gtk_widget_set_tooltip_text (close_button, _("Hide panel"));
+  g_signal_connect (close_button,
+		    "clicked",
+		    G_CALLBACK (vinagre_fav_hide),
+		    fav);
+
+  gtk_box_pack_start (fav->priv->box, box, FALSE, FALSE, 0);
+  gtk_widget_show_all (box);
+}
+
+static void
+vinagre_fav_constructed (GObject *object)
+{
+  VinagreFav *fav = VINAGRE_FAV (object);
+
+  if (G_OBJECT_CLASS (vinagre_fav_parent_class)->constructed)
+    G_OBJECT_CLASS (vinagre_fav_parent_class)->constructed (object);
+
+  vinagre_fav_create_title (fav);
+  vinagre_fav_create_toolbar (fav);
   vinagre_fav_create_tree (fav);
 
   gtk_drag_dest_set (fav->priv->tree,
@@ -756,14 +894,47 @@ vinagre_fav_init (VinagreFav *fav)
 #endif
 }
 
-GtkWidget *
-vinagre_fav_new (VinagreWindow *window)
+static void
+vinagre_fav_class_init (VinagreFavClass *klass)
 {
-  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  return GTK_WIDGET (g_object_new (VINAGRE_TYPE_FAV,
-				   "window", window,
-				   NULL));
+  object_class->get_property = vinagre_fav_get_property;
+  object_class->set_property = vinagre_fav_set_property;
+  object_class->constructed  = vinagre_fav_constructed;
+
+  g_object_class_install_property (object_class,
+				   PROP_WINDOW,
+				   g_param_spec_object ("window",
+							"Window",
+							"The VinagreWindow this panel is associated with",
+							 VINAGRE_TYPE_WINDOW,
+							 G_PARAM_READWRITE |
+							 G_PARAM_CONSTRUCT_ONLY));
+
+  signals[FAV_ACTIVATED] =
+		g_signal_new ("fav-activated",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (VinagreFavClass, fav_activated),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1,
+			      G_TYPE_OBJECT);
+
+  signals[FAV_SELECTED] =
+		g_signal_new ("fav-selected",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (VinagreFavClass, fav_selected),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1,
+			      G_TYPE_OBJECT);
+
+  g_type_class_add_private (object_class, sizeof (VinagreFavPrivate));
 }
 
 static void
@@ -850,14 +1021,6 @@ vinagre_fav_update_list (VinagreFav *fav)
   /* bookmarks */
   list = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
 
-  gtk_tree_store_append (store, &parent_iter, NULL);
-  gtk_tree_store_set (store, &parent_iter,
-                      NAME_COL, _("Bookmarks"),
-                      IS_GROUP_COL, TRUE,
-                      IS_FOLDER_COL, FALSE,
-                      IS_AVAHI_COL, FALSE,
-                      -1);
-
   vinagre_fav_fill_bookmarks (store, list, NULL, FALSE);
 
 #ifdef VINAGRE_ENABLE_AVAHI
@@ -878,4 +1041,14 @@ vinagre_fav_update_list (VinagreFav *fav)
 
   return FALSE;
 }
+
+const gchar *
+vinagre_fav_get_ui_xml_filename (void)
+{
+  if (g_file_test (VINAGRE_FAV_UI_XML_FILE, G_FILE_TEST_EXISTS))
+    return VINAGRE_FAV_UI_XML_FILE;
+  else
+    return VINAGRE_DATADIR "/" VINAGRE_FAV_UI_XML_FILE;
+}
+
 /* vim: set ts=8: */

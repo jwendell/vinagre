@@ -41,13 +41,13 @@ typedef struct _VinagreFavClass   VinagreFavClass;
 
 struct _VinagreFav 
 {
-  GtkVBox vbox;
+  GtkFrame frame;
   VinagreFavPrivate *priv;
 };
 
 struct _VinagreFavClass 
 {
-  GtkVBoxClass parent_class;
+  GtkFrameClass parent_class;
 
   /* Signals */
   void	(* fav_activated)   (VinagreFav *fav,
@@ -62,6 +62,10 @@ GType 	    vinagre_fav_get_type    (void) G_GNUC_CONST;
 GtkWidget   *vinagre_fav_new        (VinagreWindow *window);
 
 gboolean    vinagre_fav_update_list (VinagreFav *fav);
+
+void        vinagre_fav_bookmarks_open (GtkAction *action, VinagreFav *fav);
+
+const gchar * vinagre_fav_get_ui_xml_filename (void);
 
 G_END_DECLS
 

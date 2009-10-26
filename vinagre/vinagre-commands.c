@@ -227,8 +227,6 @@ vinagre_cmd_edit_preferences (GtkAction     *action,
   vinagre_prefs_dialog_show (window);
 }
 
-/*
-FIXME: Study this dialog for next release
 void
 vinagre_cmd_edit_plugins (GtkAction     *action,
                           VinagreWindow *window)
@@ -237,7 +235,6 @@ vinagre_cmd_edit_plugins (GtkAction     *action,
 
   vinagre_plugin_dialog_show (GTK_WINDOW (window));
 }
-*/
 
 /* View Menu */
 void
@@ -338,57 +335,6 @@ vinagre_cmd_bookmarks_add (GtkAction     *action,
       vinagre_tab_set_title (tab, name);
       g_free (name);
     }
-}
-
-void
-vinagre_cmd_bookmarks_new_folder (GtkAction     *action,
-				  VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  vinagre_bookmarks_new_folder (vinagre_bookmarks_get_default (),
-				GTK_WINDOW (window));
-}
-
-void
-vinagre_cmd_bookmarks_edit (GtkAction     *action,
-			    VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-  g_return_if_fail (VINAGRE_IS_BOOKMARKS_ENTRY (window->priv->fav_entry_selected));
-
-  vinagre_bookmarks_edit (vinagre_bookmarks_get_default (),
-                          window->priv->fav_entry_selected,
-                          GTK_WINDOW (window));
-}
-
-void
-vinagre_cmd_bookmarks_del (GtkAction     *action,
-			   VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-  g_return_if_fail (VINAGRE_IS_BOOKMARKS_ENTRY (window->priv->fav_entry_selected));
-
-  vinagre_bookmarks_del (vinagre_bookmarks_get_default (),
-                         window->priv->fav_entry_selected,
-                         GTK_WINDOW (window));
-}
-
-void
-vinagre_cmd_bookmarks_open (GtkAction     *action,
-			    VinagreWindow *window)
-{
-  VinagreConnection *conn;
-
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  conn = g_object_get_data (G_OBJECT (action), "conn");
-  if (!conn)
-    conn = vinagre_bookmarks_entry_get_conn (window->priv->fav_entry_selected);
-
-  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
-
-  vinagre_cmd_open_bookmark (window, conn);
 }
 
 /* Help Menu */

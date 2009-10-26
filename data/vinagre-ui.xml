@@ -38,9 +38,7 @@
 
     <menu name="EditMenu" action="Edit">
       <menuitem name="EditPreferencesMenu" action="EditPreferences"/>
-      <!--FIXME: Study this dialog for next release
       <menuitem name="EditPluginsMenu" action="EditPlugins"/>
-      -->
     </menu>
 
     <menu name="ViewMenu" action="View">
@@ -53,10 +51,6 @@
 
     <menu name="BookmarksMenu" action="Bookmarks">
       <menuitem name="BookmarksAddMenu" action="BookmarksAdd"/>
-      <separator/>
-      <menuitem name="BookmarksNewFolderMenu" action="BookmarksNewFolder"/>
-      <menuitem name="BookmarksEditMenu" action="BookmarksEdit"/>
-      <menuitem name="BookmarksDelMenu" action="BookmarksDel"/>
       <separator/>
       <placeholder name="BookmarksList"/>
       <separator/>
@@ -77,25 +71,5 @@
     <toolitem action="MachineTakeScreenshot"/>
     <separator/>
   </toolbar>
-
-  <popup name="FavPopupConn" action="FavPopupActionConn">
-    <menuitem action="BookmarksOpen"/>
-    <separator/>
-    <menuitem action="BookmarksEdit"/>
-    <menuitem action="BookmarksDel"/>
-    <separator/>
-    <menuitem action="BookmarksNewFolder"/>
-  </popup>
-
-  <popup name="FavPopupFolder" action="FavPopupActionFolder">
-    <menuitem action="BookmarksEdit"/>
-    <menuitem action="BookmarksDel"/>
-    <separator/>
-    <menuitem action="BookmarksNewFolder"/>
-  </popup>
-
-  <popup name="FavPopupEmpty" action="FavPopupActionEmpty">
-    <menuitem action="BookmarksNewFolder"/>
-  </popup>
 
 </ui>

@@ -22,7 +22,6 @@
 #define __VINAGRE_WINDOW_PRIVATE_H__
 
 #include "vinagre-window.h"
-#include "vinagre-bookmarks-entry.h"
 #include "vinagre-notebook.h"
 
 G_BEGIN_DECLS
@@ -56,8 +55,6 @@ struct _VinagreWindowPrivate
   GtkWidget       *toolbar;
   GtkWidget       *menubar;
 
-  VinagreBookmarksEntry *fav_entry_selected;
-	
   gint            width;
   gint            height;
   GdkWindowState  window_state;

@@ -9,7 +9,7 @@ vinagre-@VINAGRE_API_VERSION@.pc: vinagre.pc
 	cp vinagre.pc vinagre-@VINAGRE_API_VERSION@.pc
 
 uidir = $(datadir)/vinagre
-ui_DATA = vinagre-ui.xml GNOME_VinagreApplet.xml vinagre.ui
+ui_DATA = vinagre-ui.xml GNOME_VinagreApplet.xml vinagre.ui vinagre-fav-ui.xml
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir       = $(datadir)/applications

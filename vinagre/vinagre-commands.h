@@ -46,10 +46,10 @@ void		vinagre_cmd_machine_quit	(GtkAction     *action,
 
 void		vinagre_cmd_edit_preferences	(GtkAction     *action,
 						 VinagreWindow *window);
-/*FIXME: Study this dialog for next release
+
 void		vinagre_cmd_edit_plugins	(GtkAction     *action,
 						 VinagreWindow *window);
-*/
+
 void		vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_show_statusbar	(GtkAction     *action,
@@ -62,14 +62,6 @@ void		vinagre_cmd_view_fullscreen	(GtkAction     *action,
 void		vinagre_cmd_open_bookmark	(VinagreWindow     *window,
 						 VinagreConnection *conn);
 void		vinagre_cmd_bookmarks_add	(GtkAction     *action,
-						 VinagreWindow *window);
-void		vinagre_cmd_bookmarks_open	(GtkAction     *action,
-						 VinagreWindow *window);
-void		vinagre_cmd_bookmarks_new_folder(GtkAction     *action,
-						 VinagreWindow *window);
-void		vinagre_cmd_bookmarks_edit	(GtkAction     *action,
-						 VinagreWindow *window);
-void		vinagre_cmd_bookmarks_del	(GtkAction     *action,
 						 VinagreWindow *window);
 
 void		vinagre_cmd_help_contents	(GtkAction     *action,
