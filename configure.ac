@@ -9,6 +9,9 @@ AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
+# Use the silent-rules feature when possible.
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "\${ACLOCAL_FLAGS}")
 
