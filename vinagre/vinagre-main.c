@@ -186,6 +186,7 @@ int main (int argc, char **argv) {
     }
 
   g_option_context_parse (context, &argc, &argv, &error);
+  g_option_context_free (context);
   if (error)
     {
       g_print ("%s\n%s\n",
