@@ -260,6 +260,12 @@ add_loader (VinagrePluginsEngine *engine,
 }
 
 static void
+free_plugin_list (gpointer data, gpointer user_data G_GNUC_UNUSED)
+{
+  g_free (data);
+}
+
+static void
 activate_engine_plugins (VinagrePluginsEngine *engine)
 {
   GSList *active_plugins, *l;
@@ -282,6 +288,9 @@ activate_engine_plugins (VinagrePluginsEngine *engine)
       if (vinagre_plugin_info_is_engine (info))
 	vinagre_plugins_engine_activate_plugin (engine, info);
     }
+
+  g_slist_foreach (active_plugins, free_plugin_list, NULL);
+  g_slist_free (active_plugins);
 }
 
 static void
