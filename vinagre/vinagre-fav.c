@@ -155,6 +155,7 @@ vinagre_fav_row_activated_cb (GtkTreeView       *treeview,
 		 signals[FAV_ACTIVATED],
 		 0, 
 		 entry);
+  g_object_unref (entry);
 }
 
 static void
@@ -173,7 +174,10 @@ vinagre_fav_selection_changed_cb (GtkTreeSelection *selection,
                           IS_AVAHI_COL, &avahi,
 			  -1);
       if (avahi)
-	entry = NULL;
+	{
+	  g_object_unref (entry);
+	  entry = NULL;
+	}
     }
 
   fav->priv->selected = entry;
@@ -186,6 +190,8 @@ vinagre_fav_selection_changed_cb (GtkTreeSelection *selection,
 		 signals[FAV_SELECTED],
 		 0, 
 		 entry);
+  if (entry)
+    g_object_unref (entry);
 }
 
 static GtkTreePath *
@@ -383,7 +389,11 @@ vinagre_fav_tooltip (GtkWidget *widget,
   gtk_tree_path_free (path);
 
   if (folder || group)
-    return FALSE;
+    {
+      if (entry)
+        g_object_unref (entry);
+      return FALSE;
+    }
 
   conn = vinagre_bookmarks_entry_get_conn (entry);
   name = vinagre_connection_get_best_name (conn);
@@ -397,6 +407,7 @@ vinagre_fav_tooltip (GtkWidget *widget,
   g_free (tip);
   g_free (name);
   g_free (uri);
+  g_object_unref (entry);
 
   return TRUE;
 }
