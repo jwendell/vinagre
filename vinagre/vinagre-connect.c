@@ -191,7 +191,7 @@ saved_history (void)
   gint len;
   GPtrArray *array;
 
-  array = g_ptr_array_new ();
+  array = g_ptr_array_new_with_free_func (g_free);
 
   filename = history_filename ();
   success = g_file_get_contents (filename,
@@ -217,6 +217,7 @@ saved_history (void)
 
   g_free (filename);
   g_free (file_contents);
+  g_free (history_from_file);
   return array;
 }
 
@@ -306,6 +307,7 @@ save_history (GtkWidget *combo) {
 
   g_free (filename);
   g_free (path);
+  g_free (host);
   g_ptr_array_free (history, TRUE);
   g_string_free (content, TRUE);
 
