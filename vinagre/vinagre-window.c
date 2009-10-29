@@ -941,7 +941,7 @@ vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
   VinagreTab *tab;
   const gchar *host, *protocol;
   gint port;
-  GList *l;
+  GList *conns, *l;
 
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
@@ -953,7 +953,7 @@ vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
   if (!host || !protocol)
     return NULL;
 
-  l = vinagre_window_get_connections (window);
+  l = conns = vinagre_window_get_connections (window);
   tab = NULL;
 
   while (l != NULL)
@@ -969,7 +969,7 @@ vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
 	}
       l = l->next;
     }
-  g_list_free (l);
+  g_list_free (conns);
 
   return tab;
 }
