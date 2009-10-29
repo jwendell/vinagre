@@ -245,6 +245,7 @@ find_entry (GtkTreeModel *model,
 {
   VinagreBookmarksEntry *entry;
   struct _find_entry    *f = data;
+  gboolean              result = FALSE;
 
   gtk_tree_model_get (model, 
 		      iter,
@@ -254,10 +255,13 @@ find_entry (GtkTreeModel *model,
     {
       f->found = TRUE;
       f->path  = gtk_tree_path_copy (path);
-      return TRUE;
+      result = TRUE;
     }
 
-  return FALSE;
+  if (entry)
+    g_object_unref (entry);
+
+  return result;
 }
 
 gboolean
