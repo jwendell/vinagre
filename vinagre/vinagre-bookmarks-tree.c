@@ -222,6 +222,8 @@ vinagre_bookmarks_tree_get_selected_entry (VinagreBookmarksTree *tree)
 			  &iter,
 			  ENTRY_COL, &entry,
 			  -1);
+      if (entry)
+	g_object_unref (entry);
       return entry;
     }
   else
