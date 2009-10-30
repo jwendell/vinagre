@@ -337,13 +337,28 @@ impl_new_tab (VinagrePlugin *plugin,
   return vinagre_vnc_tab_new (conn, window);
 }
 
+static void
+ssh_tunnel_check_toggled_cb (GtkToggleButton *button, GObject *box)
+{
+  gboolean active = gtk_toggle_button_get_active (button);
+  GtkWidget *ssh_host_entry = g_object_get_data (G_OBJECT (box), "ssh_host");
+
+  gtk_widget_set_sensitive (ssh_host_entry, active);
+
+  if (active)
+    gtk_widget_grab_focus (ssh_host_entry);
+  else
+    gtk_entry_set_text (GTK_ENTRY (ssh_host_entry), "");
+}
+
 static GtkWidget *
 impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 {
-  GtkWidget *box, *check, *label, *combo, *depth_box;
+  GtkWidget *box, *check, *label, *combo, *depth_box, *ssh_box, *ssh_host_entry;
   GtkTable  *table;
   gchar     *str;
   gint      depth_profile;
+  const gchar *ssh_host = NULL;
 
   box = gtk_vbox_new (FALSE, 0);
 
@@ -355,7 +370,7 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
   gtk_misc_set_padding (GTK_MISC (label), 0, 6);
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
-  table = GTK_TABLE (gtk_table_new (4, 2, FALSE));
+  table = GTK_TABLE (gtk_table_new (5, 2, FALSE));
   label = gtk_label_new ("  ");
   gtk_table_attach (table, label, 0, 1, 0, 1, GTK_SHRINK, GTK_SHRINK, 0, 0);
 
@@ -402,6 +417,38 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
   gtk_box_pack_start (GTK_BOX (depth_box), GTK_WIDGET (combo), FALSE, FALSE, 0);
   gtk_table_attach_defaults (table, depth_box, 1, 2, 3, 4);
+
+  /* SSH Tunneling */
+  ssh_box = gtk_hbox_new (FALSE, 4);
+
+  /* Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel*/
+  check = gtk_check_button_new_with_mnemonic (_("Use h_ost"));
+  g_object_set_data (G_OBJECT (box), "use_ssh", check);
+  gtk_box_pack_start (GTK_BOX (ssh_box), check, FALSE, FALSE, 0);
+
+  ssh_host_entry = gtk_entry_new ();
+  gtk_widget_set_sensitive (ssh_host_entry, FALSE);
+  g_object_set_data (G_OBJECT (box), "ssh_host", ssh_host_entry);
+  /* Translators: This is the tooltip of the SSH tunneling entry */
+  gtk_widget_set_tooltip_text (ssh_host_entry, _("hostname or user@hostname"));
+  gtk_box_pack_start (GTK_BOX (ssh_box), ssh_host_entry, FALSE, FALSE, 0);
+
+  /* Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel*/
+  label = gtk_label_new_with_mnemonic (_("as a SSH tunnel"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_box_pack_start (GTK_BOX (ssh_box), label, FALSE, FALSE, 0);
+
+  g_signal_connect (check,
+		    "toggled",
+		    G_CALLBACK (ssh_tunnel_check_toggled_cb),
+		    box);
+  if (VINAGRE_IS_VNC_CONNECTION (conn))
+    ssh_host = vinagre_vnc_connection_get_ssh_tunnel_host (VINAGRE_VNC_CONNECTION (conn));
+  if (ssh_host)
+    gtk_entry_set_text (GTK_ENTRY (ssh_host_entry), ssh_host);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), ssh_host && *ssh_host);
+
+  gtk_table_attach_defaults (table, ssh_box, 1, 2, 4, 5);
 
   gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (table), FALSE, FALSE, 0);
   return box;

@@ -275,13 +275,14 @@ vnc_fill_conn_from_file (VinagreConnection *conn, GKeyFile *file)
 static void
 vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
 {
-  GtkWidget *view_only, *scaling, *depth_combo, *lossy;
+  GtkWidget *view_only, *scaling, *depth_combo, *lossy, *ssh_host;
 
   view_only = g_object_get_data (G_OBJECT (widget), "view_only");
   scaling = g_object_get_data (G_OBJECT (widget), "scaling");
   depth_combo = g_object_get_data (G_OBJECT (widget), "depth_combo");
   lossy = g_object_get_data (G_OBJECT (widget), "lossy");
-  if (!view_only || !scaling || !depth_combo || !lossy)
+  ssh_host = g_object_get_data (G_OBJECT (widget), "ssh_host");
+  if (!view_only || !scaling || !depth_combo || !lossy || !ssh_host)
     {
       g_warning ("Wrong widget passed to vnc_parse_options_widget()");
       return;
@@ -292,6 +293,7 @@ vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
 		"scaling", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (scaling)),
 		"depth-profile", gtk_combo_box_get_active (GTK_COMBO_BOX (depth_combo)),
 		"lossy-encoding", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (lossy)),
+		"ssh-tunnel-host", gtk_entry_get_text (GTK_ENTRY (ssh_host)),
 		NULL);
 }
 
