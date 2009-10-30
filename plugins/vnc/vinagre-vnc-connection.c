@@ -33,6 +33,7 @@ struct _VinagreVncConnectionPrivate
   gint     fd;
   gint     depth_profile;
   gboolean lossy_encoding;
+  gchar    *ssh_tunnel_host;
 };
 
 enum
@@ -44,7 +45,8 @@ enum
   PROP_SHARED,
   PROP_FD,
   PROP_DEPTH_PROFILE,
-  PROP_LOSSY_ENCODING
+  PROP_LOSSY_ENCODING,
+  PROP_SSH_TUNNEL_HOST
 };
 
 #define VINAGRE_VNC_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_VNC_CONNECTION, VinagreVncConnectionPrivate))
@@ -62,6 +64,7 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->fd = 0;
   conn->priv->depth_profile = 0;
   conn->priv->lossy_encoding = FALSE;
+  conn->priv->ssh_tunnel_host = NULL;
 }
 
 static void
@@ -76,6 +79,7 @@ vinagre_vnc_connection_finalize (GObject *object)
   VinagreVncConnection *conn = VINAGRE_VNC_CONNECTION (object);
 
   g_free (conn->priv->desktop_name);
+  g_free (conn->priv->ssh_tunnel_host);
 
   G_OBJECT_CLASS (vinagre_vnc_connection_parent_class)->finalize (object);
 }
@@ -117,6 +121,10 @@ vinagre_vnc_connection_set_property (GObject *object, guint prop_id, const GValu
 
       case PROP_LOSSY_ENCODING:
 	vinagre_vnc_connection_set_lossy_encoding (conn, g_value_get_boolean (value));
+	break;
+
+      case PROP_SSH_TUNNEL_HOST:
+	vinagre_vnc_connection_set_ssh_tunnel_host (conn, g_value_get_string (value));
 	break;
 
       default:
@@ -164,6 +172,10 @@ vinagre_vnc_connection_get_property (GObject *object, guint prop_id, GValue *val
 	g_value_set_boolean (value, conn->priv->lossy_encoding);
 	break;
 
+      case PROP_SSH_TUNNEL_HOST:
+	g_value_set_string (value, conn->priv->ssh_tunnel_host);
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -180,6 +192,9 @@ vnc_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"scaling", "%d", vnc_conn->priv->scaling);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"depth_profile", "%d", vnc_conn->priv->depth_profile);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"lossy_encoding", "%d", vnc_conn->priv->lossy_encoding);
+
+  if (vnc_conn->priv->ssh_tunnel_host && *vnc_conn->priv->ssh_tunnel_host)
+    xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"ssh_tunnel_host", "%s", vnc_conn->priv->ssh_tunnel_host);
 }
 
 static void
@@ -211,6 +226,10 @@ vnc_parse_item (VinagreConnection *conn, xmlNode *root)
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"lossy_encoding"))
 	{
 	  vinagre_vnc_connection_set_lossy_encoding (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+	}
+      else if (!xmlStrcmp(curr->name, (const xmlChar *)"ssh_tunnel_host"))
+	{
+	  vinagre_vnc_connection_set_ssh_tunnel_host (vnc_conn, (const gchar *)s_value);
 	}
 
       xmlFree (s_value);
@@ -384,6 +403,18 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
                                                         G_PARAM_STATIC_NAME |
                                                         G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property (object_class,
+                                   PROP_SSH_TUNNEL_HOST,
+                                   g_param_spec_string ("ssh-tunnel-host",
+                                                        "SSH Tunnel Host",
+	                                                "hostname used to create the SSH tunnel",
+                                                        NULL,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
 }
 
 VinagreConnection *
@@ -506,6 +537,23 @@ vinagre_vnc_connection_get_lossy_encoding (VinagreVncConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), FALSE);
 
   return conn->priv->lossy_encoding;
+}
+
+void
+vinagre_vnc_connection_set_ssh_tunnel_host (VinagreVncConnection *conn,
+					    const gchar *host)
+{
+  g_return_if_fail (VINAGRE_IS_VNC_CONNECTION (conn));
+
+  g_free (conn->priv->ssh_tunnel_host);
+  conn->priv->ssh_tunnel_host = g_strdup (host);
+}
+const gchar *
+vinagre_vnc_connection_get_ssh_tunnel_host (VinagreVncConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), NULL);
+
+  return conn->priv->ssh_tunnel_host;
 }
 
 /* vim: set ts=8: */

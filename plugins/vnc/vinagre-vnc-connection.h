@@ -83,6 +83,10 @@ gboolean	    vinagre_vnc_connection_get_lossy_encoding (VinagreVncConnection *co
 void		    vinagre_vnc_connection_set_lossy_encoding (VinagreVncConnection *conn,
 							       gboolean enable);
 
+const gchar*	    vinagre_vnc_connection_get_ssh_tunnel_host (VinagreVncConnection *conn);
+void		    vinagre_vnc_connection_set_ssh_tunnel_host (VinagreVncConnection *conn,
+								const gchar *host);
+
 G_END_DECLS
 
 #endif /* __VINAGRE_VNC_CONNECTION_H__  */
