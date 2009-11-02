@@ -307,7 +307,6 @@ save_history (GtkWidget *combo) {
 
   g_free (filename);
   g_free (path);
-  g_free (host);
   g_ptr_array_free (history, TRUE);
   g_string_free (content, TRUE);
 
