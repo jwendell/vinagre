@@ -547,4 +547,58 @@ vinagre_gtk_button_new_with_stock_icon (const gchar *label,
         return button;
 }
 
+/**
+ * vinagre_utils_ask_question:
+ * @parent: transient parent, or NULL for none
+ * @message: The message to be displayed, if it contains multiple lines,
+ *  the first one is considered as the title.
+ * @choices: NULL-terminated array of button's labels of the dialog
+ * @choice: Place to store the selected button. Zero is the first.
+ *
+ * Displays a dialog with a message and some options to the user.
+ *
+ * Returns TRUE if the user has selected any option, FALSE if the dialog
+ *  was canceled.
+ */
+gboolean
+vinagre_utils_ask_question (GtkWindow  *parent,
+			    const char *message,
+			    char       **choices,
+			    int        *choice)
+{
+  gchar **messages;
+  GtkWidget *d;
+  int i, n_choices, result;
+
+  g_return_val_if_fail (message && choices && choice, FALSE);
+
+  messages = g_strsplit (message, "\n", 2);
+
+  d = gtk_message_dialog_new (parent,
+			      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			      GTK_MESSAGE_QUESTION,
+			      GTK_BUTTONS_NONE,
+			      "%s",
+			      messages[0]);
+
+  if (g_strv_length (messages) > 1)
+    gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (d),
+						"%s",
+						messages[1]);
+  g_strfreev (messages);
+
+  n_choices = g_strv_length (choices);
+  for (i = 0; i < n_choices; i++)
+    gtk_dialog_add_button (GTK_DIALOG (d), choices[i], i);
+
+  result = gtk_dialog_run (GTK_DIALOG (d));
+  gtk_widget_destroy (d);
+
+  if (result == GTK_RESPONSE_NONE || result == GTK_RESPONSE_DELETE_EVENT)
+    return FALSE;
+
+  *choice = result;
+  return TRUE;
+}
+
 /* vim: set ts=8: */

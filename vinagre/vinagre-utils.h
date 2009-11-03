@@ -2,7 +2,7 @@
  * vinagre-utils.h
  * This file is part of vinagre
  *
- * Copyright (C) 2007,2008 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2007,2008,2009 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,5 +66,10 @@ gboolean	vinagre_utils_parse_boolean		(const gchar* value);
 
 GtkWidget      *vinagre_gtk_button_new_with_stock_icon   (const gchar *label,
                                                          const gchar *stock_id);
+
+gboolean	vinagre_utils_ask_question		(GtkWindow  *parent,
+							 const char *message,
+							 char       **choices,
+							 int        *choice);
 #endif  /* __VINAGRE_UTILS_H__  */
 /* vim: set ts=8: */
