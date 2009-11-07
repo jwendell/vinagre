@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: vinagre MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-10-09 06:59+0000\n"
-"PO-Revision-Date: 2009-10-09 14:31+0300\n"
+"POT-Creation-Date: 2009-11-03 19:58+0000\n"
+"PO-Revision-Date: 2009-11-07 09:58+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -34,12 +34,10 @@ msgstr "Ligipääs kaugtöölaudadele"
 msgid "Remote Desktop Viewer"
 msgstr "Kaugtöölaudade vaataja"
 
-msgid "All fields above are mandatory"
-msgstr "Kõik ülemised väljad on kohustuslikud"
-
 msgid "Authentication is required"
 msgstr "Autentimine on vajalik"
 
+#. setup label
 msgid "Bookmarks"
 msgstr "Järjehoidjad"
 
@@ -227,6 +225,30 @@ msgstr "_Kirjutuskaitsega"
 msgid "_Scaling"
 msgstr "_Skaleerimine"
 
+msgid "_Use JPEG Compression"
+msgstr ""
+
+msgid "This might not work on all sort of VNC servers"
+msgstr ""
+
+msgid "_Depth Color:"
+msgstr ""
+
+msgid "Use Server Settings"
+msgstr ""
+
+msgid "True Color (24 bits)"
+msgstr ""
+
+msgid "High Color (16 bits)"
+msgstr ""
+
+msgid "Low Color (8 bits)"
+msgstr ""
+
+msgid "Ultra Low Color (3 bits)"
+msgstr ""
+
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
 msgid "VNC Files"
 msgstr "VNC failid"
@@ -272,6 +294,13 @@ msgstr "_Algne suurus"
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Akna suurus sobitatakse kaugtöölaua suurusega"
 
+msgid "_Refresh Screen"
+msgstr ""
+
+msgid "Requests an update of the screen"
+msgstr ""
+
+#. Send Ctrl-alt-del
 msgid "Send Ctrl-Alt-Del"
 msgstr "Saada Ctrl+Alt+Del"
 
@@ -297,6 +326,47 @@ msgstr ""
 
 msgid "VNC support"
 msgstr "VNC tugi"
+
+msgid "IPv4:"
+msgstr "IPv4:"
+
+msgid ""
+"\n"
+"\n"
+"IPv6:"
+msgstr ""
+"\n"
+"\n"
+"IPv6:"
+
+#, c-format
+msgid "On the port %d"
+msgstr ""
+
+msgid "Incoming VNC connection arrived but there is none active window"
+msgstr ""
+
+#. vim: set ts=8:
+msgid ""
+"By activating reverse connections you can access machines that are behind a "
+"firewall. The remote side is supposed to initiate the connection with you. "
+"For further information, checkout the help."
+msgstr ""
+
+msgid "Connectivity"
+msgstr ""
+
+msgid "Reverse Connections"
+msgstr ""
+
+msgid "This machine is reachable through the following IP address(es):"
+msgstr ""
+
+msgid "_Always Enabled"
+msgstr "_Alati lubatud"
+
+msgid "_Enable Reverse Connections"
+msgstr ""
 
 msgid "A menu to quickly access remote machines"
 msgstr "Kaugmasinaga kiirelt ühenduse võtmise menüü"
@@ -455,11 +525,42 @@ msgstr "Faili pole võimalik avada."
 msgid "The file was not recognized by any of the plugins."
 msgstr "Ükski pluginatest ei tundnud seda faili ära."
 
+msgid "_New Folder"
+msgstr "_Uus kaust"
+
+msgid "Create a new folder"
+msgstr "Loo uus kataloog"
+
+msgid "_Open bookmark"
+msgstr "_Ava järjehoidja"
+
+msgid "Connect to this machine"
+msgstr "Selle masinaga ühenduse võtmine"
+
+msgid "_Edit bookmark"
+msgstr "_Redigeeri järjehoidjat"
+
+msgid "Edit the details of selected bookmark"
+msgstr "Valitud järjehoidja üksikasjade muutmine"
+
+msgid "_Remove from bookmarks"
+msgstr "_Eemalda järjehoidjate hulgast"
+
+msgid "Remove current selected connection from bookmarks"
+msgstr "Valitud järjehoidja eemaldamine järjehoidjate seast"
+
+#, c-format
+msgid "Could not merge UI XML file: %s"
+msgstr "Kasutajaliidese XML-faili pole võimalik ühendada: %s"
+
 msgid "Invalid operation"
 msgstr "Sobimatu tegevus"
 
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Aknasse lohistatud andmed ei ole sobivad."
+
+msgid "Hide panel"
+msgstr "Peida paneel"
 
 msgid "Hosts nearby"
 msgstr "Lähedalasuvad hostid"
@@ -642,34 +743,11 @@ msgstr "Programmist väljumine"
 msgid "Edit the application preferences"
 msgstr "Redigeeri rakenduse eelistusi"
 
-#. FIXME: Study this dialog for next release
-#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
-#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
-#.
-#. Bookmarks menu
-msgid "_Open bookmark"
-msgstr "_Ava järjehoidja"
+msgid "_Plugins"
+msgstr "_Pluginad"
 
-msgid "Connect to this machine"
-msgstr "Selle masinaga ühenduse võtmine"
-
-msgid "_Edit bookmark"
-msgstr "_Redigeeri järjehoidjat"
-
-msgid "Edit the details of selected bookmark"
-msgstr "Valitud järjehoidja üksikasjade muutmine"
-
-msgid "_Remove from bookmarks"
-msgstr "_Eemalda järjehoidjate hulgast"
-
-msgid "Remove current selected connection from bookmarks"
-msgstr "Valitud järjehoidja eemaldamine järjehoidjate seast"
-
-msgid "_New Folder"
-msgstr "_Uus kaust"
-
-msgid "Create a new folder"
-msgstr "Loo uus kataloog"
+msgid "Select plugins"
+msgstr "Pluginate valimine"
 
 #. Help menu
 msgid "_Contents"
@@ -787,10 +865,6 @@ msgstr ""
 msgid "Vinagre Website"
 msgstr "Vinagre veebisait"
 
-#, c-format
-msgid "Could not merge vinagre-ui.xml: %s"
-msgstr "Faili vinagre-ui.xml pole võimalik ühendada: %s"
-
 msgid "_Recent connections"
 msgstr "_Hiljutised ühendused"
 
@@ -798,3 +872,6 @@ msgstr "_Hiljutised ühendused"
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d avamine"
+
+#~ msgid "All fields above are mandatory"
+#~ msgstr "Kõik ülemised väljad on kohustuslikud"
