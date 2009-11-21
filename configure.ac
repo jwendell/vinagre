@@ -77,7 +77,9 @@ PKG_CHECK_MODULES(VINAGRE, \
   gconf-2.0 >= $GCONF_REQUIRED \
   gthread-2.0 >= $GTHREAD_REQUIRED \
   gnome-keyring-1 \
-  libxml-2.0 >= $XML_REQUIRED
+  libxml-2.0 >= $XML_REQUIRED \
+  dbus-glib-1 \
+  x11
 )
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
