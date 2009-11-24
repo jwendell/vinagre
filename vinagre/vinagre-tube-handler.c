@@ -516,7 +516,7 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
 
   dialog = gtk_message_dialog_new (GTK_WINDOW (priv->window),
       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION,
-      GTK_BUTTONS_OK_CANCEL, _("%s wants to share his desktop with you."),
+      GTK_BUTTONS_OK_CANCEL, _("%s wants to share their desktop with you."),
       alias);
 
   gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
