@@ -133,7 +133,7 @@ vinagre_tubes_manager_disconnected_cb (VinagreTubeHandler *htube,
   g_object_unref (htube);
 }
 
-static void
+static gboolean
 vinagre_tubes_manager_handle_channels (TpHandler         *self,
                                        TpAccount         *account,
                                        TpConnection      *connection,
@@ -155,6 +155,8 @@ vinagre_tubes_manager_handle_channels (TpHandler         *self,
       g_signal_connect (G_OBJECT (htube), "disconnected", G_CALLBACK
           (vinagre_tubes_manager_disconnected_cb), self);
     }
+
+  return TRUE;
 }
 
 static void
