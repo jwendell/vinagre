@@ -42,7 +42,7 @@ CLEANFILES = \
 	$(mime_DATA) \
 	$(schemas_DATA) \
 	$(pkgconfig_DATA) \
-	org.gnome.Empathy.StreamTubeHandler.rfb.service
+	org.freedesktop.Telepathy.Client.Vinagre.service
 
 EXTRA_DIST = \
 	$(glade_DATA) \
@@ -53,14 +53,14 @@ EXTRA_DIST = \
 	$(schemas_in_files) \
 	vinagre.pc.in \
 	vinagre.schemas.in.in \
-	org.gnome.Empathy.StreamTubeHandler.rfb.service.in
+	org.freedesktop.Telepathy.Client.Vinagre.service.in
 
 if TELEPATHY
 
 servicedir = $(datadir)/dbus-1/services
-service_DATA = org.gnome.Empathy.StreamTubeHandler.rfb.service
+service_DATA = org.freedesktop.Telepathy.Client.Vinagre.service
 
-org.gnome.Empathy.StreamTubeHandler.rfb.service: org.gnome.Empathy.StreamTubeHandler.rfb.service.in \
+org.freedesktop.Telepathy.Client.Vinagre.service: org.freedesktop.Telepathy.Client.Vinagre.service.in \
 		Makefile
 	@sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
 
