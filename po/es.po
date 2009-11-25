@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-10-26 13:43+0000\n"
-"PO-Revision-Date: 2009-10-29 18:42+0100\n"
+"POT-Creation-Date: 2009-11-24 23:03+0000\n"
+"PO-Revision-Date: 2009-11-25 08:25+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Acceda a escritorios remotos"
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
 #: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
-#: ../vinagre/vinagre-main.c:198
+#: ../vinagre/vinagre-main.c:199
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
 
@@ -42,7 +42,7 @@ msgid "Authentication is required"
 msgstr "Se necesita autenticación"
 
 #. setup label
-#: ../data/vinagre.ui.h:2 ../vinagre/vinagre-fav.c:840
+#: ../data/vinagre.ui.h:2 ../vinagre/vinagre-fav.c:851
 msgid "Bookmarks"
 msgstr "Marcadores"
 
@@ -59,7 +59,7 @@ msgid "Folder"
 msgstr "Carpeta"
 
 #: ../data/vinagre.ui.h:6 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:140 ../vinagre/vinagre-fav.c:394
+#: ../plugins/vnc/vinagre-vnc-tab.c:140 ../vinagre/vinagre-fav.c:404
 msgid "Host:"
 msgstr "Equipo:"
 
@@ -458,12 +458,10 @@ msgstr ""
 "usted. Para obtener más información consulte la ayuda."
 
 #: ../plugins/vnc/vnc.ui.h:2
-#| msgid "Connection"
 msgid "Connectivity"
 msgstr "Conectividad"
 
 #: ../plugins/vnc/vnc.ui.h:3
-#| msgid "_Reverse Connections..."
 msgid "Reverse Connections"
 msgstr "Conexiones inversas"
 
@@ -472,12 +470,10 @@ msgid "This machine is reachable through the following IP address(es):"
 msgstr "Se puede llegar a esta máquina a través de la(s) siguiente(s) IP:"
 
 #: ../plugins/vnc/vnc.ui.h:5
-#| msgid "Enabled"
 msgid "_Always Enabled"
 msgstr "_Siempre activado"
 
 #: ../plugins/vnc/vnc.ui.h:6
-#| msgid "_Reverse Connections..."
 msgid "_Enable Reverse Connections"
 msgstr "Activar conexiones in_versas"
 
@@ -514,8 +510,8 @@ msgstr "Error al inicializar los marcadores: %s"
 
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:463
-#: ../vinagre/vinagre-fav.c:754 ../vinagre/vinagre-main.c:100
+#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:466
+#: ../vinagre/vinagre-fav.c:765 ../vinagre/vinagre-main.c:100
 #: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:267
 msgid "Unknown error"
 msgstr "Error desconocido"
@@ -674,17 +670,17 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "No se pudo abrir el siguiente archivo:"
 msgstr[1] "No se pudieron abrir los siguientes archivos:"
 
-#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
-#: ../vinagre/vinagre-connect.c:428
+#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:331
+#: ../vinagre/vinagre-connect.c:431
 msgid "Could not get the active protocol in the protocol list."
 msgstr "No se pudo obtener el protocolo activo en la lista de protocolos."
 
-#: ../vinagre/vinagre-connect.c:313
+#: ../vinagre/vinagre-connect.c:314
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Error al guardar el archivo de histórico: %s"
 
-#: ../vinagre/vinagre-connect.c:340
+#: ../vinagre/vinagre-connect.c:341
 msgid "Choose a Remote Desktop"
 msgstr "Elegir un escritorio remoto"
 
@@ -696,58 +692,56 @@ msgstr "No se pudo abrir el archivo."
 msgid "The file was not recognized by any of the plugins."
 msgstr "Ninguno de los complementos reconoció el archivo"
 
-#: ../vinagre/vinagre-fav.c:556
+#: ../vinagre/vinagre-fav.c:567
 msgid "_New Folder"
 msgstr "Carpeta _nueva"
 
-#: ../vinagre/vinagre-fav.c:557
+#: ../vinagre/vinagre-fav.c:568
 msgid "Create a new folder"
 msgstr "Crear una carpeta nueva"
 
-#: ../vinagre/vinagre-fav.c:562
+#: ../vinagre/vinagre-fav.c:573
 msgid "_Open bookmark"
 msgstr "_Abrir marcador"
 
-#: ../vinagre/vinagre-fav.c:563
+#: ../vinagre/vinagre-fav.c:574
 msgid "Connect to this machine"
 msgstr "Conectar con esta máquina"
 
-#: ../vinagre/vinagre-fav.c:564
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Edit bookmark"
 msgstr "_Editar marcador"
 
-#: ../vinagre/vinagre-fav.c:565
+#: ../vinagre/vinagre-fav.c:576
 msgid "Edit the details of selected bookmark"
 msgstr "Editar los detalles del marcador seleccionado"
 
-#: ../vinagre/vinagre-fav.c:566
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Remove from bookmarks"
 msgstr "_Quitar de los marcadores"
 
-#: ../vinagre/vinagre-fav.c:567
+#: ../vinagre/vinagre-fav.c:578
 msgid "Remove current selected connection from bookmarks"
 msgstr "Eliminar la conexión actualmente seleccionada de los marcadores"
 
-#: ../vinagre/vinagre-fav.c:585 ../vinagre/vinagre-window.c:398
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:398
 #, c-format
-#| msgid "Could not load builder file: %s"
 msgid "Could not merge UI XML file: %s"
 msgstr "No se pudo mezclar el archivo de IU XML: %s"
 
-#: ../vinagre/vinagre-fav.c:743
+#: ../vinagre/vinagre-fav.c:754
 msgid "Invalid operation"
 msgstr "Operación no válida"
 
-#: ../vinagre/vinagre-fav.c:744
+#: ../vinagre/vinagre-fav.c:755
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Los datos recibidos de la operación arrastrar y soltar no son válidos."
 
-#: ../vinagre/vinagre-fav.c:848
-#| msgid "Side _Panel"
+#: ../vinagre/vinagre-fav.c:859
 msgid "Hide panel"
 msgstr "Ocultar panel"
 
-#: ../vinagre/vinagre-fav.c:1033
+#: ../vinagre/vinagre-fav.c:1044
 msgid "Hosts nearby"
 msgstr "Equipos cercanos"
 
@@ -788,7 +782,7 @@ msgstr[1] "Han ocurrido los siguientes errores:"
 msgid "- Remote Desktop Viewer"
 msgstr "- Visor de escritorios remotos"
 
-#: ../vinagre/vinagre-main.c:193
+#: ../vinagre/vinagre-main.c:194
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
@@ -944,7 +938,8 @@ msgstr "No se puede obtener el avatar: %s"
 
 #: ../vinagre/vinagre-tube-handler.c:519
 #, c-format
-msgid "%s wants to share his desktop with you."
+#| msgid "%s wants to share his desktop with you."
+msgid "%s wants to share their desktop with you."
 msgstr "%s quiere compartir su escritorio con usted."
 
 #: ../vinagre/vinagre-tube-handler.c:524
