@@ -249,11 +249,6 @@ libvinagre_la_SOURCES += \
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
 	$(NULL)
 
-dbus-interface-glue.h: tube-handler.xml
-	dbus-binding-tool --prefix=vinagre_tubes_manager --mode=glib-server $< > dbus-interface-glue.h
-
-BUILT_SOURCES += dbus-interface-glue.h
-
 endif
 
 DISTCLEANFILES =		\
@@ -264,7 +259,6 @@ DISTCLEANFILES =		\
 
 EXTRA_DIST =					\
 	GNOME_VinagreApplet.server.in.in	\
-	tube-handler.xml			\
 	$(NULL)
 
 dist-hook:
