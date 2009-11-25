@@ -19,12 +19,15 @@
  *
  * Authors:
  *      Arnaud Maillet <arnaud.maillet@collabora.co.uk>
+ *      Danielle Madeley <danielle.madeley@collabora.co.uk>
  */
 
 #ifndef __VINAGRE_TUBES_MANAGER_H__
 #define __VINAGRE_TUBES_MANAGER_H__
 
 #include <glib-object.h>
+
+#include <telepathy-glib/handler.h>
 
 #include "vinagre-window.h"
 
@@ -48,12 +51,12 @@ typedef struct _VinagreTubesManagerClass VinagreTubesManagerClass;
 
 struct _VinagreTubesManager
 {
-  GObject parent_instance;
+  TpHandler parent_instance;
 };
 
 struct _VinagreTubesManagerClass
 {
-  GObjectClass parent_class;
+  TpHandlerClass parent_class;
 };
 
 GType vinagre_tubes_manager_get_type (void) G_GNUC_CONST;
