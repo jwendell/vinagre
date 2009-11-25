@@ -53,9 +53,13 @@ EXTRA_DIST = \
 	$(schemas_in_files) \
 	vinagre.pc.in \
 	vinagre.schemas.in.in \
+	Vinagre.client \
 	org.freedesktop.Telepathy.Client.Vinagre.service.in
 
 if TELEPATHY
+
+clientfiledir = $(datarootdir)/telepathy/clients
+clientfile_DATA = Vinagre.client
 
 servicedir = $(datadir)/dbus-1/services
 service_DATA = org.freedesktop.Telepathy.Client.Vinagre.service
