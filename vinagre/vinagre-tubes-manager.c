@@ -241,6 +241,8 @@ vinagre_tubes_manager_new (VinagreWindow *vinagre_window)
               TP_IFACE_CHANNEL_TYPE_STREAM_TUBE,
       TP_IFACE_CHANNEL ".TargetHandleType", G_TYPE_UINT,
               TP_HANDLE_TYPE_CONTACT,
+      TP_IFACE_CHANNEL ".Requested", G_TYPE_BOOLEAN,
+              FALSE,
       TP_IFACE_CHANNEL_TYPE_STREAM_TUBE ".Service", G_TYPE_STRING,
               SERVICE,
       NULL);
