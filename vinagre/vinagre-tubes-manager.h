@@ -27,7 +27,7 @@
 
 #include <glib-object.h>
 
-#include <telepathy-glib/handler.h>
+#include "handler.h"
 
 #include "vinagre-window.h"
 
