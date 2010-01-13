@@ -34,11 +34,11 @@
 static void handler_iface_init (gpointer, gpointer);
 static void requests_iface_init (gpointer, gpointer);
 
-#define GET_PRIVATE(obj)	(G_TYPE_INSTANCE_GET_PRIVATE ((obj), TP_TYPE_HANDLER, TpHandlerPrivate))
+#define GET_PRIVATE(obj)	(G_TYPE_INSTANCE_GET_PRIVATE ((obj), TP_TYPE_HANDLER, VinagreHandlerPrivate))
 
 /**
  * SECTION:handler
- * @title: TpHandler
+ * @title: VinagreHandler
  * @short_description: convenience class to implement a Telepathy Handler
  *
  * Provides a #GObject implementing the Client.Handler interface that can be
@@ -62,7 +62,7 @@ static void requests_iface_init (gpointer, gpointer);
  *     );
  *  g_ptr_array_add (filter, map);
  *
- * handler = tp_handler_new (filter, FALSE, handle_channels);
+ * handler = vinagre_handler_new (filter, FALSE, handle_channels);
  *
  * g_assert (tp_dbus_daemon_request_name (tpdbus,
  *     TP_CLIENT_BUS_NAME_BASE CLIENT_NAME,
@@ -73,7 +73,7 @@ static void requests_iface_init (gpointer, gpointer);
  * </programlisting></example>
  */
 
-G_DEFINE_TYPE_WITH_CODE (TpHandler, tp_handler, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (VinagreHandler, vinagre_handler, G_TYPE_OBJECT,
     G_IMPLEMENT_INTERFACE (TP_TYPE_SVC_DBUS_PROPERTIES,
       tp_dbus_properties_mixin_iface_init);
     G_IMPLEMENT_INTERFACE (TP_TYPE_SVC_CLIENT, NULL);
@@ -104,21 +104,21 @@ enum /* signals */
   LAST_SIGNAL
 };
 
-static guint tp_handler_signals[LAST_SIGNAL] = { 0, };
+static guint vinagre_handler_signals[LAST_SIGNAL] = { 0, };
 
-typedef struct _TpHandlerPrivate TpHandlerPrivate;
-struct _TpHandlerPrivate
+typedef struct _VinagreHandlerPrivate VinagreHandlerPrivate;
+struct _VinagreHandlerPrivate
 {
   GList                     *channels;
   GHashTable                *requests;
   GPtrArray                 *channel_filter;
   gboolean                   bypass_approval;
-  TpHandlerHandleChannelsCb  callback;
+  VinagreHandlerHandleChannelsCb  callback;
 };
 
 typedef struct
 {
-  TpHandler              *self;
+  VinagreHandler              *self;
   TpAccount              *account;
   TpConnection           *connection;
   TpChannel             **channels;
@@ -129,11 +129,11 @@ typedef struct
 } HandleChannelsCall;
 
 static TpChannelRequest *
-lookup_channel_request (TpHandler  *self,
+lookup_channel_request (VinagreHandler  *self,
                         const char *request_path,
                         GHashTable *properties)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
   TpChannelRequest *request;
 
   request = g_hash_table_lookup (priv->requests, request_path);
@@ -163,7 +163,7 @@ lookup_channel_request (TpHandler  *self,
 static void
 handle_channels_call_maybe (HandleChannelsCall *call)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (call->self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (call->self);
 
   /* if all of our D-Bus objects are ready, call the callback */
   if (!tp_account_is_prepared (call->account, TP_ACCOUNT_FEATURE_CORE) ||
@@ -266,7 +266,7 @@ channel_closed_cb (TpChannel *channel,
                    gpointer   user_data,
                    GObject   *self)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
 
   DEBUG ("Channel Closed: %s", tp_proxy_get_object_path (channel));
 
@@ -281,8 +281,8 @@ channel_ready_cb (TpChannel    *channel,
                   gpointer      user_data)
 {
   HandleChannelsCall *call = user_data;
-  TpHandler *self = TP_HANDLER (call->self);
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandler *self = VINAGRE_HANDLER (call->self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
   GError *error2 = NULL;
 
   if (error != NULL)
@@ -305,7 +305,7 @@ channel_ready_cb (TpChannel    *channel,
 }
 
 static void
-tp_handler_handle_channels (TpSvcClientHandler   *self,
+vinagre_handler_handle_channels (TpSvcClientHandler   *self,
                             const char            *account_path,
                             const char            *connection_path,
                             const GPtrArray       *channels,
@@ -322,7 +322,7 @@ tp_handler_handle_channels (TpSvcClientHandler   *self,
   DEBUG ("HandleChannels called");
 
   call = g_slice_new0 (HandleChannelsCall);
-  call->self = TP_HANDLER (self);
+  call->self = VINAGRE_HANDLER (self);
 
   bus = tp_dbus_daemon_dup (&error);
   if (error != NULL)
@@ -368,7 +368,7 @@ tp_handler_handle_channels (TpSvcClientHandler   *self,
     {
       const char *request_path = g_ptr_array_index (requests_satisfied, i);
 
-      call->requests_satisfied[i] = lookup_channel_request (TP_HANDLER (self),
+      call->requests_satisfied[i] = lookup_channel_request (VINAGRE_HANDLER (self),
           request_path, NULL);
     }
 
@@ -380,7 +380,7 @@ tp_handler_handle_channels (TpSvcClientHandler   *self,
 }
 
 static void
-tp_handler_add_request (TpSvcClientInterfaceRequests *self,
+vinagre_handler_add_request (TpSvcClientInterfaceRequests *self,
                         const char                   *request_path,
                         GHashTable                   *properties,
                         DBusGMethodInvocation        *context)
@@ -389,32 +389,32 @@ tp_handler_add_request (TpSvcClientInterfaceRequests *self,
 
   DEBUG ("AddRequest called: %s", request_path);
 
-  request = lookup_channel_request (TP_HANDLER (self),
+  request = lookup_channel_request (VINAGRE_HANDLER (self),
       request_path, properties);
 
-  g_signal_emit (self, tp_handler_signals[ADD_REQUEST], 0, request, properties);
+  g_signal_emit (self, vinagre_handler_signals[ADD_REQUEST], 0, request, properties);
   tp_svc_client_interface_requests_return_from_add_request (context);
 
   g_object_unref (request);
 }
 
 static void
-tp_handler_remove_request (TpSvcClientInterfaceRequests *self,
+vinagre_handler_remove_request (TpSvcClientInterfaceRequests *self,
                            const char                   *request_path,
                            const char                   *error_name,
                            const char                   *message,
                            DBusGMethodInvocation        *context)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
   TpChannelRequest *request;
 
   DEBUG ("RemoveRequest called: %s", request_path);
 
-  request = lookup_channel_request (TP_HANDLER (self), request_path, NULL);
+  request = lookup_channel_request (VINAGRE_HANDLER (self), request_path, NULL);
   /* the request is no longer pending, drop it from the map */
   g_hash_table_remove (priv->requests, request_path);
 
-  g_signal_emit (self, tp_handler_signals[REMOVE_REQUEST], 0, request,
+  g_signal_emit (self, vinagre_handler_signals[REMOVE_REQUEST], 0, request,
       error_name, message);
   tp_svc_client_interface_requests_return_from_remove_request (context);
 
@@ -422,12 +422,12 @@ tp_handler_remove_request (TpSvcClientInterfaceRequests *self,
 }
 
 static void
-tp_handler_get_property (GObject    *self,
+vinagre_handler_get_property (GObject    *self,
                          guint       property_id,
                          GValue     *value,
                          GParamSpec *pspec)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
 
   switch (property_id)
     {
@@ -447,7 +447,7 @@ tp_handler_get_property (GObject    *self,
         /* the Telepathy spec says that HandledChannels should report the
          * union of all Handlers sharing a unique name, but we are deciding to
          * ignore this, because it's a pain in the neck to implement correctly
-         * (how do you deal with people not using TpHandler, or how do you
+         * (how do you deal with people not using VinagreHandler, or how do you
          * deal with people not even using tp-glib).
          *
          * This is filed as bug
@@ -478,12 +478,12 @@ tp_handler_get_property (GObject    *self,
 }
 
 static void
-tp_handler_set_property (GObject      *self,
+vinagre_handler_set_property (GObject      *self,
                          guint         property_id,
                          const GValue *value,
                          GParamSpec   *pspec)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
 
   switch (property_id)
     {
@@ -506,9 +506,9 @@ tp_handler_set_property (GObject      *self,
 }
 
 static void
-tp_handler_dispose (GObject *self)
+vinagre_handler_dispose (GObject *self)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
   GList *ptr;
   guint i;
 
@@ -533,11 +533,11 @@ tp_handler_dispose (GObject *self)
   g_ptr_array_free (priv->channel_filter, TRUE);
   priv->channel_filter = NULL;
 
-  G_OBJECT_CLASS (tp_handler_parent_class)->dispose (self);
+  G_OBJECT_CLASS (vinagre_handler_parent_class)->dispose (self);
 }
 
 static void
-tp_handler_class_init (TpHandlerClass *klass)
+vinagre_handler_class_init (VinagreHandlerClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
@@ -567,9 +567,9 @@ tp_handler_class_init (TpHandlerClass *klass)
         { NULL }
   };
 
-  object_class->get_property = tp_handler_get_property;
-  object_class->set_property = tp_handler_set_property;
-  object_class->dispose      = tp_handler_dispose;
+  object_class->get_property = vinagre_handler_get_property;
+  object_class->set_property = vinagre_handler_set_property;
+  object_class->dispose      = vinagre_handler_dispose;
 
   g_object_class_install_property (object_class, PROP_INTERFACES,
       g_param_spec_boxed ("interfaces",
@@ -579,7 +579,7 @@ tp_handler_class_init (TpHandlerClass *klass)
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   /**
-   * TpHandler:channel-filter
+   * VinagreHandler:channel-filter
    *
    * Filter for channels we handle, matches the HandlerChannelFilter property.
    * A #GPtrArray of a{sv} #GHashTable maps for the types of channels that
@@ -628,7 +628,7 @@ tp_handler_class_init (TpHandlerClass *klass)
                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
   /**
-   * TpHandler::add-request:
+   * VinagreHandler::add-request:
    * @self: the handler
    * @request: the incoming request
    * @properties: immutable properties for the request (an a{sv} map)
@@ -642,19 +642,19 @@ tp_handler_class_init (TpHandlerClass *klass)
    * If you are asked to handle the channels, @request will be passed to your
    * callback as a satisfied request. If another Handler ends up handling the
    * channels, or the request dies for some reason, @request will be passed in
-   * TpHandler::remove-request.
+   * VinagreHandler::remove-request.
    */
-  tp_handler_signals[ADD_REQUEST] = g_signal_new ("add-request",
+  vinagre_handler_signals[ADD_REQUEST] = g_signal_new ("add-request",
       G_OBJECT_CLASS_TYPE (klass),
       G_SIGNAL_RUN_LAST,
-      G_STRUCT_OFFSET (TpHandlerClass, add_request),
+      G_STRUCT_OFFSET (VinagreHandlerClass, add_request),
       NULL, NULL,
       _vinagre_marshal_VOID__OBJECT_BOXED,
       G_TYPE_NONE, 2,
       TP_TYPE_CHANNEL_REQUEST, TP_HASH_TYPE_QUALIFIED_PROPERTY_VALUE_MAP);
 
   /**
-   * TpHandler::remove-request:
+   * VinagreHandler::remove-request:
    * @self: the handler
    * @request: the removed request
    * @error: the D-Bus name of an error, why this request was lost
@@ -663,16 +663,16 @@ tp_handler_class_init (TpHandlerClass *klass)
    * Emitted in response to the RemoveRequest call being made on this Handler
    * by the Channel Dispatcher. The RemoveRequest method is used by the
    * Channel Dispatcher to indicate a request that you were previously
-   * notified about through TpHandler::add-request.
+   * notified about through VinagreHandler::add-request.
    *
    * @error gives the name of a D-Bus error for why the request was lost. The
    * error <literal>org.freedesktop.Telepathy.Error.NotYours</literal> means
    * that the channels were given to another handler.
    */
-  tp_handler_signals[REMOVE_REQUEST] = g_signal_new ("remove-request",
+  vinagre_handler_signals[REMOVE_REQUEST] = g_signal_new ("remove-request",
       G_OBJECT_CLASS_TYPE (klass),
       G_SIGNAL_RUN_LAST,
-      G_STRUCT_OFFSET (TpHandlerClass, remove_request),
+      G_STRUCT_OFFSET (VinagreHandlerClass, remove_request),
       NULL, NULL,
       _vinagre_marshal_VOID__OBJECT_BOXED,
       G_TYPE_NONE, 3,
@@ -681,15 +681,15 @@ tp_handler_class_init (TpHandlerClass *klass)
   /* call our mixin class init */
   klass->dbus_props_class.interfaces = prop_interfaces;
   tp_dbus_properties_mixin_class_init (object_class,
-      G_STRUCT_OFFSET (TpHandlerClass, dbus_props_class));
+      G_STRUCT_OFFSET (VinagreHandlerClass, dbus_props_class));
 
-  g_type_class_add_private (klass, sizeof (TpHandlerPrivate));
+  g_type_class_add_private (klass, sizeof (VinagreHandlerPrivate));
 }
 
 static void
-tp_handler_init (TpHandler *self)
+vinagre_handler_init (VinagreHandler *self)
 {
-  TpHandlerPrivate *priv = GET_PRIVATE (self);
+  VinagreHandlerPrivate *priv = GET_PRIVATE (self);
 
   priv->requests = g_hash_table_new_full (g_str_hash, g_str_equal,
                                           g_free, g_object_unref);
@@ -701,7 +701,7 @@ handler_iface_init (gpointer g_iface, gpointer iface_data)
   TpSvcClientHandlerClass *klass = (TpSvcClientHandlerClass *) g_iface;
 
 #define IMPLEMENT(x) tp_svc_client_handler_implement_##x (klass, \
-    tp_handler_##x)
+    vinagre_handler_##x)
   IMPLEMENT (handle_channels);
 #undef IMPLEMENT
 }
@@ -712,14 +712,14 @@ requests_iface_init (gpointer g_iface, gpointer iface_data)
   TpSvcClientInterfaceRequestsClass *klass = g_iface;
 
 #define IMPLEMENT(x) tp_svc_client_interface_requests_implement_##x (klass, \
-    tp_handler_##x)
+    vinagre_handler_##x)
   IMPLEMENT (add_request);
   IMPLEMENT (remove_request);
 #undef IMPLEMENT
 }
 
 /**
- * tp_handler_new:
+ * vinagre_handler_new:
  * @channel_filter: a #GPtrArray of #GHashTable a{sv} maps defining
  * HandleChannelFilter
  * @bypass_approval: whether or not this Handler bypasses any Approvers
@@ -731,12 +731,12 @@ requests_iface_init (gpointer g_iface, gpointer iface_data)
  *
  * For further information consult the <link url="http://telepathy.freedesktop.org/spec/org.freedesktop.Telepathy.Client.Handler.html">Telepathy spec</link>.
  *
- * Returns: a #TpHandler ready to be published on the session bus.
+ * Returns: a #VinagreHandler ready to be published on the session bus.
  */
-TpHandler *
-tp_handler_new (GPtrArray                 *channel_filter,
+VinagreHandler *
+vinagre_handler_new (GPtrArray                 *channel_filter,
                 gboolean                   bypass_approval,
-                TpHandlerHandleChannelsCb  handle_channels_cb)
+                VinagreHandlerHandleChannelsCb  handle_channels_cb)
 {
   g_return_val_if_fail (channel_filter != NULL, NULL);
   g_return_val_if_fail (handle_channels_cb != NULL, NULL);
@@ -749,21 +749,21 @@ tp_handler_new (GPtrArray                 *channel_filter,
 }
 
 /**
- * tp_handler_get_pending_requests:
+ * vinagre_handler_get_pending_requests:
  * @self: the handler
  *
  * Retrieves a list of all pending #TpChannelRequest objects for this handler.
- * The addition of channel requests is notified via TpHandler::add-request and
- * resolved by TpHandler::remove-request and the TpHandler:handle-channels-cb
+ * The addition of channel requests is notified via VinagreHandler::add-request and
+ * resolved by VinagreHandler::remove-request and the VinagreHandler:handle-channels-cb
  * callback.
  *
  * Returns: a #GList of #TpChannelRequest objects, owned by the Handler, do
  * not unreference. Free list with g_list_free() when done.
  */
 GList *
-tp_handler_get_pending_requests (TpHandler *self)
+vinagre_handler_get_pending_requests (VinagreHandler *self)
 {
-  TpHandlerPrivate *priv;
+  VinagreHandlerPrivate *priv;
 
   g_return_val_if_fail (TP_IS_HANDLER (self), NULL);
 

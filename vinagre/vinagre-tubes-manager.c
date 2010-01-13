@@ -134,7 +134,7 @@ vinagre_tubes_manager_disconnected_cb (VinagreTubeHandler *htube,
 }
 
 static gboolean
-vinagre_tubes_manager_handle_channels (TpHandler         *self,
+vinagre_tubes_manager_handle_channels (VinagreHandler         *self,
                                        TpAccount         *account,
                                        TpConnection      *connection,
                                        TpChannel        **channels,

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef __TP_HANDLER_H__
-#define __TP_HANDLER_H__
+#ifndef __VINAGRE_HANDLER_H__
+#define __VINAGRE_HANDLER_H__
 
 #include <glib-object.h>
 
@@ -31,29 +31,29 @@
 
 G_BEGIN_DECLS
 
-#define TP_TYPE_HANDLER	(tp_handler_get_type ())
-#define TP_HANDLER(obj)	(G_TYPE_CHECK_INSTANCE_CAST ((obj), TP_TYPE_HANDLER, TpHandler))
-#define TP_HANDLER_CLASS(obj)	(G_TYPE_CHECK_CLASS_CAST ((obj), TP_TYPE_HANDLER, TpHandlerClass))
+#define TP_TYPE_HANDLER	(vinagre_handler_get_type ())
+#define VINAGRE_HANDLER(obj)	(G_TYPE_CHECK_INSTANCE_CAST ((obj), TP_TYPE_HANDLER, VinagreHandler))
+#define VINAGRE_HANDLER_CLASS(obj)	(G_TYPE_CHECK_CLASS_CAST ((obj), TP_TYPE_HANDLER, VinagreHandlerClass))
 #define TP_IS_HANDLER(obj)	(G_TYPE_CHECK_INSTANCE_TYPE ((obj), TP_TYPE_HANDLER))
 #define TP_IS_HANDLER_CLASS(obj)	(G_TYPE_CHECK_CLASS_TYPE ((obj), TP_TYPE_HANDLER))
-#define TP_HANDLER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), TP_TYPE_HANDLER, TpHandlerClass))
+#define VINAGRE_HANDLER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), TP_TYPE_HANDLER, VinagreHandlerClass))
 
-typedef struct _TpHandler TpHandler;
-struct _TpHandler
+typedef struct _VinagreHandler VinagreHandler;
+struct _VinagreHandler
 {
   GObject parent;
 };
 
-typedef struct _TpHandlerClass TpHandlerClass;
-struct _TpHandlerClass
+typedef struct _VinagreHandlerClass VinagreHandlerClass;
+struct _VinagreHandlerClass
 {
   GObjectClass parent_class;
   TpDBusPropertiesMixinClass dbus_props_class;
 
-  void (* add_request) (TpHandler        *self,
+  void (* add_request) (VinagreHandler        *self,
                         TpChannelRequest *request,
                         GHashTable       *properties);
-  void (* remove_request) (TpHandler        *self,
+  void (* remove_request) (VinagreHandler        *self,
                            TpChannelRequest *request,
                            const char       *error,
                            const char       *message);
@@ -62,7 +62,7 @@ struct _TpHandlerClass
 };
 
 /**
- * TpHandlerHandleChannelsCb:
+ * VinagreHandlerHandleChannelsCb:
  * @self: the handler
  * @account: the Account with which the channels are associated
  * @connection: the Connection with which the channels are associated
@@ -77,7 +77,7 @@ struct _TpHandlerClass
  *
  * <example><programlisting>
  * static void
- * handle_channels (TpHandler         *self,
+ * handle_channels (VinagreHandler         *self,
  *                  TpAccount         *account,
  *                  TpConnection      *connection,
  *                  TpChannel        **channels,
@@ -109,7 +109,7 @@ struct _TpHandlerClass
  * Returns: TRUE if the Handler success, FALSE to return a NotAvailable to the
  * Channel Dispatcher
  */
-typedef gboolean (* TpHandlerHandleChannelsCb) (TpHandler         *self,
+typedef gboolean (* VinagreHandlerHandleChannelsCb) (VinagreHandler         *self,
                                                 TpAccount         *account,
                                                 TpConnection      *connection,
                                                 TpChannel        **channels,
@@ -117,11 +117,11 @@ typedef gboolean (* TpHandlerHandleChannelsCb) (TpHandler         *self,
                                                 guint64            user_action_time,
                                                 GHashTable        *handler_info);
 
-GType tp_handler_get_type (void);
-TpHandler *tp_handler_new (GPtrArray                 *channel_filter,
+GType vinagre_handler_get_type (void);
+VinagreHandler *vinagre_handler_new (GPtrArray                 *channel_filter,
                            gboolean                   bypass_approval,
-                           TpHandlerHandleChannelsCb  handle_channels_cb);
-GList *tp_handler_get_pending_requests (TpHandler *self);
+                           VinagreHandlerHandleChannelsCb  handle_channels_cb);
+GList *vinagre_handler_get_pending_requests (VinagreHandler *self);
 
 G_END_DECLS
 

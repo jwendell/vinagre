@@ -51,12 +51,12 @@ typedef struct _VinagreTubesManagerClass VinagreTubesManagerClass;
 
 struct _VinagreTubesManager
 {
-  TpHandler parent_instance;
+  VinagreHandler parent_instance;
 };
 
 struct _VinagreTubesManagerClass
 {
-  TpHandlerClass parent_class;
+  VinagreHandlerClass parent_class;
 };
 
 GType vinagre_tubes_manager_get_type (void) G_GNUC_CONST;
