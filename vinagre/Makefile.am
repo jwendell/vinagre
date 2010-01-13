@@ -17,6 +17,7 @@ INCLUDES = 						\
 NOINST_H_FILES = \
   bacon-message-connection.h \
   vinagre-enums.h \
+  vinagre-marshal.h \
   vinagre-object-module.h \
   vinagre-plugin-info.h \
   vinagre-plugin-info-priv.h \
@@ -62,7 +63,7 @@ header_DATA = $(INST_H_FILES)
 
 noinst_LTLIBRARIES = libvinagre.la
 
-libvinagre_la_SOURCES = \
+handwritten_sources = \
   bacon-message-connection.c  \
   vinagre-app.c \
   vinagre-bacon.c \
@@ -76,7 +77,6 @@ libvinagre_la_SOURCES = \
   vinagre-connection.c \
   vinagre-debug.c \
   vinagre-dirs.c \
-  vinagre-enums.c \
   vinagre-fav.c \
   vinagre-notebook.c \
   vinagre-object-module.c \
@@ -91,6 +91,12 @@ libvinagre_la_SOURCES = \
   vinagre-utils.c \
   vinagre-window.c \
   vinagre-spinner.c \
+  $(NULL)
+
+libvinagre_la_SOURCES = \
+  vinagre-enums.c \
+  vinagre-marshal.c \
+  $(handwritten_sources) \
   $(NOINST_H_FILES) \
   $(INST_H_FILES) \
   $(NULL)
@@ -181,6 +187,7 @@ vinagre_applet_SOURCES =					\
 	vinagre-fav.h vinagre-fav.c \
 	vinagre-connect.h vinagre-connect.c \
 	vinagre-spinner.h vinagre-spinner.c \
+	vinagre-marshal.h vinagre-marshal.c \
 	$(NULL)
 
 if AVAHI
@@ -231,9 +238,30 @@ vinagre-enums.h: @REBUILD@ $(vinagre_enum_headers)
 			--eprod "GType @enum_name@_get_type (void);\n" \
 		$(vinagre_enum_headers) >  $@
 
+vinagre-marshal.list: $(handwritten_sources) Makefile.am
+	( cd $(srcdir) && \
+	sed -n -e 's/.*vinagre_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
+	$(handwritten_sources) ) \
+	| sed -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp
+	if cmp -s $@.tmp $@; then \
+		rm $@.tmp; \
+	else \
+		mv $@.tmp $@; \
+	fi
+
+%-marshal.h: %-marshal.list Makefile
+	glib-genmarshal --header --prefix=_$(subst -,_,$*)_marshal $< > $*-marshal.h
+
+%-marshal.c: %-marshal.list Makefile
+	echo "#include \"vinagre-marshal.h\"" > $@ && \
+	glib-genmarshal --body --prefix=_$(subst -,_,$*)_marshal $< >> $*-marshal.c
+
 BUILT_SOURCES = \
 	vinagre-enums.c \
 	vinagre-enums.h \
+	vinagre-marshal.list \
+	vinagre-marshal.c \
+	vinagre-marshal.h \
 	$(NULL)
 
 ##############################
@@ -244,7 +272,7 @@ if TELEPATHY
 
 INCLUDES += $(TELEPATHY_CFLAGS)
 vinagre_LDADD += $(TELEPATHY_LIBS)
-libvinagre_la_SOURCES += \
+handwritten_sources += \
 	vinagre-tubes-manager.c vinagre-tubes-manager.h		\
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
 	$(NULL)
@@ -259,6 +287,7 @@ DISTCLEANFILES =		\
 
 EXTRA_DIST =					\
 	GNOME_VinagreApplet.server.in.in	\
+	vinagre-marshal.list \
 	$(NULL)
 
 dist-hook:
