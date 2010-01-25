@@ -10,6 +10,7 @@ INCLUDES = 						\
 	-DLIBDIR=\""$(libdir)"\" 			\
 	-DVINAGRE_DATADIR=\""$(datadir)/vinagre"\"	\
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\"	\
+	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\"		\
 	$(VINAGRE_CFLAGS)				\
 	$(AVAHI_CFLAGS)					\
 	$(NULL)
@@ -27,6 +28,7 @@ NOINST_H_FILES = \
   vinagre-plugins-engine.h \
   vinagre-window-private.h \
   vinagre-spinner.h \
+  pty_open.h \
   $(NULL)
 
 INST_H_FILES = \
@@ -52,6 +54,7 @@ INST_H_FILES = \
   vinagre-utils.h \
   vinagre-window.h \
   vinagre-dnd.h \
+  vinagre-ssh.h \
   $(NULL)
 
 headerdir = $(prefix)/include/vinagre-@VINAGRE_API_VERSION@/vinagre
@@ -91,6 +94,8 @@ handwritten_sources = \
   vinagre-utils.c \
   vinagre-window.c \
   vinagre-spinner.c \
+  pty_open.c \
+  vinagre-ssh.c \
   $(NULL)
 
 libvinagre_la_SOURCES = \
@@ -188,6 +193,8 @@ vinagre_applet_SOURCES =					\
 	vinagre-connect.h vinagre-connect.c \
 	vinagre-spinner.h vinagre-spinner.c \
 	vinagre-marshal.h vinagre-marshal.c \
+	pty_open.h pty_open.c \
+	vinagre-ssh.h vinagre-ssh.c \
 	$(NULL)
 
 if AVAHI

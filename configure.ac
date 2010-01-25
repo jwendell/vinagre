@@ -72,6 +72,7 @@ AM_CONDITIONAL(AVAHI, test "x$enable_avahi" = "xyes")
 PKG_CHECK_MODULES(VINAGRE, \ 
   glib-2.0 >= $GLIB_REQUIRED \
   gio-2.0 >= $GLIB_REQUIRED \
+  gio-unix-2.0 >= $GLIB_REQUIRED \
   gtk+-2.0 >= $GTK_REQUIRED \ 
   gconf-2.0 >= $GCONF_REQUIRED \
   gthread-2.0 >= $GTHREAD_REQUIRED \
@@ -88,7 +89,30 @@ PKG_CHECK_MODULES(VNC, \
 AC_SUBST(VNC_CFLAGS)
 AC_SUBST(VNC_LIBS)
 
-# Check for SSH
+dnl ****************************
+dnl *** Checks for pty stuff ***
+dnl ****************************
+
+AC_CHECK_HEADERS(sys/un.h stropts.h termios.h utmp.h sys/uio.h sys/param.h)
+
+# Check for PTY handling functions.
+AC_CHECK_FUNCS(getpt posix_openpt grantpt unlockpt ptsname ptsname_r)
+
+# Pull in the right libraries for various functions which might not be
+# bundled into an exploded libc.
+AC_CHECK_FUNC(socketpair,[have_socketpair=1],AC_CHECK_LIB(socket,socketpair,[have_socketpair=1; LIBS="$LIBS -lsocket"]))
+if test x$have_socketpair = x1 ; then
+	AC_DEFINE(HAVE_SOCKETPAIR,1,[Define if you have the socketpair function.])
+fi
+
+AC_SEARCH_LIBS(login_tty, util, [AC_DEFINE([HAVE_LOGIN_TTY],[],[Whether login_tty is available])])
+
+dnl ****************************
+dnl *** Checks for SSH stuff ***
+dnl ****************************
+
+AC_PATH_PROG(SSH_PROGRAM, ssh, "ssh")
+
 AC_ARG_ENABLE(ssh,
               AS_HELP_STRING([--enable-ssh],
                              [Enable SSH plugin (default=no)]),

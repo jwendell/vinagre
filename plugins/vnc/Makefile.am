@@ -14,7 +14,8 @@ libvnc_la_SOURCES = 						\
 	vinagre-vnc-connection.h vinagre-vnc-connection.c	\
 	vinagre-vnc-tab.h vinagre-vnc-tab.c			\
 	vinagre-vnc-listener.h vinagre-vnc-listener.c		\
-	vinagre-vnc-listener-dialog.h vinagre-vnc-listener-dialog.c
+	vinagre-vnc-listener-dialog.h vinagre-vnc-listener-dialog.c \
+	vinagre-vnc-tunnel.h vinagre-vnc-tunnel.c
 
 libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libvnc_la_LIBADD  = $(VNC_LIBS)

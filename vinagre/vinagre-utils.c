@@ -601,4 +601,11 @@ vinagre_utils_ask_question (GtkWindow  *parent,
   return TRUE;
 }
 
+#include "vinagre-ssh.h"
+static void
+shit (void)
+{
+  vinagre_ssh_connect (NULL, -1, NULL, NULL, NULL, NULL, NULL);
+}
+
 /* vim: set ts=8: */

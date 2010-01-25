@@ -28,6 +28,7 @@
 
 #include "vinagre-vnc-tab.h"
 #include "vinagre-vnc-connection.h"
+#include "vinagre-vnc-tunnel.h"
 
 #define VINAGRE_VNC_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_VNC_TAB, VinagreVncTabPrivate))
 
@@ -242,14 +243,25 @@ vinagre_vnc_tab_class_init (VinagreVncTabClass *klass)
   g_type_class_add_private (object_class, sizeof (VinagreVncTabPrivate));
 }
 
+static gboolean
+idle_close (VinagreTab *tab)
+{
+  vinagre_notebook_close_tab (vinagre_tab_get_notebook (tab), tab);
+  return FALSE;
+}
+
 static void
 open_vnc (VinagreVncTab *vnc_tab)
 {
-  gchar      *host, *port_str;
+  gchar      *host, *port_str, *ssh_tunnel_host;
   gint       port, shared, fd, depth_profile;
   gboolean   scaling, success, lossy_encoding;
+  GError     *error;
   VncDisplay *vnc = VNC_DISPLAY (vnc_tab->priv->vnc);
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
+
+  success = TRUE;
+  error = NULL;
 
   g_object_get (vinagre_tab_get_conn (tab),
 		"port", &port,
@@ -259,6 +271,7 @@ open_vnc (VinagreVncTab *vnc_tab)
 		"fd", &fd,
 		"depth-profile", &depth_profile,
 		"lossy-encoding", &lossy_encoding,
+		"ssh-tunnel-host", &ssh_tunnel_host,
 		NULL);
 
   port_str = g_strdup_printf ("%d", port);
@@ -275,17 +288,34 @@ open_vnc (VinagreVncTab *vnc_tab)
   if (fd > 0)
     success = vnc_display_open_fd (vnc, fd);
   else
-    success = vnc_display_open_host (vnc, host, port_str);
+    {
+      if (ssh_tunnel_host && *ssh_tunnel_host)
+	if (!vinagre_vnc_tunnel_create (&host, &port_str, ssh_tunnel_host, &error))
+	  {
+	    success = FALSE;
+	    vinagre_utils_show_error (_("Error creating the SSH tunnel"),
+				      error ? error->message : _("Unknown reason"),
+				      GTK_WINDOW (vinagre_tab_get_window (tab)));
+	    goto out;
+	  }
+      success = vnc_display_open_host (vnc, host, port_str);
+    }
 
   if (success)
     gtk_widget_grab_focus (GTK_WIDGET (vnc));
   else
-    vinagre_utils_show_error (NULL,
-			      _("Error connecting to host."),
+    vinagre_utils_show_error (_("Error connecting to host."),
+			      error ? error->message : _("Unknown reason"),
 			      GTK_WINDOW (vinagre_tab_get_window (tab)));
 
+out:
   g_free (port_str);
   g_free (host);
+  g_free (ssh_tunnel_host);
+  g_clear_error (&error);
+
+  if (!success)
+    g_idle_add ((GSourceFunc)idle_close, vnc_tab);
 }
 
 static void
