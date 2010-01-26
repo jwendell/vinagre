@@ -22,7 +22,7 @@
 #ifndef __VINAGRE_VNC_TUNNEL_H__
 #define __VINAGRE_VNC_TUNNEL_H__
 
-#include <glib.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -34,7 +34,11 @@ typedef enum
 #define VINAGRE_VNC_TUNNEL_ERROR vinagre_vnc_tunnel_error_quark()
 GQuark vinagre_vnc_tunnel_error_quark (void);
 
-gboolean vinagre_vnc_tunnel_create (gchar **original_host, gchar **original_port, gchar *gateway, GError **error);
+gboolean vinagre_vnc_tunnel_create (GtkWindow *parent,
+				    gchar **original_host,
+				    gchar **original_port,
+				    gchar *gateway,
+				    GError **error);
 
 G_END_DECLS
 

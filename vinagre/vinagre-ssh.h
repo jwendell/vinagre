@@ -25,7 +25,7 @@
 #define VINAGRE_SSH_CHECK "ViNagRE_CHEck"
 #define VINAGRE_SSH_CHECK_LENGTH 13
 
-#include <glib.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -43,7 +43,8 @@ typedef enum
 #define VINAGRE_SSH_ERROR vinagre_ssh_error_quark()
 GQuark vinagre_ssh_error_quark (void);
 
-gboolean vinagre_ssh_connect (const gchar *hostname,
+gboolean vinagre_ssh_connect (GtkWindow *parent,
+			      const gchar *hostname,
 			      gint port,
 			      const gchar *username,
 			      gchar **extra_arguments,

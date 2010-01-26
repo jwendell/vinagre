@@ -294,44 +294,9 @@ get_hostname_and_fingerprint_from_line (const gchar *buffer,
   return TRUE;
 }
 
-static gchar *
-ask_password (const gchar *user, const gchar *host)
-{
-  GtkWidget *dialog, *label, *entry, *content_area;
-  gchar *str, *result;
-
-  result = NULL;
-  dialog = gtk_dialog_new_with_buttons (_("Authentication needed"),
-                                        NULL,
-                                        GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-                                        GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-                                        GTK_STOCK_CANCEL, GTK_RESPONSE_NONE,
-                                        NULL);
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-
-  str = g_strdup_printf (_("Enter the SSH password for the username and host %s@%s:"), user, host);
-  label = gtk_label_new (str);
-  g_free (str);
-  gtk_container_add (GTK_CONTAINER (content_area), label);
-
-  entry = gtk_entry_new ();
-  gtk_entry_set_visibility (GTK_ENTRY (entry), FALSE);
-  gtk_container_add (GTK_CONTAINER (content_area), entry);
-
-  gtk_widget_show_all (dialog);
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-    {
-      str = (gchar *)gtk_entry_get_text (GTK_ENTRY (entry));
-      if (str && *str)
-        result = g_strdup (str);
-    }
-
-  gtk_widget_destroy (dialog);
-  return result;
-}
-
 static gboolean
-handle_login (const   gchar *host,
+handle_login (GtkWindow *parent,
+	      const   gchar *host,
 	      int     port,
 	      const   gchar *user,
 	      int     tty_fd,
@@ -347,17 +312,19 @@ handle_login (const   gchar *host,
   int prompt_fd;
   char buffer[1024];
   gsize len;
-  gboolean aborted = FALSE;
-  gboolean ret_val;
-  char *password = NULL;
+  gboolean ret_val, aborted, save_in_keyring;
   gsize bytes_written;
-  gboolean password_in_keyring = FALSE;
-  const gchar *authtype = NULL;
-  gchar *object = NULL;
+  const gchar *authtype;
+  gchar *object, *password;
   GnomeKeyringResult result;
   GList *matches;
   GnomeKeyringNetworkPasswordData *found_item;
-  
+
+  object = password = NULL;
+  authtype = NULL;
+  ret_val = TRUE;
+  aborted = save_in_keyring = FALSE;
+
   if (vendor == SSH_VENDOR_SSH) 
     prompt_fd = stderr_fd;
   else
@@ -367,7 +334,6 @@ handle_login (const   gchar *host,
   stdout_stream = g_unix_input_stream_new (stdout_fd, FALSE);
   reply_stream = g_unix_output_stream_new (tty_fd, FALSE);
 
-  ret_val = TRUE;
   while (1)
     {
       FD_ZERO (&ifds);
@@ -426,8 +392,11 @@ handle_login (const   gchar *host,
 
       if (strncmp (buffer, "\r\n", 2) == 0)
         continue;
-        
-      else if (g_str_has_suffix (buffer, "password: ") ||
+
+      g_free (password);
+      password = NULL;
+
+      if (g_str_has_suffix (buffer, "password: ") ||
           g_str_has_suffix (buffer, "Password: ") ||
           g_str_has_suffix (buffer, "Password:")  ||
           g_str_has_prefix (buffer, "Password for ") ||
@@ -450,8 +419,20 @@ handle_login (const   gchar *host,
 	  /* If the password was not found in keyring then ask for it */
 	  if (result != GNOME_KEYRING_RESULT_OK || matches == NULL || matches->data == NULL)
 	    {
-	      password = ask_password (user, host);
-              if (!password)
+	      gchar *full_host;
+	      gboolean res;
+
+	      full_host = g_strjoin ("@", user, host, NULL);
+	      res = vinagre_utils_ask_credential (parent,
+						  "SSH",
+						  full_host,
+						  FALSE,
+						  TRUE,
+						  NULL,
+						  &password,
+						  &save_in_keyring);
+	      g_free (full_host);
+              if (!res)
                 {
                   g_set_error_literal (error,
 				       VINAGRE_SSH_ERROR,
@@ -465,7 +446,6 @@ handle_login (const   gchar *host,
 	    {
 	      found_item = (GnomeKeyringNetworkPasswordData *) matches->data;
 	      password = g_strdup (found_item->password);
-	      password_in_keyring = TRUE;
 	      gnome_keyring_network_password_list_free (matches);
 	    }
 
@@ -550,25 +530,31 @@ handle_login (const   gchar *host,
 	  ret_val = FALSE;
 	  break;
         }
-      g_free (password);
     }
   
-  if (ret_val)
+  if (ret_val && save_in_keyring)
     {
       /* Login succeed, save password in keyring */
-/*      g_vfs_keyring_save_password (op_backend->user,
-                                   op_backend->host,
-                                   NULL,
-                                   "sftp",
-				   object,
-				   authtype,
-				   op_backend->port != -1 ?
-				   op_backend->port
-				   :
-				   0, 
-                                   new_password,
-                                   password_save);
-*/
+      GnomeKeyringResult result;
+      guint32            keyring_item_id;
+
+      result = gnome_keyring_set_network_password_sync (
+                NULL,         /* default keyring */
+                user,         /* user            */
+                NULL,         /* domain          */
+                host,         /* server          */
+                object,       /* object          */
+                "ssh",        /* protocol        */
+                authtype,     /* authtype        */
+                port,         /* port            */
+                password,     /* password        */
+                &keyring_item_id);
+
+      if (result != GNOME_KEYRING_RESULT_OK)
+        vinagre_utils_show_error (_("Error saving the credentials on the keyring."),
+				  gnome_keyring_result_to_message (result),
+				  parent);
+
     }
 
   g_free (object);
@@ -662,7 +648,8 @@ look_for_stderr_errors (GDataInputStream *error_stream, GError **error)
 }
 
 gboolean
-vinagre_ssh_connect (const gchar *hostname,
+vinagre_ssh_connect (GtkWindow *parent,
+		     const gchar *hostname,
 		     gint port,
 		     const gchar *username,
 		     gchar **extra_arguments,
@@ -711,7 +698,7 @@ vinagre_ssh_connect (const gchar *hostname,
   if (tty_fd == -1)
     res = wait_for_reply (stdout_fd, error);
   else
-    res = handle_login (host, port, user, tty_fd, stdout_fd, stderr_fd, error);
+    res = handle_login (parent, host, port, user, tty_fd, stdout_fd, stderr_fd, error);
 
   g_strfreev (args);
   g_free (user);

@@ -605,7 +605,128 @@ vinagre_utils_ask_question (GtkWindow  *parent,
 static void
 shit (void)
 {
-  vinagre_ssh_connect (NULL, -1, NULL, NULL, NULL, NULL, NULL);
+  vinagre_ssh_connect (NULL, NULL, -1, NULL, NULL, NULL, NULL, NULL);
+}
+
+typedef struct {
+  GtkWidget *uname, *pw, *button;
+} ControlOKButton;
+
+static void
+control_ok_button (GtkEditable *entry, ControlOKButton *data)
+{
+  gboolean enabled = TRUE;
+
+  if (GTK_WIDGET_VISIBLE (data->uname))
+    enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->uname)) > 0;
+
+  if (GTK_WIDGET_VISIBLE (data->pw))
+    enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->pw)) > 0;
+
+  gtk_widget_set_sensitive (data->button, enabled);
+}
+
+gboolean
+vinagre_utils_ask_credential (GtkWindow *parent,
+			      gchar *kind,
+			      gchar *host,
+			      gboolean need_username,
+			      gboolean need_password,
+			      gchar **username,
+			      gchar **password,
+			      gboolean *save_in_keyring)
+{
+  GtkBuilder      *xml;
+  GtkWidget       *password_dialog, *save_credential_check;
+  GtkWidget       *password_label, *username_label, *image;
+  int             result;
+  ControlOKButton control;
+
+  xml = vinagre_utils_get_builder (NULL, NULL);
+
+  password_dialog = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_dialog"));
+  if (parent)
+    gtk_window_set_transient_for (GTK_WINDOW (password_dialog), parent);
+
+  if (kind)
+    {
+       /* Translators: %s is a protocol, like VNC or SSH */
+       gchar *str = g_strdup_printf ("%s authentication is required", kind);
+       GtkWidget *auth_label = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_label"));
+       gtk_label_set_label (GTK_LABEL (auth_label), str);
+       g_free (str);
+    }
+
+  if (host)
+    {
+       GtkWidget *host_label = GTK_WIDGET (gtk_builder_get_object (xml, "host_label"));
+       gtk_label_set_label (GTK_LABEL (host_label), host);
+    }
+
+  control.uname  = GTK_WIDGET (gtk_builder_get_object (xml, "username_entry"));
+  control.pw     = GTK_WIDGET (gtk_builder_get_object (xml, "password_entry"));
+  control.button = GTK_WIDGET (gtk_builder_get_object (xml, "ok_button"));
+  password_label = GTK_WIDGET (gtk_builder_get_object (xml, "password_label"));
+  username_label = GTK_WIDGET (gtk_builder_get_object (xml, "username_label"));
+  save_credential_check = GTK_WIDGET (gtk_builder_get_object (xml, "save_credential_check"));
+
+  image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_BUTTON);
+  gtk_button_set_image (GTK_BUTTON (control.button), image);
+
+  g_signal_connect (control.uname, "changed", G_CALLBACK (control_ok_button), &control);
+  g_signal_connect (control.pw, "changed", G_CALLBACK (control_ok_button), &control);
+
+  if (need_username)
+    {
+      if (username && *username)
+        gtk_entry_set_text (GTK_ENTRY (control.uname), *username);
+    }
+  else
+    {
+      gtk_widget_hide (username_label);
+      gtk_widget_hide (control.uname);
+    }
+
+  if (need_password)
+    {
+      if (password && *password)
+        gtk_entry_set_text (GTK_ENTRY (control.pw), *password);
+    }
+  else
+    {
+      gtk_widget_hide (password_label);
+      gtk_widget_hide (control.pw);
+    }
+
+  result = gtk_dialog_run (GTK_DIALOG (password_dialog));
+  if (result == -5)
+    {
+      if (username)
+        {
+          g_free (*username);
+          if (gtk_entry_get_text_length (GTK_ENTRY (control.uname)) > 0)
+	    *username = g_strdup (gtk_entry_get_text (GTK_ENTRY (control.uname)));
+          else
+	    *username = NULL;
+	}
+
+      if (password)
+        {
+          g_free (*password);
+          if (gtk_entry_get_text_length (GTK_ENTRY (control.pw)) > 0)
+	    *password = g_strdup (gtk_entry_get_text (GTK_ENTRY (control.pw)));
+          else
+	    *password = NULL;
+	}
+
+      if (save_in_keyring)
+        *save_in_keyring = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (save_credential_check));
+    }
+
+  gtk_widget_destroy (GTK_WIDGET (password_dialog));
+  g_object_unref (xml);
+
+  return result == -5;
 }
 
 /* vim: set ts=8: */

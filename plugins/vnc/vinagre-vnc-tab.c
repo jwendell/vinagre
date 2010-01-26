@@ -259,6 +259,7 @@ open_vnc (VinagreVncTab *vnc_tab)
   GError     *error;
   VncDisplay *vnc = VNC_DISPLAY (vnc_tab->priv->vnc);
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
+  GtkWindow  *window = GTK_WINDOW (vinagre_tab_get_window (tab));
 
   success = TRUE;
   error = NULL;
@@ -290,12 +291,12 @@ open_vnc (VinagreVncTab *vnc_tab)
   else
     {
       if (ssh_tunnel_host && *ssh_tunnel_host)
-	if (!vinagre_vnc_tunnel_create (&host, &port_str, ssh_tunnel_host, &error))
+	if (!vinagre_vnc_tunnel_create (window, &host, &port_str, ssh_tunnel_host, &error))
 	  {
 	    success = FALSE;
 	    vinagre_utils_show_error (_("Error creating the SSH tunnel"),
 				      error ? error->message : _("Unknown reason"),
-				      GTK_WINDOW (vinagre_tab_get_window (tab)));
+				      window);
 	    goto out;
 	  }
       success = vnc_display_open_host (vnc, host, port_str);
@@ -306,7 +307,7 @@ open_vnc (VinagreVncTab *vnc_tab)
   else
     vinagre_utils_show_error (_("Error connecting to host."),
 			      error ? error->message : _("Unknown reason"),
-			      GTK_WINDOW (vinagre_tab_get_window (tab)));
+			      window);
 
 out:
   g_free (port_str);
@@ -441,128 +442,25 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
   g_signal_emit_by_name (G_OBJECT (tab), "tab-initialized");
 }
 
-typedef struct {
-  GtkWidget *uname, *pw, *button;
-} ControlOKButton;
-
-static void
-control_ok_button (GtkEditable *entry, ControlOKButton *data)
-{
-  gboolean enabled = TRUE;
-
-  if (GTK_WIDGET_VISIBLE (data->uname))
-    enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->uname)) > 0;
-
-  if (GTK_WIDGET_VISIBLE (data->pw))
-    enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->pw)) > 0;
-
-  gtk_widget_set_sensitive (data->button, enabled);
-}
-
-static gboolean
-ask_credential (VinagreVncTab *vnc_tab,
-		gboolean      need_username,
-		gboolean      need_password,
-		gchar         **username,
-		gchar         **password)
-{
-  GtkBuilder      *xml;
-  GtkWidget       *password_dialog, *host_label, *save_credential_check;
-  GtkWidget       *password_label, *username_label, *image;
-  gchar           *name;
-  int             result;
-  ControlOKButton control;
-  VinagreTab      *tab = VINAGRE_TAB (vnc_tab);
-  VinagreConnection *conn = vinagre_tab_get_conn (tab);
-
-  xml = vinagre_utils_get_builder (NULL, NULL);
-
-  password_dialog = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_dialog"));
-  gtk_window_set_transient_for (GTK_WINDOW(password_dialog),
-				GTK_WINDOW(vinagre_tab_get_window (tab)));
-
-  host_label = GTK_WIDGET (gtk_builder_get_object (xml, "host_label"));
-  name = vinagre_connection_get_best_name (conn);
-  gtk_label_set_label (GTK_LABEL (host_label), name);
-  g_free (name);
-
-  control.uname  = GTK_WIDGET (gtk_builder_get_object (xml, "username_entry"));
-  control.pw     = GTK_WIDGET (gtk_builder_get_object (xml, "password_entry"));
-  control.button = GTK_WIDGET (gtk_builder_get_object (xml, "ok_button"));
-  password_label = GTK_WIDGET (gtk_builder_get_object (xml, "password_label"));
-  username_label = GTK_WIDGET (gtk_builder_get_object (xml, "username_label"));
-  save_credential_check = GTK_WIDGET (gtk_builder_get_object (xml, "save_credential_check"));
-
-  image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_BUTTON);
-  gtk_button_set_image (GTK_BUTTON (control.button), image);
-
-  g_signal_connect (control.uname, "changed", G_CALLBACK (control_ok_button), &control);
-  g_signal_connect (control.pw, "changed", G_CALLBACK (control_ok_button), &control);
-
-  if (need_username)
-    {
-      if (*username)
-        gtk_entry_set_text (GTK_ENTRY (control.uname), *username);
-    }
-  else
-    {
-      gtk_widget_hide (username_label);
-      gtk_widget_hide (control.uname);
-    }
-
-  if (need_password)
-    {
-      if (*password)
-        gtk_entry_set_text (GTK_ENTRY (control.pw), *password);
-    }
-  else
-    {
-      gtk_widget_hide (password_label);
-      gtk_widget_hide (control.pw);
-    }
-
-  result = gtk_dialog_run (GTK_DIALOG (password_dialog));
-  if (result == -5)
-    {
-      g_free (*username);
-      if (gtk_entry_get_text_length (GTK_ENTRY (control.uname)) > 0)
-	*username = g_strdup (gtk_entry_get_text (GTK_ENTRY (control.uname)));
-      else
-	*username = NULL;
-
-      g_free (*password);
-      if (gtk_entry_get_text_length (GTK_ENTRY (control.pw)) > 0)
-	*password = g_strdup (gtk_entry_get_text (GTK_ENTRY (control.pw)));
-      else
-	*password = NULL;
-
-      vinagre_tab_set_save_credentials (tab,
-					gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (save_credential_check)));
-    }
-
-  gtk_widget_destroy (GTK_WIDGET (password_dialog));
-  g_object_unref (xml);
-
-  return result == -5;
-}
-
 static void
 vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vnc_tab)
 {
-  gchar *username, *password;
-  gboolean need_password, need_username;
+  gchar *username, *password, *host;
+  gboolean need_password, need_username, save_in_keyring;
   int i;
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
   VinagreConnection *conn = vinagre_tab_get_conn (tab);
-  VinagreWindow *window = vinagre_tab_get_window (tab);
+  GtkWindow *window = GTK_WINDOW (vinagre_tab_get_window (tab));
 
   if (credList == NULL)
     return;
 
   need_password = FALSE;
   need_username = FALSE;
+  save_in_keyring = FALSE;
   username = NULL;
   password = NULL;
+  host = NULL;
 
   for (i = 0; i < credList->n_values; i++) {
     switch (g_value_get_enum (&credList->values[i]))
@@ -596,7 +494,15 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
       vinagre_tab_find_credentials_in_keyring (tab, &username, &password);
       if ( (need_username && !username) || (need_password && !password) )
 	{
-	  if (!ask_credential (vnc_tab, need_username, need_password, &username, &password))
+	  host = vinagre_connection_get_best_name (conn);
+	  if (!vinagre_utils_ask_credential (window,
+					     "VNC",
+					     host,
+					     need_username,
+					     need_password,
+					     &username,
+					     &password,
+					     &save_in_keyring))
 	    {
 	      vinagre_tab_remove_from_notebook (tab);
 	      goto out;
@@ -615,7 +521,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 	      vinagre_tab_remove_from_notebook (tab);
 	      vinagre_utils_show_error (_("Authentication error"),
 					_("A username is required in order to access this machine."),
-					GTK_WINDOW (window));
+					window);
 	      goto out;
 	    }
 	}
@@ -632,14 +538,17 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 	      vinagre_tab_remove_from_notebook (tab);
 	      vinagre_utils_show_error (_("Authentication error"),
 					_("A password is required in order to access this machine."),
-					GTK_WINDOW (window));
+					window);
 	      goto out;
 	    }
 	}
 
+      vinagre_tab_set_save_credentials (tab, save_in_keyring);
+
 out:
       g_free (username);
       g_free (password);
+      g_free (host);
     }
 }
 

@@ -58,7 +58,11 @@ find_free_port (void)
 }
 
 gboolean
-vinagre_vnc_tunnel_create (gchar **original_host, gchar **original_port, gchar *gateway, GError **error)
+vinagre_vnc_tunnel_create (GtkWindow *parent,
+			   gchar **original_host,
+			   gchar **original_port,
+			   gchar *gateway,
+			   GError **error)
 {
   int local_port;
   gchar **tunnel_str, **command_str;
@@ -89,7 +93,8 @@ vinagre_vnc_tunnel_create (gchar **original_host, gchar **original_port, gchar *
   command_str[3] = g_strdup ("15");
   command_str[4] = NULL;
 
-  if (!vinagre_ssh_connect (gateway,
+  if (!vinagre_ssh_connect (parent,
+			    gateway,
 			    22,
 			    NULL,
 			    tunnel_str,

@@ -71,5 +71,15 @@ gboolean	vinagre_utils_ask_question		(GtkWindow  *parent,
 							 const char *message,
 							 char       **choices,
 							 int        *choice);
+
+gboolean	vinagre_utils_ask_credential		(GtkWindow *parent,
+							 gchar *kind,
+							 gchar *host,
+							 gboolean need_username,
+							 gboolean need_password,
+							 gchar **username,
+							 gchar **password,
+							 gboolean *save_in_keyring);
+
 #endif  /* __VINAGRE_UTILS_H__  */
 /* vim: set ts=8: */
