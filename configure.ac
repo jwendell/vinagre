@@ -193,6 +193,12 @@ AC_SUBST(REBUILD)
 # Plugins
 #*******************************************************************************
 #
+dnl ****************************
+dnl *** Checks for ifaddrs.h ***
+dnl ****************************
+AC_CHECK_HEADER(ifaddrs.h)
+AM_CONDITIONAL(SELF_IFADDRS, test "$ac_cv_header_ifaddrs_h" != "xyes")
+
 dnl active plugins for vinagre.schemas
 ACTIVE_PLUGINS="vnc"
 if test "x$enable_ssh" = "xyes" ; then

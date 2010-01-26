@@ -21,7 +21,11 @@
 #include <net/if.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#ifdef HAVE_IFADDRS_H
 #include <ifaddrs.h>
+#else
+#include "ifaddrs.h"
+#endif
 #include <string.h>
 #include <glib/gi18n.h>
 

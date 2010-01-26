@@ -17,6 +17,10 @@ libvnc_la_SOURCES = 						\
 	vinagre-vnc-listener-dialog.h vinagre-vnc-listener-dialog.c \
 	vinagre-vnc-tunnel.h vinagre-vnc-tunnel.c
 
+if SELF_IFADDRS
+libvnc_la_SOURCES += ifaddrs.h getifaddrs.c
+endif
+
 libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libvnc_la_LIBADD  = $(VNC_LIBS)
 
