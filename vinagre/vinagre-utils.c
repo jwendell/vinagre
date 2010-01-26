@@ -651,7 +651,7 @@ vinagre_utils_ask_credential (GtkWindow *parent,
   if (kind)
     {
        /* Translators: %s is a protocol, like VNC or SSH */
-       gchar *str = g_strdup_printf ("%s authentication is required", kind);
+       gchar *str = g_strdup_printf (_("%s authentication is required"), kind);
        GtkWidget *auth_label = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_label"));
        gtk_label_set_label (GTK_LABEL (auth_label), str);
        g_free (str);
