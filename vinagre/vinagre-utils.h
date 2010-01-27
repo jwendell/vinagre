@@ -59,7 +59,7 @@ void		vinagre_utils_get_current_viewport	(GdkScreen    *screen,
 							 gint         *x,
 							 gint         *y);
 
-void		vinagre_utils_help_contents		(GtkWindow *window);
+void		vinagre_utils_help_contents		(GtkWindow *window, const gchar *section);
 void		vinagre_utils_help_about		(GtkWindow *window);
 
 gboolean	vinagre_utils_parse_boolean		(const gchar* value);

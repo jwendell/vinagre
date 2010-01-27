@@ -402,7 +402,7 @@ vinagre_applet_help_cb (BonoboUIComponent *ui_container,
 			gpointer           data,
 			const gchar       *cname)
 {
-  vinagre_utils_help_contents (NULL);
+  vinagre_utils_help_contents (NULL, NULL);
 }
 
 static void

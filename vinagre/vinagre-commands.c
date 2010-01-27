@@ -345,7 +345,7 @@ void
 vinagre_cmd_help_contents (GtkAction     *action,
 			   VinagreWindow *window)
 {
-  vinagre_utils_help_contents (GTK_WINDOW (window));
+  vinagre_utils_help_contents (GTK_WINDOW (window), NULL);
 }
 
 void

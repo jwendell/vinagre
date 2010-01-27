@@ -446,19 +446,25 @@ vinagre_about_dialog_handle_url (GtkAboutDialog *about,
 }
 
 void
-vinagre_utils_help_contents (GtkWindow *window)
+vinagre_utils_help_contents (GtkWindow *window, const gchar *section)
 {
   GError    *error;
   GdkScreen *screen;
+  gchar     *uri;
 
   screen = GTK_IS_WINDOW (window) ? gtk_window_get_screen (GTK_WINDOW (window)) : NULL;
   error = NULL;
+  if (section)
+    uri = g_strdup_printf ("ghelp:vinagre?%s", section);
+  else
+    uri = g_strdup ("ghelp:vinagre");
 
   gtk_show_uri (screen,
-		"ghelp:vinagre",
+		uri,
 		GDK_CURRENT_TIME,
 		&error);
 
+  g_free (uri);
   if (error != NULL) 
     {
       vinagre_utils_show_error (NULL, error->message, GTK_IS_WINDOW (window) ? window : NULL);
