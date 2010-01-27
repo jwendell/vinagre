@@ -81,5 +81,7 @@ gboolean	vinagre_utils_ask_credential		(GtkWindow *parent,
 							 gchar **password,
 							 gboolean *save_in_keyring);
 
+gboolean	vinagre_utils_create_dir		(const gchar *filename, GError **error);
+
 #endif  /* __VINAGRE_UTILS_H__  */
 /* vim: set ts=8: */

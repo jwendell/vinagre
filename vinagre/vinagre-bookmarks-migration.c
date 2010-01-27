@@ -203,27 +203,6 @@ create_list (GKeyFile *kf)
   return entries;
 }
 
-static gboolean
-create_dir (const gchar *filename, GError **error)
-{
-  GFile    *file, *parent;
-  gboolean result;
-  gchar    *path;
-
-  file   = g_file_new_for_path (filename);
-  parent = g_file_get_parent (file);
-  path   = g_file_get_path (parent);
-  result = TRUE;
-
-  if (!g_file_test (path, G_FILE_TEST_EXISTS))
-    result = g_file_make_directory_with_parents (parent, NULL, error);
-
-  g_object_unref (file);
-  g_object_unref (parent);
-  g_free (path);
-  return result;
-}
-
 void
 vinagre_bookmarks_migration_migrate (const gchar *filename)
 {
@@ -233,7 +212,7 @@ vinagre_bookmarks_migration_migrate (const gchar *filename)
   GSList   *entries;
 
   error  = NULL;
-  if (!create_dir (filename, &error))
+  if (!vinagre_utils_create_dir (filename, &error))
     {
       g_warning (_("Error while migrating bookmarks: %s"), error?error->message:_("Failed to create the directory"));
       if (error)
