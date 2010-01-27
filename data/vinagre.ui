@@ -879,10 +879,11 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="show_accels_check">
-                        <property name="label" translatable="yes">_Show menu shortcuts</property>
+                        <property name="label" translatable="yes">Allow _keyboard shortcuts</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="tooltip_text" translatable="yes" comments="This is a tooltip in preferences dialog">This option enables menu accelerators and keyboard shortcuts. For more info on why you may want to disable them, check the documentation.</property>
                         <property name="use_underline">True</property>
                         <property name="xalign">0</property>
                         <property name="draw_indicator">True</property>
@@ -914,7 +915,21 @@
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area5">
             <property name="visible">True</property>
-            <property name="layout_style">end</property>
+            <property name="layout_style">edge</property>
+            <child>
+              <object class="GtkButton" id="preferences_help_button">
+                <property name="label">gtk-help</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkButton" id="button9">
                 <property name="label">gtk-close</property>
@@ -926,7 +941,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
@@ -939,6 +954,7 @@
       </object>
     </child>
     <action-widgets>
+      <action-widget response="1">preferences_help_button</action-widget>
       <action-widget response="0">button9</action-widget>
     </action-widgets>
   </object>

@@ -497,6 +497,7 @@ typedef struct {
   GtkWidget   *dialog;
   GtkWidget   *show_tabs;
   GtkWidget   *show_accels;
+  GtkWindow   *parent;
 } VinagrePrefsDialog;
 
 static void
@@ -514,8 +515,14 @@ vinagre_prefs_dialog_setup (VinagrePrefsDialog *dialog)
 }
 
 static void
-vinagre_prefs_dialog_quit (VinagrePrefsDialog *dialog)
+vinagre_prefs_dialog_response (GtkDialog *d, gint response_id, VinagrePrefsDialog *dialog)
 {
+  if (response_id > 0)
+    {
+      vinagre_utils_help_contents (dialog->parent, "preferences");
+      return;
+    }
+
   gtk_widget_destroy (dialog->dialog);
   g_object_unref (dialog->xml);
   g_free (dialog);
@@ -547,17 +554,18 @@ vinagre_prefs_dialog_show (VinagreWindow *window)
 
   dialog->xml = vinagre_utils_get_builder (NULL, NULL);
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "preferences_dialog"));
-  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (window));
+  dialog->parent = GTK_WINDOW (window);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), dialog->parent);
 
   dialog->show_tabs = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "always_show_tabs_check"));
   dialog->show_accels = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "show_accels_check"));
 
   vinagre_prefs_dialog_setup (dialog);
 
-  g_signal_connect_swapped (dialog->dialog,
-			    "response", 
-                            G_CALLBACK (vinagre_prefs_dialog_quit),
-                            dialog);
+  g_signal_connect (dialog->dialog,
+		    "response",
+		    G_CALLBACK (vinagre_prefs_dialog_response),
+		    dialog);
 
   g_signal_connect_swapped (dialog->show_tabs,
 			    "toggled",
