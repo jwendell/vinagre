@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <errno.h>
 #include <time.h>
 #include <sys/types.h>
 #include <string.h>
@@ -711,6 +712,48 @@ create_notebook (VinagreWindow *window)
   gtk_widget_show (GTK_WIDGET (window->priv->notebook));
 }
 
+static gboolean
+vinagre_window_check_first_run (VinagreWindow *window)
+{
+  gchar *filename;
+
+  filename = g_build_filename (g_get_user_data_dir (),
+			       "vinagre",
+			       "first_run",
+			       NULL);
+
+  if (!g_file_test (filename, G_FILE_TEST_EXISTS))
+    {
+      GError *error = NULL;
+      GtkWidget *dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+						  GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+						  GTK_MESSAGE_INFO,
+						  GTK_BUTTONS_CLOSE,
+						  _("About menu accelerators and keyboard shortcuts"));
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						_("Vinagre comes with menu accelerators and keyboard shortcuts disabled by default. The reason is to avoid the keys to be intercepted by the program, and allow them to be sent to the remote machine.\n\nYou can change this behavior through the preferences dialog. For more information, check the documentation.\n\nThis message will appear only once."));     
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+
+      if (vinagre_utils_create_dir (filename, &error))
+        {
+          int fd = g_creat (filename, 0644);
+          if (fd < 0)
+            g_warning (_("Error while creating the file %s: %s"), filename, strerror (errno));
+          else
+            close (fd);
+        }
+      else
+        {
+          g_warning (_("Error while creating the file %s: %s"), filename, error ? error->message: _("Unkown error"));
+          g_clear_error (&error);
+        }
+    }
+
+  g_free (filename);
+  return FALSE;
+}
+
 static void
 vinagre_window_init (VinagreWindow *window)
 {
@@ -768,6 +811,8 @@ vinagre_window_init (VinagreWindow *window)
   vinagre_plugins_engine_activate_plugins (vinagre_plugins_engine_get_default (),
 					   window);
 
+
+  g_idle_add ((GSourceFunc) vinagre_window_check_first_run, window);
 }
 
 VinagreNotebook *
