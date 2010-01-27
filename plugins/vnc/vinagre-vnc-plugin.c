@@ -389,7 +389,7 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 				  vinagre_vnc_connection_get_scaling (VINAGRE_VNC_CONNECTION (conn)));
 
   check = gtk_check_button_new_with_mnemonic (_("_Use JPEG Compression"));
-  gtk_widget_set_tooltip_text (check, _("This might not work on all sort of VNC servers"));
+  gtk_widget_set_tooltip_text (check, _("This might not work on all VNC servers"));
   g_object_set_data (G_OBJECT (box), "lossy", check);
   gtk_table_attach_defaults (table, check, 1, 2, 2, 3);
   if (VINAGRE_IS_VNC_CONNECTION (conn))

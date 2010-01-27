@@ -165,7 +165,7 @@ incoming (GIOChannel *source, GIOCondition condition, VinagreVncListener *listen
   window = vinagre_app_get_active_window (vinagre_app_get_default ());
   if (!window)
     {
-      g_warning (_("Incoming VNC connection arrived but there is none active window"));
+      g_warning (_("Incoming VNC connection arrived but there is no active window"));
       return TRUE;
     }
 

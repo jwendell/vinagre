@@ -745,7 +745,7 @@ vinagre_window_check_first_run (VinagreWindow *window)
         }
       else
         {
-          g_warning (_("Error while creating the file %s: %s"), filename, error ? error->message: _("Unkown error"));
+          g_warning (_("Error while creating the file %s: %s"), filename, error ? error->message: _("Unknown error"));
           g_clear_error (&error);
         }
     }
