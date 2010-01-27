@@ -1,14 +1,15 @@
+# Slovenian translation of vinagre.
 # Copyright (C) 2005-2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the vinagre package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2009.
+# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-11-25 14:12+0000\n"
-"PO-Revision-Date: 2009-11-26 15:03+0100\n"
+"POT-Creation-Date: 2010-01-25 19:06+0000\n"
+"PO-Revision-Date: 2010-01-26 09:35+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +68,7 @@ msgstr "Mapa"
 
 #: ../data/vinagre.ui.h:6
 #: ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:140
+#: ../plugins/vnc/vinagre-vnc-tab.c:141
 #: ../vinagre/vinagre-fav.c:404
 msgid "Host:"
 msgstr "Gostitelj:"
@@ -86,7 +87,7 @@ msgstr "Nadrejena mapa"
 
 #: ../data/vinagre.ui.h:10
 msgid "Preferences"
-msgstr "Lastnosti"
+msgstr "Možnosti"
 
 #: ../data/vinagre.ui.h:11
 msgid "Which machine do you want to connect to?"
@@ -198,7 +199,7 @@ msgid "Access Unix/Linux terminals"
 msgstr "Dostop do Unix/Linux terminalov"
 
 #: ../plugins/ssh/vinagre-ssh-tab.c:50
-#: ../plugins/vnc/vinagre-vnc-tab.c:141
+#: ../plugins/vnc/vinagre-vnc-tab.c:142
 msgid "Port:"
 msgstr "Vrata:"
 
@@ -206,7 +207,7 @@ msgstr "Vrata:"
 msgid "SSH support"
 msgstr "Podpora SSH"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:253
+#: ../plugins/vnc/vinagre-vnc-connection.c:272
 #: ../plugins/vnc/vinagre-vnc-plugin.c:320
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -257,141 +258,165 @@ msgstr "Datoteka ni prava VNC datoteka: manjka skupina \"povezava\"."
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "Datoteka ni prava VNC datoteka: manjka ključ \"gostitelj\"."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:350
+#: ../plugins/vnc/vinagre-vnc-plugin.c:365
 msgid "VNC Options"
 msgstr "Možnosti VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:362
-#: ../plugins/vnc/vinagre-vnc-tab.c:670
+#: ../plugins/vnc/vinagre-vnc-plugin.c:377
+#: ../plugins/vnc/vinagre-vnc-tab.c:700
 msgid "_View only"
 msgstr "Samo za _ogled"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:369
+#: ../plugins/vnc/vinagre-vnc-plugin.c:384
 msgid "_Scaling"
 msgstr "Prilagajanje _velikosti"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:376
+#: ../plugins/vnc/vinagre-vnc-plugin.c:391
 msgid "_Use JPEG Compression"
 msgstr "_Uporabi JPEG stiskanje"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:377
+#: ../plugins/vnc/vinagre-vnc-plugin.c:392
 msgid "This might not work on all sort of VNC servers"
 msgstr "Možnost morda ne bo delovala na vseh vrstah strežnikov VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:385
+#: ../plugins/vnc/vinagre-vnc-plugin.c:400
 msgid "_Depth Color:"
 msgstr "_Barvna globina:"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:395
+#: ../plugins/vnc/vinagre-vnc-plugin.c:410
 msgid "Use Server Settings"
 msgstr "Uporabi nastavitve strežnika"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:396
+#: ../plugins/vnc/vinagre-vnc-plugin.c:411
 msgid "True Color (24 bits)"
 msgstr "Prave barve (24 bitno)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:397
+#: ../plugins/vnc/vinagre-vnc-plugin.c:412
 msgid "High Color (16 bits)"
 msgstr "Visoke barve (16 bitno)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:398
+#: ../plugins/vnc/vinagre-vnc-plugin.c:413
 msgid "Low Color (8 bits)"
 msgstr "Nizke barve (8 bitno)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:399
+#: ../plugins/vnc/vinagre-vnc-plugin.c:414
 msgid "Ultra Low Color (3 bits)"
 msgstr "Zelo nizke barve (3 bitno)"
 
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:425
+msgid "Use h_ost"
+msgstr "Uporabi _gostitelja"
+
+#. Translators: This is the tooltip of the SSH tunneling entry
+#: ../plugins/vnc/vinagre-vnc-plugin.c:433
+msgid "hostname or user@hostname"
+msgstr "ime gostitelja ali uporabnik@imegostitelja"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:437
+msgid "as a SSH tunnel"
+msgstr "kot SSH tunel."
+
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:423
+#: ../plugins/vnc/vinagre-vnc-plugin.c:470
 msgid "VNC Files"
 msgstr "Datoteke VNC"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:139
+#: ../plugins/vnc/vinagre-vnc-tab.c:140
 msgid "Desktop Name:"
 msgstr "Ime namizja:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:142
+#: ../plugins/vnc/vinagre-vnc-tab.c:143
 msgid "Dimensions:"
 msgstr "Mere:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:284
+#: ../plugins/vnc/vinagre-vnc-tab.c:296
+msgid "Error creating the SSH tunnel"
+msgstr "Napaka med ustvarjanjem SSH tunela"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:297
+#: ../plugins/vnc/vinagre-vnc-tab.c:308
+msgid "Unknown reason"
+msgstr "Neznan razlog"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:307
 msgid "Error connecting to host."
 msgstr "Napaka med povezovanjem z gostiteljem."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:322
+#: ../plugins/vnc/vinagre-vnc-tab.c:352
 #, c-format
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "Način overitve z gostiteljem %s ni podprt. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:326
+#: ../plugins/vnc/vinagre-vnc-tab.c:356
 msgid "Authentication unsupported"
 msgstr "Overitev ni podprta"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:586
-#: ../plugins/vnc/vinagre-vnc-tab.c:603
+#: ../plugins/vnc/vinagre-vnc-tab.c:616
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Authentication error"
 msgstr "Napaka med overjanjem"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:587
+#: ../plugins/vnc/vinagre-vnc-tab.c:617
 msgid "A username is required in order to access this machine."
 msgstr "Za dostop do računalnika je zahtevano uporabniško ime."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:634
 msgid "A password is required in order to access this machine."
 msgstr "Za dostop do računalnika je zahtevano geslo."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:655
+#: ../plugins/vnc/vinagre-vnc-tab.c:685
 msgid "S_caling"
 msgstr "Prilagajanje _velikosti"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:656
+#: ../plugins/vnc/vinagre-vnc-tab.c:686
 msgid "Fits the remote screen into the current window size"
 msgstr "Prilagodi oddaljeni zaslon na velikost trenutnega okna"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:671
+#: ../plugins/vnc/vinagre-vnc-tab.c:701
 msgid "Does not send mouse and keyboard events"
 msgstr "Ne pošilja dejanj tipkovnice in miške"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:684
+#: ../plugins/vnc/vinagre-vnc-tab.c:714
 msgid "_Original size"
 msgstr "_Običajna velikost"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:685
+#: ../plugins/vnc/vinagre-vnc-tab.c:715
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Prilagodi okno velikosti oddaljenega namizja"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:698
+#: ../plugins/vnc/vinagre-vnc-tab.c:728
 msgid "_Refresh Screen"
 msgstr "_Osveži zaslon"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:699
+#: ../plugins/vnc/vinagre-vnc-tab.c:729
 msgid "Requests an update of the screen"
 msgstr "Zahteva posodobitev zaslona"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:721
-#: ../plugins/vnc/vinagre-vnc-tab.c:793
-#: ../plugins/vnc/vinagre-vnc-tab.c:795
+#: ../plugins/vnc/vinagre-vnc-tab.c:751
+#: ../plugins/vnc/vinagre-vnc-tab.c:823
+#: ../plugins/vnc/vinagre-vnc-tab.c:825
 msgid "Send Ctrl-Alt-Del"
 msgstr "Pošlji Ctrl-Alt-Del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:722
+#: ../plugins/vnc/vinagre-vnc-tab.c:752
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Pošlje Ctrl+Alt+Del ukaz oddaljenemu računalniku"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:774
-#: ../plugins/vnc/vinagre-vnc-tab.c:775
+#: ../plugins/vnc/vinagre-vnc-tab.c:804
+#: ../plugins/vnc/vinagre-vnc-tab.c:805
 msgid "Scaling"
 msgstr "Prilagajanje velikosti"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:784
-#: ../plugins/vnc/vinagre-vnc-tab.c:785
+#: ../plugins/vnc/vinagre-vnc-tab.c:814
+#: ../plugins/vnc/vinagre-vnc-tab.c:815
 msgid "Read only"
-msgstr "Samo za branje"
+msgstr "Le za branje"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:1001
+#: ../plugins/vnc/vinagre-vnc-tab.c:1031
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -400,6 +425,11 @@ msgstr ""
 "Prilagajanja velikosti ni podprto pri tej namestitvi.\n"
 "\n"
 "Več podrobnosti o možnostih in načinu zagona si preberite v datoteki README."
+
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:72
+#, c-format
+msgid "Unable to find a free TCP port"
+msgstr "Ni mogoče najti prostih TCP vrat"
 
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
 msgid "VNC support"
@@ -818,7 +848,7 @@ msgstr "Zapri povezavo"
 
 #: ../vinagre/vinagre-plugin-dialog.c:83
 msgid "Plugin Manager"
-msgstr "Urejevalnik vstavkov"
+msgstr "Upravljalnik vstavkov"
 
 #: ../vinagre/vinagre-plugin-manager.c:45
 msgid "Plugin"
@@ -834,15 +864,15 @@ msgstr "_Nastavitve"
 
 #: ../vinagre/vinagre-plugin-manager.c:512
 msgid "A_ctivate"
-msgstr "_Priklopi"
+msgstr "_Pokaži"
 
 #: ../vinagre/vinagre-plugin-manager.c:523
 msgid "Ac_tivate All"
-msgstr "Priklopi _vse"
+msgstr "Pokaži _vse"
 
 #: ../vinagre/vinagre-plugin-manager.c:528
 msgid "_Deactivate All"
-msgstr "_Odklopi vse"
+msgstr "_Skrij vse"
 
 #: ../vinagre/vinagre-plugin-manager.c:824
 msgid "_About Plugin"
@@ -854,7 +884,96 @@ msgstr "_Nastavitve vstavka"
 
 #: ../vinagre/vinagre-prefs.c:229
 msgid "Cannot initialize preferences manager."
-msgstr "Ni mogoče zagnati upravljalnika nastavitev."
+msgstr "Ni mogoče začeti upravljalnika možnosti."
+
+#: ../vinagre/vinagre-ssh.c:106
+msgid "Timed out when logging into SSH host"
+msgstr "Prijava v SSH gostitelja je časovno potekla"
+
+#: ../vinagre/vinagre-ssh.c:180
+msgid "Unable to spawn ssh program"
+msgstr "Ni mogoče oživiti ssh programa"
+
+#: ../vinagre/vinagre-ssh.c:197
+#, c-format
+msgid "Unable to spawn ssh program: %s"
+msgstr "Ni mogoče oživiti ssh programa: %s"
+
+#: ../vinagre/vinagre-ssh.c:304
+msgid "Authentication needed"
+msgstr "Zahtevana je overitev."
+
+#: ../vinagre/vinagre-ssh.c:312
+#, c-format
+msgid "Enter the SSH password for the username and host %s@%s:"
+msgstr "Vnesite SSH geslo za uporabniško ime in gostitelja %s@%s:"
+
+#: ../vinagre/vinagre-ssh.c:386
+msgid "Timed out when logging in"
+msgstr "Časovni  zamik prijave je potekel"
+
+#: ../vinagre/vinagre-ssh.c:409
+#: ../vinagre/vinagre-ssh.c:549
+#: ../vinagre/vinagre-ssh.c:626
+msgid "Permission denied"
+msgstr "Ni ustreznih dovoljenj"
+
+#: ../vinagre/vinagre-ssh.c:459
+msgid "Password dialog canceled"
+msgstr "Vnos gesla je preklican"
+
+#: ../vinagre/vinagre-ssh.c:483
+msgid "Could not send password"
+msgstr "Ni mogoče poslati gesla."
+
+#: ../vinagre/vinagre-ssh.c:491
+msgid "Log In Anyway"
+msgstr "Vseeno se prijavi"
+
+#: ../vinagre/vinagre-ssh.c:491
+msgid "Cancel Login"
+msgstr "Prekliči prijavo"
+
+#: ../vinagre/vinagre-ssh.c:500
+#, c-format
+msgid ""
+"The identity of the remote computer (%s) is unknown.\n"
+"This happens when you log in to a computer the first time.\n"
+"\n"
+"The identity sent by the remote computer is %s. If you want to be absolutely sure it is safe to continue, contact the system administrator."
+msgstr ""
+"Istovetnosti oddaljenega računalnika (%s) ni znana.\n"
+"To se zgodi, kadar se prvič prijavite v sistem.\n"
+"\n"
+"Podatki overitve, ki jih pošilja oddaljeni računalnik so %s. V primeru, da želite biti popolnoma prepričani, da je varno nadaljevati, stopite v stik s skrbnikom vašega sistema."
+
+#: ../vinagre/vinagre-ssh.c:518
+msgid "Login dialog canceled"
+msgstr "Prijava je preklicana"
+
+#: ../vinagre/vinagre-ssh.c:539
+msgid "Can't send host identity confirmation"
+msgstr "Ni mogoče poslati potrdila istovetnosti gostitelja"
+
+#: ../vinagre/vinagre-ssh.c:633
+msgid "Hostname not known"
+msgstr "Ime gostitelja ni znano"
+
+#: ../vinagre/vinagre-ssh.c:640
+msgid "No route to host"
+msgstr "Ni poti do gostitelja"
+
+#: ../vinagre/vinagre-ssh.c:647
+msgid "Connection refused by server"
+msgstr "Strežnik je zavrnil povezavo"
+
+#: ../vinagre/vinagre-ssh.c:654
+msgid "Host key verification failed"
+msgstr "Neuspešna overitev ključa gostitelja"
+
+#: ../vinagre/vinagre-ssh.c:689
+msgid "Unable to find a valid SSH program"
+msgstr "Ni mogoče najti veljavnega SSH programa"
 
 #: ../vinagre/vinagre-tab.c:346
 msgid "Leave fullscreen"
@@ -950,7 +1069,7 @@ msgstr "Končaj program"
 
 #: ../vinagre/vinagre-ui.h:49
 msgid "Edit the application preferences"
-msgstr "Uredi lastnosti programa"
+msgstr "Uredi možnosti programa"
 
 #: ../vinagre/vinagre-ui.h:50
 msgid "_Plugins"
@@ -1065,7 +1184,7 @@ msgstr "Uporaba in razširjanje programa Vinagre je prosto, vendar brez kakršne
 
 #: ../vinagre/vinagre-utils.c:497
 msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr "Skupaj s programom bi morali dobiti tudi kopijo GNU splošne javne licence. V primeru, da je niste, si oglejte <http://www.gnu.org/licenses/>."
+msgstr "Skupaj s programom bi morali prejeti tudi kopijo GNU splošnega javnega dovoljenja. V primeru, da je niste, si oglejte <http://www.gnu.org/licenses/>."
 
 #: ../vinagre/vinagre-utils.c:519
 msgid "translator-credits"
