@@ -203,7 +203,7 @@ saved_history (void)
     {
       history_from_file = g_strsplit (file_contents, "\n", 0);
       len = g_strv_length (history_from_file);
-      if (strlen (history_from_file[len-1]) == 0)
+      if (len > 0 && strlen (history_from_file[len-1]) == 0)
 	{
 	  g_free (history_from_file[len-1]);
 	  history_from_file[len-1] = NULL;
