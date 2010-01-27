@@ -145,7 +145,9 @@ vinagre_cmd_machine_open (GtkAction     *action,
     }
   if (i == 0)
     {
-      vinagre_utils_show_error (_("There are none supported files"), _("None of the active plugins offer a supported file to be open. Activate some plugins and try again."), GTK_WINDOW (window));
+      vinagre_utils_show_error (_("There are no supported files"),
+				_("None of the active plugins support this action. Activate some plugins and try again."),
+				GTK_WINDOW (window));
       goto finalize;
     }
 
