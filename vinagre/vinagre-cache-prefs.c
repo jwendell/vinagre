@@ -43,7 +43,7 @@ save_file (void)
   gchar *data = g_key_file_to_data (keyfile, NULL, NULL);
   gchar *dir = g_build_filename (g_get_user_cache_dir (), "vinagre", NULL);
 
-  g_mkdir_with_parents (dir, 0775);
+  g_mkdir_with_parents (dir, 0700);
 
   if (!g_file_set_contents (filename,
 			    data,
