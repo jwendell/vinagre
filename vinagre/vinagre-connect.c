@@ -397,6 +397,8 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
   setup_protocol (&dialog);
   setup_combo (&dialog);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog.fullscreen_check),
+				vinagre_cache_prefs_get_boolean ("connection", "fullscreen", FALSE));
 
 #ifdef VINAGRE_ENABLE_AVAHI
   g_signal_connect (dialog.find_button,
@@ -441,6 +443,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
       vinagre_cache_prefs_set_string ("connection", "last-protocol", protocol);
       g_free (protocol);
+      vinagre_cache_prefs_set_boolean ("connection", "fullscreen", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.fullscreen_check)));
 
       conn = vinagre_plugin_new_connection (plugin);
       if (vinagre_connection_split_string (host,

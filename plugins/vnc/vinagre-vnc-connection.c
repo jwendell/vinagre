@@ -22,6 +22,8 @@
 #include <glib/gi18n.h>
 #include <stdlib.h>
 #include <vinagre/vinagre-utils.h>
+#include <vinagre/vinagre-cache-prefs.h>
+
 #include "vinagre-vnc-connection.h"
 
 struct _VinagreVncConnectionPrivate
@@ -287,6 +289,12 @@ vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
       g_warning ("Wrong widget passed to vnc_parse_options_widget()");
       return;
     }
+
+  vinagre_cache_prefs_set_boolean ("vnc-connection", "view-only", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (view_only)));
+  vinagre_cache_prefs_set_boolean ("vnc-connection", "scaling", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (scaling)));
+  vinagre_cache_prefs_set_integer ("vnc-connection", "depth-profile", gtk_combo_box_get_active (GTK_COMBO_BOX (depth_combo)));
+  vinagre_cache_prefs_set_boolean ("vnc-connection", "lossy-encoding", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (lossy)));
+  vinagre_cache_prefs_set_string  ("vnc-connection", "ssh-tunnel-host", gtk_entry_get_text (GTK_ENTRY (ssh_host)));
 
   g_object_set (conn,
 		"view-only", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (view_only)),

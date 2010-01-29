@@ -29,6 +29,7 @@
 
 #include <vinagre/vinagre-debug.h>
 #include <vinagre/vinagre-prefs.h>
+#include <vinagre/vinagre-cache-prefs.h>
 
 #include "vinagre-vnc-plugin.h"
 #include "vinagre-vnc-connection.h"
@@ -356,9 +357,8 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 {
   GtkWidget *box, *check, *label, *combo, *depth_box, *ssh_box, *ssh_host_entry;
   GtkTable  *table;
-  gchar     *str;
-  gint      depth_profile;
-  const gchar *ssh_host = NULL;
+  gchar     *str, *ssh_host;
+  gboolean has_conn = VINAGRE_IS_VNC_CONNECTION (conn);
 
   box = gtk_vbox_new (FALSE, 0);
 
@@ -374,37 +374,36 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
   label = gtk_label_new ("  ");
   gtk_table_attach (table, label, 0, 1, 0, 1, GTK_SHRINK, GTK_SHRINK, 0, 0);
 
+  /* View only check button */
   check = gtk_check_button_new_with_mnemonic (_("_View only"));
   g_object_set_data (G_OBJECT (box), "view_only", check);
   gtk_table_attach_defaults (table, check, 1, 2, 0, 1);
-  if (VINAGRE_IS_VNC_CONNECTION (conn))
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
-				  vinagre_vnc_connection_get_view_only (VINAGRE_VNC_CONNECTION (conn)));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
+				has_conn ? vinagre_vnc_connection_get_view_only (VINAGRE_VNC_CONNECTION (conn))
+				: vinagre_cache_prefs_get_boolean ("vnc-connection", "view-only", FALSE));
 
+  /* Scaling check button */
   check = gtk_check_button_new_with_mnemonic (_("_Scaling"));
   g_object_set_data (G_OBJECT (box), "scaling", check);
   gtk_table_attach_defaults (table, check, 1, 2, 1, 2);
-  if (VINAGRE_IS_VNC_CONNECTION (conn))
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
-				  vinagre_vnc_connection_get_scaling (VINAGRE_VNC_CONNECTION (conn)));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
+				has_conn ? vinagre_vnc_connection_get_scaling (VINAGRE_VNC_CONNECTION (conn))
+				: vinagre_cache_prefs_get_boolean ("vnc-connection", "scaling", FALSE));
 
+  /* JPEG Compression check button */
   check = gtk_check_button_new_with_mnemonic (_("_Use JPEG Compression"));
   gtk_widget_set_tooltip_text (check, _("This might not work on all VNC servers"));
   g_object_set_data (G_OBJECT (box), "lossy", check);
   gtk_table_attach_defaults (table, check, 1, 2, 2, 3);
-  if (VINAGRE_IS_VNC_CONNECTION (conn))
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
-				  vinagre_vnc_connection_get_lossy_encoding (VINAGRE_VNC_CONNECTION (conn)));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
+				has_conn ? vinagre_vnc_connection_get_lossy_encoding (VINAGRE_VNC_CONNECTION (conn))
+				: vinagre_cache_prefs_get_boolean ("vnc-connection", "lossy-encoding", FALSE));
 
+  /* Depth color combo box */
   depth_box = gtk_hbox_new (FALSE, 4);
   label = gtk_label_new_with_mnemonic (_("_Depth Color:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (depth_box), GTK_WIDGET (label), FALSE, FALSE, 0);
-
-  if (VINAGRE_IS_VNC_CONNECTION (conn))
-    depth_profile = vinagre_vnc_connection_get_depth_profile (VINAGRE_VNC_CONNECTION (conn));
-  else
-    depth_profile = 0;
 
   combo = gtk_combo_box_new_text ();
   gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Use Server Settings"));
@@ -412,7 +411,9 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
   gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("High Color (16 bits)"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Low Color (8 bits)"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Ultra Low Color (3 bits)"));
-  gtk_combo_box_set_active (GTK_COMBO_BOX (combo), depth_profile);
+  gtk_combo_box_set_active (GTK_COMBO_BOX (combo),
+			    has_conn ? vinagre_vnc_connection_get_depth_profile (VINAGRE_VNC_CONNECTION (conn))
+			    : vinagre_cache_prefs_get_integer ("vnc-connection", "depth-profile", 0));
   g_object_set_data (G_OBJECT (box), "depth_combo", combo);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
   gtk_box_pack_start (GTK_BOX (depth_box), GTK_WIDGET (combo), FALSE, FALSE, 0);
@@ -442,11 +443,13 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 		    "toggled",
 		    G_CALLBACK (ssh_tunnel_check_toggled_cb),
 		    box);
-  if (VINAGRE_IS_VNC_CONNECTION (conn))
-    ssh_host = vinagre_vnc_connection_get_ssh_tunnel_host (VINAGRE_VNC_CONNECTION (conn));
+
+  ssh_host = has_conn ? g_strdup (vinagre_vnc_connection_get_ssh_tunnel_host (VINAGRE_VNC_CONNECTION (conn)))
+                      : vinagre_cache_prefs_get_string  ("vnc-connection", "ssh-tunnel-host", NULL);
   if (ssh_host)
     gtk_entry_set_text (GTK_ENTRY (ssh_host_entry), ssh_host);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), ssh_host && *ssh_host);
+  g_free (ssh_host);
 
   gtk_table_attach_defaults (table, ssh_box, 1, 2, 4, 5);
 
