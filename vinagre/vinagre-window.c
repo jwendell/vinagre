@@ -165,11 +165,14 @@ vinagre_window_configure_event (GtkWidget         *widget,
 {
   VinagreWindow *window = VINAGRE_WINDOW (widget);
 
-  window->priv->width  = event->width;
-  window->priv->height = event->height;
+  if ((vinagre_cache_prefs_get_integer ("window", "window-state", 0) & GDK_WINDOW_STATE_MAXIMIZED) == 0)
+    {
+      window->priv->width  = event->width;
+      window->priv->height = event->height;
 
-  vinagre_cache_prefs_set_integer ("window", "window-width", window->priv->width);
-  vinagre_cache_prefs_set_integer ("window", "window-height", window->priv->height);
+      vinagre_cache_prefs_set_integer ("window", "window-width", window->priv->width);
+      vinagre_cache_prefs_set_integer ("window", "window-height", window->priv->height);
+    }
 
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->configure_event (widget, event);
 }
