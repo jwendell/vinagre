@@ -1,19 +1,5 @@
 <gconfschemafile>
- 	<schemalist>
-    <schema>
-      <key>/schemas/apps/vinagre/plugins/active-plugins</key>
-      <applyto>/apps/vinagre/plugins/active-plugins</applyto>
-      <owner>vinagre</owner>
-      <type>list</type>
-      <list_type>string</list_type>
-      <default>[dummy]</default>
-      <locale name="C">
-      <short>Active plugins</short>
-      <long>List of active plugins. It contains the "Location" of the active plugins. See the .vinagre-plugin file for obtaining
-        the "Location" of a given plugin.</long>
-      </locale>
-    </schema>
-
+	<schemalist>
 		<schema>
 			<key>/schemas/desktop/gnome/url-handlers/vnc/command</key>
 			<applyto>/desktop/gnome/url-handlers/vnc/command</applyto>
@@ -98,19 +84,18 @@
 			</locale>
 		</schema>
 
-    <schema>
-      <key>/schemas/apps/vinagre/plugins/active-plugins</key>
-      <applyto>/apps/vinagre/plugins/active-plugins</applyto>
-      <owner>vinagre</owner>
-      <type>list</type>
-      <list_type>string</list_type>
-      <default>[@ACTIVE_PLUGINS@]</default>
-      <locale name="C">
-	<short>Active plugins</short>
-	<long>List of active plugins. It contains the "Location" of the active plugins. See the .vinagre-plugin file for obtaining
-        the "Location" of a given plugin.</long>
-      </locale>
-    </schema>
+		<schema>
+			<key>/schemas/apps/vinagre/plugins/active-plugins</key>
+			<applyto>/apps/vinagre/plugins/active-plugins</applyto>
+			<owner>vinagre</owner>
+			<type>list</type>
+			<list_type>string</list_type>
+			<default>[@ACTIVE_PLUGINS@]</default>
+			<locale name="C">
+				<short>Active plugins</short>
+				<long>List of active plugins. It contains the "Location" of the active plugins. See the .vinagre-plugin file for obtaining the "Location" of a given plugin.</long>
+			</locale>
+		</schema>
 
 	</schemalist>
 </gconfschemafile>
