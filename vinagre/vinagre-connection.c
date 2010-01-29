@@ -370,7 +370,10 @@ vinagre_connection_set_host (VinagreConnection *conn,
   g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
   g_free (conn->priv->host);
-  conn->priv->host = g_strdup (host);
+  if (host)
+    conn->priv->host = g_strdup (g_strstrip ((gchar *)host));
+  else
+    conn->priv->host = NULL;
 }
 const gchar *
 vinagre_connection_get_host (VinagreConnection *conn)
