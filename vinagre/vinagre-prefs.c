@@ -25,20 +25,10 @@
 
 #define VINAGRE_BASE_KEY		"/apps/vinagre"
 #define VM_ALWAYS_SHOW_TABS		VINAGRE_BASE_KEY "/always_show_tabs"
-#define VM_SHARED_FLAG			VINAGRE_BASE_KEY "/shared_flag"
-#define VM_TOOLBAR_VISIBLE	 	VINAGRE_BASE_KEY "/toolbar_visible"
-#define VM_STATUSBAR_VISIBLE		VINAGRE_BASE_KEY "/statusbar_visible"
-#define VM_SIDE_PANEL_VISIBLE		VINAGRE_BASE_KEY "/side_pane_visible"
 #define VM_SHOW_ACCELS			VINAGRE_BASE_KEY "/show_accels"
 #define VM_HISTORY_SIZE			VINAGRE_BASE_KEY "/history_size"
 #define VM_ALWAYS_ENABLE_LISTENING	VINAGRE_BASE_KEY "/always_enable_listening"
-
-#define VM_WINDOW_STATE			VINAGRE_BASE_KEY "/window_state"
-#define VM_WINDOW_WIDTH			VINAGRE_BASE_KEY "/window_width"
-#define VM_WINDOW_HEIGHT		VINAGRE_BASE_KEY "/window_height"
-#define VM_SIDE_PANEL_SIZE		VINAGRE_BASE_KEY "/side_panel_size"
-#define VM_LAST_PROTOCOL		VINAGRE_BASE_KEY "/last_protocol"
-
+#define VM_SHARED_FLAG			VINAGRE_BASE_KEY "/shared_flag"
 #define VINAGRE_PLUGINS_DIR		VINAGRE_BASE_KEY "/plugins"
 #define VM_ACTIVE_PLUGINS		VINAGRE_PLUGINS_DIR "/active-plugins"
 
@@ -53,13 +43,6 @@ enum
   PROP_0,
   PROP_SHARED_FLAG,
   PROP_ALWAYS_SHOW_TABS,
-  PROP_TOOLBAR_VISIBLE,
-  PROP_STATUSBAR_VISIBLE,
-  PROP_SIDE_PANEL_VISIBLE,
-  PROP_WINDOW_STATE,
-  PROP_WINDOW_WIDTH,
-  PROP_WINDOW_HEIGHT,
-  PROP_SIDE_PANEL_SIZE,
   PROP_SHOW_ACCELS,
   PROP_HISTORY_SIZE,
   PROP_ACTIVE_PLUGINS,
@@ -241,7 +224,6 @@ vinagre_prefs_init (VinagrePrefs *prefs)
 			   VM_SHOW_ACCELS,
                            (GConfClientNotifyFunc) vinagre_prefs_show_accels_notify,
                            prefs, NULL, NULL);
-
 }
 
 static void
@@ -257,27 +239,6 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
       case PROP_ALWAYS_SHOW_TABS:
 	vinagre_prefs_set_bool (prefs, VM_ALWAYS_SHOW_TABS, g_value_get_boolean (value));
 	break;
-      case PROP_TOOLBAR_VISIBLE:
-	vinagre_prefs_set_bool (prefs, VM_TOOLBAR_VISIBLE, g_value_get_boolean (value));
-	break;
-      case PROP_STATUSBAR_VISIBLE:
-	vinagre_prefs_set_bool (prefs, VM_STATUSBAR_VISIBLE, g_value_get_boolean (value));
-	break;
-      case PROP_SIDE_PANEL_VISIBLE:
-	vinagre_prefs_set_bool (prefs, VM_SIDE_PANEL_VISIBLE, g_value_get_boolean (value));
-	break;
-      case PROP_WINDOW_STATE:
-	vinagre_prefs_set_int (prefs, VM_WINDOW_STATE, g_value_get_int (value));
-	break;
-      case PROP_WINDOW_WIDTH:
-	vinagre_prefs_set_int (prefs, VM_WINDOW_WIDTH, g_value_get_int (value));
-	break;
-      case PROP_WINDOW_HEIGHT:
-	vinagre_prefs_set_int (prefs, VM_WINDOW_HEIGHT, g_value_get_int (value));
-	break;
-      case PROP_SIDE_PANEL_SIZE:
-	vinagre_prefs_set_int (prefs, VM_SIDE_PANEL_SIZE, g_value_get_int (value));
-	break;
       case PROP_SHOW_ACCELS:
 	vinagre_prefs_set_bool (prefs, VM_SHOW_ACCELS, g_value_get_boolean (value));
 	break;
@@ -286,9 +247,6 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
 	break;
       case PROP_ACTIVE_PLUGINS:
 	vinagre_prefs_set_list (prefs, VM_ACTIVE_PLUGINS, g_value_get_pointer (value));
-	break;
-      case PROP_LAST_PROTOCOL:
-	vinagre_prefs_set_string (prefs, VM_LAST_PROTOCOL, g_value_get_string (value));
 	break;
       case PROP_ALWAYS_ENABLE_LISTENING:
 	vinagre_prefs_set_bool (prefs, VM_ALWAYS_ENABLE_LISTENING, g_value_get_boolean (value));
@@ -313,27 +271,6 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
       case PROP_ALWAYS_SHOW_TABS:
 	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_ALWAYS_SHOW_TABS, FALSE));
 	break;
-      case PROP_TOOLBAR_VISIBLE:
-	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_TOOLBAR_VISIBLE, TRUE));
-	break;
-      case PROP_STATUSBAR_VISIBLE:
-	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_STATUSBAR_VISIBLE, TRUE));
-	break;
-      case PROP_SIDE_PANEL_VISIBLE:
-	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_SIDE_PANEL_VISIBLE, TRUE));
-	break;
-      case PROP_WINDOW_STATE:
-	g_value_set_int (value, vinagre_prefs_get_int (prefs, VM_WINDOW_STATE, 0));
-	break;
-      case PROP_WINDOW_WIDTH:
-	g_value_set_int (value, vinagre_prefs_get_int (prefs, VM_WINDOW_WIDTH, 650));
-	break;
-      case PROP_WINDOW_HEIGHT:
-	g_value_set_int (value, vinagre_prefs_get_int (prefs, VM_WINDOW_HEIGHT, 500));
-	break;
-      case PROP_SIDE_PANEL_SIZE:
-	g_value_set_int (value, vinagre_prefs_get_int (prefs, VM_SIDE_PANEL_SIZE, 200));
-	break;
       case PROP_SHOW_ACCELS:
 	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_SHOW_ACCELS, TRUE));
 	break;
@@ -342,11 +279,6 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	break;
       case PROP_ACTIVE_PLUGINS:
 	g_value_set_pointer (value, vinagre_prefs_get_list (prefs, VM_ACTIVE_PLUGINS));
-	break;
-      case PROP_LAST_PROTOCOL:
-	str = vinagre_prefs_get_string (prefs, VM_LAST_PROTOCOL, NULL);
-	g_value_set_string (value, str);
-	g_free (str);
 	break;
       case PROP_ALWAYS_ENABLE_LISTENING:
 	g_value_set_boolean (value, vinagre_prefs_get_bool (prefs, VM_ALWAYS_ENABLE_LISTENING, FALSE));
@@ -402,55 +334,6 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 							 FALSE,
 							 G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
-				   PROP_TOOLBAR_VISIBLE,
-				   g_param_spec_boolean ("toolbar-visible",
-							 "Toolbar Visibility",
-							 "Whether the toolbar is visible",
-							 TRUE,
-							 G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-				   PROP_STATUSBAR_VISIBLE,
-				   g_param_spec_boolean ("statusbar-visible",
-							 "Statusbar Visibility",
-							 "Whether the statusbar is visible",
-							 TRUE,
-							 G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-				   PROP_SIDE_PANEL_VISIBLE,
-				   g_param_spec_boolean ("side-panel-visible",
-							 "Side Panel Visibility",
-							 "Whether the side panel is visible",
-							 TRUE,
-							 G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-				   PROP_WINDOW_STATE,
-				   g_param_spec_int ("window-state",
-						     "Window State",
-						     "Whether the window is maximised",
-						     G_MININT, G_MAXINT, 0,
-						     G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-				   PROP_WINDOW_WIDTH,
-				   g_param_spec_int ("window-width",
-						     "Window Width",
-						     "The width of window",
-						     100, G_MAXINT, 650,
-						     G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-				   PROP_WINDOW_HEIGHT,
-				   g_param_spec_int ("window-height",
-						     "Window Height",
-						     "The height of window",
-						     100, G_MAXINT, 500,
-						     G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-				   PROP_SIDE_PANEL_SIZE,
-				   g_param_spec_int ("side-panel-size",
-						     "Side Panel Width",
-						     "The width of side panel",
-						     100, G_MAXINT, 200,
-						     G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
 				   PROP_SHOW_ACCELS,
 				   g_param_spec_boolean ("show-accels",
 							 "Show menu accelerators",
@@ -473,21 +356,12 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 							 G_PARAM_READWRITE));
 
   g_object_class_install_property (object_class,
-				   PROP_LAST_PROTOCOL,
-				   g_param_spec_string ("last-protocol",
-							"Last Protocol",
-							"The last protocol used in connect dialog",
-							NULL,
-							G_PARAM_READWRITE));
-
-  g_object_class_install_property (object_class,
 				   PROP_ALWAYS_ENABLE_LISTENING,
 				   g_param_spec_boolean ("always-enable-listening",
 							 "Always enable listening",
 							 "Whether we always should listen for reverse connections",
 							 FALSE,
 							 G_PARAM_READWRITE));
-
 }
 
 /* Preferences dialog */

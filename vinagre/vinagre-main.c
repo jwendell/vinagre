@@ -34,6 +34,7 @@
 #include "vinagre-app.h"
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
+#include "vinagre-cache-prefs.h"
 #include "vinagre-bacon.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin-info.h"
@@ -201,6 +202,7 @@ int main (int argc, char **argv) {
 
   vinagre_bacon_start (servers, new_window);
 
+  vinagre_cache_prefs_init ();
   app = vinagre_app_get_default ();
   window = vinagre_app_create_window (app, NULL);
   gtk_widget_show (GTK_WIDGET(window));
@@ -228,6 +230,7 @@ int main (int argc, char **argv) {
 #endif
   g_object_unref (vinagre_bookmarks_get_default ());
   g_object_unref (vinagre_prefs_get_default ());
+  vinagre_cache_prefs_finalize ();
 #ifdef VINAGRE_ENABLE_AVAHI
   g_object_unref (vinagre_mdns_get_default ());
 #endif

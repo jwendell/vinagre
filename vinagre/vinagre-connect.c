@@ -35,6 +35,7 @@
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-prefs.h"
+#include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin.h"
 
@@ -133,7 +134,7 @@ setup_protocol (VinagreConnectDialog *dialog)
 
   dialog->protocol_store = gtk_list_store_new (N_PROTOCOLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_OBJECT, G_TYPE_OBJECT);
   plugins = vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
-  g_object_get (vinagre_prefs_get_default (), "last-protocol", &last_protocol, NULL);
+  last_protocol = vinagre_cache_prefs_get_string ("connection", "last-protocol", NULL);
 
   g_hash_table_iter_init (&hash_iter, plugins);
   selected = 0;
@@ -438,7 +439,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 			  PROTOCOL_PLUGIN, &plugin,
 		      -1);
 
-      g_object_set (vinagre_prefs_get_default (), "last-protocol", protocol, NULL);
+      vinagre_cache_prefs_set_string ("connection", "last-protocol", protocol);
       g_free (protocol);
 
       conn = vinagre_plugin_new_connection (plugin);

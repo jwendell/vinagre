@@ -34,6 +34,7 @@
 #include "vinagre-notebook.h"
 #include "vinagre-fav.h"
 #include "vinagre-prefs.h"
+#include "vinagre-cache-prefs.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-ui.h"
@@ -140,9 +141,7 @@ vinagre_window_state_event_cb (GtkWidget *widget,
   VinagreWindow *window = VINAGRE_WINDOW (widget);
 
   window->priv->window_state = event->new_window_state;
-  g_object_set (vinagre_prefs_get_default (),
-		"window-state", window->priv->window_state,
-		NULL);
+  vinagre_cache_prefs_set_integer ("window", "window-state", window->priv->window_state);
 
   if ((event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) == 0)
     return FALSE;
@@ -169,10 +168,8 @@ vinagre_window_configure_event (GtkWidget         *widget,
   window->priv->width  = event->width;
   window->priv->height = event->height;
 
-  g_object_set (vinagre_prefs_get_default (),
-		"window-width", window->priv->width,
-		"window-height", window->priv->height,
-		NULL);
+  vinagre_cache_prefs_set_integer ("window", "window-width", window->priv->width);
+  vinagre_cache_prefs_set_integer ("window", "window-height", window->priv->height);
 
   return GTK_WIDGET_CLASS (vinagre_window_parent_class)->configure_event (widget, event);
 }
@@ -476,9 +473,7 @@ fav_panel_size_allocate (GtkWidget     *widget,
 {
   window->priv->side_panel_size = allocation->width;
   if (window->priv->side_panel_size > 0)
-    g_object_set (vinagre_prefs_get_default (),
-		  "side-panel-size", window->priv->side_panel_size,
-		  NULL);
+    vinagre_cache_prefs_set_integer ("window", "side-panel-size", window->priv->side_panel_size);
 }
 
 static void
@@ -626,9 +621,7 @@ create_side_panel (VinagreWindow *window)
 		   FALSE, 
 		   FALSE);
 
-  g_object_get (vinagre_prefs_get_default (),
-		"side-panel-size", &(window->priv->side_panel_size),
-		NULL);
+  window->priv->side_panel_size = vinagre_cache_prefs_get_integer ("window", "side-panel-size", 200);
   gtk_paned_set_position (GTK_PANED (window->priv->hpaned), window->priv->side_panel_size);
 
   g_signal_connect (window->priv->fav_panel,
@@ -640,42 +633,35 @@ create_side_panel (VinagreWindow *window)
 static void
 init_widgets_visibility (VinagreWindow *window)
 {
-  GdkWindowState state;
-  gint w, h;
   GtkAction *action;
   gboolean visible;
-  VinagrePrefs *prefs = vinagre_prefs_get_default ();
 
   /* side panel visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewSidePanel");
-  g_object_get (prefs, "side-panel-visible", &visible, NULL);
+  visible = vinagre_cache_prefs_get_boolean ("window", "side-panel-visible", TRUE);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
   /* toolbar visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewToolbar");
-  g_object_get (prefs, "toolbar-visible", &visible, NULL);
+  visible = vinagre_cache_prefs_get_boolean ("window", "toolbar-visible", TRUE);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
   /* statusbar visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					"ViewStatusbar");
-  g_object_get (prefs, "statusbar-visible", &visible, NULL);
+  visible = vinagre_cache_prefs_get_boolean ("window", "statusbar-visible", TRUE);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
-  g_object_get (prefs,
-		"window-state", &state,
-		"window-width", &w,
-		"window-height", &h,
-		NULL);
+  gtk_window_set_default_size (GTK_WINDOW (window),
+			       vinagre_cache_prefs_get_integer ("window", "window-width", 650),
+			       vinagre_cache_prefs_get_integer ("window", "window-height", 500));
 
-  gtk_window_set_default_size (GTK_WINDOW (window), w, h);
-
-  if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
+  if ((vinagre_cache_prefs_get_integer ("window", "window-state", 0) & GDK_WINDOW_STATE_MAXIMIZED) != 0)
     gtk_window_maximize (GTK_WINDOW (window));
   else
     gtk_window_unmaximize (GTK_WINDOW (window));
