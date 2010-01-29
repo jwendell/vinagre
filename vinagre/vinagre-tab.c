@@ -354,6 +354,8 @@ setup_layout (VinagreTab *tab)
   ViewOvBox_SetUnder (VIEW_OV_BOX (tab->priv->layout), tab->priv->scroll);
   ViewAutoDrawer_SetOffset (VIEW_AUTODRAWER (tab->priv->layout), -1);
   ViewAutoDrawer_SetFill (VIEW_AUTODRAWER (tab->priv->layout), FALSE);
+  ViewAutoDrawer_SetOverlapPixels (VIEW_AUTODRAWER (tab->priv->layout), 1);
+  ViewAutoDrawer_SetNoOverlapPixels (VIEW_AUTODRAWER (tab->priv->layout), 0);
 
   gtk_box_pack_end (GTK_BOX(tab), tab->priv->layout, TRUE, TRUE, 0);
   gtk_widget_show_all (GTK_WIDGET (tab));
