@@ -21,6 +21,7 @@
 
 #include <glib/gi18n.h>
 #include <vinagre/vinagre-utils.h>
+#include <vinagre/vinagre-cache-prefs.h>
 #include "vinagre-ssh-connection.h"
 
 struct _VinagreSshConnectionPrivate
@@ -56,6 +57,25 @@ ssh_parse_item (VinagreConnection *conn, xmlNode *root)
 }
 
 static void
+ssh_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
+{
+  GtkWidget *u_entry;
+
+  u_entry = g_object_get_data (G_OBJECT (widget), "username_entry");
+  if (!u_entry)
+    {
+      g_warning ("Wrong widget passed to ssh_parse_options_widget()");
+      return;
+    }
+
+  vinagre_cache_prefs_set_string  ("ssh-connection", "username", gtk_entry_get_text (GTK_ENTRY (u_entry)));
+
+  g_object_set (conn,
+		"username", gtk_entry_get_text (GTK_ENTRY (u_entry)),
+		NULL);
+}
+
+static void
 vinagre_ssh_connection_class_init (VinagreSshConnectionClass *klass)
 {
   GObjectClass* object_class = G_OBJECT_CLASS (klass);
@@ -67,6 +87,7 @@ vinagre_ssh_connection_class_init (VinagreSshConnectionClass *klass)
 
   parent_class->impl_fill_writer = ssh_fill_writer;
   parent_class->impl_parse_item  = ssh_parse_item;
+  parent_class->impl_parse_options_widget = ssh_parse_options_widget;
 }
 
 VinagreConnection *

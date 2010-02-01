@@ -70,18 +70,32 @@ static void
 vinagre_ssh_tab_constructed (GObject *object)
 {
   gchar **arg;
+  const gchar *username;
+  gint i;
   VinagreSshTab *ssh_tab = VINAGRE_SSH_TAB (object);
   VinagreTab    *tab = VINAGRE_TAB (object);
+  VinagreConnection *conn = vinagre_tab_get_conn (tab);
 
   if (G_OBJECT_CLASS (vinagre_ssh_tab_parent_class)->constructed)
     G_OBJECT_CLASS (vinagre_ssh_tab_parent_class)->constructed (object);
 
-  arg = g_new (gchar *, 5);
-  arg[0] = g_strdup ("ssh");
-  arg[1] = g_strdup (vinagre_connection_get_host (vinagre_tab_get_conn (tab)));
-  arg[2] = g_strdup ("-p");
-  arg[3] = g_strdup_printf ("%d", vinagre_connection_get_port (vinagre_tab_get_conn (tab)));
-  arg[4] = NULL;
+  username = vinagre_connection_get_username (conn);
+  i = 0;
+
+  arg = g_new (gchar *, 7);
+  arg[i++] = g_strdup ("ssh");
+
+  if (username && *username)
+    {
+      arg[i++] = g_strdup ("-l");
+      arg[i++] = g_strdup (username);
+    }
+
+  arg[i++] = g_strdup ("-p");
+  arg[i++] = g_strdup_printf ("%d", vinagre_connection_get_port (conn));
+
+  arg[i++] = g_strdup (vinagre_connection_get_host (conn));
+  arg[i++] = NULL;
 
   vte_terminal_fork_command (VTE_TERMINAL (ssh_tab->priv->vte),
 			     "ssh",
