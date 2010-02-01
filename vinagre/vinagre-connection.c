@@ -286,7 +286,7 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
                                                       G_PARAM_STATIC_BLURB));
 
   g_object_class_install_property (object_class,
-                                   PROP_NAME,
+                                   PROP_USERNAME,
                                    g_param_spec_string ("username",
                                                         "username",
 	                                                "username (if any) necessary for complete this connection",
