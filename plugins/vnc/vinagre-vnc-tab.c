@@ -34,13 +34,13 @@
 
 struct _VinagreVncTabPrivate
 {
-  GtkWidget  *vnc;
+  GtkWidget  *vnc, *align;
   gboolean   pointer_grab;
   gchar      *clipboard_str;
   GSList     *connected_actions, *initialized_actions;
   GtkWidget  *viewonly_button, *scaling_button;
-  GtkAction  *scaling_action, *viewonly_action, *original_size_action;
-  gulong     signal_clipboard;
+  GtkAction  *scaling_action, *viewonly_action, *original_size_action, *keep_ratio_action;
+  gulong     signal_clipboard, signal_align;
 };
 
 G_DEFINE_TYPE (VinagreVncTab, vinagre_vnc_tab, VINAGRE_TYPE_TAB)
@@ -83,6 +83,13 @@ view_scaling_cb (GtkAction *action, VinagreVncTab *vnc_tab)
 {
   vinagre_vnc_tab_set_scaling (vnc_tab,
 			       gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)));
+}
+
+static void
+view_keep_ratio_cb (GtkAction *action, VinagreVncTab *vnc_tab)
+{
+  vinagre_vnc_tab_set_keep_ratio (vnc_tab,
+				  gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)));
 }
 
 static void
@@ -410,17 +417,19 @@ vnc_initialized_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
 {
   GtkLabel *label;
   gchar    *name;
-  gboolean scaling, view_only, fullscreen;
+  gboolean scaling, view_only, fullscreen, keep_ratio;
   VinagreTab *tab = VINAGRE_TAB (vnc_tab);
   VinagreConnection *conn = vinagre_tab_get_conn (tab);
 
   g_object_get (conn,
 		"view-only", &view_only,
 		"scaling", &scaling,
+		"keep_ratio", &keep_ratio,
 		"fullscreen", &fullscreen,
 		NULL);
 
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->scaling_action), scaling);
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->keep_ratio_action), keep_ratio);
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (vnc_tab->priv->viewonly_action), view_only);
   vnc_display_set_pointer_local (vnc, TRUE);
   vnc_display_set_keyboard_grab (vnc, TRUE);
@@ -599,6 +608,20 @@ create_connected_actions (VinagreVncTab *tab)
   list = g_slist_append (list, a);
   tab->priv->scaling_action = a->action;
 
+  /* View->Keep Ratio */
+  a = g_new (VinagreTabUiAction, 1);
+  a->paths = g_new (gchar *, 2);
+  a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
+  a->paths[1] = NULL;
+  a->action = GTK_ACTION (gtk_toggle_action_new ("VNCViewKeepRatio",
+						 _("_Keep Aspect Ratio"),
+						 _("Keeps the screen aspect ratio when using scaling"),
+						 NULL));
+  gtk_action_set_sensitive (a->action, FALSE);
+  g_signal_connect (a->action, "activate", G_CALLBACK (view_keep_ratio_cb), tab);
+  list = g_slist_append (list, a);
+  tab->priv->keep_ratio_action = a->action;
+
   /* View->View Only */
   a = g_new (VinagreTabUiAction, 1);
   a->paths = g_new (gchar *, 3);
@@ -757,52 +780,10 @@ vnc_tab_clipboard_cb (GtkClipboard *cb, GdkEvent *event, VinagreVncTab *vnc_tab)
   g_free (text);
 }
 
-/*
- * Called when the main container widget's size has been set.
- * It attempts to fit the VNC widget into this space while
- * maintaining aspect ratio
- *
- * Code borrowed from from virt-viewer, thanks Daniel Berrange :)
- */
-static void
-vnc_tab_resize_align (GtkWidget *widget,
-		      GtkAllocation *alloc,
-		      VinagreVncTab *vnc_tab)
-{
-  double desktopAspect = (double)vnc_display_get_width (VNC_DISPLAY (vnc_tab->priv->vnc)) / (double)vnc_display_get_height (VNC_DISPLAY (vnc_tab->priv->vnc));
-  double scrollAspect = (double)alloc->width / (double)alloc->height;
-  int height, width;
-  GtkAllocation child;
-  int dx = 0, dy = 0;
-
-  if (!vnc_display_is_open (VNC_DISPLAY (vnc_tab->priv->vnc)))
-    return;
-
-  if (scrollAspect > desktopAspect)
-    {
-      width = alloc->height * desktopAspect;
-      dx = (alloc->width - width) / 2;
-      height = alloc->height;
-    }
-  else
-    {
-      width = alloc->width;
-      height = alloc->width / desktopAspect;
-      dy = (alloc->height - height) / 2;
-    }
-
-  child.x = alloc->x + dx;
-  child.y = alloc->y + dy;
-  child.width = width;
-  child.height = height;
-  gtk_widget_size_allocate(vnc_tab->priv->vnc, &child);
-}
-
 static void
 vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 {
   GtkClipboard *cb;
-  GtkWidget *align;
 
   vnc_tab->priv = VINAGRE_VNC_TAB_GET_PRIVATE (vnc_tab);
   vnc_tab->priv->clipboard_str = NULL;
@@ -811,13 +792,11 @@ vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
 
   /* Create the vnc widget */
   vnc_tab->priv->vnc = vnc_display_new ();
-  align = gtk_alignment_new (0.5, 0.5, 1, 1);
+  vnc_tab->priv->align = gtk_alignment_new (0.5, 0.5, 1, 1);
+  vnc_tab->priv->signal_align = 0;
+  gtk_container_add (GTK_CONTAINER (vnc_tab->priv->align), vnc_tab->priv->vnc);
 
-  g_signal_connect(align, "size-allocate",
-		  G_CALLBACK (vnc_tab_resize_align), vnc_tab);
-  gtk_container_add (GTK_CONTAINER (align), vnc_tab->priv->vnc);
-
-  vinagre_tab_add_view (VINAGRE_TAB (vnc_tab), align);
+  vinagre_tab_add_view (VINAGRE_TAB (vnc_tab), vnc_tab->priv->align);
 
   g_signal_connect (vnc_tab->priv->vnc,
 		    "vnc-connected",
@@ -944,6 +923,7 @@ vinagre_vnc_tab_set_scaling (VinagreVncTab *tab, gboolean active) {
 
   gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->scaling_button),
 				     active);
+  gtk_action_set_sensitive (tab->priv->keep_ratio_action, active);
 
   if (active)
     gtk_widget_set_size_request (tab->priv->vnc, 0, 0);
@@ -969,7 +949,6 @@ vinagre_vnc_tab_set_viewonly (VinagreVncTab *tab, gboolean active) {
   vnc_display_set_read_only (VNC_DISPLAY (tab->priv->vnc), active);
   gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->viewonly_button),
 				     active);
-
 }
 
 gboolean
@@ -977,6 +956,75 @@ vinagre_vnc_tab_get_viewonly (VinagreVncTab *tab) {
   g_return_val_if_fail (VINAGRE_IS_VNC_TAB (tab), FALSE);
 
   return vnc_display_get_read_only (VNC_DISPLAY (tab->priv->vnc));
+}
+
+/*
+ * Called when the main container widget's size has been set.
+ * It attempts to fit the VNC widget into this space while
+ * maintaining aspect ratio
+ *
+ * Code borrowed from from virt-viewer, thanks Daniel Berrange :)
+ */
+
+static void
+vnc_tab_resize_align (GtkWidget *widget,
+		      GtkAllocation *alloc,
+		      VinagreVncTab *vnc_tab)
+{
+  double desktopAspect = (double)vnc_display_get_width (VNC_DISPLAY (vnc_tab->priv->vnc)) / (double)vnc_display_get_height (VNC_DISPLAY (vnc_tab->priv->vnc));
+  double scrollAspect = (double)alloc->width / (double)alloc->height;
+  int height, width;
+  GtkAllocation child;
+  int dx = 0, dy = 0;
+
+  if (!vnc_display_is_open (VNC_DISPLAY (vnc_tab->priv->vnc)))
+    return;
+
+  if (scrollAspect > desktopAspect)
+    {
+      width = alloc->height * desktopAspect;
+      dx = (alloc->width - width) / 2;
+      height = alloc->height;
+    }
+  else
+    {
+      width = alloc->width;
+      height = alloc->width / desktopAspect;
+      dy = (alloc->height - height) / 2;
+    }
+
+  child.x = alloc->x + dx;
+  child.y = alloc->y + dy;
+  child.width = width;
+  child.height = height;
+  gtk_widget_size_allocate(vnc_tab->priv->vnc, &child);
+}
+
+void
+vinagre_vnc_tab_set_keep_ratio (VinagreVncTab *tab, gboolean active)
+{
+  g_return_if_fail (VINAGRE_IS_VNC_TAB (tab));
+
+  if (tab->priv->signal_align > 0)
+    g_signal_handler_disconnect (tab->priv->align, tab->priv->signal_align);
+
+  if (active)
+    tab->priv->signal_align = g_signal_connect (tab->priv->align,
+						"size-allocate",
+						G_CALLBACK (vnc_tab_resize_align),
+						tab);
+  else
+    tab->priv->signal_align = 0;
+
+  gtk_widget_queue_resize_no_redraw (tab->priv->align);
+}
+
+gboolean
+vinagre_vnc_tab_get_keep_ratio (VinagreVncTab *tab)
+{
+  g_return_val_if_fail (VINAGRE_IS_VNC_TAB (tab), FALSE);
+
+  return vinagre_vnc_connection_get_keep_ratio (VINAGRE_VNC_CONNECTION (vinagre_tab_get_conn (VINAGRE_TAB (tab))));
 }
 
 gboolean

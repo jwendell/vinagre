@@ -67,6 +67,10 @@ gboolean	    vinagre_vnc_connection_get_scaling      (VinagreVncConnection *conn
 void		    vinagre_vnc_connection_set_scaling      (VinagreVncConnection *conn,
 							     gboolean value);
 
+gboolean	    vinagre_vnc_connection_get_keep_ratio   (VinagreVncConnection *conn);
+void		    vinagre_vnc_connection_set_keep_ratio   (VinagreVncConnection *conn,
+							     gboolean value);
+
 gint		    vinagre_vnc_connection_get_shared       (VinagreVncConnection *conn);
 void		    vinagre_vnc_connection_set_shared       (VinagreVncConnection *conn,
 							     gint value);

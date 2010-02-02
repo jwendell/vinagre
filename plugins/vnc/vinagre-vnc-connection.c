@@ -31,6 +31,7 @@ struct _VinagreVncConnectionPrivate
   gchar    *desktop_name;
   gboolean view_only;
   gboolean scaling;
+  gboolean keep_ratio;
   gint     shared;
   gint     fd;
   gint     depth_profile;
@@ -44,6 +45,7 @@ enum
   PROP_DESKTOP_NAME,
   PROP_VIEW_ONLY,
   PROP_SCALING,
+  PROP_KEEP_RATIO,
   PROP_SHARED,
   PROP_FD,
   PROP_DEPTH_PROFILE,
@@ -62,6 +64,7 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->desktop_name = NULL;
   conn->priv->view_only = FALSE;
   conn->priv->scaling = FALSE;
+  conn->priv->keep_ratio = FALSE;
   conn->priv->shared = -1;
   conn->priv->fd = 0;
   conn->priv->depth_profile = 0;
@@ -107,6 +110,10 @@ vinagre_vnc_connection_set_property (GObject *object, guint prop_id, const GValu
 
       case PROP_SCALING:
 	vinagre_vnc_connection_set_scaling (conn, g_value_get_boolean (value));
+	break;
+
+      case PROP_KEEP_RATIO:
+	vinagre_vnc_connection_set_keep_ratio (conn, g_value_get_boolean (value));
 	break;
 
       case PROP_SHARED:
@@ -158,6 +165,10 @@ vinagre_vnc_connection_get_property (GObject *object, guint prop_id, GValue *val
 	g_value_set_boolean (value, conn->priv->scaling);
 	break;
 
+      case PROP_KEEP_RATIO:
+	g_value_set_boolean (value, conn->priv->keep_ratio);
+	break;
+
       case PROP_SHARED:
 	g_value_set_int (value, conn->priv->shared);
 	break;
@@ -192,6 +203,7 @@ vnc_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
 
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"view_only", "%d", vnc_conn->priv->view_only);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"scaling", "%d", vnc_conn->priv->scaling);
+  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"keep_ratio", "%d", vnc_conn->priv->keep_ratio);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"depth_profile", "%d", vnc_conn->priv->depth_profile);
   xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"lossy_encoding", "%d", vnc_conn->priv->lossy_encoding);
 
@@ -220,6 +232,10 @@ vnc_parse_item (VinagreConnection *conn, xmlNode *root)
 	{
 	  if (!scaling_command_line)
 	    vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+	}
+      else if (!xmlStrcmp(curr->name, (const xmlChar *)"keep_ratio"))
+	{
+	  vinagre_vnc_connection_set_keep_ratio (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"depth_profile"))
 	{
@@ -277,14 +293,15 @@ vnc_fill_conn_from_file (VinagreConnection *conn, GKeyFile *file)
 static void
 vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
 {
-  GtkWidget *view_only, *scaling, *depth_combo, *lossy, *ssh_host;
+  GtkWidget *view_only, *scaling, *depth_combo, *lossy, *ssh_host, *ratio;
 
   view_only = g_object_get_data (G_OBJECT (widget), "view_only");
   scaling = g_object_get_data (G_OBJECT (widget), "scaling");
+  ratio = g_object_get_data (G_OBJECT (widget), "ratio");
   depth_combo = g_object_get_data (G_OBJECT (widget), "depth_combo");
   lossy = g_object_get_data (G_OBJECT (widget), "lossy");
   ssh_host = g_object_get_data (G_OBJECT (widget), "ssh_host");
-  if (!view_only || !scaling || !depth_combo || !lossy || !ssh_host)
+  if (!view_only || !scaling || !depth_combo || !lossy || !ssh_host || !ratio)
     {
       g_warning ("Wrong widget passed to vnc_parse_options_widget()");
       return;
@@ -292,6 +309,7 @@ vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
 
   vinagre_cache_prefs_set_boolean ("vnc-connection", "view-only", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (view_only)));
   vinagre_cache_prefs_set_boolean ("vnc-connection", "scaling", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (scaling)));
+  vinagre_cache_prefs_set_boolean ("vnc-connection", "keep-ratio", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (ratio)));
   vinagre_cache_prefs_set_integer ("vnc-connection", "depth-profile", gtk_combo_box_get_active (GTK_COMBO_BOX (depth_combo)));
   vinagre_cache_prefs_set_boolean ("vnc-connection", "lossy-encoding", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (lossy)));
   vinagre_cache_prefs_set_string  ("vnc-connection", "ssh-tunnel-host", gtk_entry_get_text (GTK_ENTRY (ssh_host)));
@@ -299,6 +317,7 @@ vnc_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
   g_object_set (conn,
 		"view-only", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (view_only)),
 		"scaling", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (scaling)),
+		"keep-ratio", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (ratio)),
 		"depth-profile", gtk_combo_box_get_active (GTK_COMBO_BOX (depth_combo)),
 		"lossy-encoding", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (lossy)),
 		"ssh-tunnel-host", gtk_entry_get_text (GTK_ENTRY (ssh_host)),
@@ -352,6 +371,18 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
                                    g_param_spec_boolean ("scaling",
                                                         "Use scaling",
 	                                                "Whether to use scaling on this connection",
+                                                        FALSE,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_KEEP_RATIO,
+                                   g_param_spec_boolean ("keep-ratio",
+                                                        "Keep Ratio",
+	                                                "Whether to keep the aspect ratio when using scaling",
                                                         FALSE,
 	                                                G_PARAM_READWRITE |
                                                         G_PARAM_CONSTRUCT |
@@ -497,6 +528,22 @@ vinagre_vnc_connection_get_scaling (VinagreVncConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), FALSE);
 
   return conn->priv->scaling;
+}
+
+void
+vinagre_vnc_connection_set_keep_ratio (VinagreVncConnection *conn,
+				       gboolean value)
+{
+  g_return_if_fail (VINAGRE_IS_VNC_CONNECTION (conn));
+
+  conn->priv->keep_ratio = value;
+}
+gboolean
+vinagre_vnc_connection_get_keep_ratio (VinagreVncConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), FALSE);
+
+  return conn->priv->keep_ratio;
 }
 
 void

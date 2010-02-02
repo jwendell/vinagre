@@ -61,6 +61,8 @@ void		vinagre_vnc_tab_paste_text		(VinagreVncTab *tab,
 
 gboolean	vinagre_vnc_tab_set_scaling		(VinagreVncTab *tab, gboolean active);
 gboolean	vinagre_vnc_tab_get_scaling		(VinagreVncTab *tab);
+void		vinagre_vnc_tab_set_keep_ratio		(VinagreVncTab *tab, gboolean active);
+gboolean	vinagre_vnc_tab_get_keep_ratio		(VinagreVncTab *tab);
 void		vinagre_vnc_tab_set_viewonly		(VinagreVncTab *tab, gboolean active);
 gboolean	vinagre_vnc_tab_get_viewonly		(VinagreVncTab *tab);
 
