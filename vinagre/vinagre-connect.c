@@ -322,9 +322,11 @@ static void
 vinagre_connect_find_button_cb (GtkButton            *button,
 				VinagreConnectDialog *dialog)
 {
-  GtkWidget   *d;
-  GtkTreeIter tree_iter;
-  gchar       *service;
+  GtkWidget     *d;
+  GtkTreeIter   tree_iter;
+  gchar         *service;
+  GtkWidget     *options = NULL;
+  VinagrePlugin *plugin = NULL;
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->protocol_combo),
 				      &tree_iter))
@@ -335,9 +337,15 @@ vinagre_connect_find_button_cb (GtkButton            *button,
 
   gtk_tree_model_get (GTK_TREE_MODEL (dialog->protocol_store), &tree_iter,
 		      PROTOCOL_MDNS, &service,
+		      PROTOCOL_PLUGIN, &plugin,
+		      PROTOCOL_OPTIONS, &options,
 		      -1);
   if (!service)
-    return;
+    {
+      if (plugin)
+	g_object_unref (plugin);
+      return;
+    }
 
   d = aui_service_dialog_new (_("Choose a Remote Desktop"),
 				GTK_WINDOW(dialog->dialog),
@@ -367,10 +375,14 @@ vinagre_connect_find_button_cb (GtkButton            *button,
 			  tmp);
 
       g_free (tmp);
+      if (plugin && options)
+	vinagre_plugin_parse_mdns_dialog (plugin, options, d);
     }
 
   g_free (service);
   gtk_widget_destroy (d);
+  if (plugin)
+    g_object_unref (plugin);
 }
 #endif
 

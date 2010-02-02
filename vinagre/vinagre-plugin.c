@@ -129,6 +129,13 @@ default_get_file_filter (VinagrePlugin *plugin)
 }
 
 static void
+default_parse_mdns_dialog (VinagrePlugin *plugin,
+			   GtkWidget *connect_widget,
+			   GtkWidget *dialog)
+{
+}
+
+static void
 vinagre_plugin_get_property (GObject    *object,
 			   guint       prop_id,
 			   GValue     *value,
@@ -197,6 +204,7 @@ vinagre_plugin_class_init (VinagrePluginClass *klass)
 	klass->new_tab = default_new_tab;
 	klass->get_connect_widget = default_get_connect_widget;
 	klass->get_file_filter = default_get_file_filter;
+	klass->parse_mdns_dialog = default_parse_mdns_dialog;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
@@ -582,6 +590,16 @@ vinagre_plugin_get_icon_name (VinagrePlugin *plugin)
   g_return_val_if_fail (info != NULL, NULL);
 
   return vinagre_plugin_info_get_icon_name (info);
+}
+
+void
+vinagre_plugin_parse_mdns_dialog (VinagrePlugin *plugin,
+				  GtkWidget *connect_widget,
+				  GtkWidget *dialog)
+{
+  g_return_if_fail (VINAGRE_IS_PLUGIN (plugin));
+
+  VINAGRE_PLUGIN_GET_CLASS (plugin)->parse_mdns_dialog (plugin, connect_widget, dialog);
 }
 
 /* vim: set ts=8: */

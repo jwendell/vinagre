@@ -32,6 +32,11 @@
 #include "vinagre-ssh-connection.h"
 #include "vinagre-ssh-tab.h"
 
+#ifdef VINAGRE_ENABLE_AVAHI
+#include <avahi-ui/avahi-ui.h>
+#include <avahi-common/malloc.h>
+#endif
+
 #define VINAGRE_SSH_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_SSH_PLUGIN, VinagreSshPluginPrivate))
 
 VINAGRE_PLUGIN_REGISTER_TYPE(VinagreSshPlugin, vinagre_ssh_plugin)
@@ -157,6 +162,43 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 }
 
 static void
+ssh_parse_mdns_dialog (VinagrePlugin *plugin,
+		       GtkWidget *connect_widget,
+		       GtkWidget *dialog)
+{
+#ifdef VINAGRE_ENABLE_AVAHI
+  const AvahiStringList *txt;
+  gchar *u = NULL;
+
+  for (txt = aui_service_dialog_get_txt_data (AUI_SERVICE_DIALOG (dialog)); txt; txt = txt->next)
+    {
+      char *key, *value;
+
+      if (avahi_string_list_get_pair ((AvahiStringList*) txt, &key, &value, NULL) < 0)
+	break;
+
+      if (strcmp(key, "u") == 0)
+	u = g_strdup(value);
+
+      avahi_free (key);
+      avahi_free (value);
+    }
+
+  if (u)
+    {
+      GtkEntry *u_entry = g_object_get_data (G_OBJECT (connect_widget), "username_entry");
+
+      if (u_entry)
+        gtk_entry_set_text (u_entry, u);
+      else
+	g_warning ("Wrong widget passed to ssh_parse_mdns_dialog()");
+
+      g_free (u);
+    }
+#endif
+}
+
+static void
 vinagre_ssh_plugin_class_init (VinagreSshPluginClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -174,5 +216,6 @@ vinagre_ssh_plugin_class_init (VinagreSshPluginClass *klass)
   plugin_class->new_tab = impl_new_tab;
   plugin_class->get_default_port = impl_get_default_port;
   plugin_class->get_connect_widget = impl_get_connect_widget;
+  plugin_class->parse_mdns_dialog = ssh_parse_mdns_dialog;
 }
 /* vim: set ts=8: */

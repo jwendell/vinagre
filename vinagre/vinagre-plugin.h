@@ -90,6 +90,10 @@ struct _VinagrePluginClass
 
   GtkWidget 	*(*get_connect_widget)		(VinagrePlugin     *plugin,
 						 VinagreConnection *initial_settings);
+  void		(*parse_mdns_dialog)		(VinagrePlugin *plugin,
+						 GtkWidget *connect_widget,
+						 GtkWidget *dialog);
+
 
   GtkFileFilter	*(*get_file_filter)		(VinagrePlugin     *plugin);
 
@@ -122,6 +126,9 @@ void 		 vinagre_plugin_update_ui		(VinagrePlugin *plugin,
 
 gboolean	 vinagre_plugin_is_configurable		(VinagrePlugin *plugin);
 GtkWidget	*vinagre_plugin_create_configure_dialog	(VinagrePlugin *plugin);
+void		 vinagre_plugin_parse_mdns_dialog	(VinagrePlugin *plugin,
+							 GtkWidget *connect_widget,
+							 GtkWidget *dialog);
 
 GSList		*vinagre_plugin_get_context_groups	(VinagrePlugin *plugin);
 const gchar	*vinagre_plugin_get_protocol		(VinagrePlugin *plugin);

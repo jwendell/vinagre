@@ -71,7 +71,7 @@ mdns_resolver_found (GaServiceResolver *resolver,
   VinagreConnection     *conn;
   VinagreBookmarksEntry *entry;
   BrowserEntry          *b_entry;
-  char                  a[AVAHI_ADDRESS_STR_MAX];
+  char                  a[AVAHI_ADDRESS_STR_MAX], *u = NULL;
 
   b_entry = g_hash_table_lookup (mdns->priv->browsers, type);
   if (!b_entry)
@@ -80,12 +80,27 @@ mdns_resolver_found (GaServiceResolver *resolver,
       return;
     }
 
+  for (; txt; txt = txt->next)
+    {
+      char *key, *value;
+
+      if (avahi_string_list_get_pair (txt, &key, &value, NULL) < 0)
+	break;
+
+      if (strcmp(key, "u") == 0)
+	u = g_strdup (value);
+
+      avahi_free (key);
+      avahi_free (value);
+    }
+
   avahi_address_snprint (a, sizeof(a), address);
   conn = vinagre_plugin_new_connection (b_entry->info->plugin);
   g_object_set (conn,
                 "name", name,
                 "port", port,
                 "host", a,
+                "username", u,
                 NULL);
   entry = vinagre_bookmarks_entry_new_conn (conn);
   g_object_unref (conn);
