@@ -152,7 +152,7 @@ ViewAutoDrawerUpdate(ViewAutoDrawer *that, // IN
    GtkWidget *toplevel = gtk_widget_get_toplevel(GTK_WIDGET(that));
    GtkWindow *window;
 
-   if (!toplevel || !GTK_WIDGET_TOPLEVEL(toplevel)) {
+   if (!toplevel || !gtk_widget_is_toplevel(toplevel)) {
       // The autoDrawer cannot function properly without a toplevel.
       return;
    }
@@ -396,13 +396,13 @@ ViewAutoDrawerOnHierarchyChanged(ViewAutoDrawer *that,   // IN
 {
    GtkWidget *newToplevel = gtk_widget_get_toplevel(GTK_WIDGET(that));
 
-   if (oldToplevel && GTK_WIDGET_TOPLEVEL(oldToplevel)) {
+   if (oldToplevel && gtk_widget_is_toplevel(oldToplevel)) {
       g_signal_handlers_disconnect_by_func(oldToplevel,
                                            G_CALLBACK(ViewAutoDrawerOnSetFocus),
                                            that);
    }
 
-   if (newToplevel && GTK_WIDGET_TOPLEVEL(newToplevel)) {
+   if (newToplevel && gtk_widget_is_toplevel(newToplevel)) {
       g_signal_connect_after(newToplevel, "set-focus",
                              G_CALLBACK(ViewAutoDrawerOnSetFocus), that);
    }
