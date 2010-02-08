@@ -13,12 +13,8 @@ PKG_NAME="vinagre"
 }
 
 which gnome-autogen.sh || {
-    echo "You need to install gnome-common from the GNOME CVS"
+    echo "You need to install gnome-common from the GNOME git"
     exit 1
 }
 
-REQUIRED_AUTOCONF_VERSION=2.57
-REQUIRED_AUTOMAKE_VERSION=1.7
-REQUIRED_INTLTOOL_VERSION=0.35.0
-REQUIRED_PKG_CONFIG_VERSION=0.16.0
 ACLOCAL_FLAGS="$ACLOCAL_FLAGS" USE_GNOME2_MACROS=1 USE_COMMON_DOC_BUILD=yes . gnome-autogen.sh

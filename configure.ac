@@ -1,12 +1,47 @@
-# Process this file with autoconf to produce a configure script.
+# Vinagre autoconf
 
-AC_INIT(vinagre, 2.29.6, http://projects.gnome.org/vinagre/)
+AC_PREREQ([2.64])
+AC_INIT([vinagre],[2.29.6],[https://bugzilla.gnome.org/enter_bug.cgi?product=vinagre],[vinagre],[http://projects.gnome.org/vinagre/])
+AC_CONFIG_SRCDIR([vinagre/vinagre-main.c])
+AC_CONFIG_HEADERS([config.h])
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_AWK
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+
+# Checks for header files.
+AC_PATH_X
+AC_CHECK_HEADERS([sys/uio.h sys/param.h sys/un.h arpa/inet.h stropts.h fcntl.h limits.h locale.h netinet/in.h stdlib.h string.h sys/ioctl.h sys/socket.h termios.h unistd.h utmp.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_INLINE
+AC_TYPE_PID_T
+AC_TYPE_SIZE_T
+AC_TYPE_SSIZE_T
+AC_TYPE_UINT64_T
+
+# Checks for library functions.
+AC_FUNC_FORK
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([dup2 memset putenv select setlocale socket strchr strerror strstr getpt posix_openpt grantpt unlockpt ptsname ptsname_r])
+
+AM_INIT_AUTOMAKE([1.10 -Wno-portability])
+LT_PREREQ([2.2.6])
+AC_CONFIG_MACRO_DIR([m4])
+
+GNOME_COMPILE_WARNINGS([maximum])
+GNOME_CXX_WARNINGS([yes])
+GNOME_MAINTAINER_MODE_DEFINES
 
 VINAGRE_API_VERSION=1.0
 AC_SUBST(VINAGRE_API_VERSION)
 
-AM_INIT_AUTOMAKE(-Wno-portability)
-AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
 # Use the silent-rules feature when possible.
@@ -15,15 +50,12 @@ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "\${ACLOCAL_FLAGS}")
 
-AC_ISC_POSIX
+AC_SEARCH_LIBS([strerror],[cposix])
 AC_PROG_CC
-AM_PROG_CC_STDC
 AC_HEADER_STDC
-AM_DISABLE_STATIC
-AM_PROG_LIBTOOL
-AM_PROG_CC_C_O
 
-GNOME_COMPILE_WARNINGS(yes)
+LT_INIT([disable-static])
+AM_PROG_CC_C_O
 
 #*******************************************************************************
 # Internationalization
@@ -32,7 +64,7 @@ GETTEXT_PACKAGE=vinagre
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 
-IT_PROG_INTLTOOL([0.35.0])
+IT_PROG_INTLTOOL([0.40.0])
 AM_GLIB_GNU_GETTEXT
 
 GNOME_DOC_INIT
@@ -54,8 +86,7 @@ VTE_REQUIRED=0.20
 
 # Check for avahi
 AC_ARG_ENABLE(avahi,
-              AC_HELP_STRING([--disable-avahi],
-                             [Do not use avahi for auto-discover machines [default=no]]),
+              AS_HELP_STRING([--disable-avahi],[Do not use avahi for auto-discover machines [default=no]]),
               enable_avahi=${enableval},
               enable_avahi=yes)
 
@@ -94,11 +125,6 @@ AC_SUBST(VNC_LIBS)
 dnl ****************************
 dnl *** Checks for pty stuff ***
 dnl ****************************
-
-AC_CHECK_HEADERS(sys/un.h stropts.h termios.h utmp.h sys/uio.h sys/param.h)
-
-# Check for PTY handling functions.
-AC_CHECK_FUNCS(getpt posix_openpt grantpt unlockpt ptsname ptsname_r)
 
 # Pull in the right libraries for various functions which might not be
 # bundled into an exploded libc.
@@ -223,7 +249,7 @@ VINAGRE_PLUGINS_LIBS_DIR="$libdir/vinagre-1/plugins"
 AC_SUBST(VINAGRE_PLUGINS_LIBS_DIR)
 
 #*******************************************************************************
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 data/Makefile
 data/vinagre.desktop.in
@@ -241,6 +267,7 @@ plugins/ssh/Makefile
 vinagre/Makefile
 vinagre/view/Makefile
 ])
+AC_OUTPUT
 
 #*******************************************************************************
 
