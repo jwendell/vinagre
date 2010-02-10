@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 2.29.x\n"
-"Report-Msgid-Bugs-To:\n"
-"POT-Creation-Date: 2010-01-31 20:20+0100\n"
-"PO-Revision-Date: 2010-01-31 20:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-10 22:29+0100\n"
+"PO-Revision-Date: 2010-02-10 22:31+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgid "Folder"
 msgstr "Mappe"
 
 #: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:141 ../vinagre/vinagre-fav.c:404
+#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:404
 msgid "Host:"
 msgstr "Vert:"
 
@@ -125,7 +125,7 @@ msgstr "_Protokoll:"
 msgid "_Remember this credential"
 msgstr "_Husk dette passordet"
 
-#: ../data/vinagre.ui.h:24
+#: ../data/vinagre.ui.h:24 ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "Br_ukernavn:"
 
@@ -215,17 +215,28 @@ msgid "Remote Desktop Connection"
 msgstr "Ekstern skrivebordstilkobling"
 
 #. vim: set ts=8:
-#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/vinagre-ssh-plugin.c:76
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
 #. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
-#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+#: ../plugins/ssh/vinagre-ssh-plugin.c:78
 msgid "Access Unix/Linux terminals"
 msgstr "Aksesser Unix-/Linux-terminaler"
 
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:142
+#: ../plugins/ssh/vinagre-ssh-plugin.c:132
+msgid "SSH Options"
+msgstr "Alternativer for SSH"
+
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr ""
+
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
 msgid "Port:"
 msgstr "Port:"
 
@@ -233,7 +244,7 @@ msgstr "Port:"
 msgid "SSH support"
 msgstr "SSH-støtte"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:274
+#: ../plugins/vnc/vinagre-vnc-connection.c:290
 #: ../plugins/vnc/vinagre-vnc-plugin.c:321
 #, c-format
 msgid ""
@@ -287,163 +298,175 @@ msgstr "Denne filen er ikke for VNC: Mangler gruppen «connection»."
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "Denne filen er ikke for VNC: Mangler nøkkel «host»."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:365
+#: ../plugins/vnc/vinagre-vnc-plugin.c:374
 msgid "VNC Options"
 msgstr "Alternativer for VNC"
 
 #. View only check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:378
-#: ../plugins/vnc/vinagre-vnc-tab.c:609
+#: ../plugins/vnc/vinagre-vnc-plugin.c:387
+#: ../plugins/vnc/vinagre-vnc-tab.c:632
 msgid "_View only"
 msgstr "Ba_re se"
 
 #. Scaling check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:386
+#: ../plugins/vnc/vinagre-vnc-plugin.c:395
 msgid "_Scaling"
 msgstr "_Skalering"
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:411
+msgid "_Keep aspect ratio"
+msgstr "_Behold høyde-/breddeforhold"
+
 #. JPEG Compression check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:394
+#: ../plugins/vnc/vinagre-vnc-plugin.c:421
 msgid "_Use JPEG Compression"
 msgstr "Br_uk JPEG-komprimering"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:395
+#: ../plugins/vnc/vinagre-vnc-plugin.c:422
 msgid "This might not work on all VNC servers"
 msgstr "Dette virker kanskje ikke på alle VNC-tjenere"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:404
+#: ../plugins/vnc/vinagre-vnc-plugin.c:431
 msgid "_Depth Color:"
 msgstr "_Fargedybde:"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:409
+#: ../plugins/vnc/vinagre-vnc-plugin.c:436
 msgid "Use Server Settings"
 msgstr "Bruk innstillinger fra tjener"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:410
+#: ../plugins/vnc/vinagre-vnc-plugin.c:437
 msgid "True Color (24 bits)"
 msgstr "Sanne farger (24-biter)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:411
+#: ../plugins/vnc/vinagre-vnc-plugin.c:438
 msgid "High Color (16 bits)"
 msgstr "Mange farger (16-biter)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:412
+#: ../plugins/vnc/vinagre-vnc-plugin.c:439
 msgid "Low Color (8 bits)"
 msgstr "Få farger (8-biter)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:413
+#: ../plugins/vnc/vinagre-vnc-plugin.c:440
 msgid "Ultra Low Color (3 bits)"
 msgstr "Meget få farger (3-biter)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:426
+#: ../plugins/vnc/vinagre-vnc-plugin.c:453
 msgid "Use h_ost"
 msgstr "Bruk ve_rt"
 
 #. Translators: This is the tooltip of the SSH tunneling entry
-#: ../plugins/vnc/vinagre-vnc-plugin.c:434
+#: ../plugins/vnc/vinagre-vnc-plugin.c:461
 msgid "hostname or user@hostname"
 msgstr "vertsnavn eller bruker@vertsnavn"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:438
+#: ../plugins/vnc/vinagre-vnc-plugin.c:465
 msgid "as a SSH tunnel"
 msgstr "som en SSH-tunnel"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:473
+#: ../plugins/vnc/vinagre-vnc-plugin.c:500
 msgid "VNC Files"
 msgstr "VNC-filer"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:140
+#: ../plugins/vnc/vinagre-vnc-tab.c:147
 msgid "Desktop Name:"
 msgstr "Skrivebordsnavn:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:143
+#: ../plugins/vnc/vinagre-vnc-tab.c:150
 msgid "Dimensions:"
 msgstr "Dimensjoner:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:297
+#: ../plugins/vnc/vinagre-vnc-tab.c:304
 msgid "Error creating the SSH tunnel"
 msgstr "Feil ved oppretting av SSH-tunnel"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:298 ../plugins/vnc/vinagre-vnc-tab.c:309
+#: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
 msgid "Unknown reason"
 msgstr "Ukjent årsak"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:308
+#: ../plugins/vnc/vinagre-vnc-tab.c:315
 msgid "Error connecting to host."
 msgstr "Feil ved tilkobling til verten."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:353
+#: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "Autentiseringsmetoden mot verten %s er ikke støttet. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:357
+#: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
 msgstr "Autentisering er ikke støttet"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:522 ../plugins/vnc/vinagre-vnc-tab.c:539
+#: ../plugins/vnc/vinagre-vnc-tab.c:531 ../plugins/vnc/vinagre-vnc-tab.c:548
 msgid "Authentication error"
 msgstr "Feil ved autentisering"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:523
+#: ../plugins/vnc/vinagre-vnc-tab.c:532
 msgid "A username is required in order to access this machine."
 msgstr "Et brukernavn kreves for å få tilgang til denne maskinen."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:540
+#: ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "A password is required in order to access this machine."
 msgstr "Et passord kreves for å få tilgang til denne maskinen."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:594
+#: ../plugins/vnc/vinagre-vnc-tab.c:603
 msgid "S_caling"
 msgstr "S_kalering"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:595
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "Fits the remote screen into the current window size"
 msgstr "Tilpass ekstern skjerm til størrelsen på aktivt vindu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:610
+#: ../plugins/vnc/vinagre-vnc-tab.c:617
+msgid "_Keep Aspect Ratio"
+msgstr "Behold høyde-/breddeforhold"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
+msgid "Keeps the screen aspect ratio when using scaling"
+msgstr "Beholder høyde-/breddeforholdet ved skalering"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Does not send mouse and keyboard events"
 msgstr "Ikke send hendelser for mus og tastatur"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:623
+#: ../plugins/vnc/vinagre-vnc-tab.c:646
 msgid "_Original size"
 msgstr "_Opprinnelig størrelse"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:624
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Justerer vinduet til samme størrelse som eksternt skrivebord"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:637
+#: ../plugins/vnc/vinagre-vnc-tab.c:660
 msgid "_Refresh Screen"
 msgstr "Oppdate_r skjermen"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:638
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
 msgid "Requests an update of the screen"
 msgstr "Ber om en oppdatering av skjermen"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:660 ../plugins/vnc/vinagre-vnc-tab.c:732
-#: ../plugins/vnc/vinagre-vnc-tab.c:734
+#: ../plugins/vnc/vinagre-vnc-tab.c:683 ../plugins/vnc/vinagre-vnc-tab.c:755
+#: ../plugins/vnc/vinagre-vnc-tab.c:757
 msgid "Send Ctrl-Alt-Del"
 msgstr "Sende Ctrl+alt+del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:661
+#: ../plugins/vnc/vinagre-vnc-tab.c:684
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Sender Ctrl+alt+del til ekstern maskin"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:713 ../plugins/vnc/vinagre-vnc-tab.c:714
+#: ../plugins/vnc/vinagre-vnc-tab.c:736 ../plugins/vnc/vinagre-vnc-tab.c:737
 msgid "Scaling"
 msgstr "Skalering"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:723 ../plugins/vnc/vinagre-vnc-tab.c:724
+#: ../plugins/vnc/vinagre-vnc-tab.c:746 ../plugins/vnc/vinagre-vnc-tab.c:747
 msgid "Read only"
 msgstr "Bare se"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:940
+#: ../plugins/vnc/vinagre-vnc-tab.c:919
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -552,7 +575,7 @@ msgstr "Feil under oppstart av bokmerkene: %s"
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:470 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-connect.c:482 ../vinagre/vinagre-fav.c:765
 #: ../vinagre/vinagre-main.c:101 ../vinagre/vinagre-main.c:120
 #: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
 msgid "Unknown error"
@@ -706,7 +729,9 @@ msgstr "Ingen støttede filer"
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
-msgstr "Ingen av de aktive tilleggene støtter denne handlingen. Aktiver tillegg og prøv igjen."
+msgstr ""
+"Ingen av de aktive tilleggene støtter denne handlingen. Aktiver tillegg og "
+"prøv igjen."
 
 #: ../vinagre/vinagre-commands.c:184
 msgid "The following file could not be opened:"
@@ -714,8 +739,8 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Følgende fil kunne ikke bli åpnet:"
 msgstr[1] "Følgende filer kunne ikke bli åpnet:"
 
-#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:332
-#: ../vinagre/vinagre-connect.c:434
+#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:334
+#: ../vinagre/vinagre-connect.c:446
 msgid "Could not get the active protocol in the protocol list."
 msgstr "Kunne ikke hente aktiv protokoll i listen over protokoller."
 
@@ -724,7 +749,7 @@ msgstr "Kunne ikke hente aktiv protokoll i listen over protokoller."
 msgid "Error while saving history file: %s"
 msgstr "Feil under lagring av historikkfil: %s"
 
-#: ../vinagre/vinagre-connect.c:342
+#: ../vinagre/vinagre-connect.c:350
 msgid "Choose a Remote Desktop"
 msgstr "Velg et eksternt skrivebord"
 
@@ -830,27 +855,27 @@ msgid ""
 msgstr ""
 "Kjør 'vinagre --help' for å se en liste med tilgjengelige kommandolinjevalg"
 
-#: ../vinagre/vinagre-mdns.c:144
+#: ../vinagre/vinagre-mdns.c:159
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Klarte ikke å finne avahi-vertsnavn: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:202
+#: ../vinagre/vinagre-mdns.c:217
 #, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "Tillegg %s har allerede registrert en leser for tjeneste %s."
 
-#: ../vinagre/vinagre-mdns.c:211
+#: ../vinagre/vinagre-mdns.c:226
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Klarte ikke å legge til mDNS-visning for tjeneste: %s"
 
-#: ../vinagre/vinagre-mdns.c:227
+#: ../vinagre/vinagre-mdns.c:242
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Klarte ikke å se etter verter: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:300
+#: ../vinagre/vinagre-mdns.c:315
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Klarte ikke å initiere mDNS-visning: %s\n"
