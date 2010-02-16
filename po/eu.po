@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-13 18:37+0100\n"
-"PO-Revision-Date: 2010-01-13 18:47+0100\n"
+"POT-Creation-Date: 2010-02-16 18:40+0100\n"
+"PO-Revision-Date: 2010-02-16 19:11+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,94 +32,103 @@ msgstr "Sarbidetu urruneko mahaigainetara"
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
 #: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
-#: ../vinagre/vinagre-main.c:199
+#: ../vinagre/vinagre-main.c:200
 msgid "Remote Desktop Viewer"
 msgstr "Urruneko mahaigainen ikustailea"
 
 #: ../data/vinagre.ui.h:1
+msgid "Allow _keyboard shortcuts"
+msgstr "Baimendu lasterbideak"
+
+#: ../data/vinagre.ui.h:2
 msgid "Authentication is required"
 msgstr "Autentifikatu egin behar da"
 
 #. setup label
-#: ../data/vinagre.ui.h:2 ../vinagre/vinagre-fav.c:851
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:851
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
-#: ../data/vinagre.ui.h:3
+#: ../data/vinagre.ui.h:4
 msgid "Connection"
 msgstr "Konexioa"
 
-#: ../data/vinagre.ui.h:4
+#: ../data/vinagre.ui.h:5
 msgid "Connection options"
 msgstr "Konexioaren aukerak"
 
-#: ../data/vinagre.ui.h:5
+#: ../data/vinagre.ui.h:6
 msgid "Folder"
 msgstr "Karpeta"
 
-#: ../data/vinagre.ui.h:6 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:140 ../vinagre/vinagre-fav.c:404
+#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
+#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:404
 msgid "Host:"
 msgstr "Ostalaria:"
 
-#: ../data/vinagre.ui.h:7
+#: ../data/vinagre.ui.h:8
 msgid "Interface"
 msgstr "Interfazea"
 
-#: ../data/vinagre.ui.h:8
+#: ../data/vinagre.ui.h:9
 msgid "Options"
 msgstr "Aukerak"
 
-#: ../data/vinagre.ui.h:9
+#: ../data/vinagre.ui.h:10
 msgid "Parent Folder"
 msgstr "Karpeta gurasoa"
 
-#: ../data/vinagre.ui.h:10
+#: ../data/vinagre.ui.h:11
 msgid "Preferences"
 msgstr "Hobespenak"
 
-#: ../data/vinagre.ui.h:11
+#. This is a tooltip in preferences dialog
+#: ../data/vinagre.ui.h:13
+msgid ""
+"This option enables menu accelerators and keyboard shortcuts. For more info "
+"on why you may want to disable them, check the documentation."
+msgstr ""
+"Aukera honek menuaren bizkortzaileak eta lasterbideak gaitzen ditu. Begiratu dokumentazioa "
+"hauek nola desgaitzen diren jakiteko."
+
+#: ../data/vinagre.ui.h:14
 msgid "Which machine do you want to connect to?"
 msgstr "Zein ordenagailurekin konektatzea nahi duzu?"
 
-#: ../data/vinagre.ui.h:12
+#: ../data/vinagre.ui.h:15
 msgid "_Always show tabs"
 msgstr "_Beti erakutsi fitxak"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.ui.h:14
+#: ../data/vinagre.ui.h:17
 msgid "_Authenticate"
 msgstr "_Autentifikatu"
 
-#: ../data/vinagre.ui.h:15
+#: ../data/vinagre.ui.h:18
 msgid "_Full screen"
 msgstr "_Pantaila osoa"
 
-#: ../data/vinagre.ui.h:16
+#: ../data/vinagre.ui.h:19
 msgid "_Host:"
 msgstr "_Ostalaria:"
 
-#: ../data/vinagre.ui.h:17
+#: ../data/vinagre.ui.h:20
 msgid "_Name:"
 msgstr "_Izena:"
 
-#: ../data/vinagre.ui.h:18
+#: ../data/vinagre.ui.h:21
 msgid "_Password:"
 msgstr "_Pasahitza:"
 
-#: ../data/vinagre.ui.h:19
+#: ../data/vinagre.ui.h:22
 msgid "_Protocol:"
 msgstr "_Protokoloa:"
 
-#: ../data/vinagre.ui.h:20
+#: ../data/vinagre.ui.h:23
 msgid "_Remember this credential"
 msgstr "_Gogoratu kredentzial hau"
 
-#: ../data/vinagre.ui.h:21
-msgid "_Show menu shortcuts"
-msgstr "_Erakutsi menuko lasterbideak"
-
-#: ../data/vinagre.ui.h:22
+#: ../data/vinagre.ui.h:24 ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "_Erabiltzaile-izena:"
 
@@ -160,16 +169,22 @@ msgstr ""
 "erakusteko."
 
 #: ../data/vinagre.schemas.in.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr "Ezarri \"true\" (egia) gisa programa beti alderantzizko konexioak entzunez abiarazteko."
+
+#: ../data/vinagre.schemas.in.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr ""
 "Elementuen gehienezko kopurua zehazten du ostalariaren goitibeherako "
 "zerrendan."
 
-#: ../data/vinagre.schemas.in.in.h:7
+#: ../data/vinagre.schemas.in.in.h:8
 msgid "The handler for \"vnc://\" URLs"
 msgstr "\"vnc://\" URLen kudeatzailea"
 
-#: ../data/vinagre.schemas.in.in.h:8
+#: ../data/vinagre.schemas.in.in.h:9
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -179,17 +194,23 @@ msgstr ""
 "bezeroak konektatuta uzteko, edo dauden konexioak jaregiteko. Ezarri balioa "
 "\"true\" (egia) gisa mahaigaina beste bezeroekin partekatzeko."
 
-#: ../data/vinagre.schemas.in.in.h:9
+#: ../data/vinagre.schemas.in.in.h:10
 msgid "Whether we should leave other clients connected"
 msgstr "Beste bezeroak konektatuta utzi behar diren ala ez"
 
-#: ../data/vinagre.schemas.in.in.h:10
+#: ../data/vinagre.schemas.in.in.h:11
 msgid "Whether we should show tabs even when there is only one active connection"
 msgstr "Fitxatek erakutsi behar diren ala ez (nahiz eta konexio aktibo bakarra egon)"
 
-#: ../data/vinagre.schemas.in.in.h:11
+#: ../data/vinagre.schemas.in.in.h:12
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Menuaren bizkortzaileak (laster-teklak) erakutsi behar diren ala ez"
+
+#: ../data/vinagre.schemas.in.in.h:13
+msgid "Whether we should start the program listening for reverse connections"
+msgstr ""
+"Programa abiatzean alderantzizko konexioak entzun behar "
+"dituen edo ez adierazten du."
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -200,17 +221,30 @@ msgid "Remote Desktop Connection"
 msgstr "Urruneko mahaigainaren konexioa"
 
 #. vim: set ts=8:
-#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/vinagre-ssh-plugin.c:76
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
 #. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
-#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+#: ../plugins/ssh/vinagre-ssh-plugin.c:78
 msgid "Access Unix/Linux terminals"
 msgstr "Sarbidetu Unix/Linux terminaletan"
 
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:141
+#: ../plugins/ssh/vinagre-ssh-plugin.c:132
+msgid "SSH Options"
+msgstr "SSH aukerak"
+
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr ""
+"Aukerakoa. Hutsik uzten bada, zure erabiltzaile-izena erabiliko da. Gainera, "
+"gaineko 'Ordenagailua' eremuan eman daiteke erabiltzaile-izena@ostalari-izena forman."
+
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
 msgid "Port:"
 msgstr "Ataka:"
 
@@ -218,190 +252,228 @@ msgstr "Ataka:"
 msgid "SSH support"
 msgstr "SSH euskarria"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:253
-#: ../plugins/vnc/vinagre-vnc-plugin.c:320
+#: ../plugins/vnc/vinagre-vnc-connection.c:290
+#: ../plugins/vnc/vinagre-vnc-plugin.c:321
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr ""
 "Okerreko balioa 'partekatua' banderarentzako: %d. 0 edo 1 izan behar duela "
 "suposatzen da. Ez ikusi egiten."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+#: ../plugins/vnc/vinagre-vnc-plugin.c:84
 msgid "_Reverse Connections..."
 msgstr "_Alderantzizko konexioak..."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:85
+#: ../plugins/vnc/vinagre-vnc-plugin.c:86
 msgid "Configure incoming VNC connections"
 msgstr "Konfiguratu sarrerako VNC konexioak"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:172
+#: ../plugins/vnc/vinagre-vnc-plugin.c:173
 msgid "Enable scaled mode"
 msgstr "Gaitu modu eskalatua"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:187
+#: ../plugins/vnc/vinagre-vnc-plugin.c:188
 msgid "VNC Options:"
 msgstr "VNC aukerak:"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:189
+#: ../plugins/vnc/vinagre-vnc-plugin.c:190
 msgid "Show VNC Options"
 msgstr "Erakutsi VNC aukerak"
 
 #. vim: set ts=8:
-#: ../plugins/vnc/vinagre-vnc-plugin.c:211
+#: ../plugins/vnc/vinagre-vnc-plugin.c:212
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:212
+#: ../plugins/vnc/vinagre-vnc-plugin.c:213
 msgid "Access Unix/Linux, Windows and other machines."
 msgstr "Sarbidetu Unix/Linux, Windows eta beste ordenagailuetara."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:269
+#: ../plugins/vnc/vinagre-vnc-plugin.c:270
 msgid "Could not parse the file."
 msgstr "Ezin izan da fitxategia analizatu."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:276
+#: ../plugins/vnc/vinagre-vnc-plugin.c:277
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "Fitxategia ez da VNC bat. \"connection\" (konexioa) taldea falta zaio."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:282
+#: ../plugins/vnc/vinagre-vnc-plugin.c:283
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "Fitxategia ez da VNC bat. \"host\" (ostalaria) gakoa falta zaio."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:350
+#: ../plugins/vnc/vinagre-vnc-plugin.c:374
 msgid "VNC Options"
 msgstr "VNC aukerak"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:362
-#: ../plugins/vnc/vinagre-vnc-tab.c:670
+#. View only check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:387
+#: ../plugins/vnc/vinagre-vnc-tab.c:632
 msgid "_View only"
 msgstr "_Ikusteko soilik"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:369
+#. Scaling check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:395
 msgid "_Scaling"
 msgstr "_Eskalatzea"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:376
+#: ../plugins/vnc/vinagre-vnc-plugin.c:411
+msgid "_Keep aspect ratio"
+msgstr "_Mantendu aspektu-erlazioa"
+
+#. JPEG Compression check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:421
 msgid "_Use JPEG Compression"
 msgstr "_Erabili JPEG konpresioak"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:377
-msgid "This might not work on all sort of VNC servers"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:422
+msgid "This might not work on all VNC servers"
 msgstr "Baliteke VNC zerbitzari guztietan ez funtzionatzea"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:385
+#: ../plugins/vnc/vinagre-vnc-plugin.c:431
 msgid "_Depth Color:"
 msgstr "_Kolore-sakonera:"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:395
+#: ../plugins/vnc/vinagre-vnc-plugin.c:436
 msgid "Use Server Settings"
 msgstr "Erabili zerbitzariaren ezarpenak"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:396
+#: ../plugins/vnc/vinagre-vnc-plugin.c:437
 msgid "True Color (24 bits)"
 msgstr "Benetako kolorea (24 bit)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:397
+#: ../plugins/vnc/vinagre-vnc-plugin.c:438
 msgid "High Color (16 bits)"
 msgstr "Kolore altua (16 bit)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:398
+#: ../plugins/vnc/vinagre-vnc-plugin.c:439
 msgid "Low Color (8 bits)"
 msgstr "Kolore baxua (8 bit)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:399
+#: ../plugins/vnc/vinagre-vnc-plugin.c:440
 msgid "Ultra Low Color (3 bits)"
 msgstr "Kolore oso baxua (3 bit)"
 
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:453
+msgid "Use h_ost"
+msgstr "Erabili _ostalaria"
+
+#. Translators: This is the tooltip of the SSH tunneling entry
+#: ../plugins/vnc/vinagre-vnc-plugin.c:461
+msgid "hostname or user@hostname"
+msgstr "ostalari-izena edo erabiltzailea@ostalari-izena"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:465
+msgid "as a SSH tunnel"
+msgstr "SSH tunel bat bezala"
+
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:423
+#: ../plugins/vnc/vinagre-vnc-plugin.c:500
 msgid "VNC Files"
 msgstr "VNC fitxategiak"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:139
+#: ../plugins/vnc/vinagre-vnc-tab.c:147
 msgid "Desktop Name:"
 msgstr "Mahaigainaren izena:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:142
+#: ../plugins/vnc/vinagre-vnc-tab.c:150
 msgid "Dimensions:"
 msgstr "Dimentsioak:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:284
+#: ../plugins/vnc/vinagre-vnc-tab.c:304
+msgid "Error creating the SSH tunnel"
+msgstr "Errorea SSH tunela sortzean"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
+msgid "Unknown reason"
+msgstr "Errore ezezaguna"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:315
 msgid "Error connecting to host."
 msgstr "Errorea ostalariarekin konektatzean"
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:322
+#: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "%s ostalariaren autentifikazio-metodoa ez dago onartuta. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:326
+#: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
 msgstr "Autentifikazioa ez dago onartuta"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:586 ../plugins/vnc/vinagre-vnc-tab.c:603
+#: ../plugins/vnc/vinagre-vnc-tab.c:531 ../plugins/vnc/vinagre-vnc-tab.c:548
 msgid "Authentication error"
 msgstr "Errorea autentifikatzean"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:587
+#: ../plugins/vnc/vinagre-vnc-tab.c:532
 msgid "A username is required in order to access this machine."
 msgstr "Erabiltzaile-izena behar da ordenagailu honetara sarbidetzeko."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "A password is required in order to access this machine."
 msgstr "Pasahitza behar da ordenagailu honetara sarbidetzeko."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:655
+#: ../plugins/vnc/vinagre-vnc-tab.c:603
 msgid "S_caling"
 msgstr "E_skalatzea"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:656
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "Fits the remote screen into the current window size"
 msgstr "Doitu urruneko pantaila uneko leihoaren tamainara"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:671
+#: ../plugins/vnc/vinagre-vnc-tab.c:617
+msgid "_Keep Aspect Ratio"
+msgstr "_Mantendu aspektu-erlazioa"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
+msgid "Keeps the screen aspect ratio when using scaling"
+msgstr "Pantailaren aspektuaren erlazioa mantentzen du eskalatzean."
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Does not send mouse and keyboard events"
 msgstr "Ez bidali sagu eta teklatuaren gertaerarik"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:684
+#: ../plugins/vnc/vinagre-vnc-tab.c:646
 msgid "_Original size"
 msgstr "_Jatorrizko tamaina"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:685
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Leihoa doitzen du urruneko mahaigainaren tamainara"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:698
+#: ../plugins/vnc/vinagre-vnc-tab.c:660
 msgid "_Refresh Screen"
 msgstr "_Freskatu pantaila"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:699
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
 msgid "Requests an update of the screen"
 msgstr "Pantaila eguneratzea eskatzen du"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:721 ../plugins/vnc/vinagre-vnc-tab.c:793
-#: ../plugins/vnc/vinagre-vnc-tab.c:795
+#: ../plugins/vnc/vinagre-vnc-tab.c:683 ../plugins/vnc/vinagre-vnc-tab.c:755
+#: ../plugins/vnc/vinagre-vnc-tab.c:757
 msgid "Send Ctrl-Alt-Del"
 msgstr "Bidali Ktrl+Alt+Ezab"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:722
+#: ../plugins/vnc/vinagre-vnc-tab.c:684
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Bidali Ktrl+Alt+Ezab urruneko ordenagailura"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:774 ../plugins/vnc/vinagre-vnc-tab.c:775
+#: ../plugins/vnc/vinagre-vnc-tab.c:736 ../plugins/vnc/vinagre-vnc-tab.c:737
 msgid "Scaling"
 msgstr "Eskalatzea"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:784 ../plugins/vnc/vinagre-vnc-tab.c:785
+#: ../plugins/vnc/vinagre-vnc-tab.c:746 ../plugins/vnc/vinagre-vnc-tab.c:747
 msgid "Read only"
 msgstr "Irakurtzeko soilik"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:1001
+#: ../plugins/vnc/vinagre-vnc-tab.c:919
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -413,15 +485,20 @@ msgstr ""
 "Irakurri README fitxategia (Vinagre-rekin batera datorrena) eginbide hau "
 "nola gaitzen den jakiteko."
 
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:77
+#, c-format
+msgid "Unable to find a free TCP port"
+msgstr "Ezin da TCP ataka librerik aurkitu"
+
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
 msgid "VNC support"
 msgstr "VNC euskarria"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:86
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:90
 msgid "IPv4:"
 msgstr "IPv4:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:98
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:102
 msgid ""
 "\n"
 "\n"
@@ -431,13 +508,13 @@ msgstr ""
 "\n"
 "IPv6:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:157
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:161
 #, c-format
 msgid "On the port %d"
 msgstr "%d atakan"
 
 #: ../plugins/vnc/vinagre-vnc-listener.c:168
-msgid "Incoming VNC connection arrived but there is none active window"
+msgid "Incoming VNC connection arrived but there is no active window"
 msgstr "Sarrerako VNC konexioa iritsi da baina ez dago inolako leiho aktiborik"
 
 #. vim: set ts=8:
@@ -447,9 +524,9 @@ msgid ""
 "firewall. The remote side is supposed to initiate the connection with you. "
 "For further information, checkout the help."
 msgstr ""
-"Alderantzizko konexioak aktibatzean suebaki baten atzean dauden ordenagailuak atzi ditzakezu. "
-"Suposatzen da urruneko aldeak hasten duela konexioa zurekin. Informazio gehiagorako, "
-"begiratu laguntza."
+"Alderantzizko konexioak aktibatzean suebaki baten atzean dauden "
+"ordenagailuak atzi ditzakezu. Suposatzen da urruneko aldeak hasten duela "
+"konexioa zurekin. Informazio gehiagorako, begiratu laguntza."
 
 #: ../plugins/vnc/vnc.ui.h:2
 msgid "Connectivity"
@@ -491,8 +568,8 @@ msgstr "Ireki urruneko mahaigainen ikustailea"
 msgid "Access your bookmarks"
 msgstr "Atzitu zure laster-markak"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
-#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:253
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:522
+#: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "%s protokoloa ez dago onartuta."
@@ -504,9 +581,10 @@ msgstr "Errorea laster-markak hasieratzean: %s"
 
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:466
-#: ../vinagre/vinagre-fav.c:765 ../vinagre/vinagre-main.c:100
-#: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:267
+#: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:482 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-main.c:101 ../vinagre/vinagre-main.c:120
+#: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
 msgid "Unknown error"
 msgstr "Errore ezezaguna"
 
@@ -552,7 +630,7 @@ msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr "Errorea laster-markak migratzean: huts egin du XML egitura amaitzean"
 
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Errorea laster-markak migratzean: %s"
@@ -561,11 +639,11 @@ msgstr "Errorea laster-markak migratzean: %s"
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "Errorea laster-markak migratzean: VNC plugina ez dago aktibatuta"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 msgid "Failed to create the directory"
 msgstr "Huts egin du direktorioa sortzean"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:241
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -573,17 +651,17 @@ msgstr ""
 "Laster-marken fitxategia formatu berrira migratzen. Eragiketa hau behin "
 "bakarrik exekutatzen dela suposatzen da."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:270
+#: ../vinagre/vinagre-bookmarks-migration.c:249
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Errorea laster-marken fitxategi zaharra irekitzean: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:271
-#: ../vinagre/vinagre-bookmarks-migration.c:283
+#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:262
 msgid "Migration cancelled"
 msgstr "Migrazioa bertan behera utzita"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:280
+#: ../vinagre/vinagre-bookmarks-migration.c:259
 msgid "Could not remove the old bookmarks file"
 msgstr "Ezin izan da laster-marken fitxategi zaharra kendu"
 
@@ -639,47 +717,52 @@ msgstr "Errorea laster-marka kentzean: ez da sarrera aurkitu"
 msgid "New Folder"
 msgstr "Karpeta berria"
 
-#: ../vinagre/vinagre-commands.c:120
+#: ../vinagre/vinagre-cache-prefs.c:53
+#, c-format
+msgid "Error while saving preferences: %s"
+msgstr "Errorea hobespenak gordetzean: %s"
+
+#: ../vinagre/vinagre-commands.c:121
 msgid "Choose the file"
 msgstr "Aukeratu fitxategia"
 
-#: ../vinagre/vinagre-commands.c:148
-msgid "There are none supported files"
+#: ../vinagre/vinagre-commands.c:149
+msgid "There are no supported files"
 msgstr "Ez dago onartutako fitxategirik"
 
-#: ../vinagre/vinagre-commands.c:148
+#: ../vinagre/vinagre-commands.c:150
 msgid ""
-"None of the active plugins offer a supported file to be open. Activate some "
-"plugins and try again."
+"None of the active plugins support this action. Activate some plugins and "
+"try again."
 msgstr ""
-"Plugin aktibotariko bat berak ere ez du onartutako fitxategirik eskaintzen "
-"irekitzeko. Aktibatu plugin batzuk eta saiatu berriro."
+"Plugin aktibotariko bat berak ere ez du ekintza hau onartzen. "
+"Aktibatu plugin batzuk eta saiatu berriro."
 
-#: ../vinagre/vinagre-commands.c:181
+#: ../vinagre/vinagre-commands.c:184
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Ezin da honako fitxategia ireki:"
 msgstr[1] "Ezin dira honako fitxategiak ireki:"
 
-#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:331
-#: ../vinagre/vinagre-connect.c:431
+#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:334
+#: ../vinagre/vinagre-connect.c:446
 msgid "Could not get the active protocol in the protocol list."
 msgstr "Ezin izan da protokolo aktiboa lortu protokoloen zerrendan."
 
-#: ../vinagre/vinagre-connect.c:314
+#: ../vinagre/vinagre-connect.c:315
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Errorea historiaren fitxategia gordetzean: %s"
 
-#: ../vinagre/vinagre-connect.c:341
+#: ../vinagre/vinagre-connect.c:350
 msgid "Choose a Remote Desktop"
 msgstr "Aukeratu urruneko mahaigaina"
 
-#: ../vinagre/vinagre-connection.c:627
+#: ../vinagre/vinagre-connection.c:630
 msgid "Could not open the file."
 msgstr "Ezin izan da fitxategia ireki."
 
-#: ../vinagre/vinagre-connection.c:651
+#: ../vinagre/vinagre-connection.c:654
 msgid "The file was not recognized by any of the plugins."
 msgstr "Plugin bat berak ere ez du fitxategia ezagutzen."
 
@@ -715,7 +798,7 @@ msgstr "_Kendu laster-marketatik"
 msgid "Remove current selected connection from bookmarks"
 msgstr "Kendu unean hautatutako konexioa laster-marketatik"
 
-#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:398
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Ezin izan da interfazeko XML fitxategia batu: %s"
@@ -737,67 +820,67 @@ msgid "Hosts nearby"
 msgstr "Gertuko ostalariak"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:62
+#: ../vinagre/vinagre-main.c:63
 msgid "Open vinagre in fullscreen mode"
 msgstr "Ireki vinagre pantaila osoko moduan"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:66
+#: ../vinagre/vinagre-main.c:67
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "Sortu maila goreneko leihoa vinagre-ren existitzen den instantzia batean"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:70
+#: ../vinagre/vinagre-main.c:71
 msgid "Open a file recognized by vinagre"
 msgstr "Ireki vinagre-k ezagututako fitxategia"
 
-#: ../vinagre/vinagre-main.c:70
+#: ../vinagre/vinagre-main.c:71
 msgid "filename"
 msgstr "fitxategi-izena"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:75
+#: ../vinagre/vinagre-main.c:76
 msgid "[server:port]"
 msgstr "[zerbitzaria:ataka]"
 
-#: ../vinagre/vinagre-main.c:130
+#: ../vinagre/vinagre-main.c:131
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Honako errorea gertatu da:"
 msgstr[1] "Honako erroreak gertatu dira:"
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:169
+#: ../vinagre/vinagre-main.c:170
 msgid "- Remote Desktop Viewer"
 msgstr "- Urruneko mahaigainen ikustailea"
 
-#: ../vinagre/vinagre-main.c:194
+#: ../vinagre/vinagre-main.c:195
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Exekutatu 'vinagre --help' komando-lerroko aukera erabilgarri guztien "
 "zerrenda ikusteko"
 
-#: ../vinagre/vinagre-mdns.c:144
+#: ../vinagre/vinagre-mdns.c:159
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Huts egin du avahi ostalari-izena ebaztean: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:202
+#: ../vinagre/vinagre-mdns.c:217
 #, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "%s pluginak jadanik arakatzaile bat erregistratuta du %s zerbitzuarentzako."
 
-#: ../vinagre/vinagre-mdns.c:211
+#: ../vinagre/vinagre-mdns.c:226
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Huts egin du mDNS arakatzailea gehitzean %s zerbitzuarentzako."
 
-#: ../vinagre/vinagre-mdns.c:227
+#: ../vinagre/vinagre-mdns.c:242
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Huts egin du ostalariak arakatzean: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:300
+#: ../vinagre/vinagre-mdns.c:315
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Huts egin du mDNS arakatzailea hasieratzean: %s\n"
@@ -866,36 +949,118 @@ msgstr "Plugin honi _buruz"
 msgid "C_onfigure Plugin"
 msgstr "K_onfiguratu plugina"
 
-#: ../vinagre/vinagre-prefs.c:229
+#: ../vinagre/vinagre-prefs.c:212
 msgid "Cannot initialize preferences manager."
 msgstr "Ezin da hobespenen kudeatzailea hasieratu."
+
+#: ../vinagre/vinagre-ssh.c:106
+msgid "Timed out when logging into SSH host"
+msgstr "Denboraz kanpo SSH ostalarian saioa hastean"
+
+#: ../vinagre/vinagre-ssh.c:180
+msgid "Unable to spawn ssh program"
+msgstr "Ezin da 'ssh' programa abiarazi"
+
+#: ../vinagre/vinagre-ssh.c:197
+#, c-format
+msgid "Unable to spawn ssh program: %s"
+msgstr "Ezin da 'ssh' programa abiarazi: %s"
+
+#: ../vinagre/vinagre-ssh.c:352
+msgid "Timed out when logging in"
+msgstr "Denboraz kanpo saioa hastean"
+
+#: ../vinagre/vinagre-ssh.c:375 ../vinagre/vinagre-ssh.c:529
+#: ../vinagre/vinagre-ssh.c:612
+msgid "Permission denied"
+msgstr "Baimena ukatuta"
+
+#: ../vinagre/vinagre-ssh.c:440
+msgid "Password dialog canceled"
+msgstr "Pasahitzaren elkarrizketa-koadroa bertan behera utzita"
+
+#: ../vinagre/vinagre-ssh.c:463
+msgid "Could not send password"
+msgstr "Ezin izan da pasahitza bidali"
+
+#: ../vinagre/vinagre-ssh.c:471
+msgid "Log In Anyway"
+msgstr "Hasi saioa dena den"
+
+#: ../vinagre/vinagre-ssh.c:471
+msgid "Cancel Login"
+msgstr "Utzi saio-hasiera"
+
+#: ../vinagre/vinagre-ssh.c:480
+#, c-format
+msgid ""
+"The identity of the remote computer (%s) is unknown.\n"
+"This happens when you log in to a computer the first time.\n"
+"\n"
+"The identity sent by the remote computer is %s. If you want to be absolutely "
+"sure it is safe to continue, contact the system administrator."
+msgstr ""
+"Urruneko ordenagailuaren (%s) identitatea ezezaguna da.\n"
+"Ordenagailu batean aurreneko aldiz saioa hastean gertatu ohi da.\n"
+"\n"
+"Urruneko ordenagailuak bidalitako identitatea %s da. Jarraitzea segurua den "
+"edo ez jakieta nahi baduzu, jar zaitez sistemako "
+"administratzailearekin harremanetan."
+
+#: ../vinagre/vinagre-ssh.c:498
+msgid "Login dialog canceled"
+msgstr "Saio-hasierako elkarrizketa-koadroa bertan behera utzita"
+
+#: ../vinagre/vinagre-ssh.c:519
+msgid "Can't send host identity confirmation"
+msgstr "Ezin da ostalariaren identitatearen berrespenik bidali"
+
+#: ../vinagre/vinagre-ssh.c:554 ../vinagre/vinagre-tab.c:732
+msgid "Error saving the credentials on the keyring."
+msgstr "Errorea kredentziala gako-sortan gordetzean."
+
+#: ../vinagre/vinagre-ssh.c:619
+msgid "Hostname not known"
+msgstr "Ostalari-izena ezezaguna"
+
+#: ../vinagre/vinagre-ssh.c:626
+msgid "No route to host"
+msgstr "Ez dago biderik ostalarira"
+
+#: ../vinagre/vinagre-ssh.c:633
+msgid "Connection refused by server"
+msgstr "Zerbitzariak konexioa ezetsi du"
+
+#: ../vinagre/vinagre-ssh.c:640
+msgid "Host key verification failed"
+msgstr "Huts egin du ostalariaren gakoa egiaztatzean"
+
+#: ../vinagre/vinagre-ssh.c:676
+msgid "Unable to find a valid SSH program"
+msgstr "Ezin da baliozko SSH programarik aurkitu"
 
 #: ../vinagre/vinagre-tab.c:346
 msgid "Leave fullscreen"
 msgstr "Irten _pantaila osotik"
 
-#: ../vinagre/vinagre-tab.c:495
+#: ../vinagre/vinagre-tab.c:497
 msgid "Error saving recent connection."
 msgstr "Errorea azken konexioa gordetzean."
 
-#: ../vinagre/vinagre-tab.c:730
-msgid "Error saving the credentials on the keyring."
-msgstr "Errorea kredentziala gako-sortan gordetzean."
-
-#: ../vinagre/vinagre-tab.c:816
+#: ../vinagre/vinagre-tab.c:818
 msgid "Could not get a screenshot of the connection."
 msgstr "Ezin izan da konexioaren pantaila-argazkia lortu."
 
-#: ../vinagre/vinagre-tab.c:821
+#: ../vinagre/vinagre-tab.c:823
 msgid "Save Screenshot"
 msgstr "Gorde pantaila-argazkia"
 
-#: ../vinagre/vinagre-tab.c:832
+#: ../vinagre/vinagre-tab.c:834
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s(r)en pantaila-argazkia"
 
-#: ../vinagre/vinagre-tab.c:883
+#: ../vinagre/vinagre-tab.c:885
 msgid "Error saving screenshot"
 msgstr "Errorea pantaila-argazkia gordetzean"
 
@@ -1061,7 +1226,9 @@ msgstr ""
 msgid ""
 "The program tried to open an UI file but did not succeed, with the error "
 "message:"
-msgstr "Programak interfazeko fitxategia irekitzen saiatu da, baina ez du lortu. Errorearen mezua:"
+msgstr ""
+"Programak interfazeko fitxategia irekitzen saiatu da, baina ez du lortu. "
+"Errorearen mezua:"
 
 #: ../vinagre/vinagre-utils.c:180
 msgid "Please check your installation."
@@ -1071,11 +1238,11 @@ msgstr "Egiaztatu instalazioa."
 msgid "Error loading UI file"
 msgstr "Errorea interfazeko fitxategia kargatzean"
 
-#: ../vinagre/vinagre-utils.c:486
+#: ../vinagre/vinagre-utils.c:492
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Vinagre urruneko mahaigainen ikustailea da GNOMErako."
 
-#: ../vinagre/vinagre-utils.c:489
+#: ../vinagre/vinagre-utils.c:495
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -1086,7 +1253,7 @@ msgstr ""
 "Foundation-ek argitaratutako GNU Lizentzia Publiko Orokorraren 2. bertsioan, "
 "edo (nahiago baduzu) beste berriago batean, jasotako baldintzak betez gero."
 
-#: ../vinagre/vinagre-utils.c:493
+#: ../vinagre/vinagre-utils.c:499
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -1098,7 +1265,7 @@ msgstr ""
 "HELBURU PARTIKULARRETARAKO ERABILTZEKO. Argibide gehiago nahi izanez gero, "
 "ikus GNU Lizentzia Publiko Orokorra."
 
-#: ../vinagre/vinagre-utils.c:497
+#: ../vinagre/vinagre-utils.c:503
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -1106,21 +1273,56 @@ msgstr ""
 "Programa honekin batera GNU Lizentzia Publiko Orokorraren kopia bat jasoko "
 "zenuen. Hala ez bada, ikusi <http://www.gnu.org/licenses/>."
 
-#: ../vinagre/vinagre-utils.c:519
+#: ../vinagre/vinagre-utils.c:525
 msgid "translator-credits"
 msgstr "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
 
-#: ../vinagre/vinagre-utils.c:522
+#: ../vinagre/vinagre-utils.c:528
 msgid "Vinagre Website"
 msgstr "Vinagre-ren web gunea"
 
-#: ../vinagre/vinagre-window.c:427
+#. Translators: %s is a protocol, like VNC or SSH
+#: ../vinagre/vinagre-utils.c:660
+#, c-format
+msgid "%s authentication is required"
+msgstr "%s autentifikazioa behar da"
+
+#: ../vinagre/vinagre-window.c:428
 msgid "_Recent connections"
 msgstr "_Azken konexioak"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:544
+#: ../vinagre/vinagre-window.c:543
 #, c-format
 msgid "Open %s:%d"
 msgstr "Ireki %s:%d"
+
+#: ../vinagre/vinagre-window.c:721
+msgid "About menu accelerators and keyboard shortcuts"
+msgstr "Menuen bizkortzaile eta lasterbideei buruz"
+
+#: ../vinagre/vinagre-window.c:723
+msgid ""
+"Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
+"default. The reason is to avoid the keys to be intercepted by the program, "
+"and allow them to be sent to the remote machine.\n"
+"\n"
+"You can change this behavior through the preferences dialog. For more "
+"information, check the documentation.\n"
+"\n"
+"This message will appear only once."
+msgstr ""
+"Lehenetsi gisa, Vinagre menuen bizkortzaile eta lasterbideak desgaituta "
+"dituela etortzen da. Arrazoi nagusia programak sakatzen diren teklak ez interpretatzea "
+"da, tekla horiek urruneko ordenagailura bidaltzeko xedea baitu.\n"
+"\n"
+"Portaera hau alda dezakezu hobespenen elkarrizketa-koadroa erabiliz. "
+"Informazio gehiagorako, irakurri dokumentazioa.\n"
+"\n"
+"Mezu hau behin bakarrik agertuko da."
+
+#: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
+#, c-format
+msgid "Error while creating the file %s: %s"
+msgstr "Errorea %s fitxategia sortzean: %s"
 
