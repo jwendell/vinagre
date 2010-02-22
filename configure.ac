@@ -1,7 +1,7 @@
 # Vinagre autoconf
 
 AC_PREREQ([2.64])
-AC_INIT([vinagre],[2.29.90],[https://bugzilla.gnome.org/enter_bug.cgi?product=vinagre],[vinagre],[http://projects.gnome.org/vinagre/])
+AC_INIT([vinagre],[2.29.91],[https://bugzilla.gnome.org/enter_bug.cgi?product=vinagre],[vinagre],[http://projects.gnome.org/vinagre/])
 AC_CONFIG_SRCDIR([vinagre/vinagre-main.c])
 AC_CONFIG_HEADERS([config.h])
 
