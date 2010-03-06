@@ -2,21 +2,21 @@
 # This file is distributed under the same license as the vinagre package.
 #
 # Namhyung Kim <namhyung@gmail.com>, 2007.
-# Changwoo Ryu <cwryu@debian.org>, 2008, 2009.
+# Changwoo Ryu <cwryu@debian.org>, 2008, 2009, 2010.
 #
 # 새로 번역하시는 분은 아래 translator-credits에 추가하세요.
 #
 # 주의:
-# - 이 프로그램의 이름인 Vinagre는 "비나그레"로 음역. (스페인어 단어임)
+# - 이 프로그램의 이름인 Vinagre는 "비나그레"로 음역. (식초의 스페인어 단어)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-29 00:45+0900\n"
-"PO-Revision-Date: 2009-08-29 01:07+0900\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
+"POT-Creation-Date: 2010-03-06 23:38+0900\n"
+"PO-Revision-Date: 2010-03-07 00:07+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
-"Language-Team: GNOME Korea <gnome-kr-hackers@list.kldp.net>\n"
+"Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,19 +37,20 @@ msgstr "원격 데스크탑 접속"
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
 #: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
-#: ../vinagre/vinagre-main.c:198
+#: ../vinagre/vinagre-main.c:200
 msgid "Remote Desktop Viewer"
 msgstr "원격 데스크탑 보기"
 
 #: ../data/vinagre.ui.h:1
-msgid "All fields above are mandatory"
-msgstr "위의 모든 항목은 필수 항목입니다"
+msgid "Allow _keyboard shortcuts"
+msgstr "키보드 바로 가기 허용(_K)"
 
 #: ../data/vinagre.ui.h:2
 msgid "Authentication is required"
 msgstr "인증이 필요합니다"
 
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:856
+#. setup label
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:851
 msgid "Bookmarks"
 msgstr "책갈피"
 
@@ -66,7 +67,7 @@ msgid "Folder"
 msgstr "폴더"
 
 #: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:134 ../vinagre/vinagre-fav.c:425
+#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:404
 msgid "Host:"
 msgstr "호스트:"
 
@@ -86,48 +87,51 @@ msgstr "상위 폴더"
 msgid "Preferences"
 msgstr "기본 설정"
 
-#: ../data/vinagre.ui.h:12
+#. This is a tooltip in preferences dialog
+#: ../data/vinagre.ui.h:13
+msgid ""
+"This option enables menu accelerators and keyboard shortcuts. For more info "
+"on why you may want to disable them, check the documentation."
+msgstr "이 옵션을 켜면 메뉴 단축키와 키보드 바로 가기 키를 사용합니다. 이 옵션을 꺼야 하는 경우에 대한 자세한 설명은 문서를 보십시오."
+
+#: ../data/vinagre.ui.h:14
 msgid "Which machine do you want to connect to?"
 msgstr "어느 컴퓨터에 연결하시겠습니까?"
 
-#: ../data/vinagre.ui.h:13
+#: ../data/vinagre.ui.h:15
 msgid "_Always show tabs"
 msgstr "항상 탭 표시(_A)"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.ui.h:15
+#: ../data/vinagre.ui.h:17
 msgid "_Authenticate"
 msgstr "인증(_A)"
 
-#: ../data/vinagre.ui.h:16
+#: ../data/vinagre.ui.h:18
 msgid "_Full screen"
 msgstr "전체 화면(_F)"
 
-#: ../data/vinagre.ui.h:17
+#: ../data/vinagre.ui.h:19
 msgid "_Host:"
 msgstr "호스트(_H):"
 
-#: ../data/vinagre.ui.h:18
+#: ../data/vinagre.ui.h:20
 msgid "_Name:"
 msgstr "이름(_N):"
 
-#: ../data/vinagre.ui.h:19
+#: ../data/vinagre.ui.h:21
 msgid "_Password:"
 msgstr "암호(_P):"
 
-#: ../data/vinagre.ui.h:20
+#: ../data/vinagre.ui.h:22
 msgid "_Protocol:"
 msgstr "프로토콜(_P):"
 
-#: ../data/vinagre.ui.h:21
+#: ../data/vinagre.ui.h:23
 msgid "_Remember this credential"
 msgstr "이 암호를 기억(_R)"
 
-#: ../data/vinagre.ui.h:22
-msgid "_Show menu shortcuts"
-msgstr "메뉴 바로 가기 표시(_S)"
-
-#: ../data/vinagre.ui.h:23
+#: ../data/vinagre.ui.h:24 ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "사용자 이름(_U):"
 
@@ -140,7 +144,10 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .vinagre-plugin file for obtaining the \"Location\" of a given "
 "plugin."
-msgstr "활성화한 플러그인 목록. 활성화한 플러그인의 위치(\"Location\")가 들어 있습니다. 주어진 플러그인의 위치(\"Location\")를 보려면 .vinagre-plugin 파일을 참고하십시오."
+msgstr ""
+"활성화한 플러그인 목록. 활성화한 플러그인의 위치(\"Location\")가 들어 있습니"
+"다. 주어진 플러그인의 위치(\"Location\")를 보려면 .vinagre-plugin 파일을 참고"
+"하십시오."
 
 #: ../data/vinagre.schemas.in.in.h:3
 msgid "Maximum number of history items in connect dialog"
@@ -165,14 +172,20 @@ msgstr ""
 "러 개인 경우에만 탭을 표시합니다."
 
 #: ../data/vinagre.schemas.in.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr "참이면 거꾸로 연결을 받아들이는 프로그램을 항상 시작합니다."
+
+#: ../data/vinagre.schemas.in.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "호스트 드롭다운 항목의 최대 개수를 지정합니다."
 
-#: ../data/vinagre.schemas.in.in.h:7
+#: ../data/vinagre.schemas.in.in.h:8
 msgid "The handler for \"vnc://\" URLs"
 msgstr "\"vnc://\" URL에 대한 핸들러"
 
-#: ../data/vinagre.schemas.in.in.h:8
+#: ../data/vinagre.schemas.in.in.h:9
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -182,18 +195,22 @@ msgstr ""
 "을 남겨 둘 지 끊을 지 요청합니다. 이 값을 참으로 하면 데스크탑을 다른 클라이"
 "언트와 같이 사용하게 됩니다."
 
-#: ../data/vinagre.schemas.in.in.h:9
-msgid "Whether we should leave other clients connected"
-msgstr "연결한 다른 클라이언트를 남겨 둘 지 여부"
-
 #: ../data/vinagre.schemas.in.in.h:10
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr "사용 중인 연결이 하나밖에 없을 경우에도 탭을 표시할 지 여부"
+msgid "Whether we should leave other clients connected"
+msgstr "연결한 다른 클라이언트를 남겨 둘지 여부"
 
 #: ../data/vinagre.schemas.in.in.h:11
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "사용 중인 연결이 하나밖에 없을 경우에도 탭을 표시할지 여부"
+
+#: ../data/vinagre.schemas.in.in.h:12
 msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "메뉴 단축 키를 표시할 지 여부"
+msgstr "메뉴 단축 키를 표시할지 여부"
+
+#: ../data/vinagre.schemas.in.in.h:13
+msgid "Whether we should start the program listening for reverse connections"
+msgstr "거꾸로 연결을 받아들이는 프로그램을 실행할지 여부"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -204,17 +221,28 @@ msgid "Remote Desktop Connection"
 msgstr "원격 데스크탑 연결"
 
 #. vim: set ts=8:
-#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/vinagre-ssh-plugin.c:76
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
 #. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
-#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+#: ../plugins/ssh/vinagre-ssh-plugin.c:78
 msgid "Access Unix/Linux terminals"
 msgstr "유닉스/리눅스 터미널에 연결합니다"
 
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:135
+#: ../plugins/ssh/vinagre-ssh-plugin.c:132
+msgid "SSH Options"
+msgstr "SSH 옵션"
+
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr "따로 쓰지 않으면, 자기 사용자 이름을 사용합니다. 위의 컴퓨터 필드에서 사용자이름@호스트이름 형식으로 쓸 수도 있습니다."
+
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
 msgid "Port:"
 msgstr "포트:"
 
@@ -222,8 +250,8 @@ msgstr "포트:"
 msgid "SSH support"
 msgstr "SSH 기능"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:207
-#: ../plugins/vnc/vinagre-vnc-plugin.c:214
+#: ../plugins/vnc/vinagre-vnc-connection.c:290
+#: ../plugins/vnc/vinagre-vnc-plugin.c:321
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -231,133 +259,220 @@ msgstr ""
 "'shared' 플래그의 값이 잘못되었습니다: %d. 이 값은 0이나 1이어야 합니다. 무시"
 "합니다."
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:84
+msgid "_Reverse Connections..."
+msgstr "거꾸로 연결(_R)..."
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:86
+msgid "Configure incoming VNC connections"
+msgstr "VNC 연결 수신 설정"
+
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:66
+#: ../plugins/vnc/vinagre-vnc-plugin.c:173
 msgid "Enable scaled mode"
 msgstr "크기 조정 모드 사용"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:81
+#: ../plugins/vnc/vinagre-vnc-plugin.c:188
 msgid "VNC Options:"
 msgstr "VNC 옵션:"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+#: ../plugins/vnc/vinagre-vnc-plugin.c:190
 msgid "Show VNC Options"
 msgstr "VNC 옵션을 표시합니다"
 
 #. vim: set ts=8:
-#: ../plugins/vnc/vinagre-vnc-plugin.c:105
+#: ../plugins/vnc/vinagre-vnc-plugin.c:212
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:106
+#: ../plugins/vnc/vinagre-vnc-plugin.c:213
 msgid "Access Unix/Linux, Windows and other machines."
 msgstr "유닉스/리눅스, 윈도우즈, 기타 컴퓨터에 연결합니다."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:163
+#: ../plugins/vnc/vinagre-vnc-plugin.c:270
 msgid "Could not parse the file."
 msgstr "파일을 파싱할 수 없습니다."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:170
+#: ../plugins/vnc/vinagre-vnc-plugin.c:277
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "파일이 VNC 파일이 아닙니다. \"connection\" 그룹이 없습니다."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:176
+#: ../plugins/vnc/vinagre-vnc-plugin.c:283
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "파일이 VNC 파일이 아닙니다. \"host\" 키가 없습니다."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:243
+#: ../plugins/vnc/vinagre-vnc-plugin.c:374
 msgid "VNC Options"
 msgstr "VNC 옵션"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:254
-#: ../plugins/vnc/vinagre-vnc-tab.c:654
+#. View only check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:387
+#: ../plugins/vnc/vinagre-vnc-tab.c:632
 msgid "_View only"
 msgstr "보기만 가능(_V)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:261
+#. Scaling check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:395
 msgid "_Scaling"
 msgstr "크기 조정(_S)"
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:411
+msgid "_Keep aspect ratio"
+msgstr "가로 세로 비율 유지(_K)"
+
+#. JPEG Compression check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:421
+msgid "_Use JPEG Compression"
+msgstr "JPEG 압축 사용(_U)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:422
+msgid "This might not work on all VNC servers"
+msgstr "VNC 서버 종류에 따라 동작하지 않을 수도 있습니다"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:431
+msgid "_Depth Color:"
+msgstr "색 크기(_D):"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:436
+msgid "Use Server Settings"
+msgstr "서버의 설정 사용"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:437
+msgid "True Color (24 bits)"
+msgstr "트루 컬러 (16 비트)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:438
+msgid "High Color (16 bits)"
+msgstr "하이 컬러 (16 비트)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:439
+msgid "Low Color (8 bits)"
+msgstr "로우 컬러 (8 비트)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:440
+msgid "Ultra Low Color (3 bits)"
+msgstr "울트라 로우 컬러 (3 비트)"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:453
+msgid "Use h_ost"
+msgstr "호스트(_O)"
+
+#. Translators: This is the tooltip of the SSH tunneling entry
+#: ../plugins/vnc/vinagre-vnc-plugin.c:461
+msgid "hostname or user@hostname"
+msgstr "hostname 또는 user@hostname 형식"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:465
+msgid "as a SSH tunnel"
+msgstr "SSH 터널로 사용"
+
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:285
+#: ../plugins/vnc/vinagre-vnc-plugin.c:500
 msgid "VNC Files"
 msgstr "VNC 파일"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:133
+#: ../plugins/vnc/vinagre-vnc-tab.c:147
 msgid "Desktop Name:"
 msgstr "데스크탑 이름:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:136
+#: ../plugins/vnc/vinagre-vnc-tab.c:150
 msgid "Dimensions:"
 msgstr "크기:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:268
+#: ../plugins/vnc/vinagre-vnc-tab.c:304
+msgid "Error creating the SSH tunnel"
+msgstr "SSH 터널을 만드는데 오류가 발생했습니다"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
+msgid "Unknown reason"
+msgstr "알 수 없는 이유"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:315
 msgid "Error connecting to host."
 msgstr "호스트에 연결하는 중 오류."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:306
+#: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "%s 호스트가 해당 인증 방식을 지원하지 않습니다. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:310
+#: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
 msgstr "인증 방식을 지원하지 않습니다"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:570 ../plugins/vnc/vinagre-vnc-tab.c:587
+#: ../plugins/vnc/vinagre-vnc-tab.c:531 ../plugins/vnc/vinagre-vnc-tab.c:548
 msgid "Authentication error"
 msgstr "인증 오류"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:571
+#: ../plugins/vnc/vinagre-vnc-tab.c:532
 msgid "A username is required in order to access this machine."
 msgstr "이 컴퓨터에 연결하려면 사용자 이름이 필요합니다."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:588
+#: ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "A password is required in order to access this machine."
 msgstr "이 컴퓨터에 연결하려면 암호가 필요합니다."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:639
+#: ../plugins/vnc/vinagre-vnc-tab.c:603
 msgid "S_caling"
 msgstr "크기 조정(_C)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:640
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "Fits the remote screen into the current window size"
 msgstr "원격 화면을 현재 창 크기에 맞춥니다"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:655
+#: ../plugins/vnc/vinagre-vnc-tab.c:617
+msgid "_Keep Aspect Ratio"
+msgstr "가로 세로 비율 유지(_K)"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
+msgid "Keeps the screen aspect ratio when using scaling"
+msgstr "화면 크기를 조절할 때 가로 세로 비율을 유지합니다"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Does not send mouse and keyboard events"
 msgstr "마우스와 키보드 이벤트를 보내지 않습니다"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:668
+#: ../plugins/vnc/vinagre-vnc-tab.c:646
 msgid "_Original size"
 msgstr "원래 크기(_O)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:669
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "창의 크기를 원격 데스크탑의 크기에 맞게 조절합니다"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:692 ../plugins/vnc/vinagre-vnc-tab.c:766
-#: ../plugins/vnc/vinagre-vnc-tab.c:767
+#: ../plugins/vnc/vinagre-vnc-tab.c:660
+msgid "_Refresh Screen"
+msgstr "화면 새로 고침(_R)"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
+msgid "Requests an update of the screen"
+msgstr "화면 업데이트를 요청합니다"
+
+#. Send Ctrl-alt-del
+#: ../plugins/vnc/vinagre-vnc-tab.c:683 ../plugins/vnc/vinagre-vnc-tab.c:755
+#: ../plugins/vnc/vinagre-vnc-tab.c:757
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl-Alt-Del 보내기"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:693
+#: ../plugins/vnc/vinagre-vnc-tab.c:684
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "원격 컴퓨터에 Ctrl+Alt+Del 키를 보냅니다"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:745 ../plugins/vnc/vinagre-vnc-tab.c:746
+#: ../plugins/vnc/vinagre-vnc-tab.c:736 ../plugins/vnc/vinagre-vnc-tab.c:737
 msgid "Scaling"
 msgstr "크기 조정"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:755 ../plugins/vnc/vinagre-vnc-tab.c:756
+#: ../plugins/vnc/vinagre-vnc-tab.c:746 ../plugins/vnc/vinagre-vnc-tab.c:747
 msgid "Read only"
 msgstr "읽기 전용"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:925
+#: ../plugins/vnc/vinagre-vnc-tab.c:919
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -368,9 +483,65 @@ msgstr ""
 "\n"
 "이 기능을 사용하는 방법을 보려면 비나그레에 들어 있는 README 파일을 보십시오."
 
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:77
+#, c-format
+msgid "Unable to find a free TCP port"
+msgstr "빈 TCP 포트를 찾을 수 없습니다"
+
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
 msgid "VNC support"
 msgstr "VNC 기능"
+
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:90
+msgid "IPv4:"
+msgstr "IPv4:"
+
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:102
+msgid ""
+"\n"
+"\n"
+"IPv6:"
+msgstr ""
+"\n"
+"\n"
+"IPv6:"
+
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:161
+#, c-format
+msgid "On the port %d"
+msgstr "%d번 포트"
+
+#: ../plugins/vnc/vinagre-vnc-listener.c:168
+msgid "Incoming VNC connection arrived but there is no active window"
+msgstr "VNC 연결이 수신되었지만 활성화된 창이 없습니다"
+
+#. vim: set ts=8:
+#: ../plugins/vnc/vnc.ui.h:1
+msgid ""
+"By activating reverse connections you can access machines that are behind a "
+"firewall. The remote side is supposed to initiate the connection with you. "
+"For further information, checkout the help."
+msgstr "거꾸로 연결 기능을 사용하면 방화벽 안에 있는 컴퓨터에 연결할 수 있습니다. 원격 컴퓨터 쪽에서 이 쪽으로 연결을 시도합니다. 자세한 설명은 도움말을 보십시오."
+
+#: ../plugins/vnc/vnc.ui.h:2
+msgid "Connectivity"
+msgstr "연결"
+
+#: ../plugins/vnc/vnc.ui.h:3
+msgid "Reverse Connections"
+msgstr "거꾸로 연결"
+
+#: ../plugins/vnc/vnc.ui.h:4
+msgid "This machine is reachable through the following IP address(es):"
+msgstr "이 컴퓨터는 다음 IP 주소를 통해 연결할 수 있습니다:"
+
+#: ../plugins/vnc/vnc.ui.h:5
+msgid "_Always Enabled"
+msgstr "항상 사용(_A)"
+
+#: ../plugins/vnc/vnc.ui.h:6
+msgid "_Enable Reverse Connections"
+msgstr "거꾸로 연결 사용(_E)"
 
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
 msgid "A menu to quickly access remote machines"
@@ -392,8 +563,8 @@ msgstr "원격 데스크탑 프로그램 열기"
 msgid "Access your bookmarks"
 msgstr "책갈피 읽기"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
-#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:253
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:522
+#: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "%s 프로토콜을 지원하지 않습니다."
@@ -405,9 +576,10 @@ msgstr "책갈피를 초기화하는 중 오류: %s"
 
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:459
-#: ../vinagre/vinagre-fav.c:681 ../vinagre/vinagre-main.c:100
-#: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
+#: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:482 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-main.c:101 ../vinagre/vinagre-main.c:120
+#: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
 msgid "Unknown error"
 msgstr "알 수 없는 오류"
 
@@ -452,7 +624,7 @@ msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr "책갈피를 옮기는 중 오류: XML 구조를 마무리하는데 실패했습니다"
 
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "책갈피를 옮기는 중 오류: %s"
@@ -461,27 +633,27 @@ msgstr "책갈피를 옮기는 중 오류: %s"
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "책갈피를 옮기는 중 오류: VNC 플러그인을 활성화하지 않았습니다"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 msgid "Failed to create the directory"
 msgstr "디렉터리를 만드는데 실패했습니다"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:241
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
 msgstr "책갈피를 새 형식으로 옮기는 중입니다. 이 작업은 한 번만 동작합니다."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:270
+#: ../vinagre/vinagre-bookmarks-migration.c:249
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "예전 책갈피를 여는 중 오류: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:271
-#: ../vinagre/vinagre-bookmarks-migration.c:283
+#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:262
 msgid "Migration cancelled"
 msgstr "옮기기를 취소했습니다"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:280
+#: ../vinagre/vinagre-bookmarks-migration.c:259
 msgid "Could not remove the old bookmarks file"
 msgstr "예전 책갈피 파일을 제거할 수 없습니다"
 
@@ -537,119 +709,166 @@ msgstr "책갈피를 제거하는 중 오류: 항목이 없습니다"
 msgid "New Folder"
 msgstr "새 폴더"
 
-#: ../vinagre/vinagre-commands.c:120
+#: ../vinagre/vinagre-cache-prefs.c:53
+#, c-format
+msgid "Error while saving preferences: %s"
+msgstr "기본 설정을 저장하는 중 오류: %s"
+
+#: ../vinagre/vinagre-commands.c:121
 msgid "Choose the file"
 msgstr "파일을 선택하십시오"
 
-#: ../vinagre/vinagre-commands.c:148
-msgid "There are none supported files"
+#: ../vinagre/vinagre-commands.c:149
+msgid "There are no supported files"
 msgstr "지원하는 파일이 없습니다"
 
-#: ../vinagre/vinagre-commands.c:148
+#: ../vinagre/vinagre-commands.c:150
 msgid ""
-"None of the active plugins offer a supported file to be open. Activate some "
-"plugins and try again."
-msgstr "활성화한 플러그인 중에서 파일 열기를 지원하는 플러그인이 없습니다. 플러그인을 활성화한 다음 다시 시도하십시오."
+"None of the active plugins support this action. Activate some plugins and "
+"try again."
+msgstr "활성화한 플러그인 중에서 이 동작을 지원하는 플러그인이 없습니다. 플러그인을 활성화한 다음 다시 시도하십시오."
 
-#: ../vinagre/vinagre-commands.c:181
+#: ../vinagre/vinagre-commands.c:184
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "다음 파일은 열 수 없습니다:"
 
-#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
-#: ../vinagre/vinagre-connect.c:424
+#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:334
+#: ../vinagre/vinagre-connect.c:446
 msgid "Could not get the active protocol in the protocol list."
 msgstr "프로토콜 목록에서 프로토콜을 가져올 수 없습니다."
 
-#: ../vinagre/vinagre-connect.c:313
+#: ../vinagre/vinagre-connect.c:315
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "기록 파일을 저장하는 중 오류: %s"
 
-#: ../vinagre/vinagre-connect.c:340
+#: ../vinagre/vinagre-connect.c:350
 msgid "Choose a Remote Desktop"
 msgstr "원격 데스크탑 선택"
 
-#: ../vinagre/vinagre-connection.c:627
+#: ../vinagre/vinagre-connection.c:630
 msgid "Could not open the file."
 msgstr "파일을 열 수 없습니다."
 
-#: ../vinagre/vinagre-connection.c:651
+#: ../vinagre/vinagre-connection.c:654
 msgid "The file was not recognized by any of the plugins."
 msgstr "이 파일을 인식하는 플러그인이 없습니다."
 
-#: ../vinagre/vinagre-fav.c:670
+#: ../vinagre/vinagre-fav.c:567
+msgid "_New Folder"
+msgstr "새 폴더(_N)"
+
+#: ../vinagre/vinagre-fav.c:568
+msgid "Create a new folder"
+msgstr "새 폴더를 만듭니다"
+
+#: ../vinagre/vinagre-fav.c:573
+msgid "_Open bookmark"
+msgstr "책갈피 열기(_O)"
+
+#: ../vinagre/vinagre-fav.c:574
+msgid "Connect to this machine"
+msgstr "이 컴퓨터에 연결합니다"
+
+#: ../vinagre/vinagre-fav.c:575
+msgid "_Edit bookmark"
+msgstr "책갈피 편집(_E)"
+
+#: ../vinagre/vinagre-fav.c:576
+msgid "Edit the details of selected bookmark"
+msgstr "선택한 책갈피의 정보를 편집합니다"
+
+#: ../vinagre/vinagre-fav.c:577
+msgid "_Remove from bookmarks"
+msgstr "책갈피에서 제거(_R)"
+
+#: ../vinagre/vinagre-fav.c:578
+msgid "Remove current selected connection from bookmarks"
+msgstr "현재 선택한 연결을 책갈피에서 제거합니다"
+
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
+#, c-format
+msgid "Could not merge UI XML file: %s"
+msgstr "UI XML 파일을 합칠 수 없습니다: %s"
+
+#: ../vinagre/vinagre-fav.c:754
 msgid "Invalid operation"
 msgstr "잘못된 동작"
 
-#: ../vinagre/vinagre-fav.c:671
+#: ../vinagre/vinagre-fav.c:755
 msgid "Data received from drag&drop operation is invalid."
 msgstr "끌어놓기 동작에서 받은 데이터가 올바르지 않습니다."
 
-#: ../vinagre/vinagre-fav.c:871
+# tooltip
+#: ../vinagre/vinagre-fav.c:859
+msgid "Hide panel"
+msgstr "패널을 숨깁니다"
+
+#: ../vinagre/vinagre-fav.c:1044
 msgid "Hosts nearby"
 msgstr "주변 호스트"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:62
+#: ../vinagre/vinagre-main.c:63
 msgid "Open vinagre in fullscreen mode"
 msgstr "비나그레를 전체 화면 모드에서 엽니다"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:66
+#: ../vinagre/vinagre-main.c:67
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "기존의 비나그레 프로그램에서 최상위 창을 새로 만듭니다."
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:70
+#: ../vinagre/vinagre-main.c:71
 msgid "Open a file recognized by vinagre"
 msgstr "비나그레가 인식하는 파일을 엽니다"
 
-#: ../vinagre/vinagre-main.c:70
+#: ../vinagre/vinagre-main.c:71
 msgid "filename"
 msgstr "파일 이름"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:75
+#: ../vinagre/vinagre-main.c:76
 msgid "[server:port]"
 msgstr "[서버:포트]"
 
-#: ../vinagre/vinagre-main.c:130
+#: ../vinagre/vinagre-main.c:131
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "다음 오류가 발생했습니다:"
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:169
+#: ../vinagre/vinagre-main.c:170
 msgid "- Remote Desktop Viewer"
 msgstr "- 원격 데스크탑 보기"
 
-#: ../vinagre/vinagre-main.c:193
+#: ../vinagre/vinagre-main.c:195
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "이용 가능한 전체 명령행 옵션을 보려면 'vinagre --help'를 실행하십시오"
 
-#: ../vinagre/vinagre-mdns.c:142
+#: ../vinagre/vinagre-mdns.c:159
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "아바히 호스트 이름을 찾는데 실패했습니다: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:200
+#: ../vinagre/vinagre-mdns.c:217
 #, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "%s 플러그인은 이미 %s 서비스 브라우저로 등록되어 있습니다."
 
-#: ../vinagre/vinagre-mdns.c:209
+#: ../vinagre/vinagre-mdns.c:226
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "%s 서비스에 대한 mDNS 브라우저를 추가하는데 실패했습니다."
 
-#: ../vinagre/vinagre-mdns.c:225
+#: ../vinagre/vinagre-mdns.c:242
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "호스트를 찾아보는데 실패했습니다: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:298
+#: ../vinagre/vinagre-mdns.c:315
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "mDNS 브라우저를 초기화하는데 실패했습니다: %s\n"
@@ -674,11 +893,11 @@ msgstr "'%s' 호스트에 대한 인증이 실패했습니다"
 msgid "Authentication failed"
 msgstr "인증이 실패했습니다"
 
-#: ../vinagre/vinagre-notebook.c:525
+#: ../vinagre/vinagre-notebook.c:526
 msgid "Connecting..."
 msgstr "연결하는 중..."
 
-#: ../vinagre/vinagre-notebook.c:552 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:553 ../vinagre/vinagre-tab.c:325
 msgid "Close connection"
 msgstr "연결 끊기"
 
@@ -718,36 +937,116 @@ msgstr "플러그인 정보(_A)"
 msgid "C_onfigure Plugin"
 msgstr "플러그인 설정(_O)"
 
-#: ../vinagre/vinagre-prefs.c:217
+#: ../vinagre/vinagre-prefs.c:212
 msgid "Cannot initialize preferences manager."
 msgstr "설정 관리자를 초기화할 수 없습니다."
+
+#: ../vinagre/vinagre-ssh.c:106
+msgid "Timed out when logging into SSH host"
+msgstr "SSH 호스트에 로그인하는데 시간이 초과했습니다"
+
+#: ../vinagre/vinagre-ssh.c:180
+msgid "Unable to spawn ssh program"
+msgstr "SSH 프로그램을 실행할 수 없습니다"
+
+#: ../vinagre/vinagre-ssh.c:197
+#, c-format
+msgid "Unable to spawn ssh program: %s"
+msgstr "SSH 프로그램을 실행할 수 없습니다: %s"
+
+#: ../vinagre/vinagre-ssh.c:352
+msgid "Timed out when logging in"
+msgstr "로그인 시간이 초과했습니다"
+
+#: ../vinagre/vinagre-ssh.c:375 ../vinagre/vinagre-ssh.c:529
+#: ../vinagre/vinagre-ssh.c:612
+msgid "Permission denied"
+msgstr "권한이 거부되었습니다"
+
+#: ../vinagre/vinagre-ssh.c:440
+msgid "Password dialog canceled"
+msgstr "암호 대화창이 취소되었습니다"
+
+#: ../vinagre/vinagre-ssh.c:463
+msgid "Could not send password"
+msgstr "암호를 보낼 수 없습니다"
+
+#: ../vinagre/vinagre-ssh.c:471
+msgid "Log In Anyway"
+msgstr "그래도 로그인"
+
+#: ../vinagre/vinagre-ssh.c:471
+msgid "Cancel Login"
+msgstr "로그인 취소"
+
+#: ../vinagre/vinagre-ssh.c:480
+#, c-format
+msgid ""
+"The identity of the remote computer (%s) is unknown.\n"
+"This happens when you log in to a computer the first time.\n"
+"\n"
+"The identity sent by the remote computer is %s. If you want to be absolutely "
+"sure it is safe to continue, contact the system administrator."
+msgstr ""
+"원격 컴퓨터의 (%s) 신원을 알 수 없습니다.\n"
+"컴퓨터에 맨 처음 연결할 때 이렇게 나타납니다.\n"
+"\n"
+"원격 컴퓨터가 보낸 신원은 %s 입니다. 정말로 계속해도 안전하다고 확신한다면, 시스템 관리자에게 문의하십시오."
+
+#: ../vinagre/vinagre-ssh.c:498
+msgid "Login dialog canceled"
+msgstr "로그인 대화창이 취소되었습니다"
+
+#: ../vinagre/vinagre-ssh.c:519
+msgid "Can't send host identity confirmation"
+msgstr "호스트 신원 확인을 보낼 수 없습니다"
+
+#: ../vinagre/vinagre-ssh.c:554 ../vinagre/vinagre-tab.c:732
+msgid "Error saving the credentials on the keyring."
+msgstr "키 모음에 암호를 저장하는 중 오류."
+
+#: ../vinagre/vinagre-ssh.c:619
+msgid "Hostname not known"
+msgstr "호스트 이름을 알 수 없습니다"
+
+#: ../vinagre/vinagre-ssh.c:626
+msgid "No route to host"
+msgstr "호스트에 연결하는 경로를 찾을 수 없습니다"
+
+#: ../vinagre/vinagre-ssh.c:633
+msgid "Connection refused by server"
+msgstr "서버에서 연결을 거부했습니다"
+
+#: ../vinagre/vinagre-ssh.c:640
+msgid "Host key verification failed"
+msgstr "호스트 키 확인이 실패했습니다"
+
+#: ../vinagre/vinagre-ssh.c:676
+msgid "Unable to find a valid SSH program"
+msgstr "올바른 SSH 프로그램을 찾을 수 없습니다"
 
 #: ../vinagre/vinagre-tab.c:346
 msgid "Leave fullscreen"
 msgstr "전체 화면 나가기"
 
-#: ../vinagre/vinagre-tab.c:495
+#: ../vinagre/vinagre-tab.c:497
 msgid "Error saving recent connection."
 msgstr "최근 연결을 저장하는 중 오류."
 
-#: ../vinagre/vinagre-tab.c:728
-msgid "Error saving the credentials on the keyring."
-msgstr "키 모음에 암호를 저장하는 중 오류."
-
-#: ../vinagre/vinagre-tab.c:814
+#: ../vinagre/vinagre-tab.c:818
 msgid "Could not get a screenshot of the connection."
 msgstr "해당 연결의 스크린샷을 찍을 수 없습니다."
 
-#: ../vinagre/vinagre-tab.c:819
+#: ../vinagre/vinagre-tab.c:823
 msgid "Save Screenshot"
 msgstr "스크린샷 저장"
 
-#: ../vinagre/vinagre-tab.c:830
+#: ../vinagre/vinagre-tab.c:834
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s의 스크린샷"
 
-#: ../vinagre/vinagre-tab.c:881
+#: ../vinagre/vinagre-tab.c:885
 msgid "Error saving screenshot"
 msgstr "스크린샷을 저장하는 중 오류."
 
@@ -778,7 +1077,7 @@ msgstr "아바타를 가져올 수 없습니다: %s"
 
 #: ../vinagre/vinagre-tube-handler.c:519
 #, c-format
-msgid "%s wants to share his desktop with you."
+msgid "%s wants to share their desktop with you."
 msgstr "%s 사용자가 자기 데스크탑을 공유하고 싶어 합니다."
 
 #: ../vinagre/vinagre-tube-handler.c:524
@@ -818,111 +1117,82 @@ msgstr "프로그램 끝내기"
 msgid "Edit the application preferences"
 msgstr "프로그램 기본 설정을 편집합니다"
 
-#. FIXME: Study this dialog for next release
-#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
-#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
-#.
-#. Bookmarks menu
-#: ../vinagre/vinagre-ui.h:56
-msgid "_Open bookmark"
-msgstr "책갈피 열기(_O)"
+#: ../vinagre/vinagre-ui.h:50
+msgid "_Plugins"
+msgstr "플러그인(_P)"
 
-#: ../vinagre/vinagre-ui.h:57
-msgid "Connect to this machine"
-msgstr "이 컴퓨터에 연결합니다"
-
-#: ../vinagre/vinagre-ui.h:58
-msgid "_Edit bookmark"
-msgstr "책갈피 편집(_E)"
-
-#: ../vinagre/vinagre-ui.h:59
-msgid "Edit the details of selected bookmark"
-msgstr "선택한 책갈피의 정보를 편집합니다"
-
-#: ../vinagre/vinagre-ui.h:60
-msgid "_Remove from bookmarks"
-msgstr "책갈피에서 제거(_R)"
-
-#: ../vinagre/vinagre-ui.h:61
-msgid "Remove current selected connection from bookmarks"
-msgstr "현재 선택한 연결을 책갈피에서 제거합니다"
-
-#: ../vinagre/vinagre-ui.h:62
-msgid "_New Folder"
-msgstr "새 폴더(_N)"
-
-#: ../vinagre/vinagre-ui.h:63
-msgid "Create a new folder"
-msgstr "새 폴더를 만듭니다"
+#: ../vinagre/vinagre-ui.h:51
+msgid "Select plugins"
+msgstr "플러그인 선택"
 
 #. Help menu
-#: ../vinagre/vinagre-ui.h:66
+#: ../vinagre/vinagre-ui.h:54
 msgid "_Contents"
 msgstr "차례(_C)"
 
-#: ../vinagre/vinagre-ui.h:67
+#: ../vinagre/vinagre-ui.h:55
 msgid "Open the vinagre manual"
 msgstr "비나그레 설명서 열기"
 
-#: ../vinagre/vinagre-ui.h:69
+#: ../vinagre/vinagre-ui.h:57
 msgid "About this application"
 msgstr "프로그램 정보"
 
-#: ../vinagre/vinagre-ui.h:74
+#: ../vinagre/vinagre-ui.h:62
 msgid "_Toolbar"
 msgstr "도구 모음(_T)"
 
-#: ../vinagre/vinagre-ui.h:75
+#: ../vinagre/vinagre-ui.h:63
 msgid "Show or hide the toolbar"
 msgstr "도구 모음을 보이거나 숨깁니다"
 
-#: ../vinagre/vinagre-ui.h:78
+#: ../vinagre/vinagre-ui.h:66
 msgid "_Statusbar"
 msgstr "상태 표시줄(_S)"
 
-#: ../vinagre/vinagre-ui.h:79
+#: ../vinagre/vinagre-ui.h:67
 msgid "Show or hide the statusbar"
 msgstr "상태 표시줄을 보이거나 숨깁니다"
 
-#: ../vinagre/vinagre-ui.h:82
+#: ../vinagre/vinagre-ui.h:70
 msgid "Side _Panel"
 msgstr "가장자리 패널(_P)"
 
-#: ../vinagre/vinagre-ui.h:83
+#: ../vinagre/vinagre-ui.h:71
 msgid "Show or hide the side panel"
 msgstr "가장자리 패널을 보이거나 숨깁니다"
 
-#: ../vinagre/vinagre-ui.h:91
+#: ../vinagre/vinagre-ui.h:79
 msgid "Close the current connection"
 msgstr "현재 연결 끊기"
 
-#: ../vinagre/vinagre-ui.h:92
+#: ../vinagre/vinagre-ui.h:80
 msgid "C_lose All"
 msgstr "모두 닫기(_L)"
 
-#: ../vinagre/vinagre-ui.h:93
+#: ../vinagre/vinagre-ui.h:81
 msgid "Close all active connections"
 msgstr "모든 활성화된 연결을 닫습니다"
 
 #. Bookmarks menu
-#: ../vinagre/vinagre-ui.h:96
+#: ../vinagre/vinagre-ui.h:84
 msgid "_Add to bookmarks"
 msgstr "책갈피에 추가(_A)"
 
-#: ../vinagre/vinagre-ui.h:97
+#: ../vinagre/vinagre-ui.h:85
 msgid "Add current connection to your bookmarks"
 msgstr "현재 연결을 책갈피에 추가합니다"
 
 #. Machine menu
-#: ../vinagre/vinagre-ui.h:104
+#: ../vinagre/vinagre-ui.h:92
 msgid "Take screenshot"
 msgstr "스크린샷 찍기"
 
-#: ../vinagre/vinagre-ui.h:105
+#: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
 msgstr "활성화된 연결의 스크린샷을 찍습니다"
 
-#: ../vinagre/vinagre-ui.h:109
+#: ../vinagre/vinagre-ui.h:97
 msgid "View the current machine in full screen"
 msgstr "현재 컴퓨터를 전체 화면으로 봅니다"
 
@@ -930,16 +1200,31 @@ msgstr "현재 컴퓨터를 전체 화면으로 봅니다"
 msgid "An error has occurred:"
 msgstr "오류가 발생했습니다:"
 
-#: ../vinagre/vinagre-utils.c:150
-#, c-format
-msgid "Could not load builder file: %s"
-msgstr "빌더 파일을 열 수 없습니다: %s"
+#: ../vinagre/vinagre-utils.c:175
+msgid ""
+"A plugin tried to open an UI file but did not succeed, with the error "
+"message:"
+msgstr "플러그인에서 UI 파일 열기를 시도했지만 성공하지 못했습니다. 오류 메시지는:"
 
-#: ../vinagre/vinagre-utils.c:453
+#: ../vinagre/vinagre-utils.c:177
+msgid ""
+"The program tried to open an UI file but did not succeed, with the error "
+"message:"
+msgstr "프로그램에서 UI 파일 열기를 시도했지만 성공하지 못했습니다. 오류 메시지는:"
+
+#: ../vinagre/vinagre-utils.c:180
+msgid "Please check your installation."
+msgstr "설치가 올바른지 확인하십시오."
+
+#: ../vinagre/vinagre-utils.c:181
+msgid "Error loading UI file"
+msgstr "UI 파일을 읽어들이는 중 오류"
+
+#: ../vinagre/vinagre-utils.c:492
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "비나그레는 그놈 데스크탑을 위한 원격 데스크탑 프로그램입니다"
 
-#: ../vinagre/vinagre-utils.c:456
+#: ../vinagre/vinagre-utils.c:495
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -950,7 +1235,7 @@ msgstr ""
 "단이 공표한 GNU 일반 공중 사용 허가서 2판 또는 그 이후 판을 임의로 선택해서, "
 "그 규정에 따라 프로그램을 개작하거나 재배포할 수 있습니다."
 
-#: ../vinagre/vinagre-utils.c:460
+#: ../vinagre/vinagre-utils.c:499
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -962,7 +1247,7 @@ msgstr ""
 "한 어떠한 형태의 보증도 제공하지 않습니다. 보다 자세한 사항에 대해서는 GNU 일"
 "반 공중 사용 허가서를 참고하시기 바랍니다."
 
-#: ../vinagre/vinagre-utils.c:464
+#: ../vinagre/vinagre-utils.c:503
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -970,27 +1255,54 @@ msgstr ""
 "GNU 일반 공중 사용 허가서는 이 프로그램과 함께 제공됩니다. 만약, 이 문서가 누"
 "락되어 있다면 <http://www.gnu.org/licenses/>를 살펴보기 바랍니다."
 
-#: ../vinagre/vinagre-utils.c:486
+#: ../vinagre/vinagre-utils.c:525
 msgid "translator-credits"
 msgstr ""
 "김남형 <namhyung@gmail.com>\n"
 "류창우 <cwryu@debian.org>"
 
-#: ../vinagre/vinagre-utils.c:489
+#: ../vinagre/vinagre-utils.c:528
 msgid "Vinagre Website"
 msgstr "비나그레 웹사이트"
 
-#: ../vinagre/vinagre-window.c:397
+#. Translators: %s is a protocol, like VNC or SSH
+#: ../vinagre/vinagre-utils.c:660
 #, c-format
-msgid "Could not merge vinagre-ui.xml: %s"
-msgstr "vinagre-ui.xml 파일을 합칠 수 없음: %s"
+msgid "%s authentication is required"
+msgstr "%s 인증이 필요합니다"
 
-#: ../vinagre/vinagre-window.c:425
+#: ../vinagre/vinagre-window.c:428
 msgid "_Recent connections"
 msgstr "최근 연결(_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:585
+#: ../vinagre/vinagre-window.c:543
 #, c-format
 msgid "Open %s:%d"
 msgstr "%s:%d 열기"
+
+#: ../vinagre/vinagre-window.c:721
+msgid "About menu accelerators and keyboard shortcuts"
+msgstr "메뉴 단축키 및 키보드 바로 가기 키 정보"
+
+#: ../vinagre/vinagre-window.c:723
+msgid ""
+"Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
+"default. The reason is to avoid the keys to be intercepted by the program, "
+"and allow them to be sent to the remote machine.\n"
+"\n"
+"You can change this behavior through the preferences dialog. For more "
+"information, check the documentation.\n"
+"\n"
+"This message will appear only once."
+msgstr ""
+"비나그레의 메뉴 단축키와 키보드 바로 가기 키는 사용하지 않도록 설정되어 있습니다. 해당 키를 프로그램에서 가로채지 않고 원격 컴퓨터에 보내도록 하기 위해서 이렇게 설정되어 있습니다.\n"
+"\n"
+"기본 설정 대화창에서 이 설정을 바꿀 수 있습니다. 자세한 설명은 문서를 보십시오.\n"
+"\n"
+"이 메시지는 한 번만 나타납니다."
+
+#: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
+#, c-format
+msgid "Error while creating the file %s: %s"
+msgstr "%s 파일을 만든느데 오류: %s"
