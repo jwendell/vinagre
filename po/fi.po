@@ -2,14 +2,14 @@
 # Copyright (C) Ilkka Tuohela.
 # This file is distributed under the same license as the vinagre package.
 # Ilkka Tuohela <hile@iki.fi>, 2007-2009.
-# Tommi Vainikainen <thv@iki.fi>, 2009.
+# Tommi Vainikainen <thv@iki.fi>, 2009-2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-27 22:15+0300\n"
-"PO-Revision-Date: 2009-08-27 22:15+0300\n"
+"POT-Creation-Date: 2010-03-10 12:08+0200\n"
+"PO-Revision-Date: 2010-03-10 14:43+0200\n"
 "Last-Translator: Tommi Vainikainen <thv@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -32,19 +32,20 @@ msgstr "Käytä etätyöpöytiä"
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
 #: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
-#: ../vinagre/vinagre-main.c:198
+#: ../vinagre/vinagre-main.c:200
 msgid "Remote Desktop Viewer"
 msgstr "Etätyöpöytien käyttö"
 
 #: ../data/vinagre.ui.h:1
-msgid "All fields above are mandatory"
-msgstr "Kaikki ylläolevat kentät ovat pakollisia"
+msgid "Allow _keyboard shortcuts"
+msgstr "Salli _pikanäppäimet"
 
 #: ../data/vinagre.ui.h:2
 msgid "Authentication is required"
 msgstr "Todentaminen vaaditaan"
 
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:856
+#. setup label
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:851
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
@@ -61,7 +62,7 @@ msgid "Folder"
 msgstr "Kansio"
 
 #: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:134 ../vinagre/vinagre-fav.c:425
+#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:404
 msgid "Host:"
 msgstr "Verkkonimi:"
 
@@ -81,48 +82,51 @@ msgstr "Yläkansio"
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: ../data/vinagre.ui.h:12
+#. This is a tooltip in preferences dialog
+#: ../data/vinagre.ui.h:13
+msgid ""
+"This option enables menu accelerators and keyboard shortcuts. For more info "
+"on why you may want to disable them, check the documentation."
+msgstr "Tämä valitsin ottaa käyttöön valikko-oikotiet ja pikanäppäimet. Lisätietoa miksi kenties haluat poistaa ne käytöstä, katso käyttöohjetta."
+
+#: ../data/vinagre.ui.h:14
 msgid "Which machine do you want to connect to?"
 msgstr "Mihin tietokoneeseen haluat ottaa yhteyttä?"
 
-#: ../data/vinagre.ui.h:13
+#: ../data/vinagre.ui.h:15
 msgid "_Always show tabs"
 msgstr "Näytä välilehdet _aina"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.ui.h:15
+#: ../data/vinagre.ui.h:17
 msgid "_Authenticate"
 msgstr "Todenna"
 
-#: ../data/vinagre.ui.h:16
+#: ../data/vinagre.ui.h:18
 msgid "_Full screen"
 msgstr "_Kokoruutu"
 
-#: ../data/vinagre.ui.h:17
+#: ../data/vinagre.ui.h:19
 msgid "_Host:"
 msgstr "_Verkkonimi:"
 
-#: ../data/vinagre.ui.h:18
+#: ../data/vinagre.ui.h:20
 msgid "_Name:"
 msgstr "_Nimi:"
 
-#: ../data/vinagre.ui.h:19
+#: ../data/vinagre.ui.h:21
 msgid "_Password:"
 msgstr "_Salasana:"
 
-#: ../data/vinagre.ui.h:20
+#: ../data/vinagre.ui.h:22
 msgid "_Protocol:"
 msgstr "_Protokolla:"
 
-#: ../data/vinagre.ui.h:21
+#: ../data/vinagre.ui.h:23
 msgid "_Remember this credential"
 msgstr "_Muista nämä tunnukset"
 
-#: ../data/vinagre.ui.h:22
-msgid "_Show menu shortcuts"
-msgstr "_Näytä valikkopikanäppäimet"
-
-#: ../data/vinagre.ui.h:23
+#: ../data/vinagre.ui.h:24 ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "_Käyttäjänimi:"
 
@@ -164,14 +168,20 @@ msgstr ""
 "aktiivinen yhteys."
 
 #: ../data/vinagre.schemas.in.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr "Aseta todeksi jos haluat aina käynnistää vastayhteyksien kuunteluohjelman."
+
+#: ../data/vinagre.schemas.in.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "Määrittää verkkonimien pudotusvalikon kohtien enimmäismäärän."
 
-#: ../data/vinagre.schemas.in.in.h:7
+#: ../data/vinagre.schemas.in.in.h:8
 msgid "The handler for \"vnc://\" URLs"
 msgstr "Käsittelijä \"vnc://\"-URL:eille"
 
-#: ../data/vinagre.schemas.in.in.h:8
+#: ../data/vinagre.schemas.in.in.h:9
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -181,19 +191,23 @@ msgstr ""
 "istunnot auki tai katkaisemaan ne. Aseta tämä todeksi, jos haluat jakaa "
 "istunnon muiden asiakkaiden kanssa."
 
-#: ../data/vinagre.schemas.in.in.h:9
+#: ../data/vinagre.schemas.in.in.h:10
 msgid "Whether we should leave other clients connected"
 msgstr "Pidetäänkö muut asiakkaat yhdistettyinä"
 
-#: ../data/vinagre.schemas.in.in.h:10
+#: ../data/vinagre.schemas.in.in.h:11
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr ""
 "Näytetäänkö välilehdet myös silloin kun avoinna on vain yksi etäistunto"
 
-#: ../data/vinagre.schemas.in.in.h:11
+#: ../data/vinagre.schemas.in.in.h:12
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Näytetäänkö valikoiden oikotiet (pikanäppäimet)"
+
+#: ../data/vinagre.schemas.in.in.h:13
+msgid "Whether we should start the program listening for reverse connections"
+msgstr "Käynnistetäänkö vastayhteyksiä kuunteleva ohjelma"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -204,17 +218,28 @@ msgid "Remote Desktop Connection"
 msgstr "Etätyöpöytäyhteys"
 
 #. vim: set ts=8:
-#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/vinagre-ssh-plugin.c:76
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
 #. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
-#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+#: ../plugins/ssh/vinagre-ssh-plugin.c:78
 msgid "Access Unix/Linux terminals"
 msgstr "Käytä Unix/Linux-päätteitä"
 
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:135
+#: ../plugins/ssh/vinagre-ssh-plugin.c:132
+msgid "SSH Options"
+msgstr "SSH-valitsimet"
+
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr "Valinnainen. Mikäli tyhjä, käytetään käyttäjätunnustasi. Tämän voi myös syöttää Tietokone-kenttään yllä muodossa tunnus@isäntänimi."
+
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
 msgid "Port:"
 msgstr "Portti:"
 
@@ -222,140 +247,227 @@ msgstr "Portti:"
 msgid "SSH support"
 msgstr "SSH-tuki"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:207
-#: ../plugins/vnc/vinagre-vnc-plugin.c:214
+#: ../plugins/vnc/vinagre-vnc-connection.c:290
+#: ../plugins/vnc/vinagre-vnc-plugin.c:321
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr "Väärä arvo ”shared”-lipulle: %d. Sen tulee olla 0 tai 1. Ohitetaan."
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:84
+msgid "_Reverse Connections..."
+msgstr "_Vastayhteydet..."
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:86
+msgid "Configure incoming VNC connections"
+msgstr "Aseta sisääntulevat VNC-yhteydet"
+
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:66
+#: ../plugins/vnc/vinagre-vnc-plugin.c:173
 msgid "Enable scaled mode"
 msgstr "Ota käyttöön skaalaava tila"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:81
+#: ../plugins/vnc/vinagre-vnc-plugin.c:188
 msgid "VNC Options:"
 msgstr "VNC-valitsimet:"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+#: ../plugins/vnc/vinagre-vnc-plugin.c:190
 msgid "Show VNC Options"
 msgstr "Näytä VNC-valitsimet"
 
 #. vim: set ts=8:
-#: ../plugins/vnc/vinagre-vnc-plugin.c:105
+#: ../plugins/vnc/vinagre-vnc-plugin.c:212
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:106
+#: ../plugins/vnc/vinagre-vnc-plugin.c:213
 msgid "Access Unix/Linux, Windows and other machines."
 msgstr "Käytä Unix/Linux-, Windows- ja muita koneita."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:163
+#: ../plugins/vnc/vinagre-vnc-plugin.c:270
 msgid "Could not parse the file."
 msgstr "Tiedostoa ei voi jäsentää."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:170
+#: ../plugins/vnc/vinagre-vnc-plugin.c:277
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "Tiedosto ei ole VNC-tiedosto: Puuttuu yhteysryhmä (”connection”)."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:176
+#: ../plugins/vnc/vinagre-vnc-plugin.c:283
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "Tiedosto ei ole VNC-tiedosto: Puuttuu isäntä-avain (”host”)."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:243
+#: ../plugins/vnc/vinagre-vnc-plugin.c:374
 msgid "VNC Options"
 msgstr "VNC-valitsimet"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:254
-#: ../plugins/vnc/vinagre-vnc-tab.c:654
+#. View only check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:387
+#: ../plugins/vnc/vinagre-vnc-tab.c:632
 msgid "_View only"
 msgstr "_Vain näyttö"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:261
+#. Scaling check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:395
 msgid "_Scaling"
 msgstr "_Sovitus"
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:411
+msgid "_Keep aspect ratio"
+msgstr "_Säilytä kuvasuhde"
+
+#. JPEG Compression check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:421
+msgid "_Use JPEG Compression"
+msgstr "_Käytä JPEG-pakkausta"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:422
+msgid "This might not work on all VNC servers"
+msgstr "Tämä ei välttämättä toimi kaikkien VNC-palvelimien kanssa"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:431
+msgid "_Depth Color:"
+msgstr "_Värisyvyys:"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:436
+msgid "Use Server Settings"
+msgstr "Käytä palvelimen asetuksia"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:437
+msgid "True Color (24 bits)"
+msgstr "Täysvärinen (24-bittinen)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:438
+msgid "High Color (16 bits)"
+msgstr "Runsasvärinen (16-bittinen)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:439
+msgid "Low Color (8 bits)"
+msgstr "Vähävärinen (8-bittinen)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:440
+msgid "Ultra Low Color (3 bits)"
+msgstr "Erittäin vähävärinen (3-bittinen)"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:453
+msgid "Use h_ost"
+msgstr "Käytä _isäntää"
+
+#. Translators: This is the tooltip of the SSH tunneling entry
+#: ../plugins/vnc/vinagre-vnc-plugin.c:461
+msgid "hostname or user@hostname"
+msgstr "isäntänimi tai käyttäjä@isäntänimi"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:465
+msgid "as a SSH tunnel"
+msgstr "SSH-putkena"
+
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:285
+#: ../plugins/vnc/vinagre-vnc-plugin.c:500
 msgid "VNC Files"
 msgstr "VNC-tiedostot"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:133
+#: ../plugins/vnc/vinagre-vnc-tab.c:147
 msgid "Desktop Name:"
 msgstr "Työpöydän nimi:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:136
+#: ../plugins/vnc/vinagre-vnc-tab.c:150
 msgid "Dimensions:"
 msgstr "Mitat:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:268
+#: ../plugins/vnc/vinagre-vnc-tab.c:304
+msgid "Error creating the SSH tunnel"
+msgstr "Virhe luotaessa SSH-putkea"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
+msgid "Unknown reason"
+msgstr "Tuntematon syy"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:315
 msgid "Error connecting to host."
 msgstr "Virhe yhdistettäessä tietokoneeseen."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:306
+#: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "Todennusmenetelmä palvelimella %s ei ole tuettu. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:310
+#: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
 msgstr "Todennusmenetelmä ei ole tuettu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:570 ../plugins/vnc/vinagre-vnc-tab.c:587
+#: ../plugins/vnc/vinagre-vnc-tab.c:531 ../plugins/vnc/vinagre-vnc-tab.c:548
 msgid "Authentication error"
 msgstr "Virhe todennuksessa"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:571
+#: ../plugins/vnc/vinagre-vnc-tab.c:532
 msgid "A username is required in order to access this machine."
 msgstr "Yhteydenotto tähän tietokoneeseen vaatii käyttäjätunnuksen."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:588
+#: ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "A password is required in order to access this machine."
 msgstr "Yhteydenotto tähän tietokoneeseen vaatii salasanan."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:639
+#: ../plugins/vnc/vinagre-vnc-tab.c:603
 msgid "S_caling"
 msgstr "_Sovitus"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:640
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "Fits the remote screen into the current window size"
 msgstr "Sovittaa etänäytön tämänhetkisen ikkunan kokoon"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:655
+#: ../plugins/vnc/vinagre-vnc-tab.c:617
+msgid "_Keep Aspect Ratio"
+msgstr "_Säilytä kuvasuhde"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
+msgid "Keeps the screen aspect ratio when using scaling"
+msgstr "Säilyttään ruudun kuvasuhteen sovitettaessa kuvaa"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Does not send mouse and keyboard events"
 msgstr "Ei lähetä hiiri- ja näppäimistötapahtumia"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:668
+#: ../plugins/vnc/vinagre-vnc-tab.c:646
 msgid "_Original size"
 msgstr "Alkuperäinen k_oko"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:669
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Sovittaa ikkunan etätyöpöydän kokoon"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:692 ../plugins/vnc/vinagre-vnc-tab.c:766
-#: ../plugins/vnc/vinagre-vnc-tab.c:767
+#: ../plugins/vnc/vinagre-vnc-tab.c:660
+msgid "_Refresh Screen"
+msgstr "_Päivitä ruutu"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
+msgid "Requests an update of the screen"
+msgstr "Pyytää ruudunpäivitystä"
+
+#. Send Ctrl-alt-del
+#: ../plugins/vnc/vinagre-vnc-tab.c:683 ../plugins/vnc/vinagre-vnc-tab.c:755
+#: ../plugins/vnc/vinagre-vnc-tab.c:757
 msgid "Send Ctrl-Alt-Del"
 msgstr "Lähetä Ctrl-Alt-Del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:693
+#: ../plugins/vnc/vinagre-vnc-tab.c:684
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Lähettää Ctrl-Alt-Del etätietokoneelle"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:745 ../plugins/vnc/vinagre-vnc-tab.c:746
+#: ../plugins/vnc/vinagre-vnc-tab.c:736 ../plugins/vnc/vinagre-vnc-tab.c:737
 msgid "Scaling"
 msgstr "Sovitus"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:755 ../plugins/vnc/vinagre-vnc-tab.c:756
+#: ../plugins/vnc/vinagre-vnc-tab.c:746 ../plugins/vnc/vinagre-vnc-tab.c:747
 msgid "Read only"
 msgstr "Vain katselu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:925
+#: ../plugins/vnc/vinagre-vnc-tab.c:919
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -367,9 +479,62 @@ msgstr ""
 "Lue vinagren mukana toimitetusta README-tiedostosta lisätietoja, kuinka voit "
 "ottaa tämän toiminnon käyttöön."
 
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:77
+#, c-format
+msgid "Unable to find a free TCP port"
+msgstr "Ei löytynyt vapaata TCP-porttia"
+
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
 msgid "VNC support"
 msgstr "VNC-tuki"
+
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:90
+msgid "IPv4:"
+msgstr "IPv4:"
+
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:102
+msgid ""
+"\n"
+"\n"
+"IPv6:"
+msgstr "\n\nIPv6:"
+
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:161
+#, c-format
+msgid "On the port %d"
+msgstr "Portissa %d"
+
+#: ../plugins/vnc/vinagre-vnc-listener.c:168
+msgid "Incoming VNC connection arrived but there is no active window"
+msgstr "Sisääntuleva VNC-yhteys havaittu, mutta yhtään ikkunaa ei ole aktiivisena"
+
+#. vim: set ts=8:
+#: ../plugins/vnc/vnc.ui.h:1
+msgid ""
+"By activating reverse connections you can access machines that are behind a "
+"firewall. The remote side is supposed to initiate the connection with you. "
+"For further information, checkout the help."
+msgstr "Aktivoimalla vastayhteydet voit päästä käsiksi tietokoneisiin, jotka ovat palomuurin takana. Vastapuolen täytyy avata yhteys kanssasi. Tarkempia tietoja löytyy käyttöohjeesta."
+
+#: ../plugins/vnc/vnc.ui.h:2
+msgid "Connectivity"
+msgstr "Yhteys"
+
+#: ../plugins/vnc/vnc.ui.h:3
+msgid "Reverse Connections"
+msgstr "_Vastayhteydet"
+
+#: ../plugins/vnc/vnc.ui.h:4
+msgid "This machine is reachable through the following IP address(es):"
+msgstr "Tämä tietokone on saavutettavissa seuraavissa IP-osoitteissa:"
+
+#: ../plugins/vnc/vnc.ui.h:5
+msgid "_Always Enabled"
+msgstr "_Aina käytössä"
+
+#: ../plugins/vnc/vnc.ui.h:6
+msgid "_Enable Reverse Connections"
+msgstr "_Ota käyttöön vastayhteydet"
 
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
 msgid "A menu to quickly access remote machines"
@@ -391,8 +556,8 @@ msgstr "Avaa etätyöpöytien katselin"
 msgid "Access your bookmarks"
 msgstr "Avaa kirjanmerkkisi"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
-#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:253
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:522
+#: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokolla %s ei ole tuettu."
@@ -404,9 +569,10 @@ msgstr "Virhe alustettaessa kirjanmerkkejä: %s"
 
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:459
-#: ../vinagre/vinagre-fav.c:681 ../vinagre/vinagre-main.c:100
-#: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
+#: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:482 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-main.c:101 ../vinagre/vinagre-main.c:120
+#: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
 msgid "Unknown error"
 msgstr "Tuntematon virhe"
 
@@ -456,7 +622,7 @@ msgstr ""
 "Virhe siirrettäessä kirjanmerkkejä: XML-rakenteen viimeistely epäonnistui"
 
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Virhe siirrettäessä kirjanmerkkejä: %s"
@@ -465,11 +631,11 @@ msgstr "Virhe siirrettäessä kirjanmerkkejä: %s"
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "Virhe siirrettäessä kirjanmerkkejä: VNC-liitännäinen ei ole aktivoitu"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 msgid "Failed to create the directory"
 msgstr "Hakemiston luonti epäonnistui"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:241
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -477,17 +643,17 @@ msgstr ""
 "Siirretään kirjanmerkkitiedosto uuteen muotoon. Tämä toiminto on tarkoitus "
 "tehdä vain kerran."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:270
+#: ../vinagre/vinagre-bookmarks-migration.c:249
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Virhe avattaessa vanhaa kirjanmerkkitiedostoa: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:271
-#: ../vinagre/vinagre-bookmarks-migration.c:283
+#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:262
 msgid "Migration cancelled"
 msgstr "Siirto peruttiin"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:280
+#: ../vinagre/vinagre-bookmarks-migration.c:259
 msgid "Could not remove the old bookmarks file"
 msgstr "Vanhaa kirjanmerkkikansiota ei voi poistaa"
 
@@ -542,124 +708,168 @@ msgstr "Virhe poistettaessa kirjanmerkkiä: Kohtaa ei löydy"
 msgid "New Folder"
 msgstr "Uusi kansio"
 
-#: ../vinagre/vinagre-commands.c:120
+#: ../vinagre/vinagre-cache-prefs.c:53
+#, c-format
+msgid "Error while saving preferences: %s"
+msgstr "Virhe tallennettaessa asetuksia: %s"
+
+#: ../vinagre/vinagre-commands.c:121
 msgid "Choose the file"
 msgstr "Valitse tiedosto"
 
-#: ../vinagre/vinagre-commands.c:148
-msgid "There are none supported files"
+#: ../vinagre/vinagre-commands.c:149
+msgid "There are no supported files"
 msgstr "Ei ole yhtään tuettua tiedostoa"
 
-#: ../vinagre/vinagre-commands.c:148
+#: ../vinagre/vinagre-commands.c:150
 msgid ""
-"None of the active plugins offer a supported file to be open. Activate some "
-"plugins and try again."
-msgstr ""
-"Mikään aktiivista liitännäisistä ei tarjoutunut avaamaan tiedostoa. Ota "
-"käyttöön lisää liitännäisiä ja yritä uudelleen."
+"None of the active plugins support this action. Activate some plugins and "
+"try again."
+msgstr "Mikään aktiivista liitännäisistä ei tue tätä toimintoa. Ota käyttöön lisää liitännäisiä ja yritä uudelleen."
 
-#: ../vinagre/vinagre-commands.c:181
+#: ../vinagre/vinagre-commands.c:184
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Seuraavaa tiedostoa ei voitu avata:"
 msgstr[1] "Seuraavia tiedostoja ei voitu avata:"
 
-#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
-#: ../vinagre/vinagre-connect.c:424
+#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:334
+#: ../vinagre/vinagre-connect.c:446
 msgid "Could not get the active protocol in the protocol list."
 msgstr "Protokollaluettelosta ei saatu aktiivista protokollaa."
 
-#: ../vinagre/vinagre-connect.c:313
+#: ../vinagre/vinagre-connect.c:315
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Virhe tallennettaessa historiatiedostoa: %s"
 
-#: ../vinagre/vinagre-connect.c:340
+#: ../vinagre/vinagre-connect.c:350
 msgid "Choose a Remote Desktop"
 msgstr "Valitse etätyöpöytä"
 
-#: ../vinagre/vinagre-connection.c:627
+#: ../vinagre/vinagre-connection.c:630
 msgid "Could not open the file."
 msgstr "Tiedostoa ei voi avata."
 
-#: ../vinagre/vinagre-connection.c:651
+#: ../vinagre/vinagre-connection.c:654
 msgid "The file was not recognized by any of the plugins."
 msgstr "Mikään liitännäisistä ei tunnistanut tiedostoa."
 
-#: ../vinagre/vinagre-fav.c:670
+#: ../vinagre/vinagre-fav.c:567
+msgid "_New Folder"
+msgstr "_Uusi kansio"
+
+#: ../vinagre/vinagre-fav.c:568
+msgid "Create a new folder"
+msgstr "Luo uusi kansio"
+
+#: ../vinagre/vinagre-fav.c:573
+msgid "_Open bookmark"
+msgstr "_Avaa kirjanmerkki"
+
+#: ../vinagre/vinagre-fav.c:574
+msgid "Connect to this machine"
+msgstr "Yhdistä tähän tietokoneeseen"
+
+#: ../vinagre/vinagre-fav.c:575
+msgid "_Edit bookmark"
+msgstr "_Muokkaa kirjanmerkkiä"
+
+#: ../vinagre/vinagre-fav.c:576
+msgid "Edit the details of selected bookmark"
+msgstr "Muokkaa valitun kirjanmerkin yksityiskohtia"
+
+#: ../vinagre/vinagre-fav.c:577
+msgid "_Remove from bookmarks"
+msgstr "_Poista kirjanmerkeistä"
+
+#: ../vinagre/vinagre-fav.c:578
+msgid "Remove current selected connection from bookmarks"
+msgstr "Poista valittu yhteys kirjanmerkeistä"
+
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
+#, c-format
+msgid "Could not merge UI XML file: %s"
+msgstr "Ei voitu liittää käyttöliittymän XML-tiedostoa: %s"
+
+#: ../vinagre/vinagre-fav.c:754
 msgid "Invalid operation"
 msgstr "Virheellinen toiminto"
 
-#: ../vinagre/vinagre-fav.c:671
+#: ../vinagre/vinagre-fav.c:755
 msgid "Data received from drag&drop operation is invalid."
 msgstr ""
 "Vedä- ja pudota -toiminnosta vastaanotetut tiedot eivät ole kelvollisia."
 
-#: ../vinagre/vinagre-fav.c:871
+#: ../vinagre/vinagre-fav.c:859
+msgid "Hide panel"
+msgstr "Piilota paneeli"
+
+#: ../vinagre/vinagre-fav.c:1044
 msgid "Hosts nearby"
 msgstr "Lähellä olevat palvelimet"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:62
+#: ../vinagre/vinagre-main.c:63
 msgid "Open vinagre in fullscreen mode"
 msgstr "Avaa Vinagre kokoruututilassa"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:66
+#: ../vinagre/vinagre-main.c:67
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "Luo uusi päätason ikkuna aikaisempaan vinagren instanssiin"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:70
+#: ../vinagre/vinagre-main.c:71
 msgid "Open a file recognized by vinagre"
 msgstr "Avaa Vinagren tunnistama tiedosto"
 
-#: ../vinagre/vinagre-main.c:70
+#: ../vinagre/vinagre-main.c:71
 msgid "filename"
 msgstr "tiedostonimi"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:75
+#: ../vinagre/vinagre-main.c:76
 msgid "[server:port]"
 msgstr "[palvelin:portti]"
 
-#: ../vinagre/vinagre-main.c:130
+#: ../vinagre/vinagre-main.c:131
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Tapahtui seuraava virhe:"
 msgstr[1] "Tapahtui seuraavat virheet:"
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:169
+#: ../vinagre/vinagre-main.c:170
 msgid "- Remote Desktop Viewer"
 msgstr "- Etätyöpöytien katselin"
 
-#: ../vinagre/vinagre-main.c:193
+#: ../vinagre/vinagre-main.c:195
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Suorita 'vinagre --help' nähdäksesi kaikki mahdolliset valitsimet"
 
-#: ../vinagre/vinagre-mdns.c:142
+#: ../vinagre/vinagre-mdns.c:159
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Avahi-verkkonimeä ei voitu selvittää: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:200
+#: ../vinagre/vinagre-mdns.c:217
 #, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "Liitännäinen %s on jo rekisteröinyt selailmen palvelulle %s."
 
-#: ../vinagre/vinagre-mdns.c:209
+#: ../vinagre/vinagre-mdns.c:226
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "mDNS-selaimen lisääminen palvelulle %s epäonnistui."
 
-#: ../vinagre/vinagre-mdns.c:225
+#: ../vinagre/vinagre-mdns.c:242
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Palvelimia ei voitu selata: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:298
+#: ../vinagre/vinagre-mdns.c:315
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "mDNS-selaimen alustus epäonnistui: %s\n"
@@ -684,11 +894,11 @@ msgstr "Todennus palvelimelle %s epäonnistui"
 msgid "Authentication failed"
 msgstr "Todennus epäonnistui"
 
-#: ../vinagre/vinagre-notebook.c:525
+#: ../vinagre/vinagre-notebook.c:526
 msgid "Connecting..."
 msgstr "Yhdistetään..."
 
-#: ../vinagre/vinagre-notebook.c:552 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:553 ../vinagre/vinagre-tab.c:325
 msgid "Close connection"
 msgstr "Sulje yhteys"
 
@@ -728,36 +938,116 @@ msgstr "_Tietoja liitännäisestä"
 msgid "C_onfigure Plugin"
 msgstr "Liitännäisen _asetukset"
 
-#: ../vinagre/vinagre-prefs.c:217
+#: ../vinagre/vinagre-prefs.c:212
 msgid "Cannot initialize preferences manager."
 msgstr "Asetusten hallintaohjelmaa ei voi alustaa."
+
+#: ../vinagre/vinagre-ssh.c:106
+msgid "Timed out when logging into SSH host"
+msgstr "Yhteys aikakatkaistu kirjauduttaessa SSH-palvelimeen"
+
+#: ../vinagre/vinagre-ssh.c:180
+msgid "Unable to spawn ssh program"
+msgstr "Ei voitu käynnistää ssh-ohjelmaa"
+
+#: ../vinagre/vinagre-ssh.c:197
+#, c-format
+msgid "Unable to spawn ssh program: %s"
+msgstr "Ei voitu käynnistää ssh-ohjelmaa: %s"
+
+#: ../vinagre/vinagre-ssh.c:352
+msgid "Timed out when logging in"
+msgstr "Aikakatkaistu kirjauduttaessa sisään"
+
+#: ../vinagre/vinagre-ssh.c:375 ../vinagre/vinagre-ssh.c:529
+#: ../vinagre/vinagre-ssh.c:612
+msgid "Permission denied"
+msgstr "Lupa evätty"
+
+#: ../vinagre/vinagre-ssh.c:440
+msgid "Password dialog canceled"
+msgstr "Salasanaikkuna peruttu"
+
+#: ../vinagre/vinagre-ssh.c:463
+msgid "Could not send password"
+msgstr "Ei voitu lähettää salasanaa"
+
+#: ../vinagre/vinagre-ssh.c:471
+msgid "Log In Anyway"
+msgstr "Kirjaudu sisään kaikesta huolimatta"
+
+#: ../vinagre/vinagre-ssh.c:471
+msgid "Cancel Login"
+msgstr "Keskeytä kirjautuminen"
+
+#: ../vinagre/vinagre-ssh.c:480
+#, c-format
+msgid ""
+"The identity of the remote computer (%s) is unknown.\n"
+"This happens when you log in to a computer the first time.\n"
+"\n"
+"The identity sent by the remote computer is %s. If you want to be absolutely "
+"sure it is safe to continue, contact the system administrator."
+msgstr ""
+"Etätietokoneen (%s) tunniste on tuntematon.\n"
+"Tämä johtuu siitä, että kirjaudut tietokoneelle ensimmäistä kertaa.\n"
+"\n"
+"Etätietokoneen lähettämä tunniste on %s. Jos haluat olla täysin varma, että jatkaminen on turvallista, ota yhteyttä järjestelmäylläpitäjääsi."
+
+#: ../vinagre/vinagre-ssh.c:498
+msgid "Login dialog canceled"
+msgstr "Kirjautumisikkuna suljettu"
+
+#: ../vinagre/vinagre-ssh.c:519
+msgid "Can't send host identity confirmation"
+msgstr "Ei voitu lähettää isännän tunnistevahvistusta"
+
+#: ../vinagre/vinagre-ssh.c:554 ../vinagre/vinagre-tab.c:732
+msgid "Error saving the credentials on the keyring."
+msgstr "Virhe tallennettaessa kirjautumistietoja avainnippuun."
+
+#: ../vinagre/vinagre-ssh.c:619
+msgid "Hostname not known"
+msgstr "Tuntematon isäntänimi"
+
+#: ../vinagre/vinagre-ssh.c:626
+msgid "No route to host"
+msgstr "Ei reittiä isäntään"
+
+#: ../vinagre/vinagre-ssh.c:633
+msgid "Connection refused by server"
+msgstr "Palvelin kieltäytyi yhteydestä"
+
+#: ../vinagre/vinagre-ssh.c:640
+msgid "Host key verification failed"
+msgstr "Isännän avaimen varmennus epäonnistui"
+
+#: ../vinagre/vinagre-ssh.c:676
+msgid "Unable to find a valid SSH program"
+msgstr "Ei löytynyt kelvollista SSH-ohjelmaa"
 
 #: ../vinagre/vinagre-tab.c:346
 msgid "Leave fullscreen"
 msgstr "Poistu kokoruututilasta"
 
-#: ../vinagre/vinagre-tab.c:495
+#: ../vinagre/vinagre-tab.c:497
 msgid "Error saving recent connection."
 msgstr "Virhe tallennettaessa äskettäistä yhteyttä."
 
-#: ../vinagre/vinagre-tab.c:728
-msgid "Error saving the credentials on the keyring."
-msgstr "Virhe tallennettaessa kirjautumistietoja avainnippuun."
-
-#: ../vinagre/vinagre-tab.c:814
+#: ../vinagre/vinagre-tab.c:818
 msgid "Could not get a screenshot of the connection."
 msgstr "Kuvakaappausta yhteydestä ei voi ottaa."
 
-#: ../vinagre/vinagre-tab.c:819
+#: ../vinagre/vinagre-tab.c:823
 msgid "Save Screenshot"
 msgstr "Tallenna kuvakaappaus"
 
-#: ../vinagre/vinagre-tab.c:830
+#: ../vinagre/vinagre-tab.c:834
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Kuvakaappaus yhteydestä %s"
 
-#: ../vinagre/vinagre-tab.c:881
+#: ../vinagre/vinagre-tab.c:885
 msgid "Error saving screenshot"
 msgstr "Virhe tallennettaessa kuvakaappausta"
 
@@ -788,7 +1078,7 @@ msgstr "Mahdotonta saada avatarta: %s"
 
 #: ../vinagre/vinagre-tube-handler.c:519
 #, c-format
-msgid "%s wants to share his desktop with you."
+msgid "%s wants to share their desktop with you."
 msgstr "%s haluaa jakaa työpöytänsä kanssasi."
 
 #: ../vinagre/vinagre-tube-handler.c:524
@@ -828,111 +1118,82 @@ msgstr "Lopeta ohjelma"
 msgid "Edit the application preferences"
 msgstr "Muokkaa sovelluksen asetuksia"
 
-#. FIXME: Study this dialog for next release
-#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
-#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
-#.
-#. Bookmarks menu
-#: ../vinagre/vinagre-ui.h:56
-msgid "_Open bookmark"
-msgstr "_Avaa kirjanmerkki"
+#: ../vinagre/vinagre-ui.h:50
+msgid "_Plugins"
+msgstr "_Liitännäiset"
 
-#: ../vinagre/vinagre-ui.h:57
-msgid "Connect to this machine"
-msgstr "Yhdistä tähän tietokoneeseen"
-
-#: ../vinagre/vinagre-ui.h:58
-msgid "_Edit bookmark"
-msgstr "_Muokkaa kirjanmerkkiä"
-
-#: ../vinagre/vinagre-ui.h:59
-msgid "Edit the details of selected bookmark"
-msgstr "Muokkaa valitun kirjanmerkin yksityiskohtia"
-
-#: ../vinagre/vinagre-ui.h:60
-msgid "_Remove from bookmarks"
-msgstr "_Poista kirjanmerkeistä"
-
-#: ../vinagre/vinagre-ui.h:61
-msgid "Remove current selected connection from bookmarks"
-msgstr "Poista valittu yhteys kirjanmerkeistä"
-
-#: ../vinagre/vinagre-ui.h:62
-msgid "_New Folder"
-msgstr "_Uusi kansio"
-
-#: ../vinagre/vinagre-ui.h:63
-msgid "Create a new folder"
-msgstr "Luo uusi kansio"
+#: ../vinagre/vinagre-ui.h:51
+msgid "Select plugins"
+msgstr "Valitse liitännäiset"
 
 #. Help menu
-#: ../vinagre/vinagre-ui.h:66
+#: ../vinagre/vinagre-ui.h:54
 msgid "_Contents"
 msgstr "_Sisältö"
 
-#: ../vinagre/vinagre-ui.h:67
+#: ../vinagre/vinagre-ui.h:55
 msgid "Open the vinagre manual"
 msgstr "Avaa vinagren ohje"
 
-#: ../vinagre/vinagre-ui.h:69
+#: ../vinagre/vinagre-ui.h:57
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
-#: ../vinagre/vinagre-ui.h:74
+#: ../vinagre/vinagre-ui.h:62
 msgid "_Toolbar"
 msgstr "_Työkalupalkki"
 
-#: ../vinagre/vinagre-ui.h:75
+#: ../vinagre/vinagre-ui.h:63
 msgid "Show or hide the toolbar"
 msgstr "Näytä tai piilota työkalupalkki"
 
-#: ../vinagre/vinagre-ui.h:78
+#: ../vinagre/vinagre-ui.h:66
 msgid "_Statusbar"
 msgstr "_Tilarivi"
 
-#: ../vinagre/vinagre-ui.h:79
+#: ../vinagre/vinagre-ui.h:67
 msgid "Show or hide the statusbar"
 msgstr "Näytä tai piilota tilarivi"
 
-#: ../vinagre/vinagre-ui.h:82
+#: ../vinagre/vinagre-ui.h:70
 msgid "Side _Panel"
 msgstr "Sivu_palkki"
 
-#: ../vinagre/vinagre-ui.h:83
+#: ../vinagre/vinagre-ui.h:71
 msgid "Show or hide the side panel"
 msgstr "Näytä tai piilota sivupalkki"
 
-#: ../vinagre/vinagre-ui.h:91
+#: ../vinagre/vinagre-ui.h:79
 msgid "Close the current connection"
 msgstr "Sulje nykyinen yhteys"
 
-#: ../vinagre/vinagre-ui.h:92
+#: ../vinagre/vinagre-ui.h:80
 msgid "C_lose All"
 msgstr "Su_lje kaikki"
 
-#: ../vinagre/vinagre-ui.h:93
+#: ../vinagre/vinagre-ui.h:81
 msgid "Close all active connections"
 msgstr "Sulje kaikki aktiiviset yhteydet"
 
 #. Bookmarks menu
-#: ../vinagre/vinagre-ui.h:96
+#: ../vinagre/vinagre-ui.h:84
 msgid "_Add to bookmarks"
 msgstr "_Lisää kirjanmerkkeihin"
 
-#: ../vinagre/vinagre-ui.h:97
+#: ../vinagre/vinagre-ui.h:85
 msgid "Add current connection to your bookmarks"
 msgstr "Lisää nykyinen yhteys kirjanmerkkeihin"
 
 #. Machine menu
-#: ../vinagre/vinagre-ui.h:104
+#: ../vinagre/vinagre-ui.h:92
 msgid "Take screenshot"
 msgstr "Ota kuvakaappaus"
 
-#: ../vinagre/vinagre-ui.h:105
+#: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
 msgstr "Ota kuvakaappaus aktiivisesta yhteydestä"
 
-#: ../vinagre/vinagre-ui.h:109
+#: ../vinagre/vinagre-ui.h:97
 msgid "View the current machine in full screen"
 msgstr "Näytä nykyinen yhteys kokoruututilassa"
 
@@ -940,16 +1201,31 @@ msgstr "Näytä nykyinen yhteys kokoruututilassa"
 msgid "An error has occurred:"
 msgstr "Tapahtui virhe:"
 
-#: ../vinagre/vinagre-utils.c:150
-#, c-format
-msgid "Could not load builder file: %s"
-msgstr "Ei voitu ladata käyttöliittymän rakennustiedostoa: %s"
+#: ../vinagre/vinagre-utils.c:175
+msgid ""
+"A plugin tried to open an UI file but did not succeed, with the error "
+"message:"
+msgstr "Liitännäinen yritti avata käyttöliittymätiedostoa, mutta epäonnistui virheilmoituksella:"
 
-#: ../vinagre/vinagre-utils.c:453
+#: ../vinagre/vinagre-utils.c:177
+msgid ""
+"The program tried to open an UI file but did not succeed, with the error "
+"message:"
+msgstr "Ohjelma yritti avata käyttöliittymätiedostoa, mutta epäonnistui virheilmoituksella:"
+
+#: ../vinagre/vinagre-utils.c:180
+msgid "Please check your installation."
+msgstr "Ole hyvä ja tarkista asennuksesi."
+
+#: ../vinagre/vinagre-utils.c:181
+msgid "Error loading UI file"
+msgstr "Virhe ladattaessa käyttöliittymätiedostoa"
+
+#: ../vinagre/vinagre-utils.c:492
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Vinagre on etätyöpöytäkatselin Gnome-työpöydälle"
 
-#: ../vinagre/vinagre-utils.c:456
+#: ../vinagre/vinagre-utils.c:495
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -961,7 +1237,7 @@ msgstr ""
 "Software Foundation on ne julkaissut; joko lisenssin version 2, tai "
 "(valinnan mukaan) minkä tahansa myöhemmän version mukaisesti."
 
-#: ../vinagre/vinagre-utils.c:460
+#: ../vinagre/vinagre-utils.c:499
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -973,7 +1249,7 @@ msgstr ""
 "laadusta tai soveltuvuudesta tiettyyn tarkoitukseen. Katso GPL lisenssistä "
 "lisää yksityiskohtia."
 
-#: ../vinagre/vinagre-utils.c:464
+#: ../vinagre/vinagre-utils.c:503
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -981,7 +1257,7 @@ msgstr ""
 "Tämän ohjelman mukana pitäisi tulla kopio GPL-lisenssistä; jos näin ei ole, "
 "lue lisää sivulta <http://www.gnu.org/licenses/>."
 
-#: ../vinagre/vinagre-utils.c:486
+#: ../vinagre/vinagre-utils.c:525
 msgid "translator-credits"
 msgstr ""
 "Ilkka Tuohela, 2007.\n"
@@ -989,24 +1265,57 @@ msgstr ""
 "\n"
 "http://www.gnome.fi/"
 
-#: ../vinagre/vinagre-utils.c:489
+#: ../vinagre/vinagre-utils.c:528
 msgid "Vinagre Website"
 msgstr "Vinagren WWW-sivut"
 
-#: ../vinagre/vinagre-window.c:397
+#. Translators: %s is a protocol, like VNC or SSH
+#: ../vinagre/vinagre-utils.c:660
 #, c-format
-msgid "Could not merge vinagre-ui.xml: %s"
-msgstr "Tiedostoa vinagre-ui.xml ei voi liittää: %s"
+msgid "%s authentication is required"
+msgstr "%s-todentaminen vaaditaan"
 
-#: ../vinagre/vinagre-window.c:425
+#: ../vinagre/vinagre-window.c:428
 msgid "_Recent connections"
 msgstr "_Viimeisimmät yhteydet"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:585
+#: ../vinagre/vinagre-window.c:543
 #, c-format
 msgid "Open %s:%d"
 msgstr "Avaa %s:%d"
+
+#: ../vinagre/vinagre-window.c:721
+msgid "About menu accelerators and keyboard shortcuts"
+msgstr "Tietoja valikko-oikoteistä ja pikanäppäimistä"
+
+#: ../vinagre/vinagre-window.c:723
+msgid ""
+"Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
+"default. The reason is to avoid the keys to be intercepted by the program, "
+"and allow them to be sent to the remote machine.\n"
+"\n"
+"You can change this behavior through the preferences dialog. For more "
+"information, check the documentation.\n"
+"\n"
+"This message will appear only once."
+msgstr ""
+"Vinagressa on oletuksena valikko-oikotiet ja pikanäppäimet kytketty pois käytöstä. Näin vältytään kaappaamasta välistä näppäimenpainalluksia, ja sen sijaan voidaan lähettää ne suoraan etätietokoneelle.\n"
+"\n"
+"Voit muuttaa tätä käytöstä asetusikkunasta. Lisätietoja löydät käyttöohjeesta.\n"
+"\n"
+"Tämä viesti näytetään vain kerran."
+
+#: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
+#, c-format
+msgid "Error while creating the file %s: %s"
+msgstr "Virhe luotaessa tiedostoa %s: %s"
+
+#~ msgid "All fields above are mandatory"
+#~ msgstr "Kaikki ylläolevat kentät ovat pakollisia"
+
+#~ msgid "Could not merge vinagre-ui.xml: %s"
+#~ msgstr "Tiedostoa vinagre-ui.xml ei voi liittää: %s"
 
 #~ msgid "Failed to request name: %s"
 #~ msgstr "Nimipyyntö epäonnistui: %s"
