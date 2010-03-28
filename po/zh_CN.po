@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-02-05 09:37+0000\n"
-"PO-Revision-Date: 2010-02-06 12:05+0800\n"
+"POT-Creation-Date: 2010-03-27 15:15+0000\n"
+"PO-Revision-Date: 2010-03-28 10:21+0800\n"
 "Last-Translator: Eleanor Chen <chenyueg@gmail.com>\n"
 "Language-Team: Chinese/Simplified <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -170,7 +170,7 @@ msgstr ""
 msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
-msgstr ""
+msgstr "如果为 \"true\" (真)，则总是以监听反向连接的方式启动本程序。"
 
 #: ../data/vinagre.schemas.in.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
@@ -203,10 +203,8 @@ msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "是否应显示菜单加速器(快捷键)"
 
 #: ../data/vinagre.schemas.in.in.h:13
-#, fuzzy
-#| msgid "Whether we should leave other clients connected"
 msgid "Whether we should start the program listening for reverse connections"
-msgstr "是否应保持其它客户端的连接"
+msgstr "是否以监听反向连接的方式启动此程序"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -228,10 +226,8 @@ msgid "Access Unix/Linux terminals"
 msgstr "访问 Unix/Linux 终端"
 
 #: ../plugins/ssh/vinagre-ssh-plugin.c:132
-#, fuzzy
-#| msgid "Options"
 msgid "SSH Options"
-msgstr "选项"
+msgstr "SSH 选项"
 
 #. Translators: This is the tooltip for the username field in a SSH connection
 #: ../plugins/ssh/vinagre-ssh-plugin.c:149
@@ -239,6 +235,8 @@ msgid ""
 "Optional. If blank, your username will be used. Also, it can be supplied in "
 "the Machine field above, in the form username@hostname."
 msgstr ""
+"可选。如果为空，将使用您的用户名。也可以在上面提到的机器字段中使用 用户名@主"
+"机名 的格式提供。"
 
 #: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
 msgid "Port:"
@@ -248,8 +246,9 @@ msgstr "端口："
 msgid "SSH support"
 msgstr "SSH 支持"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:290
-#: ../plugins/vnc/vinagre-vnc-plugin.c:321
+#. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
+#: ../plugins/vnc/vinagre-vnc-connection.c:291
+#: ../plugins/vnc/vinagre-vnc-plugin.c:322
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -300,75 +299,75 @@ msgstr "此文件不是 VNC 文件缺少 \"connection\" 组。"
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "此文件不是 VNC 文件缺少 \"host\" 键。"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:374
+#: ../plugins/vnc/vinagre-vnc-plugin.c:375
 msgid "VNC Options"
 msgstr "VNC 选项"
 
 #. View only check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:387
+#: ../plugins/vnc/vinagre-vnc-plugin.c:388
 #: ../plugins/vnc/vinagre-vnc-tab.c:632
 msgid "_View only"
 msgstr "仅查看(_V)"
 
 #. Scaling check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:395
+#: ../plugins/vnc/vinagre-vnc-plugin.c:396
 msgid "_Scaling"
 msgstr "缩放(_S)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:411
+#: ../plugins/vnc/vinagre-vnc-plugin.c:412
 msgid "_Keep aspect ratio"
-msgstr ""
+msgstr "保持宽高比(_K)"
 
 #. JPEG Compression check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:421
+#: ../plugins/vnc/vinagre-vnc-plugin.c:422
 msgid "_Use JPEG Compression"
 msgstr "使用 JPEG 压缩(_U)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:422
+#: ../plugins/vnc/vinagre-vnc-plugin.c:423
 msgid "This might not work on all VNC servers"
 msgstr "这可能不能在所有 VNC 服务器上工作"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:431
+#: ../plugins/vnc/vinagre-vnc-plugin.c:432
 msgid "_Depth Color:"
 msgstr "颜色深度(_D)："
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:436
+#: ../plugins/vnc/vinagre-vnc-plugin.c:437
 msgid "Use Server Settings"
 msgstr "使用服务器设定"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:437
+#: ../plugins/vnc/vinagre-vnc-plugin.c:438
 msgid "True Color (24 bits)"
 msgstr "真彩色(24 位)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:438
+#: ../plugins/vnc/vinagre-vnc-plugin.c:439
 msgid "High Color (16 bits)"
 msgstr "高彩色(16 位)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:439
+#: ../plugins/vnc/vinagre-vnc-plugin.c:440
 msgid "Low Color (8 bits)"
 msgstr "低彩色(8 位)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:440
+#: ../plugins/vnc/vinagre-vnc-plugin.c:441
 msgid "Ultra Low Color (3 bits)"
 msgstr "超低彩色(3 位)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:453
+#: ../plugins/vnc/vinagre-vnc-plugin.c:454
 msgid "Use h_ost"
 msgstr "使用主机(_O)"
 
 #. Translators: This is the tooltip of the SSH tunneling entry
-#: ../plugins/vnc/vinagre-vnc-plugin.c:461
+#: ../plugins/vnc/vinagre-vnc-plugin.c:462
 msgid "hostname or user@hostname"
 msgstr "主机名或 user@hostname"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:465
+#: ../plugins/vnc/vinagre-vnc-plugin.c:466
 msgid "as a SSH tunnel"
 msgstr "作为 SSH 隧道"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:500
+#: ../plugins/vnc/vinagre-vnc-plugin.c:501
 msgid "VNC Files"
 msgstr "VNC 文件"
 
@@ -424,11 +423,11 @@ msgstr "使远程屏幕适应当前窗口大小"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:617
 msgid "_Keep Aspect Ratio"
-msgstr ""
+msgstr "保持宽高比(_K)"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:618
 msgid "Keeps the screen aspect ratio when using scaling"
-msgstr ""
+msgstr "使用缩放时，保持屏幕的宽高比"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Does not send mouse and keyboard events"
@@ -707,10 +706,9 @@ msgid "New Folder"
 msgstr "新文件夹"
 
 #: ../vinagre/vinagre-cache-prefs.c:53
-#, fuzzy, c-format
-#| msgid "Error while saving bookmarks: %s"
+#, c-format
 msgid "Error while saving preferences: %s"
-msgstr "保存书签时出错：%s"
+msgstr "保存首选项时出错：%s"
 
 #: ../vinagre/vinagre-commands.c:121
 msgid "Choose the file"
@@ -1247,8 +1245,8 @@ msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
-"您应该在收到 Nautilus 的同时收到了 GNU GPL 协议的副本；如果您没有收到的话，请"
-"查看 <http://www.gnu.org/licenses/>。"
+"您应该随本程序收到了 GNU GPL 协议的副本；如果您没有收到的话，请查看 <http://"
+"www.gnu.org/licenses/>。"
 
 #: ../vinagre/vinagre-utils.c:525
 msgid "translator-credits"
