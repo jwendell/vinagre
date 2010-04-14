@@ -40,6 +40,7 @@
 #include "vinagre-plugin-info.h"
 #include "vinagre-plugin-info-priv.h"
 #include "vinagre-debug.h"
+#include "vinagre-ssh.h"
 
 #ifdef HAVE_TELEPATHY
 #include "vinagre-tubes-manager.h"
@@ -222,6 +223,9 @@ int main (int argc, char **argv) {
 #ifdef HAVE_TELEPATHY
    vinagre_tubes_manager = vinagre_tubes_manager_new (window);
 #endif
+
+  /* fake call, just to ensure this symbol will be present at vinagre.so */
+  vinagre_ssh_connect (NULL, NULL, -1, NULL, NULL, NULL, NULL, NULL);
 
   gtk_main ();
 

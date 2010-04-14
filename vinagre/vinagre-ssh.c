@@ -664,7 +664,8 @@ vinagre_ssh_connect (GtkWindow *parent,
   GInputStream *is;
   GDataInputStream *error_stream;
 
-  g_return_val_if_fail (hostname != NULL, FALSE);
+  if (!hostname)
+    return FALSE;
 
   if (vendor == SSH_VENDOR_INVALID)
     vendor = get_ssh_client_vendor ();
