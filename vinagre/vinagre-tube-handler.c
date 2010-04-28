@@ -459,10 +459,12 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
 
   if (error != NULL)
     {
-      error_msg = g_strdup_printf
-          (_("Impossible to get the contact name: %s"), error->message);
-      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
-          GTK_WINDOW (priv->window));
+      /* Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message. */
+      error_msg = g_strdup_printf (_("Impossible to get the contact name: %s"),
+                                   error->message);
+      vinagre_utils_show_error (NULL,
+                                (const gchar *) error_msg,
+                                GTK_WINDOW (priv->window));
       g_free (error_msg);
       g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
       return;
