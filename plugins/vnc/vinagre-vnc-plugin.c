@@ -81,6 +81,7 @@ static GtkActionEntry action_entries[] =
 {
   { "VNCListener",
     NULL,
+    /* Translators: "Reverse" here is an adjective, not a verb. */
     N_("_Reverse Connections..."),
     NULL,
     N_("Configure incoming VNC connections"),
