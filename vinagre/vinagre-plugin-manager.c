@@ -43,6 +43,7 @@ enum
 };
 
 #define PLUGIN_MANAGER_NAME_TITLE _("Plugin")
+/* Translators: "Enabled" is the title of a column in the plugins treeview. This column shows a checkbox, where the plugin can be [de]activated. If it's activated, its status is "enabled" and the checkbox is checked. */
 #define PLUGIN_MANAGER_ACTIVE_TITLE _("Enabled")
 
 #define VINAGRE_PLUGIN_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_PLUGIN_MANAGER, VinagrePluginManagerPrivate))
