@@ -356,7 +356,7 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreVncTab *vnc_ta
   name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
   emphasis = g_strdup_printf ("<i>%s</i>", name);
 
-  /* Translators: %s is a host name or IP address; %u is a code error (number). */
+  /* Translators: %s is a host name or IP address; %u is a code error (number). Also, the right sentence would be ... method for host... */
   g_string_printf (message, _("Authentication method to host %s is unsupported. (%u)"),
 		   emphasis,
 		   auth_type);
