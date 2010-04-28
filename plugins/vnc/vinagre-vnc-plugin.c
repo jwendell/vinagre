@@ -274,12 +274,14 @@ impl_new_connection_from_file (VinagrePlugin *plugin,
 
   if (!g_key_file_has_group (file, "connection"))
     {
+      /* Translators: Do not translate "connection". It's the name of a group in the .vnc (.ini like) file. */
       *error_msg = g_strdup (_("The file is not a VNC one: Missing the group \"connection\"."));
       goto the_end;
     }
 
   if (!g_key_file_has_key (file, "connection", "host", NULL))
     {
+      /* Translators: Do not translate "host". It's the name of a key in the .vnc (.ini like) file. */
       *error_msg = g_strdup (_("The file is not a VNC one: Missing the key \"host\"."));
       goto the_end;
     }
