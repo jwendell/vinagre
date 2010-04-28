@@ -831,6 +831,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
 
   name = vinagre_connection_get_best_name (tab->priv->conn);
   suggested_filename = g_string_new (NULL);
+  /* Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123 */
   g_string_printf (suggested_filename, _("Screenshot of %s"), name);
   g_string_append (suggested_filename, ".png");
   g_free (name);
