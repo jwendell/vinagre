@@ -18,14 +18,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config.h>
+
 #include <net/if.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+
 #ifdef HAVE_IFADDRS_H
 #include <ifaddrs.h>
 #else
-#include "ifaddrs.h"
+#include "if/ifaddrs.h"
 #endif
+
 #include <string.h>
 #include <glib/gi18n.h>
 

@@ -226,6 +226,10 @@ dnl *** Checks for ifaddrs.h ***
 dnl ****************************
 AC_CHECK_HEADER(ifaddrs.h)
 AM_CONDITIONAL(SELF_IFADDRS, test "x$ac_cv_header_ifaddrs_h" != "xyes")
+if test "x$ac_cv_header_ifaddrs_h" = "xyes"; then
+  AC_DEFINE(HAVE_IFADDRS_H, [1], [Define if we have system ifaddrs.h])
+fi
+
 
 dnl active plugins for vinagre.schemas
 ACTIVE_PLUGINS="vnc"

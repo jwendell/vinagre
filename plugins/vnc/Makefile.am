@@ -18,7 +18,7 @@ libvnc_la_SOURCES = 						\
 	vinagre-vnc-tunnel.h vinagre-vnc-tunnel.c
 
 if SELF_IFADDRS
-libvnc_la_SOURCES += ifaddrs.h getifaddrs.c
+libvnc_la_SOURCES += if/ifaddrs.h if/getifaddrs.c
 endif
 
 libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
