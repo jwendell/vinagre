@@ -186,6 +186,7 @@ default_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
     xmlTextWriterWriteElement (writer, "protocol", conn->priv->protocol);
   xmlTextWriterWriteElement (writer, "name", conn->priv->name);
   xmlTextWriterWriteElement (writer, "host", conn->priv->host);
+  xmlTextWriterWriteElement (writer, "username", conn->priv->username ? conn->priv->username : "");
   xmlTextWriterWriteFormatElement (writer, "port", "%d", conn->priv->port);
   xmlTextWriterWriteFormatElement (writer, "fullscreen", "%d", conn->priv->fullscreen);
 }
@@ -204,6 +205,8 @@ default_parse_item (VinagreConnection *conn, xmlNode *root)
 	vinagre_connection_set_host (conn, s_value);
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"name"))
 	vinagre_connection_set_name (conn, s_value);
+      else if (!xmlStrcmp(curr->name, (const xmlChar *)"username"))
+	vinagre_connection_set_username (conn, s_value);
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"port"))
 	vinagre_connection_set_port (conn, atoi (s_value));
       else if (!xmlStrcmp(curr->name, (const xmlChar *)"fullscreen"))
@@ -401,7 +404,7 @@ vinagre_connection_get_port (VinagreConnection *conn)
 
 void
 vinagre_connection_set_username (VinagreConnection *conn,
-			     const gchar *username)
+				 const gchar *username)
 {
   g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
 
