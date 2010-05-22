@@ -631,6 +631,7 @@ vinagre_utils_ask_credential (GtkWindow *parent,
 			      gchar *host,
 			      gboolean need_username,
 			      gboolean need_password,
+			      gint password_limit,
 			      gchar **username,
 			      gchar **password,
 			      gboolean *save_in_keyring)
@@ -688,6 +689,7 @@ vinagre_utils_ask_credential (GtkWindow *parent,
 
   if (need_password)
     {
+      gtk_entry_set_max_length (GTK_ENTRY (control.pw), password_limit);
       if (password && *password)
         gtk_entry_set_text (GTK_ENTRY (control.pw), *password);
     }

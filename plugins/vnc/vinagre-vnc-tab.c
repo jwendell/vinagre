@@ -509,6 +509,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 					     host,
 					     need_username,
 					     need_password,
+					     8,
 					     &username,
 					     &password,
 					     &save_in_keyring))

@@ -428,6 +428,7 @@ handle_login (GtkWindow *parent,
 						  full_host,
 						  FALSE,
 						  TRUE,
+						  0,
 						  NULL,
 						  &password,
 						  &save_in_keyring);
