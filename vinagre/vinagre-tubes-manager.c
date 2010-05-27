@@ -27,6 +27,7 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-bindings.h>
 
+#include <telepathy-glib/simple-handler.h>
 #include <telepathy-glib/enums.h>
 #include <telepathy-glib/dbus.h>
 #include <telepathy-glib/interfaces.h>
@@ -42,7 +43,7 @@
 #define BUS_NAME TP_CLIENT_BUS_NAME_BASE CLIENT_NAME
 #define OBJECT_PATH TP_CLIENT_OBJECT_PATH_BASE CLIENT_NAME
 
-G_DEFINE_TYPE (VinagreTubesManager, vinagre_tubes_manager, TP_TYPE_HANDLER);
+G_DEFINE_TYPE (VinagreTubesManager, vinagre_tubes_manager, G_TYPE_OBJECT);
 
 #define VINAGRE_TUBES_MANAGER_GET_PRIVATE(obj)\
     (G_TYPE_INSTANCE_GET_PRIVATE ((obj), VINAGRE_TYPE_TUBES_MANAGER,\
@@ -52,6 +53,7 @@ typedef struct _VinagreTubesManagerPrivate VinagreTubesManagerPrivate;
 
 struct _VinagreTubesManagerPrivate
 {
+  TpBaseClient *handler;
   VinagreWindow *window;
   GSList *tubes_handler;
 };
@@ -133,21 +135,28 @@ vinagre_tubes_manager_disconnected_cb (VinagreTubeHandler *htube,
   g_object_unref (htube);
 }
 
-static gboolean
-vinagre_tubes_manager_handle_channels (VinagreHandler         *self,
-                                       TpAccount         *account,
-                                       TpConnection      *connection,
-                                       TpChannel        **channels,
-                                       TpChannelRequest **requests,
-                                       guint64            user_action_time,
-                                       GHashTable        *handler_info)
+static void
+vinagre_tubes_manager_handle_channels (TpSimpleHandler *handler,
+    TpAccount *account,
+    TpConnection *connection,
+    GList *channels,
+    GList *requests_satisfied,
+    gint64 user_action_time,
+    TpHandleChannelsContext *context,
+    gpointer user_data)
 {
+  VinagreTubesManager *self = user_data;
   VinagreTubesManagerPrivate *priv = VINAGRE_TUBES_MANAGER_GET_PRIVATE (self);
-  TpChannel *channel, **ptr;
+  GList *l;
 
-  for (ptr = channels; channel = *ptr; ptr++)
+  for (l = channels; l != NULL; l = g_list_next (l))
     {
+      TpChannel *channel = l->data;
       VinagreTubeHandler *htube;
+
+      if (tp_strdiff (tp_channel_get_channel_type (channel),
+            TP_IFACE_CHANNEL_TYPE_STREAM_TUBE))
+        continue;
 
       htube = vinagre_tube_handler_new (priv->window, channel);
       priv->tubes_handler = g_slist_prepend (priv->tubes_handler, htube);
@@ -156,42 +165,7 @@ vinagre_tubes_manager_handle_channels (VinagreHandler         *self,
           (vinagre_tubes_manager_disconnected_cb), self);
     }
 
-  return TRUE;
-}
-
-static void
-vinagre_tubes_manager_register_tube_handler (GObject *object)
-{
-  TpDBusDaemon *bus;
-  guint result;
-  GError *error = NULL;
-
-  bus = tp_dbus_daemon_dup (&error);
-  if (error != NULL)
-    {
-      vinagre_debug_message (DEBUG_TUBE, "Failed to connect to bus: %s",
-          error ? error->message : "No error given");
-      g_clear_error (&error);
-      goto OUT;
-    }
-
-  if (!tp_dbus_daemon_request_name (bus, BUS_NAME, FALSE, &error))
-    {
-      vinagre_debug_message (DEBUG_TUBE, "Failed to request name: %s",
-          error ? error->message : "No error given");
-      g_clear_error (&error);
-      goto OUT;
-    }
-
-  vinagre_debug_message (DEBUG_TUBE,
-      "Creating tube handler %s object_path:%s\n",
-      BUS_NAME, OBJECT_PATH);
-  dbus_g_connection_register_g_object (
-      tp_proxy_get_dbus_connection (TP_PROXY (bus)),
-      OBJECT_PATH, G_OBJECT (object));
-
-OUT:
-  g_object_unref (bus);
+  tp_handle_channels_context_accept (context);
 }
 
 static void
@@ -199,8 +173,13 @@ vinagre_tubes_manager_constructed (GObject *object)
 {
   VinagreTubesManagerPrivate *priv = VINAGRE_TUBES_MANAGER_GET_PRIVATE
       (object);
+  GError *error = NULL;
 
-  vinagre_tubes_manager_register_tube_handler (object);
+  if (!tp_base_client_register (priv->handler, &error))
+    {
+      vinagre_debug_message (DEBUG_TUBE, "Failed to register handler: %s",
+          error->message);
+    }
 }
 
 static void
@@ -227,36 +206,36 @@ vinagre_tubes_manager_class_init (VinagreTubesManagerClass *klass)
 }
 
 static void
-vinagre_tubes_manager_init (VinagreTubesManager *object)
+vinagre_tubes_manager_init (VinagreTubesManager *self)
 {
+  VinagreTubesManagerPrivate *priv = VINAGRE_TUBES_MANAGER_GET_PRIVATE (self);
+  TpDBusDaemon *dbus;
+
+  dbus = tp_dbus_daemon_dup (NULL);
+
+  priv->handler = tp_simple_handler_new (dbus, FALSE, FALSE, "Vinagre", FALSE,
+      vinagre_tubes_manager_handle_channels, self, NULL);
+
+  g_object_unref (dbus);
+
+  tp_base_client_take_handler_filter (priv->handler, tp_asv_new (
+        TP_PROP_CHANNEL_CHANNEL_TYPE, G_TYPE_STRING,
+          TP_IFACE_CHANNEL_TYPE_STREAM_TUBE,
+        TP_PROP_CHANNEL_TARGET_HANDLE_TYPE, G_TYPE_UINT,
+          TP_HANDLE_TYPE_CONTACT,
+        TP_PROP_CHANNEL_REQUESTED, G_TYPE_BOOLEAN,
+          FALSE,
+        TP_PROP_CHANNEL_TYPE_STREAM_TUBE_SERVICE, G_TYPE_STRING,
+          SERVICE,
+        NULL));
 }
 
 VinagreTubesManager *
 vinagre_tubes_manager_new (VinagreWindow *vinagre_window)
 {
   VinagreTubesManager *self;
-  GPtrArray *filter = g_ptr_array_new ();
-  GHashTable *map = tp_asv_new (
-      TP_IFACE_CHANNEL ".ChannelType", G_TYPE_STRING,
-              TP_IFACE_CHANNEL_TYPE_STREAM_TUBE,
-      TP_IFACE_CHANNEL ".TargetHandleType", G_TYPE_UINT,
-              TP_HANDLE_TYPE_CONTACT,
-      TP_IFACE_CHANNEL ".Requested", G_TYPE_BOOLEAN,
-              FALSE,
-      TP_IFACE_CHANNEL_TYPE_STREAM_TUBE ".Service", G_TYPE_STRING,
-              SERVICE,
-      NULL);
-  g_ptr_array_add (filter, map);
 
-  self = g_object_new (VINAGRE_TYPE_TUBES_MANAGER,
-      "channel-filter", filter,
-      "bypass-approval", FALSE,
-      "handle-channels-cb", vinagre_tubes_manager_handle_channels,
+  return g_object_new (VINAGRE_TYPE_TUBES_MANAGER,
       "vinagre-window", vinagre_window,
       NULL);
-
-  g_hash_table_destroy (map);
-  g_ptr_array_free (filter, TRUE);
-
-  return self;
 }

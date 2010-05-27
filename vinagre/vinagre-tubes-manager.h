@@ -27,8 +27,6 @@
 
 #include <glib-object.h>
 
-#include "handler.h"
-
 #include "vinagre-window.h"
 
 G_BEGIN_DECLS
@@ -51,12 +49,12 @@ typedef struct _VinagreTubesManagerClass VinagreTubesManagerClass;
 
 struct _VinagreTubesManager
 {
-  VinagreHandler parent_instance;
+  GObject parent_instance;
 };
 
 struct _VinagreTubesManagerClass
 {
-  VinagreHandlerClass parent_class;
+  GObjectClass parent_class;
 };
 
 GType vinagre_tubes_manager_get_type (void) G_GNUC_CONST;
