@@ -282,7 +282,6 @@ vinagre_LDADD += $(TELEPATHY_LIBS)
 handwritten_sources += \
 	vinagre-tubes-manager.c vinagre-tubes-manager.h		\
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
-	handler.c handler.h \
 	$(NULL)
 
 endif
