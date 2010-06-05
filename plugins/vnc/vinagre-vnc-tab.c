@@ -681,7 +681,7 @@ create_initialized_actions (VinagreVncTab *tab)
   a->paths[1] = g_strdup ("/ToolBar");
   a->paths[2] = NULL;
   a->action = gtk_action_new ("VNCMachineSendCtrlAltDel",
-			      _("Send Ctrl-Alt-Del"),
+			      _("_Send Ctrl-Alt-Del"),
 			      _("Sends Ctrl+Alt+Del to the remote machine"),
 			      "preferences-desktop-keyboard-shortcuts");
   gtk_action_set_is_important (a->action, TRUE);

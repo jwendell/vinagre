@@ -89,7 +89,7 @@ static const GtkActionEntry vinagre_machine_connected_entries[] =
 static const GtkActionEntry vinagre_machine_initialized_entries[] =
 {
   /* Machine menu */
-  { "MachineTakeScreenshot", "applets-screenshooter", N_("Take screenshot"), NULL,
+  { "MachineTakeScreenshot", "applets-screenshooter", N_("_Take screenshot"), NULL,
     N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_machine_take_screenshot) },
 
   /* View menu */
