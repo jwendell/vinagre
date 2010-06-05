@@ -27,7 +27,6 @@ NOINST_H_FILES = \
   vinagre-plugin-dialog.h \
   vinagre-plugins-engine.h \
   vinagre-window-private.h \
-  vinagre-spinner.h \
   pty_open.h \
   $(NULL)
 
@@ -94,7 +93,6 @@ handwritten_sources = \
   vinagre-tab.c \
   vinagre-utils.c \
   vinagre-window.c \
-  vinagre-spinner.c \
   pty_open.c \
   vinagre-ssh.c \
   vinagre-cache-prefs.c \
@@ -193,7 +191,6 @@ vinagre_applet_SOURCES =					\
 	vinagre-dirs.h vinagre-dirs.c \
 	vinagre-fav.h vinagre-fav.c \
 	vinagre-connect.h vinagre-connect.c \
-	vinagre-spinner.h vinagre-spinner.c \
 	vinagre-marshal.h vinagre-marshal.c \
 	pty_open.h pty_open.c \
 	vinagre-ssh.h vinagre-ssh.c \

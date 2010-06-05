@@ -24,11 +24,9 @@
 
 #include <glib/gi18n.h>
 
-#include "vinagre-notebook.h"
 #include "vinagre-utils.h"
 #include "vinagre-dnd.h"
 #include "vinagre-prefs.h"
-#include "vinagre-spinner.h"
 
 #define VINAGRE_NOTEBOOK_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_NOTEBOOK, VinagreNotebookPrivate))
 
@@ -224,14 +222,14 @@ vinagre_notebook_update_ui_sentitivity (VinagreNotebook *nb)
       if (vinagre_tab_get_state (VINAGRE_TAB (nb->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED)
 	{
 	  gtk_widget_hide (spinner);
-	  vinagre_spinner_stop (VINAGRE_SPINNER (spinner));
+	  gtk_spinner_stop (GTK_SPINNER (spinner));
 	  gtk_widget_show (icon);
 	}
       else
 	{
 	  gtk_widget_hide (icon);
 	  gtk_widget_show (spinner);
-	  vinagre_spinner_start (VINAGRE_SPINNER (spinner));
+	  gtk_spinner_start (GTK_SPINNER (spinner));
 	}
     }
 }
@@ -558,8 +556,7 @@ build_tab_label (VinagreNotebook *nb,
 		    tab);
 
   /* setup spinner */
-  spinner = vinagre_spinner_new ();
-  vinagre_spinner_set_size (VINAGRE_SPINNER (spinner), GTK_ICON_SIZE_MENU);
+  spinner = gtk_spinner_new();
   gtk_box_pack_start (GTK_BOX (label_hbox), spinner, FALSE, FALSE, 0);
 
   /* setup site icon */
