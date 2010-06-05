@@ -477,7 +477,7 @@ tab_auth_failed_cb (VinagreTab *tab, const gchar *msg, VinagreNotebook *nb)
 
   emphasis = g_strdup_printf ("<i>%s</i>", name);
   /* Translators: %s is a host name or IP address. */
-  g_string_printf (message, _("Authentication to host %s has failed"),
+  g_string_printf (message, _("Authentication for host %s has failed"),
 		   emphasis);
   if (msg)
   	g_string_append_printf (message, " (%s)", msg);
