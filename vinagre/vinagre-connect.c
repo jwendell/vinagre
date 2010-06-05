@@ -84,8 +84,7 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
 
   if (!gtk_combo_box_get_active_iter (combo, &tree_iter))
     {
-      /* Translators: Please consider the word "from" instead of "in". I'll fix this phrase for 2.31 (or 3.0) */
-      g_warning (_("Could not get the active protocol in the protocol list."));
+      g_warning (_("Could not get the active protocol from the protocol list."));
       return;
     }
 
@@ -332,7 +331,7 @@ vinagre_connect_find_button_cb (GtkButton            *button,
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->protocol_combo),
 				      &tree_iter))
     {
-      g_warning (_("Could not get the active protocol in the protocol list."));
+      g_warning (_("Could not get the active protocol from the protocol list."));
       return;
     }
 
@@ -444,7 +443,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
       if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog.protocol_combo), &iter))
 	{
-	  g_warning (_("Could not get the active protocol in the protocol list."));
+	  g_warning (_("Could not get the active protocol from the protocol list."));
 	  goto fail;
 	}
 
