@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-29 14:12+0300\n"
-"PO-Revision-Date: 2010-05-29 18:39+0200\n"
+"POT-Creation-Date: 2010-06-06 17:44+0300\n"
+"PO-Revision-Date: 2010-06-06 17:45+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: he\n"
 "MIME-Version: 1.0\n"
@@ -402,11 +402,11 @@ msgstr "סיבה לא ידועה"
 msgid "Error connecting to host."
 msgstr "שגיאה בחיבור למארח"
 
-#. Translators: %s is a host name or IP address; %u is a code error (number). Also, the right sentence would be ... method for host...
+#. Translators: %s is a host name or IP address; %u is a code error (number).
 #: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
-msgid "Authentication method to host %s is unsupported. (%u)"
-msgstr "שיטת האימות אל המארח %s אינה נתמכת. (%u)."
+msgid "Authentication method for host %s is unsupported. (%u)"
+msgstr "שיטת האימות עבור המארח %s אינה נתמכת. (%u)."
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
@@ -460,11 +460,9 @@ msgstr "_רענן את תמונת המסך"
 msgid "Requests an update of the screen"
 msgstr "בקשת עדכון של תמונת המסך"
 
-#. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:684 ../plugins/vnc/vinagre-vnc-tab.c:756
-#: ../plugins/vnc/vinagre-vnc-tab.c:758
-msgid "Send Ctrl-Alt-Del"
-msgstr "שלח Ctrl-Alt-Del"
+#: ../plugins/vnc/vinagre-vnc-tab.c:684
+msgid "_Send Ctrl-Alt-Del"
+msgstr "_שליחת Ctrl-Alt-Del"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:685
 msgid "Sends Ctrl+Alt+Del to the remote machine"
@@ -477,6 +475,11 @@ msgstr "התאמה"
 #: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
 msgid "Read only"
 msgstr "קריאה בלבד"
+
+#. Send Ctrl-alt-del
+#: ../plugins/vnc/vinagre-vnc-tab.c:756 ../plugins/vnc/vinagre-vnc-tab.c:758
+msgid "Send Ctrl-Alt-Del"
+msgstr "שלח Ctrl-Alt-Del"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:920
 msgid ""
@@ -587,7 +590,7 @@ msgstr "שגיאה באתחול הסימניות: %s"
 #: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:483 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-connect.c:482 ../vinagre/vinagre-fav.c:765
 #: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
 #: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
 msgid "Unknown error"
@@ -745,18 +748,17 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "לא ניתן לפתוח את הקובץ הבא:"
 msgstr[1] "לא ניתן לפתוח את הקבצים הבאים:"
 
-#. Translators: Please consider the word "from" instead of "in". I'll fix this phrase for 2.31 (or 3.0)
-#: ../vinagre/vinagre-connect.c:88 ../vinagre/vinagre-connect.c:335
-#: ../vinagre/vinagre-connect.c:447
-msgid "Could not get the active protocol in the protocol list."
-msgstr "לא ניתן לאחזר את הפרוטוקול הזמין ברשימת הפרוטוקולים"
+#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:334
+#: ../vinagre/vinagre-connect.c:446
+msgid "Could not get the active protocol from the protocol list."
+msgstr "לא ניתן לקבל את הפרוטוקול הזמין מרשימת הפרוטוקולים."
 
-#: ../vinagre/vinagre-connect.c:316
+#: ../vinagre/vinagre-connect.c:315
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "שגיאה במהלך שמירת קובץ היסטוריה: %s"
 
-#: ../vinagre/vinagre-connect.c:351
+#: ../vinagre/vinagre-connect.c:350
 msgid "Choose a Remote Desktop"
 msgstr "בחר שולחן עבודה מרוחק"
 
@@ -889,30 +891,30 @@ msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "ארע כשל בהפעלת סייר ה־mDNS:‏ %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:461
+#: ../vinagre/vinagre-notebook.c:459
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "החיבור למארח %s נסגר."
 
-#: ../vinagre/vinagre-notebook.c:463
+#: ../vinagre/vinagre-notebook.c:461
 msgid "Connection closed"
 msgstr "החיבור נסגר"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:482
+#: ../vinagre/vinagre-notebook.c:480
 #, c-format
-msgid "Authentication to host %s has failed"
-msgstr "אימות עם המארח %s נכשל"
+msgid "Authentication for host %s has failed"
+msgstr "האימות מול המארח %s נכשל"
 
-#: ../vinagre/vinagre-notebook.c:488
+#: ../vinagre/vinagre-notebook.c:486
 msgid "Authentication failed"
 msgstr "האימות נכשל"
 
-#: ../vinagre/vinagre-notebook.c:526
+#: ../vinagre/vinagre-notebook.c:524
 msgid "Connecting..."
 msgstr "מתחבר..."
 
-#: ../vinagre/vinagre-notebook.c:553 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:551 ../vinagre/vinagre-tab.c:325
 msgid "Close connection"
 msgstr "סגור חיבור"
 
@@ -1205,8 +1207,8 @@ msgstr "הוסף את החיבור הנוכחי לסימניות שלך"
 
 #. Machine menu
 #: ../vinagre/vinagre-ui.h:92
-msgid "Take screenshot"
-msgstr "צלם תמונת מסך"
+msgid "_Take screenshot"
+msgstr "_צילום תמונת מסך"
 
 #: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
