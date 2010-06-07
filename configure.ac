@@ -226,8 +226,23 @@ dnl *** Checks for ifaddrs.h ***
 dnl ****************************
 AC_CHECK_HEADER(ifaddrs.h)
 AM_CONDITIONAL(SELF_IFADDRS, test "x$ac_cv_header_ifaddrs_h" != "xyes")
+
+dnl RFC2553 introduce sockaddr_storage as ifa_addr member in ifaddrs structure
+dnl Not all distros follow this.
 if test "x$ac_cv_header_ifaddrs_h" = "xyes"; then
-  AC_DEFINE(HAVE_IFADDRS_H, [1], [Define if we have system ifaddrs.h])
+        AC_DEFINE(HAVE_IFADDRS_H, [1], [Define if we have system ifaddrs.h])
+        AC_TRY_COMPILE([
+          #include <ifaddrs.h>
+          #include <net/if.h>
+          ],[
+          struct ifaddrs *myaddrs;
+          getifaddrs (&myaddrs);
+          if (myaddrs->ifa_addr->ss_family == AF_INET) {
+          }
+        ], have_sockaddr_storage=yes, have_sockaddr_storage=no)
+        if test "x$have_sockaddr_storage" = "xyes"; then
+           AC_DEFINE(RFC2553, [], [Define to if follow RFC2553 ])
+        fi
 fi
 
 

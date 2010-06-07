@@ -30,6 +30,12 @@
 #include "if/ifaddrs.h"
 #endif
 
+#ifdef RFC2553
+#define ADDR_FAMILY_MEMBER ss_family
+#else
+#define ADDR_FAMILY_MEMBER sa_family
+#endif
+
 #include <string.h>
 #include <glib/gi18n.h>
 
@@ -69,7 +75,7 @@ setup_ip_buffer (VncListenDialog *dialog)
       if (ifa->ifa_addr == NULL || ifa->ifa_name == NULL || (ifa->ifa_flags & IFF_UP) == 0 || strncmp (ifa->ifa_name, "lo", 2) == 0)
 	continue;
 
-      switch (ifa->ifa_addr->sa_family)
+      switch (ifa->ifa_addr->ADDR_FAMILY_MEMBER)
 	{
 	  case AF_INET:
 	    sin = &((struct sockaddr_in *)ifa->ifa_addr)->sin_addr;
