@@ -23,216 +23,158 @@
 gchar *
 vinagre_dirs_get_user_config_dir ()
 {
-	gchar *config_dir = NULL;
-
-#ifndef G_OS_WIN32
-	const gchar *home;
-	
-	home = g_get_home_dir ();
-
-	if (home != NULL)
-	{
-		config_dir = g_build_filename (home,
-					       ".gnome2",
-					       "vinagre",
-					       NULL);
-	}
-#else
-	config_dir = g_build_filename (g_get_user_config_dir (),
-				       "vinagre",
-				       NULL);
-#endif
-
-	return config_dir;
+  return g_build_filename (g_get_user_config_dir (),
+			   "vinagre",
+			   NULL);
 }
 
 gchar *
 vinagre_dirs_get_user_cache_dir ()
 {
-	const gchar *cache_dir;
-
-	cache_dir = g_get_user_cache_dir ();
-
-	return g_build_filename (cache_dir,
-				 "vinagre",
-				 NULL);
+  return g_build_filename (g_get_user_cache_dir (),
+			   "vinagre",
+			   NULL);
 }
 
 gchar *
 vinagre_dirs_get_user_plugins_dir (void)
 {
-	gchar *config_dir;
-	gchar *plugin_dir;
+  gchar *config_dir, *plugin_dir;
 
-	config_dir = vinagre_dirs_get_user_config_dir ();
-
-	plugin_dir = g_build_filename (config_dir,
-				       "plugins",
-				       NULL);
-	g_free (config_dir);
-	
-	return plugin_dir;
+  config_dir = vinagre_dirs_get_user_config_dir ();
+  plugin_dir = g_build_filename (config_dir,
+				 "plugins",
+				 NULL);
+  g_free (config_dir);
+  return plugin_dir;
 }
 
 gchar *
 vinagre_dirs_get_user_accels_file ()
 {
-	gchar *accels = NULL;
+  gchar *accels, *config_dir;
 
-#ifndef G_OS_WIN32
-	const gchar *home;
-	
-	home = g_get_home_dir ();
+  config_dir = vinagre_dirs_get_user_config_dir ();
+  accels = g_build_filename (config_dir,
+			     "accels",
+			     NULL);
 
-	if (home != NULL)
-	{
-		/* on linux accels are stored in .gnome2/accels
-		 * for historic reasons (backward compat with the
-		 * old libgnome that took care of saving them */
-		accels = g_build_filename (home,
-					   ".gnome2",
-					   "accels",
-					   "vinagre",
-					   NULL);
-	}
-#else
-	{
-		gchar *config_dir = NULL;
-
-		config_dir = vinagre_dirs_get_user_config_dir ();
-		accels = g_build_filename (config_dir,
-					   "accels",
-					   "vinagre",
-					   NULL);
-
-		g_free (config_dir);
-	}
-#endif
-
-	return accels;
+  g_free (config_dir);
+  return accels;
 }
 
 gchar *
 vinagre_dirs_get_vinagre_data_dir (void)
 {
-	gchar *data_dir;
+  gchar *data_dir;
 
 #ifndef G_OS_WIN32
-	data_dir = g_build_filename (DATADIR,
-				     "vinagre-1",
-				     NULL);
+  data_dir = g_build_filename (DATADIR,
+			       "vinagre-1",
+			       NULL);
 #else
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	data_dir = g_build_filename (win32_dir,
-				     "share",
-				     "vinagre-1",
-				     NULL);
-	
-	g_free (win32_dir);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  data_dir = g_build_filename (win32_dir,
+			       "share",
+			       "vinagre-1",
+			       NULL);
+  g_free (win32_dir);
 #endif
 
-	return data_dir;
+  return data_dir;
 }
 
 gchar *
 vinagre_dirs_get_vinagre_locale_dir (void)
 {
-	gchar *locale_dir;
+  gchar *locale_dir;
 
 #ifndef G_OS_WIN32
-	locale_dir = g_build_filename (DATADIR,
-				       "locale",
-				       NULL);
+  locale_dir = g_build_filename (DATADIR,
+				 "locale",
+				 NULL);
 #else
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	locale_dir = g_build_filename (win32_dir,
-				       "share",
-				       "locale",
-				       NULL);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  locale_dir = g_build_filename (win32_dir,
+				 "share",
+				 "locale",
+				 NULL);
 	
-	g_free (win32_dir);
+  g_free (win32_dir);
 #endif
 
-	return locale_dir;
+  return locale_dir;
 }
 
 gchar *
 vinagre_dirs_get_vinagre_lib_dir (void)
 {
-	gchar *lib_dir;
+  gchar *lib_dir;
 
 #ifndef G_OS_WIN32
-	lib_dir = g_build_filename (LIBDIR,
-				    "vinagre-1",
-				    NULL);
+  lib_dir = g_build_filename (LIBDIR,
+			      "vinagre-1",
+			      NULL);
 #else
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	lib_dir = g_build_filename (win32_dir,
-				    "lib",
-				    "vinagre-1",
-				    NULL);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  lib_dir = g_build_filename (win32_dir,
+			      "lib",
+			      "vinagre-1",
+			      NULL);
 	
-	g_free (win32_dir);
+  g_free (win32_dir);
 #endif
 
-	return lib_dir;
+  return lib_dir;
 }
 
 gchar *
 vinagre_dirs_get_vinagre_plugins_dir (void)
 {
-	gchar *lib_dir;
-	gchar *plugin_dir;
+  gchar *lib_dir, *plugin_dir;
 	
-	lib_dir = vinagre_dirs_get_vinagre_lib_dir ();
-	
-	plugin_dir = g_build_filename (lib_dir,
-				       "plugins",
-				       NULL);
-	g_free (lib_dir);
-	
-	return plugin_dir;
+  lib_dir = vinagre_dirs_get_vinagre_lib_dir ();
+  plugin_dir = g_build_filename (lib_dir,
+				 "plugins",
+				 NULL);
+  g_free (lib_dir);
+  return plugin_dir;
 }
 
 gchar *
 vinagre_dirs_get_vinagre_plugin_loaders_dir (void)
 {
-	gchar *lib_dir;
-	gchar *loader_dir;
+  gchar *lib_dir, *loader_dir;
 	
-	lib_dir = vinagre_dirs_get_vinagre_lib_dir ();
-	
-	loader_dir = g_build_filename (lib_dir,
-				       "plugin-loaders",
-				       NULL);
-	g_free (lib_dir);
-	
-	return loader_dir;
+  lib_dir = vinagre_dirs_get_vinagre_lib_dir ();
+  loader_dir = g_build_filename (lib_dir,
+				 "plugin-loaders",
+				 NULL);
+  g_free (lib_dir);
+  return loader_dir;
 }
 
 gchar *
 vinagre_dirs_get_ui_file (const gchar *file)
 {
-	gchar *datadir;
-	gchar *ui_file;
+  gchar *datadir, *ui_file;
 
-	g_return_val_if_fail (file != NULL, NULL);
+  g_return_val_if_fail (file != NULL, NULL);
 	
-	datadir = vinagre_dirs_get_vinagre_data_dir ();
-	ui_file = g_build_filename (datadir,
-				    "ui",
-				    file,
-				    NULL);
-	g_free (datadir);
-	
-	return ui_file;
+  datadir = vinagre_dirs_get_vinagre_data_dir ();
+  ui_file = g_build_filename (datadir,
+			      "ui",
+			      file,
+			      NULL);
+  g_free (datadir);
+  return ui_file;
 }

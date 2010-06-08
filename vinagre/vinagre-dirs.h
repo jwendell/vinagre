@@ -26,23 +26,15 @@
 G_BEGIN_DECLS
 
 gchar		*vinagre_dirs_get_user_config_dir		(void);
-
 gchar		*vinagre_dirs_get_user_cache_dir		(void);
-
-gchar		*vinagre_dirs_get_user_plugins_dir	(void);
-
-gchar		*vinagre_dirs_get_user_accels_file	(void);
+gchar		*vinagre_dirs_get_user_plugins_dir		(void);
+gchar		*vinagre_dirs_get_user_accels_file		(void);
 
 gchar		*vinagre_dirs_get_vinagre_data_dir		(void);
-
-gchar		*vinagre_dirs_get_vinagre_locale_dir	(void);
-
+gchar		*vinagre_dirs_get_vinagre_locale_dir		(void);
 gchar		*vinagre_dirs_get_vinagre_lib_dir		(void);
-
-gchar		*vinagre_dirs_get_vinagre_plugins_dir	(void);
-
-gchar		*vinagre_dirs_get_vinagre_plugin_loaders_dir (void);
-
+gchar		*vinagre_dirs_get_vinagre_plugins_dir		(void);
+gchar		*vinagre_dirs_get_vinagre_plugin_loaders_dir	(void);
 gchar		*vinagre_dirs_get_ui_file			(const gchar *file);
 
 G_END_DECLS
