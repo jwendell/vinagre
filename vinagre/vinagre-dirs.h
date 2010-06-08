@@ -26,6 +26,7 @@
 G_BEGIN_DECLS
 
 gchar		*vinagre_dirs_get_user_config_dir		(void);
+gchar		*vinagre_dirs_get_user_data_dir			(void);
 gchar		*vinagre_dirs_get_user_cache_dir		(void);
 gchar		*vinagre_dirs_get_user_plugins_dir		(void);
 gchar		*vinagre_dirs_get_user_accels_file		(void);

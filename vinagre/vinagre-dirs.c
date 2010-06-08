@@ -50,6 +50,14 @@ vinagre_dirs_get_user_plugins_dir (void)
 }
 
 gchar *
+vinagre_dirs_get_user_data_dir ()
+{
+  return g_build_filename (g_get_user_data_dir (),
+			   "vinagre",
+			   NULL);
+}
+
+gchar *
 vinagre_dirs_get_user_accels_file ()
 {
   gchar *accels, *config_dir;
