@@ -38,6 +38,7 @@
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin.h"
+#include "vinagre-dirs.h"
 
 typedef struct {
   GtkBuilder *xml;
@@ -68,10 +69,14 @@ enum {
 
 static gchar*
 history_filename () {
-  return g_build_filename (g_get_user_data_dir (),
-			   "vinagre",
-			   "history",
-			   NULL);
+  gchar *dir, *filename;
+
+  dir = vinagre_dirs_get_user_data_dir ();
+  filename =  g_build_filename (dir,
+				"history",
+				NULL);
+  g_free (dir);
+  return filename;
 }
 
 static void

@@ -42,6 +42,7 @@
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-dirs.h"
 
 #ifdef VINAGRE_ENABLE_AVAHI
 #include "vinagre-mdns.h"
@@ -704,12 +705,13 @@ create_notebook (VinagreWindow *window)
 static gboolean
 vinagre_window_check_first_run (VinagreWindow *window)
 {
-  gchar *filename;
+  gchar *dir, *filename;
 
-  filename = g_build_filename (g_get_user_data_dir (),
-			       "vinagre",
+  dir = vinagre_dirs_get_user_data_dir ();
+  filename = g_build_filename (dir,
 			       "first_run",
 			       NULL);
+  g_free (dir);
 
   if (!g_file_test (filename, G_FILE_TEST_EXISTS))
     {

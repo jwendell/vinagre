@@ -35,6 +35,7 @@
 #include "vinagre-bookmarks.h"
 #include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-dirs.h"
 
 static void
 fill_xml (GSList *list, xmlTextWriter *writer)
@@ -206,7 +207,7 @@ create_list (GKeyFile *kf)
 void
 vinagre_bookmarks_migration_migrate (const gchar *filename)
 {
-  gchar    *old;
+  gchar    *old, *dir;
   GKeyFile *kf;
   GError   *error;
   GSList   *entries;
@@ -220,10 +221,11 @@ vinagre_bookmarks_migration_migrate (const gchar *filename)
       return;
     }
 
-  old = g_build_filename (g_get_user_data_dir (),
-			  "vinagre",
+  dir = vinagre_dirs_get_user_data_dir ();
+  old = g_build_filename (dir,
 			  VINAGRE_BOOKMARKS_FILE_OLD,
 			  NULL);
+  g_free (dir);
   if (!g_file_test (old, G_FILE_TEST_EXISTS))
     {
       g_free (old);

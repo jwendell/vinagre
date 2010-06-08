@@ -20,6 +20,7 @@
 
 #include <glib/gi18n.h>
 #include "vinagre-cache-prefs.h"
+#include "vinagre-dirs.h"
 
 static GKeyFile *keyfile = NULL;
 static char* filename = NULL;
@@ -27,11 +28,13 @@ static char* filename = NULL;
 void
 vinagre_cache_prefs_init (void)
 {
+  gchar *dir = vinagre_dirs_get_user_cache_dir ();
+
   keyfile = g_key_file_new ();
-  filename = g_build_filename (g_get_user_cache_dir (),
-                               "vinagre",
+  filename = g_build_filename (dir,
                                "vinagre-prefs-cache.ini",
                                NULL);
+  g_free (dir);
 
   g_key_file_load_from_file (keyfile, filename, 0, NULL);
 }
@@ -41,7 +44,7 @@ save_file (void)
 {
   GError *error = NULL;
   gchar *data = g_key_file_to_data (keyfile, NULL, NULL);
-  gchar *dir = g_build_filename (g_get_user_cache_dir (), "vinagre", NULL);
+  gchar *dir = vinagre_dirs_get_user_cache_dir ();
 
   g_mkdir_with_parents (dir, 0700);
 

@@ -27,6 +27,7 @@
 
 #include "vinagre-app.h"
 #include "vinagre-utils.h"
+#include "vinagre-dirs.h"
 
 #define VINAGRE_APP_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_APP, VinagreAppPrivate))
 
@@ -59,27 +60,12 @@ vinagre_app_class_init (VinagreAppClass *klass)
   g_type_class_add_private (object_class, sizeof(VinagreAppPrivate));
 }
 
-static gchar *
-get_accel_file (void)
-{
-  const gchar *home;
-
-  home = g_get_user_config_dir ();
-
-  if (home)
-    return g_build_filename (home,
-			     "vinagre",
-			     "accels",
-			     NULL);
-  return NULL;
-}
-
 static void
 load_accels (void)
 {
   gchar *filename;
 
-  filename = get_accel_file ();
+  filename = vinagre_dirs_get_user_accels_file ();
   if (!filename)
     return;
 
@@ -92,7 +78,7 @@ save_accels (void)
 {
   gchar *filename;
 
-  filename = get_accel_file ();
+  filename = vinagre_dirs_get_user_accels_file ();
   if (!filename)
     return;
 

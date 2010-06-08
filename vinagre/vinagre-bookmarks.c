@@ -30,6 +30,7 @@
 #include "vinagre-connection.h"
 #include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-dirs.h"
 
 struct _VinagreBookmarksPrivate
 {
@@ -61,13 +62,16 @@ static void
 vinagre_bookmarks_init (VinagreBookmarks *book)
 {
   GFile *gfile;
+  gchar *dir;
 
   book->priv = G_TYPE_INSTANCE_GET_PRIVATE (book, VINAGRE_TYPE_BOOKMARKS, VinagreBookmarksPrivate);
   book->priv->entries = NULL;
-  book->priv->filename = g_build_filename (g_get_user_data_dir (),
-			                   "vinagre",
+
+  dir = vinagre_dirs_get_user_data_dir ();
+  book->priv->filename = g_build_filename (dir,
 			                   VINAGRE_BOOKMARKS_FILE,
 			                   NULL);
+  g_free (dir);
 
   if (!g_file_test (book->priv->filename, G_FILE_TEST_EXISTS))
     vinagre_bookmarks_migration_migrate (book->priv->filename);
