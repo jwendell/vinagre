@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vinagre MASTER\n"
+"Project-Id-Version: vinagre 2.30\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-02-02 14:40+0000\n"
+"POT-Creation-Date: 2010-06-05 14:56+0000\n"
 "PO-Revision-Date: 2010-02-03 11:55+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -92,6 +92,7 @@ msgstr "_Täisekraan"
 msgid "_Host:"
 msgstr "_Host:"
 
+#. Translators: This is the name of a bookmark. It appears in the add/edit bookmark dialog.
 msgid "_Name:"
 msgstr "_Nimi:"
 
@@ -204,6 +205,7 @@ msgstr "Port:"
 msgid "SSH support"
 msgstr "SSH tugi"
 
+#. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -211,6 +213,7 @@ msgstr ""
 " 'shared' lipul on sobimatu väärtus: %d. See peaks olema 0 või 1. Lippu "
 "eiratakse."
 
+#. Translators: "Reverse" here is an adjective, not a verb.
 msgid "_Reverse Connections..."
 msgstr "_Pööratud ühendused..."
 
@@ -239,9 +242,11 @@ msgstr "Ligipääs Unixi/Linuxi, Windowsi ja teiste opsüsteemidega masinatele."
 msgid "Could not parse the file."
 msgstr "Faili pole võimalik töödelda."
 
+#. Translators: Do not translate "connection". It's the name of a group in the .vnc (.ini like) file.
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "See pole VNC fail: puudub grupp \"connection\"."
 
+#. Translators: Do not translate "host". It's the name of a key in the .vnc (.ini like) file.
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "See pole VNC fail: puudub võti \"host\"."
 
@@ -315,7 +320,7 @@ msgstr "Põhjus tundmatu"
 msgid "Error connecting to host."
 msgstr "Viga hostiga ühendumisel."
 
-#. Translators: %s is a host name or IP address; %u is a code error (number).
+#. Translators: %s is a host name or IP address; %u is a code error (number). Also, the right sentence would be ... method for host...
 #, c-format
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "Hosti <i>%s</i> autentimismeetod pole toetatud. (%u)"
@@ -427,6 +432,7 @@ msgstr "Pööratud ühendused"
 msgid "This machine is reachable through the following IP address(es):"
 msgstr "See arvuti on ligipääsetav järgnevatelt IP aadressi(te)lt:"
 
+#. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Machine->Reverse connections.
 msgid "_Always Enabled"
 msgstr "_Alati lubatud"
 
@@ -578,6 +584,7 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Järgnevat faili pole võimalik avada:"
 msgstr[1] "Järgnevaid faile pole võimalik avada:"
 
+#. Translators: Please consider the word "from" instead of "in". I'll fix this phrase for 2.31 (or 3.0)
 msgid "Could not get the active protocol in the protocol list."
 msgstr "Protokolliloendist ei saadud aktiivset protokolli."
 
@@ -678,6 +685,7 @@ msgstr "Plugin %s on juba registreerinud teenuse %s jaoks lehitseja."
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Tõrge mDNS-i sirvija lisamisel teenusele %s."
 
+#. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Tõrge hostide sirvimisel: %s\n"
@@ -714,6 +722,7 @@ msgstr "Pluginahaldur"
 msgid "Plugin"
 msgstr "Plugin"
 
+#. Translators: "Enabled" is the title of a column in the plugins treeview. This column shows a checkbox, where the plugin can be [de]activated. If it's activated, its status is "enabled" and the checkbox is checked.
 msgid "Enabled"
 msgstr "Lubatud"
 
@@ -816,6 +825,7 @@ msgstr "Ühendusest pole võimalik kuvatõmmist võtta."
 msgid "Save Screenshot"
 msgstr "Kuvatõmmise salvestamine"
 
+#. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Masina %s kuvatõmmis"
@@ -835,6 +845,7 @@ msgstr "Ühendust pole võimalik luua: %s"
 msgid "Impossible to accept the stream tube: %s"
 msgstr "Andmevoo toruga pole võimalik nõustuda: %s"
 
+#. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Kontaktnime pole võimalik hankida: %s"
