@@ -462,7 +462,12 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
   gtk_widget_set_sensitive (ssh_host_entry, FALSE);
   g_object_set_data (G_OBJECT (box), "ssh_host", ssh_host_entry);
   /* Translators: This is the tooltip of the SSH tunneling entry */
-  gtk_widget_set_tooltip_text (ssh_host_entry, _("hostname or user@hostname"));
+  str = g_strdup_printf ("%s\n%s\n%s",
+			 _("hostname or user@hostname"),
+			 _("Supply an alternative port using colon"),
+			 _("For instance: joe@domain.com:5022"));
+  gtk_widget_set_tooltip_text (ssh_host_entry, str);
+  g_free (str);
   gtk_box_pack_start (GTK_BOX (box2), ssh_host_entry, FALSE, FALSE, 0);
 
   /* Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel*/

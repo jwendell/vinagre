@@ -23,6 +23,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <glib/gi18n.h>
 
 #include <vinagre/vinagre-ssh.h>
@@ -58,6 +59,24 @@ find_free_port (void)
   return 0;
 }
 
+static void
+split_gateway (const gchar *gateway, gchar **host, gint *port)
+{
+  if (g_strrstr (gateway, ":") == NULL)
+    {
+      *host = g_strdup (gateway);
+      *port = 22;
+    }
+  else
+    {
+      gchar **server = g_strsplit (gateway, ":", 2);
+      *host = g_strdup (server[0]);
+      *port = server[1] ? atoi (server[1]) : 22;
+      g_strfreev (server);
+    }
+}
+
+
 gboolean
 vinagre_vnc_tunnel_create (GtkWindow *parent,
 			   gchar **original_host,
@@ -65,8 +84,8 @@ vinagre_vnc_tunnel_create (GtkWindow *parent,
 			   gchar *gateway,
 			   GError **error)
 {
-  int local_port;
-  gchar **tunnel_str, **command_str;
+  int local_port, gateway_port;
+  gchar **tunnel_str, **command_str, *gateway_host;
 
   local_port = find_free_port ();
   if (local_port == 0)
@@ -94,9 +113,11 @@ vinagre_vnc_tunnel_create (GtkWindow *parent,
   command_str[3] = g_strdup ("15");
   command_str[4] = NULL;
 
+  split_gateway (gateway, &gateway_host, &gateway_port);
+
   if (!vinagre_ssh_connect (parent,
-			    gateway,
-			    22,
+			    gateway_host,
+			    gateway_port,
 			    NULL,
 			    tunnel_str,
 			    command_str,
@@ -105,11 +126,13 @@ vinagre_vnc_tunnel_create (GtkWindow *parent,
     {
       g_strfreev (tunnel_str);
       g_strfreev (command_str);
+      g_free (gateway_host);
       return FALSE;
     }
 
   g_strfreev (tunnel_str);
   g_strfreev (command_str);
+  g_free (gateway_host);
   g_free (*original_host);
   *original_host = g_strdup ("localhost");
   g_free (*original_port);
