@@ -364,6 +364,13 @@ handle_login (GtkWindow *parent,
               ret_val = FALSE;
               break;
             }
+
+          if (len == 0) /* Error, let's exit and look at stderr */
+            {
+              ret_val = TRUE;
+              break;
+            }
+
           buffer[len] = 0;
           if (strncmp (buffer, VINAGRE_SSH_CHECK, VINAGRE_SSH_CHECK_LENGTH) == 0)
             break;
@@ -562,6 +569,7 @@ handle_login (GtkWindow *parent,
   g_object_unref (prompt_stream);
   g_object_unref (stdout_stream);
   g_object_unref (reply_stream);
+
   return ret_val;
 }
 
