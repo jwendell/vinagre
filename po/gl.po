@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre-master-po-gl-26618\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-06 18:24+0200\n"
-"PO-Revision-Date: 2010-06-06 18:26+0200\n"
+"POT-Creation-Date: 2010-06-17 15:46+0200\n"
+"PO-Revision-Date: 2010-06-17 15:46+0200\n"
 "Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
 "Language-Team: Galician <gnome@g11.net>\n"
 "MIME-Version: 1.0\n"
@@ -383,18 +383,25 @@ msgstr "Calidade ultrabaixa (3 bits)"
 msgid "Use h_ost"
 msgstr "Usar servid_or"
 
-#. Translators: This is the tooltip of the SSH tunneling entry
-#: ../plugins/vnc/vinagre-vnc-plugin.c:465
+#: ../plugins/vnc/vinagre-vnc-plugin.c:466
 msgid "hostname or user@hostname"
 msgstr "Nome de servidor ou usuario@servidor"
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:467
+msgid "Supply an alternative port using colon"
+msgstr "Fornecer un porto alternativo usando dous puntos"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:468
+msgid "For instance: joe@domain.com:5022"
+msgstr "Por exemplo: xoan@dominio.com:5022"
+
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:469
+#: ../plugins/vnc/vinagre-vnc-plugin.c:474
 msgid "as a SSH tunnel"
 msgstr "como un túnel SSH"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:504
+#: ../plugins/vnc/vinagre-vnc-plugin.c:509
 msgid "VNC Files"
 msgstr "Ficheiros VNC"
 
@@ -509,7 +516,7 @@ msgstr ""
 "Lea o ficheiro README (distribuído co Vinagre) para saber como activar esta "
 "característica."
 
-#: ../plugins/vnc/vinagre-vnc-tunnel.c:77
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "Foi incapaz de encontar un porto TCP libre"
@@ -518,11 +525,11 @@ msgstr "Foi incapaz de encontar un porto TCP libre"
 msgid "VNC support"
 msgstr "Compatibilidade VNC"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:94
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:100
 msgid "IPv4:"
 msgstr "IPv4:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:106
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:112
 msgid ""
 "\n"
 "\n"
@@ -532,7 +539,7 @@ msgstr ""
 "\n"
 "IPv6:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:165
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:171
 #, c-format
 msgid "On the port %d"
 msgstr "No porto %d"
@@ -593,97 +600,97 @@ msgstr "Abrir o visualizador de escritorio remoto"
 msgid "Access your bookmarks"
 msgstr "Acceder aos seus marcadores"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:525
+#: ../vinagre/vinagre-bookmarks.c:269 ../vinagre/vinagre-connection.c:525
 #: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Non se admite o protocolo %s."
 
-#: ../vinagre/vinagre-bookmarks.c:343
+#: ../vinagre/vinagre-bookmarks.c:347
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Produciuse un erro ao inicializar os marcadores: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:482 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-bookmarks.c:347 ../vinagre/vinagre-bookmarks.c:462
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:765
 #: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
-#: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
+#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: ../vinagre/vinagre-bookmarks.c:350
+#: ../vinagre/vinagre-bookmarks.c:354
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr ""
 "Produciuse un erro ao iniciar os marcadores: o ficheiro parece que está "
 "baleiro"
 
-#: ../vinagre/vinagre-bookmarks.c:357
+#: ../vinagre/vinagre-bookmarks.c:361
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr ""
 "Produciuse un erro ao iniciar os marcadores: o ficheiro non é un ficheiro de "
 "marcadores do Vinagre"
 
-#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+#: ../vinagre/vinagre-bookmarks.c:423 ../vinagre/vinagre-bookmarks.c:430
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr ""
 "Produciuse un erro ao gardar os marcadores: fallou ao crear a estrutura XML"
 
-#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+#: ../vinagre/vinagre-bookmarks.c:437 ../vinagre/vinagre-bookmarks.c:444
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Produciuse un erro ao gardar os marcadores: fallou ao inicializar a "
 "estrutura XML"
 
-#: ../vinagre/vinagre-bookmarks.c:449
+#: ../vinagre/vinagre-bookmarks.c:453
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Produciuse un erro ao gardar os marcadores: fallou ao finalizar a estrutura "
 "XML"
 
-#: ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks.c:462
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Produciuse un erro ao gardar os marcadores: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:95
-#: ../vinagre/vinagre-bookmarks-migration.c:102
+#: ../vinagre/vinagre-bookmarks-migration.c:96
+#: ../vinagre/vinagre-bookmarks-migration.c:103
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr ""
 "Produciuse un erro ao migrar os marcadores: fallou ao crear a estrutura XML"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:109
-#: ../vinagre/vinagre-bookmarks-migration.c:116
+#: ../vinagre/vinagre-bookmarks-migration.c:110
+#: ../vinagre/vinagre-bookmarks-migration.c:117
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Produciuse un erro ao migrar os marcadores: fallou ao inicializar a "
 "estrutura XML"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:125
+#: ../vinagre/vinagre-bookmarks-migration.c:126
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Produciuse un erro ao migrar os marcadores: fallou ao finalizar a estrutura "
 "XML"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-bookmarks-migration.c:218
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Produciuse un erro ao migrar os marcadores: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:164
+#: ../vinagre/vinagre-bookmarks-migration.c:165
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr ""
 "Produciuse un erro ao migrar os marcadores: o engadido de VNC non está "
 "activado"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:218
 msgid "Failed to create the directory"
 msgstr "Produciuse un erro ao crear o cartafol"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:241
+#: ../vinagre/vinagre-bookmarks-migration.c:243
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -691,17 +698,17 @@ msgstr ""
 "Migrando o ficheiro de marcadores a un formato novo. Esta operación só "
 "debería ser executada unha vez."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:249
+#: ../vinagre/vinagre-bookmarks-migration.c:251
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Produciuse un erro ao abrir o ficheiro antigo de marcadores: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:250
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:252
+#: ../vinagre/vinagre-bookmarks-migration.c:264
 msgid "Migration cancelled"
 msgstr "Migración cancelada"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:259
+#: ../vinagre/vinagre-bookmarks-migration.c:261
 msgid "Could not remove the old bookmarks file"
 msgstr "Non foi posíbel eliminar o ficheiro antigo de marcadores"
 
@@ -760,7 +767,7 @@ msgstr "Produciuse un erro ao eliminar o marcador: non se encontrou a entrada"
 msgid "New Folder"
 msgstr "Cartafol novo"
 
-#: ../vinagre/vinagre-cache-prefs.c:53
+#: ../vinagre/vinagre-cache-prefs.c:56
 #, c-format
 msgid "Error while saving preferences: %s"
 msgstr "Produciuse un erro ao gardar as preferencias: %s"
@@ -787,17 +794,17 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Non foi posíbel abrir o seguinte ficheiro:"
 msgstr[1] "Non foi posíbel abrir os seguintes ficheiros:"
 
-#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:334
-#: ../vinagre/vinagre-connect.c:446
+#: ../vinagre/vinagre-connect.c:92 ../vinagre/vinagre-connect.c:339
+#: ../vinagre/vinagre-connect.c:451
 msgid "Could not get the active protocol from the protocol list."
 msgstr "Non foi posíbel obter o protocolo activo na lista de protocolos."
 
-#: ../vinagre/vinagre-connect.c:315
+#: ../vinagre/vinagre-connect.c:320
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Produciuse un erro ao gardar o ficheiro de historial: %s"
 
-#: ../vinagre/vinagre-connect.c:350
+#: ../vinagre/vinagre-connect.c:355
 msgid "Choose a Remote Desktop"
 msgstr "Escolla un escritorio remoto"
 
@@ -841,7 +848,7 @@ msgstr "_Eliminar dos marcadores"
 msgid "Remove current selected connection from bookmarks"
 msgstr "Eliminar dos marcadores a conexión seleccionada neste momento"
 
-#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:400
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Non foi posíbel fusionar o ficheiro XML de UI: %s"
@@ -1017,28 +1024,28 @@ msgstr "Non foi quen de sementar o programa ssh: %s"
 msgid "Timed out when logging in"
 msgstr "Esgotouse o tempo de inicio de sesión"
 
-#: ../vinagre/vinagre-ssh.c:375 ../vinagre/vinagre-ssh.c:530
-#: ../vinagre/vinagre-ssh.c:613
+#: ../vinagre/vinagre-ssh.c:382 ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:621
 msgid "Permission denied"
 msgstr "Permiso denegado"
 
-#: ../vinagre/vinagre-ssh.c:441
+#: ../vinagre/vinagre-ssh.c:448
 msgid "Password dialog canceled"
 msgstr "O cadro de diálogo do contrasinal cancelouse"
 
-#: ../vinagre/vinagre-ssh.c:464
+#: ../vinagre/vinagre-ssh.c:471
 msgid "Could not send password"
 msgstr "Non foi posíbel enviar o contrasinal"
 
-#: ../vinagre/vinagre-ssh.c:472
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Log In Anyway"
 msgstr "Iniciar de todas maneiras"
 
-#: ../vinagre/vinagre-ssh.c:472
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Cancel Login"
 msgstr "Anular o inicio de sesión"
 
-#: ../vinagre/vinagre-ssh.c:481
+#: ../vinagre/vinagre-ssh.c:488
 #, c-format
 msgid ""
 "The identity of the remote computer (%s) is unknown.\n"
@@ -1054,35 +1061,35 @@ msgstr ""
 "absolutamente seguro de que é seguro continuar, contacte co administrador do "
 "sistema."
 
-#: ../vinagre/vinagre-ssh.c:499
+#: ../vinagre/vinagre-ssh.c:506
 msgid "Login dialog canceled"
 msgstr "Cancelouse o cadro de diálogo de inicio de sesión"
 
-#: ../vinagre/vinagre-ssh.c:520
+#: ../vinagre/vinagre-ssh.c:527
 msgid "Can't send host identity confirmation"
 msgstr "Non pode enviar confirmación de identidade de servidor"
 
-#: ../vinagre/vinagre-ssh.c:555 ../vinagre/vinagre-tab.c:732
+#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:732
 msgid "Error saving the credentials on the keyring."
 msgstr "Produciuse un erro ao gardar as credenciais no anel de chaves."
 
-#: ../vinagre/vinagre-ssh.c:620
+#: ../vinagre/vinagre-ssh.c:628
 msgid "Hostname not known"
 msgstr "Servidor descoñecido"
 
-#: ../vinagre/vinagre-ssh.c:627
+#: ../vinagre/vinagre-ssh.c:635
 msgid "No route to host"
 msgstr "Non hai un camiño ao servidor"
 
-#: ../vinagre/vinagre-ssh.c:634
+#: ../vinagre/vinagre-ssh.c:642
 msgid "Connection refused by server"
 msgstr "Conexión rexeitada polo servidor"
 
-#: ../vinagre/vinagre-ssh.c:641
+#: ../vinagre/vinagre-ssh.c:649
 msgid "Host key verification failed"
 msgstr "Produciuse un fallo na chave do servidor"
 
-#: ../vinagre/vinagre-ssh.c:678
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Unable to find a valid SSH program"
 msgstr "Foi incapaz de encontrar un programa de SSH válido"
 
@@ -1338,21 +1345,21 @@ msgstr "Sitio web do Vinagre"
 msgid "%s authentication is required"
 msgstr "Requírese a autenticación %s"
 
-#: ../vinagre/vinagre-window.c:428
+#: ../vinagre/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "Conexións _recentes"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:543
+#: ../vinagre/vinagre-window.c:544
 #, c-format
 msgid "Open %s:%d"
 msgstr "Abrir %s:%d"
 
-#: ../vinagre/vinagre-window.c:721
+#: ../vinagre/vinagre-window.c:723
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "Sobre as teclas rápidas e atallos de teclado"
 
-#: ../vinagre/vinagre-window.c:723
+#: ../vinagre/vinagre-window.c:725
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1372,7 +1379,7 @@ msgstr ""
 "\n"
 "Esta mensaxe aparecerá só unha vez."
 
-#: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
+#: ../vinagre/vinagre-window.c:733 ../vinagre/vinagre-window.c:739
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Produciuse un erro ao crear o ficheiro: %s: %s"
