@@ -2,22 +2,23 @@
 # Copyright (C) 2008-2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the vinagre package.
 # Theppitak Karoonboonyanan <thep@linux.thai.net>, 2008-2010.
+# Sira Nokyoongtong <gumaraa@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-03-26 12:30+0000\n"
-"PO-Revision-Date: 2010-04-09 16:31+0700\n"
-"Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
+"POT-Creation-Date: 2010-06-16 21:22+0000\n"
+"PO-Revision-Date: 2010-06-19 23:55+0700\n"
+"Last-Translator: Sira Nokyoongtong <gumaraa@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1 ../vinagre/vinagre-plugin-manager.c:495
+#: ../data/GNOME_VinagreApplet.xml.h:1 ../vinagre/vinagre-plugin-manager.c:496
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
@@ -32,7 +33,7 @@ msgstr "เข้าใช้พื้นโต๊ะในเครื่อง
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
 #: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
-#: ../vinagre/vinagre-main.c:200
+#: ../vinagre/vinagre-main.c:201
 msgid "Remote Desktop Viewer"
 msgstr "เครื่องมือแสดงพื้นโต๊ะเครื่องอื่น"
 
@@ -112,27 +113,28 @@ msgstr "เ_ต็มจอ"
 msgid "_Host:"
 msgstr "_โฮสต์:"
 
-#: ../data/vinagre.ui.h:20
+#. Translators: This is the name of a bookmark. It appears in the add/edit bookmark dialog.
+#: ../data/vinagre.ui.h:21
 msgid "_Name:"
 msgstr "_ชื่อ:"
 
-#: ../data/vinagre.ui.h:21
+#: ../data/vinagre.ui.h:22
 msgid "_Password:"
 msgstr "_รหัสผ่าน:"
 
-#: ../data/vinagre.ui.h:22
+#: ../data/vinagre.ui.h:23
 msgid "_Protocol:"
 msgstr "โ_พรโทคอล:"
 
-#: ../data/vinagre.ui.h:23
+#: ../data/vinagre.ui.h:24
 msgid "_Remember this credential"
 msgstr "_จำรหัสลับนี้ไว้"
 
-#: ../data/vinagre.ui.h:24 ../plugins/ssh/vinagre-ssh-plugin.c:144
+#: ../data/vinagre.ui.h:25 ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "_ชื่อผู้ใช้:"
 
-#: ../data/vinagre.schemas.in.in.h:1 ../vinagre/vinagre-plugin-manager.c:795
+#: ../data/vinagre.schemas.in.in.h:1 ../vinagre/vinagre-plugin-manager.c:796
 msgid "Active plugins"
 msgstr "ปลั๊กอินที่เปิดใช้"
 
@@ -248,126 +250,136 @@ msgstr "การรองรับ SSH"
 
 #. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
 #: ../plugins/vnc/vinagre-vnc-connection.c:291
-#: ../plugins/vnc/vinagre-vnc-plugin.c:322
+#: ../plugins/vnc/vinagre-vnc-plugin.c:325
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr "ค่าของแฟล็ก 'shared' ไม่ถูกต้อง: %d ค่านี้ควรจะเป็น 0 หรือ 1 ดังนั้นจะข้ามไป"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:84
+#. Translators: "Reverse" here is an adjective, not a verb.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:85
 msgid "_Reverse Connections..."
 msgstr "การเชื่อมต่อย้อ_นทาง..."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:86
+#: ../plugins/vnc/vinagre-vnc-plugin.c:87
 msgid "Configure incoming VNC connections"
 msgstr "ตั้งค่าการเชื่อมต่อ VNC ขาเข้า"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:173
+#: ../plugins/vnc/vinagre-vnc-plugin.c:174
 msgid "Enable scaled mode"
 msgstr "เปิดใช้โหมดปรับขนาดภาพ"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:188
+#: ../plugins/vnc/vinagre-vnc-plugin.c:189
 msgid "VNC Options:"
 msgstr "ตัวเลือก VNC:"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:190
+#: ../plugins/vnc/vinagre-vnc-plugin.c:191
 msgid "Show VNC Options"
 msgstr "แสดงตัวเลือก VNC"
 
 #. vim: set ts=8:
-#: ../plugins/vnc/vinagre-vnc-plugin.c:212
+#: ../plugins/vnc/vinagre-vnc-plugin.c:213
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:213
+#: ../plugins/vnc/vinagre-vnc-plugin.c:214
 msgid "Access Unix/Linux, Windows and other machines."
 msgstr "เข้าใช้ยูนิกซ์/ลินุกซ์, วินโดวส์ และเครื่องประเภทอื่นๆ"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:270
+#: ../plugins/vnc/vinagre-vnc-plugin.c:271
 msgid "Could not parse the file."
 msgstr "ไม่สามารถแจงแฟ้มนี้"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:277
+#. Translators: Do not translate "connection". It's the name of a group in the .vnc (.ini like) file.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:279
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "แฟ้มนี้ไม่ใช่แฟ้ม VNC: ไม่มีกลุ่มข้อมูล \"connection\""
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:283
+#. Translators: Do not translate "host". It's the name of a key in the .vnc (.ini like) file.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:286
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "แฟ้มนี้ไม่ใช่แฟ้ม VNC: ไม่มีคีย์ \"host\""
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:375
+#: ../plugins/vnc/vinagre-vnc-plugin.c:378
 msgid "VNC Options"
 msgstr "ตัวเลือก VNC"
 
 #. View only check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:388
-#: ../plugins/vnc/vinagre-vnc-tab.c:632
+#: ../plugins/vnc/vinagre-vnc-plugin.c:391
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "_View only"
 msgstr "ดูอย่างเ_ดียว"
 
 #. Scaling check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:396
+#: ../plugins/vnc/vinagre-vnc-plugin.c:399
 msgid "_Scaling"
 msgstr "ปรับ_ขนาด"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:412
+#: ../plugins/vnc/vinagre-vnc-plugin.c:415
 msgid "_Keep aspect ratio"
 msgstr "_รักษาสัดส่วนภาพ"
 
 #. JPEG Compression check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:422
+#: ../plugins/vnc/vinagre-vnc-plugin.c:425
 msgid "_Use JPEG Compression"
 msgstr "ใช้การ_บีบอัด JPEG"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:423
+#: ../plugins/vnc/vinagre-vnc-plugin.c:426
 msgid "This might not work on all VNC servers"
 msgstr "ตัวเลือกนี้อาจไม่ได้ใช้ได้กับเซิร์ฟเวอร์ VNC ทั้งหมด"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:432
+#: ../plugins/vnc/vinagre-vnc-plugin.c:435
 msgid "_Depth Color:"
 msgstr "จำนวนบิต_สี:"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:437
+#: ../plugins/vnc/vinagre-vnc-plugin.c:440
 msgid "Use Server Settings"
 msgstr "ใช้ตามค่าตั้งเซิร์ฟเวอร์"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:438
+#: ../plugins/vnc/vinagre-vnc-plugin.c:441
 msgid "True Color (24 bits)"
 msgstr "สีแท้ (24 บิต)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:439
+#: ../plugins/vnc/vinagre-vnc-plugin.c:442
 msgid "High Color (16 bits)"
 msgstr "ความละเอียดสีสูง (16 บิต)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:440
+#: ../plugins/vnc/vinagre-vnc-plugin.c:443
 msgid "Low Color (8 bits)"
 msgstr "ความละเอียดสีต่ำ (8 บิต)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:441
+#: ../plugins/vnc/vinagre-vnc-plugin.c:444
 msgid "Ultra Low Color (3 bits)"
 msgstr "ความละเอียดสีต่ำมาก (3 บิต)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:454
+#: ../plugins/vnc/vinagre-vnc-plugin.c:457
 msgid "Use h_ost"
 msgstr "ใช้_โฮสต์"
 
-#. Translators: This is the tooltip of the SSH tunneling entry
-#: ../plugins/vnc/vinagre-vnc-plugin.c:462
+#: ../plugins/vnc/vinagre-vnc-plugin.c:466
 msgid "hostname or user@hostname"
 msgstr "hostname หรือ user@hostname"
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:467
+msgid "Supply an alternative port using colon"
+msgstr "กำหนดพอร์ตอื่นได้โดยใช้ทวิภาค (colon)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:468
+msgid "For instance: joe@domain.com:5022"
+msgstr "ตัวอย่าง: joe@domain.com:5022"
+
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:466
+#: ../plugins/vnc/vinagre-vnc-plugin.c:474
 msgid "as a SSH tunnel"
 msgstr "เป็นอุโมงค์ SSH"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:501
+#: ../plugins/vnc/vinagre-vnc-plugin.c:509
 msgid "VNC Files"
 msgstr "แฟ้ม VNC"
 
@@ -394,80 +406,83 @@ msgstr "เกิดข้อผิดพลาดขณะเชื่อมต
 #. Translators: %s is a host name or IP address; %u is a code error (number).
 #: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
-msgid "Authentication method to host %s is unsupported. (%u)"
+msgid "Authentication method for host %s is unsupported. (%u)"
 msgstr "ไม่รองรับวิธีการยืนยันตัวบุคคลกับโฮสต์ %s (%u)"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
 msgstr "ไม่รองรับการยืนยันตัวบุคคล"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:531 ../plugins/vnc/vinagre-vnc-tab.c:548
+#: ../plugins/vnc/vinagre-vnc-tab.c:532 ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "Authentication error"
 msgstr "ข้อผิดพลาดในการยืนยันตัวบุคคล"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:532
+#: ../plugins/vnc/vinagre-vnc-tab.c:533
 msgid "A username is required in order to access this machine."
 msgstr "ต้องกรอกชื่อผู้ใช้เพื่อจะเข้าใช้เครื่องนี้"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:549
+#: ../plugins/vnc/vinagre-vnc-tab.c:550
 msgid "A password is required in order to access this machine."
 msgstr "ต้องกรอกรหัสผ่านเพื่อจะเข้าใช้เครื่องนี้"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:603
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "S_caling"
 msgstr "ปรับ_ขนาด"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:605
 msgid "Fits the remote screen into the current window size"
 msgstr "ปรับขนาดหน้าจอของเครื่องปลายทางให้พอดีกับขนาดหน้าต่างปัจจุบัน"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:617
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
 msgid "_Keep Aspect Ratio"
 msgstr "_รักษาสัดส่วนภาพ"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:618
+#: ../plugins/vnc/vinagre-vnc-tab.c:619
 msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "รักษาสัดส่วนภาพเมื่อใช้การปรับขนาดภาพ"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:633
+#: ../plugins/vnc/vinagre-vnc-tab.c:634
 msgid "Does not send mouse and keyboard events"
 msgstr "ไม่ต้องส่งเหตุการณ์ของเมาส์และแป้นพิมพ์"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:646
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "_Original size"
 msgstr "ขนาด_ต้นฉบับ"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:647
+#: ../plugins/vnc/vinagre-vnc-tab.c:648
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "ปรับขนาดหน้าต่างให้ตรงกับขนาดของพื้นโต๊ะระยะไกลต้นฉบับ"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:660
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
 msgid "_Refresh Screen"
 msgstr "_ปรับแสดงหน้าจอ"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:661
+#: ../plugins/vnc/vinagre-vnc-tab.c:662
 msgid "Requests an update of the screen"
 msgstr "ส่งคำขอปรับแสดงหน้าจอใหม่"
 
-#. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:683 ../plugins/vnc/vinagre-vnc-tab.c:755
-#: ../plugins/vnc/vinagre-vnc-tab.c:757
-msgid "Send Ctrl-Alt-Del"
-msgstr "ส่ง Ctrl-Alt-Del"
-
 #: ../plugins/vnc/vinagre-vnc-tab.c:684
+msgid "_Send Ctrl-Alt-Del"
+msgstr "_ส่ง Ctrl-Alt-Del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:685
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "ส่ง Ctrl+Alt+Del ไปยังเครื่องฝั่งโน้น"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:736 ../plugins/vnc/vinagre-vnc-tab.c:737
+#: ../plugins/vnc/vinagre-vnc-tab.c:737 ../plugins/vnc/vinagre-vnc-tab.c:738
 msgid "Scaling"
 msgstr "ปรับขนาด"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:746 ../plugins/vnc/vinagre-vnc-tab.c:747
+#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
 msgid "Read only"
 msgstr "ดูอย่างเดียว"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:919
+#. Send Ctrl-alt-del
+#: ../plugins/vnc/vinagre-vnc-tab.c:756 ../plugins/vnc/vinagre-vnc-tab.c:758
+msgid "Send Ctrl-Alt-Del"
+msgstr "ส่ง Ctrl-Alt-Del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:920
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -478,7 +493,7 @@ msgstr ""
 "\n"
 "กรุณาอ่านแฟ้ม README (ซึ่งมากับ Vinagre) เพื่อดูว่าจะเปิดใช้ความสามารถนี้อย่างไร"
 
-#: ../plugins/vnc/vinagre-vnc-tunnel.c:77
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "หาพอร์ต TCP ที่ว่างอยู่ไม่พบ"
@@ -487,11 +502,11 @@ msgstr "หาพอร์ต TCP ที่ว่างอยู่ไม่พ�
 msgid "VNC support"
 msgstr "การรองรับ VNC"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:90
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:100
 msgid "IPv4:"
 msgstr "IPv4:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:102
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:112
 msgid ""
 "\n"
 "\n"
@@ -501,7 +516,7 @@ msgstr ""
 "\n"
 "IPv6:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:161
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:171
 #, c-format
 msgid "On the port %d"
 msgstr "ที่พอร์ต %d"
@@ -532,11 +547,12 @@ msgstr "การเชื่อมต่อย้อนทาง"
 msgid "This machine is reachable through the following IP address(es):"
 msgstr "เครื่องนี้สามารถเข้าถึงได้ผ่านหมายเลขไอพีต่อไปนี้:"
 
-#: ../plugins/vnc/vnc.ui.h:5
+#. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Machine->Reverse connections.
+#: ../plugins/vnc/vnc.ui.h:6
 msgid "_Always Enabled"
 msgstr "เปิดใช้เ_สมอ"
 
-#: ../plugins/vnc/vnc.ui.h:6
+#: ../plugins/vnc/vnc.ui.h:7
 msgid "_Enable Reverse Connections"
 msgstr "_เปิดใช้การเชื่อมต่อย้อนทาง"
 
@@ -560,97 +576,97 @@ msgstr "เปิดเครื่องมือแสดงพื้นโต
 msgid "Access your bookmarks"
 msgstr "เข้าใช้ที่คั่นหน้า"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:522
+#: ../vinagre/vinagre-bookmarks.c:269 ../vinagre/vinagre-connection.c:525
 #: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "ไม่รองรับโพรโทคอล %s"
 
-#: ../vinagre/vinagre-bookmarks.c:343
+#: ../vinagre/vinagre-bookmarks.c:347
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "เกิดข้อผิดพลาดขณะกำหนดค่าตั้งต้นที่คั่นหน้า: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:482 ../vinagre/vinagre-fav.c:765
-#: ../vinagre/vinagre-main.c:101 ../vinagre/vinagre-main.c:120
-#: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
+#: ../vinagre/vinagre-bookmarks.c:347 ../vinagre/vinagre-bookmarks.c:462
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
+#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
 msgid "Unknown error"
 msgstr "ข้อผิดพลาดไม่ทราบสาเหตุ"
 
-#: ../vinagre/vinagre-bookmarks.c:350
+#: ../vinagre/vinagre-bookmarks.c:354
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "เกิดข้อผิดพลาดขณะกำหนดค่าตั้งต้นที่คั่นหน้า: ดูเหมือนแฟ้มจะว่างเปล่า"
 
-#: ../vinagre/vinagre-bookmarks.c:357
+#: ../vinagre/vinagre-bookmarks.c:361
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "เกิดข้อผิดพลาดขณะกำหนดค่าตั้งต้นที่คั่นหน้า: แฟ้มนี้ไม่ใช่แฟ้มที่คั่นหน้าของ vinagre"
 
-#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+#: ../vinagre/vinagre-bookmarks.c:423 ../vinagre/vinagre-bookmarks.c:430
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกที่คั่นหน้า: สร้างโครงสร้าง XML ไม่สำเร็จ"
 
-#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+#: ../vinagre/vinagre-bookmarks.c:437 ../vinagre/vinagre-bookmarks.c:444
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกที่คั่นหน้า: กำหนดค่าตั้งต้นของโครงสร้าง XML ไม่สำเร็จ"
 
-#: ../vinagre/vinagre-bookmarks.c:449
+#: ../vinagre/vinagre-bookmarks.c:453
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกที่คั่นหน้า: เขียนข้อมูลปิดท้ายโครงสร้าง XML ไม่สำเร็จ"
 
-#: ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks.c:462
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกที่คั่นหน้า: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:95
-#: ../vinagre/vinagre-bookmarks-migration.c:102
+#: ../vinagre/vinagre-bookmarks-migration.c:96
+#: ../vinagre/vinagre-bookmarks-migration.c:103
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr "เกิดข้อผิดพลาดขณะย้ายข้อมูลที่คั่นหน้า: สร้างโครงสร้าง XML ไม่สำเร็จ"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:109
-#: ../vinagre/vinagre-bookmarks-migration.c:116
+#: ../vinagre/vinagre-bookmarks-migration.c:110
+#: ../vinagre/vinagre-bookmarks-migration.c:117
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr "เกิดข้อผิดพลาดขณะย้ายข้อมูลที่คั่นหน้า: กำหนดค่าตั้งต้นของโครงสร้าง XML ไม่สำเร็จ"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:125
+#: ../vinagre/vinagre-bookmarks-migration.c:126
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr "เกิดข้อผิดพลาดขณะย้ายข้อมูลที่คั่นหน้า: เขียนข้อมูลปิดท้ายโครงสร้าง XML ไม่สำเร็จ"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-bookmarks-migration.c:218
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "เกิดข้อผิดพลาดขณะย้ายข้อมูลที่คั่นหน้า: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:164
+#: ../vinagre/vinagre-bookmarks-migration.c:165
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "เกิดข้อผิดพลาดขณะย้ายข้อมูลที่คั่นหน้า: ไม่ได้เปิดใช้ปลั๊กอิน VNC"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:218
 msgid "Failed to create the directory"
 msgstr "สร้างไดเรกทอรีไม่สำเร็จ"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:241
+#: ../vinagre/vinagre-bookmarks-migration.c:243
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
 msgstr "กำลังย้ายข้อมูลแฟ้มที่คั่นหน้าไปเป็นฟอร์แมตใหม่ การกระทำนี้ควรเกิดขึ้นเพียงครั้งเดียวเท่านั้น"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:249
+#: ../vinagre/vinagre-bookmarks-migration.c:251
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "เกิดข้อผิดพลาดขณะเปิดแฟ้มที่คั่นหน้าเก่า: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:250
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:252
+#: ../vinagre/vinagre-bookmarks-migration.c:264
 msgid "Migration cancelled"
 msgstr "ยกเลิกการย้ายข้อมูล"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:259
+#: ../vinagre/vinagre-bookmarks-migration.c:261
 msgid "Could not remove the old bookmarks file"
 msgstr "ไม่สามารถลบแฟ้มที่คั่นหน้าเก่า"
 
@@ -705,7 +721,7 @@ msgstr "เกิดข้อผิดพลาดขณะลบที่คั
 msgid "New Folder"
 msgstr "โฟลเดอร์ใหม่"
 
-#: ../vinagre/vinagre-cache-prefs.c:53
+#: ../vinagre/vinagre-cache-prefs.c:56
 #, c-format
 msgid "Error while saving preferences: %s"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกค่าปรับแต่ง: %s"
@@ -730,25 +746,25 @@ msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "ไม่สามารถเปิดแฟ้มต่อไปนี้:"
 
-#: ../vinagre/vinagre-connect.c:87 ../vinagre/vinagre-connect.c:334
-#: ../vinagre/vinagre-connect.c:446
-msgid "Could not get the active protocol in the protocol list."
+#: ../vinagre/vinagre-connect.c:92 ../vinagre/vinagre-connect.c:339
+#: ../vinagre/vinagre-connect.c:451
+msgid "Could not get the active protocol from the protocol list."
 msgstr "ไม่สามารถอ่านโพรโทคอลที่เปิดใช้จากรายชื่อโพรโทคอล"
 
-#: ../vinagre/vinagre-connect.c:315
+#: ../vinagre/vinagre-connect.c:320
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกแฟ้มประวัติ: %s"
 
-#: ../vinagre/vinagre-connect.c:350
+#: ../vinagre/vinagre-connect.c:355
 msgid "Choose a Remote Desktop"
 msgstr "เลือกพื้นโต๊ะเครื่องอื่น"
 
-#: ../vinagre/vinagre-connection.c:630
+#: ../vinagre/vinagre-connection.c:633
 msgid "Could not open the file."
 msgstr "ไม่สามารถเปิดแฟ้มนี้"
 
-#: ../vinagre/vinagre-connection.c:654
+#: ../vinagre/vinagre-connection.c:657
 msgid "The file was not recognized by any of the plugins."
 msgstr "ไม่มีปลั๊กอินใดรู้จักแฟ้มนี้เลย"
 
@@ -784,7 +800,7 @@ msgstr "_ลบออกจากรายการที่คั่นหน�
 msgid "Remove current selected connection from bookmarks"
 msgstr "ลบการเชื่อมต่อที่เลือกออกจากรายการที่คั่นหน้า"
 
-#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:400
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "ไม่สามารถผสานแฟ้ม XML ส่วนติดต่อผู้ใช้: %s"
@@ -806,40 +822,40 @@ msgid "Hosts nearby"
 msgstr "โฮสต์ที่อยู่ใกล้"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:63
+#: ../vinagre/vinagre-main.c:64
 msgid "Open vinagre in fullscreen mode"
 msgstr "เปิด vinagre ในโหมดเต็มจอ"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:67
+#: ../vinagre/vinagre-main.c:68
 msgid "Create a new toplevel window in an existing instance of vinagre"
 msgstr "เปิดหน้าต่างใหม่โดยอาศัยโพรเซสของ vinagre ที่มีอยู่"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:71
+#: ../vinagre/vinagre-main.c:72
 msgid "Open a file recognized by vinagre"
 msgstr "เปิดแฟ้มที่ vinagre รู้จัก"
 
-#: ../vinagre/vinagre-main.c:71
+#: ../vinagre/vinagre-main.c:72
 msgid "filename"
 msgstr "ชื่อแฟ้ม"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:76
+#: ../vinagre/vinagre-main.c:77
 msgid "[server:port]"
 msgstr "[เซิร์ฟเวอร์:พอร์ต]"
 
-#: ../vinagre/vinagre-main.c:131
+#: ../vinagre/vinagre-main.c:132
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "เกิดข้อผิดพลาดต่อไปนี้:"
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:170
+#: ../vinagre/vinagre-main.c:171
 msgid "- Remote Desktop Viewer"
 msgstr "- เครื่องมือแสดงพื้นโต๊ะเครื่องอื่น"
 
-#: ../vinagre/vinagre-main.c:195
+#: ../vinagre/vinagre-main.c:196
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "เรียก 'vinagre --help' เพื่อดูรายการเต็มของตัวเลือกสำหรับบรรทัดคำสั่ง"
@@ -859,41 +875,42 @@ msgstr "ปลั๊กอิน %s ได้ลงทะเบียนเบ�
 msgid "Failed to add mDNS browser for service %s."
 msgstr "ไม่สามารถเพิ่มเบราว์เซอร์ mDNS สำหรับบริการ %s"
 
-#: ../vinagre/vinagre-mdns.c:242
+#. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
+#: ../vinagre/vinagre-mdns.c:243
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "ไม่สามารถเรียกดูโฮสต์: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:315
+#: ../vinagre/vinagre-mdns.c:316
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "ไม่สามารถตั้งต้นเบราว์เซอร์ mDNS: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:461
+#: ../vinagre/vinagre-notebook.c:459
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "การเชื่อมต่อไปยังโฮสต์ %s ถูกปิด"
 
-#: ../vinagre/vinagre-notebook.c:463
+#: ../vinagre/vinagre-notebook.c:461
 msgid "Connection closed"
 msgstr "การเชื่อมต่อถูกปิด"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:482
+#: ../vinagre/vinagre-notebook.c:480
 #, c-format
-msgid "Authentication to host %s has failed"
+msgid "Authentication for host %s has failed"
 msgstr "การยืนยันตัวบุคคลกับโฮสต์ %s ไม่ผ่าน"
 
-#: ../vinagre/vinagre-notebook.c:488
+#: ../vinagre/vinagre-notebook.c:486
 msgid "Authentication failed"
 msgstr "การยืนยันตัวบุคคลไม่ผ่าน"
 
-#: ../vinagre/vinagre-notebook.c:526
+#: ../vinagre/vinagre-notebook.c:524
 msgid "Connecting..."
 msgstr "กำลังเชื่อมต่อ..."
 
-#: ../vinagre/vinagre-notebook.c:553 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:551 ../vinagre/vinagre-tab.c:325
 msgid "Close connection"
 msgstr "ปิดการเชื่อมต่อ"
 
@@ -905,31 +922,32 @@ msgstr "เครื่องมือจัดการปลั๊กอิน
 msgid "Plugin"
 msgstr "ปลั๊กอิน"
 
-#: ../vinagre/vinagre-plugin-manager.c:46
+#. Translators: "Enabled" is the title of a column in the plugins treeview. This column shows a checkbox, where the plugin can be [de]activated. If it's activated, its status is "enabled" and the checkbox is checked.
+#: ../vinagre/vinagre-plugin-manager.c:47
 msgid "Enabled"
 msgstr "เปิดใช้"
 
-#: ../vinagre/vinagre-plugin-manager.c:503
+#: ../vinagre/vinagre-plugin-manager.c:504
 msgid "C_onfigure"
 msgstr "_ตั้งค่า"
 
-#: ../vinagre/vinagre-plugin-manager.c:512
+#: ../vinagre/vinagre-plugin-manager.c:513
 msgid "A_ctivate"
 msgstr "_เปิดใช้งาน"
 
-#: ../vinagre/vinagre-plugin-manager.c:523
+#: ../vinagre/vinagre-plugin-manager.c:524
 msgid "Ac_tivate All"
 msgstr "เปิดใช้งาน_ทั้งหมด"
 
-#: ../vinagre/vinagre-plugin-manager.c:528
+#: ../vinagre/vinagre-plugin-manager.c:529
 msgid "_Deactivate All"
 msgstr "ปิ_ดใช้ทั้งหมด"
 
-#: ../vinagre/vinagre-plugin-manager.c:824
+#: ../vinagre/vinagre-plugin-manager.c:825
 msgid "_About Plugin"
 msgstr "เ_กี่ยวกับปลั๊กอิน"
 
-#: ../vinagre/vinagre-plugin-manager.c:828
+#: ../vinagre/vinagre-plugin-manager.c:829
 msgid "C_onfigure Plugin"
 msgstr "_ตั้งค่าปลั๊กอิน"
 
@@ -954,28 +972,28 @@ msgstr "ไม่สามารถ swawn โปรแกรม ssh: %s"
 msgid "Timed out when logging in"
 msgstr "หมดเวลาขณะเข้าระบบ"
 
-#: ../vinagre/vinagre-ssh.c:375 ../vinagre/vinagre-ssh.c:529
-#: ../vinagre/vinagre-ssh.c:612
+#: ../vinagre/vinagre-ssh.c:382 ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:621
 msgid "Permission denied"
 msgstr "ไม่ได้รับอนุญาต"
 
-#: ../vinagre/vinagre-ssh.c:440
+#: ../vinagre/vinagre-ssh.c:448
 msgid "Password dialog canceled"
 msgstr "กล่องโต้ตอบรับรหัสผ่านถูกยกเลิก"
 
-#: ../vinagre/vinagre-ssh.c:463
+#: ../vinagre/vinagre-ssh.c:471
 msgid "Could not send password"
 msgstr "ไม่สามารถส่งรหัสผ่าน"
 
-#: ../vinagre/vinagre-ssh.c:471
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Log In Anyway"
 msgstr "เข้าระบบต่อไป"
 
-#: ../vinagre/vinagre-ssh.c:471
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Cancel Login"
 msgstr "ยกเลิกการเข้าระบบ"
 
-#: ../vinagre/vinagre-ssh.c:480
+#: ../vinagre/vinagre-ssh.c:488
 #, c-format
 msgid ""
 "The identity of the remote computer (%s) is unknown.\n"
@@ -990,35 +1008,35 @@ msgstr ""
 "ข้อความบอกเอกลักษณ์ที่เครื่องฝั่งโน้นส่งมาคือ %s  ถ้าคุณต้องการมั่นใจว่าปลอดภัยที่จะดำเนินการต่อ "
 "กรุณาติดต่อผู้ดูแลระบบ"
 
-#: ../vinagre/vinagre-ssh.c:498
+#: ../vinagre/vinagre-ssh.c:506
 msgid "Login dialog canceled"
 msgstr "กล่องโต้ตอบเข้าระบบถูกยกเลิก"
 
-#: ../vinagre/vinagre-ssh.c:519
+#: ../vinagre/vinagre-ssh.c:527
 msgid "Can't send host identity confirmation"
 msgstr "ไม่สามารถส่งคำยืนยันเอกลักษณ์โฮสต์"
 
-#: ../vinagre/vinagre-ssh.c:554 ../vinagre/vinagre-tab.c:732
+#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:732
 msgid "Error saving the credentials on the keyring."
 msgstr "เกิดข้อผิดพลาดขณะบันทึกรหัสลับลงในพวงกุญแจ"
 
-#: ../vinagre/vinagre-ssh.c:619
+#: ../vinagre/vinagre-ssh.c:628
 msgid "Hostname not known"
 msgstr "ไม่รู้จักชื่อโฮสต์"
 
-#: ../vinagre/vinagre-ssh.c:626
+#: ../vinagre/vinagre-ssh.c:635
 msgid "No route to host"
 msgstr "ไม่มีเส้นทางไปยังโฮสต์"
 
-#: ../vinagre/vinagre-ssh.c:633
+#: ../vinagre/vinagre-ssh.c:642
 msgid "Connection refused by server"
 msgstr "เซิร์ฟเวอร์ปฏิเสธการเชื่อมต่อ"
 
-#: ../vinagre/vinagre-ssh.c:640
+#: ../vinagre/vinagre-ssh.c:649
 msgid "Host key verification failed"
 msgstr "การตรวจสอบกุญแจสำหรับโฮสต์ไม่ผ่าน"
 
-#: ../vinagre/vinagre-ssh.c:676
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Unable to find a valid SSH program"
 msgstr "ไม่พบโปรแกรม SSH ที่ใช้การได้"
 
@@ -1038,12 +1056,13 @@ msgstr "ไม่สามารถจับภาพหน้าจอของ
 msgid "Save Screenshot"
 msgstr "จับภาพหน้าจอ"
 
-#: ../vinagre/vinagre-tab.c:834
+#. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
+#: ../vinagre/vinagre-tab.c:835
 #, c-format
 msgid "Screenshot of %s"
 msgstr "ภาพหน้าจอของ %s"
 
-#: ../vinagre/vinagre-tab.c:885
+#: ../vinagre/vinagre-tab.c:886
 msgid "Error saving screenshot"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกภาพหน้าจอ"
 
@@ -1062,22 +1081,23 @@ msgstr "ไม่สามารถสร้างการเชื่อมต
 msgid "Impossible to accept the stream tube: %s"
 msgstr "ไม่สามารถตอบรับท่อสตรีม: %s"
 
+#. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
 #: ../vinagre/vinagre-tube-handler.c:463
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "ไม่สามารถอ่านชื่อผู้ติดต่อ: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:498
+#: ../vinagre/vinagre-tube-handler.c:500
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "ไม่สามารถอ่านรูปแทนตัว: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:519
+#: ../vinagre/vinagre-tube-handler.c:521
 #, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "%s ต้องการแบ่งปันพื้นโต๊ะให้คุณใช้ร่วม"
 
-#: ../vinagre/vinagre-tube-handler.c:524
+#: ../vinagre/vinagre-tube-handler.c:526
 msgid "Desktop sharing invitation"
 msgstr "คำเชิญเพื่อแบ่งปันพื้นโต๊ะ"
 
@@ -1182,8 +1202,8 @@ msgstr "เพิ่มการเชื่อมต่อปัจจุบั
 
 #. Machine menu
 #: ../vinagre/vinagre-ui.h:92
-msgid "Take screenshot"
-msgstr "จับภาพหน้าจอ"
+msgid "_Take screenshot"
+msgstr "_จับภาพหน้าจอ"
 
 #: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
@@ -1265,26 +1285,26 @@ msgid "Vinagre Website"
 msgstr "เว็บไซต์ Vinagre"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:660
+#: ../vinagre/vinagre-utils.c:654
 #, c-format
 msgid "%s authentication is required"
 msgstr "ต้องการการยืนยันตัวบุคคลสำหรับ %s"
 
-#: ../vinagre/vinagre-window.c:428
+#: ../vinagre/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "การเชื่อมต่อ_ล่าสุด"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:543
+#: ../vinagre/vinagre-window.c:544
 #, c-format
 msgid "Open %s:%d"
 msgstr "เปิด %s:%d"
 
-#: ../vinagre/vinagre-window.c:721
+#: ../vinagre/vinagre-window.c:723
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "เกี่ยวกับคีย์ด่วนเมนูและปุ่มลัดแป้นพิมพ์"
 
-#: ../vinagre/vinagre-window.c:723
+#: ../vinagre/vinagre-window.c:725
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1302,7 +1322,7 @@ msgstr ""
 "\n"
 "ข้อความนี้จะปรากฏเพียงครั้งเดียวเท่านั้น"
 
-#: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
+#: ../vinagre/vinagre-window.c:733 ../vinagre/vinagre-window.c:739
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "เกิดข้อผิดพลาดขณะสร้างแฟ้ม %s: %s"
