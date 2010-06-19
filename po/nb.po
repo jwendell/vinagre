@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 2.29.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-02 11:41+0200\n"
-"PO-Revision-Date: 2010-05-02 11:47+0200\n"
+"POT-Creation-Date: 2010-06-19 16:44+0200\n"
+"PO-Revision-Date: 2010-06-19 16:45+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,10 @@ msgstr "Brukervalg"
 msgid ""
 "This option enables menu accelerators and keyboard shortcuts. For more info "
 "on why you may want to disable them, check the documentation."
-msgstr "Dette valget slår på menyakselleratorer og tastatursnarveier. Se dokumentasjonen for mer informasjon om hvorfor det kan være lurt å slå dem av."
+msgstr ""
+"Dette valget slår på menyakselleratorer og tastatursnarveier. Se "
+"dokumentasjonen for mer informasjon om hvorfor det kan være lurt å slå dem "
+"av."
 
 #: ../data/vinagre.ui.h:14
 msgid "Which machine do you want to connect to?"
@@ -234,7 +237,9 @@ msgstr "Alternativer for SSH"
 msgid ""
 "Optional. If blank, your username will be used. Also, it can be supplied in "
 "the Machine field above, in the form username@hostname."
-msgstr "Valgfri. Hvis denne er tom vil ditt brukernavn brukes. Kan også oppgis i Maskin-feltet over på formen brukernavn@vertsnavn."
+msgstr ""
+"Valgfri. Hvis denne er tom vil ditt brukernavn brukes. Kan også oppgis i "
+"Maskin-feltet over på formen brukernavn@vertsnavn."
 
 #: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
 msgid "Port:"
@@ -308,7 +313,7 @@ msgstr "Alternativer for VNC"
 
 #. View only check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:391
-#: ../plugins/vnc/vinagre-vnc-tab.c:632
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "_View only"
 msgstr "Ba_re se"
 
@@ -359,18 +364,25 @@ msgstr "Meget få farger (3-biter)"
 msgid "Use h_ost"
 msgstr "Bruk ve_rt"
 
-#. Translators: This is the tooltip of the SSH tunneling entry
-#: ../plugins/vnc/vinagre-vnc-plugin.c:465
+#: ../plugins/vnc/vinagre-vnc-plugin.c:466
 msgid "hostname or user@hostname"
 msgstr "vertsnavn eller bruker@vertsnavn"
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:467
+msgid "Supply an alternative port using colon"
+msgstr "Oppgi en alternativ port ved bruk av kolon"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:468
+msgid "For instance: joe@domain.com:5022"
+msgstr "For eksempel: per@domene.no:5022"
+
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:469
+#: ../plugins/vnc/vinagre-vnc-plugin.c:474
 msgid "as a SSH tunnel"
 msgstr "som en SSH-tunnel"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:504
+#: ../plugins/vnc/vinagre-vnc-plugin.c:509
 msgid "VNC Files"
 msgstr "VNC-filer"
 
@@ -394,83 +406,86 @@ msgstr "Ukjent årsak"
 msgid "Error connecting to host."
 msgstr "Feil ved tilkobling til verten."
 
-#. Translators: %s is a host name or IP address; %u is a code error (number). Also, the right sentence would be ... method for host...
+#. Translators: %s is a host name or IP address; %u is a code error (number).
 #: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
-msgid "Authentication method to host %s is unsupported. (%u)"
-msgstr "Autentiseringsmetoden mot verten %s er ikke støttet. (%u)"
+msgid "Authentication method for host %s is unsupported. (%u)"
+msgstr "Autentiseringsmetoden mot vert %s er ikke støttet. (%u)"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
 msgstr "Autentisering er ikke støttet"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:531 ../plugins/vnc/vinagre-vnc-tab.c:548
+#: ../plugins/vnc/vinagre-vnc-tab.c:532 ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "Authentication error"
 msgstr "Feil ved autentisering"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:532
+#: ../plugins/vnc/vinagre-vnc-tab.c:533
 msgid "A username is required in order to access this machine."
 msgstr "Et brukernavn kreves for å få tilgang til denne maskinen."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:549
+#: ../plugins/vnc/vinagre-vnc-tab.c:550
 msgid "A password is required in order to access this machine."
 msgstr "Et passord kreves for å få tilgang til denne maskinen."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:603
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "S_caling"
 msgstr "S_kalering"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:605
 msgid "Fits the remote screen into the current window size"
 msgstr "Tilpass ekstern skjerm til størrelsen på aktivt vindu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:617
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
 msgid "_Keep Aspect Ratio"
 msgstr "Behold høyde-/breddeforhold"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:618
+#: ../plugins/vnc/vinagre-vnc-tab.c:619
 msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "Beholder høyde-/breddeforholdet ved skalering"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:633
+#: ../plugins/vnc/vinagre-vnc-tab.c:634
 msgid "Does not send mouse and keyboard events"
 msgstr "Ikke send hendelser for mus og tastatur"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:646
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "_Original size"
 msgstr "_Opprinnelig størrelse"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:647
+#: ../plugins/vnc/vinagre-vnc-tab.c:648
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Justerer vinduet til samme størrelse som eksternt skrivebord"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:660
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
 msgid "_Refresh Screen"
 msgstr "Oppdate_r skjermen"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:661
+#: ../plugins/vnc/vinagre-vnc-tab.c:662
 msgid "Requests an update of the screen"
 msgstr "Ber om en oppdatering av skjermen"
 
-#. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:683 ../plugins/vnc/vinagre-vnc-tab.c:755
-#: ../plugins/vnc/vinagre-vnc-tab.c:757
-msgid "Send Ctrl-Alt-Del"
-msgstr "Sende Ctrl+alt+del"
-
 #: ../plugins/vnc/vinagre-vnc-tab.c:684
+msgid "_Send Ctrl-Alt-Del"
+msgstr "_Sende Ctrl+Alt+Del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:685
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Sender Ctrl+alt+del til ekstern maskin"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:736 ../plugins/vnc/vinagre-vnc-tab.c:737
+#: ../plugins/vnc/vinagre-vnc-tab.c:737 ../plugins/vnc/vinagre-vnc-tab.c:738
 msgid "Scaling"
 msgstr "Skalering"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:746 ../plugins/vnc/vinagre-vnc-tab.c:747
+#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
 msgid "Read only"
 msgstr "Bare se"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:919
+#. Send Ctrl-alt-del
+#: ../plugins/vnc/vinagre-vnc-tab.c:756 ../plugins/vnc/vinagre-vnc-tab.c:758
+msgid "Send Ctrl-Alt-Del"
+msgstr "Sende Ctrl+alt+del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:920
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -482,7 +497,7 @@ msgstr ""
 "Les filen README, som distribueres med Vinagre, for å finne ut hvordan du "
 "aktiverer denne funksjonen."
 
-#: ../plugins/vnc/vinagre-vnc-tunnel.c:77
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "Kan ikke finne en ledig TCP-port"
@@ -491,11 +506,11 @@ msgstr "Kan ikke finne en ledig TCP-port"
 msgid "VNC support"
 msgstr "VNC-støtte"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:94
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:100
 msgid "IPv4:"
 msgstr "IPv4:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:106
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:112
 msgid ""
 "\n"
 "\n"
@@ -505,7 +520,7 @@ msgstr ""
 "\n"
 "IPv6:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:165
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:171
 #, c-format
 msgid "On the port %d"
 msgstr "På port %d"
@@ -537,11 +552,12 @@ msgstr "Omvendte tilkoblinger"
 msgid "This machine is reachable through the following IP address(es):"
 msgstr "Denne maskinen kan nås via følgende IP-adresse(r):"
 
-#: ../plugins/vnc/vnc.ui.h:5
+#. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Machine->Reverse connections.
+#: ../plugins/vnc/vnc.ui.h:6
 msgid "_Always Enabled"
 msgstr "_Alltid aktivert"
 
-#: ../plugins/vnc/vnc.ui.h:6
+#: ../plugins/vnc/vnc.ui.h:7
 msgid "_Enable Reverse Connections"
 msgstr "Slå på omv_endte tilkoblinger"
 
@@ -565,85 +581,85 @@ msgstr "Åpne visning av eksternt skrivebord"
 msgid "Access your bookmarks"
 msgstr "Åpne dine bokmerker"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:525
+#: ../vinagre/vinagre-bookmarks.c:269 ../vinagre/vinagre-connection.c:525
 #: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokoll %s er ikke støttet."
 
-#: ../vinagre/vinagre-bookmarks.c:343
+#: ../vinagre/vinagre-bookmarks.c:347
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Feil under oppstart av bokmerkene: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:483 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-bookmarks.c:347 ../vinagre/vinagre-bookmarks.c:462
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:765
 #: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
-#: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
+#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
 msgid "Unknown error"
 msgstr "Ukjent feil"
 
-#: ../vinagre/vinagre-bookmarks.c:350
+#: ../vinagre/vinagre-bookmarks.c:354
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Feil under initiering av bokmerker: Filen ser ut til å være tom"
 
-#: ../vinagre/vinagre-bookmarks.c:357
+#: ../vinagre/vinagre-bookmarks.c:361
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr ""
 "Feil under initiering av bokmerkene: Filen er ikke en bokmerkefil fra vinagre"
 
-#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+#: ../vinagre/vinagre-bookmarks.c:423 ../vinagre/vinagre-bookmarks.c:430
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "Feil under lagring av bokmerker: Klarte ikke å lage XML-strukturen"
 
-#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+#: ../vinagre/vinagre-bookmarks.c:437 ../vinagre/vinagre-bookmarks.c:444
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "Feil under lagring av bokmerker: Klarte ikke å initiere XML-strukturen"
 
-#: ../vinagre/vinagre-bookmarks.c:449
+#: ../vinagre/vinagre-bookmarks.c:453
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Feil under lagring av bokmerker: Klarte ikke å sluttføre XML-strukturen"
 
-#: ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks.c:462
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Feil under lagring av bokmerker: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:95
-#: ../vinagre/vinagre-bookmarks-migration.c:102
+#: ../vinagre/vinagre-bookmarks-migration.c:96
+#: ../vinagre/vinagre-bookmarks-migration.c:103
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr "Feil under migrering av bokmerker: Klarte ikke å lage XML-strukturen"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:109
-#: ../vinagre/vinagre-bookmarks-migration.c:116
+#: ../vinagre/vinagre-bookmarks-migration.c:110
+#: ../vinagre/vinagre-bookmarks-migration.c:117
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Feil udner migrering av bokmerker: Klarte ikke å initiere XML-strukturen"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:125
+#: ../vinagre/vinagre-bookmarks-migration.c:126
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Feil under migrering av bokmerker: Klarte ikke å sluttføre XML-strukturen"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-bookmarks-migration.c:218
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Feil under migrering av bokmerker: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:164
+#: ../vinagre/vinagre-bookmarks-migration.c:165
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "Feil under migrering av bokmerker: VNC-tillegg er ikke aktivert"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:218
 msgid "Failed to create the directory"
 msgstr "Klarte ikke å lage katalogen"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:241
+#: ../vinagre/vinagre-bookmarks-migration.c:243
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -651,17 +667,17 @@ msgstr ""
 "Migrerer bokmerkefilen til det nye formatet. Denne operasjonen skal bare "
 "kjøres en gang."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:249
+#: ../vinagre/vinagre-bookmarks-migration.c:251
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Feil under åpning av gammel bokmerkefil: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:250
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:252
+#: ../vinagre/vinagre-bookmarks-migration.c:264
 msgid "Migration cancelled"
 msgstr "Migrering avbrutt"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:259
+#: ../vinagre/vinagre-bookmarks-migration.c:261
 msgid "Could not remove the old bookmarks file"
 msgstr "Kunne ikke fjerne den gamle bokmerkefilen"
 
@@ -716,7 +732,7 @@ msgstr "Feil under fjerning av bokmerke: Oppføring ikke funnet"
 msgid "New Folder"
 msgstr "Ny mappe"
 
-#: ../vinagre/vinagre-cache-prefs.c:53
+#: ../vinagre/vinagre-cache-prefs.c:56
 #, c-format
 msgid "Error while saving preferences: %s"
 msgstr "Feil under lagring av brukervalg: %s"
@@ -743,18 +759,17 @@ msgid_plural "The following files could not be opened:"
 msgstr[0] "Følgende fil kunne ikke bli åpnet:"
 msgstr[1] "Følgende filer kunne ikke bli åpnet:"
 
-#. Translators: Please consider the word "from" instead of "in". I'll fix this phrase for 2.31 (or 3.0)
-#: ../vinagre/vinagre-connect.c:88 ../vinagre/vinagre-connect.c:335
-#: ../vinagre/vinagre-connect.c:447
-msgid "Could not get the active protocol in the protocol list."
-msgstr "Kunne ikke hente aktiv protokoll i listen over protokoller."
+#: ../vinagre/vinagre-connect.c:92 ../vinagre/vinagre-connect.c:339
+#: ../vinagre/vinagre-connect.c:451
+msgid "Could not get the active protocol from the protocol list."
+msgstr "Kunne ikke hente aktiv protokoll fra listen med protokoller."
 
-#: ../vinagre/vinagre-connect.c:316
+#: ../vinagre/vinagre-connect.c:320
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Feil under lagring av historikkfil: %s"
 
-#: ../vinagre/vinagre-connect.c:351
+#: ../vinagre/vinagre-connect.c:355
 msgid "Choose a Remote Desktop"
 msgstr "Velg et eksternt skrivebord"
 
@@ -798,7 +813,7 @@ msgstr "_Fjern fra bokmerkene"
 msgid "Remove current selected connection from bookmarks"
 msgstr "Fjern gjeldende valgte tilkobling fra bokmerkene"
 
-#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:400
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Kunne ikke flette XML-fil for brukergrensesnitt: %s"
@@ -887,30 +902,30 @@ msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Klarte ikke å initiere mDNS-visning: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:461
+#: ../vinagre/vinagre-notebook.c:459
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "Tilkobling til vert %s ble lukket."
 
-#: ../vinagre/vinagre-notebook.c:463
+#: ../vinagre/vinagre-notebook.c:461
 msgid "Connection closed"
 msgstr "Tilkobling lukket"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:482
+#: ../vinagre/vinagre-notebook.c:480
 #, c-format
-msgid "Authentication to host %s has failed"
-msgstr "Autentisering mot vert %s feilet"
+msgid "Authentication for host %s has failed"
+msgstr "Autentisering for vert %s feilet"
 
-#: ../vinagre/vinagre-notebook.c:488
+#: ../vinagre/vinagre-notebook.c:486
 msgid "Authentication failed"
 msgstr "Autentisering feilet"
 
-#: ../vinagre/vinagre-notebook.c:526
+#: ../vinagre/vinagre-notebook.c:524
 msgid "Connecting..."
-msgstr "Kobler til ..."
+msgstr "Kobler til..."
 
-#: ../vinagre/vinagre-notebook.c:553 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:551 ../vinagre/vinagre-tab.c:325
 msgid "Close connection"
 msgstr "Lukk tilkobling"
 
@@ -972,28 +987,28 @@ msgstr "Kan ikke starte ssh-program: %s"
 msgid "Timed out when logging in"
 msgstr "Tidsavbrudd ved innlogging"
 
-#: ../vinagre/vinagre-ssh.c:375 ../vinagre/vinagre-ssh.c:529
-#: ../vinagre/vinagre-ssh.c:612
+#: ../vinagre/vinagre-ssh.c:382 ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:621
 msgid "Permission denied"
 msgstr "Tilgang nektet"
 
-#: ../vinagre/vinagre-ssh.c:440
+#: ../vinagre/vinagre-ssh.c:448
 msgid "Password dialog canceled"
 msgstr "Passorddialog avbrutt"
 
-#: ../vinagre/vinagre-ssh.c:463
+#: ../vinagre/vinagre-ssh.c:471
 msgid "Could not send password"
 msgstr "Kunne ikke sende passord"
 
-#: ../vinagre/vinagre-ssh.c:471
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Log In Anyway"
 msgstr "Logg inn likevel"
 
-#: ../vinagre/vinagre-ssh.c:471
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Cancel Login"
 msgstr "Avbrutt innlogging"
 
-#: ../vinagre/vinagre-ssh.c:480
+#: ../vinagre/vinagre-ssh.c:488
 #, c-format
 msgid ""
 "The identity of the remote computer (%s) is unknown.\n"
@@ -1009,35 +1024,35 @@ msgstr ""
 "absolutt sikker på at det er sikkert å fortsette kan du kontakte "
 "systemadministrator."
 
-#: ../vinagre/vinagre-ssh.c:498
+#: ../vinagre/vinagre-ssh.c:506
 msgid "Login dialog canceled"
 msgstr "Innloggingsdialog avbrutt"
 
-#: ../vinagre/vinagre-ssh.c:519
+#: ../vinagre/vinagre-ssh.c:527
 msgid "Can't send host identity confirmation"
 msgstr "Kan ikke sende bekreftelse på vertsidentitet"
 
-#: ../vinagre/vinagre-ssh.c:554 ../vinagre/vinagre-tab.c:732
+#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:732
 msgid "Error saving the credentials on the keyring."
 msgstr "Feil under lagring av autentiseringsinformasjon på nøkkelringen."
 
-#: ../vinagre/vinagre-ssh.c:619
+#: ../vinagre/vinagre-ssh.c:628
 msgid "Hostname not known"
 msgstr "Vertsnavn ikke kjent"
 
-#: ../vinagre/vinagre-ssh.c:626
+#: ../vinagre/vinagre-ssh.c:635
 msgid "No route to host"
 msgstr "Ingen rute til vert"
 
-#: ../vinagre/vinagre-ssh.c:633
+#: ../vinagre/vinagre-ssh.c:642
 msgid "Connection refused by server"
 msgstr "Tilkobling nektet av tjener"
 
-#: ../vinagre/vinagre-ssh.c:640
+#: ../vinagre/vinagre-ssh.c:649
 msgid "Host key verification failed"
 msgstr "Verifisering av vertsnøkkel feilet"
 
-#: ../vinagre/vinagre-ssh.c:677
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Unable to find a valid SSH program"
 msgstr "Kan ikke finne et gyldig SSH-program"
 
@@ -1203,8 +1218,8 @@ msgstr "Legg til gjeldende tilkobling til dine bokmerker"
 
 #. Machine menu
 #: ../vinagre/vinagre-ui.h:92
-msgid "Take screenshot"
-msgstr "Ta skjermbilde"
+msgid "_Take screenshot"
+msgstr "_Ta skjermbilde"
 
 #: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
@@ -1290,26 +1305,26 @@ msgid "Vinagre Website"
 msgstr "Hjemmeside for Vinagre"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:653
+#: ../vinagre/vinagre-utils.c:654
 #, c-format
 msgid "%s authentication is required"
 msgstr "%s autentisering kreves"
 
-#: ../vinagre/vinagre-window.c:428
+#: ../vinagre/vinagre-window.c:429
 msgid "_Recent connections"
 msgstr "_Siste tilkoblinger"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:543
+#: ../vinagre/vinagre-window.c:544
 #, c-format
 msgid "Open %s:%d"
 msgstr "Åpne %s:%d"
 
-#: ../vinagre/vinagre-window.c:721
+#: ../vinagre/vinagre-window.c:723
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "Om menyakselleratorer og tastatursnarveier"
 
-#: ../vinagre/vinagre-window.c:723
+#: ../vinagre/vinagre-window.c:725
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1320,13 +1335,16 @@ msgid ""
 "\n"
 "This message will appear only once."
 msgstr ""
-"Vinagre's menyakselleratorer og tastatursnarveier er slått av som forvalg. Dette gjøres for å unngå at tastetrykkene fanges opp av programmet slik at de kan sendes til ekstern maskin i stedet.\n"
+"Vinagre's menyakselleratorer og tastatursnarveier er slått av som forvalg. "
+"Dette gjøres for å unngå at tastetrykkene fanges opp av programmet slik at "
+"de kan sendes til ekstern maskin i stedet.\n"
 "\n"
-"Du kan endre denne oppførselen gjennom brukervalgdialogen. Se dokumentasjonen for mer informasjon.\n"
+"Du kan endre denne oppførselen gjennom brukervalgdialogen. Se "
+"dokumentasjonen for mer informasjon.\n"
 "\n"
 "Denne meldingen vises kun en gang."
 
-#: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
+#: ../vinagre/vinagre-window.c:733 ../vinagre/vinagre-window.c:739
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Feil under oppretting av fil %s: %s"
