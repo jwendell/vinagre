@@ -861,13 +861,7 @@ vinagre_plugins_engine_configure_plugin (VinagrePluginsEngine *engine,
 	gtk_window_set_transient_for (GTK_WINDOW (conf_dlg),
 				      parent);
 
-	wg = parent->group;		      
-	if (wg == NULL)
-	{
-		wg = gtk_window_group_new ();
-		gtk_window_group_add_window (wg, parent);
-	}
-			
+	wg = gtk_window_get_group (parent);
 	gtk_window_group_add_window (wg,
 				     GTK_WINDOW (conf_dlg));
 		

@@ -112,10 +112,7 @@ vinagre_utils_show_many_errors (const gchar *title, GSList *items, GtkWindow *pa
 void
 vinagre_utils_toggle_widget_visible (GtkWidget *widget)
 {
-  if (GTK_WIDGET_VISIBLE (widget))
-    gtk_widget_hide (widget);
-  else
-    gtk_widget_show_all (widget);
+  gtk_widget_set_visible (widget, !gtk_widget_get_visible (widget));
 }
 
 const gchar *
@@ -328,9 +325,9 @@ vinagre_utils_get_window_workspace (GtkWindow *gtkwindow)
 	guint ret = VINAGRE_ALL_WORKSPACES;
 
 	g_return_val_if_fail (GTK_IS_WINDOW (gtkwindow), 0);
-	g_return_val_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (gtkwindow)), 0);
+	g_return_val_if_fail (gtk_widget_get_realized (GTK_WIDGET (gtkwindow)), 0);
 
-	window = GTK_WIDGET (gtkwindow)->window;
+	window = gtk_widget_get_window (GTK_WIDGET (gtkwindow));
 	display = gdk_drawable_get_display (window);
 
 	gdk_error_trap_push ();
@@ -616,10 +613,10 @@ control_ok_button (GtkEditable *entry, ControlOKButton *data)
 {
   gboolean enabled = TRUE;
 
-  if (GTK_WIDGET_VISIBLE (data->uname))
+  if (gtk_widget_get_visible (data->uname))
     enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->uname)) > 0;
 
-  if (GTK_WIDGET_VISIBLE (data->pw))
+  if (gtk_widget_get_visible (data->pw))
     enabled = enabled && gtk_entry_get_text_length (GTK_ENTRY (data->pw)) > 0;
 
   gtk_widget_set_sensitive (data->button, enabled);

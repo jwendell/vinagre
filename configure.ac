@@ -74,7 +74,7 @@ GNOME_DOC_INIT
 #*******************************************************************************
 
 GLIB_REQUIRED=2.17.0
-GTK_REQUIRED=2.20.0
+GTK_REQUIRED=2.21.3
 GCONF_REQUIRED=2.16.0
 GTHREAD_REQUIRED=2.0.0
 GTK_VNC_REQUIRED=0.3.10

@@ -166,13 +166,13 @@ vinagre_bacon_message_received (const char *message,
    * terminal. We also need to make sure that the window
    * has been realized otherwise it will not work. lame.
    */
-  if (!GTK_WIDGET_REALIZED (window))
+  if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     gtk_widget_realize (GTK_WIDGET (window));
 
   if (startup_timestamp <= 0)
-    startup_timestamp = gdk_x11_get_server_time (GTK_WIDGET (window)->window);
+    startup_timestamp = gdk_x11_get_server_time (gtk_widget_get_window GTK_WIDGET ((window)));
 
-  gdk_x11_window_set_user_time (GTK_WIDGET (window)->window,
+  gdk_x11_window_set_user_time (gtk_widget_get_window (GTK_WIDGET (window)),
 				startup_timestamp);
   gtk_window_present (GTK_WINDOW (window));
 

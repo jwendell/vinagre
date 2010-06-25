@@ -221,6 +221,7 @@ menu_position (GtkMenu    *menu,
   gint wx, wy;
   GtkRequisition requisition;
   GtkWidget *w;
+  GtkAllocation allocation;
 
   w = fav->priv->tree;
   path = get_current_path (fav);
@@ -233,17 +234,18 @@ menu_position (GtkMenu    *menu,
   wx = rect.x;
   wy = rect.y;
 
-  gdk_window_get_origin (w->window, x, y);
+  gdk_window_get_origin (gtk_widget_get_window (w), x, y);
 	
   gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+  gtk_widget_get_allocation (w, &allocation);
 
   if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
-    *x += w->allocation.x + w->allocation.width - requisition.width - 10;
+    *x += allocation.x + allocation.width - requisition.width - 10;
   else
-    *x += w->allocation.x + 10 ;
+    *x += allocation.x + 10 ;
 
   wy = MAX (*y + 5, *y + wy + 5);
-  wy = MIN (wy, *y + w->allocation.height - requisition.height - 5);
+  wy = MIN (wy, *y + allocation.height - requisition.height - 5);
 	
   *y = wy;
 
@@ -726,12 +728,12 @@ drag_data_received_handl (GtkWidget *widget,
   gchar *_sdata;
   gboolean success = FALSE;
 
-  if ((selection_data != NULL) && (selection_data->length >= 0))
+  if ((selection_data != NULL) && (gtk_selection_data_get_length (selection_data) >= 0))
     {
       switch (target_type)
 	{
 	  case TARGET_VINAGRE:
-	    _sdata = (gchar*)selection_data-> data;
+	    _sdata = (gchar*)gtk_selection_data_get_data (selection_data);
 	    success = TRUE;
 	   break;
 
@@ -788,12 +790,14 @@ drag_drop_handl (GtkWidget *widget,
 {
   gboolean is_valid_drop_site;
   GdkAtom  target_type;
+  GList    *targets;
 
   is_valid_drop_site = FALSE;
+  targets = gdk_drag_context_list_targets (context);
 
-  if (context->targets)
+  if (targets)
     {
-      target_type = GDK_POINTER_TO_ATOM (g_list_nth_data (context->targets, TARGET_VINAGRE));
+      target_type = GDK_POINTER_TO_ATOM (g_list_nth_data (targets, TARGET_VINAGRE));
       gtk_drag_get_data (widget,
 			 context,
 			 target_type,

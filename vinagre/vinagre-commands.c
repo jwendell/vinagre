@@ -250,7 +250,7 @@ vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 
   vinagre_cache_prefs_set_boolean ("window",
 				   "toolbar-visible",
-				   GTK_WIDGET_VISIBLE (window->priv->toolbar));
+				   gtk_widget_get_visible (window->priv->toolbar));
 }
 
 void
@@ -263,7 +263,7 @@ vinagre_cmd_view_show_statusbar	(GtkAction     *action,
 
   vinagre_cache_prefs_set_boolean ("window",
 				   "statusbar-visible",
-				   GTK_WIDGET_VISIBLE (window->priv->statusbar));
+				   gtk_widget_get_visible (window->priv->statusbar));
 }
 
 void
@@ -276,7 +276,7 @@ vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
 
   vinagre_cache_prefs_set_boolean ("window",
 				   "side-panel-visible",
-				   GTK_WIDGET_VISIBLE (window->priv->fav_panel));
+				   gtk_widget_get_visible (window->priv->fav_panel));
 }
 
 void

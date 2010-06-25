@@ -206,7 +206,7 @@ vinagre_app_get_active_window (VinagreApp *app)
    * first one shows its window.
    */
 
-  if (!GTK_WIDGET_REALIZED (GTK_WIDGET (app->priv->active_window)))
+  if (!gtk_widget_get_realized (GTK_WIDGET (app->priv->active_window)))
     gtk_widget_realize (GTK_WIDGET (app->priv->active_window));
 
   return app->priv->active_window;
@@ -249,8 +249,8 @@ is_in_viewport (VinagreWindow *window,
     return FALSE;
 
   /* Check for viewport match */
-  gdk_window_get_position (GTK_WIDGET (window)->window, &x, &y);
-  gdk_drawable_get_size (GTK_WIDGET (window)->window, &width, &height);
+  gdk_window_get_position (gtk_widget_get_window (GTK_WIDGET (window)), &x, &y);
+  gdk_drawable_get_size (gtk_widget_get_window (GTK_WIDGET (window)), &width, &height);
   vinagre_utils_get_current_viewport (screen, &vp_x, &vp_y);
   x += vp_x;
   y += vp_y;

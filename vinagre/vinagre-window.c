@@ -103,15 +103,15 @@ vinagre_window_show_hide_controls (VinagreWindow *window)
 {
   if (window->priv->fullscreen)
     {
-      window->priv->fav_panel_visible = GTK_WIDGET_VISIBLE (window->priv->fav_panel);
+      window->priv->fav_panel_visible = gtk_widget_get_visible (window->priv->fav_panel);
       gtk_widget_hide (window->priv->fav_panel);
 
-      window->priv->toolbar_visible = GTK_WIDGET_VISIBLE (window->priv->toolbar);
+      window->priv->toolbar_visible = gtk_widget_get_visible (window->priv->toolbar);
       gtk_widget_hide (window->priv->toolbar);
 
       gtk_widget_hide (window->priv->menubar);
 
-      window->priv->statusbar_visible = GTK_WIDGET_VISIBLE (window->priv->statusbar);
+      window->priv->statusbar_visible = gtk_widget_get_visible (window->priv->statusbar);
       gtk_widget_hide (window->priv->statusbar);
 
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), FALSE);

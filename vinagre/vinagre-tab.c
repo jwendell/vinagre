@@ -270,10 +270,10 @@ active_connections_button_clicked  (GtkToolButton *button,
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 
       label = vinagre_connection_get_best_name (conn);
-      if ((l->data == tab) && (GTK_IS_LABEL (GTK_BIN (item)->child)))
+      if ((l->data == tab) && (GTK_IS_LABEL (gtk_bin_get_child (GTK_BIN (item)))))
 	{
 	  str = g_strdup_printf ("<b>%s</b>", label);
-	  gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (item)->child), TRUE);
+	  gtk_label_set_use_markup (GTK_LABEL (gtk_bin_get_child GTK_BIN (item)), TRUE);
 	  g_free (label);
 	  label = str;
 	}
@@ -316,7 +316,7 @@ setup_layout (VinagreTab *tab)
 
   tab->priv->toolbar = gtk_toolbar_new ();
   gtk_toolbar_set_show_arrow (GTK_TOOLBAR (tab->priv->toolbar), FALSE);
-  GTK_WIDGET_SET_FLAGS (tab->priv->toolbar, GTK_NO_SHOW_ALL);
+  gtk_widget_set_no_show_all (tab->priv->toolbar, TRUE);
 
   gtk_toolbar_set_style (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOLBAR_BOTH_HORIZ);
 

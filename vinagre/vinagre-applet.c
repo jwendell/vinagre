@@ -99,34 +99,40 @@ vinagre_applet_get_icon (VinagreApplet *applet)
 static void
 vinagre_applet_check_size (VinagreApplet *applet)
 {
+  GtkAllocation allocation;
+
+  gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
+
   /* we don't use the size function here, but the yet allocated size because the
      size value is false (kind of rounded) */
   if (PANEL_APPLET_VERTICAL(panel_applet_get_orient (PANEL_APPLET (applet))))
     {
-      if (applet->size != GTK_WIDGET(applet)->allocation.width)
+      if (applet->size != allocation.width)
 	{
-	  applet->size = GTK_WIDGET(applet)->allocation.width;
+	  applet->size = allocation.width;
 	  vinagre_applet_get_icon (applet);
 	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->size, applet->icon_height + 2);
 	}
 
       /* Adjusting in case the icon size has changed */
-      if (GTK_WIDGET(applet)->allocation.height < applet->icon_height + 2)
+      gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
+      if (allocation.height < applet->icon_height + 2)
 	{
 	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->size, applet->icon_height + 2);
 	}
     }
   else
     {
-      if (applet->size != GTK_WIDGET(applet)->allocation.height)
+      if (applet->size != allocation.height)
 	{
-	  applet->size = GTK_WIDGET(applet)->allocation.height;
+	  applet->size = allocation.height;
 	  vinagre_applet_get_icon (applet);
 	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->icon_width + 2, applet->size);
 	}
 
       /* Adjusting in case the icon size has changed */
-      if (GTK_WIDGET(applet)->allocation.width < applet->icon_width + 2)
+      gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
+      if (allocation.width < applet->icon_width + 2)
 	{
 	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->icon_width + 2, applet->size);
 	}
@@ -140,12 +146,14 @@ vinagre_applet_draw_cb (VinagreApplet *applet)
   GdkColor color;
   GdkGC *gc;
   GdkPixmap *background;
+  GtkAllocation allocation;
+  GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (applet));
 
-  if (GTK_WIDGET (applet)->window == NULL)
+  if (window == NULL)
     return FALSE;
 
   /* Clear the window so we can draw on it later */
-  gdk_window_clear (GTK_WIDGET(applet)->window);
+  gdk_window_clear (window);
 
   /* retrieve applet size */
   vinagre_applet_get_icon (applet);
@@ -157,17 +165,18 @@ vinagre_applet_draw_cb (VinagreApplet *applet)
   if (applet->icon == NULL)
     return FALSE;
 
-  w = GTK_WIDGET(applet)->allocation.width;
-  h = GTK_WIDGET(applet)->allocation.height;
+  gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
+  w = allocation.width;
+  h = allocation.height;
 
-  gc = gdk_gc_new (GTK_WIDGET(applet)->window);
+  gc = gdk_gc_new (window);
 
   /* draw pixmap background */
   bg_type = panel_applet_get_background (PANEL_APPLET (applet), &color, &background);
   if (bg_type == PANEL_PIXMAP_BACKGROUND)
     {
       /* fill with given background pixmap */
-      gdk_draw_drawable (GTK_WIDGET(applet)->window, gc, background, 0, 0, 0, 0, w, h);
+      gdk_draw_drawable (window, gc, background, 0, 0, 0, 0, w, h);
     }
 	
   /* draw color background */
@@ -175,11 +184,11 @@ vinagre_applet_draw_cb (VinagreApplet *applet)
     {
       gdk_gc_set_rgb_fg_color (gc,&color);
       gdk_gc_set_fill (gc,GDK_SOLID);
-      gdk_draw_rectangle (GTK_WIDGET(applet)->window, gc, TRUE, 0, 0, w, h);
+      gdk_draw_rectangle (window, gc, TRUE, 0, 0, w, h);
     }
 
   /* draw icon at center */
-  gdk_draw_pixbuf (GTK_WIDGET(applet)->window, gc, applet->icon,
+  gdk_draw_pixbuf (window, gc, applet->icon,
 		   0, 0, (w - applet->icon_width)/2, (h - applet->icon_height)/2,
 		   applet->icon_width, applet->icon_height,
 		   GDK_RGB_DITHER_NONE, 0, 0);
@@ -219,9 +228,10 @@ menu_position (GtkMenu    *menu,
 {
   int applet_height, applet_width;
   GtkRequisition requisition;
+  GdkWindow *window = gtk_widget_get_window (applet);
 
-  gdk_window_get_origin (applet->window, x, y);
-  gdk_drawable_get_size (applet->window, &applet_width, &applet_height);
+  gdk_window_get_origin (window, x, y);
+  gdk_drawable_get_size (window, &applet_width, &applet_height);
   gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
   switch (panel_applet_get_orient (PANEL_APPLET (applet)))

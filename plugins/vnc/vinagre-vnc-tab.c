@@ -577,7 +577,7 @@ vnc_pointer_ungrab_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
 static void
 vnc_bell_cb (VncDisplay *vnc, VinagreVncTab *vnc_tab)
 {
-  gdk_window_beep (GTK_WIDGET (vnc_tab)->window);
+  gdk_window_beep (gtk_widget_get_window (GTK_WIDGET (vnc_tab)));
 }
 
 static void
