@@ -40,10 +40,12 @@ struct _ViewAutoDrawerPrivate
    gboolean inputUngrabbed;
 
    gboolean opened;
+   gboolean forceClosing;
 
    gboolean fill;
    gint offset;
 
+   guint closeConnection;
    guint delayConnection;
    guint delayValue;
    guint overlapPixels;
@@ -80,6 +82,7 @@ ViewAutoDrawerEnforce(ViewAutoDrawer *that, // IN
                       gboolean animate)     // IN
 {
    double fraction;
+   GtkAllocation allocation;
    ViewAutoDrawerPrivate *priv = that->priv;
 
    if (!priv->active) {
@@ -92,8 +95,15 @@ ViewAutoDrawerEnforce(ViewAutoDrawer *that, // IN
    g_assert(GTK_IS_WIDGET(priv->over));
 
    ViewOvBox_SetMin(VIEW_OV_BOX(that), priv->noOverlapPixels);
-   fraction = priv->opened
-      ? 1 : ((double)priv->overlapPixels / priv->over->allocation.height);
+
+   // The forceClosing flag overrides the opened flag.
+   if (priv->opened && !priv->forceClosing) {
+      fraction = 1;
+   } else {
+      gtk_widget_get_allocation (priv->over, &allocation);
+      fraction = ((double)priv->overlapPixels / allocation.height);
+   }
+
    if (!animate) {
       ViewOvBox_SetFraction(VIEW_OV_BOX(that), fraction);
    }
@@ -130,6 +140,33 @@ ViewAutoDrawerOnEnforceDelay(ViewAutoDrawer *that) // IN
 /*
  *-----------------------------------------------------------------------------
  *
+ * ViewAutoDrawerOnCloseDelay --
+ *
+ *      Callback fired when the drawer is closed manually. This prevents the
+ *      drawer from reopening right away.
+ *
+ * Results:
+ *      FALSE to indicate timer should not repeat.
+ *
+ * Side effects:
+ *      None
+ *
+ *-----------------------------------------------------------------------------
+ */
+
+static gboolean
+ViewAutoDrawerOnCloseDelay(ViewAutoDrawer *that) // IN
+{
+   that->priv->closeConnection = 0;
+   that->priv->forceClosing = FALSE;
+
+   return FALSE;
+}
+
+
+/*
+ *-----------------------------------------------------------------------------
+ *
  * ViewAutoDrawerUpdate --
  *
  *      Decide whether an AutoDrawer should be opened or closed, and enforce
@@ -151,6 +188,7 @@ ViewAutoDrawerUpdate(ViewAutoDrawer *that, // IN
    ViewAutoDrawerPrivate *priv = that->priv;
    GtkWidget *toplevel = gtk_widget_get_toplevel(GTK_WIDGET(that));
    GtkWindow *window;
+   GtkAllocation allocation;
 
    if (!toplevel || !gtk_widget_is_toplevel(toplevel)) {
       // The autoDrawer cannot function properly without a toplevel.
@@ -181,10 +219,11 @@ ViewAutoDrawerUpdate(ViewAutoDrawer *that, // IN
       int y;
 
       gtk_widget_get_pointer(priv->evBox, &x, &y);
+      gtk_widget_get_allocation(priv->evBox, &allocation);
       g_assert(gtk_container_get_border_width(   GTK_CONTAINER(priv->evBox))
                                               == 0);
-      if (   (guint)x < (guint)priv->evBox->allocation.width
-          && (guint)y < (guint)priv->evBox->allocation.height) {
+      if (   (guint)x < (guint)allocation.width
+          && (guint)y < (guint)allocation.height) {
          priv->opened = TRUE;
       }
    }
@@ -211,15 +250,15 @@ ViewAutoDrawerUpdate(ViewAutoDrawer *that, // IN
    if (!priv->inputUngrabbed) {
       GtkWidget *grabbed = NULL;
 
-      if (window->group && window->group->grabs) {
-         grabbed = GTK_WIDGET(window->group->grabs->data);
+      if (gtk_window_has_group (window)) {
+        GtkWindowGroup *group = gtk_window_get_group (window);
+        grabbed = gtk_window_group_get_current_grab (group);
       }
       if (!grabbed) {
          grabbed = gtk_grab_get_current();
       }
-//      g_assert(grabbed);
 
-      if (GTK_IS_MENU(grabbed)) {
+      if (grabbed && GTK_IS_MENU(grabbed)) {
          /*
           * With cascading menus, the deepest menu owns the grab. Traverse the
           * menu hierarchy up until we reach the attach widget for the whole
@@ -254,7 +293,7 @@ ViewAutoDrawerUpdate(ViewAutoDrawer *that, // IN
          }
       }
 
-      if (gtk_widget_is_ancestor(grabbed, priv->evBox)) {
+      if (grabbed && gtk_widget_is_ancestor(grabbed, priv->evBox)) {
          /*
           * Override the default 'immediate' to make sure the 'over' widget
           * immediately appears along with the widget the grab happens on
@@ -269,7 +308,10 @@ ViewAutoDrawerUpdate(ViewAutoDrawer *that, // IN
    if (priv->delayConnection) {
       g_source_remove(priv->delayConnection);
    }
-   if (immediate) {
+
+   if (priv->forceClosing) {
+      ViewAutoDrawerEnforce(that, TRUE);
+   } else if (immediate) {
       ViewAutoDrawerEnforce(that, FALSE);
    } else {
       priv->delayConnection = g_timeout_add(priv->delayValue,
@@ -332,7 +374,7 @@ ViewAutoDrawerOnGrabNotify(GtkWidget *evBox,     // IN: Unused
                            ViewAutoDrawer *that) // IN
 {
    ViewAutoDrawerPrivate *priv = that->priv;
-   
+
    priv->inputUngrabbed = ungrabbed;
 
    /*
@@ -481,7 +523,7 @@ ViewAutoDrawerRefreshPacking(ViewAutoDrawer *that) // IN
    expand = (that->priv->fill || (that->priv->offset < 0));
    fill = that->priv->fill;
    padding = (expand || fill) ? 0 : that->priv->offset;
-   
+
    gtk_box_set_child_packing(GTK_BOX(that), that->priv->evBox,
                              expand, fill, padding, GTK_PACK_START);
 }
@@ -516,6 +558,7 @@ ViewAutoDrawerInit(GTypeInstance *instance, // IN
 
    priv->active = TRUE;
    priv->pinned = FALSE;
+   priv->forceClosing = FALSE;
    priv->inputUngrabbed = TRUE;
    priv->delayConnection = 0;
    priv->delayValue = 250;
@@ -679,13 +722,13 @@ ViewAutoDrawer_New(void)
  *
  *      Set the response time of an AutoDrawer in ms., i.e. the time that
  *      elapses between:
- *      - when the AutoDrawer notices a change that can impact the outcome of 
+ *      - when the AutoDrawer notices a change that can impact the outcome of
  *        the decision to open or close the drawer,
  *      and
  *      - when the AutoDrawer makes such decision.
  *
- *      Users move the mouse inaccurately. If they temporarily move the mouse in 
- *      or out of the AutoDrawer for less than the reponse time, their move will 
+ *      Users move the mouse inaccurately. If they temporarily move the mouse in
+ *      or out of the AutoDrawer for less than the reponse time, their move will
  *      be ignored.
  *
  * Results:
@@ -886,4 +929,53 @@ ViewAutoDrawer_SetOffset(ViewAutoDrawer *that, // IN
 
    that->priv->offset = offset;
    ViewAutoDrawerRefreshPacking(that);
+}
+
+
+/*
+ *-----------------------------------------------------------------------------
+ *
+ * ViewAutoDrawer_Close --
+ *
+ *      Closes the drawer. This will not unset the pinned state.
+ *
+ * Results:
+ *      None
+ *
+ * Side effects:
+ *      Drawer state is updated. If there is a focused widget inside the
+ *      drawer, unfocus it.
+ *
+ *-----------------------------------------------------------------------------
+ */
+
+void
+ViewAutoDrawer_Close(ViewAutoDrawer *that)   // IN
+{
+   GtkWindow *window;
+   GtkWidget *focus;
+   GtkWidget *toplevel;
+
+   g_return_if_fail(VIEW_IS_AUTODRAWER(that));
+   toplevel = gtk_widget_get_toplevel(GTK_WIDGET(that));
+
+   if (!toplevel || !gtk_widget_is_toplevel(toplevel)) {
+      // The autoDrawer cannot function properly without a toplevel.
+      return;
+   }
+   window = GTK_WINDOW(toplevel);
+
+   focus = gtk_window_get_focus(window);
+   if (focus && gtk_widget_is_ancestor(focus, that->priv->evBox)) {
+      gtk_window_set_focus(window, NULL);
+   }
+
+   that->priv->forceClosing = TRUE;
+   that->priv->closeConnection =
+      g_timeout_add(ViewDrawer_GetCloseTime(&that->parent) +
+                    that->priv->delayValue,
+      (GSourceFunc)ViewAutoDrawerOnCloseDelay, that);
+
+   /* This change happens programmatically. Always react to it immediately. */
+   ViewAutoDrawerUpdate(that, TRUE);
 }
