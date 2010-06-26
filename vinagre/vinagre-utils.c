@@ -112,7 +112,10 @@ vinagre_utils_show_many_errors (const gchar *title, GSList *items, GtkWindow *pa
 void
 vinagre_utils_toggle_widget_visible (GtkWidget *widget)
 {
-  gtk_widget_set_visible (widget, !gtk_widget_get_visible (widget));
+  if (gtk_widget_get_visible (widget))
+    gtk_widget_hide (widget);
+  else
+    gtk_widget_show_all (widget);
 }
 
 const gchar *
