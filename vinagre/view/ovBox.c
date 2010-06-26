@@ -121,7 +121,7 @@ ViewOvBoxInit(GTypeInstance *instance, // IN
    that->priv = VIEW_OV_BOX_GET_PRIVATE(that);
    priv = that->priv;
 
-   gtk_widget_set_has_window (GTK_WIDGET (that), FALSE);
+   gtk_widget_set_has_window (GTK_WIDGET (that), TRUE);
 
    priv->underWin = NULL;
    priv->under = NULL;
