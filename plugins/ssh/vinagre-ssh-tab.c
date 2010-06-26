@@ -53,7 +53,17 @@ ssh_tab_get_tooltip (VinagreTab *tab)
 static GdkPixbuf *
 ssh_tab_get_screenshot (VinagreTab *tab)
 {
-  return NULL;
+  GdkPixbuf *pixbuf;
+  GdkPixmap *pixmap = gtk_widget_get_snapshot (VINAGRE_SSH_TAB (tab)->priv->vte, NULL);
+
+  pixbuf = gdk_pixbuf_get_from_drawable (NULL,
+					 GDK_DRAWABLE (pixmap),
+					 gdk_colormap_get_system (),
+					 0, 0, 0, 0,
+					 -1, -1);
+
+  g_object_unref (pixmap);
+  return pixbuf;
 }
 
 static gboolean
