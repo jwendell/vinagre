@@ -1,12 +1,17 @@
 DIST_SUBDIRS =	\
   vnc		\
-  ssh
+  ssh		\
+  rdp
 
 SUBDIRS = 		\
   vnc
 
 if SSH
 SUBDIRS += ssh
+endif
+
+if RDP
+SUBDIRS += rdp
 endif
 
 -include $(top_srcdir)/git.mk
