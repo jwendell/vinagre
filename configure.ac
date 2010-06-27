@@ -157,26 +157,6 @@ if test "x$enable_ssh" = "xyes" ; then
 fi
 AM_CONDITIONAL(SSH, test "x$enable_ssh" = "xyes")
 
-dnl ****************************
-dnl *** Checks for RDP stuff ***
-dnl ****************************
-
-AC_ARG_ENABLE(rdp,
-              AS_HELP_STRING([--enable-rdp],
-                             [Enable RDP plugin (default=yes)]),
-              enable_rdp=${enableval},
-              enable_rdp=yes)
-
-if test "x$enable_rdp" = "xyes" ; then
-  AC_PATH_PROG(RDESKTOP_PROGRAM, rdesktop, "rdesktop")
-  PKG_CHECK_MODULES(RDP,\
-  libxml-2.0 >= $XML_REQUIRED)
-  AC_SUBST(RDP_CFLAGS)
-  AC_SUBST(RDP_LIBS)
-  AC_DEFINE([VINAGRE_ENABLE_RDP],[1],[We want rdp support])
-fi
-AM_CONDITIONAL(RDP, test "x$enable_rdp" = "xyes")
-
 # Check for telepathy
 AC_ARG_ENABLE(telepathy,
               AS_HELP_STRING([--enable-telepathy=@<:@no/yes/auto@:>@],
@@ -303,7 +283,6 @@ plugin-loaders/c/Makefile
 plugins/Makefile
 plugins/vnc/Makefile
 plugins/ssh/Makefile
-plugins/rdp/Makefile
 vinagre/Makefile
 vinagre/view/Makefile
 ])
@@ -324,5 +303,4 @@ Configure summary:
 	GNOME Panel applet..........:  ${enable_applet}
 	Telepathy support ..........:  ${have_telepathy}
 	SSH plugin .................:  ${enable_ssh}
-	RDP plugin .................:  ${enable_rdp}
 "
