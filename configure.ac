@@ -72,12 +72,12 @@ GNOME_DOC_INIT
 # Check required GNOME libraries
 #*******************************************************************************
 
-GLIB_REQUIRED=2.17.0
-GTK_REQUIRED=2.21.3
+GLIB_REQUIRED=2.25.11
+GTK_REQUIRED=2.90.4
 GCONF_REQUIRED=2.16.0
 GTHREAD_REQUIRED=2.0.0
 GTK_VNC_REQUIRED=0.3.10
-AVAHI_REQUIRED=0.6.22
+AVAHI_REQUIRED=0.6.26
 PANEL_REQUIRED_VERSION=2.0.0
 TELEPATHY_GLIB_REQUIRED=0.11.6
 XML_REQUIRED=2.6.31
@@ -91,7 +91,7 @@ AC_ARG_ENABLE(avahi,
 
 if test "x$enable_avahi" = "xyes" ; then
   PKG_CHECK_MODULES(AVAHI,\
-  avahi-ui >= $AVAHI_REQUIRED\
+  avahi-ui-gtk3 >= $AVAHI_REQUIRED\
   avahi-gobject >= $AVAHI_REQUIRED)
   AC_SUBST(AVAHI_CFLAGS)
   AC_SUBST(AVAHI_LIBS)
@@ -103,7 +103,7 @@ PKG_CHECK_MODULES(VINAGRE, \
   glib-2.0 >= $GLIB_REQUIRED \
   gio-2.0 >= $GLIB_REQUIRED \
   gio-unix-2.0 >= $GLIB_REQUIRED \
-  gtk+-2.0 >= $GTK_REQUIRED \ 
+  gtk+-3.0 >= $GTK_REQUIRED \
   gconf-2.0 >= $GCONF_REQUIRED \
   gthread-2.0 >= $GTHREAD_REQUIRED \
   gnome-keyring-1 \
@@ -116,6 +116,7 @@ AC_SUBST(VINAGRE_LIBS)
 
 PKG_CHECK_MODULES(VNC, \
   gtk-vnc-1.0 >= $GTK_VNC_REQUIRED \
+  gtk+-3.0 >= $GTK_REQUIRED \
   libxml-2.0 >= $XML_REQUIRED
 )
 AC_SUBST(VNC_CFLAGS)
