@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-06-16 18:28+0000\n"
-"PO-Revision-Date: 2010-06-16 23:21+0200\n"
+"POT-Creation-Date: 2010-06-29 18:52+0000\n"
+"PO-Revision-Date: 2010-07-01 08:52+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Acceda a escritorios remotos"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
+#: ../vinagre/vinagre-applet.c:444 ../vinagre/vinagre-applet.c:496
 #: ../vinagre/vinagre-main.c:201
 msgid "Remote Desktop Viewer"
 msgstr "Visor de escritorios remotos"
@@ -46,7 +46,7 @@ msgid "Authentication is required"
 msgstr "Se necesita autenticación"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:851
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:855
 msgid "Bookmarks"
 msgstr "Marcadores"
 
@@ -62,8 +62,9 @@ msgstr "Opciones de conexión"
 msgid "Folder"
 msgstr "Carpeta"
 
-#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:404
+#: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
+#: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
+#: ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "Equipo:"
 
@@ -131,7 +132,8 @@ msgstr "_Protocolo:"
 msgid "_Remember this credential"
 msgstr "_Recordar estas credenciales"
 
-#: ../data/vinagre.ui.h:25 ../plugins/ssh/vinagre-ssh-plugin.c:144
+#: ../data/vinagre.ui.h:25 ../plugins/rdp/vinagre-rdp-plugin.c:133
+#: ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "_Usuario:"
 
@@ -228,6 +230,59 @@ msgstr "Archivo de escritorio remoto (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Conexión a un escritorio remoto"
 
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:1
+#: ../plugins/rdp/vinagre-rdp-plugin.c:71
+msgid "RDP"
+msgstr "RDP"
+
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:2
+#| msgid "SSH support"
+msgid "RDP support"
+msgstr "Soporte para RDP"
+
+#. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
+#: ../plugins/rdp/vinagre-rdp-plugin.c:73
+#| msgid "Access Unix/Linux, Windows and other machines."
+msgid "Access MS Windows machines"
+msgstr "Acceder a equipos MS Windows"
+
+#: ../plugins/rdp/vinagre-rdp-plugin.c:121
+#| msgid "Options"
+msgid "RDP Options"
+msgstr "Opciones RDP"
+
+#. Translators: This is the tooltip for the username field in a RDP connection
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/rdp/vinagre-rdp-plugin.c:138
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr ""
+"Opcional Si se deja vacío se usará su nombre de usuario. También se puede "
+"proporcionar en el campo Máquina superior, de la forma "
+"usuario@nombre_de_equipo."
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
+#: ../plugins/vnc/vinagre-vnc-tab.c:149
+msgid "Port:"
+msgstr "Puerto:"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:129
+#| msgid "Error while creating the file %s: %s"
+msgid "Error while executing rdesktop"
+msgstr "Error al ejecutar rdesktop"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:347
+#: ../vinagre/vinagre-bookmarks.c:462
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:767
+#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
+#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
+msgid "Unknown error"
+msgstr "Error desconocido"
+
 #. vim: set ts=8:
 #: ../plugins/ssh/vinagre-ssh-plugin.c:76
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
@@ -242,20 +297,6 @@ msgstr "Acceder a terminales UNIX/Linux"
 #: ../plugins/ssh/vinagre-ssh-plugin.c:132
 msgid "SSH Options"
 msgstr "Opciones de SSH"
-
-#. Translators: This is the tooltip for the username field in a SSH connection
-#: ../plugins/ssh/vinagre-ssh-plugin.c:149
-msgid ""
-"Optional. If blank, your username will be used. Also, it can be supplied in "
-"the Machine field above, in the form username@hostname."
-msgstr ""
-"Opcional Si se deja vacío se usará su nombre de usuario. También se puede "
-"proporcionar en el campo Máquina superior, de la forma "
-"usuario@nombre_de_equipo."
-
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
-msgid "Port:"
-msgstr "Puerto:"
 
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
 msgid "SSH support"
@@ -581,15 +622,15 @@ msgstr "Un menú para acceder rápidamente a una máquina remota"
 msgid "Vinagre Applet Factory"
 msgstr "Factoría de miniaplicaciones de Vinagre"
 
-#: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
+#: ../vinagre/vinagre-applet.c:287 ../vinagre/vinagre-applet.c:370
 msgid "Could not run vinagre:"
 msgstr "No se pudo ejecutar vinagre:"
 
-#: ../vinagre/vinagre-applet.c:380
+#: ../vinagre/vinagre-applet.c:390
 msgid "Open Remote Desktop Viewer"
 msgstr "Abrir el visor de escritorios remotos"
 
-#: ../vinagre/vinagre-applet.c:435
+#: ../vinagre/vinagre-applet.c:445
 msgid "Access your bookmarks"
 msgstr "Acceder a sus marcadores"
 
@@ -603,15 +644,6 @@ msgstr "El protocolo %s no está soportado."
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Error al inicializar los marcadores: %s"
-
-#: ../vinagre/vinagre-bookmarks.c:347 ../vinagre/vinagre-bookmarks.c:462
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:765
-#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
-#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
-msgid "Unknown error"
-msgstr "Error desconocido"
 
 #: ../vinagre/vinagre-bookmarks.c:354
 msgid "Error while initializing bookmarks: The file seems to be empty"
@@ -794,56 +826,56 @@ msgstr "No se pudo abrir el archivo."
 msgid "The file was not recognized by any of the plugins."
 msgstr "Ninguno de los complementos reconoció el archivo"
 
-#: ../vinagre/vinagre-fav.c:567
+#: ../vinagre/vinagre-fav.c:569
 msgid "_New Folder"
 msgstr "Carpeta _nueva"
 
-#: ../vinagre/vinagre-fav.c:568
+#: ../vinagre/vinagre-fav.c:570
 msgid "Create a new folder"
 msgstr "Crear una carpeta nueva"
 
-#: ../vinagre/vinagre-fav.c:573
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Open bookmark"
 msgstr "_Abrir marcador"
 
-#: ../vinagre/vinagre-fav.c:574
+#: ../vinagre/vinagre-fav.c:576
 msgid "Connect to this machine"
 msgstr "Conectar con esta máquina"
 
-#: ../vinagre/vinagre-fav.c:575
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Edit bookmark"
 msgstr "_Editar marcador"
 
-#: ../vinagre/vinagre-fav.c:576
+#: ../vinagre/vinagre-fav.c:578
 msgid "Edit the details of selected bookmark"
 msgstr "Editar los detalles del marcador seleccionado"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:579
 msgid "_Remove from bookmarks"
 msgstr "_Quitar de los marcadores"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:580
 msgid "Remove current selected connection from bookmarks"
 msgstr "Eliminar la conexión actualmente seleccionada de los marcadores"
 
-#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:400
+#: ../vinagre/vinagre-fav.c:598 ../vinagre/vinagre-window.c:400
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "No se pudo mezclar el archivo de IU XML: %s"
 
-#: ../vinagre/vinagre-fav.c:754
+#: ../vinagre/vinagre-fav.c:756
 msgid "Invalid operation"
 msgstr "Operación no válida"
 
-#: ../vinagre/vinagre-fav.c:755
+#: ../vinagre/vinagre-fav.c:757
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Los datos recibidos de la operación arrastrar y soltar no son válidos."
 
-#: ../vinagre/vinagre-fav.c:859
+#: ../vinagre/vinagre-fav.c:863
 msgid "Hide panel"
 msgstr "Ocultar panel"
 
-#: ../vinagre/vinagre-fav.c:1044
+#: ../vinagre/vinagre-fav.c:1048
 msgid "Hosts nearby"
 msgstr "Equipos cercanos"
 
