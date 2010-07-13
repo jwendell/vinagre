@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 2.29.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-19 16:44+0200\n"
-"PO-Revision-Date: 2010-06-19 16:45+0200\n"
+"POT-Creation-Date: 2010-07-13 21:32+0200\n"
+"PO-Revision-Date: 2010-07-13 21:33+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +31,7 @@ msgstr "Bruk eksternt skrivebord"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
+#: ../vinagre/vinagre-applet.c:444 ../vinagre/vinagre-applet.c:496
 #: ../vinagre/vinagre-main.c:201
 msgid "Remote Desktop Viewer"
 msgstr "Visning av eksternt skrivebord"
@@ -44,7 +45,7 @@ msgid "Authentication is required"
 msgstr "Autentisering kreves"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:851
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:855
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
@@ -60,8 +61,9 @@ msgstr "Alternativer for tilkobling"
 msgid "Folder"
 msgstr "Mappe"
 
-#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:404
+#: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
+#: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
+#: ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "Vert:"
 
@@ -129,7 +131,8 @@ msgstr "_Protokoll:"
 msgid "_Remember this credential"
 msgstr "_Husk dette passordet"
 
-#: ../data/vinagre.ui.h:25 ../plugins/ssh/vinagre-ssh-plugin.c:144
+#: ../data/vinagre.ui.h:25 ../plugins/rdp/vinagre-rdp-plugin.c:133
+#: ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "Br_ukernavn:"
 
@@ -217,6 +220,54 @@ msgstr "Fil for eksternt skrivebord (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Ekstern skrivebordstilkobling"
 
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:1
+#: ../plugins/rdp/vinagre-rdp-plugin.c:71
+msgid "RDP"
+msgstr "RDP"
+
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:2
+msgid "RDP support"
+msgstr "RDP-støtte"
+
+#. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
+#: ../plugins/rdp/vinagre-rdp-plugin.c:73
+msgid "Access MS Windows machines"
+msgstr "Tilgang til MS Windows-maskiner"
+
+#: ../plugins/rdp/vinagre-rdp-plugin.c:121
+msgid "RDP Options"
+msgstr "Alternativer for RDP"
+
+#. Translators: This is the tooltip for the username field in a RDP connection
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/rdp/vinagre-rdp-plugin.c:138
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr ""
+"Valgfri. Hvis denne er tom vil ditt brukernavn brukes. Kan også oppgis i "
+"Maskin-feltet over på formen brukernavn@vertsnavn."
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
+#: ../plugins/vnc/vinagre-vnc-tab.c:149
+msgid "Port:"
+msgstr "Port:"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:129
+msgid "Error while executing rdesktop"
+msgstr "Feil under kjøring av rdesktop"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:347
+#: ../vinagre/vinagre-bookmarks.c:462
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:767
+#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
+#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
+msgid "Unknown error"
+msgstr "Ukjent feil"
+
 #. vim: set ts=8:
 #: ../plugins/ssh/vinagre-ssh-plugin.c:76
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
@@ -231,19 +282,6 @@ msgstr "Aksesser Unix-/Linux-terminaler"
 #: ../plugins/ssh/vinagre-ssh-plugin.c:132
 msgid "SSH Options"
 msgstr "Alternativer for SSH"
-
-#. Translators: This is the tooltip for the username field in a SSH connection
-#: ../plugins/ssh/vinagre-ssh-plugin.c:149
-msgid ""
-"Optional. If blank, your username will be used. Also, it can be supplied in "
-"the Machine field above, in the form username@hostname."
-msgstr ""
-"Valgfri. Hvis denne er tom vil ditt brukernavn brukes. Kan også oppgis i "
-"Maskin-feltet over på formen brukernavn@vertsnavn."
-
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
-msgid "Port:"
-msgstr "Port:"
 
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
 msgid "SSH support"
@@ -569,15 +607,15 @@ msgstr "En meny for å koble til en ekstern maskin raskt"
 msgid "Vinagre Applet Factory"
 msgstr "Fabrikk for vinagre panelprogram"
 
-#: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
+#: ../vinagre/vinagre-applet.c:287 ../vinagre/vinagre-applet.c:370
 msgid "Could not run vinagre:"
 msgstr "Kunne ikke kjøre vinagre:"
 
-#: ../vinagre/vinagre-applet.c:380
+#: ../vinagre/vinagre-applet.c:390
 msgid "Open Remote Desktop Viewer"
 msgstr "Åpne visning av eksternt skrivebord"
 
-#: ../vinagre/vinagre-applet.c:435
+#: ../vinagre/vinagre-applet.c:445
 msgid "Access your bookmarks"
 msgstr "Åpne dine bokmerker"
 
@@ -591,15 +629,6 @@ msgstr "Protokoll %s er ikke støttet."
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Feil under oppstart av bokmerkene: %s"
-
-#: ../vinagre/vinagre-bookmarks.c:347 ../vinagre/vinagre-bookmarks.c:462
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:765
-#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
-#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
-msgid "Unknown error"
-msgstr "Ukjent feil"
 
 #: ../vinagre/vinagre-bookmarks.c:354
 msgid "Error while initializing bookmarks: The file seems to be empty"
@@ -781,56 +810,56 @@ msgstr "Kunne ikke åpne filen."
 msgid "The file was not recognized by any of the plugins."
 msgstr "Filen ble ikke gjenkjent av noen av tilleggene."
 
-#: ../vinagre/vinagre-fav.c:567
+#: ../vinagre/vinagre-fav.c:569
 msgid "_New Folder"
 msgstr "_Ny mappe"
 
-#: ../vinagre/vinagre-fav.c:568
+#: ../vinagre/vinagre-fav.c:570
 msgid "Create a new folder"
 msgstr "Lag en ny mappe"
 
-#: ../vinagre/vinagre-fav.c:573
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Open bookmark"
 msgstr "_Åpne bokmerke"
 
-#: ../vinagre/vinagre-fav.c:574
+#: ../vinagre/vinagre-fav.c:576
 msgid "Connect to this machine"
 msgstr "Koble til denne maskinen"
 
-#: ../vinagre/vinagre-fav.c:575
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Edit bookmark"
 msgstr "_Rediger bokmerke"
 
-#: ../vinagre/vinagre-fav.c:576
+#: ../vinagre/vinagre-fav.c:578
 msgid "Edit the details of selected bookmark"
 msgstr "Rediger detaljene for valgt bokmerke"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:579
 msgid "_Remove from bookmarks"
 msgstr "_Fjern fra bokmerkene"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:580
 msgid "Remove current selected connection from bookmarks"
 msgstr "Fjern gjeldende valgte tilkobling fra bokmerkene"
 
-#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:400
+#: ../vinagre/vinagre-fav.c:598 ../vinagre/vinagre-window.c:400
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Kunne ikke flette XML-fil for brukergrensesnitt: %s"
 
-#: ../vinagre/vinagre-fav.c:754
+#: ../vinagre/vinagre-fav.c:756
 msgid "Invalid operation"
 msgstr "Ugyldig operasjon"
 
-#: ../vinagre/vinagre-fav.c:755
+#: ../vinagre/vinagre-fav.c:757
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Data mottatt fra dra-og-slipp operasjon er ugyldig."
 
-#: ../vinagre/vinagre-fav.c:859
+#: ../vinagre/vinagre-fav.c:863
 msgid "Hide panel"
 msgstr "Skjul panel"
 
-#: ../vinagre/vinagre-fav.c:1044
+#: ../vinagre/vinagre-fav.c:1048
 msgid "Hosts nearby"
 msgstr "Verter i nærheten"
 
