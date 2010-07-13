@@ -4,15 +4,16 @@
 # Deng Xiyue <manphiz@gmail.com>, 2008.
 # 甘露(Gan Lu) <rhythm.gan@gmail.com>, 2009.
 # YunQiang Su <wzssyqa@gmail.com>, 2010.
+# Eleanor Chen <chenyueg@gmail.com>, 2010.
+# Aron Xu <aronxu@gnome.org>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vinagre HEAD\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-06-26 15:46+0000\n"
-"PO-Revision-Date: 2010-06-27 16:31+0800\n"
-"Last-Translator: Eleanor Chen <chenyueg@gmail.com>\n"
+"Project-Id-Version: vinagre master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-14 00:08+0800\n"
+"PO-Revision-Date: 2010-07-14 00:09+0800\n"
+"Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese/Simplified <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,8 +64,9 @@ msgstr "连接选项"
 msgid "Folder"
 msgstr "文件夹"
 
-#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:406
+#: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
+#: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
+#: ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "主机："
 
@@ -130,7 +132,8 @@ msgstr "协议(_P)："
 msgid "_Remember this credential"
 msgstr "记住此证书(_R)"
 
-#: ../data/vinagre.ui.h:25 ../plugins/ssh/vinagre-ssh-plugin.c:144
+#: ../data/vinagre.ui.h:25 ../plugins/rdp/vinagre-rdp-plugin.c:133
+#: ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "用户名(_N)："
 
@@ -215,6 +218,54 @@ msgstr "远程桌面(VNC)文件"
 msgid "Remote Desktop Connection"
 msgstr "远程桌面连接"
 
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:1
+#: ../plugins/rdp/vinagre-rdp-plugin.c:71
+msgid "RDP"
+msgstr "RDP"
+
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:2
+msgid "RDP support"
+msgstr "RDP 支持"
+
+#. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
+#: ../plugins/rdp/vinagre-rdp-plugin.c:73
+msgid "Access MS Windows machines"
+msgstr "访问 MS Windows 机器"
+
+#: ../plugins/rdp/vinagre-rdp-plugin.c:121
+msgid "RDP Options"
+msgstr "RDP 选项"
+
+#. Translators: This is the tooltip for the username field in a RDP connection
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/rdp/vinagre-rdp-plugin.c:138
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr ""
+"可选。如果为空，将使用您的用户名。也可以在上面提到的机器字段中使用 用户名@主"
+"机名 的格式提供。"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
+#: ../plugins/vnc/vinagre-vnc-tab.c:149
+msgid "Port:"
+msgstr "端口："
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:129
+msgid "Error while executing rdesktop"
+msgstr "执行 rdesktop 出错"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:347
+#: ../vinagre/vinagre-bookmarks.c:462
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:767
+#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
+#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
+msgid "Unknown error"
+msgstr "未知错误"
+
 #. vim: set ts=8:
 #: ../plugins/ssh/vinagre-ssh-plugin.c:76
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
@@ -229,19 +280,6 @@ msgstr "访问 Unix/Linux 终端"
 #: ../plugins/ssh/vinagre-ssh-plugin.c:132
 msgid "SSH Options"
 msgstr "SSH 选项"
-
-#. Translators: This is the tooltip for the username field in a SSH connection
-#: ../plugins/ssh/vinagre-ssh-plugin.c:149
-msgid ""
-"Optional. If blank, your username will be used. Also, it can be supplied in "
-"the Machine field above, in the form username@hostname."
-msgstr ""
-"可选。如果为空，将使用您的用户名。也可以在上面提到的机器字段中使用 用户名@主"
-"机名 的格式提供。"
-
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
-msgid "Port:"
-msgstr "端口："
 
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
 msgid "SSH support"
@@ -585,15 +623,6 @@ msgstr "不支持 %s 协议。"
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "初始化书签时出错：%s"
-
-#: ../vinagre/vinagre-bookmarks.c:347 ../vinagre/vinagre-bookmarks.c:462
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:767
-#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
-#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
-msgid "Unknown error"
-msgstr "未知错误"
 
 #: ../vinagre/vinagre-bookmarks.c:354
 msgid "Error while initializing bookmarks: The file seems to be empty"
