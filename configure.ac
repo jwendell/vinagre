@@ -149,7 +149,7 @@ AC_ARG_ENABLE(ssh,
 
 if test "x$enable_ssh" = "xyes" ; then
   PKG_CHECK_MODULES(SSH,\
-  vte >= $VTE_REQUIRED \
+  vte-2.90 >= $VTE_REQUIRED \
   libxml-2.0 >= $XML_REQUIRED)
   AC_SUBST(VTE_CFLAGS)
   AC_SUBST(VTE_LIBS)
