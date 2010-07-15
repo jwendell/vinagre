@@ -32,7 +32,6 @@
 
 #include <glib/gi18n.h>
 #include <vinagre/vinagre-commands.h>
-#include <vinagre/vinagre-app.h>
 #include "vinagre-vnc-listener.h"
 #include "vinagre-vnc-connection.h"
 
@@ -152,7 +151,7 @@ static gboolean
 incoming (GIOChannel *source, GIOCondition condition, VinagreVncListener *listener)
 {
   VinagreConnection *conn;
-  VinagreWindow *window;
+  GtkWindow *window;
   int cl_sock;
   struct sockaddr_in6 client_addr;
   char client_name[INET6_ADDRSTRLEN];
@@ -162,7 +161,7 @@ incoming (GIOChannel *source, GIOCondition condition, VinagreVncListener *listen
   if (cl_sock < 0)
     g_error ("accept() failed");
 
-  window = vinagre_app_get_active_window (vinagre_app_get_default ());
+  window = gtk_application_get_window (GTK_APPLICATION (g_application_get_instance ()));
   if (!window)
     {
       g_warning (_("Incoming VNC connection arrived but there is no active window"));
@@ -176,7 +175,7 @@ incoming (GIOChannel *source, GIOCondition condition, VinagreVncListener *listen
     vinagre_connection_set_host (conn, client_name);
   vinagre_connection_set_port (conn, ntohs (client_addr.sin6_port));
 
-  vinagre_cmd_direct_connect (conn, window);
+  vinagre_cmd_direct_connect (conn, VINAGRE_WINDOW (window));
 
   return TRUE;
 }

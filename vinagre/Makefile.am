@@ -16,7 +16,6 @@ INCLUDES = 						\
 	$(NULL)
 
 NOINST_H_FILES = \
-  bacon-message-connection.h \
   vinagre-enums.h \
   vinagre-marshal.h \
   vinagre-object-module.h \
@@ -31,8 +30,6 @@ NOINST_H_FILES = \
   $(NULL)
 
 INST_H_FILES = \
-  vinagre-app.h \
-  vinagre-bacon.h \
   vinagre-bookmarks-entry.h \
   vinagre-bookmarks.h \
   vinagre-bookmarks-migration.h \
@@ -67,9 +64,6 @@ header_DATA = $(INST_H_FILES)
 noinst_LTLIBRARIES = libvinagre.la
 
 handwritten_sources = \
-  bacon-message-connection.c  \
-  vinagre-app.c \
-  vinagre-bacon.c \
   vinagre-bookmarks.c \
   vinagre-bookmarks-entry.c \
   vinagre-bookmarks-migration.c \
@@ -124,7 +118,8 @@ libvinagre_la_LIBADD += $(VINAGRE_LIBS)
 bin_PROGRAMS = vinagre
 
 vinagre_SOURCES = \
-  vinagre-main.c
+  vinagre-main.c  \
+  vinagre-options.h vinagre-options.c
 
 vinagre_LDADD = \
 	libvinagre.la \
@@ -186,7 +181,6 @@ vinagre_applet_SOURCES =					\
 	vinagre-notebook.h vinagre-notebook.c \
 	vinagre-tab.h vinagre-tab.c \
 	vinagre-prefs.h vinagre-prefs.c \
-	vinagre-app.h vinagre-app.c \
 	vinagre-object-module.h vinagre-object-module.c \
 	vinagre-dirs.h vinagre-dirs.c \
 	vinagre-fav.h vinagre-fav.c \

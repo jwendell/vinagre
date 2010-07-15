@@ -22,25 +22,20 @@
 #include <config.h>
 #endif
 
-#include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <locale.h>
 
-#include "vinagre-connection.h"
-#include "vinagre-commands.h"
-#include "vinagre-bookmarks.h"
 #include "vinagre-window.h"
-#include "vinagre-app.h"
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
-#include "vinagre-bacon.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin-info.h"
 #include "vinagre-plugin-info-priv.h"
 #include "vinagre-debug.h"
 #include "vinagre-ssh.h"
+#include "vinagre-options.h"
 
 #ifdef HAVE_TELEPATHY
 #include "vinagre-tubes-manager.h"
@@ -50,113 +45,25 @@
 #include "vinagre-mdns.h"
 #endif
 
-/* command line */
-static gchar **files = NULL;
-static gchar **remaining_args = NULL;
-static GSList *servers = NULL;
-static gboolean new_window = FALSE;
-static gboolean fullscreen = FALSE;
-
-static const GOptionEntry options [] =
-{
-  { "fullscreen", 'f', 0, G_OPTION_ARG_NONE, &fullscreen,
-  /* Translators: this is a command line option (run vinagre --help) */
-    N_("Open vinagre in fullscreen mode"), NULL },
-
-  { "new-window", 'n', 0, G_OPTION_ARG_NONE, &new_window,
-  /* Translators: this is a command line option (run vinagre --help) */
-    N_("Create a new toplevel window in an existing instance of vinagre"), NULL },
-
-  { "file", 'F', 0, G_OPTION_ARG_FILENAME_ARRAY, &files,
-  /* Translators: this is a command line option (run vinagre --help) */
-    N_("Open a file recognized by vinagre"), N_("filename")},
-
-  { 
-    G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &remaining_args,
-  /* Translators: this is a command line option (run vinagre --help) */
-    NULL, N_("[server:port]") },
-
-  { NULL }
-};
-
-static void
-vinagre_main_process_command_line (VinagreWindow *window)
-{
-  gint               i;
-  VinagreConnection *conn;
-  gchar             *error;
-  GSList            *errors = NULL;
-
-  if (files)
-    {
-      for (i = 0; files[i]; i++) 
-	{
-	  conn = vinagre_connection_new_from_file (files[i], &error, FALSE);
-	  if (conn)
-	    servers = g_slist_prepend (servers, conn);
-	  else
-	    {
-	      errors = g_slist_prepend (errors,
-					g_strdup_printf ("<i>%s</i>: %s",
-							files[i],
-							error ? error : _("Unknown error")));
-	      if (error)
-	        g_free (error);
-	    }
-	}
-      g_strfreev (files);
-    }
-
-  if (remaining_args)
-    {
-      for (i = 0; remaining_args[i]; i++) 
-	{
-	  conn = vinagre_connection_new_from_string (remaining_args[i], &error, TRUE);
-	  if (conn)
-	    servers = g_slist_prepend (servers, conn);
-	  else
-	    errors = g_slist_prepend (errors,
-				      g_strdup_printf ("<i>%s</i>: %s",
-						       remaining_args[i],
-						       error ? error : _("Unknown error")));
-
-	  if (error)
-	    g_free (error);
-	}
-
-      g_strfreev (remaining_args);
-    }
-
-  if (errors)
-    {
-      vinagre_utils_show_many_errors (ngettext ("The following error has occurred:",
-						"The following errors have occurred:",
-						g_slist_length (errors)),
-				      errors,
-				      window?GTK_WINDOW (window):NULL);
-      g_slist_free (errors);
-    }
-}
-
 int main (int argc, char **argv) {
   GOptionContext       *context;
   GError               *error = NULL;
   GSList               *l, *plugins;
-  VinagreWindow        *window;
-  VinagreApp           *app;
+  GtkWindow            *window;
+  GtkApplication       *app;
   VinagrePluginsEngine *engine;
 #ifdef HAVE_TELEPATHY
   VinagreTubesManager *vinagre_tubes_manager;
 #endif
 
-  if (!g_thread_supported ())
-    g_thread_init (NULL);
   g_type_init();
+  g_set_application_name (_("Remote Desktop Viewer"));
 
   /* Setup debugging */
   vinagre_debug_init ();
   vinagre_debug_message (DEBUG_APP, "Startup");
 
+  /* i18n */
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -169,7 +76,7 @@ int main (int argc, char **argv) {
 
   /* Setup command line options */
   context = g_option_context_new (_("- Remote Desktop Viewer"));
-  g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+  g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
 
   for (l = plugins; l; l = l->next)
@@ -198,27 +105,33 @@ int main (int argc, char **argv) {
       return 1;
     }
 
-  g_set_application_name (_("Remote Desktop Viewer"));
-  vinagre_main_process_command_line (NULL);
+  g_clear_error (&error);
+  app = g_initable_new (GTK_TYPE_APPLICATION,
+			NULL,
+			&error,
+			"application-id", "org.gnome.Vinagre",
+			"argv", g_variant_new_bytestring_array ((const gchar * const*)argv, argc),
+			"default-quit", FALSE,
+			NULL);
+  if (!app)
+    g_error ("%s", error->message);
 
-  vinagre_bacon_start (servers, new_window);
+  if (g_application_is_remote (G_APPLICATION (app)))
+    {
+      vinagre_options_invoke_remote_instance (app, &optionstate);
+      return 0;
+    }
 
+  vinagre_options_register_actions (app);
   vinagre_cache_prefs_init ();
-  app = vinagre_app_get_default ();
-  window = vinagre_app_create_window (app, NULL);
-  gtk_widget_show (GTK_WIDGET(window));
+
+  window = GTK_WINDOW (vinagre_window_new ());
+  gtk_application_add_window (app, window);
+  gtk_widget_show (GTK_WIDGET (window));
 
   vinagre_utils_handle_debug ();
-
-  for (l = servers; l; l = l->next)
-    {
-      VinagreConnection *conn = l->data;
-
-      vinagre_connection_set_fullscreen (conn, fullscreen);
-      vinagre_cmd_direct_connect (conn, window);
-      g_object_unref (conn);
-    }
-  g_slist_free (servers);
+  optionstate.new_window = FALSE;
+  vinagre_options_process_command_line (window, &optionstate);
 
 #ifdef HAVE_TELEPATHY
    vinagre_tubes_manager = vinagre_tubes_manager_new (window);
@@ -227,7 +140,11 @@ int main (int argc, char **argv) {
   /* fake call, just to ensure this symbol will be present at vinagre.so */
   vinagre_ssh_connect (NULL, NULL, -1, NULL, NULL, NULL, NULL, NULL);
 
-  gtk_main ();
+  g_signal_connect (app,
+		    "action-with-data",
+		    G_CALLBACK (vinagre_options_handle_action),
+		    NULL);
+  gtk_application_run (app);
 
 #ifdef HAVE_TELEPATHY
   g_object_unref (vinagre_tubes_manager);
@@ -235,9 +152,11 @@ int main (int argc, char **argv) {
   g_object_unref (vinagre_bookmarks_get_default ());
   g_object_unref (vinagre_prefs_get_default ());
   vinagre_cache_prefs_finalize ();
+  g_object_unref (app);
 #ifdef VINAGRE_ENABLE_AVAHI
   g_object_unref (vinagre_mdns_get_default ());
 #endif
+
 
   return 0;
 }

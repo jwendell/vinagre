@@ -31,7 +31,6 @@
 #include "vinagre-plugin-info-priv.h"
 #include "vinagre-plugin.h"
 #include "vinagre-debug.h"
-#include "vinagre-app.h"
 #include "vinagre-prefs.h"
 #include "vinagre-plugin-loader.h"
 #include "vinagre-object-module.h"
@@ -624,7 +623,7 @@ static void
 vinagre_plugins_engine_activate_plugin_real (VinagrePluginsEngine *engine,
 					     VinagrePluginInfo    *info)
 {
-  const GList *wins;
+  const GSList *wins;
   const gchar *protocol;
   VinagrePluginInfo *plugin_protocol;
 
@@ -648,7 +647,7 @@ vinagre_plugins_engine_activate_plugin_real (VinagrePluginsEngine *engine,
     }
 
   /* activate plugin for all windows */
-  wins = vinagre_app_get_windows (vinagre_app_get_default ());
+  wins = gtk_application_get_windows (GTK_APPLICATION (g_application_get_instance ()));
   for (; wins != NULL; wins = wins->next)
     vinagre_plugin_activate (info->plugin, VINAGRE_WINDOW (wins->data));
 }
@@ -692,7 +691,7 @@ static void
 vinagre_plugins_engine_deactivate_plugin_real (VinagrePluginsEngine *engine,
 					       VinagrePluginInfo    *info)
 {
-  const GList *wins;
+  const GSList *wins;
   VinagrePluginLoader *loader;
 
   if (!vinagre_plugin_info_is_active (info) || 
@@ -707,7 +706,7 @@ vinagre_plugins_engine_deactivate_plugin_real (VinagrePluginsEngine *engine,
     }
   else
     {
-      wins = vinagre_app_get_windows (vinagre_app_get_default ());
+      wins = gtk_application_get_windows (GTK_APPLICATION (g_application_get_instance ()));
       for (; wins != NULL; wins = wins->next)
 	call_plugin_deactivate (info->plugin, VINAGRE_WINDOW (wins->data));
     }
