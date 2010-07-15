@@ -53,12 +53,6 @@ gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 
 void		vinagre_utils_handle_debug		(void);
 
-guint		vinagre_utils_get_current_workspace	(GdkScreen *screen);
-guint		vinagre_utils_get_window_workspace	(GtkWindow *gtkwindow);
-void		vinagre_utils_get_current_viewport	(GdkScreen    *screen,
-							 gint         *x,
-							 gint         *y);
-
 void		vinagre_utils_help_contents		(GtkWindow *window, const gchar *section);
 void		vinagre_utils_help_about		(GtkWindow *window);
 

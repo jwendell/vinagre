@@ -16,7 +16,6 @@ AC_PROG_MAKE_SET
 AC_PROG_RANLIB
 
 # Checks for header files.
-AC_PATH_X
 AC_CHECK_HEADERS([sys/uio.h sys/param.h sys/un.h arpa/inet.h stropts.h fcntl.h limits.h locale.h netinet/in.h stdlib.h string.h sys/ioctl.h sys/socket.h termios.h unistd.h utmp.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -109,7 +108,6 @@ PKG_CHECK_MODULES(VINAGRE, \
   gnome-keyring-1 \
   libxml-2.0 >= $XML_REQUIRED \
   dbus-glib-1 \
-  x11
 )
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
