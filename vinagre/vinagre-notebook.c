@@ -358,9 +358,10 @@ unmerge_tab_ui (VinagreNotebook *nb)
 }
 
 static void 
-vinagre_notebook_page_switched (GtkNotebook     *notebook,
-				gint            page_num, 
-				gpointer        data)
+vinagre_notebook_page_switched (GtkNotebook *notebook,
+				GtkWidget   *page,
+				gint         page_num,
+				gpointer     data)
 {
   VinagreNotebook *nb = VINAGRE_NOTEBOOK (notebook);
   VinagreTab *tab;
