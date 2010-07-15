@@ -113,18 +113,6 @@ vinagre_prefs_get_int (VinagrePrefs *prefs, const gchar* key, gint def)
       return def;
 }
 
-static gchar *
-vinagre_prefs_get_string (VinagrePrefs *prefs, const gchar *key, const gchar *def)
-{
-  gchar *result;
-
-  result = gconf_client_get_string (prefs->priv->gconf_client, key, NULL);
-  if (!result)
-    result = g_strdup (def);
-
-  return result;
-}
-
 static GSList *
 vinagre_prefs_get_list (VinagrePrefs *prefs, const gchar* key)
 {
@@ -152,18 +140,6 @@ vinagre_prefs_set_int (VinagrePrefs *prefs, const gchar* key, gint value)
   GError *error = NULL;
 
   if (!gconf_client_set_int (prefs->priv->gconf_client, key, value, &error))
-    {
-      g_warning ("Setting key %s failed: %s", key, error->message);
-      g_error_free (error);
-    }
-}
-
-static void
-vinagre_prefs_set_string (VinagrePrefs *prefs, const gchar *key, const gchar *value)
-{
-  GError *error = NULL;
-
-  if (!gconf_client_set_string (prefs->priv->gconf_client, key, value, &error))
     {
       g_warning ("Setting key %s failed: %s", key, error->message);
       g_error_free (error);
@@ -261,7 +237,6 @@ static void
 vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
   VinagrePrefs *prefs = VINAGRE_PREFS (object);
-  gchar        *str;
 
   switch (prop_id)
     {
@@ -311,7 +286,6 @@ static void
 vinagre_prefs_class_init (VinagrePrefsClass *klass)
 {
   GObjectClass* object_class = G_OBJECT_CLASS (klass);
-  GObjectClass* parent_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (VinagrePrefsPrivate));
 

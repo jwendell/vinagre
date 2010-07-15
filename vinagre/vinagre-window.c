@@ -25,9 +25,11 @@
 #include <errno.h>
 #include <time.h>
 #include <sys/types.h>
+#include <fcntl.h>
 #include <string.h>
 
 #include <glib/gi18n.h>
+#include <glib/gstdio.h>
 #include <gdk/gdkkeysyms.h>
 
 #include "vinagre-window.h"

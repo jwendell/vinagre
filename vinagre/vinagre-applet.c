@@ -67,9 +67,6 @@ static void  vinagre_applet_init       (VinagreApplet *applet);
 static void	vinagre_applet_get_icon		(VinagreApplet *applet);
 static void	vinagre_applet_check_size	(VinagreApplet *applet);
 static gboolean	vinagre_applet_draw_cb		(VinagreApplet *applet);
-static void	vinagre_applet_update_tooltip	(VinagreApplet *applet);
-static void	vinagre_applet_dialog_about_cb	(BonoboUIComponent *uic, gpointer data, const gchar *verbname);
-static gboolean	vinagre_applet_bonobo_cb	(PanelApplet *_applet, const gchar *iid, gpointer data);
 static void	vinagre_applet_destroy_cb	(GtkObject *object);
 
 G_DEFINE_TYPE (VinagreApplet, vinagre_applet, PANEL_TYPE_APPLET)
@@ -347,7 +344,7 @@ fill_recursive_menu (GSList *entries, GtkWidget *menu)
 static void
 fill_menu (GSList *all, GtkWidget *menu)
 {
-  GtkWidget *item, *image;
+  GtkWidget *item;
 
   if (g_slist_length (all) == 0)
     return;

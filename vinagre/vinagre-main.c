@@ -81,7 +81,6 @@ int main (int argc, char **argv) {
 
   for (l = plugins; l; l = l->next)
     {
-      GOptionGroup      *group;
       GSList            *groups, *l2;
       VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (l->data);
 

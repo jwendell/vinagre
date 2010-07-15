@@ -297,8 +297,6 @@ vinagre_bookmarks_del (VinagreBookmarks      *book,
 {
   GtkWidget *dialog;
   gchar     *name, *title, *msg1, *msg2;
-  GError    *error = NULL;
-  GSList    *parent;
 
   g_return_if_fail (VINAGRE_IS_BOOKMARKS (book));
   g_return_if_fail (VINAGRE_IS_BOOKMARKS_ENTRY (entry));

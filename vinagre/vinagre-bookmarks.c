@@ -194,9 +194,6 @@ vinagre_bookmarks_exists (VinagreBookmarks *book,
                           const gchar      *host,
                           gint              port)
 {
-  VinagreConnection *conn = NULL;
-  GSList *l, *next;
-
   g_return_val_if_fail (VINAGRE_IS_BOOKMARKS (book), NULL);
   g_return_val_if_fail (host != NULL, NULL);
 
@@ -216,8 +213,8 @@ vinagre_bookmarks_save_fill_xml (GSList *list, xmlTextWriter *writer)
       switch (vinagre_bookmarks_entry_get_node (entry))
 	{
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
-	    xmlTextWriterStartElement (writer, "folder");
-	    xmlTextWriterWriteAttribute (writer, "name", vinagre_bookmarks_entry_get_name (entry));
+	    xmlTextWriterStartElement (writer, (const xmlChar *)"folder");
+	    xmlTextWriterWriteAttribute (writer, (const xmlChar *)"name", (const xmlChar *)vinagre_bookmarks_entry_get_name (entry));
 
 	    vinagre_bookmarks_save_fill_xml (vinagre_bookmarks_entry_get_children (entry), writer);
 	    xmlTextWriterEndElement (writer);
@@ -226,7 +223,7 @@ vinagre_bookmarks_save_fill_xml (GSList *list, xmlTextWriter *writer)
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 
-	    xmlTextWriterStartElement (writer, "item");
+	    xmlTextWriterStartElement (writer, (const xmlChar *)"item");
 	    vinagre_connection_fill_writer (conn, writer);
 	    xmlTextWriterEndElement (writer);
 	    break;
@@ -438,7 +435,7 @@ vinagre_bookmarks_save_to_file (VinagreBookmarks *book)
       goto finalize;
     }
 
-  rc = xmlTextWriterStartElement (writer, "vinagre-bookmarks");
+  rc = xmlTextWriterStartElement (writer, (const xmlChar *)"vinagre-bookmarks");
   if (rc < 0)
     {
       g_warning (_("Error while saving bookmarks: Failed to initialize the XML structure"));

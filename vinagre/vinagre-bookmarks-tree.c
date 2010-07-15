@@ -103,7 +103,6 @@ vinagre_bookmarks_tree_update_list (VinagreBookmarksTree *tree)
   GdkPixbuf        *pixbuf;
   GtkIconTheme     *icon_theme;
   GtkTreeSelection *selection;
-  GtkTreePath      *path;
 
   icon_theme = gtk_icon_theme_get_default ();
   pixbuf = gtk_icon_theme_load_icon  (icon_theme,
@@ -269,9 +268,6 @@ vinagre_bookmarks_tree_select_entry (VinagreBookmarksTree *tree,
 				     VinagreBookmarksEntry *entry)
 {
   GtkTreeModel          *model;
-  GtkTreeIter            iter;
-  GtkTreePath           *path;
-  gboolean               valid;
   struct _find_entry     f;
 
   if (!entry)

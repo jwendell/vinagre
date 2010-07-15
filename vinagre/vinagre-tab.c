@@ -525,7 +525,6 @@ GtkWidget *
 vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
 {
   VinagrePlugin *plugin;
-  GtkWidget     *tab;
   const gchar   *protocol = vinagre_connection_get_protocol (conn);
 
   plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),

@@ -20,6 +20,7 @@
 
 #include <avahi-gobject/ga-service-browser.h>
 #include <avahi-gobject/ga-service-resolver.h>
+#include <avahi-common/malloc.h>
 #include <glib/gi18n.h>
 
 #include "vinagre-mdns.h"
@@ -202,7 +203,6 @@ vinagre_mdns_add_service (VinagrePluginInfo *info,
   GError           *error = NULL;
   const gchar      *service;
   BrowserEntry     *entry;
-  VinagrePlugin    *plugin;
 
   if (!vinagre_plugin_info_is_active (info))
     return;
@@ -367,7 +367,6 @@ static void
 vinagre_mdns_class_init (VinagreMdnsClass *klass)
 {
   GObjectClass* object_class = G_OBJECT_CLASS (klass);
-  GObjectClass* parent_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (VinagreMdnsPrivate));
 

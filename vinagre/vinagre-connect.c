@@ -238,7 +238,6 @@ static void
 setup_combo (VinagreConnectDialog *dialog)
 {
   GtkListStore *store;
-  GtkTreeIter   iter;
   GtkEntryCompletion *completion;
   GPtrArray    *history;
   gint          i, size;

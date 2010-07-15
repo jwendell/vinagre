@@ -99,7 +99,7 @@ static const GtkActionEntry vinagre_machine_initialized_entries[] =
 
 static const GtkToggleActionEntry vinagre_machine_initialized_toggle_entries[] =
 {
- 0,
+ {0,},
 };
 
 G_END_DECLS

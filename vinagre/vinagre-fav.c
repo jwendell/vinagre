@@ -27,10 +27,12 @@
 #include "vinagre-utils.h"
 #include "vinagre-dnd.h"
 #include "vinagre-bookmarks.h"
+#include "vinagre-bookmarks-ui.h"
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-commands.h"
 
 #ifdef VINAGRE_ENABLE_AVAHI
 #include "vinagre-mdns.h"
@@ -585,7 +587,6 @@ vinagre_fav_create_toolbar (VinagreFav *fav)
 {
   GtkWidget *toolbar;
   GtkActionGroup *action_group;
-  GtkAction *action;
   GtkUIManager *manager;
   GError *error = NULL;
 
@@ -842,7 +843,7 @@ vinagre_fav_hide (GtkButton *button, VinagreFav *fav)
 static void
 vinagre_fav_create_title (VinagreFav *fav)
 {
-  GtkWidget *box, *label, *close_button, *image, *frame;
+  GtkWidget *box, *label, *close_button, *image;
 
   box = gtk_hbox_new (FALSE, 0);
 
@@ -1023,10 +1024,9 @@ vinagre_fav_fill_bookmarks (GtkTreeStore *store, GSList *list, GtkTreeIter *pare
 gboolean
 vinagre_fav_update_list (VinagreFav *fav)
 {
-  GtkTreeIter        iter, parent_iter;
-  GtkTreeStore      *store;
-  GSList            *list, *l, *next;
-  GdkPixbuf         *pixbuf;
+  GtkTreeIter   parent_iter;
+  GtkTreeStore *store;
+  GSList       *list;
     
   g_return_val_if_fail (VINAGRE_IS_FAV (fav), FALSE);
 

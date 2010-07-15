@@ -380,13 +380,11 @@ vinagre_notebook_page_switched (GtkNotebook     *notebook,
 static void
 vinagre_notebook_page_removed_cb (VinagreNotebook *nb)
 {
-  gint n;
-
   if ((gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb)) == 0) &&
       (vinagre_window_is_fullscreen (nb->priv->window)))
     vinagre_window_toggle_fullscreen (nb->priv->window);
 
-vinagre_notebook_show_hide_tabs (nb);
+  vinagre_notebook_show_hide_tabs (nb);
 }
 
 static void
@@ -610,7 +608,6 @@ vinagre_notebook_add_tab (VinagreNotebook *nb,
 			  gint           position)
 {
   GtkWidget      *label;
-  GtkActionGroup *action_group;
   int            pos;
 
   g_return_if_fail (VINAGRE_IS_NOTEBOOK (nb));
@@ -664,7 +661,6 @@ vinagre_notebook_close_tab (VinagreNotebook *nb,
 			    VinagreTab      *tab)
 {
   gint           position;
-  GtkActionGroup *action_group;
   GtkNotebook    *notebook;
   VinagreTab     *previous_active_tab;
 

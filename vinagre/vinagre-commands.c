@@ -43,6 +43,7 @@
 #include "vinagre-plugin-info.h"
 #include "vinagre-plugin-info-priv.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-plugin-dialog.h"
 
 void
 vinagre_cmd_direct_connect (VinagreConnection *conn,
@@ -294,7 +295,6 @@ vinagre_cmd_open_bookmark (VinagreWindow     *window,
 			   VinagreConnection *conn)
 {
   VinagreTab *tab;
-  VinagreConnection *new_conn;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
   g_return_if_fail (VINAGRE_IS_CONNECTION (conn));

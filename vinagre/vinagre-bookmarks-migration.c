@@ -24,6 +24,7 @@
  */
 
 #include <glib.h>
+#include <glib/gstdio.h>
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <libxml/parser.h>
@@ -36,6 +37,7 @@
 #include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
+#include "vinagre-utils.h"
 
 static void
 fill_xml (GSList *list, xmlTextWriter *writer)
@@ -50,8 +52,8 @@ fill_xml (GSList *list, xmlTextWriter *writer)
       switch (vinagre_bookmarks_entry_get_node (entry))
 	{
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
-	    xmlTextWriterStartElement (writer, "folder");
-	    xmlTextWriterWriteAttribute (writer, "name", vinagre_bookmarks_entry_get_name (entry));
+	    xmlTextWriterStartElement (writer, (const xmlChar *)"folder");
+	    xmlTextWriterWriteAttribute (writer, (const xmlChar *)"name", (const xmlChar *)vinagre_bookmarks_entry_get_name (entry));
 
 	    fill_xml (vinagre_bookmarks_entry_get_children (entry), writer);
 	    xmlTextWriterEndElement (writer);
@@ -60,13 +62,11 @@ fill_xml (GSList *list, xmlTextWriter *writer)
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 
-	    xmlTextWriterStartElement (writer, "item");
-	    xmlTextWriterWriteElement (writer, "name", vinagre_connection_get_name (conn));
-	    xmlTextWriterWriteElement (writer, "host", vinagre_connection_get_host (conn));
-	    xmlTextWriterWriteFormatElement (writer, "port", "%d", vinagre_connection_get_port (conn));
-	    //xmlTextWriterWriteFormatElement (writer, "view_only", "%d", vinagre_connection_get_view_only (conn));
-	    //xmlTextWriterWriteFormatElement (writer, "scaling", "%d", vinagre_connection_get_scaling (conn));
-	    xmlTextWriterWriteFormatElement (writer, "fullscreen", "%d", vinagre_connection_get_fullscreen (conn));
+	    xmlTextWriterStartElement (writer, (const xmlChar *)"item");
+	    xmlTextWriterWriteElement (writer, (const xmlChar *)"name", (const xmlChar *)vinagre_connection_get_name (conn));
+	    xmlTextWriterWriteElement (writer, (const xmlChar *)"host", (const xmlChar *)vinagre_connection_get_host (conn));
+	    xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"port", "%d", vinagre_connection_get_port (conn));
+	    xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"fullscreen", "%d", vinagre_connection_get_fullscreen (conn));
 
 	    xmlTextWriterEndElement (writer);
 	    break;
@@ -111,7 +111,7 @@ save_to_file (GSList *entries, const gchar *filename)
       goto finalize;
     }
 
-  rc = xmlTextWriterStartElement (writer, "vinagre-bookmarks");
+  rc = xmlTextWriterStartElement (writer, (const xmlChar *)"vinagre-bookmarks");
   if (rc < 0)
     {
       g_warning (_("Error while migrating bookmarks: Failed to initialize the XML structure"));
@@ -173,7 +173,6 @@ create_list (GKeyFile *kf)
       VinagreConnection *conn;
       gchar             *s_value;
       gint               i_value;
-      gboolean           b_value;
 
       s_value = g_key_file_get_string (kf, conns[i], "host", NULL);
       if (!s_value)
