@@ -107,14 +107,16 @@ vinagre_ssh_tab_constructed (GObject *object)
   arg[i++] = g_strdup (vinagre_connection_get_host (conn));
   arg[i++] = NULL;
 
-  vte_terminal_fork_command (VTE_TERMINAL (ssh_tab->priv->vte),
-			     "ssh",
-			     arg,
-			     NULL,
-			     NULL,
-			     FALSE,
-			     FALSE,
-			     FALSE);
+  vte_terminal_fork_command_full (VTE_TERMINAL (ssh_tab->priv->vte),
+				  0,
+				  NULL,
+				  arg,
+				  NULL,
+				  G_SPAWN_SEARCH_PATH,
+				  NULL,
+				  NULL,
+				  NULL,
+				  NULL);
   g_strfreev (arg);
   gtk_widget_show_all (GTK_WIDGET (ssh_tab));
 
