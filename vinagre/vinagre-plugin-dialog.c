@@ -22,7 +22,6 @@
 #include <glib/gi18n.h>
 
 #include "vinagre-plugin-dialog.h"
-#include "vinagre-plugin-manager.h"
 #include "vinagre-debug.h"
 
 static GtkWidget *plugin_dialog = NULL;
