@@ -21,7 +21,6 @@ NOINST_H_FILES = \
   vinagre-object-module.h \
   vinagre-plugin-info.h \
   vinagre-plugin-info-priv.h \
-  vinagre-plugin-loader.h \
   vinagre-plugin-manager.h \
   vinagre-plugin-dialog.h \
   vinagre-plugins-engine.h \
@@ -43,7 +42,6 @@ INST_H_FILES = \
   vinagre-fav.h \
   vinagre-notebook.h \
   vinagre-plugin.h \
-  vinagre-plugin-loader.h \
   vinagre-prefs.h \
   vinagre-tab.h \
   vinagre-ui.h \
@@ -80,7 +78,6 @@ handwritten_sources = \
   vinagre-plugin.c \
   vinagre-plugin-info.c \
   vinagre-plugin-dialog.c \
-  vinagre-plugin-loader.c \
   vinagre-plugin-manager.c \
   vinagre-plugins-engine.c \
   vinagre-prefs.c \
@@ -171,7 +168,6 @@ vinagre_applet_SOURCES =					\
 	vinagre-bookmarks-migration.h vinagre-bookmarks-migration.c \
 	vinagre-plugins-engine.h vinagre-plugins-engine.c \
 	vinagre-plugin.h vinagre-plugin.c \
-	vinagre-plugin-loader.h vinagre-plugin-loader.c \
 	vinagre-plugin-manager.h vinagre-plugin-manager.c \
 	vinagre-plugin-dialog.h vinagre-plugin-dialog.c \
 	vinagre-debug.h vinagre-debug.c \
