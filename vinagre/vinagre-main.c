@@ -31,8 +31,6 @@
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
-#include "vinagre-plugin-info.h"
-#include "vinagre-plugin-info-priv.h"
 #include "vinagre-debug.h"
 #include "vinagre-ssh.h"
 #include "vinagre-options.h"

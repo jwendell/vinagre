@@ -28,8 +28,6 @@
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin.h"
-#include "vinagre-plugin-info.h"
-#include "vinagre-plugin-info-priv.h"
 
 typedef struct
 {

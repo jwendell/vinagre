@@ -40,8 +40,6 @@
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugin.h"
-#include "vinagre-plugin-info.h"
-#include "vinagre-plugin-info-priv.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin-dialog.h"
 
