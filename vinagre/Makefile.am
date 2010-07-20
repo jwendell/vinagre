@@ -37,7 +37,6 @@ INST_H_FILES = \
   vinagre-dirs.h \
   vinagre-fav.h \
   vinagre-notebook.h \
-  vinagre-plugin.h \
   vinagre-prefs.h \
   vinagre-tab.h \
   vinagre-ui.h \
@@ -71,7 +70,6 @@ handwritten_sources = \
   vinagre-fav.c \
   vinagre-notebook.c \
   vinagre-object-module.c \
-  vinagre-plugin.c \
   vinagre-plugin-dialog.c \
   vinagre-prefs.c \
   vinagre-tab.c \
@@ -159,7 +157,6 @@ vinagre_applet_SOURCES =					\
 	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\
 	vinagre-bookmarks-tree.h vinagre-bookmarks-tree.c	\
 	vinagre-bookmarks-migration.h vinagre-bookmarks-migration.c \
-	vinagre-plugin.h vinagre-plugin.c \
 	vinagre-plugin-dialog.h vinagre-plugin-dialog.c \
 	vinagre-debug.h vinagre-debug.c \
 	vinagre-window.h vinagre-window.c \
