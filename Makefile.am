@@ -1,5 +1,5 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
-SUBDIRS = vinagre help po data plugins plugin-loaders
+SUBDIRS = vinagre help po data plugins
 
 vinagredocdir = ${datadir}/doc/vinagre
 vinagredoc_DATA = \

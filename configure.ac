@@ -273,11 +273,9 @@ AC_SUBST(ACTIVE_PLUGINS)
 
 VINAGRE_IMPLIB="-lvinagre-${VINAGRE_API_VERSION}"
 PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
-LOADER_LIBTOOL_FLAGS="-module -avoid-version"
 
 AC_SUBST(VINAGRE_IMPLIB)
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
-AC_SUBST(LOADER_LIBTOOL_FLAGS)
 
 VINAGRE_PLUGINS_DATA_DIR="$datadir/vinagre-1/plugins"
 AC_SUBST(VINAGRE_PLUGINS_DATA_DIR)
@@ -296,8 +294,6 @@ data/vinagre.schemas.in
 data/icons/Makefile
 help/Makefile
 po/Makefile.in
-plugin-loaders/Makefile
-plugin-loaders/c/Makefile
 plugins/Makefile
 plugins/vnc/Makefile
 plugins/ssh/Makefile
