@@ -22,6 +22,10 @@
 #include <config.h>
 #endif
 
+#ifdef ENABLE_INTROSPECTION
+#include <girepository.h>
+#endif
+
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <locale.h>
@@ -76,6 +80,10 @@ int main (int argc, char **argv) {
   context = g_option_context_new (_("- Remote Desktop Viewer"));
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
+
+#ifdef ENABLE_INTROSPECTION
+  g_option_context_add_group (context, g_irepository_get_option_group ());
+#endif
 
   for (l = plugins; l; l = l->next)
     {

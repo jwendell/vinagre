@@ -701,7 +701,7 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
 
 void
 vinagre_connection_fill_writer (VinagreConnection *conn,
-				xmlTextWriter     *writer)
+				xmlTextWriterPtr   writer)
 {
   VINAGRE_CONNECTION_GET_CLASS (conn)->impl_fill_writer (conn, writer);
 }

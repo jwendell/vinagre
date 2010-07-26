@@ -286,6 +286,16 @@ AC_SUBST(VINAGRE_PLUGINS_DATA_DIR)
 VINAGRE_PLUGINS_LIBS_DIR="$libdir/vinagre-1/plugins"
 AC_SUBST(VINAGRE_PLUGINS_LIBS_DIR)
 
+# Introspection
+GOBJECT_INTROSPECTION_CHECK([0.9.3])
+
+if test "$found_introspection" = "yes"; then
+	enable_introspection=yes
+	AC_DEFINE([ENABLE_INTROSPECTION], [1], [Define to enable GObject Introspection])
+else
+	enable_introspection=no
+fi
+
 #*******************************************************************************
 AC_CONFIG_FILES([
 Makefile
@@ -316,6 +326,7 @@ Configure summary:
 
 	Compiler ...................:  ${CC} 
 	Compiler Flags .............:  ${CFLAGS}
+	GObject Introspection.......:  $enable_introspection
 
 	Avahi enabled ..............:  ${enable_avahi}
 	GNOME Panel applet..........:  ${enable_applet}

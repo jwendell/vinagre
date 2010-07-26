@@ -13,6 +13,7 @@ INCLUDES = 						\
 	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\"		\
 	$(VINAGRE_CFLAGS)				\
 	$(AVAHI_CFLAGS)					\
+	$(INTROSPECTION_CFLAGS)				\
 	$(NULL)
 
 NOINST_H_FILES = \
@@ -114,6 +115,7 @@ vinagre_LDADD = \
 	$(VINAGRE_LIBS)		\
 	$(AVAHI_LIBS)		\
 	$(GTKVNC_LIBS)		\
+	$(INTROSPECTION_LIBS)	\
 	$(NULL)
 
 vinagre_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
@@ -261,6 +263,25 @@ handwritten_sources += \
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
 	$(NULL)
 
+endif
+
+if HAVE_INTROSPECTION
+-include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS = Vinagre-3.0.gir
+
+Vinagre-3.0.gir: vinagre
+INTROSPECTION_SCANNER_ARGS = $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
+Vinagre_3_0_gir_NAMESPACE = Vinagre
+Vinagre_3_0_gir_VERSION = 3.0
+Vinagre_3_0_gir_PROGRAM = $(builddir)/vinagre
+Vinagre_3_0_gir_FILES = $(INST_H_FILES) $(NOINST_H_FILES) $(handwritten_sources)
+Vinagre_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0
+
+girdir = $(datadir)/vinagre/gir-1.0
+gir_DATA = $(INTROSPECTION_GIRS)
+
+typelibdir = $(libdir)/vinagre/girepository-1.0
+typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 endif
 
 DISTCLEANFILES =		\

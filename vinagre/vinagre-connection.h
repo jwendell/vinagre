@@ -44,7 +44,7 @@ struct _VinagreConnectionClass
   GObjectClass	parent_class;
 
   /* Virtual functions */
-  void		(*impl_fill_writer)		(VinagreConnection *conn, xmlTextWriter *writer);
+  void		(*impl_fill_writer)		(VinagreConnection *conn, xmlTextWriterPtr writer);
   void		(*impl_parse_item)		(VinagreConnection *conn, xmlNode *root);
   gchar *	(*impl_get_best_name)		(VinagreConnection *conn);
   void		(*impl_fill_conn_from_file)	(VinagreConnection *conn, GKeyFile *file);
@@ -106,7 +106,7 @@ gchar*		    vinagre_connection_get_string_rep	(VinagreConnection *conn,
 /* vinagre_connection_fill_writer(): Used to fill a xml writer when saving bookmarks.
    subclasses must inherit from it and call super() */
 void                vinagre_connection_fill_writer	(VinagreConnection *conn,
-							 xmlTextWriter *writer);
+							 xmlTextWriterPtr  writer);
 
 /* vinagre_connection_parse_item(): Used to parse a xml item when loading bookmarks.
    subclasses must inherit from it and call super() */
