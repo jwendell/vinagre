@@ -28,9 +28,9 @@
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-bookmarks-migration.h"
 #include "vinagre-connection.h"
-#include "vinagre-plugin.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
+#include "vinagre-protocol-ext.h"
 
 struct _VinagreBookmarksPrivate
 {
@@ -242,7 +242,7 @@ vinagre_bookmarks_parse_item (xmlNode *root)
   xmlNode               *curr;
   xmlChar               *s_value;
   gchar                 *protocol = NULL;
-  VinagrePlugin         *plugin;
+  VinagreProtocolExt    *ext;
 
   /* Loop to discover the protocol */
   for (curr = root->children; curr; curr = curr->next)
@@ -259,15 +259,15 @@ vinagre_bookmarks_parse_item (xmlNode *root)
   if (!protocol)
     protocol = g_strdup ("vnc");
 
-  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
-				protocol);
-  if (!plugin)
+  ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (), protocol);
+
+  if (!ext)
     {
       g_warning (_("The protocol %s is not supported."), protocol);
       goto out;
     }
 
-  conn = vinagre_plugin_new_connection (plugin);
+  conn = vinagre_protocol_ext_new_connection (ext);
   vinagre_connection_parse_item (conn, root);
 
   if (vinagre_connection_get_host (conn))

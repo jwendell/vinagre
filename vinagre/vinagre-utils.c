@@ -141,7 +141,7 @@ vinagre_utils_get_ui_xml_filename (void)
  *  if the file cannot be found. In this case an error dialog will be shown.
  */
 GtkBuilder *
-vinagre_utils_get_builder (VinagrePlugin *plugin, const gchar *filename)
+vinagre_utils_get_builder (void *plugin, const gchar *filename)
 {
   GtkBuilder *xml = NULL;
   GError     *error = NULL;
@@ -149,7 +149,7 @@ vinagre_utils_get_builder (VinagrePlugin *plugin, const gchar *filename)
 
   if (plugin)
     {
-      plugin_datadir = vinagre_plugin_get_data_dir (plugin);
+      //plugin_datadir = vinagre_plugin_get_data_dir (plugin);
       actual_filename = g_build_filename (plugin_datadir, filename, NULL);
       g_free (plugin_datadir);
     }

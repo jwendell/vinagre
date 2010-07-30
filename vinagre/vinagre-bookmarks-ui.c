@@ -24,7 +24,7 @@
 #include "vinagre-bookmarks-ui.h"
 #include "vinagre-utils.h"
 #include "vinagre-bookmarks-tree.h"
-#include "vinagre-plugin.h"
+#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 
 static void
@@ -118,16 +118,16 @@ show_dialog_conn (VinagreBookmarks      *book,
 		  VinagreBookmarksEntry *entry,
 		  gboolean               is_add)
 {
-  gchar             *str, *host, *error_str, *protocol;
-  gint               port;
-  GtkBuilder        *xml;
-  GtkWidget         *dialog, *host_entry, *name_entry, *fs_check;
-  GtkWidget         *folder_box, *tree, *save_button, *plugin_box;
-  GtkWidget         *plugin_options, *protocol_label;
-  VinagreConnection *conn;
-  const gchar       *name;
-  VinagrePlugin     *plugin;
-  gchar             **props;
+  gchar              *str, *host, *error_str, *protocol;
+  gint                port;
+  GtkBuilder         *xml;
+  GtkWidget          *dialog, *host_entry, *name_entry, *fs_check;
+  GtkWidget          *folder_box, *tree, *save_button, *plugin_box;
+  GtkWidget          *plugin_options, *protocol_label;
+  VinagreConnection  *conn;
+  const gchar        *name;
+  VinagreProtocolExt *ext;
+  gchar              **props;
 
   xml = vinagre_utils_get_builder (NULL, NULL);
   dialog         = GTK_WIDGET (gtk_builder_get_object (xml, "bookmarks_add_edit_conn_dialog"));
@@ -155,15 +155,15 @@ show_dialog_conn (VinagreBookmarks      *book,
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fs_check),
 				vinagre_connection_get_fullscreen (conn));
 
-  plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
-							  vinagre_connection_get_protocol (conn));
-  plugin_options = vinagre_plugin_get_connect_widget (plugin, conn);
+  ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+						       vinagre_connection_get_protocol (conn));
+  plugin_options = vinagre_protocol_ext_get_connect_widget (ext, conn);
   if (plugin_options)
     gtk_box_pack_start (GTK_BOX (plugin_box), plugin_options, TRUE, TRUE, 0);
   else
     gtk_widget_hide (plugin_box);
 
-  props = vinagre_plugin_get_public_description (plugin);
+  props = vinagre_protocol_ext_get_public_description (ext);
   /* Translators: %s is a protocol name, like VNC or SSH */
   str = g_strdup_printf (_("(Protocol: %s)"), props[0]);
   gtk_label_set_label (GTK_LABEL (protocol_label), str);

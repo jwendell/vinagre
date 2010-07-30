@@ -27,7 +27,9 @@
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-plugins-engine.h"
-#include "vinagre-plugin.h"
+#include "vinagre-protocol-ext.h"
+
+typedef struct {void *plugin; char*name;} VinagrePluginInfo;
 
 typedef struct
 {
@@ -94,7 +96,7 @@ mdns_resolver_found (GaServiceResolver *resolver,
     }
 
   avahi_address_snprint (a, sizeof(a), address);
-  conn = vinagre_plugin_new_connection (b_entry->info->plugin);
+  conn = vinagre_protocol_new_connection (b_entry->info->plugin);
   g_object_set (conn,
                 "name", name,
                 "port", port,
@@ -189,7 +191,7 @@ static void
 destroy_browser_entry (BrowserEntry *entry)
 {
   g_object_unref (entry->browser);
-  _vinagre_plugin_info_unref (entry->info);
+//  _vinagre_plugin_info_unref (entry->info);
   g_free (entry);
 }
 
@@ -202,10 +204,10 @@ vinagre_mdns_add_service (VinagrePluginInfo *info,
   const gchar      *service;
   BrowserEntry     *entry;
 
-  if (!vinagre_plugin_info_is_active (info))
-    return;
+//  if (!vinagre_plugin_info_is_active (info))
+//    return;
 
-  service = vinagre_plugin_get_mdns_service (info->plugin);
+  service = vinagre_protocol_get_mdns_service (info->plugin);
   if (!service)
     return;
 
@@ -245,7 +247,7 @@ vinagre_mdns_add_service (VinagrePluginInfo *info,
 
   entry = g_new (BrowserEntry, 1);
   entry->browser = g_object_ref (browser);
-  _vinagre_plugin_info_ref (info);
+  //_vinagre_plugin_info_ref (info);
   entry->info = info;
   g_hash_table_insert (mdns->priv->browsers, (gpointer)service, entry);
 }
@@ -286,12 +288,12 @@ plugin_deactivated_cb (VinagrePluginsEngine *engine,
 {
   const gchar *service;
 
-  service = vinagre_plugin_get_mdns_service (info->plugin);
+  service = vinagre_protocol_get_mdns_service (info->plugin);
   if (!service)
     return;
 
   vinagre_mdns_remove_entries_by_protocol (mdns,
-					   vinagre_plugin_get_protocol (info->plugin));
+					   vinagre_protocol_get_protocol (info->plugin));
   g_hash_table_remove (mdns->priv->browsers, (gconstpointer)service);
 
 }
@@ -319,11 +321,12 @@ vinagre_mdns_init (VinagreMdns *mdns)
     }
 
   engine = vinagre_plugins_engine_get_default ();
+/*
   plugins = (GSList *)vinagre_plugins_engine_get_plugin_list (engine);
   g_slist_foreach (plugins,
 		   (GFunc)vinagre_mdns_add_service,
 		   mdns);
-
+*/
   g_signal_connect_after (engine,
 			  "activate-plugin",
 			  G_CALLBACK (plugin_activated_cb),
