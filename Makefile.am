@@ -37,7 +37,7 @@ MAINTAINERCLEANFILES = 		\
 	omf.make		\
 	xmldocs.make		\
 	`find "$(srcdir)" -type f -name Makefile.in -print`	\
-	`find "$(top_srcdir)/help" -type f -name *.mo -print`
+	`find "$(srcdir)/help" -type f -name *.mo -print`
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
