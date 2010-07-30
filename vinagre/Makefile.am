@@ -19,7 +19,6 @@ INCLUDES = 						\
 NOINST_H_FILES = \
   vinagre-enums.h \
   vinagre-marshal.h \
-  vinagre-object-module.h \
   vinagre-plugin-dialog.h \
   vinagre-window-private.h \
   pty_open.h \
@@ -70,7 +69,6 @@ handwritten_sources = \
   vinagre-dirs.c \
   vinagre-fav.c \
   vinagre-notebook.c \
-  vinagre-object-module.c \
   vinagre-plugin-dialog.c \
   vinagre-prefs.c \
   vinagre-tab.c \
@@ -166,7 +164,6 @@ vinagre_applet_SOURCES =					\
 	vinagre-notebook.h vinagre-notebook.c \
 	vinagre-tab.h vinagre-tab.c \
 	vinagre-prefs.h vinagre-prefs.c \
-	vinagre-object-module.h vinagre-object-module.c \
 	vinagre-dirs.h vinagre-dirs.c \
 	vinagre-fav.h vinagre-fav.c \
 	vinagre-connect.h vinagre-connect.c \
