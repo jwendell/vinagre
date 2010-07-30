@@ -25,46 +25,30 @@
 #include <glib/gi18n-lib.h>
 #include <gmodule.h>
 
-#include <vinagre/vinagre-debug.h>
 #include <vinagre/vinagre-cache-prefs.h>
+#include <vinagre/vinagre-protocol.h>
 
 #include "vinagre-rdp-plugin.h"
 #include "vinagre-rdp-connection.h"
 #include "vinagre-rdp-tab.h"
 
-#define VINAGRE_RDP_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_RDP_PLUGIN, VinagreRdpPluginPrivate))
+static void vinagre_protocol_iface_init (VinagreProtocolInterface *iface);
 
-VINAGRE_PLUGIN_REGISTER_TYPE(VinagreRdpPlugin, vinagre_rdp_plugin)
-
-static void
-impl_activate (VinagrePlugin *plugin,
-               VinagreWindow *window)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreRdpPlugin Activate");
-}
-
-static void
-impl_deactivate  (VinagrePlugin *plugin,
-                  VinagreWindow *window)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreRdpPlugin Deactivate");
-}
-
-static void
-impl_update_ui (VinagrePlugin *plugin,
-                VinagreWindow *window)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreRdpPlugin Update UI");
-}
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreRdpPlugin,
+				vinagre_rdp_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
+							       vinagre_protocol_iface_init))
 
 static const gchar *
-impl_get_protocol (VinagrePlugin *plugin)
+impl_get_protocol (VinagreProtocol *plugin)
 {
   return "rdp";
 }
 
 static gchar **
-impl_get_public_description (VinagrePlugin *plugin)
+impl_get_public_description (VinagreProtocol *plugin)
 {
   gchar **result = g_new (gchar *, 3);
 
@@ -77,13 +61,13 @@ impl_get_public_description (VinagrePlugin *plugin)
 }
 
 static VinagreConnection *
-impl_new_connection (VinagrePlugin *plugin)
+impl_new_connection (VinagreProtocol *plugin)
 {
   return vinagre_rdp_connection_new ();
 }
 
 static GtkWidget *
-impl_new_tab (VinagrePlugin     *plugin,
+impl_new_tab (VinagreProtocol   *plugin,
 	      VinagreConnection *conn,
 	      VinagreWindow     *window)
 {
@@ -91,7 +75,7 @@ impl_new_tab (VinagrePlugin     *plugin,
 }
 
 static gint
-impl_get_default_port (VinagrePlugin *plugin)
+impl_get_default_port (VinagreProtocol *plugin)
 {
   return 3389;
 }
@@ -99,19 +83,10 @@ impl_get_default_port (VinagrePlugin *plugin)
 static void
 vinagre_rdp_plugin_init (VinagreRdpPlugin *plugin)
 {
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreRdpPlugin initializing");
-}
-
-static void
-vinagre_rdp_plugin_finalize (GObject *object)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreRdpPlugin finalizing");
-
-  G_OBJECT_CLASS (vinagre_rdp_plugin_parent_class)->finalize (object);
 }
 
 static GtkWidget *
-impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
+impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 {
   GtkWidget *box, *label, *u_box, *u_entry;
   gchar     *str;
@@ -151,21 +126,33 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 }
 
 static void
+vinagre_protocol_iface_init (VinagreProtocolInterface *iface)
+{
+  iface->get_protocol  = impl_get_protocol;
+  iface->get_public_description  = impl_get_public_description;
+  iface->new_connection = impl_new_connection;
+  iface->new_tab = impl_new_tab;
+  iface->get_default_port = impl_get_default_port;
+  iface->get_connect_widget = impl_get_connect_widget;
+}
+
+static void
+vinagre_rdp_plugin_class_finalize (VinagreRdpPluginClass *klass)
+{
+}
+
+static void
 vinagre_rdp_plugin_class_init (VinagreRdpPluginClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  VinagrePluginClass *plugin_class = VINAGRE_PLUGIN_CLASS (klass);
-
-  object_class->finalize   = vinagre_rdp_plugin_finalize;
-
-  plugin_class->activate   = impl_activate;
-  plugin_class->deactivate = impl_deactivate;
-  plugin_class->update_ui  = impl_update_ui;
-  plugin_class->get_protocol  = impl_get_protocol;
-  plugin_class->get_public_description  = impl_get_public_description;
-  plugin_class->new_connection = impl_new_connection;
-  plugin_class->new_tab = impl_new_tab;
-  plugin_class->get_default_port = impl_get_default_port;
-  plugin_class->get_connect_widget = impl_get_connect_widget;
 }
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+  vinagre_rdp_plugin_register_type (G_TYPE_MODULE (module));
+  peas_object_module_register_extension_type (module,
+					      VINAGRE_TYPE_PROTOCOL,
+					      VINAGRE_TYPE_RDP_PLUGIN);
+}
+
 /* vim: set ts=8: */
