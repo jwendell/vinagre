@@ -46,6 +46,7 @@ INST_H_FILES = \
   vinagre-ssh.h \
   vinagre-cache-prefs.h \
   vinagre-protocol.h \
+  vinagre-protocol-ext.h \
   $(NULL)
 
 headerdir = $(prefix)/include/vinagre-@VINAGRE_API_VERSION@/vinagre
@@ -79,6 +80,7 @@ handwritten_sources = \
   vinagre-ssh.c \
   vinagre-cache-prefs.c \
   vinagre-protocol.c \
+  vinagre-protocol-ext.c \
   $(NULL)
 
 libvinagre_la_SOURCES = \
@@ -174,6 +176,7 @@ vinagre_applet_SOURCES =					\
 	vinagre-ssh.h vinagre-ssh.c \
 	vinagre-cache-prefs.h vinagre-cache-prefs.c \
 	vinagre-protocol.h vinagre-protocol.c \
+	vinagre-protocol-ext.h vinagre-protocol-ext.c \
 	$(NULL)
 
 if AVAHI
