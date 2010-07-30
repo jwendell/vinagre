@@ -271,6 +271,8 @@ handwritten_sources += \
 
 endif
 
+CLEANFILES =
+
 if HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS = Vinagre-3.0.gir
@@ -288,6 +290,12 @@ gir_DATA = $(INTROSPECTION_GIRS)
 
 typelibdir = $(libdir)/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+
+CLEANFILES +=		\
+	$(gir_DATA)	\
+	$(typelib_DATA)	\
+	$(NULL)
+
 endif
 
 DISTCLEANFILES =		\
