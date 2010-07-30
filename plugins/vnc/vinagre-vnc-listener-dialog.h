@@ -22,11 +22,10 @@
 #define __VINAGRE_VNC_LISTENER_DIALOG_H__
 
 #include <vinagre/vinagre-window.h>
-#include <vinagre/vinagre-plugin.h>
 
 G_BEGIN_DECLS
 
-void vinagre_vnc_listener_dialog_show (VinagreWindow *parent, VinagrePlugin *plugin);
+void vinagre_vnc_listener_dialog_show (VinagreWindow *parent/*, VinagrePlugin *plugin*/);
 
 G_END_DECLS
 

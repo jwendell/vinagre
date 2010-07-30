@@ -27,9 +27,9 @@
 #include <gmodule.h>
 #include <vncdisplay.h>
 
-#include <vinagre/vinagre-debug.h>
 #include <vinagre/vinagre-prefs.h>
 #include <vinagre/vinagre-cache-prefs.h>
+#include <vinagre/vinagre-protocol.h>
 
 #include "vinagre-vnc-plugin.h"
 #include "vinagre-vnc-connection.h"
@@ -37,10 +37,15 @@
 #include "vinagre-vnc-listener-dialog.h"
 #include "vinagre-vnc-listener.h"
 
-#define VINAGRE_VNC_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_VNC_PLUGIN, VinagreVncPluginPrivate))
 #define WINDOW_DATA_KEY "VinagreVNCPluginWindowData"
 
-VINAGRE_PLUGIN_REGISTER_TYPE(VinagreVncPlugin, vinagre_vnc_plugin)
+static void vinagre_protocol_iface_init (VinagreProtocolInterface *iface);
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreVncPlugin,
+				vinagre_vnc_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
+							       vinagre_protocol_iface_init))
 
 typedef struct
 {
@@ -50,10 +55,11 @@ typedef struct
 
 typedef struct
 {
-  VinagrePlugin *plugin;
+  VinagreProtocol *plugin;
   VinagreWindow *window;
 } ActionData;
 
+/*
 static void
 free_window_data (WindowData *data)
 {
@@ -70,11 +76,12 @@ free_action_data (ActionData *data)
 
   g_slice_free (ActionData, data);
 }
+*/
 
 static void
 listening_cb (GtkAction *action, ActionData *action_data)
 {
-  vinagre_vnc_listener_dialog_show (action_data->window, action_data->plugin);
+  vinagre_vnc_listener_dialog_show (action_data->window/*, action_data->plugin*/);
 }
 
 static GtkActionEntry action_entries[] =
@@ -89,8 +96,9 @@ static GtkActionEntry action_entries[] =
   }
 };
 
+/*
 static void
-impl_activate (VinagrePlugin *plugin,
+impl_activate (VinagreProtocol *plugin,
                VinagreWindow *window)
 {
   GtkActionGroup *action_group;
@@ -142,7 +150,7 @@ impl_activate (VinagrePlugin *plugin,
 }
 
 static void
-impl_deactivate  (VinagrePlugin *plugin,
+impl_deactivate  (VinagreProtocol *plugin,
                   VinagreWindow *window)
 {
   GtkUIManager *manager;
@@ -159,13 +167,7 @@ impl_deactivate  (VinagrePlugin *plugin,
 
   g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 }
-
-static void
-impl_update_ui (VinagrePlugin *plugin,
-                VinagreWindow *window)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Update UI");
-}
+*/
 
 static const GOptionEntry vinagre_vnc_args[] =
 {
@@ -176,12 +178,10 @@ static const GOptionEntry vinagre_vnc_args[] =
 };
 
 static GSList *
-impl_get_context_groups (VinagrePlugin *plugin)
+impl_get_context_groups (VinagreProtocol *plugin)
 {
   GOptionGroup *group;
   GSList       *groups = NULL;
-
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Get Context Group");
 
   scaling_command_line = FALSE;
   group = g_option_group_new ("vnc",
@@ -200,13 +200,13 @@ impl_get_context_groups (VinagrePlugin *plugin)
 }
 
 static const gchar *
-impl_get_protocol (VinagrePlugin *plugin)
+impl_get_protocol (VinagreProtocol *plugin)
 {
   return "vnc";
 }
 
 static gchar **
-impl_get_public_description (VinagrePlugin *plugin)
+impl_get_public_description (VinagreProtocol *plugin)
 {
   gchar **result = g_new (gchar *, 3);
 
@@ -218,13 +218,13 @@ impl_get_public_description (VinagrePlugin *plugin)
 }
 
 static const gchar *
-impl_get_mdns_service (VinagrePlugin *plugin)
+impl_get_mdns_service (VinagreProtocol *plugin)
 {
   return "_rfb._tcp";
 }
 
 static VinagreConnection *
-impl_new_connection (VinagrePlugin *plugin)
+impl_new_connection (VinagreProtocol *plugin)
 {
   VinagreConnection *conn;
 
@@ -236,7 +236,7 @@ impl_new_connection (VinagrePlugin *plugin)
 }
 
 static VinagreConnection *
-impl_new_connection_from_file (VinagrePlugin *plugin,
+impl_new_connection_from_file (VinagreProtocol *plugin,
 			       const gchar   *data,
 			       gboolean       use_bookmarks,
 			       gchar        **error_msg)
@@ -335,7 +335,7 @@ the_end:
 }
 
 static GtkWidget *
-impl_new_tab (VinagrePlugin *plugin,
+impl_new_tab (VinagreProtocol *plugin,
 	      VinagreConnection *conn,
 	      VinagreWindow     *window)
 {
@@ -366,7 +366,7 @@ scaling_check_toggled_cb (GtkToggleButton *button, GObject *box)
 }
 
 static GtkWidget *
-impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
+impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 {
   GtkWidget *box, *check, *label, *combo, *box2, *ssh_host_entry;
   GtkTable  *table;
@@ -494,13 +494,13 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 }
 
 static gint
-impl_get_default_port (VinagrePlugin *plugin)
+impl_get_default_port (VinagreProtocol *plugin)
 {
   return 5900;
 }
 
 static GtkFileFilter *
-impl_get_file_filter (VinagrePlugin *plugin)
+impl_get_file_filter (VinagreProtocol *plugin)
 {
   GtkFileFilter *filter;
 
@@ -513,39 +513,42 @@ impl_get_file_filter (VinagrePlugin *plugin)
 }
 
 static void
-vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin initializing");
-}
-
-static void
-vinagre_vnc_plugin_finalize (GObject *object)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin finalizing");
-
-  G_OBJECT_CLASS (vinagre_vnc_plugin_parent_class)->finalize (object);
-}
-
-static void
 vinagre_vnc_plugin_class_init (VinagreVncPluginClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  VinagrePluginClass *plugin_class = VINAGRE_PLUGIN_CLASS (klass);
-
-  object_class->finalize   = vinagre_vnc_plugin_finalize;
-
-  plugin_class->activate   = impl_activate;
-  plugin_class->deactivate = impl_deactivate;
-  plugin_class->update_ui  = impl_update_ui;
-  plugin_class->get_context_groups = impl_get_context_groups;
-  plugin_class->get_protocol  = impl_get_protocol;
-  plugin_class->get_public_description  = impl_get_public_description;
-  plugin_class->new_connection = impl_new_connection;
-  plugin_class->new_connection_from_file = impl_new_connection_from_file;
-  plugin_class->get_mdns_service  = impl_get_mdns_service;
-  plugin_class->new_tab = impl_new_tab;
-  plugin_class->get_connect_widget = impl_get_connect_widget;
-  plugin_class->get_default_port = impl_get_default_port;
-  plugin_class->get_file_filter = impl_get_file_filter;
 }
+static void
+vinagre_vnc_plugin_class_finalize (VinagreVncPluginClass *klass)
+{
+}
+static void
+vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
+{
+}
+
+static void
+vinagre_protocol_iface_init (VinagreProtocolInterface *iface)
+{
+  //iface->activate   = impl_activate;
+  //iface->deactivate = impl_deactivate;
+  iface->get_context_groups = impl_get_context_groups;
+  iface->get_protocol  = impl_get_protocol;
+  iface->get_public_description  = impl_get_public_description;
+  iface->new_connection = impl_new_connection;
+  iface->new_connection_from_file = impl_new_connection_from_file;
+  iface->get_mdns_service  = impl_get_mdns_service;
+  iface->new_tab = impl_new_tab;
+  iface->get_connect_widget = impl_get_connect_widget;
+  iface->get_default_port = impl_get_default_port;
+  iface->get_file_filter = impl_get_file_filter;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+  vinagre_vnc_plugin_register_type (G_TYPE_MODULE (module));
+  peas_object_module_register_extension_type (module,
+					      VINAGRE_TYPE_PROTOCOL,
+					      VINAGRE_TYPE_VNC_PLUGIN);
+}
+
 /* vim: set ts=8: */

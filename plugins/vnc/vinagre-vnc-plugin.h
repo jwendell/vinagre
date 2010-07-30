@@ -3,6 +3,7 @@
  * This file is part of vinagre
  *
  * Copyright (C) 2009 Jorge Pereira <jorge@jorgepereira.com.br>
+ * Copyright (C) 2010 Jonh Wendell <wendell@bani.com.br>
  * 
  * vinagre-vnc-plugin.h is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -23,7 +24,7 @@
 
 #include <glib.h>
 #include <glib-object.h>
-#include <vinagre/vinagre-plugin.h>
+#include <libpeas/peas.h>
 
 G_BEGIN_DECLS
 
@@ -37,38 +38,25 @@ G_BEGIN_DECLS
 #define VINAGRE_IS_VNC_PLUGIN_CLASS(k)          (G_TYPE_CHECK_CLASS_TYPE ((k), VINAGRE_TYPE_VNC_PLUGIN))
 #define VINAGRE_VNC_PLUGIN_GET_CLASS(o)         (G_TYPE_INSTANCE_GET_CLASS ((o), VINAGRE_TYPE_VNC_PLUGIN, VinagreVncPluginClass))
 
-/* Private structure type */
-typedef struct _VinagreVncPluginPrivate	VinagreVncPluginPrivate;
-
-/*
- * Main object structure
- */
-typedef struct _VinagreVncPlugin		VinagreVncPlugin;
+typedef struct _VinagreVncPlugin	VinagreVncPlugin;
+typedef struct _VinagreVncPluginClass	VinagreVncPluginClass;
 
 struct _VinagreVncPlugin
 {
-  VinagrePlugin parent_instance;
+  PeasExtensionBase parent_instance;
 };
-
-/*
- * Class definition
- */
-typedef struct _VinagreVncPluginClass	VinagreVncPluginClass;
 
 struct _VinagreVncPluginClass
 {
-  VinagrePluginClass parent_class;
+  PeasExtensionBaseClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType	vinagre_vnc_plugin_get_type		(void) G_GNUC_CONST;
+GType vinagre_vnc_plugin_get_type (void) G_GNUC_CONST;
 
-/* All the plugins must implement this function */
-G_MODULE_EXPORT GType register_vinagre_plugin (GTypeModule *module);
+G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
 
 G_END_DECLS
 
 #endif /* __VINAGRE_VNC_PLUGIN_H__ */
+
 /* vim: set ts=8: */
