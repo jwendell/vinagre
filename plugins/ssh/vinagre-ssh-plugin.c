@@ -25,8 +25,8 @@
 #include <glib/gi18n-lib.h>
 #include <gmodule.h>
 
-#include <vinagre/vinagre-debug.h>
 #include <vinagre/vinagre-cache-prefs.h>
+#include <vinagre/vinagre-protocol.h>
 
 #include "vinagre-ssh-plugin.h"
 #include "vinagre-ssh-connection.h"
@@ -37,39 +37,22 @@
 #include <avahi-common/malloc.h>
 #endif
 
-#define VINAGRE_SSH_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_SSH_PLUGIN, VinagreSshPluginPrivate))
-
-VINAGRE_PLUGIN_REGISTER_TYPE(VinagreSshPlugin, vinagre_ssh_plugin)
-
-static void
-impl_activate (VinagrePlugin *plugin,
-               VinagreWindow *window)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreSshPlugin Activate");
-}
-
-static void
-impl_deactivate  (VinagrePlugin *plugin,
-                  VinagreWindow *window)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreSshPlugin Deactivate");
-}
-
-static void
-impl_update_ui (VinagrePlugin *plugin,
-                VinagreWindow *window)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreSshPlugin Update UI");
-}
+static void vinagre_protocol_iface_init (VinagreProtocolInterface *iface);
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreSshPlugin,
+				vinagre_ssh_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
+							       vinagre_protocol_iface_init))
 
 static const gchar *
-impl_get_protocol (VinagrePlugin *plugin)
+impl_get_protocol (VinagreProtocol *plugin)
 {
   return "ssh";
 }
 
 static gchar **
-impl_get_public_description (VinagrePlugin *plugin)
+impl_get_public_description (VinagreProtocol *plugin)
 {
   gchar **result = g_new (gchar *, 3);
 
@@ -82,19 +65,19 @@ impl_get_public_description (VinagrePlugin *plugin)
 }
 
 static const gchar *
-impl_get_mdns_service (VinagrePlugin *plugin)
+impl_get_mdns_service (VinagreProtocol *plugin)
 {
   return "_ssh._tcp";
 }
 
 static VinagreConnection *
-impl_new_connection (VinagrePlugin *plugin)
+impl_new_connection (VinagreProtocol *plugin)
 {
   return vinagre_ssh_connection_new ();
 }
 
 static GtkWidget *
-impl_new_tab (VinagrePlugin     *plugin,
+impl_new_tab (VinagreProtocol   *protocol,
 	      VinagreConnection *conn,
 	      VinagreWindow     *window)
 {
@@ -102,27 +85,13 @@ impl_new_tab (VinagrePlugin     *plugin,
 }
 
 static gint
-impl_get_default_port (VinagrePlugin *plugin)
+impl_get_default_port (VinagreProtocol *plugin)
 {
   return 22;
 }
 
-static void
-vinagre_ssh_plugin_init (VinagreSshPlugin *plugin)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreSshPlugin initializing");
-}
-
-static void
-vinagre_ssh_plugin_finalize (GObject *object)
-{
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreSshPlugin finalizing");
-
-  G_OBJECT_CLASS (vinagre_ssh_plugin_parent_class)->finalize (object);
-}
-
 static GtkWidget *
-impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
+impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 {
   GtkWidget *box, *label, *u_box, *u_entry;
   gchar     *str;
@@ -162,7 +131,7 @@ impl_get_connect_widget (VinagrePlugin *plugin, VinagreConnection *conn)
 }
 
 static void
-ssh_parse_mdns_dialog (VinagrePlugin *plugin,
+ssh_parse_mdns_dialog (VinagreProtocol *plugin,
 		       GtkWidget *connect_widget,
 		       GtkWidget *dialog)
 {
@@ -199,23 +168,40 @@ ssh_parse_mdns_dialog (VinagrePlugin *plugin,
 }
 
 static void
+vinagre_protocol_iface_init (VinagreProtocolInterface *iface)
+{
+  iface->get_protocol  = impl_get_protocol;
+  iface->get_public_description  = impl_get_public_description;
+  iface->new_connection = impl_new_connection;
+  iface->get_mdns_service  = impl_get_mdns_service;
+  iface->new_tab = impl_new_tab;
+  iface->get_default_port = impl_get_default_port;
+  iface->get_connect_widget = impl_get_connect_widget;
+  iface->parse_mdns_dialog = ssh_parse_mdns_dialog;
+}
+
+static void
+vinagre_ssh_plugin_class_finalize (VinagreSshPluginClass *klass)
+{
+}
+
+static void
 vinagre_ssh_plugin_class_init (VinagreSshPluginClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  VinagrePluginClass *plugin_class = VINAGRE_PLUGIN_CLASS (klass);
-
-  object_class->finalize   = vinagre_ssh_plugin_finalize;
-
-  plugin_class->activate   = impl_activate;
-  plugin_class->deactivate = impl_deactivate;
-  plugin_class->update_ui  = impl_update_ui;
-  plugin_class->get_protocol  = impl_get_protocol;
-  plugin_class->get_public_description  = impl_get_public_description;
-  plugin_class->new_connection = impl_new_connection;
-  plugin_class->get_mdns_service  = impl_get_mdns_service;
-  plugin_class->new_tab = impl_new_tab;
-  plugin_class->get_default_port = impl_get_default_port;
-  plugin_class->get_connect_widget = impl_get_connect_widget;
-  plugin_class->parse_mdns_dialog = ssh_parse_mdns_dialog;
 }
+
+static void
+vinagre_ssh_plugin_init (VinagreSshPlugin *plugin)
+{
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+  vinagre_ssh_plugin_register_type (G_TYPE_MODULE (module));
+  peas_object_module_register_extension_type (module,
+					      VINAGRE_TYPE_PROTOCOL,
+					      VINAGRE_TYPE_SSH_PLUGIN);
+}
+
 /* vim: set ts=8: */

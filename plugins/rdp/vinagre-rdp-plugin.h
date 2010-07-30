@@ -23,7 +23,7 @@
 
 #include <glib.h>
 #include <glib-object.h>
-#include <vinagre/vinagre-plugin.h>
+#include <libpeas/peas.h>
 
 G_BEGIN_DECLS
 
@@ -37,38 +37,25 @@ G_BEGIN_DECLS
 #define VINAGRE_IS_RDP_PLUGIN_CLASS(k)          (G_TYPE_CHECK_CLASS_TYPE ((k), VINAGRE_TYPE_RDP_PLUGIN))
 #define VINAGRE_RDP_PLUGIN_GET_CLASS(o)         (G_TYPE_INSTANCE_GET_CLASS ((o), VINAGRE_TYPE_RDP_PLUGIN, VinagreRdpPluginClass))
 
-/* Private structure type */
-typedef struct _VinagreRdpPluginPrivate	VinagreRdpPluginPrivate;
-
-/*
- * Main object structure
- */
-typedef struct _VinagreRdpPlugin		VinagreRdpPlugin;
+typedef struct _VinagreRdpPlugin	VinagreRdpPlugin;
+typedef struct _VinagreRdpPluginClass	VinagreRdpPluginClass;
 
 struct _VinagreRdpPlugin
 {
-  VinagrePlugin parent_instance;
+  PeasExtensionBase parent_instance;
 };
-
-/*
- * Class definition
- */
-typedef struct _VinagreRdpPluginClass	VinagreRdpPluginClass;
 
 struct _VinagreRdpPluginClass
 {
-  VinagrePluginClass parent_class;
+  PeasExtensionBaseClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType	vinagre_rdp_plugin_get_type		(void) G_GNUC_CONST;
+GType vinagre_rdp_plugin_get_type (void) G_GNUC_CONST;
 
-/* All the plugins must implement this function */
-G_MODULE_EXPORT GType register_vinagre_plugin (GTypeModule *module);
+G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
 
 G_END_DECLS
 
 #endif /* __VINAGRE_RDP_PLUGIN_H__ */
+
 /* vim: set ts=8: */

@@ -204,13 +204,14 @@ always_enabled_toggled_cb (GtkToggleButton *button, VncListenDialog *dialog)
 }
 
 void
-vinagre_vnc_listener_dialog_show (VinagreWindow *parent, VinagrePlugin *plugin)
+vinagre_vnc_listener_dialog_show (VinagreWindow *parent/*, VinagrePlugin *plugin*/)
 {
   VncListenDialog *dialog;
   GtkBuilder *xml;
   gboolean always;
 
-  xml = vinagre_utils_get_builder (plugin, "vnc.ui");
+  //xml = vinagre_utils_get_builder (plugin, "vnc.ui");
+  xml = NULL;
   if (!xml)
     return;
 

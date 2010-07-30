@@ -13,18 +13,13 @@ INCLUDES = 						\
 	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\"		\
 	$(VINAGRE_CFLAGS)				\
 	$(AVAHI_CFLAGS)					\
+	$(INTROSPECTION_CFLAGS)				\
 	$(NULL)
 
 NOINST_H_FILES = \
   vinagre-enums.h \
   vinagre-marshal.h \
-  vinagre-object-module.h \
-  vinagre-plugin-info.h \
-  vinagre-plugin-info-priv.h \
-  vinagre-plugin-loader.h \
-  vinagre-plugin-manager.h \
   vinagre-plugin-dialog.h \
-  vinagre-plugins-engine.h \
   vinagre-window-private.h \
   pty_open.h \
   $(NULL)
@@ -42,8 +37,6 @@ INST_H_FILES = \
   vinagre-dirs.h \
   vinagre-fav.h \
   vinagre-notebook.h \
-  vinagre-plugin.h \
-  vinagre-plugin-loader.h \
   vinagre-prefs.h \
   vinagre-tab.h \
   vinagre-ui.h \
@@ -52,6 +45,9 @@ INST_H_FILES = \
   vinagre-dnd.h \
   vinagre-ssh.h \
   vinagre-cache-prefs.h \
+  vinagre-protocol.h \
+  vinagre-protocol-ext.h \
+  vinagre-plugins-engine.h \
   $(NULL)
 
 headerdir = $(prefix)/include/vinagre-@VINAGRE_API_VERSION@/vinagre
@@ -76,13 +72,7 @@ handwritten_sources = \
   vinagre-dirs.c \
   vinagre-fav.c \
   vinagre-notebook.c \
-  vinagre-object-module.c \
-  vinagre-plugin.c \
-  vinagre-plugin-info.c \
   vinagre-plugin-dialog.c \
-  vinagre-plugin-loader.c \
-  vinagre-plugin-manager.c \
-  vinagre-plugins-engine.c \
   vinagre-prefs.c \
   vinagre-tab.c \
   vinagre-utils.c \
@@ -90,6 +80,9 @@ handwritten_sources = \
   pty_open.c \
   vinagre-ssh.c \
   vinagre-cache-prefs.c \
+  vinagre-protocol.c \
+  vinagre-protocol-ext.c \
+  vinagre-plugins-engine.c \
   $(NULL)
 
 libvinagre_la_SOURCES = \
@@ -126,6 +119,7 @@ vinagre_LDADD = \
 	$(VINAGRE_LIBS)		\
 	$(AVAHI_LIBS)		\
 	$(GTKVNC_LIBS)		\
+	$(INTROSPECTION_LIBS)	\
 	$(NULL)
 
 vinagre_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
@@ -169,19 +163,13 @@ vinagre_applet_SOURCES =					\
 	vinagre-bookmarks-entry.h vinagre-bookmarks-entry.c	\
 	vinagre-bookmarks-tree.h vinagre-bookmarks-tree.c	\
 	vinagre-bookmarks-migration.h vinagre-bookmarks-migration.c \
-	vinagre-plugins-engine.h vinagre-plugins-engine.c \
-	vinagre-plugin.h vinagre-plugin.c \
-	vinagre-plugin-loader.h vinagre-plugin-loader.c \
-	vinagre-plugin-manager.h vinagre-plugin-manager.c \
 	vinagre-plugin-dialog.h vinagre-plugin-dialog.c \
 	vinagre-debug.h vinagre-debug.c \
-	vinagre-plugin-info.h vinagre-plugin-info.c \
 	vinagre-window.h vinagre-window.c \
 	vinagre-commands.h vinagre-commands.c \
 	vinagre-notebook.h vinagre-notebook.c \
 	vinagre-tab.h vinagre-tab.c \
 	vinagre-prefs.h vinagre-prefs.c \
-	vinagre-object-module.h vinagre-object-module.c \
 	vinagre-dirs.h vinagre-dirs.c \
 	vinagre-fav.h vinagre-fav.c \
 	vinagre-connect.h vinagre-connect.c \
@@ -189,6 +177,9 @@ vinagre_applet_SOURCES =					\
 	pty_open.h pty_open.c \
 	vinagre-ssh.h vinagre-ssh.c \
 	vinagre-cache-prefs.h vinagre-cache-prefs.c \
+	vinagre-protocol.h vinagre-protocol.c \
+	vinagre-protocol-ext.h vinagre-protocol-ext.c \
+	vinagre-plugins-engine.h vinagre-plugins-engine.c \
 	$(NULL)
 
 if AVAHI
@@ -276,6 +267,33 @@ vinagre_LDADD += $(TELEPATHY_LIBS)
 handwritten_sources += \
 	vinagre-tubes-manager.c vinagre-tubes-manager.h		\
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
+	$(NULL)
+
+endif
+
+CLEANFILES =
+
+if HAVE_INTROSPECTION
+-include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS = Vinagre-3.0.gir
+
+Vinagre-3.0.gir: vinagre
+INTROSPECTION_SCANNER_ARGS = $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
+Vinagre_3_0_gir_NAMESPACE = Vinagre
+Vinagre_3_0_gir_VERSION = 3.0
+Vinagre_3_0_gir_PROGRAM = $(builddir)/vinagre
+Vinagre_3_0_gir_FILES = $(INST_H_FILES) $(NOINST_H_FILES) $(handwritten_sources)
+Vinagre_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0 Peas-1.0 PeasUI-1.0
+
+girdir = $(datadir)/vinagre/gir-1.0
+gir_DATA = $(INTROSPECTION_GIRS)
+
+typelibdir = $(libdir)/girepository-1.0
+typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+
+CLEANFILES +=		\
+	$(gir_DATA)	\
+	$(typelib_DATA)	\
 	$(NULL)
 
 endif

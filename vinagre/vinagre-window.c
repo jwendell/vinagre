@@ -42,7 +42,7 @@
 #include "vinagre-ui.h"
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
-#include "vinagre-plugin.h"
+#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
 
@@ -63,8 +63,7 @@ vinagre_window_dispose (GObject *object)
 
   if (!window->priv->dispose_has_run)
     {
-      vinagre_plugins_engine_deactivate_plugins (vinagre_plugins_engine_get_default (),
-						 window);
+      peas_engine_garbage_collect (PEAS_ENGINE (vinagre_plugins_engine_get_default ()));
       window->priv->dispose_has_run = TRUE;
     }
 
@@ -495,7 +494,7 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
   GtkAction             *action;
   VinagreWindowPrivate  *p = window->priv;
   VinagreConnection     *conn;
-  VinagrePlugin         *plugin;
+  VinagreProtocolExt    *ext;
 
   for (l = entries; l; l = l->next)
     {
@@ -533,8 +532,8 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
-	    plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
-								    vinagre_connection_get_protocol (conn));
+	    ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+								 vinagre_connection_get_protocol (conn));
 
 	    action_name = vinagre_connection_get_best_name (conn);
 	    action_label = vinagre_utils_escape_underscores (action_name, -1);
@@ -552,7 +551,7 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 				     NULL);
 	    g_object_set (G_OBJECT (action),
 			  "icon-name",
-			  vinagre_plugin_get_icon_name (plugin),
+			  vinagre_protocol_ext_get_icon_name (ext),
 			  NULL);
 	    g_object_set_data (G_OBJECT (action), "conn", conn);
 	    gtk_action_group_add_action (p->bookmarks_list_action_group,
@@ -800,10 +799,6 @@ vinagre_window_init (VinagreWindow *window)
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
 #endif
-
-  vinagre_plugins_engine_activate_plugins (vinagre_plugins_engine_get_default (),
-					   window);
-
 
   g_idle_add ((GSourceFunc) vinagre_window_check_first_run, window);
 }

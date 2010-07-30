@@ -30,7 +30,7 @@
 #include "vinagre-utils.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
-#include "vinagre-plugin.h"
+#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 
 #include <config.h>
@@ -298,7 +298,7 @@ fill_recursive_menu (GSList *entries, GtkWidget *menu)
     {
       VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
       VinagreConnection     *conn;
-      VinagrePlugin         *plugin;
+      VinagreProtocolExt    *ext;
 
       switch (vinagre_bookmarks_entry_get_node (entry))
 	{
@@ -319,10 +319,10 @@ fill_recursive_menu (GSList *entries, GtkWidget *menu)
 
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
-	    plugin = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
-								    vinagre_connection_get_protocol (conn));
+	    ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
+								 vinagre_connection_get_protocol (conn));
 
-	    image = gtk_image_new_from_icon_name (vinagre_plugin_get_icon_name (plugin),
+	    image = gtk_image_new_from_icon_name (vinagre_protocol_ext_get_icon_name (ext),
 						  GTK_ICON_SIZE_MENU);
 	    item = gtk_image_menu_item_new_with_label (vinagre_connection_get_name (conn));
 	    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),

@@ -2,10 +2,11 @@
 plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
-	-I$(top_srcdir) 				\
-	$(VNC_CFLAGS) 					\
-	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)	
+	-I$(top_srcdir) 	\
+	$(VINAGRE_CFLAGS)	\
+	$(VNC_CFLAGS) 		\
+	$(WARN_CFLAGS)		\
+	$(DISABLE_DEPRECATED_CFLAGS)
 
 plugin_LTLIBRARIES = libvnc.la
 

@@ -37,7 +37,7 @@
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
-#include "vinagre-plugin.h"
+#include "vinagre-protocol-ext.h"
 #include "vinagre-dirs.h"
 
 typedef struct {
@@ -129,7 +129,7 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
 static void
 setup_protocol (VinagreConnectDialog *dialog)
 {
-  GHashTable      *plugins;
+  GHashTable      *extensions;
   GHashTableIter  hash_iter;
   gpointer        key, value;
   GtkTreeIter     tree_iter;
@@ -138,31 +138,32 @@ setup_protocol (VinagreConnectDialog *dialog)
   gint            selected, i;
 
   dialog->protocol_store = gtk_list_store_new (N_PROTOCOLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_OBJECT, G_TYPE_OBJECT);
-  plugins = vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
+  extensions = vinagre_plugins_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
   last_protocol = vinagre_cache_prefs_get_string ("connection", "last-protocol", NULL);
 
-  g_hash_table_iter_init (&hash_iter, plugins);
+  g_hash_table_iter_init (&hash_iter, extensions);
   selected = 0;
   i = 0;
   while (g_hash_table_iter_next (&hash_iter, &key, &value)) 
     {
-      gchar         **description;
-      VinagrePlugin *plugin = VINAGRE_PLUGIN (value);
-      GtkWidget     *widget;
+      gchar **description;
+      GtkWidget *widget;
+      VinagreProtocolExt *ext =  (VinagreProtocolExt *)value;
 
-      description = vinagre_plugin_get_public_description (plugin);
+      description = vinagre_protocol_ext_get_public_description (ext);
       if (!description || !description[0])
 	continue;
 
-      widget = vinagre_plugin_get_connect_widget (plugin, NULL);
+      //widget = vinagre_protocol_ext_get_connect_widget (ext, NULL);
+      widget = NULL;
 
       gtk_list_store_append (dialog->protocol_store, &tree_iter);
       gtk_list_store_set (dialog->protocol_store, &tree_iter,
 			  PROTOCOL_NAME, description[0],
 			  PROTOCOL_DESCRIPTION, description[1],
-			  PROTOCOL_MDNS, vinagre_plugin_get_mdns_service (plugin),
+			  PROTOCOL_MDNS, vinagre_protocol_ext_get_mdns_service (ext),
 			  PROTOCOL_OPTIONS, widget,
-			  PROTOCOL_PLUGIN, plugin,
+			  PROTOCOL_PLUGIN, ext,
 			  -1);
 
       if (last_protocol && g_str_equal (last_protocol, description[0]))
@@ -330,7 +331,7 @@ vinagre_connect_find_button_cb (GtkButton            *button,
   GtkTreeIter   tree_iter;
   gchar         *service;
   GtkWidget     *options = NULL;
-  VinagrePlugin *plugin = NULL;
+  VinagreProtocol *plugin = NULL;
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->protocol_combo),
 				      &tree_iter))
@@ -380,7 +381,7 @@ vinagre_connect_find_button_cb (GtkButton            *button,
 
       g_free (tmp);
       if (plugin && options)
-	vinagre_plugin_parse_mdns_dialog (plugin, options, d);
+	vinagre_protocol_parse_mdns_dialog (plugin, options, d);
     }
 
   g_free (service);
@@ -431,11 +432,11 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 
   if (result == GTK_RESPONSE_OK)
     {
-      gchar         *host = NULL, *error_msg = NULL, *protocol = NULL, *actual_host;
-      gint          port;
-      VinagrePlugin *plugin;
-      GtkWidget     *options;
-      GtkTreeIter   iter;
+      gchar *host = NULL, *error_msg = NULL, *protocol = NULL, *actual_host;
+      gint port;
+      GtkWidget *options;
+      GtkTreeIter iter;
+      VinagreProtocolExt *ext;
 
       host = gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog.host_entry));
       gtk_widget_hide (GTK_WIDGET (dialog.dialog));
@@ -454,14 +455,14 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
       gtk_tree_model_get (GTK_TREE_MODEL (dialog.protocol_store), &iter,
 			  PROTOCOL_NAME, &protocol,
 			  PROTOCOL_OPTIONS, &options,
-			  PROTOCOL_PLUGIN, &plugin,
+			  PROTOCOL_PLUGIN, &ext,
 		      -1);
 
       vinagre_cache_prefs_set_string ("connection", "last-protocol", protocol);
       g_free (protocol);
       vinagre_cache_prefs_set_boolean ("connection", "fullscreen", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog.fullscreen_check)));
 
-      conn = vinagre_plugin_new_connection (plugin);
+      conn = vinagre_protocol_ext_new_connection (ext);
       if (vinagre_connection_split_string (host,
 					   vinagre_connection_get_protocol (conn),
 					   &protocol,
@@ -487,7 +488,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
 				    GTK_WINDOW (window));
 	}
 
-      g_object_unref (plugin);
+      g_object_unref (ext);
       if (options)
 	g_object_unref (options);
 

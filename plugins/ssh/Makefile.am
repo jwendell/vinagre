@@ -2,9 +2,10 @@
 plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
-	-I$(top_srcdir) 				\
-	$(SSH_CFLAGS) 					\
-	$(WARN_CFLAGS)					\
+	-I$(top_srcdir)		\
+	$(SSH_CFLAGS) 		\
+	$(WARN_CFLAGS)		\
+	$(VINAGRE_CFLAGS)	\
 	$(DISABLE_DEPRECATED_CFLAGS)	
 
 plugin_LTLIBRARIES = libssh.la

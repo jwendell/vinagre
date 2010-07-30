@@ -2,10 +2,8 @@
  * vinagre-plugins-engine.h
  * This file is part of vinagre
  *
- * Based on gedit plugin system
- * Copyright (C) 2002-2005 Paolo Maggi
- * Copyright (C) 2009 Jonh Wendell <wendell@bani.com.br>
- * 
+ * Copyright (C) 2010 Jonh Wendell <wendell@bani.com.br>
+ *
  * vinagre-plugins-engine.h is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 2 of the License, or
@@ -24,10 +22,8 @@
 #define __VINAGRE_PLUGINS_ENGINE_H__
 
 #include <glib.h>
-#include "vinagre-window.h"
-#include "vinagre-plugin-info.h"
-#include "vinagre-plugin.h"
-#include "vinagre-connection.h"
+#include <libpeas/peas.h>
+#include "vinagre-protocol-ext.h"
 
 G_BEGIN_DECLS
 
@@ -40,64 +36,27 @@ G_BEGIN_DECLS
 
 typedef struct _VinagrePluginsEngine		VinagrePluginsEngine;
 typedef struct _VinagrePluginsEnginePrivate	VinagrePluginsEnginePrivate;
+typedef struct _VinagrePluginsEngineClass	VinagrePluginsEngineClass;
 
 struct _VinagrePluginsEngine
 {
-  GObject parent;
+  PeasEngine parent;
   VinagrePluginsEnginePrivate *priv;
 };
 
-typedef struct _VinagrePluginsEngineClass	VinagrePluginsEngineClass;
-
 struct _VinagrePluginsEngineClass
 {
-  GObjectClass parent_class;
-
-  void	 (* activate_plugin)		(VinagrePluginsEngine *engine,
-					 VinagrePluginInfo    *info);
-
-  void	 (* deactivate_plugin)		(VinagrePluginsEngine *engine,
-					 VinagrePluginInfo    *info);
+  PeasEngineClass parent_class;
 };
 
-GType			 vinagre_plugins_engine_get_type		(void) G_GNUC_CONST;
+GType			 vinagre_plugins_engine_get_type	(void) G_GNUC_CONST;
 
-VinagrePluginsEngine	*vinagre_plugins_engine_get_default		(void);
-
-void			 vinagre_plugins_engine_garbage_collect		(VinagrePluginsEngine *engine);
-
-const GSList		*vinagre_plugins_engine_get_plugin_list 	(VinagrePluginsEngine *engine);
-
-VinagrePluginInfo	*vinagre_plugins_engine_get_plugin_info		(VinagrePluginsEngine *engine,
-									 const gchar        *name);
-
-/* plugin load and unloading (overall, for all windows) */
-gboolean 		 vinagre_plugins_engine_activate_plugin 	(VinagrePluginsEngine *engine,
-									 VinagrePluginInfo    *info);
-gboolean 		 vinagre_plugins_engine_deactivate_plugin	(VinagrePluginsEngine *engine,
-									 VinagrePluginInfo    *info);
-
-void		 	 vinagre_plugins_engine_configure_plugin	(VinagrePluginsEngine *engine,
-									 VinagrePluginInfo    *info,
-									 GtkWindow            *parent);
-
-/* plugin activation/deactivation per window, private to VinagreWindow */
-void 			 vinagre_plugins_engine_activate_plugins 	 (VinagrePluginsEngine *engine,
-									  VinagreWindow        *window);
-void 			 vinagre_plugins_engine_deactivate_plugins	 (VinagrePluginsEngine *engine,
-									  VinagreWindow        *window);
-void			 vinagre_plugins_engine_update_plugins_ui	 (VinagrePluginsEngine *engine,
-									  VinagreWindow        *window);
-
-/* private for gconf notification */
-void			 vinagre_plugins_engine_active_plugins_changed	(VinagrePluginsEngine *engine);
-
-void			 vinagre_plugins_engine_rescan_plugins		(VinagrePluginsEngine *engine);
-
-GHashTable		*vinagre_plugin_engine_get_plugins_by_protocol	(VinagrePluginsEngine *engine);
-VinagrePlugin		*vinagre_plugins_engine_get_plugin_by_protocol	(VinagrePluginsEngine *engine,
+VinagrePluginsEngine	*vinagre_plugins_engine_get_default	(void);
+VinagreProtocolExt	*vinagre_plugins_engine_get_plugin_by_protocol	(VinagrePluginsEngine *engine,
 									 const gchar          *protocol);
-
+GHashTable		*vinagre_plugins_engine_get_plugins_by_protocol	(VinagrePluginsEngine *engine);
 G_END_DECLS
 
 #endif  /* __VINAGRE_PLUGINS_ENGINE_H__ */
+
+/* vim: set ts=8: */

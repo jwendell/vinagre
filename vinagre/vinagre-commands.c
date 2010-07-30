@@ -39,9 +39,7 @@
 #include "vinagre-window-private.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
-#include "vinagre-plugin.h"
-#include "vinagre-plugin-info.h"
-#include "vinagre-plugin-info-priv.h"
+#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin-dialog.h"
 
@@ -129,6 +127,7 @@ vinagre_cmd_machine_open (GtkAction     *action,
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), FALSE);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), TRUE);
 
+/* TODO
   plugins = (GSList *) vinagre_plugins_engine_get_plugin_list (vinagre_plugins_engine_get_default ());
   i = 0;
   for (; plugins; plugins = plugins->next)
@@ -145,6 +144,7 @@ vinagre_cmd_machine_open (GtkAction     *action,
 	  i++;
 	}
     }
+*/
   if (i == 0)
     {
       vinagre_utils_show_error (_("There are no supported files"),

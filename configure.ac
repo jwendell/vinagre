@@ -81,6 +81,7 @@ PANEL_REQUIRED_VERSION=2.0.0
 TELEPATHY_GLIB_REQUIRED=0.11.6
 XML_REQUIRED=2.6.31
 VTE_REQUIRED=0.20
+PEAS_REQUIRED=0.5.2
 
 # Check for avahi
 AC_ARG_ENABLE(avahi,
@@ -108,6 +109,8 @@ PKG_CHECK_MODULES(VINAGRE, \
   gnome-keyring-1 \
   libxml-2.0 >= $XML_REQUIRED \
   dbus-glib-1 \
+  libpeas-1.0 >= $PEAS_REQUIRED \
+  libpeasui-1.0 >= $PEAS_REQUIRED
 )
 AC_SUBST(VINAGRE_CFLAGS)
 AC_SUBST(VINAGRE_LIBS)
@@ -273,17 +276,25 @@ AC_SUBST(ACTIVE_PLUGINS)
 
 VINAGRE_IMPLIB="-lvinagre-${VINAGRE_API_VERSION}"
 PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
-LOADER_LIBTOOL_FLAGS="-module -avoid-version"
 
 AC_SUBST(VINAGRE_IMPLIB)
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
-AC_SUBST(LOADER_LIBTOOL_FLAGS)
 
 VINAGRE_PLUGINS_DATA_DIR="$datadir/vinagre-1/plugins"
 AC_SUBST(VINAGRE_PLUGINS_DATA_DIR)
 
 VINAGRE_PLUGINS_LIBS_DIR="$libdir/vinagre-1/plugins"
 AC_SUBST(VINAGRE_PLUGINS_LIBS_DIR)
+
+# Introspection
+GOBJECT_INTROSPECTION_CHECK([0.9.3])
+
+if test "$found_introspection" = "yes"; then
+	enable_introspection=yes
+	AC_DEFINE([ENABLE_INTROSPECTION], [1], [Define to enable GObject Introspection])
+else
+	enable_introspection=no
+fi
 
 #*******************************************************************************
 AC_CONFIG_FILES([
@@ -296,8 +307,6 @@ data/vinagre.schemas.in
 data/icons/Makefile
 help/Makefile
 po/Makefile.in
-plugin-loaders/Makefile
-plugin-loaders/c/Makefile
 plugins/Makefile
 plugins/vnc/Makefile
 plugins/ssh/Makefile
@@ -317,6 +326,7 @@ Configure summary:
 
 	Compiler ...................:  ${CC} 
 	Compiler Flags .............:  ${CFLAGS}
+	GObject Introspection.......:  $enable_introspection
 
 	Avahi enabled ..............:  ${enable_avahi}
 	GNOME Panel applet..........:  ${enable_applet}

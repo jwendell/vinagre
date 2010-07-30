@@ -22,6 +22,10 @@
 #include <config.h>
 #endif
 
+#ifdef ENABLE_INTROSPECTION
+#include <girepository.h>
+#endif
+
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <locale.h>
@@ -30,12 +34,10 @@
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
-#include "vinagre-plugins-engine.h"
-#include "vinagre-plugin-info.h"
-#include "vinagre-plugin-info-priv.h"
 #include "vinagre-debug.h"
 #include "vinagre-ssh.h"
 #include "vinagre-options.h"
+#include "vinagre-protocol-ext.h"
 
 #ifdef HAVE_TELEPATHY
 #include "vinagre-tubes-manager.h"
@@ -51,7 +53,7 @@ int main (int argc, char **argv) {
   GSList               *l, *plugins;
   GtkWindow            *window;
   GtkApplication       *app;
-  VinagrePluginsEngine *engine;
+//  VinagrePluginsEngine *engine;
 #ifdef HAVE_TELEPATHY
   VinagreTubesManager *vinagre_tubes_manager;
 #endif
@@ -71,14 +73,19 @@ int main (int argc, char **argv) {
 
   /* Init plugins engine */
   vinagre_debug_message (DEBUG_APP, "Init plugins");
-  engine = vinagre_plugins_engine_get_default ();
-  plugins = (GSList *) vinagre_plugins_engine_get_plugin_list (engine);
+  //engine = vinagre_plugins_engine_get_default ();
+  //plugins = (GSList *) vinagre_plugins_engine_get_plugin_list (engine);
 
   /* Setup command line options */
   context = g_option_context_new (_("- Remote Desktop Viewer"));
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
 
+#ifdef ENABLE_INTROSPECTION
+  g_option_context_add_group (context, g_irepository_get_option_group ());
+#endif
+
+/*
   for (l = plugins; l; l = l->next)
     {
       GSList            *groups, *l2;
@@ -92,7 +99,7 @@ int main (int argc, char **argv) {
 	g_option_context_add_group (context, (GOptionGroup *)l2->data);
       g_slist_free (groups);
     }
-
+*/
   g_option_context_parse (context, &argc, &argv, &error);
   g_option_context_free (context);
   if (error)

@@ -34,7 +34,7 @@
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks-migration.h"
 #include "vinagre-bookmarks.h"
-#include "vinagre-plugin.h"
+#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
 #include "vinagre-utils.h"
@@ -156,11 +156,11 @@ create_list (GKeyFile *kf)
   GSList *entries;
   gchar **conns;
   gsize   length, i;
-  VinagrePlugin *plugin;
+  VinagreProtocolExt *ext;
 
-  plugin = g_hash_table_lookup (vinagre_plugin_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ()),
-				"vnc");
-  if (!plugin)
+  ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (), "vnc");
+
+  if (!ext)
     {
       g_warning (_("Error while migrating bookmarks: VNC plugin is not activated"));
       return NULL;
@@ -178,7 +178,7 @@ create_list (GKeyFile *kf)
       if (!s_value)
         continue;
 
-      conn = vinagre_plugin_new_connection (plugin);
+      conn = vinagre_protocol_ext_new_connection (ext);
       i_value = g_key_file_get_integer (kf, conns[i], "port", NULL);
       if (i_value == 0)
         i_value = 5900;
