@@ -167,71 +167,14 @@ vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
   g_type_class_add_private (klass, sizeof (VinagrePluginsEnginePrivate));
 }
 
-/*
-static void
-require_private_typelib (void)
-{
-	const gchar *lib_dir;
-	gchar *filename;
-	GMappedFile *mfile;
-	GTypelib *typelib;
-	const gchar *ns;
-	GError *error = NULL;
-
-	lib_dir = vinagre_dirs_get_vinagre_lib_dir ();
-	filename = g_build_filename (lib_dir,
-				     "girepository-1.0",
-				     "Vinagre-3.0.typelib",
-				     NULL);
-
-	vinagre_debug_message (DEBUG_PLUGINS, "typelib: %s", filename);
-	mfile = g_mapped_file_new (filename, FALSE, NULL);
-
-	g_free (filename);
-
-	if (mfile == NULL)
-	{
-		g_warning ("Private typelib 'Vinagre-3.0' not found");
-		return;
-	}
-
-	typelib = g_typelib_new_from_mapped_file (mfile, &error);
-
-	if (typelib == NULL)
-	{
-		g_warning ("Private typelib 'Vinagre-3.0' could not be loaded: %s",
-		           error->message);
-
-		g_error_free (error);
-		return;
-	}
-
-	ns = g_irepository_load_typelib (g_irepository_get_default (),
-					 typelib,
-					 0,
-					 &error);
-
-	if (!ns)
-	{
-		g_warning ("Typelib 'Vinagre-3.0' could not be loaded: %s",
-		           error->message);
-		g_error_free (error);
-		return;
-	}
-
-	vinagre_debug_message (DEBUG_PLUGINS, "Namespace '%s' loaded.", ns);
-}
-*/
-
 VinagrePluginsEngine *
 vinagre_plugins_engine_get_default (void)
 {
-  gchar *modules_dir, **search_paths;
+  gchar *tmp, *typelib_dir, **search_paths;
   GError *error;
 
   if (default_engine != NULL)
     return default_engine;
-
 
   /* This should be moved to libpeas */
   g_irepository_require (g_irepository_get_default (),
@@ -239,17 +182,21 @@ vinagre_plugins_engine_get_default (void)
   g_irepository_require (g_irepository_get_default (),
 			 "PeasUI", "1.0", 0, NULL);
 
+  /* Require vinagre's typelib. */
+  tmp = vinagre_dirs_get_vinagre_lib_dir ();
+  typelib_dir = g_build_filename (tmp,
+				  "girepository-1.0",
+				  NULL);
   error = NULL;
-  g_irepository_require (g_irepository_get_default (),
-			 "Vinagre", "3.0", 0, &error);
+  g_irepository_require_private (g_irepository_get_default (),
+				 typelib_dir, "Vinagre", "3.0", 0, &error);
+  g_free (typelib_dir);
+  g_free (tmp);
   if (error)
     {
       g_print ("error registering vinagre typelib: %s\n", error->message);
       g_error_free (error);
     }
-//  require_private_typelib ();
-
-  modules_dir = vinagre_dirs_get_vinagre_lib_dir ();
 
   search_paths = g_new (gchar *, 5);
   /* Add the user plugins dir in ~ */
@@ -263,12 +210,10 @@ vinagre_plugins_engine_get_default (void)
 
   default_engine = VINAGRE_PLUGINS_ENGINE (g_object_new (VINAGRE_TYPE_PLUGINS_ENGINE,
 							 "app-name", "Vinagre",
-							 "base-module-dir", modules_dir,
 							 "search-paths", search_paths,
 							 NULL));
 
   g_strfreev (search_paths);
-  g_free (modules_dir);
 
   g_object_add_weak_pointer (G_OBJECT (default_engine),
 			     (gpointer) &default_engine);

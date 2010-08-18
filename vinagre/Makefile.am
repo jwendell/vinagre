@@ -288,7 +288,7 @@ Vinagre_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0 Peas-1.0 PeasUI-1.0
 girdir = $(datadir)/vinagre/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
 
-typelibdir = $(libdir)/girepository-1.0
+typelibdir = $(libdir)/vinagre-1/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
 CLEANFILES +=		\
