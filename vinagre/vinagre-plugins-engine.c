@@ -24,15 +24,12 @@
 #include "vinagre-dirs.h"
 #include "vinagre-debug.h"
 #include "vinagre-protocol.h"
-
-#define VINAGRE_PLUGINS_ENGINE_BASE_KEY "/apps/vinagre-2/plugins"
-#define VINAGRE_PLUGINS_ENGINE_KEY VINAGRE_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
+#include "vinagre-prefs.h"
 
 G_DEFINE_TYPE (VinagrePluginsEngine, vinagre_plugins_engine, PEAS_TYPE_ENGINE)
 
 struct _VinagrePluginsEnginePrivate
 {
-  //GSettings *plugin_settings;
   gboolean loading_plugin_list : 1;
   GHashTable *protocols;
   PeasExtensionSet *extensions;
@@ -84,7 +81,6 @@ vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
 					      VINAGRE_TYPE_PLUGINS_ENGINE,
 					      VinagrePluginsEnginePrivate);
 
-  //engine->priv->plugin_settings = g_settings_new ("org.gnome.vinagre.plugins");
   engine->priv->loading_plugin_list = FALSE;
   engine->priv->protocols = g_hash_table_new (g_str_hash, g_str_equal);
 
@@ -115,14 +111,19 @@ static void
 save_plugin_list (VinagrePluginsEngine *engine)
 {
   gchar **loaded_plugins;
+  GSList *plugins = NULL;
+  gint i;
 
   loaded_plugins = peas_engine_get_loaded_plugins (PEAS_ENGINE (engine));
-/*
-  g_settings_set_strv (engine->priv->plugin_settings,
-		       VINAGRE_SETTINGS_ACTIVE_PLUGINS,
-		       (const gchar * const *) loaded_plugins);
-*/
+  for (i = 0; loaded_plugins[i]; i++)
+    plugins = g_slist_prepend (plugins, loaded_plugins[i]);
+
+  g_object_set (vinagre_prefs_get_default (),
+		"active-plugins", plugins,
+		NULL);
+
   g_strfreev (loaded_plugins);
+  g_slist_free (plugins);
 }
 
 static void
@@ -165,6 +166,30 @@ vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
   engine_class->unload_plugin = vinagre_plugins_engine_unload_plugin;
 
   g_type_class_add_private (klass, sizeof (VinagrePluginsEnginePrivate));
+}
+
+static void
+vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
+{
+  GSList *plugins, *l;
+  gchar **loaded_plugins;
+  gint i;
+
+  g_object_get (vinagre_prefs_get_default (),
+		"active-plugins", &plugins,
+		NULL);
+
+  loaded_plugins = g_new0 (gchar *, g_slist_length (plugins) + 1);
+  i = 0;
+  for (l = plugins; l; l = l->next)
+    loaded_plugins[i++] = (l->data);
+
+  engine->priv->loading_plugin_list = TRUE;
+  peas_engine_set_loaded_plugins (PEAS_ENGINE (engine),
+				  (const gchar **) loaded_plugins);
+  engine->priv->loading_plugin_list = FALSE;
+  g_strfreev (loaded_plugins);
+  g_slist_free (plugins);
 }
 
 VinagrePluginsEngine *
@@ -218,27 +243,11 @@ vinagre_plugins_engine_get_default (void)
   g_object_add_weak_pointer (G_OBJECT (default_engine),
 			     (gpointer) &default_engine);
 
-  //vinagre_plugins_engine_active_plugins_changed (default_engine);
+  vinagre_plugins_engine_active_plugins_changed (default_engine);
 
   return default_engine;
 }
 
-/*
-void
-vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
-{
-  gchar **loaded_plugins;
-
-  loaded_plugins = g_settings_get_strv (engine->priv->plugin_settings,
-					VINAGRE_SETTINGS_ACTIVE_PLUGINS);
-
-  engine->priv->loading_plugin_list = TRUE;
-  peas_engine_set_loaded_plugins (PEAS_ENGINE (engine),
-				  (const gchar **) loaded_plugins);
-  engine->priv->loading_plugin_list = FALSE;
-  g_strfreev (loaded_plugins);
-}
-*/
 
 VinagreProtocolExt *
 vinagre_plugins_engine_get_plugin_by_protocol (VinagrePluginsEngine *engine,
