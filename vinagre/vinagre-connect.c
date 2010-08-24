@@ -396,7 +396,7 @@ VinagreConnection *vinagre_connect (VinagreWindow *window)
   gint                  result;
   VinagreConnectDialog  dialog;
 
-  dialog.xml = vinagre_utils_get_builder (NULL, NULL);
+  dialog.xml = vinagre_utils_get_builder (NULL);
   if (!dialog.xml)
     return NULL;
 
