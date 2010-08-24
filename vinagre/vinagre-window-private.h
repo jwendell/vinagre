@@ -21,6 +21,8 @@
 #ifndef __VINAGRE_WINDOW_PRIVATE_H__
 #define __VINAGRE_WINDOW_PRIVATE_H__
 
+#include <libpeas/peas-extension-set.h>
+
 #include "vinagre-window.h"
 #include "vinagre-notebook.h"
 
@@ -54,6 +56,8 @@ struct _VinagreWindowPrivate
 
   GtkWidget       *toolbar;
   GtkWidget       *menubar;
+
+  PeasExtensionSet *extensions;
 
   gint            width;
   gint            height;

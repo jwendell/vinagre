@@ -61,8 +61,15 @@ vinagre_window_dispose (GObject *object)
 {
   VinagreWindow *window = VINAGRE_WINDOW (object);
 
+  peas_engine_garbage_collect (PEAS_ENGINE (vinagre_plugins_engine_get_default ()));
+
   if (!window->priv->dispose_has_run)
     {
+      peas_extension_set_call (window->priv->extensions,
+			       "deactivate",
+			       window);
+
+      g_object_unref (window->priv->extensions);
       peas_engine_garbage_collect (PEAS_ENGINE (vinagre_plugins_engine_get_default ()));
       window->priv->dispose_has_run = TRUE;
     }
@@ -81,6 +88,8 @@ vinagre_window_dispose (GObject *object)
 				   window->priv->update_recents_menu_ui_id);
       window->priv->update_recents_menu_ui_id = 0;
     }
+
+  peas_engine_garbage_collect (PEAS_ENGINE (vinagre_plugins_engine_get_default ()));
 
   G_OBJECT_CLASS (vinagre_window_parent_class)->dispose (object);
 }
@@ -747,6 +756,24 @@ vinagre_window_check_first_run (VinagreWindow *window)
 }
 
 static void
+extension_added (PeasExtensionSet *extensions,
+		 PeasPluginInfo   *info,
+		 PeasExtension    *exten,
+		 gpointer          user_data)
+{
+  peas_extension_call (exten, "activate");
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+		   PeasPluginInfo   *info,
+		   PeasExtension    *exten,
+		   gpointer          user_data)
+{
+  peas_extension_call (exten, "deactivate");
+}
+
+static void
 vinagre_window_init (VinagreWindow *window)
 {
   GtkWidget *main_box;
@@ -799,6 +826,20 @@ vinagre_window_init (VinagreWindow *window)
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
 #endif
+
+  window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (vinagre_plugins_engine_get_default ()),
+						     PEAS_TYPE_ACTIVATABLE,
+						     "object", window,
+						     NULL);
+  g_signal_connect (window->priv->extensions,
+		    "extension-added",
+		    G_CALLBACK (extension_added),
+		    window);
+  g_signal_connect (window->priv->extensions,
+		    "extension-removed",
+		    G_CALLBACK (extension_removed),
+		    window);
+  peas_extension_set_call (window->priv->extensions, "activate");
 
   g_idle_add ((GSourceFunc) vinagre_window_check_first_run, window);
 }
