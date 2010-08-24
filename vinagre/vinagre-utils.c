@@ -133,13 +133,10 @@ vinagre_utils_get_builder (const gchar *filename)
 {
   GtkBuilder *xml = NULL;
   GError     *error = NULL;
-  gchar      *actual_filename, *plugin_datadir;
+  gchar      *actual_filename;
 
   if (filename)
-    {
-      actual_filename = g_strdup (filename);
-      g_free (plugin_datadir);
-    }
+    actual_filename = g_strdup (filename);
   else
     actual_filename = g_strdup (vinagre_utils_get_ui_filename ());
 
