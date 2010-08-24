@@ -128,29 +128,16 @@ vinagre_utils_get_ui_xml_filename (void)
     return VINAGRE_DATADIR "/" VINAGRE_UI_XML_FILE;
 }
 
-/**
- * vinagre_utils_get_builder:
- * @plugin: a #VinagrePlugin or NULL
- * @filename: the filename of the UI file for the plugin, or NULL if plugin is NULL
- *
- * This function gets a #GtkBuilder object for a UI file.
- * Supply a plugin and a filename in order to get a #GtkBuilder for the plugin.
- * Supply NULL to both arguments to get the main Vinagre #GtkBuilder
- *
- * Returns a #GtkBuilder on success (free with #g_object_unref) or NULL
- *  if the file cannot be found. In this case an error dialog will be shown.
- */
 GtkBuilder *
-vinagre_utils_get_builder (void *plugin, const gchar *filename)
+vinagre_utils_get_builder (const gchar *filename)
 {
   GtkBuilder *xml = NULL;
   GError     *error = NULL;
   gchar      *actual_filename, *plugin_datadir;
 
-  if (plugin)
+  if (filename)
     {
-      //plugin_datadir = vinagre_plugin_get_data_dir (plugin);
-      actual_filename = g_build_filename (plugin_datadir, filename, NULL);
+      actual_filename = g_strdup (filename);
       g_free (plugin_datadir);
     }
   else
@@ -163,7 +150,7 @@ vinagre_utils_get_builder (void *plugin, const gchar *filename)
     {
       GString *str = g_string_new (NULL);
 
-      if (plugin)
+      if (filename)
 	g_string_append (str, _("A plugin tried to open an UI file but did not succeed, with the error message:"));
       else
 	g_string_append (str, _("The program tried to open an UI file but did not succeed, with the error message:"));
@@ -475,7 +462,7 @@ vinagre_utils_ask_credential (GtkWindow *parent,
   int             result;
   ControlOKButton control;
 
-  xml = vinagre_utils_get_builder (NULL, NULL);
+  xml = vinagre_utils_get_builder (NULL);
 
   password_dialog = GTK_WIDGET (gtk_builder_get_object (xml, "auth_required_dialog"));
   if (parent)
