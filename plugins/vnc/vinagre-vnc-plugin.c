@@ -34,10 +34,6 @@
 #include "vinagre-vnc-plugin.h"
 #include "vinagre-vnc-connection.h"
 #include "vinagre-vnc-tab.h"
-#include "vinagre-vnc-listener-dialog.h"
-#include "vinagre-vnc-listener.h"
-
-#define WINDOW_DATA_KEY "VinagreVNCPluginWindowData"
 
 static void vinagre_protocol_iface_init (VinagreProtocolInterface *iface);
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreVncPlugin,
@@ -46,128 +42,6 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreVncPlugin,
 				0,
 				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
 							       vinagre_protocol_iface_init))
-
-typedef struct
-{
-  GtkActionGroup *ui_action_group;
-  guint ui_id;
-} WindowData;
-
-typedef struct
-{
-  VinagreProtocol *plugin;
-  VinagreWindow *window;
-} ActionData;
-
-/*
-static void
-free_window_data (WindowData *data)
-{
-  g_return_if_fail (data != NULL);
-
-  g_object_unref (data->ui_action_group);
-  g_slice_free (WindowData, data);
-}
-
-static void
-free_action_data (ActionData *data)
-{
-  g_return_if_fail (data != NULL);
-
-  g_slice_free (ActionData, data);
-}
-*/
-
-static void
-listening_cb (GtkAction *action, ActionData *action_data)
-{
-  vinagre_vnc_listener_dialog_show (action_data->window/*, action_data->plugin*/);
-}
-
-static GtkActionEntry action_entries[] =
-{
-  { "VNCListener",
-    NULL,
-    /* Translators: "Reverse" here is an adjective, not a verb. */
-    N_("_Reverse Connections..."),
-    NULL,
-    N_("Configure incoming VNC connections"),
-    G_CALLBACK (listening_cb)
-  }
-};
-
-/*
-static void
-impl_activate (VinagreProtocol *plugin,
-               VinagreWindow *window)
-{
-  GtkActionGroup *action_group;
-  GtkUIManager *manager;
-  WindowData *data;
-  ActionData *action_data;
-  gboolean always;
-
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Activate");
-
-  data = g_slice_new (WindowData);
-  action_data = g_slice_new (ActionData);
-  action_data->window = window;
-  action_data->plugin = plugin;
-
-  action_group = vinagre_window_get_always_sensitive_action (window);
-  manager = vinagre_window_get_ui_manager (window);
-
-  data->ui_action_group = gtk_action_group_new ("VinagreVNCPluginActions");
-  gtk_action_group_set_translation_domain (data->ui_action_group, GETTEXT_PACKAGE);
-  gtk_action_group_add_actions_full (data->ui_action_group,
-				     action_entries,
-				     G_N_ELEMENTS (action_entries),
-				     action_data,
-				     (GDestroyNotify) free_action_data);
-  gtk_ui_manager_insert_action_group (manager,
-				      data->ui_action_group,
-				      -1);
-
-  data->ui_id = gtk_ui_manager_new_merge_id (manager);
-  gtk_ui_manager_add_ui (manager,
-			 data->ui_id,
-			 "/MenuBar/MachineMenu/MachineOps_1",
-			 "VNCListener",
-			 "VNCListener",
-			 GTK_UI_MANAGER_AUTO,
-			 TRUE);
-
-  g_object_set_data_full (G_OBJECT (window),
-			  WINDOW_DATA_KEY,
-			  data,
-			  (GDestroyNotify) free_window_data);
-
-  g_object_get (vinagre_prefs_get_default (),
-		"always-enable-listening", &always,
-		NULL);
-  if (always)
-    vinagre_vnc_listener_start (vinagre_vnc_listener_get_default ());
-}
-
-static void
-impl_deactivate  (VinagreProtocol *plugin,
-                  VinagreWindow *window)
-{
-  GtkUIManager *manager;
-  WindowData *data;
-
-  vinagre_debug_message (DEBUG_PLUGINS, "VinagreVncPlugin Deactivate");
-
-  manager = vinagre_window_get_ui_manager (window);
-  data = (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-  g_return_if_fail (data != NULL);
-
-  gtk_ui_manager_remove_ui (manager, data->ui_id);
-  gtk_ui_manager_remove_action_group (manager, data->ui_action_group);
-
-  g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
-}
-*/
 
 static const GOptionEntry vinagre_vnc_args[] =
 {
@@ -528,8 +402,6 @@ vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
 static void
 vinagre_protocol_iface_init (VinagreProtocolInterface *iface)
 {
-  //iface->activate   = impl_activate;
-  //iface->deactivate = impl_deactivate;
   iface->get_context_groups = impl_get_context_groups;
   iface->get_protocol  = impl_get_protocol;
   iface->get_public_description  = impl_get_public_description;
