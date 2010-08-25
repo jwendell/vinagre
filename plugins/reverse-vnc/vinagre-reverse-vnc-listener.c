@@ -32,15 +32,14 @@
 
 #include <glib/gi18n.h>
 #include <vinagre/vinagre-commands.h>
+#include <vinagre/vinagre-utils.h>
 #include "vinagre-reverse-vnc-listener.h"
 #include "../vnc/vinagre-vnc-connection.h"
 
 struct _VinagreReverseVncListenerPrivate
 {
-  int server_sock;
-  GIOChannel *io;
+  GSocketService *service;
   gboolean listening;
-  guint io_uid;
   gint port;
 };
 
@@ -53,7 +52,6 @@ enum
 
 static VinagreReverseVncListener *listener_singleton = NULL;
 
-#define VINAGRE_REVERSE_VNC_LISTENER_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_REVERSE_VNC_LISTENER, VinagreReverseVncListenerPrivate))
 G_DEFINE_TYPE (VinagreReverseVncListener, vinagre_reverse_vnc_listener, G_TYPE_OBJECT);
 
 static void
@@ -61,10 +59,7 @@ vinagre_reverse_vnc_listener_init (VinagreReverseVncListener *listener)
 {
   listener->priv = G_TYPE_INSTANCE_GET_PRIVATE (listener, VINAGRE_TYPE_REVERSE_VNC_LISTENER, VinagreReverseVncListenerPrivate);
 
-  listener->priv->io = NULL;
-  listener->priv->server_sock = 0;
   listener->priv->listening = FALSE;
-  listener->priv->io_uid = 0;
   listener->priv->port = 0;
 }
 
@@ -152,18 +147,14 @@ vinagre_reverse_vnc_listener_get_default (void)
 }
 
 static gboolean
-incoming (GIOChannel *source, GIOCondition condition, VinagreReverseVncListener *listener)
+incoming (GSocketService *service,
+	  GSocketConnection *connection,
+	  GObject *source,
+	  VinagreReverseVncListener *listener)
 {
   VinagreConnection *conn;
   GtkWindow *window;
-  int cl_sock;
-  struct sockaddr_in6 client_addr;
-  char client_name[INET6_ADDRSTRLEN];
-  socklen_t client_addr_len = sizeof (client_addr);
-
-  cl_sock = accept (listener->priv->server_sock, (struct sockaddr *) &client_addr, &client_addr_len);
-  if (cl_sock < 0)
-    g_error ("accept() failed");
+  GSocketAddress *address;
 
   window = gtk_application_get_window (GTK_APPLICATION (g_application_get_instance ()));
   if (!window)
@@ -173,11 +164,20 @@ incoming (GIOChannel *source, GIOCondition condition, VinagreReverseVncListener 
     }
 
   conn = vinagre_vnc_connection_new ();
-  vinagre_vnc_connection_set_fd (VINAGRE_VNC_CONNECTION (conn), cl_sock);
+  vinagre_vnc_connection_set_socket (VINAGRE_VNC_CONNECTION (conn),
+				     g_socket_connection_get_socket (connection));
 
-  if (inet_ntop (AF_INET6, &client_addr.sin6_addr.s6_addr, client_name, sizeof (client_name)) != NULL)
-    vinagre_connection_set_host (conn, client_name);
-  vinagre_connection_set_port (conn, ntohs (client_addr.sin6_port));
+  address = g_socket_connection_get_remote_address (connection, NULL);
+  if (address)
+    {
+      gchar *host = g_inet_address_to_string (g_inet_socket_address_get_address (G_INET_SOCKET_ADDRESS (address)));
+
+      vinagre_connection_set_host (conn, host);
+      vinagre_connection_set_port (conn, g_inet_socket_address_get_port (G_INET_SOCKET_ADDRESS (address)));
+
+      g_object_unref (address);
+      g_free (host);
+    }
 
   vinagre_cmd_direct_connect (conn, VINAGRE_WINDOW (window));
 
@@ -187,65 +187,61 @@ incoming (GIOChannel *source, GIOCondition condition, VinagreReverseVncListener 
 void
 vinagre_reverse_vnc_listener_start (VinagreReverseVncListener *listener)
 {
-  struct sockaddr_in6 server_addr;
+  VinagreReverseVncListenerPrivate *priv = listener->priv;
+  GError *error;
   int port;
 
   g_return_if_fail (VINAGRE_IS_REVERSE_VNC_LISTENER (listener));
 
-  if (listener->priv->listening)
+  if (priv->listening)
     return;
 
-  listener->priv->server_sock = socket (AF_INET6, SOCK_STREAM, IPPROTO_TCP);
-  if (listener->priv->server_sock < 0)
-    g_error ("socket() failed");
-
-  memset (&server_addr, 0, sizeof (server_addr));
-  server_addr.sin6_family = AF_INET6;
-  server_addr.sin6_addr = in6addr_any;
+  priv->service = g_socket_service_new ();
 
   for (port=5500; port<=5600; port++)
     {
-      server_addr.sin6_port = htons (port);
-
-      if (bind (listener->priv->server_sock, (struct sockaddr *) &server_addr, sizeof (server_addr)) == 0)
+      error = NULL;
+      if (g_socket_listener_add_inet_port (G_SOCKET_LISTENER (priv->service), port, NULL, &error))
 	break;
+      else
+	{
+	  g_message ("%s", error->message);
+	  g_clear_error (&error);
+	}
     }
-  if (port>5600)
-    g_error ("bind() failed");
+  if (port > 5600)
+    {
+      vinagre_utils_show_error (_("Error activating reverse connections"),
+				_("The program could not find any available TCP ports starting at 5500. Is there any other running program consuming all your TCP ports?"),
+				gtk_application_get_window (GTK_APPLICATION (g_application_get_instance ())));
+      g_object_unref (priv->service);
+      priv->service = NULL;
+      return;
+    }
 
-  if (listen (listener->priv->server_sock, 5) < 0)
-    g_error ("listen() failed");
+  g_signal_connect (priv->service, "incoming", G_CALLBACK (incoming), listener);
+  g_socket_service_start (priv->service);
 
-  listener->priv->io = g_io_channel_unix_new (listener->priv->server_sock);
-  listener->priv->io_uid = g_io_add_watch (listener->priv->io, G_IO_IN, (GIOFunc)incoming, listener);
-
-  listener->priv->port = port;
-  listener->priv->listening = TRUE;
+  priv->port = port;
+  priv->listening = TRUE;
   g_object_notify (G_OBJECT (listener), "listening");
 }
 
 void
 vinagre_reverse_vnc_listener_stop (VinagreReverseVncListener *listener)
 {
+  VinagreReverseVncListenerPrivate *priv = listener->priv;
+
   g_return_if_fail (VINAGRE_IS_REVERSE_VNC_LISTENER (listener));
 
-  if (!listener->priv->listening)
+  if (!priv->listening)
     return;
 
-  if (listener->priv->io)
-    {
-      g_source_remove (listener->priv->io_uid);
-      g_io_channel_unref (listener->priv->io);
-      listener->priv->io = NULL;
-    }
+  g_socket_service_stop (priv->service);
+  g_object_unref (priv->service);
+  priv->service = NULL;
 
-  if (listener->priv->server_sock > 0)
-    {
-      close (listener->priv->server_sock);
-      listener->priv->server_sock = 0;
-    }
-
-  listener->priv->listening = FALSE;
+  priv->listening = FALSE;
   g_object_notify (G_OBJECT (listener), "listening");
 }
 
