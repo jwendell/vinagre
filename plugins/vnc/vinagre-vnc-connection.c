@@ -3,7 +3,7 @@
  * Child class of abstract VinagreConnection, specific to VNC protocol
  * This file is part of vinagre
  *
- * Copyright (C) 2009 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2009-2010 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@ struct _VinagreVncConnectionPrivate
   gint     depth_profile;
   gboolean lossy_encoding;
   gchar    *ssh_tunnel_host;
+  GSocket  *socket;
 };
 
 enum
@@ -50,7 +51,8 @@ enum
   PROP_FD,
   PROP_DEPTH_PROFILE,
   PROP_LOSSY_ENCODING,
-  PROP_SSH_TUNNEL_HOST
+  PROP_SSH_TUNNEL_HOST,
+  PROP_SOCKET
 };
 
 #define VINAGRE_VNC_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_VNC_CONNECTION, VinagreVncConnectionPrivate))
@@ -70,6 +72,7 @@ vinagre_vnc_connection_init (VinagreVncConnection *conn)
   conn->priv->depth_profile = 0;
   conn->priv->lossy_encoding = FALSE;
   conn->priv->ssh_tunnel_host = NULL;
+  conn->priv->socket = NULL;
 }
 
 static void
@@ -87,6 +90,20 @@ vinagre_vnc_connection_finalize (GObject *object)
   g_free (conn->priv->ssh_tunnel_host);
 
   G_OBJECT_CLASS (vinagre_vnc_connection_parent_class)->finalize (object);
+}
+
+static void
+vinagre_vnc_connection_dispose (GObject *object)
+{
+  VinagreVncConnection *conn = VINAGRE_VNC_CONNECTION (object);
+
+  if (conn->priv->socket)
+    {
+      g_object_unref (conn->priv->socket);
+      conn->priv->socket = NULL;
+    }
+
+  G_OBJECT_CLASS (vinagre_vnc_connection_parent_class)->dispose (object);
 }
 
 static void
@@ -136,6 +153,10 @@ vinagre_vnc_connection_set_property (GObject *object, guint prop_id, const GValu
 	vinagre_vnc_connection_set_ssh_tunnel_host (conn, g_value_get_string (value));
 	break;
 
+      case PROP_SOCKET:
+	vinagre_vnc_connection_set_socket (conn, g_value_get_object (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -174,7 +195,7 @@ vinagre_vnc_connection_get_property (GObject *object, guint prop_id, GValue *val
 	break;
 
       case PROP_FD:
-	g_value_set_int (value, conn->priv->fd);
+	g_value_set_int (value, vinagre_vnc_connection_get_fd (conn));
 	break;
 
       case PROP_DEPTH_PROFILE:
@@ -187,6 +208,10 @@ vinagre_vnc_connection_get_property (GObject *object, guint prop_id, GValue *val
 
       case PROP_SSH_TUNNEL_HOST:
 	g_value_set_string (value, conn->priv->ssh_tunnel_host);
+	break;
+
+      case PROP_SOCKET:
+	g_value_set_object (value, conn->priv->socket);
 	break;
 
       default:
@@ -334,6 +359,7 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
   g_type_class_add_private (klass, sizeof (VinagreVncConnectionPrivate));
 
   object_class->finalize = vinagre_vnc_connection_finalize;
+  object_class->dispose = vinagre_vnc_connection_dispose;
   object_class->set_property = vinagre_vnc_connection_set_property;
   object_class->get_property = vinagre_vnc_connection_get_property;
   object_class->constructed  = vinagre_vnc_connection_constructed;
@@ -457,6 +483,18 @@ vinagre_vnc_connection_class_init (VinagreVncConnectionClass *klass)
                                                         G_PARAM_STATIC_NAME |
                                                         G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property (object_class,
+                                   PROP_SOCKET,
+                                   g_param_spec_object ("socket",
+                                                        "Socket",
+	                                                "A GSocket for this connection",
+	                                                G_TYPE_SOCKET,
+	                                                G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT |
+                                                        G_PARAM_STATIC_NICK |
+                                                        G_PARAM_STATIC_NAME |
+                                                        G_PARAM_STATIC_BLURB));
+
 }
 
 VinagreConnection *
@@ -561,7 +599,27 @@ vinagre_vnc_connection_get_fd (VinagreVncConnection *conn)
 {
   g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), 0);
 
-  return conn->priv->fd;
+  if (conn->priv->socket)
+    return g_socket_get_fd (conn->priv->socket);
+  else
+    return conn->priv->fd;
+}
+
+void
+vinagre_vnc_connection_set_socket (VinagreVncConnection *conn,
+				   GSocket              *socket)
+{
+  g_return_if_fail (VINAGRE_IS_VNC_CONNECTION (conn));
+
+  if (socket)
+    conn->priv->socket = g_object_ref (socket);
+}
+GSocket *
+vinagre_vnc_connection_get_socket (VinagreVncConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_VNC_CONNECTION (conn), 0);
+
+  return conn->priv->socket;
 }
 
 void

@@ -3,7 +3,7 @@
  * Child class of abstract VinagreConnection, specific to VNC protocol
  * This file is part of vinagre
  *
- * Copyright (C) 2009 - Jonh Wendell <wendell@bani.com.br>
+ * Copyright (C) 2009-2010 - Jonh Wendell <wendell@bani.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -78,6 +78,10 @@ void		    vinagre_vnc_connection_set_shared       (VinagreVncConnection *conn,
 gint		    vinagre_vnc_connection_get_fd           (VinagreVncConnection *conn);
 void		    vinagre_vnc_connection_set_fd           (VinagreVncConnection *conn,
 							     gint value);
+
+GSocket *	    vinagre_vnc_connection_get_socket       (VinagreVncConnection *conn);
+void		    vinagre_vnc_connection_set_socket       (VinagreVncConnection *conn,
+							     GSocket *socket);
 
 gint		    vinagre_vnc_connection_get_depth_profile (VinagreVncConnection *conn);
 void		    vinagre_vnc_connection_set_depth_profile (VinagreVncConnection *conn,
