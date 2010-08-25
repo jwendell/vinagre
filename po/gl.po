@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre-master-po-gl-26618\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-24 21:09+0200\n"
-"PO-Revision-Date: 2010-08-24 21:10+0200\n"
+"POT-Creation-Date: 2010-08-25 17:12+0200\n"
+"PO-Revision-Date: 2010-08-25 17:15+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@ubuntu.com>\n"
 "Language-Team: Galician <gnome-gl-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: ../data/GNOME_VinagreApplet.xml.h:1
 msgid "_About"
-msgstr "_Sobre"
+msgstr "_Sobrera "
 
 #: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
 msgid "_Help"
@@ -307,7 +307,7 @@ msgid "SSH support"
 msgstr "Capacidade SSH"
 
 #. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
-#: ../plugins/vnc/vinagre-vnc-connection.c:291
+#: ../plugins/vnc/vinagre-vnc-connection.c:316
 #: ../plugins/vnc/vinagre-vnc-plugin.c:199
 #, c-format
 msgid ""
@@ -581,9 +581,30 @@ msgstr ""
 msgid "On the port %d"
 msgstr "No porto %d"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:171
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
 msgid "Incoming VNC connection arrived but there is no active window"
 msgstr "A conexión VNC entrante chegou pero non hai ningunha xanela activa"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
+msgid "Error activating reverse connections"
+msgstr "Producise un erro ao activar as conexións inversas."
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+msgid ""
+"The program could not find any available TCP ports starting at 5500. Is "
+"there any other running program consuming all your TCP ports?"
+msgstr ""
+"O programa non puido encontrar ningún porto TCP a partires do 5500. Ten "
+"algún outro programa empregando todos os seus portos TCP?"
+
+#. Translators: "Reverse" here is an adjective, not a verb.
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
+msgid "_Reverse Connections..."
+msgstr "Conexións _inversas..."
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
+msgid "Configure incoming VNC connections"
+msgstr "Configura as conexións VNC entrantes"
 
 #. vim: set ts=8:
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
@@ -1385,12 +1406,6 @@ msgstr ""
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Produciuse un erro ao crear o ficheiro: %s: %s"
-
-#~ msgid "_Reverse Connections..."
-#~ msgstr "Conexións _inversas..."
-
-#~ msgid "Configure incoming VNC connections"
-#~ msgstr "Configura as conexións VNC entrantes"
 
 #~ msgid "Plugin"
 #~ msgstr "Engadido"
