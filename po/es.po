@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-08-24 18:38+0000\n"
-"PO-Revision-Date: 2010-08-24 20:51+0200\n"
+"POT-Creation-Date: 2010-08-25 14:49+0000\n"
+"PO-Revision-Date: 2010-08-26 09:15+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -299,7 +299,7 @@ msgid "SSH support"
 msgstr "Soporte para SSH"
 
 #. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
-#: ../plugins/vnc/vinagre-vnc-connection.c:291
+#: ../plugins/vnc/vinagre-vnc-connection.c:316
 #: ../plugins/vnc/vinagre-vnc-plugin.c:199
 #, c-format
 msgid ""
@@ -547,12 +547,10 @@ msgid "VNC support"
 msgstr "Soporte para VNC"
 
 #: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:1
-#| msgid "Reverse Connections"
 msgid "Allows reverse VNC connections"
 msgstr "Permite conexiones VNC inversas"
 
 #: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:2
-#| msgid "Reverse Connections"
 msgid "Reverse VNC"
 msgstr "VNC inverso"
 
@@ -575,9 +573,31 @@ msgstr ""
 msgid "On the port %d"
 msgstr "En el puerto %d"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:171
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
 msgid "Incoming VNC connection arrived but there is no active window"
 msgstr "La conexión VNC entrante llegó pero no hay ninguna ventana activa"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
+#| msgid "Error saving recent connection."
+msgid "Error activating reverse connections"
+msgstr "Error al activar las conexiones inversas"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+msgid ""
+"The program could not find any available TCP ports starting at 5500. Is "
+"there any other running program consuming all your TCP ports?"
+msgstr ""
+"El programa no pudo encontrar ningún puerto TCP comenzando desde el 5500. "
+"¿Existe otro programa que esté ocupando todos sus puertos TCP?"
+
+#. Translators: "Reverse" here is an adjective, not a verb.
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
+msgid "_Reverse Connections..."
+msgstr "Conexiones _inversas…"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
+msgid "Configure incoming VNC connections"
+msgstr "Configurar las conexiones VNC entrantes"
 
 #. vim: set ts=8:
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
@@ -1359,12 +1379,6 @@ msgstr ""
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Error al crear el archivo %s: %s"
-
-#~ msgid "_Reverse Connections..."
-#~ msgstr "Conexiones _inversas…"
-
-#~ msgid "Configure incoming VNC connections"
-#~ msgstr "Configurar las conexiones VNC entrantes"
 
 #~ msgid "Plugin"
 #~ msgstr "Complemento"
