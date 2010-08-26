@@ -68,6 +68,12 @@ vinagre_protocol_ext_get_mdns_service (VinagreProtocolExt *protocol)
   return result;
 }
 
+/**
+ * vinagre_protocol_ext_get_context_groups: blah
+ * @protocol: A protocol
+ *
+ * Return value: (element-type any) (transfer container): blah
+ */
 GSList *
 vinagre_protocol_ext_get_context_groups (VinagreProtocolExt *protocol)
 {

@@ -40,7 +40,7 @@ default_get_default_port (VinagreProtocol *protocol)
   return 0;
 }
 
-static GSList *
+GSList *
 default_get_context_groups (VinagreProtocol *protocol)
 {
   return NULL;
@@ -182,6 +182,12 @@ vinagre_protocol_get_mdns_service (VinagreProtocol *protocol)
   return NULL;
 }
 
+/**
+ * vinagre_protocol_get_context_groups: blah
+ * @protocol: A protocol
+ *
+ * Return value: (element-type any) (transfer container): blah
+ */
 GSList *
 vinagre_protocol_get_context_groups (VinagreProtocol *protocol)
 {
