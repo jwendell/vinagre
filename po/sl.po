@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-08-24 20:59+0000\n"
-"PO-Revision-Date: 2010-08-25 08:45+0100\n"
+"POT-Creation-Date: 2010-08-26 07:16+0000\n"
+"PO-Revision-Date: 2010-08-26 13:58+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -272,7 +272,7 @@ msgid "SSH support"
 msgstr "Podpora SSH"
 
 #. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
-#: ../plugins/vnc/vinagre-vnc-connection.c:291
+#: ../plugins/vnc/vinagre-vnc-connection.c:316
 #: ../plugins/vnc/vinagre-vnc-plugin.c:199
 #, c-format
 msgid "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -546,9 +546,17 @@ msgstr ""
 msgid "On the port %d"
 msgstr "Na vratih %d"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:171
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
 msgid "Incoming VNC connection arrived but there is no active window"
 msgstr "Prispela je zahteva za VNC povezavo, vendar ni dejavnih oken"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
+msgid "Error activating reverse connections"
+msgstr "Napaka med omogočanjem nasprotnih povezav"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+msgid "The program could not find any available TCP ports starting at 5500. Is there any other running program consuming all your TCP ports?"
+msgstr "Ni mogoče najti razpoložljivih vrat TCP pri 5500. Ali je zagnan kakšen program, ki uporablja vsa vrata TCP?"
 
 #. Translators: "Reverse" here is an adjective, not a verb.
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
