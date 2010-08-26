@@ -37,13 +37,13 @@
 #include <avahi-common/malloc.h>
 #endif
 
-static void vinagre_protocol_iface_init (VinagreProtocolInterface *iface);
+static void vinagre_ssh_protocol_iface_init (VinagreProtocolInterface *iface);
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreSshPlugin,
 				vinagre_ssh_plugin,
 				PEAS_TYPE_EXTENSION_BASE,
 				0,
 				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
-							       vinagre_protocol_iface_init))
+							       vinagre_ssh_protocol_iface_init))
 
 static const gchar *
 impl_get_protocol (VinagreProtocol *plugin)
@@ -168,7 +168,7 @@ ssh_parse_mdns_dialog (VinagreProtocol *plugin,
 }
 
 static void
-vinagre_protocol_iface_init (VinagreProtocolInterface *iface)
+vinagre_ssh_protocol_iface_init (VinagreProtocolInterface *iface)
 {
   iface->get_protocol  = impl_get_protocol;
   iface->get_public_description  = impl_get_public_description;

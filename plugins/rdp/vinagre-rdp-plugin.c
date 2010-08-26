@@ -32,14 +32,14 @@
 #include "vinagre-rdp-connection.h"
 #include "vinagre-rdp-tab.h"
 
-static void vinagre_protocol_iface_init (VinagreProtocolInterface *iface);
+static void vinagre_rdp_protocol_iface_init (VinagreProtocolInterface *iface);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreRdpPlugin,
 				vinagre_rdp_plugin,
 				PEAS_TYPE_EXTENSION_BASE,
 				0,
 				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
-							       vinagre_protocol_iface_init))
+							       vinagre_rdp_protocol_iface_init))
 
 static const gchar *
 impl_get_protocol (VinagreProtocol *plugin)
@@ -126,7 +126,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 }
 
 static void
-vinagre_protocol_iface_init (VinagreProtocolInterface *iface)
+vinagre_rdp_protocol_iface_init (VinagreProtocolInterface *iface)
 {
   iface->get_protocol  = impl_get_protocol;
   iface->get_public_description  = impl_get_public_description;

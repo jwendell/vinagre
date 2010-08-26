@@ -35,13 +35,13 @@
 #include "vinagre-vnc-connection.h"
 #include "vinagre-vnc-tab.h"
 
-static void vinagre_protocol_iface_init (VinagreProtocolInterface *iface);
+static void vinagre_vnc_protocol_iface_init (VinagreProtocolInterface *iface);
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreVncPlugin,
 				vinagre_vnc_plugin,
 				PEAS_TYPE_EXTENSION_BASE,
 				0,
 				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
-							       vinagre_protocol_iface_init))
+							       vinagre_vnc_protocol_iface_init))
 
 static const GOptionEntry vinagre_vnc_args[] =
 {
@@ -400,7 +400,7 @@ vinagre_vnc_plugin_init (VinagreVncPlugin *plugin)
 }
 
 static void
-vinagre_protocol_iface_init (VinagreProtocolInterface *iface)
+vinagre_vnc_protocol_iface_init (VinagreProtocolInterface *iface)
 {
   iface->get_context_groups = impl_get_context_groups;
   iface->get_protocol  = impl_get_protocol;
