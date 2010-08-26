@@ -28,14 +28,9 @@
 
 G_BEGIN_DECLS
 
-/*
- * Type checking and casting macros
- */
 #define VINAGRE_TYPE_PROTOCOL              (vinagre_protocol_get_type())
 #define VINAGRE_PROTOCOL(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), VINAGRE_TYPE_PROTOCOL, VinagreProtocol))
-#define VINAGRE_PROTOCOL_IFACE(klass)      (G_TYPE_CHECK_IFACE_CAST((klass), VINAGRE_TYPE_PROTOCOL, VinagreProtocolInterface))
 #define VINAGRE_IS_PROTOCOL(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), VINAGRE_TYPE_PROTOCOL))
-#define VINAGRE_IS_PROTOCOL_IFACE(klass)   (G_TYPE_CHECK_IFACE_TYPE ((klass), VINAGRE_TYPE_PROTOCOL))
 #define VINAGRE_PROTOCOL_GET_IFACE(obj)    (G_TYPE_INSTANCE_GET_INTERFACE((obj), VINAGRE_TYPE_PROTOCOL, VinagreProtocolInterface))
 
 typedef struct _VinagreProtocol VinagreProtocol;
@@ -46,7 +41,6 @@ struct _VinagreProtocolInterface
   GTypeInterface g_iface;
 
   /* Virtual public methods */
-  GSList		*(*get_context_groups)		(VinagreProtocol *protocol);
   const gchar		*(*get_protocol)		(VinagreProtocol *protocol);
   gchar			**(*get_public_description)	(VinagreProtocol *protocol);
   gint			(*get_default_port)		(VinagreProtocol *protocol);
@@ -68,6 +62,7 @@ struct _VinagreProtocolInterface
   GdkPixbuf		*(*get_icon)			(VinagreProtocol *protocol,
 							 gint             size);
   const gchar		*(*get_icon_name)		(VinagreProtocol *protocol);
+  GSList		*(*get_context_groups)		(VinagreProtocol *protocol);
 };
 
 /*
@@ -78,7 +73,6 @@ GType			vinagre_protocol_get_type		  (void) G_GNUC_CONST;
 void			vinagre_protocol_parse_mdns_dialog	  (VinagreProtocol *protocol,
 								   GtkWidget *connect_widget,
 								   GtkWidget *dialog);
-GSList *		vinagre_protocol_get_context_groups	  (VinagreProtocol *protocol);
 const gchar *		vinagre_protocol_get_protocol		  (VinagreProtocol *protocol);
 gchar **		vinagre_protocol_get_public_description	  (VinagreProtocol *protocol);
 gint			vinagre_protocol_get_default_port	  (VinagreProtocol *protocol);
@@ -99,6 +93,9 @@ GtkFileFilter *		vinagre_protocol_get_file_filter	  (VinagreProtocol *protocol);
 GdkPixbuf *		vinagre_protocol_get_icon		  (VinagreProtocol *protocol,
 								   gint             size);
 const gchar *		vinagre_protocol_get_icon_name		  (VinagreProtocol *protocol);
+GSList *		vinagre_protocol_get_context_groups	  (VinagreProtocol *protocol);
+
+G_END_DECLS
 
 #endif  /* __VINAGRE_PROTOCOL_H__ */
 /* vim: set ts=8: */
