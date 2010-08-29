@@ -6,15 +6,15 @@
 # This file is distributed under the same license as the vinagre package.
 #
 # Maintainer: Dušan Živojnov <calvin@verat.net>
-# Translated on 2009-09-13 by: Branko Kokanović <branko.kokanovic@gmail.com>
+# Translated on 2010-08-28 by: Branko Kokanović <branko.kokanovic@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-09-13 01:50+0000\n"
-"PO-Revision-Date: 2009-09-13 11:05+0200\n"
+"POT-Creation-Date: 2010-08-28 00:59+0000\n"
+"PO-Revision-Date: 2010-08-28 23:05+0200\n"
 "Last-Translator: Branko Kokanović <branko.kokanovic@gmail.com>\n"
 "Language-Team:  <sr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1 ../vinagre/vinagre-plugin-manager.c:495
+#: ../data/GNOME_VinagreApplet.xml.h:1
 msgid "_About"
 msgstr "_O programu"
 
@@ -37,19 +37,20 @@ msgstr "Pristupi udaljenom računaru"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
-#: ../vinagre/vinagre-main.c:198
+#: ../vinagre/vinagre-applet.c:441 ../vinagre/vinagre-applet.c:493
+#: ../vinagre/vinagre-main.c:64
 msgid "Remote Desktop Viewer"
 msgstr "Pregled udaljenih radnih površina"
 
 #: ../data/vinagre.ui.h:1
-msgid "All fields above are mandatory"
-msgstr "Sva polja iznad su obavezna"
+msgid "Allow _keyboard shortcuts"
+msgstr "Dozvoli _prečice sa tastature"
 
 #: ../data/vinagre.ui.h:2
 msgid "Authentication is required"
 msgstr "Prijava je obavezna"
 
+#. setup label
 #: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:856
 msgid "Bookmarks"
 msgstr "Obeleživači"
@@ -66,8 +67,9 @@ msgstr "Opcije veze"
 msgid "Folder"
 msgstr "Fascikla"
 
-#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
-#: ../plugins/vnc/vinagre-vnc-tab.c:134 ../vinagre/vinagre-fav.c:425
+#: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
+#: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
+#: ../vinagre/vinagre-fav.c:408
 msgid "Host:"
 msgstr "Računar:"
 
@@ -87,52 +89,59 @@ msgstr "Roditeljska fascikla"
 msgid "Preferences"
 msgstr "Postavke"
 
-#: ../data/vinagre.ui.h:12
+#. This is a tooltip in preferences dialog
+#: ../data/vinagre.ui.h:13
+msgid ""
+"This option enables menu accelerators and keyboard shortcuts. For more info "
+"on why you may want to disable them, check the documentation."
+msgstr ""
+"Ovom opcijom se omogućava brzi pristup menijima i prečice sa tastature. Za "
+"više podataka zašto biste želeli da ih isključite, pogledajte dokumentaciju."
+
+#: ../data/vinagre.ui.h:14
 msgid "Which machine do you want to connect to?"
 msgstr "Na koji računar želite da se povežete?"
 
-#: ../data/vinagre.ui.h:13
+#: ../data/vinagre.ui.h:15
 msgid "_Always show tabs"
 msgstr "_Uvek prikazuj listove"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.ui.h:15
+#: ../data/vinagre.ui.h:17
 msgid "_Authenticate"
 msgstr "Prij_avi se"
 
-#: ../data/vinagre.ui.h:16
+#: ../data/vinagre.ui.h:18
 msgid "_Full screen"
 msgstr "_Ceo ekran"
 
-#: ../data/vinagre.ui.h:17
+#: ../data/vinagre.ui.h:19
 msgid "_Host:"
 msgstr "_Računar:"
 
-#: ../data/vinagre.ui.h:18
+#. Translators: This is the name of a bookmark. It appears in the add/edit bookmark dialog.
+#: ../data/vinagre.ui.h:21
 msgid "_Name:"
 msgstr "_Ime:"
 
-#: ../data/vinagre.ui.h:19
+#: ../data/vinagre.ui.h:22
 msgid "_Password:"
 msgstr "_Šifra:"
 
-#: ../data/vinagre.ui.h:20
+#: ../data/vinagre.ui.h:23
 msgid "_Protocol:"
 msgstr "_Protokol:"
 
-#: ../data/vinagre.ui.h:21
+#: ../data/vinagre.ui.h:24
 msgid "_Remember this credential"
 msgstr "_Zapamti ove akreditive"
 
-#: ../data/vinagre.ui.h:22
-msgid "_Show menu shortcuts"
-msgstr "_Prikaži prečice u meniju"
-
-#: ../data/vinagre.ui.h:23
+#: ../data/vinagre.ui.h:25 ../plugins/rdp/vinagre-rdp-plugin.c:108
+#: ../plugins/ssh/vinagre-ssh-plugin.c:113
 msgid "_Username:"
 msgstr "_Korisničko ime:"
 
-#: ../data/vinagre.schemas.in.in.h:1 ../vinagre/vinagre-plugin-manager.c:795
+#: ../data/vinagre.schemas.in.in.h:1
 msgid "Active plugins"
 msgstr "Pokrenuti dodaci"
 
@@ -168,14 +177,21 @@ msgstr ""
 "listove samo kada postoji više aktivnih veza."
 
 #: ../data/vinagre.schemas.in.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr ""
+"Ako je uključeno, program će odmah po pokretanju slušati za obrnute veze."
+
+#: ../data/vinagre.schemas.in.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "Određuje maksimalan broj stavki u listi za unos imena računara. "
 
-#: ../data/vinagre.schemas.in.in.h:7
+#: ../data/vinagre.schemas.in.in.h:8
 msgid "The handler for \"vnc://\" URLs"
 msgstr "Program za korišćenje URL-ova tipa \"vnc://\""
 
-#: ../data/vinagre.schemas.in.in.h:8
+#: ../data/vinagre.schemas.in.in.h:9
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -185,18 +201,22 @@ msgstr ""
 "prekine vezu sa već povezanim klijentima. Uključite da omogućite deljenje "
 "kontrole sa drugim klijentima."
 
-#: ../data/vinagre.schemas.in.in.h:9
+#: ../data/vinagre.schemas.in.in.h:10
 msgid "Whether we should leave other clients connected"
 msgstr "Treba li zadržati prethodne veze ka drugim klijentima"
 
-#: ../data/vinagre.schemas.in.in.h:10
+#: ../data/vinagre.schemas.in.in.h:11
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr "Treba li prikazati listove kada je samo jedna veza aktivna"
 
-#: ../data/vinagre.schemas.in.in.h:11
+#: ../data/vinagre.schemas.in.in.h:12
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Treba li prikazati ubrzivače menija (prečice)"
+
+#: ../data/vinagre.schemas.in.in.h:13
+msgid "Whether we should start the program listening for reverse connections"
+msgstr "Treba li program da sluša za obrnute veze po pokretanju"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -206,159 +226,299 @@ msgstr "Konfiguraciona datoteka udaljene radne površine (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Veza ka udaljenoj radnoj površini"
 
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:1
+#: ../plugins/rdp/vinagre-rdp-plugin.c:55
+msgid "RDP"
+msgstr "RDP"
+
+#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:2
+msgid "RDP support"
+msgstr "RDP podrška"
+
+#. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
+#: ../plugins/rdp/vinagre-rdp-plugin.c:57
+msgid "Access MS Windows machines"
+msgstr "Pristup MS Windows računarima"
+
+#: ../plugins/rdp/vinagre-rdp-plugin.c:96
+msgid "RDP Options"
+msgstr "RDP Opcije"
+
+#. Translators: This is the tooltip for the username field in a RDP connection
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/rdp/vinagre-rdp-plugin.c:113
+#: ../plugins/ssh/vinagre-ssh-plugin.c:118
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr ""
+"Opciono. Ako je prazno, biće korišćeno vaše korisničko ime. Takođe ga možete "
+"uneti i iznad u polju „Računar“, u obliku korisničkoime@domaćin."
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
+#: ../plugins/vnc/vinagre-vnc-tab.c:149
+msgid "Port:"
+msgstr "Port:"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:129
+msgid "Error while executing rdesktop"
+msgstr "Greška pri pokretanju programa rdesktop"
+
+#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:344
+#: ../vinagre/vinagre-bookmarks.c:459
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:174
+#: ../vinagre/vinagre-connect.c:486 ../vinagre/vinagre-fav.c:768
+#: ../vinagre/vinagre-options.c:82 ../vinagre/vinagre-options.c:100
+#: ../vinagre/vinagre-window.c:279 ../vinagre/vinagre-window.c:749
+msgid "Unknown error"
+msgstr "Javila se nepoznata greška"
+
 #. vim: set ts=8:
-#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/vinagre-ssh-plugin.c:59
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
 #. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
-#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+#: ../plugins/ssh/vinagre-ssh-plugin.c:61
 msgid "Access Unix/Linux terminals"
 msgstr "Pristup UNIX/Linuks terminalima"
 
-#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:135
-msgid "Port:"
-msgstr "Port:"
+#: ../plugins/ssh/vinagre-ssh-plugin.c:101
+msgid "SSH Options"
+msgstr "SSH Opcije"
 
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
 msgid "SSH support"
 msgstr "SSH podrška"
 
-#: ../plugins/vnc/vinagre-vnc-connection.c:207
-#: ../plugins/vnc/vinagre-vnc-plugin.c:214
+#. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
+#: ../plugins/vnc/vinagre-vnc-connection.c:316
+#: ../plugins/vnc/vinagre-vnc-plugin.c:199
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr "Loša vrednost za „deljenu“ oznaku: %d. Treba biti 0 ili 1. Ignorišem."
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:66
+#: ../plugins/vnc/vinagre-vnc-plugin.c:50
 msgid "Enable scaled mode"
 msgstr "Omogući režim razmere"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:81
+#: ../plugins/vnc/vinagre-vnc-plugin.c:63
 msgid "VNC Options:"
 msgstr "VNC opcije:"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+#: ../plugins/vnc/vinagre-vnc-plugin.c:65
 msgid "Show VNC Options"
 msgstr "Prikaži VNC opcije"
 
 #. vim: set ts=8:
-#: ../plugins/vnc/vinagre-vnc-plugin.c:105
+#: ../plugins/vnc/vinagre-vnc-plugin.c:87
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:106
+#: ../plugins/vnc/vinagre-vnc-plugin.c:88
 msgid "Access Unix/Linux, Windows and other machines."
-msgstr "Pristup UNIX/Linuks, Windows i ostalim mašinama."
+msgstr "Pristup UNIX/Linuks, Windows i ostalim računarima."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:163
+#: ../plugins/vnc/vinagre-vnc-plugin.c:145
 msgid "Could not parse the file."
 msgstr "Ne mogu da obradim datoteku."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:170
+#. Translators: Do not translate "connection". It's the name of a group in the .vnc (.ini like) file.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:153
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "Ovo nije VNC datoteka: Nedostaje grupa „connection“."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:176
+#. Translators: Do not translate "host". It's the name of a key in the .vnc (.ini like) file.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:160
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "Ovo nije VNC datoteka: Nedostaje ključ „host“."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:243
+#: ../plugins/vnc/vinagre-vnc-plugin.c:252
 msgid "VNC Options"
 msgstr "VNC opcije"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:254
-#: ../plugins/vnc/vinagre-vnc-tab.c:654
+#. View only check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:265
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "_View only"
 msgstr "Samo _pregled"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:261
+#. Scaling check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:273
 msgid "_Scaling"
 msgstr "_Razmera"
 
+#: ../plugins/vnc/vinagre-vnc-plugin.c:289
+msgid "_Keep aspect ratio"
+msgstr "_Zadrži odnos širine i visine"
+
+#. JPEG Compression check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:299
+msgid "_Use JPEG Compression"
+msgstr "_Koristi JPEG kompresiju"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:300
+msgid "This might not work on all VNC servers"
+msgstr "Ovo ne mora da radi na svim VNC serverima"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:309
+msgid "_Depth Color:"
+msgstr "_Dubina boja:"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:314
+msgid "Use Server Settings"
+msgstr "Koristi podešavanja servera"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:315
+msgid "True Color (24 bits)"
+msgstr "Pune boje (24 bita)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:316
+msgid "High Color (16 bits)"
+msgstr "Mnogo boja (16 bita)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:317
+msgid "Low Color (8 bits)"
+msgstr "Malo boja (8 bita)"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:318
+msgid "Ultra Low Color (3 bits)"
+msgstr "Jako malo boja (3 bita)"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:331
+msgid "Use h_ost"
+msgstr "K_oristi domaćina"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:340
+msgid "hostname or user@hostname"
+msgstr "domaćin ili korisnik@domaćin"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:341
+msgid "Supply an alternative port using colon"
+msgstr "Navedite alternativni port koristeći dve tačke"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:342
+msgid "For instance: joe@domain.com:5022"
+msgstr "Na primer: pera@domen.com:5022"
+
+#. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
+#: ../plugins/vnc/vinagre-vnc-plugin.c:348
+msgid "as a SSH tunnel"
+msgstr "kao SSH tunel"
+
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:285
+#: ../plugins/vnc/vinagre-vnc-plugin.c:383
 msgid "VNC Files"
 msgstr "VNC datoteke"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:133
+#: ../plugins/vnc/vinagre-vnc-tab.c:147
 msgid "Desktop Name:"
 msgstr "Ime radne površine:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:136
+#: ../plugins/vnc/vinagre-vnc-tab.c:150
 msgid "Dimensions:"
 msgstr "Dimenzije:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:268
+#: ../plugins/vnc/vinagre-vnc-tab.c:304
+msgid "Error creating the SSH tunnel"
+msgstr "Greška pri pravljenju SSH tunela"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
+msgid "Unknown reason"
+msgstr "Razlog nepoznat"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:315
 msgid "Error connecting to host."
 msgstr "Greška prilikom povezivanja sa računarom."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:306
+#: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
-msgid "Authentication method to host %s is unsupported. (%u)"
-msgstr "Metod prijave za računar %s nije podržan. (%u)"
+msgid "Authentication method for host %s is unsupported. (%u)"
+msgstr "Metod prijave za domaćina %s nije podržan. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:310
+#: ../plugins/vnc/vinagre-vnc-tab.c:364
 msgid "Authentication unsupported"
 msgstr "Metod prijave nije podržan"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:570 ../plugins/vnc/vinagre-vnc-tab.c:587
+#: ../plugins/vnc/vinagre-vnc-tab.c:532 ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "Authentication error"
 msgstr "Greška pri prijavljivanju"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:571
+#: ../plugins/vnc/vinagre-vnc-tab.c:533
 msgid "A username is required in order to access this machine."
 msgstr "Potrebno vam je korisničko ime da bi pristupili ovom računaru."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:588
+#: ../plugins/vnc/vinagre-vnc-tab.c:550
 msgid "A password is required in order to access this machine."
 msgstr "Potrebna vam je lozinka da bi pristupili ovom računaru."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:639
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "S_caling"
 msgstr "R_azmera"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:640
+#: ../plugins/vnc/vinagre-vnc-tab.c:605
 msgid "Fits the remote screen into the current window size"
 msgstr "Uklapa udaljeni ekran u veličinu prozora"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:655
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
+msgid "_Keep Aspect Ratio"
+msgstr "_Zadrži odnos širine i visine"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:619
+msgid "Keeps the screen aspect ratio when using scaling"
+msgstr "Zadržava odnos širine i visine pri skaliranju veličine"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:634
 msgid "Does not send mouse and keyboard events"
 msgstr "Ne šalje događaje miša i tastature"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:668
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "_Original size"
 msgstr "_Izvorna veličina"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:669
+#: ../plugins/vnc/vinagre-vnc-tab.c:648
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Prilagođava prozor veličini udaljene radne površine"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:692 ../plugins/vnc/vinagre-vnc-tab.c:766
-#: ../plugins/vnc/vinagre-vnc-tab.c:767
-msgid "Send Ctrl-Alt-Del"
-msgstr "Pošalji Ctrl-Alt-Del"
+#: ../plugins/vnc/vinagre-vnc-tab.c:661
+msgid "_Refresh Screen"
+msgstr "_Osveži ekran"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:693
+#: ../plugins/vnc/vinagre-vnc-tab.c:662
+msgid "Requests an update of the screen"
+msgstr "Zahteva ažuriranje ekrana"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:684
+msgid "_Send Ctrl-Alt-Del"
+msgstr "_Pošalji Ctrl-Alt-Del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:685
 msgid "Sends Ctrl+Alt+Del to the remote machine"
-msgstr "Šalje Ctrl+Alt+Del udaljenoj mašini"
+msgstr "Šalje Ctrl+Alt+Del udaljenom računaru"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:745 ../plugins/vnc/vinagre-vnc-tab.c:746
+#: ../plugins/vnc/vinagre-vnc-tab.c:737 ../plugins/vnc/vinagre-vnc-tab.c:738
 msgid "Scaling"
 msgstr "Razmera"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:755 ../plugins/vnc/vinagre-vnc-tab.c:756
+#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
 msgid "Read only"
 msgstr "Samo za pregled"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:925
+#. Send Ctrl-alt-del
+#: ../plugins/vnc/vinagre-vnc-tab.c:756 ../plugins/vnc/vinagre-vnc-tab.c:758
+msgid "Send Ctrl-Alt-Del"
+msgstr "Pošalji Ctrl-Alt-Del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:920
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -370,9 +530,98 @@ msgstr ""
 "Pročitajte README datoteku (isporučuje su Vinager) da bi saznali kako da "
 "omogućite ovu mogućnost."
 
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:96
+#, c-format
+msgid "Unable to find a free TCP port"
+msgstr "Ne mogu da nađen slobodan TCP port"
+
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
 msgid "VNC support"
 msgstr "VNC podrška"
+
+#: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:1
+msgid "Allows reverse VNC connections"
+msgstr "Dozvoli obrnute VNC veze"
+
+#: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:2
+msgid "Reverse VNC"
+msgstr "Obrnuti VNC"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:101
+msgid "IPv4:"
+msgstr "IPv4:"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:113
+msgid ""
+"\n"
+"\n"
+"IPv6:"
+msgstr ""
+"\n"
+"\n"
+"IPv6:"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:172
+#, c-format
+msgid "On the port %d"
+msgstr "Na portu %d"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
+msgid "Incoming VNC connection arrived but there is no active window"
+msgstr "Dolazna VNC veza, ali nema aktivnog prozora"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
+msgid "Error activating reverse connections"
+msgstr "Greška prilikom aktiviranja obrnute veze"
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+msgid ""
+"The program could not find any available TCP ports starting at 5500. Is "
+"there any other running program consuming all your TCP ports?"
+msgstr ""
+"Program nije mogao da nađe slobodne TCP portove počevši od 5500. Da li "
+"postoji još neki program koji je zauzeo sve vaše TCP portove?"
+
+#. Translators: "Reverse" here is an adjective, not a verb.
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
+msgid "_Reverse Connections..."
+msgstr "Ob_rnute veze..."
+
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
+msgid "Configure incoming VNC connections"
+msgstr "Podesite dolazne VNC veze"
+
+#. vim: set ts=8:
+#: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
+msgid ""
+"By activating reverse connections you can access machines that are behind a "
+"firewall. The remote side is supposed to initiate the connection with you. "
+"For further information, checkout the help."
+msgstr ""
+"Aktiviranjem obrnutih veza, možete pristupiti računarima koji su iza "
+"zaštitnog zida. Potrebno je da udaljena strana uspostavlja vezu sa vama. Za "
+"više informacija, pogledajte pomoć."
+
+#: ../plugins/reverse-vnc/reverse-vnc.ui.h:2
+msgid "Connectivity"
+msgstr "Povezivost"
+
+#: ../plugins/reverse-vnc/reverse-vnc.ui.h:3
+msgid "Reverse Connections"
+msgstr "Obrnute veze"
+
+#: ../plugins/reverse-vnc/reverse-vnc.ui.h:4
+msgid "This machine is reachable through the following IP address(es):"
+msgstr "Ovaj računar je dostupan kroz sledeću(e) IP adresu(e):"
+
+#. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Machine->Reverse connections.
+#: ../plugins/reverse-vnc/reverse-vnc.ui.h:6
+msgid "_Always Enabled"
+msgstr "_Uvek omogućene"
+
+#: ../plugins/reverse-vnc/reverse-vnc.ui.h:7
+msgid "_Enable Reverse Connections"
+msgstr "_Omogući obrnute veze"
 
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
 msgid "A menu to quickly access remote machines"
@@ -382,104 +631,96 @@ msgstr "Meni za brz pristup udaljenim računarima"
 msgid "Vinagre Applet Factory"
 msgstr "Fabrika vinager programčeta"
 
-#: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
+#: ../vinagre/vinagre-applet.c:284 ../vinagre/vinagre-applet.c:367
 msgid "Could not run vinagre:"
 msgstr "Ne mogu da pokrenem preglednika udaljene radne površine:"
 
-#: ../vinagre/vinagre-applet.c:380
+#: ../vinagre/vinagre-applet.c:387
 msgid "Open Remote Desktop Viewer"
 msgstr "Otvori preglednika udaljene radne površine"
 
-#: ../vinagre/vinagre-applet.c:435
+#: ../vinagre/vinagre-applet.c:442
 msgid "Access your bookmarks"
 msgstr "Pristupi obeleživačima"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
+#: ../vinagre/vinagre-bookmarks.c:266 ../vinagre/vinagre-connection.c:526
 #: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokol %s nije podržan."
 
-#: ../vinagre/vinagre-bookmarks.c:343
+#: ../vinagre/vinagre-bookmarks.c:344
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Greška prilikom inicijalizovanja obeleživača: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:463
-#: ../vinagre/vinagre-fav.c:681 ../vinagre/vinagre-main.c:100
-#: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
-msgid "Unknown error"
-msgstr "Javila se nepoznata greška"
-
-#: ../vinagre/vinagre-bookmarks.c:350
+#: ../vinagre/vinagre-bookmarks.c:351
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Greška prilikom inicijalizovanja obeleživača: Datoteka izgleda prazno"
 
-#: ../vinagre/vinagre-bookmarks.c:357
+#: ../vinagre/vinagre-bookmarks.c:358
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr ""
 "Greška prilikom inicijalizovanja obeleživača: Datoteka nije u formatu u kome "
 "se čuvaju obeleživači."
 
-#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+#: ../vinagre/vinagre-bookmarks.c:420 ../vinagre/vinagre-bookmarks.c:427
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr ""
 "Greška prilikom čuvanja obeleživača: Greška prilikom pravljenja XML strukture"
 
-#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+#: ../vinagre/vinagre-bookmarks.c:434 ../vinagre/vinagre-bookmarks.c:441
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Greška prilikom čuvanja obeleživača: Greška prilikom inicijalizacije XML "
 "strukture"
 
-#: ../vinagre/vinagre-bookmarks.c:449
+#: ../vinagre/vinagre-bookmarks.c:450
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Greška prilikom čuvanja obeleživača: Greška prilikom dovršavanja XML strukture"
 
-#: ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks.c:459
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Greška prilikom čuvanja obeleživača: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:95
-#: ../vinagre/vinagre-bookmarks-migration.c:102
+#: ../vinagre/vinagre-bookmarks-migration.c:96
+#: ../vinagre/vinagre-bookmarks-migration.c:103
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr ""
 "Greška prilikom prebacivanja obeleživača: Greška prilikom pravljenja XML "
 "strukture"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:109
-#: ../vinagre/vinagre-bookmarks-migration.c:116
+#: ../vinagre/vinagre-bookmarks-migration.c:110
+#: ../vinagre/vinagre-bookmarks-migration.c:117
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Greška prilikom prebacivanja obeleživača: Greška prilikom inicijalizacije XML "
 "strukture"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:125
+#: ../vinagre/vinagre-bookmarks-migration.c:126
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Greška prilikom prebacivanja obeleživača: Greška prilikom dovršavanja XML "
 "strukture"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Greška prilikom prebacivanja obeleživača: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:164
+#: ../vinagre/vinagre-bookmarks-migration.c:165
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "Greška prilikom prebacivanja obeleživača: VNC dodatak nije aktiviran"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:238
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 msgid "Failed to create the directory"
 msgstr "Ne mogu da napravim fasciklu"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:242
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -487,21 +728,21 @@ msgstr ""
 "Prebacujem datoteku sa obeleživačima u novi format. Ova operacija je "
 "predviđena da se obavi samo jednom."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:270
+#: ../vinagre/vinagre-bookmarks-migration.c:250
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Greška prilikom otvaranja datoteke sa obeleživačima: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:271
-#: ../vinagre/vinagre-bookmarks-migration.c:283
+#: ../vinagre/vinagre-bookmarks-migration.c:251
+#: ../vinagre/vinagre-bookmarks-migration.c:263
 msgid "Migration cancelled"
 msgstr "Prebacivanje je otkazano"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:280
+#: ../vinagre/vinagre-bookmarks-migration.c:260
 msgid "Could not remove the old bookmarks file"
 msgstr "Ne mogu da uklonim staru datoteku sa obeleživačima"
 
-#: ../vinagre/vinagre-bookmarks-tree.c:120
+#: ../vinagre/vinagre-bookmarks-tree.c:119
 msgid "Root Folder"
 msgstr "Korena fascikla"
 
@@ -527,252 +768,349 @@ msgid "(Protocol: %s)"
 msgstr "(Protokol: %s)"
 
 #. Translators: %s is a bookmark entry name
-#: ../vinagre/vinagre-bookmarks-ui.c:308
+#: ../vinagre/vinagre-bookmarks-ui.c:306
 #, c-format
 msgid "Are you sure you want to remove %s from bookmarks?"
 msgstr "Da li ste sigurni da želite da uklonite %s iz obeleživača?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:314
+#: ../vinagre/vinagre-bookmarks-ui.c:312
 msgid "Remove Folder?"
 msgstr "Da uklonim fasciklu?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:315
+#: ../vinagre/vinagre-bookmarks-ui.c:313
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr ""
 "Primetite da će sve fascikle i sve stavke ispod ove fascikle takođe biti "
 "uklonjene."
 
-#: ../vinagre/vinagre-bookmarks-ui.c:320
+#: ../vinagre/vinagre-bookmarks-ui.c:318
 msgid "Remove Item?"
 msgstr "Da uklonim stavku?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:337
+#: ../vinagre/vinagre-bookmarks-ui.c:335
 msgid "Error removing bookmark: Entry not found"
 msgstr "Greška prilikom brisanja obeleživača: Unos nije nađen"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:354
+#: ../vinagre/vinagre-bookmarks-ui.c:352
 msgid "New Folder"
 msgstr "Nova fascikla"
+
+#: ../vinagre/vinagre-cache-prefs.c:56
+#, c-format
+msgid "Error while saving preferences: %s"
+msgstr "Greška prilikom čuvanja podešavanja: %s"
 
 #: ../vinagre/vinagre-commands.c:120
 msgid "Choose the file"
 msgstr "Izaberite datoteku"
 
-#: ../vinagre/vinagre-commands.c:148
-msgid "There are none supported files"
+#: ../vinagre/vinagre-commands.c:150
+msgid "There are no supported files"
 msgstr "Ne postoje nijedna podržana datoteka"
 
-#: ../vinagre/vinagre-commands.c:148
+#: ../vinagre/vinagre-commands.c:151
 msgid ""
-"None of the active plugins offer a supported file to be open. Activate some "
-"plugins and try again."
+"None of the active plugins support this action. Activate some plugins and "
+"try again."
 msgstr ""
-"Nijedan od aktivnih dodataka ne podržava otvaranje datoteke. Aktivirajte neke "
+"Nijedan od aktivnih dodataka ne podržava ovu akciju. Aktivirajte neke "
 "dodatke i probajte ponovo."
 
-#: ../vinagre/vinagre-commands.c:181
+#: ../vinagre/vinagre-commands.c:185
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Ne mogu da otvorim sledeću datoteku:"
 msgstr[1] "Ne mogu da otvorim sledeće datoteke:"
 msgstr[2] "Ne mogu da otvorim sledeće datoteke:"
 
-#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
-#: ../vinagre/vinagre-connect.c:428
-msgid "Could not get the active protocol in the protocol list."
+#: ../vinagre/vinagre-connect.c:92 ../vinagre/vinagre-connect.c:338
+#: ../vinagre/vinagre-connect.c:450
+msgid "Could not get the active protocol from the protocol list."
 msgstr "Ne mogu da uzmem aktivni protokol iz spiska protokola."
 
-#: ../vinagre/vinagre-connect.c:313
+#: ../vinagre/vinagre-connect.c:319
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Greška prilikom čuvanja istorijata: %s"
 
-#: ../vinagre/vinagre-connect.c:340
+#: ../vinagre/vinagre-connect.c:354
 msgid "Choose a Remote Desktop"
 msgstr "Odaberite udaljenu radnu površinu"
 
-#: ../vinagre/vinagre-connection.c:627
+#: ../vinagre/vinagre-connection.c:634
 msgid "Could not open the file."
 msgstr "Ne mogu da otvorim datoteku."
 
-#: ../vinagre/vinagre-connection.c:651
+#: ../vinagre/vinagre-connection.c:658
 msgid "The file was not recognized by any of the plugins."
 msgstr "Nijedan dodatak nije prepoznao datoteku."
 
-#: ../vinagre/vinagre-fav.c:670
+#: ../vinagre/vinagre-fav.c:571
+msgid "_New Folder"
+msgstr "_Nova fascikla"
+
+#: ../vinagre/vinagre-fav.c:572
+msgid "Create a new folder"
+msgstr "Pravi novu fasciklu"
+
+#: ../vinagre/vinagre-fav.c:577
+msgid "_Open bookmark"
+msgstr "_Otvori obeleživač"
+
+#: ../vinagre/vinagre-fav.c:578
+msgid "Connect to this machine"
+msgstr "Povezuje se na ovaj računar"
+
+#: ../vinagre/vinagre-fav.c:579
+msgid "_Edit bookmark"
+msgstr "_Prepravi obeleživač"
+
+#: ../vinagre/vinagre-fav.c:580
+msgid "Edit the details of selected bookmark"
+msgstr "Prepravlja detalje odabranih obeleživača"
+
+#: ../vinagre/vinagre-fav.c:581
+msgid "_Remove from bookmarks"
+msgstr "_Ukloni iz obeleživača"
+
+#: ../vinagre/vinagre-fav.c:582
+msgid "Remove current selected connection from bookmarks"
+msgstr "Uklanja trenutno odabranu vezu iz obeleživača"
+
+#: ../vinagre/vinagre-fav.c:599 ../vinagre/vinagre-window.c:410
+#, c-format
+msgid "Could not merge UI XML file: %s"
+msgstr "Ne mogu da stopim XML datoteku sučelja: %s"
+
+#: ../vinagre/vinagre-fav.c:757
 msgid "Invalid operation"
 msgstr "Neispravna operacija"
 
-#: ../vinagre/vinagre-fav.c:671
+#: ../vinagre/vinagre-fav.c:758
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Podaci primljeni iz operacije prevlačenja nisu ispravni."
 
-#: ../vinagre/vinagre-fav.c:871
+#: ../vinagre/vinagre-fav.c:864
+msgid "Hide panel"
+msgstr "Sakrij panel"
+
+#: ../vinagre/vinagre-fav.c:1048
 msgid "Hosts nearby"
 msgstr "Računari u blizini"
 
-#. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:62
-msgid "Open vinagre in fullscreen mode"
-msgstr "Otvara Vinager u režimu preko celog ekrana"
-
-#. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:66
-msgid "Create a new toplevel window in an existing instance of vinagre"
-msgstr "Pravi novi prozor u već pokrenutom programu"
-
-#. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:70
-msgid "Open a file recognized by vinagre"
-msgstr "Otvara datoteku koju Vinager prepozna"
-
-#: ../vinagre/vinagre-main.c:70
-msgid "filename"
-msgstr "ime datoteke"
-
-#. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-main.c:75
-msgid "[server:port]"
-msgstr "[server:port]"
-
-#: ../vinagre/vinagre-main.c:130
-msgid "The following error has occurred:"
-msgid_plural "The following errors have occurred:"
-msgstr[0] "Javio se sledeći problem:"
-msgstr[1] "Javili su se sledeći problemi:"
-msgstr[2] "Javili su se sledeći problemi:"
-
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:169
+#: ../vinagre/vinagre-main.c:81
 msgid "- Remote Desktop Viewer"
 msgstr "- Pregled udaljenih radnih površina"
 
-#: ../vinagre/vinagre-main.c:193
+#: ../vinagre/vinagre-main.c:106
 msgid ""
 "Run 'vinagre --help' to see a full list of available command line options"
 msgstr ""
 "Pokrenite 'vinagre --help' ako želite da vidite potpunu listu dostupnih "
 "opcija"
 
-#: ../vinagre/vinagre-mdns.c:144
+#: ../vinagre/vinagre-mdns.c:160
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Ne mogu da razlučim avahi ime: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:202
+#: ../vinagre/vinagre-mdns.c:217
 #, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "Dodatak %s je već registrovao pregledača za uslugu %s."
 
-#: ../vinagre/vinagre-mdns.c:211
+#: ../vinagre/vinagre-mdns.c:226
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Ne mogu da dodam mDNS pretraživač za uslugu %s."
 
-#: ../vinagre/vinagre-mdns.c:227
+#. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
+#: ../vinagre/vinagre-mdns.c:243
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Ne mogu da razgledam računar: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:300
+#: ../vinagre/vinagre-mdns.c:316
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Neuspelo pokretanje mDNS pretraživača: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:461
+#: ../vinagre/vinagre-notebook.c:457
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "Veza sa računarom %s je zatvorena."
 
-#: ../vinagre/vinagre-notebook.c:463
+#: ../vinagre/vinagre-notebook.c:459
 msgid "Connection closed"
 msgstr "Veza je zatvorena"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:482
+#: ../vinagre/vinagre-notebook.c:478
 #, c-format
-msgid "Authentication to host %s has failed"
+msgid "Authentication for host %s has failed"
 msgstr "Prijava za računar %s nije uspela"
 
-#: ../vinagre/vinagre-notebook.c:488
+#: ../vinagre/vinagre-notebook.c:484
 msgid "Authentication failed"
 msgstr "Prijava nije uspela"
 
-#: ../vinagre/vinagre-notebook.c:525
+#: ../vinagre/vinagre-notebook.c:522
 msgid "Connecting..."
 msgstr "Povezujem se..."
 
-#: ../vinagre/vinagre-notebook.c:552 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:549 ../vinagre/vinagre-tab.c:325
 msgid "Close connection"
 msgstr "Zatvori vezu"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-options.c:31
+msgid "Open vinagre in fullscreen mode"
+msgstr "Otvara Vinager u režimu preko celog ekrana"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-options.c:35
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "Pravi novi prozor u već pokrenutom programu"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-options.c:39
+msgid "Open a file recognized by vinagre"
+msgstr "Otvara datoteku koju Vinager prepozna"
+
+#: ../vinagre/vinagre-options.c:39
+msgid "filename"
+msgstr "ime datoteke"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-options.c:44
+msgid "[server:port]"
+msgstr "[server:port]"
+
+#: ../vinagre/vinagre-options.c:132
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "Javio se sledeći problem:"
+msgstr[1] "Javili su se sledeći problemi:"
+msgstr[2] "Javili su se sledeći problemi:"
 
 #: ../vinagre/vinagre-plugin-dialog.c:83
 msgid "Plugin Manager"
 msgstr "Upravnik dodacima"
 
-#: ../vinagre/vinagre-plugin-manager.c:45
-msgid "Plugin"
-msgstr "Dodatak"
-
-#: ../vinagre/vinagre-plugin-manager.c:46
-msgid "Enabled"
-msgstr "Omogućen"
-
-#: ../vinagre/vinagre-plugin-manager.c:503
-msgid "C_onfigure"
-msgstr "P_odesi"
-
-#: ../vinagre/vinagre-plugin-manager.c:512
-msgid "A_ctivate"
-msgstr "A_ktiviraj"
-
-#: ../vinagre/vinagre-plugin-manager.c:523
-msgid "Ac_tivate All"
-msgstr "Ak_tiviraj sve"
-
-#: ../vinagre/vinagre-plugin-manager.c:528
-msgid "_Deactivate All"
-msgstr "_Deaktiviraj sve"
-
-#: ../vinagre/vinagre-plugin-manager.c:824
-msgid "_About Plugin"
-msgstr "_O dodatku"
-
-#: ../vinagre/vinagre-plugin-manager.c:828
-msgid "C_onfigure Plugin"
-msgstr "P_odesi dodatak"
-
-#: ../vinagre/vinagre-prefs.c:227
+#: ../vinagre/vinagre-prefs.c:188
 msgid "Cannot initialize preferences manager."
 msgstr "Ne mogu da inicijalizujem upravnika preferencija"
+
+#: ../vinagre/vinagre-ssh.c:106
+msgid "Timed out when logging into SSH host"
+msgstr "Isteklo vreme prilikom prijavljivanja na SSH domaćina"
+
+#: ../vinagre/vinagre-ssh.c:180
+msgid "Unable to spawn ssh program"
+msgstr "Ne mogu da pokrenem ssh program"
+
+#: ../vinagre/vinagre-ssh.c:197
+#, c-format
+msgid "Unable to spawn ssh program: %s"
+msgstr "Ne mogu da pokrenem ssh program: %s"
+
+#: ../vinagre/vinagre-ssh.c:352
+msgid "Timed out when logging in"
+msgstr "Isteklo vreme prilikom prijavljivanja"
+
+#: ../vinagre/vinagre-ssh.c:382 ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:621
+msgid "Permission denied"
+msgstr "Pristup odbijen"
+
+#: ../vinagre/vinagre-ssh.c:448
+msgid "Password dialog canceled"
+msgstr "Prozorče za lozinku otkazano"
+
+#: ../vinagre/vinagre-ssh.c:471
+msgid "Could not send password"
+msgstr "Ne mogu da pošaljem lozinku"
+
+#: ../vinagre/vinagre-ssh.c:479
+msgid "Log In Anyway"
+msgstr "Prijavi se svejedno"
+
+#: ../vinagre/vinagre-ssh.c:479
+msgid "Cancel Login"
+msgstr "Otkaži prijavu"
+
+#: ../vinagre/vinagre-ssh.c:488
+#, c-format
+msgid ""
+"The identity of the remote computer (%s) is unknown.\n"
+"This happens when you log in to a computer the first time.\n"
+"\n"
+"The identity sent by the remote computer is %s. If you want to be absolutely "
+"sure it is safe to continue, contact the system administrator."
+msgstr ""
+"Identitet udaljenog računara (%s) je nepoznat.\n"
+"Ovo se dešava kada se po prvi put prijavljujete na neki računar.\n"
+"\n"
+"Identitet koji je poslao udaljeni računar je %s. Ako želite da budete potpuno "
+"sigurni da je bezbedno da nastavite, kontaktirajte administratora sistema."
+
+#: ../vinagre/vinagre-ssh.c:506
+msgid "Login dialog canceled"
+msgstr "Prozorče za prijavu otkazano"
+
+#: ../vinagre/vinagre-ssh.c:527
+msgid "Can't send host identity confirmation"
+msgstr "Ne mogu da pošaljem potvrdu o identitetu domaćina"
+
+#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:730
+msgid "Error saving the credentials on the keyring."
+msgstr "Greška prilikom čuvanja šifri u privesku ključeva."
+
+#: ../vinagre/vinagre-ssh.c:628
+msgid "Hostname not known"
+msgstr "Ime domaćina nepoznato"
+
+#: ../vinagre/vinagre-ssh.c:635
+msgid "No route to host"
+msgstr "Nema putanje do domaćina"
+
+#: ../vinagre/vinagre-ssh.c:642
+msgid "Connection refused by server"
+msgstr "Veza odbijena od strane servera"
+
+#: ../vinagre/vinagre-ssh.c:649
+msgid "Host key verification failed"
+msgstr "Potvrda ključa domaćina nije uspela"
+
+#: ../vinagre/vinagre-ssh.c:686
+msgid "Unable to find a valid SSH program"
+msgstr "Ne mogu da nađem ispravan SSH program"
 
 #: ../vinagre/vinagre-tab.c:346
 msgid "Leave fullscreen"
 msgstr "Napusti ceo ekran"
 
-#: ../vinagre/vinagre-tab.c:495
+#: ../vinagre/vinagre-tab.c:497
 msgid "Error saving recent connection."
 msgstr "Greška prilikom čuvanja nedavnih veza"
 
-#: ../vinagre/vinagre-tab.c:728
-msgid "Error saving the credentials on the keyring."
-msgstr "Greška prilikom čuvanja šifri u privesku ključeva."
-
-#: ../vinagre/vinagre-tab.c:814
+#: ../vinagre/vinagre-tab.c:816
 msgid "Could not get a screenshot of the connection."
 msgstr "Ne mogu da uzmem snimak ekrana aktivne veze."
 
-#: ../vinagre/vinagre-tab.c:819
+#: ../vinagre/vinagre-tab.c:821
 msgid "Save Screenshot"
 msgstr "Čuva snimak ekrana"
 
-#: ../vinagre/vinagre-tab.c:830
+#. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
+#: ../vinagre/vinagre-tab.c:833
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Snimak ekrana %s"
 
-#: ../vinagre/vinagre-tab.c:881
+#: ../vinagre/vinagre-tab.c:884
 msgid "Error saving screenshot"
 msgstr "Greška prilikom čuvanja snimka ekrana"
 
@@ -791,22 +1129,23 @@ msgstr "Ne mogu da napravim vezu: %s"
 msgid "Impossible to accept the stream tube: %s"
 msgstr "Ne mogu da prihvatitim kanal toka: %s"
 
+#. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
 #: ../vinagre/vinagre-tube-handler.c:463
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Ne mogu da preuzmem ime kontakta: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:498
+#: ../vinagre/vinagre-tube-handler.c:500
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "Ne mogu da preuzmem avatar: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:519
+#: ../vinagre/vinagre-tube-handler.c:521
 #, c-format
-msgid "%s wants to share his desktop with you."
+msgid "%s wants to share their desktop with you."
 msgstr "%s želi da deli svoju radnu površinu sa vama."
 
-#: ../vinagre/vinagre-tube-handler.c:524
+#: ../vinagre/vinagre-tube-handler.c:526
 msgid "Desktop sharing invitation"
 msgstr "Pozivnica za deljenje radne površine"
 
@@ -843,128 +1182,118 @@ msgstr "Izlazi iz programa"
 msgid "Edit the application preferences"
 msgstr "Menja postavke programa"
 
-#. FIXME: Study this dialog for next release
-#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
-#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
-#.
-#. Bookmarks menu
-#: ../vinagre/vinagre-ui.h:56
-msgid "_Open bookmark"
-msgstr "_Otvori obeleživač"
+#: ../vinagre/vinagre-ui.h:50
+msgid "_Plugins"
+msgstr "_Dodaci"
 
-#: ../vinagre/vinagre-ui.h:57
-msgid "Connect to this machine"
-msgstr "Povezuje se na ovaj računar"
-
-#: ../vinagre/vinagre-ui.h:58
-msgid "_Edit bookmark"
-msgstr "_Prepravi obeleživač"
-
-#: ../vinagre/vinagre-ui.h:59
-msgid "Edit the details of selected bookmark"
-msgstr "Prepravlja detalje odabranih obeleživača"
-
-#: ../vinagre/vinagre-ui.h:60
-msgid "_Remove from bookmarks"
-msgstr "_Ukloni iz obeleživača"
-
-#: ../vinagre/vinagre-ui.h:61
-msgid "Remove current selected connection from bookmarks"
-msgstr "Uklanja trenutno odabranu vezu iz obeleživača"
-
-#: ../vinagre/vinagre-ui.h:62
-msgid "_New Folder"
-msgstr "_Nova fascikla"
-
-#: ../vinagre/vinagre-ui.h:63
-msgid "Create a new folder"
-msgstr "Pravi novu fasciklu"
+#: ../vinagre/vinagre-ui.h:51
+msgid "Select plugins"
+msgstr "Odaberite dodatke"
 
 #. Help menu
-#: ../vinagre/vinagre-ui.h:66
+#: ../vinagre/vinagre-ui.h:54
 msgid "_Contents"
 msgstr "_Sadržaj"
 
-#: ../vinagre/vinagre-ui.h:67
+#: ../vinagre/vinagre-ui.h:55
 msgid "Open the vinagre manual"
 msgstr "Otvara korisničko uputstvo za Pregled udaljenih radnih površina"
 
-#: ../vinagre/vinagre-ui.h:69
+#: ../vinagre/vinagre-ui.h:57
 msgid "About this application"
 msgstr "O ovom programu"
 
-#: ../vinagre/vinagre-ui.h:74
+#: ../vinagre/vinagre-ui.h:62
 msgid "_Toolbar"
 msgstr "_Paleta alatki"
 
-#: ../vinagre/vinagre-ui.h:75
+#: ../vinagre/vinagre-ui.h:63
 msgid "Show or hide the toolbar"
 msgstr "Prikazuje ili sakriva paletu alatki"
 
-#: ../vinagre/vinagre-ui.h:78
+#: ../vinagre/vinagre-ui.h:66
 msgid "_Statusbar"
 msgstr "_Statusna linija"
 
-#: ../vinagre/vinagre-ui.h:79
+#: ../vinagre/vinagre-ui.h:67
 msgid "Show or hide the statusbar"
 msgstr "Prikazuje ili sakriva statusnu liniju"
 
-#: ../vinagre/vinagre-ui.h:82
+#: ../vinagre/vinagre-ui.h:70
 msgid "Side _Panel"
 msgstr "_Panel sa strane"
 
-#: ../vinagre/vinagre-ui.h:83
+#: ../vinagre/vinagre-ui.h:71
 msgid "Show or hide the side panel"
 msgstr "Prikazuje ili sakriva pano za sa strane"
 
-#: ../vinagre/vinagre-ui.h:91
+#: ../vinagre/vinagre-ui.h:79
 msgid "Close the current connection"
 msgstr "Zatvara trenutnu vezu"
 
-#: ../vinagre/vinagre-ui.h:92
+#: ../vinagre/vinagre-ui.h:80
 msgid "C_lose All"
 msgstr "Z_atvori sve"
 
-#: ../vinagre/vinagre-ui.h:93
+#: ../vinagre/vinagre-ui.h:81
 msgid "Close all active connections"
 msgstr "Zatvara sve aktivne veze"
 
 #. Bookmarks menu
-#: ../vinagre/vinagre-ui.h:96
+#: ../vinagre/vinagre-ui.h:84
 msgid "_Add to bookmarks"
 msgstr "_Dodaj u obeleživače"
 
-#: ../vinagre/vinagre-ui.h:97
+#: ../vinagre/vinagre-ui.h:85
 msgid "Add current connection to your bookmarks"
 msgstr "Dodaje trenutnu vezu u obeleživače"
 
 #. Machine menu
-#: ../vinagre/vinagre-ui.h:104
-msgid "Take screenshot"
-msgstr "Snimi ekran"
+#: ../vinagre/vinagre-ui.h:92
+msgid "_Take screenshot"
+msgstr "_Snimi ekran"
 
-#: ../vinagre/vinagre-ui.h:105
+#: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
 msgstr "Uzima snimak ekrana trenutno aktivne veze"
 
-#: ../vinagre/vinagre-ui.h:109
+#: ../vinagre/vinagre-ui.h:97
 msgid "View the current machine in full screen"
 msgstr "Pregleda ovaj računar preko celog ekrana"
 
-#: ../vinagre/vinagre-utils.c:75
+#: ../vinagre/vinagre-utils.c:67
 msgid "An error has occurred:"
 msgstr "Javila se sledeća greška:"
 
-#: ../vinagre/vinagre-utils.c:150
-#, c-format
-msgid "Could not load builder file: %s"
-msgstr "Ne mogu da otvorim datoteku izgradnje: %s"
+#: ../vinagre/vinagre-utils.c:151
+msgid ""
+"A plugin tried to open an UI file but did not succeed, with the error "
+"message:"
+msgstr ""
+"Dodatak je pokušao da otvori datoteku sučelja, ali nije uspeo sa porukom "
+"greške:"
 
-#: ../vinagre/vinagre-utils.c:453
+#: ../vinagre/vinagre-utils.c:153
+msgid ""
+"The program tried to open an UI file but did not succeed, with the error "
+"message:"
+msgstr ""
+"Program je pokušao da otvori datoteku sučelja, ali nije uspeo sa porukom "
+"greške:"
+
+#: ../vinagre/vinagre-utils.c:156
+msgid "Please check your installation."
+msgstr "Proverite vašu instalaciju."
+
+#: ../vinagre/vinagre-utils.c:157
+msgid "Error loading UI file"
+msgstr "Greška prilikom učitavanja datoteke sučelja"
+
+#: ../vinagre/vinagre-utils.c:309
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Vinager je Gnomov pregledač udaljenih radnih površina"
 
-#: ../vinagre/vinagre-utils.c:456
+#: ../vinagre/vinagre-utils.c:312
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -977,7 +1306,7 @@ msgstr ""
 "Foundation); i to verzije 2 ove licence ili, po vašem mišljenju, bilo koje "
 "novije verzije."
 
-#: ../vinagre/vinagre-utils.c:460
+#: ../vinagre/vinagre-utils.c:316
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -989,7 +1318,7 @@ msgstr ""
 "ODREĐENE SVRHE. Pogledajte Gnuovu Opštu javnu licencu ( GNU General Public "
 "License) za više informacija."
 
-#: ../vinagre/vinagre-utils.c:464
+#: ../vinagre/vinagre-utils.c:320
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -998,7 +1327,7 @@ msgstr ""
 "javne licence (GNU General Public License). Ako niste, pogledajte <http://"
 "www.gnu.org/licenses/>."
 
-#: ../vinagre/vinagre-utils.c:486
+#: ../vinagre/vinagre-utils.c:342
 msgid "translator-credits"
 msgstr ""
 "Marko Uskoković <marko.uskokovic@cp6linux.org>\n"
@@ -1007,21 +1336,52 @@ msgstr ""
 "\n"
 "Prevod.org — prevod na srpski jezik."
 
-#: ../vinagre/vinagre-utils.c:489
+#: ../vinagre/vinagre-utils.c:345
 msgid "Vinagre Website"
 msgstr "Veb mesto projekta  Vinager"
 
-#: ../vinagre/vinagre-window.c:397
+#. Translators: %s is a protocol, like VNC or SSH
+#: ../vinagre/vinagre-utils.c:471
 #, c-format
-msgid "Could not merge vinagre-ui.xml: %s"
-msgstr "Ne mogu da spojim vinagre-ui.xml: %s"
+msgid "%s authentication is required"
+msgstr "%s prijavljivanje je obavezno"
 
-#: ../vinagre/vinagre-window.c:425
+#: ../vinagre/vinagre-window.c:439
 msgid "_Recent connections"
 msgstr "_Nedavne veze"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:585
+#: ../vinagre/vinagre-window.c:554
 #, c-format
 msgid "Open %s:%d"
 msgstr "Otvara %s:%d"
+
+#: ../vinagre/vinagre-window.c:733
+msgid "About menu accelerators and keyboard shortcuts"
+msgstr "O brzim pristupima meniju i prečicama sa tastature"
+
+#: ../vinagre/vinagre-window.c:735
+msgid ""
+"Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
+"default. The reason is to avoid the keys to be intercepted by the program, "
+"and allow them to be sent to the remote machine.\n"
+"\n"
+"You can change this behavior through the preferences dialog. For more "
+"information, check the documentation.\n"
+"\n"
+"This message will appear only once."
+msgstr ""
+"Pregled udaljenih radnih površina dolazi sa podrazumevano isključenim brzim "
+"pristupom menijima i prečicama sa tastature. Razlog je da se izbegne "
+"presretanje pritiskanja tastera od strane programa i da im se dozvoli da budu "
+"poslati na udaljeni računar.\n"
+"\n"
+"Možete promeniti ovo ponašanje kroz prozorče postavki. Za više informacija, "
+"pogledajte dokumentaciju.\n"
+"\n"
+"Ova poruka će se pojaviti samo jednom."
+
+#: ../vinagre/vinagre-window.c:743 ../vinagre/vinagre-window.c:749
+#, c-format
+msgid "Error while creating the file %s: %s"
+msgstr "Greška prilikom pravljenja datoteke %s: %s"
