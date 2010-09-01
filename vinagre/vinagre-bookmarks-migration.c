@@ -34,7 +34,6 @@
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks-migration.h"
 #include "vinagre-bookmarks.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
 #include "vinagre-utils.h"
@@ -156,7 +155,7 @@ create_list (GKeyFile *kf)
   GSList *entries;
   gchar **conns;
   gsize   length, i;
-  VinagreProtocolExt *ext;
+  VinagreProtocol *ext;
 
   ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (), "vnc");
 
@@ -178,7 +177,7 @@ create_list (GKeyFile *kf)
       if (!s_value)
         continue;
 
-      conn = vinagre_protocol_ext_new_connection (ext);
+      conn = vinagre_protocol_new_connection (ext);
       i_value = g_key_file_get_integer (kf, conns[i], "port", NULL);
       if (i_value == 0)
         i_value = 5900;

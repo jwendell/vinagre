@@ -26,7 +26,6 @@
 #include "vinagre-connection.h"
 #include "vinagre-enums.h"
 #include "vinagre-bookmarks.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-utils.h"
 
@@ -495,7 +494,7 @@ vinagre_connection_split_string (const gchar *uri,
   gint    lport;
   gchar  *lhost;
   gchar   ipv6_host[255] = {0,};
-  VinagreProtocolExt *ext;
+  VinagreProtocol *ext;
 
   *error_msg = NULL;
   *host = NULL;
@@ -545,12 +544,12 @@ vinagre_connection_split_string (const gchar *uri,
   if (g_strrstr (lhost, "::") != NULL)
     {
       server = g_strsplit (lhost, "::", 2);
-      lport = server[1] ? atoi (server[1]) : vinagre_protocol_ext_get_default_port (ext);
+      lport = server[1] ? atoi (server[1]) : vinagre_protocol_get_default_port (ext);
     }
   else
     {
       server = g_strsplit (lhost, ":", 2);
-      lport = server[1] ? atoi (server[1]) : vinagre_protocol_ext_get_default_port (ext);
+      lport = server[1] ? atoi (server[1]) : vinagre_protocol_get_default_port (ext);
 
       if ((g_str_equal (*protocol, "vnc")) && (lport < 1024))
         lport += 5900;
@@ -573,7 +572,7 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolea
   VinagreConnection *conn = NULL;
   gint    port;
   gchar  *host, *protocol;
-  VinagreProtocolExt *ext;
+  VinagreProtocol *ext;
 
   if (!vinagre_connection_split_string (uri, NULL, &protocol, &host, &port, error_msg))
     return NULL;
@@ -590,7 +589,7 @@ vinagre_connection_new_from_string (const gchar *uri, gchar **error_msg, gboolea
       if (!ext)
 	goto finalize;
 
-      conn = vinagre_protocol_ext_new_connection (ext);
+      conn = vinagre_protocol_new_connection (ext);
       vinagre_connection_set_host (conn, host);
       vinagre_connection_set_port (conn, port);
     }
@@ -640,10 +639,10 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg, gboolean 
   g_hash_table_iter_init (&iter, extensions);
   while (g_hash_table_iter_next (&iter, NULL, &ext))
     {
-      conn = vinagre_protocol_ext_new_connection_from_file ((VinagreProtocolExt *)ext,
-							    data,
-							    use_bookmarks,
-							    error_msg);
+      conn = vinagre_protocol_new_connection_from_file ((VinagreProtocol *)ext,
+							data,
+							use_bookmarks,
+							error_msg);
       g_free (*error_msg);
       *error_msg = NULL;
       if (conn)
@@ -667,7 +666,7 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
   GString *uri;
   gchar *result;
   gboolean is_ipv6;
-  VinagreProtocolExt *ext;
+  VinagreProtocol *ext;
 
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
@@ -689,7 +688,7 @@ vinagre_connection_get_string_rep (VinagreConnection *conn,
 
   ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (), conn->priv->protocol);
   if (ext)
-    if (vinagre_protocol_ext_get_default_port (ext) != conn->priv->port)
+    if (vinagre_protocol_get_default_port (ext) != conn->priv->port)
       g_string_append_printf (uri, "::%d", conn->priv->port);
 
   result = uri->str;

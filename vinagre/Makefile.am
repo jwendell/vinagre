@@ -46,7 +46,6 @@ INST_H_FILES = \
   vinagre-ssh.h \
   vinagre-cache-prefs.h \
   vinagre-protocol.h \
-  vinagre-protocol-ext.h \
   vinagre-plugins-engine.h \
   $(NULL)
 
@@ -81,7 +80,6 @@ handwritten_sources = \
   vinagre-ssh.c \
   vinagre-cache-prefs.c \
   vinagre-protocol.c \
-  vinagre-protocol-ext.c \
   vinagre-plugins-engine.c \
   $(NULL)
 
@@ -178,7 +176,6 @@ vinagre_applet_SOURCES =					\
 	vinagre-ssh.h vinagre-ssh.c \
 	vinagre-cache-prefs.h vinagre-cache-prefs.c \
 	vinagre-protocol.h vinagre-protocol.c \
-	vinagre-protocol-ext.h vinagre-protocol-ext.c \
 	vinagre-plugins-engine.h vinagre-plugins-engine.c \
 	$(NULL)
 

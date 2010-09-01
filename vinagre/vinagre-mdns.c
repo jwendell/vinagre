@@ -27,7 +27,6 @@
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-plugins-engine.h"
-#include "vinagre-protocol-ext.h"
 
 typedef struct {void *plugin; char*name;} VinagrePluginInfo;
 

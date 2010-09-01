@@ -30,7 +30,6 @@
 #include "vinagre-utils.h"
 #include "vinagre-connection.h"
 #include "vinagre-commands.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 
 #include <config.h>

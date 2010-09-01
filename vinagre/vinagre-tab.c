@@ -31,7 +31,6 @@
 #include "vinagre-utils.h"
 #include "vinagre-prefs.h"
 #include "view/autoDrawer.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
@@ -251,7 +250,7 @@ active_connections_button_clicked  (GtkToolButton *button,
 				    VinagreTab    *tab)
 {
   GSList             *connections, *l;
-  VinagreProtocolExt *ext;
+  VinagreProtocol    *ext;
   VinagreConnection  *conn;
   GtkWidget          *menu, *item, *image;
   gchar              *str, *label;
@@ -265,7 +264,7 @@ active_connections_button_clicked  (GtkToolButton *button,
       ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
 							   vinagre_connection_get_protocol (conn));
       item = gtk_image_menu_item_new_with_label ("");
-      image = gtk_image_new_from_icon_name (vinagre_protocol_ext_get_icon_name (ext),
+      image = gtk_image_new_from_icon_name (vinagre_protocol_get_icon_name (ext),
 					    GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 
@@ -524,7 +523,7 @@ vinagre_tab_init (VinagreTab *tab)
 GtkWidget *
 vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
 {
-  VinagreProtocolExt *ext;
+  VinagreProtocol *ext;
   const gchar *protocol = vinagre_connection_get_protocol (conn);
 
   ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (), protocol);
@@ -534,7 +533,7 @@ vinagre_tab_new (VinagreConnection *conn, VinagreWindow *window)
       return NULL;
     }
 
-  return vinagre_protocol_ext_new_tab (ext, conn, window);
+  return vinagre_protocol_new_tab (ext, conn, window);
 }
 
 gchar *
@@ -938,7 +937,7 @@ const gchar *
 vinagre_tab_get_icon_name (VinagreTab *tab)
 {
   const gchar *protocol;
-  VinagreProtocolExt *ext;
+  VinagreProtocol *ext;
 
   g_return_val_if_fail (VINAGRE_IS_TAB (tab), NULL);
 
@@ -946,7 +945,7 @@ vinagre_tab_get_icon_name (VinagreTab *tab)
   ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (), protocol);
   g_return_val_if_fail (ext != NULL, NULL);
 
-  return vinagre_protocol_ext_get_icon_name (ext);
+  return vinagre_protocol_get_icon_name (ext);
 }
 
 /* vim: set ts=8: */

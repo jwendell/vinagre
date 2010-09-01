@@ -249,7 +249,7 @@ vinagre_plugins_engine_get_default (void)
 }
 
 
-VinagreProtocolExt *
+VinagreProtocol *
 vinagre_plugins_engine_get_plugin_by_protocol (VinagrePluginsEngine *engine,
 					       const gchar          *protocol)
 {

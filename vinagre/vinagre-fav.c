@@ -30,7 +30,6 @@
 #include "vinagre-bookmarks-ui.h"
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-commands.h"
 
@@ -963,7 +962,7 @@ vinagre_fav_fill_bookmarks (GtkTreeStore *store, GSList *list, GtkTreeIter *pare
   GSList                *l;
   GtkTreeIter            iter;
   VinagreConnection     *conn;
-  VinagreProtocolExt    *ext;
+  VinagreProtocol       *ext;
 
  for (l = list; l; l = l->next)
     {
@@ -999,7 +998,7 @@ vinagre_fav_fill_bookmarks (GtkTreeStore *store, GSList *list, GtkTreeIter *pare
 	    ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
 								 vinagre_connection_get_protocol (conn));
 
-	    pixbuf = vinagre_protocol_ext_get_icon (ext, 16);
+	    pixbuf = vinagre_protocol_get_icon (ext, 16);
 
 	    gtk_tree_store_append (store, &iter, parent_iter);
 	    gtk_tree_store_set (store, &iter,

@@ -23,7 +23,7 @@
 
 #include <glib.h>
 #include <libpeas/peas.h>
-#include "vinagre-protocol-ext.h"
+#include "vinagre-protocol.h"
 
 G_BEGIN_DECLS
 
@@ -52,7 +52,7 @@ struct _VinagrePluginsEngineClass
 GType			 vinagre_plugins_engine_get_type	(void) G_GNUC_CONST;
 
 VinagrePluginsEngine	*vinagre_plugins_engine_get_default	(void);
-VinagreProtocolExt	*vinagre_plugins_engine_get_plugin_by_protocol	(VinagrePluginsEngine *engine,
+VinagreProtocol		*vinagre_plugins_engine_get_plugin_by_protocol	(VinagrePluginsEngine *engine,
 									 const gchar          *protocol);
 GHashTable		*vinagre_plugins_engine_get_plugins_by_protocol	(VinagrePluginsEngine *engine);
 G_END_DECLS

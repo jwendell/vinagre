@@ -42,7 +42,6 @@
 #include "vinagre-ui.h"
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
 
@@ -503,7 +502,7 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
   GtkAction             *action;
   VinagreWindowPrivate  *p = window->priv;
   VinagreConnection     *conn;
-  VinagreProtocolExt    *ext;
+  VinagreProtocol       *ext;
 
   for (l = entries; l; l = l->next)
     {
@@ -560,7 +559,7 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 				     NULL);
 	    g_object_set (G_OBJECT (action),
 			  "icon-name",
-			  vinagre_protocol_ext_get_icon_name (ext),
+			  vinagre_protocol_get_icon_name (ext),
 			  NULL);
 	    g_object_set_data (G_OBJECT (action), "conn", conn);
 	    gtk_action_group_add_action (p->bookmarks_list_action_group,

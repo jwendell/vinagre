@@ -283,7 +283,7 @@ vinagre_protocol_new_connection_from_file (VinagreProtocol *protocol,
  *
  * @protocol: a protocol
  * @initial_settings: (allow-none): bla bla
- * @returns: (allow-none): a widget
+ * Return value: (allow-none): a widget
  */
 GtkWidget *
 vinagre_protocol_get_connect_widget (VinagreProtocol   *protocol,

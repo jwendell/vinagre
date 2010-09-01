@@ -39,7 +39,6 @@
 #include "vinagre-window-private.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin-dialog.h"
 

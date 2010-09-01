@@ -37,7 +37,6 @@
 #include "vinagre-debug.h"
 #include "vinagre-ssh.h"
 #include "vinagre-options.h"
-#include "vinagre-protocol-ext.h"
 #include "vinagre-plugins-engine.h"
 
 #ifdef HAVE_TELEPATHY
@@ -55,7 +54,7 @@ int main (int argc, char **argv) {
   GtkApplication       *app;
   GHashTable           *extensions;
   GHashTableIter        iter;
-  VinagreProtocolExt   *extension;
+  VinagreProtocol      *extension;
 #ifdef HAVE_TELEPATHY
   VinagreTubesManager *vinagre_tubes_manager;
 #endif
@@ -91,7 +90,7 @@ int main (int argc, char **argv) {
     {
       GSList *groups, *l;
 
-      groups = vinagre_protocol_ext_get_context_groups (extension);
+      groups = vinagre_protocol_get_context_groups (extension);
       for (l = groups; l; l = l->next)
 	g_option_context_add_group (context, (GOptionGroup *)l->data);
       g_slist_free (groups);

@@ -30,7 +30,6 @@
 #include "vinagre-connection.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
-#include "vinagre-protocol-ext.h"
 
 struct _VinagreBookmarksPrivate
 {
@@ -242,7 +241,7 @@ vinagre_bookmarks_parse_item (xmlNode *root)
   xmlNode               *curr;
   xmlChar               *s_value;
   gchar                 *protocol = NULL;
-  VinagreProtocolExt    *ext;
+  VinagreProtocol       *ext;
 
   /* Loop to discover the protocol */
   for (curr = root->children; curr; curr = curr->next)
@@ -267,7 +266,7 @@ vinagre_bookmarks_parse_item (xmlNode *root)
       goto out;
     }
 
-  conn = vinagre_protocol_ext_new_connection (ext);
+  conn = vinagre_protocol_new_connection (ext);
   vinagre_connection_parse_item (conn, root);
 
   if (vinagre_connection_get_host (conn))
