@@ -2,9 +2,13 @@ DIST_SUBDIRS =	\
   vnc		\
   ssh		\
   rdp		\
-  reverse-vnc
+  reverse-vnc	\
+  im-status
 
-SUBDIRS = vnc reverse-vnc
+SUBDIRS =	\
+  vnc		\
+  reverse-vnc	\
+  im-status
 
 if SSH
 SUBDIRS += ssh

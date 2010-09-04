@@ -312,6 +312,7 @@ plugins/vnc/Makefile
 plugins/ssh/Makefile
 plugins/rdp/Makefile
 plugins/reverse-vnc/Makefile
+plugins/im-status/Makefile
 vinagre/Makefile
 vinagre/view/Makefile
 ])
