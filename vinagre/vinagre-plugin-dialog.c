@@ -27,23 +27,11 @@
 
 static GtkWidget *plugin_dialog = NULL;
 
-#define VINAGRE_PLUGIN_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
-						     VINAGRE_TYPE_PLUGIN_DIALOG, \
-						     VinagrePluginDialogPrivate))
-
-struct _VinagrePluginDialogPrivate
-{
-  gint dummy;
-};
-
 G_DEFINE_TYPE(VinagrePluginDialog, vinagre_plugin_dialog, GTK_TYPE_DIALOG)
 
 static void 
 vinagre_plugin_dialog_class_init (VinagrePluginDialogClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (object_class, sizeof (VinagrePluginDialogPrivate));
 }
 
 static void
@@ -74,7 +62,6 @@ setup_plugins_page (VinagrePluginDialog *dlg)
 static void
 vinagre_plugin_dialog_init (VinagrePluginDialog *dlg)
 {
-  dlg->priv = VINAGRE_PLUGIN_DIALOG_GET_PRIVATE (dlg);
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
 			  GTK_STOCK_CLOSE,
 			  GTK_RESPONSE_CLOSE,

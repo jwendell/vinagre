@@ -33,14 +33,12 @@ G_BEGIN_DECLS
 #define VINAGRE_IS_PLUGIN_DIALOG_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), VINAGRE_TYPE_PLUGIN_DIALOG))
 #define VINAGRE_PLUGIN_DIALOG_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj),  VINAGRE_TYPE_PLUGIN_DIALOG, VinagrePluginDialogClass))
 
-typedef struct _VinagrePluginDialogPrivate VinagrePluginDialogPrivate;
 typedef struct _VinagrePluginDialog VinagrePluginDialog;
 typedef struct _VinagrePluginDialogClass VinagrePluginDialogClass;
 
 struct _VinagrePluginDialog 
 {
   GtkDialog dialog;
-  VinagrePluginDialogPrivate *priv;
 };
 
 struct _VinagrePluginDialogClass 
