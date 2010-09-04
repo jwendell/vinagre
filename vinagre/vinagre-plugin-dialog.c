@@ -56,6 +56,7 @@ setup_plugins_page (VinagrePluginDialog *dlg)
   gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
 		     page_content);
 
+  gtk_widget_set_size_request (page_content, 450, 275);
   gtk_widget_show_all (page_content);
 }
 
@@ -68,7 +69,7 @@ vinagre_plugin_dialog_init (VinagrePluginDialog *dlg)
 			  NULL);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Plugin Manager"));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
+  gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
