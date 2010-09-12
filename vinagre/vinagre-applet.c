@@ -138,18 +138,14 @@ vinagre_applet_check_size (VinagreApplet *applet)
 static gboolean
 vinagre_applet_draw_cb (VinagreApplet *applet)
 {
-  gint w, h, bg_type;
+  gint bg_type;
   GdkColor color;
-  GdkGC *gc;
   GdkPixmap *background;
-  GtkAllocation allocation;
   GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (applet));
+  cairo_t *cr;
 
   if (window == NULL)
     return FALSE;
-
-  /* Clear the window so we can draw on it later */
-  gdk_window_clear (window);
 
   /* retrieve applet size */
   vinagre_applet_get_icon (applet);
@@ -161,33 +157,27 @@ vinagre_applet_draw_cb (VinagreApplet *applet)
   if (applet->icon == NULL)
     return FALSE;
 
-  gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
-  w = allocation.width;
-  h = allocation.height;
-
-  gc = gdk_gc_new (window);
+  cr = gdk_cairo_create (window);
 
   /* draw pixmap background */
   bg_type = panel_applet_get_background (PANEL_APPLET (applet), &color, &background);
   if (bg_type == PANEL_PIXMAP_BACKGROUND)
     {
       /* fill with given background pixmap */
-      gdk_draw_drawable (window, gc, background, 0, 0, 0, 0, w, h);
+      gdk_cairo_set_source_pixmap (cr, background, 0, 0);
+      cairo_paint (cr);
     }
-	
+
   /* draw color background */
   if (bg_type == PANEL_COLOR_BACKGROUND)
     {
-      gdk_gc_set_rgb_fg_color (gc,&color);
-      gdk_gc_set_fill (gc,GDK_SOLID);
-      gdk_draw_rectangle (window, gc, TRUE, 0, 0, w, h);
+      gdk_cairo_set_source_color (cr, &color);
+      cairo_fill (cr);
     }
 
-  /* draw icon at center */
-  gdk_draw_pixbuf (window, gc, applet->icon,
-		   0, 0, (w - applet->icon_width)/2, (h - applet->icon_height)/2,
-		   applet->icon_width, applet->icon_height,
-		   GDK_RGB_DITHER_NONE, 0, 0);
+  gdk_cairo_set_source_pixbuf (cr, applet->icon, 0, 0);
+  cairo_paint (cr);
+  cairo_destroy (cr);
 
   return TRUE;
 }
