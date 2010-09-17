@@ -70,7 +70,6 @@ vinagre_plugin_dialog_init (VinagrePluginDialog *dlg)
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Plugin Manager"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   g_signal_connect (dlg,
