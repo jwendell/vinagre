@@ -878,7 +878,7 @@ vinagre_vnc_tab_new (VinagreConnection *conn,
 void
 vinagre_vnc_tab_send_ctrlaltdel (VinagreVncTab *tab)
 {
-  guint keys[] = { GDK_Control_L, GDK_Alt_L, GDK_Delete };
+  guint keys[] = { GDK_KEY_Control_L, GDK_KEY_Alt_L, GDK_KEY_Delete };
 
   g_return_if_fail (VINAGRE_IS_VNC_TAB (tab));
 
