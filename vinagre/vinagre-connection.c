@@ -701,6 +701,8 @@ void
 vinagre_connection_fill_writer (VinagreConnection *conn,
 				xmlTextWriterPtr   writer)
 {
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
   VINAGRE_CONNECTION_GET_CLASS (conn)->impl_fill_writer (conn, writer);
 }
 
@@ -708,12 +710,16 @@ void
 vinagre_connection_parse_item (VinagreConnection *conn,
 			       xmlNode           *root)
 {
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
   VINAGRE_CONNECTION_GET_CLASS (conn)->impl_parse_item (conn, root);
 }
 
 gchar*
 vinagre_connection_get_best_name (VinagreConnection *conn)
 {
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
+
   return VINAGRE_CONNECTION_GET_CLASS (conn)->impl_get_best_name (conn);
 }
 
