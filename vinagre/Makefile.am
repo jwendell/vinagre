@@ -280,7 +280,7 @@ Vinagre_3_0_gir_NAMESPACE = Vinagre
 Vinagre_3_0_gir_VERSION = 3.0
 Vinagre_3_0_gir_PROGRAM = $(builddir)/vinagre
 Vinagre_3_0_gir_FILES = $(INST_H_FILES) $(NOINST_H_FILES) $(handwritten_sources)
-Vinagre_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0 Peas-1.0 PeasUI-1.0
+Vinagre_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0 Peas-1.0 PeasGtk-1.0
 
 girdir = $(datadir)/vinagre/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
