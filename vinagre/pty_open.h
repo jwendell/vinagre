@@ -50,7 +50,9 @@ enum {
 	PTY_LOGIN_TTY = 2
 };
 
-/* Start up the given binary (exact path, not interpreted at all) in a
+/**
+ * pty_open: (skip)
+ * Start up the given binary (exact path, not interpreted at all) in a
  * pseudo-terminal of its own, returning the descriptor for the master
  * side of the PTY pair, logging the session to the specified files, and
  * storing the child's PID in the given argument. */
@@ -58,7 +60,6 @@ int pty_open(pid_t *child, guint flags, char **env_add,
 	     const char *command, char **argv, const char *directory,
 	     int columns, int rows,
 	     int *stdin_fd, int *stdout_fd, int *stderr_fd);
-int pty_get_size(int master, int *columns, int *rows);
 
 G_END_DECLS
 

@@ -749,7 +749,7 @@ _pty_open_unix98(pid_t *child, guint flags, char **env_add,
 }
 
 /**
- * pty_open:
+ * pty_open: (skip)
  * @child: location to store the new process's ID
  * @env_add: a list of environment variables to add to the child's environment
  * @command: name of the binary to run
