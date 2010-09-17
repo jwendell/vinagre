@@ -203,7 +203,7 @@ vinagre_window_class_init (VinagreWindowClass *klass)
 }
 
 static void
-menu_item_select_cb (GtkItem       *proxy,
+menu_item_select_cb (GtkMenuItem   *proxy,
 		     VinagreWindow *window)
 {
   GtkAction *action;
@@ -222,7 +222,7 @@ menu_item_select_cb (GtkItem       *proxy,
 }
 
 static void
-menu_item_deselect_cb (GtkItem       *proxy,
+menu_item_deselect_cb (GtkMenuItem   *proxy,
                        VinagreWindow *window)
 {
   gtk_statusbar_pop (GTK_STATUSBAR (window->priv->statusbar),
