@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-04-28 01:37+0000\n"
-"PO-Revision-Date: 2010-04-26 14:54+0200\n"
+"POT-Creation-Date: 2010-09-20 12:32+0000\n"
+"PO-Revision-Date: 2010-09-20 14:39+0200\n"
 "Last-Translator: Roman Mátyus <romanmatyus@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,10 +37,8 @@ msgid "Remote Desktop Viewer"
 msgstr "Zobrazovač vzdialenej pracovnej plochy"
 
 #: ../data/vinagre.ui.h:1
-#, fuzzy
-#| msgid "_Show menu shortcuts"
 msgid "Allow _keyboard shortcuts"
-msgstr "Zobraziť kláve_sové skratky ponuky"
+msgstr "Povoliť _klávesové skratky"
 
 #: ../data/vinagre.ui.h:2
 msgid "Authentication is required"
@@ -82,7 +80,7 @@ msgstr "Rodičovský priečinok"
 
 #: ../data/vinagre.ui.h:11
 msgid "Preferences"
-msgstr "Predvoľby"
+msgstr "Nastavenia"
 
 #. This is a tooltip in preferences dialog
 #: ../data/vinagre.ui.h:13
@@ -90,6 +88,8 @@ msgid ""
 "This option enables menu accelerators and keyboard shortcuts. For more info "
 "on why you may want to disable them, check the documentation."
 msgstr ""
+"Táto voľba povolí akcelerátory a klávesové skratky ponuky. Viac informácií o "
+"tom, prečo by ste ich mohli chcieť zakázať, sa dozviete v dokumentácii."
 
 #: ../data/vinagre.ui.h:14
 msgid "Which machine do you want to connect to?"
@@ -159,7 +159,7 @@ msgid ""
 msgstr ""
 "Aby ste zakázali klávesové skratky ponuky, nastavte na \"false\". Aby ste "
 "ich povolili, nastavte na \"true\". Všimnite si, že ak sú klávesy povolené, "
-"budú zachytené ponukou, a nebudú odoslané vzdialenému hostiteľovi."
+"budú zachytené ponukou a nebudú odoslané vzdialenému hostiteľovi."
 
 #: ../data/vinagre.schemas.in.in.h:5
 msgid ""
@@ -174,6 +174,8 @@ msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
 msgstr ""
+"Aby sa vždy spustil program očakávajúci spiatočné spojenia, nastavte \"true"
+"\"."
 
 #: ../data/vinagre.schemas.in.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
@@ -209,10 +211,8 @@ msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Či máme zobraziť akcelerátory (klávesové skratky) ponúk"
 
 #: ../data/vinagre.schemas.in.in.h:13
-#, fuzzy
-#| msgid "Whether we should leave other clients connected"
 msgid "Whether we should start the program listening for reverse connections"
-msgstr "Či má nechať ostatných klientov pripojených"
+msgstr "Či máme spustiť program očakávajúci spiatočné spojenia"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -234,10 +234,8 @@ msgid "Access Unix/Linux terminals"
 msgstr "Prístup k unixovému/linuxovému terminálu"
 
 #: ../plugins/ssh/vinagre-ssh-plugin.c:132
-#, fuzzy
-#| msgid "Options"
 msgid "SSH Options"
-msgstr "Možnosti"
+msgstr "Možnosti SSH"
 
 #. Translators: This is the tooltip for the username field in a SSH connection
 #: ../plugins/ssh/vinagre-ssh-plugin.c:149
@@ -245,6 +243,8 @@ msgid ""
 "Optional. If blank, your username will be used. Also, it can be supplied in "
 "the Machine field above, in the form username@hostname."
 msgstr ""
+"Voliteľné. Ak je prázdne, použije sa vaše používateľské meno.  Taktiež môže "
+"byť zadané vyššie v poli Stroj, vo formáte používateľ@hostiteľ."
 
 #: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
 msgid "Port:"
@@ -261,14 +261,13 @@ msgstr "Podpora SSH"
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr ""
-"Chybná hodnota pre prepínač 'zdieľané': %d. Malo by to byť 0 alebo 1. "
-"Ignoruje sa."
+"Chybná hodnota pre príznak 'shared' (zdieľané): %d. Malo by to byť 0 alebo "
+"1. Ignoruje sa."
 
 #. Translators: "Reverse" here is an adjective, not a verb.
 #: ../plugins/vnc/vinagre-vnc-plugin.c:85
-#, fuzzy
 msgid "_Reverse Connections..."
-msgstr "Ob_rátiť spojenia..."
+msgstr "_Spiatočné pripojenia..."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:87
 msgid "Configure incoming VNC connections"
@@ -305,13 +304,11 @@ msgstr "Súbor sa nepodarilo analyzovať."
 
 #. Translators: Do not translate "connection". It's the name of a group in the .vnc (.ini like) file.
 #: ../plugins/vnc/vinagre-vnc-plugin.c:279
-#, fuzzy
 msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgstr "Tento súbor nie je VNC súborom: Chýba skupina \"connection\"."
 
 #. Translators: Do not translate "host". It's the name of a key in the .vnc (.ini like) file.
 #: ../plugins/vnc/vinagre-vnc-plugin.c:286
-#, fuzzy
 msgid "The file is not a VNC one: Missing the key \"host\"."
 msgstr "Tento súbor nie je VNC súborom: Chýba kľúč \"host\"."
 
@@ -321,69 +318,76 @@ msgstr "Možnosti VNC"
 
 #. View only check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:391
-#: ../plugins/vnc/vinagre-vnc-tab.c:632
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "_View only"
 msgstr "Iba _pozeranie"
 
 #. Scaling check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:399
 msgid "_Scaling"
-msgstr "_Zmena veľkosti"
+msgstr "_Zmena rozmerov"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:415
 msgid "_Keep aspect ratio"
-msgstr ""
+msgstr "_Zachovať pomer strán"
 
 #. JPEG Compression check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:425
 msgid "_Use JPEG Compression"
-msgstr ""
+msgstr "Po_užiť kompresiu JPEG"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:426
 msgid "This might not work on all VNC servers"
-msgstr ""
+msgstr "Toto na všetkých VNC servroch nemusí fungovať"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:435
 msgid "_Depth Color:"
-msgstr ""
+msgstr "_Farebná hĺbka"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:440
 msgid "Use Server Settings"
-msgstr ""
+msgstr "Použiť nastavenia servera"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:441
 msgid "True Color (24 bits)"
-msgstr ""
+msgstr "True Color (24 bitov)"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:442
 msgid "High Color (16 bits)"
-msgstr ""
+msgstr "High Color (16 bitov)"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:443
 msgid "Low Color (8 bits)"
-msgstr ""
+msgstr "Low Color (8 bitov)"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:444
 msgid "Ultra Low Color (3 bits)"
-msgstr ""
+msgstr "Ultra Low Color (3 bity)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:457
 msgid "Use h_ost"
-msgstr ""
+msgstr "P_oužiť hostiteľa"
 
-#. Translators: This is the tooltip of the SSH tunneling entry
-#: ../plugins/vnc/vinagre-vnc-plugin.c:465
+#: ../plugins/vnc/vinagre-vnc-plugin.c:466
 msgid "hostname or user@hostname"
-msgstr ""
+msgstr "Názov hostiteľa alebo používateľ@hostiteľ"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:467
+msgid "Supply an alternative port using colon"
+msgstr "Zadajte alternatívny port pomocou dvojbodky"
+
+#: ../plugins/vnc/vinagre-vnc-plugin.c:468
+msgid "For instance: joe@domain.com:5022"
+msgstr "Napríklad: joe@domain.com:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:469
+#: ../plugins/vnc/vinagre-vnc-plugin.c:474
 msgid "as a SSH tunnel"
-msgstr ""
+msgstr "ako SSH tunel"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:504
+#: ../plugins/vnc/vinagre-vnc-plugin.c:509
 msgid "VNC Files"
 msgstr "Súbory VNC"
 
@@ -397,13 +401,11 @@ msgstr "Rozmery:"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:304
 msgid "Error creating the SSH tunnel"
-msgstr ""
+msgstr "Chyba pri vytváraní SSH tunela"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
-#, fuzzy
-#| msgid "Unknown error"
 msgid "Unknown reason"
-msgstr "Neznáma chyba"
+msgstr "Neznámy dôvod"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:315
 msgid "Error connecting to host."
@@ -413,6 +415,7 @@ msgstr "Chyba pripájania sa k hostiteľovi."
 #. Translators: %s is a host name or IP address; %u is a code error (number). Also, the right sentence would be ... method for host...
 #: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, fuzzy, c-format
+#| msgid "Authentication method for host %s is unsupported. (%u)"
 msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "Metóda overenia totožnosti k hostiteľovi %s nie je podporovaná. (%u)"
 
@@ -420,112 +423,116 @@ msgstr "Metóda overenia totožnosti k hostiteľovi %s nie je podporovaná. (%u)
 msgid "Authentication unsupported"
 msgstr "Overenie totožnosti nie je podporované"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:531 ../plugins/vnc/vinagre-vnc-tab.c:548
+#: ../plugins/vnc/vinagre-vnc-tab.c:532 ../plugins/vnc/vinagre-vnc-tab.c:549
 msgid "Authentication error"
 msgstr "Chyba overenia totožnosti"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:532
+#: ../plugins/vnc/vinagre-vnc-tab.c:533
 msgid "A username is required in order to access this machine."
 msgstr "Je vyžadované používateľské meno za účelom prístupu k tomuto stroju."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:549
+#: ../plugins/vnc/vinagre-vnc-tab.c:550
 msgid "A password is required in order to access this machine."
 msgstr "Je vyžadované heslo za účelom prístupu k tomuto stroju."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:603
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "S_caling"
 msgstr "_Zmena rozmerov"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:605
 msgid "Fits the remote screen into the current window size"
 msgstr "Prispôsobí vzdialenú obrazovku aktuálnej veľkosti okna"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:617
-msgid "_Keep Aspect Ratio"
-msgstr ""
-
 #: ../plugins/vnc/vinagre-vnc-tab.c:618
-msgid "Keeps the screen aspect ratio when using scaling"
-msgstr ""
+msgid "_Keep Aspect Ratio"
+msgstr "_Zachovať pomer strán"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:633
+#: ../plugins/vnc/vinagre-vnc-tab.c:619
+msgid "Keeps the screen aspect ratio when using scaling"
+msgstr "Zachovať pomer strán obrazovky pri použití zmeny rozmerov"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:634
 msgid "Does not send mouse and keyboard events"
 msgstr "Neodosiela udalosti klávesnice a myši"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:646
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "_Original size"
 msgstr "Pôv_odná velkosť"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:647
+#: ../plugins/vnc/vinagre-vnc-tab.c:648
 msgid "Adjusts the window to the remote desktop's size"
-msgstr "Zmení okno veľkosti vzdialenej pracovnej plochy"
-
-#: ../plugins/vnc/vinagre-vnc-tab.c:660
-msgid "_Refresh Screen"
-msgstr ""
+msgstr "Zmení okno do veľkosti vzdialenej pracovnej plochy"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:661
+msgid "_Refresh Screen"
+msgstr "Obnoviť ob_razovku"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:662
 msgid "Requests an update of the screen"
-msgstr ""
+msgstr "Vyžiada si obnovenie obrazovky"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:683 ../plugins/vnc/vinagre-vnc-tab.c:755
-#: ../plugins/vnc/vinagre-vnc-tab.c:757
+#: ../plugins/vnc/vinagre-vnc-tab.c:684 ../plugins/vnc/vinagre-vnc-tab.c:756
+#: ../plugins/vnc/vinagre-vnc-tab.c:758
 msgid "Send Ctrl-Alt-Del"
 msgstr "Odoslať Ctrl-Alt-Del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:684
+#: ../plugins/vnc/vinagre-vnc-tab.c:685
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Odošle Ctrl+Alt+Del vzdialenému stroju"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:736 ../plugins/vnc/vinagre-vnc-tab.c:737
+#: ../plugins/vnc/vinagre-vnc-tab.c:737 ../plugins/vnc/vinagre-vnc-tab.c:738
 msgid "Scaling"
-msgstr "Zmena veľkosti"
+msgstr "Zmena rozmerov"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:746 ../plugins/vnc/vinagre-vnc-tab.c:747
+#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
 msgid "Read only"
 msgstr "Len na čítanie"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:919
+#: ../plugins/vnc/vinagre-vnc-tab.c:920
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
 "Read the README file (shipped with Vinagre) in order to know how to enable "
 "this feature."
 msgstr ""
-"Táto inštalácia nepodporuje zmenu veľkosti.\n"
+"Táto inštalácia nepodporuje zmenu rozmerov.\n"
 "\n"
 "Prečítajte si súbor README (distribuovaný s Vinagre), aby ste vedeli, ako "
 "túto funkciu povoliť."
 
-#: ../plugins/vnc/vinagre-vnc-tunnel.c:77
+#: ../plugins/vnc/vinagre-vnc-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
-msgstr ""
+msgstr "Nie je možné nájsť voľný TCP port"
 
 #: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
 msgid "VNC support"
 msgstr "Podpora VNC"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:90
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:94
 msgid "IPv4:"
-msgstr ""
+msgstr "IPv4:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:102
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:106
 msgid ""
 "\n"
 "\n"
 "IPv6:"
 msgstr ""
+"\n"
+"\n"
+"IPv6:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:161
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:165
 #, c-format
 msgid "On the port %d"
-msgstr ""
+msgstr "Na porte %d"
 
+# ja by som to preložil takto
 #: ../plugins/vnc/vinagre-vnc-listener.c:168
 msgid "Incoming VNC connection arrived but there is no active window"
-msgstr ""
+msgstr "Prichádzajúce VNC spojenie dorazilo ale žiadne okno nie je aktívne"
 
 #. vim: set ts=8:
 #: ../plugins/vnc/vnc.ui.h:1
@@ -534,34 +541,31 @@ msgid ""
 "firewall. The remote side is supposed to initiate the connection with you. "
 "For further information, checkout the help."
 msgstr ""
+"Aktivovaním spiatočných pripojení umožníte prístup na stroje, ktoré sú za "
+"firewallom. Vzdialená strana očakáva inicializáciu spojenia s vami. Ďalšie "
+"informácie nájdete v pomocníkovi."
 
 #: ../plugins/vnc/vnc.ui.h:2
-#, fuzzy
-#| msgid "Connection"
 msgid "Connectivity"
-msgstr "Pripojenie"
+msgstr "Pripojiteľnosť"
 
 #: ../plugins/vnc/vnc.ui.h:3
-#, fuzzy
-#| msgid "_Reverse Connections..."
 msgid "Reverse Connections"
-msgstr "_Opakovať pripojenia..."
+msgstr "Opakovať pripojenia..."
 
 #: ../plugins/vnc/vnc.ui.h:4
 msgid "This machine is reachable through the following IP address(es):"
-msgstr ""
+msgstr "Tento stroj je dosiahnuteľný pomocou nasledujúcej adresy (adries):"
 
-#: ../plugins/vnc/vnc.ui.h:5
-#, fuzzy
-#| msgid "Enabled"
-msgid "_Always Enabled"
-msgstr "Povolený"
-
+# https://bugzilla.gnome.org/show_bug.cgi?id=618664
+#. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Machine->Reverse connections.
 #: ../plugins/vnc/vnc.ui.h:6
-#, fuzzy
-#| msgid "_Reverse Connections..."
+msgid "_Always Enabled"
+msgstr "_Vždy povolené"
+
+#: ../plugins/vnc/vnc.ui.h:7
 msgid "_Enable Reverse Connections"
-msgstr "_Opakovať pripojenia..."
+msgstr "Povoliť spiatočné _pripojenia"
 
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
 msgid "A menu to quickly access remote machines"
@@ -569,7 +573,7 @@ msgstr "Ponuka na rýchly prístup k vzdialeným strojom"
 
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
 msgid "Vinagre Applet Factory"
-msgstr "Továreň zásuvného modulu Vinagre"
+msgstr "Vytváracie rozhranie apletu Vinagre"
 
 #: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
 msgid "Could not run vinagre:"
@@ -583,7 +587,7 @@ msgstr "Otvoriť zobrazovač vzdialenej pracovnej plochy"
 msgid "Access your bookmarks"
 msgstr "Prístup k vašim záložkám"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:522
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:525
 #: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
@@ -734,32 +738,25 @@ msgid "New Folder"
 msgstr "Nový priečinok"
 
 #: ../vinagre/vinagre-cache-prefs.c:53
-#, fuzzy, c-format
-#| msgid "Error while saving bookmarks: %s"
+#, c-format
 msgid "Error while saving preferences: %s"
-msgstr "Chyba pri ukladaní záložiek: %s"
+msgstr "Chyba pri ukladaní predvolieb: %s"
 
 #: ../vinagre/vinagre-commands.c:121
 msgid "Choose the file"
 msgstr "Vybrať súbor"
 
 #: ../vinagre/vinagre-commands.c:149
-#, fuzzy
-#| msgid "There are none supported files"
 msgid "There are no supported files"
-msgstr "Žiadne podporované súbory"
+msgstr "Neexistujú žiadne podporované súbory"
 
 #: ../vinagre/vinagre-commands.c:150
-#, fuzzy
-#| msgid ""
-#| "None of the active plugins offer a supported file to be open. Activate "
-#| "some plugins and try again."
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
 msgstr ""
-"Žiadny aktívny zásuvný modul neponúka možnosť otvorenia súboru. Aktivujte "
-"nejaké zásuvné moduly a skúste to znovu."
+"Žiadny aktívny zásuvný modul nepodporuje túto akciu. Aktivujte nejaké "
+"zásuvné moduly a skúste to znovu"
 
 #: ../vinagre/vinagre-commands.c:184
 msgid "The following file could not be opened:"
@@ -773,8 +770,9 @@ msgstr[2] "Nasledujúce súbory sa nepodarilo otvoriť:"
 #: ../vinagre/vinagre-connect.c:88 ../vinagre/vinagre-connect.c:335
 #: ../vinagre/vinagre-connect.c:447
 #, fuzzy
+#| msgid "Could not get the active protocol from the protocol list."
 msgid "Could not get the active protocol in the protocol list."
-msgstr "Nepodarilo sa získať aktívny protokol v zozname protokolov."
+msgstr "Nepodarilo sa získať aktívny protokol zo zoznamu protokolov."
 
 #: ../vinagre/vinagre-connect.c:316
 #, c-format
@@ -785,11 +783,11 @@ msgstr "Chyba pri ukladaní súboru histórie: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Vybrať vzdialenú pracovnú plochu"
 
-#: ../vinagre/vinagre-connection.c:630
+#: ../vinagre/vinagre-connection.c:633
 msgid "Could not open the file."
 msgstr "Súbor sa nepodarilo otvoriť."
 
-#: ../vinagre/vinagre-connection.c:654
+#: ../vinagre/vinagre-connection.c:657
 msgid "The file was not recognized by any of the plugins."
 msgstr "Súbor nebol rozpoznaný žiadnym zásuvným modulom."
 
@@ -826,10 +824,9 @@ msgid "Remove current selected connection from bookmarks"
 msgstr "Odstrániť práve zvolené pripojenie zo záložiek"
 
 #: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
-#, fuzzy, c-format
-#| msgid "Could not merge vinagre-ui.xml: %s"
+#, c-format
 msgid "Could not merge UI XML file: %s"
-msgstr "Nedá sa zlúčiť vinagre-ui.xml: %s"
+msgstr "Nepodarilo sa zlúčiť súbor UI XML: %s"
 
 #: ../vinagre/vinagre-fav.c:754
 msgid "Invalid operation"
@@ -837,13 +834,11 @@ msgstr "Neplatná operácia"
 
 #: ../vinagre/vinagre-fav.c:755
 msgid "Data received from drag&drop operation is invalid."
-msgstr "Dáta prijaté pomocou operácie chyť a pusť sú neplatné."
+msgstr "Dáta prijaté pomocou operácie ťahaj a pusť sú neplatné."
 
 #: ../vinagre/vinagre-fav.c:859
-#, fuzzy
-#| msgid "Side _Panel"
 msgid "Hide panel"
-msgstr "Bočný _panel"
+msgstr "Skryť panel"
 
 #: ../vinagre/vinagre-fav.c:1044
 msgid "Hosts nearby"
@@ -895,10 +890,10 @@ msgstr ""
 #: ../vinagre/vinagre-mdns.c:159
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
-msgstr "Nepodarilo sa previesť názov hostiteľa avahi: %s\n"
+msgstr "Nepodarilo sa previesť názov hostiteľa avahi na adresu: %s\n"
 
 #: ../vinagre/vinagre-mdns.c:217
-#, fuzzy, c-format
+#, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "Zásuvný modul %s je už registrovaný ako prehliadač služby %s."
 
@@ -909,9 +904,9 @@ msgstr "Zlyhalo pridanie prehliadača mDNS pre službu %s."
 
 #. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
 #: ../vinagre/vinagre-mdns.c:243
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to browse for hosts: %s\n"
-msgstr "Nepodarilo sa prehľadať zoznam hostiteľov: %s\n"
+msgstr "Zlyhalo prehľadávanie hostiteľov: %s\n"
 
 #: ../vinagre/vinagre-mdns.c:316
 #, c-format
@@ -930,7 +925,8 @@ msgstr "Pripojenie zatvorené"
 
 #. Translators: %s is a host name or IP address.
 #: ../vinagre/vinagre-notebook.c:482
-#, c-format
+#, fuzzy, c-format
+#| msgid "Authentication for host %s has failed"
 msgid "Authentication to host %s has failed"
 msgstr "Overenie totožnosti pri prístupe k hostiteľovi %s zlyhalo"
 
@@ -956,7 +952,6 @@ msgstr "Zásuvný modul"
 
 #. Translators: "Enabled" is the title of a column in the plugins treeview. This column shows a checkbox, where the plugin can be [de]activated. If it's activated, its status is "enabled" and the checkbox is checked.
 #: ../vinagre/vinagre-plugin-manager.c:47
-#, fuzzy
 msgid "Enabled"
 msgstr "Povoliť"
 
@@ -990,45 +985,43 @@ msgstr "Nepodarilo sa inicializovať správcu predvolieb."
 
 #: ../vinagre/vinagre-ssh.c:106
 msgid "Timed out when logging into SSH host"
-msgstr ""
+msgstr "Vypršal čas pri prihlasovaní k SSH hostiteľovi"
 
 #: ../vinagre/vinagre-ssh.c:180
 msgid "Unable to spawn ssh program"
-msgstr ""
+msgstr "Nedá sa spustiť program ssh"
 
 #: ../vinagre/vinagre-ssh.c:197
 #, c-format
 msgid "Unable to spawn ssh program: %s"
-msgstr ""
+msgstr "Nedá sa spustiť program ssh: %s"
 
 #: ../vinagre/vinagre-ssh.c:352
 msgid "Timed out when logging in"
-msgstr ""
+msgstr "Vypršal čas pri prihlasovaní"
 
-#: ../vinagre/vinagre-ssh.c:375 ../vinagre/vinagre-ssh.c:529
-#: ../vinagre/vinagre-ssh.c:612
+#: ../vinagre/vinagre-ssh.c:382 ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:621
 msgid "Permission denied"
-msgstr ""
+msgstr "Prístup zamietnutý"
 
-#: ../vinagre/vinagre-ssh.c:440
+#: ../vinagre/vinagre-ssh.c:448
 msgid "Password dialog canceled"
-msgstr ""
+msgstr "Okno s heslom bolo zrušené"
 
-#: ../vinagre/vinagre-ssh.c:463
-#, fuzzy
-#| msgid "Could not run vinagre:"
+#: ../vinagre/vinagre-ssh.c:471
 msgid "Could not send password"
-msgstr "Nedá sa spustiť vinagre:"
+msgstr "Nepodarilo sa odoslať heslo"
 
-#: ../vinagre/vinagre-ssh.c:471
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Log In Anyway"
-msgstr ""
+msgstr "Prihlásiť sa nepriek tomu"
 
-#: ../vinagre/vinagre-ssh.c:471
+#: ../vinagre/vinagre-ssh.c:479
 msgid "Cancel Login"
-msgstr ""
+msgstr "Zrušiť prihlásenie"
 
-#: ../vinagre/vinagre-ssh.c:480
+#: ../vinagre/vinagre-ssh.c:488
 #, c-format
 msgid ""
 "The identity of the remote computer (%s) is unknown.\n"
@@ -1037,44 +1030,44 @@ msgid ""
 "The identity sent by the remote computer is %s. If you want to be absolutely "
 "sure it is safe to continue, contact the system administrator."
 msgstr ""
+"Totožnosť vzdialeného počítača (%s) je neznáma.\n"
+"Toto sa stáva ak sa prihlásite do počítača prvýkrát.\n"
+"\n"
+"Identita odoslaná vzdialeným počítačom je %s. Ak si chcete byť absolútne "
+"istý, či je bezpečné pokračovať, kontaktujte systémového administrátora."
 
-#: ../vinagre/vinagre-ssh.c:498
-#, fuzzy
-#| msgid "Migration cancelled"
+#: ../vinagre/vinagre-ssh.c:506
 msgid "Login dialog canceled"
-msgstr "Migrácia zrušená"
+msgstr "Prihlasovacie okno bolo zrušené"
 
-#: ../vinagre/vinagre-ssh.c:519
+#: ../vinagre/vinagre-ssh.c:527
 msgid "Can't send host identity confirmation"
-msgstr ""
+msgstr "Nedá sa odoslať potvrdenie totožnosti hostiteľa"
 
-#: ../vinagre/vinagre-ssh.c:554 ../vinagre/vinagre-tab.c:732
+#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:732
 msgid "Error saving the credentials on the keyring."
-msgstr "Chyba pri ukladaná prihlasovacích údajov do kľúčenky."
+msgstr "Chyba pri ukladaní prihlasovacích údajov do zväzku kľúčov."
 
-#: ../vinagre/vinagre-ssh.c:619
+#: ../vinagre/vinagre-ssh.c:628
 msgid "Hostname not known"
-msgstr ""
+msgstr "Neznámy názov hostiteľa"
 
-#: ../vinagre/vinagre-ssh.c:626
+# http://mail.gnome.org/archives/gnome-sk-list/2010-May/msg00018.html
+#: ../vinagre/vinagre-ssh.c:635
 msgid "No route to host"
-msgstr ""
+msgstr "Cesta k hostiteľovi nenájdená"
 
-#: ../vinagre/vinagre-ssh.c:633
-#, fuzzy
-#| msgid "Connection closed"
+#: ../vinagre/vinagre-ssh.c:642
 msgid "Connection refused by server"
-msgstr "Pripojenie bolo ukončené"
+msgstr "Server odmietol pripojenie"
 
-#: ../vinagre/vinagre-ssh.c:640
-#, fuzzy
-#| msgid "Authentication failed"
+#: ../vinagre/vinagre-ssh.c:649
 msgid "Host key verification failed"
-msgstr "Overenie prístupu zlyhalo"
+msgstr "Overenie kľúča hostiteľa zlyhalo"
 
-#: ../vinagre/vinagre-ssh.c:677
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Unable to find a valid SSH program"
-msgstr ""
+msgstr "Nie je možné nájsť platný SSH program"
 
 #: ../vinagre/vinagre-tab.c:346
 msgid "Leave fullscreen"
@@ -1094,7 +1087,7 @@ msgstr "Uložiť snímku obrazovky"
 
 #. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
 #: ../vinagre/vinagre-tab.c:835
-#, fuzzy, c-format
+#, c-format
 msgid "Screenshot of %s"
 msgstr "Snímka obrazovky %s"
 
@@ -1113,13 +1106,13 @@ msgid "Impossible to create the connection: %s"
 msgstr "Nemožné vytvoriť pripojenie: %s"
 
 #: ../vinagre/vinagre-tube-handler.c:325
-#, fuzzy, c-format
+#, c-format
 msgid "Impossible to accept the stream tube: %s"
 msgstr "Nemožné akceptovať stream tube: %s"
 
 #. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
 #: ../vinagre/vinagre-tube-handler.c:463
-#, fuzzy, c-format
+#, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Nemožné získať názov kontaktu: %s"
 
@@ -1129,8 +1122,7 @@ msgid "Impossible to get the avatar: %s"
 msgstr "Nemožné získať avatara: %s"
 
 #: ../vinagre/vinagre-tube-handler.c:521
-#, fuzzy, c-format
-#| msgid "%s wants to share his desktop with you."
+#, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "%s chce s vami zdieľať svoju pracovnú plochu."
 
@@ -1169,19 +1161,15 @@ msgstr "Ukončiť program"
 
 #: ../vinagre/vinagre-ui.h:49
 msgid "Edit the application preferences"
-msgstr "Upraviť predvoľby aplikácie"
+msgstr "Upraviť nastavenia aplikácie"
 
 #: ../vinagre/vinagre-ui.h:50
-#, fuzzy
-#| msgid "Plugin"
 msgid "_Plugins"
-msgstr "Zásuvný modul"
+msgstr "_Zásuvné moduly"
 
 #: ../vinagre/vinagre-ui.h:51
-#, fuzzy
-#| msgid "Active plugins"
 msgid "Select plugins"
-msgstr "Aktívne zásuvné moduly"
+msgstr "Vybrať zásuvné moduly"
 
 #. Help menu
 #: ../vinagre/vinagre-ui.h:54
@@ -1198,11 +1186,11 @@ msgstr "O tejto aplikácií"
 
 #: ../vinagre/vinagre-ui.h:62
 msgid "_Toolbar"
-msgstr "Lišta nás_trojov"
+msgstr "Panel nás_trojov"
 
 #: ../vinagre/vinagre-ui.h:63
 msgid "Show or hide the toolbar"
-msgstr "Zobraziť alebo skryť lištu nástrojov"
+msgstr "Zobraziť alebo skryť panel nástrojov"
 
 #: ../vinagre/vinagre-ui.h:66
 msgid "_Statusbar"
@@ -1293,10 +1281,10 @@ msgid ""
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Tento program je slobodný softvér; môžete ho šíriť a modifikovať podľa "
-"ustanovení GNU General Public License, ako ho vydala Free Software "
-"Foundation; a to buď verzie 2 tejto licence alebo (podla vlastného uváženia) "
-"ktorejkoľvek neskoršej verzie."
+"Vinagre je slobodný softvér; môžete ho ďalej šíriť a/alebo upravovať podľa "
+"ustanovení Všeobecnej verejnej licencie GNU tak, ako bola vydaná "
+"organizáciou Free Software Foundation, a to buď verzie 2 tejto licencie, "
+"alebo (podľa vášho uváženia) ktorejkoľvek neskoršej verzie."
 
 #: ../vinagre/vinagre-utils.c:499
 msgid ""
@@ -1306,17 +1294,17 @@ msgid ""
 "details."
 msgstr ""
 "Program Vinagre je rozširovaný v nádeji, že bude užitočný, avšak BEZ "
-"AKEJKOĽVEK ZÁRUKY; neposkytujú sa ani odvodené záruky PREDAJNOSTI alebo "
-"VHODNOSTI PRE URČITÝ ÚČEL. Ďalšie podrobnosti hľadejte v GNU General Public "
-"License."
+"AKEJKOĽVEK ZÁRUKY. Neposkytujú sa ani odvodené záruky OBCHODOVATEĽNOSTI "
+"alebo VHODNOSTI PRE URČITÝ ÚČEL. Ďalšie podrobnosti hľadajte vo Všeobecnej "
+"verejnej licencii GNU."
 
 #: ../vinagre/vinagre-utils.c:503
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
-"Kópiu GNU General Public License ste mali obdržať spolu s programom. Ak sa "
-"tak nestalo, navštívte <http://www.gnu.org/licenses/>."
+"Kópiu Všeobecnej verejnej licencie GNU ste mali obdržať spolu s programom. "
+"Ak sa tak nestalo, navštívte <http://www.gnu.org/licenses/>."
 
 #: ../vinagre/vinagre-utils.c:525
 msgid "translator-credits"
@@ -1324,14 +1312,13 @@ msgstr "Roman Mátyus <romanmatyus@gmail.com>"
 
 #: ../vinagre/vinagre-utils.c:528
 msgid "Vinagre Website"
-msgstr "Webová stránka Vinagre"
+msgstr "Webové stránky Vinagre"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:653
-#, fuzzy, c-format
-#| msgid "Authentication is required"
+#: ../vinagre/vinagre-utils.c:654
+#, c-format
 msgid "%s authentication is required"
-msgstr "Je vyžadované overenie"
+msgstr "je vyžadované %s overenie totožnosti"
 
 #: ../vinagre/vinagre-window.c:428
 msgid "_Recent connections"
@@ -1345,7 +1332,7 @@ msgstr "Otvoriť %s:%d"
 
 #: ../vinagre/vinagre-window.c:721
 msgid "About menu accelerators and keyboard shortcuts"
-msgstr ""
+msgstr "O ponuke akcelerátorov a klávesových skratiek"
 
 #: ../vinagre/vinagre-window.c:723
 msgid ""
@@ -1358,9 +1345,45 @@ msgid ""
 "\n"
 "This message will appear only once."
 msgstr ""
+"Vinagre prichádza predvolene so zakázanými akcelerátormi a klávesovými "
+"skratkami ponuky. Dôvodom je vyhnutie sa zachyteniu kláves programom a "
+"umožnenie odoslania vzdialenému stroju.\n"
+"\n"
+"Toto správanie môžete zmeniť cez okno nastavení. Pre viac informácií, "
+"pozrite dokumentáciu.\n"
+"\n"
+"Táto správa sa objaví iba raz."
 
 #: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
-#, fuzzy, c-format
-#| msgid "Error while saving history file: %s"
+#, c-format
 msgid "Error while creating the file %s: %s"
-msgstr "Chyba pri ukladaní súboru s históriou: %s"
+msgstr "Chyba pri vytváraní súboru %s: %s"
+
+#~ msgid "RDP"
+#~ msgstr "RDP"
+
+#~ msgid "RDP support"
+#~ msgstr "Podpora RDP"
+
+#~ msgid "Access MS Windows machines"
+#~ msgstr "Prístup ku strojom MS Windows"
+
+#~ msgid "RDP Options"
+#~ msgstr "Možnosti RDP"
+
+#~ msgid "Error while executing rdesktop"
+#~ msgstr "Chyba pri spúšťaní rdesktop"
+
+#~ msgid "_Send Ctrl-Alt-Del"
+#~ msgstr "Odo_slať Ctrl-Alt-Del"
+
+#~ msgid "Allows reverse VNC connections"
+#~ msgstr "Povolí spiatočné VNC spojenia"
+
+#~ msgid "Reverse VNC"
+#~ msgstr "Spiatočné VNC"
+
+#, fuzzy
+#~| msgid "Error saving recent connection."
+#~ msgid "Error activating reverse connections"
+#~ msgstr "Chyba pri ukladaní nedávneho pripojenia."
