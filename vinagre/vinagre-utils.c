@@ -231,37 +231,6 @@ vinagre_utils_handle_debug (void)
   initialized = TRUE;
 }
 
-/* Make url in about dialog clickable */
-static void
-vinagre_about_dialog_handle_url (GtkAboutDialog *about,
-				 const char     *link,
-				 gpointer        data)
-{
-  GError    *error = NULL;
-  gchar     *address;
-  GdkScreen *screen;
-
-  if (g_strstr_len (link, strlen (link), "@"))
-    address = g_strdup_printf ("mailto:%s", link);
-  else
-    address = g_strdup (link);
-
-  screen = GTK_IS_WINDOW (data) ? gtk_window_get_screen (GTK_WINDOW (data)) : NULL;
-
-  gtk_show_uri (screen,
-		address,
-		GDK_CURRENT_TIME,
-		&error);
-
-  if (error != NULL) 
-    {
-      vinagre_utils_show_error (NULL, error->message, GTK_IS_WINDOW (data) ? GTK_WINDOW (data) : NULL);
-      g_error_free (error);
-    }
-
-  g_free (address);
-}
-
 void
 vinagre_utils_help_contents (GtkWindow *window, const gchar *section)
 {
@@ -325,11 +294,6 @@ vinagre_utils_help_about (GtkWindow *window)
 
   license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]),
 				     _(license[2]), NULL);
-
-  /* Make URLs and email clickable in about dialog */
-  gtk_about_dialog_set_url_hook (vinagre_about_dialog_handle_url, window, NULL);
-  gtk_about_dialog_set_email_hook (vinagre_about_dialog_handle_url, window, NULL);
-
 
   gtk_show_about_dialog (GTK_IS_WINDOW (window)?window:NULL,
 			 "authors", authors,
