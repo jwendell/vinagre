@@ -6,19 +6,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
-"Report-Msgid-Bugs-To: "
-"http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-06-29 18:52+0000\n"
-"PO-Revision-Date: 2010-07-14 21:08+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=vinagre&component=general\n"
+"POT-Creation-Date: 2010-09-23 19:56+0000\n"
+"PO-Revision-Date: 2010-09-24 14:14+0000\n"
 "Last-Translator: Lucian Adrian Grijincu <lucian.grijincu@gmail.com>\n"
-"Language-Team: Romanian Gnome Team <gnomero-list@lists.sourceforge.net>\n"
-"Language: ro\n"
+"Language-Team: Romanian GNOME Team <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2);;\n"
-"X-Generator: Virtaal 0.6.1\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
+"== 0) && (n != 0))) ? 2: 1));\n"
+"X-Launchpad-Export-Date: 2010-09-24 14:16+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"Language: ro\n"
 
 #: ../data/GNOME_VinagreApplet.xml.h:1 ../vinagre/vinagre-plugin-manager.c:496
 msgid "_About"
@@ -34,21 +35,21 @@ msgstr "Accesați desktopuri la distanță"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:444 ../vinagre/vinagre-applet.c:496
+#: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
 #: ../vinagre/vinagre-main.c:201
 msgid "Remote Desktop Viewer"
 msgstr "Vizualizare desktop la distanță"
 
 #: ../data/vinagre.ui.h:1
 msgid "Allow _keyboard shortcuts"
-msgstr "Arată _scurtăturile de tastatură"
+msgstr "Permite _scurtăturile de tastatură"
 
 #: ../data/vinagre.ui.h:2
 msgid "Authentication is required"
 msgstr "Se cere autentificare"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:855
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:851
 msgid "Bookmarks"
 msgstr "Favorite"
 
@@ -64,9 +65,8 @@ msgstr "Opțiuni conexiune"
 msgid "Folder"
 msgstr "Dosar"
 
-#: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
-#: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../vinagre/vinagre-fav.c:406
+#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
+#: ../plugins/vnc/vinagre-vnc-tab.c:148 ../vinagre/vinagre-fav.c:404
 msgid "Host:"
 msgstr "Gazdă:"
 
@@ -134,8 +134,7 @@ msgstr "_Protocol:"
 msgid "_Remember this credential"
 msgstr "Memo_rează această certificare"
 
-#: ../data/vinagre.ui.h:25 ../plugins/rdp/vinagre-rdp-plugin.c:133
-#: ../plugins/ssh/vinagre-ssh-plugin.c:144
+#: ../data/vinagre.ui.h:25 ../plugins/ssh/vinagre-ssh-plugin.c:144
 msgid "_Username:"
 msgstr "Nume _utilizator:"
 
@@ -180,8 +179,8 @@ msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
 msgstr ""
-"Definit ca „true” pentru a porni întotdeauna programul în ascultare de "
-"conexiuni inverse."
+"Definit ca „true” pentru a porni întotdeauna programul de primire a "
+"conexiunilor inverse."
 
 #: ../data/vinagre.schemas.in.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
@@ -220,7 +219,7 @@ msgstr "Dacă trebuie afișați acceleratorii din meniuri (scurtăturile)"
 #: ../data/vinagre.schemas.in.in.h:13
 msgid "Whether we should start the program listening for reverse connections"
 msgstr ""
-"Dacă programul ar trebui pornit întotdeauna în ascultare de conexiuni "
+"Dacă programul ar trebui pornit întotdeauna de acceptare a conexiunilor "
 "inverse."
 
 #: ../data/vinagre-mime.xml.in.h:1
@@ -230,59 +229,6 @@ msgstr "Fișier desktop la distanță (VNC)"
 #: ../data/vinagre-mime.xml.in.h:2
 msgid "Remote Desktop Connection"
 msgstr "Conexiune desktop la distanță"
-
-#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:1
-#: ../plugins/rdp/vinagre-rdp-plugin.c:71
-msgid "RDP"
-msgstr "RDP"
-
-#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:2
-#| msgid "SSH support"
-msgid "RDP support"
-msgstr "Suport RDP"
-
-#. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
-#: ../plugins/rdp/vinagre-rdp-plugin.c:73
-#| msgid "Access Unix/Linux, Windows and other machines."
-msgid "Access MS Windows machines"
-msgstr "Accesați mașini Microsoft Windows"
-
-#: ../plugins/rdp/vinagre-rdp-plugin.c:121
-#| msgid "Options"
-msgid "RDP Options"
-msgstr "Opțiuni RDP"
-
-#. Translators: This is the tooltip for the username field in a RDP connection
-#. Translators: This is the tooltip for the username field in a SSH connection
-#: ../plugins/rdp/vinagre-rdp-plugin.c:138
-#: ../plugins/ssh/vinagre-ssh-plugin.c:149
-msgid ""
-"Optional. If blank, your username will be used. Also, it can be supplied in "
-"the Machine field above, in the form username@hostname."
-msgstr ""
-"Opțional. Dacă este gol, numele de utilizator al dumneavoastră va fi "
-"folosit. De asemenea, poate fi dat în câmpul care specifică numele mașinii "
-"de mai sus în forma nume_utilizator@nume_gazdă."
-
-#: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
-#: ../plugins/vnc/vinagre-vnc-tab.c:149
-msgid "Port:"
-msgstr "Port:"
-
-#: ../plugins/rdp/vinagre-rdp-tab.c:129
-#| msgid "Error while creating the file %s: %s"
-msgid "Error while executing rdesktop"
-msgstr "Eroare la executarea rdesktop"
-
-#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:347
-#: ../vinagre/vinagre-bookmarks.c:462
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:487 ../vinagre/vinagre-fav.c:767
-#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
-#: ../vinagre/vinagre-window.c:269 ../vinagre/vinagre-window.c:739
-msgid "Unknown error"
-msgstr "Eroare necunoscută"
 
 #. vim: set ts=8:
 #: ../plugins/ssh/vinagre-ssh-plugin.c:76
@@ -299,6 +245,20 @@ msgstr "Accesați terminale Unix/Linux"
 msgid "SSH Options"
 msgstr "Opțiuni SSH"
 
+#. Translators: This is the tooltip for the username field in a SSH connection
+#: ../plugins/ssh/vinagre-ssh-plugin.c:149
+msgid ""
+"Optional. If blank, your username will be used. Also, it can be supplied in "
+"the Machine field above, in the form username@hostname."
+msgstr ""
+"Opțional. Dacă este gol, numele dumneavoastră de utilizator va fi folosit. "
+"De asemenea, poate fi introdus în câmpul de mai sus care specifică numele "
+"mașinii în forma nume_utilizator@nume_gazdă."
+
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:149
+msgid "Port:"
+msgstr "Port:"
+
 #: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
 msgid "SSH support"
 msgstr "Suport SSH"
@@ -313,10 +273,12 @@ msgstr ""
 "Valoare greșită pentru fanionul „shared”: %d. Trebuie să fie 0 sau 1. Se "
 "ignoră."
 
+#LG: nu e pe "inve_rse" pentru că "_r" mai există în același meniu la
+# șirul "Conexiuni _recente"
 #. Translators: "Reverse" here is an adjective, not a verb.
 #: ../plugins/vnc/vinagre-vnc-plugin.c:85
 msgid "_Reverse Connections..."
-msgstr "Conexiuni inve_rse..."
+msgstr "Conexiuni in_verse..."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:87
 msgid "Configure incoming VNC connections"
@@ -424,7 +386,7 @@ msgstr "nume gazdă sau nume_utilizator@nume_gazdă"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:467
 msgid "Supply an alternative port using colon"
-msgstr "Specificați un port alternativ folosind două-puncte"
+msgstr "Oferă port alternativ folosind simbolul două puncte"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:468
 msgid "For instance: joe@domain.com:5022"
@@ -433,7 +395,7 @@ msgstr "De exemplu: mihai@domeniu.com:5022"
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:474
 msgid "as a SSH tunnel"
-msgstr "un tunel SSH"
+msgstr "ca un tunel SSH"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
 #: ../plugins/vnc/vinagre-vnc-plugin.c:509
@@ -460,11 +422,10 @@ msgstr "Motiv necunoscut"
 msgid "Error connecting to host."
 msgstr "Eroare la conectarea la gazdă."
 
-#. Translators: %s is a host name or IP address; %u is a code error (number).
+#. Translators: %s is a host name or IP address; %u is a code error (number). Also, the right sentence would be ... method for host...
 #: ../plugins/vnc/vinagre-vnc-tab.c:360
 #, c-format
-#| msgid "Authentication method to host %s is unsupported. (%u)"
-msgid "Authentication method for host %s is unsupported. (%u)"
+msgid "Authentication method to host %s is unsupported. (%u)"
 msgstr "Metoda de autentificare la gazda %s nu este suportată. (%u)"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:364
@@ -519,10 +480,11 @@ msgstr "_Reîmprospătează ecranul"
 msgid "Requests an update of the screen"
 msgstr "Pune în coadă o actualizare de ecran"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:684
-#| msgid "Send Ctrl-Alt-Del"
-msgid "_Send Ctrl-Alt-Del"
-msgstr "_Trimite Ctrl-Alt-Del"
+#. Send Ctrl-alt-del
+#: ../plugins/vnc/vinagre-vnc-tab.c:684 ../plugins/vnc/vinagre-vnc-tab.c:756
+#: ../plugins/vnc/vinagre-vnc-tab.c:758
+msgid "Send Ctrl-Alt-Del"
+msgstr "Trimite Ctrl-Alt-Del"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:685
 msgid "Sends Ctrl+Alt+Del to the remote machine"
@@ -535,11 +497,6 @@ msgstr "Scalare"
 #: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
 msgid "Read only"
 msgstr "Doar citire"
-
-#. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:756 ../plugins/vnc/vinagre-vnc-tab.c:758
-msgid "Send Ctrl-Alt-Del"
-msgstr "Trimite Ctrl-Alt-Del"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:920
 msgid ""
@@ -562,11 +519,11 @@ msgstr "Nu s-a putut găsi un port TCP liber"
 msgid "VNC support"
 msgstr "Suport VNC"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:100
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:94
 msgid "IPv4:"
 msgstr "IPv4:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:112
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:106
 msgid ""
 "\n"
 "\n"
@@ -576,7 +533,7 @@ msgstr ""
 "\n"
 "IPv6:"
 
-#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:171
+#: ../plugins/vnc/vinagre-vnc-listener-dialog.c:165
 #, c-format
 msgid "On the port %d"
 msgstr "Pe portul %d"
@@ -627,86 +584,95 @@ msgstr "Un meniul pentru a accesa rapid mașini la distanță"
 msgid "Vinagre Applet Factory"
 msgstr "Șablon miniaplicație Vinagre"
 
-#: ../vinagre/vinagre-applet.c:287 ../vinagre/vinagre-applet.c:370
+#: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
 msgid "Could not run vinagre:"
 msgstr "Nu s-a putut porni vinagre:"
 
-#: ../vinagre/vinagre-applet.c:390
+#: ../vinagre/vinagre-applet.c:380
 msgid "Open Remote Desktop Viewer"
 msgstr "Deschide vizualizatorul de desktop la distanță"
 
-#: ../vinagre/vinagre-applet.c:445
+#: ../vinagre/vinagre-applet.c:435
 msgid "Access your bookmarks"
 msgstr "Accesare favorite"
 
-#: ../vinagre/vinagre-bookmarks.c:269 ../vinagre/vinagre-connection.c:525
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:525
 #: ../vinagre/vinagre-tab.c:535 ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protocolul %s nu este suportat."
 
-#: ../vinagre/vinagre-bookmarks.c:347
+#: ../vinagre/vinagre-bookmarks.c:343
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Eroare la inițializare favorite: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:354
+#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-cache-prefs.c:53 ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:483 ../vinagre/vinagre-fav.c:765
+#: ../vinagre/vinagre-main.c:102 ../vinagre/vinagre-main.c:121
+#: ../vinagre/vinagre-window.c:268 ../vinagre/vinagre-window.c:737
+msgid "Unknown error"
+msgstr "Eroare necunoscută"
+
+#: ../vinagre/vinagre-bookmarks.c:350
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Eroare la inițializare favorite: Acest fișier pare a fi gol"
 
-#: ../vinagre/vinagre-bookmarks.c:361
+#: ../vinagre/vinagre-bookmarks.c:357
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr ""
 "Eroare la inițializare favorite: Acest fișier nu este un fișier favorit "
 "vinagre"
 
-#: ../vinagre/vinagre-bookmarks.c:423 ../vinagre/vinagre-bookmarks.c:430
+#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "Eroare la salvarea favoritelor: Crearea structurii XML a eșuat"
 
-#: ../vinagre/vinagre-bookmarks.c:437 ../vinagre/vinagre-bookmarks.c:444
+#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "Eroare la salvarea favoritelor: Inițializarea structurii XML a eșuat"
 
-#: ../vinagre/vinagre-bookmarks.c:453
+#: ../vinagre/vinagre-bookmarks.c:449
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "Eroare la salvarea favoritelor: Finalizarea structurii XML a eșuat"
 
-#: ../vinagre/vinagre-bookmarks.c:462
+#: ../vinagre/vinagre-bookmarks.c:458
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Eroare la salvarea favoritelor: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:96
-#: ../vinagre/vinagre-bookmarks-migration.c:103
+#: ../vinagre/vinagre-bookmarks-migration.c:95
+#: ../vinagre/vinagre-bookmarks-migration.c:102
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr "Eroare la migrarea favoritelor: Creearea structurii XML a eșuat"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:110
-#: ../vinagre/vinagre-bookmarks-migration.c:117
+#: ../vinagre/vinagre-bookmarks-migration.c:109
+#: ../vinagre/vinagre-bookmarks-migration.c:116
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr "Eroare la migrarea favoritelor: Inițializarea structurii XML a eșuat"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:126
+#: ../vinagre/vinagre-bookmarks-migration.c:125
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr "Eroare la migrarea favoritelor: Finalizarea structurii XML a eșuat"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-bookmarks-migration.c:218
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Eroare la migrarea favoritelor: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:165
+#: ../vinagre/vinagre-bookmarks-migration.c:164
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "Eroare la migrarea favoritelor: modulul VNC nu este activat"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:218
+#: ../vinagre/vinagre-bookmarks-migration.c:217
 msgid "Failed to create the directory"
 msgstr "Eroare la crearea dosarului"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:243
+#: ../vinagre/vinagre-bookmarks-migration.c:241
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -714,17 +680,17 @@ msgstr ""
 "Se migrează fișierul favoritelor în noua locație. Se presupune că această "
 "operație este rulată doar o singură dată."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:251
+#: ../vinagre/vinagre-bookmarks-migration.c:249
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Eroare la deschiderea fișierului favorit vechi: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:252
-#: ../vinagre/vinagre-bookmarks-migration.c:264
+#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:262
 msgid "Migration cancelled"
 msgstr "Migrare anulată"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:261
+#: ../vinagre/vinagre-bookmarks-migration.c:259
 msgid "Could not remove the old bookmarks file"
 msgstr "Nu s-a putut șterge fișierul vechi al favoritelor"
 
@@ -779,7 +745,7 @@ msgstr "Eroare la ștergerea favoritului: Intrarea nu a fost găsită"
 msgid "New Folder"
 msgstr "Dosar nou"
 
-#: ../vinagre/vinagre-cache-prefs.c:56
+#: ../vinagre/vinagre-cache-prefs.c:53
 #, c-format
 msgid "Error while saving preferences: %s"
 msgstr "Eroare la salvarea preferințelor: %s"
@@ -807,18 +773,18 @@ msgstr[0] "Următorul fișier nu a putut fi deschis:"
 msgstr[1] "Următoarele fișiere nu au putut fi deschise:"
 msgstr[2] "Următoarele fișiere nu au putut fi deschise:"
 
-#: ../vinagre/vinagre-connect.c:92 ../vinagre/vinagre-connect.c:339
-#: ../vinagre/vinagre-connect.c:451
-#| msgid "Could not get the active protocol in the protocol list."
-msgid "Could not get the active protocol from the protocol list."
+#. Translators: Please consider the word "from" instead of "in". I'll fix this phrase for 2.31 (or 3.0)
+#: ../vinagre/vinagre-connect.c:88 ../vinagre/vinagre-connect.c:335
+#: ../vinagre/vinagre-connect.c:447
+msgid "Could not get the active protocol in the protocol list."
 msgstr "Nu s-a putut găsi protocolul activ din lista de protocoale."
 
-#: ../vinagre/vinagre-connect.c:320
+#: ../vinagre/vinagre-connect.c:316
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Eroare la salvarea fișierului istoric: %s"
 
-#: ../vinagre/vinagre-connect.c:355
+#: ../vinagre/vinagre-connect.c:351
 msgid "Choose a Remote Desktop"
 msgstr "Alegeți un desktop la distanță"
 
@@ -830,56 +796,56 @@ msgstr "Nu s-a putut deschide fișierul."
 msgid "The file was not recognized by any of the plugins."
 msgstr "Fișierul nu a fost recunoscut de niciunul dintre module."
 
-#: ../vinagre/vinagre-fav.c:569
+#: ../vinagre/vinagre-fav.c:567
 msgid "_New Folder"
 msgstr "Dosar _nou"
 
-#: ../vinagre/vinagre-fav.c:570
+#: ../vinagre/vinagre-fav.c:568
 msgid "Create a new folder"
 msgstr "Creează un dosar nou"
 
-#: ../vinagre/vinagre-fav.c:575
+#: ../vinagre/vinagre-fav.c:573
 msgid "_Open bookmark"
 msgstr "Deschide fav_orit"
 
-#: ../vinagre/vinagre-fav.c:576
+#: ../vinagre/vinagre-fav.c:574
 msgid "Connect to this machine"
 msgstr "Conectare la acestă mașină"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Edit bookmark"
 msgstr "_Editare favorite"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:576
 msgid "Edit the details of selected bookmark"
 msgstr "Editați detaliile pentru favoritul selectat"
 
-#: ../vinagre/vinagre-fav.c:579
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Remove from bookmarks"
 msgstr "Ște_rge din favorite"
 
-#: ../vinagre/vinagre-fav.c:580
+#: ../vinagre/vinagre-fav.c:578
 msgid "Remove current selected connection from bookmarks"
 msgstr "Șterge din favorite conexiunea selectată curent"
 
-#: ../vinagre/vinagre-fav.c:598 ../vinagre/vinagre-window.c:400
+#: ../vinagre/vinagre-fav.c:596 ../vinagre/vinagre-window.c:399
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Nu s-a putut combina fișierul XML UI: %s"
 
-#: ../vinagre/vinagre-fav.c:756
+#: ../vinagre/vinagre-fav.c:754
 msgid "Invalid operation"
 msgstr "Operație nevalidă"
 
-#: ../vinagre/vinagre-fav.c:757
+#: ../vinagre/vinagre-fav.c:755
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Datele primite de la operația „drag&drop” nu sunt valide."
 
-#: ../vinagre/vinagre-fav.c:863
+#: ../vinagre/vinagre-fav.c:859
 msgid "Hide panel"
 msgstr "Ascunde panoul"
 
-#: ../vinagre/vinagre-fav.c:1048
+#: ../vinagre/vinagre-fav.c:1044
 msgid "Hosts nearby"
 msgstr "Gazde în apropiere"
 
@@ -954,31 +920,30 @@ msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Inițializarea navigatorului mDNS a eșuat: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:459
+#: ../vinagre/vinagre-notebook.c:461
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "Conexiunea la gazda %s a fost închisă."
 
-#: ../vinagre/vinagre-notebook.c:461
+#: ../vinagre/vinagre-notebook.c:463
 msgid "Connection closed"
 msgstr "Conexiunea a fost închisă"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:480
+#: ../vinagre/vinagre-notebook.c:482
 #, c-format
-#| msgid "Authentication to host %s has failed"
-msgid "Authentication for host %s has failed"
-msgstr "Autentificarea pentru gazda %s a eșuat"
+msgid "Authentication to host %s has failed"
+msgstr "Autentificarea la gazda %s a eșuat"
 
-#: ../vinagre/vinagre-notebook.c:486
+#: ../vinagre/vinagre-notebook.c:488
 msgid "Authentication failed"
 msgstr "Autentificarea a eșuat"
 
-#: ../vinagre/vinagre-notebook.c:524
+#: ../vinagre/vinagre-notebook.c:526
 msgid "Connecting..."
 msgstr "Se conectează..."
 
-#: ../vinagre/vinagre-notebook.c:551 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:553 ../vinagre/vinagre-tab.c:325
 msgid "Close connection"
 msgstr "Închide conexiune"
 
@@ -1272,9 +1237,8 @@ msgstr "Adaugă conexiunea curentă la favorite"
 
 #. Machine menu
 #: ../vinagre/vinagre-ui.h:92
-#| msgid "Take screenshot"
-msgid "_Take screenshot"
-msgstr "Cap_turează ecranul"
+msgid "Take screenshot"
+msgstr "Capturează ecranul"
 
 #: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
@@ -1315,7 +1279,8 @@ msgstr "Eroare la încărcarea fișierului UI"
 #: ../vinagre/vinagre-utils.c:492
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr ""
-"Vinagre este o aplicație de vizualizare la mașini pentru desktopul GNOME"
+"Vinagre este o aplicație pentru GNOME de vizualizare la distanță a "
+"desktopului altor mașini"
 
 #: ../vinagre/vinagre-utils.c:495
 msgid ""
@@ -1353,6 +1318,9 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Adi Roiban https://launchpad.net/~adiroiban\n"
+"  Alexandru Cucu https://launchpad.net/~alexandru.cucu\n"
+"  Cristian Contescu https://launchpad.net/~ckristi\n"
+"  Jorel https://launchpad.net/~d-dymon\n"
 "  Lucian Adrian Grijincu https://launchpad.net/~lucian.grijincu"
 
 #: ../vinagre/vinagre-utils.c:528
@@ -1363,23 +1331,23 @@ msgstr "Pagina web Vinagre"
 #: ../vinagre/vinagre-utils.c:654
 #, c-format
 msgid "%s authentication is required"
-msgstr "Autentificarea %s este necesară"
+msgstr "Este necesară autentificarea %s"
 
-#: ../vinagre/vinagre-window.c:429
+#: ../vinagre/vinagre-window.c:428
 msgid "_Recent connections"
 msgstr "Conexiuni _recente"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:544
+#: ../vinagre/vinagre-window.c:543
 #, c-format
 msgid "Open %s:%d"
 msgstr "Deschide %s:%d"
 
-#: ../vinagre/vinagre-window.c:723
+#: ../vinagre/vinagre-window.c:721
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "Despre acceleratorii de meniu și scurtăturile de tastatură"
 
-#: ../vinagre/vinagre-window.c:725
+#: ../vinagre/vinagre-window.c:723
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1400,13 +1368,13 @@ msgstr ""
 "\n"
 "Acest mesaj va fi afișat o singură dată."
 
-#: ../vinagre/vinagre-window.c:733 ../vinagre/vinagre-window.c:739
+#: ../vinagre/vinagre-window.c:731 ../vinagre/vinagre-window.c:737
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Eroare la crearea fișierului %s: %s"
 
-#~ msgid "All fields above are mandatory"
-#~ msgstr "Toate câmpurile de mai sus sunt obligatorii"
-
 #~ msgid "Could not merge vinagre-ui.xml: %s"
 #~ msgstr "Nu s-a putut combina vinagre-ui.xml: %s"
+
+#~ msgid "All fields above are mandatory"
+#~ msgstr "Toate câmpurile de mai sus sunt obligatorii"
