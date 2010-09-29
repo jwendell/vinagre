@@ -560,6 +560,12 @@ vinagre_tab_get_dimensions (VinagreTab *tab, int *w, int *h)
   VINAGRE_TAB_GET_CLASS (tab)->impl_get_dimensions (tab, w, h);
 }
 
+/**
+ * vinagre_tab_get_window:
+ * @tab: a Tab
+ *
+ * Return value: (transfer none):
+ */
 VinagreWindow *
 vinagre_tab_get_window (VinagreTab *tab)
 {
@@ -568,6 +574,12 @@ vinagre_tab_get_window (VinagreTab *tab)
   return tab->priv->window;
 }
 
+/**
+ * vinagre_tab_get_conn:
+ * @tab: a Tab
+ *
+ * Return value: (transfer none):
+ */
 VinagreConnection *
 vinagre_tab_get_conn (VinagreTab *tab)
 {
@@ -592,6 +604,12 @@ vinagre_tab_add_view (VinagreTab *tab, GtkWidget *view)
   gtk_widget_modify_bg (viewport, GTK_STATE_NORMAL, &color);
 }
 
+/**
+ * vinagre_tab_get_view:
+ * @tab: a Tab
+ *
+ * Return value: (transfer none):
+ */
 GtkWidget *
 vinagre_tab_get_view (VinagreTab *tab)
 {
@@ -622,6 +640,12 @@ vinagre_tab_set_notebook (VinagreTab      *tab,
   tab->priv->nb = nb;
 }
 
+/**
+ * vinagre_tab_get_notebook:
+ * @tab: a Tab
+ *
+ * Return value: (transfer none):
+ */
 VinagreNotebook *
 vinagre_tab_get_notebook (VinagreTab *tab)
 {
@@ -644,6 +668,12 @@ vinagre_tab_set_state (VinagreTab *tab, VinagreTabState state)
   tab->priv->state = state;
 }
 
+/**
+ * vinagre_tab_get_toolbar:
+ * @tab: a Tab
+ *
+ * Return value: (transfer none):
+ */
 GtkWidget *
 vinagre_tab_get_toolbar (VinagreTab *tab)
 {
@@ -652,6 +682,12 @@ vinagre_tab_get_toolbar (VinagreTab *tab)
   return tab->priv->toolbar;
 }
 
+/**
+ * vinagre_tab_get_from_connection:
+ * @conn: a Connection
+ *
+ * Return value: (allow-none) (transfer none):
+ */
 VinagreTab *
 vinagre_tab_get_from_connection (VinagreConnection *conn)
 {

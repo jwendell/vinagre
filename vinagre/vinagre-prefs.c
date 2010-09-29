@@ -54,6 +54,11 @@ G_DEFINE_TYPE (VinagrePrefs, vinagre_prefs, G_TYPE_OBJECT);
 
 static VinagrePrefs *prefs_singleton = NULL;
 
+/**
+ * vinagre_prefs_get_default:
+ *
+ * Return value: (transfer none):
+ */
 VinagrePrefs *
 vinagre_prefs_get_default (void)
 {

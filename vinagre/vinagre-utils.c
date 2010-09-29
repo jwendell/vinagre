@@ -29,6 +29,11 @@
 #include <config.h>
 #endif
 
+/**
+ * vinagre_utils_create_small_close_button:
+ *
+ * Return value: (transfer full):
+ */
 GtkWidget *
 vinagre_utils_create_small_close_button ()
 {
@@ -128,6 +133,11 @@ vinagre_utils_get_ui_xml_filename (void)
     return VINAGRE_DATADIR "/" VINAGRE_UI_XML_FILE;
 }
 
+/**
+ * vinagre_utils_get_builder:
+ *
+ * Return value: (allow-none) (transfer full):
+ */
 GtkBuilder *
 vinagre_utils_get_builder (const gchar *filename)
 {
@@ -318,20 +328,6 @@ vinagre_utils_parse_boolean (const gchar* value)
     return TRUE;
 
   return FALSE;
-}
-
-GtkWidget *
-vinagre_gtk_button_new_with_stock_icon (const gchar *label,
-                                        const gchar *stock_id)
-{
-  GtkWidget *button;
-
-  button = gtk_button_new_with_mnemonic (label);
-  gtk_button_set_image (GTK_BUTTON (button),
-            gtk_image_new_from_stock (stock_id,
-              GTK_ICON_SIZE_BUTTON));
-
-        return button;
 }
 
 /**

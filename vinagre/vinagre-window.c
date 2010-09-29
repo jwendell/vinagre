@@ -843,6 +843,12 @@ vinagre_window_init (VinagreWindow *window)
   g_idle_add ((GSourceFunc) vinagre_window_check_first_run, window);
 }
 
+/**
+ * vinagre_window_get_notebook:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 VinagreNotebook *
 vinagre_window_get_notebook (VinagreWindow *window)
 {
@@ -900,6 +906,12 @@ vinagre_window_toggle_fullscreen (VinagreWindow *window)
     gtk_window_fullscreen (GTK_WINDOW (window));
 }
 
+/**
+ * vinagre_window_get_statusbar:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkWidget *
 vinagre_window_get_statusbar (VinagreWindow *window)
 {
@@ -908,6 +920,12 @@ vinagre_window_get_statusbar (VinagreWindow *window)
   return window->priv->statusbar;
 }
 
+/**
+ * vinagre_window_get_toolbar:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkWidget *
 vinagre_window_get_toolbar (VinagreWindow *window)
 {
@@ -916,6 +934,12 @@ vinagre_window_get_toolbar (VinagreWindow *window)
   return window->priv->toolbar;
 }
 
+/**
+ * vinagre_window_get_menubar:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkWidget *
 vinagre_window_get_menubar (VinagreWindow *window)
 {
@@ -924,6 +948,12 @@ vinagre_window_get_menubar (VinagreWindow *window)
   return window->priv->menubar;
 }
 
+/**
+ * vinagre_window_get_initialized_action:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkActionGroup *
 vinagre_window_get_initialized_action (VinagreWindow *window)
 {
@@ -932,6 +962,12 @@ vinagre_window_get_initialized_action (VinagreWindow *window)
   return window->priv->machine_initialized_action_group;
 }
 
+/**
+ * vinagre_window_get_always_sensitive_action:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkActionGroup *
 vinagre_window_get_always_sensitive_action (VinagreWindow *window)
 {
@@ -940,6 +976,12 @@ vinagre_window_get_always_sensitive_action (VinagreWindow *window)
   return window->priv->always_sensitive_action_group;
 }
 
+/**
+ * vinagre_window_get_connected_action:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkActionGroup *
 vinagre_window_get_connected_action (VinagreWindow *window)
 {
@@ -948,6 +990,12 @@ vinagre_window_get_connected_action (VinagreWindow *window)
   return window->priv->machine_connected_action_group;
 }
 
+/**
+ * vinagre_window_get_fav_panel:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkWidget *
 vinagre_window_get_fav_panel (VinagreWindow *window)
 {
@@ -964,6 +1012,12 @@ vinagre_window_close_active_tab	(VinagreWindow *window)
   vinagre_notebook_close_active_tab (window->priv->notebook);
 }
 
+/**
+ * vinagre_window_get_active_tab:
+ * @window: A window
+ *
+ * Return value: (allow-none) (transfer none):
+ */
 VinagreTab *
 vinagre_window_get_active_tab (VinagreWindow *window)
 {
@@ -972,6 +1026,12 @@ vinagre_window_get_active_tab (VinagreWindow *window)
   return vinagre_notebook_get_active_tab (window->priv->notebook);
 }
 
+/**
+ * vinagre_window_get_ui_manager:
+ * @window: A window
+ *
+ * Return value: (transfer none):
+ */
 GtkUIManager *
 vinagre_window_get_ui_manager (VinagreWindow *window)
 {
@@ -990,7 +1050,12 @@ add_connection (VinagreTab *tab, GList **res)
   *res = g_list_prepend (*res, conn);
 }
 
-/* Returns a newly allocated list with all the connections in the window */
+/**
+ * vinagre_window_get_connections: Returns a newly allocated
+ * list with all the connections in the window
+ * 
+ * Return value: (element-type VinagreConnection) (transfer full):
+ */
 GList *
 vinagre_window_get_connections (VinagreWindow *window)
 {
@@ -1007,6 +1072,12 @@ vinagre_window_get_connections (VinagreWindow *window)
   return res;
 }
 
+/**
+ * vinagre_window_conn_exists:
+ * @window: A window
+ *
+ * Return value: (allow-none) (transfer none):
+ */
 VinagreTab *
 vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
 {

@@ -113,7 +113,6 @@ void			vinagre_tab_get_dimensions	(VinagreTab *tab, int *w, int *h);
 const GSList *		vinagre_tab_get_always_sensitive_actions(VinagreTab *tab);
 const GSList *		vinagre_tab_get_connected_actions	(VinagreTab *tab);
 const GSList *		vinagre_tab_get_initialized_actions	(VinagreTab *tab);
-GtkActionGroup *	vinagre_tab_get_action_group		(VinagreTab *tab);
 
 gchar *			vinagre_tab_get_extra_title	(VinagreTab *tab);
 GtkWidget *		vinagre_tab_get_toolbar		(VinagreTab *tab);

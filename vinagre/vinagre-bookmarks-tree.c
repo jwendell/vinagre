@@ -203,6 +203,11 @@ vinagre_bookmarks_tree_new (void)
   return GTK_WIDGET (g_object_new (VINAGRE_TYPE_BOOKMARKS_TREE, NULL));
 }
 
+/**
+ * vinagre_bookmarks_tree_get_selected_entry:
+ *
+ * Return value: (allow-none) (transfer full):
+ */
 VinagreBookmarksEntry *
 vinagre_bookmarks_tree_get_selected_entry (VinagreBookmarksTree *tree)
 {

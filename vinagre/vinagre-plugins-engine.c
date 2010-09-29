@@ -192,7 +192,11 @@ vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
   g_slist_free (plugins);
 }
 
-VinagrePluginsEngine *
+/**
+ * vinagre_plugins_engine_get_default:
+ *
+ * Return value: (transfer none):
+ */VinagrePluginsEngine *
 vinagre_plugins_engine_get_default (void)
 {
   gchar *tmp, *typelib_dir, **search_paths;
@@ -248,7 +252,11 @@ vinagre_plugins_engine_get_default (void)
   return default_engine;
 }
 
-
+/**
+ * vinagre_plugins_engine_get_plugin_by_protocol:
+ *
+ * Return value: (allow-none) (transfer none):
+ */
 VinagreProtocol *
 vinagre_plugins_engine_get_plugin_by_protocol (VinagrePluginsEngine *engine,
 					       const gchar          *protocol)
@@ -258,6 +266,11 @@ vinagre_plugins_engine_get_plugin_by_protocol (VinagrePluginsEngine *engine,
   return g_hash_table_lookup (engine->priv->protocols, (gconstpointer) protocol);
 }
 
+/**
+ * vinagre_plugins_engine_get_plugins_by_protocol:
+ *
+ * Return value: (element-type utf8 PeasExtension) (transfer none):
+ */
 GHashTable *
 vinagre_plugins_engine_get_plugins_by_protocol (VinagrePluginsEngine *engine)
 {

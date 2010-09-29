@@ -131,6 +131,12 @@ vinagre_protocol_get_protocol (VinagreProtocol *protocol)
   return NULL;
 }
 
+/**
+ * vinagre_protocol_get_public_description:
+ * @protocol: A protocol
+ *
+ * Return value: (array zero-terminated=1) (element-type utf8) (transfer full):
+ */
 gchar **
 vinagre_protocol_get_public_description (VinagreProtocol *protocol)
 {
@@ -183,10 +189,10 @@ vinagre_protocol_get_mdns_service (VinagreProtocol *protocol)
 }
 
 /**
- * vinagre_protocol_get_context_groups: blah
+ * vinagre_protocol_get_context_groups:
  * @protocol: A protocol
  *
- * Return value: (element-type any) (transfer container): blah
+ * Return value: (allow-none) (element-type any) (transfer container):
  */
 GSList *
 vinagre_protocol_get_context_groups (VinagreProtocol *protocol)
@@ -205,6 +211,12 @@ vinagre_protocol_get_context_groups (VinagreProtocol *protocol)
   return NULL;
 }
 
+/**
+ * vinagre_protocol_get_file_filter:
+ * @protocol: A protocol
+ *
+ * Return value: (allow-none) (transfer full):
+ */
 GtkFileFilter *
 vinagre_protocol_get_file_filter (VinagreProtocol *protocol)
 {
@@ -222,6 +234,12 @@ vinagre_protocol_get_file_filter (VinagreProtocol *protocol)
   return NULL;
 }
 
+/**
+ * vinagre_protocol_new_tab:
+ * @protocol: A protocol
+ *
+ * Return value: (allow-none) (transfer full):
+ */
 GtkWidget *
 vinagre_protocol_new_tab (VinagreProtocol   *protocol,
 			  VinagreConnection *conn,
@@ -241,6 +259,12 @@ vinagre_protocol_new_tab (VinagreProtocol   *protocol,
   return NULL;
 }
 
+/**
+ * vinagre_protocol_new_connection:
+ * @protocol: A protocol
+ *
+ * Return value: (allow-none) (transfer full):
+ */
 VinagreConnection *
 vinagre_protocol_new_connection (VinagreProtocol *protocol)
 {
@@ -258,6 +282,12 @@ vinagre_protocol_new_connection (VinagreProtocol *protocol)
   return NULL;
 }
 
+/**
+ * vinagre_protocol_new_connection_from_file:
+ * @protocol: A protocol
+ *
+ * Return value: (allow-none) (transfer full):
+ */
 VinagreConnection *
 vinagre_protocol_new_connection_from_file (VinagreProtocol *protocol,
 					   const gchar     *data,
@@ -283,7 +313,7 @@ vinagre_protocol_new_connection_from_file (VinagreProtocol *protocol,
  *
  * @protocol: a protocol
  * @initial_settings: (allow-none): bla bla
- * Return value: (allow-none): a widget
+ * Return value: (allow-none) (transfer full): a widget
  */
 GtkWidget *
 vinagre_protocol_get_connect_widget (VinagreProtocol   *protocol,
@@ -337,6 +367,12 @@ vinagre_protocol_get_icon_name (VinagreProtocol *protocol)
   return NULL;
 }
 
+/**
+ * vinagre_protocol_get_icon:
+ * @protocol: A protocol
+ *
+ * Return value: (allow-none) (transfer full):
+ */
 GdkPixbuf *
 vinagre_protocol_get_icon (VinagreProtocol *protocol,
 			   gint             size)

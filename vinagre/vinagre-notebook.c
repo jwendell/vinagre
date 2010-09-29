@@ -727,6 +727,12 @@ vinagre_notebook_close_active_tab (VinagreNotebook *nb)
   vinagre_notebook_close_tab (nb, nb->priv->active_tab);
 }
 
+/**
+ * vinagre_notebook_get_active_tab:
+ * @nb: A Notebook
+ *
+ * Return value: (transfer none):
+ */
 VinagreTab *
 vinagre_notebook_get_active_tab (VinagreNotebook *nb)
 {
@@ -735,6 +741,12 @@ vinagre_notebook_get_active_tab (VinagreNotebook *nb)
   return nb->priv->active_tab;
 }
 
+/**
+ * vinagre_notebook_get_tabs:
+ * @nb: A Notebook
+ *
+ * Return value: (transfer none) (element-type VinagreTab):
+ */
 GSList *
 vinagre_notebook_get_tabs (VinagreNotebook *nb)
 {

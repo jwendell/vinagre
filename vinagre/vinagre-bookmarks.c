@@ -187,6 +187,11 @@ find_conn_by_host (GSList      *entries,
   return NULL;
 }
 
+/**
+ * vinagre_bookmarks_exists:
+ *
+ * Return value: (allow-none) (transfer none):
+ */
 VinagreConnection *
 vinagre_bookmarks_exists (VinagreBookmarks *book,
                           const gchar      *protocol,
@@ -384,6 +389,11 @@ vinagre_bookmarks_file_changed (GFileMonitor      *monitor,
 
 /* Public API */
 
+/**
+ * vinagre_bookmarks_get_default:
+ *
+ * Return value: (transfer full):
+ */
 VinagreBookmarks *
 vinagre_bookmarks_get_default (void)
 {
@@ -393,6 +403,12 @@ vinagre_bookmarks_get_default (void)
   return book_singleton;
 }
 
+/**
+ * vinagre_bookmarks_get_all:
+ * @book: A Bookmarks
+ *
+ * Return value: (element-type VinagreBookmarksEntry) (transfer none):
+ */
 GSList *
 vinagre_bookmarks_get_all (VinagreBookmarks *book)
 {
@@ -519,6 +535,11 @@ vinagre_bookmarks_remove_entry (VinagreBookmarks      *book,
 }
 
 
+/**
+ * vinagre_bookmarks_name_exists:
+ *
+ * Return value: (allow-none) (transfer none):
+ */
 VinagreBookmarksEntry *
 vinagre_bookmarks_name_exists (VinagreBookmarks      *book,
                                VinagreBookmarksEntry *parent,

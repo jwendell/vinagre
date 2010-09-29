@@ -389,7 +389,14 @@ vinagre_connect_find_button_cb (GtkButton            *button,
 }
 #endif
 
-VinagreConnection *vinagre_connect (VinagreWindow *window)
+/**
+ * vinagre_connect:
+ * @window: A Window
+ *
+ * Return value: (allow-none) (transfer full):
+ */
+VinagreConnection *
+vinagre_connect (VinagreWindow *window)
 {
   VinagreConnection    *conn = NULL;
   gint                  result;

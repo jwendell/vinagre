@@ -179,6 +179,12 @@ vinagre_bookmarks_entry_set_conn (VinagreBookmarksEntry *entry, VinagreConnectio
   entry->priv->conn = g_object_ref (conn);
 }
 
+/**
+ * vinagre_bookmarks_entry_get_conn:
+ * @entry: A BookmarksEntry
+ *
+ * Return value: (allow-none) (transfer none):
+ */
 VinagreConnection *
 vinagre_bookmarks_entry_get_conn (VinagreBookmarksEntry *entry)
 {
@@ -248,6 +254,12 @@ vinagre_bookmarks_entry_remove_child (VinagreBookmarksEntry *entry,
   return FALSE;
 }
 
+/**
+ * vinagre_bookmarks_entry_get_children:
+ * @entry: A BookmarksEntry
+ *
+ * Return value: (element-type VinagreBookmarksEntry) (transfer none):
+ */
 GSList *
 vinagre_bookmarks_entry_get_children (VinagreBookmarksEntry *entry)
 {
@@ -256,6 +268,12 @@ vinagre_bookmarks_entry_get_children (VinagreBookmarksEntry *entry)
   return entry->priv->children;
 }
 
+/**
+ * vinagre_bookmarks_entry_get_parent:
+ * @entry: A BookmarksEntry
+ *
+ * Return value: (transfer none):
+ */
 VinagreBookmarksEntry *
 vinagre_bookmarks_entry_get_parent (VinagreBookmarksEntry *entry)
 {
