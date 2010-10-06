@@ -66,7 +66,7 @@ static void  vinagre_applet_init       (VinagreApplet *applet);
 static void	vinagre_applet_get_icon		(VinagreApplet *applet);
 static void	vinagre_applet_check_size	(VinagreApplet *applet);
 static gboolean	vinagre_applet_draw_cb		(VinagreApplet *applet);
-static void	vinagre_applet_destroy_cb	(GtkObject *object);
+static void	vinagre_applet_destroy_cb	(GtkWidget     *widget);
 
 G_DEFINE_TYPE (VinagreApplet, vinagre_applet, PANEL_TYPE_APPLET)
 
@@ -191,9 +191,9 @@ vinagre_applet_change_background_cb (VinagreApplet *applet,
 }
 
 static void
-vinagre_applet_destroy_cb (GtkObject *object)
+vinagre_applet_destroy_cb (GtkWidget *widget)
 {
-  VinagreApplet *applet = VINAGRE_APPLET (object);
+  VinagreApplet *applet = VINAGRE_APPLET (widget);
 
   if (applet->icon != NULL)
     g_object_unref (applet->icon);
