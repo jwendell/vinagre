@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-08-26 07:16+0000\n"
-"PO-Revision-Date: 2010-08-26 13:58+0100\n"
+"POT-Creation-Date: 2010-10-05 22:26+0000\n"
+"PO-Revision-Date: 2010-10-06 15:04+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,9 +38,9 @@ msgstr "Dostop do oddaljenih namizij"
 #: ../data/vinagre.desktop.in.in.h:2
 #: ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:441
-#: ../vinagre/vinagre-applet.c:493
-#: ../vinagre/vinagre-main.c:62
+#: ../vinagre/vinagre-applet.c:440
+#: ../vinagre/vinagre-applet.c:492
+#: ../vinagre/vinagre-main.c:63
 msgid "Remote Desktop Viewer"
 msgstr "Pregledovalnik oddaljenih namizij"
 
@@ -53,7 +54,7 @@ msgstr "Zahtevana je overitev"
 
 #. setup label
 #: ../data/vinagre.ui.h:3
-#: ../vinagre/vinagre-fav.c:856
+#: ../vinagre/vinagre-fav.c:855
 msgid "Bookmarks"
 msgstr "Zaznamki"
 
@@ -73,7 +74,7 @@ msgstr "Mapa"
 #: ../plugins/rdp/vinagre-rdp-tab.c:53
 #: ../plugins/ssh/vinagre-ssh-tab.c:49
 #: ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../vinagre/vinagre-fav.c:408
+#: ../vinagre/vinagre-fav.c:407
 msgid "Host:"
 msgstr "Gostitelj:"
 
@@ -238,17 +239,17 @@ msgid "Error while executing rdesktop"
 msgstr "Napaka med izvajanjem programa rdesktop"
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:130
-#: ../vinagre/vinagre-bookmarks.c:344
-#: ../vinagre/vinagre-bookmarks.c:459
-#: ../vinagre/vinagre-bookmarks-migration.c:136
+#: ../vinagre/vinagre-bookmarks.c:348
+#: ../vinagre/vinagre-bookmarks.c:474
+#: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:56
-#: ../vinagre/vinagre-commands.c:174
-#: ../vinagre/vinagre-connect.c:486
-#: ../vinagre/vinagre-fav.c:768
+#: ../vinagre/vinagre-commands.c:173
+#: ../vinagre/vinagre-connect.c:492
+#: ../vinagre/vinagre-fav.c:767
 #: ../vinagre/vinagre-options.c:82
 #: ../vinagre/vinagre-options.c:100
-#: ../vinagre/vinagre-window.c:279
-#: ../vinagre/vinagre-window.c:749
+#: ../vinagre/vinagre-window.c:278
+#: ../vinagre/vinagre-window.c:748
 msgid "Unknown error"
 msgstr "Neznana napaka"
 
@@ -593,6 +594,10 @@ msgstr "_Vedno omogočeno"
 msgid "_Enable Reverse Connections"
 msgstr "_Omogoči nasprotne povezave"
 
+#: ../plugins/im-status/im-status.js:43
+msgid "Could not communicate to Telepathy. IM Status plugin will not work."
+msgstr "Ni se mogoče povezati s programom Telepathy. Vstavek stanja hipnega sporočanja ne bo deloval."
+
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
 msgid "A menu to quickly access remote machines"
 msgstr "Meni za hitri dostop do oddaljenih računalnikov"
@@ -601,102 +606,102 @@ msgstr "Meni za hitri dostop do oddaljenih računalnikov"
 msgid "Vinagre Applet Factory"
 msgstr "Tovarna vstavka Vinagre"
 
-#: ../vinagre/vinagre-applet.c:284
-#: ../vinagre/vinagre-applet.c:367
+#: ../vinagre/vinagre-applet.c:283
+#: ../vinagre/vinagre-applet.c:366
 msgid "Could not run vinagre:"
 msgstr "Ni mogoče zagnati programa vinagre:"
 
-#: ../vinagre/vinagre-applet.c:387
+#: ../vinagre/vinagre-applet.c:386
 msgid "Open Remote Desktop Viewer"
 msgstr "Odpri pregledovalnik oddaljenih namizij"
 
-#: ../vinagre/vinagre-applet.c:442
+#: ../vinagre/vinagre-applet.c:441
 msgid "Access your bookmarks"
 msgstr "Dostop do zaznamkov"
 
-#: ../vinagre/vinagre-bookmarks.c:266
-#: ../vinagre/vinagre-connection.c:526
-#: ../vinagre/vinagre-tab.c:533
+#: ../vinagre/vinagre-bookmarks.c:270
+#: ../vinagre/vinagre-connection.c:525
+#: ../vinagre/vinagre-tab.c:532
 #: ../vinagre/vinagre-tube-handler.c:253
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokol %s ni podprt."
 
-#: ../vinagre/vinagre-bookmarks.c:344
+#: ../vinagre/vinagre-bookmarks.c:348
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Napaka med zaganjanjem zaznamkov: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:351
+#: ../vinagre/vinagre-bookmarks.c:355
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Napaka med zaganjanjem zaznamkov: datoteka je videti prazna."
 
-#: ../vinagre/vinagre-bookmarks.c:358
+#: ../vinagre/vinagre-bookmarks.c:362
 msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "Napaka med zaganjanjem zaznamkov: datoteka ni prava vinagre datoteka zaznamkov."
 
-#: ../vinagre/vinagre-bookmarks.c:420
-#: ../vinagre/vinagre-bookmarks.c:427
+#: ../vinagre/vinagre-bookmarks.c:435
+#: ../vinagre/vinagre-bookmarks.c:442
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "Napaka med shranjevanjem zaznamkov: napaka med ustvarjanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks.c:434
-#: ../vinagre/vinagre-bookmarks.c:441
+#: ../vinagre/vinagre-bookmarks.c:449
+#: ../vinagre/vinagre-bookmarks.c:456
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "Napaka med shranjevanjem zaznamkov: napaka med zaganjanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks.c:450
+#: ../vinagre/vinagre-bookmarks.c:465
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "Napaka med shranjevanjem zaznamkov: napaka med zaključevanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks.c:459
+#: ../vinagre/vinagre-bookmarks.c:474
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Napaka med shranjevanjem zaznamkov: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:96
-#: ../vinagre/vinagre-bookmarks-migration.c:103
+#: ../vinagre/vinagre-bookmarks-migration.c:95
+#: ../vinagre/vinagre-bookmarks-migration.c:102
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr "Napaka med premikanjem zaznamkov: napaka med ustvarjanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:110
-#: ../vinagre/vinagre-bookmarks-migration.c:117
+#: ../vinagre/vinagre-bookmarks-migration.c:109
+#: ../vinagre/vinagre-bookmarks-migration.c:116
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr "Napaka med premikanjem zaznamkov: napaka med zaganjanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:126
+#: ../vinagre/vinagre-bookmarks-migration.c:125
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr "Napaka med premikanjem zaznamkov: napaka med zaključevanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-bookmarks-migration.c:216
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Napaka med premikanjem zaznamkov: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:165
+#: ../vinagre/vinagre-bookmarks-migration.c:164
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr "Napaka med premikanjem zaznamkov: VNC vstavek ni dejaven"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:216
 msgid "Failed to create the directory"
 msgstr "Napaka med ustvarjanjem mape"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:242
+#: ../vinagre/vinagre-bookmarks-migration.c:241
 msgid "Migrating the bookmarks file to the new format. This operation is only supposed to run once."
 msgstr "Premikanje datoteke zaznamkov v novo obliko. Možnost se praviloma uporabi le enkrat."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:249
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Napaka med odpiranjem stare datoteke zaznamkov: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:251
-#: ../vinagre/vinagre-bookmarks-migration.c:263
+#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:262
 msgid "Migration cancelled"
 msgstr "Premikanje je  preklicano."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:260
+#: ../vinagre/vinagre-bookmarks-migration.c:259
 msgid "Could not remove the old bookmarks file"
 msgstr "Ni mogoče odstraniti stare datoteke z zaznamki."
 
@@ -704,51 +709,51 @@ msgstr "Ni mogoče odstraniti stare datoteke z zaznamki."
 msgid "Root Folder"
 msgstr "Korenska mapa"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:78
+#: ../vinagre/vinagre-bookmarks-ui.c:77
 msgid "Invalid name for this folder"
 msgstr "Neveljavno ime za to mapo"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:88
-#: ../vinagre/vinagre-bookmarks-ui.c:200
+#: ../vinagre/vinagre-bookmarks-ui.c:87
+#: ../vinagre/vinagre-bookmarks-ui.c:199
 #, c-format
 msgid "The name \"%s\" is already used in this folder. Please use a different name."
 msgstr "Ime \"%s\" je v tej mapi že uporabljeno. Uporabite drugo ime."
 
-#: ../vinagre/vinagre-bookmarks-ui.c:89
-#: ../vinagre/vinagre-bookmarks-ui.c:190
-#: ../vinagre/vinagre-bookmarks-ui.c:201
+#: ../vinagre/vinagre-bookmarks-ui.c:88
+#: ../vinagre/vinagre-bookmarks-ui.c:189
+#: ../vinagre/vinagre-bookmarks-ui.c:200
 msgid "Invalid name for this item"
 msgstr "Neveljavno ime predmeta"
 
 #. Translators: %s is a protocol name, like VNC or SSH
-#: ../vinagre/vinagre-bookmarks-ui.c:168
+#: ../vinagre/vinagre-bookmarks-ui.c:167
 #, c-format
 msgid "(Protocol: %s)"
 msgstr "(Protokol: %s)"
 
 #. Translators: %s is a bookmark entry name
-#: ../vinagre/vinagre-bookmarks-ui.c:306
+#: ../vinagre/vinagre-bookmarks-ui.c:305
 #, c-format
 msgid "Are you sure you want to remove %s from bookmarks?"
 msgstr "Ali zares želite odstraniti %s iz zaznamkov?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:312
+#: ../vinagre/vinagre-bookmarks-ui.c:311
 msgid "Remove Folder?"
 msgstr "Ali naj se mapa odstrani?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:313
+#: ../vinagre/vinagre-bookmarks-ui.c:312
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "Bodite pozorni, da bodo odstranjene tudi vse podrejene mape in njihove datoteke."
 
-#: ../vinagre/vinagre-bookmarks-ui.c:318
+#: ../vinagre/vinagre-bookmarks-ui.c:317
 msgid "Remove Item?"
 msgstr "Odstrani predmet?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:335
+#: ../vinagre/vinagre-bookmarks-ui.c:334
 msgid "Error removing bookmark: Entry not found"
 msgstr "Napaka med odstranjevanjem zaznamka: vnosa ni mogoče najti."
 
-#: ../vinagre/vinagre-bookmarks-ui.c:352
+#: ../vinagre/vinagre-bookmarks-ui.c:351
 msgid "New Folder"
 msgstr "Nova mapa"
 
@@ -757,19 +762,19 @@ msgstr "Nova mapa"
 msgid "Error while saving preferences: %s"
 msgstr "Prišlo je do napake med shranjevanjem možnosti: %s"
 
-#: ../vinagre/vinagre-commands.c:120
+#: ../vinagre/vinagre-commands.c:119
 msgid "Choose the file"
 msgstr "Izberite datoteko"
 
-#: ../vinagre/vinagre-commands.c:150
+#: ../vinagre/vinagre-commands.c:149
 msgid "There are no supported files"
 msgstr "Ni podprtih datotek"
 
-#: ../vinagre/vinagre-commands.c:151
+#: ../vinagre/vinagre-commands.c:150
 msgid "None of the active plugins support this action. Activate some plugins and try again."
 msgstr "Ni ustreznega vstavka za podporo temu dejanju. Zagnati je treba ustrezne vstavke."
 
-#: ../vinagre/vinagre-commands.c:185
+#: ../vinagre/vinagre-commands.c:184
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Datoteke, ki jih ni mogoče odpreti:"
@@ -777,116 +782,114 @@ msgstr[1] "Datoteka, ki je ni mogoče odpreti:"
 msgstr[2] "Datoteki, ki ju ni mogoče odpreti:"
 msgstr[3] "Datoteke, ki jih ni mogoče odpreti:"
 
-#: ../vinagre/vinagre-connect.c:92
-#: ../vinagre/vinagre-connect.c:338
-#: ../vinagre/vinagre-connect.c:450
+#: ../vinagre/vinagre-connect.c:91
+#: ../vinagre/vinagre-connect.c:337
+#: ../vinagre/vinagre-connect.c:456
 msgid "Could not get the active protocol from the protocol list."
 msgstr "Ni mogoče pridobiti dejavnega protokola v seznamu protokolov."
 
-#: ../vinagre/vinagre-connect.c:319
+#: ../vinagre/vinagre-connect.c:318
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Napaka med shranjevanjem datoteke zgodovine: %s"
 
-#: ../vinagre/vinagre-connect.c:354
+#: ../vinagre/vinagre-connect.c:353
 msgid "Choose a Remote Desktop"
 msgstr "Zapri oddaljeno namizje"
 
-#: ../vinagre/vinagre-connection.c:634
+#: ../vinagre/vinagre-connection.c:633
 msgid "Could not open the file."
 msgstr "Ni mogoče odpreti datoteke."
 
-#: ../vinagre/vinagre-connection.c:658
+#: ../vinagre/vinagre-connection.c:657
 msgid "The file was not recognized by any of the plugins."
 msgstr "Datoteke ne ustrezna nobenemu izmed dejavnih vstavkov."
 
-#: ../vinagre/vinagre-fav.c:571
+#: ../vinagre/vinagre-fav.c:570
 msgid "_New Folder"
 msgstr "_Nova mapa"
 
-#: ../vinagre/vinagre-fav.c:572
+#: ../vinagre/vinagre-fav.c:571
 msgid "Create a new folder"
 msgstr "Ustvari novo mapo"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:576
 msgid "_Open bookmark"
 msgstr "_Odpri zaznamek"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:577
 msgid "Connect to this machine"
 msgstr "Povezava z izbranim računalnikom"
 
-#: ../vinagre/vinagre-fav.c:579
+#: ../vinagre/vinagre-fav.c:578
 msgid "_Edit bookmark"
 msgstr "_Uredi zaznamke"
 
-#: ../vinagre/vinagre-fav.c:580
+#: ../vinagre/vinagre-fav.c:579
 msgid "Edit the details of selected bookmark"
 msgstr "Urejanje podrobnosti izbranega zaznamka"
 
-#: ../vinagre/vinagre-fav.c:581
+#: ../vinagre/vinagre-fav.c:580
 msgid "_Remove from bookmarks"
 msgstr "_Odstrani iz zaznamkov"
 
-#: ../vinagre/vinagre-fav.c:582
+#: ../vinagre/vinagre-fav.c:581
 msgid "Remove current selected connection from bookmarks"
 msgstr "Odstranite trenutno izbrane povezave iz zaznamkov"
 
-#: ../vinagre/vinagre-fav.c:599
-#: ../vinagre/vinagre-window.c:410
+#: ../vinagre/vinagre-fav.c:598
+#: ../vinagre/vinagre-window.c:409
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Ni mogoče združiti XML datoteke uporabniškega vmesnika: %s"
 
-#: ../vinagre/vinagre-fav.c:757
+#: ../vinagre/vinagre-fav.c:756
 msgid "Invalid operation"
 msgstr "Neveljavno dejanje"
 
-#: ../vinagre/vinagre-fav.c:758
+#: ../vinagre/vinagre-fav.c:757
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Podatki prejeti preko povleci&spusti so neveljavni."
 
-#: ../vinagre/vinagre-fav.c:864
+#: ../vinagre/vinagre-fav.c:863
 msgid "Hide panel"
 msgstr "Skrij pult"
 
-#: ../vinagre/vinagre-fav.c:1048
+#: ../vinagre/vinagre-fav.c:1047
 msgid "Hosts nearby"
 msgstr "Gostitelji v bližini"
 
-#. engine = vinagre_plugins_engine_get_default ();
-#. plugins = (GSList *) vinagre_plugins_engine_get_plugin_list (engine);
 #. Setup command line options
 #: ../vinagre/vinagre-main.c:80
 msgid "- Remote Desktop Viewer"
 msgstr "- Pregledovalnik oddaljenih namizij"
 
-#: ../vinagre/vinagre-main.c:109
+#: ../vinagre/vinagre-main.c:105
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Zagon ukaza 'vinagre --help' izpiše celoten seznam ukazov, ki so na voljo."
 
-#: ../vinagre/vinagre-mdns.c:160
+#: ../vinagre/vinagre-mdns.c:159
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Napaka med razčlenjevanjem avahi imena gostitelja: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:217
+#: ../vinagre/vinagre-mdns.c:216
 #, c-format
 msgid "Plugin %s has already registered a browser for service %s."
 msgstr "Vstavek %s je že objavil brskalnik za storitev %s."
 
-#: ../vinagre/vinagre-mdns.c:226
+#: ../vinagre/vinagre-mdns.c:225
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Napaka med dodajanjem mDNS brskalnika za storitev %s."
 
 #. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
-#: ../vinagre/vinagre-mdns.c:243
+#: ../vinagre/vinagre-mdns.c:242
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Napaka med brskanjem za gostitelji: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:316
+#: ../vinagre/vinagre-mdns.c:315
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Napaka med zaganjanjem mDNS brskalnika: %s\n"
@@ -916,7 +919,7 @@ msgid "Connecting..."
 msgstr "Povezovanje ..."
 
 #: ../vinagre/vinagre-notebook.c:549
-#: ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-tab.c:324
 msgid "Close connection"
 msgstr "Zapri povezavo"
 
@@ -952,11 +955,11 @@ msgstr[1] "Prišlo je do naslednje napake:"
 msgstr[2] "Prišlo je do naslednjih napak:"
 msgstr[3] "Prišlo je do naslednjih napak:"
 
-#: ../vinagre/vinagre-plugin-dialog.c:83
+#: ../vinagre/vinagre-plugin-dialog.c:71
 msgid "Plugin Manager"
 msgstr "Upravljalnik vstavkov"
 
-#: ../vinagre/vinagre-prefs.c:188
+#: ../vinagre/vinagre-prefs.c:193
 msgid "Cannot initialize preferences manager."
 msgstr "Ni mogoče začeti upravljalnika možnosti."
 
@@ -1021,7 +1024,7 @@ msgid "Can't send host identity confirmation"
 msgstr "Ni mogoče poslati potrdila istovetnosti gostitelja"
 
 #: ../vinagre/vinagre-ssh.c:562
-#: ../vinagre/vinagre-tab.c:730
+#: ../vinagre/vinagre-tab.c:765
 msgid "Error saving the credentials on the keyring."
 msgstr "Napaka med shranjevanjem poverilnice v zbirko ključev."
 
@@ -1045,29 +1048,29 @@ msgstr "Neuspešna overitev ključa gostitelja"
 msgid "Unable to find a valid SSH program"
 msgstr "Ni mogoče najti veljavnega programa SSH"
 
-#: ../vinagre/vinagre-tab.c:346
+#: ../vinagre/vinagre-tab.c:345
 msgid "Leave fullscreen"
 msgstr "Zapusti celozaslonski način"
 
-#: ../vinagre/vinagre-tab.c:497
+#: ../vinagre/vinagre-tab.c:496
 msgid "Error saving recent connection."
 msgstr "Napaka med shranjevanjem nedavnih povezav"
 
-#: ../vinagre/vinagre-tab.c:816
+#: ../vinagre/vinagre-tab.c:851
 msgid "Could not get a screenshot of the connection."
 msgstr "Ni mogoče zajeti zaslonske slike povezave."
 
-#: ../vinagre/vinagre-tab.c:821
+#: ../vinagre/vinagre-tab.c:856
 msgid "Save Screenshot"
 msgstr "Shrani zajeto sliko"
 
 #. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
-#: ../vinagre/vinagre-tab.c:833
+#: ../vinagre/vinagre-tab.c:868
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Zajeta slika %s"
 
-#: ../vinagre/vinagre-tab.c:884
+#: ../vinagre/vinagre-tab.c:919
 msgid "Error saving screenshot"
 msgstr "Napaka med shranjevanjem zajete slike"
 
@@ -1218,71 +1221,71 @@ msgstr "Zajemi zaslonsko sliko dejavne povezave"
 msgid "View the current machine in full screen"
 msgstr "Pogled trenutnega računalnika v celozaslonskem načinu"
 
-#: ../vinagre/vinagre-utils.c:67
+#: ../vinagre/vinagre-utils.c:72
 msgid "An error has occurred:"
 msgstr "Prišlo je do napake:"
 
-#: ../vinagre/vinagre-utils.c:151
+#: ../vinagre/vinagre-utils.c:161
 msgid "A plugin tried to open an UI file but did not succeed, with the error message:"
 msgstr "Vstavek je poskusil odpreti datoteko uporabniškega vmesnika, vendar je prišlo do napake:"
 
-#: ../vinagre/vinagre-utils.c:153
+#: ../vinagre/vinagre-utils.c:163
 msgid "The program tried to open an UI file but did not succeed, with the error message:"
 msgstr "Program je poskusil odpreti datoteko uporabniškega vmesnika, vendar je prišlo do napake:"
 
-#: ../vinagre/vinagre-utils.c:156
+#: ../vinagre/vinagre-utils.c:166
 msgid "Please check your installation."
 msgstr "Preverite namestitev."
 
-#: ../vinagre/vinagre-utils.c:157
+#: ../vinagre/vinagre-utils.c:167
 msgid "Error loading UI file"
 msgstr "Napaka med nalaganjem datoteke uporabniškega vmesnika"
 
-#: ../vinagre/vinagre-utils.c:309
+#: ../vinagre/vinagre-utils.c:288
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Program Vinagre je pregledovalnik oddaljenih namizi za namizje GNOME"
 
-#: ../vinagre/vinagre-utils.c:312
+#: ../vinagre/vinagre-utils.c:291
 msgid "Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
 msgstr "Program Vinagre je prosti program; lahko ga izmenjujete in spreminjate pod pogoji GNU splošne javne licence kot je objavljena s Free Software Foundation; različica 2 in vse nadaljnje različice."
 
-#: ../vinagre/vinagre-utils.c:316
+#: ../vinagre/vinagre-utils.c:295
 msgid "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
 msgstr "Uporaba in razširjanje programa Vinagre je prosto, vendar brez kakršnekoli garancije. Za več podrobnosti si oglejte GNU splošno javno licenco."
 
-#: ../vinagre/vinagre-utils.c:320
+#: ../vinagre/vinagre-utils.c:299
 msgid "You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>."
 msgstr "Skupaj s programom bi morali prejeti tudi kopijo GNU splošnega javnega dovoljenja. V primeru, da je niste, si oglejte <http://www.gnu.org/licenses/>."
 
-#: ../vinagre/vinagre-utils.c:342
+#: ../vinagre/vinagre-utils.c:316
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
-#: ../vinagre/vinagre-utils.c:345
+#: ../vinagre/vinagre-utils.c:319
 msgid "Vinagre Website"
 msgstr "Spletišče Vinagre"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:471
+#: ../vinagre/vinagre-utils.c:431
 #, c-format
 msgid "%s authentication is required"
 msgstr "Zahtevana je %s overitev"
 
-#: ../vinagre/vinagre-window.c:439
+#: ../vinagre/vinagre-window.c:438
 msgid "_Recent connections"
 msgstr "_Nedavne povezave"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:554
+#: ../vinagre/vinagre-window.c:553
 #, c-format
 msgid "Open %s:%d"
 msgstr "Odpri %s:%d"
 
-#: ../vinagre/vinagre-window.c:733
+#: ../vinagre/vinagre-window.c:732
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "O meniju in tipkovnih bližnicah"
 
-#: ../vinagre/vinagre-window.c:735
+#: ../vinagre/vinagre-window.c:734
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by default. The reason is to avoid the keys to be intercepted by the program, and allow them to be sent to the remote machine.\n"
 "\n"
@@ -1296,120 +1299,87 @@ msgstr ""
 "\n"
 "To sporočilo je bilo prikazano le tokrat."
 
-#: ../vinagre/vinagre-window.c:743
-#: ../vinagre/vinagre-window.c:749
+#: ../vinagre/vinagre-window.c:742
+#: ../vinagre/vinagre-window.c:748
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Napaka med ustvarjanjem datoteke %s: %s"
 
 #~ msgid "Plugin"
 #~ msgstr "Vstavek"
-
 #~ msgid "Enabled"
 #~ msgstr "Omogočeno"
-
 #~ msgid "C_onfigure"
 #~ msgstr "_Nastavitve"
-
 #~ msgid "A_ctivate"
 #~ msgstr "_Pokaži"
-
 #~ msgid "Ac_tivate All"
 #~ msgstr "Pokaži _vse"
-
 #~ msgid "_Deactivate All"
 #~ msgstr "_Skrij vse"
-
 #~ msgid "_About Plugin"
 #~ msgstr "_O vstavku"
-
 #~ msgid "C_onfigure Plugin"
 #~ msgstr "_Nastavitve vstavka"
-
 #~ msgid "Authentication needed"
 #~ msgstr "Zahtevana je overitev."
-
 #~ msgid "Enter the SSH password for the username and host %s@%s:"
 #~ msgstr "Vnesite SSH geslo za uporabniško ime in gostitelja %s@%s:"
-
 #~ msgid "All fields above are mandatory"
 #~ msgstr "Vsa zgornja polja morajo biti izpolnjena"
-
 #~ msgid "Could not merge vinagre-ui.xml: %s"
 #~ msgstr "Ni mogoče združiti vinagre-ui.xml: %s"
-
 #~ msgid "<b>Connection</b>"
 #~ msgstr "<b>Povezava</b>"
-
 #~ msgid "<b>Folder</b>"
 #~ msgstr "<b>Mapa</b>"
-
 #~ msgid "host or host:display or host::port"
 #~ msgstr "gostitelj ali gostitelj:zaslon ali gostitelj::vrata"
-
 #~ msgid "Supported formats"
 #~ msgstr "Podprte oblike zapisov"
-
 #~ msgid "Choose a VNC Server"
 #~ msgstr "Izbor VNC strežnika"
-
 #~ msgid "Could not find the host address in the file."
 #~ msgstr "Ni mogoče najti naslova gostitelja v tej datoteki."
-
 #~ msgid "Opens a .vnc file"
 #~ msgstr "Odpre datoteko .vnc"
-
 #~ msgid "- VNC Client for GNOME"
 #~ msgstr "- VNC odjemalec za GNOME"
-
 #~ msgid "Minimize window"
 #~ msgstr "Pomanjšaj okno"
-
 #~ msgid "_Read only"
 #~ msgstr "Samo za _branje"
-
 #~ msgid "Press Ctrl+Alt to release the cursor"
 #~ msgstr "Pritisnite Ctrl+Alt za sprostitev kazalke"
-
 #~ msgid "gtk-close"
 #~ msgstr "gtk-close"
-
 #~ msgid ""
 #~ "Scaling does not work properly on composited windows. Disable the visual "
 #~ "effects and try again."
 #~ msgstr ""
 #~ "Prilagajanje velikosti ne deluje pravilno na združenih oknih. Onemogočite "
 #~ "posebne učinke namizja in poskusite znova."
-
 #~ msgid "<b>Editing a bookmark</b>"
 #~ msgstr "<b>Urejanje zaznamka</b>"
-
 #~ msgid "<b>Enter a name for this connection</b>"
 #~ msgstr "<b>Vnesite ime za to povezavo</b>"
-
 #~ msgid ""
 #~ "<b>In order to connect on this machine, a password is required. Please "
 #~ "supply it.</b>"
 #~ msgstr ""
 #~ "<b>Za uspešno povezovanje z izbranim računalnikom morate vnesti geslo.</b>"
-
 #~ msgid "Editing a bookmark"
 #~ msgstr "Urejanje zaznamka"
-
 #~ msgid "Saving to bookmarks"
 #~ msgstr "Shranjevanje zaznamkov"
-
 #~ msgid "_Bookmark name:"
 #~ msgstr "_Ime zaznamka:"
-
 #~ msgid "Error: %s"
 #~ msgstr "Napaka: %s"
-
 #~ msgid "Error while removing %s from bookmarks: %s"
 #~ msgstr "Napaka med odstranjevanjem %s iz zaznamkov: %s"
-
 #~ msgid "Expected `%s' got `%s' for key %s"
 #~ msgstr "Pričakovan je `%s', dobljen pa `%s' za ključ %s"
-
 #~ msgid "Press Ctrl+Alt to grab the cursor"
 #~ msgstr "Pritisnite Ctrl+Alt za sprostitev kazalke"
+
