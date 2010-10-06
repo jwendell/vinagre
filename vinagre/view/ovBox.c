@@ -375,9 +375,8 @@ ViewOvBoxRealize(GtkWidget *widget) // IN
    attributes.window_type = GDK_WINDOW_CHILD;
    attributes.wclass = GDK_INPUT_OUTPUT;
    attributes.visual = gtk_widget_get_visual(widget);
-   attributes.colormap = gtk_widget_get_colormap(widget);
    attributes.event_mask = gtk_widget_get_events(widget) | GDK_EXPOSURE_MASK;
-   mask = GDK_WA_VISUAL | GDK_WA_COLORMAP | GDK_WA_X | GDK_WA_Y;
+   mask = GDK_WA_VISUAL | GDK_WA_X | GDK_WA_Y;
 
    gtk_widget_get_allocation(widget, &allocation);
    attributes.x = allocation.x;
