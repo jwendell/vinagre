@@ -129,7 +129,7 @@ setup_ip_buffer (VncListenDialog *dialog)
 }
 
 static void
-dialog_destroy (GtkObject *obj,
+dialog_destroy (GtkWidget *widget,
 		VncListenDialog *dialog)
 {
   g_object_unref (dialog->xml);
