@@ -226,16 +226,14 @@ menu_position (GtkMenu    *menu,
 	       gboolean   *push_in,
 	       VinagreTab *tab)
 {
-  int width, height;
   GdkWindow *window;
 
   window = gtk_widget_get_window (tab->priv->toolbar);
 
   gdk_window_get_origin (window, x, y);
-  gdk_drawable_get_size (window, &width, &height);
 
   *push_in = TRUE;
-  *y += height;
+  *y += gdk_window_get_height (window);
 }
 
 static void
