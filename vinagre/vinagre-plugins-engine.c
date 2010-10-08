@@ -38,6 +38,30 @@ struct _VinagrePluginsEnginePrivate
 VinagrePluginsEngine *default_engine = NULL;
 
 static void
+vinagre_plugins_engine_load_extensions (VinagrePluginsEngine *engine)
+{
+  GSList *plugins, *l;
+  gchar **loaded_plugins;
+  gint i;
+
+  g_object_get (vinagre_prefs_get_default (),
+		"active-plugins", &plugins,
+		NULL);
+
+  loaded_plugins = g_new0 (gchar *, g_slist_length (plugins) + 1);
+  i = 0;
+  for (l = plugins; l; l = l->next)
+    loaded_plugins[i++] = (l->data);
+
+  engine->priv->loading_plugin_list = TRUE;
+  peas_engine_set_loaded_plugins (PEAS_ENGINE (engine),
+				  (const gchar **) loaded_plugins);
+  engine->priv->loading_plugin_list = FALSE;
+  g_strfreev (loaded_plugins);
+  g_slist_free (plugins);
+}
+
+static void
 vinagre_plugins_engine_extension_added (PeasExtensionSet     *extensions,
 					PeasPluginInfo       *info,
 					PeasExtension        *exten,
@@ -75,15 +99,14 @@ vinagre_plugins_engine_extension_removed (PeasExtensionSet    *extensions,
 }
 
 static void
-vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
+vinagre_plugins_engine_constructed (GObject *object)
 {
-  engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
-					      VINAGRE_TYPE_PLUGINS_ENGINE,
-					      VinagrePluginsEnginePrivate);
+  VinagrePluginsEngine *engine;
 
-  engine->priv->loading_plugin_list = FALSE;
-  engine->priv->protocols = g_hash_table_new (g_str_hash, g_str_equal);
+  if (G_OBJECT_CLASS (vinagre_plugins_engine_parent_class)->constructed)
+    G_OBJECT_CLASS (vinagre_plugins_engine_parent_class)->constructed (object);
 
+  engine = VINAGRE_PLUGINS_ENGINE (object);
   engine->priv->extensions = peas_extension_set_new (PEAS_ENGINE (engine),
 						     VINAGRE_TYPE_PROTOCOL,
 						     NULL);
@@ -95,6 +118,52 @@ vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
 		    "extension-removed",
 		    G_CALLBACK (vinagre_plugins_engine_extension_removed),
 		    engine);
+
+  vinagre_plugins_engine_load_extensions (engine);
+}
+
+static void
+vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
+{
+  gchar *tmp, *typelib_dir;
+  GError *error = NULL;
+  PeasEngine *p_engine = PEAS_ENGINE (engine);
+
+  engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
+					      VINAGRE_TYPE_PLUGINS_ENGINE,
+					      VinagrePluginsEnginePrivate);
+
+  engine->priv->loading_plugin_list = FALSE;
+  engine->priv->protocols = g_hash_table_new (g_str_hash, g_str_equal);
+
+  /* This should be moved to libpeas */
+  g_irepository_require (g_irepository_get_default (),
+			 "Peas", "1.0", 0, NULL);
+  g_irepository_require (g_irepository_get_default (),
+			 "PeasUI", "1.0", 0, NULL);
+
+  /* Require vinagre's typelib. */
+  tmp = vinagre_dirs_get_vinagre_lib_dir ();
+  typelib_dir = g_build_filename (tmp,
+				  "girepository-1.0",
+				  NULL);
+  g_irepository_require_private (g_irepository_get_default (),
+				 typelib_dir, "Vinagre", "3.0", 0, &error);
+  g_free (typelib_dir);
+  g_free (tmp);
+  if (error)
+    {
+      g_print ("error registering vinagre typelib: %s\n", error->message);
+      g_error_free (error);
+    }
+
+  tmp = vinagre_dirs_get_user_plugins_dir ();
+  peas_engine_add_search_path (p_engine, tmp, tmp);
+  g_free (tmp);
+
+  tmp = vinagre_dirs_get_vinagre_plugins_dir ();
+  peas_engine_add_search_path (p_engine, tmp, tmp);
+  g_free (tmp);
 }
 
 static void
@@ -161,6 +230,7 @@ vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = vinagre_plugins_engine_finalize;
+  object_class->constructed = vinagre_plugins_engine_constructed;
 
   engine_class->load_plugin = vinagre_plugins_engine_load_plugin;
   engine_class->unload_plugin = vinagre_plugins_engine_unload_plugin;
@@ -168,86 +238,20 @@ vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
   g_type_class_add_private (klass, sizeof (VinagrePluginsEnginePrivate));
 }
 
-static void
-vinagre_plugins_engine_active_plugins_changed (VinagrePluginsEngine *engine)
-{
-  GSList *plugins, *l;
-  gchar **loaded_plugins;
-  gint i;
-
-  g_object_get (vinagre_prefs_get_default (),
-		"active-plugins", &plugins,
-		NULL);
-
-  loaded_plugins = g_new0 (gchar *, g_slist_length (plugins) + 1);
-  i = 0;
-  for (l = plugins; l; l = l->next)
-    loaded_plugins[i++] = (l->data);
-
-  engine->priv->loading_plugin_list = TRUE;
-  peas_engine_set_loaded_plugins (PEAS_ENGINE (engine),
-				  (const gchar **) loaded_plugins);
-  engine->priv->loading_plugin_list = FALSE;
-  g_strfreev (loaded_plugins);
-  g_slist_free (plugins);
-}
-
 /**
  * vinagre_plugins_engine_get_default:
  *
  * Return value: (transfer none):
- */VinagrePluginsEngine *
+ */
+VinagrePluginsEngine *
 vinagre_plugins_engine_get_default (void)
 {
-  gchar *tmp, *typelib_dir, **search_paths;
-  GError *error;
-
-  if (default_engine != NULL)
-    return default_engine;
-
-  /* This should be moved to libpeas */
-  g_irepository_require (g_irepository_get_default (),
-			 "Peas", "1.0", 0, NULL);
-  g_irepository_require (g_irepository_get_default (),
-			 "PeasUI", "1.0", 0, NULL);
-
-  /* Require vinagre's typelib. */
-  tmp = vinagre_dirs_get_vinagre_lib_dir ();
-  typelib_dir = g_build_filename (tmp,
-				  "girepository-1.0",
-				  NULL);
-  error = NULL;
-  g_irepository_require_private (g_irepository_get_default (),
-				 typelib_dir, "Vinagre", "3.0", 0, &error);
-  g_free (typelib_dir);
-  g_free (tmp);
-  if (error)
+  if (!default_engine)
     {
-      g_print ("error registering vinagre typelib: %s\n", error->message);
-      g_error_free (error);
+      default_engine = VINAGRE_PLUGINS_ENGINE (g_object_new (VINAGRE_TYPE_PLUGINS_ENGINE, NULL));
+      g_object_add_weak_pointer (G_OBJECT (default_engine),
+				 (gpointer) &default_engine);
     }
-
-  search_paths = g_new (gchar *, 5);
-  /* Add the user plugins dir in ~ */
-  search_paths[0] = vinagre_dirs_get_user_plugins_dir ();
-  search_paths[1] = vinagre_dirs_get_user_plugins_dir ();
-  /* Add the system plugins dir */
-  search_paths[2] = vinagre_dirs_get_vinagre_plugins_dir ();
-  search_paths[3] = vinagre_dirs_get_vinagre_plugins_dir ();
-  /* Add the trailing NULL */
-  search_paths[4] = NULL;
-
-  default_engine = VINAGRE_PLUGINS_ENGINE (g_object_new (VINAGRE_TYPE_PLUGINS_ENGINE,
-							 "app-name", "Vinagre",
-							 "search-paths", search_paths,
-							 NULL));
-
-  g_strfreev (search_paths);
-
-  g_object_add_weak_pointer (G_OBJECT (default_engine),
-			     (gpointer) &default_engine);
-
-  vinagre_plugins_engine_active_plugins_changed (default_engine);
 
   return default_engine;
 }
