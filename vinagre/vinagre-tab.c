@@ -219,6 +219,29 @@ default_get_extra_title (VinagreTab *tab)
   return NULL;
 }
 
+static GdkPixbuf *
+default_get_screenshot (VinagreTab *tab)
+{
+  cairo_t       *cr;
+  cairo_surface_t *s;
+  GtkAllocation alloc;
+  GdkPixbuf *pix;
+
+  gtk_widget_get_allocation (tab->priv->view, &alloc);
+  s = cairo_image_surface_create (CAIRO_FORMAT_RGB24, alloc.width, alloc.height);
+  cr = cairo_create (s);
+  gtk_widget_draw (tab->priv->view, cr);
+  pix = gdk_pixbuf_get_from_surface (cairo_get_target (cr),
+				     0,
+				     0,
+				     alloc.width,
+				     alloc.height);
+  cairo_destroy (cr);
+  cairo_surface_destroy (s);
+
+  return pix;
+}
+
 static void
 menu_position (GtkMenu    *menu,
 	       gint       *x,
@@ -380,7 +403,7 @@ vinagre_tab_class_init (VinagreTabClass *klass)
   object_class->constructed = vinagre_tab_constructed;
 
   klass->impl_get_tooltip = NULL;
-  klass->impl_get_screenshot = NULL;
+  klass->impl_get_screenshot = default_get_screenshot;
   klass->impl_get_dimensions = default_get_dimensions;
   klass->impl_get_always_sensitive_actions = default_get_always_sensitive_actions;
   klass->impl_get_connected_actions = default_get_connected_actions;
