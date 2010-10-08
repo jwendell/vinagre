@@ -106,7 +106,10 @@ VinagreNotebook *	vinagre_tab_get_notebook	(VinagreTab *tab);
 VinagreTabState		vinagre_tab_get_state		(VinagreTab *tab);
 VinagreTab *		vinagre_tab_get_from_connection	(VinagreConnection *conn);
 
+void			vinagre_tab_set_has_screenshot	(VinagreTab *tab, gboolean has_screenshot);
+gboolean		vinagre_tab_get_has_screenshot	(VinagreTab *tab);
 void			vinagre_tab_take_screenshot	(VinagreTab *tab);
+
 gchar *			vinagre_tab_get_tooltip		(VinagreTab *tab);
 void			vinagre_tab_get_dimensions	(VinagreTab *tab, int *w, int *h);
 

@@ -47,6 +47,7 @@ struct _VinagreTabPrivate
   VinagreTabState    state;
   GtkWidget         *layout;
   GtkWidget         *toolbar;
+  gboolean          has_screenshot;
 };
 
 G_DEFINE_ABSTRACT_TYPE (VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
@@ -67,7 +68,8 @@ enum
   PROP_0,
   PROP_CONN,
   PROP_WINDOW,
-  PROP_TOOLTIP
+  PROP_TOOLTIP,
+  PROP_HAS_SCREENSHOT
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
@@ -138,6 +140,10 @@ vinagre_tab_get_property (GObject    *object,
 	break;
       case PROP_TOOLTIP:
 	g_value_take_string (value, vinagre_tab_get_tooltip (tab));
+	break;
+      case PROP_HAS_SCREENSHOT:
+	g_value_set_boolean (value, tab->priv->has_screenshot);
+	break;
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;			
@@ -165,6 +171,9 @@ vinagre_tab_set_property (GObject      *object,
 			  G_CALLBACK (vinagre_tab_window_state_cb),
 			  tab);
         break;
+      case PROP_HAS_SCREENSHOT:
+	tab->priv->has_screenshot = g_value_get_boolean (value);
+	break;
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;			
@@ -443,6 +452,17 @@ vinagre_tab_class_init (VinagreTabClass *klass)
 							G_PARAM_STATIC_NAME |
 							G_PARAM_STATIC_NICK |
 							G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+				   PROP_HAS_SCREENSHOT,
+				   g_param_spec_boolean ("has-screenshot",
+							 "Has Screenshot",
+							 "Whether this tab has the ability to take a screenshot",
+							 FALSE,
+							 G_PARAM_READWRITE |
+							 G_PARAM_STATIC_NAME |
+							 G_PARAM_STATIC_NICK |
+							 G_PARAM_STATIC_BLURB));
 
   signals[TAB_CONNECTED] =
 		g_signal_new ("tab-connected",
@@ -865,6 +885,9 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
 
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
+  if (!tab->priv->has_screenshot)
+    return;
+
   pix = VINAGRE_TAB_GET_CLASS (tab)->impl_get_screenshot (tab);
   if (!pix)
     {
@@ -1003,6 +1026,22 @@ vinagre_tab_get_icon_name (VinagreTab *tab)
   g_return_val_if_fail (ext != NULL, NULL);
 
   return vinagre_protocol_get_icon_name (ext);
+}
+
+void
+vinagre_tab_set_has_screenshot (VinagreTab *tab, gboolean has_screenshot)
+{
+  g_return_if_fail (VINAGRE_IS_TAB (tab));
+
+  tab->priv->has_screenshot = has_screenshot;
+}
+
+gboolean
+vinagre_tab_get_has_screenshot (VinagreTab *tab)
+{
+  g_return_val_if_fail (VINAGRE_IS_TAB (tab), FALSE);
+
+  return tab->priv->has_screenshot;
 }
 
 /* vim: set ts=8: */
