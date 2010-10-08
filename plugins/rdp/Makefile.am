@@ -17,11 +17,9 @@ librdp_la_SOURCES = 						\
 librdp_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 librdp_la_LIBADD  = $(rdp_LIBS)
 
-plugin_in_files = rdp.vinagre-plugin.desktop.in
-
-rdp.vinagre-plugin: rdp.vinagre-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
-
-plugin_DATA = $(plugin_in_files:.vinagre-plugin.desktop.in=.vinagre-plugin)
+plugin_in_files = rdp.plugin.desktop.in
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 EXTRA_DIST = $(plugin_in_files)
 CLEANFILES = $(plugin_DATA)
