@@ -50,22 +50,6 @@ ssh_tab_get_tooltip (VinagreTab *tab)
 				  _("Port:"), vinagre_connection_get_port (conn));
 }
 
-static GdkPixbuf *
-ssh_tab_get_screenshot (VinagreTab *tab)
-{
-  GdkPixbuf *pixbuf;
-  GdkPixmap *pixmap = gtk_widget_get_snapshot (VINAGRE_SSH_TAB (tab)->priv->vte, NULL);
-
-  pixbuf = gdk_pixbuf_get_from_drawable (NULL,
-					 GDK_DRAWABLE (pixmap),
-					 gdk_colormap_get_system (),
-					 0, 0, 0, 0,
-					 -1, -1);
-
-  g_object_unref (pixmap);
-  return pixbuf;
-}
-
 static gboolean
 emit_delayed_signal (GObject *object)
 {
@@ -134,7 +118,6 @@ vinagre_ssh_tab_class_init (VinagreSshTabClass *klass)
   object_class->constructed = vinagre_ssh_tab_constructed;
 
   tab_class->impl_get_tooltip = ssh_tab_get_tooltip;
-  tab_class->impl_get_screenshot = ssh_tab_get_screenshot;
 
   g_type_class_add_private (object_class, sizeof (VinagreSshTabPrivate));
 }
