@@ -25,11 +25,9 @@ libreversevnc_la_LIBADD  = $(VNC_LIBS)
 uidir = $(VINAGRE_PLUGINS_DATA_DIR)/reverse-vnc
 ui_DATA = reverse-vnc.ui
 
-plugin_in_files = reverse-vnc.vinagre-plugin.desktop.in
-
-reverse-vnc.vinagre-plugin: reverse-vnc.vinagre-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
-
-plugin_DATA = $(plugin_in_files:.vinagre-plugin.desktop.in=.vinagre-plugin)
+plugin_in_files = reverse-vnc.plugin.desktop.in
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
 
