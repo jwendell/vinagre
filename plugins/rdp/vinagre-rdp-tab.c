@@ -54,12 +54,6 @@ rdp_tab_get_tooltip (VinagreTab *tab)
 				  _("Port:"), vinagre_connection_get_port (conn));
 }
 
-static GdkPixbuf *
-rdp_tab_get_screenshot (VinagreTab *tab)
-{
-  return NULL;
-}
-
 static void
 emit_connected_signal (GtkSocket *socket, VinagreRdpTab *rdp_tab)
 {
@@ -186,7 +180,6 @@ vinagre_rdp_tab_class_init (VinagreRdpTabClass *klass)
   object_class->dispose = vinagre_rdp_tab_dispose;
 
   tab_class->impl_get_tooltip = rdp_tab_get_tooltip;
-  tab_class->impl_get_screenshot = rdp_tab_get_screenshot;
 
   g_type_class_add_private (object_class, sizeof (VinagreRdpTabPrivate));
 }
