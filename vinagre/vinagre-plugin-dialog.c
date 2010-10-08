@@ -50,7 +50,7 @@ setup_plugins_page (VinagrePluginDialog *dlg)
 {
   GtkWidget *page_content;
 
-  page_content = peas_gtk_plugin_manager_new (PEAS_ENGINE (vinagre_plugins_engine_get_default ()));
+  page_content = peas_gtk_plugin_manager_new ();
   g_return_if_fail (page_content != NULL);
 
   gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
