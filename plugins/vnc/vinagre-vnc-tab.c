@@ -150,14 +150,6 @@ vnc_tab_get_tooltip (VinagreTab *tab)
 				  _("Dimensions:"), vnc_display_get_width (VNC_DISPLAY (vnc_tab->priv->vnc)), vnc_display_get_height (VNC_DISPLAY (vnc_tab->priv->vnc)));
 }
 
-static GdkPixbuf *
-vnc_tab_get_screenshot (VinagreTab *tab)
-{
-  VinagreVncTab *vnc_tab = VINAGRE_VNC_TAB (tab);
-
-  return vnc_display_get_pixbuf (VNC_DISPLAY (vnc_tab->priv->vnc));
-}
-
 static void
 vinagre_vnc_tab_finalize (GObject *object)
 {
@@ -223,7 +215,6 @@ vinagre_vnc_tab_class_init (VinagreVncTabClass *klass)
   tab_class->impl_get_tooltip = vnc_tab_get_tooltip;
   tab_class->impl_get_connected_actions = vnc_get_connected_actions;
   tab_class->impl_get_initialized_actions = vnc_get_initialized_actions;
-  tab_class->impl_get_screenshot = vnc_tab_get_screenshot;
 
   g_object_class_install_property (object_class,
 				   PROP_ORIGINAL_WIDTH,
@@ -798,6 +789,7 @@ vinagre_vnc_tab_init (VinagreVncTab *vnc_tab)
   gtk_container_add (GTK_CONTAINER (vnc_tab->priv->align), vnc_tab->priv->vnc);
 
   vinagre_tab_add_view (VINAGRE_TAB (vnc_tab), vnc_tab->priv->align);
+  vinagre_tab_set_has_screenshot (VINAGRE_TAB (vnc_tab), TRUE);
 
   g_signal_connect (vnc_tab->priv->vnc,
 		    "vnc-connected",
