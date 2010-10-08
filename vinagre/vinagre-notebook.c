@@ -202,6 +202,7 @@ vinagre_notebook_update_ui_sentitivity (VinagreNotebook *nb)
 {
   gboolean       active;
   GtkActionGroup *action_group;
+  GtkAction      *action;
 
   active = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb)) > 0;
   action_group = vinagre_window_get_connected_action (nb->priv->window);
@@ -211,6 +212,11 @@ vinagre_notebook_update_ui_sentitivity (VinagreNotebook *nb)
   active = (nb->priv->active_tab) &&
 	   (vinagre_tab_get_state (VINAGRE_TAB (nb->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED);
   gtk_action_group_set_sensitive (action_group, active);
+
+  action = gtk_action_group_get_action (action_group, "MachineTakeScreenshot");
+  gtk_action_set_sensitive (action, active &&
+				    nb->priv->active_tab &&
+				    vinagre_tab_get_has_screenshot (nb->priv->active_tab));
 
   if (nb->priv->active_tab)
     {
