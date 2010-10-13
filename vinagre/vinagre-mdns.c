@@ -71,12 +71,22 @@ mdns_resolver_found (GaServiceResolver *resolver,
   VinagreBookmarksEntry *entry;
   BrowserEntry          *b_entry;
   char                  a[AVAHI_ADDRESS_STR_MAX], *u = NULL;
+  GSList *l;
 
   b_entry = g_hash_table_lookup (mdns->priv->browsers, type);
   if (!b_entry)
     {
       g_warning ("Service name not found in mDNS resolver hash table. This probably is a bug somewhere.");
       return;
+    }
+
+  for (l = mdns->priv->entries; l; l = l->next)
+    {
+      VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
+      if (strcmp (vinagre_connection_get_name (vinagre_bookmarks_entry_get_conn (entry)), name) == 0)
+	{
+	  goto out;
+	}
     }
 
   for (; txt; txt = txt->next)
@@ -108,8 +118,11 @@ mdns_resolver_found (GaServiceResolver *resolver,
 					       entry,
 					       (GCompareFunc)vinagre_bookmarks_entry_compare);
 
-  g_object_unref (resolver);
   g_signal_emit (mdns, signals[MDNS_CHANGED], 0);
+
+out:
+  g_object_unref (resolver);
+  g_free (u);
 }
 
 static void
