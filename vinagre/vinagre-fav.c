@@ -871,8 +871,17 @@ vinagre_fav_create_title (VinagreFav *fav)
 }
 
 static void
+protocol_added_removed_cb (VinagrePluginsEngine *engine,
+			   VinagreProtocol      *protocol,
+			   VinagreFav           *fav)
+{
+  vinagre_fav_update_list (fav);
+}
+
+static void
 vinagre_fav_constructed (GObject *object)
 {
+  VinagrePluginsEngine *engine;
   VinagreFav *fav = VINAGRE_FAV (object);
 
   if (G_OBJECT_CLASS (vinagre_fav_parent_class)->constructed)
@@ -907,6 +916,16 @@ vinagre_fav_constructed (GObject *object)
                             G_CALLBACK (vinagre_fav_update_list),
                             fav);
 #endif
+
+  engine = vinagre_plugins_engine_get_default ();
+  g_signal_connect_after (engine,
+			  "protocol-added",
+			  G_CALLBACK (protocol_added_removed_cb),
+			  fav);
+  g_signal_connect_after (engine,
+			  "protocol-removed",
+			  G_CALLBACK (protocol_added_removed_cb),
+			  fav);
 }
 
 static void
@@ -994,11 +1013,13 @@ vinagre_fav_fill_bookmarks (GtkTreeStore *store, GSList *list, GtkTreeIter *pare
 
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
-	    name = vinagre_connection_get_best_name (conn);
 	    ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
 								 vinagre_connection_get_protocol (conn));
+	    if (!ext)
+	      continue;
 
 	    pixbuf = vinagre_protocol_get_icon (ext, 16);
+	    name = vinagre_connection_get_best_name (conn);
 
 	    gtk_tree_store_append (store, &iter, parent_iter);
 	    gtk_tree_store_set (store, &iter,
