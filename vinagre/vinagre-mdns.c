@@ -248,22 +248,18 @@ vinagre_mdns_add_service (VinagreMdns     *mdns,
 static void
 vinagre_mdns_remove_entries_by_protocol (VinagreMdns *mdns, const gchar *protocol)
 {
-  GSList *l;
-  gboolean changed = FALSE;
+  GSList *l, *next;
 
-  for (l = mdns->priv->entries; l; l = l->next)
+  for (l = mdns->priv->entries; l; l = next)
     {
       VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
+      next = l->next;
       if (strcmp (vinagre_connection_get_protocol (vinagre_bookmarks_entry_get_conn (entry)), protocol) == 0)
 	{
 	  mdns->priv->entries = g_slist_remove (mdns->priv->entries, entry);
 	  g_object_unref (entry);
-	  changed = TRUE;
 	}
     }
-
-  if (changed)
-    g_signal_emit (mdns, signals[MDNS_CHANGED], 0);
 }
 
 static void
@@ -288,7 +284,6 @@ protocol_removed_cb (VinagrePluginsEngine *engine,
   vinagre_mdns_remove_entries_by_protocol (mdns,
 					   vinagre_protocol_get_protocol (protocol));
   g_hash_table_remove (mdns->priv->browsers, (gconstpointer)service);
-
 }
 
 static void
