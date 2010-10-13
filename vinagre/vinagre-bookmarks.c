@@ -286,7 +286,6 @@ vinagre_bookmarks_parse_item (xmlNode *root)
 
   if (!ext)
     {
-      g_warning (_("The protocol %s is not supported."), protocol);
       goto out;
     }
 

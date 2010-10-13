@@ -75,7 +75,7 @@ mdns_resolver_found (GaServiceResolver *resolver,
   b_entry = g_hash_table_lookup (mdns->priv->browsers, type);
   if (!b_entry)
     {
-      g_error ("Service name not found in mDNS resolver hash table. This probably is a bug somewhere.");
+      g_warning ("Service name not found in mDNS resolver hash table. This probably is a bug somewhere.");
       return;
     }
 
