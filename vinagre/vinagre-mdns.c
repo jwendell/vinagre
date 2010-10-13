@@ -27,13 +27,12 @@
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-plugins-engine.h"
-
-typedef struct {void *plugin; char*name;} VinagrePluginInfo;
+#include "vinagre-protocol.h"
 
 typedef struct
 {
-  GaServiceBrowser  *browser;
-  VinagrePluginInfo *info;
+  GaServiceBrowser *browser;
+  VinagreProtocol  *protocol;
 } BrowserEntry;
 
 struct _VinagreMdnsPrivate
@@ -95,7 +94,7 @@ mdns_resolver_found (GaServiceResolver *resolver,
     }
 
   avahi_address_snprint (a, sizeof(a), address);
-  conn = vinagre_protocol_new_connection (b_entry->info->plugin);
+  conn = vinagre_protocol_new_connection (b_entry->protocol);
   g_object_set (conn,
                 "name", name,
                 "port", port,
@@ -190,31 +189,27 @@ static void
 destroy_browser_entry (BrowserEntry *entry)
 {
   g_object_unref (entry->browser);
-//  _vinagre_plugin_info_unref (entry->info);
+  g_object_unref (entry->protocol);
   g_free (entry);
 }
 
 static void
-vinagre_mdns_add_service (VinagrePluginInfo *info,
-			  VinagreMdns       *mdns)
+vinagre_mdns_add_service (VinagreMdns     *mdns,
+			  VinagreProtocol *protocol)
 {
   GaServiceBrowser *browser;
   GError           *error = NULL;
   const gchar      *service;
   BrowserEntry     *entry;
 
-//  if (!vinagre_plugin_info_is_active (info))
-//    return;
-
-  service = vinagre_protocol_get_mdns_service (info->plugin);
+  service = vinagre_protocol_get_mdns_service (protocol);
   if (!service)
     return;
 
   entry = g_hash_table_lookup (mdns->priv->browsers, service);
   if (entry)
     {
-      g_warning (_("Plugin %s has already registered a browser for service %s."),
-		 info->name,
+      g_warning (_("The service %s was already registered by another plugin."),
 		 service);
       return;
     }
@@ -246,8 +241,7 @@ vinagre_mdns_add_service (VinagrePluginInfo *info,
 
   entry = g_new (BrowserEntry, 1);
   entry->browser = g_object_ref (browser);
-  //_vinagre_plugin_info_ref (info);
-  entry->info = info;
+  entry->protocol = g_object_ref (protocol);
   g_hash_table_insert (mdns->priv->browsers, (gpointer)service, entry);
 }
 
@@ -273,26 +267,26 @@ vinagre_mdns_remove_entries_by_protocol (VinagreMdns *mdns, const gchar *protoco
 }
 
 static void
-plugin_activated_cb (VinagrePluginsEngine *engine,
-		     VinagrePluginInfo    *info,
-		     VinagreMdns          *mdns)
+protocol_added_cb (VinagrePluginsEngine *engine,
+		   VinagreProtocol      *protocol,
+		   VinagreMdns          *mdns)
 {
-  vinagre_mdns_add_service (info, mdns);
+  vinagre_mdns_add_service (mdns, protocol);
 }
 
 static void
-plugin_deactivated_cb (VinagrePluginsEngine *engine,
-		       VinagrePluginInfo    *info,
-		       VinagreMdns          *mdns)
+protocol_removed_cb (VinagrePluginsEngine *engine,
+		     VinagreProtocol      *protocol,
+		     VinagreMdns          *mdns)
 {
   const gchar *service;
 
-  service = vinagre_protocol_get_mdns_service (info->plugin);
+  service = vinagre_protocol_get_mdns_service (protocol);
   if (!service)
     return;
 
   vinagre_mdns_remove_entries_by_protocol (mdns,
-					   vinagre_protocol_get_protocol (info->plugin));
+					   vinagre_protocol_get_protocol (protocol));
   g_hash_table_remove (mdns->priv->browsers, (gconstpointer)service);
 
 }
@@ -303,6 +297,9 @@ vinagre_mdns_init (VinagreMdns *mdns)
   GError *error = NULL;
   GSList *plugins;
   VinagrePluginsEngine *engine;
+  VinagreProtocol *protocol;
+  GHashTable *protocols;
+  GHashTableIter iter;
 
   mdns->priv = G_TYPE_INSTANCE_GET_PRIVATE (mdns, VINAGRE_TYPE_MDNS, VinagreMdnsPrivate);
 
@@ -320,19 +317,20 @@ vinagre_mdns_init (VinagreMdns *mdns)
     }
 
   engine = vinagre_plugins_engine_get_default ();
-/*
-  plugins = (GSList *)vinagre_plugins_engine_get_plugin_list (engine);
-  g_slist_foreach (plugins,
-		   (GFunc)vinagre_mdns_add_service,
-		   mdns);
-*/
-  g_signal_connect_after (engine,
-			  "activate-plugin",
-			  G_CALLBACK (plugin_activated_cb),
-			  mdns);
+  protocols = vinagre_plugins_engine_get_plugins_by_protocol (engine);
+  g_hash_table_iter_init (&iter, protocols);
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&protocol))
+    {
+      vinagre_mdns_add_service (mdns, protocol);
+    }
+
   g_signal_connect (engine,
-		    "deactivate-plugin",
-		    G_CALLBACK (plugin_deactivated_cb),
+		    "protocol-added",
+		    G_CALLBACK (protocol_added_cb),
+		    mdns);
+  g_signal_connect (engine,
+		    "protocol-removed",
+		    G_CALLBACK (protocol_removed_cb),
 		    mdns);
 }
 
