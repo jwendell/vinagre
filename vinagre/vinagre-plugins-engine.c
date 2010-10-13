@@ -35,6 +35,14 @@ struct _VinagrePluginsEnginePrivate
   PeasExtensionSet *extensions;
 };
 
+enum
+{
+  PROTOCOL_ADDED,
+  PROTOCOL_REMOVED,
+  LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
 VinagrePluginsEngine *default_engine = NULL;
 
 static void
@@ -83,19 +91,21 @@ vinagre_plugins_engine_extension_added (PeasExtensionSet     *extensions,
     }
 
   g_hash_table_insert (engine->priv->protocols, (gpointer)protocol, exten);
+  g_signal_emit (engine, signals[PROTOCOL_ADDED], 0, exten);
 }
 
 static void
-vinagre_plugins_engine_extension_removed (PeasExtensionSet    *extensions,
-					  PeasPluginInfo      *info,
-					  PeasExtension       *exten,
-					 VinagrePluginsEngine *engine)
+vinagre_plugins_engine_extension_removed (PeasExtensionSet     *extensions,
+					  PeasPluginInfo       *info,
+					  PeasExtension        *exten,
+					  VinagrePluginsEngine *engine)
 {
   const gchar *protocol = NULL;
 
   peas_extension_call (exten, "get_protocol", &protocol);
 
   g_hash_table_remove (engine->priv->protocols, (gpointer)protocol);
+  g_signal_emit (engine, signals[PROTOCOL_REMOVED], 0, exten);
 }
 
 static void
@@ -234,6 +244,28 @@ vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
 
   engine_class->load_plugin = vinagre_plugins_engine_load_plugin;
   engine_class->unload_plugin = vinagre_plugins_engine_unload_plugin;
+
+  signals[PROTOCOL_ADDED] =
+		g_signal_new ("protocol-added",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      0,
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1,
+			      PEAS_TYPE_EXTENSION);
+
+  signals[PROTOCOL_REMOVED] =
+		g_signal_new ("protocol-removed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      0,
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1,
+			      PEAS_TYPE_EXTENSION);
 
   g_type_class_add_private (klass, sizeof (VinagrePluginsEnginePrivate));
 }
