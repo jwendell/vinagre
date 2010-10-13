@@ -58,10 +58,19 @@ static void vinagre_bookmarks_file_changed     (GFileMonitor     *monitor,
 					        VinagreBookmarks  *book);
 
 static void
+protocol_added_removed_cb (VinagrePluginsEngine *engine,
+			   VinagreProtocol      *protocol,
+			   VinagreBookmarks     *book)
+{
+  vinagre_bookmarks_update_from_file (book);
+}
+
+static void
 vinagre_bookmarks_init (VinagreBookmarks *book)
 {
   GFile *gfile;
   gchar *dir;
+  VinagrePluginsEngine *engine;
 
   book->priv = G_TYPE_INSTANCE_GET_PRIVATE (book, VINAGRE_TYPE_BOOKMARKS, VinagreBookmarksPrivate);
   book->priv->entries = NULL;
@@ -88,6 +97,16 @@ vinagre_bookmarks_init (VinagreBookmarks *book)
                     "changed",
                     G_CALLBACK (vinagre_bookmarks_file_changed),
                     book);
+
+  engine = vinagre_plugins_engine_get_default ();
+  g_signal_connect (engine,
+		    "protocol-added",
+		    G_CALLBACK (protocol_added_removed_cb),
+		    book);
+  g_signal_connect (engine,
+		    "protocol-removed",
+		    G_CALLBACK (protocol_added_removed_cb),
+		    book);
 }
 
 static void
