@@ -542,6 +542,8 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 	    ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
 								 vinagre_connection_get_protocol (conn));
+	    if (!ext)
+	     continue;
 
 	    action_name = vinagre_connection_get_best_name (conn);
 	    action_label = vinagre_utils_escape_underscores (action_name, -1);
@@ -773,9 +775,18 @@ extension_removed (PeasExtensionSet *extensions,
 }
 
 static void
+protocol_added_removed_cb (VinagrePluginsEngine *engine,
+			   VinagreProtocol      *protocol,
+			   VinagreWindow        *window)
+{
+  vinagre_window_update_bookmarks_list_menu (window);
+}
+
+static void
 vinagre_window_init (VinagreWindow *window)
 {
   GtkWidget *main_box;
+  VinagrePluginsEngine *engine;
 
   gtk_window_set_default_icon_name ("vinagre");
 
@@ -826,7 +837,8 @@ vinagre_window_init (VinagreWindow *window)
                             window);
 #endif
 
-  window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (vinagre_plugins_engine_get_default ()),
+  engine = vinagre_plugins_engine_get_default ();
+  window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (engine),
 						     PEAS_TYPE_ACTIVATABLE,
 						     "object", window,
 						     NULL);
@@ -839,6 +851,15 @@ vinagre_window_init (VinagreWindow *window)
 		    G_CALLBACK (extension_removed),
 		    window);
   peas_extension_set_call (window->priv->extensions, "activate");
+
+  g_signal_connect_after (engine,
+			  "protocol-added",
+			  G_CALLBACK (protocol_added_removed_cb),
+			  window);
+  g_signal_connect_after (engine,
+			  "protocol-removed",
+			  G_CALLBACK (protocol_added_removed_cb),
+			  window);
 
   g_idle_add ((GSourceFunc) vinagre_window_check_first_run, window);
 }
