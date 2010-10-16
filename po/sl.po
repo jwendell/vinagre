@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-10-09 11:24+0000\n"
-"PO-Revision-Date: 2010-10-09 20:14+0100\n"
+"POT-Creation-Date: 2010-10-14 19:31+0000\n"
+"PO-Revision-Date: 2010-10-16 21:40+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -239,8 +239,8 @@ msgid "Error while executing rdesktop"
 msgstr "Napaka med izvajanjem programa rdesktop"
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:124
-#: ../vinagre/vinagre-bookmarks.c:348
-#: ../vinagre/vinagre-bookmarks.c:474
+#: ../vinagre/vinagre-bookmarks.c:366
+#: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:56
 #: ../vinagre/vinagre-commands.c:173
@@ -249,7 +249,7 @@ msgstr "Napaka med izvajanjem programa rdesktop"
 #: ../vinagre/vinagre-options.c:82
 #: ../vinagre/vinagre-options.c:100
 #: ../vinagre/vinagre-window.c:278
-#: ../vinagre/vinagre-window.c:748
+#: ../vinagre/vinagre-window.c:750
 msgid "Unknown error"
 msgstr "Neznana napaka"
 
@@ -627,42 +627,34 @@ msgstr "Odpri pregledovalnik oddaljenih namizij"
 msgid "Access your bookmarks"
 msgstr "Dostop do zaznamkov"
 
-#: ../vinagre/vinagre-bookmarks.c:270
-#: ../vinagre/vinagre-connection.c:525
-#: ../vinagre/vinagre-tab.c:573
-#: ../vinagre/vinagre-tube-handler.c:253
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "Protokol %s ni podprt."
-
-#: ../vinagre/vinagre-bookmarks.c:348
+#: ../vinagre/vinagre-bookmarks.c:366
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Napaka med zaganjanjem zaznamkov: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:355
+#: ../vinagre/vinagre-bookmarks.c:373
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Napaka med zaganjanjem zaznamkov: datoteka je videti prazna."
 
-#: ../vinagre/vinagre-bookmarks.c:362
+#: ../vinagre/vinagre-bookmarks.c:380
 msgid "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "Napaka med zaganjanjem zaznamkov: datoteka ni prava vinagre datoteka zaznamkov."
 
-#: ../vinagre/vinagre-bookmarks.c:435
-#: ../vinagre/vinagre-bookmarks.c:442
+#: ../vinagre/vinagre-bookmarks.c:453
+#: ../vinagre/vinagre-bookmarks.c:460
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "Napaka med shranjevanjem zaznamkov: napaka med ustvarjanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks.c:449
-#: ../vinagre/vinagre-bookmarks.c:456
+#: ../vinagre/vinagre-bookmarks.c:467
+#: ../vinagre/vinagre-bookmarks.c:474
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "Napaka med shranjevanjem zaznamkov: napaka med zaganjanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks.c:465
+#: ../vinagre/vinagre-bookmarks.c:483
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "Napaka med shranjevanjem zaznamkov: napaka med zaključevanjem XML zgradbe."
 
-#: ../vinagre/vinagre-bookmarks.c:474
+#: ../vinagre/vinagre-bookmarks.c:492
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Napaka med shranjevanjem zaznamkov: %s"
@@ -805,6 +797,13 @@ msgstr "Napaka med shranjevanjem datoteke zgodovine: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Zapri oddaljeno namizje"
 
+#: ../vinagre/vinagre-connection.c:525
+#: ../vinagre/vinagre-tab.c:573
+#: ../vinagre/vinagre-tube-handler.c:253
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "Protokol %s ni podprt."
+
 #: ../vinagre/vinagre-connection.c:633
 msgid "Could not open the file."
 msgstr "Ni mogoče odpreti datoteke."
@@ -863,7 +862,7 @@ msgstr "Podatki prejeti preko povleci&spusti so neveljavni."
 msgid "Hide panel"
 msgstr "Skrij pult"
 
-#: ../vinagre/vinagre-fav.c:1047
+#: ../vinagre/vinagre-fav.c:1068
 msgid "Hosts nearby"
 msgstr "Gostitelji v bližini"
 
@@ -876,28 +875,28 @@ msgstr "- Pregledovalnik oddaljenih namizij"
 msgid "Run 'vinagre --help' to see a full list of available command line options"
 msgstr "Zagon ukaza 'vinagre --help' izpiše celoten seznam ukazov, ki so na voljo."
 
-#: ../vinagre/vinagre-mdns.c:159
+#: ../vinagre/vinagre-mdns.c:171
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Napaka med razčlenjevanjem avahi imena gostitelja: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:216
-#, c-format
-msgid "Plugin %s has already registered a browser for service %s."
-msgstr "Vstavek %s je že objavil brskalnik za storitev %s."
-
 #: ../vinagre/vinagre-mdns.c:225
+#, c-format
+msgid "The service %s was already registered by another plugin."
+msgstr "Storitev %s je že vpisana pri drugem vstavku."
+
+#: ../vinagre/vinagre-mdns.c:233
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Napaka med dodajanjem mDNS brskalnika za storitev %s."
 
 #. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
-#: ../vinagre/vinagre-mdns.c:242
+#: ../vinagre/vinagre-mdns.c:250
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Napaka med brskanjem za gostitelji: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:315
+#: ../vinagre/vinagre-mdns.c:320
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Napaka med zaganjanjem mDNS brskalnika: %s\n"
@@ -1284,16 +1283,16 @@ msgid "_Recent connections"
 msgstr "_Nedavne povezave"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:553
+#: ../vinagre/vinagre-window.c:555
 #, c-format
 msgid "Open %s:%d"
 msgstr "Odpri %s:%d"
 
-#: ../vinagre/vinagre-window.c:732
+#: ../vinagre/vinagre-window.c:734
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "O meniju in tipkovnih bližnicah"
 
-#: ../vinagre/vinagre-window.c:734
+#: ../vinagre/vinagre-window.c:736
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by default. The reason is to avoid the keys to be intercepted by the program, and allow them to be sent to the remote machine.\n"
 "\n"
@@ -1307,12 +1306,14 @@ msgstr ""
 "\n"
 "To sporočilo je bilo prikazano le tokrat."
 
-#: ../vinagre/vinagre-window.c:742
-#: ../vinagre/vinagre-window.c:748
+#: ../vinagre/vinagre-window.c:744
+#: ../vinagre/vinagre-window.c:750
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Napaka med ustvarjanjem datoteke %s: %s"
 
+#~ msgid "Plugin %s has already registered a browser for service %s."
+#~ msgstr "Vstavek %s je že objavil brskalnik za storitev %s."
 #~ msgid "Plugin"
 #~ msgstr "Vstavek"
 #~ msgid "Enabled"
