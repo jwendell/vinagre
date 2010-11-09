@@ -805,7 +805,7 @@ vinagre_window_init (VinagreWindow *window)
   create_statusbar (window, main_box);
 
   /* Add the main area */
-  window->priv->hpaned = gtk_hpaned_new ();
+  window->priv->hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_box_pack_start (GTK_BOX (main_box), 
   		      window->priv->hpaned, 
   		      TRUE, 
