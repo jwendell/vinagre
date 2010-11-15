@@ -261,7 +261,7 @@ setup_combo (VinagreConnectDialog *dialog)
 
   gtk_combo_box_set_model (GTK_COMBO_BOX (dialog->host_entry),
 			   GTK_TREE_MODEL (store));
-  gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (dialog->host_entry),
+  gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (dialog->host_entry),
 				       0);
 
   completion = gtk_entry_completion_new ();
@@ -284,7 +284,7 @@ save_history (GtkWidget *combo) {
   GString *content;
   GError *error = NULL;
 
-  host = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
+  host = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
 
   history = saved_history ();
   for (i=0; i<history->len; i++)
@@ -443,7 +443,7 @@ vinagre_connect (VinagreWindow *window)
       GtkTreeIter iter;
       VinagreProtocol *ext;
 
-      host = gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog.host_entry));
+      host = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (dialog.host_entry));
       gtk_widget_hide (GTK_WIDGET (dialog.dialog));
 
       if (!host || !g_strcmp0 (host, ""))
