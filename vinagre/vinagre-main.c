@@ -118,7 +118,7 @@ int main (int argc, char **argv) {
   if (!app)
     g_error ("%s", error->message);
 
-  if (g_application_is_remote (G_APPLICATION (app)))
+  if (g_application_get_is_remote (G_APPLICATION (app)))
     {
       vinagre_options_invoke_remote_instance (app, &optionstate);
       return 0;
