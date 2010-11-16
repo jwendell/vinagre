@@ -64,7 +64,8 @@ save_file (void)
 void
 vinagre_cache_prefs_finalize (void)
 {
-  g_return_if_fail (keyfile != NULL);
+  if (keyfile == NULL)
+    return;
 
   save_file ();
 
