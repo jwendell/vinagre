@@ -49,21 +49,15 @@ const GOptionEntry all_options [] =
 VinagreCmdLineOptions optionstate;
 
 void
-vinagre_options_register_actions (GtkApplication *app)
-{
-  GApplication *g_app = G_APPLICATION (app);
-  g_application_add_action (g_app, "uris", "List of machines to connect to");
-}
-
-void
-vinagre_options_process_command_line (GtkWindow *window, const VinagreCmdLineOptions *options)
+vinagre_options_process_command_line (GtkApplication *app,
+				      GtkWindow      *window,
+				      const VinagreCmdLineOptions *options)
 {
   gint               i;
   VinagreConnection *conn;
   gchar             *error;
   GSList            *errors, *servers, *l;
   VinagreWindow     *v_window;
-  GtkApplication    *app;
 
   errors = servers = NULL;
 
@@ -104,13 +98,12 @@ vinagre_options_process_command_line (GtkWindow *window, const VinagreCmdLineOpt
       g_strfreev (options->uris);
     }
 
-  app = GTK_APPLICATION (g_application_get_instance ());
   if (servers &&
       options->new_window)
     {
       v_window = vinagre_window_new ();
       gtk_widget_show (GTK_WIDGET (v_window));
-      gtk_application_add_window (app, GTK_WINDOW (v_window));
+      gtk_window_set_application (GTK_WINDOW (v_window), app);
     }
   else
     {
@@ -140,90 +133,4 @@ vinagre_options_process_command_line (GtkWindow *window, const VinagreCmdLineOpt
   gtk_window_present (GTK_WINDOW (v_window));
 }
 
-void
-vinagre_options_invoke_remote_instance (GtkApplication *app, const VinagreCmdLineOptions *options)
-{
-  GVariantBuilder builder;
-  GVariant *data;
-
-  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a{sv}"));
-
-  if (options->files)
-    {
-      g_variant_builder_add (&builder,
-			     "{sv}",
-			     "files",
-			     g_variant_new_bytestring_array ((const gchar * const*)options->files, -1));
-      g_strfreev (options->files);
-    }
-
-  if (options->uris)
-    {
-      g_variant_builder_add (&builder,
-			     "{sv}",
-			     "args",
-			     g_variant_new_bytestring_array ((const gchar * const*)options->uris, -1));
-      g_strfreev (options->uris);
-    }
-
-  g_variant_builder_add (&builder,
-			 "{sv}",
-			 "new_window",
-			 g_variant_new_boolean (options->new_window));
-
-  g_variant_builder_add (&builder,
-			 "{sv}",
-			 "fullscreen",
-			 g_variant_new_boolean (options->fullscreen));
-
-
-  data = g_variant_builder_end (&builder);
-  g_application_invoke_action (G_APPLICATION (app), "uris", data);
-  g_variant_unref (data);
-}
-
-void
-vinagre_options_handle_action (GApplication *app,
-			       gchar        *action,
-			       GVariant     *data,
-			       gpointer      user_data)
-{
-  GVariantIter iter;
-  gchar *key;
-  GVariant *value;
-  const gchar **files, **uris;
-
-  if (g_strcmp0 (action, "uris") != 0)
-    {
-      g_message ("Received an unknown action: %s", action);
-      return;
-    }
-
-  files = uris = NULL;
-  memset (&optionstate, 0, sizeof optionstate);
-
-  g_variant_iter_init (&iter, data);
-  while (g_variant_iter_loop (&iter, "{sv}", &key, &value))
-    {
-      if (g_strcmp0 (key, "files") == 0)
-	{
-	  optionstate.files = (gchar **) g_variant_dup_bytestring_array (value, NULL);
-	}
-      else if (g_strcmp0 (key, "args") == 0)
-	{
-	  optionstate.uris = (gchar **) g_variant_dup_bytestring_array (value, NULL);
-	}
-      else if (g_strcmp0 (key, "new_window") == 0)
-	{
-	  optionstate.new_window = g_variant_get_boolean (value);
-	}
-      else if (g_strcmp0 (key, "fullscreen") == 0)
-	{
-	  optionstate.fullscreen = g_variant_get_boolean (value);
-	}
-    }
-
-  vinagre_options_process_command_line (gtk_application_get_window (GTK_APPLICATION (app)),
-					&optionstate);
-}
 /* vim: set ts=8: */

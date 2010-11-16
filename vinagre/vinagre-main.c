@@ -47,24 +47,88 @@
 #include "vinagre-mdns.h"
 #endif
 
-int main (int argc, char **argv) {
-  GOptionContext       *context;
-  GError               *error = NULL;
-  GtkWindow            *window;
-  GtkApplication       *app;
-  GHashTable           *extensions;
-  GHashTableIter        iter;
-  VinagreProtocol      *extension;
+static gboolean startup_called = FALSE;
+static GtkWindow *window = NULL;
+static GOptionContext *context = NULL;
+
 #ifdef HAVE_TELEPATHY
-  VinagreTubesManager *vinagre_tubes_manager;
+static VinagreTubesManager *vinagre_tubes_manager = NULL;
 #endif
 
-  g_type_init();
-  g_set_application_name (_("Remote Desktop Viewer"));
-
-  /* Setup debugging */
+static void
+app_init (GtkApplication *app)
+{
   vinagre_debug_init ();
   vinagre_debug_message (DEBUG_APP, "Startup");
+
+  vinagre_cache_prefs_init ();
+
+  window = GTK_WINDOW (vinagre_window_new ());
+  gtk_window_set_application (window, app);
+  gtk_widget_show (GTK_WIDGET (window));
+
+  vinagre_utils_handle_debug ();
+
+#ifdef HAVE_TELEPATHY
+   vinagre_tubes_manager = vinagre_tubes_manager_new (window);
+#endif
+
+  /* fake call, just to ensure this symbol will be present at vinagre.so */
+  vinagre_ssh_connect (NULL, NULL, -1, NULL, NULL, NULL, NULL, NULL);
+}
+
+static void
+app_startup (GApplication *app,
+	     void         *user_data)
+{
+  /* We don't do anything here, as we need to know the options
+   * when we set everything up.
+   * Note that this will break D-Bus activation of the application */
+  startup_called = TRUE;
+}
+
+static int
+app_command_line (GApplication            *app,
+		  GApplicationCommandLine *command_line,
+		  void                    *user_data)
+{
+  GError *error = NULL;
+  int argc;
+  char **argv;
+
+  argv = g_application_command_line_get_arguments (command_line, &argc);
+
+  g_option_context_parse (context, &argc, &argv, &error);
+
+  /* Don't create another window if we're remote.
+   * We can't use g_application_get_is_remote() because it's not registered yet */
+  if (startup_called != FALSE)
+    {
+      app_init (GTK_APPLICATION (app));
+      startup_called = FALSE;
+    }
+  else
+    {
+      gtk_window_present_with_time (window, GDK_CURRENT_TIME);
+    }
+
+  vinagre_options_process_command_line (GTK_APPLICATION (app), window, &optionstate);
+
+  g_strfreev (argv);
+  return 0;
+}
+
+int main (int argc, char **argv) {
+  GtkApplication *app;
+  VinagreProtocol *extension;
+  GHashTable *extensions;
+  GHashTableIter iter;
+  int res;
+
+  g_set_prgname ("vinagre");
+  g_type_init ();
+  g_set_application_name (_("Remote Desktop Viewer"));
+  optionstate.new_window = FALSE;
 
   /* i18n */
   setlocale (LC_ALL, "");
@@ -72,18 +136,17 @@ int main (int argc, char **argv) {
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  /* Init plugins engine */
-  vinagre_debug_message (DEBUG_APP, "Init plugins");
-  extensions = vinagre_plugins_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
-
   /* Setup command line options */
   context = g_option_context_new (_("- Remote Desktop Viewer"));
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
+  g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
 
 #ifdef ENABLE_INTROSPECTION
   g_option_context_add_group (context, g_irepository_get_option_group ());
 #endif
+
+  extensions = vinagre_plugins_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
 
   g_hash_table_iter_init (&iter, extensions);
   while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&extension))
@@ -96,70 +159,37 @@ int main (int argc, char **argv) {
       g_slist_free (groups);
     }
 
-  g_option_context_parse (context, &argc, &argv, &error);
-  g_option_context_free (context);
-  if (error)
-    {
-      g_print ("%s\n%s\n",
-	       error->message,
-	       _("Run 'vinagre --help' to see a full list of available command line options"));
-      g_error_free (error);
-      return 1;
-    }
-
-  g_clear_error (&error);
-  app = g_initable_new (GTK_TYPE_APPLICATION,
-			NULL,
-			&error,
-			"application-id", "org.gnome.Vinagre",
-			"argv", g_variant_new_bytestring_array ((const gchar * const*)argv, argc),
-			"default-quit", FALSE,
-			NULL);
-  if (!app)
-    g_error ("%s", error->message);
-
-  if (g_application_get_is_remote (G_APPLICATION (app)))
-    {
-      vinagre_options_invoke_remote_instance (app, &optionstate);
-      return 0;
-    }
-
-  vinagre_options_register_actions (app);
-  vinagre_cache_prefs_init ();
-
-  window = GTK_WINDOW (vinagre_window_new ());
-  gtk_application_add_window (app, window);
-  gtk_widget_show (GTK_WIDGET (window));
-
-  vinagre_utils_handle_debug ();
-  optionstate.new_window = FALSE;
-  vinagre_options_process_command_line (window, &optionstate);
-
-#ifdef HAVE_TELEPATHY
-   vinagre_tubes_manager = vinagre_tubes_manager_new (window);
-#endif
-
-  /* fake call, just to ensure this symbol will be present at vinagre.so */
-  vinagre_ssh_connect (NULL, NULL, -1, NULL, NULL, NULL, NULL, NULL);
-
+  app = gtk_application_new ("org.gnome.vinagre", G_APPLICATION_HANDLES_COMMAND_LINE);
+  /* https://bugzilla.gnome.org/show_bug.cgi?id=634990 */
+  g_application_set_option_context (G_APPLICATION (app), context);
   g_signal_connect (app,
-		    "action-with-data",
-		    G_CALLBACK (vinagre_options_handle_action),
+		    "command-line",
+		    G_CALLBACK (app_command_line),
 		    NULL);
-  gtk_application_run (app);
+  g_signal_connect (app,
+		    "startup",
+		    G_CALLBACK (app_startup),
+		    NULL);
+  res = g_application_run (G_APPLICATION (app), argc, argv);
 
-#ifdef HAVE_TELEPATHY
-  g_object_unref (vinagre_tubes_manager);
-#endif
-  g_object_unref (vinagre_bookmarks_get_default ());
-  g_object_unref (vinagre_prefs_get_default ());
-  vinagre_cache_prefs_finalize ();
+  if (res == 0)
+    {
+      #ifdef HAVE_TELEPATHY
+	g_object_unref (vinagre_tubes_manager);
+      #endif
+
+      g_object_unref (vinagre_bookmarks_get_default ());
+      g_object_unref (vinagre_prefs_get_default ());
+      vinagre_cache_prefs_finalize ();
+
+    #ifdef VINAGRE_ENABLE_AVAHI
+	g_object_unref (vinagre_mdns_get_default ());
+    #endif
+    }
+
   g_object_unref (app);
-#ifdef VINAGRE_ENABLE_AVAHI
-  g_object_unref (vinagre_mdns_get_default ());
-#endif
+  g_option_context_free (context);
 
-
-  return 0;
+  return res;
 }
 /* vim: set ts=8: */

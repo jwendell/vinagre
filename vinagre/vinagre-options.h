@@ -34,15 +34,9 @@ typedef struct {
 extern const GOptionEntry all_options[];
 extern VinagreCmdLineOptions optionstate;
 
-void vinagre_options_register_actions       (GtkApplication *app);
-void vinagre_options_process_command_line   (GtkWindow *window,
+void vinagre_options_process_command_line   (GtkApplication   *app,
+					     GtkWindow        *window,
 					     const VinagreCmdLineOptions *options);
-void vinagre_options_invoke_remote_instance (GtkApplication *app,
-					     const VinagreCmdLineOptions *options);
-void vinagre_options_handle_action          (GApplication *app,
-					     gchar        *action,
-					     GVariant     *data,
-					     gpointer      user_data);
 
 #endif  /* __VINAGRE_OPTIONS_H__ */
 /* vim: set ts=8: */
