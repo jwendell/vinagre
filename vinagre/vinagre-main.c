@@ -161,7 +161,7 @@ int main (int argc, char **argv) {
 
   app = gtk_application_new ("org.gnome.vinagre", G_APPLICATION_HANDLES_COMMAND_LINE);
   /* https://bugzilla.gnome.org/show_bug.cgi?id=634990 */
-  g_application_set_option_context (G_APPLICATION (app), context);
+  /* g_application_set_option_context (G_APPLICATION (app), context); */
   g_signal_connect (app,
 		    "command-line",
 		    G_CALLBACK (app_command_line),
