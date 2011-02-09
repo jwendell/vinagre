@@ -310,12 +310,12 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (box2), GTK_WIDGET (label), FALSE, FALSE, 0);
 
-  combo = gtk_combo_box_new_text ();
-  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Use Server Settings"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("True Color (24 bits)"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("High Color (16 bits)"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Low Color (8 bits)"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Ultra Low Color (3 bits)"));
+  combo = gtk_combo_box_text_new ();
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("Use Server Settings"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("True Color (24 bits)"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("High Color (16 bits)"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("Low Color (8 bits)"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("Ultra Low Color (3 bits)"));
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo),
 			    has_conn ? vinagre_vnc_connection_get_depth_profile (VINAGRE_VNC_CONNECTION (conn))
 			    : vinagre_cache_prefs_get_integer ("vnc-connection", "depth-profile", 0));
