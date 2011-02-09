@@ -36,7 +36,7 @@
 #include "vinagre-tab.h"
 #include "vinagre-notebook.h"
 #include "vinagre-debug.h"
-#include "vinagre-plugin.h"
+#include "vinagre-protocol.h"
 #include "vinagre-plugins-engine.h"
 
 G_DEFINE_TYPE (VinagreTubeHandler, vinagre_tube_handler, G_TYPE_OBJECT);
