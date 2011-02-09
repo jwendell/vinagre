@@ -23,7 +23,7 @@
 #include <sys/wait.h>
 
 #include <glib/gi18n.h>
-#include <gdk/gdkx.h>
+#include <gtk/gtkx.h>
 
 #include <vinagre/vinagre-utils.h>
 #include <vinagre/vinagre-prefs.h>
