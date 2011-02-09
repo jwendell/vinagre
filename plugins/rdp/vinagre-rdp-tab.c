@@ -98,7 +98,7 @@ delay_connect (GObject *object)
     arg[i++] = g_strdup ("-f");
 
   arg[i++] = g_strdup ("-X");
-  arg[i++] = g_strdup_printf ("%d", gtk_socket_get_id (GTK_SOCKET (rdp_tab->priv->box)));
+  arg[i++] = g_strdup_printf ("%d", (int)gtk_socket_get_id (GTK_SOCKET (rdp_tab->priv->box)));
 
   if (username && *username)
     {
