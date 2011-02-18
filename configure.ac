@@ -75,6 +75,7 @@ GLIB_REQUIRED=2.25.11
 GTK_REQUIRED=2.99.3
 GTHREAD_REQUIRED=2.0.0
 GTK_VNC_REQUIRED=0.4.3
+SPICE_GTK_REQUIRED=0.5
 AVAHI_REQUIRED=0.6.26
 PANEL_REQUIRED_VERSION=2.0.0
 TELEPATHY_GLIB_REQUIRED=0.11.6
@@ -215,6 +216,21 @@ if test "x$enable_applet" = "xyes";then
 fi
 AM_CONDITIONAL(APPLET, test "x$enable_applet" = "xyes")
 
+AC_ARG_ENABLE(spice,
+              AS_HELP_STRING([--enable-spice],
+                             [Enable SPICE plugin (default=yes)]),
+              enable_spice=${enableval},
+              enable_spice=yes)
+
+if test "x$enable_spice" = "xyes" ; then
+  PKG_CHECK_MODULES(SPICE,\
+  spice-client-gtk-3.0 >= $SPICE_GTK_REQUIRED)
+  AC_SUBST(SPICE_CFLAGS)
+  AC_SUBST(SPICE_LIBS)
+  AC_DEFINE([VINAGRE_ENABLE_SPICE],[1],[We want spice support])
+fi
+AM_CONDITIONAL(SPICE, test "x$enable_spice" = "xyes")
+
 GLIB_GSETTINGS
 
 dnl Check for bind in libsocket (needed on Solaris)
@@ -303,6 +319,7 @@ plugins/Makefile
 plugins/vnc/Makefile
 plugins/ssh/Makefile
 plugins/rdp/Makefile
+plugins/spice/Makefile
 plugins/reverse-vnc/Makefile
 plugins/im-status/Makefile
 vinagre/Makefile
@@ -327,4 +344,5 @@ Configure summary:
 	Telepathy support ..........:  ${have_telepathy}
 	SSH plugin .................:  ${enable_ssh}
 	RDP plugin .................:  ${enable_rdp}
+	Spice plugin ...............:  ${enable_spice}
 "

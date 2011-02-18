@@ -1,21 +1,30 @@
-DIST_SUBDIRS =	\
-  vnc		\
-  ssh		\
-  rdp		\
-  reverse-vnc	\
-  im-status
+NULL =
 
-SUBDIRS =	\
-  vnc		\
-  reverse-vnc	\
-  im-status
+DIST_SUBDIRS =					\
+	im-status				\
+	rdp					\
+	reverse-vnc				\
+	spice					\
+	ssh					\
+	vnc					\
+	$(NULL)
 
-if SSH
-SUBDIRS += ssh
-endif
+SUBDIRS =					\
+	im-status				\
+	reverse-vnc				\
+	vnc					\
+	$(NULL)
 
 if RDP
 SUBDIRS += rdp
+endif
+
+if SPICE
+SUBDIRS += spice
+endif
+
+if SSH
+SUBDIRS += ssh
 endif
 
 -include $(top_srcdir)/git.mk
