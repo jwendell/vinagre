@@ -275,7 +275,7 @@ if HAVE_INTROSPECTION
 INTROSPECTION_GIRS = Vinagre-3.0.gir
 
 Vinagre-3.0.gir: vinagre
-INTROSPECTION_SCANNER_ARGS = $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
+INTROSPECTION_SCANNER_ARGS = $(INCLUDES) $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
 Vinagre_3_0_gir_NAMESPACE = Vinagre
 Vinagre_3_0_gir_VERSION = 3.0
 Vinagre_3_0_gir_PROGRAM = $(builddir)/vinagre
