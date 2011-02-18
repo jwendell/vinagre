@@ -221,7 +221,7 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
   gchar *port_s;
   gchar *host;
   const gchar *service_s;
-  VinagrePlugin *plugin;
+  VinagreProtocol *plugin;
 
   if (error != NULL)
     {
@@ -265,7 +265,7 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
 
   port_s = g_strdup_printf ("%u", priv->port);
 
-  host = g_strconcat (vinagre_plugin_get_protocol (plugin), "://",
+  host = g_strconcat (vinagre_protocol_get_protocol (plugin), "://",
       priv->hostname, ":", port_s,
       NULL);
 
