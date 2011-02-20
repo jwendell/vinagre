@@ -136,7 +136,7 @@ server_DATA =					\
 	$(server_in_files:.server.in=.server)
 
 $(server_in_files): $(server_in_files:.server.in=.server.in.in)
-	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" -e "s|\@VERSION\@|$(VERSION)|" $< > $@
+	$(AM_V_GEN)sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" -e "s|\@VERSION\@|$(VERSION)|" $< > $@
 
 @INTLTOOL_SERVER_RULE@
 
@@ -202,7 +202,7 @@ vinagre_enum_headers = \
 	$(NULL)
 
 vinagre-enums.c: @REBUILD@ $(vinagre_enum_headers)
-	glib-mkenums    --fhead "#include <glib-object.h>\n" \
+	$(AM_V_GEN)glib-mkenums    --fhead "#include <glib-object.h>\n" \
 			--fhead "#include \"vinagre-enums.h\"\n\n" \
 			--fprod "\n/* enumerations from \"@filename@\" */" \
 			--fprod "\n#include \"@filename@\"\n" \
@@ -217,7 +217,7 @@ vinagre-enums.c: @REBUILD@ $(vinagre_enum_headers)
 		$(vinagre_enum_headers) > $@
 
 vinagre-enums.h: @REBUILD@ $(vinagre_enum_headers)
-	glib-mkenums    --fhead "#ifndef __VINAGRE_ENUMS_H__\n" \
+	$(AM_V_GEN)glib-mkenums    --fhead "#ifndef __VINAGRE_ENUMS_H__\n" \
 			--fhead "#define __VINAGRE_ENUMS_H__ 1\n\n" \
 			--fhead "G_BEGIN_DECLS\n\n" \
 			--ftail "G_END_DECLS\n\n" \
@@ -228,10 +228,10 @@ vinagre-enums.h: @REBUILD@ $(vinagre_enum_headers)
 		$(vinagre_enum_headers) >  $@
 
 vinagre-marshal.list: $(handwritten_sources) Makefile.am
-	( cd $(srcdir) && \
+	$(AM_V_GEN)( cd $(srcdir) && \
 	sed -n -e 's/.*vinagre_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
 	$(handwritten_sources) ) \
-	| sed -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp
+	| sed -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp && \
 	if cmp -s $@.tmp $@; then \
 		rm $@.tmp; \
 	else \
@@ -239,10 +239,10 @@ vinagre-marshal.list: $(handwritten_sources) Makefile.am
 	fi
 
 %-marshal.h: %-marshal.list Makefile
-	glib-genmarshal --header --prefix=_$(subst -,_,$*)_marshal $< > $*-marshal.h
+	$(AM_V_GEN)glib-genmarshal --header --prefix=_$(subst -,_,$*)_marshal $< > $*-marshal.h
 
 %-marshal.c: %-marshal.list Makefile
-	echo "#include \"vinagre-marshal.h\"" > $@ && \
+	$(AM_V_GEN)echo "#include \"vinagre-marshal.h\"" > $@ && \
 	glib-genmarshal --body --prefix=_$(subst -,_,$*)_marshal $< >> $*-marshal.c
 
 BUILT_SOURCES = \

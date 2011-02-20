@@ -6,7 +6,7 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = vinagre-@VINAGRE_API_VERSION@.pc
 
 vinagre-@VINAGRE_API_VERSION@.pc: vinagre.pc
-	cp vinagre.pc vinagre-@VINAGRE_API_VERSION@.pc
+	@cp vinagre.pc vinagre-@VINAGRE_API_VERSION@.pc
 
 uidir = $(datadir)/vinagre
 ui_DATA = vinagre-ui.xml GNOME_VinagreApplet.xml vinagre.ui vinagre-fav-ui.xml
@@ -66,7 +66,7 @@ service_DATA = org.freedesktop.Telepathy.Client.Vinagre.service
 
 org.freedesktop.Telepathy.Client.Vinagre.service: org.freedesktop.Telepathy.Client.Vinagre.service.in \
 		Makefile
-	@sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
+	$(AM_V_GEN)sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
 
 endif
 

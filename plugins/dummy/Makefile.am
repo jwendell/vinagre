@@ -21,7 +21,7 @@ libdummy_la_LIBADD  = $(VINAGRE_LIBS)
 
 plugin_in_files = dummy.vinagre-plugin.desktop.in
 
-dummy.vinagre-plugin: dummy.vinagre-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+dummy.vinagre-plugin: dummy.vinagre-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(AM_V_GEN)$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
 plugin_DATA = $(plugin_in_files:.vinagre-plugin.desktop.in=.vinagre-plugin)
 

@@ -26,7 +26,7 @@ uidir = $(VINAGRE_PLUGINS_DATA_DIR)/reverse-vnc
 ui_DATA = reverse-vnc.ui
 
 plugin_in_files = reverse-vnc.plugin.desktop.in
-%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(AM_V_GEN)$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
