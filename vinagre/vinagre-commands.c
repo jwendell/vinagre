@@ -111,8 +111,11 @@ vinagre_cmd_machine_open (GtkAction     *action,
   GSList            *files, *l;
   gchar             *uri;
   gchar             *error = NULL;
-  GSList            *plugins, *errors = NULL;
+  GSList            *errors = NULL;
   gint              i;
+  GHashTable        *protocols;
+  GHashTableIter    iter;
+  VinagreProtocol   *protocol;
 
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
@@ -126,24 +129,18 @@ vinagre_cmd_machine_open (GtkAction     *action,
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), FALSE);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), TRUE);
 
-/* TODO
-  plugins = (GSList *) vinagre_plugins_engine_get_plugin_list (vinagre_plugins_engine_get_default ());
-  i = 0;
-  for (; plugins; plugins = plugins->next)
+  protocols = vinagre_plugins_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
+  g_hash_table_iter_init (&iter, protocols);
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&protocol))
     {
-      VinagrePluginInfo *info = VINAGRE_PLUGIN_INFO (plugins->data);
-
-      if (!vinagre_plugin_info_is_active (info))
-	continue;
-
-      filter = vinagre_plugin_get_file_filter (info->plugin);
+      filter = vinagre_protocol_get_file_filter (protocol);
       if (filter)
 	{
 	  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
 	  i++;
 	}
     }
-*/
+
   if (i == 0)
     {
       vinagre_utils_show_error (_("There are no supported files"),
