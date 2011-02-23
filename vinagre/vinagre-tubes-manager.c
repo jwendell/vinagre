@@ -32,6 +32,7 @@
 #include <telepathy-glib/dbus.h>
 #include <telepathy-glib/interfaces.h>
 #include <telepathy-glib/defs.h>
+#include <telepathy-glib/util.h>
 
 #include "vinagre-tubes-manager.h"
 #include "vinagre-tube-handler.h"
@@ -235,7 +236,9 @@ vinagre_tubes_manager_new (VinagreWindow *vinagre_window)
 {
   VinagreTubesManager *self;
 
-  return g_object_new (VINAGRE_TYPE_TUBES_MANAGER,
+  self = g_object_new (VINAGRE_TYPE_TUBES_MANAGER,
       "vinagre-window", vinagre_window,
       NULL);
+
+  return self;
 }

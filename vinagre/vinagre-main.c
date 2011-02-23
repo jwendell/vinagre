@@ -70,7 +70,7 @@ app_init (GtkApplication *app)
   vinagre_utils_handle_debug ();
 
 #ifdef HAVE_TELEPATHY
-   vinagre_tubes_manager = vinagre_tubes_manager_new (window);
+  vinagre_tubes_manager = vinagre_tubes_manager_new (VINAGRE_WINDOW (window));
 #endif
 
   /* fake call, just to ensure this symbol will be present at vinagre.so */

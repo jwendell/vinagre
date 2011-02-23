@@ -312,7 +312,7 @@ handle_login (GtkWindow *parent,
   int prompt_fd;
   char buffer[1024];
   gsize len;
-  gboolean ret_val, aborted, save_in_keyring;
+  gboolean ret_val, save_in_keyring;
   gsize bytes_written;
   const gchar *authtype;
   gchar *object, *password;
@@ -323,7 +323,7 @@ handle_login (GtkWindow *parent,
   object = password = NULL;
   authtype = NULL;
   ret_val = TRUE;
-  aborted = save_in_keyring = FALSE;
+  save_in_keyring = FALSE;
 
   if (vendor == SSH_VENDOR_SSH) 
     prompt_fd = stderr_fd;

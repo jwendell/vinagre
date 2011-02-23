@@ -303,7 +303,6 @@ static void
 vinagre_mdns_init (VinagreMdns *mdns)
 {
   GError *error = NULL;
-  GSList *plugins;
   VinagrePluginsEngine *engine;
   VinagreProtocol *protocol;
   GHashTable *protocols;
