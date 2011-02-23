@@ -238,8 +238,8 @@ vinagre_prefs_dialog_show (VinagreWindow *window)
   dialog->show_accels = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "show_accels_check"));
 
   pref = vinagre_prefs_get_default ();
-  g_settings_bind (pref->priv->gsettings, "always-show-tabs", dialog->show_tabs, "active", G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (pref->priv->gsettings, "show-accels", dialog->show_accels, "active", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (pref->priv->gsettings, VM_ALWAYS_SHOW_TABS, dialog->show_tabs, "active", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (pref->priv->gsettings, VM_SHOW_ACCELS, dialog->show_accels, "active", G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (dialog->dialog,
 		    "response",

@@ -147,9 +147,7 @@ vinagre_notebook_show_hide_tabs (VinagreNotebook *nb)
   fs = vinagre_window_is_fullscreen (nb->priv->window);
   n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
 
-  g_object_get (vinagre_prefs_get_default (),
-		"always-show-tabs", &always,
-		NULL);
+  always = g_settings_get_boolean (vinagre_prefs_get_default_gsettings (), "always-show-tabs");
 
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (nb),
 			      ((n > 1) || (always)) && !fs);
@@ -415,8 +413,9 @@ vinagre_notebook_init (VinagreNotebook *nb)
 		    "switch-page",
 		    G_CALLBACK (vinagre_notebook_page_switched),
 		    NULL);
-  g_signal_connect_swapped (vinagre_prefs_get_default (),
-			    "notify::always-show-tabs",
+
+  g_signal_connect_swapped (vinagre_prefs_get_default_gsettings (),
+			    "changed::always-show-tabs",
 			     G_CALLBACK (vinagre_notebook_show_hide_tabs),
 			     nb);
 }
