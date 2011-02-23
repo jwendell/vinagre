@@ -314,9 +314,8 @@ show_hide_accels (VinagreWindow *window)
 {
   gboolean show_accels;
 
-  g_object_get (vinagre_prefs_get_default (),
-		"show-accels", &show_accels,
-		NULL);
+  show_accels = g_settings_get_boolean (vinagre_prefs_get_default_gsettings (), "show-accels");
+
   g_object_set (gtk_settings_get_default (),
 		"gtk-enable-accels", show_accels,
 		"gtk-enable-mnemonics", show_accels,
@@ -472,8 +471,8 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 		    G_CALLBACK (recent_manager_changed),
 		    window);
 
-  g_signal_connect_swapped (vinagre_prefs_get_default (),
-			    "notify::show-accels",
+  g_signal_connect_swapped (vinagre_prefs_get_default_gsettings (),
+			    "changed::show-accels",
 			     G_CALLBACK (show_hide_accels),
 			     window);
   show_hide_accels (window);

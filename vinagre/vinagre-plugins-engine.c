@@ -48,31 +48,22 @@ VinagrePluginsEngine *default_engine = NULL;
 static void
 vinagre_plugins_engine_load_extensions (VinagrePluginsEngine *engine)
 {
-  GSList *plugins, *l;
-  gchar **loaded_plugins;
-  gint i;
+ GStrv plugins;
 
   g_object_get (vinagre_prefs_get_default (),
 		"active-plugins", &plugins,
 		NULL);
 
-  loaded_plugins = g_new0 (gchar *, g_slist_length (plugins) + 1);
-  i = 0;
-  for (l = plugins; l; l = l->next)
-    loaded_plugins[i++] = (l->data);
-
   engine->priv->loading_plugin_list = TRUE;
-  peas_engine_set_loaded_plugins (PEAS_ENGINE (engine),
-				  (const gchar **) loaded_plugins);
+  peas_engine_set_loaded_plugins (PEAS_ENGINE (engine), (const gchar **)plugins);
   engine->priv->loading_plugin_list = FALSE;
-  g_strfreev (loaded_plugins);
-  g_slist_free (plugins);
+  g_strfreev (plugins);
 }
 
 static void
 vinagre_plugins_engine_extension_added (PeasExtensionSet     *extensions,
-					PeasPluginInfo       *info,
-					PeasExtension        *exten,
+					PeasPluginInfo	     *info,
+					PeasExtension	     *exten,
 					VinagrePluginsEngine *engine)
 {
   PeasExtension *previous_ext;
@@ -97,7 +88,7 @@ vinagre_plugins_engine_extension_added (PeasExtensionSet     *extensions,
 static void
 vinagre_plugins_engine_extension_removed (PeasExtensionSet     *extensions,
 					  PeasPluginInfo       *info,
-					  PeasExtension        *exten,
+					  PeasExtension	       *exten,
 					  VinagrePluginsEngine *engine)
 {
   const gchar *protocol = NULL;
@@ -190,23 +181,18 @@ static void
 save_plugin_list (VinagrePluginsEngine *engine)
 {
   gchar **loaded_plugins;
-  GSList *plugins = NULL;
-  gint i;
 
   loaded_plugins = peas_engine_get_loaded_plugins (PEAS_ENGINE (engine));
-  for (i = 0; loaded_plugins[i]; i++)
-    plugins = g_slist_prepend (plugins, loaded_plugins[i]);
 
   g_object_set (vinagre_prefs_get_default (),
-		"active-plugins", plugins,
+		"active-plugins", loaded_plugins,
 		NULL);
 
   g_strfreev (loaded_plugins);
-  g_slist_free (plugins);
 }
 
 static void
-vinagre_plugins_engine_load_plugin (PeasEngine     *engine,
+vinagre_plugins_engine_load_plugin (PeasEngine	   *engine,
 				    PeasPluginInfo *info)
 {
   VinagrePluginsEngine *vengine = VINAGRE_PLUGINS_ENGINE (engine);
@@ -295,7 +281,7 @@ vinagre_plugins_engine_get_default (void)
  */
 VinagreProtocol *
 vinagre_plugins_engine_get_plugin_by_protocol (VinagrePluginsEngine *engine,
-					       const gchar          *protocol)
+					       const gchar	    *protocol)
 {
   g_return_val_if_fail (VINAGRE_IS_PLUGINS_ENGINE (engine), NULL);
 

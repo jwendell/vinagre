@@ -73,7 +73,6 @@ GNOME_DOC_INIT
 
 GLIB_REQUIRED=2.25.11
 GTK_REQUIRED=2.99.3
-GCONF_REQUIRED=2.16.0
 GTHREAD_REQUIRED=2.0.0
 GTK_VNC_REQUIRED=0.4.3
 AVAHI_REQUIRED=0.6.26
@@ -104,7 +103,6 @@ PKG_CHECK_MODULES(VINAGRE, \
   gio-2.0 >= $GLIB_REQUIRED \
   gio-unix-2.0 >= $GLIB_REQUIRED \
   gtk+-3.0 >= $GTK_REQUIRED \
-  gconf-2.0 >= $GCONF_REQUIRED \
   gthread-2.0 >= $GTHREAD_REQUIRED \
   gnome-keyring-1 \
   libxml-2.0 >= $XML_REQUIRED \
@@ -216,13 +214,6 @@ if test "x$enable_applet" = "xyes";then
    AC_SUBST(APPLET_LIBS)
 fi
 AM_CONDITIONAL(APPLET, test "x$enable_applet" = "xyes")
-
-dnl ================================================================
-dnl GConf related settings
-dnl ================================================================
-
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
 
 GLIB_GSETTINGS
 
