@@ -108,7 +108,6 @@ PKG_CHECK_MODULES(VINAGRE, \
   gthread-2.0 >= $GTHREAD_REQUIRED \
   gnome-keyring-1 \
   libxml-2.0 >= $XML_REQUIRED \
-  dbus-glib-1 \
   libpeas-1.0 >= $PEAS_REQUIRED \
   libpeas-gtk-1.0 >= $PEAS_REQUIRED
 )
@@ -187,6 +186,7 @@ AC_ARG_ENABLE(telepathy,
 if test "x$enable_telepathy" != "xno"; then
    PKG_CHECK_MODULES(TELEPATHY,
    [
+      dbus-glib-1 \
       telepathy-glib >= $TELEPATHY_GLIB_REQUIRED
    ], have_telepathy="yes", have_telepathy="no")
    if test "x$have_telepathy" = "xyes"; then
