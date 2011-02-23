@@ -1,14 +1,14 @@
 # Norwegian (bokmål) translation of vinagre.
 # Copyright (C) 2004, Red Hat, Inc.
 # This file is distributed under the same license as the vino package.
-# Kjartan Maraas <kmaraas@gnome.org>, 2004-2010.
+# Kjartan Maraas <kmaraas@gnome.org>, 2004-2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vinagre 2.31.x\n"
+"Project-Id-Version: vinagre 2.92.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-20 19:16+0100\n"
-"PO-Revision-Date: 2010-11-20 19:17+0100\n"
+"POT-Creation-Date: 2011-02-23 09:51+0100\n"
+"PO-Revision-Date: 2011-02-23 09:52+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -45,13 +45,13 @@ msgid "Authentication is required"
 msgstr "Autentisering kreves"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:855
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:854
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
 #: ../data/vinagre.ui.h:4
 msgid "Connection"
-msgstr "Tilkobling..."
+msgstr "Tilkobling"
 
 #: ../data/vinagre.ui.h:5
 msgid "Connection options"
@@ -63,7 +63,7 @@ msgstr "Mappe"
 
 #: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
 #: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../vinagre/vinagre-fav.c:407
+#: ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "Vert:"
 
@@ -261,8 +261,8 @@ msgstr "Feil under kjøring av rdesktop"
 #: ../plugins/rdp/vinagre-rdp-tab.c:124 ../vinagre/vinagre-bookmarks.c:366
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:767
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:170
+#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:766
 #: ../vinagre/vinagre-options.c:76 ../vinagre/vinagre-options.c:94
 #: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:750
 msgid "Unknown error"
@@ -562,15 +562,11 @@ msgstr ""
 msgid "On the port %d"
 msgstr "På port %d"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
-msgid "Incoming VNC connection arrived but there is no active window"
-msgstr "Innkommende VNC-tilkobling mottatt men det finnes ingen aktive vinduer"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:211
 msgid "Error activating reverse connections"
 msgstr "Feil under aktivering av omvendte tilkoblinger"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:212
 msgid ""
 "The program could not find any available TCP ports starting at 5500. Is "
 "there any other running program consuming all your TCP ports?"
@@ -581,7 +577,7 @@ msgstr ""
 #. Translators: "Reverse" here is an adjective, not a verb.
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
 msgid "_Reverse Connections..."
-msgstr "_Omvendte tilkoblinger..."
+msgstr "_Omvendte tilkoblinger …"
 
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
 msgid "Configure incoming VNC connections"
@@ -623,7 +619,9 @@ msgstr "Slå på omv_endte tilkoblinger"
 msgid ""
 "Changes Instant Messenger status to busy when window toggles to fullscreen "
 "(works with Empathy)"
-msgstr "Endrer lynmeldingsstatus til opptatt når vinduet bytter til fullskjerm (fungerer med Empathy)"
+msgstr ""
+"Endrer lynmeldingsstatus til opptatt når vinduet bytter til fullskjerm "
+"(fungerer med Empathy)"
 
 #: ../plugins/im-status/im-status.plugin.desktop.in.h:2
 msgid "IM Status"
@@ -631,7 +629,9 @@ msgstr "Lyndmeldingsstatus"
 
 #: ../plugins/im-status/im-status.js:43
 msgid "Could not communicate to Telepathy. IM Status plugin will not work."
-msgstr "Kunne ikke kommunisere med Telepathy. Tillegg for lyndmeldingsstatus vil ikke fungere."
+msgstr ""
+"Kunne ikke kommunisere med Telepathy. Tillegg for lyndmeldingsstatus vil "
+"ikke fungere."
 
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
 msgid "A menu to quickly access remote machines"
@@ -794,15 +794,15 @@ msgstr "Ny mappe"
 msgid "Error while saving preferences: %s"
 msgstr "Feil under lagring av brukervalg: %s"
 
-#: ../vinagre/vinagre-commands.c:119
+#: ../vinagre/vinagre-commands.c:122
 msgid "Choose the file"
 msgstr "Velg fil"
 
-#: ../vinagre/vinagre-commands.c:149
+#: ../vinagre/vinagre-commands.c:146
 msgid "There are no supported files"
 msgstr "Ingen støttede filer"
 
-#: ../vinagre/vinagre-commands.c:150
+#: ../vinagre/vinagre-commands.c:147
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
@@ -810,7 +810,7 @@ msgstr ""
 "Ingen av de aktive tilleggene støtter denne handlingen. Aktiver tillegg og "
 "prøv igjen."
 
-#: ../vinagre/vinagre-commands.c:184
+#: ../vinagre/vinagre-commands.c:181
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Følgende fil kunne ikke bli åpnet:"
@@ -831,7 +831,7 @@ msgid "Choose a Remote Desktop"
 msgstr "Velg et eksternt skrivebord"
 
 #: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:573
-#: ../vinagre/vinagre-tube-handler.c:253
+#: ../vinagre/vinagre-tube-handler.c:254
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokoll %s er ikke støttet."
@@ -844,56 +844,56 @@ msgstr "Kunne ikke åpne filen."
 msgid "The file was not recognized by any of the plugins."
 msgstr "Filen ble ikke gjenkjent av noen av tilleggene."
 
-#: ../vinagre/vinagre-fav.c:570
+#: ../vinagre/vinagre-fav.c:569
 msgid "_New Folder"
 msgstr "_Ny mappe"
 
-#: ../vinagre/vinagre-fav.c:571
+#: ../vinagre/vinagre-fav.c:570
 msgid "Create a new folder"
 msgstr "Lag en ny mappe"
 
-#: ../vinagre/vinagre-fav.c:576
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Open bookmark"
 msgstr "_Åpne bokmerke"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:576
 msgid "Connect to this machine"
 msgstr "Koble til denne maskinen"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Edit bookmark"
 msgstr "_Rediger bokmerke"
 
-#: ../vinagre/vinagre-fav.c:579
+#: ../vinagre/vinagre-fav.c:578
 msgid "Edit the details of selected bookmark"
 msgstr "Rediger detaljene for valgt bokmerke"
 
-#: ../vinagre/vinagre-fav.c:580
+#: ../vinagre/vinagre-fav.c:579
 msgid "_Remove from bookmarks"
 msgstr "_Fjern fra bokmerkene"
 
-#: ../vinagre/vinagre-fav.c:581
+#: ../vinagre/vinagre-fav.c:580
 msgid "Remove current selected connection from bookmarks"
 msgstr "Fjern gjeldende valgte tilkobling fra bokmerkene"
 
-#: ../vinagre/vinagre-fav.c:598 ../vinagre/vinagre-window.c:409
+#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:409
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Kunne ikke flette XML-fil for brukergrensesnitt: %s"
 
-#: ../vinagre/vinagre-fav.c:756
+#: ../vinagre/vinagre-fav.c:755
 msgid "Invalid operation"
 msgstr "Ugyldig operasjon"
 
-#: ../vinagre/vinagre-fav.c:757
+#: ../vinagre/vinagre-fav.c:756
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Data mottatt fra dra-og-slipp operasjon er ugyldig."
 
-#: ../vinagre/vinagre-fav.c:863
+#: ../vinagre/vinagre-fav.c:862
 msgid "Hide panel"
 msgstr "Skjul panel"
 
-#: ../vinagre/vinagre-fav.c:1068
+#: ../vinagre/vinagre-fav.c:1067
 msgid "Hosts nearby"
 msgstr "Verter i nærheten"
 
@@ -923,7 +923,7 @@ msgstr "Klarte ikke å legge til mDNS-visning for tjeneste: %s"
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Klarte ikke å se etter verter: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:320
+#: ../vinagre/vinagre-mdns.c:319
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Klarte ikke å initiere mDNS-visning: %s\n"
@@ -950,7 +950,7 @@ msgstr "Autentisering feilet"
 
 #: ../vinagre/vinagre-notebook.c:528
 msgid "Connecting..."
-msgstr "Kobler til..."
+msgstr "Kobler til …"
 
 #: ../vinagre/vinagre-notebook.c:555 ../vinagre/vinagre-tab.c:354
 msgid "Close connection"
@@ -1106,38 +1106,38 @@ msgstr "Skjermbilde av %s"
 msgid "Error saving screenshot"
 msgstr "Feil under lagring av skjermdump"
 
-#: ../vinagre/vinagre-tube-handler.c:229
+#: ../vinagre/vinagre-tube-handler.c:230
 #, c-format
 msgid "Impossible to get service property: %s"
 msgstr "Klarte ikke å hente egenskap for tjeneste: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:286
+#: ../vinagre/vinagre-tube-handler.c:287
 #, c-format
 msgid "Impossible to create the connection: %s"
 msgstr "Klarte ikke å lage tilkoblingen: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:325
+#: ../vinagre/vinagre-tube-handler.c:326
 #, c-format
 msgid "Impossible to accept the stream tube: %s"
 msgstr "Kan ikke godta rør for strøm: %s"
 
 #. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
-#: ../vinagre/vinagre-tube-handler.c:463
+#: ../vinagre/vinagre-tube-handler.c:464
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Kan ikke hente navn på kontakt: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:500
+#: ../vinagre/vinagre-tube-handler.c:501
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "Kan ikke hente personbilde: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:521
+#: ../vinagre/vinagre-tube-handler.c:522
 #, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "%s vil dele skrivebordet sitt med deg."
 
-#: ../vinagre/vinagre-tube-handler.c:526
+#: ../vinagre/vinagre-tube-handler.c:527
 msgid "Desktop sharing invitation"
 msgstr "Invitasjon til delt skrivebord"
 
