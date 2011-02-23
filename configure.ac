@@ -224,6 +224,8 @@ dnl ================================================================
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
+GLIB_GSETTINGS
+
 dnl Check for bind in libsocket (needed on Solaris)
 AC_CHECK_LIB(socket, bind)
 
@@ -267,7 +269,7 @@ if test "x$ac_cv_header_ifaddrs_h" = "xyes"; then
 fi
 
 
-dnl active plugins for vinagre.schemas
+dnl active plugins for org.gnome.Vinagre.gschema.xml
 ACTIVE_PLUGINS="vnc"
 if test "x$enable_ssh" = "xyes" ; then
 ACTIVE_PLUGINS="$ACTIVE_PLUGINS,ssh"
@@ -303,7 +305,6 @@ data/Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
 data/vinagre.pc
-data/vinagre.schemas.in
 data/icons/Makefile
 help/Makefile
 po/Makefile.in
