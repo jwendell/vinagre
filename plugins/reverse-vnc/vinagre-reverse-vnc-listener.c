@@ -267,8 +267,7 @@ vinagre_reverse_vnc_listener_set_window (VinagreReverseVncListener *listener,
   if (listener->priv->window)
     g_object_unref (listener->priv->window);
 
-  if (window)
-    listener->priv->window = g_object_ref (window);
+  listener->priv->window = window ? g_object_ref (window) : NULL;
 }
 
 /* vim: set ts=8: */
