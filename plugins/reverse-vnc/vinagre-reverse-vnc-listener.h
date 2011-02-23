@@ -55,6 +55,8 @@ void			vinagre_reverse_vnc_listener_start (VinagreReverseVncListener *listener);
 void			vinagre_reverse_vnc_listener_stop  (VinagreReverseVncListener *listener);
 gboolean		vinagre_reverse_vnc_listener_is_listening (VinagreReverseVncListener *listener);
 gint			vinagre_reverse_vnc_listener_get_port (VinagreReverseVncListener *listener);
+void			vinagre_reverse_vnc_listener_set_window (VinagreReverseVncListener *listener,
+								 VinagreWindow *window);
 
 G_END_DECLS
 

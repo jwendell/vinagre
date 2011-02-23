@@ -30,7 +30,9 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
+
 #include <vinagre/vinagre-commands.h>
 #include <vinagre/vinagre-utils.h>
 #include "vinagre-reverse-vnc-listener.h"
@@ -39,8 +41,9 @@
 struct _VinagreReverseVncListenerPrivate
 {
   GSocketService *service;
-  gboolean listening;
-  gint port;
+  gboolean        listening;
+  gint            port;
+  VinagreWindow  *window;
 };
 
 enum
@@ -153,15 +156,9 @@ incoming (GSocketService *service,
 	  VinagreReverseVncListener *listener)
 {
   VinagreConnection *conn;
-  GtkWindow *window;
   GSocketAddress *address;
 
-  window = gtk_application_get_window (GTK_APPLICATION (g_application_get_instance ()));
-  if (!window)
-    {
-      g_warning (_("Incoming VNC connection arrived but there is no active window"));
-      return TRUE;
-    }
+  g_return_val_if_fail (listener->priv->window != NULL, FALSE);
 
   conn = vinagre_vnc_connection_new ();
   vinagre_vnc_connection_set_socket (VINAGRE_VNC_CONNECTION (conn),
@@ -179,7 +176,7 @@ incoming (GSocketService *service,
       g_free (host);
     }
 
-  vinagre_cmd_direct_connect (conn, VINAGRE_WINDOW (window));
+  vinagre_cmd_direct_connect (conn, listener->priv->window);
 
   return TRUE;
 }
@@ -213,7 +210,7 @@ vinagre_reverse_vnc_listener_start (VinagreReverseVncListener *listener)
     {
       vinagre_utils_show_error (_("Error activating reverse connections"),
 				_("The program could not find any available TCP ports starting at 5500. Is there any other running program consuming all your TCP ports?"),
-				gtk_application_get_window (GTK_APPLICATION (g_application_get_instance ())));
+				GTK_WINDOW (listener->priv->window));
       g_object_unref (priv->service);
       priv->service = NULL;
       return;
@@ -259,6 +256,19 @@ vinagre_reverse_vnc_listener_get_port (VinagreReverseVncListener *listener)
   g_return_val_if_fail (VINAGRE_IS_REVERSE_VNC_LISTENER (listener), 0);
 
   return listener->priv->listening ? listener->priv->port : 0;
+}
+
+void
+vinagre_reverse_vnc_listener_set_window (VinagreReverseVncListener *listener,
+                                         VinagreWindow *window)
+{
+  g_return_if_fail (VINAGRE_IS_REVERSE_VNC_LISTENER (listener));
+
+  if (listener->priv->window)
+    g_object_unref (listener->priv->window);
+
+  if (window)
+    listener->priv->window = g_object_ref (window);
 }
 
 /* vim: set ts=8: */

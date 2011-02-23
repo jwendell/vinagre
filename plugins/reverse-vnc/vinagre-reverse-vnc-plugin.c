@@ -82,6 +82,9 @@ impl_activate (PeasActivatable *activatable)
 
   priv = VINAGRE_REVERSE_VNC_PLUGIN (activatable)->priv;
 
+  g_return_if_fail (priv->window != NULL);
+  g_return_if_fail (priv->ui_action_group == NULL);
+
   manager = vinagre_window_get_ui_manager (priv->window);
 
   priv->ui_action_group = gtk_action_group_new ("VinagreReverseVNCPluginActions");
@@ -121,12 +124,18 @@ impl_deactivate (PeasActivatable *activatable)
   manager = vinagre_window_get_ui_manager (priv->window);
 
   gtk_ui_manager_remove_ui (manager, priv->ui_id);
-  gtk_ui_manager_remove_action_group (manager, priv->ui_action_group);
+
+  if (priv->ui_action_group)
+    {
+      gtk_ui_manager_remove_action_group (manager, priv->ui_action_group);
+      g_object_unref (priv->ui_action_group);
+      priv->ui_action_group = NULL;
+    }
 }
 
 static void
 vinagre_reverse_vnc_plugin_set_property (GObject      *object,
-					 guint         prop_id,
+					 guint	       prop_id,
 					 const GValue *value,
 					 GParamSpec   *pspec)
 {
@@ -136,6 +145,8 @@ vinagre_reverse_vnc_plugin_set_property (GObject      *object,
     {
       case PROP_OBJECT:
 	plugin->priv->window = VINAGRE_WINDOW (g_value_dup_object (value));
+	vinagre_reverse_vnc_listener_set_window (plugin->priv->listener,
+						 VINAGRE_WINDOW (plugin->priv->window));
 	break;
 
       default:
@@ -146,8 +157,8 @@ vinagre_reverse_vnc_plugin_set_property (GObject      *object,
 
 static void
 vinagre_reverse_vnc_plugin_get_property (GObject    *object,
-					 guint       prop_id,
-					 GValue     *value,
+					 guint	     prop_id,
+					 GValue	    *value,
 					 GParamSpec *pspec)
 {
   VinagreReverseVncPlugin *plugin = VINAGRE_REVERSE_VNC_PLUGIN (object);
@@ -169,22 +180,18 @@ vinagre_reverse_vnc_plugin_dispose (GObject *object)
 {
   VinagreReverseVncPluginPrivate *priv = VINAGRE_REVERSE_VNC_PLUGIN (object)->priv;
 
-  if (priv->ui_action_group)
+  if (priv->listener)
     {
-      g_object_unref (priv->ui_action_group);
-      priv->ui_action_group = NULL;
+      vinagre_reverse_vnc_listener_set_window (priv->listener,
+					       NULL);
+      g_object_unref (priv->listener);
+      priv->listener = NULL;
     }
 
   if (priv->window != NULL)
     {
       g_object_unref (priv->window);
       priv->window = NULL;
-    }
-
-  if (priv->listener)
-    {
-      g_object_unref (priv->listener);
-      priv->listener = NULL;
     }
 
   G_OBJECT_CLASS (vinagre_reverse_vnc_plugin_parent_class)->dispose (object);
