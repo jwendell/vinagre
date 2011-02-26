@@ -71,6 +71,13 @@ vinagre_plugins_engine_extension_added (PeasExtensionSet     *extensions,
 
   peas_extension_call (exten, "get_protocol", &protocol);
 
+  if (!protocol)
+    {
+      g_warning ("Unable to determine a protocol for the plugin %s",
+                 peas_plugin_info_get_name (info));
+      return;
+    }
+
   previous_ext = g_hash_table_lookup (engine->priv->protocols, protocol);
 
   if (previous_ext)
@@ -94,6 +101,13 @@ vinagre_plugins_engine_extension_removed (PeasExtensionSet     *extensions,
   const gchar *protocol = NULL;
 
   peas_extension_call (exten, "get_protocol", &protocol);
+
+  if (!protocol)
+    {
+      g_warning ("Unable to determine a protocol for the plugin %s",
+                 peas_plugin_info_get_name (info));
+      return;
+    }
 
   g_hash_table_remove (engine->priv->protocols, (gpointer)protocol);
   g_signal_emit (engine, signals[PROTOCOL_REMOVED], 0, exten);
