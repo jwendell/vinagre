@@ -49,6 +49,13 @@ INST_H_FILES = \
   vinagre-plugins-engine.h \
   $(NULL)
 
+INTROSPECTION_GIR_INCLUDES= \
+  Gtk-3.0 \
+  libxml2-2.0 \
+  Peas-1.0 \
+  PeasGtk-1.0 \
+  $(NULL)
+
 headerdir = $(prefix)/include/vinagre-@VINAGRE_API_VERSION@/vinagre
 header_DATA = $(INST_H_FILES)
 
@@ -265,6 +272,7 @@ handwritten_sources += \
 	vinagre-tubes-manager.c vinagre-tubes-manager.h		\
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
 	$(NULL)
+INTROSPECTION_GIR_INCLUDES += TelepathyGLib-0.12
 
 endif
 
@@ -279,8 +287,8 @@ INTROSPECTION_SCANNER_ARGS = $(INCLUDES) $(VINAGRE_CFLAGS) -I$(top_srcdir) --war
 Vinagre_3_0_gir_NAMESPACE = Vinagre
 Vinagre_3_0_gir_VERSION = 3.0
 Vinagre_3_0_gir_PROGRAM = $(builddir)/vinagre
-Vinagre_3_0_gir_FILES = $(INST_H_FILES) $(NOINST_H_FILES) $(handwritten_sources)
-Vinagre_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0 Peas-1.0 PeasGtk-1.0
+Vinagre_3_0_gir_FILES = $(INST_H_FILES) $(filter-out pty_open.h vinagre-plugin-dialog.h, $(NOINST_H_FILES)) $(handwritten_sources)
+Vinagre_3_0_gir_INCLUDES = $(INTROSPECTION_GIR_INCLUDES)
 
 girdir = $(datadir)/vinagre/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
