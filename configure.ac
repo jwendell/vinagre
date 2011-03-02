@@ -99,7 +99,7 @@ if test "x$enable_avahi" = "xyes" ; then
 fi
 AM_CONDITIONAL(AVAHI, test "x$enable_avahi" = "xyes")
 
-PKG_CHECK_MODULES(VINAGRE, \ 
+PKG_CHECK_MODULES(VINAGRE, \
   glib-2.0 >= $GLIB_REQUIRED \
   gio-2.0 >= $GLIB_REQUIRED \
   gio-unix-2.0 >= $GLIB_REQUIRED \
@@ -185,7 +185,6 @@ AC_ARG_ENABLE(telepathy,
 if test "x$enable_telepathy" != "xno"; then
    PKG_CHECK_MODULES(TELEPATHY,
    [
-      dbus-glib-1 \
       telepathy-glib >= $TELEPATHY_GLIB_REQUIRED
    ], have_telepathy="yes", have_telepathy="no")
    if test "x$have_telepathy" = "xyes"; then
@@ -216,11 +215,12 @@ if test "x$enable_applet" = "xyes";then
 fi
 AM_CONDITIONAL(APPLET, test "x$enable_applet" = "xyes")
 
+# Check for spice
 AC_ARG_ENABLE(spice,
               AS_HELP_STRING([--enable-spice],
                              [Enable SPICE plugin (default=yes)]),
               enable_spice=${enableval},
-              enable_spice=yes)
+              enable_spice=no)
 
 if test "x$enable_spice" = "xyes" ; then
   PKG_CHECK_MODULES(SPICE,\
@@ -335,7 +335,7 @@ This is vinagre version AC_PACKAGE_VERSION
 
 Configure summary:
 
-	Compiler ...................:  ${CC} 
+	Compiler ...................:  ${CC}
 	Compiler Flags .............:  ${CFLAGS}
 	GObject Introspection.......:  $enable_introspection
 
