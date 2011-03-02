@@ -21,12 +21,23 @@ MIMEFILES = vinagre-mime.xml.in
 mimedir = $(datadir)/mime/packages
 mime_DATA = vinagre-mime.xml
 
-gsettings_SCHEMAS = org.gnome.Vinagre.gschema.xml
+gsettings_in_file = org.gnome.Vinagre.gschema.xml.in
+gsettings_SCHEMAS = $(gsettings_in_file:.xml.in=.xml)
+# @INTLTOOL_XML_NOMERGE_RULE@ # This rule is overriden by the above
+                              # INTLTOOL_XML_RULE macro.
+# Here is the workaround. Could break if intltools changes arguments.
+$(gsettings_SCHEMAS): $(gsettings_in_file)
+	$(INTLTOOL_MERGE) ; LC_ALL=C $(INTLTOOL_MERGE) -x -u /tmp $< [$]@
+
 @GSETTINGS_RULES@
+
+dist_noinst_DATA = \
+	$(gsettings_in_file)
 
 CLEANFILES = \
 	$(desktop_DATA) \
 	$(mime_DATA) \
+	$(gsettings_SCHEMAS) \
 	$(pkgconfig_DATA) \
 	org.freedesktop.Telepathy.Client.Vinagre.service
 
@@ -36,7 +47,7 @@ EXTRA_DIST = \
 	$(ui_DATA) \
 	$(desktop_in_files) \
 	$(MIMEFILES) \
-	$(gsettings_SCHEMAS) \
+	$(gsettings_in_files) \
 	vinagre.pc.in \
 	Vinagre.client \
 	org.freedesktop.Telepathy.Client.Vinagre.service.in
@@ -69,12 +80,14 @@ UPDATE_DESKTOP = \
                 fi \
         fi
 
-install-data-hook: 
+install-data-hook:
 	$(UPDATE_MIME)
 	$(UPDATE_DESKTOP)
 
-uninstall-hook: 
+uninstall-hook:
 	$(UPDATE_MIME)
 	$(UPDATE_DESKTOP)
 
 -include $(top_srcdir)/git.mk
+
+MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
