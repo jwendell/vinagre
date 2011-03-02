@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 2.92.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-23 09:51+0100\n"
-"PO-Revision-Date: 2011-02-23 09:52+0100\n"
+"POT-Creation-Date: 2011-03-02 20:51+0100\n"
+"PO-Revision-Date: 2011-03-02 20:53+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -63,7 +63,7 @@ msgstr "Mappe"
 
 #: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
 #: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../vinagre/vinagre-fav.c:406
+#: ../plugins/spice/vinagre-spice-tab.c:138 ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "Vert:"
 
@@ -119,7 +119,7 @@ msgstr "_Vert:"
 msgid "_Name:"
 msgstr "_Navn:"
 
-#: ../data/vinagre.ui.h:22
+#: ../data/vinagre.ui.h:22 ../plugins/spice/vinagre-spice-plugin.c:295
 msgid "_Password:"
 msgstr "_Passord:"
 
@@ -135,82 +135,6 @@ msgstr "_Husk dette passordet"
 #: ../plugins/ssh/vinagre-ssh-plugin.c:113
 msgid "_Username:"
 msgstr "Br_ukernavn:"
-
-#: ../data/vinagre.schemas.in.in.h:1
-msgid "Active plugins"
-msgstr "Aktive tillegg"
-
-#: ../data/vinagre.schemas.in.in.h:2
-msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
-"plugin."
-msgstr ""
-"Liste med aktive tillegg. Den inneholder «Lokasjon» for aktive tillegg. Se ."
-"vinagre-plugin-filen for å finne «Lokasjon» for et gitt tillegg."
-
-#: ../data/vinagre.schemas.in.in.h:3
-msgid "Maximum number of history items in connect dialog"
-msgstr "Maksimalt antall historikkoppføringer i tilkoblingsdialogen"
-
-#: ../data/vinagre.schemas.in.in.h:4
-msgid ""
-"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
-"Note that if they are enabled, those keys will be intercepted by the menu "
-"and will not be sent to the remote host."
-msgstr ""
-"Sett til «false» for å slå av menysnarveier. Sett til «true»  for å slå dem "
-"på. Merk at hvis de er slått på vil disse tastene fanges av menyen og ikke "
-"bli sendt til ekstern vert."
-
-#: ../data/vinagre.schemas.in.in.h:5
-msgid ""
-"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
-"tabs when there is more than one active connection."
-msgstr ""
-"Sett til «true» for å alltid vise faner. Settes denne til «false» vil faner "
-"kun vises når det er mer enn en aktiv tilkobling."
-
-#: ../data/vinagre.schemas.in.in.h:6
-msgid ""
-"Set to \"true\" to always start the program listening for reverse "
-"connections."
-msgstr "Sett til «true» for alltid å lytte etter reverserte tilkoblinger."
-
-#: ../data/vinagre.schemas.in.in.h:7
-msgid "Specifies the maximum number of items in the host dropdown entry."
-msgstr "Oppgir maksimalt antall oppføringer i vertsmenyen."
-
-#: ../data/vinagre.schemas.in.in.h:8
-msgid "The handler for \"vnc://\" URLs"
-msgstr "Håndterer for «vnc://»-URLer"
-
-#: ../data/vinagre.schemas.in.in.h:9
-msgid ""
-"When connecting to a host, the client can say to the server to leave other "
-"clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the other clients."
-msgstr ""
-"Når du kobler til en vert kan klientene be tjeneren om å la andre klienter "
-"forbli tilkoblet eller om disse skal kobles fra. Sett verdien til «true» for "
-"å dele skrivebordet med andre klienter."
-
-#: ../data/vinagre.schemas.in.in.h:10
-msgid "Whether we should leave other clients connected"
-msgstr "Om andre klienter skal kunne forbli tilkoblet"
-
-#: ../data/vinagre.schemas.in.in.h:11
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr "Om faner skal vises selv om det bare er en aktiv tilkobling"
-
-#: ../data/vinagre.schemas.in.in.h:12
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "Om hurtigtaster for menyene skal vises (snarveitaster)"
-
-#: ../data/vinagre.schemas.in.in.h:13
-msgid "Whether we should start the program listening for reverse connections"
-msgstr "Om programmet skal lytte etter reverserte tilkoblinger ved oppstart"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -251,6 +175,7 @@ msgstr ""
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
 #: ../plugins/vnc/vinagre-vnc-tab.c:149
+#: ../plugins/spice/vinagre-spice-tab.c:139
 msgid "Port:"
 msgstr "Port:"
 
@@ -264,7 +189,7 @@ msgstr "Feil under kjøring av rdesktop"
 #: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:170
 #: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:766
 #: ../vinagre/vinagre-options.c:76 ../vinagre/vinagre-options.c:94
-#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:750
+#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:749
 msgid "Unknown error"
 msgstr "Ukjent feil"
 
@@ -323,6 +248,7 @@ msgid "Access Unix/Linux, Windows and other machines."
 msgstr "Tilgang til Unix/Linux, Windows og andre maskiner."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:145
+#: ../plugins/spice/vinagre-spice-plugin.c:100
 msgid "Could not parse the file."
 msgstr "Kunne ikke lese filen."
 
@@ -341,13 +267,17 @@ msgid "VNC Options"
 msgstr "Alternativer for VNC"
 
 #. View only check button
+#. View only check button - not fully ready on spice-gtk side
 #: ../plugins/vnc/vinagre-vnc-plugin.c:265
 #: ../plugins/vnc/vinagre-vnc-tab.c:624
+#: ../plugins/spice/vinagre-spice-plugin.c:222
+#: ../plugins/spice/vinagre-spice-tab.c:506
 msgid "_View only"
 msgstr "Ba_re se"
 
 #. Scaling check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:273
+#: ../plugins/spice/vinagre-spice-plugin.c:246
 msgid "_Scaling"
 msgstr "_Skalering"
 
@@ -390,23 +320,28 @@ msgstr "Meget få farger (3-biter)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:331
+#: ../plugins/spice/vinagre-spice-plugin.c:257
 msgid "Use h_ost"
 msgstr "Bruk ve_rt"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:340
+#: ../plugins/spice/vinagre-spice-plugin.c:266
 msgid "hostname or user@hostname"
 msgstr "vertsnavn eller bruker@vertsnavn"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:341
+#: ../plugins/spice/vinagre-spice-plugin.c:267
 msgid "Supply an alternative port using colon"
 msgstr "Oppgi en alternativ port ved bruk av kolon"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:342
+#: ../plugins/spice/vinagre-spice-plugin.c:268
 msgid "For instance: joe@domain.com:5022"
 msgstr "For eksempel: per@domene.no:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:348
+#: ../plugins/spice/vinagre-spice-plugin.c:274
 msgid "as a SSH tunnel"
 msgstr "som en SSH-tunnel"
 
@@ -424,14 +359,18 @@ msgid "Dimensions:"
 msgstr "Dimensjoner:"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:295
+#: ../plugins/spice/vinagre-spice-tab.c:251
 msgid "Error creating the SSH tunnel"
 msgstr "Feil ved oppretting av SSH-tunnel"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:296 ../plugins/vnc/vinagre-vnc-tab.c:307
+#: ../plugins/spice/vinagre-spice-tab.c:252
+#: ../plugins/spice/vinagre-spice-tab.c:264
 msgid "Unknown reason"
 msgstr "Ukjent årsak"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:306
+#: ../plugins/spice/vinagre-spice-tab.c:263
 msgid "Error connecting to host."
 msgstr "Feil ved tilkobling til verten."
 
@@ -458,10 +397,12 @@ msgid "A password is required in order to access this machine."
 msgstr "Et passord kreves for å få tilgang til denne maskinen."
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:595
+#: ../plugins/spice/vinagre-spice-tab.c:465
 msgid "S_caling"
 msgstr "S_kalering"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:596
+#: ../plugins/spice/vinagre-spice-tab.c:466
 msgid "Fits the remote screen into the current window size"
 msgstr "Tilpass ekstern skjerm til størrelsen på aktivt vindu"
 
@@ -474,6 +415,7 @@ msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "Beholder høyde-/breddeforholdet ved skalering"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:625
+#: ../plugins/spice/vinagre-spice-tab.c:507
 msgid "Does not send mouse and keyboard events"
 msgstr "Ikke send hendelser for mus og tastatur"
 
@@ -494,23 +436,31 @@ msgid "Requests an update of the screen"
 msgstr "Ber om en oppdatering av skjermen"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:675
+#: ../plugins/spice/vinagre-spice-tab.c:530
 msgid "_Send Ctrl-Alt-Del"
 msgstr "_Sende Ctrl+Alt+Del"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:676
+#: ../plugins/spice/vinagre-spice-tab.c:531
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Sender Ctrl+alt+del til ekstern maskin"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:728 ../plugins/vnc/vinagre-vnc-tab.c:729
+#: ../plugins/spice/vinagre-spice-tab.c:583
+#: ../plugins/spice/vinagre-spice-tab.c:584
 msgid "Scaling"
 msgstr "Skalering"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:738 ../plugins/vnc/vinagre-vnc-tab.c:739
+#: ../plugins/spice/vinagre-spice-tab.c:593
+#: ../plugins/spice/vinagre-spice-tab.c:594
 msgid "Read only"
 msgstr "Bare se"
 
 #. Send Ctrl-alt-del
 #: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:749
+#: ../plugins/spice/vinagre-spice-tab.c:602
+#: ../plugins/spice/vinagre-spice-tab.c:604
 msgid "Send Ctrl-Alt-Del"
 msgstr "Sende Ctrl+alt+del"
 
@@ -527,6 +477,7 @@ msgstr ""
 "aktiverer denne funksjonen."
 
 #: ../plugins/vnc/vinagre-vnc-tunnel.c:96
+#: ../plugins/spice/vinagre-spice-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "Kan ikke finne en ledig TCP-port"
@@ -582,6 +533,68 @@ msgstr "_Omvendte tilkoblinger …"
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
 msgid "Configure incoming VNC connections"
 msgstr "Konfigurer innkommende VNC-tilkoblinger"
+
+#. vim: set ts=8:
+#: ../plugins/spice/spice.plugin.desktop.in.h:1
+msgid "Spice"
+msgstr "Spice"
+
+#: ../plugins/spice/spice.plugin.desktop.in.h:2
+msgid "Spice support"
+msgstr "Støtte for Spice"
+
+#. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:107
+msgid "The file is not a Spice one: Missing the group \"connection\"."
+msgstr "Denne filen er ikke for Spice: Mangler gruppen «connection»."
+
+#. Translators: Do not translate "host". It's the name of a key in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:114
+msgid "The file is not a Spice one: Missing the key \"host\"."
+msgstr "Denne filen er ikke for Spice: Mangler nøkkel «host»."
+
+#: ../plugins/spice/vinagre-spice-plugin.c:158
+msgid "SPICE"
+msgstr "SPICE"
+
+#. Translators: This is a description of the SPICE protocol. It appears at Connect dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:160
+msgid "Access Spice desktop server"
+msgstr "Koble til Spice skrivebordstjener"
+
+#: ../plugins/spice/vinagre-spice-plugin.c:209
+msgid "SPICE Options"
+msgstr "Alternativer for SPICE"
+
+#. Resize guest check button
+#: ../plugins/spice/vinagre-spice-plugin.c:230
+#: ../plugins/spice/vinagre-spice-tab.c:479
+msgid "_Resize guest"
+msgstr "End_re størrelse på gjest"
+
+#. Clipboard sharing check button
+#: ../plugins/spice/vinagre-spice-plugin.c:238
+#: ../plugins/spice/vinagre-spice-tab.c:492
+msgid "_Share clipboard"
+msgstr "_Del utklippstavle"
+
+#. Translators: This is the tooltip for the password field in a SPICE connection
+#: ../plugins/spice/vinagre-spice-plugin.c:300
+msgid "Optional"
+msgstr "Valgfri"
+
+#. Translators: this is a pattern to open *.spice files in a open dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:321
+msgid "Spice Files"
+msgstr "Spice-filer"
+
+#: ../plugins/spice/vinagre-spice-tab.c:480
+msgid "Resize the screen guest to best fit"
+msgstr "Endre størrelse på skjerm for gjest for beste tilpasning"
+
+#: ../plugins/spice/vinagre-spice-tab.c:493
+msgid "Automatically share clipboard between client and guest"
+msgstr "Del utklippstavle mellom klient og gjest automatisk"
 
 #. vim: set ts=8:
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
@@ -876,7 +889,7 @@ msgstr "_Fjern fra bokmerkene"
 msgid "Remove current selected connection from bookmarks"
 msgstr "Fjern gjeldende valgte tilkobling fra bokmerkene"
 
-#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:409
+#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:408
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Kunne ikke flette XML-fil for brukergrensesnitt: %s"
@@ -929,30 +942,30 @@ msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Klarte ikke å initiere mDNS-visning: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:463
+#: ../vinagre/vinagre-notebook.c:462
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "Tilkobling til vert %s ble lukket."
 
-#: ../vinagre/vinagre-notebook.c:465
+#: ../vinagre/vinagre-notebook.c:464
 msgid "Connection closed"
 msgstr "Tilkobling lukket"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:484
+#: ../vinagre/vinagre-notebook.c:483
 #, c-format
 msgid "Authentication for host %s has failed"
 msgstr "Autentisering for vert %s feilet"
 
-#: ../vinagre/vinagre-notebook.c:490
+#: ../vinagre/vinagre-notebook.c:489
 msgid "Authentication failed"
 msgstr "Autentisering feilet"
 
-#: ../vinagre/vinagre-notebook.c:528
+#: ../vinagre/vinagre-notebook.c:527
 msgid "Connecting..."
 msgstr "Kobler til …"
 
-#: ../vinagre/vinagre-notebook.c:555 ../vinagre/vinagre-tab.c:354
+#: ../vinagre/vinagre-notebook.c:554 ../vinagre/vinagre-tab.c:354
 msgid "Close connection"
 msgstr "Lukk tilkobling"
 
@@ -990,7 +1003,7 @@ msgstr[1] "Følgende feil oppsto:"
 msgid "Plugin Manager"
 msgstr "Tilleggshåndterer"
 
-#: ../vinagre/vinagre-prefs.c:193
+#: ../vinagre/vinagre-prefs.c:87
 msgid "Cannot initialize preferences manager."
 msgstr "Kan ikke starte opp innstillingshåndtereren."
 
@@ -1334,21 +1347,21 @@ msgstr "Hjemmeside for Vinagre"
 msgid "%s authentication is required"
 msgstr "%s autentisering kreves"
 
-#: ../vinagre/vinagre-window.c:438
+#: ../vinagre/vinagre-window.c:437
 msgid "_Recent connections"
 msgstr "_Siste tilkoblinger"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:555
+#: ../vinagre/vinagre-window.c:554
 #, c-format
 msgid "Open %s:%d"
 msgstr "Åpne %s:%d"
 
-#: ../vinagre/vinagre-window.c:734
+#: ../vinagre/vinagre-window.c:733
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "Om menyakselleratorer og tastatursnarveier"
 
-#: ../vinagre/vinagre-window.c:736
+#: ../vinagre/vinagre-window.c:735
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1368,7 +1381,7 @@ msgstr ""
 "\n"
 "Denne meldingen vises kun en gang."
 
-#: ../vinagre/vinagre-window.c:744 ../vinagre/vinagre-window.c:750
+#: ../vinagre/vinagre-window.c:743 ../vinagre/vinagre-window.c:749
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Feil under oppretting av fil %s: %s"
