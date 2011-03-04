@@ -218,7 +218,7 @@ AM_CONDITIONAL(APPLET, test "x$enable_applet" = "xyes")
 # Check for spice
 AC_ARG_ENABLE(spice,
               AS_HELP_STRING([--enable-spice],
-                             [Enable SPICE plugin (default=yes)]),
+                             [Enable SPICE plugin (default=no)]),
               enable_spice=${enableval},
               enable_spice=no)
 
