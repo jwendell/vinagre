@@ -8,8 +8,7 @@ vinagredoc_DATA = \
 	AUTHORS\
 	ChangeLog\
 	INSTALL\
-	NEWS\
-	MAINTAINERS
+	NEWS
 
 EXTRA_DIST =			\
 	$(vinagredoc_DATA)	\
