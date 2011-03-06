@@ -33,7 +33,7 @@
 #include "vinagre-plugins-engine.h"
 #include "vinagre-commands.h"
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 #include "vinagre-mdns.h"
 #endif
 
@@ -909,7 +909,7 @@ vinagre_fav_constructed (GObject *object)
                             "changed",
                             G_CALLBACK (vinagre_fav_update_list),
                             fav);
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   g_signal_connect_swapped (vinagre_mdns_get_default (),
                             "changed",
                             G_CALLBACK (vinagre_fav_update_list),
@@ -1057,7 +1057,7 @@ vinagre_fav_update_list (VinagreFav *fav)
 
   vinagre_fav_fill_bookmarks (store, list, NULL, FALSE);
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   list = vinagre_mdns_get_all (vinagre_mdns_get_default ());
   if (!list)
     return FALSE;

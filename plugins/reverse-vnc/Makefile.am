@@ -3,6 +3,7 @@ plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-DDATADIR=\"$(VINAGRE_PLUGINS_DATA_DIR)/reverse-vnc\"	\
+	-I$(top_builddir) \
 	-I$(top_srcdir) 					\
 	$(VINAGRE_CFLAGS)					\
 	$(WARN_CFLAGS)						\
@@ -15,7 +16,7 @@ libreversevnc_la_SOURCES = 						\
 	vinagre-reverse-vnc-listener.h vinagre-reverse-vnc-listener.c	\
 	vinagre-reverse-vnc-listener-dialog.h vinagre-reverse-vnc-listener-dialog.c
 
-if SELF_IFADDRS
+if VINAGRE_HAVE_SELF_IFADDRS
 libreversevnc_la_SOURCES += if/ifaddrs.h if/getifaddrs.c
 endif
 

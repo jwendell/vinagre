@@ -34,7 +34,7 @@
 
 #include <config.h>
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 #include "vinagre-mdns.h"
 #endif
 
@@ -382,7 +382,7 @@ vinagre_applet_click_cb (GtkWidget      *applet,
   all = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
   fill_menu (all, menu);
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   all = vinagre_mdns_get_all (vinagre_mdns_get_default ());
   fill_menu (all, menu);
 #endif
@@ -414,7 +414,7 @@ static void
 vinagre_applet_init (VinagreApplet *applet)
 {
   gchar *tmp;
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   VinagreMdns *mdns;
 #endif
 
@@ -457,7 +457,7 @@ vinagre_applet_init (VinagreApplet *applet)
   g_signal_connect (G_OBJECT (applet), "destroy",
 		    G_CALLBACK (vinagre_applet_destroy_cb), NULL);
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   mdns = vinagre_mdns_get_default ();
 #endif
 }

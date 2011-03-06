@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#ifdef ENABLE_INTROSPECTION
+#ifdef VINAGRE_HAVE_INTROSPECTION
 #include <girepository.h>
 #endif
 
@@ -39,11 +39,11 @@
 #include "vinagre-options.h"
 #include "vinagre-plugins-engine.h"
 
-#ifdef HAVE_TELEPATHY
+#ifdef VINAGRE_HAVE_TELEPATHY_GLIB
 #include "vinagre-tubes-manager.h"
 #endif
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 #include "vinagre-mdns.h"
 #endif
 
@@ -51,7 +51,7 @@ static gboolean startup_called = FALSE;
 static GtkWindow *window = NULL;
 static GOptionContext *context = NULL;
 
-#ifdef HAVE_TELEPATHY
+#ifdef VINAGRE_HAVE_TELEPATHY_GLIB
 static VinagreTubesManager *vinagre_tubes_manager = NULL;
 #endif
 
@@ -69,7 +69,7 @@ app_init (GtkApplication *app)
 
   vinagre_utils_handle_debug ();
 
-#ifdef HAVE_TELEPATHY
+#ifdef VINAGRE_HAVE_TELEPATHY_GLIB
   vinagre_tubes_manager = vinagre_tubes_manager_new (VINAGRE_WINDOW (window));
 #endif
 
@@ -142,7 +142,7 @@ int main (int argc, char **argv) {
   g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
 
-#ifdef ENABLE_INTROSPECTION
+#ifdef VINAGRE_HAVE_INTROSPECTION
   g_option_context_add_group (context, g_irepository_get_option_group ());
 #endif
 
@@ -174,17 +174,17 @@ int main (int argc, char **argv) {
 
   if (res == 0)
     {
-      #ifdef HAVE_TELEPATHY
+#ifdef VINAGRE_HAVE_TELEPATHY_GLIB
 	g_object_unref (vinagre_tubes_manager);
-      #endif
+#endif
 
       g_object_unref (vinagre_bookmarks_get_default ());
       g_object_unref (vinagre_prefs_get_default ());
       vinagre_cache_prefs_finalize ();
 
-    #ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 	g_object_unref (vinagre_mdns_get_default ());
-    #endif
+#endif
     }
 
   g_object_unref (app);

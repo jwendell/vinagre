@@ -4,6 +4,7 @@ plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 NULL =
 INCLUDES =					\
 	-I$(top_srcdir)				\
+	-I$(top_builddir) \
 	$(DISABLE_DEPRECATED_CFLAGS)		\
 	$(SPICE_CFLAGS)				\
 	$(VINAGRE_CFLAGS)			\

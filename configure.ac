@@ -1,22 +1,114 @@
-# Vinagre autoconf
-
 AC_PREREQ([2.64])
-AC_INIT([vinagre],[2.91.9],[https://bugzilla.gnome.org/enter_bug.cgi?product=vinagre],[vinagre],[http://projects.gnome.org/vinagre/])
+AC_INIT([Vinagre],[2.91.9],[https://bugzilla.gnome.org/enter_bug.cgi?product=vinagre],[vinagre],[http://projects.gnome.org/vinagre/])
+AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_SRCDIR([vinagre/vinagre-main.c])
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
+
+AM_INIT_AUTOMAKE([1.10 -Wall check-news no-define nostdinc])
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 # Checks for programs.
-AC_PROG_CXX
-AC_PROG_AWK
 AC_PROG_CC
-AC_PROG_CPP
-AC_PROG_INSTALL
-AC_PROG_LN_S
-AC_PROG_MAKE_SET
-AC_PROG_RANLIB
+AM_PROG_CC_C_O
 
-# Checks for header files.
-AC_CHECK_HEADERS([sys/uio.h sys/param.h sys/un.h arpa/inet.h stropts.h fcntl.h limits.h locale.h netinet/in.h stdlib.h string.h sys/ioctl.h sys/socket.h termios.h unistd.h utmp.h])
+GNOME_COMPILE_WARNINGS([maximum])
+GNOME_MAINTAINER_MODE_DEFINES
+
+LT_PREREQ([2.2.6])
+LT_INIT([disable-static])
+
+# TODO: Bump before release with GTK+ 3 support.
+# TODO: Use in name of pkg-config file, plugin path and where appropriate.
+AC_SUBST([VINAGRE_API_VERSION], [1.0])
+
+AC_SUBST([PLUGIN_LIBTOOL_FLAGS], ["-module -avoid-version"])
+AC_SUBST([VINAGRE_PLUGINS_DATA_DIR], ["$datadir/vinagre-1/plugins"])
+AC_SUBST([VINAGRE_PLUGINS_LIBS_DIR], ["$libdir/vinagre-1/plugins"])
+
+GLIB_DEPS="glib-2.0 >= 2.25.11 gio-unix-2.0 >= 2.25.11"
+GTHREAD_DEPS="gthread-2.0 >= 2.0.0"
+GTK_DEPS="gtk+-3.0 >= 2.99.3"
+GTK_VNC_DEPS="gtk-vnc-2.0 >= 0.4.3"
+XML2_DEPS="libxml-2.0 >= 2.6.31"
+PEAS_DEPS="libpeas-1.0 >= 0.7.2 libpeas-gtk-1.0 >= 0.7.2"
+
+# Whether to enable support for SSH.
+SSH_DEPS="vte-2.90 >= 0.20 $XML2_DEPS"
+
+AC_ARG_ENABLE([ssh],
+  [AS_HELP_STRING([--disable-ssh],
+    [Disable Secure Shell (SSH) support])])
+
+AS_IF([test "x$enable_ssh" != "xno"],
+  [PKG_CHECK_EXISTS([SSH],
+    [$SSH_DEPS],
+    [have_ssh=yes],
+    [have_ssh=no])],
+  [have_ssh=no])
+
+AS_IF([test "x$have_ssh" = "xyes"],
+  [AC_DEFINE([VINAGRE_ENABLE_SSH], [], [Build with SSH support])
+    AC_PATH_PROG([SSH_PROGRAM], [ssh], [ssh])],
+  [SSH_DEPS=""
+    AS_IF([test "x$enable_ssh" = "xyes"],
+      [AC_MSG_ERROR([SSH support requested but required dependencies not found])])])
+
+AM_CONDITIONAL([VINAGRE_ENABLE_SSH], [test "x$enable_ssh" = "xyes"])
+
+# Whether to enable support for RDP.
+RDP_DEPS="$XML2_DEPS"
+AC_ARG_ENABLE([rdp],
+  [AS_HELP_STRING([--disable-rdp],
+    [Disable Remote Desktop Protocol (RDP) support])])
+
+AS_IF([test "x$enable_rdp" != "xno"],
+  [PKG_CHECK_EXISTS([RDP],
+    [$RDP_DEPS],
+    [have_rdp=yes],
+    [have_rdp=no])],
+  [have_rdp=no])
+
+AS_IF([test "x$have_rdp" = "xyes"],
+  [AC_DEFINE([VINAGRE_ENABLE_RDP], [], [Build with RDP support])
+    AC_PATH_PROG([RDESKTOP_PROGRAM], [rdesktop], [rdesktop])],
+  [RDP_DEPS=""
+    AS_IF([test "x$enable_rdp" = "xyes"],
+      [AC_MSG_ERROR([RDP support requested by required dependencies not found])])])
+
+AM_CONDITIONAL([VINAGRE_ENABLE_RDP], [test "x$enable_rdp" = "xyes"])
+
+# Check for spice.
+SPICE_DEPS="spice-slient-gtk-3.0 >= 0.5"
+
+AC_ARG_ENABLE([spice],
+  [AS_HELP_STRING([--disable-spice],
+    [Disable SPICE protocol support])])
+
+AS_IF([test "x$enable_spice" != "xno"],
+  [PKG_CHECK_MODULES([SPICE],
+    [$SPICE_DEPS],
+    [have_spice=yes],
+    [have_spice=no])],
+  [have_spice=no])
+
+AS_IF([test "x$have_spice" = "xyes"],
+  [AC_DEFINE([VINAGRE_ENABLE_SPICE], [], [Build with spice support])],
+  [SPICE_DEPS=""
+    AS_IF([test "x$enable_spice" = "xyes"],
+    [AC_MSG_ERROR([spice support requested but not found])])])
+
+AM_CONDITIONAL([VINAGRE_ENABLE_SPICE], [test "x$have_spice" = "xyes"])
+
+# Checks for header files. See vinagre/pyt_open.c for usage.
+AC_CHECK_HEADERS([ifaddrs.h sys/un.h stropts.h termios.h utmp.h])
+
+# Internationalization.
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.17])
+AC_SUBST([GETTEXT_PACKAGE], [$PACKAGE_TARNAME])
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [GETTEXT package name])
+IT_PROG_INTLTOOL([0.40.0])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
@@ -25,291 +117,148 @@ AC_TYPE_SIZE_T
 AC_TYPE_SSIZE_T
 AC_TYPE_UINT64_T
 
-# Checks for library functions.
-AC_FUNC_FORK
-AC_FUNC_MALLOC
-AC_CHECK_FUNCS([dup2 memset putenv select setlocale socket strchr strerror strstr getpt posix_openpt grantpt unlockpt ptsname ptsname_r])
+# Checks for library functions. See vinagre/pty_open.c for usage.
+AC_CHECK_FUNCS([getpt posix_openpt grantpt unlockpt ptsname ptsname_r])
 
-AM_INIT_AUTOMAKE([1.10 -Wno-portability])
-LT_PREREQ([2.2.6])
-AC_CONFIG_MACRO_DIR([m4])
+AC_SEARCH_LIBS([strerror], [cposix])
 
-GNOME_COMPILE_WARNINGS([maximum])
-GNOME_MAINTAINER_MODE_DEFINES
+# Check for Avahi.
+AVAHI_DEPS="avahi-ui-gtk3 >= 0.6.26 avahi-gobject >= 0.6.26"
 
-VINAGRE_API_VERSION=1.0
-AC_SUBST(VINAGRE_API_VERSION)
+AC_ARG_WITH([avahi],
+  [AS_HELP_STRING([--without-avahi],
+    [ignore avahi support and disable it])])
 
-AM_MAINTAINER_MODE
+AS_IF([test "x$with_avahi" != "xno"],
+  [PKG_CHECK_EXISTS([AVAHI],
+    [$AVAHI_DEPS],
+    [have_avahi=yes],
+    [have_avahi=no])],
+  [have_avahi=no])
 
-# Use the silent-rules feature when possible.
-m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+AS_IF([test "x$have_avahi" = "xyes"],
+  [AC_DEFINE([VINAGRE_HAVE_AVAHI], [], [Build with avahi support])],
+  [AVAHI_DEPS=""
+    AS_IF([test "x$with_avahi" = "xyes"],
+    [AC_MSG_ERROR([avahi support requested but not found])])])
 
-dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
-AC_SUBST(ACLOCAL_AMFLAGS, "\${ACLOCAL_FLAGS}")
+AM_CONDITIONAL([VINAGRE_HAVE_AVAHI], [test "x$have_avahi" = "xyes"])
 
-AC_SEARCH_LIBS([strerror],[cposix])
-AC_PROG_CC
-AC_HEADER_STDC
+# Check for telepathy-glib.
+TELEPATHY_GLIB_DEPS="telepathy-glib >= 0.11.6"
 
-LT_INIT([disable-static])
-AM_PROG_CC_C_O
+AC_ARG_WITH([telepathy],
+  [AS_HELP_STRING([--without-telepathy],
+    [ignore the presence of telepathy and disable it])])
 
-#*******************************************************************************
-# Internationalization
-#*******************************************************************************
-GETTEXT_PACKAGE=vinagre
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
+AS_IF([test "x$with_telepathy" != "xno"],
+  [PKG_CHECK_EXISTS([TELEPATHY_GLIB],
+    [$TELEPATHY_GLIB_DEPS],
+    [have_telepathy=yes],
+    [have_telepathy=no])],
+  [have_telepathy=no])
 
-IT_PROG_INTLTOOL([0.40.0])
-AM_GLIB_GNU_GETTEXT
+AS_IF([test "x$have_telepathy" = "xyes"],
+  [AC_DEFINE([VINAGRE_HAVE_TELEPATHY_GLIB], [], [Build with telepathy-glib support])],
+  [TELEPATHY_GLIB_DEPS=""
+    AS_IF([test "x$with_telepathy" = "xyes"],
+    [AC_MSG_ERROR([telepathy support requested but not found])])])
 
-GNOME_DOC_INIT
+AM_CONDITIONAL([VINAGRE_HAVE_TELEPATHY_GLIB], [test "x$have_telepathy" = "xyes"])
 
-#*******************************************************************************
-# Check required GNOME libraries
-#*******************************************************************************
-
-GLIB_REQUIRED=2.25.11
-GTK_REQUIRED=2.99.3
-GTHREAD_REQUIRED=2.0.0
-GTK_VNC_REQUIRED=0.4.3
-SPICE_GTK_REQUIRED=0.5
-AVAHI_REQUIRED=0.6.26
-PANEL_REQUIRED_VERSION=2.91.91
-TELEPATHY_GLIB_REQUIRED=0.11.6
-XML_REQUIRED=2.6.31
-VTE_REQUIRED=0.20
-PEAS_REQUIRED=0.7.2
-
-# Check for avahi
-AC_ARG_ENABLE(avahi,
-              AS_HELP_STRING([--disable-avahi],[Do not use avahi for auto-discover machines [default=no]]),
-              enable_avahi=${enableval},
-              enable_avahi=yes)
-
-if test "x$enable_avahi" = "xyes" ; then
-  PKG_CHECK_MODULES(AVAHI,\
-  avahi-ui-gtk3 >= $AVAHI_REQUIRED\
-  avahi-gobject >= $AVAHI_REQUIRED)
-  AC_SUBST(AVAHI_CFLAGS)
-  AC_SUBST(AVAHI_LIBS)
-  AC_DEFINE([VINAGRE_ENABLE_AVAHI],[1],[We want avahi support])
-fi
-AM_CONDITIONAL(AVAHI, test "x$enable_avahi" = "xyes")
-
-PKG_CHECK_MODULES(VINAGRE, \
-  glib-2.0 >= $GLIB_REQUIRED \
-  gio-2.0 >= $GLIB_REQUIRED \
-  gio-unix-2.0 >= $GLIB_REQUIRED \
-  gtk+-3.0 >= $GTK_REQUIRED \
-  gthread-2.0 >= $GTHREAD_REQUIRED \
-  gnome-keyring-1 \
-  libxml-2.0 >= $XML_REQUIRED \
-  libpeas-1.0 >= $PEAS_REQUIRED \
-  libpeas-gtk-1.0 >= $PEAS_REQUIRED
-)
-AC_SUBST(VINAGRE_CFLAGS)
-AC_SUBST(VINAGRE_LIBS)
-
-PKG_CHECK_MODULES(VNC, \
-  gtk-vnc-2.0 >= $GTK_VNC_REQUIRED \
-  gtk+-3.0 >= $GTK_REQUIRED \
-  libxml-2.0 >= $XML_REQUIRED
-)
-AC_SUBST(VNC_CFLAGS)
-AC_SUBST(VNC_LIBS)
-
-dnl ****************************
-dnl *** Checks for pty stuff ***
-dnl ****************************
-
-# Pull in the right libraries for various functions which might not be
-# bundled into an exploded libc.
-AC_CHECK_FUNC(socketpair,[have_socketpair=1],AC_CHECK_LIB(socket,socketpair,[have_socketpair=1; LIBS="$LIBS -lsocket"]))
-if test x$have_socketpair = x1 ; then
-	AC_DEFINE(HAVE_SOCKETPAIR,1,[Define if you have the socketpair function.])
-fi
-
-AC_SEARCH_LIBS(login_tty, util, [AC_DEFINE([HAVE_LOGIN_TTY],[],[Whether login_tty is available])])
-
-dnl ****************************
-dnl *** Checks for SSH stuff ***
-dnl ****************************
-
-AC_PATH_PROG(SSH_PROGRAM, ssh, "ssh")
-
-AC_ARG_ENABLE(ssh,
-              AS_HELP_STRING([--enable-ssh],
-                             [Enable SSH plugin (default=no)]),
-              enable_ssh=${enableval},
-              enable_ssh=no)
-
-if test "x$enable_ssh" = "xyes" ; then
-  PKG_CHECK_MODULES(SSH,\
-  vte-2.90 >= $VTE_REQUIRED \
-  libxml-2.0 >= $XML_REQUIRED)
-  AC_SUBST(VTE_CFLAGS)
-  AC_SUBST(VTE_LIBS)
-  AC_DEFINE([VINAGRE_ENABLE_SSH],[1],[We want ssh support])
-fi
-AM_CONDITIONAL(SSH, test "x$enable_ssh" = "xyes")
-
-dnl ****************************
-dnl *** Checks for RDP stuff ***
-dnl ****************************
-
-AC_ARG_ENABLE(rdp,
-              AS_HELP_STRING([--enable-rdp],
-                             [Enable RDP plugin (default=yes)]),
-              enable_rdp=${enableval},
-              enable_rdp=yes)
-
-if test "x$enable_rdp" = "xyes" ; then
-  AC_PATH_PROG(RDESKTOP_PROGRAM, rdesktop, "rdesktop")
-  PKG_CHECK_MODULES(RDP,\
-  libxml-2.0 >= $XML_REQUIRED)
-  AC_SUBST(RDP_CFLAGS)
-  AC_SUBST(RDP_LIBS)
-  AC_DEFINE([VINAGRE_ENABLE_RDP],[1],[We want rdp support])
-fi
-AM_CONDITIONAL(RDP, test "x$enable_rdp" = "xyes")
-
-# Check for telepathy
-AC_ARG_ENABLE(telepathy,
-              AS_HELP_STRING([--enable-telepathy=@<:@no/yes/auto@:>@],
-                             [Enable telepathy checking]), ,
-                             enable_telepathy=auto)
-
-if test "x$enable_telepathy" != "xno"; then
-   PKG_CHECK_MODULES(TELEPATHY,
-   [
-      telepathy-glib >= $TELEPATHY_GLIB_REQUIRED
-   ], have_telepathy="yes", have_telepathy="no")
-   if test "x$have_telepathy" = "xyes"; then
-      AC_SUBST(TELEPATHY_CFLAGS)
-      AC_SUBST(TELEPATHY_LIBS)
-      AC_DEFINE(HAVE_TELEPATHY, [], [Define if you have telepathy])
-   fi
-else
-   have_telepathy=no
-fi
-
-if test "x$enable_telepathy" = "xyes" -a "x$have_telepathy" != "xyes"; then
-   AC_MSG_ERROR([Couldn't find telepathy dependencies.])
-fi
-
-AM_CONDITIONAL(TELEPATHY, test "x$have_telepathy" = "xyes")
-
-# Enable/disable gnome-panel applet
+# Check for panelapplet.
 # TODO: Applet needs porting to GTK+ 3 and libpanelapplet-4.0, and is currently
 # broken. Do not enable applet support unless you are a developer who wants to
 # hack on it.
-AC_ARG_ENABLE(applet,
-              AS_HELP_STRING([--enable-applet], [Build the panel applet @<:@default=disabled@:>@]),
-              enable_applet=$enableval,
-              enable_applet=no)
+PANELAPPLET_DEPS="libpanelapplet-4.0 >= 2.91.91"
 
-if test "x$enable_applet" = "xyes";then
-   AC_MSG_WARN([Applet support is currently broken!])
-   PKG_CHECK_MODULES(APPLET, libpanelapplet-4.0 >= $PANEL_REQUIRED_VERSION)
-   AC_SUBST(APPLET_CFLAGS)
-   AC_SUBST(APPLET_LIBS)
-fi
-AM_CONDITIONAL(APPLET, test "x$enable_applet" = "xyes")
+AC_ARG_WITH([panelapplet],
+  [AS_HELP_STRING([--with-panelapplet],
+    [enable libpanelapplet support])],
+  [],
+  [with_panelapplet=no])
 
-# Check for spice
-AC_ARG_ENABLE(spice,
-              AS_HELP_STRING([--enable-spice],
-                             [Enable SPICE plugin (default=no)]),
-              enable_spice=${enableval},
-              enable_spice=no)
+AS_IF([test "x$with_panelapplet" != "xno"],
+  [PKG_CHECK_MODULES([PANELAPPLET],
+    [$PANELAPPLET_DEPS],
+    [have_panelapplet=yes],
+    [have_panelapplet=no])],
+  [have_panelapplet=no])
 
-if test "x$enable_spice" = "xyes" ; then
-  PKG_CHECK_MODULES(SPICE,\
-  spice-client-gtk-3.0 >= $SPICE_GTK_REQUIRED)
-  AC_SUBST(SPICE_CFLAGS)
-  AC_SUBST(SPICE_LIBS)
-  AC_DEFINE([VINAGRE_ENABLE_SPICE],[1],[We want spice support])
-fi
-AM_CONDITIONAL(SPICE, test "x$enable_spice" = "xyes")
+AS_IF([test "x$have_panelapplet" = "xyes"],
+  [AC_MSG_WARN([Applet support is currently broken!])],
+  [PANELAPPLET_DEPS=""
+    AS_IF([test "x$with_panelapplet" = "xyes"],
+      [AC_MSG_ERROR([panelapplet support requested but not found])])])
 
-GLIB_GSETTINGS
+AM_CONDITIONAL([VINAGRE_HAVE_PANELAPPLET], [test "x$have_panelapplet" = "xyes"])
 
-dnl Check for bind in libsocket (needed on Solaris)
-AC_CHECK_LIB(socket, bind)
+# Check required libraries
+PKG_CHECK_MODULES([VINAGRE], [$GLIB_DEPS $GTHREAD_DEPS $GTK_DEPS gnome-keyring-1 $XML2_DEPS $PEAS_DEPS $AVAHI_DEPS $TELEPATHY_GLIB_DEPS])
 
-dnl define a MAINT-like variable REBUILD which is set
-dnl if Perl, so autogenerated sources can be rebuilt
-AC_PATH_PROGS(PERL, perl5 perl)
-AC_ARG_ENABLE(rebuilds, [  --disable-rebuilds      disable all source autogeneration rules],,enable_rebuilds=yes)
-REBUILD=\#
-if test "x$enable_rebuilds" = "xyes" && \
-     test -n "$PERL" && \
-     $PERL -e 'exit !($] >= 5.002)' > /dev/null 2>&1 ; then
-  REBUILD=
-fi
-AC_SUBST(REBUILD)
+PKG_CHECK_MODULES([VNC], [$GTK_VNC_DEPS $GTK_DEPS $XML2_DEPS])
 
-# Plugins
-#*******************************************************************************
-#
-dnl ****************************
-dnl *** Checks for ifaddrs.h ***
-dnl ****************************
-AC_CHECK_HEADER(ifaddrs.h)
-AM_CONDITIONAL(SELF_IFADDRS, test "x$ac_cv_header_ifaddrs_h" != "xyes")
+# *** Checks for pty stuff ***
+# Pull in the right libraries for various functions which might not be
+# bundled into an exploded libc.
+AC_CHECK_FUNC([socketpair],
+  [have_socketpair=yes],
+  [AC_CHECK_LIB([socket],
+    [socketpair],
+    [have_socketpair=yes
+      LIBS="$LIBS -lsocket"])])
 
-dnl RFC2553 introduce sockaddr_storage as ifa_addr member in ifaddrs structure
-dnl Not all distros follow this.
-if test "x$ac_cv_header_ifaddrs_h" = "xyes"; then
-        AC_DEFINE(HAVE_IFADDRS_H, [1], [Define if we have system ifaddrs.h])
-        AC_TRY_COMPILE([
-          #include <ifaddrs.h>
-          #include <net/if.h>
-          ],[
-          struct ifaddrs *myaddrs;
-          getifaddrs (&myaddrs);
-          if (myaddrs->ifa_addr->ss_family == AF_INET) {
-          }
-        ], have_sockaddr_storage=yes, have_sockaddr_storage=no)
-        if test "x$have_sockaddr_storage" = "xyes"; then
-           AC_DEFINE(RFC2553, [], [Define to if follow RFC2553 ])
-        fi
-fi
+AS_IF([test "x$have_socketpair" = "xyes"],
+  [AC_DEFINE([VINAGRE_HAVE_SOCKETPAIR], [], [Define if you have the socketpair function.])])
 
+AC_SEARCH_LIBS([login_tty],
+  [util],
+  [AC_DEFINE([HAVE_LOGIN_TTY], [], [Whether login_tty is available])])
 
-dnl active plugins for org.gnome.Vinagre.gschema.xml
+# Check for bind in libsocket (needed on Solaris)
+AC_CHECK_LIB([socket], [bind])
+
+# Check for getifaddrs
+AM_CONDITIONAL([VINAGRE_HAVE_SELF_IFADDRS], [test "x$ac_cv_header_ifaddrs_h" != "xyes"])
+
+# RFC2553 introduce sockaddr_storage as ifa_addr member in ifaddrs structure
+# Not all distros follow this.
+AS_IF([test "x$ac_cv_header_ifaddrs_h" = "xyes"],
+  [AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+    #include <net/if.h>
+    #include <ifaddrs.h>
+    ]], [[
+    struct ifaddrs *myaddrs;
+    getifaddrs (&myaddrs);
+    if (myaddrs->ifa_addr->ss_family == AF_INET) {
+    }
+    ]])],
+    [have_sockaddr_storage=yes],
+    [have_sockaddr_storage=no])],
+  [AS_IF([test "x$have_sockaddr_storage" = "xyes"],
+    [AC_DEFINE([RFC2553], [], [Define if RFC2553 is followed])])])
+
+# Active plugins for org.gnome.Vinagre.gschema.xml
+# TODO: Make this work.
 ACTIVE_PLUGINS="vnc"
-if test "x$enable_ssh" = "xyes" ; then
-ACTIVE_PLUGINS="$ACTIVE_PLUGINS,ssh"
-fi
-AC_SUBST(ACTIVE_PLUGINS)
-
-VINAGRE_IMPLIB="-lvinagre-${VINAGRE_API_VERSION}"
-PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
-
-AC_SUBST(VINAGRE_IMPLIB)
-AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
-
-VINAGRE_PLUGINS_DATA_DIR="$datadir/vinagre-1/plugins"
-AC_SUBST(VINAGRE_PLUGINS_DATA_DIR)
-
-VINAGRE_PLUGINS_LIBS_DIR="$libdir/vinagre-1/plugins"
-AC_SUBST(VINAGRE_PLUGINS_LIBS_DIR)
+AS_IF([test "x$enable_ssh" = "xyes"],
+  [ACTIVE_PLUGINS="$ACTIVE_PLUGINS,ssh"])
+AC_SUBST([ACTIVE_PLUGINS])
 
 # Introspection
 GOBJECT_INTROSPECTION_CHECK([0.9.3])
 
-if test "$found_introspection" = "yes"; then
-	enable_introspection=yes
-	AC_DEFINE([ENABLE_INTROSPECTION], [1], [Define to enable GObject Introspection])
-else
-	enable_introspection=no
-fi
+AS_IF([test "x$found_introspection" = "xyes"],
+  [enable_introspection=yes
+    AC_DEFINE([VINAGRE_HAVE_INTROSPECTION], [], [Build with GObject Introspection support])],
+  [enable_introspection=no])
 
-#*******************************************************************************
+AM_CONDITIONAL([VINAGRE_HAVE_INTROSPECTION], [test "x$enable_introspection" = "xyes"])
+
+GNOME_DOC_INIT
+
+GLIB_GSETTINGS
+
 AC_CONFIG_FILES([
 Makefile
 data/Makefile
@@ -330,23 +279,3 @@ vinagre/Makefile
 vinagre/view/Makefile
 ])
 AC_OUTPUT
-
-#*******************************************************************************
-
-echo "
-
-This is vinagre version AC_PACKAGE_VERSION
-
-Configure summary:
-
-	Compiler ...................:  ${CC}
-	Compiler Flags .............:  ${CFLAGS}
-	GObject Introspection.......:  $enable_introspection
-
-	Avahi enabled ..............:  ${enable_avahi}
-	GNOME Panel applet..........:  ${enable_applet}
-	Telepathy support ..........:  ${have_telepathy}
-	SSH plugin .................:  ${enable_ssh}
-	RDP plugin .................:  ${enable_rdp}
-	Spice plugin ...............:  ${enable_spice}
-"

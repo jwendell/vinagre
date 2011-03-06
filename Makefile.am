@@ -38,7 +38,7 @@ MAINTAINERCLEANFILES = 		\
 	`find "$(srcdir)" -type f -name Makefile.in -print`	\
 	`find "$(topdir)/help" -type f -name *.mo -print`
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-applet
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --without-panelapplet
 
 # Copy all the spec files. Of cource, only one is actually used.
 dist-hook:

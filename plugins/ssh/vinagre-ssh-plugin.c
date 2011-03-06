@@ -32,7 +32,7 @@
 #include "vinagre-ssh-connection.h"
 #include "vinagre-ssh-tab.h"
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 #include <avahi-ui/avahi-ui.h>
 #include <avahi-common/malloc.h>
 #endif
@@ -135,7 +135,7 @@ ssh_parse_mdns_dialog (VinagreProtocol *plugin,
 		       GtkWidget *connect_widget,
 		       GtkWidget *dialog)
 {
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   const AvahiStringList *txt;
   gchar *u = NULL;
 

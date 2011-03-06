@@ -15,15 +15,15 @@ SUBDIRS =					\
 	vnc					\
 	$(NULL)
 
-if RDP
+if VINAGRE_ENABLE_RDP
 SUBDIRS += rdp
 endif
 
-if SPICE
+if VINAGRE_ENABLE_SPICE
 SUBDIRS += spice
 endif
 
-if SSH
+if VINAGRE_ENABLE_SSH
 SUBDIRS += ssh
 endif
 

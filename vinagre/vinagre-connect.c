@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 #include <avahi-ui/avahi-ui.h>
 #endif
 
@@ -101,7 +101,7 @@ protocol_combo_changed (GtkComboBox *combo, VinagreConnectDialog *dialog)
   gtk_label_set_label (GTK_LABEL (dialog->protocol_description_label),
 		       description);
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   if (service)
     gtk_widget_show (dialog->find_button);
   else
@@ -320,7 +320,7 @@ save_history (GtkWidget *combo) {
   }
 }
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 static void
 vinagre_connect_find_button_cb (GtkButton            *button,
 				VinagreConnectDialog *dialog)
@@ -422,7 +422,7 @@ vinagre_connect (VinagreWindow *window)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog.fullscreen_check),
 				vinagre_cache_prefs_get_boolean ("connection", "fullscreen", FALSE));
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   g_signal_connect (dialog.find_button,
 		    "clicked",
 		    G_CALLBACK (vinagre_connect_find_button_cb),

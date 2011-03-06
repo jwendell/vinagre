@@ -3,6 +3,8 @@ SUBDIRS = view
 NULL = 
 
 INCLUDES = 						\
+	-I$(top_builddir) \
+	-I$(top_builddir)/vinagre \
 	-DBINDIR=\"$(bindir)\"			 	\
 	-DDATADIR=\"$(datadir)\"			\
 	-DPREFIX=\""$(prefix)"\" 			\
@@ -12,7 +14,6 @@ INCLUDES = 						\
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\"	\
 	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\"		\
 	$(VINAGRE_CFLAGS)				\
-	$(AVAHI_CFLAGS)					\
 	$(INTROSPECTION_CFLAGS)				\
 	$(NULL)
 
@@ -98,7 +99,7 @@ libvinagre_la_SOURCES = \
   $(INST_H_FILES) \
   $(NULL)
 
-if AVAHI
+if VINAGRE_HAVE_AVAHI
 libvinagre_la_SOURCES += vinagre-mdns.h vinagre-mdns.c
 endif
 
@@ -122,14 +123,13 @@ vinagre_SOURCES = \
 vinagre_LDADD = \
 	libvinagre.la \
 	$(VINAGRE_LIBS)		\
-	$(AVAHI_LIBS)		\
 	$(GTKVNC_LIBS)		\
 	$(INTROSPECTION_LIBS)	\
 	$(NULL)
 
 vinagre_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
-if APPLET
+if VINAGRE_HAVE_PANELAPPLET
 
 ##############################
 # Bonobo .server
@@ -154,8 +154,7 @@ $(server_in_files): $(server_in_files:.server.in=.server.in.in)
 libexec_PROGRAMS = vinagre-applet
 
 vinagre_applet_CFLAGS =			\
-	$(APPLET_CFLAGS)		\
-	$(AVAHI_CFLAGS)			\
+	$(PANELAPPLET_CFLAGS)		\
 	$(NULL)
 
 vinagre_applet_SOURCES =					\
@@ -186,15 +185,14 @@ vinagre_applet_SOURCES =					\
 	vinagre-plugins-engine.h vinagre-plugins-engine.c \
 	$(NULL)
 
-if AVAHI
+if VINAGRE_HAVE_AVAHI
 vinagre_applet_SOURCES += vinagre-mdns.h vinagre-mdns.c
 endif
 
 vinagre_applet_LDADD =			\
 	view/libview.la			\
-	$(APPLET_LIBS)			\
+	$(PANELAPPLET_LIBS)			\
 	$(VINAGRE_LIBS)			\
-	$(AVAHI_LIBS)			\
 	$(NULL)
 vinagre_applet_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
@@ -208,7 +206,7 @@ vinagre_enum_headers = \
 	$(top_srcdir)/vinagre/vinagre-connection.h \
 	$(NULL)
 
-vinagre-enums.c: @REBUILD@ $(vinagre_enum_headers)
+vinagre-enums.c: $(vinagre_enum_headers)
 	$(AM_V_GEN)glib-mkenums    --fhead "#include <glib-object.h>\n" \
 			--fhead "#include \"vinagre-enums.h\"\n\n" \
 			--fprod "\n/* enumerations from \"@filename@\" */" \
@@ -223,7 +221,7 @@ vinagre-enums.c: @REBUILD@ $(vinagre_enum_headers)
 			--vtail "  return type;\n}\n\n" \
 		$(vinagre_enum_headers) > $@
 
-vinagre-enums.h: @REBUILD@ $(vinagre_enum_headers)
+vinagre-enums.h: $(vinagre_enum_headers)
 	$(AM_V_GEN)glib-mkenums    --fhead "#ifndef __VINAGRE_ENUMS_H__\n" \
 			--fhead "#define __VINAGRE_ENUMS_H__ 1\n\n" \
 			--fhead "G_BEGIN_DECLS\n\n" \
@@ -264,21 +262,17 @@ BUILT_SOURCES = \
 # Telepathy stuff
 ##############################
 
-if TELEPATHY
-
-INCLUDES += $(TELEPATHY_CFLAGS)
-vinagre_LDADD += $(TELEPATHY_LIBS)
+if VINAGRE_HAVE_TELEPATHY_GLIB
 handwritten_sources += \
 	vinagre-tubes-manager.c vinagre-tubes-manager.h		\
 	vinagre-tube-handler.c vinagre-tube-handler.h		\
 	$(NULL)
 INTROSPECTION_GIR_INCLUDES += TelepathyGLib-0.12
-
 endif
 
 CLEANFILES =
 
-if HAVE_INTROSPECTION
+if VINAGRE_HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS = Vinagre-3.0.gir
 

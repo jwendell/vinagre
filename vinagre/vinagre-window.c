@@ -45,7 +45,7 @@
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
 #include "vinagre-mdns.h"
 #endif
 
@@ -616,7 +616,7 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
 
   favs = vinagre_bookmarks_get_all (vinagre_bookmarks_get_default ());
 
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   mdnss = vinagre_mdns_get_all (vinagre_mdns_get_default ());
 #endif
 
@@ -829,7 +829,7 @@ vinagre_window_init (VinagreWindow *window)
                             "changed",
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),
                             window);
-#ifdef VINAGRE_ENABLE_AVAHI
+#ifdef VINAGRE_HAVE_AVAHI
   g_signal_connect_swapped (vinagre_mdns_get_default (),
                             "changed",
                             G_CALLBACK (vinagre_window_update_bookmarks_list_menu),

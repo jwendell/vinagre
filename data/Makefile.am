@@ -23,11 +23,11 @@ mime_DATA = vinagre-mime.xml
 
 gsettings_in_file = org.gnome.Vinagre.gschema.xml.in
 gsettings_SCHEMAS = $(gsettings_in_file:.xml.in=.xml)
-# @INTLTOOL_XML_NOMERGE_RULE@ # This rule is overriden by the above
-                              # INTLTOOL_XML_RULE macro.
+# @INTLTOOL_XML_NOMERGE_RULE@
+# This rule is overriden by the above INTLTOOL_XML_RULE macro.
 # Here is the workaround. Could break if intltools changes arguments.
 $(gsettings_SCHEMAS): $(gsettings_in_file)
-	$(INTLTOOL_MERGE) ; LC_ALL=C $(INTLTOOL_MERGE) -x -u /tmp $< [$]@
+	$(INTLTOOL_MERGE) ; LC_ALL=C $(INTLTOOL_MERGE) -x -u /tmp $< $@
 
 @GSETTINGS_RULES@
 
@@ -52,8 +52,7 @@ EXTRA_DIST = \
 	Vinagre.client \
 	org.freedesktop.Telepathy.Client.Vinagre.service.in
 
-if TELEPATHY
-
+if VINAGRE_HAVE_TELEPATHY_GLIB
 clientfiledir = $(datarootdir)/telepathy/clients
 clientfile_DATA = Vinagre.client
 
@@ -63,7 +62,6 @@ service_DATA = org.freedesktop.Telepathy.Client.Vinagre.service
 org.freedesktop.Telepathy.Client.Vinagre.service: org.freedesktop.Telepathy.Client.Vinagre.service.in \
 		Makefile
 	$(AM_V_GEN)sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
-
 endif
 
 UPDATE_MIME = \
