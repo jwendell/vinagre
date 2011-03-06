@@ -1,3 +1,37 @@
+Vinagre 2.91.9
+===============
+
+  Features
+
+        + Make GSettings schema translatable (Chris Kühl)
+
+  Fixes
+
+        + Overhaul configure script (David King)
+          Note to packagers: Arguments to the configure script were changed.
+          All functionality (except the panel applet) is now automagically
+	  enabled, and can be disabled or explicitly enabled with the
+	  appropriate configure arguments. Please check `configure --help`.
+        + Adapt to GtkObject removal in GTK+ 3 (Javier Jardón)
+        + Replace gdk_draw_* with cairo* in panel applet (Daniel Svensson)
+        + Avoid NULL pointer dereference in plugins if introspection is
+          disabled (Brett Witherspoon)
+        + Partially fix introspection build (Brett Witherspoon)
+
+  UI translations:
+
+        + Daniel Mustieles (es)
+        + Ivar Smolin (et)
+        + Bruno Brouard (fr)
+        + Sweta Kothari (gu)
+        + Yaron Shahrabani (he)
+        + Changwoo Ryu (ko)
+        + Rudolfs Mazurs (lv)
+        + Kjartan Maraas (nb)
+        + A S Alam (pa)
+        + Matej Urbančič (sl)
+        + Daniel Korostil (uk)
+
 Vinagre 2.91.8
 ===============
 

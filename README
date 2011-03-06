@@ -1,5 +1,5 @@
-Vinagre 2.31.4
-===============
+Vinagre
+=======
 
 This is vinagre, a remote desktop viewer for the GNOME Desktop.
 
@@ -10,7 +10,27 @@ You can download or see more information about it on:
 Installation
 ============
 
-  - See the file 'INSTALL'
+You need the devel packages of the following libraries:
+
+ - gtk+-3.0 >= 2.99.3
+ - glib-2.0 >= 2.25.11
+ - gnome-keyring
+ - gtk-vnc >= 0.4.3 (http://live.gnome.org/gtk-vnc)
+ - avahi-gobject and avahi-ui-gtk3 >= 0.6.26
+
+To compile it, just do:
+
+./configure [--prefix=/usr]
+make
+make install (as root, or with sudo)
+
+Notes:
+
+  - gtk-vnc must be compiled with the flag '--with-gtk=3.0' in the configure script
+
+  - Use the flag '--enable-ssh' to compile vinagre with SSH support
+    - You will need libvte >= 0.25
+    - libvte must be compiled with the flag '--with-gtk=3.0' in the configure script
 
 
 What's New?
@@ -23,4 +43,3 @@ Who is behind Vinagre?
 ======================
 
   - See the file 'AUTHORS'
-
