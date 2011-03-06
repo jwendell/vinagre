@@ -203,12 +203,16 @@ fi
 AM_CONDITIONAL(TELEPATHY, test "x$have_telepathy" = "xyes")
 
 # Enable/disable gnome-panel applet
+# TODO: Applet needs porting to GTK+ 3 and libpanelapplet-4.0, and is currently
+# broken. Do not enable applet support unless you are a developer who wants to
+# hack on it.
 AC_ARG_ENABLE(applet,
-              AS_HELP_STRING([--disable-applet], [Do not build the panel applet @<:@default=enabled@:>@]),
+              AS_HELP_STRING([--enable-applet], [Build the panel applet @<:@default=disabled@:>@]),
               enable_applet=$enableval,
-              enable_applet=yes)
+              enable_applet=no)
 
 if test "x$enable_applet" = "xyes";then
+   AC_MSG_WARN([Applet support is currently broken!])
    PKG_CHECK_MODULES(APPLET, libpanelapplet-2.0 >= $PANEL_REQUIRED_VERSION)
    AC_SUBST(APPLET_CFLAGS)
    AC_SUBST(APPLET_LIBS)
