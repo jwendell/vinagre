@@ -119,7 +119,8 @@ dist_noinst_DATA = \
 	$(service_in_file) \
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in
+	intltool-update.in \
+	vinagre.doap
 
 CLEANFILES = \
 	$(nodist_desktop_DATA) \
