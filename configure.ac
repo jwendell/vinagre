@@ -282,7 +282,6 @@ Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
 data/vinagre.pc
-data/icons/Makefile
 help/Makefile
 po/Makefile.in
 plugins/Makefile

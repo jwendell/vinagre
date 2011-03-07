@@ -1,8 +1,67 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
-SUBDIRS = vinagre help po data/icons plugins
+SUBDIRS = vinagre help po plugins
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --without-panelapplet
 
+iconthemedir = $(datadir)/icons/hicolor
+appicon16dir = $(iconthemedir)/16x16/apps
+appicon22dir = $(iconthemedir)/22x22/apps
+appicon24dir = $(iconthemedir)/24x24/apps
+appicon32dir = $(iconthemedir)/32x32/apps
+appicon48dir = $(iconthemedir)/48x48/apps
+appiconscalabledir = $(iconthemedir)/scalable/apps
+mimeicon16dir = $(iconthemedir)/16x16/mimetypes
+mimeicon22dir = $(iconthemedir)/22x22/mimetypes
+mimeicon24dir = $(iconthemedir)/24x24/mimetypes
+mimeicon32dir = $(iconthemedir)/32x32/mimetypes
+mimeicon48dir = $(iconthemedir)/48x48/mimetypes
+mimeiconscalabledir = $(iconthemedir)/scalable/mimetypes
+statusicon16dir = $(iconthemedir)/16x16/status
+statusicon22dir = $(iconthemedir)/22x22/status
+statusicon32dir = $(iconthemedir)/32x32/status
+statusicon48dir = $(iconthemedir)/48x48/status
+
+dist_appicon16_DATA = data/icons/16x16/apps/vinagre.png
+dist_appicon22_DATA = data/icons/22x22/apps/vinagre.png
+dist_appicon24_DATA = data/icons/24x24/apps/vinagre.png
+dist_appicon32_DATA = data/icons/32x32/apps/vinagre.png
+dist_appicon48_DATA = data/icons/48x48/apps/vinagre.png
+dist_appiconscalable_DATA = data/icons/scalable/apps/vinagre.svg
+dist_mimeicon16_DATA = \
+	data/icons/16x16/mimetypes/application-x-remote-connection.png \
+	data/icons/16x16/mimetypes/application-x-vnc.png
+dist_mimeicon22_DATA = \
+	data/icons/22x22/mimetypes/application-x-remote-connection.png \
+	data/icons/22x22/mimetypes/application-x-vnc.png
+dist_mimeicon24_DATA = \
+	data/icons/24x24/mimetypes/application-x-remote-connection.png \
+	data/icons/24x24/mimetypes/application-x-vnc.png
+dist_mimeicon32_DATA = \
+	data/icons/32x32/mimetypes/application-x-remote-connection.png \
+	data/icons/32x32/mimetypes/application-x-vnc.png
+dist_mimeicon48_DATA = \
+	data/icons/48x48/mimetypes/application-x-remote-connection.png \
+	data/icons/48x48/mimetypes/application-x-vnc.png
+dist_mimeiconscalable_DATA = \
+	data/icons/scalable/mimetypes/application-x-remote-connection.svg \
+	data/icons/scalable/mimetypes/application-x-vnc.svg
+dist_statusicon16_DATA = data/icons/16x16/status/view-minimize.png
+dist_statusicon22_DATA = data/icons/22x22/status/view-minimize.png
+dist_statusicon32_DATA = data/icons/32x32/status/view-minimize.png
+dist_statusicon48_DATA = data/icons/48x48/status/view-minimize.png
+
+update_icon_cache = gtk-update-icon-cache --ignore-theme-index --force
+
+install-data-hook: install-update-icon-cache
+uninstall-hook: uninstall-update-icon-cache
+
+install-update-icon-cache:
+	@$(POST_INSTALL)
+	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
+
+uninstall-update-icon-cache:
+	@$(POST_UNINSTALL)
+	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
 dist_man_MANS = data/vinagre.1
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -11,8 +70,7 @@ nodist_pkgconfig_DATA = data/vinagre-@VINAGRE_API_VERSION@.pc
 data/vinagre-@VINAGRE_API_VERSION@.pc: data/vinagre.pc
 	$(AM_V_GEN)cp $< $@
 
-uidir = $(pkgdatadir)
-dist_ui_DATA = \
+dist_pkgdata_DATA = \
 	data/vinagre-ui.xml \
 	data/GNOME_VinagreApplet.xml \
 	data/vinagre.ui \
@@ -50,6 +108,10 @@ $(nodist_service_DATA): $(service_in_file) Makefile
 endif
 
 dist_noinst_DATA = \
+	data/icons/hicolor_apps_16x16_vinagre.svg \
+	data/icons/hicolor_apps_16x16_vinagre.xcf \
+	data/icons/hicolor_apps_22x22_vinagre.svg \
+	data/icons/hicolor_apps_32x32_vinagre.svg \
 	data/vinagre.pc.in \
 	data/vinagre-mime.xml.in \
 	$(desktop_in_files) \
@@ -86,3 +148,5 @@ MAINTAINERCLEANFILES = \
 	mkinstalldirs \
 	omf.make \
 	xmldocs.make
+
+.PHONY: install-update-icon-cache uninstall-update-icon-cache
