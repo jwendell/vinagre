@@ -1,4 +1,4 @@
-Vinagre 2.91.9
+Vinagre 2.91.91
 ===============
 
   Features
@@ -10,8 +10,10 @@ Vinagre 2.91.9
         + Overhaul configure script (David King)
           Note to packagers: Arguments to the configure script were changed.
           All functionality (except the panel applet) is now automagically
-	  enabled, and can be disabled or explicitly enabled with the
-	  appropriate configure arguments. Please check `configure --help`.
+          enabled, and can be disabled or explicitly enabled with the
+          appropriate configure arguments. Please check `configure --help`.
+        + Make the build partially non-recursive (David King)
+        + Fix the build with introspection enabled (David King)
         + Adapt to GtkObject removal in GTK+ 3 (Javier Jardón)
         + Replace gdk_draw_* with cairo* in panel applet (Daniel Svensson)
         + Avoid NULL pointer dereference in plugins if introspection is
