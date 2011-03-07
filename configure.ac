@@ -20,6 +20,8 @@ LT_INIT([disable-static])
 
 PKG_PROG_PKG_CONFIG([0.16])
 
+AC_PROG_SED
+
 # TODO: Bump before release with GTK+ 3 support.
 # TODO: Use in name of pkg-config file, plugin path and where appropriate.
 AC_SUBST([VINAGRE_API_VERSION], [1.0])

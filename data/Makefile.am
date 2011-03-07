@@ -61,7 +61,7 @@ service_DATA = org.freedesktop.Telepathy.Client.Vinagre.service
 
 org.freedesktop.Telepathy.Client.Vinagre.service: org.freedesktop.Telepathy.Client.Vinagre.service.in \
 		Makefile
-	$(AM_V_GEN)sed -e "s|[@]bindir[@]|$(bindir)|" $< > $@
+	$(AM_V_GEN)$(SED) -e "s|[@]bindir[@]|$(bindir)|" $< > $@
 endif
 
 UPDATE_MIME = \

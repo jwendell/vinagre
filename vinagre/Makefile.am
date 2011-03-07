@@ -143,7 +143,7 @@ server_DATA =					\
 	$(server_in_files:.server.in=.server)
 
 $(server_in_files): $(server_in_files:.server.in=.server.in.in)
-	$(AM_V_GEN)sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" -e "s|\@VERSION\@|$(VERSION)|" $< > $@
+	$(AM_V_GEN)$(SED) -e "s|\@LIBEXECDIR\@|$(libexecdir)|" -e "s|\@PACKAGE_VERSION\@|$(PACKAGE_VERSION)|" $< > $@
 
 @INTLTOOL_SERVER_RULE@
 
@@ -234,9 +234,9 @@ vinagre-enums.h: $(vinagre_enum_headers)
 
 vinagre-marshal.list: $(handwritten_sources) Makefile.am
 	$(AM_V_GEN)( cd $(srcdir) && \
-	sed -n -e 's/.*vinagre_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
+	$(SED) -n -e 's/.*vinagre_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
 	$(handwritten_sources) ) \
-	| sed -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp && \
+	| $(SED) -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp && \
 	if cmp -s $@.tmp $@; then \
 		rm $@.tmp; \
 	else \
