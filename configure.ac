@@ -279,7 +279,6 @@ GLIB_GSETTINGS
 
 AC_CONFIG_FILES([
 Makefile
-data/Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
 data/vinagre.pc
