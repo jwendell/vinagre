@@ -59,8 +59,7 @@ AC_ARG_ENABLE([ssh],
     [Disable Secure Shell (SSH) support])])
 
 AS_IF([test "x$enable_ssh" != "xno"],
-  [PKG_CHECK_EXISTS([SSH],
-    [$SSH_DEPS],
+  [PKG_CHECK_EXISTS([$SSH_DEPS],
     [have_ssh=yes],
     [have_ssh=no])],
   [have_ssh=no])
@@ -81,8 +80,7 @@ AC_ARG_ENABLE([rdp],
     [Disable Remote Desktop Protocol (RDP) support])])
 
 AS_IF([test "x$enable_rdp" != "xno"],
-  [PKG_CHECK_EXISTS([RDP],
-    [$RDP_DEPS],
+  [PKG_CHECK_EXISTS([$RDP_DEPS],
     [have_rdp=yes],
     [have_rdp=no])],
   [have_rdp=no])
@@ -148,8 +146,7 @@ AC_ARG_WITH([avahi],
     [ignore avahi support and disable it])])
 
 AS_IF([test "x$with_avahi" != "xno"],
-  [PKG_CHECK_EXISTS([AVAHI],
-    [$AVAHI_DEPS],
+  [PKG_CHECK_EXISTS([$AVAHI_DEPS],
     [have_avahi=yes],
     [have_avahi=no])],
   [have_avahi=no])
@@ -170,8 +167,7 @@ AC_ARG_WITH([telepathy],
     [ignore the presence of telepathy and disable it])])
 
 AS_IF([test "x$with_telepathy" != "xno"],
-  [PKG_CHECK_EXISTS([TELEPATHY_GLIB],
-    [$TELEPATHY_GLIB_DEPS],
+  [PKG_CHECK_EXISTS([$TELEPATHY_GLIB_DEPS],
     [have_telepathy=yes],
     [have_telepathy=no])],
   [have_telepathy=no])
