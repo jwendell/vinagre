@@ -97,7 +97,7 @@ AS_IF([test "x$have_rdp" = "xyes"],
 AM_CONDITIONAL([VINAGRE_ENABLE_RDP], [test "x$enable_rdp" = "xyes"])
 
 # Check for spice.
-SPICE_DEPS="spice-slient-gtk-3.0 >= 0.5"
+SPICE_DEPS="spice-client-gtk-3.0 >= 0.5"
 
 AC_ARG_ENABLE([spice],
   [AS_HELP_STRING([--disable-spice],
