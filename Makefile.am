@@ -350,10 +350,7 @@ uninstall-update-icon-cache:
 dist_man_MANS = data/vinagre.1
 
 pkgconfigdir = $(libdir)/pkgconfig
-nodist_pkgconfig_DATA = data/vinagre-@VINAGRE_API_VERSION@.pc
-
-data/vinagre-@VINAGRE_API_VERSION@.pc: data/vinagre.pc
-	$(AM_V_GEN)cp $< $@
+pkgconfig_DATA = data/vinagre-@VINAGRE_ABI_VERSION@.pc
 
 dist_pkgdata_DATA = \
 	data/vinagre-ui.xml \

@@ -23,8 +23,8 @@ PKG_PROG_PKG_CONFIG([0.16])
 AC_PROG_SED
 
 # TODO: Bump before release with GTK+ 3 support.
-# TODO: Use in name of pkg-config file, plugin path and where appropriate.
-AC_SUBST([VINAGRE_API_VERSION], [1.0])
+# TODO: Use in plugin path and where appropriate.
+AC_SUBST([VINAGRE_ABI_VERSION], [1.0])
 
 AC_SUBST([PLUGIN_LIBTOOL_FLAGS], ["-module -avoid-version"])
 AC_SUBST([VINAGRE_PLUGINS_DATA_DIR], ["$datadir/vinagre-1/plugins"])
@@ -277,7 +277,7 @@ AC_CONFIG_FILES([
 Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
-data/vinagre.pc
+data/vinagre-${VINAGRE_ABI_VERSION}.pc:data/vinagre.pc.in
 help/Makefile
 po/Makefile.in
 plugins/Makefile
