@@ -1,11 +1,12 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
-SUBDIRS = vinagre/view help po plugins
+SUBDIRS = help po plugins
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --without-panelapplet
 
 AM_CPPFLAGS = \
 	-I$(top_builddir) \
 	-I$(top_builddir)/vinagre \
+	-I$(top_srcdir)/vinagre/view \
 	-DBINDIR=\"$(bindir)\" \
 	-DDATADIR=\"$(datadir)\" \
 	-DPREFIX=\""$(prefix)"\" \
@@ -33,6 +34,9 @@ vinagre_vinagre_LDADD = \
 vinagrehdir = $(includedir)/vinagre-@VINAGRE_API_VERSION@/vinagre
 
 noinst_vinagreh_headers = \
+	vinagre/view/autoDrawer.h \
+	vinagre/view/drawer.h \
+	vinagre/view/ovBox.h \
 	vinagre/vinagre-enums.h \
 	vinagre/vinagre-marshal.h \
 	vinagre/vinagre-plugin-dialog.h \
@@ -73,6 +77,9 @@ INTROSPECTION_GIR_INCLUDES = \
 noinst_LTLIBRARIES = libvinagre.la
 
 handwritten_sources = \
+	vinagre/view/autoDrawer.c \
+	vinagre/view/drawer.c \
+	vinagre/view/ovBox.c \
 	vinagre/vinagre-bookmarks.c \
 	vinagre/vinagre-bookmarks-entry.c \
 	vinagre/vinagre-bookmarks-migration.c \
@@ -111,9 +118,7 @@ endif
 
 libvinagre_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
-libvinagre_la_LIBADD = \
-	vinagre/view/libview.la \
-	$(VINAGRE_LIBS)
+libvinagre_la_LIBADD = $(VINAGRE_LIBS)
 
 if VINAGRE_HAVE_PANELAPPLET
 

@@ -287,6 +287,5 @@ plugins/rdp/Makefile
 plugins/spice/Makefile
 plugins/reverse-vnc/Makefile
 plugins/im-status/Makefile
-vinagre/view/Makefile
 ])
 AC_OUTPUT
