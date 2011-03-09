@@ -1,5 +1,5 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
-SUBDIRS = help po plugins
+SUBDIRS = help po
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --without-panelapplet
 
@@ -295,6 +295,125 @@ CLEANFILES += \
 
 endif
 
+plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
+
+if VINAGRE_ENABLE_RDP
+rdp_plugin = librdp.la
+rdp_plugin_in = plugins/rdp/rdp.plugin.desktop.in
+
+librdp_la_SOURCES = \
+	plugins/rdp/vinagre-rdp-plugin.h \
+	plugins/rdp/vinagre-rdp-plugin.c \
+	plugins/rdp/vinagre-rdp-connection.h \
+	plugins/rdp/vinagre-rdp-connection.c \
+	plugins/rdp/vinagre-rdp-tab.h \
+	plugins/rdp/vinagre-rdp-tab.c
+
+librdp_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+librdp_la_LIBADD = $(VINAGRE_LIBS)
+endif
+
+if VINAGRE_ENABLE_SPICE
+spice_plugin = libspice.la
+spice_plugin_in = plugins/spice/spice.plugin.desktop.in
+
+libspice_la_CPPFLAGS = \
+	$(AM_CPPFLAGS) \
+	$(SPICE_CFLAGS) \
+	-I$(top_srcdir)/plugins/spice
+
+libspice_la_SOURCES = \
+	plugins/spice/vinagre-spice-plugin.h \
+	plugins/spice/vinagre-spice-plugin.c \
+	plugins/spice/vinagre-spice-connection.h \
+	plugins/spice/vinagre-spice-connection.c \
+	plugins/spice/vinagre-spice-tab.h \
+	plugins/spice/vinagre-spice-tab.c \
+	plugins/spice/vinagre-spice-tunnel.h \
+	plugins/spice/vinagre-spice-tunnel.c
+
+libspice_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libspice_la_LIBADD = $(SPICE_LIBS)
+endif
+
+if VINAGRE_ENABLE_SSH
+ssh_plugin = libssh.la
+ssh_plugin_in = plugins/ssh/ssh.plugin.desktop.in
+
+libssh_la_SOURCES = \
+	plugins/ssh/vinagre-ssh-plugin.h \
+	plugins/ssh/vinagre-ssh-plugin.c \
+	plugins/ssh/vinagre-ssh-connection.h \
+	plugins/ssh/vinagre-ssh-connection.c \
+	plugins/ssh/vinagre-ssh-tab.h \
+	plugins/ssh/vinagre-ssh-tab.c
+
+libssh_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+endif
+
+plugin_LTLIBRARIES = \
+	$(rdp_plugin) \
+	$(spice_plugin) \
+	$(ssh_plugin) \
+	libreversevnc.la \
+	libvnc.la
+
+libreversevnc_la_CPPFLAGS = \
+	$(AM_CPPFLAGS) \
+	-I$(top_srcdir)
+
+libreversevnc_la_SOURCES = \
+	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.h \
+	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c \
+	plugins/reverse-vnc/vinagre-reverse-vnc-listener.h \
+	plugins/reverse-vnc/vinagre-reverse-vnc-listener.c \
+	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.h \
+	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c
+
+libreversevnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libreversevnc_la_LIBADD = $(VNC_LIBS)
+
+reversevncuidir = $(VINAGRE_PLUGINS_DATA_DIR)/reverse-vnc
+dist_reversevncui_DATA = plugins/reverse-vnc/reverse-vnc.ui
+
+libvnc_la_CPPFLAGS = \
+	$(AM_CPPFLAGS) \
+	$(VNC_CFLAGS) \
+	-I$(top_srcdir)
+
+libvnc_la_SOURCES = \
+	plugins/vnc/vinagre-vnc-plugin.h \
+	plugins/vnc/vinagre-vnc-plugin.c \
+	plugins/vnc/vinagre-vnc-connection.h \
+	plugins/vnc/vinagre-vnc-connection.c \
+	plugins/vnc/vinagre-vnc-tab.h \
+	plugins/vnc/vinagre-vnc-tab.c \
+	plugins/vnc/vinagre-vnc-tunnel.h \
+	plugins/vnc/vinagre-vnc-tunnel.c
+
+libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libvnc_la_LIBADD = $(VNC_LIBS)
+
+dist_plugin_DATA = plugins/im-status/im-status.js
+
+plugin_in_files = \
+	$(rdp_plugin_in) \
+	$(spice_plugin_in) \
+	$(ssh_plugin_in) \
+	plugins/im-status/im-status.plugin.desktop.in \
+	plugins/reverse-vnc/reverse-vnc.plugin.desktop.in \
+	plugins/vnc/vnc.plugin.desktop.in
+
+# TODO: Fix this ugly workaround.
+plugins/im-status/im-status.plugin: plugins/im-status/im-status.plugin.desktop.in
+	$(MKDIR_P) $(top_builddir)/plugins/im-status
+	$(AM_V_GEN)$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
+	$(AM_V_GEN)$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+
+nodist_plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
+
 iconthemedir = $(datadir)/icons/hicolor
 appicon16dir = $(iconthemedir)/16x16/apps
 appicon22dir = $(iconthemedir)/22x22/apps
@@ -409,6 +528,7 @@ dist_noinst_DATA = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
+	$(plugin_in_files) \
 	vinagre/GNOME_VinagreApplet.server.in.in \
 	vinagre/vinagre-marshal.list \
 	vinagre.doap
@@ -418,6 +538,7 @@ CLEANFILES += \
 	$(nodist_mime_DATA) \
 	$(gsettings_SCHEMAS) \
 	$(nodist_pkgconfig_DATA) \
+	$(nodist_plugin_DATA) \
 	data/org.freedesktop.Telepathy.Client.Vinagre.service
 
 DISTCLEANFILES = \

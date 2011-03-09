@@ -280,12 +280,5 @@ data/vinagre-file.desktop.in
 data/vinagre-${VINAGRE_ABI_VERSION}.pc:data/vinagre.pc.in
 help/Makefile
 po/Makefile.in
-plugins/Makefile
-plugins/vnc/Makefile
-plugins/ssh/Makefile
-plugins/rdp/Makefile
-plugins/spice/Makefile
-plugins/reverse-vnc/Makefile
-plugins/im-status/Makefile
 ])
 AC_OUTPUT
