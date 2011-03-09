@@ -5,7 +5,7 @@ AC_CONFIG_SRCDIR([vinagre/vinagre-main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.10 -Wall check-news no-define nostdinc])
+AM_INIT_AUTOMAKE([1.10 -Wall check-news no-define nostdinc subdir-objects])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 # Checks for programs.

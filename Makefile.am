@@ -277,9 +277,9 @@ if VINAGRE_HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS = Vinagre-3.0.gir
 
-Vinagre-3.0.gir: vinagre
+Vinagre-3.0.gir: libvinagre.la
 INTROSPECTION_SCANNER_ARGS = $(AM_CPPFLAGS) $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
-Vinagre_3_0_gir_LIBS = $(builddir)/libvinagre.la
+Vinagre_3_0_gir_LIBS = libvinagre.la
 Vinagre_3_0_gir_FILES = $(vinagreh_HEADERS) $(filter-out pty_open.h vinagre-plugin-dialog.h, $(noinst_vinagreh_headers)) $(handwritten_sources)
 Vinagre_3_0_gir_INCLUDES = $(INTROSPECTION_GIR_INCLUDES)
 
