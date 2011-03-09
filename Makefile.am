@@ -498,8 +498,8 @@ gsettings_SCHEMAS = $(gsettings_in_file:.xml.in=.xml)
 # @INTLTOOL_XML_NOMERGE_RULE@
 # This rule is overriden by the above INTLTOOL_XML_RULE macro.
 # Here is the workaround. Could break if intltools changes arguments.
-$(gsettings_SCHEMAS): $(gsettings_in_file)
-	$(INTLTOOL_MERGE) ; LC_ALL=C $(INTLTOOL_MERGE) -x -u /tmp $< $@
+$(gsettings_SCHEMAS): $(gsettings_in_file) $(INTLTOOL_MERGE)
+	 LC_ALL=C $(INTLTOOL_MERGE) -x -u /tmp $< $@
 
 @GSETTINGS_RULES@
 
