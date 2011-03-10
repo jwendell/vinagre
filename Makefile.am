@@ -358,6 +358,12 @@ plugin_LTLIBRARIES = \
 	libreversevnc.la \
 	libvnc.la
 
+if VINAGRE_HAVE_SELF_IFADDRS
+ifaddrs_sources = \
+	plugins/reverse-vnc/if/ifaddrs.h \
+	plugins/reverse-vnc/if/getifaddrs.c
+endif
+
 libreversevnc_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
 	-I$(top_srcdir)
@@ -368,7 +374,8 @@ libreversevnc_la_SOURCES = \
 	plugins/reverse-vnc/vinagre-reverse-vnc-listener.h \
 	plugins/reverse-vnc/vinagre-reverse-vnc-listener.c \
 	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.h \
-	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c
+	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c \
+	$(ifaddrs_sources)
 
 libreversevnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libreversevnc_la_LIBADD = $(VNC_LIBS)
