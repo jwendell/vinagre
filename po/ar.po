@@ -5,13 +5,13 @@
 # Automatically generated, 2007.
 # Usama Akkad <uak@aya.sy>, 2008.
 # Osama Khalid <osamak.wfm@gmail.com>, 2009.
-# Khaled Hosny <khaledhosny@eglug.org>, 2009, 2010.
+# Khaled Hosny <khaledhosny@eglug.org>, 2009, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-23 22:55+0300\n"
-"PO-Revision-Date: 2010-09-23 22:51+0300\n"
+"POT-Creation-Date: 2011-03-11 18:45+0200\n"
+"PO-Revision-Date: 2011-03-11 18:45+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,14 +30,86 @@ msgstr "_عن"
 msgid "_Help"
 msgstr "م_ساعدة"
 
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+msgid "Active plugins"
+msgstr "الملحقات النشِطة"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
+"قائمة الملحقات النشطة. تضم \"Location\" الملحقات النشطة. انظر الملف .vinagre-"
+"plugin، للحصول على\"Location\" ملحق معين."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+msgid "Maximum number of history items in connect dialog"
+msgstr "العدد الأقصى من عناصر التاريخ في مربع الاتصال"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr ""
+"ضع \"خطأ\" لتعطيل اختصارات القائمة.ضع \"صحيح\" لتفعيلها. لاحظ أنه عند "
+"تفعيلها، ستعترض هذه المفاتيح من القائمة و لن ترسل إلى المستضيف البعيد."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr ""
+"ضع \"صح\" لعرض الألسنة دائما. ضع \"خطأ\" لعرض الالسنة فقط عند وجود اكثر من "
+"اتصال نشط."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr "يخصص العدد الأقصى للعناصر في قائمة الرفض للمستضيف."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr ""
+"عند الاتصال بمستضيف، يمكن للعميل طلب إبقاء العملاء الآخرين متصلين او إيقاف "
+"الاتصالات السابقة. اضبط القيمة على \"صحيح\" لمشاركة سطح المكتب مع العملاء "
+"الآخرين."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+msgid "Whether we should leave other clients connected"
+msgstr "إذا ما كان علينا ترك العملاء الآخرين متصلين"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "إذا ما علينا عرض الألسنة حتى عند وجود اتصال نشط واحد فقط"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:11
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "إذا ما علينا عرض مسرعات القوائم (مفاتيح الاختصار)"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:12
+#, fuzzy
+msgid "Whether we should start the program listening for reverse connections"
+msgstr "إذا ما كان علينا ترك العملاء الآخرين متصلين"
+
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "اتصل بسطح مكتب بعيد"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 #: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:440 ../vinagre/vinagre-applet.c:492
-#: ../vinagre/vinagre-main.c:63
+#: ../vinagre/vinagre-applet.c:430 ../vinagre/vinagre-applet.c:482
+#: ../vinagre/vinagre-main.c:130
 msgid "Remote Desktop Viewer"
 msgstr "عارض سطوح مكتب بعيدة"
 
@@ -50,7 +122,7 @@ msgid "Authentication is required"
 msgstr "الاستيثاق مطلوب"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:855
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:854
 msgid "Bookmarks"
 msgstr "العلامات"
 
@@ -68,7 +140,7 @@ msgstr "المجلد"
 
 #: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
 #: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../vinagre/vinagre-fav.c:407
+#: ../plugins/spice/vinagre-spice-tab.c:138 ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "المستضيف:"
 
@@ -123,7 +195,7 @@ msgstr "الم_ضيف:"
 msgid "_Name:"
 msgstr "الا_سم:"
 
-#: ../data/vinagre.ui.h:22
+#: ../data/vinagre.ui.h:22 ../plugins/spice/vinagre-spice-plugin.c:295
 msgid "_Password:"
 msgstr "_كلمة السر:"
 
@@ -140,82 +212,6 @@ msgstr "_تذكّر هذا الاعتماد"
 msgid "_Username:"
 msgstr "اسم ال_مستخدم:"
 
-#: ../data/vinagre.schemas.in.in.h:1
-msgid "Active plugins"
-msgstr "الملحقات النشِطة"
-
-#: ../data/vinagre.schemas.in.in.h:2
-msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
-"plugin."
-msgstr ""
-"قائمة الملحقات النشطة. تضم \"Location\" الملحقات النشطة. انظر الملف .vinagre-"
-"plugin، للحصول على\"Location\" ملحق معين."
-
-#: ../data/vinagre.schemas.in.in.h:3
-msgid "Maximum number of history items in connect dialog"
-msgstr "العدد الأقصى من عناصر التاريخ في مربع الاتصال"
-
-#: ../data/vinagre.schemas.in.in.h:4
-msgid ""
-"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
-"Note that if they are enabled, those keys will be intercepted by the menu "
-"and will not be sent to the remote host."
-msgstr ""
-"ضع \"خطأ\" لتعطيل اختصارات القائمة.ضع \"صحيح\" لتفعيلها. لاحظ أنه عند "
-"تفعيلها، ستعترض هذه المفاتيح من القائمة و لن ترسل إلى المستضيف البعيد."
-
-#: ../data/vinagre.schemas.in.in.h:5
-msgid ""
-"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
-"tabs when there is more than one active connection."
-msgstr ""
-"ضع \"صح\" لعرض الألسنة دائما. ضع \"خطأ\" لعرض الالسنة فقط عند وجود اكثر من "
-"اتصال نشط."
-
-#: ../data/vinagre.schemas.in.in.h:6
-msgid ""
-"Set to \"true\" to always start the program listening for reverse "
-"connections."
-msgstr ""
-
-#: ../data/vinagre.schemas.in.in.h:7
-msgid "Specifies the maximum number of items in the host dropdown entry."
-msgstr "يخصص العدد الأقصى للعناصر في قائمة الرفض للمستضيف."
-
-#: ../data/vinagre.schemas.in.in.h:8
-msgid "The handler for \"vnc://\" URLs"
-msgstr "مدير عناوين \"vnc://\""
-
-#: ../data/vinagre.schemas.in.in.h:9
-msgid ""
-"When connecting to a host, the client can say to the server to leave other "
-"clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the other clients."
-msgstr ""
-"عند الاتصال بمستضيف، يمكن للعميل طلب إبقاء العملاء الآخرين متصلين او إيقاف "
-"الاتصالات السابقة. اضبط القيمة على \"صحيح\" لمشاركة سطح المكتب مع العملاء "
-"الآخرين."
-
-#: ../data/vinagre.schemas.in.in.h:10
-msgid "Whether we should leave other clients connected"
-msgstr "إذا ما كان علينا ترك العملاء الآخرين متصلين"
-
-#: ../data/vinagre.schemas.in.in.h:11
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr "إذا ما علينا عرض الألسنة حتى عند وجود اتصال نشط واحد فقط"
-
-#: ../data/vinagre.schemas.in.in.h:12
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "إذا ما علينا عرض مسرعات القوائم (مفاتيح الاختصار)"
-
-#: ../data/vinagre.schemas.in.in.h:13
-#, fuzzy
-msgid "Whether we should start the program listening for reverse connections"
-msgstr "إذا ما كان علينا ترك العملاء الآخرين متصلين"
-
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "ملف (VNC) لسطح المكتب البعيد"
@@ -224,26 +220,23 @@ msgstr "ملف (VNC) لسطح المكتب البعيد"
 msgid "Remote Desktop Connection"
 msgstr "اتصال سطح مكتب بعيد"
 
-#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:1
+#: ../plugins/rdp/rdp.plugin.desktop.in.h:1
 #: ../plugins/rdp/vinagre-rdp-plugin.c:55
 msgid "RDP"
-msgstr ""
+msgstr "RDP"
 
-#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:2
-#, fuzzy
+#: ../plugins/rdp/rdp.plugin.desktop.in.h:2
 msgid "RDP support"
-msgstr "دعم SSH"
+msgstr "دعم RDP"
 
 #. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
 #: ../plugins/rdp/vinagre-rdp-plugin.c:57
-#, fuzzy
 msgid "Access MS Windows machines"
-msgstr "اتصل بأجهزة يونكس\\لينكس و ويندوز وغيرها."
+msgstr "اتصل بأجهزة ويندوز"
 
 #: ../plugins/rdp/vinagre-rdp-plugin.c:96
-#, fuzzy
 msgid "RDP Options"
-msgstr "الخيارات"
+msgstr "خيارات RDP"
 
 #. Translators: This is the tooltip for the username field in a RDP connection
 #. Translators: This is the tooltip for the username field in a SSH connection
@@ -258,27 +251,27 @@ msgstr ""
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
 #: ../plugins/vnc/vinagre-vnc-tab.c:149
+#: ../plugins/spice/vinagre-spice-tab.c:139
 msgid "Port:"
 msgstr "المنفذ:"
 
-#: ../plugins/rdp/vinagre-rdp-tab.c:129
-#, fuzzy
+#: ../plugins/rdp/vinagre-rdp-tab.c:123
 msgid "Error while executing rdesktop"
-msgstr "خطأ أثناء إنشاء الملف %s: ‏%s"
+msgstr "خطأ أثناء تنفيذ rdesktop"
 
-#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:343
-#: ../vinagre/vinagre-bookmarks.c:458
+#: ../plugins/rdp/vinagre-rdp-tab.c:124 ../vinagre/vinagre-bookmarks.c:366
+#: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:485 ../vinagre/vinagre-fav.c:767
-#: ../vinagre/vinagre-options.c:82 ../vinagre/vinagre-options.c:100
-#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:748
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:170
+#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:766
+#: ../vinagre/vinagre-options.c:76 ../vinagre/vinagre-options.c:94
+#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:749
 msgid "Unknown error"
 msgstr "خطأ مجهول"
 
 #. vim: set ts=8:
 #: ../plugins/ssh/vinagre-ssh-plugin.c:59
-#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
+#: ../plugins/ssh/ssh.plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
@@ -291,7 +284,7 @@ msgstr "اتصل بطرفيات يونكس\\لينكس"
 msgid "SSH Options"
 msgstr "خيارات SSH"
 
-#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
+#: ../plugins/ssh/ssh.plugin.desktop.in.h:2
 msgid "SSH support"
 msgstr "دعم SSH"
 
@@ -320,7 +313,7 @@ msgstr "اعرض خيارات VNC"
 
 #. vim: set ts=8:
 #: ../plugins/vnc/vinagre-vnc-plugin.c:87
-#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
+#: ../plugins/vnc/vnc.plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
@@ -329,6 +322,7 @@ msgid "Access Unix/Linux, Windows and other machines."
 msgstr "اتصل بأجهزة يونكس\\لينكس و ويندوز وغيرها."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:145
+#: ../plugins/spice/vinagre-spice-plugin.c:100
 msgid "Could not parse the file."
 msgstr "تعذر تحليل الملف."
 
@@ -347,13 +341,17 @@ msgid "VNC Options"
 msgstr "خيارات VNC"
 
 #. View only check button
+#. View only check button - not fully ready on spice-gtk side
 #: ../plugins/vnc/vinagre-vnc-plugin.c:265
-#: ../plugins/vnc/vinagre-vnc-tab.c:633
+#: ../plugins/vnc/vinagre-vnc-tab.c:624
+#: ../plugins/spice/vinagre-spice-plugin.c:222
+#: ../plugins/spice/vinagre-spice-tab.c:506
 msgid "_View only"
 msgstr "ا_عرض فقط"
 
 #. Scaling check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:273
+#: ../plugins/spice/vinagre-spice-plugin.c:246
 msgid "_Scaling"
 msgstr "ال_قياس"
 
@@ -396,23 +394,28 @@ msgstr "لون منخفض جدا (3 بتات)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:331
+#: ../plugins/spice/vinagre-spice-plugin.c:257
 msgid "Use h_ost"
 msgstr "استخدم الم_ستضيف"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:340
+#: ../plugins/spice/vinagre-spice-plugin.c:266
 msgid "hostname or user@hostname"
 msgstr "اسم المستضيف أو user@hostname"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:341
+#: ../plugins/spice/vinagre-spice-plugin.c:267
 msgid "Supply an alternative port using colon"
 msgstr "حدد منفذا إضافيا باستخدام النقطتان"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:342
+#: ../plugins/spice/vinagre-spice-plugin.c:268
 msgid "For instance: joe@domain.com:5022"
 msgstr "مثلا: joe@domain.com:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:348
+#: ../plugins/spice/vinagre-spice-plugin.c:274
 msgid "as a SSH tunnel"
 msgstr "استخدم نفق SSH"
 
@@ -429,99 +432,113 @@ msgstr "اسم سطح المكتب:"
 msgid "Dimensions:"
 msgstr "الأبعاد:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:304
+#: ../plugins/vnc/vinagre-vnc-tab.c:295
+#: ../plugins/spice/vinagre-spice-tab.c:251
 msgid "Error creating the SSH tunnel"
 msgstr "خطأ أثناء إنشاء نفق SSH"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
+#: ../plugins/vnc/vinagre-vnc-tab.c:296 ../plugins/vnc/vinagre-vnc-tab.c:307
+#: ../plugins/spice/vinagre-spice-tab.c:252
+#: ../plugins/spice/vinagre-spice-tab.c:264
 msgid "Unknown reason"
 msgstr "سبب مجهول"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:315
+#: ../plugins/vnc/vinagre-vnc-tab.c:306
+#: ../plugins/spice/vinagre-spice-tab.c:263
 msgid "Error connecting to host."
 msgstr "خطأ في الاتصال بالمستضيف."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:360
-#, fuzzy, c-format
+#: ../plugins/vnc/vinagre-vnc-tab.c:351
+#, c-format
 msgid "Authentication method for host %s is unsupported. (%u)"
 msgstr "طريقة استيثاق المستضيف %s غير مدعومة. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:364
+#: ../plugins/vnc/vinagre-vnc-tab.c:355
 msgid "Authentication unsupported"
 msgstr "الاستيثاق غير مدعوم"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:532 ../plugins/vnc/vinagre-vnc-tab.c:549
+#: ../plugins/vnc/vinagre-vnc-tab.c:523 ../plugins/vnc/vinagre-vnc-tab.c:540
 msgid "Authentication error"
 msgstr "خطأ في الاستيثاق"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:533
+#: ../plugins/vnc/vinagre-vnc-tab.c:524
 msgid "A username is required in order to access this machine."
 msgstr "تحتاج لاسم مستخدم للوصول إلى هذا الجهاز."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:550
+#: ../plugins/vnc/vinagre-vnc-tab.c:541
 msgid "A password is required in order to access this machine."
 msgstr "تحتاج لكلمة سر للوصول إلى هذا الجهاز."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:595
+#: ../plugins/spice/vinagre-spice-tab.c:465
 msgid "S_caling"
 msgstr "الم_قياس"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:605
+#: ../plugins/vnc/vinagre-vnc-tab.c:596
+#: ../plugins/spice/vinagre-spice-tab.c:466
 msgid "Fits the remote screen into the current window size"
 msgstr "لائم حجم شاشة الجهة المتصل بها مع حجم النافذة الحالية"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:618
+#: ../plugins/vnc/vinagre-vnc-tab.c:609
 msgid "_Keep Aspect Ratio"
 msgstr "_حافظ على نسبة الهيئة"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:619
+#: ../plugins/vnc/vinagre-vnc-tab.c:610
 msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "حافظ على النسبة بين أبعاد الشاشة عند التحجيم"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:634
+#: ../plugins/vnc/vinagre-vnc-tab.c:625
+#: ../plugins/spice/vinagre-spice-tab.c:507
 msgid "Does not send mouse and keyboard events"
 msgstr "لا يستخدم أحداث الفأرة ولوحة المفاتيح"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:647
+#: ../plugins/vnc/vinagre-vnc-tab.c:638
 msgid "_Original size"
 msgstr "الحجم الأ_صلي"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:648
+#: ../plugins/vnc/vinagre-vnc-tab.c:639
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "يسوي حجم نافذة سطح المكتب البعيد"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:661
+#: ../plugins/vnc/vinagre-vnc-tab.c:652
 msgid "_Refresh Screen"
 msgstr "حدّث ال_شاشة"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:662
+#: ../plugins/vnc/vinagre-vnc-tab.c:653
 msgid "Requests an update of the screen"
 msgstr "يطلب تحديثا للشاشة"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:684
-#, fuzzy
+#: ../plugins/vnc/vinagre-vnc-tab.c:675
+#: ../plugins/spice/vinagre-spice-tab.c:530
 msgid "_Send Ctrl-Alt-Del"
-msgstr "أرسل Ctrl-Alt-Del"
+msgstr "أر_سل Ctrl-Alt-Del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:685
+#: ../plugins/vnc/vinagre-vnc-tab.c:676
+#: ../plugins/spice/vinagre-spice-tab.c:531
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "يُرسل Ctrl+Alt+Del للجهاز البعيد"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:737 ../plugins/vnc/vinagre-vnc-tab.c:738
+#: ../plugins/vnc/vinagre-vnc-tab.c:728 ../plugins/vnc/vinagre-vnc-tab.c:729
+#: ../plugins/spice/vinagre-spice-tab.c:583
+#: ../plugins/spice/vinagre-spice-tab.c:584
 msgid "Scaling"
 msgstr "القياس"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
+#: ../plugins/vnc/vinagre-vnc-tab.c:738 ../plugins/vnc/vinagre-vnc-tab.c:739
+#: ../plugins/spice/vinagre-spice-tab.c:593
+#: ../plugins/spice/vinagre-spice-tab.c:594
 msgid "Read only"
 msgstr "قراءة فقط"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:756 ../plugins/vnc/vinagre-vnc-tab.c:758
+#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:749
+#: ../plugins/spice/vinagre-spice-tab.c:602
+#: ../plugins/spice/vinagre-spice-tab.c:604
 msgid "Send Ctrl-Alt-Del"
 msgstr "أرسل Ctrl-Alt-Del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:920
+#: ../plugins/vnc/vinagre-vnc-tab.c:912
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -533,23 +550,22 @@ msgstr ""
 "اقرا ملف README (المقدم مع فيناجر) لمعرفة كيفية تفعيل هذه الميزة."
 
 #: ../plugins/vnc/vinagre-vnc-tunnel.c:96
+#: ../plugins/spice/vinagre-spice-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "تعذّر إيجاد منفذ TCP"
 
-#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
+#: ../plugins/vnc/vnc.plugin.desktop.in.h:2
 msgid "VNC support"
 msgstr "دعم VNC"
 
-#: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:1
-#, fuzzy
+#: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:1
 msgid "Allows reverse VNC connections"
-msgstr "اعكس الاتّصالات"
+msgstr "اسمح باتّصالات VNC العكسية"
 
-#: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:2
-#, fuzzy
+#: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:2
 msgid "Reverse VNC"
-msgstr "اعكس الاتّصالات"
+msgstr "اتصال VNC عكسي"
 
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:101
 msgid "IPv4:"
@@ -570,16 +586,11 @@ msgstr ""
 msgid "On the port %d"
 msgstr "على المنفذ %d"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
-msgid "Incoming VNC connection arrived but there is no active window"
-msgstr "وصل اتصال VNC وارد لكن لا توجد نافذة نشطة"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
-#, fuzzy
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:211
 msgid "Error activating reverse connections"
-msgstr "خطأ أثناء حفظ الاتصال الأخير."
+msgstr "خطأ أثناء تفعيل الاتصالات العكسية"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:212
 msgid ""
 "The program could not find any available TCP ports starting at 5500. Is "
 "there any other running program consuming all your TCP ports?"
@@ -593,6 +604,70 @@ msgstr "ا_عكس الاتّصالات..."
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
 msgid "Configure incoming VNC connections"
 msgstr "اضبط اتصالات VNC الواردة"
+
+#. vim: set ts=8:
+#: ../plugins/spice/spice.plugin.desktop.in.h:1
+msgid "Spice"
+msgstr "Spice"
+
+#: ../plugins/spice/spice.plugin.desktop.in.h:2
+msgid "Spice support"
+msgstr "دعم Spice"
+
+#. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:107
+msgid "The file is not a Spice one: Missing the group \"connection\"."
+msgstr "الملف ليس ملف Spice: لا يحتوي المجموعة \"connection\"."
+
+#. Translators: Do not translate "host". It's the name of a key in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:114
+msgid "The file is not a Spice one: Missing the key \"host\"."
+msgstr "الملف ليس ملف Spice: لا يحتوي المفتاح \"host\"."
+
+#: ../plugins/spice/vinagre-spice-plugin.c:158
+msgid "SPICE"
+msgstr "SPICE"
+
+#. Translators: This is a description of the SPICE protocol. It appears at Connect dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:160
+msgid "Access Spice desktop server"
+msgstr "اتصل بخادوم سطح مكتب Spice"
+
+#: ../plugins/spice/vinagre-spice-plugin.c:209
+msgid "SPICE Options"
+msgstr "خيارات Spice"
+
+#. Resize guest check button
+#: ../plugins/spice/vinagre-spice-plugin.c:230
+#: ../plugins/spice/vinagre-spice-tab.c:479
+msgid "_Resize guest"
+msgstr ""
+
+#. Clipboard sharing check button
+#: ../plugins/spice/vinagre-spice-plugin.c:238
+#: ../plugins/spice/vinagre-spice-tab.c:492
+msgid "_Share clipboard"
+msgstr ""
+
+#. Translators: This is the tooltip for the password field in a SPICE connection
+#: ../plugins/spice/vinagre-spice-plugin.c:300
+#, fuzzy
+msgid "Optional"
+msgstr "الخيارات"
+
+#. Translators: this is a pattern to open *.spice files in a open dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:321
+#, fuzzy
+msgid "Spice Files"
+msgstr "ملفات VNC"
+
+#: ../plugins/spice/vinagre-spice-tab.c:480
+msgid "Resize the screen guest to best fit"
+msgstr ""
+
+#: ../plugins/spice/vinagre-spice-tab.c:493
+msgid "Automatically share clipboard between client and guest"
+msgstr ""
 
 #. vim: set ts=8:
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
@@ -625,6 +700,17 @@ msgstr "مفعّل _دائما"
 msgid "_Enable Reverse Connections"
 msgstr "_فعّل عكس الاتّصالات"
 
+#: ../plugins/im-status/im-status.plugin.desktop.in.h:1
+msgid ""
+"Changes Instant Messenger status to busy when window toggles to fullscreen "
+"(works with Empathy)"
+msgstr ""
+
+#: ../plugins/im-status/im-status.plugin.desktop.in.h:2
+#, fuzzy
+msgid "IM Status"
+msgstr "شريط ال_حالة"
+
 #: ../plugins/im-status/im-status.js:43
 msgid "Could not communicate to Telepathy. IM Status plugin will not work."
 msgstr ""
@@ -637,51 +723,45 @@ msgstr "قائمة للوصول السريع للأجهزة البعيدة"
 msgid "Vinagre Applet Factory"
 msgstr "مصنع بريمجات فيناجر"
 
-#: ../vinagre/vinagre-applet.c:283 ../vinagre/vinagre-applet.c:366
+#: ../vinagre/vinagre-applet.c:273 ../vinagre/vinagre-applet.c:356
 msgid "Could not run vinagre:"
 msgstr "تعذر تشغيل فيناجر:"
 
-#: ../vinagre/vinagre-applet.c:386
+#: ../vinagre/vinagre-applet.c:376
 msgid "Open Remote Desktop Viewer"
 msgstr "افتح عارض سطوح المكتب البعيدة"
 
-#: ../vinagre/vinagre-applet.c:441
+#: ../vinagre/vinagre-applet.c:431
 msgid "Access your bookmarks"
 msgstr "اطلع على علاماتك"
 
-#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:525
-#: ../vinagre/vinagre-tab.c:532 ../vinagre/vinagre-tube-handler.c:253
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "البروتوكول %s غير مدعوم."
-
-#: ../vinagre/vinagre-bookmarks.c:343
+#: ../vinagre/vinagre-bookmarks.c:366
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "خطأ في ابتداء العلامات: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:350
+#: ../vinagre/vinagre-bookmarks.c:373
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "خطأ في ابتداء العلامات: يبدو الملف فارغًا"
 
-#: ../vinagre/vinagre-bookmarks.c:357
+#: ../vinagre/vinagre-bookmarks.c:380
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr "خطأ في ابتداء العلامات: ليس الملف علامة موقع فيناجر"
 
-#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+#: ../vinagre/vinagre-bookmarks.c:453 ../vinagre/vinagre-bookmarks.c:460
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr "خطأ في حفظ العلامات: فشل في إنشاء بناء XML"
 
-#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+#: ../vinagre/vinagre-bookmarks.c:467 ../vinagre/vinagre-bookmarks.c:474
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr "خطأ في حفظ العلامات: فشل في ابتداء بناء XML"
 
-#: ../vinagre/vinagre-bookmarks.c:449
+#: ../vinagre/vinagre-bookmarks.c:483
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr "خطأ في حفظ العلامات: فشل في إنهاء بناء XML"
 
-#: ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks.c:492
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "خطأ في حفظ العلامات: %s"
@@ -792,15 +872,15 @@ msgstr "مجلد جديد"
 msgid "Error while saving preferences: %s"
 msgstr "خطأ أثناء حفظ التفضيلات: %s"
 
-#: ../vinagre/vinagre-commands.c:119
+#: ../vinagre/vinagre-commands.c:122
 msgid "Choose the file"
 msgstr "اختر الملف"
 
-#: ../vinagre/vinagre-commands.c:149
+#: ../vinagre/vinagre-commands.c:146
 msgid "There are no supported files"
 msgstr "لا توجد ملفات مدعومة"
 
-#: ../vinagre/vinagre-commands.c:150
+#: ../vinagre/vinagre-commands.c:147
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
@@ -808,7 +888,7 @@ msgstr ""
 "لا يدعم أي من الملحقات النشطة هذا الإجراء. نشط المزيد من الملحقات ثم أعد "
 "المحاولة."
 
-#: ../vinagre/vinagre-commands.c:184
+#: ../vinagre/vinagre-commands.c:181
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "لا يمكن فتح هذا الملف"
@@ -819,7 +899,7 @@ msgstr[4] "لا يمكن فتح هذه الملفات"
 msgstr[5] "لا يمكن فتح هذه الملفات"
 
 #: ../vinagre/vinagre-connect.c:91 ../vinagre/vinagre-connect.c:337
-#: ../vinagre/vinagre-connect.c:449
+#: ../vinagre/vinagre-connect.c:456
 #, fuzzy
 msgid "Could not get the active protocol from the protocol list."
 msgstr "تعذّر إيجاد البروتوكول النشط في قائمة البروتوكولات."
@@ -833,6 +913,12 @@ msgstr "خطأ في حفظ ملف التاريخ: %s"
 msgid "Choose a Remote Desktop"
 msgstr "اختر سطح مكتب بعيد"
 
+#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:573
+#: ../vinagre/vinagre-tube-handler.c:254
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "البروتوكول %s غير مدعوم."
+
 #: ../vinagre/vinagre-connection.c:633
 msgid "Could not open the file."
 msgstr "تعذر فتح الملف."
@@ -841,120 +927,115 @@ msgstr "تعذر فتح الملف."
 msgid "The file was not recognized by any of the plugins."
 msgstr "لم تتعرف أي من الملحقات على الملف."
 
-#: ../vinagre/vinagre-fav.c:570
+#: ../vinagre/vinagre-fav.c:569
 msgid "_New Folder"
 msgstr "مجلد _جديد"
 
-#: ../vinagre/vinagre-fav.c:571
+#: ../vinagre/vinagre-fav.c:570
 msgid "Create a new folder"
 msgstr "أنشئ مجلدا جديدا"
 
-#: ../vinagre/vinagre-fav.c:576
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Open bookmark"
 msgstr "ا_فتح العلامة"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:576
 msgid "Connect to this machine"
 msgstr "اتصل بهذا الجهاز"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Edit bookmark"
 msgstr "_حرر العلامة"
 
-#: ../vinagre/vinagre-fav.c:579
+#: ../vinagre/vinagre-fav.c:578
 msgid "Edit the details of selected bookmark"
 msgstr "حرر تفاصيل العلامة المحددة"
 
-#: ../vinagre/vinagre-fav.c:580
+#: ../vinagre/vinagre-fav.c:579
 msgid "_Remove from bookmarks"
 msgstr "ا_حذف من العلامات"
 
-#: ../vinagre/vinagre-fav.c:581
+#: ../vinagre/vinagre-fav.c:580
 msgid "Remove current selected connection from bookmarks"
 msgstr "احذف الاتصالات المنتقاة حاليا من العلامات"
 
-#: ../vinagre/vinagre-fav.c:598 ../vinagre/vinagre-window.c:409
+#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:408
 #, fuzzy, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "تعذّر تحميل ملف واجهة المستخدم: %s"
 
-#: ../vinagre/vinagre-fav.c:756
+#: ../vinagre/vinagre-fav.c:755
 msgid "Invalid operation"
 msgstr "عملية غير صحيحة"
 
-#: ../vinagre/vinagre-fav.c:757
+#: ../vinagre/vinagre-fav.c:756
 msgid "Data received from drag&drop operation is invalid."
 msgstr "البيانات المتلقاة من عملية السحب والإلقاء غير صحيحة."
 
-#: ../vinagre/vinagre-fav.c:863
+#: ../vinagre/vinagre-fav.c:862
 msgid "Hide panel"
 msgstr "أخف اللوحة"
 
-#: ../vinagre/vinagre-fav.c:1047
+#: ../vinagre/vinagre-fav.c:1067
 msgid "Hosts nearby"
 msgstr "المستضيفون المجاورون"
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:80
+#: ../vinagre/vinagre-main.c:140
 msgid "- Remote Desktop Viewer"
 msgstr "- عارض سطوح مكتب بعيدة"
 
-#: ../vinagre/vinagre-main.c:105
-msgid ""
-"Run 'vinagre --help' to see a full list of available command line options"
-msgstr "شغّل 'vinagre --help' لرؤية قائمة كاملة لخيارات سطر الأوامر."
-
-#: ../vinagre/vinagre-mdns.c:159
+#: ../vinagre/vinagre-mdns.c:171
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "فشل حل اسم مستضيف avahi‏ : %s\n"
 
-#: ../vinagre/vinagre-mdns.c:216
-#, c-format
-msgid "Plugin %s has already registered a browser for service %s."
-msgstr "سجّلت الملحقة %s مستعرضا للخدمة %s من قبل."
-
 #: ../vinagre/vinagre-mdns.c:225
+#, fuzzy, c-format
+msgid "The service %s was already registered by another plugin."
+msgstr "لم تتعرف أي من الملحقات على الملف."
+
+#: ../vinagre/vinagre-mdns.c:233
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "فشلت إضافة المستعرض mDNS للخدمة %s."
 
 #. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
-#: ../vinagre/vinagre-mdns.c:242
+#: ../vinagre/vinagre-mdns.c:250
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "فشل الاستعراض عن مستضيفين: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:315
+#: ../vinagre/vinagre-mdns.c:319
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "فشل بدء المستعرض mDNS‏: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:457
+#: ../vinagre/vinagre-notebook.c:462
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "أغُلق الاتصال بالمستضيف %s"
 
-#: ../vinagre/vinagre-notebook.c:459
+#: ../vinagre/vinagre-notebook.c:464
 msgid "Connection closed"
 msgstr "أغلق الاتصال"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:478
+#: ../vinagre/vinagre-notebook.c:483
 #, fuzzy, c-format
 msgid "Authentication for host %s has failed"
 msgstr "فشل استيثاق للمستضيف %s"
 
-#: ../vinagre/vinagre-notebook.c:484
+#: ../vinagre/vinagre-notebook.c:489
 msgid "Authentication failed"
 msgstr "فشل التصريح"
 
-#: ../vinagre/vinagre-notebook.c:522
+#: ../vinagre/vinagre-notebook.c:527
 msgid "Connecting..."
 msgstr "يتصل..."
 
-#: ../vinagre/vinagre-notebook.c:549 ../vinagre/vinagre-tab.c:324
+#: ../vinagre/vinagre-notebook.c:554 ../vinagre/vinagre-tab.c:354
 msgid "Close connection"
 msgstr "أغلق الاتصال"
 
@@ -982,7 +1063,7 @@ msgstr "اسم الملف"
 msgid "[server:port]"
 msgstr "[خادوم:منفذ]"
 
-#: ../vinagre/vinagre-options.c:132
+#: ../vinagre/vinagre-options.c:125
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "حصل الخطأ التالي:"
@@ -996,7 +1077,7 @@ msgstr[5] "حصلت الأخطاء التالية:"
 msgid "Plugin Manager"
 msgstr "مدير الملحقات"
 
-#: ../vinagre/vinagre-prefs.c:188
+#: ../vinagre/vinagre-prefs.c:87
 msgid "Cannot initialize preferences manager."
 msgstr "تعذّر بدء مدير التفضيلات."
 
@@ -1061,7 +1142,7 @@ msgstr "ألغي حوار الولوج"
 msgid "Can't send host identity confirmation"
 msgstr "تعذّر إرسال تأكيد هوية الخادوم"
 
-#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:729
+#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:806
 msgid "Error saving the credentials on the keyring."
 msgstr "خطأ في حفظ الاعتماد في حلقة المفاتيح."
 
@@ -1085,64 +1166,64 @@ msgstr "فشل التحقق من مفتاح المستضيف"
 msgid "Unable to find a valid SSH program"
 msgstr "تعذّر إيجاد برنامج SSH صالح"
 
-#: ../vinagre/vinagre-tab.c:345
+#: ../vinagre/vinagre-tab.c:375
 msgid "Leave fullscreen"
 msgstr "غادر ملء الشاشة"
 
-#: ../vinagre/vinagre-tab.c:496
+#: ../vinagre/vinagre-tab.c:537
 msgid "Error saving recent connection."
 msgstr "خطأ أثناء حفظ الاتصال الأخير."
 
-#: ../vinagre/vinagre-tab.c:815
+#: ../vinagre/vinagre-tab.c:895
 msgid "Could not get a screenshot of the connection."
 msgstr "تعذّر أخذ لقطة شاشة للاتصال."
 
-#: ../vinagre/vinagre-tab.c:820
+#: ../vinagre/vinagre-tab.c:900
 msgid "Save Screenshot"
 msgstr "احفظ لقطة الشاشة"
 
 #. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
-#: ../vinagre/vinagre-tab.c:832
+#: ../vinagre/vinagre-tab.c:912
 #, c-format
 msgid "Screenshot of %s"
 msgstr "لقطة شاشة ل‍ %s"
 
-#: ../vinagre/vinagre-tab.c:883
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "خطأ أثناء حفظ لقطة الشاشة"
 
-#: ../vinagre/vinagre-tube-handler.c:229
+#: ../vinagre/vinagre-tube-handler.c:230
 #, c-format
 msgid "Impossible to get service property: %s"
 msgstr "تعذّرت معرفة خاصية الخدمة: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:286
+#: ../vinagre/vinagre-tube-handler.c:287
 #, c-format
 msgid "Impossible to create the connection: %s"
 msgstr "تعذّر إنشاء الاتصال: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:325
+#: ../vinagre/vinagre-tube-handler.c:326
 #, c-format
 msgid "Impossible to accept the stream tube: %s"
 msgstr "تعذّر قبول قناة الدفق: %s"
 
 #. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
-#: ../vinagre/vinagre-tube-handler.c:463
+#: ../vinagre/vinagre-tube-handler.c:464
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "تعذّرت معرفة اسم المتراسل: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:500
+#: ../vinagre/vinagre-tube-handler.c:501
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "تعذّر جلب الأفاتر: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:521
+#: ../vinagre/vinagre-tube-handler.c:522
 #, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "يريد %s أن يشاركوا سطح مكتبهم معك."
 
-#: ../vinagre/vinagre-tube-handler.c:526
+#: ../vinagre/vinagre-tube-handler.c:527
 msgid "Desktop sharing invitation"
 msgstr "دعوة لمشاركة سطح المكتب"
 
@@ -1259,36 +1340,36 @@ msgstr "خذ لقطة شاشة للاتصال النشط"
 msgid "View the current machine in full screen"
 msgstr "اعرض الاتصال الحالي في نسق كامل الشاشة"
 
-#: ../vinagre/vinagre-utils.c:67
+#: ../vinagre/vinagre-utils.c:72
 msgid "An error has occurred:"
 msgstr "صودف خطأ:"
 
-#: ../vinagre/vinagre-utils.c:151
+#: ../vinagre/vinagre-utils.c:161
 msgid ""
 "A plugin tried to open an UI file but did not succeed, with the error "
 "message:"
 msgstr ""
 
-#: ../vinagre/vinagre-utils.c:153
+#: ../vinagre/vinagre-utils.c:163
 msgid ""
 "The program tried to open an UI file but did not succeed, with the error "
 "message:"
 msgstr ""
 
-#: ../vinagre/vinagre-utils.c:156
+#: ../vinagre/vinagre-utils.c:166
 msgid "Please check your installation."
 msgstr "رجاء تأكد من تثبيتك."
 
-#: ../vinagre/vinagre-utils.c:157
+#: ../vinagre/vinagre-utils.c:167
 #, fuzzy
 msgid "Error loading UI file"
 msgstr "خطأ في حفظ ملف التاريخ: %s"
 
-#: ../vinagre/vinagre-utils.c:278
+#: ../vinagre/vinagre-utils.c:288
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "فيناجر هو عارض سطوح مكتب عن بعد لجنوم"
 
-#: ../vinagre/vinagre-utils.c:281
+#: ../vinagre/vinagre-utils.c:291
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -1299,7 +1380,7 @@ msgstr ""
 "لجنو كما نشرتها مؤسسة البرمجيات الحرة؛ إما الإصدارة 2 للرخصة أو (حسب رأيك) "
 "أي إصدارة لاحقة."
 
-#: ../vinagre/vinagre-utils.c:285
+#: ../vinagre/vinagre-utils.c:295
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -1310,7 +1391,7 @@ msgstr ""
 "الضمني بالصلاحية التسويقية أو توافقه مع أي استخدام محدد. انظر رخصة جنو "
 "العامة مزيد من التفاصيل. "
 
-#: ../vinagre/vinagre-utils.c:289
+#: ../vinagre/vinagre-utils.c:299
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -1318,7 +1399,7 @@ msgstr ""
 "من المفترض أن تكون قد استلمت نسخة من رخصة جنو العامة مع البرنامج؛ في حال عدم "
 "استلامك، يمكنك تصفح <http://www.gnu.org/licenses/>."
 
-#: ../vinagre/vinagre-utils.c:306
+#: ../vinagre/vinagre-utils.c:316
 msgid "translator-credits"
 msgstr ""
 "فريق عربآيز للترجمة http://www.arabeyes.org:\n"
@@ -1326,31 +1407,31 @@ msgstr ""
 "أسامة خالد\t<osamak.wfm@gmail.com>\n"
 "خالد حسني\t<khaledhosny@eglug.org>"
 
-#: ../vinagre/vinagre-utils.c:309
+#: ../vinagre/vinagre-utils.c:319
 msgid "Vinagre Website"
 msgstr "موقع فيناجر"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:435
+#: ../vinagre/vinagre-utils.c:431
 #, c-format
 msgid "%s authentication is required"
 msgstr "استيثاق %s مطلوب"
 
-#: ../vinagre/vinagre-window.c:438
+#: ../vinagre/vinagre-window.c:437
 msgid "_Recent connections"
 msgstr "الاتّصالات ال_حديثة"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:553
+#: ../vinagre/vinagre-window.c:554
 #, c-format
 msgid "Open %s:%d"
 msgstr "افتح %s:%d"
 
-#: ../vinagre/vinagre-window.c:732
+#: ../vinagre/vinagre-window.c:733
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "حول مسرعات القوائم واختصارات لوحة المفاتيح"
 
-#: ../vinagre/vinagre-window.c:734
+#: ../vinagre/vinagre-window.c:735
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1368,10 +1449,23 @@ msgstr ""
 "\n"
 "ستظهر هذه الرسالة مرة واحدة فقط."
 
-#: ../vinagre/vinagre-window.c:742 ../vinagre/vinagre-window.c:748
+#: ../vinagre/vinagre-window.c:743 ../vinagre/vinagre-window.c:749
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "خطأ أثناء إنشاء الملف %s: ‏%s"
+
+#~ msgid "The handler for \"vnc://\" URLs"
+#~ msgstr "مدير عناوين \"vnc://\""
+
+#~ msgid "Incoming VNC connection arrived but there is no active window"
+#~ msgstr "وصل اتصال VNC وارد لكن لا توجد نافذة نشطة"
+
+#~ msgid ""
+#~ "Run 'vinagre --help' to see a full list of available command line options"
+#~ msgstr "شغّل 'vinagre --help' لرؤية قائمة كاملة لخيارات سطر الأوامر."
+
+#~ msgid "Plugin %s has already registered a browser for service %s."
+#~ msgstr "سجّلت الملحقة %s مستعرضا للخدمة %s من قبل."
 
 #~ msgid "Plugin"
 #~ msgstr "ملحقة"
