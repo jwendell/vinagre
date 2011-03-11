@@ -522,7 +522,24 @@ $(nodist_service_DATA): $(service_in_file) Makefile
 	$(AM_V_GEN)$(SED) -e "s|[@]bindir[@]|$(bindir)|" $< > $@
 endif
 
+if MAINTAINER_MODE
+dist-hook: dist-changelog
+else
+dist-hook:
+endif
+
+dist-changelog:
+	$(AM_V_at)if git --git-dir=$(top_srcdir)/.git --work-tree=$(top_srcdir) \
+		log --no-merges --date=short --pretty='tformat:%cd  %an  <%ae>%n%n%s%n%n%b' f0cffbf192b629275f107322ea1dedfd69cf6fc6.. | \
+	 $(SED)	-e '/^[12]...-[01].-[0123].  [^<>]*  <[^<>]*>$$/,/^$$/ b' \
+		-e '/[^	 ]/,/^[	 ]*$$/ !d' \
+		-e 's/^[	 ]*/	/' \
+		-e 's/^[	 ]*$$//' >.ChangeLog.tmp; \
+	then mv -f .ChangeLog.tmp "$(top_distdir)/ChangeLog"; \
+	else rm -f .ChangeLog.tmp; exit 1; fi
+
 dist_noinst_DATA = \
+	ChangeLog.pre-git \
 	data/icons/hicolor_apps_16x16_vinagre.svg \
 	data/icons/hicolor_apps_16x16_vinagre.xcf \
 	data/icons/hicolor_apps_22x22_vinagre.svg \
@@ -572,4 +589,4 @@ MAINTAINERCLEANFILES = \
 	omf.make \
 	xmldocs.make
 
-.PHONY: install-update-icon-cache uninstall-update-icon-cache
+.PHONY: install-update-icon-cache uninstall-update-icon-cache dist-changelog
