@@ -14,5 +14,3 @@ DOC_FIGURES = \
 	figures/vinagre-saving-bookmarks.png
 
 DOC_LINGUAS = ca cs de el en_GB es fr it oc pl pt pt_BR sq sl sv th zh_CN
-
--include $(top_srcdir)/git.mk
