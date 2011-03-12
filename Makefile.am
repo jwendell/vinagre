@@ -40,7 +40,6 @@ noinst_vinagreh_headers = \
 	vinagre/view/drawer.h \
 	vinagre/view/ovBox.h \
 	vinagre/vinagre-enums.h \
-	vinagre/vinagre-marshal.h \
 	vinagre/vinagre-plugin-dialog.h \
 	vinagre/vinagre-window-private.h \
 	vinagre/pty_open.h
@@ -107,7 +106,6 @@ handwritten_sources = \
 
 libvinagre_la_SOURCES = \
 	vinagre/vinagre-enums.c \
-	vinagre/vinagre-marshal.c \
 	$(handwritten_sources) \
 	$(noinst_vinagreh_headers) \
 	$(vinagreh_HEADERS)
@@ -178,8 +176,6 @@ vinagre_applet_SOURCES = \
 	vinagre/vinagre-fav.c \
 	vinagre/vinagre-connect.h \
 	vinagre/vinagre-connect.c \
-	vinagre/vinagre-marshal.h \
-	vinagre/vinagre-marshal.c \
 	vinagre/pty_open.h \
 	vinagre/pty_open.c \
 	vinagre/vinagre-ssh.h \
@@ -235,30 +231,9 @@ vinagre/vinagre-enums.h: $(vinagre_enum_headers)
 			--eprod "GType @enum_name@_get_type (void);\n" \
 		$(vinagre_enum_headers) >  $@
 
-vinagre/vinagre-marshal.list: $(handwritten_sources) Makefile.am
-	$(AM_V_GEN)( cd $(srcdir) && \
-	$(SED) -n -e 's/.*vinagre_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
-	$(handwritten_sources) ) \
-	| $(SED) -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp && \
-	if cmp -s $@.tmp $@; then \
-		rm $@.tmp; \
-	else \
-		mv $@.tmp $@; \
-	fi
-
-%-marshal.h: %-marshal.list Makefile
-	$(AM_V_GEN)$(GLIB_GENMARSHAL) --header --prefix=_$(subst -,_,$*)_marshal $< > $*-marshal.h
-
-%-marshal.c: %-marshal.list Makefile
-	$(AM_V_GEN)echo "#include \"vinagre-marshal.h\"" > $@ && \
-	$(GLIB_GENMARSHAL) --body --prefix=_$(subst -,_,$*)_marshal $< >> $*-marshal.c
-
 BUILT_SOURCES = \
 	vinagre/vinagre-enums.c \
-	vinagre/vinagre-enums.h \
-	vinagre/vinagre-marshal.list \
-	vinagre/vinagre-marshal.c \
-	vinagre/vinagre-marshal.h
+	vinagre/vinagre-enums.h
 
 # Telepathy stuff
 if VINAGRE_HAVE_TELEPATHY_GLIB
@@ -554,7 +529,6 @@ dist_noinst_DATA = \
 	intltool-update.in \
 	$(plugin_in_files) \
 	vinagre/GNOME_VinagreApplet.server.in.in \
-	vinagre/vinagre-marshal.list \
 	vinagre.doap
 
 CLEANFILES += \

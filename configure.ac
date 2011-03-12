@@ -37,13 +37,6 @@ GTK_VNC_DEPS="gtk-vnc-2.0 >= 0.4.3"
 XML2_DEPS="libxml-2.0 >= 2.6.31"
 PEAS_DEPS="libpeas-1.0 >= 0.7.2 libpeas-gtk-1.0 >= 0.7.2"
 
-AC_MSG_CHECKING([for glib-genmarshal script])
-GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
-AS_IF([test "x$GLIB_GENMARSHAL" = "x"],
-  [AC_MSG_ERROR([glib-genmarshal not listed in glib-2.0 pkg-config file])],
-  [AC_SUBST([GLIB_GENMARSHAL])
-    AC_MSG_RESULT([$GLIB_GENMARSHAL])])
-
 AC_MSG_CHECKING([for glib-mkenums script])
 GLIB_MKENUMS=`$PKG_CONFIG --variable=glib_mkenums glib-2.0`
 AS_IF([test "x$GLIB_MKENUMS" = "x"],
