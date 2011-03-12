@@ -37,13 +37,6 @@ GTK_VNC_DEPS="gtk-vnc-2.0 >= 0.4.3"
 XML2_DEPS="libxml-2.0 >= 2.6.31"
 PEAS_DEPS="libpeas-1.0 >= 0.7.2 libpeas-gtk-1.0 >= 0.7.2"
 
-AC_MSG_CHECKING([for glib-mkenums script])
-GLIB_MKENUMS=`$PKG_CONFIG --variable=glib_mkenums glib-2.0`
-AS_IF([test "x$GLIB_MKENUMS" = "x"],
-  [AC_MSG_ERROR([glib-mkenums not listed in glib-2.0 pkg-config file])],
-  [AC_SUBST([GLIB_MKENUMS])
-    AC_MSG_RESULT([$GLIB_MKENUMS])])
-
 # Whether to enable support for SSH.
 SSH_DEPS="vte-2.90 >= 0.20 $XML2_DEPS"
 
