@@ -45,8 +45,8 @@
 #define VINAGRE_IS_APPLET_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), VINAGRE_TYPE_APPLET))
 #define VINAGRE_APPLET_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), VINAGRE_TYPE_APPLET, VinagreAppletClass))
 
-#define VINAGRE_APPLET_OAFID		"OAFIID:GNOME_VinagreApplet"
-#define VINAGRE_APPLET_FACTORY_OAFID	"OAFIID:GNOME_VinagreApplet_Factory"
+static const gchar VINAGRE_APPLET_FACTORY_ID[] = "VinagreAppletFactory";
+static const gchar VINAGRE_APPLET_ID[] = "VinagreApplet";
 #define PANEL_APPLET_VERTICAL(p)	 (((p) == PANEL_APPLET_ORIENT_LEFT) || ((p) == PANEL_APPLET_ORIENT_RIGHT))
 
 typedef struct{
@@ -138,9 +138,7 @@ vinagre_applet_check_size (VinagreApplet *applet)
 static gboolean
 vinagre_applet_draw_cb (VinagreApplet *applet)
 {
-  gint bg_type;
   GdkColor color;
-  GdkPixmap *background;
   GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (applet));
   cairo_t *cr;
 
@@ -159,21 +157,7 @@ vinagre_applet_draw_cb (VinagreApplet *applet)
 
   cr = gdk_cairo_create (window);
 
-  /* draw pixmap background */
-  bg_type = panel_applet_get_background (PANEL_APPLET (applet), &color, &background);
-  if (bg_type == PANEL_PIXMAP_BACKGROUND)
-    {
-      /* fill with given background pixmap */
-      gdk_cairo_set_source_pixmap (cr, background, 0, 0);
-      cairo_paint (cr);
-    }
-
-  /* draw color background */
-  if (bg_type == PANEL_COLOR_BACKGROUND)
-    {
-      gdk_cairo_set_source_color (cr, &color);
-      cairo_fill (cr);
-    }
+  panel_applet_set_background_widget(PANEL_APPLET(applet), GTK_WIDGET(applet));
 
   gdk_cairo_set_source_pixbuf (cr, applet->icon, 0, 0);
   cairo_paint (cr);
@@ -184,8 +168,8 @@ vinagre_applet_draw_cb (VinagreApplet *applet)
 
 static void
 vinagre_applet_change_background_cb (VinagreApplet *applet,
-				     PanelAppletBackgroundType arg1,
-				     GdkColor *arg2, GdkPixmap *arg3, gpointer data)
+    cairo_pattern_t *pattern,
+    gpointer user_data)
 {
   gtk_widget_queue_draw (GTK_WIDGET (applet));
 }
@@ -217,7 +201,8 @@ menu_position (GtkMenu    *menu,
   GdkWindow *window = gtk_widget_get_window (applet);
 
   gdk_window_get_origin (window, x, y);
-  gdk_drawable_get_size (window, &applet_width, &applet_height);
+  applet_width = gdk_window_get_width(window);
+  applet_height = gdk_window_get_height(window);
   gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
   switch (panel_applet_get_orient (PANEL_APPLET (applet)))
@@ -247,34 +232,32 @@ menu_position (GtkMenu    *menu,
 
 static void
 open_connection_cb (GtkMenuItem *item,
-		    gpointer    *user_data)
+    gpointer    user_data)
 {
-  GError *err = NULL;
-  gchar **argv;
-  VinagreConnection *conn;
+    GAppInfo *info;
+    GdkAppLaunchContext *context;
+    GError *error = NULL;
+    VinagreConnection *conn;
+    gchar *commandline;
+    static const gchar application_name[] = PACKAGE_TARNAME;
+  
+    conn = VINAGRE_CONNECTION (g_object_get_data (G_OBJECT (item), "conn"));
+  
+    commandline = vinagre_connection_get_string_rep (conn, TRUE);
 
-  conn = VINAGRE_CONNECTION (g_object_get_data (G_OBJECT (item), "conn"));
-
-  argv = g_new0 (gchar *, 3);
-  argv[0] = g_strdup ("vinagre");
-  argv[1] = g_strdup (vinagre_connection_get_string_rep (conn, TRUE));
-  argv[2] = NULL;
-
-  if (!gdk_spawn_on_screen (gtk_widget_get_screen (GTK_WIDGET (item)),
-			    NULL,
-			    argv,
-			    NULL,
-			    G_SPAWN_SEARCH_PATH,
-			    NULL,
-			    NULL,
-			    NULL,
-			    &err))
+    info = g_app_info_create_from_commandline(commandline, application_name,
+        G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION, &error);
+    context = gdk_display_get_app_launch_context(gdk_display_get_default());
+    g_app_info_launch(info, NULL, G_APP_LAUNCH_CONTEXT(context), &error);
+  
+    if(error)
     {
-      vinagre_utils_show_error (_("Could not run vinagre:"), err->message, NULL);
-      g_error_free (err);
+        vinagre_utils_show_error (_("Could not run vinagre:"), error->message,
+	    NULL);
+        g_error_free(error);
     }
-
-  g_strfreev (argv);
+ 
+    g_free(commandline);
 }
 
 static void
@@ -287,7 +270,7 @@ fill_recursive_menu (GSList *entries, GtkWidget *menu)
     {
       VinagreBookmarksEntry *entry = VINAGRE_BOOKMARKS_ENTRY (l->data);
       VinagreConnection     *conn;
-      VinagreProtocolExt    *ext;
+      VinagreProtocol *ext;
 
       switch (vinagre_bookmarks_entry_get_node (entry))
 	{
@@ -311,7 +294,7 @@ fill_recursive_menu (GSList *entries, GtkWidget *menu)
 	    ext = vinagre_plugins_engine_get_plugin_by_protocol (vinagre_plugins_engine_get_default (),
 								 vinagre_connection_get_protocol (conn));
 
-	    image = gtk_image_new_from_icon_name (vinagre_protocol_ext_get_icon_name (ext),
+	    image = gtk_image_new_from_icon_name (vinagre_protocol_get_icon_name (ext),
 						  GTK_ICON_SIZE_MENU);
 	    item = gtk_image_menu_item_new_with_label (vinagre_connection_get_name (conn));
 	    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item),
@@ -394,19 +377,17 @@ vinagre_applet_click_cb (GtkWidget      *applet,
 }
 
 static void
-vinagre_applet_help_cb (BonoboUIComponent *ui_container,
-			gpointer           data,
-			const gchar       *cname)
+vinagre_applet_help_cb (GtkAction *action,
+    gpointer data)
 {
-  vinagre_utils_help_contents (NULL, NULL);
+    vinagre_utils_help_contents (NULL, NULL);
 }
 
 static void
-vinagre_applet_about_cb (BonoboUIComponent *ui_container,
-			 gpointer           data,
-			 const gchar       *cname)
+vinagre_applet_about_cb (GtkAction *action,
+    gpointer           data)
 {
-  vinagre_utils_help_about (NULL);
+    vinagre_utils_help_about (NULL);
 }
 
 
@@ -464,36 +445,38 @@ vinagre_applet_init (VinagreApplet *applet)
 
 static gboolean
 vinagre_applet_fill (PanelApplet *_applet,
-		     const gchar *iid,
-		     gpointer     data)
+    const gchar *iid,
+    gpointer     data)
 {
-  VinagreApplet *applet = VINAGRE_APPLET (_applet);
+    VinagreApplet *applet = VINAGRE_APPLET (_applet);
+    GtkActionGroup *action_group;
+    gchar *ui_path;
 
-  static const BonoboUIVerb menu_verbs[] = {
-    BONOBO_UI_VERB ("VinagreHelp", vinagre_applet_help_cb),
-    BONOBO_UI_VERB ("VinagreAbout", vinagre_applet_about_cb),
-    BONOBO_UI_VERB_END
-  };
+    static const GtkActionEntry menu_actions[] = {
+        { "VinagreHelp", GTK_STOCK_HELP, N_("_Help"), NULL, NULL, G_CALLBACK(vinagre_applet_help_cb) },
+        { "VinagreAbout", GTK_STOCK_ABOUT, N_("_About"), NULL, NULL, G_CALLBACK(vinagre_applet_about_cb) }
+    };
 
-  if (strcmp (iid, VINAGRE_APPLET_OAFID) != 0)
-    return FALSE;
+    if (g_strcmp0 (iid, VINAGRE_APPLET_ID) != 0)
+        return FALSE;
 
-  gtk_window_set_default_icon_name ("vinagre");
-  g_set_application_name (_("Remote Desktop Viewer"));
+    gtk_window_set_default_icon_name (PACKAGE_TARNAME);
+    g_set_application_name (_("Remote Desktop Viewer"));
 
-  panel_applet_setup_menu_from_file (_applet,
-				     NULL,
-				     DATADIR "/vinagre/GNOME_VinagreApplet.xml",
-				     NULL, menu_verbs, applet);
-  vinagre_applet_draw_cb (applet);
-  return TRUE;
+    action_group = gtk_action_group_new("Vinagre Applet Actions");
+    gtk_action_group_set_translation_domain(action_group, GETTEXT_PACKAGE);
+    gtk_action_group_add_actions(action_group, menu_actions,
+        G_N_ELEMENTS(menu_actions), applet);
+    ui_path = g_build_filename(VINAGRE_DATADIR, "VinagreApplet.xml", NULL);
+    panel_applet_setup_menu_from_file(_applet, ui_path, action_group);
+    g_free(ui_path);
+    g_object_unref(action_group);
+
+    vinagre_applet_draw_cb (applet);
+    return TRUE;
 }
 
-PANEL_APPLET_BONOBO_FACTORY (VINAGRE_APPLET_FACTORY_OAFID,
-                             VINAGRE_TYPE_APPLET,
-                             "VinagreApplet",
-                             VERSION,
-                             vinagre_applet_fill,
-                             NULL);
-
-/* vim: set ts=8: */
+PANEL_APPLET_OUT_PROCESS_FACTORY (VINAGRE_APPLET_FACTORY_ID,
+    VINAGRE_TYPE_APPLET,
+    (PanelAppletFactoryCallback) vinagre_applet_fill,
+    NULL);

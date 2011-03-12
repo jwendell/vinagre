@@ -173,10 +173,8 @@ AM_CONDITIONAL([VINAGRE_HAVE_TELEPATHY_GLIB], [test "x$have_telepathy" = "xyes"]
 PANELAPPLET_DEPS="libpanelapplet-4.0 >= 2.91.91"
 
 AC_ARG_WITH([panelapplet],
-  [AS_HELP_STRING([--with-panelapplet],
-    [enable libpanelapplet support])],
-  [],
-  [with_panelapplet=no])
+  [AS_HELP_STRING([--without-panelapplet],
+    [ignore libpanelapplet support and disable it])])
 
 AS_IF([test "x$with_panelapplet" != "xno"],
   [PKG_CHECK_MODULES([PANELAPPLET],
@@ -186,7 +184,9 @@ AS_IF([test "x$with_panelapplet" != "xno"],
   [have_panelapplet=no])
 
 AS_IF([test "x$have_panelapplet" = "xyes"],
-  [AC_MSG_WARN([Applet support is currently broken!])],
+  [AC_MSG_CHECKING([for panel applet path in pkg-config file])
+    AC_SUBST([LIBPANEL_APPLET_DIR], [`$PKG_CONFIG --variable=libpanel_applet_dir libpanelapplet-4.0`])
+    AC_MSG_RESULT([$LIBPANEL_APPLET_DIR])],
   [PANELAPPLET_DEPS=""
     AS_IF([test "x$with_panelapplet" = "xyes"],
       [AC_MSG_ERROR([panelapplet support requested but not found])])])
@@ -261,6 +261,7 @@ GLIB_GSETTINGS
 
 AC_CONFIG_FILES([
 Makefile
+data/org.gnome.panel.Vinagre.panel-applet.in
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
 data/vinagre-${VINAGRE_ABI_VERSION}.pc:data/vinagre.pc.in

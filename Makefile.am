@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = help po
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --without-panelapplet
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 AM_CPPFLAGS = \
 	-I$(top_builddir) \
@@ -120,77 +120,39 @@ libvinagre_la_LIBADD = $(VINAGRE_LIBS)
 
 if VINAGRE_HAVE_PANELAPPLET
 
-# Bonobo .server
-serverdir = $(libdir)/bonobo/servers
-server_in_files = GNOME_VinagreApplet.server.in
-nodist_server_DATA = $(server_in_files:.server.in=.server)
+appletdir = $(LIBPANEL_APPLET_DIR)
+applet_in_file = data/org.gnome.panel.Vinagre.panel-applet.in
+nodist_applet_DATA = $(applet_in_file:.panel-applet.in=.panel-applet)
 
-$(server_in_files): $(server_in_files:.server.in=.server.in.in)
-	$(AM_V_GEN)$(SED) -e "s|\@LIBEXECDIR\@|$(libexecdir)|" -e "s|\@PACKAGE_VERSION\@|$(PACKAGE_VERSION)|" $< > $@
+$(applet_in_file): $(applet_in_file).in Makefile
+	$(AM_V_GEN)$(SED) \
+		-e "s|\@LIBEXECDIR\@|$(libexecdir)|" \
+		-e "s|\@PACKAGE_VERSION\@|$(PACKAGE_VERSION)|" $< > $@
 
-@INTLTOOL_SERVER_RULE@
+# TODO: Replace with INTLTOOL_PANEL_APPLET_RULE when it exists.
+$(nodist_applet_DATA): $(applet_in_file) $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
+	$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+
+appletservicedir = $(datadir)/dbus-1/services
+appletservice_in_file = data/org.gnome.panel.applet.Vinagre.service.in
+nodist_appletservice_DATA = $(appletservice_in_file:.service.in=.service)
+
+$(nodist_appletservice_DATA): $(appletservice_in_file) Makefile
+	$(AM_V_GEN)$(SED) \
+		-e "s|\@LOCATION\@|$(libexecdir)/vinagre-applet|" $< > $@
 
 # The applet binary
 libexec_PROGRAMS = vinagre-applet
 
-vinagre_applet_CFLAGS = \
-	$(PANELAPPLET_CFLAGS)
+vinagre_applet_CPPFLAGS = \
+	$(PANELAPPLET_CFLAGS) \
+	$(AM_CPPFLAGS)
 
 vinagre_applet_SOURCES = \
-	vinagre/vinagre-applet.c \
-	vinagre/vinagre-bookmarks.h \
-	vinagre/vinagre-bookmarks.c \
-	vinagre/vinagre-bookmarks-ui.h \
-	vinagre/vinagre-bookmarks-ui.c \
-	vinagre/vinagre-connection.h \
-	vinagre/vinagre-connection.c \
-	vinagre/vinagre-utils.h \
-	vinagre/vinagre-utils.c \
-	vinagre/vinagre-bookmarks-entry.h \
-	vinagre/vinagre-bookmarks-entry.c \
-	vinagre/vinagre-bookmarks-tree.h \
-	vinagre/vinagre-bookmarks-tree.c \
-	vinagre/vinagre-bookmarks-migration.h \
-	vinagre/vinagre-bookmarks-migration.c \
-	vinagre/vinagre-plugin-dialog.h \
-	vinagre/vinagre-plugin-dialog.c \
-	vinagre/vinagre-debug.h \
-	vinagre/vinagre-debug.c \
-	vinagre/vinagre-window.h \
-	vinagre/vinagre-window.c \
-	vinagre/vinagre-commands.h \
-	vinagre/vinagre-commands.c \
-	vinagre/vinagre-notebook.h \
-	vinagre/vinagre-notebook.c \
-	vinagre/vinagre-tab.h \
-	vinagre/vinagre-tab.c \
-	vinagre/vinagre-prefs.h \
-	vinagre/vinagre-prefs.c \
-	vinagre/vinagre-dirs.h \
-	vinagre/vinagre-dirs.c \
-	vinagre/vinagre-fav.h \
-	vinagre/vinagre-fav.c \
-	vinagre/vinagre-connect.h \
-	vinagre/vinagre-connect.c \
-	vinagre/pty_open.h \
-	vinagre/pty_open.c \
-	vinagre/vinagre-ssh.h \
-	vinagre/vinagre-ssh.c \
-	vinagre/vinagre-cache-prefs.h \
-	vinagre/vinagre-cache-prefs.c \
-	vinagre/vinagre-protocol.h \
-	vinagre/vinagre-protocol.c \
-	vinagre/vinagre-plugins-engine.h \
-	vinagre/vinagre-plugins-engine.c
-
-if VINAGRE_HAVE_AVAHI
-vinagre_applet_SOURCES += \
-	vinagre/vinagre-mdns.h \
-	vinagre/vinagre-mdns.c
-endif
+	vinagre/vinagre-applet.c
 
 vinagre_applet_LDADD = \
-	vinagre/view/libview.la \
+	libvinagre.la \
 	$(PANELAPPLET_LIBS) \
 	$(VINAGRE_LIBS)
 
@@ -486,12 +448,13 @@ dist_noinst_DATA = \
 	data/vinagre-mime.xml.in \
 	$(desktop_in_files) \
 	$(gsettings_in_file) \
+	$(applet_in_file) \
+	$(appletservice_in_file) \
 	$(service_in_file) \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
 	$(plugin_in_files) \
-	vinagre/GNOME_VinagreApplet.server.in.in \
 	vinagre.doap
 
 CLEANFILES += \
@@ -499,15 +462,15 @@ CLEANFILES += \
 	$(nodist_mime_DATA) \
 	$(gsettings_SCHEMAS) \
 	$(nodist_pkgconfig_DATA) \
-	$(nodist_plugin_DATA) \
-	data/org.freedesktop.Telepathy.Client.Vinagre.service
+	$(nodist_applet_DATA) \
+	$(nodist_appletservice_DATA) \
+	$(nodist_service_DATA) \
+	$(nodist_plugin_DATA)
 
 DISTCLEANFILES = \
 	intltool-extract \
 	intltool-merge \
-	intltool-update \
-	$(server_in_files) \
-	$(server_DATA)
+	intltool-update
 
 MAINTAINERCLEANFILES = \
 	build-aux/compile \
