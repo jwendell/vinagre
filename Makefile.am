@@ -33,7 +33,7 @@ vinagre_vinagre_LDADD = \
 	$(GTKVNC_LIBS) \
 	$(INTROSPECTION_LIBS)
 
-vinagrehdir = $(includedir)/vinagre-@VINAGRE_API_VERSION@/vinagre
+vinagrehdir = $(includedir)/vinagre-@VINAGRE_ABI_VERSION@/vinagre
 
 noinst_vinagreh_headers = \
 	vinagre/view/autoDrawer.h \
