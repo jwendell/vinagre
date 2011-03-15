@@ -1,40 +1,105 @@
 # Hungarian translation of Vinagre
-# Copyright (C) 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
+# Copyright (C) 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Vinagre package.
 #
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2007, 2008, 2009, 2010.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2007, 2008, 2009, 2010, 2011.
 # Nyitrai István <sianis at gmail dot com>, 2008.
 # Mate Ory <orymate at gmail dot com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-31 01:54+0200\n"
-"PO-Revision-Date: 2010-08-31 01:53+0200\n"
+"POT-Creation-Date: 2011-03-15 15:42+0100\n"
+"PO-Revision-Date: 2011-03-15 15:42+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at fsf dot hu>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1
-msgid "_About"
-msgstr "_Névjegy"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+msgid "Active plugins"
+msgstr "Aktív bővítmények"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Súgó"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
+"Az aktív bővítmények listája. Az aktív bővítmények helyét tartalmazza. Adott "
+"bővítmény helyének beszerzéséhez lásd a .vinagre-plugin fájlt."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+msgid "Maximum number of history items in connect dialog"
+msgstr "A megjegyzett elemek maximális száma a kapcsolódási ablakban"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr ""
+"Állítsa hamisra a menügyorsítók kikapcsolásához. Állítsa igazra az "
+"engedélyezésükhöz. Megjegyzés: ha engedélyezi őket, ezeket elkapja a menü, "
+"és nem kerülnek továbbításra a távoli gépre."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr ""
+"Állítsa igazra a fülek állandó mutatásához. Állítsa hamisra, ha csak akkor "
+"szeretné látni a füleket, ha több aktív kapcsolat van."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr ""
+"Állítsa igazra a fordított kapcsolatok indítás utáni folyamatos figyeléséhez."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr "Megadja a gépnév mező javaslatainak maximumát."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr ""
+"Egy géphez való kapcsolódáskor a kliens megadhatja, hogy a kiszolgálóhoz "
+"kapcsolódó többi kliens kapcsolata meghagyandó vagy bontandó. Állítsa "
+"igazra, ha meg szeretné osztani az asztalt a többi klienssel."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+msgid "Whether we should leave other clients connected"
+msgstr "Más kliensek maradjanak-e kapcsolódva"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "Akkor is megjelenjenek-e a fülek, ha csak egy aktív kapcsolat van"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:11
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Megjelenjenek-e a hívóbetűk"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:12
+msgid "Whether we should start the program listening for reverse connections"
+msgstr "A program figyelje-e indítás után a fordított kapcsolatokat"
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Távoli asztalok elérése"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:441 ../vinagre/vinagre-applet.c:493
-#: ../vinagre/vinagre-main.c:64
+#: ../vinagre/vinagre-applet.c:411 ../vinagre/vinagre-applet.c:464
+#: ../vinagre/vinagre-main.c:130
 msgid "Remote Desktop Viewer"
 msgstr "Távoli asztalok megjelenítése"
 
@@ -47,7 +112,7 @@ msgid "Authentication is required"
 msgstr "Hitelesítés szükséges"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:856
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:854
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
@@ -65,7 +130,7 @@ msgstr "Mappa"
 
 #: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
 #: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../vinagre/vinagre-fav.c:408
+#: ../plugins/spice/vinagre-spice-tab.c:138 ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "Gépnév:"
 
@@ -120,7 +185,7 @@ msgstr "_Gép:"
 msgid "_Name:"
 msgstr "_Név:"
 
-#: ../data/vinagre.ui.h:22
+#: ../data/vinagre.ui.h:22 ../plugins/spice/vinagre-spice-plugin.c:295
 msgid "_Password:"
 msgstr "_Jelszó:"
 
@@ -137,83 +202,6 @@ msgstr "_Emlékezzen a hitelesítési adatokra"
 msgid "_Username:"
 msgstr "_Felhasználónév:"
 
-#: ../data/vinagre.schemas.in.in.h:1
-msgid "Active plugins"
-msgstr "Aktív bővítmények"
-
-#: ../data/vinagre.schemas.in.in.h:2
-msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
-"plugin."
-msgstr ""
-"Az aktív bővítmények listája. Az aktív bővítmények helyét tartalmazza. Adott "
-"bővítmény helyének beszerzéséhez lásd a .vinagre-plugin fájlt."
-
-#: ../data/vinagre.schemas.in.in.h:3
-msgid "Maximum number of history items in connect dialog"
-msgstr "A megjegyzett elemek maximális száma a kapcsolódási ablakban"
-
-#: ../data/vinagre.schemas.in.in.h:4
-msgid ""
-"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
-"Note that if they are enabled, those keys will be intercepted by the menu "
-"and will not be sent to the remote host."
-msgstr ""
-"Állítsa hamisra a menügyorsítók kikapcsolásához. Állítsa igazra az "
-"engedélyezésükhöz. Megjegyzés: ha engedélyezi őket, ezeket elkapja a menü, "
-"és nem kerülnek továbbításra a távoli gépre."
-
-#: ../data/vinagre.schemas.in.in.h:5
-msgid ""
-"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
-"tabs when there is more than one active connection."
-msgstr ""
-"Állítsa igazra a fülek állandó mutatásához. Állítsa hamisra, ha csak akkor "
-"szeretné látni a füleket, ha több aktív kapcsolat van."
-
-#: ../data/vinagre.schemas.in.in.h:6
-msgid ""
-"Set to \"true\" to always start the program listening for reverse "
-"connections."
-msgstr ""
-"Állítsa igazra a fordított kapcsolatok indítás utáni folyamatos figyeléséhez."
-
-#: ../data/vinagre.schemas.in.in.h:7
-msgid "Specifies the maximum number of items in the host dropdown entry."
-msgstr "Megadja a gépnév mező javaslatainak maximumát."
-
-#: ../data/vinagre.schemas.in.in.h:8
-msgid "The handler for \"vnc://\" URLs"
-msgstr "Kezelő a „vnc://” URL címekhez"
-
-#: ../data/vinagre.schemas.in.in.h:9
-msgid ""
-"When connecting to a host, the client can say to the server to leave other "
-"clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the other clients."
-msgstr ""
-"Egy géphez való kapcsolódáskor a kliens megadhatja, hogy a kiszolgálóhoz "
-"kapcsolódó többi kliens kapcsolata meghagyandó vagy bontandó. Állítsa "
-"igazra, ha meg szeretné osztani az asztalt a többi klienssel."
-
-#: ../data/vinagre.schemas.in.in.h:10
-msgid "Whether we should leave other clients connected"
-msgstr "Más kliensek maradjanak-e kapcsolódva"
-
-#: ../data/vinagre.schemas.in.in.h:11
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr "Akkor is megjelenjenek-e a fülek, ha csak egy aktív kapcsolat van"
-
-#: ../data/vinagre.schemas.in.in.h:12
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "Megjelenjenek-e a hívóbetűk"
-
-#: ../data/vinagre.schemas.in.in.h:13
-msgid "Whether we should start the program listening for reverse connections"
-msgstr "A program figyelje-e indítás után a fordított kapcsolatokat"
-
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "Távoli asztal (VNC) fájl"
@@ -222,12 +210,12 @@ msgstr "Távoli asztal (VNC) fájl"
 msgid "Remote Desktop Connection"
 msgstr "Távoli asztali kapcsolat"
 
-#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:1
+#: ../plugins/rdp/rdp.plugin.desktop.in.h:1
 #: ../plugins/rdp/vinagre-rdp-plugin.c:55
 msgid "RDP"
 msgstr "RDP"
 
-#: ../plugins/rdp/rdp.vinagre-plugin.desktop.in.h:2
+#: ../plugins/rdp/rdp.plugin.desktop.in.h:2
 msgid "RDP support"
 msgstr "RDP-támogatás"
 
@@ -253,26 +241,27 @@ msgstr ""
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
 #: ../plugins/vnc/vinagre-vnc-tab.c:149
+#: ../plugins/spice/vinagre-spice-tab.c:139
 msgid "Port:"
 msgstr "Port:"
 
-#: ../plugins/rdp/vinagre-rdp-tab.c:129
+#: ../plugins/rdp/vinagre-rdp-tab.c:123
 msgid "Error while executing rdesktop"
 msgstr "Hiba az rdesktop végrehajtása közben"
 
-#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:344
-#: ../vinagre/vinagre-bookmarks.c:459
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:174
-#: ../vinagre/vinagre-connect.c:486 ../vinagre/vinagre-fav.c:768
-#: ../vinagre/vinagre-options.c:82 ../vinagre/vinagre-options.c:100
-#: ../vinagre/vinagre-window.c:279 ../vinagre/vinagre-window.c:749
+#: ../plugins/rdp/vinagre-rdp-tab.c:124 ../vinagre/vinagre-bookmarks.c:366
+#: ../vinagre/vinagre-bookmarks.c:492
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:170
+#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:766
+#: ../vinagre/vinagre-options.c:76 ../vinagre/vinagre-options.c:94
+#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:749
 msgid "Unknown error"
 msgstr "Ismeretlen hiba"
 
 #. vim: set ts=8:
 #: ../plugins/ssh/vinagre-ssh-plugin.c:59
-#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
+#: ../plugins/ssh/ssh.plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
@@ -285,7 +274,7 @@ msgstr "Unix/Linux terminálok elérése"
 msgid "SSH Options"
 msgstr "SSH-beállítások"
 
-#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
+#: ../plugins/ssh/ssh.plugin.desktop.in.h:2
 msgid "SSH support"
 msgstr "SSH-támogatás"
 
@@ -316,7 +305,7 @@ msgstr "VNC kapcsolóinak megjelenítése"
 
 #. vim: set ts=8:
 #: ../plugins/vnc/vinagre-vnc-plugin.c:87
-#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
+#: ../plugins/vnc/vnc.plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
@@ -325,6 +314,7 @@ msgid "Access Unix/Linux, Windows and other machines."
 msgstr "Unix/Linux, Windows és más gépek elérése."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:145
+#: ../plugins/spice/vinagre-spice-plugin.c:100
 msgid "Could not parse the file."
 msgstr "A fájl nem dolgozható fel."
 
@@ -343,13 +333,17 @@ msgid "VNC Options"
 msgstr "VNC kapcsolói"
 
 #. View only check button
+#. View only check button - not fully ready on spice-gtk side
 #: ../plugins/vnc/vinagre-vnc-plugin.c:265
-#: ../plugins/vnc/vinagre-vnc-tab.c:633
+#: ../plugins/vnc/vinagre-vnc-tab.c:624
+#: ../plugins/spice/vinagre-spice-plugin.c:222
+#: ../plugins/spice/vinagre-spice-tab.c:506
 msgid "_View only"
 msgstr "_Csak megtekintés"
 
 #. Scaling check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:273
+#: ../plugins/spice/vinagre-spice-plugin.c:246
 msgid "_Scaling"
 msgstr "_Méretezés"
 
@@ -392,23 +386,28 @@ msgstr "Ultra Low Color (3 bit)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:331
+#: ../plugins/spice/vinagre-spice-plugin.c:257
 msgid "Use h_ost"
 msgstr "Ezen gé_p használata:"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:340
+#: ../plugins/spice/vinagre-spice-plugin.c:266
 msgid "hostname or user@hostname"
 msgstr "gépnév vagy felhasználó@gépnév"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:341
+#: ../plugins/spice/vinagre-spice-plugin.c:267
 msgid "Supply an alternative port using colon"
 msgstr "Alternatív portot kettősponttal adhat meg"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:342
+#: ../plugins/spice/vinagre-spice-plugin.c:268
 msgid "For instance: joe@domain.com:5022"
 msgstr "Például: geza@példa.hu:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:348
+#: ../plugins/spice/vinagre-spice-plugin.c:274
 msgid "as a SSH tunnel"
 msgstr "SSH-alagútként"
 
@@ -425,98 +424,113 @@ msgstr "Asztal neve:"
 msgid "Dimensions:"
 msgstr "Dimenziók:"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:304
+#: ../plugins/vnc/vinagre-vnc-tab.c:295
+#: ../plugins/spice/vinagre-spice-tab.c:251
 msgid "Error creating the SSH tunnel"
 msgstr "Hiba az SSH-alagút létrehozásakor"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:305 ../plugins/vnc/vinagre-vnc-tab.c:316
+#: ../plugins/vnc/vinagre-vnc-tab.c:296 ../plugins/vnc/vinagre-vnc-tab.c:307
+#: ../plugins/spice/vinagre-spice-tab.c:252
+#: ../plugins/spice/vinagre-spice-tab.c:264
 msgid "Unknown reason"
 msgstr "Ismeretlen ok"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:315
+#: ../plugins/vnc/vinagre-vnc-tab.c:306
+#: ../plugins/spice/vinagre-spice-tab.c:263
 msgid "Error connecting to host."
 msgstr "Hiba a géphez csatlakozás közben."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
-#: ../plugins/vnc/vinagre-vnc-tab.c:360
+#: ../plugins/vnc/vinagre-vnc-tab.c:351
 #, c-format
 msgid "Authentication method for host %s is unsupported. (%u)"
 msgstr "A hitelesítési módszer a géphez (%s) nem támogatott. (%u)"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:364
+#: ../plugins/vnc/vinagre-vnc-tab.c:355
 msgid "Authentication unsupported"
 msgstr "A hitelesítés nem támogatott"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:532 ../plugins/vnc/vinagre-vnc-tab.c:549
+#: ../plugins/vnc/vinagre-vnc-tab.c:523 ../plugins/vnc/vinagre-vnc-tab.c:540
 msgid "Authentication error"
 msgstr "Hitelesítési hiba"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:533
+#: ../plugins/vnc/vinagre-vnc-tab.c:524
 msgid "A username is required in order to access this machine."
 msgstr "A számítógép eléréséhez felhasználónév szükséges."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:550
+#: ../plugins/vnc/vinagre-vnc-tab.c:541
 msgid "A password is required in order to access this machine."
 msgstr "A számítógép eléréséhez jelszó szükséges."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:595
+#: ../plugins/spice/vinagre-spice-tab.c:465
 msgid "S_caling"
 msgstr "_Méretezés"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:605
+#: ../plugins/vnc/vinagre-vnc-tab.c:596
+#: ../plugins/spice/vinagre-spice-tab.c:466
 msgid "Fits the remote screen into the current window size"
 msgstr "A távoli képernyő nyújtása a jelenlegi ablak méretére"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:618
+#: ../plugins/vnc/vinagre-vnc-tab.c:609
 msgid "_Keep Aspect Ratio"
 msgstr "_Méretarány megtartása"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:619
+#: ../plugins/vnc/vinagre-vnc-tab.c:610
 msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "A képernyő méretarányának megtartása méretezés használatakor"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:634
+#: ../plugins/vnc/vinagre-vnc-tab.c:625
+#: ../plugins/spice/vinagre-spice-tab.c:507
 msgid "Does not send mouse and keyboard events"
 msgstr "Ne küldjön egér- és billentyűzeteseményeket"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:647
+#: ../plugins/vnc/vinagre-vnc-tab.c:638
 msgid "_Original size"
 msgstr "Ere_deti méret"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:648
+#: ../plugins/vnc/vinagre-vnc-tab.c:639
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Az ablak igazítása a távoli asztal méretéhez"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:661
+#: ../plugins/vnc/vinagre-vnc-tab.c:652
 msgid "_Refresh Screen"
 msgstr "Képernyő _frissítése"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:662
+#: ../plugins/vnc/vinagre-vnc-tab.c:653
 msgid "Requests an update of the screen"
 msgstr "A képernyő frissítésének kérése"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:684
+#: ../plugins/vnc/vinagre-vnc-tab.c:675
+#: ../plugins/spice/vinagre-spice-tab.c:530
 msgid "_Send Ctrl-Alt-Del"
 msgstr "_Ctrl+Alt+Del küldése"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:685
+#: ../plugins/vnc/vinagre-vnc-tab.c:676
+#: ../plugins/spice/vinagre-spice-tab.c:531
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Ctrl+Alt+Del küldése a távoli gépnek"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:737 ../plugins/vnc/vinagre-vnc-tab.c:738
+#: ../plugins/vnc/vinagre-vnc-tab.c:728 ../plugins/vnc/vinagre-vnc-tab.c:729
+#: ../plugins/spice/vinagre-spice-tab.c:583
+#: ../plugins/spice/vinagre-spice-tab.c:584
 msgid "Scaling"
 msgstr "Méretezés"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:748
+#: ../plugins/vnc/vinagre-vnc-tab.c:738 ../plugins/vnc/vinagre-vnc-tab.c:739
+#: ../plugins/spice/vinagre-spice-tab.c:593
+#: ../plugins/spice/vinagre-spice-tab.c:594
 msgid "Read only"
 msgstr "Csak olvasható"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:756 ../plugins/vnc/vinagre-vnc-tab.c:758
+#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:749
+#: ../plugins/spice/vinagre-spice-tab.c:602
+#: ../plugins/spice/vinagre-spice-tab.c:604
 msgid "Send Ctrl-Alt-Del"
 msgstr "Ctrl+Alt+Del küldése"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:920
+#: ../plugins/vnc/vinagre-vnc-tab.c:912
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -529,19 +543,20 @@ msgstr ""
 "alkalmazással szállított README fájlt."
 
 #: ../plugins/vnc/vinagre-vnc-tunnel.c:96
+#: ../plugins/spice/vinagre-spice-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "Nem található szabad TCP port"
 
-#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
+#: ../plugins/vnc/vnc.plugin.desktop.in.h:2
 msgid "VNC support"
 msgstr "VNC-támogatás"
 
-#: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:1
+#: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:1
 msgid "Allows reverse VNC connections"
 msgstr "Fordított VNC-kapcsolatok engedélyezése"
 
-#: ../plugins/reverse-vnc/reverse-vnc.vinagre-plugin.desktop.in.h:2
+#: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:2
 msgid "Reverse VNC"
 msgstr "Fordított VNC"
 
@@ -564,15 +579,11 @@ msgstr ""
 msgid "On the port %d"
 msgstr "Ezen a porton: %d"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
-msgid "Incoming VNC connection arrived but there is no active window"
-msgstr "Bejövő VNC-kapcsolat érkezett, de nincs aktív ablak"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:211
 msgid "Error activating reverse connections"
 msgstr "Hiba a fordított kapcsolatok aktiválásakor"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:212
 msgid ""
 "The program could not find any available TCP ports starting at 5500. Is "
 "there any other running program consuming all your TCP ports?"
@@ -588,6 +599,68 @@ msgstr "_Fordított kapcsolatok…"
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
 msgid "Configure incoming VNC connections"
 msgstr "Bejövő VNC-kapcsolatok beállítása"
+
+#. vim: set ts=8:
+#: ../plugins/spice/spice.plugin.desktop.in.h:1
+msgid "Spice"
+msgstr "Spice"
+
+#: ../plugins/spice/spice.plugin.desktop.in.h:2
+msgid "Spice support"
+msgstr "Spice támogatás"
+
+#. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:107
+msgid "The file is not a Spice one: Missing the group \"connection\"."
+msgstr "A fájl nem Spice-fájl: hiányzik a „connection” csoport."
+
+#. Translators: Do not translate "host". It's the name of a key in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:114
+msgid "The file is not a Spice one: Missing the key \"host\"."
+msgstr "A fájl nem Spice-fájl: hiányzik a „host” kulcs."
+
+#: ../plugins/spice/vinagre-spice-plugin.c:158
+msgid "SPICE"
+msgstr "SPICE"
+
+#. Translators: This is a description of the SPICE protocol. It appears at Connect dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:160
+msgid "Access Spice desktop server"
+msgstr "Spice asztalkiszolgáló elérése"
+
+#: ../plugins/spice/vinagre-spice-plugin.c:209
+msgid "SPICE Options"
+msgstr "SPICE beállításai"
+
+#. Resize guest check button
+#: ../plugins/spice/vinagre-spice-plugin.c:230
+#: ../plugins/spice/vinagre-spice-tab.c:479
+msgid "_Resize guest"
+msgstr "Ve_ndég átméretezése"
+
+#. Clipboard sharing check button
+#: ../plugins/spice/vinagre-spice-plugin.c:238
+#: ../plugins/spice/vinagre-spice-tab.c:492
+msgid "_Share clipboard"
+msgstr "_Vágólap megosztása"
+
+#. Translators: This is the tooltip for the password field in a SPICE connection
+#: ../plugins/spice/vinagre-spice-plugin.c:300
+msgid "Optional"
+msgstr "Elhagyható"
+
+#. Translators: this is a pattern to open *.spice files in a open dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:321
+msgid "Spice Files"
+msgstr "Spice fájlok"
+
+#: ../plugins/spice/vinagre-spice-tab.c:480
+msgid "Resize the screen guest to best fit"
+msgstr "A vendég képernyőjének átméretezése a legjobb illeszkedés érdekében"
+
+#: ../plugins/spice/vinagre-spice-tab.c:493
+msgid "Automatically share clipboard between client and guest"
+msgstr "Vágólap automatikus megosztása a kliens és a vendég közt"
 
 #. vim: set ts=8:
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
@@ -621,103 +694,115 @@ msgstr "Min_dig engedélyezve"
 msgid "_Enable Reverse Connections"
 msgstr "_Fordított kapcsolatok engedélyezése"
 
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "Menü távoli gépekhez való gyors kapcsolódáshoz"
+#: ../plugins/im-status/im-status.plugin.desktop.in.h:1
+msgid ""
+"Changes Instant Messenger status to busy when window toggles to fullscreen "
+"(works with Empathy)"
+msgstr ""
+"Az azonnali üzenő állapotát elfoglaltra változtatja az ablak teljes "
+"képernyőre váltásakor (az Empathyval működik)"
 
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Vinagre kisalkalmazás factory"
+#: ../plugins/im-status/im-status.plugin.desktop.in.h:2
+msgid "IM Status"
+msgstr "Üzenetküldő-állapot"
 
-#: ../vinagre/vinagre-applet.c:284 ../vinagre/vinagre-applet.c:367
+#: ../plugins/im-status/im-status.js:43
+msgid "Could not communicate to Telepathy. IM Status plugin will not work."
+msgstr ""
+"Nem lehet kommunikálni a Telepathyval. Az Üzenetküldő-állapot bővítmény nem "
+"fog működni."
+
+#: ../vinagre/vinagre-applet.c:255 ../vinagre/vinagre-applet.c:339
 msgid "Could not run vinagre:"
 msgstr "A vinagre nem futtatható:"
 
-#: ../vinagre/vinagre-applet.c:387
+#: ../vinagre/vinagre-applet.c:359
 msgid "Open Remote Desktop Viewer"
 msgstr "A távoliasztal-megjelenítő megnyitása"
 
-#: ../vinagre/vinagre-applet.c:442
+#: ../vinagre/vinagre-applet.c:412
 msgid "Access your bookmarks"
 msgstr "Könyvjelzők elérése"
 
-#: ../vinagre/vinagre-bookmarks.c:266 ../vinagre/vinagre-connection.c:526
-#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:253
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "A(z) %s protokoll nem támogatott."
+#: ../vinagre/vinagre-applet.c:456 ../vinagre/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Súgó"
 
-#: ../vinagre/vinagre-bookmarks.c:344
+#: ../vinagre/vinagre-applet.c:457
+msgid "_About"
+msgstr "_Névjegy"
+
+#: ../vinagre/vinagre-bookmarks.c:366
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Hiba a könyvjelzők előkészítésekor: %s"
 
-#: ../vinagre/vinagre-bookmarks.c:351
+#: ../vinagre/vinagre-bookmarks.c:373
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Hiba a könyvjelzők előkészítésekor: A fájl üresnek tűnik"
 
-#: ../vinagre/vinagre-bookmarks.c:358
+#: ../vinagre/vinagre-bookmarks.c:380
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr ""
 "Hiba a könyvjelzők előkészítésekor: A fájl nem egy vinagre könyvjelzőfájl"
 
-#: ../vinagre/vinagre-bookmarks.c:420 ../vinagre/vinagre-bookmarks.c:427
+#: ../vinagre/vinagre-bookmarks.c:453 ../vinagre/vinagre-bookmarks.c:460
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr ""
 "Hiba a könyvjelzők mentése közben: Az XML-struktúra létrehozása meghiúsult"
 
-#: ../vinagre/vinagre-bookmarks.c:434 ../vinagre/vinagre-bookmarks.c:441
+#: ../vinagre/vinagre-bookmarks.c:467 ../vinagre/vinagre-bookmarks.c:474
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Hiba a könyvjelzők mentése közben: Az XML-struktúra előkészítése meghiúsult"
 
-#: ../vinagre/vinagre-bookmarks.c:450
+#: ../vinagre/vinagre-bookmarks.c:483
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Hiba a könyvjelzők mentése közben: Az XML-struktúra befejezése meghiúsult"
 
-#: ../vinagre/vinagre-bookmarks.c:459
+#: ../vinagre/vinagre-bookmarks.c:492
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Hiba a könyvjelzők mentése közben: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:96
-#: ../vinagre/vinagre-bookmarks-migration.c:103
+#: ../vinagre/vinagre-bookmarks-migration.c:95
+#: ../vinagre/vinagre-bookmarks-migration.c:102
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr ""
 "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra létrehozása "
 "meghiúsult"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:110
-#: ../vinagre/vinagre-bookmarks-migration.c:117
+#: ../vinagre/vinagre-bookmarks-migration.c:109
+#: ../vinagre/vinagre-bookmarks-migration.c:116
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra előkészítése "
 "meghiúsult"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:126
+#: ../vinagre/vinagre-bookmarks-migration.c:125
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Hiba a könyvjelzők átköltöztetése közben: Az XML-struktúra befejezése "
 "meghiúsult"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-bookmarks-migration.c:216
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Hiba a könyvjelzők átköltöztetése közben: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:165
+#: ../vinagre/vinagre-bookmarks-migration.c:164
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr ""
 "Hiba a könyvjelzők átköltöztetése közben: a VNC bővítmény nincs aktiválva"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:217
+#: ../vinagre/vinagre-bookmarks-migration.c:216
 msgid "Failed to create the directory"
 msgstr "A könyvtár létrehozása meghiúsult"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:242
+#: ../vinagre/vinagre-bookmarks-migration.c:241
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -725,17 +810,17 @@ msgstr ""
 "A könyvjelzőfájl új formátumra alakítása. Ez a művelet csak egyszer fog "
 "lefutni."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:249
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Hiba a régi könyvjelzőfájl megnyitása közben: %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:251
-#: ../vinagre/vinagre-bookmarks-migration.c:263
+#: ../vinagre/vinagre-bookmarks-migration.c:250
+#: ../vinagre/vinagre-bookmarks-migration.c:262
 msgid "Migration cancelled"
 msgstr "Az átköltöztetés megszakítva"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:260
+#: ../vinagre/vinagre-bookmarks-migration.c:259
 msgid "Could not remove the old bookmarks file"
 msgstr "A régi könyvjelzőfájl nem távolítható el"
 
@@ -743,51 +828,51 @@ msgstr "A régi könyvjelzőfájl nem távolítható el"
 msgid "Root Folder"
 msgstr "Gyökérmappa"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:78
+#: ../vinagre/vinagre-bookmarks-ui.c:77
 msgid "Invalid name for this folder"
 msgstr "A mappanév érvénytelen"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:88 ../vinagre/vinagre-bookmarks-ui.c:200
+#: ../vinagre/vinagre-bookmarks-ui.c:87 ../vinagre/vinagre-bookmarks-ui.c:199
 #, c-format
 msgid ""
 "The name \"%s\" is already used in this folder. Please use a different name."
 msgstr ""
 "Ez a név („%s”) már használatban van a mappában. Használjon másik nevet."
 
-#: ../vinagre/vinagre-bookmarks-ui.c:89 ../vinagre/vinagre-bookmarks-ui.c:190
-#: ../vinagre/vinagre-bookmarks-ui.c:201
+#: ../vinagre/vinagre-bookmarks-ui.c:88 ../vinagre/vinagre-bookmarks-ui.c:189
+#: ../vinagre/vinagre-bookmarks-ui.c:200
 msgid "Invalid name for this item"
 msgstr "Az elem neve érvénytelen"
 
 #. Translators: %s is a protocol name, like VNC or SSH
-#: ../vinagre/vinagre-bookmarks-ui.c:168
+#: ../vinagre/vinagre-bookmarks-ui.c:167
 #, c-format
 msgid "(Protocol: %s)"
 msgstr "(Protokoll: %s)"
 
 #. Translators: %s is a bookmark entry name
-#: ../vinagre/vinagre-bookmarks-ui.c:306
+#: ../vinagre/vinagre-bookmarks-ui.c:305
 #, c-format
 msgid "Are you sure you want to remove %s from bookmarks?"
 msgstr "Biztosan törölni akarja a következőt a könyvjelzők közül: %s?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:312
+#: ../vinagre/vinagre-bookmarks-ui.c:311
 msgid "Remove Folder?"
 msgstr "Eltávolítja a mappát?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:313
+#: ../vinagre/vinagre-bookmarks-ui.c:312
 msgid "Notice that all its subfolders and items will be removed as well."
 msgstr "Ne feledje, hogy az almappái és fájljai is eltávolításra kerülnek."
 
-#: ../vinagre/vinagre-bookmarks-ui.c:318
+#: ../vinagre/vinagre-bookmarks-ui.c:317
 msgid "Remove Item?"
 msgstr "Eltávolítja az elemet?"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:335
+#: ../vinagre/vinagre-bookmarks-ui.c:334
 msgid "Error removing bookmark: Entry not found"
 msgstr "Hiba a könyvjelző eltávolítása közben: A bejegyzés nem található"
 
-#: ../vinagre/vinagre-bookmarks-ui.c:352
+#: ../vinagre/vinagre-bookmarks-ui.c:351
 msgid "New Folder"
 msgstr "Új mappa"
 
@@ -796,15 +881,15 @@ msgstr "Új mappa"
 msgid "Error while saving preferences: %s"
 msgstr "Hiba a beállítások mentése közben: %s"
 
-#: ../vinagre/vinagre-commands.c:120
+#: ../vinagre/vinagre-commands.c:122
 msgid "Choose the file"
 msgstr "Válassza ki a fájlt"
 
-#: ../vinagre/vinagre-commands.c:150
+#: ../vinagre/vinagre-commands.c:146
 msgid "There are no supported files"
 msgstr "Nincsenek támogatott fájlok"
 
-#: ../vinagre/vinagre-commands.c:151
+#: ../vinagre/vinagre-commands.c:147
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
@@ -812,150 +897,149 @@ msgstr ""
 "Az aktív bővítmények egyike sem támogatja a műveletet. Aktiváljon néhány "
 "bővítményt, és próbálja újra."
 
-#: ../vinagre/vinagre-commands.c:185
+#: ../vinagre/vinagre-commands.c:181
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "A következő fájl nem nyitható meg:"
 msgstr[1] "A következő fájlok nem nyithatók meg:"
 
-#: ../vinagre/vinagre-connect.c:92 ../vinagre/vinagre-connect.c:338
-#: ../vinagre/vinagre-connect.c:450
+#: ../vinagre/vinagre-connect.c:91 ../vinagre/vinagre-connect.c:337
+#: ../vinagre/vinagre-connect.c:456
 msgid "Could not get the active protocol from the protocol list."
 msgstr "Nem kérhető le az aktív protokoll a protokoll-listából."
 
-#: ../vinagre/vinagre-connect.c:319
+#: ../vinagre/vinagre-connect.c:318
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Hiba a történet mentése közben: %s"
 
-#: ../vinagre/vinagre-connect.c:354
+#: ../vinagre/vinagre-connect.c:353
 msgid "Choose a Remote Desktop"
 msgstr "Válasszon távoli asztalt"
 
-#: ../vinagre/vinagre-connection.c:634
+#: ../vinagre/vinagre-connection.c:524 ../vinagre/vinagre-tab.c:573
+#: ../vinagre/vinagre-tube-handler.c:254
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "A(z) %s protokoll nem támogatott."
+
+#: ../vinagre/vinagre-connection.c:632
 msgid "Could not open the file."
 msgstr "A fájl nem nyitható meg."
 
-#: ../vinagre/vinagre-connection.c:658
+#: ../vinagre/vinagre-connection.c:656
 msgid "The file was not recognized by any of the plugins."
 msgstr "A fájlt egyik bővítmény sem ismerte fel."
 
-#: ../vinagre/vinagre-fav.c:571
+#: ../vinagre/vinagre-fav.c:569
 msgid "_New Folder"
 msgstr "Új _mappa"
 
-#: ../vinagre/vinagre-fav.c:572
+#: ../vinagre/vinagre-fav.c:570
 msgid "Create a new folder"
 msgstr "Új mappa létrehozása"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Open bookmark"
 msgstr "_Könyvjelző megnyitása"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:576
 msgid "Connect to this machine"
 msgstr "Kapcsolódás ehhez a géphez"
 
-#: ../vinagre/vinagre-fav.c:579
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Edit bookmark"
 msgstr "Könyvjelző s_zerkesztése"
 
-#: ../vinagre/vinagre-fav.c:580
+#: ../vinagre/vinagre-fav.c:578
 msgid "Edit the details of selected bookmark"
 msgstr "A kijelölt könyvjelző részleteinek szerkesztése"
 
-#: ../vinagre/vinagre-fav.c:581
+#: ../vinagre/vinagre-fav.c:579
 msgid "_Remove from bookmarks"
 msgstr "_Eltávolítás a könyvjelzők közül"
 
-#: ../vinagre/vinagre-fav.c:582
+#: ../vinagre/vinagre-fav.c:580
 msgid "Remove current selected connection from bookmarks"
 msgstr "A jelenleg kiválasztott kapcsolat eltávolítása a könyvjelzők közül"
 
-#: ../vinagre/vinagre-fav.c:599 ../vinagre/vinagre-window.c:410
+#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:408
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Az XML felületfájl nem fésülhető össze: %s"
 
-#: ../vinagre/vinagre-fav.c:757
+#: ../vinagre/vinagre-fav.c:755
 msgid "Invalid operation"
 msgstr "Érvénytelen művelet"
 
-#: ../vinagre/vinagre-fav.c:758
+#: ../vinagre/vinagre-fav.c:756
 msgid "Data received from drag&drop operation is invalid."
 msgstr "A fogd és vidd műveletből fogadott adatok érvénytelenek."
 
-#: ../vinagre/vinagre-fav.c:864
+#: ../vinagre/vinagre-fav.c:862
 msgid "Hide panel"
 msgstr "Panel elrejtése"
 
-#: ../vinagre/vinagre-fav.c:1048
+#: ../vinagre/vinagre-fav.c:1067
 msgid "Hosts nearby"
 msgstr "Közeli gépek"
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:81
+#: ../vinagre/vinagre-main.c:140
 msgid "- Remote Desktop Viewer"
 msgstr "– Távoli asztalok megjelenítése"
 
-#: ../vinagre/vinagre-main.c:106
-msgid ""
-"Run 'vinagre --help' to see a full list of available command line options"
-msgstr ""
-"Futtassa a „vinagre --help” parancsot az elérhető parancssori lehetőségek "
-"teljes listájáért"
-
-#: ../vinagre/vinagre-mdns.c:160
+#: ../vinagre/vinagre-mdns.c:171
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Avahi gépnév feloldása sikertelen: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:217
+#: ../vinagre/vinagre-mdns.c:225
 #, c-format
-msgid "Plugin %s has already registered a browser for service %s."
-msgstr "A(z) %s bővítmény már regisztrált böngészőt a(z) %s szolgáltatáshoz."
+msgid "The service %s was already registered by another plugin."
+msgstr "A szolgáltatást (%s) már regisztrálta egy másik bővítmény."
 
-#: ../vinagre/vinagre-mdns.c:226
+#: ../vinagre/vinagre-mdns.c:233
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Az mDNS böngésző hozzáadása sikertelen a(z) %s szolgáltatáshoz."
 
 #. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
-#: ../vinagre/vinagre-mdns.c:243
+#: ../vinagre/vinagre-mdns.c:250
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Gépek böngészése sikertelen: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:316
+#: ../vinagre/vinagre-mdns.c:319
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Az mDNS böngésző előkészítése sikertelen: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:457
+#: ../vinagre/vinagre-notebook.c:462
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "A kapcsolat lezárva következő géphez: %s."
 
-#: ../vinagre/vinagre-notebook.c:459
+#: ../vinagre/vinagre-notebook.c:464
 msgid "Connection closed"
 msgstr "A kapcsolat lezárva"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:478
+#: ../vinagre/vinagre-notebook.c:483
 #, c-format
 msgid "Authentication for host %s has failed"
 msgstr "A hitelesítés meghiúsult a következő géphez: %s"
 
-#: ../vinagre/vinagre-notebook.c:484
+#: ../vinagre/vinagre-notebook.c:489
 msgid "Authentication failed"
 msgstr "A hitelesítés meghiúsult"
 
-#: ../vinagre/vinagre-notebook.c:522
+#: ../vinagre/vinagre-notebook.c:527
 msgid "Connecting..."
 msgstr "Kapcsolódás…"
 
-#: ../vinagre/vinagre-notebook.c:549 ../vinagre/vinagre-tab.c:325
+#: ../vinagre/vinagre-notebook.c:554 ../vinagre/vinagre-tab.c:354
 msgid "Close connection"
 msgstr "Kapcsolat lezárása"
 
@@ -983,17 +1067,17 @@ msgstr "fájlnév"
 msgid "[server:port]"
 msgstr "[kiszolgáló:port]"
 
-#: ../vinagre/vinagre-options.c:132
+#: ../vinagre/vinagre-options.c:125
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "A következő hiba keletkezett:"
 msgstr[1] "A következő hibák keletkeztek:"
 
-#: ../vinagre/vinagre-plugin-dialog.c:83
+#: ../vinagre/vinagre-plugin-dialog.c:71
 msgid "Plugin Manager"
 msgstr "Bővítménykezelő"
 
-#: ../vinagre/vinagre-prefs.c:188
+#: ../vinagre/vinagre-prefs.c:87
 msgid "Cannot initialize preferences manager."
 msgstr "A beállításkezelő nem indítható el."
 
@@ -1058,7 +1142,7 @@ msgstr "Bejelentkezési ablak megszakítva"
 msgid "Can't send host identity confirmation"
 msgstr "Nem küldhető el a gép azonosságának megerősítése"
 
-#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:730
+#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:806
 msgid "Error saving the credentials on the keyring."
 msgstr "Hiba a hitelesítési adatok kulcstartóra mentésekor."
 
@@ -1082,64 +1166,64 @@ msgstr "A kiszolgáló kulcsának ellenőrzése meghiúsult"
 msgid "Unable to find a valid SSH program"
 msgstr "Nem található érvényes SSH program"
 
-#: ../vinagre/vinagre-tab.c:346
+#: ../vinagre/vinagre-tab.c:375
 msgid "Leave fullscreen"
 msgstr "Teljes képernyő elhagyása"
 
-#: ../vinagre/vinagre-tab.c:497
+#: ../vinagre/vinagre-tab.c:537
 msgid "Error saving recent connection."
 msgstr "Hiba a legutóbbi kapcsolat mentésekor."
 
-#: ../vinagre/vinagre-tab.c:816
+#: ../vinagre/vinagre-tab.c:895
 msgid "Could not get a screenshot of the connection."
 msgstr "Nem készíthető képernyőkép az aktív kapcsolatról."
 
-#: ../vinagre/vinagre-tab.c:821
+#: ../vinagre/vinagre-tab.c:900
 msgid "Save Screenshot"
 msgstr "Képernyőkép mentése"
 
 #. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
-#: ../vinagre/vinagre-tab.c:833
+#: ../vinagre/vinagre-tab.c:912
 #, c-format
 msgid "Screenshot of %s"
 msgstr "%s képernyőképe"
 
-#: ../vinagre/vinagre-tab.c:884
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "Hiba a képernyőkép mentésekor"
 
-#: ../vinagre/vinagre-tube-handler.c:229
+#: ../vinagre/vinagre-tube-handler.c:230
 #, c-format
 msgid "Impossible to get service property: %s"
 msgstr "Nem lehet lekérni a szolgáltatás tulajdonságát: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:286
+#: ../vinagre/vinagre-tube-handler.c:287
 #, c-format
 msgid "Impossible to create the connection: %s"
 msgstr "A kapcsolat létrehozása meghiúsult: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:325
+#: ../vinagre/vinagre-tube-handler.c:326
 #, c-format
 msgid "Impossible to accept the stream tube: %s"
 msgstr "Nem fogadható el az adatfolyam-csatorna: %s"
 
 #. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
-#: ../vinagre/vinagre-tube-handler.c:463
+#: ../vinagre/vinagre-tube-handler.c:464
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Nem kérhető le a partner neve: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:500
+#: ../vinagre/vinagre-tube-handler.c:501
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "Nem kérhető le az avatar: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:521
+#: ../vinagre/vinagre-tube-handler.c:522
 #, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "%s meg szeretné Önnel osztani az asztalát."
 
-#: ../vinagre/vinagre-tube-handler.c:526
+#: ../vinagre/vinagre-tube-handler.c:527
 msgid "Desktop sharing invitation"
 msgstr "Felkérés asztal megosztására"
 
@@ -1255,11 +1339,11 @@ msgstr "Képernyőkép készítése az aktív kapcsolatról"
 msgid "View the current machine in full screen"
 msgstr "A jelenlegi gép megjelenítése teljes képernyőn"
 
-#: ../vinagre/vinagre-utils.c:67
+#: ../vinagre/vinagre-utils.c:72
 msgid "An error has occurred:"
 msgstr "Hiba történt:"
 
-#: ../vinagre/vinagre-utils.c:151
+#: ../vinagre/vinagre-utils.c:161
 msgid ""
 "A plugin tried to open an UI file but did not succeed, with the error "
 "message:"
@@ -1267,7 +1351,7 @@ msgstr ""
 "Egy bővítmény megpróbált megnyitni egy felhasználóifelület-fájlt, de ez "
 "meghiúsult a következő üzenettel:"
 
-#: ../vinagre/vinagre-utils.c:153
+#: ../vinagre/vinagre-utils.c:163
 msgid ""
 "The program tried to open an UI file but did not succeed, with the error "
 "message:"
@@ -1275,19 +1359,19 @@ msgstr ""
 "A program megpróbált megnyitni egy felhasználóifelület-fájlt, de ez "
 "meghiúsult a következő üzenettel:"
 
-#: ../vinagre/vinagre-utils.c:156
+#: ../vinagre/vinagre-utils.c:166
 msgid "Please check your installation."
 msgstr "Ellenőrizze a telepítést."
 
-#: ../vinagre/vinagre-utils.c:157
+#: ../vinagre/vinagre-utils.c:167
 msgid "Error loading UI file"
 msgstr "Hiba a felhasználóifelület-fájlt betöltésekor"
 
-#: ../vinagre/vinagre-utils.c:309
+#: ../vinagre/vinagre-utils.c:288
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "A Vinagre egy távoliasztal-megjelenítő a GNOME asztali környezethez"
 
-#: ../vinagre/vinagre-utils.c:312
+#: ../vinagre/vinagre-utils.c:291
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -1298,7 +1382,7 @@ msgstr ""
 "Foundation által kiadott GNU General Public License második (vagy bármely "
 "későbbi) változatában foglaltak alapján."
 
-#: ../vinagre/vinagre-utils.c:316
+#: ../vinagre/vinagre-utils.c:295
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -1310,7 +1394,7 @@ msgstr ""
 "alkalmas-e a KÖZREADÁSRA vagy EGY BIZONYOS FELADAT ELVÉGZÉSÉRE. További "
 "részletekért tanulmányozza a GNU GPL licencet."
 
-#: ../vinagre/vinagre-utils.c:320
+#: ../vinagre/vinagre-utils.c:299
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -1318,24 +1402,24 @@ msgstr ""
 "A programhoz a GNU General Public License egy példánya is jár, ha nem kapta "
 "meg, akkor keresse fel a <http://www.gnu.org/licenses/> oldalt."
 
-#: ../vinagre/vinagre-utils.c:342
+#: ../vinagre/vinagre-utils.c:316
 msgid "translator-credits"
 msgstr ""
 "Kelemen Gábor <kelemeng at gnome dot hu>\n"
 "Nyitrai István <sianis at gmail dot com>\n"
 "Őry Máté <orymate at gmail dot com>"
 
-#: ../vinagre/vinagre-utils.c:345
+#: ../vinagre/vinagre-utils.c:319
 msgid "Vinagre Website"
 msgstr "A Vinagre weboldala"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:471
+#: ../vinagre/vinagre-utils.c:431
 #, c-format
 msgid "%s authentication is required"
 msgstr "%s hitelesítés szükséges"
 
-#: ../vinagre/vinagre-window.c:439
+#: ../vinagre/vinagre-window.c:437
 msgid "_Recent connections"
 msgstr "_Legutóbbi kapcsolatok"
 
