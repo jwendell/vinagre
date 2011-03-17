@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gu\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2011-02-23 23:27+0000\n"
-"PO-Revision-Date: 2011-02-28 15:05+0530\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagre&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-13 12:21+0000\n"
+"PO-Revision-Date: 2011-03-17 11:21+0530\n"
 "Last-Translator: Sweta Kothari <swkothar@redhat.com>\n"
 "Language-Team: Gujarati\n"
 "MIME-Version: 1.0\n"
@@ -17,21 +17,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1
-msgid "_About"
-msgstr "વિશે (_A)"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+#| msgid "Select plugins"
+msgid "Active plugins"
+msgstr "પ્લગઇનોને સક્રિય કરો"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
-msgid "_Help"
-msgstr "મદદ (_H)"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+msgid "Maximum number of history items in connect dialog"
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+msgid "Whether we should leave other clients connected"
+msgstr "ક્યાંતો આપણે આપણી સાથે જોડાયેલ બીજા ક્લાયન્ટોને છોડવા જોઇએ"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+msgid "Whether we should show tabs even when there is only one active connection"
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:11
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr ""
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:12
+msgid "Whether we should start the program listening for reverse connections"
+msgstr ""
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "દૂરસ્થ ડેસ્કટોપો માં પ્રવેશો"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:440 ../vinagre/vinagre-applet.c:492
+#: ../vinagre/vinagre-applet.c:411 ../vinagre/vinagre-applet.c:464
 #: ../vinagre/vinagre-main.c:130
 msgid "Remote Desktop Viewer"
 msgstr "દૂરસ્થ ડેસ્કટોપ દર્શક"
@@ -149,18 +202,15 @@ msgid "RDP"
 msgstr "RDP"
 
 #: ../plugins/rdp/rdp.plugin.desktop.in.h:2
-#| msgid "SSH support"
 msgid "RDP support"
 msgstr "RDP આધાર"
 
 #. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
 #: ../plugins/rdp/vinagre-rdp-plugin.c:57
-#| msgid "Access Unix/Linux, Windows and other machines."
 msgid "Access MS Windows machines"
 msgstr "MS Windows મશીનોમાં પ્રવેશો"
 
 #: ../plugins/rdp/vinagre-rdp-plugin.c:96
-#| msgid "Options"
 msgid "RDP Options"
 msgstr "RDP વિકલ્પો"
 
@@ -182,7 +232,6 @@ msgid "Port:"
 msgstr "પોર્ટ:"
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:123
-#| msgid "Error while creating the file %s: %s"
 msgid "Error while executing rdesktop"
 msgstr "જ્યારે rdesktop ને ચલાવી રહ્યા હોય ત્યારે ભૂલ"
 
@@ -377,7 +426,6 @@ msgstr "યજમાનને જોડાણમાં ભૂલ."
 #. Translators: %s is a host name or IP address; %u is a code error (number).
 #: ../plugins/vnc/vinagre-vnc-tab.c:351
 #, c-format
-#| msgid "Authentication method to host %s is unsupported. (%u)"
 msgid "Authentication method for host %s is unsupported. (%u)"
 msgstr "યજમાન %s ની સત્તાધિકરણ પદ્દતિ એ આધારભૂત નથી. (%u)"
 
@@ -438,7 +486,6 @@ msgstr "સ્ક્રીનનાં સુધારાને સૂચન ક
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:675
 #: ../plugins/spice/vinagre-spice-tab.c:530
-#| msgid "Send Ctrl-Alt-Del"
 msgid "_Send Ctrl-Alt-Del"
 msgstr "Ctrl-Alt-Del મોકલો (_S)"
 
@@ -489,12 +536,10 @@ msgid "VNC support"
 msgstr "VNC આધાર"
 
 #: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:1
-#| msgid "Reverse Connections"
 msgid "Allows reverse VNC connections"
 msgstr "વિપરીત VNC જોડાણોની પરવાનગી આપે છે"
 
 #: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:2
-#| msgid "Reverse Connections"
 msgid "Reverse VNC"
 msgstr "વિપરીત VNC"
 
@@ -518,7 +563,6 @@ msgid "On the port %d"
 msgstr "પોર્ટ %d પર"
 
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:211
-#| msgid "Error saving recent connection."
 msgid "Error activating reverse connections"
 msgstr "વિપરીત જોડાણોને સક્રિય કરી રહ્યા હોય ત્યારે ભૂલ"
 
@@ -526,7 +570,9 @@ msgstr "વિપરીત જોડાણોને સક્રિય કરી
 msgid ""
 "The program could not find any available TCP ports starting at 5500. Is "
 "there any other running program consuming all your TCP ports?"
-msgstr "કાર્યક્રમ 5500 થી શરૂ થતા કોઇપણ ઉપલબ્ધ TCP પોર્ટોને શોધી શક્યુ નહિં. શું ત્યાં કોઇપણ બીજા કાર્યક્રમ બધા તમારા TCP પોર્ટોને વાપરી રહ્યા હોય તેવુ છે?"
+msgstr ""
+"કાર્યક્રમ 5500 થી શરૂ થતા કોઇપણ ઉપલબ્ધ TCP પોર્ટોને શોધી શક્યુ નહિં. શું ત્યાં કોઇપણ બીજા "
+"કાર્યક્રમ બધા તમારા TCP પોર્ટોને વાપરી રહ્યા હોય તેવુ છે?"
 
 #. Translators: "Reverse" here is an adjective, not a verb.
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
@@ -543,19 +589,16 @@ msgid "Spice"
 msgstr "Spice"
 
 #: ../plugins/spice/spice.plugin.desktop.in.h:2
-#| msgid "SSH support"
 msgid "Spice support"
 msgstr "Spice આધાર"
 
 #. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
 #: ../plugins/spice/vinagre-spice-plugin.c:107
-#| msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgid "The file is not a Spice one: Missing the group \"connection\"."
 msgstr "ફાઇલ Spice નથી: જૂથ \"connection\" ગુમ થયેલ છે."
 
 #. Translators: Do not translate "host". It's the name of a key in the .spice (.ini like) file.
 #: ../plugins/spice/vinagre-spice-plugin.c:114
-#| msgid "The file is not a VNC one: Missing the key \"host\"."
 msgid "The file is not a Spice one: Missing the key \"host\"."
 msgstr "ફાઇલ Spice નથી: કી \"host\" ગુમ થયેલ છે."
 
@@ -565,12 +608,10 @@ msgstr "SPICE"
 
 #. Translators: This is a description of the SPICE protocol. It appears at Connect dialog.
 #: ../plugins/spice/vinagre-spice-plugin.c:160
-#| msgid "Access remote desktops"
 msgid "Access Spice desktop server"
 msgstr "Spice ડેસ્કટોપ સર્વરમાં પ્રવેશો"
 
 #: ../plugins/spice/vinagre-spice-plugin.c:209
-#| msgid "SSH Options"
 msgid "SPICE Options"
 msgstr "SPICE વિકલ્પો"
 
@@ -588,13 +629,11 @@ msgstr "ક્લિપબોર્ડને વહેંચો (_S)"
 
 #. Translators: This is the tooltip for the password field in a SPICE connection
 #: ../plugins/spice/vinagre-spice-plugin.c:300
-#| msgid "Options"
 msgid "Optional"
 msgstr "વૈકલ્પિક"
 
 #. Translators: this is a pattern to open *.spice files in a open dialog.
 #: ../plugins/spice/vinagre-spice-plugin.c:321
-#| msgid "VNC Files"
 msgid "Spice Files"
 msgstr "Spice ફાઇલો"
 
@@ -641,10 +680,11 @@ msgstr "વિપરીત જોડાણોને સક્રિય કરો
 msgid ""
 "Changes Instant Messenger status to busy when window toggles to fullscreen "
 "(works with Empathy)"
-msgstr "વ્યસ્ત રાખવા માટે Instant Messenger પરિસ્થિતિને બદલે છે જ્યારે વિન્ડો સંપૂર્ણસ્ક્રીનને જકડી રાખે છે (Empathy સાથે કામ કરે છે)"
+msgstr ""
+"વ્યસ્ત રાખવા માટે Instant Messenger પરિસ્થિતિને બદલે છે જ્યારે વિન્ડો સંપૂર્ણસ્ક્રીનને જકડી "
+"રાખે છે (Empathy સાથે કામ કરે છે)"
 
 #: ../plugins/im-status/im-status.plugin.desktop.in.h:2
-#| msgid "_Statusbar"
 msgid "IM Status"
 msgstr "IM પરિસ્થિતિ"
 
@@ -652,25 +692,25 @@ msgstr "IM પરિસ્થિતિ"
 msgid "Could not communicate to Telepathy. IM Status plugin will not work."
 msgstr "Telepathy માં વાર્તાલાપ કરી શક્યા નહિં. IM પરિસ્થિત પ્લગઇન કામ કરશે નહિં."
 
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "દૂરસ્થ મશીનો માં તરત જ પ્રવેશવા માટે મેનુ"
-
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Vinagre એપલેટ ફેક્ટરી"
-
-#: ../vinagre/vinagre-applet.c:283 ../vinagre/vinagre-applet.c:366
+#: ../vinagre/vinagre-applet.c:255 ../vinagre/vinagre-applet.c:339
 msgid "Could not run vinagre:"
 msgstr "vinagre ને ચલાવી શકાયુ નહિં:"
 
-#: ../vinagre/vinagre-applet.c:386
+#: ../vinagre/vinagre-applet.c:359
 msgid "Open Remote Desktop Viewer"
 msgstr "દૂરસ્થ ડેસ્કટોપ દર્શક ને ખોલો"
 
-#: ../vinagre/vinagre-applet.c:441
+#: ../vinagre/vinagre-applet.c:412
 msgid "Access your bookmarks"
 msgstr "તમારા બુકમાર્કો માં પ્રવેશો"
+
+#: ../vinagre/vinagre-applet.c:456 ../vinagre/vinagre-ui.h:37
+msgid "_Help"
+msgstr "મદદ (_H)"
+
+#: ../vinagre/vinagre-applet.c:457
+msgid "_About"
+msgstr "વિશે (_A)"
 
 #: ../vinagre/vinagre-bookmarks.c:366
 #, c-format
@@ -833,7 +873,6 @@ msgstr[1] "નીચેની ફાઇલો ને ખોલી શકાઇ �
 
 #: ../vinagre/vinagre-connect.c:91 ../vinagre/vinagre-connect.c:337
 #: ../vinagre/vinagre-connect.c:456
-#| msgid "Could not get the active protocol in the protocol list."
 msgid "Could not get the active protocol from the protocol list."
 msgstr "પ્રોટોકોલ યાદીમાં સક્રિય પ્રોટોકોલને મેળવી શકાયુ નહિં."
 
@@ -846,17 +885,17 @@ msgstr "જ્યારે ઇતિહાસ ફાઇલ ને સંગ્�
 msgid "Choose a Remote Desktop"
 msgstr "દૂરસ્થ ડેસ્કટોપ ને પસંદ કરો"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:573
+#: ../vinagre/vinagre-connection.c:524 ../vinagre/vinagre-tab.c:573
 #: ../vinagre/vinagre-tube-handler.c:254
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "પ્રોટોકોલ %s આધારભૂત નથી."
 
-#: ../vinagre/vinagre-connection.c:633
+#: ../vinagre/vinagre-connection.c:632
 msgid "Could not open the file."
 msgstr "ફાઇલ ને ખોલી શકાઇ નહિં."
 
-#: ../vinagre/vinagre-connection.c:657
+#: ../vinagre/vinagre-connection.c:656
 msgid "The file was not recognized by any of the plugins."
 msgstr "પ્લગઇનોનાં કોઇપણ દ્દારા ફાઇલ ઓળખાયેલ નથી."
 
@@ -925,7 +964,6 @@ msgstr "avahi યજમાન નામ ને સુધારવામાં �
 
 #: ../vinagre/vinagre-mdns.c:225
 #, c-format
-#| msgid "The file was not recognized by any of the plugins."
 msgid "The service %s was already registered by another plugin."
 msgstr "બીજા પ્લગઇન દ્દારા સેવા %s પહેલેથી જ રજીસ્ટર થયેલ હતી."
 
@@ -958,7 +996,6 @@ msgstr "જોડાણ બંધ થયેલ છે"
 #. Translators: %s is a host name or IP address.
 #: ../vinagre/vinagre-notebook.c:483
 #, c-format
-#| msgid "Authentication to host %s has failed"
 msgid "Authentication for host %s has failed"
 msgstr "યજમાન %s નું સત્તાધિકરણ નિષ્ફળ હતુ"
 
@@ -1259,7 +1296,6 @@ msgstr "તમારા બુકમાર્કો માં હાલનાં
 
 #. Machine menu
 #: ../vinagre/vinagre-ui.h:92
-#| msgid "Take screenshot"
 msgid "_Take screenshot"
 msgstr "સ્ક્રીનશોટ લો (_T)"
 
