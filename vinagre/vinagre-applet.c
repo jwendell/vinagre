@@ -50,128 +50,44 @@ static const gchar VINAGRE_APPLET_ID[] = "VinagreApplet";
 #define PANEL_APPLET_VERTICAL(p)	 (((p) == PANEL_APPLET_ORIENT_LEFT) || ((p) == PANEL_APPLET_ORIENT_RIGHT))
 
 typedef struct{
-  PanelApplet parent;
-  GdkPixbuf *icon;
-  gint icon_width, icon_height, size;
+    PanelApplet parent;
+    GtkWidget *icon;
+    gint icon_width, icon_height, size;
 } VinagreApplet;
 
 typedef struct{
-  PanelAppletClass parent_class;
+    PanelAppletClass parent_class;
 } VinagreAppletClass;
 
-GType        vinagre_applet_get_type   (void);
-static void  vinagre_applet_class_init (VinagreAppletClass *klass);
-static void  vinagre_applet_init       (VinagreApplet *applet);
+GType vinagre_applet_get_type (void);
+static void vinagre_applet_class_init (VinagreAppletClass *klass);
+static void vinagre_applet_init (VinagreApplet *applet);
 
-static void	vinagre_applet_get_icon		(VinagreApplet *applet);
-static void	vinagre_applet_check_size	(VinagreApplet *applet);
-static gboolean	vinagre_applet_draw_cb		(VinagreApplet *applet);
-static void	vinagre_applet_destroy_cb	(GtkWidget     *widget);
+static void vinagre_applet_get_icon (VinagreApplet *applet);
+static void vinagre_applet_destroy_cb (GtkWidget *widget);
 
 G_DEFINE_TYPE (VinagreApplet, vinagre_applet, PANEL_TYPE_APPLET)
 
 static void
 vinagre_applet_get_icon (VinagreApplet *applet)
 {
-  if (applet->icon != NULL)
+    GdkPixbuf *pixbuf;
+
+    if(applet->icon != NULL)
     {
-      g_object_unref (applet->icon);
-      applet->icon = NULL;
+        g_object_unref(applet->icon);
+        applet->icon = NULL;
     }
 
-  if (applet->size <= 2)
-    return;
+    if(applet->size <= 2)
+        return;
 
-  applet->icon = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-					   "vinagre",
-					   applet->size - 2,
-					   0,
-					   NULL);
+    pixbuf = gtk_icon_theme_load_icon(gtk_icon_theme_get_default(),
+        PACKAGE_TARNAME, applet->size - 2, 0, NULL);
 
-  applet->icon_height = gdk_pixbuf_get_height (applet->icon);
-  applet->icon_width  = gdk_pixbuf_get_width (applet->icon);
-}
-
-static void
-vinagre_applet_check_size (VinagreApplet *applet)
-{
-  GtkAllocation allocation;
-
-  gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
-
-  /* we don't use the size function here, but the yet allocated size because the
-     size value is false (kind of rounded) */
-  if (PANEL_APPLET_VERTICAL(panel_applet_get_orient (PANEL_APPLET (applet))))
-    {
-      if (applet->size != allocation.width)
-	{
-	  applet->size = allocation.width;
-	  vinagre_applet_get_icon (applet);
-	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->size, applet->icon_height + 2);
-	}
-
-      /* Adjusting in case the icon size has changed */
-      gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
-      if (allocation.height < applet->icon_height + 2)
-	{
-	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->size, applet->icon_height + 2);
-	}
-    }
-  else
-    {
-      if (applet->size != allocation.height)
-	{
-	  applet->size = allocation.height;
-	  vinagre_applet_get_icon (applet);
-	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->icon_width + 2, applet->size);
-	}
-
-      /* Adjusting in case the icon size has changed */
-      gtk_widget_get_allocation (GTK_WIDGET (applet), &allocation);
-      if (allocation.width < applet->icon_width + 2)
-	{
-	  gtk_widget_set_size_request (GTK_WIDGET(applet), applet->icon_width + 2, applet->size);
-	}
-    }
-}
-
-static gboolean
-vinagre_applet_draw_cb (VinagreApplet *applet)
-{
-  GdkColor color;
-  GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (applet));
-  cairo_t *cr;
-
-  if (window == NULL)
-    return FALSE;
-
-  /* retrieve applet size */
-  vinagre_applet_get_icon (applet);
-  vinagre_applet_check_size (applet);
-  if (applet->size <= 2)
-    return FALSE;
-
-  /* if no icon, then don't try to display */
-  if (applet->icon == NULL)
-    return FALSE;
-
-  cr = gdk_cairo_create (window);
-
-  panel_applet_set_background_widget(PANEL_APPLET(applet), GTK_WIDGET(applet));
-
-  gdk_cairo_set_source_pixbuf (cr, applet->icon, 0, 0);
-  cairo_paint (cr);
-  cairo_destroy (cr);
-
-  return TRUE;
-}
-
-static void
-vinagre_applet_change_background_cb (VinagreApplet *applet,
-    cairo_pattern_t *pattern,
-    gpointer user_data)
-{
-  gtk_widget_queue_draw (GTK_WIDGET (applet));
+    applet->icon_height = gdk_pixbuf_get_height(pixbuf);
+    applet->icon_width = gdk_pixbuf_get_width(pixbuf);
+    applet->icon = gtk_image_new_from_pixbuf(pixbuf);
 }
 
 static void
@@ -179,8 +95,8 @@ vinagre_applet_destroy_cb (GtkWidget *widget)
 {
   VinagreApplet *applet = VINAGRE_APPLET (widget);
 
-  if (applet->icon != NULL)
-    g_object_unref (applet->icon);
+  if(applet->icon != NULL)
+      g_object_unref (applet->icon);
 }
 
 static void
@@ -253,7 +169,7 @@ open_connection_cb (GtkMenuItem *item,
     if(error)
     {
         vinagre_utils_show_error (_("Could not run vinagre:"), error->message,
-	    NULL);
+            NULL);
         g_error_free(error);
     }
  
@@ -385,7 +301,7 @@ vinagre_applet_help_cb (GtkAction *action,
 
 static void
 vinagre_applet_about_cb (GtkAction *action,
-    gpointer           data)
+    gpointer data)
 {
     vinagre_utils_help_about (NULL);
 }
@@ -394,73 +310,20 @@ vinagre_applet_about_cb (GtkAction *action,
 static void
 vinagre_applet_init (VinagreApplet *applet)
 {
-  gchar *tmp;
-#ifdef VINAGRE_HAVE_AVAHI
-  VinagreMdns *mdns;
-#endif
-
-  setlocale (LC_ALL, "");
-  bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-
-  applet->size = 0;
-  applet->icon = NULL;
-
-  tmp = g_strdup_printf ("%s\n%s",
-			_("Remote Desktop Viewer"),
-			_("Access your bookmarks"));
-  gtk_widget_set_tooltip_text (GTK_WIDGET (applet), tmp);
-  g_free (tmp);
-
-  panel_applet_set_flags (PANEL_APPLET (applet), PANEL_APPLET_EXPAND_MINOR);
-  gtk_widget_show_all (GTK_WIDGET(applet));
-  vinagre_applet_draw_cb (applet);
-
-  g_signal_connect (G_OBJECT (applet), "button-press-event",
-		    G_CALLBACK (vinagre_applet_click_cb), NULL);
-
-  g_signal_connect (G_OBJECT (applet), "expose-event",
-		    G_CALLBACK (vinagre_applet_draw_cb), NULL);
-
-  /* We use g_signal_connect_after because letting the panel draw
-   * the background is the only way to have the correct
-   * background when a theme defines a background picture. */
-  g_signal_connect_after (G_OBJECT (applet), "expose-event",
-			  G_CALLBACK (vinagre_applet_draw_cb), NULL);
-
-  g_signal_connect (G_OBJECT (applet), "change-background",
-		    G_CALLBACK (vinagre_applet_change_background_cb), NULL);
-
-  g_signal_connect (G_OBJECT (applet), "change-orient",
-		    G_CALLBACK (vinagre_applet_draw_cb), NULL);
-
-  g_signal_connect (G_OBJECT (applet), "destroy",
-		    G_CALLBACK (vinagre_applet_destroy_cb), NULL);
-
-#ifdef VINAGRE_HAVE_AVAHI
-  mdns = vinagre_mdns_get_default ();
-#endif
-}
-
-static gboolean
-vinagre_applet_fill (PanelApplet *_applet,
-    const gchar *iid,
-    gpointer     data)
-{
-    VinagreApplet *applet = VINAGRE_APPLET (_applet);
     GtkActionGroup *action_group;
     gchar *ui_path;
+    gchar *tooltip;
+#ifdef VINAGRE_HAVE_AVAHI
+    VinagreMdns *mdns;
+#endif
 
     static const GtkActionEntry menu_actions[] = {
         { "VinagreHelp", GTK_STOCK_HELP, N_("_Help"), NULL, NULL, G_CALLBACK(vinagre_applet_help_cb) },
         { "VinagreAbout", GTK_STOCK_ABOUT, N_("_About"), NULL, NULL, G_CALLBACK(vinagre_applet_about_cb) }
     };
 
-    if (g_strcmp0 (iid, VINAGRE_APPLET_ID) != 0)
-        return FALSE;
-
     gtk_window_set_default_icon_name (PACKAGE_TARNAME);
+    panel_applet_set_flags (PANEL_APPLET(applet), PANEL_APPLET_EXPAND_MINOR);
     g_set_application_name (_("Remote Desktop Viewer"));
 
     action_group = gtk_action_group_new("Vinagre Applet Actions");
@@ -468,15 +331,62 @@ vinagre_applet_fill (PanelApplet *_applet,
     gtk_action_group_add_actions(action_group, menu_actions,
         G_N_ELEMENTS(menu_actions), applet);
     ui_path = g_build_filename(VINAGRE_DATADIR, "VinagreApplet.xml", NULL);
-    panel_applet_setup_menu_from_file(_applet, ui_path, action_group);
+    panel_applet_setup_menu_from_file(PANEL_APPLET(applet), ui_path,
+        action_group);
     g_free(ui_path);
     g_object_unref(action_group);
 
-    vinagre_applet_draw_cb (applet);
+    tooltip = g_strdup_printf("%s\n%s", _("Remote Desktop Viewer"),
+        _("Access your bookmarks"));
+    gtk_widget_set_tooltip_text(GTK_WIDGET(applet), tooltip);
+    g_free(tooltip);
+
+    panel_applet_set_background_widget(PANEL_APPLET(applet),
+        GTK_WIDGET(applet));
+
+    /* TODO: Replace with gtk_widget_get_allocation(). */
+    applet->size = panel_applet_get_size(PANEL_APPLET(applet));
+    applet->icon = NULL;
+    vinagre_applet_get_icon(applet);
+
+    /* TODO: Deal with theme changes. */
+    gtk_container_add(GTK_CONTAINER(applet), applet->icon);
+
+    g_signal_connect (G_OBJECT (applet), "button-press-event",
+        G_CALLBACK (vinagre_applet_click_cb), NULL);
+
+    g_signal_connect (G_OBJECT (applet), "destroy",
+        G_CALLBACK (vinagre_applet_destroy_cb), NULL);
+
+#ifdef VINAGRE_HAVE_AVAHI
+    mdns = vinagre_mdns_get_default();
+#endif
+
+    gtk_widget_show_all(GTK_WIDGET(applet));
+}
+
+static gboolean
+vinagre_applet_start(VinagreApplet *applet)
+{
+    gtk_widget_show(GTK_WIDGET(applet));
+
     return TRUE;
+}
+
+static gboolean
+vinagre_applet_factory (VinagreApplet *applet,
+    const gchar *iid,
+    gpointer data)
+{
+    gboolean retval = FALSE;
+
+    if(!g_strcmp0 (iid, VINAGRE_APPLET_ID))
+        retval = vinagre_applet_start(applet);
+
+    return retval;
 }
 
 PANEL_APPLET_OUT_PROCESS_FACTORY (VINAGRE_APPLET_FACTORY_ID,
     VINAGRE_TYPE_APPLET,
-    (PanelAppletFactoryCallback) vinagre_applet_fill,
+    (PanelAppletFactoryCallback) vinagre_applet_factory,
     NULL);
