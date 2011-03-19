@@ -217,30 +217,6 @@ vinagre_utils_escape_underscores (const gchar* text,
 	return g_string_free (str, FALSE);
 }
 
-static void _default_log (const gchar *log_domain G_GNUC_UNUSED,
-			 GLogLevelFlags log_level G_GNUC_UNUSED,
-			 const gchar *message,
-			 gpointer user_data G_GNUC_UNUSED)
-{
-  printf ("gtk-vnc: %s\n", message);
-}
-
-void
-vinagre_utils_handle_debug (void)
-{
-  static gboolean initialized = FALSE;
-
-  if (initialized)
-    return;
-
-  g_log_set_handler ("gtk-vnc",
-		     G_LOG_LEVEL_DEBUG,
-		     _default_log,
-		     NULL);
-
-  initialized = TRUE;
-}
-
 void
 vinagre_utils_help_contents (GtkWindow *window, const gchar *section)
 {

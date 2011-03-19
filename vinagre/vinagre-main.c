@@ -67,8 +67,6 @@ app_init (GtkApplication *app)
   gtk_window_set_application (window, app);
   gtk_widget_show (GTK_WIDGET (window));
 
-  vinagre_utils_handle_debug ();
-
 #ifdef VINAGRE_HAVE_TELEPATHY_GLIB
   vinagre_tubes_manager = vinagre_tubes_manager_new (VINAGRE_WINDOW (window));
 #endif

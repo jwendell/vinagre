@@ -50,8 +50,6 @@ GtkBuilder	*vinagre_utils_get_builder		(const gchar *filename);
 gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 							 gssize      length);
 
-void		vinagre_utils_handle_debug		(void);
-
 void		vinagre_utils_help_contents		(GtkWindow *window, const gchar *section);
 void		vinagre_utils_help_about		(GtkWindow *window);
 
