@@ -10,35 +10,106 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=vinagre&component=general\n"
-"POT-Creation-Date: 2010-11-16 17:39+0000\n"
-"PO-Revision-Date: 2011-02-07 02:30+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagr"
+"e&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-13 12:21+0000\n"
+"PO-Revision-Date: 2011-03-10 23:07+0200\n"
 "Last-Translator: Rudolfs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-01-04 13:08+0000\n"
 "X-Generator: Lokalize 1.1\n"
+"X-Launchpad-Export-Date: 2009-01-04 13:08+0000\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1
-msgid "_About"
-msgstr "P_ar"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+msgid "Active plugins"
+msgstr "Aktivizētie spraudņi"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Palīdzība"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
+"Aktivizēto spraudņu saraksts. Tas satur aktivizēto spraudņu atrašanās "
+"vietas. Skatiet .vinagre-plugin failu, lai sameklētu dotā spraudņa atrašanās "
+"vietu."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+msgid "Maximum number of history items in connect dialog"
+msgstr "Maksimālais vēstures vienību skaits savienojuma dialogā"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr ""
+"Iestatiet \"false\" lai deaktivizētu izvēlņu saīsnes. Iestatiet \"true\", lai "
+"aktivizētu tās. Atcerieties - ja tās ir aktivizētas, šos taustiņus pārtvers "
+"izvēlne un tie netiks nosūtīti uz attālināto datoru."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr ""
+"Iestatiet uz \"true\", lai vienmēr rādītu cilnes. Iestatiet uz \"false\", lai "
+"rādītu cilnes tikai tad, ja ir vairāk par vienu aktīvo savienojumu."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr ""
+"Iestatiet uz \"true\", lai vienmēr startētu programmu ar atgriezenisko "
+"savienojumu klausīšanos."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr "Norāda maksimālo vienību skaitu adrešu izritināmajā laukā."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr ""
+"Savienojoties ar datoru, klients var teikt serverim atstāt citu klientu "
+"savienojumus, vai arī atvienot tos. Iestatiet vērtību uz 'true', ja "
+"vēlaties, lai darbvirsma tiktu koplietota ar citiem klientiem."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+msgid "Whether we should leave other clients connected"
+msgstr "Vai vajag atstāt citu klientu savienojumus"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "Vai vajag rādīt cilnes pat tad, kad ir tikai viens aktīvais savienojums"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:11
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Vai vajag parādīt izvēlnes paātrinātājus (saīsņu atslēgas)"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:12
+msgid "Whether we should start the program listening for reverse connections"
+msgstr ""
+"Vai mums vajadzētu startēt programmu ar atgriezenisko savienojumu "
+"klausīšanos"
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
 msgstr "Piekļūt attālinātajām darbvirsmām"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:440 ../vinagre/vinagre-applet.c:492
+#: ../vinagre/vinagre-applet.c:411 ../vinagre/vinagre-applet.c:464
 #: ../vinagre/vinagre-main.c:130
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
+#: ../vinagre/vinagre-applet.c:440
+#: ../vinagre/vinagre-applet.c:492
 msgid "Remote Desktop Viewer"
 msgstr "Attālinātās darbvirsmas pārlūks"
 
@@ -51,7 +122,7 @@ msgid "Authentication is required"
 msgstr "Autentifikācija ir pieprasīta"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:855
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:854
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
@@ -69,7 +140,7 @@ msgstr "Mape"
 
 #: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
 #: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../vinagre/vinagre-fav.c:407
+#: ../plugins/spice/vinagre-spice-tab.c:138 ../vinagre/vinagre-fav.c:406
 msgid "Host:"
 msgstr "Adrese:"
 
@@ -124,7 +195,7 @@ msgstr "_Adrese:"
 msgid "_Name:"
 msgstr "_Nosaukums:"
 
-#: ../data/vinagre.ui.h:22
+#: ../data/vinagre.ui.h:22 ../plugins/spice/vinagre-spice-plugin.c:295
 msgid "_Password:"
 msgstr "_Parole:"
 
@@ -141,87 +212,6 @@ msgstr "Atce_rēties šo paroli"
 msgid "_Username:"
 msgstr "_Lietotājvārds:"
 
-#: ../data/vinagre.schemas.in.in.h:1
-msgid "Active plugins"
-msgstr "Aktivizētie spraudņi"
-
-#: ../data/vinagre.schemas.in.in.h:2
-msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
-"plugin."
-msgstr ""
-"Aktivizēto spraudņu saraksts. Tas satur aktivizēto spraudņu atrašanās "
-"vietas. Skatiet .vinagre-plugin failu, lai sameklētu dotā spraudņa atrašanās "
-"vietu."
-
-#: ../data/vinagre.schemas.in.in.h:3
-msgid "Maximum number of history items in connect dialog"
-msgstr "Maksimālais vēstures vienību skaits savienojuma dialogā"
-
-#: ../data/vinagre.schemas.in.in.h:4
-msgid ""
-"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
-"Note that if they are enabled, those keys will be intercepted by the menu "
-"and will not be sent to the remote host."
-msgstr ""
-"Iestatiet \"false\" lai deaktivizētu izvēlņu saīsnes. Iestatiet \"true\", "
-"lai aktivizētu tās. Atcerieties - ja tās ir aktivizētas, šos taustiņus "
-"pārtvers izvēlne un tie netiks nosūtīti uz attālināto datoru."
-
-#: ../data/vinagre.schemas.in.in.h:5
-msgid ""
-"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
-"tabs when there is more than one active connection."
-msgstr ""
-"Iestatiet uz \"true\", lai vienmēr rādītu cilnes. Iestatiet uz \"false\", "
-"lai rādītu cilnes tikai tad, ja ir vairāk par vienu aktīvo savienojumu."
-
-#: ../data/vinagre.schemas.in.in.h:6
-msgid ""
-"Set to \"true\" to always start the program listening for reverse "
-"connections."
-msgstr ""
-"Iestatiet uz \"true\", lai vienmēr startētu programmu ar atgriezenisko "
-"savienojumu klausīšanos."
-
-#: ../data/vinagre.schemas.in.in.h:7
-msgid "Specifies the maximum number of items in the host dropdown entry."
-msgstr "Norāda maksimālo vienību skaitu adrešu izritināmajā laukā."
-
-#: ../data/vinagre.schemas.in.in.h:8
-msgid "The handler for \"vnc://\" URLs"
-msgstr "\"vnc://\" URL saišu apstrādātājs"
-
-#: ../data/vinagre.schemas.in.in.h:9
-msgid ""
-"When connecting to a host, the client can say to the server to leave other "
-"clients connected or to drop the existent connections. Set the value to true "
-"to share the desktop with the other clients."
-msgstr ""
-"Savienojoties ar datoru, klients var teikt serverim atstāt citu klientu "
-"savienojumus, vai arī atvienot tos. Iestatiet vērtību uz 'true', ja "
-"vēlaties, lai darbvirsma tiktu koplietota ar citiem klientiem."
-
-#: ../data/vinagre.schemas.in.in.h:10
-msgid "Whether we should leave other clients connected"
-msgstr "Vai vajag atstāt citu klientu savienojumus"
-
-#: ../data/vinagre.schemas.in.in.h:11
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr ""
-"Vai vajag rādīt cilnes pat tad, kad ir tikai viens aktīvais savienojums"
-
-#: ../data/vinagre.schemas.in.in.h:12
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "Vai vajag parādīt izvēlnes paātrinātājus (saīsņu atslēgas)"
-
-#: ../data/vinagre.schemas.in.in.h:13
-msgid "Whether we should start the program listening for reverse connections"
-msgstr ""
-"Vai mums vajadzētu startēt programmu ar atgriezenisko savienojumu klausīšanos"
-
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
 msgstr "Attālinātās darbvirsmas (VNC) fails"
@@ -236,18 +226,15 @@ msgid "RDP"
 msgstr "RDP"
 
 #: ../plugins/rdp/rdp.plugin.desktop.in.h:2
-#| msgid "SSH support"
 msgid "RDP support"
 msgstr "RDP atbalsts"
 
 #. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
 #: ../plugins/rdp/vinagre-rdp-plugin.c:57
-#| msgid "Access Unix/Linux, Windows and other machines."
 msgid "Access MS Windows machines"
 msgstr "Piekļūt MS Windows datoriem"
 
 #: ../plugins/rdp/vinagre-rdp-plugin.c:96
-#| msgid "Options"
 msgid "RDP Options"
 msgstr "RDP opcijas"
 
@@ -264,21 +251,21 @@ msgstr ""
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
 #: ../plugins/vnc/vinagre-vnc-tab.c:149
+#: ../plugins/spice/vinagre-spice-tab.c:139
 msgid "Port:"
 msgstr "Ports:"
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:123
-#| msgid "Error while creating the file %s: %s"
 msgid "Error while executing rdesktop"
 msgstr "Kļūda, izpildot rdesktop"
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:124 ../vinagre/vinagre-bookmarks.c:366
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:173
-#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:767
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:170
+#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:766
 #: ../vinagre/vinagre-options.c:76 ../vinagre/vinagre-options.c:94
-#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:750
+#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:749
 msgid "Unknown error"
 msgstr "Nezināma kļūda"
 
@@ -336,6 +323,7 @@ msgid "Access Unix/Linux, Windows and other machines."
 msgstr "Piekļūt Unix/Linux, Windows un citām mašīnām."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:145
+#: ../plugins/spice/vinagre-spice-plugin.c:100
 msgid "Could not parse the file."
 msgstr "Neizdevās noparsēt failu"
 
@@ -354,13 +342,17 @@ msgid "VNC Options"
 msgstr "VNC opcijas"
 
 #. View only check button
+#. View only check button - not fully ready on spice-gtk side
 #: ../plugins/vnc/vinagre-vnc-plugin.c:265
 #: ../plugins/vnc/vinagre-vnc-tab.c:624
+#: ../plugins/spice/vinagre-spice-plugin.c:222
+#: ../plugins/spice/vinagre-spice-tab.c:506
 msgid "_View only"
 msgstr "Tikai _skatīšanai"
 
 #. Scaling check button
 #: ../plugins/vnc/vinagre-vnc-plugin.c:273
+#: ../plugins/spice/vinagre-spice-plugin.c:246
 msgid "_Scaling"
 msgstr "_Mērogošana"
 
@@ -403,23 +395,28 @@ msgstr "Ļoti maz krāsu (3 bitu)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:331
+#: ../plugins/spice/vinagre-spice-plugin.c:257
 msgid "Use h_ost"
 msgstr "Izmantot"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:340
+#: ../plugins/spice/vinagre-spice-plugin.c:266
 msgid "hostname or user@hostname"
 msgstr "saimniekdatora nosaukums vai arī lietotājvārds@saimniekdators"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:341
+#: ../plugins/spice/vinagre-spice-plugin.c:267
 msgid "Supply an alternative port using colon"
 msgstr "Norādiet citu portu, izmantojot kolu"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:342
+#: ../plugins/spice/vinagre-spice-plugin.c:268
 msgid "For instance: joe@domain.com:5022"
 msgstr "Piemēram: joe@domain.com:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
 #: ../plugins/vnc/vinagre-vnc-plugin.c:348
+#: ../plugins/spice/vinagre-spice-plugin.c:274
 msgid "as a SSH tunnel"
 msgstr "kā SSH tunelis"
 
@@ -437,21 +434,24 @@ msgid "Dimensions:"
 msgstr "Izmēri:"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:295
+#: ../plugins/spice/vinagre-spice-tab.c:251
 msgid "Error creating the SSH tunnel"
 msgstr "Kļūda, izveidojot SSH tuneli"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:296 ../plugins/vnc/vinagre-vnc-tab.c:307
+#: ../plugins/spice/vinagre-spice-tab.c:252
+#: ../plugins/spice/vinagre-spice-tab.c:264
 msgid "Unknown reason"
 msgstr "Nezināma kļūda"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:306
+#: ../plugins/spice/vinagre-spice-tab.c:263
 msgid "Error connecting to host."
 msgstr "Kļūda, pieslēdzoties datoram."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
 #: ../plugins/vnc/vinagre-vnc-tab.c:351
 #, c-format
-#| msgid "Authentication method to host %s is unsupported. (%u)"
 msgid "Authentication method for host %s is unsupported. (%u)"
 msgstr "Autentifikācijas metode ar datoru %s nav atbalstīta. (%u)"
 
@@ -472,10 +472,12 @@ msgid "A password is required in order to access this machine."
 msgstr "Nepieciešama parole, lai piekļūtu šim datoram."
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:595
+#: ../plugins/spice/vinagre-spice-tab.c:465
 msgid "S_caling"
 msgstr "Mē_rogošana"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:596
+#: ../plugins/spice/vinagre-spice-tab.c:466
 msgid "Fits the remote screen into the current window size"
 msgstr "Piemēro attālināto ekrānu loga pašreizējam izmēram"
 
@@ -488,6 +490,7 @@ msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "Patur ekrāna malu attiecību mainot mērogojumu"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:625
+#: ../plugins/spice/vinagre-spice-tab.c:507
 msgid "Does not send mouse and keyboard events"
 msgstr "Nesūtīt peles un klaviatūras ievadu"
 
@@ -508,24 +511,31 @@ msgid "Requests an update of the screen"
 msgstr "Pieprasa ekrāna atjauninājumu"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:675
-#| msgid "Send Ctrl-Alt-Del"
+#: ../plugins/spice/vinagre-spice-tab.c:530
 msgid "_Send Ctrl-Alt-Del"
 msgstr "No_sūtīt Ctrl-Alt-Del"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:676
+#: ../plugins/spice/vinagre-spice-tab.c:531
 msgid "Sends Ctrl+Alt+Del to the remote machine"
 msgstr "Nosūta Ctrl+Alt+Del uz attālināto datoru"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:728 ../plugins/vnc/vinagre-vnc-tab.c:729
+#: ../plugins/spice/vinagre-spice-tab.c:583
+#: ../plugins/spice/vinagre-spice-tab.c:584
 msgid "Scaling"
 msgstr "Mērogošana"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:738 ../plugins/vnc/vinagre-vnc-tab.c:739
+#: ../plugins/spice/vinagre-spice-tab.c:593
+#: ../plugins/spice/vinagre-spice-tab.c:594
 msgid "Read only"
 msgstr "Tikai skatāms"
 
 #. Send Ctrl-alt-del
 #: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:749
+#: ../plugins/spice/vinagre-spice-tab.c:602
+#: ../plugins/spice/vinagre-spice-tab.c:604
 msgid "Send Ctrl-Alt-Del"
 msgstr "Nosūtīt Ctrl-Alt-Del"
 
@@ -542,6 +552,7 @@ msgstr ""
 "aktivizēt šo iespēju."
 
 #: ../plugins/vnc/vinagre-vnc-tunnel.c:96
+#: ../plugins/spice/vinagre-spice-tunnel.c:96
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "Neizdevās atrast brīvu TCP portu"
@@ -551,12 +562,10 @@ msgid "VNC support"
 msgstr "VNC atbalsts"
 
 #: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:1
-#| msgid "Reverse Connections"
 msgid "Allows reverse VNC connections"
 msgstr "Atļauj apgrieztos VNC savienojumus"
 
 #: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:2
-#| msgid "Reverse Connections"
 msgid "Reverse VNC"
 msgstr "Apgriezts VNC"
 
@@ -579,22 +588,17 @@ msgstr ""
 msgid "On the port %d"
 msgstr "Uz porta %d"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:162
-msgid "Incoming VNC connection arrived but there is no active window"
-msgstr "Ienākošais VNC savienojums ieradās, bet nav aktīvu logu"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:214
-#| msgid "Error saving recent connection."
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:211
 msgid "Error activating reverse connections"
 msgstr "Kļūda, aktivizējot apgrieztos savienojumus"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:215
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:212
 msgid ""
 "The program could not find any available TCP ports starting at 5500. Is "
 "there any other running program consuming all your TCP ports?"
 msgstr ""
-"Programma nevarēja atrast nevienu TCP portu, kas sāktos ar 5500. Vai ir "
-"kāda cita programma, kas izmanto visus tavus TCP portus?"
+"Programma nevarēja atrast nevienu TCP portu, kas sāktos ar 5500. Vai ir kāda "
+"cita programma, kas izmanto visus tavus TCP portus?"
 
 #. Translators: "Reverse" here is an adjective, not a verb.
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
@@ -604,6 +608,75 @@ msgstr "_Apgrieztie savienojumi..."
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
 msgid "Configure incoming VNC connections"
 msgstr "Konfigurēt ienākošos VNC savienojumus"
+
+#. vim: set ts=8:
+#: ../plugins/spice/spice.plugin.desktop.in.h:1
+msgid "Spice"
+msgstr "Spice"
+
+#: ../plugins/spice/spice.plugin.desktop.in.h:2
+#| msgid "SSH support"
+msgid "Spice support"
+msgstr "Spice atbalsts"
+
+#. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:107
+#| msgid "The file is not a VNC one: Missing the group \"connection\"."
+msgid "The file is not a Spice one: Missing the group \"connection\"."
+msgstr "Fails nav Spice: trūkst grupas \"connection\"."
+
+#. Translators: Do not translate "host". It's the name of a key in the .spice (.ini like) file.
+#: ../plugins/spice/vinagre-spice-plugin.c:114
+#| msgid "The file is not a VNC one: Missing the key \"host\"."
+msgid "The file is not a Spice one: Missing the key \"host\"."
+msgstr "Fails nav Spice: trūkst atslēgas \"host\"."
+
+#: ../plugins/spice/vinagre-spice-plugin.c:158
+msgid "SPICE"
+msgstr "SPICE"
+
+#. Translators: This is a description of the SPICE protocol. It appears at Connect dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:160
+#| msgid "Access remote desktops"
+msgid "Access Spice desktop server"
+msgstr "Piekļūt Spice darbvirsmas serverim"
+
+#: ../plugins/spice/vinagre-spice-plugin.c:209
+#| msgid "RDP Options"
+msgid "SPICE Options"
+msgstr "SPICE opcijas"
+
+#. Resize guest check button
+#: ../plugins/spice/vinagre-spice-plugin.c:230
+#: ../plugins/spice/vinagre-spice-tab.c:479
+msgid "_Resize guest"
+msgstr "Mainīt viesa izmē_ru"
+
+#. Clipboard sharing check button
+#: ../plugins/spice/vinagre-spice-plugin.c:238
+#: ../plugins/spice/vinagre-spice-tab.c:492
+msgid "_Share clipboard"
+msgstr "Koplietot _starpliktuvi"
+
+#. Translators: This is the tooltip for the password field in a SPICE connection
+#: ../plugins/spice/vinagre-spice-plugin.c:300
+#| msgid "Options"
+msgid "Optional"
+msgstr "Neobligāts"
+
+#. Translators: this is a pattern to open *.spice files in a open dialog.
+#: ../plugins/spice/vinagre-spice-plugin.c:321
+#| msgid "VNC Files"
+msgid "Spice Files"
+msgstr "Spice faili"
+
+#: ../plugins/spice/vinagre-spice-tab.c:480
+msgid "Resize the screen guest to best fit"
+msgstr "Mainīt ekrāna viesi labākai saderībai"
+
+#: ../plugins/spice/vinagre-spice-tab.c:493
+msgid "Automatically share clipboard between client and guest"
+msgstr "Automātiski koplietot starpliktuvi starp klientu un viesi"
 
 #. vim: set ts=8:
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
@@ -646,7 +719,6 @@ msgstr ""
 "(darbojas ar Empathy)"
 
 #: ../plugins/im-status/im-status.plugin.desktop.in.h:2
-#| msgid "_Statusbar"
 msgid "IM Status"
 msgstr "IM status"
 
@@ -654,25 +726,31 @@ msgstr "IM status"
 msgid "Could not communicate to Telepathy. IM Status plugin will not work."
 msgstr "Neizdevās sazināties ar Telepathy. TZ statusa spraudnis nedarbosies."
 
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "Izvēlne, lai ātri piekļūtu attālinātiem datoriem"
-
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Vinagre sīklietotnes ražotne"
-
-#: ../vinagre/vinagre-applet.c:283 ../vinagre/vinagre-applet.c:366
+#: ../vinagre/vinagre-applet.c:255 ../vinagre/vinagre-applet.c:339
+#: ../vinagre/vinagre-applet.c:283
+#: ../vinagre/vinagre-applet.c:366
 msgid "Could not run vinagre:"
 msgstr "Nevarēja palaist vinagre:"
 
+#: ../vinagre/vinagre-applet.c:359
 #: ../vinagre/vinagre-applet.c:386
 msgid "Open Remote Desktop Viewer"
 msgstr "Atvērt attālinātās darbvirsmas skatītāju"
 
+#: ../vinagre/vinagre-applet.c:412
 #: ../vinagre/vinagre-applet.c:441
 msgid "Access your bookmarks"
 msgstr "Piekļūstiet jūsu grāmatzīmēm"
+
+#: ../vinagre/vinagre-applet.c:456 ../vinagre/vinagre-ui.h:37
+#: ../data/GNOME_VinagreApplet.xml.h:2
+msgid "_Help"
+msgstr "_Palīdzība"
+
+#: ../vinagre/vinagre-applet.c:457
+#: ../data/GNOME_VinagreApplet.xml.h:1
+msgid "_About"
+msgstr "P_ar"
 
 #: ../vinagre/vinagre-bookmarks.c:366
 #, c-format
@@ -813,15 +891,15 @@ msgstr "Jauna mape"
 msgid "Error while saving preferences: %s"
 msgstr "Kļūda, saglabājot iestatījumus: %s"
 
-#: ../vinagre/vinagre-commands.c:119
+#: ../vinagre/vinagre-commands.c:122
 msgid "Choose the file"
 msgstr "Izvēlieties failu"
 
-#: ../vinagre/vinagre-commands.c:149
+#: ../vinagre/vinagre-commands.c:146
 msgid "There are no supported files"
 msgstr "Nav neviena atbalstīta faila."
 
-#: ../vinagre/vinagre-commands.c:150
+#: ../vinagre/vinagre-commands.c:147
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
@@ -829,7 +907,7 @@ msgstr ""
 "Neviens no aktivizētajiem spraudņiem neatbalsta šo darbību. Aktivizējiet "
 "dažus spraudņus un mēģiniet vēlreiz."
 
-#: ../vinagre/vinagre-commands.c:184
+#: ../vinagre/vinagre-commands.c:181
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Nevar atvērt sekojošu failu:"
@@ -838,7 +916,6 @@ msgstr[2] "Nevar atvērt sekojošus failus:"
 
 #: ../vinagre/vinagre-connect.c:91 ../vinagre/vinagre-connect.c:337
 #: ../vinagre/vinagre-connect.c:456
-#| msgid "Could not get the active protocol in the protocol list."
 msgid "Could not get the active protocol from the protocol list."
 msgstr "Nevarēja iegūt aktīvo protokolu no protokolu saraksta."
 
@@ -851,70 +928,73 @@ msgstr "Kļūda, saglabājot vēstures failu: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Izvēlieties attālināto darbvirsmu"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:573
-#: ../vinagre/vinagre-tube-handler.c:253
+#: ../vinagre/vinagre-connection.c:524 ../vinagre/vinagre-tab.c:573
+#: ../vinagre/vinagre-tube-handler.c:254
+#: ../vinagre/vinagre-connection.c:525
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokols %s nav atbalstīts."
 
+#: ../vinagre/vinagre-connection.c:632
 #: ../vinagre/vinagre-connection.c:633
 msgid "Could not open the file."
 msgstr "Nevarēja atvērt failu."
 
+#: ../vinagre/vinagre-connection.c:656
 #: ../vinagre/vinagre-connection.c:657
 msgid "The file was not recognized by any of the plugins."
 msgstr "Neviens no spraudņiem neatpazina failu."
 
-#: ../vinagre/vinagre-fav.c:570
+#: ../vinagre/vinagre-fav.c:569
 msgid "_New Folder"
 msgstr "_Jauna mape"
 
-#: ../vinagre/vinagre-fav.c:571
+#: ../vinagre/vinagre-fav.c:570
 msgid "Create a new folder"
 msgstr "Izveidot jaunu mapi"
 
-#: ../vinagre/vinagre-fav.c:576
+#: ../vinagre/vinagre-fav.c:575
 msgid "_Open bookmark"
 msgstr "_Atvērt grāmatzīmi"
 
-#: ../vinagre/vinagre-fav.c:577
+#: ../vinagre/vinagre-fav.c:576
 msgid "Connect to this machine"
 msgstr "Savienoties ar šo datoru"
 
-#: ../vinagre/vinagre-fav.c:578
+#: ../vinagre/vinagre-fav.c:577
 msgid "_Edit bookmark"
 msgstr "R_ediģēt grāmatzīmi"
 
-#: ../vinagre/vinagre-fav.c:579
+#: ../vinagre/vinagre-fav.c:578
 msgid "Edit the details of selected bookmark"
 msgstr "Rediģēt izvēlētās grāmatzīmes detaļas"
 
-#: ../vinagre/vinagre-fav.c:580
+#: ../vinagre/vinagre-fav.c:579
 msgid "_Remove from bookmarks"
 msgstr "_Izņemt no grāmatzīmēm"
 
-#: ../vinagre/vinagre-fav.c:581
+#: ../vinagre/vinagre-fav.c:580
 msgid "Remove current selected connection from bookmarks"
 msgstr "Izņemt šobrīd izvēlēto savienojumu no grāmatzīmēm"
 
-#: ../vinagre/vinagre-fav.c:598 ../vinagre/vinagre-window.c:409
+#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:408
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Nevarēja apvienot LS XML failu: %s"
 
-#: ../vinagre/vinagre-fav.c:756
+#: ../vinagre/vinagre-fav.c:755
 msgid "Invalid operation"
 msgstr "Nepamatota operācija"
 
-#: ../vinagre/vinagre-fav.c:757
+#: ../vinagre/vinagre-fav.c:756
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Saņemtie dati no vilkšanas un nomešanas operācijas ir nepamatoti."
 
-#: ../vinagre/vinagre-fav.c:863
+#: ../vinagre/vinagre-fav.c:862
 msgid "Hide panel"
 msgstr "Slēpt paneli"
 
-#: ../vinagre/vinagre-fav.c:1068
+#: ../vinagre/vinagre-fav.c:1067
 msgid "Hosts nearby"
 msgstr "Tuvumā pieejamie datori"
 
@@ -930,7 +1010,6 @@ msgstr "Neizdevās noteikt avahi datora nosaukumu: %s\n"
 
 #: ../vinagre/vinagre-mdns.c:225
 #, c-format
-#| msgid "The file was not recognized by any of the plugins."
 msgid "The service %s was already registered by another plugin."
 msgstr "Servisu %s jau tika reģistrēja cits spraudnis."
 
@@ -945,37 +1024,36 @@ msgstr "Neizdevās pievienot mDNS pārlūku servisam %s."
 msgid "Failed to browse for hosts: %s\n"
 msgstr "Neizdevās pārlūkot saimniekdatoru nosaukumus: %s\n"
 
-#: ../vinagre/vinagre-mdns.c:320
+#: ../vinagre/vinagre-mdns.c:319
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Neizdevās inicializēt mDNS pārlūku: %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:463
+#: ../vinagre/vinagre-notebook.c:462
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "Savienojums ar datoru ar nosaukumu %s tika aizvērts."
 
-#: ../vinagre/vinagre-notebook.c:465
+#: ../vinagre/vinagre-notebook.c:464
 msgid "Connection closed"
 msgstr "Savienojums aizvērts"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:484
+#: ../vinagre/vinagre-notebook.c:483
 #, c-format
-#| msgid "Authentication to host %s has failed"
 msgid "Authentication for host %s has failed"
 msgstr "Autentifikācija ar datoru ar nosaukumu %s neizdevās"
 
-#: ../vinagre/vinagre-notebook.c:490
+#: ../vinagre/vinagre-notebook.c:489
 msgid "Authentication failed"
 msgstr "Autentifikācija neizdevās"
 
-#: ../vinagre/vinagre-notebook.c:528
+#: ../vinagre/vinagre-notebook.c:527
 msgid "Connecting..."
 msgstr "Savienojas..."
 
-#: ../vinagre/vinagre-notebook.c:555 ../vinagre/vinagre-tab.c:354
+#: ../vinagre/vinagre-notebook.c:554 ../vinagre/vinagre-tab.c:354
 msgid "Close connection"
 msgstr "Aizvērt savienojumu"
 
@@ -1015,7 +1093,7 @@ msgstr[2] "Notikušas sekojošas kļūdas:"
 msgid "Plugin Manager"
 msgstr "Spraudņu pārvaldnieks"
 
-#: ../vinagre/vinagre-prefs.c:193
+#: ../vinagre/vinagre-prefs.c:87
 msgid "Cannot initialize preferences manager."
 msgstr "Nevar inicializēt iestatījumu pārvaldnieku."
 
@@ -1131,38 +1209,38 @@ msgstr "%s ekrānattēls"
 msgid "Error saving screenshot"
 msgstr "Kļūda, saglabājot ekrānattēlu"
 
-#: ../vinagre/vinagre-tube-handler.c:229
+#: ../vinagre/vinagre-tube-handler.c:230
 #, c-format
 msgid "Impossible to get service property: %s"
 msgstr "Neiespējami iegūt servisa rekvizītu: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:286
+#: ../vinagre/vinagre-tube-handler.c:287
 #, c-format
 msgid "Impossible to create the connection: %s"
 msgstr "Neiespējami izveidot savienojumu: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:325
+#: ../vinagre/vinagre-tube-handler.c:326
 #, c-format
 msgid "Impossible to accept the stream tube: %s"
 msgstr "Neiespējami akceptēt plūsmas cauruli: %s"
 
 #. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
-#: ../vinagre/vinagre-tube-handler.c:463
+#: ../vinagre/vinagre-tube-handler.c:464
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Neiespējami iegūt kontakta nosaukumu: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:500
+#: ../vinagre/vinagre-tube-handler.c:501
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "Neiespējami iegūt iemiesojumu: %s"
 
-#: ../vinagre/vinagre-tube-handler.c:521
+#: ../vinagre/vinagre-tube-handler.c:522
 #, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "%s vēlas koplietot viņa(-as) darbvirsmu ar jums."
 
-#: ../vinagre/vinagre-tube-handler.c:526
+#: ../vinagre/vinagre-tube-handler.c:527
 msgid "Desktop sharing invitation"
 msgstr "Darbvirsmas koplietošanas ielūgums"
 
@@ -1267,7 +1345,6 @@ msgstr "Pievienot pašreizējo savienojumu jūsu grāmatzīmēm"
 
 #. Machine menu
 #: ../vinagre/vinagre-ui.h:92
-#| msgid "Take screenshot"
 msgid "_Take screenshot"
 msgstr "Uzņem_t ekrānattēlu"
 
@@ -1356,21 +1433,21 @@ msgstr "Vinagre tīmekļa vietne"
 msgid "%s authentication is required"
 msgstr "ir pieprasīta %s autentifikācija"
 
-#: ../vinagre/vinagre-window.c:438
+#: ../vinagre/vinagre-window.c:437
 msgid "_Recent connections"
 msgstr "_Nesenie savienojumi"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:555
+#: ../vinagre/vinagre-window.c:554
 #, c-format
 msgid "Open %s:%d"
 msgstr "Atvērt %s:%d"
 
-#: ../vinagre/vinagre-window.c:734
+#: ../vinagre/vinagre-window.c:733
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "Par izvēlņu paātrinātājiem un tastatūras saīsnēm"
 
-#: ../vinagre/vinagre-window.c:736
+#: ../vinagre/vinagre-window.c:735
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1390,10 +1467,22 @@ msgstr ""
 "\n"
 "Šis paziņojums parādīsies tikai vienu reizi."
 
-#: ../vinagre/vinagre-window.c:744 ../vinagre/vinagre-window.c:750
+#: ../vinagre/vinagre-window.c:743 ../vinagre/vinagre-window.c:749
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Kļūda, izveidojot failu %s: %s"
+
+#~ msgid "The handler for \"vnc://\" URLs"
+#~ msgstr "\"vnc://\" URL saišu apstrādātājs"
+
+#~ msgid "Incoming VNC connection arrived but there is no active window"
+#~ msgstr "Ienākošais VNC savienojums ieradās, bet nav aktīvu logu"
+
+#~ msgid "A menu to quickly access remote machines"
+#~ msgstr "Izvēlne, lai ātri piekļūtu attālinātiem datoriem"
+
+#~ msgid "Vinagre Applet Factory"
+#~ msgstr "Vinagre sīklietotnes ražotne"
 
 #~ msgid ""
 #~ "Run 'vinagre --help' to see a full list of available command line options"
