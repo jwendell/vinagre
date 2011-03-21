@@ -322,12 +322,6 @@ plugins/im-status/im-status.plugin: plugins/im-status/im-status.plugin.desktop.i
 nodist_plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 iconthemedir = $(datadir)/icons/hicolor
-appicon16dir = $(iconthemedir)/16x16/apps
-appicon22dir = $(iconthemedir)/22x22/apps
-appicon24dir = $(iconthemedir)/24x24/apps
-appicon32dir = $(iconthemedir)/32x32/apps
-appicon48dir = $(iconthemedir)/48x48/apps
-appiconscalabledir = $(iconthemedir)/scalable/apps
 mimeicon16dir = $(iconthemedir)/16x16/mimetypes
 mimeicon22dir = $(iconthemedir)/22x22/mimetypes
 mimeicon24dir = $(iconthemedir)/24x24/mimetypes
@@ -339,12 +333,6 @@ statusicon22dir = $(iconthemedir)/22x22/status
 statusicon32dir = $(iconthemedir)/32x32/status
 statusicon48dir = $(iconthemedir)/48x48/status
 
-dist_appicon16_DATA = data/icons/16x16/apps/vinagre.png
-dist_appicon22_DATA = data/icons/22x22/apps/vinagre.png
-dist_appicon24_DATA = data/icons/24x24/apps/vinagre.png
-dist_appicon32_DATA = data/icons/32x32/apps/vinagre.png
-dist_appicon48_DATA = data/icons/48x48/apps/vinagre.png
-dist_appiconscalable_DATA = data/icons/scalable/apps/vinagre.svg
 dist_mimeicon16_DATA = \
 	data/icons/16x16/mimetypes/application-x-remote-connection.png \
 	data/icons/16x16/mimetypes/application-x-vnc.png
@@ -440,10 +428,6 @@ dist-changelog:
 
 dist_noinst_DATA = \
 	ChangeLog.pre-git \
-	data/icons/hicolor_apps_16x16_vinagre.svg \
-	data/icons/hicolor_apps_16x16_vinagre.xcf \
-	data/icons/hicolor_apps_22x22_vinagre.svg \
-	data/icons/hicolor_apps_32x32_vinagre.svg \
 	data/vinagre.pc.in \
 	data/vinagre-mime.xml.in \
 	$(desktop_in_files) \
