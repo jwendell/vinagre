@@ -619,6 +619,10 @@ vinagre_fav_create_toolbar (VinagreFav *fav)
   fav->priv->always_sensitive_action_group = action_group;
 
   toolbar = gtk_ui_manager_get_widget (manager, "/FavToolBar");
+  gtk_style_context_add_class (gtk_widget_get_style_context (toolbar),
+                               GTK_STYLE_CLASS_INLINE_TOOLBAR);
+  gtk_style_context_set_junction_sides (gtk_widget_get_style_context (toolbar),
+                                        GTK_JUNCTION_BOTTOM);
   gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
   gtk_toolbar_set_icon_size (GTK_TOOLBAR (toolbar), GTK_ICON_SIZE_MENU);
 
@@ -641,7 +645,9 @@ vinagre_fav_create_tree (VinagreFav *fav)
 				  GTK_POLICY_AUTOMATIC);
 
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-				       GTK_SHADOW_ETCHED_OUT);
+				       GTK_SHADOW_IN);
+  gtk_style_context_set_junction_sides (gtk_widget_get_style_context (scroll),
+                                        GTK_JUNCTION_TOP);
 
   gtk_box_pack_start (fav->priv->box, scroll, TRUE, TRUE, 0);
 

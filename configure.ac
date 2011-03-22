@@ -32,7 +32,7 @@ AC_SUBST([VINAGRE_PLUGINS_LIBS_DIR], ["$libdir/vinagre-1/plugins"])
 
 GLIB_DEPS="glib-2.0 >= 2.25.11 gio-unix-2.0 >= 2.25.11"
 GTHREAD_DEPS="gthread-2.0 >= 2.0.0"
-GTK_DEPS="gtk+-3.0 >= 2.99.3"
+GTK_DEPS="gtk+-3.0 >= 3.0.3"
 GTK_VNC_DEPS="gtk-vnc-2.0 >= 0.4.3"
 XML2_DEPS="libxml-2.0 >= 2.6.31"
 PEAS_DEPS="libpeas-1.0 >= 0.7.2 libpeas-gtk-1.0 >= 0.7.2"
