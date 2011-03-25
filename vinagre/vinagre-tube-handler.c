@@ -21,6 +21,7 @@
  *      Arnaud Maillet <arnaud.maillet@collabora.co.uk>
  */
 
+#include <config.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
 

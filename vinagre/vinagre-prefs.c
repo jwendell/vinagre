@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config.h>
 #include <glib/gi18n.h>
 #include "vinagre-prefs.h"
 #include "vinagre-utils.h"

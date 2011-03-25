@@ -23,6 +23,7 @@
  * a XML one. The new format is used in Vinagre 2.25.
  */
 
+#include <config.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <gio/gio.h>

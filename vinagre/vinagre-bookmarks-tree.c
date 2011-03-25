@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config.h>
 #include "vinagre-bookmarks-tree.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-bookmarks.h"

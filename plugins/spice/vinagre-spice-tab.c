@@ -20,6 +20,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config.h>
 #include <glib/gi18n.h>
 #include <spice-client-glib-2.0/spice-session.h>
 #include <spice-client-glib-2.0/spice-audio.h>
