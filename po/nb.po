@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 2.92.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-09 20:29+0100\n"
-"PO-Revision-Date: 2011-03-09 20:29+0100\n"
+"POT-Creation-Date: 2011-03-25 14:51+0100\n"
+"PO-Revision-Date: 2011-03-25 14:52+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -16,14 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ../data/GNOME_VinagreApplet.xml.h:1
-msgid "_About"
-msgstr "_Om"
-
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Hjelp"
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
 msgid "Active plugins"
@@ -38,7 +30,7 @@ msgstr ""
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
 msgid "Maximum number of history items in connect dialog"
-msgstr ""
+msgstr "Maksimalt antall historikkelementer i tilkoblingsdialogen"
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
 msgid ""
@@ -61,7 +53,7 @@ msgstr ""
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
 msgid "Specifies the maximum number of items in the host dropdown entry."
-msgstr ""
+msgstr "Oppgir maksimalt antall oppføringer i vertsoppføringen."
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
 msgid ""
@@ -72,7 +64,7 @@ msgstr ""
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
 msgid "Whether we should leave other clients connected"
-msgstr ""
+msgstr "Hvorvidt andre klienter skal være koblet til"
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
 msgid ""
@@ -92,9 +84,8 @@ msgid "Access remote desktops"
 msgstr "Bruk eksternt skrivebord"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:430 ../vinagre/vinagre-applet.c:482
-#: ../vinagre/vinagre-main.c:130
+#: ../vinagre/vinagre-applet.c:327 ../vinagre/vinagre-applet.c:339
+#: ../vinagre/vinagre-main.c:128
 msgid "Remote Desktop Viewer"
 msgstr "Visning av eksternt skrivebord"
 
@@ -107,7 +98,7 @@ msgid "Authentication is required"
 msgstr "Autentisering kreves"
 
 #. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:854
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:860
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
@@ -249,9 +240,9 @@ msgstr "Feil under kjøring av rdesktop"
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:170
-#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:766
+#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:772
 #: ../vinagre/vinagre-options.c:76 ../vinagre/vinagre-options.c:94
-#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:749
+#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:751
 msgid "Unknown error"
 msgstr "Ukjent feil"
 
@@ -708,23 +699,23 @@ msgstr ""
 "Kunne ikke kommunisere med Telepathy. Tillegg for lyndmeldingsstatus vil "
 "ikke fungere."
 
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "En meny for å koble til en ekstern maskin raskt"
-
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Fabrikk for vinagre panelprogram"
-
-#: ../vinagre/vinagre-applet.c:273 ../vinagre/vinagre-applet.c:356
+#: ../vinagre/vinagre-applet.c:171 ../vinagre/vinagre-applet.c:255
 msgid "Could not run vinagre:"
 msgstr "Kunne ikke kjøre vinagre:"
 
-#: ../vinagre/vinagre-applet.c:376
+#: ../vinagre/vinagre-applet.c:275
 msgid "Open Remote Desktop Viewer"
 msgstr "Åpne visning av eksternt skrivebord"
 
-#: ../vinagre/vinagre-applet.c:431
+#: ../vinagre/vinagre-applet.c:321 ../vinagre/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Hjelp"
+
+#: ../vinagre/vinagre-applet.c:322
+msgid "_About"
+msgstr "_Om"
+
+#: ../vinagre/vinagre-applet.c:340
 msgid "Access your bookmarks"
 msgstr "Åpne dine bokmerker"
 
@@ -905,17 +896,17 @@ msgstr "Feil under lagring av historikkfil: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Velg et eksternt skrivebord"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:573
+#: ../vinagre/vinagre-connection.c:524 ../vinagre/vinagre-tab.c:573
 #: ../vinagre/vinagre-tube-handler.c:254
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Protokoll %s er ikke støttet."
 
-#: ../vinagre/vinagre-connection.c:633
+#: ../vinagre/vinagre-connection.c:632
 msgid "Could not open the file."
 msgstr "Kunne ikke åpne filen."
 
-#: ../vinagre/vinagre-connection.c:657
+#: ../vinagre/vinagre-connection.c:656
 msgid "The file was not recognized by any of the plugins."
 msgstr "Filen ble ikke gjenkjent av noen av tilleggene."
 
@@ -956,24 +947,24 @@ msgstr "Fjern gjeldende valgte tilkobling fra bokmerkene"
 msgid "Could not merge UI XML file: %s"
 msgstr "Kunne ikke flette XML-fil for brukergrensesnitt: %s"
 
-#: ../vinagre/vinagre-fav.c:755
+#: ../vinagre/vinagre-fav.c:761
 msgid "Invalid operation"
 msgstr "Ugyldig operasjon"
 
-#: ../vinagre/vinagre-fav.c:756
+#: ../vinagre/vinagre-fav.c:762
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Data mottatt fra dra-og-slipp operasjon er ugyldig."
 
-#: ../vinagre/vinagre-fav.c:862
+#: ../vinagre/vinagre-fav.c:868
 msgid "Hide panel"
 msgstr "Skjul panel"
 
-#: ../vinagre/vinagre-fav.c:1067
+#: ../vinagre/vinagre-fav.c:1073
 msgid "Hosts nearby"
 msgstr "Verter i nærheten"
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:140
+#: ../vinagre/vinagre-main.c:138
 msgid "- Remote Desktop Viewer"
 msgstr "- Visning av eksternt skrivebord"
 
@@ -1356,13 +1347,13 @@ msgstr "Vennligst sjekk installasjonen."
 msgid "Error loading UI file"
 msgstr "Feil under lasting av fil for brukergrensesnitt"
 
-#: ../vinagre/vinagre-utils.c:288
+#: ../vinagre/vinagre-utils.c:264
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr ""
 "Vinagre er et program for visning av eksterne skrivebord på GNOME-"
 "skrivebordet"
 
-#: ../vinagre/vinagre-utils.c:291
+#: ../vinagre/vinagre-utils.c:267
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -1374,7 +1365,7 @@ msgstr ""
 "Software Foundation; enten versjon 2 av lisensen, eller (hvis du ønsker det) "
 "enhver senere versjon."
 
-#: ../vinagre/vinagre-utils.c:295
+#: ../vinagre/vinagre-utils.c:271
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -1385,7 +1376,7 @@ msgstr ""
 "GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET "
 "BESTEMT FORMÅL. Se GNU General Public License for detaljer."
 
-#: ../vinagre/vinagre-utils.c:299
+#: ../vinagre/vinagre-utils.c:275
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -1393,37 +1384,37 @@ msgstr ""
 "Du skal ha mottatt en kopi av GNU General Public License sammen med dette "
 "programmet. Hvis ikke, se på <http://www.gnu.org/licenses/>."
 
-#: ../vinagre/vinagre-utils.c:316
+#: ../vinagre/vinagre-utils.c:292
 msgid "translator-credits"
 msgstr ""
 "Kjartan Maraas <kmaraas@gnome.org>\n"
 "Espen Stefansen <libbe AT stefansen DOT net>"
 
-#: ../vinagre/vinagre-utils.c:319
+#: ../vinagre/vinagre-utils.c:295
 msgid "Vinagre Website"
 msgstr "Hjemmeside for Vinagre"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:431
+#: ../vinagre/vinagre-utils.c:407
 #, c-format
 msgid "%s authentication is required"
 msgstr "%s autentisering kreves"
 
-#: ../vinagre/vinagre-window.c:437
+#: ../vinagre/vinagre-window.c:439
 msgid "_Recent connections"
 msgstr "_Siste tilkoblinger"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:554
+#: ../vinagre/vinagre-window.c:556
 #, c-format
 msgid "Open %s:%d"
 msgstr "Åpne %s:%d"
 
-#: ../vinagre/vinagre-window.c:733
+#: ../vinagre/vinagre-window.c:735
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "Om menyakselleratorer og tastatursnarveier"
 
-#: ../vinagre/vinagre-window.c:735
+#: ../vinagre/vinagre-window.c:737
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys to be intercepted by the program, "
@@ -1443,7 +1434,7 @@ msgstr ""
 "\n"
 "Denne meldingen vises kun en gang."
 
-#: ../vinagre/vinagre-window.c:743 ../vinagre/vinagre-window.c:749
+#: ../vinagre/vinagre-window.c:745 ../vinagre/vinagre-window.c:751
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Feil under oppretting av fil %s: %s"
