@@ -821,8 +821,6 @@ vinagre_window_init (VinagreWindow *window)
 
   gtk_widget_show (window->priv->hpaned);
 
-  gtk_widget_grab_focus (window->priv->hpaned);
-
   init_widgets_visibility (window);
 //  vinagre_window_merge_tab_ui (window);
 
