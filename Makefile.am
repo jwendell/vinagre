@@ -186,7 +186,7 @@ Vinagre_3_0_gir_INCLUDES = $(INTROSPECTION_GIR_INCLUDES)
 girdir = $(pkgdatadir)/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
 
-typelibdir = $(libdir)/vinagre-1/girepository-1.0
+typelibdir = $(libdir)/vinagre-@VINAGRE_ABI_VERSION@/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
 CLEANFILES += \

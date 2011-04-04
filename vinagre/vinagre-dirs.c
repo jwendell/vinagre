@@ -20,6 +20,8 @@
 
 #include "vinagre-dirs.h"
 
+#include "config.h"
+
 gchar *
 vinagre_dirs_get_user_config_dir ()
 {
@@ -78,7 +80,7 @@ vinagre_dirs_get_vinagre_data_dir (void)
 
 #ifndef G_OS_WIN32
   data_dir = g_build_filename (DATADIR,
-			       "vinagre-1",
+			       "vinagre-" VINAGRE_ABI_VERSION,
 			       NULL);
 #else
   gchar *win32_dir;
@@ -87,7 +89,7 @@ vinagre_dirs_get_vinagre_data_dir (void)
 
   data_dir = g_build_filename (win32_dir,
 			       "share",
-			       "vinagre-1",
+			       "vinagre-" VINAGRE_ABI_VERSION,
 			       NULL);
   g_free (win32_dir);
 #endif
@@ -127,7 +129,7 @@ vinagre_dirs_get_vinagre_lib_dir (void)
 
 #ifndef G_OS_WIN32
   lib_dir = g_build_filename (LIBDIR,
-			      "vinagre-1",
+			      "vinagre-" VINAGRE_ABI_VERSION,
 			      NULL);
 #else
   gchar *win32_dir;
@@ -136,7 +138,7 @@ vinagre_dirs_get_vinagre_lib_dir (void)
 
   lib_dir = g_build_filename (win32_dir,
 			      "lib",
-			      "vinagre-1",
+			      "vinagre-" VINAGRE_ABI_VERSION,
 			      NULL);
 	
   g_free (win32_dir);
