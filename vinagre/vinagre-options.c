@@ -33,15 +33,15 @@ const GOptionEntry all_options [] =
 
   { "fullscreen", 'f', 0, G_OPTION_ARG_NONE, &optionstate.fullscreen,
   /* Translators: this is a command line option (run vinagre --help) */
-    N_("Open vinagre in fullscreen mode"), NULL },
+    N_("Open Vinagre in fullscreen mode"), NULL },
 
   { "new-window", 'n', 0, G_OPTION_ARG_NONE, &optionstate.new_window,
   /* Translators: this is a command line option (run vinagre --help) */
-    N_("Create a new toplevel window in an existing instance of vinagre"), NULL },
+    N_("Create a new toplevel window in an existing instance of Vinagre"), NULL },
 
   { "file", 'F', 0, G_OPTION_ARG_FILENAME_ARRAY, &optionstate.files,
   /* Translators: this is a command line option (run vinagre --help) */
-    N_("Open a file recognized by vinagre"), N_("filename")},
+    N_("Open a file recognized by Vinagre"), N_("filename")},
 
   { 
     G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &optionstate.uris,
