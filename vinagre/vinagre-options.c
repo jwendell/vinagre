@@ -27,6 +27,10 @@
 
 const GOptionEntry all_options [] =
 {
+  { "geometry", 0, 0, G_OPTION_ARG_STRING, &optionstate.geometry,
+  /* Translators: this is a command line option (run vinagre --help) */
+    N_("Specify geometry of the main Vinagre window"), NULL },
+
   { "fullscreen", 'f', 0, G_OPTION_ARG_NONE, &optionstate.fullscreen,
   /* Translators: this is a command line option (run vinagre --help) */
     N_("Open vinagre in fullscreen mode"), NULL },
@@ -103,12 +107,23 @@ vinagre_options_process_command_line (GtkApplication *app,
       options->new_window)
     {
       v_window = vinagre_window_new ();
-      gtk_widget_show (GTK_WIDGET (v_window));
+      gtk_widget_show_all (GTK_WIDGET (v_window));
       gtk_window_set_application (GTK_WINDOW (v_window), app);
     }
   else
     {
       v_window = VINAGRE_WINDOW (window);
+    }
+
+  if (options->geometry)
+    {
+      if (!gtk_window_parse_geometry (window, options->geometry))
+        {
+	  errors = g_slist_prepend (errors,
+              g_strdup_printf (_("Invalid argument %s for --geometry"),
+                               options->geometry));
+        }
+      gtk_window_unmaximize (window);
     }
 
   for (l = servers; l; l = l->next)

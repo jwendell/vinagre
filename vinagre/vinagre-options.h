@@ -29,6 +29,7 @@ typedef struct {
   gchar **uris;
   gboolean new_window;
   gboolean fullscreen;
+  gchar *geometry;
 } VinagreCmdLineOptions;
 
 extern const GOptionEntry all_options[];
