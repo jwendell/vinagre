@@ -197,6 +197,12 @@ PKG_CHECK_MODULES([VINAGRE], [$GLIB_DEPS $GTHREAD_DEPS $GTK_DEPS gnome-keyring-1
 
 PKG_CHECK_MODULES([VNC], [$GTK_VNC_DEPS $GTK_DEPS $XML2_DEPS])
 
+AC_MSG_CHECKING([for gnome-icon-theme])
+PKG_CHECK_EXISTS([gnome-icon-theme >= 2.30],
+  [AC_MSG_RESULT([yes])],
+  [AC_MSG_RESULT([no])
+   AC_MSG_WARN([gnome-icon-theme is suggested, as Vinagre no longer ships icons for the desktop files.])])
+
 # *** Checks for pty stuff ***
 # Pull in the right libraries for various functions which might not be
 # bundled into an exploded libc.
