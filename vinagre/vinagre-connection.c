@@ -554,7 +554,7 @@ vinagre_connection_split_string (const gchar *uri,
         lport += 5900;
     }
 
-  lhost = ipv6_host[0] ? ipv6_host : (server[0][0] ? server[0] : "localhost");
+  lhost = ipv6_host[0] ? ipv6_host : (server[0] && server[0][0] ? server[0] : "localhost");
 
   *host = g_strdup (lhost);
   *port = lport;
