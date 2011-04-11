@@ -249,6 +249,7 @@ libssh_la_SOURCES = \
 	plugins/ssh/vinagre-ssh-tab.c
 
 libssh_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libssh_la_LIBADD = $(VINAGRE_LIBS)
 endif
 
 plugin_LTLIBRARIES = \
