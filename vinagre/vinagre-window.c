@@ -641,6 +641,7 @@ init_widgets_visibility (VinagreWindow *window)
   visible = vinagre_cache_prefs_get_boolean ("window", "toolbar-visible", TRUE);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
+  vinagre_utils_set_widget_visible (window->priv->toolbar, visible);
 
   /* statusbar visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
@@ -648,6 +649,7 @@ init_widgets_visibility (VinagreWindow *window)
   visible = vinagre_cache_prefs_get_boolean ("window", "statusbar-visible", TRUE);
   if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
+  vinagre_utils_set_widget_visible (window->priv->statusbar, visible);
 
   gtk_window_set_default_size (GTK_WINDOW (window),
 			       vinagre_cache_prefs_get_integer ("window", "window-width", 650),

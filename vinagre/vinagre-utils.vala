@@ -26,11 +26,11 @@ namespace Vinagre.Utils {
             return false;
     }
 
-    public void toggle_widget_visible (Widget widget) {
-        if (widget.visible)
-            widget.hide ();
-        else
+    public void set_widget_visible (Widget widget, bool visible) {
+        if (visible)
             widget.show_all ();
+        else
+            widget.hide ();
     }
 
     public void show_error_dialog (string? title,
