@@ -367,7 +367,7 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   window->priv->always_sensitive_action_group = action_group;
 
   action = gtk_action_group_get_action (action_group, "MachineConnect");
-  g_object_set (action, "is_important", TRUE, NULL);
+  gtk_action_set_is_important (action, TRUE);
 
   /* Machine connected actions */
   action_group = gtk_action_group_new ("VinagreWindowMachineConnectedActions");
@@ -381,9 +381,6 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   g_object_unref (action_group);
   window->priv->machine_connected_action_group = action_group;
 
-  action = gtk_action_group_get_action (action_group, "MachineClose");
-  g_object_set (action, "is_important", TRUE, NULL);
-
   /* Machine initialized actions */
   action_group = gtk_action_group_new ("VinagreWindowMachineInitializedActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
@@ -395,11 +392,6 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
   window->priv->machine_initialized_action_group = action_group;
-
-  action = gtk_action_group_get_action (action_group, "ViewFullScreen");
-  g_object_set (action, "is_important", TRUE, NULL);
-  action = gtk_action_group_get_action (action_group, "MachineTakeScreenshot");
-  g_object_set (action, "is_important", TRUE, NULL);
 
   /* now load the UI definition */
   gtk_ui_manager_add_ui_from_file (manager, vinagre_utils_get_ui_xml_filename (), &error);
