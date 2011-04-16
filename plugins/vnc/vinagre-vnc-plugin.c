@@ -85,7 +85,7 @@ impl_get_public_description (VinagreProtocol *plugin)
   gchar **result = g_new (gchar *, 3);
 
   result[0] = g_strdup (_("VNC"));
-  result[1] = g_strdup (_("Access Unix/Linux, Windows and other machines."));
+  result[1] = g_strdup (_("Access Unix/Linux, Windows and other remote desktops."));
   result[2] = NULL;
 
   return result;

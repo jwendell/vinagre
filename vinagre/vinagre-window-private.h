@@ -44,8 +44,8 @@ struct _VinagreWindowPrivate
   GtkUIManager   *manager;
 
   GtkActionGroup *always_sensitive_action_group;
-  GtkActionGroup *machine_connected_action_group;
-  GtkActionGroup *machine_initialized_action_group;
+  GtkActionGroup *remote_connected_action_group;
+  GtkActionGroup *remote_initialized_action_group;
 
   GtkActionGroup *bookmarks_list_action_group;
   GtkActionGroup *recent_action_group;

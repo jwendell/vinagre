@@ -295,7 +295,7 @@ update_recent_connections (VinagreWindow *window)
 
   gtk_ui_manager_add_ui (p->manager,
 			 p->recents_menu_ui_id,
-			 "/MenuBar/MachineMenu/FileRecentsPlaceholder",
+			 "/MenuBar/RemoteMenu/FileRecentsPlaceholder",
 			 "recent_connections",
 			 "recent_connections",
 			 GTK_UI_MANAGER_MENUITEM,
@@ -366,32 +366,32 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   g_object_unref (action_group);
   window->priv->always_sensitive_action_group = action_group;
 
-  action = gtk_action_group_get_action (action_group, "MachineConnect");
+  action = gtk_action_group_get_action (action_group, "RemoteConnect");
   gtk_action_set_is_important (action, TRUE);
 
-  /* Machine connected actions */
-  action_group = gtk_action_group_new ("VinagreWindowMachineConnectedActions");
+  /* Remote connected actions */
+  action_group = gtk_action_group_new ("VinagreWindowRemoteConnectedActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
   gtk_action_group_add_actions (action_group,
-				vinagre_machine_connected_entries,
-				G_N_ELEMENTS (vinagre_machine_connected_entries),
+				vinagre_remote_connected_entries,
+				G_N_ELEMENTS (vinagre_remote_connected_entries),
 				window);
   gtk_action_group_set_sensitive (action_group, FALSE);
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
-  window->priv->machine_connected_action_group = action_group;
+  window->priv->remote_connected_action_group = action_group;
 
-  /* Machine initialized actions */
-  action_group = gtk_action_group_new ("VinagreWindowMachineInitializedActions");
+  /* Remote initialized actions */
+  action_group = gtk_action_group_new ("VinagreWindowRemoteInitializedActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
   gtk_action_group_add_actions (action_group,
-				vinagre_machine_initialized_entries,
-				G_N_ELEMENTS (vinagre_machine_initialized_entries),
+				vinagre_remote_initialized_entries,
+				G_N_ELEMENTS (vinagre_remote_initialized_entries),
 				window);
   gtk_action_group_set_sensitive (action_group, FALSE);
   gtk_ui_manager_insert_action_group (manager, action_group, 0);
   g_object_unref (action_group);
-  window->priv->machine_initialized_action_group = action_group;
+  window->priv->remote_initialized_action_group = action_group;
 
   /* now load the UI definition */
   gtk_ui_manager_add_ui_from_file (manager, vinagre_utils_get_ui_xml_filename (), &error);
@@ -726,7 +726,7 @@ vinagre_window_check_first_run (VinagreWindow *window)
 						  GTK_BUTTONS_CLOSE,
 						  _("About menu accelerators and keyboard shortcuts"));
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						_("Vinagre comes with menu accelerators and keyboard shortcuts disabled by default. The reason is to avoid the keys to be intercepted by the program, and allow them to be sent to the remote machine.\n\nYou can change this behavior through the preferences dialog. For more information, check the documentation.\n\nThis message will appear only once."));     
+						_("Vinagre comes with menu accelerators and keyboard shortcuts disabled by default. The reason is to avoid the keys from being intercepted by the program, and allow them to be sent to the remote desktop.\n\nYou can change this behavior through the preferences dialog. For more information, check the documentation.\n\nThis message will appear only once."));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
 
@@ -971,7 +971,7 @@ vinagre_window_get_initialized_action (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
-  return window->priv->machine_initialized_action_group;
+  return window->priv->remote_initialized_action_group;
 }
 
 /**
@@ -999,7 +999,7 @@ vinagre_window_get_connected_action (VinagreWindow *window)
 {
   g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
 
-  return window->priv->machine_connected_action_group;
+  return window->priv->remote_connected_action_group;
 }
 
 /**

@@ -100,7 +100,7 @@ impl_activate (PeasActivatable *activatable)
   priv->ui_id = gtk_ui_manager_new_merge_id (manager);
   gtk_ui_manager_add_ui (manager,
 			 priv->ui_id,
-			 "/MenuBar/MachineMenu/MachineOps_1",
+			 "/MenuBar/RemoteMenu/RemoteOps_1",
 			 "VNCListener",
 			 "VNCListener",
 			 GTK_UI_MANAGER_AUTO,

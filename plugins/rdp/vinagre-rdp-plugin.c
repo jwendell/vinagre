@@ -53,8 +53,8 @@ impl_get_public_description (VinagreProtocol *plugin)
   gchar **result = g_new (gchar *, 3);
 
   result[0] = g_strdup (_("RDP"));
-  /* Translators: This is a description of the RDP protocol. It appears at Connect dialog. */
-  result[1] = g_strdup (_("Access MS Windows machines"));
+  /* Translators: This is a description of the RDP protocol. It appears in the Connect dialog. */
+  result[1] = g_strdup (_("Access MS Windows remote desktops"));
   result[2] = NULL;
 
   return result;
@@ -110,7 +110,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 
   u_entry = gtk_entry_new ();
   /* Translators: This is the tooltip for the username field in a RDP connection */
-  gtk_widget_set_tooltip_text (u_entry, _("Optional. If blank, your username will be used. Also, it can be supplied in the Machine field above, in the form username@hostname."));
+  gtk_widget_set_tooltip_text (u_entry, _("Optional. If blank, your username will be used. Also, it can be supplied in the Host field above, in the form username@hostname."));
   g_object_set_data (G_OBJECT (box), "username_entry", u_entry);
   gtk_box_pack_start (GTK_BOX (u_box), u_entry, TRUE, TRUE, 5);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), u_entry);

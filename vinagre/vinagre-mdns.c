@@ -247,7 +247,7 @@ vinagre_mdns_add_service (VinagreMdns     *mdns,
                                   mdns->priv->client,
                                   &error))
     {
-        /* Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network */
+        /* Translators: "Browse for hosts" means the ability to find/locate some remote hosts [with the VNC service enabled] in the local network */
         g_warning (_("Failed to browse for hosts: %s\n"), error->message);
         g_error_free (error);
         return;

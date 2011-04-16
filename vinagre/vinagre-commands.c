@@ -64,9 +64,9 @@ vinagre_cmd_direct_connect (VinagreConnection *conn,
     }
 }
 
-/* Machine Menu */
+/* Remote Menu */
 void
-vinagre_cmd_machine_connect (GtkAction     *action,
+vinagre_cmd_remote_connect (GtkAction     *action,
 			     VinagreWindow *window)
 {
   VinagreTab *tab;
@@ -101,7 +101,7 @@ vinagre_cmd_free_string_list (gpointer str, gpointer user_data)
 }
 
 void
-vinagre_cmd_machine_open (GtkAction     *action,
+vinagre_cmd_remote_open (GtkAction     *action,
 			  VinagreWindow *window)
 {
   GtkWidget         *tab;
@@ -192,28 +192,28 @@ finalize:
 }
 
 void
-vinagre_cmd_machine_close (GtkAction     *action,
+vinagre_cmd_remote_close (GtkAction     *action,
 			   VinagreWindow *window)
 {
   vinagre_window_close_active_tab (window);
 }
 
 void
-vinagre_cmd_machine_take_screenshot (GtkAction     *action,
+vinagre_cmd_remote_take_screenshot (GtkAction     *action,
 				     VinagreWindow *window)
 {
   vinagre_tab_take_screenshot (vinagre_window_get_active_tab (window));
 }
 
 void
-vinagre_cmd_machine_close_all (GtkAction     *action,
+vinagre_cmd_remote_close_all (GtkAction     *action,
 			       VinagreWindow *window)
 {
   vinagre_window_close_all_tabs (window);
 }
 
 void
-vinagre_cmd_machine_quit (GtkAction     *action,
+vinagre_cmd_remote_quit (GtkAction     *action,
 			  VinagreWindow *window)
 {
   gtk_widget_destroy (GTK_WIDGET (window));

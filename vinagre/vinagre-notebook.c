@@ -211,7 +211,7 @@ vinagre_notebook_update_ui_sentitivity (VinagreNotebook *nb)
 	   (vinagre_tab_get_state (VINAGRE_TAB (nb->priv->active_tab)) == VINAGRE_TAB_STATE_CONNECTED);
   gtk_action_group_set_sensitive (action_group, active);
 
-  action = gtk_action_group_get_action (action_group, "MachineTakeScreenshot");
+  action = gtk_action_group_get_action (action_group, "RemoteTakeScreenshot");
   gtk_action_set_sensitive (action, active &&
 				    nb->priv->active_tab &&
 				    vinagre_tab_get_has_screenshot (nb->priv->active_tab));

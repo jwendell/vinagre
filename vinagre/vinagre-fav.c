@@ -566,14 +566,14 @@ vinagre_fav_bookmarks_open (GtkAction  *action,
 
 static const GtkActionEntry always_sensitive_actions[] =
 {
-  {"BookmarksNewFolder", "folder-new", N_("_New Folder"), NULL,
+  {"BookmarksNewFolder", "folder-new", N_("_New folder"), NULL,
     N_("Create a new folder"), G_CALLBACK (vinagre_fav_bookmarks_new_folder) },
 };
 
 static const GtkActionEntry actions[] =
 {
   { "BookmarksOpen", GTK_STOCK_CONNECT, N_("_Open bookmark"), NULL,
-    N_("Connect to this machine"), G_CALLBACK (vinagre_fav_bookmarks_open) },
+    N_("Connect to this remote desktop"), G_CALLBACK (vinagre_fav_bookmarks_open) },
   {"BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit bookmark"), NULL,
     N_("Edit the details of selected bookmark"), G_CALLBACK (vinagre_fav_bookmarks_edit) },
   {"BookmarksDel", GTK_STOCK_DELETE, N_("_Remove from bookmarks"), NULL,

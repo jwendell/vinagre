@@ -485,9 +485,9 @@ handle_login (GtkWindow *parent,
 
 	  get_hostname_and_fingerprint_from_line (buffer, &hostname, &fingerprint);
 
-	  message = g_strdup_printf (_("The identity of the remote computer (%s) is unknown.\n"
-				       "This happens when you log in to a computer the first time.\n\n"
-				       "The identity sent by the remote computer is %s. "
+	  message = g_strdup_printf (_("The identity of the remote host (%s) is unknown.\n"
+				       "This happens when you log in to a host the first time.\n\n"
+				       "The identity sent by the remote host is %s. "
 				       "If you want to be absolutely sure it is safe to continue, "
 				       "contact the system administrator."),
 				     hostname ? hostname : host, fingerprint);

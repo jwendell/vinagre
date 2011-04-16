@@ -522,7 +522,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 	    {
 	      vinagre_tab_remove_from_notebook (tab);
 	      vinagre_utils_show_error (_("Authentication error"),
-					_("A username is required in order to access this machine."),
+					_("A username is required in order to access this remote desktop."),
 					window);
 	      goto out;
 	    }
@@ -539,7 +539,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 	    {
 	      vinagre_tab_remove_from_notebook (tab);
 	      vinagre_utils_show_error (_("Authentication error"),
-					_("A password is required in order to access this machine."),
+					_("A password is required in order to access this remote desktop."),
 					window);
 	      goto out;
 	    }
@@ -666,15 +666,15 @@ create_initialized_actions (VinagreVncTab *tab)
   GSList *list = NULL;
   VinagreTabUiAction *a;
 
-  /* Machine->Send CTRL-ALT-DEL */
+  /* Remote->Send CTRL-ALT-DEL */
   a = g_new (VinagreTabUiAction, 1);
   a->paths = g_new (gchar *, 3);
-  a->paths[0] = g_strdup ("/MenuBar/MachineMenu/MachineOps_1");
+  a->paths[0] = g_strdup ("/MenuBar/RemoteMenu/RemoteOps_1");
   a->paths[1] = g_strdup ("/ToolBar");
   a->paths[2] = NULL;
-  a->action = gtk_action_new ("VNCMachineSendCtrlAltDel",
+  a->action = gtk_action_new ("VNCRemoteSendCtrlAltDel",
 			      _("_Send Ctrl-Alt-Del"),
-			      _("Sends Ctrl+Alt+Del to the remote machine"),
+			      _("Sends Ctrl+Alt+Del to the remote desktop"),
 			      "preferences-desktop-keyboard-shortcuts");
   gtk_action_set_is_important (a->action, TRUE);
   gtk_action_set_icon_name (a->action, "preferences-desktop-keyboard-shortcuts");

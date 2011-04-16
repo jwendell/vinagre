@@ -30,19 +30,19 @@ G_BEGIN_DECLS
 void		vinagre_cmd_direct_connect	(VinagreConnection *conn,
 						 VinagreWindow     *window);
 
-void		vinagre_cmd_machine_connect	(GtkAction     *action,
+void		vinagre_cmd_remote_connect	(GtkAction     *action,
 						 VinagreWindow *window);
-void		vinagre_cmd_machine_open	(GtkAction     *action,
+void		vinagre_cmd_remote_open	(GtkAction     *action,
+					 VinagreWindow *window);
+void		vinagre_cmd_remote_close	(GtkAction     *action,
 						 VinagreWindow *window);
-void		vinagre_cmd_machine_close	(GtkAction     *action,
-						 VinagreWindow *window);
-void		vinagre_cmd_machine_take_screenshot (GtkAction     *action,
-						     VinagreWindow *window);
+void		vinagre_cmd_remote_take_screenshot (GtkAction     *action,
+						    VinagreWindow *window);
 
-void		vinagre_cmd_machine_close_all	(GtkAction     *action,
+void		vinagre_cmd_remote_close_all	(GtkAction     *action,
 						 VinagreWindow *window);
-void		vinagre_cmd_machine_quit	(GtkAction     *action,
-						 VinagreWindow *window);
+void		vinagre_cmd_remote_quit	(GtkAction     *action,
+					 VinagreWindow *window);
 
 void		vinagre_cmd_edit_preferences	(GtkAction     *action,
 						 VinagreWindow *window);
