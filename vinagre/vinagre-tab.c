@@ -351,7 +351,7 @@ setup_layout (VinagreTab *tab)
 
   /* Close connection */
   button = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_CLOSE));
-  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Close connection"));
+  gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (button), _("Disconnect"));
   gtk_widget_show (GTK_WIDGET (button));
   gtk_toolbar_insert (GTK_TOOLBAR (tab->priv->toolbar), GTK_TOOL_ITEM (button), 0);
   g_signal_connect (button, "clicked", G_CALLBACK (close_button_clicked), tab);

@@ -192,7 +192,7 @@ finalize:
 }
 
 void
-vinagre_cmd_remote_close (GtkAction     *action,
+vinagre_cmd_remote_disconnect (GtkAction     *action,
 			   VinagreWindow *window)
 {
   vinagre_window_close_active_tab (window);
@@ -206,7 +206,7 @@ vinagre_cmd_remote_take_screenshot (GtkAction     *action,
 }
 
 void
-vinagre_cmd_remote_close_all (GtkAction     *action,
+vinagre_cmd_remote_disconnect_all (GtkAction     *action,
 			       VinagreWindow *window)
 {
   vinagre_window_close_all_tabs (window);

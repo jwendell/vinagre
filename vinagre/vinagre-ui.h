@@ -47,12 +47,13 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
   /* Edit menu */
   { "EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
     N_("Edit the application preferences"), G_CALLBACK (vinagre_cmd_edit_preferences) },
+  /* TODO: Use a more appropriate icon. Libpeas uses "libpeas-plugin".  */
   { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
     N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
-    N_("Open the vinagre manual"),  G_CALLBACK (vinagre_cmd_help_contents)},
+    N_("Open the Vinagre manual"),  G_CALLBACK (vinagre_cmd_help_contents)},
   { "HelpAbout", GTK_STOCK_ABOUT, NULL, NULL,
     N_("About this application"), G_CALLBACK (vinagre_cmd_help_about) }
 };
@@ -75,14 +76,14 @@ static const GtkToggleActionEntry vinagre_always_sensitive_toggle_entries[] =
 static const GtkActionEntry vinagre_remote_connected_entries[] =
 {
   /* Remote menu */
-  { "RemoteClose", GTK_STOCK_CLOSE, NULL, "<control>W",
-    N_("Close the current connection"), G_CALLBACK (vinagre_cmd_remote_close) },
-  { "RemoteCloseAll", GTK_STOCK_CLOSE, N_("C_lose All"), "<control><shift>W",
-    N_("Close all active connections"), G_CALLBACK (vinagre_cmd_remote_close_all) },
+  { "RemoteDisconnect", GTK_STOCK_DISCONNECT, NULL, "<control>W",
+    N_("Disconnect the current connection"), G_CALLBACK (vinagre_cmd_remote_disconnect) },
+  { "RemoteDisconnectAll", GTK_STOCK_DISCONNECT, N_("Disconnect All"), "<control><shift>W",
+    N_("Disconnect all connections"), G_CALLBACK (vinagre_cmd_remote_disconnect_all) },
 
   /* Bookmarks menu */
-  { "BookmarksAdd", GTK_STOCK_SAVE, N_("_Add to bookmarks"), "<control>D",
-    N_("Add current connection to your bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_add) }
+  { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add to bookmarks"), "<control>D",
+    N_("Add the current connection to your bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_add) }
 
 };
 
@@ -90,11 +91,11 @@ static const GtkActionEntry vinagre_remote_initialized_entries[] =
 {
   /* Remote menu */
   { "RemoteTakeScreenshot", "applets-screenshooter", N_("_Take screenshot"), NULL,
-    N_("Take a screenshot of active connection"), G_CALLBACK (vinagre_cmd_remote_take_screenshot) },
+    N_("Take a screenshot of the active connection"), G_CALLBACK (vinagre_cmd_remote_take_screenshot) },
 
   /* View menu */
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
-    N_("View the current remote desktop in full screen"), G_CALLBACK (vinagre_cmd_view_fullscreen) }
+    N_("View the current remote desktop in fullscreen mode"), G_CALLBACK (vinagre_cmd_view_fullscreen) }
 };
 
 static const GtkToggleActionEntry vinagre_remote_initialized_toggle_entries[] =
