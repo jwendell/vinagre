@@ -267,7 +267,8 @@ endif
 
 libreversevnc_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
-	-I$(top_srcdir)
+	-I$(top_srcdir) \
+	-DVINAGRE_REVERSE_VNC_DATADIR=\"$(reversevncuidir)\"
 
 libreversevnc_la_SOURCES = \
 	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.h \

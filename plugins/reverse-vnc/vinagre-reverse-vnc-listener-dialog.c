@@ -210,7 +210,7 @@ vinagre_reverse_vnc_listener_dialog_show (GtkWindow *parent)
   gboolean always;
   gchar *filename;
 
-  filename = g_build_filename (DATADIR, "reverse-vnc.ui", NULL);
+  filename = g_build_filename (VINAGRE_REVERSE_VNC_DATADIR, "reverse-vnc.ui", NULL);
 
   xml = vinagre_utils_get_builder (filename);
   g_free (filename);
