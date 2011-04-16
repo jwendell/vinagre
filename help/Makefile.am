@@ -15,4 +15,5 @@ DOC_PAGES = \
 	bookmarks.page \
 	connect.page \
 	index.page \
-	preferences.page
+	preferences.page \
+	using.page
