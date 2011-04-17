@@ -6,7 +6,7 @@ DOC_ID = $(PACKAGE_TARNAME)
 DOC_FIGURES = \
 	figures/vinagre-screenshot.png	\
 	figures/vinagre-auth-needed.png	\
-	figures/vinagre-bookmarks-side-panel.png	\
+	figures/vinagre-bookmarks-side-pane.png \
 	figures/vinagre-connect-dialog.png	\
 	figures/vinagre-editing-bookmarks.png	\
 	figures/vinagre-saving-bookmarks.png
