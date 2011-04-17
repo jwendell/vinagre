@@ -428,7 +428,7 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
 
   /* Recent connections */
   window->priv->recent_action = gtk_recent_action_new ("recent_connections",
-						     _("_Recent connections"),
+						     _("_Recent Connections"),
 						       NULL, NULL);
   g_object_set (G_OBJECT (window->priv->recent_action),
 		"show-not-found", TRUE,

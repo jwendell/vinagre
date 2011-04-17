@@ -310,7 +310,7 @@ vinagre_bookmarks_del (VinagreBookmarks      *book,
     {
       name = g_strdup (vinagre_bookmarks_entry_get_name (entry));
       title = g_strdup (_("Remove Folder?"));
-      msg2 = g_strdup_printf ("%s\n\n%s", msg1, _("Notice that all its subfolders and items will be removed as well."));
+      msg2 = g_strdup_printf ("%s\n\n%s", msg1, _("Note that all its subfolders and bookmarks will be removed as well."));
     }
   else
     {

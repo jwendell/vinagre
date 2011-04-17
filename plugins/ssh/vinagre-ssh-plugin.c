@@ -96,19 +96,16 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   GtkWidget *box, *label, *u_box, *u_entry;
   gchar     *str;
 
-  box = gtk_vbox_new (FALSE, 0);
+  box = gtk_vbox_new (FALSE, 6);
 
   str = g_strdup_printf ("<b>%s</b>", _("SSH Options"));
   label = gtk_label_new (str);
   g_free (str);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_misc_set_padding (GTK_MISC (label), 0, 6);
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
-  u_box = gtk_hbox_new (FALSE, 4);
-  label = gtk_label_new ("  ");
-  gtk_box_pack_start (GTK_BOX (u_box), label, FALSE, FALSE, 0);
+  u_box = gtk_hbox_new (FALSE, 6);
 
   label = gtk_label_new_with_mnemonic (_("_Username:"));
   gtk_box_pack_start (GTK_BOX (u_box), label, FALSE, FALSE, 0);
@@ -117,7 +114,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   /* Translators: This is the tooltip for the username field in a SSH connection */
   gtk_widget_set_tooltip_text (u_entry, _("Optional. If blank, your username will be used. Also, it can be supplied in the Host field above, in the form username@hostname."));
   g_object_set_data (G_OBJECT (box), "username_entry", u_entry);
-  gtk_box_pack_start (GTK_BOX (u_box), u_entry, TRUE, TRUE, 5);
+  gtk_container_add (GTK_CONTAINER (u_box), u_entry);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), u_entry);
   str = g_strdup (VINAGRE_IS_CONNECTION (conn) ?
 		  vinagre_connection_get_username (conn) :
@@ -126,6 +123,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gtk_entry_set_activates_default (GTK_ENTRY (u_entry), TRUE);
   g_free (str);
 
+  gtk_widget_set_margin_left (u_box, 12);
   gtk_box_pack_start (GTK_BOX (box), u_box, TRUE, TRUE, 0);
   return box;
 }

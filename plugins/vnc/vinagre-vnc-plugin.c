@@ -247,24 +247,20 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gchar     *str, *ssh_host;
   gboolean has_conn = VINAGRE_IS_VNC_CONNECTION (conn), active;
 
-  box = gtk_vbox_new (FALSE, 0);
+  box = gtk_vbox_new (FALSE, 6);
 
   str = g_strdup_printf ("<b>%s</b>", _("VNC Options"));
   label = gtk_label_new (str);
   g_free (str);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_misc_set_padding (GTK_MISC (label), 0, 6);
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-
-  table = GTK_TABLE (gtk_table_new (6, 2, FALSE));
-  label = gtk_label_new ("  ");
-  gtk_table_attach (table, label, 0, 1, 0, 1, GTK_SHRINK, GTK_SHRINK, 0, 0);
 
   /* View only check button */
   check = gtk_check_button_new_with_mnemonic (_("_View only"));
   g_object_set_data (G_OBJECT (box), "view_only", check);
-  gtk_table_attach_defaults (table, check, 1, 2, 0, 1);
+  gtk_widget_set_margin_left (check, 12);
+  gtk_container_add (GTK_CONTAINER (box), check);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				has_conn ? vinagre_vnc_connection_get_view_only (VINAGRE_VNC_CONNECTION (conn))
 				: vinagre_cache_prefs_get_boolean ("vnc-connection", "view-only", FALSE));
@@ -272,7 +268,8 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   /* Scaling check button */
   check = gtk_check_button_new_with_mnemonic (_("_Scaling"));
   g_object_set_data (G_OBJECT (box), "scaling", check);
-  gtk_table_attach_defaults (table, check, 1, 2, 1, 2);
+  gtk_widget_set_margin_left (check, 12);
+  gtk_container_add (GTK_CONTAINER (box), check);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				has_conn ? vinagre_vnc_connection_get_scaling (VINAGRE_VNC_CONNECTION (conn))
 				: vinagre_cache_prefs_get_boolean ("vnc-connection", "scaling", FALSE));
@@ -283,13 +280,10 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 		    box);
 
   /* Keep ratio check button */
-  box2 = gtk_hbox_new (FALSE, 4);
-  label = gtk_label_new ("   ");
-  gtk_box_pack_start (GTK_BOX (box2), GTK_WIDGET (label), FALSE, FALSE, 0);
   check = gtk_check_button_new_with_mnemonic (_("_Keep aspect ratio"));
-  gtk_box_pack_start (GTK_BOX (box2), check, TRUE, TRUE, 0);
   g_object_set_data (G_OBJECT (box), "ratio", check);
-  gtk_table_attach_defaults (table, box2, 1, 2, 2, 3);
+  gtk_widget_set_margin_left (check, 24);
+  gtk_container_add (GTK_CONTAINER (box), check);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				has_conn ? vinagre_vnc_connection_get_keep_ratio (VINAGRE_VNC_CONNECTION (conn))
 				: vinagre_cache_prefs_get_boolean ("vnc-connection", "keep-ratio", TRUE));
@@ -299,14 +293,15 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   check = gtk_check_button_new_with_mnemonic (_("_Use JPEG Compression"));
   gtk_widget_set_tooltip_text (check, _("This might not work on all VNC servers"));
   g_object_set_data (G_OBJECT (box), "lossy", check);
-  gtk_table_attach_defaults (table, check, 1, 2, 3, 4);
+  gtk_widget_set_margin_left (check, 12);
+  gtk_container_add (GTK_CONTAINER (box), check);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				has_conn ? vinagre_vnc_connection_get_lossy_encoding (VINAGRE_VNC_CONNECTION (conn))
 				: vinagre_cache_prefs_get_boolean ("vnc-connection", "lossy-encoding", FALSE));
 
-  /* Depth color combo box */
-  box2 = gtk_hbox_new (FALSE, 4);
-  label = gtk_label_new_with_mnemonic (_("_Depth Color:"));
+  /* Color depth combo box */
+  box2 = gtk_hbox_new (FALSE, 6);
+  label = gtk_label_new_with_mnemonic (_("Color _Depth:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (box2), GTK_WIDGET (label), FALSE, FALSE, 0);
 
@@ -322,10 +317,11 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   g_object_set_data (G_OBJECT (box), "depth_combo", combo);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
   gtk_box_pack_start (GTK_BOX (box2), GTK_WIDGET (combo), FALSE, FALSE, 0);
-  gtk_table_attach_defaults (table, box2, 1, 2, 4, 5);
+  gtk_widget_set_margin_left (box2, 12);
+  gtk_container_add (GTK_CONTAINER (box), box2);
 
   /* SSH Tunneling */
-  box2 = gtk_hbox_new (FALSE, 4);
+  box2 = gtk_hbox_new (FALSE, 6);
 
   /* Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel*/
   check = gtk_check_button_new_with_mnemonic (_("Use h_ost"));
@@ -361,9 +357,9 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), ssh_host && *ssh_host);
   g_free (ssh_host);
 
-  gtk_table_attach_defaults (table, box2, 1, 2, 5, 6);
+  gtk_widget_set_margin_left (box2, 12);
+  gtk_container_add (GTK_CONTAINER (box), box2);
 
-  gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (table), FALSE, FALSE, 0);
   return box;
 }
 

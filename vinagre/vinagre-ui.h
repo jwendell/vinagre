@@ -49,7 +49,7 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
     N_("Edit the application preferences"), G_CALLBACK (vinagre_cmd_edit_preferences) },
   /* TODO: Use a more appropriate icon. Libpeas uses "libpeas-plugin".  */
   { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
-    N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
+    N_("Select active plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
@@ -68,8 +68,8 @@ static const GtkToggleActionEntry vinagre_always_sensitive_toggle_entries[] =
     N_("Show or hide the statusbar"),
     G_CALLBACK (vinagre_cmd_view_show_statusbar), FALSE },
 
-  { "ViewSidePanel", NULL, N_("Side _Panel"), "F9",
-    N_("Show or hide the side panel"),
+  { "ViewSidePanel", NULL, N_("Side _Pane"), "F9",
+    N_("Show or hide the side pane"),
     G_CALLBACK (vinagre_cmd_view_show_fav_panel), FALSE }
 };
 
@@ -82,7 +82,7 @@ static const GtkActionEntry vinagre_remote_connected_entries[] =
     N_("Disconnect all connections"), G_CALLBACK (vinagre_cmd_remote_disconnect_all) },
 
   /* Bookmarks menu */
-  { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add to bookmarks"), "<control>D",
+  { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
     N_("Add the current connection to your bookmarks"), G_CALLBACK (vinagre_cmd_bookmarks_add) }
 
 };
@@ -90,8 +90,8 @@ static const GtkActionEntry vinagre_remote_connected_entries[] =
 static const GtkActionEntry vinagre_remote_initialized_entries[] =
 {
   /* Remote menu */
-  { "RemoteTakeScreenshot", "applets-screenshooter", N_("_Take screenshot"), NULL,
-    N_("Take a screenshot of the active connection"), G_CALLBACK (vinagre_cmd_remote_take_screenshot) },
+  { "RemoteTakeScreenshot", "applets-screenshooter", N_("_Take Screenshot"), NULL,
+    N_("Take a screenshot of the current remote desktop"), G_CALLBACK (vinagre_cmd_remote_take_screenshot) },
 
   /* View menu */
   { "ViewFullScreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
