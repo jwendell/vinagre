@@ -248,6 +248,7 @@ void
 vinagre_utils_help_about (GtkWindow *window)
 {
   static const gchar * const authors[] = {
+	"David King <amigadave@amigadave.com>",
 	"Jonh Wendell <jwendell@gnome.org>",
 	NULL
   };
@@ -258,7 +259,8 @@ vinagre_utils_help_about (GtkWindow *window)
   };
 
   static const gchar copyright[] = \
-	"Copyright \xc2\xa9 2007-2009 Jonh Wendell";
+    "Copyright \xc2\xa9 2007-2011 Jonh Wendell\n" \
+    "Copyright \xc2\xa9 2011 David King";
 
   static const gchar comments[] = \
 	N_("Vinagre is a remote desktop viewer for the GNOME Desktop");
