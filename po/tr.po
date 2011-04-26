@@ -3,14 +3,16 @@
 # This file is distributed under the same license as the Vinagre package.
 #
 # Baris Cicek <baris@teamforce.name.tr>, 2008, 2009, 2011.
+# Muhammet Kara <muhammet.k@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-04-02 09:35+0000\n"
-"PO-Revision-Date: 2011-04-02 17:01+0300\n"
-"Last-Translator: İlker DAĞLI <ilker@ilkerdagli.info>\n"
+"POT-Creation-Date: 2011-04-25 18:31+0000\n"
+"PO-Revision-Date: 2011-04-26 20:22+0300\n"
+"Last-Translator: Muhammet Kara <muhammet.k@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,10 +93,10 @@ msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Menü hızlandırıcılarının (kısayol tuşları) gösterilmesi"
 
 #: ../data/org.gnome.Vinagre.gschema.xml.in.h:12
-#, fuzzy
-#| msgid "Whether we should leave other clients connected"
 msgid "Whether we should start the program listening for reverse connections"
-msgstr "Diğer istemcilerin bağlı olarak bırakılması"
+msgstr ""
+"Programı, tersine bağlantıları dinleyecek şekilde başlatıp başlatmamamız "
+"gerektiği"
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
 msgid "Access remote desktops"
@@ -107,10 +109,8 @@ msgid "Remote Desktop Viewer"
 msgstr "Uzak Masaüstü Görüntüleyici"
 
 #: ../data/vinagre.ui.h:1
-#, fuzzy
-#| msgid "_Show menu shortcuts"
 msgid "Allow _keyboard shortcuts"
-msgstr "_Menü kısayollarını göster"
+msgstr "_Klavye kısayollarına izin ver"
 
 #: ../data/vinagre.ui.h:2
 msgid "Authentication is required"
@@ -222,23 +222,17 @@ msgid "RDP"
 msgstr "RDP"
 
 #: ../plugins/rdp/rdp.plugin.desktop.in.h:2
-#, fuzzy
-#| msgid "SSH support"
 msgid "RDP support"
-msgstr "SSH desteği"
+msgstr "RDP desteği"
 
 #. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
 #: ../plugins/rdp/vinagre-rdp-plugin.c:57
-#, fuzzy
-#| msgid "Access Unix/Linux, Windows and other machines."
 msgid "Access MS Windows machines"
-msgstr "Unix/Linux, Windows ve diğer makineler erişim."
+msgstr "MS Windows makinelere erişin."
 
 #: ../plugins/rdp/vinagre-rdp-plugin.c:96
-#, fuzzy
-#| msgid "Options"
 msgid "RDP Options"
-msgstr "Seçenekler"
+msgstr "RDP Seçenekleri"
 
 #. Translators: This is the tooltip for the username field in a RDP connection
 #. Translators: This is the tooltip for the username field in a SSH connection
@@ -283,10 +277,8 @@ msgid "Access Unix/Linux terminals"
 msgstr "Unix/Linux Uçbirimlerine Erişim"
 
 #: ../plugins/ssh/vinagre-ssh-plugin.c:101
-#, fuzzy
-#| msgid "Options"
 msgid "SSH Options"
-msgstr "Seçenekler"
+msgstr "SSH Seçenekleri"
 
 #: ../plugins/ssh/ssh.plugin.desktop.in.h:2
 msgid "SSH support"
@@ -401,7 +393,7 @@ msgstr "Çok Düşük Renk(3 bit)"
 #: ../plugins/vnc/vinagre-vnc-plugin.c:331
 #: ../plugins/spice/vinagre-spice-plugin.c:257
 msgid "Use h_ost"
-msgstr "Makineyi Kullan"
+msgstr "M_akineyi kullan"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:340
 #: ../plugins/spice/vinagre-spice-plugin.c:266
@@ -445,10 +437,8 @@ msgstr "SSH tüneli oluşturma hatası"
 #: ../plugins/vnc/vinagre-vnc-tab.c:297 ../plugins/vnc/vinagre-vnc-tab.c:308
 #: ../plugins/spice/vinagre-spice-tab.c:253
 #: ../plugins/spice/vinagre-spice-tab.c:265
-#, fuzzy
-#| msgid "Unknown error"
 msgid "Unknown reason"
-msgstr "Bilinmeyen hata"
+msgstr "Bilinmeyen sebep"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:307
 #: ../plugins/spice/vinagre-spice-tab.c:264
@@ -457,10 +447,9 @@ msgstr "Ana bilgisayara bağlanırken hata."
 
 #. Translators: %s is a host name or IP address; %u is a code error (number).
 #: ../plugins/vnc/vinagre-vnc-tab.c:352
-#, fuzzy, c-format
-#| msgid "Authentication method to host %s is unsupported. (%u)"
+#, c-format
 msgid "Authentication method for host %s is unsupported. (%u)"
-msgstr "%s makinesine kimlik doğrulama yöntemi desteklenmiyor. (%u)"
+msgstr "%s makinesinin kimlik doğrulama yöntemi desteklenmiyor. (%u)"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:356
 msgid "Authentication unsupported"
@@ -519,10 +508,8 @@ msgstr "Ekranın güncellenmesi için sorgu"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:676
 #: ../plugins/spice/vinagre-spice-tab.c:531
-#, fuzzy
-#| msgid "Send Ctrl-Alt-Del"
 msgid "_Send Ctrl-Alt-Del"
-msgstr "Ctrl-Alt-Del Gönder"
+msgstr "Ctrl-Alt-Del _Gönder"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:677
 #: ../plugins/spice/vinagre-spice-tab.c:532
@@ -570,10 +557,8 @@ msgid "VNC support"
 msgstr "VNC desteği"
 
 #: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:1
-#, fuzzy
-#| msgid "Close connection"
 msgid "Allows reverse VNC connections"
-msgstr "Bağlantıyı kapat"
+msgstr "Ters VNC bağlantılarına izin verir"
 
 #: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:2
 msgid "Reverse VNC"
@@ -599,10 +584,8 @@ msgid "On the port %d"
 msgstr "%d portunda"
 
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:212
-#, fuzzy
-#| msgid "Error saving recent connection."
 msgid "Error activating reverse connections"
-msgstr "Son bağlantı kaydedilirken hata."
+msgstr "Ters bağlantılar etkinleştirilirken hata"
 
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:213
 msgid ""
@@ -614,10 +597,8 @@ msgstr ""
 
 #. Translators: "Reverse" here is an adjective, not a verb.
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
-#, fuzzy
-#| msgid "_Recent connections"
 msgid "_Reverse Connections..."
-msgstr "_Son bağlantılar"
+msgstr "_Ters Bağlantılar..."
 
 #: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
 msgid "Configure incoming VNC connections"
@@ -626,27 +607,21 @@ msgstr "Gelen VNC bağlantılarını yapılandır"
 #. vim: set ts=8:
 #: ../plugins/spice/spice.plugin.desktop.in.h:1
 msgid "Spice"
-msgstr "Tat"
+msgstr "Spice"
 
 #: ../plugins/spice/spice.plugin.desktop.in.h:2
-#, fuzzy
-#| msgid "SSH support"
 msgid "Spice support"
-msgstr "SSH desteği"
+msgstr "Spice desteği"
 
 #. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
 #: ../plugins/spice/vinagre-spice-plugin.c:107
-#, fuzzy
-#| msgid "The file is not a VNC one: Missing the group \"connection\"."
 msgid "The file is not a Spice one: Missing the group \"connection\"."
-msgstr "Dosya bir VNC dosyası değil:  \"connection\" grubu eksik."
+msgstr "Dosya bir Spice dosyası değil:  \"connection\" grubu eksik."
 
 #. Translators: Do not translate "host". It's the name of a key in the .spice (.ini like) file.
 #: ../plugins/spice/vinagre-spice-plugin.c:114
-#, fuzzy
-#| msgid "The file is not a VNC one: Missing the key \"host\"."
 msgid "The file is not a Spice one: Missing the key \"host\"."
-msgstr "Dosya bir VNC dosyası değil:  \"host\" anahtarı eksik."
+msgstr "Dosya bir Spice dosyası değil:  \"host\" anahtarı eksik."
 
 #: ../plugins/spice/vinagre-spice-plugin.c:158
 msgid "SPICE"
@@ -654,16 +629,12 @@ msgstr "TAT"
 
 #. Translators: This is a description of the SPICE protocol. It appears at Connect dialog.
 #: ../plugins/spice/vinagre-spice-plugin.c:160
-#, fuzzy
-#| msgid "Access remote desktops"
 msgid "Access Spice desktop server"
-msgstr "Uzak masaüstüne ulaş"
+msgstr "Spice masaüstü sunucusuna erişin."
 
 #: ../plugins/spice/vinagre-spice-plugin.c:209
-#, fuzzy
-#| msgid "VNC Options"
 msgid "SPICE Options"
-msgstr "VNC Seçenekleri"
+msgstr "SPICE Seçenekleri"
 
 #. Resize guest check button
 #: ../plugins/spice/vinagre-spice-plugin.c:230
@@ -679,17 +650,13 @@ msgstr "Panoyu _Paylaş"
 
 #. Translators: This is the tooltip for the password field in a SPICE connection
 #: ../plugins/spice/vinagre-spice-plugin.c:300
-#, fuzzy
-#| msgid "Options"
 msgid "Optional"
-msgstr "Seçenekler"
+msgstr "İsteğe bağlı"
 
 #. Translators: this is a pattern to open *.spice files in a open dialog.
 #: ../plugins/spice/vinagre-spice-plugin.c:321
-#, fuzzy
-#| msgid "VNC Files"
 msgid "Spice Files"
-msgstr "VNC Dosyaları"
+msgstr "Spice Dosyaları"
 
 #: ../plugins/spice/vinagre-spice-tab.c:481
 msgid "Resize the screen guest to best fit"
@@ -711,16 +678,12 @@ msgstr ""
 "gerekmektedir. Detaylı bilgi için, yardım'a gözatın."
 
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:2
-#, fuzzy
-#| msgid "Connection"
 msgid "Connectivity"
-msgstr "Bağlantı"
+msgstr "Bağlanabilirlik"
 
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:3
-#, fuzzy
-#| msgid "_Recent connections"
 msgid "Reverse Connections"
-msgstr "_Son bağlantılar"
+msgstr "Ters Bağlantılar"
 
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:4
 msgid "This machine is reachable through the following IP address(es):"
@@ -728,16 +691,12 @@ msgstr "Bu makineye aşağıdaki IP adres(ler)inden ulaşılabilir:"
 
 #. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Machine->Reverse connections.
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:6
-#, fuzzy
-#| msgid "Enabled"
 msgid "_Always Enabled"
-msgstr "Etkin"
+msgstr "Her Z_aman Etkin"
 
 #: ../plugins/reverse-vnc/reverse-vnc.ui.h:7
-#, fuzzy
-#| msgid "_Recent connections"
 msgid "_Enable Reverse Connections"
-msgstr "_Son bağlantılar"
+msgstr "Ters Bağlantıları _Etkinleştir"
 
 #: ../plugins/im-status/im-status.plugin.desktop.in.h:1
 msgid ""
@@ -748,10 +707,8 @@ msgstr ""
 "Meşgul olarak ayarla. (Empatyh ile çalışır.)"
 
 #: ../plugins/im-status/im-status.plugin.desktop.in.h:2
-#, fuzzy
-#| msgid "_Statusbar"
 msgid "IM Status"
-msgstr "_Durum Çubuğu"
+msgstr "IM Durumu"
 
 #: ../plugins/im-status/im-status.js:43
 msgid "Could not communicate to Telepathy. IM Status plugin will not work."
@@ -913,32 +870,25 @@ msgid "New Folder"
 msgstr "Yeni Klasör"
 
 #: ../vinagre/vinagre-cache-prefs.c:57
-#, fuzzy, c-format
-#| msgid "Error while saving bookmarks: %s"
+#, c-format
 msgid "Error while saving preferences: %s"
-msgstr "Yer imlerini kaydederken hata: %s"
+msgstr "Tercihleri kaydederken hata: %s"
 
 #: ../vinagre/vinagre-commands.c:122
 msgid "Choose the file"
 msgstr "Dosya seçin"
 
 #: ../vinagre/vinagre-commands.c:146
-#, fuzzy
-#| msgid "There are none supported files"
 msgid "There are no supported files"
-msgstr "Hiçbir desteklenen dosya yok"
+msgstr "Desteklenen hiçbir dosya yok"
 
 #: ../vinagre/vinagre-commands.c:147
-#, fuzzy
-#| msgid ""
-#| "None of the active plugins offer a supported file to be open. Activate "
-#| "some plugins and try again."
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
 msgstr ""
-"Etkin eklentilerin hiçbiri açmak için desteklenen bir dosya sunmuyor. Bazı "
-"eklentileri etkinleştirin ve yeniden deneyin."
+"Etkin eklentilerin hiçbiri bu eylemi desteklemiyor. Başka eklentileri "
+"etkinleştirin ve yeniden deneyin."
 
 #: ../vinagre/vinagre-commands.c:181
 msgid "The following file could not be opened:"
@@ -947,10 +897,8 @@ msgstr[0] "Aşağıdaki dosya açılamadı."
 
 #: ../vinagre/vinagre-connect.c:91 ../vinagre/vinagre-connect.c:337
 #: ../vinagre/vinagre-connect.c:456
-#, fuzzy
-#| msgid "Could not get the active protocol in the protocol list."
 msgid "Could not get the active protocol from the protocol list."
-msgstr "Protokol listesinden aktif protokol alınamadı."
+msgstr "İletişim kuralları listesinden etkin iletişim kuralı alınamadı."
 
 #: ../vinagre/vinagre-connect.c:318
 #, c-format
@@ -1008,10 +956,9 @@ msgid "Remove current selected connection from bookmarks"
 msgstr "Seçilen bağlantıyı yer imlerinden kaldır"
 
 #: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:408
-#, fuzzy, c-format
-#| msgid "Could not load builder file: %s"
+#, c-format
 msgid "Could not merge UI XML file: %s"
-msgstr "İnşa edici dosya yüklenemedi: %s"
+msgstr "UI XML dosyası birleştirilemedi: %s"
 
 #: ../vinagre/vinagre-fav.c:761
 msgid "Invalid operation"
@@ -1022,10 +969,8 @@ msgid "Data received from drag&drop operation is invalid."
 msgstr "Sürükle ve bırak işleminden alınan veri geçersiz."
 
 #: ../vinagre/vinagre-fav.c:868
-#, fuzzy
-#| msgid "Side _Panel"
 msgid "Hide panel"
-msgstr "Kenar _Paneli"
+msgstr "Paneli gizle"
 
 #: ../vinagre/vinagre-fav.c:1073
 msgid "Hosts nearby"
@@ -1042,10 +987,9 @@ msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "Avahi makine ismi çözümü başarısız oldu: %s\n"
 
 #: ../vinagre/vinagre-mdns.c:226
-#, fuzzy, c-format
-#| msgid "The file was not recognized by any of the plugins."
+#, c-format
 msgid "The service %s was already registered by another plugin."
-msgstr "Dosya hiçbir eklenti tarafından tanınmadı."
+msgstr "%s hizmeti başka bir eklenti tarafından zaten kaydedilmiş."
 
 #: ../vinagre/vinagre-mdns.c:234
 #, c-format
@@ -1075,10 +1019,9 @@ msgstr "Bağlantı kapatıldı"
 
 #. Translators: %s is a host name or IP address.
 #: ../vinagre/vinagre-notebook.c:483
-#, fuzzy, c-format
-#| msgid "Authentication to host %s has failed"
+#, c-format
 msgid "Authentication for host %s has failed"
-msgstr "%s makinesine kimlik doğrulama başarılamadı"
+msgstr "%s makinesine kimlik doğrulama başarılamadı"
 
 #: ../vinagre/vinagre-notebook.c:489
 msgid "Authentication failed"
@@ -1156,10 +1099,8 @@ msgid "Password dialog canceled"
 msgstr "Parola penceresi iptal edildi"
 
 #: ../vinagre/vinagre-ssh.c:471
-#, fuzzy
-#| msgid "Could not run vinagre:"
 msgid "Could not send password"
-msgstr "Vinagre çalıştırılamadı:"
+msgstr "Parola gönderilemedi"
 
 #: ../vinagre/vinagre-ssh.c:479
 msgid "Log In Anyway"
@@ -1185,10 +1126,8 @@ msgstr ""
 "güvenli olduğundan emin olmak istiyorsanız sistem yöneticisi ile görüşün."
 
 #: ../vinagre/vinagre-ssh.c:506
-#, fuzzy
-#| msgid "Migration cancelled"
 msgid "Login dialog canceled"
-msgstr "Aktarma iptal edildi"
+msgstr "Giriş penceresi iptal edildi"
 
 #: ../vinagre/vinagre-ssh.c:527
 msgid "Can't send host identity confirmation"
@@ -1207,16 +1146,12 @@ msgid "No route to host"
 msgstr "Makineye rota yok"
 
 #: ../vinagre/vinagre-ssh.c:642
-#, fuzzy
-#| msgid "Connection closed"
 msgid "Connection refused by server"
-msgstr "Bağlantı kapatıldı"
+msgstr "Bağlantı sunucu tarafından reddedildi"
 
 #: ../vinagre/vinagre-ssh.c:649
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "Host key verification failed"
-msgstr "Kimlik doğrulama başarısız"
+msgstr "Makine anahtarının doğrulanması başarısız oldu"
 
 #: ../vinagre/vinagre-ssh.c:686
 msgid "Unable to find a valid SSH program"
@@ -1275,8 +1210,7 @@ msgid "Impossible to get the avatar: %s"
 msgstr "Avatar almak imkansız: %s"
 
 #: ../vinagre/vinagre-tube-handler.c:523
-#, fuzzy, c-format
-#| msgid "%s wants to share his desktop with you."
+#, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "%s sizinle masaüstünü paylaşmak istiyor."
 
@@ -1318,16 +1252,12 @@ msgid "Edit the application preferences"
 msgstr "Uygulama tercihlerini düzenle"
 
 #: ../vinagre/vinagre-ui.h:50
-#, fuzzy
-#| msgid "Plugin"
 msgid "_Plugins"
-msgstr "Eklenti"
+msgstr "_Eklentiler"
 
 #: ../vinagre/vinagre-ui.h:51
-#, fuzzy
-#| msgid "Active plugins"
 msgid "Select plugins"
-msgstr "Etkin eklentiler"
+msgstr "Eklenti seçin"
 
 #. Help menu
 #: ../vinagre/vinagre-ui.h:54
@@ -1389,10 +1319,8 @@ msgstr "Mevcut bağlantıyı yer imlerinize ekleyin"
 
 #. Machine menu
 #: ../vinagre/vinagre-ui.h:92
-#, fuzzy
-#| msgid "Take screenshot"
 msgid "_Take screenshot"
-msgstr "Ekran görüntüsü al"
+msgstr "_Ekran görüntüsü al"
 
 #: ../vinagre/vinagre-ui.h:93
 msgid "Take a screenshot of active connection"
@@ -1423,16 +1351,14 @@ msgid "Please check your installation."
 msgstr "Lütfen kurulumunuzu kontrol edin."
 
 #: ../vinagre/vinagre-utils.c:167
-#, fuzzy
-#| msgid "Error while saving history file: %s"
 msgid "Error loading UI file"
-msgstr "Geçmiş dosyası kaydederken hata: %s"
+msgstr "UI dosyası yüklenirken hata"
 
-#: ../vinagre/vinagre-utils.c:264
+#: ../vinagre/vinagre-utils.c:266
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Vinagre GNOME Masaüstü için bir uzaktaki masaüstü görüntüleyicidir."
 
-#: ../vinagre/vinagre-utils.c:267
+#: ../vinagre/vinagre-utils.c:269
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -1443,7 +1369,7 @@ msgstr ""
 "vakfı tarafından yayınlanan GNU Genel Kamu Lisansının sürüm 2 veya (sizin "
 "seçiminiz) daha sonrakisürümlerinin  şartları altında değiştirebilirsiniz."
 
-#: ../vinagre/vinagre-utils.c:271
+#: ../vinagre/vinagre-utils.c:273
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -1455,7 +1381,7 @@ msgstr ""
 "etmedendağıtılmaktadır. Ayrıntılı bilgi için GNU Genel Kamu Lisansına "
 "bakınız."
 
-#: ../vinagre/vinagre-utils.c:275
+#: ../vinagre/vinagre-utils.c:277
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -1463,20 +1389,21 @@ msgstr ""
 "Bu programla birlikte GNU Genel Kamu Lisansının bir kopyasını almış "
 "olmalısınız Eğer yoksa, <http://www.gnu.org/licenses/>adresine bakınız."
 
-#: ../vinagre/vinagre-utils.c:292
+#: ../vinagre/vinagre-utils.c:294
 msgid "translator-credits"
-msgstr "Barış Çiçek <baris@teamforce.name.tr>"
+msgstr ""
+"Barış Çiçek <baris@teamforce.name.tr>\n"
+"Muhammet Kara <muhammet.k@gmail.com>"
 
-#: ../vinagre/vinagre-utils.c:295
+#: ../vinagre/vinagre-utils.c:297
 msgid "Vinagre Website"
 msgstr "Vinagre Web sayfası"
 
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:407
-#, fuzzy, c-format
-#| msgid "Authentication is required"
+#: ../vinagre/vinagre-utils.c:409
+#, c-format
 msgid "%s authentication is required"
-msgstr "Kimlik denetimi gerekli"
+msgstr "%s kimlik denetimi gerekli"
 
 #: ../vinagre/vinagre-window.c:439
 msgid "_Recent connections"
@@ -1513,10 +1440,9 @@ msgstr ""
 "Bu mesaj sadece bir defa gösterilir."
 
 #: ../vinagre/vinagre-window.c:745 ../vinagre/vinagre-window.c:751
-#, fuzzy, c-format
-#| msgid "Error while saving history file: %s"
+#, c-format
 msgid "Error while creating the file %s: %s"
-msgstr "Geçmiş dosyası kaydederken hata: %s"
+msgstr "%s dosyası oluşturulurken hata: %s"
 
 #~ msgid "All fields above are mandatory"
 #~ msgstr "Yukarıdakı tüm alanlar zorunludur"
