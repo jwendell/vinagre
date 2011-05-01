@@ -118,48 +118,6 @@ libvinagre_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[
 
 libvinagre_la_LIBADD = $(VINAGRE_LIBS)
 
-if VINAGRE_HAVE_PANELAPPLET
-
-appletdir = $(LIBPANEL_APPLET_DIR)
-applet_in_file = data/org.gnome.panel.Vinagre.panel-applet.in
-nodist_applet_DATA = $(applet_in_file:.panel-applet.in=.panel-applet)
-
-$(applet_in_file): $(applet_in_file).in Makefile
-	$(AM_V_GEN)$(SED) \
-		-e "s|\@LIBEXECDIR\@|$(libexecdir)|" \
-		-e "s|\@PACKAGE_VERSION\@|$(PACKAGE_VERSION)|" $< > $@
-
-# TODO: Replace with INTLTOOL_PANEL_APPLET_RULE when it exists.
-$(nodist_applet_DATA): $(applet_in_file) $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
-	$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
-
-appletservicedir = $(datadir)/dbus-1/services
-appletservice_in_file = data/org.gnome.panel.applet.Vinagre.service.in
-nodist_appletservice_DATA = $(appletservice_in_file:.service.in=.service)
-
-$(nodist_appletservice_DATA): $(appletservice_in_file) Makefile
-	$(AM_V_GEN)$(SED) \
-		-e "s|\@LOCATION\@|$(libexecdir)/vinagre-applet|" $< > $@
-
-# The applet binary
-libexec_PROGRAMS = vinagre-applet
-
-vinagre_applet_CPPFLAGS = \
-	$(PANELAPPLET_CFLAGS) \
-	$(AM_CPPFLAGS)
-
-vinagre_applet_SOURCES = \
-	vinagre/vinagre-applet.c
-
-vinagre_applet_LDADD = \
-	libvinagre.la \
-	$(PANELAPPLET_LIBS) \
-	$(VINAGRE_LIBS)
-
-vinagre_applet_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
-
-endif
-
 # Telepathy stuff
 if VINAGRE_HAVE_TELEPATHY_GLIB
 handwritten_sources += \
@@ -434,8 +392,6 @@ dist_noinst_DATA = \
 	data/vinagre-mime.xml.in \
 	$(desktop_in_files) \
 	$(gsettings_in_file) \
-	$(applet_in_file) \
-	$(appletservice_in_file) \
 	$(service_in_file) \
 	intltool-extract.in \
 	intltool-merge.in \
@@ -448,8 +404,6 @@ CLEANFILES += \
 	$(nodist_mime_DATA) \
 	$(gsettings_SCHEMAS) \
 	$(nodist_pkgconfig_DATA) \
-	$(nodist_applet_DATA) \
-	$(nodist_appletservice_DATA) \
 	$(nodist_service_DATA) \
 	$(nodist_plugin_DATA)
 
