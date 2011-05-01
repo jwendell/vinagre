@@ -42,6 +42,14 @@
 #include "vinagre-plugins-engine.h"
 #include "vinagre-plugin-dialog.h"
 
+static void _toggle_widget_visible (GtkWidget *widget)
+{
+    if (gtk_widget_get_visible (widget))
+        gtk_widget_hide (widget);
+    else
+        gtk_widget_show_all (widget);
+}
+
 void
 vinagre_cmd_direct_connect (VinagreConnection *conn,
 			    VinagreWindow     *window)
@@ -243,7 +251,7 @@ vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  vinagre_utils_toggle_widget_visible (window->priv->toolbar);
+  _toggle_widget_visible (window->priv->toolbar);
 
   vinagre_cache_prefs_set_boolean ("window",
 				   "toolbar-visible",
@@ -256,7 +264,7 @@ vinagre_cmd_view_show_statusbar	(GtkAction     *action,
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  vinagre_utils_toggle_widget_visible (window->priv->statusbar);
+  _toggle_widget_visible (window->priv->statusbar);
 
   vinagre_cache_prefs_set_boolean ("window",
 				   "statusbar-visible",
@@ -269,7 +277,7 @@ vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  vinagre_utils_toggle_widget_visible (window->priv->fav_panel);
+  _toggle_widget_visible (window->priv->fav_panel);
 
   vinagre_cache_prefs_set_boolean ("window",
 				   "side-panel-visible",

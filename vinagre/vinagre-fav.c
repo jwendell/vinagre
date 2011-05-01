@@ -844,6 +844,32 @@ vinagre_fav_hide (GtkButton *button, VinagreFav *fav)
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), FALSE);
 }
 
+static GtkWidget *
+_create_small_close_button ()
+{
+  GtkRcStyle *rcstyle;
+  GtkWidget *image;
+  GtkWidget *close_button;
+
+  close_button = gtk_button_new ();
+  gtk_button_set_relief (GTK_BUTTON (close_button),
+			 GTK_RELIEF_NONE);
+  /* don't allow focus on the close button */
+  gtk_button_set_focus_on_click (GTK_BUTTON (close_button), FALSE);
+
+  /* make it as small as possible */
+  rcstyle = gtk_rc_style_new ();
+  rcstyle->xthickness = rcstyle->ythickness = 0;
+  gtk_widget_modify_style (close_button, rcstyle);
+  g_object_unref (rcstyle),
+
+  image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
+				    GTK_ICON_SIZE_MENU);
+  gtk_container_add (GTK_CONTAINER (close_button), image);
+
+  return close_button;
+}
+
 static void
 vinagre_fav_create_title (VinagreFav *fav)
 {
@@ -863,7 +889,7 @@ vinagre_fav_create_title (VinagreFav *fav)
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
   /* setup small close button */
-  close_button = vinagre_utils_create_small_close_button ();
+  close_button = _create_small_close_button ();
   gtk_box_pack_start (GTK_BOX (box), close_button, FALSE, FALSE, 0);
   gtk_widget_set_tooltip_text (close_button, _("Hide panel"));
   g_signal_connect (close_button,

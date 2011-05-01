@@ -22,43 +22,9 @@
 #include <glib/gi18n.h>
 #include "vinagre-utils.h"
 
-#define VINAGRE_UI_FILE  "vinagre.ui"
-#define VINAGRE_UI_XML_FILE "vinagre-ui.xml"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-/**
- * vinagre_utils_create_small_close_button:
- *
- * Return value: (transfer full):
- */
-GtkWidget *
-vinagre_utils_create_small_close_button ()
-{
-  GtkRcStyle *rcstyle;
-  GtkWidget *image;
-  GtkWidget *close_button;
-
-  close_button = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (close_button),
-			 GTK_RELIEF_NONE);
-  /* don't allow focus on the close button */
-  gtk_button_set_focus_on_click (GTK_BUTTON (close_button), FALSE);
-
-  /* make it as small as possible */
-  rcstyle = gtk_rc_style_new ();
-  rcstyle->xthickness = rcstyle->ythickness = 0;
-  gtk_widget_modify_style (close_button, rcstyle);
-  g_object_unref (rcstyle),
-
-  image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
-				    GTK_ICON_SIZE_MENU);
-  gtk_container_add (GTK_CONTAINER (close_button), image);
-
-  return close_button;
-}
 
 void
 vinagre_utils_show_error (const gchar *title, const gchar *message, GtkWindow *parent)
@@ -115,22 +81,15 @@ vinagre_utils_toggle_widget_visible (GtkWidget *widget)
     gtk_widget_show_all (widget);
 }
 
-const gchar *
-vinagre_utils_get_ui_filename (void)
+static const gchar *
+_get_ui_filename (void)
 {
-  if (g_file_test (VINAGRE_UI_FILE, G_FILE_TEST_EXISTS))
-    return VINAGRE_UI_FILE;
-  else
-    return VINAGRE_DATADIR "/" VINAGRE_UI_FILE;
-}
+    static const gchar ui_file[] = "vinagre.ui";
 
-const gchar *
-vinagre_utils_get_ui_xml_filename (void)
-{
-  if (g_file_test (VINAGRE_UI_XML_FILE, G_FILE_TEST_EXISTS))
-    return VINAGRE_UI_XML_FILE;
+  if (g_file_test (ui_file, G_FILE_TEST_EXISTS))
+    return ui_file;
   else
-    return VINAGRE_DATADIR "/" VINAGRE_UI_XML_FILE;
+    return g_build_filename (VINAGRE_DATADIR, ui_file, NULL);
 }
 
 /**
@@ -148,7 +107,7 @@ vinagre_utils_get_builder (const gchar *filename)
   if (filename)
     actual_filename = g_strdup (filename);
   else
-    actual_filename = g_strdup (vinagre_utils_get_ui_filename ());
+    actual_filename = g_strdup (_get_ui_filename ());
 
   xml = gtk_builder_new ();
   if (!gtk_builder_add_from_file (xml,
