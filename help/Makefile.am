@@ -11,9 +11,12 @@ DOC_FIGURES = \
 	figures/vinagre-editing-bookmarks.png	\
 	figures/vinagre-saving-bookmarks.png
 
+# TODO: Install reverse-connections only with the corresponding plugin.
+
 DOC_PAGES = \
 	bookmarks.page \
 	connect.page \
 	index.page \
 	preferences.page \
+	reverse-connections.page \
 	using.page
