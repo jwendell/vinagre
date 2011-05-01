@@ -145,7 +145,8 @@ dialog_response_handler (GtkDialog       *widget,
   switch (res_id)
     {
       case GTK_RESPONSE_HELP:
-	// TODO: display the help
+	vinagre_utils_help_contents (GTK_WINDOW (dialog->dialog),
+          "reverse-connections");
 	break;
 
       default:
