@@ -20,7 +20,7 @@
 
 #include <string.h>
 #include <glib/gi18n.h>
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -51,7 +51,7 @@ vinagre_utils_show_error (const gchar *title, const gchar *message, GtkWindow *p
 					      message);
 
   g_signal_connect_swapped (d,
-			    "response", 
+			    "response",
 			    G_CALLBACK (gtk_widget_destroy),
 			    d);
   gtk_widget_show_all (GTK_WIDGET(d));
@@ -137,7 +137,7 @@ vinagre_utils_get_builder (const gchar *filename)
 /*
  * Doubles underscore to avoid spurious menu accels.
  */
-gchar * 
+gchar *
 vinagre_utils_escape_underscores (const gchar* text,
 				  gssize       length)
 {
@@ -196,7 +196,7 @@ vinagre_utils_help_contents (GtkWindow *window, const gchar *section)
 		&error);
 
   g_free (uri);
-  if (error != NULL) 
+  if (error != NULL)
     {
       vinagre_utils_show_error (NULL, error->message, GTK_IS_WINDOW (window) ? window : NULL);
       g_error_free (error);

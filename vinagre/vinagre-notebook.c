@@ -24,7 +24,7 @@
 
 #include <glib/gi18n.h>
 
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 #include "vinagre-dnd.h"
 #include "vinagre-prefs.h"
 

@@ -28,7 +28,7 @@
 #include <string.h>
 
 #include "vinagre-commands.h"
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 #include "vinagre-connection.h"
 #include "vinagre-notebook.h"
 #include "vinagre-tab.h"

@@ -26,7 +26,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtkx.h>
 
-#include <vinagre/vinagre-utils.h>
+#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-prefs.h>
 
 #include "vinagre-rdp-tab.h"

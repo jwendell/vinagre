@@ -24,7 +24,7 @@
 #include <vncdisplay.h>
 #include <gdk/gdkkeysyms.h>
 
-#include <vinagre/vinagre-utils.h>
+#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-prefs.h>
 
 #include "vinagre-vnc-tab.h"

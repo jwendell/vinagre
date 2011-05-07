@@ -27,7 +27,7 @@
 #include <spice-client-gtk-3.0/spice-widget.h>
 #include <gdk/gdkkeysyms.h>
 
-#include <vinagre/vinagre-utils.h>
+#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-prefs.h>
 
 #include "vinagre-spice-tab.h"

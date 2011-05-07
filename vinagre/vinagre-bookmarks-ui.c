@@ -23,7 +23,7 @@
 #include <glib/gi18n.h>
 
 #include "vinagre-bookmarks-ui.h"
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 #include "vinagre-bookmarks-tree.h"
 #include "vinagre-plugins-engine.h"
 

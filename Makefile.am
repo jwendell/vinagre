@@ -59,7 +59,7 @@ vinagreh_HEADERS = \
 	vinagre/vinagre-prefs.h \
 	vinagre/vinagre-tab.h \
 	vinagre/vinagre-ui.h \
-	vinagre/vinagre-utils.h \
+	vinagre/vinagre-util.h \
 	vinagre/vinagre-window.h \
 	vinagre/vinagre-dnd.h \
 	vinagre/vinagre-ssh.h \
@@ -95,7 +95,7 @@ handwritten_sources = \
 	vinagre/vinagre-plugin-dialog.c \
 	vinagre/vinagre-prefs.c \
 	vinagre/vinagre-tab.c \
-	vinagre/vinagre-utils.c \
+	vinagre/vinagre-util.c \
 	vinagre/vinagre-window.c \
 	vinagre/pty_open.c \
 	vinagre/vinagre-ssh.c \

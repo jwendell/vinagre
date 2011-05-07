@@ -32,7 +32,7 @@
 #endif
 
 #include "vinagre-connect.h"
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"

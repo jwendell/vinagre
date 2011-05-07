@@ -30,7 +30,7 @@
 #include <gnome-keyring.h>
 
 #include "vinagre-ssh.h"
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 #include "pty_open.h"
 
 #define SSH_READ_TIMEOUT 40   /* seconds */

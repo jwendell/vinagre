@@ -37,7 +37,7 @@
 #include "vinagre-fav.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-ui.h"
 #include "vinagre-window-private.h"

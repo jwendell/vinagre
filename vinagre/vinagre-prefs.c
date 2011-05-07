@@ -21,7 +21,7 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "vinagre-prefs.h"
-#include "vinagre-utils.h"
+#include "vinagre-util.h"
 
 #define VINAGRE_SCHEMA_NAME		"org.gnome.Vinagre"
 #define VM_ALWAYS_SHOW_TABS		"always-show-tabs"

@@ -22,7 +22,7 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include <stdlib.h>
-#include <vinagre/vinagre-utils.h>
+#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-cache-prefs.h>
 
 #include "vinagre-vnc-connection.h"

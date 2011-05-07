@@ -39,7 +39,7 @@
 #include <string.h>
 #include <glib/gi18n.h>
 
-#include <vinagre/vinagre-utils.h>
+#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-prefs.h>
 #include "vinagre-reverse-vnc-listener-dialog.h"
 #include "vinagre-reverse-vnc-listener.h"
