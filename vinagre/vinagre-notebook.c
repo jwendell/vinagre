@@ -461,7 +461,7 @@ tab_disconnected_cb (VinagreTab *tab, VinagreNotebook *nb)
   /* Translators: %s is a host name or IP address. */
   message = g_strdup_printf (_("Connection to host %s was closed."),
 			     emphasis);
-  vinagre_utils_show_error (_("Connection closed"), message, GTK_WINDOW (nb->priv->window));
+  vinagre_utils_show_error_dialog (_("Connection closed"), message, GTK_WINDOW (nb->priv->window));
   g_free (message);
   g_free (name);
   g_free (emphasis);
@@ -486,7 +486,7 @@ tab_auth_failed_cb (VinagreTab *tab, const gchar *msg, VinagreNotebook *nb)
   	g_string_append_printf (message, " (%s)", msg);
   g_string_append_c (message, '.');
 
-  vinagre_utils_show_error (_("Authentication failed"), message->str, GTK_WINDOW (nb->priv->window));
+  vinagre_utils_show_error_dialog (_("Authentication failed"), message->str, GTK_WINDOW (nb->priv->window));
   g_string_free (message, TRUE);
   g_free (name);
   g_free (emphasis);

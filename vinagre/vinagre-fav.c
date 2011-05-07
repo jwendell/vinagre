@@ -758,7 +758,7 @@ drag_data_received_handl (GtkWidget *widget,
       info = g_strsplit (_sdata, "||", 2);
       if (g_strv_length (info) != 2)
 	{
-	  vinagre_utils_show_error (_("Invalid operation"),
+	  vinagre_utils_show_error_dialog (_("Invalid operation"),
 				    _("Data received from drag&drop operation is invalid."),
 				    GTK_WINDOW (fav->priv->window));
 	  return;
@@ -768,7 +768,7 @@ drag_data_received_handl (GtkWidget *widget,
       if (!conn)
 	{
 	  g_strfreev (info);
-	  vinagre_utils_show_error (NULL,
+	  vinagre_utils_show_error_dialog (NULL,
 				    error ? error : _("Unknown error"),
 				    GTK_WINDOW (fav->priv->window));
 	  g_free (error);

@@ -151,7 +151,7 @@ vinagre_cmd_remote_open (GtkAction     *action,
 
   if (i == 0)
     {
-      vinagre_utils_show_error (_("There are no supported files"),
+      vinagre_utils_show_error_dialog (_("There are no supported files"),
 				_("None of the active plugins support this action. Activate some plugins and try again."),
 				GTK_WINDOW (window));
       goto finalize;
@@ -350,14 +350,14 @@ void
 vinagre_cmd_help_contents (GtkAction     *action,
 			   VinagreWindow *window)
 {
-  vinagre_utils_help_contents (GTK_WINDOW (window), NULL);
+  vinagre_utils_show_help (GTK_WINDOW (window), NULL);
 }
 
 void
 vinagre_cmd_help_about (GtkAction     *action,
 			VinagreWindow *window)
 {
-  vinagre_utils_help_about (GTK_WINDOW (window));
+  vinagre_utils_show_help_about (GTK_WINDOW (window));
 }
 
 /* vim: set ts=8: */

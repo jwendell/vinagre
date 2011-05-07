@@ -121,7 +121,7 @@ delay_connect (GObject *object)
 		      &rdp_tab->priv->pid,
 		      &error))
     {
-      vinagre_utils_show_error (_("Error while executing rdesktop"),
+      vinagre_utils_show_error_dialog (_("Error while executing rdesktop"),
 				error ? error->message : _("Unknown error"),
 				GTK_WINDOW (vinagre_tab_get_window (tab)));
       vinagre_tab_remove_from_notebook (tab);

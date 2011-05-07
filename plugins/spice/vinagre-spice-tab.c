@@ -249,7 +249,7 @@ open_spice (VinagreSpiceTab *spice_tab)
 	if (!vinagre_spice_tunnel_create (window, &host, &port_str, ssh_tunnel_host, &error))
 	  {
 	    success = FALSE;
-	    vinagre_utils_show_error (_("Error creating the SSH tunnel"),
+	    vinagre_utils_show_error_dialog (_("Error creating the SSH tunnel"),
 				      error ? error->message : _("Unknown reason"),
 				      window);
 	    goto out;
@@ -261,7 +261,7 @@ open_spice (VinagreSpiceTab *spice_tab)
     }
 
   if (!success)
-    vinagre_utils_show_error (_("Error connecting to host."),
+    vinagre_utils_show_error_dialog (_("Error connecting to host."),
 			      error ? error->message : _("Unknown reason"),
 			      window);
 

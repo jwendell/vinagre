@@ -489,7 +489,7 @@ vinagre_connect (VinagreWindow *window)
 	}
       else
 	{
-	  vinagre_utils_show_error (NULL, error_msg ? error_msg : _("Unknown error"),
+	  vinagre_utils_show_error_dialog (NULL, error_msg ? error_msg : _("Unknown error"),
 				    GTK_WINDOW (window));
 	}
 

@@ -559,7 +559,7 @@ handle_login (GtkWindow *parent,
                 &keyring_item_id);
 
       if (result != GNOME_KEYRING_RESULT_OK)
-        vinagre_utils_show_error (_("Error saving the credentials on the keyring."),
+        vinagre_utils_show_error_dialog (_("Error saving the credentials on the keyring."),
 				  gnome_keyring_result_to_message (result),
 				  parent);
 

@@ -27,37 +27,6 @@
 #endif
 
 void
-vinagre_utils_show_error (const gchar *title, const gchar *message, GtkWindow *parent)
-{
-  GtkWidget *d;
-  gchar     *t;
-
-  if (title)
-    t = g_strdup (title);
-  else
-    t = g_strdup (_("An error has occurred:"));
-
-  d = gtk_message_dialog_new (parent,
-			      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-			      GTK_MESSAGE_ERROR,
-			      GTK_BUTTONS_CLOSE,
-			      "%s",
-			      t);
-  g_free (t);
-
-  if (message)
-    gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (d),
-					      "%s",
-					      message);
-
-  g_signal_connect_swapped (d,
-			    "response",
-			    G_CALLBACK (gtk_widget_destroy),
-			    d);
-  gtk_widget_show_all (GTK_WIDGET(d));
-}
-
-void
 vinagre_utils_show_many_errors (const gchar *title, GSList *items, GtkWindow *parent)
 {
   GString *msg;
@@ -68,7 +37,7 @@ vinagre_utils_show_many_errors (const gchar *title, GSList *items, GtkWindow *pa
   for (l = items; l; l = l->next)
     g_string_append_printf (msg, "%s\n", (gchar *)l->data);
 
-  vinagre_utils_show_error (title, msg->str, parent);
+  vinagre_utils_show_error_dialog (title, msg->str, parent);
   g_string_free (msg, TRUE);
 }
 
@@ -123,7 +92,7 @@ vinagre_utils_get_builder (const gchar *filename)
 
       g_string_append_printf (str, "\n\n%s\n\n", error->message);
       g_string_append (str, _("Please check your installation."));
-      vinagre_utils_show_error (_("Error loading UI file"), str->str, NULL);
+      vinagre_utils_show_error_dialog (_("Error loading UI file"), str->str, NULL);
       g_error_free (error);
       g_string_free (str, TRUE);
       g_object_unref (xml);
@@ -174,88 +143,6 @@ vinagre_utils_escape_underscores (const gchar* text,
 	}
 
 	return g_string_free (str, FALSE);
-}
-
-void
-vinagre_utils_help_contents (GtkWindow *window, const gchar *section)
-{
-  GError    *error;
-  GdkScreen *screen;
-  gchar     *uri;
-
-  screen = GTK_IS_WINDOW (window) ? gtk_window_get_screen (GTK_WINDOW (window)) : NULL;
-  error = NULL;
-  if (section)
-    uri = g_strdup_printf ("ghelp:vinagre?%s", section);
-  else
-    uri = g_strdup ("ghelp:vinagre");
-
-  gtk_show_uri (screen,
-		uri,
-		GDK_CURRENT_TIME,
-		&error);
-
-  g_free (uri);
-  if (error != NULL)
-    {
-      vinagre_utils_show_error (NULL, error->message, GTK_IS_WINDOW (window) ? window : NULL);
-      g_error_free (error);
-    }
-}
-
-void
-vinagre_utils_help_about (GtkWindow *window)
-{
-  static const gchar * const authors[] = {
-	"David King <amigadave@amigadave.com>",
-	"Jonh Wendell <jwendell@gnome.org>",
-	NULL
-  };
-
-  static const gchar * const artists[] = {
-	"Vinicius Depizzol <vdepizzol@gmail.com>",
-	NULL
-  };
-
-  static const gchar copyright[] = \
-    "Copyright \xc2\xa9 2007-2011 Jonh Wendell\n" \
-    "Copyright \xc2\xa9 2011 David King";
-
-  static const gchar comments[] = \
-	N_("Vinagre is a remote desktop viewer for the GNOME Desktop");
-
-  static const char *license[] = {
-	N_("Vinagre is free software; you can redistribute it and/or modify "
-	   "it under the terms of the GNU General Public License as published by "
-	   "the Free Software Foundation; either version 2 of the License, or "
-	   "(at your option) any later version."),
-	N_("Vinagre is distributed in the hope that it will be useful, "
-	   "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-	   "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-	   "GNU General Public License for more details."),
-	N_("You should have received a copy of the GNU General Public License "
-	   "along with this program. If not, see <http://www.gnu.org/licenses/>.")
-  };
-
-  gchar *license_trans;
-
-  license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]),
-				     _(license[2]), NULL);
-
-  gtk_show_about_dialog (GTK_IS_WINDOW (window)?window:NULL,
-			 "authors", authors,
-			 "artists", artists,
-			 "comments", _(comments),
-			 "copyright", copyright,
-			 "license", license_trans,
-			 "wrap-license", TRUE,
-			 "logo-icon-name", "vinagre",
-			 "translator-credits", _("translator-credits"),
-			 "version", PACKAGE_VERSION,
-			 "website", PACKAGE_URL,
-			 "website-label", _("Vinagre Website"),
-			 NULL);
-  g_free (license_trans);
 }
 
 gboolean
@@ -442,27 +329,6 @@ vinagre_utils_ask_credential (GtkWindow *parent,
   g_object_unref (xml);
 
   return result == -5;
-}
-
-gboolean
-vinagre_utils_create_dir (const gchar *filename, GError **error)
-{
-  GFile    *file, *parent;
-  gboolean result;
-  gchar    *path;
-
-  file   = g_file_new_for_path (filename);
-  parent = g_file_get_parent (file);
-  path   = g_file_get_path (parent);
-  result = TRUE;
-
-  if (!g_file_test (path, G_FILE_TEST_EXISTS))
-    result = g_file_make_directory_with_parents (parent, NULL, error);
-
-  g_object_unref (file);
-  g_object_unref (parent);
-  g_free (path);
-  return result;
 }
 
 /* vim: set ts=8: */

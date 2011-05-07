@@ -31,10 +31,6 @@
 
 enum { VINAGRE_ALL_WORKSPACES = 0xffffffff };
 
-void		vinagre_utils_show_error		(const gchar *title,
-							 const gchar *message,
-							 GtkWindow *parent);
-
 void		vinagre_utils_show_many_errors		(const gchar *title,
 							 GSList *items,
 							 GtkWindow *parent);
@@ -45,9 +41,6 @@ GtkBuilder	*vinagre_utils_get_builder		(const gchar *filename);
 
 gchar		*vinagre_utils_escape_underscores	(const gchar *text,
 							 gssize      length);
-
-void		vinagre_utils_help_contents		(GtkWindow *window, const gchar *section);
-void		vinagre_utils_help_about		(GtkWindow *window);
 
 gboolean	vinagre_utils_parse_boolean		(const gchar* value);
 
@@ -65,8 +58,6 @@ gboolean	vinagre_utils_ask_credential		(GtkWindow *parent,
 							 gchar **username,
 							 gchar **password,
 							 gboolean *save_in_keyring);
-
-gboolean	vinagre_utils_create_dir		(const gchar *filename, GError **error);
 
 #endif  /* __VINAGRE_UTILS_H__  */
 /* vim: set ts=8: */

@@ -209,7 +209,7 @@ vinagre_reverse_vnc_listener_start (VinagreReverseVncListener *listener)
     }
   if (port > 5600)
     {
-      vinagre_utils_show_error (_("Error activating reverse connections"),
+      vinagre_utils_show_error_dialog (_("Error activating reverse connections"),
 				_("The program could not find any available TCP ports starting at 5500. Is there any other running program consuming all your TCP ports?"),
 				GTK_WINDOW (listener->priv->window));
       g_object_unref (priv->service);

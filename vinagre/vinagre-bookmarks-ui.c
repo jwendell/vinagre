@@ -75,7 +75,7 @@ show_dialog_folder (VinagreBookmarks      *book,
       name = gtk_entry_get_text (GTK_ENTRY (name_entry));
       if (strlen (name) < 1)
         {
-	  vinagre_utils_show_error (NULL, _("Invalid name for this folder"), GTK_WINDOW (dialog));
+	  vinagre_utils_show_error_dialog (NULL, _("Invalid name for this folder"), GTK_WINDOW (dialog));
 	  gtk_widget_grab_focus (name_entry);
 	  continue;
 	}
@@ -86,7 +86,7 @@ show_dialog_folder (VinagreBookmarks      *book,
       if (existing_entry && existing_entry != entry)
 	{
 	  gchar *str = g_strdup_printf (_("The name \"%s\" is already used in this folder. Please use a different name."), name);
-	  vinagre_utils_show_error (_("Invalid name for this item"),
+	  vinagre_utils_show_error_dialog (_("Invalid name for this item"),
 				    str,
 				    GTK_WINDOW (dialog));
 	  g_free (str);
@@ -187,7 +187,7 @@ show_dialog_conn (VinagreBookmarks      *book,
       name = gtk_entry_get_text (GTK_ENTRY (name_entry));
       if (strlen (name) < 1)
         {
-	  vinagre_utils_show_error (NULL, _("Invalid name for this item"), GTK_WINDOW (dialog));
+	  vinagre_utils_show_error_dialog (NULL, _("Invalid name for this item"), GTK_WINDOW (dialog));
 	  gtk_widget_grab_focus (name_entry);
 	  continue;
 	}
@@ -198,7 +198,7 @@ show_dialog_conn (VinagreBookmarks      *book,
       if (existing_entry && existing_entry != entry)
 	{
 	  str = g_strdup_printf (_("The name \"%s\" is already used in this folder. Please use a different name."), name);
-	  vinagre_utils_show_error (_("Invalid name for this item"),
+	  vinagre_utils_show_error_dialog (_("Invalid name for this item"),
 				    str,
 				    GTK_WINDOW (dialog));
 	  g_free (str);
@@ -213,7 +213,7 @@ show_dialog_conn (VinagreBookmarks      *book,
 					    &port,
 					    &error_str))
         {
-	  vinagre_utils_show_error (NULL, error_str, GTK_WINDOW (dialog));
+	  vinagre_utils_show_error_dialog (NULL, error_str, GTK_WINDOW (dialog));
 	  g_free (error_str);
 	  gtk_widget_grab_focus (host_entry);
 	  continue;

@@ -533,7 +533,7 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
   data->is_private = FALSE;
 
   if (!gtk_recent_manager_add_full (manager, uri, data))
-    vinagre_utils_show_error (NULL,
+    vinagre_utils_show_error_dialog (NULL,
 			      _("Error saving recent connection."),
 			      GTK_WINDOW (tab->priv->window));
 
@@ -803,7 +803,7 @@ vinagre_tab_save_credentials_in_keyring (VinagreTab *tab)
                 &tab->priv->keyring_item_id);
 
   if (result != GNOME_KEYRING_RESULT_OK)
-    vinagre_utils_show_error (_("Error saving the credentials on the keyring."),
+    vinagre_utils_show_error_dialog (_("Error saving the credentials on the keyring."),
 			      gnome_keyring_result_to_message (result),
 			      GTK_WINDOW (tab->priv->window));
 
@@ -891,7 +891,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   pix = VINAGRE_TAB_GET_CLASS (tab)->impl_get_screenshot (tab);
   if (!pix)
     {
-      vinagre_utils_show_error (NULL,
+      vinagre_utils_show_error_dialog (NULL,
 				_("Could not get a screenshot of the connection."),
 				GTK_WINDOW (tab->priv->window));
       return;
@@ -960,7 +960,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
 
       if (!gdk_pixbuf_save (pix, filename, name, &error, NULL))
 	{
-	  vinagre_utils_show_error (_("Error saving screenshot"),
+	  vinagre_utils_show_error_dialog (_("Error saving screenshot"),
 				    error->message,
 				    GTK_WINDOW (tab->priv->window));
 	  g_error_free (error);

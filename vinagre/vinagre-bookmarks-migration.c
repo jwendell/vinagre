@@ -212,7 +212,7 @@ vinagre_bookmarks_migration_migrate (const gchar *filename)
   GSList   *entries;
 
   error  = NULL;
-  if (!vinagre_utils_create_dir (filename, &error))
+  if (!vinagre_utils_create_dir_for_file (filename, &error))
     {
       g_warning (_("Error while migrating bookmarks: %s"), error?error->message:_("Failed to create the directory"));
       if (error)

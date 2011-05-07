@@ -3,7 +3,7 @@ SUBDIRS = help po
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
-AM_CPPFLAGS = \
+common_cppflags = \
 	-I$(top_builddir) \
 	-I$(top_builddir)/vinagre \
 	-I$(top_srcdir)/vinagre/view \
@@ -20,11 +20,19 @@ AM_CPPFLAGS = \
 	$(WARN_FLAGS) \
 	$(DISABLE_DEPRECATED_FLAGS)
 
+AM_CPPFLAGS = \
+	$(common_cppflags) \
+	-include config.h
+
+AM_VALAFLAGS = \
+	--vapidir vinagre/vapi \
+	--pkg config \
+	--pkg gtk+-3.0
+
 bin_PROGRAMS = vinagre/vinagre
 
 vinagre_vinagre_SOURCES = \
 	vinagre/vinagre-main.c \
-	vinagre/vinagre-options.h \
 	vinagre/vinagre-options.c
 
 vinagre_vinagre_LDADD = \
@@ -41,7 +49,11 @@ noinst_vinagreh_headers = \
 	vinagre/view/ovBox.h \
 	vinagre/vinagre-plugin-dialog.h \
 	vinagre/vinagre-window-private.h \
-	vinagre/pty_open.h
+	vinagre/pty_open.h \
+	vinagre/vinagre-options.h \
+	vinagre/vinagre-mdns.h \
+	vinagre/vinagre-tubes-manager.h \
+	vinagre/vinagre-tube-handler.h
 
 vinagreh_HEADERS = \
 	vinagre/vinagre-bookmarks-entry.h \
@@ -95,6 +107,7 @@ handwritten_sources = \
 	vinagre/vinagre-plugin-dialog.c \
 	vinagre/vinagre-prefs.c \
 	vinagre/vinagre-tab.c \
+	vinagre/vinagre-utils.vala \
 	vinagre/vinagre-util.c \
 	vinagre/vinagre-window.c \
 	vinagre/pty_open.c \
@@ -104,13 +117,10 @@ handwritten_sources = \
 	vinagre/vinagre-plugins-engine.c
 
 libvinagre_la_SOURCES = \
-	$(handwritten_sources) \
-	$(noinst_vinagreh_headers) \
-	$(vinagreh_HEADERS)
+	$(handwritten_sources)
 
 if VINAGRE_HAVE_AVAHI
 libvinagre_la_SOURCES += \
-	vinagre/vinagre-mdns.h \
 	vinagre/vinagre-mdns.c
 endif
 
@@ -122,9 +132,7 @@ libvinagre_la_LIBADD = $(VINAGRE_LIBS)
 if VINAGRE_HAVE_TELEPATHY_GLIB
 handwritten_sources += \
 	vinagre/vinagre-tubes-manager.c \
-	vinagre/vinagre-tubes-manager.h \
-	vinagre/vinagre-tube-handler.c \
-	vinagre/vinagre-tube-handler.h
+	vinagre/vinagre-tube-handler.c
 INTROSPECTION_GIR_INCLUDES += TelepathyGLib-0.12
 endif
 
@@ -136,7 +144,7 @@ if VINAGRE_HAVE_INTROSPECTION
 INTROSPECTION_GIRS = Vinagre-3.0.gir
 
 Vinagre-3.0.gir: libvinagre.la
-INTROSPECTION_SCANNER_ARGS = $(AM_CPPFLAGS) $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
+INTROSPECTION_SCANNER_ARGS = $(common_cppflags) $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
 Vinagre_3_0_gir_LIBS = libvinagre.la
 Vinagre_3_0_gir_FILES = $(vinagreh_HEADERS) $(filter-out pty_open.h vinagre-plugin-dialog.h, $(noinst_vinagreh_headers)) $(handwritten_sources)
 Vinagre_3_0_gir_INCLUDES = $(INTROSPECTION_GIR_INCLUDES)
@@ -155,16 +163,33 @@ endif
 
 plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 
+noinst_plugin_headers = \
+	plugins/rdp/vinagre-rdp-plugin.h \
+	plugins/rdp/vinagre-rdp-connection.h \
+	plugins/rdp/vinagre-rdp-tab.h \
+	plugins/spice/vinagre-spice-plugin.h \
+	plugins/spice/vinagre-spice-connection.h \
+	plugins/spice/vinagre-spice-tab.h \
+	plugins/spice/vinagre-spice-tunnel.h \
+	plugins/ssh/vinagre-ssh-plugin.h \
+	plugins/ssh/vinagre-ssh-connection.h \
+	plugins/ssh/vinagre-ssh-tab.h \
+	plugins/reverse-vnc/if/ifaddrs.h \
+	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.h \
+	plugins/reverse-vnc/vinagre-reverse-vnc-listener.h \
+	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.h \
+	plugins/vnc/vinagre-vnc-plugin.h \
+	plugins/vnc/vinagre-vnc-connection.h \
+	plugins/vnc/vinagre-vnc-tab.h \
+	plugins/vnc/vinagre-vnc-tunnel.h
+
 if VINAGRE_ENABLE_RDP
 rdp_plugin = librdp.la
 rdp_plugin_in = plugins/rdp/rdp.plugin.desktop.in
 
 librdp_la_SOURCES = \
-	plugins/rdp/vinagre-rdp-plugin.h \
 	plugins/rdp/vinagre-rdp-plugin.c \
-	plugins/rdp/vinagre-rdp-connection.h \
 	plugins/rdp/vinagre-rdp-connection.c \
-	plugins/rdp/vinagre-rdp-tab.h \
 	plugins/rdp/vinagre-rdp-tab.c
 
 librdp_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
@@ -181,13 +206,9 @@ libspice_la_CPPFLAGS = \
 	-I$(top_srcdir)/plugins/spice
 
 libspice_la_SOURCES = \
-	plugins/spice/vinagre-spice-plugin.h \
 	plugins/spice/vinagre-spice-plugin.c \
-	plugins/spice/vinagre-spice-connection.h \
 	plugins/spice/vinagre-spice-connection.c \
-	plugins/spice/vinagre-spice-tab.h \
 	plugins/spice/vinagre-spice-tab.c \
-	plugins/spice/vinagre-spice-tunnel.h \
 	plugins/spice/vinagre-spice-tunnel.c
 
 libspice_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
@@ -199,11 +220,8 @@ ssh_plugin = libssh.la
 ssh_plugin_in = plugins/ssh/ssh.plugin.desktop.in
 
 libssh_la_SOURCES = \
-	plugins/ssh/vinagre-ssh-plugin.h \
 	plugins/ssh/vinagre-ssh-plugin.c \
-	plugins/ssh/vinagre-ssh-connection.h \
 	plugins/ssh/vinagre-ssh-connection.c \
-	plugins/ssh/vinagre-ssh-tab.h \
 	plugins/ssh/vinagre-ssh-tab.c
 
 libssh_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
@@ -219,7 +237,6 @@ plugin_LTLIBRARIES = \
 
 if VINAGRE_HAVE_SELF_IFADDRS
 ifaddrs_sources = \
-	plugins/reverse-vnc/if/ifaddrs.h \
 	plugins/reverse-vnc/if/getifaddrs.c
 endif
 
@@ -229,11 +246,8 @@ libreversevnc_la_CPPFLAGS = \
 	-DVINAGRE_REVERSE_VNC_DATADIR=\"$(reversevncuidir)\"
 
 libreversevnc_la_SOURCES = \
-	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.h \
 	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c \
-	plugins/reverse-vnc/vinagre-reverse-vnc-listener.h \
 	plugins/reverse-vnc/vinagre-reverse-vnc-listener.c \
-	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.h \
 	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c \
 	$(ifaddrs_sources)
 
@@ -249,13 +263,9 @@ libvnc_la_CPPFLAGS = \
 	-I$(top_srcdir)
 
 libvnc_la_SOURCES = \
-	plugins/vnc/vinagre-vnc-plugin.h \
 	plugins/vnc/vinagre-vnc-plugin.c \
-	plugins/vnc/vinagre-vnc-connection.h \
 	plugins/vnc/vinagre-vnc-connection.c \
-	plugins/vnc/vinagre-vnc-tab.h \
 	plugins/vnc/vinagre-vnc-tab.c \
-	plugins/vnc/vinagre-vnc-tunnel.h \
 	plugins/vnc/vinagre-vnc-tunnel.c
 
 libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
@@ -387,6 +397,8 @@ dist-changelog:
 	else rm -f .ChangeLog.tmp; exit 1; fi
 
 dist_noinst_DATA = \
+	$(noinst_vinagreh_headers) \
+	$(noinst_plugin_headers) \
 	ChangeLog.pre-git \
 	data/vinagre.pc.in \
 	data/vinagre-mime.xml.in \

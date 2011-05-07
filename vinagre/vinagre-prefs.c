@@ -212,7 +212,7 @@ vinagre_prefs_dialog_response (GtkDialog *d, gint response_id, VinagrePrefsDialo
 {
   if (response_id > 0)
     {
-      vinagre_utils_help_contents (dialog->parent, "preferences");
+      vinagre_utils_show_help (dialog->parent, "preferences");
       return;
     }
 

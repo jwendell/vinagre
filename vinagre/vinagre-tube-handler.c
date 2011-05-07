@@ -230,7 +230,7 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
       error_msg = g_strdup_printf
           (_("Impossible to get service property: %s"),
           error->message);
-      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+      vinagre_utils_show_error_dialog (NULL, (const gchar *) error_msg,
           GTK_WINDOW (priv->window));
       g_free (priv->hostname);
       g_free (error_msg);
@@ -253,7 +253,7 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
     {
       error_msg = g_strdup_printf
           (_("The protocol %s is not supported."), service_s);
-      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+      vinagre_utils_show_error_dialog (NULL, (const gchar *) error_msg,
           GTK_WINDOW (priv->window));
       g_free (priv->hostname);
       g_free (error_msg);
@@ -286,7 +286,7 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
     {
       error_msg = g_strdup_printf
           (_("Impossible to create the connection: %s"), error_conn_msg);
-      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+      vinagre_utils_show_error_dialog (NULL, (const gchar *) error_msg,
           GTK_WINDOW (priv->window));
       g_signal_handler_disconnect (G_OBJECT (priv->channel),
         priv->signal_invalidated_id);
@@ -326,7 +326,7 @@ vinagre_tube_handler_accept_stream_tube_cb (TpChannel *channel,
       error_msg = g_strdup_printf
           (_("Impossible to accept the stream tube: %s"),
           error->message);
-      vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+      vinagre_utils_show_error_dialog (NULL, (const gchar *) error_msg,
           GTK_WINDOW (priv->window));
       g_free (error_msg);
       g_signal_emit (G_OBJECT (self), signals[DISCONNECTED], 0);
@@ -464,7 +464,7 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
       /* Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message. */
       error_msg = g_strdup_printf (_("Impossible to get the contact name: %s"),
                                    error->message);
-      vinagre_utils_show_error (NULL,
+      vinagre_utils_show_error_dialog (NULL,
                                 (const gchar *) error_msg,
                                 GTK_WINDOW (priv->window));
       g_free (error_msg);
@@ -501,7 +501,7 @@ vinagre_tube_handler_factory_handle_cb (TpConnection *connection,
               error_msg = g_strdup_printf
                   (_("Impossible to get the avatar: %s"),
                   error_failed->message);
-              vinagre_utils_show_error (NULL, (const gchar *) error_msg,
+              vinagre_utils_show_error_dialog (NULL, (const gchar *) error_msg,
                   GTK_WINDOW (priv->window));
               g_free (error_msg);
               image = gtk_image_new_from_icon_name ("stock_person",

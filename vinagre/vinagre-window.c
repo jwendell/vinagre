@@ -285,7 +285,7 @@ activate_recent_cb (GtkRecentChooser *action, VinagreWindow *window)
       g_object_unref (conn);
     }
   else
-    vinagre_utils_show_error (NULL, error ? error : _("Unknown error"), GTK_WINDOW (window));
+    vinagre_utils_show_error_dialog (NULL, error ? error : _("Unknown error"), GTK_WINDOW (window));
 
   g_free (error);
   g_free (uri);
@@ -740,7 +740,7 @@ vinagre_window_check_first_run (VinagreWindow *window)
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
 
-      if (vinagre_utils_create_dir (filename, &error))
+      if (vinagre_utils_create_dir_for_file (filename, &error))
         {
           int fd = g_creat (filename, 0644);
           if (fd < 0)

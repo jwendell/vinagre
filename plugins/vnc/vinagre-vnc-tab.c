@@ -293,7 +293,7 @@ open_vnc (VinagreVncTab *vnc_tab)
 	if (!vinagre_vnc_tunnel_create (window, &host, &port_str, ssh_tunnel_host, &error))
 	  {
 	    success = FALSE;
-	    vinagre_utils_show_error (_("Error creating the SSH tunnel"),
+	    vinagre_utils_show_error_dialog (_("Error creating the SSH tunnel"),
 				      error ? error->message : _("Unknown reason"),
 				      window);
 	    goto out;
@@ -304,7 +304,7 @@ open_vnc (VinagreVncTab *vnc_tab)
   if (success)
     gtk_widget_grab_focus (GTK_WIDGET (vnc));
   else
-    vinagre_utils_show_error (_("Error connecting to host."),
+    vinagre_utils_show_error_dialog (_("Error connecting to host."),
 			      error ? error->message : _("Unknown reason"),
 			      window);
 
@@ -353,7 +353,7 @@ vnc_auth_unsupported_cb (VncDisplay *vnc, guint auth_type, VinagreVncTab *vnc_ta
 		   emphasis,
 		   auth_type);
 
-  vinagre_utils_show_error (_("Authentication unsupported"),
+  vinagre_utils_show_error_dialog (_("Authentication unsupported"),
 			    message->str,
 			    GTK_WINDOW (vinagre_tab_get_window (tab)));
   g_string_free (message, TRUE);
@@ -521,7 +521,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 	  else
 	    {
 	      vinagre_tab_remove_from_notebook (tab);
-	      vinagre_utils_show_error (_("Authentication error"),
+	      vinagre_utils_show_error_dialog (_("Authentication error"),
 					_("A username is required in order to access this remote desktop."),
 					window);
 	      goto out;
@@ -538,7 +538,7 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 	  else
 	    {
 	      vinagre_tab_remove_from_notebook (tab);
-	      vinagre_utils_show_error (_("Authentication error"),
+	      vinagre_utils_show_error_dialog (_("Authentication error"),
 					_("A password is required in order to access this remote desktop."),
 					window);
 	      goto out;
@@ -910,7 +910,7 @@ vinagre_vnc_tab_set_scaling (VinagreVncTab *tab, gboolean active) {
   vnc_display_set_force_size (VNC_DISPLAY(tab->priv->vnc), !active);
   if (!vnc_display_set_scaling (VNC_DISPLAY (tab->priv->vnc), active))
     {
-      vinagre_utils_show_error (NULL, _("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
+      vinagre_utils_show_error_dialog (NULL, _("Scaling is not supported on this installation.\n\nRead the README file (shipped with Vinagre) in order to know how to enable this feature."),
 				GTK_WINDOW (vinagre_tab_get_window (VINAGRE_TAB (tab))));
       return FALSE;
     }
