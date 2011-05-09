@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre-master-po-gl-26618\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-30 21:40+0200\n"
-"PO-Revision-Date: 2011-04-30 22:50+0200\n"
+"POT-Creation-Date: 2011-05-09 12:47+0200\n"
+"PO-Revision-Date: 2011-05-09 12:47+0200\n"
 "Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -113,7 +113,6 @@ msgid "Access remote desktops"
 msgstr "Acceso a escritorios remotos"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../vinagre/vinagre-applet.c:327 ../vinagre/vinagre-applet.c:339
 #: ../vinagre/vinagre-main.c:128
 msgid "Remote Desktop Viewer"
 msgstr "Visualizador de escritorios remotos"
@@ -136,7 +135,7 @@ msgid "Bookmark Folder"
 msgstr "Cartafol «Marcadores»"
 
 #. setup label
-#: ../data/vinagre.ui.h:5 ../vinagre/vinagre-fav.c:860
+#: ../data/vinagre.ui.h:5 ../vinagre/vinagre-fav.c:886
 msgid "Bookmarks"
 msgstr "Marcadores"
 
@@ -313,10 +312,10 @@ msgstr "Produciuse un erro ao executar rdesktop"
 #: ../plugins/rdp/vinagre-rdp-tab.c:125 ../vinagre/vinagre-bookmarks.c:367
 #: ../vinagre/vinagre-bookmarks.c:493
 #: ../vinagre/vinagre-bookmarks-migration.c:136
-#: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:170
+#: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:178
 #: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:772
 #: ../vinagre/vinagre-options.c:81 ../vinagre/vinagre-options.c:99
-#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:743
+#: ../vinagre/vinagre-window.c:288 ../vinagre/vinagre-window.c:753
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
@@ -636,7 +635,7 @@ msgstr ""
 "\n"
 "IPv6:"
 
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:172
+#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:173
 #, c-format
 msgid "On the port %d"
 msgstr "No porto %d"
@@ -773,26 +772,6 @@ msgid "Could not communicate to Telepathy. IM Status plugin will not work."
 msgstr ""
 "Non foi posíbel estabelecer unha comunicación con Telepathy. O engadido do "
 "estado na IM non funciona correctamente."
-
-#: ../vinagre/vinagre-applet.c:171 ../vinagre/vinagre-applet.c:255
-msgid "Could not run vinagre:"
-msgstr "Non foi posíbel executar Vinagre:"
-
-#: ../vinagre/vinagre-applet.c:275
-msgid "Open Remote Desktop Viewer"
-msgstr "Abrir o visualizador de escritorio remoto"
-
-#: ../vinagre/vinagre-applet.c:321 ../vinagre/vinagre-ui.h:37
-msgid "_Help"
-msgstr "_Axuda"
-
-#: ../vinagre/vinagre-applet.c:322
-msgid "_About"
-msgstr "_Sobre"
-
-#: ../vinagre/vinagre-applet.c:340
-msgid "Access your bookmarks"
-msgstr "Acceder aos seus marcadores"
 
 #: ../vinagre/vinagre-bookmarks.c:367
 #, c-format
@@ -951,15 +930,15 @@ msgstr "Cartafol novo"
 msgid "Error while saving preferences: %s"
 msgstr "Produciuse un erro ao gardar as preferencias: %s"
 
-#: ../vinagre/vinagre-commands.c:122
+#: ../vinagre/vinagre-commands.c:130
 msgid "Choose the file"
 msgstr "Seleccione o ficheiro"
 
-#: ../vinagre/vinagre-commands.c:146
+#: ../vinagre/vinagre-commands.c:154
 msgid "There are no supported files"
 msgstr "Non hai ficheiros compatíbeis"
 
-#: ../vinagre/vinagre-commands.c:147
+#: ../vinagre/vinagre-commands.c:155
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
@@ -967,7 +946,7 @@ msgstr ""
 "Ningún dos engadidos activados ofrecen un ficheiro compatíbel que abrir. "
 "Active algúns dos engadidos e probe de novo."
 
-#: ../vinagre/vinagre-commands.c:181
+#: ../vinagre/vinagre-commands.c:189
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Non foi posíbel abrir o seguinte ficheiro:"
@@ -1033,7 +1012,7 @@ msgstr "_Eliminar dos marcadores"
 msgid "Remove current selected connection from bookmarks"
 msgstr "Eliminar dos marcadores a conexión seleccionada neste momento"
 
-#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:400
+#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:410
 #, c-format
 msgid "Could not merge UI XML file: %s"
 msgstr "Non foi posíbel fusionar o ficheiro XML de UI: %s"
@@ -1046,11 +1025,11 @@ msgstr "A operación non é válida"
 msgid "Data received from drag&drop operation is invalid."
 msgstr "Os datos recibidos operación arrastrar&soltar non son correctos."
 
-#: ../vinagre/vinagre-fav.c:868
+#: ../vinagre/vinagre-fav.c:894
 msgid "Hide panel"
 msgstr "Agochar panel"
 
-#: ../vinagre/vinagre-fav.c:1073
+#: ../vinagre/vinagre-fav.c:1099
 msgid "Hosts nearby"
 msgstr "Servidores próximos"
 
@@ -1329,6 +1308,10 @@ msgstr "_Ver"
 msgid "_Bookmarks"
 msgstr "_Marcadores"
 
+#: ../vinagre/vinagre-ui.h:37
+msgid "_Help"
+msgstr "_Axuda"
+
 #: ../vinagre/vinagre-ui.h:41
 msgid "Connect to a remote desktop"
 msgstr "Conectarse a un escritorio remoto"
@@ -1425,11 +1408,7 @@ msgstr "Facer unha captura de pantalla do escritorio remoto actual"
 msgid "View the current remote desktop in fullscreen mode"
 msgstr "Ver o escritorio remoto actual en modo a pantalla completa"
 
-#: ../vinagre/vinagre-utils.c:72
-msgid "An error has occurred:"
-msgstr "Produciuse un erro:"
-
-#: ../vinagre/vinagre-utils.c:161
+#: ../vinagre/vinagre-util.c:89
 msgid ""
 "A plugin tried to open an UI file but did not succeed, with the error "
 "message:"
@@ -1437,7 +1416,7 @@ msgstr ""
 "Un engadido tentou abrir un ficheiro de IU pero non tivo éxito, obtivo a "
 "seguinte mensaxe de erro:"
 
-#: ../vinagre/vinagre-utils.c:163
+#: ../vinagre/vinagre-util.c:91
 msgid ""
 "The program tried to open an UI file but did not succeed, with the error "
 "message:"
@@ -1445,50 +1424,33 @@ msgstr ""
 "Un programa tentou abrir un ficheiro de IU pero non tivo éxito, obtivo a "
 "seguinte mensaxe de erro:"
 
-#: ../vinagre/vinagre-utils.c:166
+#: ../vinagre/vinagre-util.c:94
 msgid "Please check your installation."
 msgstr "Comprobe a súa instalación."
 
-#: ../vinagre/vinagre-utils.c:167
+#: ../vinagre/vinagre-util.c:95
 msgid "Error loading UI file"
 msgstr "Produciuse un erro ao cargar o ficheiro de IU"
 
-#: ../vinagre/vinagre-utils.c:266
+#. Translators: %s is a protocol, like VNC or SSH
+#: ../vinagre/vinagre-util.c:255
+#, c-format
+msgid "%s authentication is required"
+msgstr "Requírese a autenticación %s"
+
+#: ../vinagre/vinagre-utils.vala:24
+msgid "An error occurred"
+msgstr "Produciuse un erro"
+
+#: ../vinagre/vinagre-utils.vala:63
+msgid "Error showing help"
+msgstr "Produciuse un erro ao mostrar a axuda"
+
+#: ../vinagre/vinagre-utils.vala:77
 msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "O Vinagre é un visor de escritorio remoto para o escritorio GNOME"
 
-#: ../vinagre/vinagre-utils.c:269
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"O Vinagre é software libre, pode redistribuílo ou modificalo baixo as "
-"condicións da Licenza pública xeral GNU tal como a publica a Free Software "
-"Foundation, tanto na versión 2 da licenza como (segundo o seu criterio) en "
-"calquera versión posterior."
-
-#: ../vinagre/vinagre-utils.c:273
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"O Vinagre distribúese esperando que sexa útil mais SEN NINGUNHA GARANTÍA, "
-"nin sequera a garantía implícita de VALOR COMERCIAL ou ADECUACIÓN PARA UN "
-"FIN ESPECÍFICO. Para máis detalles vexa a Licenza pública xeral GNU."
-
-#: ../vinagre/vinagre-utils.c:277
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Debeu recibir unha copia da Licenza pública xeral GNU xunto con este "
-"programa. Se non é así, vexa <http://www.gnu.org/licenses/>."
-
-#: ../vinagre/vinagre-utils.c:294
+#: ../vinagre/vinagre-utils.vala:88
 msgid "translator-credits"
 msgstr ""
 "Fran Diéguez <frandieguez@ubuntu.com>, 2009, 2010.\n"
@@ -1499,31 +1461,25 @@ msgstr ""
 "Suso Baleato <suso.baleato@xunta.es>, 2009.\n"
 "Ignacio Casal Quinteiro <icq@gnome.org>, 2007, 2008."
 
-#: ../vinagre/vinagre-utils.c:297
+#: ../vinagre/vinagre-utils.vala:91
 msgid "Vinagre Website"
 msgstr "Sitio web do Vinagre"
 
-#. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:409
-#, c-format
-msgid "%s authentication is required"
-msgstr "Requírese a autenticación %s"
-
-#: ../vinagre/vinagre-window.c:431
+#: ../vinagre/vinagre-window.c:441
 msgid "_Recent Connections"
 msgstr "Conexións _recentes"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:548
+#: ../vinagre/vinagre-window.c:558
 #, c-format
 msgid "Open %s:%d"
 msgstr "Abrir %s:%d"
 
-#: ../vinagre/vinagre-window.c:727
+#: ../vinagre/vinagre-window.c:737
 msgid "About menu accelerators and keyboard shortcuts"
 msgstr "Sobre as teclas rápidas e atallos de teclado"
 
-#: ../vinagre/vinagre-window.c:729
+#: ../vinagre/vinagre-window.c:739
 msgid ""
 "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
 "default. The reason is to avoid the keys from being intercepted by the "
@@ -1543,10 +1499,50 @@ msgstr ""
 "\n"
 "Esta mensaxe aparecerá só unha vez."
 
-#: ../vinagre/vinagre-window.c:737 ../vinagre/vinagre-window.c:743
+#: ../vinagre/vinagre-window.c:747 ../vinagre/vinagre-window.c:753
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Produciuse un erro ao crear o ficheiro: %s: %s"
+
+#~ msgid "Could not run vinagre:"
+#~ msgstr "Non foi posíbel executar Vinagre:"
+
+#~ msgid "Open Remote Desktop Viewer"
+#~ msgstr "Abrir o visualizador de escritorio remoto"
+
+#~ msgid "_About"
+#~ msgstr "_Sobre"
+
+#~ msgid "Access your bookmarks"
+#~ msgstr "Acceder aos seus marcadores"
+
+#~ msgid ""
+#~ "Vinagre is free software; you can redistribute it and/or modify it under "
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software Foundation; either version 2 of the License, or (at your option) "
+#~ "any later version."
+#~ msgstr ""
+#~ "O Vinagre é software libre, pode redistribuílo ou modificalo baixo as "
+#~ "condicións da Licenza pública xeral GNU tal como a publica a Free "
+#~ "Software Foundation, tanto na versión 2 da licenza como (segundo o seu "
+#~ "criterio) en calquera versión posterior."
+
+#~ msgid ""
+#~ "Vinagre is distributed in the hope that it will be useful, but WITHOUT "
+#~ "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+#~ "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+#~ "more details."
+#~ msgstr ""
+#~ "O Vinagre distribúese esperando que sexa útil mais SEN NINGUNHA GARANTÍA, "
+#~ "nin sequera a garantía implícita de VALOR COMERCIAL ou ADECUACIÓN PARA UN "
+#~ "FIN ESPECÍFICO. Para máis detalles vexa a Licenza pública xeral GNU."
+
+#~ msgid ""
+#~ "You should have received a copy of the GNU General Public License along "
+#~ "with this program. If not, see <http://www.gnu.org/licenses/>."
+#~ msgstr ""
+#~ "Debeu recibir unha copia da Licenza pública xeral GNU xunto con este "
+#~ "programa. Se non é así, vexa <http://www.gnu.org/licenses/>."
 
 #~ msgid "Which machine do you want to connect to?"
 #~ msgstr "A que máquina se quere conectar?"
