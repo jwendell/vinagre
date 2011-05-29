@@ -32,7 +32,6 @@
 #endif
 
 #include "vinagre-connect.h"
-#include "vinagre-util.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
@@ -402,7 +401,7 @@ vinagre_connect (VinagreWindow *window)
   gint                  result;
   VinagreConnectDialog  dialog;
 
-  dialog.xml = vinagre_utils_get_builder (NULL);
+  dialog.xml = vinagre_utils_get_builder ();
   if (!dialog.xml)
     return NULL;
 

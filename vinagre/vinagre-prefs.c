@@ -21,7 +21,6 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "vinagre-prefs.h"
-#include "vinagre-util.h"
 
 #define VINAGRE_SCHEMA_NAME		"org.gnome.Vinagre"
 #define VM_ALWAYS_SHOW_TABS		"always-show-tabs"
@@ -230,7 +229,7 @@ vinagre_prefs_dialog_show (VinagreWindow *window)
 
   dialog = g_new (VinagrePrefsDialog, 1);
 
-  dialog->xml = vinagre_utils_get_builder (NULL);
+  dialog->xml = vinagre_utils_get_builder ();
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "preferences_dialog"));
   dialog->parent = GTK_WINDOW (window);
   gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), dialog->parent);

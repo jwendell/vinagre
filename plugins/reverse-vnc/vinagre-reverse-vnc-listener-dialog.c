@@ -39,7 +39,6 @@
 #include <string.h>
 #include <glib/gi18n.h>
 
-#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-prefs.h>
 #include "vinagre-reverse-vnc-listener-dialog.h"
 #include "vinagre-reverse-vnc-listener.h"
@@ -208,12 +207,27 @@ vinagre_reverse_vnc_listener_dialog_show (GtkWindow *parent)
 {
   VncListenDialog *dialog;
   GtkBuilder *xml;
+  GError *error = NULL;
   gboolean always;
   gchar *filename;
 
   filename = g_build_filename (VINAGRE_REVERSE_VNC_DATADIR, "reverse-vnc.ui", NULL);
 
-  xml = vinagre_utils_get_builder (filename);
+  xml = gtk_builder_new ();
+  if (!gtk_builder_add_from_file (xml, filename, &error))
+  {
+    GString *str = g_string_new (NULL);
+
+    g_string_append (str, _("The reverse VNC plugin failed to open a UI file, with the error message:"));
+    g_string_append_printf (str, "\n\n%s\n\n", error->message);
+    g_string_append (str, _("Please check your installation."));
+    vinagre_utils_show_error_dialog (_("Error loading UI file"), str->str, NULL);
+    g_error_free (error);
+    g_string_free (str, TRUE);
+    g_object_unref (xml);
+    xml = NULL;
+  }
+
   g_free (filename);
   if (!xml)
     return;

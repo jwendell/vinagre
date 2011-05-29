@@ -28,7 +28,6 @@
 
 #include "vinagre-tab.h"
 #include "vinagre-notebook.h"
-#include "vinagre-util.h"
 #include "vinagre-prefs.h"
 #include "view/autoDrawer.h"
 #include "vinagre-plugins-engine.h"

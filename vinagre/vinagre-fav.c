@@ -24,7 +24,6 @@
 
 #include <glib/gi18n.h>
 #include "vinagre-fav.h"
-#include "vinagre-util.h"
 #include "vinagre-dnd.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-bookmarks-ui.h"

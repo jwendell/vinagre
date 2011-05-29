@@ -27,7 +27,6 @@
 #include <spice-client-gtk-3.0/spice-widget.h>
 #include <gdk/gdkkeysyms.h>
 
-#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-prefs.h>
 
 #include "vinagre-spice-tab.h"
@@ -294,7 +293,7 @@ spice_main_channel_event_cb(SpiceChannel *channel, SpiceChannelEvent event,
     gboolean save_in_keyring = FALSE;
 
     vinagre_tab_remove_credentials_from_keyring (VINAGRE_TAB (tab));
-    if (!vinagre_utils_ask_credential (window,
+    if (!vinagre_utils_request_credential (window,
 				       "SPICE",
 				       name,
 				       FALSE,

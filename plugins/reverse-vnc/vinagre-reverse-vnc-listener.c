@@ -35,7 +35,6 @@
 #include <glib/gi18n.h>
 
 #include <vinagre/vinagre-commands.h>
-#include "vinagre/vinagre-util.h"
 #include "vinagre-reverse-vnc-listener.h"
 #include "../vnc/vinagre-vnc-connection.h"
 

@@ -24,7 +24,6 @@
 #include <vncdisplay.h>
 #include <gdk/gdkkeysyms.h>
 
-#include "vinagre/vinagre-util.h"
 #include <vinagre/vinagre-prefs.h>
 
 #include "vinagre-vnc-tab.h"
@@ -496,15 +495,9 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
       if ( (need_username && !username) || (need_password && !password) )
 	{
 	  host = vinagre_connection_get_best_name (conn);
-	  if (!vinagre_utils_ask_credential (window,
-					     "VNC",
-					     host,
-					     need_username,
-					     need_password,
-					     8,
-					     &username,
-					     &password,
-					     &save_in_keyring))
+	  if (!vinagre_utils_request_credential (window, "VNC", host,
+	     need_username, need_password, 8, &username, &password,
+	     &save_in_keyring))
 	    {
 	      vinagre_tab_remove_from_notebook (tab);
 	      goto out;

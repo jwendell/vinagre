@@ -18,7 +18,23 @@
 
 namespace Vinagre.Utils {
 
-static void show_error_dialog(string? title, string? message, Gtk.Window parent)
+static bool parse_boolean(string str)
+{
+    if(str == "true" || str == "1")
+        return true;
+    else
+        return false;
+}
+
+static void toggle_widget_visible(Gtk.Widget widget)
+{
+    if(widget.visible)
+        widget.hide();
+    else
+        widget.show_all();
+}
+
+static void show_error_dialog(string? title, string? message, Gtk.Window? parent)
 {
     if(title != null)
         title = _("An error occurred");
@@ -34,6 +50,13 @@ static void show_error_dialog(string? title, string? message, Gtk.Window parent)
     dialog.show_all();
 }
 
+static void show_many_errors(string? title, GLib.SList<string> items, Gtk.Window parent)
+{
+    string messages = "";
+    items.foreach((message) => messages.printf("%s\n", message));
+    show_error_dialog(title, messages, parent);
+}
+
 static bool create_dir_for_file(string filename) throws GLib.Error
 {
     var file = GLib.File.new_for_path(filename);
@@ -44,6 +67,117 @@ static bool create_dir_for_file(string filename) throws GLib.Error
         return parent.make_directory_with_parents();
     else
         return true;
+}
+
+static Gtk.Builder get_builder()
+{
+    string filename = GLib.Path.build_filename(Vinagre.Config.VINAGRE_DATADIR,
+        "vinagre.ui");
+
+    var builder = new Gtk.Builder();
+    try
+    {
+        builder.add_from_file(filename);
+    }
+    catch(GLib.Error err)
+    {
+        string subtitle = _("Vinagre failed to open a UI file, with the error message:");
+	string closing = _("Please check your installation.");
+	string message = "%s\n\n%s\n\n%s".printf(subtitle, err.message,
+            closing);
+        show_error_dialog(_("Error loading UI file"), message, null);
+    }
+
+    return builder;
+}
+
+static bool request_credential(Gtk.Window parent, string protocol, string host,
+    bool need_username, bool need_password, int password_limit,
+    out string username, out string password, out bool save_in_keyring)
+{
+    var xml = get_builder();
+
+    var password_dialog = xml.get_object("auth_required_dialog") as Gtk.Dialog;
+    password_dialog.set_transient_for(parent);
+    string auth_label_message =
+        // Translators: %s is a protocol, like VNC or SSH.
+        _("%s authentication is required").printf(protocol);
+
+    var auth_label = xml.get_object("auth_required_label") as Gtk.Label;
+    auth_label.label = auth_label_message;
+
+    var host_label = xml.get_object("host_label") as Gtk.Label;
+    host_label.label = host;
+
+    var password_label = xml.get_object("password_label") as Gtk.Label;
+    var username_label = xml.get_object("username_label") as Gtk.Label;
+    var save_credential_check = xml.get_object("save_credential_check")
+        as Gtk.CheckButton;
+
+    var ok_button = xml.get_object("ok_button") as Gtk.Button;
+    var image = new Gtk.Image.from_stock(Gtk.Stock.DIALOG_AUTHENTICATION,
+        Gtk.IconSize.DIALOG);
+    ok_button.image = image;
+
+    var username_entry = xml.get_object("username_entry") as Gtk.Entry;
+    var password_entry = xml.get_object("password_entry") as Gtk.Entry;
+    username_entry.changed.connect(() => {
+        var enabled = true;
+
+        if(username_entry.visible)
+            enabled = enabled && username_entry.text_length > 0;
+
+        if(password_entry.visible)
+            enabled = enabled && password_entry.text_length > 0;
+
+        ok_button.sensitive = enabled;
+    });
+
+    if(need_username)
+        username_entry.text = username;
+    else
+    {
+        username_label.hide();
+	username_entry.hide();
+    }
+
+    password_entry.changed.connect(() => {
+        var enabled = true;
+
+        if(username_entry.visible)
+            enabled = enabled && username_entry.text_length > 0;
+
+        if(password_entry.visible)
+            enabled = enabled && password_entry.text_length > 0;
+
+        ok_button.sensitive = enabled;
+    });
+    if(need_password)
+    {
+        password_entry.max_length = password_limit;
+        password_entry.text = password;
+    }
+    else
+    {
+        password_label.hide();
+        password_entry.hide();
+    }
+
+    var result = password_dialog.run();
+    if(result == Gtk.ResponseType.OK)
+    {
+        if(username_entry.text_length > 0)
+            username = username_entry.text;
+
+        if(password_entry.text_length > 0)
+            password = password_entry.text;
+
+        if(save_in_keyring)
+            save_in_keyring = save_credential_check.active;
+    }
+
+    password_dialog.destroy();
+    return result == Gtk.ResponseType.OK;
 }
 
 static void show_help(Gtk.Window window, string? page)

@@ -37,7 +37,6 @@
 #include "vinagre-fav.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
-#include "vinagre-util.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-ui.h"
 #include "vinagre-window-private.h"
@@ -492,6 +491,48 @@ fav_panel_size_allocate (GtkWidget     *widget,
     vinagre_cache_prefs_set_integer ("window", "side-panel-size", window->priv->side_panel_size);
 }
 
+/*
+ * Doubles underscore to avoid spurious menu accels.
+ */
+static gchar *
+_escape_underscores (const gchar* text,
+	gssize       length)
+{
+	GString *str;
+	const gchar *p;
+	const gchar *end;
+
+	g_return_val_if_fail (text != NULL, NULL);
+
+	if (length < 0)
+		length = strlen (text);
+
+	str = g_string_sized_new (length);
+
+	p = text;
+	end = text + length;
+
+	while (p != end)
+	{
+		const gchar *next;
+		next = g_utf8_next_char (p);
+
+		switch (*p)
+		{
+			case '_':
+				g_string_append (str, "__");
+				break;
+			default:
+				g_string_append_len (str, p, next - p);
+				break;
+		}
+
+		p = next;
+	}
+
+	return g_string_free (str, FALSE);
+}
+
 static void
 vinagre_window_populate_bookmarks (VinagreWindow *window,
 				   const gchar   *group,
@@ -513,7 +554,7 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
       switch (vinagre_bookmarks_entry_get_node (entry))
 	{
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
-	    action_label = vinagre_utils_escape_underscores (vinagre_bookmarks_entry_get_name (entry), -1);
+	    action_label = _escape_underscores (vinagre_bookmarks_entry_get_name (entry), -1);
 	    action_name = g_strdup_printf ("BOOKMARK_FOLDER_ACTION_%d", ++i);
 	    action = gtk_action_new (action_name,
 				     action_label,
@@ -549,7 +590,7 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 	     continue;
 
 	    action_name = vinagre_connection_get_best_name (conn);
-	    action_label = vinagre_utils_escape_underscores (action_name, -1);
+	    action_label = _escape_underscores (action_name, -1);
 	    g_free (action_name);
 
 	    action_name = g_strdup_printf ("BOOKMARK_ITEM_ACTION_%d", ++i);

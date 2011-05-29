@@ -31,7 +31,6 @@
 #include <locale.h>
 
 #include "vinagre-window.h"
-#include "vinagre-util.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-debug.h"

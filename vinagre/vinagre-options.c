@@ -23,7 +23,6 @@
 #include "vinagre-connection.h"
 #include "vinagre-window.h"
 #include "vinagre-commands.h"
-#include "vinagre-util.h"
 
 const GOptionEntry all_options [] =
 {
