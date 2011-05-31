@@ -16,193 +16,191 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Vinagre.Utils {
+using Gtk;
 
-    public bool parse_boolean(string str)
-    {
-        if(str == "true" || str == "1")
+namespace Vinagre.Utils {
+    public bool parse_boolean (string str) {
+        if (str == "true" || str == "1")
             return true;
         else
             return false;
     }
 
-    public void toggle_widget_visible(Gtk.Widget widget)
-    {
-        if(widget.visible)
-            widget.hide();
+    public void toggle_widget_visible (Widget widget) {
+        if (widget.visible)
+            widget.hide ();
         else
-            widget.show_all();
+            widget.show_all ();
     }
 
-    public void show_error_dialog(string? title, string? message, Gtk.Window? parent)
-    {
-        if(title != null)
+    public void show_error_dialog (string? title,
+                                   string? message,
+                                   Window? parent) {
+        if (title != null)
             title = _("An error occurred");
 
-        var dialog = new Gtk.MessageDialog(parent,
-                Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
-                Gtk.MessageType.ERROR, Gtk.ButtonsType.CLOSE, "%s", title);
+        var dialog = new MessageDialog (parent,
+                                        DialogFlags.DESTROY_WITH_PARENT |
+                                        DialogFlags.MODAL,
+                                        MessageType.ERROR,
+                                        ButtonsType.CLOSE,
+                                        "%s",
+                                        title);
 
-        if(message != null)
-            dialog.format_secondary_markup("%s", message);
+        if (message != null)
+            dialog.format_secondary_markup ("%s", message);
 
-        dialog.response.connect((d, response) => { dialog.destroy(); });
-        dialog.show_all();
+        dialog.response.connect ((d, response) => { dialog.destroy (); });
+        dialog.show_all ();
     }
 
-    public void show_many_errors(string? title, GLib.SList<string> items, Gtk.Window parent)
-    {
-        string messages = "";
-        items.foreach((message) => messages.printf("%s\n", message));
-        show_error_dialog(title, messages, parent);
+    public void show_many_errors (string?       title,
+                                  SList<string> items,
+                                  Window        parent) {
+        var messages = "";
+        items.foreach ((message) => messages.printf ("%s\n", message));
+        show_error_dialog (title, messages, parent);
     }
 
-    public bool create_dir_for_file(string filename) throws GLib.Error
-    {
-        var file = GLib.File.new_for_path(filename);
-        var parent = file.get_parent();
-        var parent_path = parent.get_path();
+    public bool create_dir_for_file (string filename) throws Error {
+        var file = File.new_for_path (filename);
+        var parent = file.get_parent ();
+        var parent_path = parent.get_path ();
 
-        if(!GLib.FileUtils.test(parent_path, GLib.FileTest.EXISTS))
-            return parent.make_directory_with_parents();
+        if (!FileUtils.test (parent_path, FileTest.EXISTS))
+            return parent.make_directory_with_parents ();
         else
             return true;
     }
 
-    public Gtk.Builder get_builder()
-    {
-        string filename = GLib.Path.build_filename(Vinagre.Config.VINAGRE_DATADIR,
-                "vinagre.ui");
+    public Builder get_builder () {
+        var filename = Path.build_filename (Vinagre.Config.VINAGRE_DATADIR,
+                                            "vinagre.ui");
 
-        var builder = new Gtk.Builder();
-        try
-        {
-            builder.add_from_file(filename);
-        }
-        catch(GLib.Error err)
-        {
-            string subtitle = _("Vinagre failed to open a UI file, with the error message:");
-            string closing = _("Please check your installation.");
-            string message = "%s\n\n%s\n\n%s".printf(subtitle, err.message,
-                    closing);
-            show_error_dialog(_("Error loading UI file"), message, null);
+        var builder = new Builder ();
+        try {
+            builder.add_from_file (filename);
+        } catch (Error err) {
+            var subtitle = _("Vinagre failed to open a UI file," +
+                             " with the error message:");
+            var closing = _("Please check your installation.");
+            var message = "%s\n\n%s\n\n%s".printf (subtitle,
+                                                   err.message,
+                                                   closing);
+            show_error_dialog (_("Error loading UI file"), message, null);
         }
 
         return builder;
     }
 
-    public bool request_credential(Gtk.Window parent, string protocol, string host,
-            bool need_username, bool need_password, int password_limit,
-            out string username, out string password, out bool save_in_keyring)
+    public bool request_credential (Window     parent,
+                                    string     protocol,
+                                    string     host,
+                                    bool       need_username,
+                                    bool       need_password,
+                                    int        password_limit,
+                                    out string username,
+                                    out string password,
+                                    out bool   save_in_keyring)
     {
-        var xml = get_builder();
+        var xml = get_builder ();
 
-        var password_dialog = xml.get_object("auth_required_dialog") as Gtk.Dialog;
-        password_dialog.set_transient_for(parent);
-        string auth_label_message =
-            // Translators: %s is a protocol, like VNC or SSH.
-            _("%s authentication is required").printf(protocol);
+        var password_dialog = xml.get_object ("auth_required_dialog") as Dialog;
+        password_dialog.set_transient_for (parent);
 
-        var auth_label = xml.get_object("auth_required_label") as Gtk.Label;
-        auth_label.label = auth_label_message;
+        var auth_label = xml.get_object ("auth_required_label") as Label;
+        // Translators: %s is a protocol, like VNC or SSH
+        auth_label.label = _("%s authentication is required").printf (protocol);
 
-        var host_label = xml.get_object("host_label") as Gtk.Label;
+        var host_label = xml.get_object ("host_label") as Label;
         host_label.label = host;
 
-        var password_label = xml.get_object("password_label") as Gtk.Label;
-        var username_label = xml.get_object("username_label") as Gtk.Label;
-        var save_credential_check = xml.get_object("save_credential_check")
-            as Gtk.CheckButton;
+        var password_label = xml.get_object ("password_label") as Label;
+        var username_label = xml.get_object ("username_label") as Label;
+        var save_credential_check = xml.get_object ("save_credential_check")
+                                    as CheckButton;
 
-        var ok_button = xml.get_object("ok_button") as Gtk.Button;
-        var image = new Gtk.Image.from_stock(Gtk.Stock.DIALOG_AUTHENTICATION,
-                Gtk.IconSize.DIALOG);
+        var ok_button = xml.get_object ("ok_button") as Button;
+        var image = new Image.from_stock (Stock.DIALOG_AUTHENTICATION,
+                                          IconSize.DIALOG);
         ok_button.image = image;
 
-        var username_entry = xml.get_object("username_entry") as Gtk.Entry;
-        var password_entry = xml.get_object("password_entry") as Gtk.Entry;
-        username_entry.changed.connect(() => {
-                var enabled = true;
-
-                if(username_entry.visible)
-                enabled = enabled && username_entry.text_length > 0;
-
-                if(password_entry.visible)
-                enabled = enabled && password_entry.text_length > 0;
-
-                ok_button.sensitive = enabled;
-                });
-
-        if(need_username)
-            username_entry.text = username;
-        else
-        {
-            username_label.hide();
-            username_entry.hide();
-        }
-
-        password_entry.changed.connect(() => {
+        var username_entry = xml.get_object ("username_entry") as Entry;
+        var password_entry = xml.get_object ("password_entry") as Entry;
+        username_entry.changed.connect (() => {
             var enabled = true;
 
-            if(username_entry.visible)
-            enabled = enabled && username_entry.text_length > 0;
+            if (username_entry.visible)
+                enabled = enabled && username_entry.text_length > 0;
 
-            if(password_entry.visible)
-            enabled = enabled && password_entry.text_length > 0;
+            if (password_entry.visible)
+                enabled = enabled && password_entry.text_length > 0;
 
             ok_button.sensitive = enabled;
         });
-        if(need_password)
-        {
+
+        if (need_username)
+            username_entry.text = username;
+        else {
+            username_label.hide ();
+            username_entry.hide ();
+        }
+
+        password_entry.changed.connect (() => {
+            var enabled = true;
+
+            if (username_entry.visible)
+                enabled = enabled && username_entry.text_length > 0;
+
+            if (password_entry.visible)
+                enabled = enabled && password_entry.text_length > 0;
+
+            ok_button.sensitive = enabled;
+        });
+        if (need_password) {
             password_entry.max_length = password_limit;
             password_entry.text = password;
-        }
-        else
-        {
-            password_label.hide();
-            password_entry.hide();
+        } else {
+            password_label.hide ();
+            password_entry.hide ();
         }
 
-        var result = password_dialog.run();
-        if(result == Gtk.ResponseType.OK)
-        {
-            if(username_entry.text_length > 0)
+        var result = password_dialog.run ();
+        if (result == ResponseType.OK) {
+            if (username_entry.text_length > 0)
                 username = username_entry.text;
 
-            if(password_entry.text_length > 0)
+            if (password_entry.text_length > 0)
                 password = password_entry.text;
 
-            if(save_in_keyring)
+            if (save_in_keyring)
                 save_in_keyring = save_credential_check.active;
         }
 
-        password_dialog.destroy();
-        return result == Gtk.ResponseType.OK;
+        password_dialog.destroy ();
+
+        return result == ResponseType.OK;
     }
 
-    public void show_help(Gtk.Window window, string? page)
+    public void show_help (Window window, string? page)
     {
         string uri;
-        if(page != null)
+        if (page != null)
             uri = "ghelp:" + Vinagre.Config.PACKAGE_TARNAME + "?" + page;
         else
             uri = "ghelp:" + Vinagre.Config.PACKAGE_TARNAME;
 
-        try
-        {
-            Gtk.show_uri(window.get_screen(), uri, Gdk.CURRENT_TIME);
-        }
-        catch(GLib.Error error)
-        {
-            show_error_dialog(_("Error showing help"), error.message, window);
+        try {
+            show_uri (window.get_screen (), uri, Gdk.CURRENT_TIME);
+        } catch (Error error) {
+            show_error_dialog (_("Error showing help"), error.message, window);
         }
     }
 
-    // TODO: Move this into the GtkBuilder file.
-    public void show_help_about(Gtk.Window parent)
-    {
+    // TODO: Move this into the uilder file.
+    public void show_help_about (Window parent) {
         string[] authors = { "David King <amigadave@amigadave.com>",
-            "Jonh Wendell <jwendell@gnome.org>" };
+                             "Jonh Wendell <jwendell@gnome.org>" };
 
         string[] artists = { "Vinicius Depizzol <vdepizzol@gmail.com>" };
 
@@ -217,13 +215,17 @@ namespace Vinagre.Utils {
 
             You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.""";
 
-        Gtk.show_about_dialog(parent, "authors", authors, "artists", artists,
-                "comments", _(comments), "copyright", copyright, "license", license,
-                "wrap-license", true, "logo-icon-name", Vinagre.Config.PACKAGE_TARNAME,
-                "translator-credits", _("translator-credits"),
-                "version", Vinagre.Config.PACKAGE_VERSION,
-                "website", Vinagre.Config.PACKAGE_URL,
-                "website-label", _("Vinagre Website"));
+        show_about_dialog (parent,
+                           "authors", authors,
+                           "artists", artists,
+                           "comments", _(comments),
+                           "copyright", copyright,
+                           "license", license,
+                           "wrap-license", true,
+                           "logo-icon-name", Vinagre.Config.PACKAGE_TARNAME,
+                           "translator-credits", _("translator-credits"),
+                           "version", Vinagre.Config.PACKAGE_VERSION,
+                           "website", Vinagre.Config.PACKAGE_URL,
+                           "website-label", _("Vinagre Website"));
     }
-
 } // namespace Vinagre.Utils
