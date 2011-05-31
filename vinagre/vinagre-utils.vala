@@ -18,7 +18,7 @@
 
 namespace Vinagre.Utils {
 
-    static bool parse_boolean(string str)
+    public bool parse_boolean(string str)
     {
         if(str == "true" || str == "1")
             return true;
@@ -26,7 +26,7 @@ namespace Vinagre.Utils {
             return false;
     }
 
-    static void toggle_widget_visible(Gtk.Widget widget)
+    public void toggle_widget_visible(Gtk.Widget widget)
     {
         if(widget.visible)
             widget.hide();
@@ -34,7 +34,7 @@ namespace Vinagre.Utils {
             widget.show_all();
     }
 
-    static void show_error_dialog(string? title, string? message, Gtk.Window? parent)
+    public void show_error_dialog(string? title, string? message, Gtk.Window? parent)
     {
         if(title != null)
             title = _("An error occurred");
@@ -50,14 +50,14 @@ namespace Vinagre.Utils {
         dialog.show_all();
     }
 
-    static void show_many_errors(string? title, GLib.SList<string> items, Gtk.Window parent)
+    public void show_many_errors(string? title, GLib.SList<string> items, Gtk.Window parent)
     {
         string messages = "";
         items.foreach((message) => messages.printf("%s\n", message));
         show_error_dialog(title, messages, parent);
     }
 
-    static bool create_dir_for_file(string filename) throws GLib.Error
+    public bool create_dir_for_file(string filename) throws GLib.Error
     {
         var file = GLib.File.new_for_path(filename);
         var parent = file.get_parent();
@@ -69,7 +69,7 @@ namespace Vinagre.Utils {
             return true;
     }
 
-    static Gtk.Builder get_builder()
+    public Gtk.Builder get_builder()
     {
         string filename = GLib.Path.build_filename(Vinagre.Config.VINAGRE_DATADIR,
                 "vinagre.ui");
@@ -91,7 +91,7 @@ namespace Vinagre.Utils {
         return builder;
     }
 
-    static bool request_credential(Gtk.Window parent, string protocol, string host,
+    public bool request_credential(Gtk.Window parent, string protocol, string host,
             bool need_username, bool need_password, int password_limit,
             out string username, out string password, out bool save_in_keyring)
     {
@@ -180,7 +180,7 @@ namespace Vinagre.Utils {
         return result == Gtk.ResponseType.OK;
     }
 
-    static void show_help(Gtk.Window window, string? page)
+    public void show_help(Gtk.Window window, string? page)
     {
         string uri;
         if(page != null)
@@ -199,7 +199,7 @@ namespace Vinagre.Utils {
     }
 
     // TODO: Move this into the GtkBuilder file.
-    static void show_help_about(Gtk.Window parent)
+    public void show_help_about(Gtk.Window parent)
     {
         string[] authors = { "David King <amigadave@amigadave.com>",
             "Jonh Wendell <jwendell@gnome.org>" };
