@@ -55,7 +55,6 @@ noinst_vinagreh_headers = \
 	vinagre/view/drawer.h \
 	vinagre/view/ovBox.h \
 	vinagre/vinagre-window-private.h \
-	vinagre/pty_open.h \
 	vinagre/vinagre-bookmarks-entry.h \
 	vinagre/vinagre-bookmarks.h \
 	vinagre/vinagre-bookmarks-migration.h \
@@ -105,12 +104,18 @@ handwritten_sources = \
 	vinagre/vinagre-tab.c \
 	vinagre/vinagre-utils.vala \
 	vinagre/vinagre-window.c \
-	vinagre/pty_open.c \
 	vinagre/vinagre-ssh.c \
 	vinagre/vinagre-cache-prefs.c \
 	vinagre/vinagre-protocol.c \
 	vinagre/vinagre-plugins-engine.c \
 	$(ifaddrs_sources)
+
+if VINAGRE_PTY_OPEN
+noinst_vinagreh_headers += \
+	vinagre/pty_open.h
+handwritten_sources += \
+	vinagre/pty_open.c
+endif
 
 libvinagre_la_SOURCES = \
 	$(handwritten_sources)

@@ -127,6 +127,8 @@ AC_TYPE_UINT64_T
 # Checks for library functions. See vinagre/pty_open.c for usage.
 AC_CHECK_FUNCS([getpt posix_openpt grantpt unlockpt ptsname ptsname_r])
 
+AM_CONDITIONAL([VINAGRE_PTY_OPEN], [test "x$ac_cv_func_getpt" = xyes])
+
 AC_SEARCH_LIBS([strerror], [cposix])
 
 # Check for Avahi.
