@@ -20,8 +20,14 @@
  */
 
 #include <config.h>
+#ifdef G_OS_WIN32
+#undef DATADIR
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#else /* !G_OS_WIN32 */
 #include <netinet/in.h>
 #include <sys/socket.h>
+#endif /* G_OS_WIN32 */
 #include <unistd.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>

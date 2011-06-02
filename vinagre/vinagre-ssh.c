@@ -20,12 +20,19 @@
  */
 
 #include <config.h>
+#ifdef G_OS_WIN32
+#undef DATADIR
+#include <winsock2.h>
+#include <gio/gwin32inputstream.h>
+#include <gio/gwin32outputstream.h>
+#else /* !G_OS_WIN32 */
 #include <netinet/in.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#endif /* G_OS_WIN32 */
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 #include <glib/gi18n.h>
 #include <gnome-keyring.h>
 
@@ -159,7 +166,7 @@ setup_ssh_commandline (const gchar *host,
 
 static gboolean
 spawn_ssh (char *args[],
-           pid_t *pid,
+           GPid *pid,
            int *tty_fd,
            int *stdin_fd,
            int *stdout_fd,
@@ -383,9 +390,16 @@ handle_login (GtkWindow *parent,
   else
     prompt_fd = tty_fd;
 
+#ifdef G_OS_WIN32
+  g_critical ("untested Windows code");
+  prompt_stream = g_win32_input_stream_new (prompt_fd, FALSE);
+  stdout_stream = g_win32_input_stream_new (stdout_fd, FALSE);
+  reply_stream = g_win32_output_stream_new (tty_fd, FALSE);
+#else /* !G_OS_WIN32 */
   prompt_stream = g_unix_input_stream_new (prompt_fd, FALSE);
   stdout_stream = g_unix_input_stream_new (stdout_fd, FALSE);
   reply_stream = g_unix_output_stream_new (tty_fd, FALSE);
+#endif /* G_OS_WIN32 */
 
   while (1)
     {
@@ -713,7 +727,7 @@ vinagre_ssh_connect (GtkWindow *parent,
 		     GError **error)
 {
   int tty_fd, stdin_fd, stdout_fd, stderr_fd;
-  pid_t pid;
+  GPid pid;
   gchar *user, *host, **args;
   gboolean res;
   GInputStream *is;
@@ -763,8 +777,14 @@ vinagre_ssh_connect (GtkWindow *parent,
   if (!res)
     return FALSE;
 
+#ifdef G_OS_WIN32
+  u_long mode = 1;
+  ioctlsocket (stderr_fd, FIONBIO, &mode);
+  is = g_win32_input_stream_new (stderr_fd, FALSE);
+#else /* !G_OS_WIN32 */
   fcntl (stderr_fd, F_SETFL, O_NONBLOCK | fcntl (stderr_fd, F_GETFL));
   is = g_unix_input_stream_new (stderr_fd, FALSE);
+#endif /* G_OS_WIN32 */
   error_stream = g_data_input_stream_new (is);
   g_object_unref (is);
   
