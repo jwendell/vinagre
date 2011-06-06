@@ -16,7 +16,10 @@ DOC_FIGURES = \
 DOC_PAGES = \
 	bookmarks.page \
 	connect.page \
+	fullscreen.page \
 	index.page \
 	preferences.page \
 	reverse-connections.page \
-	using.page
+	scaling.page \
+	take-screenshot.page \
+	view-only.page
