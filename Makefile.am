@@ -50,10 +50,7 @@ noinst_vinagreh_headers = \
 	vinagre/vinagre-plugin-dialog.h \
 	vinagre/vinagre-window-private.h \
 	vinagre/pty_open.h \
-	vinagre/vinagre-options.h \
-	vinagre/vinagre-mdns.h \
-	vinagre/vinagre-tubes-manager.h \
-	vinagre/vinagre-tube-handler.h
+	vinagre/vinagre-options.h
 
 vinagreh_HEADERS = \
 	vinagre/vinagre-bookmarks-entry.h \
@@ -120,6 +117,8 @@ libvinagre_la_SOURCES = \
 if VINAGRE_HAVE_AVAHI
 libvinagre_la_SOURCES += \
 	vinagre/vinagre-mdns.c
+noinst_vinagreh_headers += \
+	vinagre/vinagre-mdns.h
 endif
 
 libvinagre_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
@@ -131,6 +130,9 @@ if VINAGRE_HAVE_TELEPATHY_GLIB
 handwritten_sources += \
 	vinagre/vinagre-tubes-manager.c \
 	vinagre/vinagre-tube-handler.c
+noinst_vinagreh_headers += \
+	vinagre/vinagre-tubes-manager.h \
+	vinagre/vinagre-tube-handler.h
 INTROSPECTION_GIR_INCLUDES += TelepathyGLib-0.12
 endif
 
