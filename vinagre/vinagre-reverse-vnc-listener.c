@@ -34,9 +34,9 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
-#include <vinagre/vinagre-commands.h>
+#include "vinagre-commands.h"
 #include "vinagre-reverse-vnc-listener.h"
-#include "../vnc/vinagre-vnc-connection.h"
+#include "plugins/vnc/vinagre-vnc-connection.h"
 
 struct _VinagreReverseVncListenerPrivate
 {
@@ -269,5 +269,3 @@ vinagre_reverse_vnc_listener_set_window (VinagreReverseVncListener *listener,
 
   listener->priv->window = window ? g_object_ref (window) : NULL;
 }
-
-/* vim: set ts=8: */

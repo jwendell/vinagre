@@ -41,6 +41,9 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
     N_("Connect to a remote desktop"), G_CALLBACK (vinagre_cmd_remote_connect) },
   { "RemoteOpen", GTK_STOCK_OPEN, NULL, "<control>O",
     N_("Open a .VNC file"), G_CALLBACK (vinagre_cmd_remote_open) },
+  { "VNCListener", NULL, /* Translators: "Reverse" here is an adjective, not a verb. */
+    N_("_Reverse Connections…"), NULL, N_("Configure incoming VNC connections"),
+    G_CALLBACK (vinagre_cmd_remote_vnc_listener) },
   { "RemoteQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
     N_("Quit the program"), G_CALLBACK (vinagre_cmd_remote_quit) },
 

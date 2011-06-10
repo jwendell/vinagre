@@ -6,6 +6,7 @@ DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 common_cppflags = \
 	-I$(top_builddir) \
 	-I$(top_builddir)/vinagre \
+	-I$(top_srcdir) \
 	-I$(top_srcdir)/vinagre/view \
 	-DBINDIR=\"$(bindir)\" \
 	-DDATADIR=\"$(datadir)\" \
@@ -30,6 +31,11 @@ AM_VALAFLAGS = \
 
 bin_PROGRAMS = vinagre/vinagre
 
+if VINAGRE_HAVE_SELF_IFADDRS
+ifaddrs_sources = \
+       vinagre/if/getifaddrs.c
+endif
+
 vinagre_vinagre_SOURCES = \
 	vinagre/vinagre-main.c \
 	vinagre/vinagre-options.c
@@ -44,6 +50,7 @@ vinagre_vinagre_LDADD = \
 	libvnc.la
 
 noinst_vinagreh_headers = \
+	vinagre/if/ifaddrs.h \
 	vinagre/view/autoDrawer.h \
 	vinagre/view/drawer.h \
 	vinagre/view/ovBox.h \
@@ -67,6 +74,8 @@ noinst_vinagreh_headers = \
 	vinagre/vinagre-plugins-engine.h \
 	vinagre/vinagre-prefs.h \
 	vinagre/vinagre-protocol.h \
+	vinagre/vinagre-reverse-vnc-listener.h \
+	vinagre/vinagre-reverse-vnc-listener-dialog.h \
 	vinagre/vinagre-static-extension.h \
 	vinagre/vinagre-tab.h \
 	vinagre/vinagre-ui.h \
@@ -93,6 +102,8 @@ handwritten_sources = \
 	vinagre/vinagre-fav.c \
 	vinagre/vinagre-notebook.c \
 	vinagre/vinagre-prefs.c \
+	vinagre/vinagre-reverse-vnc-listener.c \
+	vinagre/vinagre-reverse-vnc-listener-dialog.c \
 	vinagre/vinagre-static-extension.c \
 	vinagre/vinagre-tab.c \
 	vinagre/vinagre-utils.vala \
@@ -101,7 +112,8 @@ handwritten_sources = \
 	vinagre/vinagre-ssh.c \
 	vinagre/vinagre-cache-prefs.c \
 	vinagre/vinagre-protocol.c \
-	vinagre/vinagre-plugins-engine.c
+	vinagre/vinagre-plugins-engine.c \
+	$(ifaddrs_sources)
 
 libvinagre_la_SOURCES = \
 	$(handwritten_sources)
@@ -140,10 +152,6 @@ noinst_plugin_headers = \
 	plugins/ssh/vinagre-ssh-plugin.h \
 	plugins/ssh/vinagre-ssh-connection.h \
 	plugins/ssh/vinagre-ssh-tab.h \
-	plugins/reverse-vnc/if/ifaddrs.h \
-	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.h \
-	plugins/reverse-vnc/vinagre-reverse-vnc-listener.h \
-	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.h \
 	plugins/vnc/vinagre-vnc-plugin.h \
 	plugins/vnc/vinagre-vnc-connection.h \
 	plugins/vnc/vinagre-vnc-tab.h \
@@ -195,30 +203,7 @@ plugin_LTLIBRARIES = \
 	$(rdp_plugin) \
 	$(spice_plugin) \
 	$(ssh_plugin) \
-	libreversevnc.la \
 	libvnc.la
-
-if VINAGRE_HAVE_SELF_IFADDRS
-ifaddrs_sources = \
-	plugins/reverse-vnc/if/getifaddrs.c
-endif
-
-libreversevnc_la_CPPFLAGS = \
-	$(AM_CPPFLAGS) \
-	-I$(top_srcdir) \
-	-DVINAGRE_REVERSE_VNC_DATADIR=\"$(reversevncuidir)\"
-
-libreversevnc_la_SOURCES = \
-	plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c \
-	plugins/reverse-vnc/vinagre-reverse-vnc-listener.c \
-	plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c \
-	$(ifaddrs_sources)
-
-libreversevnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-libreversevnc_la_LIBADD = $(VNC_LIBS)
-
-reversevncuidir = $(VINAGRE_PLUGINS_DATA_DIR)/reverse-vnc
-dist_reversevncui_DATA = plugins/reverse-vnc/reverse-vnc.ui
 
 libvnc_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) \

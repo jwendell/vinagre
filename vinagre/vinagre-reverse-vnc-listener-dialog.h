@@ -18,8 +18,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __VINAGRE_REVERSE_VNC_LISTENER_DIALOG_H__
-#define __VINAGRE_REVERSE_VNC_LISTENER_DIALOG_H__
+#ifndef VINAGRE_REVERSE_VNC_LISTENER_DIALOG_H_
+#define VINAGRE_REVERSE_VNC_LISTENER_DIALOG_H_
 
 G_BEGIN_DECLS
 
@@ -27,5 +27,4 @@ void vinagre_reverse_vnc_listener_dialog_show (GtkWindow *parent);
 
 G_END_DECLS
 
-#endif /* __VINAGRE_REVERSE_VNC_LISTENER_DIALOG_H__ */
-/* vim: set ts=8: */
+#endif /* VINAGRE_REVERSE_VNC_LISTENER_DIALOG_H_ */

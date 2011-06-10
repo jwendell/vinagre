@@ -23,6 +23,7 @@
 
 #include "vinagre-window.h"
 #include "vinagre-notebook.h"
+#include "vinagre-reverse-vnc-listener.h"
 
 G_BEGIN_DECLS
 
@@ -31,6 +32,7 @@ G_BEGIN_DECLS
 struct _VinagreWindowPrivate
 {
   VinagreNotebook *notebook;
+  VinagreReverseVncListener *listener;
   GtkWidget       *fav_panel;
   GtkWidget       *statusbar;	
   guint           generic_message_cid;

@@ -84,6 +84,11 @@ vinagre_window_dispose (GObject *object)
       window->priv->update_recents_menu_ui_id = 0;
     }
 
+    if (window->priv->listener)
+    {
+        g_object_unref (window->priv->listener);
+        window->priv->listener = NULL;
+    }
   G_OBJECT_CLASS (vinagre_window_parent_class)->dispose (object);
 }
 
@@ -742,6 +747,22 @@ create_notebook (VinagreWindow *window)
   gtk_widget_show (GTK_WIDGET (window->priv->notebook));
 }
 
+/* Initialise the reverse connections dialog, and start the listener if it is
+ * enabled. */
+static void
+_init_reverse_connections (VinagreWindow *window)
+{
+    gboolean always;
+    VinagreReverseVncListener *listener = window->priv->listener;
+
+    listener = vinagre_reverse_vnc_listener_get_default ();
+
+    g_object_get (vinagre_prefs_get_default (), "always-enable-listening",
+        &always, NULL);
+    if (always)
+        vinagre_reverse_vnc_listener_start (listener);
+}
+
 static gboolean
 vinagre_window_check_first_run (VinagreWindow *window)
 {
@@ -857,6 +878,7 @@ vinagre_window_init (VinagreWindow *window)
 			  G_CALLBACK (protocol_added_removed_cb),
 			  window);
 
+  _init_reverse_connections (window);
   g_idle_add ((GSourceFunc) vinagre_window_check_first_run, window);
 }
 

@@ -41,6 +41,9 @@ void		vinagre_cmd_remote_take_screenshot (GtkAction     *action,
 
 void		vinagre_cmd_remote_disconnect_all	(GtkAction     *action,
 							 VinagreWindow *window);
+void            vinagre_cmd_remote_vnc_listener (GtkAction *action,
+                                                 VinagreWindow *window);
+
 void		vinagre_cmd_remote_quit	(GtkAction     *action,
 					 VinagreWindow *window);
 

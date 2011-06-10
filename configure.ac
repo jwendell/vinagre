@@ -26,8 +26,7 @@ AC_PROG_SED
 AC_SUBST([VINAGRE_ABI_VERSION], [3.0])
 AC_DEFINE_UNQUOTED([VINAGRE_ABI_VERSION], ["$VINAGRE_ABI_VERSION"], [Vinagre ABI version])
 
-AC_SUBST([PLUGIN_LIBTOOL_FLAGS], ["-module -avoid-version"])
-AC_SUBST([VINAGRE_PLUGINS_DATA_DIR], ["$datadir/vinagre-$VINAGRE_ABI_VERSION/plugins"])
+AC_SUBST([PLUGIN_LIBTOOL_FLAGS], ["-avoid-version"])
 AC_SUBST([VINAGRE_PLUGINS_LIBS_DIR], ["$libdir/vinagre-$VINAGRE_ABI_VERSION/plugins"])
 
 GLIB_DEPS="glib-2.0 >= 2.25.11 gio-unix-2.0 >= 2.25.11"

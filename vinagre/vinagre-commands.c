@@ -219,6 +219,13 @@ vinagre_cmd_remote_disconnect_all (GtkAction     *action,
 }
 
 void
+vinagre_cmd_remote_vnc_listener (GtkAction *action,
+                                 VinagreWindow *window)
+{
+    vinagre_reverse_vnc_listener_dialog_show (window);
+}
+
+void
 vinagre_cmd_remote_quit (GtkAction     *action,
 			  VinagreWindow *window)
 {
