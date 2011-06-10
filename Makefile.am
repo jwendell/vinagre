@@ -271,20 +271,12 @@ libvnc_la_SOURCES = \
 libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libvnc_la_LIBADD = $(VNC_LIBS)
 
-dist_plugin_DATA = plugins/im-status/im-status.js
-
 plugin_in_files = \
 	$(rdp_plugin_in) \
 	$(spice_plugin_in) \
 	$(ssh_plugin_in) \
-	plugins/im-status/im-status.plugin.desktop.in \
 	plugins/reverse-vnc/reverse-vnc.plugin.desktop.in \
 	plugins/vnc/vnc.plugin.desktop.in
-
-# TODO: Fix this ugly workaround.
-plugins/im-status/im-status.plugin: plugins/im-status/im-status.plugin.desktop.in
-	$(MKDIR_P) $(top_builddir)/plugins/im-status
-	$(AM_V_GEN)$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
 %.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
 	$(AM_V_GEN)$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
