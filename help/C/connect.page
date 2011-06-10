@@ -3,10 +3,10 @@
       id="connect">
 
   <info>
-    <link type="guide" xref="index"/>
+    <link type="guide" xref="index#connections"/>
     <link type="seealso" xref="bookmarks"/>
     <title type="sort">1</title>
-    <desc>Learn about connecting to another computer with Vinagre.</desc>
+    <desc>Establish a connection to another computer on your local network.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -16,66 +16,53 @@
     </license>
   </info>
 
-  <title>Connecting to other computers</title>
+  <title>Establishing a connection</title>
 
-  <section id="connect">
-    <title>Establishing a connection</title>
-    <p>To connect to a remote computer, choose <guiseq><gui>Remote</gui>
-    <gui>Connect</gui></guiseq>. The connection dialog is displayed. Choose the
-    <gui>Protocol</gui> and the <gui>Host</gui> for the connection and click the
-    <gui>Connect</gui> button. You will be presented with some other options,
-    depending on which protocol you have selected.</p>
+  <p>This method can be used to connect to other computers on your network.</p>
 
-    <figure>
-      <title>Connect dialog</title>
-      <media type="image" mime="image/png" src="figures/vinagre-connect-dialog.png"/>
-    </figure>
-
-    <p>You can also use the <gui>Find</gui> button to browse available computers
-    on the local network.</p>
-
-    <note>
-      <p>The availabity of the <gui>Find</gui> button depends on the protocol
-      you have selected. <app>Vinagre</app> relies on <app>Avahi</app> to browse
-      for machines on your local network. Also, note that <app>Vinagre</app> can
-      be compiled without <app>Avahi</app> support. In this case, this button
-      will not be displayed.</p>
-    </note>
-
-    <p>Some machines may require a secure connection: an authentication dialog
-    will be displayed, asking for the credentials. The type of credentials
-    depend on the remote host, it may be a password and a username. If you
-    select <gui>Remember this credential</gui>, <app>Vinagre</app> will store
-    the information using <app>GNOME Keyring</app>.</p>
-
+  <steps>
+    <item>
+      <p>Choose <guiseq><gui>Remote</gui><gui>Connect</gui></guiseq>.</p>
+      <figure>
+        <title>Connect dialog</title>
+        <media type="image" mime="image/png" src="figures/vinagre-connect-dialog.png"/>
+      </figure>
+    </item>
+    <item>
+      <p>Choose the <gui>Protocol</gui> and the <gui>Host</gui> for the
+      connection.</p>
+      <note>
+        <p>You can see all available hosts on your local network by clicking
+        the <gui>Find</gui> button. The availabity of the <gui>Find</gui> button
+        depends on the protocol you have selected. <app>Vinagre</app> relies on
+        <app>Avahi</app> to browse for machines on your local network. Also,
+        note that <app>Vinagre</app> can be compiled without <app>Avahi</app>
+        support. In this case, this button will not be displayed.</p>
+      </note>
+    </item>
+    <item>
+      <p>Select the options which you want enabled when the connection is
+      established. Options will vary depending on the protocol which is used.</p>
+    </item>
+    <item>
+      <p>Click the <gui>Connect</gui> button. At this point, the host will be
+      need to confirm that they want the connection established.</p>
+      <note>
+        <p>Some machines may require a secure connection: an authentication
+        dialog will be displayed, asking for the credentials. The type of
+        credentials depend on the remote host, it may be a password and a
+        username. If you select <gui>Remember this credential</gui>,
+        <app>Vinagre</app> will store the information using
+        <app>GNOME Keyring</app>.</p>
+      </note>
     <figure>
       <title>Authentication dialog</title>
       <media type="image" mime="image/png" src="figures/vinagre-auth-needed.png"/>
     </figure>
+    </item>
+  </steps>
 
-    <p>If the connection has been used previously, you can also access it
-    through <guiseq><gui>Remote</gui><gui>Recent Connections</gui></guiseq></p>
-  </section>
-
-  <section id="connect-opening-file">
-    <title>Opening a remote connection file</title>
-
-    <p>Some hosts distribute remote connection files (generally ending with
-    suffix <file>.vnc</file>) instead of using a host address and port. To open
-    a remote connection file, choose <guiseq><gui>Remote</gui>
-    <gui>Open</gui></guiseq>. The file choser dialog is displayed. Select the
-    file you want to open, then click the <gui>Open</gui> button.</p>
-
-    <note style="tip">
-      <p>You can also double-click on a remote connection file in
-      <app>Nautilus</app> to open it with <app>Vinagre</app>.</p>
-    </note>
-  </section>
-
-  <section id="close">
-    <title>Closing a connection</title>
-    <p>To close a connection, choose <guiseq><gui>Remote</gui>
-    <gui>Close</gui></guiseq>.</p>
-  </section>
+  <p>If the connection has been used previously, you can also access it
+  through <guiseq><gui>Remote</gui><gui>Recent Connections</gui></guiseq></p>
 
 </page>

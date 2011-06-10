@@ -3,11 +3,11 @@
       id="reverse-connections">
 
   <info>
-    <link type="guide" xref="index"/>
-    <link type="seealso" xref="using"/>
+    <link type="guide" xref="index#connections"/>
     <link type="seealso" xref="connect"/>
-    <title type="sort">5</title>
-    <desc>Bypassing firewall restrictions on remote host.</desc>
+    <title type="sort">3</title>
+    <desc>Connecting to computers not on your local network: bypassing firewall
+    restrictions on remote host.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -17,43 +17,57 @@
     </license>
   </info>
 
-<title>Reverse Connections…</title>
+  <title>Reverse Connections…</title>
 
-<p>A reverse connection is usually used to bypass firewall restrictions on open
-ports. A firewall usually blocks open ports, but does not block outgoing
-traffic. In a normal forward connection, a client connects to a server through
-the server's open port, but in the case of a reverse connection, the client
-opens the port that the server connects to.</p>
+  <p>A reverse connection is usually used to bypass firewall restrictions on
+  open ports. A firewall usually blocks open ports, but does not block outgoing
+  traffic. In a normal forward connection, a client connects to a server through
+  the server's open port, but in the case of a reverse connection, the client
+  opens the port that the server connects to.</p>
 
-<section id="enable-reverse-connections">
-  <title>Enabling reverse connections</title>
-<p>Open <guiseq><gui>Remote</gui><gui>Reverse Connections...</gui></guiseq> and
-select <gui>Enable Reverse Connections</gui>.</p>
+  <section id="enable-reverse-connections">
+    <title>Enabling reverse connections</title>
+
+    <steps>
+      <item>
+        <p>Open <guiseq><gui>Remote</gui><gui>Reverse Connections...</gui>
+        </guiseq>.</p>
+      </item>
+      <item>
+        <p>Select <gui>Enable Reverse Connections</gui>.</p>
+      </item>
+    </steps>
+
 <!-- TODO: add screenshot
 <figure>
   <title>Reverse Connections dialog</title>
   <media type="image" mime="image/png" src="figures/reverse-connections-dialog.png"/>
 </figure>-->
-</section>
 
-<section id="accessing-behind-firewall">
-  <title>Accessing a remote desktop behind a firewall</title>
-<p>The remote machine needs to connect to your machine using your IP address and
-port number, which are in the <gui>Reverse Connections...</gui> dialog, under
-<gui>Connectivity</gui>.</p>
-<note>
-<p>Currently, <app>Vino</app>, the GNOME VNC server, does not support reverse
-connections (also known as "listen mode"). Some other applications, such as
-<app>UltraVNC</app>, <app>RealVNC</app> and <app>TightVNC</app>, do have support
-for reverse connections.</p>
-</note>
-<p>Once a remote machine connects to your machine, <app>Vinagre</app> will
-establish the reverse connection.</p>
-<note>
-<p>When connecting to a machine which is not on your local network, you will
-will need to provide your externally visible IP address and port number to the
-remote server.</p>
-</note>
-</section>
+  </section>
+
+  <section id="accessing-behind-firewall">
+    <title>Accessing a remote desktop behind a firewall</title>
+
+    <p>The remote machine needs to connect to your machine using your IP address
+    and port number, which are in the <gui>Reverse Connections...</gui> dialog,
+    under <gui>Connectivity</gui>.</p>
+
+    <note>
+      <p>Currently, <app>Vino</app>, the GNOME VNC server, does not support
+      reverse connections (also known as "listen mode"). Some other
+      applications, such as <app>UltraVNC</app>, <app>RealVNC</app> and
+      <app>TightVNC</app>, do have support for reverse connections.</p>
+    </note>
+
+    <p>Once a remote machine connects to your machine, <app>Vinagre</app> will
+    establish the reverse connection.</p>
+
+    <note>
+      <p>When connecting to a machine which is not on your local network, you
+      will need to provide your externally visible IP address and port number to
+      the remote server.</p>
+    </note>
+  </section>
 
 </page>
