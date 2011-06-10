@@ -151,7 +151,6 @@ noinst_plugin_headers = \
 
 if VINAGRE_ENABLE_RDP
 rdp_plugin = librdp.la
-rdp_plugin_in = plugins/rdp/rdp.plugin.desktop.in
 
 librdp_la_SOURCES = \
 	plugins/rdp/vinagre-rdp-plugin.c \
@@ -164,7 +163,6 @@ endif
 
 if VINAGRE_ENABLE_SPICE
 spice_plugin = libspice.la
-spice_plugin_in = plugins/spice/spice.plugin.desktop.in
 
 libspice_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
@@ -183,7 +181,6 @@ endif
 
 if VINAGRE_ENABLE_SSH
 ssh_plugin = libssh.la
-ssh_plugin_in = plugins/ssh/ssh.plugin.desktop.in
 
 libssh_la_SOURCES = \
 	plugins/ssh/vinagre-ssh-plugin.c \
@@ -236,18 +233,6 @@ libvnc_la_SOURCES = \
 
 libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libvnc_la_LIBADD = $(VNC_LIBS)
-
-plugin_in_files = \
-	$(rdp_plugin_in) \
-	$(spice_plugin_in) \
-	$(ssh_plugin_in) \
-	plugins/reverse-vnc/reverse-vnc.plugin.desktop.in \
-	plugins/vnc/vnc.plugin.desktop.in
-
-%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
-	$(AM_V_GEN)$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
-
-nodist_plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 iconthemedir = $(datadir)/icons/hicolor
 mimeicon16dir = $(iconthemedir)/16x16/mimetypes
@@ -362,7 +347,6 @@ dist_noinst_DATA = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
-	$(plugin_in_files) \
 	vinagre.doap
 
 CLEANFILES = \
@@ -370,8 +354,7 @@ CLEANFILES = \
 	$(nodist_mime_DATA) \
 	$(gsettings_SCHEMAS) \
 	$(nodist_pkgconfig_DATA) \
-	$(nodist_service_DATA) \
-	$(nodist_plugin_DATA)
+	$(nodist_service_DATA)
 
 DISTCLEANFILES = \
 	intltool-extract \
