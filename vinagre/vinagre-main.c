@@ -22,10 +22,6 @@
 #include <config.h>
 #endif
 
-#ifdef VINAGRE_HAVE_INTROSPECTION
-#include <girepository.h>
-#endif
-
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <locale.h>
@@ -138,10 +134,6 @@ int main (int argc, char **argv) {
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
-
-#ifdef VINAGRE_HAVE_INTROSPECTION
-  g_option_context_add_group (context, g_irepository_get_option_group ());
-#endif
 
   extensions = vinagre_plugins_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
 

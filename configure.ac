@@ -221,16 +221,6 @@ AS_IF([test "x$enable_ssh" = "xyes"],
   [ACTIVE_PLUGINS="$ACTIVE_PLUGINS,ssh"])
 AC_SUBST([ACTIVE_PLUGINS])
 
-# Introspection
-GOBJECT_INTROSPECTION_CHECK([0.9.3])
-
-AS_IF([test "x$found_introspection" = "xyes"],
-  [enable_introspection=yes
-    AC_DEFINE([VINAGRE_HAVE_INTROSPECTION], [], [Build with GObject Introspection support])],
-  [enable_introspection=no])
-
-AM_CONDITIONAL([VINAGRE_HAVE_INTROSPECTION], [test "x$enable_introspection" = "xyes"])
-
 GNOME_DOC_INIT
 
 GLIB_GSETTINGS

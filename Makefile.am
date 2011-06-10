@@ -16,7 +16,6 @@ common_cppflags = \
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\" \
 	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\" \
 	$(VINAGRE_CFLAGS) \
-	$(INTROSPECTION_CFLAGS) \
 	$(WARN_FLAGS) \
 	$(DISABLE_DEPRECATED_FLAGS)
 
@@ -39,7 +38,6 @@ vinagre_vinagre_LDADD = \
 	libvinagre.la \
 	$(VINAGRE_LIBS) \
 	$(GTKVNC_LIBS) \
-	$(INTROSPECTION_LIBS)
 	$(rdp_plugin) \
 	$(spice_plugin) \
 	$(ssh_plugin) \
@@ -78,10 +76,6 @@ vinagreh_HEADERS = \
 	vinagre/vinagre-cache-prefs.h \
 	vinagre/vinagre-protocol.h \
 	vinagre/vinagre-plugins-engine.h
-
-INTROSPECTION_GIR_INCLUDES = \
-	Gtk-3.0 \
-	libxml2-2.0
 
 # The main library
 noinst_LTLIBRARIES = libvinagre.la
@@ -135,32 +129,6 @@ handwritten_sources += \
 noinst_vinagreh_headers += \
 	vinagre/vinagre-tubes-manager.h \
 	vinagre/vinagre-tube-handler.h
-INTROSPECTION_GIR_INCLUDES += TelepathyGLib-0.12
-endif
-
-CLEANFILES =
-
-# Introspection
-if VINAGRE_HAVE_INTROSPECTION
--include $(INTROSPECTION_MAKEFILE)
-INTROSPECTION_GIRS = Vinagre-3.0.gir
-
-Vinagre-3.0.gir: libvinagre.la
-INTROSPECTION_SCANNER_ARGS = $(common_cppflags) $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
-Vinagre_3_0_gir_LIBS = libvinagre.la
-Vinagre_3_0_gir_FILES = $(vinagreh_HEADERS) $(filter-out pty_open.h, $(noinst_vinagreh_headers)) $(handwritten_sources)
-Vinagre_3_0_gir_INCLUDES = $(INTROSPECTION_GIR_INCLUDES)
-
-girdir = $(pkgdatadir)/gir-1.0
-gir_DATA = $(INTROSPECTION_GIRS)
-
-typelibdir = $(libdir)/vinagre-@VINAGRE_ABI_VERSION@/girepository-1.0
-typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
-
-CLEANFILES += \
-	$(gir_DATA) \
-	$(typelib_DATA)
-
 endif
 
 plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
@@ -405,7 +373,7 @@ dist_noinst_DATA = \
 	$(plugin_in_files) \
 	vinagre.doap
 
-CLEANFILES += \
+CLEANFILES = \
 	$(nodist_desktop_DATA) \
 	$(nodist_mime_DATA) \
 	$(gsettings_SCHEMAS) \
