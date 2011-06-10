@@ -22,7 +22,6 @@
 #define __VINAGRE_PROTOCOL_H__
 
 #include <glib-object.h>
-#include <libpeas/peas.h>
 
 #include "vinagre-window.h"
 

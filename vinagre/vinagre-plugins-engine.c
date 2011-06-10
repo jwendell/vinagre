@@ -18,21 +18,19 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <girepository.h>
-
 #include "vinagre-plugins-engine.h"
 #include "vinagre-dirs.h"
 #include "vinagre-debug.h"
 #include "vinagre-protocol.h"
 #include "vinagre-prefs.h"
+#include "vinagre-static-extension.h"
 
-G_DEFINE_TYPE (VinagrePluginsEngine, vinagre_plugins_engine, PEAS_TYPE_ENGINE)
+G_DEFINE_TYPE (VinagrePluginsEngine, vinagre_plugins_engine, G_TYPE_OBJECT)
 
 struct _VinagrePluginsEnginePrivate
 {
   gboolean loading_plugin_list : 1;
   GHashTable *protocols;
-  PeasExtensionSet *extensions;
 };
 
 enum
@@ -46,103 +44,36 @@ static guint signals[LAST_SIGNAL] = { 0 };
 VinagrePluginsEngine *default_engine = NULL;
 
 static void
-vinagre_plugins_engine_load_extensions (VinagrePluginsEngine *engine)
+vinagre_plugins_engine_add_protocol (VinagrePluginsEngine *engine,
+    const gchar *name, GObject *protocol)
 {
- GStrv plugins;
+    GObject *previous_ext = g_hash_table_lookup (engine->priv->protocols, name);
 
-  g_object_get (vinagre_prefs_get_default (),
-		"active-plugins", &plugins,
-		NULL);
-
-  engine->priv->loading_plugin_list = TRUE;
-  peas_engine_set_loaded_plugins (PEAS_ENGINE (engine), (const gchar **)plugins);
-  engine->priv->loading_plugin_list = FALSE;
-  g_strfreev (plugins);
-}
-
-static void
-vinagre_plugins_engine_extension_added (PeasExtensionSet     *extensions,
-					PeasPluginInfo	     *info,
-					PeasExtension	     *exten,
-					VinagrePluginsEngine *engine)
-{
-  PeasExtension *previous_ext;
-  const gchar *protocol = NULL;
-
-  peas_extension_call (exten, "get_protocol", &protocol);
-
-  if (!protocol)
+    if (previous_ext)
     {
-      g_warning ("Unable to determine a protocol for the plugin %s",
-                 peas_plugin_info_get_name (info));
-      return;
+        g_warning ("The protocol %s was already registered", name);
+        return;
     }
 
-  previous_ext = g_hash_table_lookup (engine->priv->protocols, protocol);
-
-  if (previous_ext)
-    {
-      g_warning ("The protocol %s was already registered by the plugin %s",
-		 protocol,
-		 peas_plugin_info_get_name (info));
-      return;
-    }
-
-  g_hash_table_insert (engine->priv->protocols, (gpointer)protocol, exten);
-  g_signal_emit (engine, signals[PROTOCOL_ADDED], 0, exten);
+    g_hash_table_insert (engine->priv->protocols, (gpointer)name, protocol);
+    g_signal_emit (engine, signals[PROTOCOL_ADDED], 0, protocol);
 }
 
-static void
-vinagre_plugins_engine_extension_removed (PeasExtensionSet     *extensions,
-					  PeasPluginInfo       *info,
-					  PeasExtension	       *exten,
-					  VinagrePluginsEngine *engine)
+gboolean
+vinagre_plugins_engine_load_extension (VinagrePluginsEngine *engine,
+    const gchar *name)
 {
-  const gchar *protocol = NULL;
-
-  peas_extension_call (exten, "get_protocol", &protocol);
-
-  if (!protocol)
-    {
-      g_warning ("Unable to determine a protocol for the plugin %s",
-                 peas_plugin_info_get_name (info));
-      return;
-    }
-
-  g_hash_table_remove (engine->priv->protocols, (gpointer)protocol);
-  g_signal_emit (engine, signals[PROTOCOL_REMOVED], 0, exten);
-}
-
-static void
-vinagre_plugins_engine_constructed (GObject *object)
-{
-  VinagrePluginsEngine *engine;
-
-  if (G_OBJECT_CLASS (vinagre_plugins_engine_parent_class)->constructed)
-    G_OBJECT_CLASS (vinagre_plugins_engine_parent_class)->constructed (object);
-
-  engine = VINAGRE_PLUGINS_ENGINE (object);
-  engine->priv->extensions = peas_extension_set_new (PEAS_ENGINE (engine),
-						     VINAGRE_TYPE_PROTOCOL,
-						     NULL);
-  g_signal_connect (engine->priv->extensions,
-		    "extension-added",
-		    G_CALLBACK (vinagre_plugins_engine_extension_added),
-		    engine);
-  g_signal_connect (engine->priv->extensions,
-		    "extension-removed",
-		    G_CALLBACK (vinagre_plugins_engine_extension_removed),
-		    engine);
-
-  vinagre_plugins_engine_load_extensions (engine);
+    g_warn_if_reached ();
+    return FALSE;
 }
 
 static void
 vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
 {
-  gchar *tmp, *typelib_dir;
-  GError *error = NULL;
-  PeasEngine *p_engine = PEAS_ENGINE (engine);
+  guint n_children;
+  GType child, *children;
+  GObject *object;
+  const gchar *protocol;
 
   engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
 					      VINAGRE_TYPE_PLUGINS_ENGINE,
@@ -151,34 +82,17 @@ vinagre_plugins_engine_init (VinagrePluginsEngine *engine)
   engine->priv->loading_plugin_list = FALSE;
   engine->priv->protocols = g_hash_table_new (g_str_hash, g_str_equal);
 
-  /* This should be moved to libpeas */
-  g_irepository_require (g_irepository_get_default (),
-			 "Peas", "1.0", 0, NULL);
-  g_irepository_require (g_irepository_get_default (),
-			 "PeasUI", "1.0", 0, NULL);
+  children = g_type_children (VINAGRE_TYPE_STATIC_EXTENSION, &n_children);
+  while (n_children > 0 )
+  {
+    n_children--;
+    child = children[n_children];
+    object = g_object_new (child, NULL);
+    protocol = vinagre_protocol_get_protocol (VINAGRE_PROTOCOL (object));
+    vinagre_plugins_engine_add_protocol (engine, protocol, object);
+  }
 
-  /* Require vinagre's typelib. */
-  tmp = vinagre_dirs_get_vinagre_lib_dir ();
-  typelib_dir = g_build_filename (tmp,
-				  "girepository-1.0",
-				  NULL);
-  g_irepository_require_private (g_irepository_get_default (),
-				 typelib_dir, "Vinagre", "3.0", 0, &error);
-  g_free (typelib_dir);
-  g_free (tmp);
-  if (error)
-    {
-      g_print ("error registering vinagre typelib: %s\n", error->message);
-      g_error_free (error);
-    }
-
-  tmp = vinagre_dirs_get_user_plugins_dir ();
-  peas_engine_add_search_path (p_engine, tmp, tmp);
-  g_free (tmp);
-
-  tmp = vinagre_dirs_get_vinagre_plugins_dir ();
-  peas_engine_add_search_path (p_engine, tmp, tmp);
-  g_free (tmp);
+  g_free (children);
 }
 
 static void
@@ -192,58 +106,11 @@ vinagre_plugins_engine_finalize (GObject *object)
 }
 
 static void
-save_plugin_list (VinagrePluginsEngine *engine)
-{
-  gchar **loaded_plugins;
-
-  loaded_plugins = peas_engine_get_loaded_plugins (PEAS_ENGINE (engine));
-
-  g_object_set (vinagre_prefs_get_default (),
-		"active-plugins", loaded_plugins,
-		NULL);
-
-  g_strfreev (loaded_plugins);
-}
-
-static void
-vinagre_plugins_engine_load_plugin (PeasEngine	   *engine,
-				    PeasPluginInfo *info)
-{
-  VinagrePluginsEngine *vengine = VINAGRE_PLUGINS_ENGINE (engine);
-
-  PEAS_ENGINE_CLASS (vinagre_plugins_engine_parent_class)->load_plugin (engine, info);
-
-  /* We won't save the plugin list if we are currently loading the
-   * plugins from the saved list */
-  if (!vengine->priv->loading_plugin_list && peas_plugin_info_is_loaded (info))
-    save_plugin_list (vengine);
-}
-
-static void
-vinagre_plugins_engine_unload_plugin (PeasEngine     *engine,
-				      PeasPluginInfo *info)
-{
-  VinagrePluginsEngine *vengine = VINAGRE_PLUGINS_ENGINE (engine);
-
-  PEAS_ENGINE_CLASS (vinagre_plugins_engine_parent_class)->unload_plugin (engine, info);
-
-  /* We won't save the plugin list if we are currently unloading the
-   * plugins from the saved list */
-  if (!vengine->priv->loading_plugin_list && !peas_plugin_info_is_loaded (info))
-    save_plugin_list (vengine);
-}
-
-static void
 vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
 {
-  PeasEngineClass *engine_class = PEAS_ENGINE_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = vinagre_plugins_engine_finalize;
-  object_class->constructed = vinagre_plugins_engine_constructed;
-
-  engine_class->load_plugin = vinagre_plugins_engine_load_plugin;
-  engine_class->unload_plugin = vinagre_plugins_engine_unload_plugin;
 
   signals[PROTOCOL_ADDED] =
 		g_signal_new ("protocol-added",
@@ -254,7 +121,7 @@ vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      PEAS_TYPE_EXTENSION);
+			      VINAGRE_TYPE_PROTOCOL);
 
   signals[PROTOCOL_REMOVED] =
 		g_signal_new ("protocol-removed",
@@ -265,7 +132,7 @@ vinagre_plugins_engine_class_init (VinagrePluginsEngineClass *klass)
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      PEAS_TYPE_EXTENSION);
+			      VINAGRE_TYPE_PROTOCOL);
 
   g_type_class_add_private (klass, sizeof (VinagrePluginsEnginePrivate));
 }
@@ -305,7 +172,7 @@ vinagre_plugins_engine_get_plugin_by_protocol (VinagrePluginsEngine *engine,
 /**
  * vinagre_plugins_engine_get_plugins_by_protocol:
  *
- * Return value: (element-type utf8 PeasExtension) (transfer none):
+ * Return value: (element-type utf8 GObject) (transfer none):
  */
 GHashTable *
 vinagre_plugins_engine_get_plugins_by_protocol (VinagrePluginsEngine *engine)

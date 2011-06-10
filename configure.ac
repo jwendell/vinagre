@@ -35,7 +35,6 @@ GTHREAD_DEPS="gthread-2.0 >= 2.0.0"
 GTK_DEPS="gtk+-3.0 >= 3.0.3"
 GTK_VNC_DEPS="gtk-vnc-2.0 >= 0.4.3"
 XML2_DEPS="libxml-2.0 >= 2.6.31"
-PEAS_DEPS="libpeas-1.0 >= 0.7.2 libpeas-gtk-1.0 >= 0.7.2"
 
 # Whether to enable support for SSH.
 SSH_DEPS="vte-2.90 >= 0.20 $XML2_DEPS"
@@ -165,7 +164,7 @@ AS_IF([test "x$have_telepathy" = "xyes"],
 AM_CONDITIONAL([VINAGRE_HAVE_TELEPATHY_GLIB], [test "x$have_telepathy" = "xyes"])
 
 # Check required libraries
-PKG_CHECK_MODULES([VINAGRE], [$GLIB_DEPS $GTHREAD_DEPS $GTK_DEPS gnome-keyring-1 $XML2_DEPS $PEAS_DEPS $AVAHI_DEPS $TELEPATHY_GLIB_DEPS $SSH_DEPS])
+PKG_CHECK_MODULES([VINAGRE], [$GLIB_DEPS $GTHREAD_DEPS $GTK_DEPS gnome-keyring-1 $XML2_DEPS $AVAHI_DEPS $TELEPATHY_GLIB_DEPS $SSH_DEPS])
 
 PKG_CHECK_MODULES([VNC], [$GTK_VNC_DEPS $GTK_DEPS $XML2_DEPS])
 

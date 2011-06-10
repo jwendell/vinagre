@@ -21,8 +21,8 @@
 #ifndef __VINAGRE_PLUGINS_ENGINE_H__
 #define __VINAGRE_PLUGINS_ENGINE_H__
 
-#include <glib.h>
-#include <libpeas/peas.h>
+#include <glib-object.h>
+
 #include "vinagre-protocol.h"
 
 G_BEGIN_DECLS
@@ -40,13 +40,13 @@ typedef struct _VinagrePluginsEngineClass	VinagrePluginsEngineClass;
 
 struct _VinagrePluginsEngine
 {
-  PeasEngine parent;
+  GObject parent;
   VinagrePluginsEnginePrivate *priv;
 };
 
 struct _VinagrePluginsEngineClass
 {
-  PeasEngineClass parent_class;
+  GObjectClass parent_class;
 };
 
 GType			 vinagre_plugins_engine_get_type	(void) G_GNUC_CONST;
@@ -55,6 +55,8 @@ VinagrePluginsEngine	*vinagre_plugins_engine_get_default	(void);
 VinagreProtocol		*vinagre_plugins_engine_get_plugin_by_protocol	(VinagrePluginsEngine *engine,
 									 const gchar          *protocol);
 GHashTable		*vinagre_plugins_engine_get_plugins_by_protocol	(VinagrePluginsEngine *engine);
+gboolean                 vinagre_plugins_engine_load_extension  (VinagrePluginsEngine *engine,
+                                                                 const gchar *name);
 G_END_DECLS
 
 #endif  /* __VINAGRE_PLUGINS_ENGINE_H__ */

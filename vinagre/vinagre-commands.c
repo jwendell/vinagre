@@ -240,7 +240,7 @@ vinagre_cmd_edit_plugins (GtkAction     *action,
 {
   g_return_if_fail (VINAGRE_IS_WINDOW (window));
 
-  vinagre_plugin_dialog_show (GTK_WINDOW (window));
+  g_warn_if_reached ();
 }
 
 /* View Menu */

@@ -51,7 +51,6 @@ noinst_vinagreh_headers = \
 	vinagre/view/autoDrawer.h \
 	vinagre/view/drawer.h \
 	vinagre/view/ovBox.h \
-	vinagre/vinagre-plugin-dialog.h \
 	vinagre/vinagre-window-private.h \
 	vinagre/pty_open.h \
 	vinagre/vinagre-options.h
@@ -82,9 +81,7 @@ vinagreh_HEADERS = \
 
 INTROSPECTION_GIR_INCLUDES = \
 	Gtk-3.0 \
-	libxml2-2.0 \
-	Peas-1.0 \
-	PeasGtk-1.0
+	libxml2-2.0
 
 # The main library
 noinst_LTLIBRARIES = libvinagre.la
@@ -105,7 +102,6 @@ handwritten_sources = \
 	vinagre/vinagre-dirs.c \
 	vinagre/vinagre-fav.c \
 	vinagre/vinagre-notebook.c \
-	vinagre/vinagre-plugin-dialog.c \
 	vinagre/vinagre-prefs.c \
 	vinagre/vinagre-static-extension.c \
 	vinagre/vinagre-tab.c \
@@ -152,7 +148,7 @@ INTROSPECTION_GIRS = Vinagre-3.0.gir
 Vinagre-3.0.gir: libvinagre.la
 INTROSPECTION_SCANNER_ARGS = $(common_cppflags) $(VINAGRE_CFLAGS) -I$(top_srcdir) --warn-all
 Vinagre_3_0_gir_LIBS = libvinagre.la
-Vinagre_3_0_gir_FILES = $(vinagreh_HEADERS) $(filter-out pty_open.h vinagre-plugin-dialog.h, $(noinst_vinagreh_headers)) $(handwritten_sources)
+Vinagre_3_0_gir_FILES = $(vinagreh_HEADERS) $(filter-out pty_open.h, $(noinst_vinagreh_headers)) $(handwritten_sources)
 Vinagre_3_0_gir_INCLUDES = $(INTROSPECTION_GIR_INCLUDES)
 
 girdir = $(pkgdatadir)/gir-1.0

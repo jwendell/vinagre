@@ -47,9 +47,6 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
   /* Edit menu */
   { "EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
     N_("Edit the application preferences"), G_CALLBACK (vinagre_cmd_edit_preferences) },
-  /* TODO: Use a more appropriate icon. Libpeas uses "libpeas-plugin".  */
-  { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
-    N_("Select active plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
 
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
