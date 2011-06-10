@@ -66,6 +66,7 @@ vinagreh_HEADERS = \
 	vinagre/vinagre-fav.h \
 	vinagre/vinagre-notebook.h \
 	vinagre/vinagre-prefs.h \
+	vinagre/vinagre-static-extension.h \
 	vinagre/vinagre-tab.h \
 	vinagre/vinagre-ui.h \
 	vinagre/vinagre-window.h \
@@ -102,6 +103,7 @@ handwritten_sources = \
 	vinagre/vinagre-notebook.c \
 	vinagre/vinagre-plugin-dialog.c \
 	vinagre/vinagre-prefs.c \
+	vinagre/vinagre-static-extension.c \
 	vinagre/vinagre-tab.c \
 	vinagre/vinagre-utils.vala \
 	vinagre/vinagre-window.c \
