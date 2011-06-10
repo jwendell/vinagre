@@ -229,7 +229,6 @@ AC_CONFIG_FILES([
 Makefile
 data/vinagre.desktop.in
 data/vinagre-file.desktop.in
-data/vinagre-${VINAGRE_ABI_VERSION}.pc:data/vinagre.pc.in
 help/Makefile
 po/Makefile.in
 ])

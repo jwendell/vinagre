@@ -302,9 +302,6 @@ uninstall-update-icon-cache:
 	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
 dist_man_MANS = data/vinagre.1
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = data/vinagre-@VINAGRE_ABI_VERSION@.pc
-
 dist_pkgdata_DATA = \
 	data/vinagre-ui.xml \
 	data/GNOME_VinagreApplet.xml \
@@ -362,7 +359,6 @@ dist_noinst_DATA = \
 	$(noinst_vinagreh_headers) \
 	$(noinst_plugin_headers) \
 	ChangeLog.pre-git \
-	data/vinagre.pc.in \
 	data/vinagre-mime.xml.in \
 	$(desktop_in_files) \
 	$(gsettings_in_file) \
