@@ -43,39 +43,35 @@ vinagre_vinagre_LDADD = \
 	$(ssh_plugin) \
 	libvnc.la
 
-vinagrehdir = $(includedir)/vinagre-@VINAGRE_ABI_VERSION@/vinagre
-
 noinst_vinagreh_headers = \
 	vinagre/view/autoDrawer.h \
 	vinagre/view/drawer.h \
 	vinagre/view/ovBox.h \
 	vinagre/vinagre-window-private.h \
 	vinagre/pty_open.h \
-	vinagre/vinagre-options.h
-
-vinagreh_HEADERS = \
 	vinagre/vinagre-bookmarks-entry.h \
 	vinagre/vinagre-bookmarks.h \
 	vinagre/vinagre-bookmarks-migration.h \
 	vinagre/vinagre-bookmarks-tree.h \
 	vinagre/vinagre-bookmarks-ui.h \
+	vinagre/vinagre-cache-prefs.h \
 	vinagre/vinagre-commands.h \
 	vinagre/vinagre-connect.h \
 	vinagre/vinagre-connection.h \
 	vinagre/vinagre-debug.h \
 	vinagre/vinagre-dirs.h \
+	vinagre/vinagre-dnd.h \
 	vinagre/vinagre-fav.h \
 	vinagre/vinagre-notebook.h \
+	vinagre/vinagre-options.h \
+	vinagre/vinagre-plugins-engine.h \
 	vinagre/vinagre-prefs.h \
+	vinagre/vinagre-protocol.h \
 	vinagre/vinagre-static-extension.h \
 	vinagre/vinagre-tab.h \
 	vinagre/vinagre-ui.h \
 	vinagre/vinagre-window.h \
-	vinagre/vinagre-dnd.h \
-	vinagre/vinagre-ssh.h \
-	vinagre/vinagre-cache-prefs.h \
-	vinagre/vinagre-protocol.h \
-	vinagre/vinagre-plugins-engine.h
+	vinagre/vinagre-ssh.h
 
 # The main library
 noinst_LTLIBRARIES = libvinagre.la
