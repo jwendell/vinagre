@@ -36,12 +36,12 @@
 #include "vinagre-vnc-tab.h"
 
 static void vinagre_vnc_protocol_iface_init (VinagreProtocolInterface *iface);
-G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreVncPlugin,
-				vinagre_vnc_plugin,
-				PEAS_TYPE_EXTENSION_BASE,
-				0,
-				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
-							       vinagre_vnc_protocol_iface_init))
+G_DEFINE_TYPE_EXTENDED (VinagreVncPlugin,
+			vinagre_vnc_plugin,
+			VINAGRE_TYPE_STATIC_EXTENSION,
+			0,
+			G_IMPLEMENT_INTERFACE (VINAGRE_TYPE_PROTOCOL,
+					       vinagre_vnc_protocol_iface_init))
 
 static const GOptionEntry vinagre_vnc_args[] =
 {
@@ -410,13 +410,11 @@ vinagre_vnc_protocol_iface_init (VinagreProtocolInterface *iface)
   iface->get_file_filter = impl_get_file_filter;
 }
 
-G_MODULE_EXPORT void
-peas_register_types (PeasObjectModule *module)
+__attribute__((constructor)) void
+vnc_register_types (void)
 {
-  vinagre_vnc_plugin_register_type (G_TYPE_MODULE (module));
-  peas_object_module_register_extension_type (module,
-					      VINAGRE_TYPE_PROTOCOL,
-					      VINAGRE_TYPE_VNC_PLUGIN);
+  g_type_init ();
+  volatile dontoptimiseaway = vinagre_vnc_plugin_get_type ();
 }
 
 /* vim: set ts=8: */

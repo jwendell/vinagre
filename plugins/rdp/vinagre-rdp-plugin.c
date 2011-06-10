@@ -34,12 +34,12 @@
 
 static void vinagre_rdp_protocol_iface_init (VinagreProtocolInterface *iface);
 
-G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreRdpPlugin,
-				vinagre_rdp_plugin,
-				PEAS_TYPE_EXTENSION_BASE,
-				0,
-				G_IMPLEMENT_INTERFACE_DYNAMIC (VINAGRE_TYPE_PROTOCOL,
-							       vinagre_rdp_protocol_iface_init))
+G_DEFINE_TYPE_EXTENDED (VinagreRdpPlugin,
+			vinagre_rdp_plugin,
+			VINAGRE_TYPE_STATIC_EXTENSION,
+			0,
+			G_IMPLEMENT_INTERFACE (VINAGRE_TYPE_PROTOCOL,
+					       vinagre_rdp_protocol_iface_init))
 
 static const gchar *
 impl_get_protocol (VinagreProtocol *plugin)
@@ -144,13 +144,11 @@ vinagre_rdp_plugin_class_init (VinagreRdpPluginClass *klass)
 {
 }
 
-G_MODULE_EXPORT void
-peas_register_types (PeasObjectModule *module)
+__attribute__((constructor)) void
+rdp_register_types (void)
 {
-  vinagre_rdp_plugin_register_type (G_TYPE_MODULE (module));
-  peas_object_module_register_extension_type (module,
-					      VINAGRE_TYPE_PROTOCOL,
-					      VINAGRE_TYPE_RDP_PLUGIN);
+  g_type_init ();
+  volatile dontoptimiseaway = vinagre_rdp_plugin_get_type ();
 }
 
 /* vim: set ts=8: */

@@ -23,7 +23,8 @@
 
 #include <glib.h>
 #include <glib-object.h>
-#include <libpeas/peas.h>
+
+#include "vinagre/vinagre-static-extension.h"
 
 G_BEGIN_DECLS
 
@@ -42,17 +43,15 @@ typedef struct _VinagreSshPluginClass	VinagreSshPluginClass;
 
 struct _VinagreSshPlugin
 {
-  PeasExtensionBase parent_instance;
+  VinagreStaticExtension parent_instance;
 };
 
 struct _VinagreSshPluginClass
 {
-  PeasExtensionBaseClass parent_class;
+  VinagreStaticExtensionClass parent_class;
 };
 
 GType vinagre_ssh_plugin_get_type (void) G_GNUC_CONST;
-
-G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
 
 G_END_DECLS
 

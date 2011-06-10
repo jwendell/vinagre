@@ -34,12 +34,12 @@
 #define WINDOW_DATA_KEY "VinagreVNCPluginWindowData"
 
 static void vnc_activatable_iface_init (PeasActivatableInterface *iface);
-G_DEFINE_DYNAMIC_TYPE_EXTENDED (VinagreReverseVncPlugin,
-				vinagre_reverse_vnc_plugin,
-				PEAS_TYPE_EXTENSION_BASE,
-				0,
-				G_IMPLEMENT_INTERFACE_DYNAMIC (PEAS_TYPE_ACTIVATABLE,
-							       vnc_activatable_iface_init))
+G_DEFINE_TYPE_EXTENDED (VinagreReverseVncPlugin,
+			vinagre_reverse_vnc_plugin,
+			VINAGRE_TYPE_STATIC_EXTENSION,
+			0,
+			G_IMPLEMENT_INTERFACE (VINAGRE_TYPE_ACTIVATABLE,
+					       vnc_activatable_iface_init))
 
 struct _VinagreReverseVncPluginPrivate
 {
@@ -234,13 +234,11 @@ vnc_activatable_iface_init (PeasActivatableInterface *iface)
   iface->deactivate = impl_deactivate;
 }
 
-G_MODULE_EXPORT void
-peas_register_types (PeasObjectModule *module)
+__attribute__((constructor)) void
+reverse_vnc_register_types (void)
 {
-  vinagre_reverse_vnc_plugin_register_type (G_TYPE_MODULE (module));
-  peas_object_module_register_extension_type (module,
-					      PEAS_TYPE_ACTIVATABLE,
-					      VINAGRE_TYPE_REVERSE_VNC_PLUGIN);
+  g_type_init ();
+  volatile dontoptimiseaway = vinagre_reverse_vnc_plugin_get_type ();
 }
 
 /* vim: set ts=8: */

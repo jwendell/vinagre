@@ -40,6 +40,10 @@ vinagre_vinagre_LDADD = \
 	$(VINAGRE_LIBS) \
 	$(GTKVNC_LIBS) \
 	$(INTROSPECTION_LIBS)
+	$(rdp_plugin) \
+	$(spice_plugin) \
+	$(ssh_plugin) \
+	libvnc.la
 
 vinagrehdir = $(includedir)/vinagre-@VINAGRE_ABI_VERSION@/vinagre
 
