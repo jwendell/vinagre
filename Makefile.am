@@ -270,7 +270,6 @@ dist_man_MANS = data/vinagre.1
 
 dist_pkgdata_DATA = \
 	data/vinagre-ui.xml \
-	data/GNOME_VinagreApplet.xml \
 	data/vinagre.ui \
 	data/vinagre-fav-ui.xml
 
