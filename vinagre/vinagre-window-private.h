@@ -33,12 +33,9 @@ struct _VinagreWindowPrivate
 {
   VinagreNotebook *notebook;
   VinagreReverseVncListener *listener;
-  GtkWidget       *fav_panel;
   GtkWidget       *statusbar;	
   guint           generic_message_cid;
   guint           tip_message_cid;
-
-  GtkWidget       *hpaned;
 
   /* Menus & Toolbars */
   GtkUIManager   *manager;
@@ -60,12 +57,10 @@ struct _VinagreWindowPrivate
   gint            width;
   gint            height;
   GdkWindowState  window_state;
-  gint		  side_panel_size;
 
   gboolean        fullscreen;
   gboolean        toolbar_visible;
   gboolean        statusbar_visible;
-  gboolean        fav_panel_visible;
   gboolean        dispose_has_run;
 };
 
@@ -73,4 +68,3 @@ struct _VinagreWindowPrivate
 G_END_DECLS
 
 #endif  /* __VINAGRE_WINDOW_PRIVATE_H__  */
-/* vim: set ts=8: */

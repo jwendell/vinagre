@@ -68,7 +68,6 @@ noinst_vinagreh_headers = \
 	vinagre/vinagre-debug.h \
 	vinagre/vinagre-dirs.h \
 	vinagre/vinagre-dnd.h \
-	vinagre/vinagre-fav.h \
 	vinagre/vinagre-notebook.h \
 	vinagre/vinagre-options.h \
 	vinagre/vinagre-plugins-engine.h \
@@ -99,7 +98,6 @@ handwritten_sources = \
 	vinagre/vinagre-connection.c \
 	vinagre/vinagre-debug.c \
 	vinagre/vinagre-dirs.c \
-	vinagre/vinagre-fav.c \
 	vinagre/vinagre-notebook.c \
 	vinagre/vinagre-prefs.c \
 	vinagre/vinagre-reverse-vnc-listener.c \
@@ -270,8 +268,7 @@ dist_man_MANS = data/vinagre.1
 
 dist_pkgdata_DATA = \
 	data/vinagre-ui.xml \
-	data/vinagre.ui \
-	data/vinagre-fav-ui.xml
+	data/vinagre.ui
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications

@@ -66,11 +66,7 @@ static const GtkToggleActionEntry vinagre_always_sensitive_toggle_entries[] =
 
   { "ViewStatusbar", NULL, N_("_Statusbar"), NULL,
     N_("Show or hide the statusbar"),
-    G_CALLBACK (vinagre_cmd_view_show_statusbar), FALSE },
-
-  { "ViewSidePanel", NULL, N_("Side _Pane"), "F9",
-    N_("Show or hide the side pane"),
-    G_CALLBACK (vinagre_cmd_view_show_fav_panel), FALSE }
+    G_CALLBACK (vinagre_cmd_view_show_statusbar), FALSE }
 };
 
 static const GtkActionEntry vinagre_remote_connected_entries[] =
@@ -106,4 +102,3 @@ static const GtkToggleActionEntry vinagre_remote_initialized_toggle_entries[] =
 G_END_DECLS
 
 #endif  /* __VINAGRE_UI_H__  */
-/* vim: set ts=8: */

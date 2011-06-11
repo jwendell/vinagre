@@ -34,7 +34,6 @@
 #include "vinagre-connect.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-bookmarks-ui.h"
-#include "vinagre-fav.h"
 #include "vinagre-window-private.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
@@ -274,19 +273,6 @@ vinagre_cmd_view_show_statusbar	(GtkAction     *action,
   vinagre_cache_prefs_set_boolean ("window",
 				   "statusbar-visible",
 				   gtk_widget_get_visible (window->priv->statusbar));
-}
-
-void
-vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
-				 VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  _toggle_widget_visible (window->priv->fav_panel);
-
-  vinagre_cache_prefs_set_boolean ("window",
-				   "side-panel-visible",
-				   gtk_widget_get_visible (window->priv->fav_panel));
 }
 
 void

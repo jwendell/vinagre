@@ -34,7 +34,6 @@
 
 #include "vinagre-window.h"
 #include "vinagre-notebook.h"
-#include "vinagre-fav.h"
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-bookmarks.h"
@@ -111,9 +110,6 @@ vinagre_window_show_hide_controls (VinagreWindow *window)
 {
   if (window->priv->fullscreen)
     {
-      window->priv->fav_panel_visible = gtk_widget_get_visible (window->priv->fav_panel);
-      gtk_widget_hide (window->priv->fav_panel);
-
       window->priv->toolbar_visible = gtk_widget_get_visible (window->priv->toolbar);
       gtk_widget_hide (window->priv->toolbar);
 
@@ -127,9 +123,6 @@ vinagre_window_show_hide_controls (VinagreWindow *window)
     }
   else
     {
-      if (window->priv->fav_panel_visible)
-        gtk_widget_show_all (window->priv->fav_panel);
-
       if (window->priv->toolbar_visible)
         gtk_widget_show_all (window->priv->toolbar);
 
@@ -471,16 +464,6 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   show_hide_accels (window);
 }
 
-static void
-fav_panel_size_allocate (GtkWidget     *widget,
-			 GtkAllocation *allocation,
-			 VinagreWindow *window)
-{
-  window->priv->side_panel_size = allocation->width;
-  if (window->priv->side_panel_size > 0)
-    vinagre_cache_prefs_set_integer ("window", "side-panel-size", window->priv->side_panel_size);
-}
-
 /*
  * Doubles underscore to avoid spurious menu accels.
  */
@@ -600,10 +583,6 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 	    g_object_set_data (G_OBJECT (action), "conn", conn);
 	    gtk_action_group_add_action (p->bookmarks_list_action_group,
 					 action);
-	    g_signal_connect (action,
-			     "activate",
-			     G_CALLBACK (vinagre_fav_bookmarks_open),
-			     window->priv->fav_panel);
 
 	    path = g_strdup_printf ("/MenuBar/BookmarksMenu/%s%s", group, parent?parent:"");
 	    gtk_ui_manager_add_ui (p->manager,
@@ -641,9 +620,6 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
   actions = gtk_action_group_list_actions (p->bookmarks_list_action_group);
   for (l = actions; l != NULL; l = l->next)
     {
-      g_signal_handlers_disconnect_by_func (GTK_ACTION (l->data),
-					    G_CALLBACK (vinagre_fav_bookmarks_open),
-					    window->priv->fav_panel);
       gtk_action_group_remove_action (p->bookmarks_list_action_group,
 				      GTK_ACTION (l->data));
     }
@@ -661,36 +637,10 @@ vinagre_window_update_bookmarks_list_menu (VinagreWindow *window)
 }
 
 static void
-create_side_panel (VinagreWindow *window)
-{
-  window->priv->fav_panel = vinagre_fav_new (window);
-
-  gtk_paned_pack1 (GTK_PANED (window->priv->hpaned), 
-		   window->priv->fav_panel, 
-		   FALSE, 
-		   FALSE);
-
-  window->priv->side_panel_size = vinagre_cache_prefs_get_integer ("window", "side-panel-size", 200);
-  gtk_paned_set_position (GTK_PANED (window->priv->hpaned), window->priv->side_panel_size);
-
-  g_signal_connect (window->priv->fav_panel,
-		    "size-allocate",
-		    G_CALLBACK (fav_panel_size_allocate),
-		    window);
-}
-
-static void
 init_widgets_visibility (VinagreWindow *window)
 {
   GtkAction *action;
   gboolean visible;
-
-  /* side panel visibility */
-  action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					"ViewSidePanel");
-  visible = vinagre_cache_prefs_get_boolean ("window", "side-panel-visible", TRUE);
-  if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
   /* toolbar visibility */
   action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
@@ -735,16 +685,14 @@ create_statusbar (VinagreWindow *window,
 }
 
 static void
-create_notebook (VinagreWindow *window)
+_create_notebook (VinagreWindow *window, GtkWidget *main_box)
 {
-  window->priv->notebook = vinagre_notebook_new (window);
+    window->priv->notebook = vinagre_notebook_new (window);
 
-  gtk_paned_pack2 (GTK_PANED (window->priv->hpaned), 
-  		   GTK_WIDGET (window->priv->notebook),
-  		   TRUE, 
-  		   FALSE);
+    gtk_box_pack_start (GTK_BOX (main_box), GTK_WIDGET (window->priv->notebook),
+        TRUE, FALSE, 0);
 
-  gtk_widget_show (GTK_WIDGET (window->priv->notebook));
+    gtk_widget_show (GTK_WIDGET (window->priv->notebook));
 }
 
 /* Initialise the reverse connections dialog, and start the listener if it is
@@ -836,21 +784,8 @@ vinagre_window_init (VinagreWindow *window)
   /* Add status bar */
   create_statusbar (window, main_box);
 
-  /* Add the main area */
-  window->priv->hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-  gtk_box_pack_start (GTK_BOX (main_box), 
-  		      window->priv->hpaned, 
-  		      TRUE, 
-  		      TRUE, 
-  		      0);
-
   /* setup notebook area */
-  create_notebook (window);
-
-  /* side panel */
-  create_side_panel (window);
-
-  gtk_widget_show (window->priv->hpaned);
+  _create_notebook (window, main_box);
 
   init_widgets_visibility (window);
 //  vinagre_window_merge_tab_ui (window);
@@ -1029,20 +964,6 @@ vinagre_window_get_connected_action (VinagreWindow *window)
   return window->priv->remote_connected_action_group;
 }
 
-/**
- * vinagre_window_get_fav_panel:
- * @window: A window
- *
- * Return value: (transfer none):
- */
-GtkWidget *
-vinagre_window_get_fav_panel (VinagreWindow *window)
-{
-  g_return_val_if_fail (VINAGRE_IS_WINDOW (window), NULL);
-
-  return window->priv->fav_panel;
-}
-
 void
 vinagre_window_close_active_tab	(VinagreWindow *window)
 {
@@ -1156,5 +1077,3 @@ vinagre_window_conn_exists (VinagreWindow *window, VinagreConnection *conn)
 
   return tab;
 }
-
-/* vim: set ts=8: */

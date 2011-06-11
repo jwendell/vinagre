@@ -57,8 +57,6 @@ void		vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_show_statusbar	(GtkAction     *action,
 						 VinagreWindow *window);
-void		vinagre_cmd_view_show_fav_panel	(GtkAction     *action,
-						 VinagreWindow *window);
 void		vinagre_cmd_view_fullscreen	(GtkAction     *action,
 						 VinagreWindow *window);
 
