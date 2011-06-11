@@ -39,7 +39,6 @@
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
-#include "vinagre-plugin-dialog.h"
 
 static void _toggle_widget_visible (GtkWidget *widget)
 {
