@@ -28,7 +28,6 @@
 #define VM_HISTORY_SIZE			"history-size"
 #define VM_ALWAYS_ENABLE_LISTENING	"always-enable-listening"
 #define VM_SHARED_FLAG			"shared-flag"
-#define VM_ACTIVE_PLUGINS		"active-plugins"
 
 struct _VinagrePrefsPrivate
 {
@@ -41,7 +40,6 @@ enum
   PROP_0,
   PROP_SHARED_FLAG,
   PROP_HISTORY_SIZE,
-  PROP_ACTIVE_PLUGINS,
   PROP_LAST_PROTOCOL,
   PROP_ALWAYS_ENABLE_LISTENING
 };
@@ -101,9 +99,6 @@ vinagre_prefs_set_property (GObject *object, guint prop_id, const GValue *value,
       case PROP_HISTORY_SIZE:
 	g_settings_set_int (prefs->priv->gsettings, VM_HISTORY_SIZE, g_value_get_int (value));
 	break;
-      case PROP_ACTIVE_PLUGINS:
-	g_settings_set_strv (prefs->priv->gsettings, VM_ACTIVE_PLUGINS, g_value_get_boxed (value));
-	break;
       case PROP_ALWAYS_ENABLE_LISTENING:
 	g_settings_set_boolean (prefs->priv->gsettings, VM_ALWAYS_ENABLE_LISTENING, g_value_get_boolean (value));
 	break;
@@ -125,9 +120,6 @@ vinagre_prefs_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	break;
       case PROP_HISTORY_SIZE:
 	g_value_set_int (value, g_settings_get_int (prefs->priv->gsettings, VM_HISTORY_SIZE));
-	break;
-      case PROP_ACTIVE_PLUGINS:
-	g_value_set_boxed (value, g_settings_get_strv (prefs->priv->gsettings, VM_ACTIVE_PLUGINS));
 	break;
       case PROP_ALWAYS_ENABLE_LISTENING:
 	g_value_set_boolean (value, g_settings_get_boolean (prefs->priv->gsettings, VM_ALWAYS_ENABLE_LISTENING));
@@ -178,14 +170,6 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 						     "Max number of items in history dropdown entry",
 						     0, G_MAXINT, 15,
 						     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (object_class,
-				   PROP_ACTIVE_PLUGINS,
-				   g_param_spec_boxed ("active-plugins",
-						       "Active plugins",
-						       "The list of active plugins",
-						       G_TYPE_STRV,
-						       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
 				   PROP_ALWAYS_ENABLE_LISTENING,

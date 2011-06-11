@@ -214,13 +214,6 @@ AS_IF([test "x$ac_cv_header_ifaddrs_h" = "xyes"],
   [AS_IF([test "x$have_sockaddr_storage" = "xyes"],
     [AC_DEFINE([RFC2553], [], [Define if RFC2553 is followed])])])
 
-# Active plugins for org.gnome.Vinagre.gschema.xml
-# TODO: Make this work.
-ACTIVE_PLUGINS="vnc"
-AS_IF([test "x$enable_ssh" = "xyes"],
-  [ACTIVE_PLUGINS="$ACTIVE_PLUGINS,ssh"])
-AC_SUBST([ACTIVE_PLUGINS])
-
 GNOME_DOC_INIT
 
 GLIB_GSETTINGS
