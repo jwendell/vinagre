@@ -690,7 +690,7 @@ _create_notebook (VinagreWindow *window, GtkWidget *main_box)
     window->priv->notebook = vinagre_notebook_new (window);
 
     gtk_box_pack_start (GTK_BOX (main_box), GTK_WIDGET (window->priv->notebook),
-        TRUE, FALSE, 0);
+        TRUE, TRUE, 0);
 
     gtk_widget_show (GTK_WIDGET (window->priv->notebook));
 }
