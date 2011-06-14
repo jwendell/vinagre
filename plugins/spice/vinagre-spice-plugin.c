@@ -349,7 +349,7 @@ vinagre_spice_plugin_class_init (VinagreSpicePluginClass *klass)
 }
 
 __attribute__((constructor)) void
-spice_register_types (PeasObjectModule *module)
+spice_register_types (void)
 {
   g_type_init ();
   volatile dontoptimiseaway = vinagre_spice_plugin_get_type ();
