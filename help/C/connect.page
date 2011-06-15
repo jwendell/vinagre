@@ -16,9 +16,10 @@
     </license>
   </info>
 
-  <title>Establishing a connection</title>
+  <title>Establish a connection</title>
 
-  <p>This method can be used to connect to other computers on your network.</p>
+  <p>You can connect to other computers on your local network using
+  <app>Vinagre</app>.</p>
 
   <steps>
     <item>
@@ -32,23 +33,20 @@
       <p>Choose the <gui>Protocol</gui> and the <gui>Host</gui> for the
       connection.</p>
       <note>
-        <p>You can see all available hosts on your local network by clicking
-        the <gui>Find</gui> button. The availabity of the <gui>Find</gui> button
-        depends on the protocol you have selected. <app>Vinagre</app> relies on
-        <app>Avahi</app> to browse for machines on your local network. Also,
-        note that <app>Vinagre</app> can be compiled without <app>Avahi</app>
-        support. In this case, this button will not be displayed.</p>
+        <p>Some protocols allow you to see see all available computers on your
+        local network by clicking the <gui>Find</gui> button. Without
+        <app>Avahi</app> support, this button will not be displayed.</p>
       </note>
     </item>
     <item>
       <p>Select the options which you want enabled when the connection is
-      established. Options will vary depending on the protocol which is used.</p>
+      made. Options will vary depending on the protocol you use.</p>
     </item>
     <item>
-      <p>Click the <gui>Connect</gui> button. At this point, the host will be
+      <p>Click the <gui>Connect</gui> button. At this point, the host to will
       need to confirm that they want the connection established.</p>
       <note>
-        <p>Some machines may require a secure connection: an authentication
+        <p>Some computers may require a secure connection: an authentication
         dialog will be displayed, asking for the credentials. The type of
         credentials depend on the remote host, it may be a password and a
         username. If you select <gui>Remember this credential</gui>,
@@ -63,6 +61,9 @@
   </steps>
 
   <p>If the connection has been used previously, you can also access it
-  through <guiseq><gui>Remote</gui><gui>Recent Connections</gui></guiseq></p>
+  through <guiseq><gui>Remote</gui><gui>Recent Connections</gui></guiseq>.</p>
+
+  <p>To close a connection, choose <guiseq><gui>Remote</gui>
+  <gui>Close</gui></guiseq> or click the <gui>Close</gui> button.</p>
 
 </page>

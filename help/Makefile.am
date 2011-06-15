@@ -14,9 +14,7 @@ DOC_FIGURES = \
 # TODO: Install reverse-connections only with the corresponding plugin.
 
 DOC_PAGES = \
-	bookmarks.page \
 	connect.page \
-	connect-close.page \
 	connect-file.page \
 	fullscreen.page \
 	index.page \
