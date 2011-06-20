@@ -56,7 +56,7 @@ AS_IF([test "x$have_ssh" = "xyes"],
     AS_IF([test "x$enable_ssh" = "xyes"],
       [AC_MSG_ERROR([SSH support requested but required dependencies not found])])])
 
-AM_CONDITIONAL([VINAGRE_ENABLE_SSH], [test "x$enable_ssh" = "xyes"])
+AM_CONDITIONAL([VINAGRE_ENABLE_SSH], [test "x$have_ssh" = "xyes"])
 
 # Whether to enable support for RDP.
 RDP_DEPS="$XML2_DEPS"
@@ -77,7 +77,7 @@ AS_IF([test "x$have_rdp" = "xyes"],
     AS_IF([test "x$enable_rdp" = "xyes"],
       [AC_MSG_ERROR([RDP support requested by required dependencies not found])])])
 
-AM_CONDITIONAL([VINAGRE_ENABLE_RDP], [test "x$enable_rdp" = "xyes"])
+AM_CONDITIONAL([VINAGRE_ENABLE_RDP], [test "x$have_rdp" = "xyes"])
 
 # Check for spice.
 SPICE_DEPS="spice-client-gtk-3.0 >= 0.5"
