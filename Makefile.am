@@ -328,6 +328,7 @@ dist_noinst_DATA = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
+	vinagre/vapi/config.vapi \
 	vinagre.doap
 
 CLEANFILES = \
