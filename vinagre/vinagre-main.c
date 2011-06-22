@@ -118,16 +118,16 @@ int main (int argc, char **argv) {
   GHashTableIter iter;
   int res;
 
-  g_set_prgname ("vinagre");
-  g_type_init ();
-  g_set_application_name (_("Remote Desktop Viewer"));
-  optionstate.new_window = FALSE;
-
   /* i18n */
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
+
+  g_set_prgname (PACKAGE_TARNAME);
+  g_type_init ();
+  g_set_application_name (_("Remote Desktop Viewer"));
+  optionstate.new_window = FALSE;
 
   /* Setup command line options */
   context = g_option_context_new (_("- Remote Desktop Viewer"));
