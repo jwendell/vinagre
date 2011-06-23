@@ -24,3 +24,5 @@ DOC_PAGES = \
 	scaling.page \
 	take-screenshot.page \
 	view-only.page
+
+DOC_LINGUAS = hu sl
