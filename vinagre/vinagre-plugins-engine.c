@@ -19,7 +19,6 @@
  */
 
 #include "vinagre-plugins-engine.h"
-#include "vinagre-dirs.h"
 #include "vinagre-debug.h"
 #include "vinagre-protocol.h"
 #include "vinagre-prefs.h"

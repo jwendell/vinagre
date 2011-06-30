@@ -66,7 +66,6 @@ noinst_vinagreh_headers = \
 	vinagre/vinagre-connect.h \
 	vinagre/vinagre-connection.h \
 	vinagre/vinagre-debug.h \
-	vinagre/vinagre-dirs.h \
 	vinagre/vinagre-dnd.h \
 	vinagre/vinagre-notebook.h \
 	vinagre/vinagre-options.h \
@@ -97,7 +96,7 @@ handwritten_sources = \
 	vinagre/vinagre-connect.c \
 	vinagre/vinagre-connection.c \
 	vinagre/vinagre-debug.c \
-	vinagre/vinagre-dirs.c \
+	vinagre/vinagre-dirs.vala \
 	vinagre/vinagre-notebook.c \
 	vinagre/vinagre-prefs.c \
 	vinagre/vinagre-reverse-vnc-listener.c \

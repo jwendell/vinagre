@@ -30,7 +30,6 @@
 #include "vinagre-bookmarks-migration.h"
 #include "vinagre-connection.h"
 #include "vinagre-plugins-engine.h"
-#include "vinagre-dirs.h"
 
 struct _VinagreBookmarksPrivate
 {
