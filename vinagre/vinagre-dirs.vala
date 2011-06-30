@@ -27,19 +27,30 @@ namespace Vinagre.Dirs {
             Config.PACKAGE_TARNAME);
     }
 
-    // Only used by get_package_data_file ().
-    private string get_vinagre_data_dir () {
-#if ! G_OS_WIN32
-        // TODO: const string[] data_dirs = Environment.get_system_data_dirs ();
-        return Path.build_filename (Config.DATADIR, Config.PACKAGE_TARNAME);
-#else
+    public string get_package_data_file (string filename) {
+#if G_OS_WIN32
         return Path.build_filename (
             Win32.get_package_installation_directory_of_module (null), "share",
-            Config.PACKAGE_TARNAME);
-#endif
-    }
+            Config.PACKAGE_TARNAME, filename);
+#else
+        /* Check the compiled-in path first, so that if Vinagre is installed in
+         * a custom prefix and the standard prefix, the custom prefix is
+         * checked first. */
+        var system_data_dirs = Environment.get_system_data_dirs ();
+        string[] data_dirs = {};
+        data_dirs += Config.DATADIR;
+        foreach (var dir in system_data_dirs) { data_dirs += dir; };
 
-    public string get_package_data_file (string filename) {
-        return Path.build_filename (get_vinagre_data_dir (), filename);
+        foreach (var dir in data_dirs) {
+            var absolute_path = Path.build_filename (dir,
+                Config.PACKAGE_TARNAME, filename);
+            if (FileUtils.test (absolute_path, FileTest.EXISTS))
+                return absolute_path;
+        };
+
+        // Filename could not be found!
+        error ("Data file ‘%s’ could not be found in system data directories.",
+            filename);
+#endif
     }
 }
