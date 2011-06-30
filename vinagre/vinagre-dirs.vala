@@ -28,11 +28,6 @@ namespace Vinagre.Dirs {
     }
 
     public string get_package_data_file (string filename) {
-#if G_OS_WIN32
-        return Path.build_filename (
-            Win32.get_package_installation_directory_of_module (null), "share",
-            Config.PACKAGE_TARNAME, filename);
-#else
         /* Check the compiled-in path first, so that if Vinagre is installed in
          * a custom prefix and the standard prefix, the custom prefix is
          * checked first. */
@@ -51,6 +46,5 @@ namespace Vinagre.Dirs {
         // Filename could not be found!
         error ("Data file ‘%s’ could not be found in system data directories.",
             filename);
-#endif
     }
 }
