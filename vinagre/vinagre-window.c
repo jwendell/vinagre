@@ -52,16 +52,6 @@
 
 G_DEFINE_TYPE(VinagreWindow, vinagre_window, GTK_TYPE_WINDOW)
 
-static const gchar * _get_ui_xml_filename (void)
-{
-    static const gchar ui_xml_file[] = "vinagre-ui.xml";
-
-    if (g_file_test (ui_xml_file, G_FILE_TEST_EXISTS))
-        return ui_xml_file;
-    else
-        return g_build_filename (VINAGRE_DATADIR, ui_xml_file, NULL);
-}
-
 static void
 vinagre_window_dispose (GObject *object)
 {
@@ -323,6 +313,7 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   GtkRecentManager *recent_manager;
   GtkRecentFilter  *filter;
   GtkAction        *action;
+  gchar            *filename;
 
   manager = gtk_ui_manager_new ();
   window->priv->manager = manager;
@@ -385,7 +376,10 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   window->priv->remote_initialized_action_group = action_group;
 
   /* now load the UI definition */
-  gtk_ui_manager_add_ui_from_file (manager, _get_ui_xml_filename (), &error);
+  filename = vinagre_dirs_get_package_data_file ("vinagre-ui.xml");
+  gtk_ui_manager_add_ui_from_file (manager, filename, &error);
+  g_free (filename);
+
   if (error != NULL)
     {
       g_critical (_("Could not merge UI XML file: %s"), error->message);

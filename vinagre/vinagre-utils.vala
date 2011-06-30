@@ -74,8 +74,7 @@ namespace Vinagre.Utils {
     }
 
     public Builder get_builder () {
-        var filename = Path.build_filename (Vinagre.Config.VINAGRE_DATADIR,
-                                            "vinagre.ui");
+        var filename = Vinagre.Dirs.get_package_data_file ("vinagre.ui");
 
         var builder = new Builder ();
         try {

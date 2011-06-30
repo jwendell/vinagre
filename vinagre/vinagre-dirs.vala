@@ -27,22 +27,19 @@ namespace Vinagre.Dirs {
             Config.PACKAGE_TARNAME);
     }
 
-    // Only used by get_ui_file ().
+    // Only used by get_package_data_file ().
     private string get_vinagre_data_dir () {
 #if ! G_OS_WIN32
         // TODO: const string[] data_dirs = Environment.get_system_data_dirs ();
-        return Path.build_filename (Config.DATADIR,
-            "%s-%s".printf (Config.PACKAGE_TARNAME,
-                Config.VINAGRE_ABI_VERSION));
+        return Path.build_filename (Config.DATADIR, Config.PACKAGE_TARNAME);
 #else
         return Path.build_filename (
             Win32.get_package_installation_directory_of_module (null), "share",
-            "%s-%s".printf (Config.PACKAGE_TARNAME,
-                Config.VINAGRE_ABI_VERSION));
+            Config.PACKAGE_TARNAME);
 #endif
     }
 
-    public string get_ui_file (string filename) {
+    public string get_package_data_file (string filename) {
         return Path.build_filename (get_vinagre_data_dir (), filename);
     }
 }
