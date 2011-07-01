@@ -260,8 +260,7 @@ vinagre_bookmarks_migration_migrate (const gchar *filename)
   else
     g_warning (_("Migration cancelled"));
 
-  g_slist_foreach (entries, (GFunc) g_object_unref, NULL);
-  g_slist_free (entries);
+  g_slist_free_full (entries, g_object_unref);
   g_key_file_free (kf);
   g_free (old);
 }

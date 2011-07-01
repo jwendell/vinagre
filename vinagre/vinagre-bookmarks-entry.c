@@ -72,8 +72,7 @@ vinagre_bookmarks_entry_dispose (GObject *object)
       case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
 	if (entry->priv->children)
 	  {
-	    g_slist_foreach (entry->priv->children, (GFunc) g_object_unref, NULL);
-	    g_slist_free (entry->priv->children);
+	    g_slist_free_full (entry->priv->children, g_object_unref);
 	    entry->priv->children = NULL;
 	  }
 	break;
@@ -140,8 +139,7 @@ vinagre_bookmarks_entry_set_node (VinagreBookmarksEntry *entry, VinagreBookmarks
       case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	g_free (entry->priv->name);
 	entry->priv->name = NULL;
-	g_slist_foreach (entry->priv->children, (GFunc) g_object_unref, NULL);
-	g_slist_free (entry->priv->children);
+	g_slist_free_full (entry->priv->children, g_object_unref);
 	entry->priv->children = NULL;
 	break;
 

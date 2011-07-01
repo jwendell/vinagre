@@ -361,8 +361,7 @@ vinagre_mdns_dispose (GObject *object)
 
   if (mdns->priv->entries)
     {
-      g_slist_foreach (mdns->priv->entries, (GFunc) g_object_unref, NULL);
-      g_slist_free (mdns->priv->entries);
+      g_slist_free_full (mdns->priv->entries, g_object_unref);
       mdns->priv->entries = NULL;
     }
 

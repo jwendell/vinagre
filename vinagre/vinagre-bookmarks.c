@@ -112,8 +112,7 @@ vinagre_bookmarks_init (VinagreBookmarks *book)
 static void
 vinagre_bookmarks_clear_entries (VinagreBookmarks *book)
 {
-  g_slist_foreach (book->priv->entries, (GFunc) g_object_unref, NULL);
-  g_slist_free (book->priv->entries);
+  g_slist_free_full (book->priv->entries, g_object_unref);
 
   book->priv->entries = NULL;
 }

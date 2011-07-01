@@ -996,7 +996,7 @@ vinagre_tab_get_initialized_actions (VinagreTab *tab)
 }
 
 static void
-free_actions (gpointer data, gpointer user_data)
+_free_action (gpointer data)
 {
   VinagreTabUiAction *action = (VinagreTabUiAction *)data;
 
@@ -1008,8 +1008,7 @@ free_actions (gpointer data, gpointer user_data)
 void
 vinagre_tab_free_actions (GSList *actions)
 {
-  g_slist_foreach (actions, (GFunc) free_actions, NULL);
-  g_slist_free (actions);
+  g_slist_free_full (actions, _free_action);
 }
 
 const gchar *

@@ -91,12 +91,6 @@ vinagre_cmd_remote_connect (GtkAction     *action,
   g_object_unref (conn);
 }
 
-static void
-vinagre_cmd_free_string_list (gpointer str, gpointer user_data)
-{
-  g_free (str);
-}
-
 void
 vinagre_cmd_remote_open (GtkAction     *action,
 			  VinagreWindow *window)
@@ -180,8 +174,7 @@ vinagre_cmd_remote_open (GtkAction     *action,
 						 g_slist_length (errors)),
 				      errors,
 				      GTK_WINDOW (window));
-      g_slist_foreach (errors, vinagre_cmd_free_string_list, NULL);
-      g_slist_free (errors);
+      g_slist_free_full (errors, g_free);
     }
 
 finalize:

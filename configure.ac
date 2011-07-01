@@ -38,7 +38,7 @@ AC_DEFINE_UNQUOTED([VINAGRE_ABI_VERSION], ["$VINAGRE_ABI_VERSION"], [Vinagre ABI
 AC_SUBST([PLUGIN_LIBTOOL_FLAGS], ["-avoid-version"])
 AC_SUBST([VINAGRE_PLUGINS_LIBS_DIR], ["$libdir/vinagre-$VINAGRE_ABI_VERSION/plugins"])
 
-GLIB_DEPS="glib-2.0 >= 2.25.11 $gio_os >= 2.25.11"
+GLIB_DEPS="glib-2.0 >= 2.28.0 $gio_os >= 2.28.0"
 GTHREAD_DEPS="gthread-2.0 >= 2.0.0"
 GTK_DEPS="gtk+-3.0 >= 3.0.3"
 GTK_VNC_DEPS="gtk-vnc-2.0 >= 0.4.3"
