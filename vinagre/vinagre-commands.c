@@ -231,15 +231,6 @@ vinagre_cmd_edit_preferences (GtkAction     *action,
   vinagre_prefs_dialog_show (window);
 }
 
-void
-vinagre_cmd_edit_plugins (GtkAction     *action,
-                          VinagreWindow *window)
-{
-  g_return_if_fail (VINAGRE_IS_WINDOW (window));
-
-  g_warn_if_reached ();
-}
-
 /* View Menu */
 void
 vinagre_cmd_view_show_toolbar	(GtkAction     *action,
