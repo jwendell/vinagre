@@ -20,6 +20,8 @@
  */
 
 #include <config.h>
+#include <vinagre/vinagre-ssh.h>
+
 #ifdef G_OS_WIN32
 #undef DATADIR
 #include <winsock2.h>
@@ -32,7 +34,6 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 
-#include <vinagre/vinagre-ssh.h>
 #include "vinagre-spice-tunnel.h"
 
 #define TUNNEL_PORT_OFFSET 5500

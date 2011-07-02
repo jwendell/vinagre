@@ -20,6 +20,10 @@
  */
 
 #include <config.h>
+
+#include "vinagre-ssh.h"
+#include "pty_open.h"
+
 #ifdef G_OS_WIN32
 #undef DATADIR
 #include <winsock2.h>
@@ -35,9 +39,6 @@
 
 #include <glib/gi18n.h>
 #include <gnome-keyring.h>
-
-#include "vinagre-ssh.h"
-#include "pty_open.h"
 
 #define SSH_READ_TIMEOUT 40   /* seconds */
 
