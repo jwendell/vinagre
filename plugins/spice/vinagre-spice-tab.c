@@ -456,7 +456,7 @@ create_connected_actions (VinagreSpiceTab *tab)
   VinagreTabUiAction *a;
 
   /* View->Scaling */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = g_strdup ("/ToolBar");
@@ -471,7 +471,7 @@ create_connected_actions (VinagreSpiceTab *tab)
   tab->priv->scaling_action = a->action;
 
   /* View->Resize Guest */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 2);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = NULL;
@@ -484,7 +484,7 @@ create_connected_actions (VinagreSpiceTab *tab)
   tab->priv->resize_guest_action = a->action;
 
   /* View->Share clipboard */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 2);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = NULL;
@@ -497,7 +497,7 @@ create_connected_actions (VinagreSpiceTab *tab)
   tab->priv->auto_clipboard_action = a->action;
 
   /* View->View Only TODO: not ready in spice-gtk yet */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = g_strdup ("/ToolBar");
@@ -521,7 +521,7 @@ create_initialized_actions (VinagreSpiceTab *tab)
   VinagreTabUiAction *a;
 
   /* Remote->Send CTRL-ALT-DEL */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/RemoteeMenu/RemoteOps_1");
   a->paths[1] = g_strdup ("/ToolBar");

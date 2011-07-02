@@ -204,7 +204,7 @@ destroy_browser_entry (BrowserEntry *entry)
 {
   g_object_unref (entry->browser);
   g_object_unref (entry->protocol);
-  g_free (entry);
+  g_slice_free (BrowserEntry, entry);
 }
 
 static void
@@ -253,7 +253,7 @@ vinagre_mdns_add_service (VinagreMdns     *mdns,
         return;
     }
 
-  entry = g_new (BrowserEntry, 1);
+  entry = g_slice_new (BrowserEntry);
   entry->browser = g_object_ref (browser);
   entry->protocol = g_object_ref (protocol);
   g_hash_table_insert (mdns->priv->browsers, (gpointer)service, entry);

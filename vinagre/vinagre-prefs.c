@@ -201,7 +201,7 @@ vinagre_prefs_dialog_response (GtkDialog *d, gint response_id, VinagrePrefsDialo
 
   gtk_widget_destroy (dialog->dialog);
   g_object_unref (dialog->xml);
-  g_free (dialog);
+  g_slice_free (VinagrePrefsDialog, dialog);
   dialog = NULL;
 }
 
@@ -211,7 +211,7 @@ vinagre_prefs_dialog_show (VinagreWindow *window)
   VinagrePrefsDialog *dialog;
   VinagrePrefs *pref;
 
-  dialog = g_new (VinagrePrefsDialog, 1);
+  dialog = g_slice_new (VinagrePrefsDialog);
 
   dialog->xml = vinagre_utils_get_builder ();
   dialog->dialog = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "preferences_dialog"));

@@ -1002,7 +1002,7 @@ _free_action (gpointer data)
 
   g_strfreev (action->paths);
   g_object_unref (action->action);
-  g_free (action);
+  g_slice_free (VinagreTabUiAction, action);
 }
 
 void

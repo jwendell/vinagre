@@ -580,7 +580,7 @@ create_connected_actions (VinagreVncTab *tab)
   VinagreTabUiAction *a;
 
   /* View->Scaling */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = g_strdup ("/ToolBar");
@@ -595,7 +595,7 @@ create_connected_actions (VinagreVncTab *tab)
   tab->priv->scaling_action = a->action;
 
   /* View->Keep Ratio */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 2);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = NULL;
@@ -609,7 +609,7 @@ create_connected_actions (VinagreVncTab *tab)
   tab->priv->keep_ratio_action = a->action;
 
   /* View->View Only */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = g_strdup ("/ToolBar");
@@ -624,7 +624,7 @@ create_connected_actions (VinagreVncTab *tab)
   tab->priv->viewonly_action = a->action;
 
   /* View->Original Size */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 2);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = NULL;
@@ -638,7 +638,7 @@ create_connected_actions (VinagreVncTab *tab)
   tab->priv->original_size_action = a->action;
 
   /* View->Refresh */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 2);
   a->paths[0] = g_strdup ("/MenuBar/ViewMenu");
   a->paths[1] = NULL;
@@ -660,7 +660,7 @@ create_initialized_actions (VinagreVncTab *tab)
   VinagreTabUiAction *a;
 
   /* Remote->Send CTRL-ALT-DEL */
-  a = g_new (VinagreTabUiAction, 1);
+  a = g_slice_new (VinagreTabUiAction);
   a->paths = g_new (gchar *, 3);
   a->paths[0] = g_strdup ("/MenuBar/RemoteMenu/RemoteOps_1");
   a->paths[1] = g_strdup ("/ToolBar");
@@ -1070,7 +1070,7 @@ cb_set_preferred_size (GtkWidget *widget, GtkRequisition *req,
   req->height = size->height;
 
   g_signal_handler_disconnect (widget, size->sig_id);
-  g_free (size);
+  g_slice_free (VinagrePrefSize, size);
   g_idle_add (cb_unset_size, widget);
 }
 
@@ -1079,7 +1079,7 @@ vinagre_widget_set_preferred_size (GtkWidget *widget,
 				   gint      width,
 				   gint      height)
 {
-  VinagrePrefSize *size = g_new (VinagrePrefSize, 1);
+  VinagrePrefSize *size = g_slice_new (VinagrePrefSize);
 
   size->width  = width;
   size->height = height;
