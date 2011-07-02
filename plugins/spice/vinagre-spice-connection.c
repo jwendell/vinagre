@@ -204,13 +204,13 @@ spice_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
   VinagreSpiceConnection *spice_conn = VINAGRE_SPICE_CONNECTION (conn);
   VINAGRE_CONNECTION_CLASS (vinagre_spice_connection_parent_class)->impl_fill_writer (conn, writer);
 
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"view_only", "%d", spice_conn->priv->view_only);
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"scaling", "%d", spice_conn->priv->scaling);
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"resize_guest", "%d", spice_conn->priv->resize_guest);
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"auto_clipboard", "%d", spice_conn->priv->auto_clipboard);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "view_only", "%d", spice_conn->priv->view_only);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "scaling", "%d", spice_conn->priv->scaling);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "resize_guest", "%d", spice_conn->priv->resize_guest);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "auto_clipboard", "%d", spice_conn->priv->auto_clipboard);
 
   if (spice_conn->priv->ssh_tunnel_host && *spice_conn->priv->ssh_tunnel_host)
-    xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"ssh_tunnel_host", "%s", spice_conn->priv->ssh_tunnel_host);
+    xmlTextWriterWriteFormatElement (writer, BAD_CAST "ssh_tunnel_host", "%s", spice_conn->priv->ssh_tunnel_host);
 }
 
 static void
@@ -226,23 +226,23 @@ spice_parse_item (VinagreConnection *conn, xmlNode *root)
     {
       s_value = xmlNodeGetContent (curr);
 
-      if (!xmlStrcmp(curr->name, (const xmlChar *)"view_only"))
+      if (!xmlStrcmp(curr->name, BAD_CAST "view_only"))
 	{
 	  vinagre_spice_connection_set_view_only (spice_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"scaling"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "scaling"))
 	{
 	  vinagre_spice_connection_set_scaling (spice_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"resize_guest"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "resize_guest"))
 	{
 	  vinagre_spice_connection_set_resize_guest (spice_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"auto_clipboard"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "auto_clipboard"))
 	{
 	  vinagre_spice_connection_set_auto_clipboard (spice_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"ssh_tunnel_host"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "ssh_tunnel_host"))
 	{
 	  vinagre_spice_connection_set_ssh_tunnel_host (spice_conn, (const gchar *)s_value);
 	}

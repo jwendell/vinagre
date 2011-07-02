@@ -50,8 +50,8 @@ fill_xml (GSList *list, xmlTextWriter *writer)
       switch (vinagre_bookmarks_entry_get_node (entry))
 	{
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
-	    xmlTextWriterStartElement (writer, (const xmlChar *)"folder");
-	    xmlTextWriterWriteAttribute (writer, (const xmlChar *)"name", (const xmlChar *)vinagre_bookmarks_entry_get_name (entry));
+	    xmlTextWriterStartElement (writer, BAD_CAST "folder");
+	    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST vinagre_bookmarks_entry_get_name (entry));
 
 	    fill_xml (vinagre_bookmarks_entry_get_children (entry), writer);
 	    xmlTextWriterEndElement (writer);
@@ -60,11 +60,11 @@ fill_xml (GSList *list, xmlTextWriter *writer)
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 
-	    xmlTextWriterStartElement (writer, (const xmlChar *)"item");
-	    xmlTextWriterWriteElement (writer, (const xmlChar *)"name", (const xmlChar *)vinagre_connection_get_name (conn));
-	    xmlTextWriterWriteElement (writer, (const xmlChar *)"host", (const xmlChar *)vinagre_connection_get_host (conn));
-	    xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"port", "%d", vinagre_connection_get_port (conn));
-	    xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"fullscreen", "%d", vinagre_connection_get_fullscreen (conn));
+	    xmlTextWriterStartElement (writer, BAD_CAST "item");
+	    xmlTextWriterWriteElement (writer, BAD_CAST "name", BAD_CAST vinagre_connection_get_name (conn));
+	    xmlTextWriterWriteElement (writer, BAD_CAST "host", BAD_CAST vinagre_connection_get_host (conn));
+	    xmlTextWriterWriteFormatElement (writer, BAD_CAST "port", "%d", vinagre_connection_get_port (conn));
+	    xmlTextWriterWriteFormatElement (writer, BAD_CAST "fullscreen", "%d", vinagre_connection_get_fullscreen (conn));
 
 	    xmlTextWriterEndElement (writer);
 	    break;
@@ -109,7 +109,7 @@ save_to_file (GSList *entries, const gchar *filename)
       goto finalize;
     }
 
-  rc = xmlTextWriterStartElement (writer, (const xmlChar *)"vinagre-bookmarks");
+  rc = xmlTextWriterStartElement (writer, BAD_CAST "vinagre-bookmarks");
   if (rc < 0)
     {
       g_warning (_("Error while migrating bookmarks: Failed to initialize the XML structure"));

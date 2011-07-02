@@ -235,8 +235,8 @@ vinagre_bookmarks_save_fill_xml (GSList *list, xmlTextWriter *writer)
       switch (vinagre_bookmarks_entry_get_node (entry))
 	{
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_FOLDER:
-	    xmlTextWriterStartElement (writer, (const xmlChar *)"folder");
-	    xmlTextWriterWriteAttribute (writer, (const xmlChar *)"name", (const xmlChar *)vinagre_bookmarks_entry_get_name (entry));
+	    xmlTextWriterStartElement (writer, BAD_CAST "folder");
+	    xmlTextWriterWriteAttribute (writer, BAD_CAST "name", BAD_CAST vinagre_bookmarks_entry_get_name (entry));
 
 	    vinagre_bookmarks_save_fill_xml (vinagre_bookmarks_entry_get_children (entry), writer);
 	    xmlTextWriterEndElement (writer);
@@ -245,7 +245,7 @@ vinagre_bookmarks_save_fill_xml (GSList *list, xmlTextWriter *writer)
 	  case VINAGRE_BOOKMARKS_ENTRY_NODE_CONN:
 	    conn = vinagre_bookmarks_entry_get_conn (entry);
 
-	    xmlTextWriterStartElement (writer, (const xmlChar *)"item");
+	    xmlTextWriterStartElement (writer, BAD_CAST "item");
 	    vinagre_connection_fill_writer (conn, writer);
 	    xmlTextWriterEndElement (writer);
 	    break;
@@ -269,7 +269,7 @@ vinagre_bookmarks_parse_item (xmlNode *root)
   /* Loop to discover the protocol */
   for (curr = root->children; curr; curr = curr->next)
     {
-      if (xmlStrcmp(curr->name, (const xmlChar *)"protocol"))
+      if (xmlStrcmp(curr->name, BAD_CAST "protocol"))
         continue;
 
       s_value = xmlNodeGetContent (curr);
@@ -312,9 +312,9 @@ vinagre_bookmarks_parse_xml (VinagreBookmarks *book, xmlNode *root, VinagreBookm
     {
       if (curr->type == XML_ELEMENT_NODE)
 	{
-	  if (!xmlStrcmp(curr->name, (const xmlChar *)"folder"))
+	  if (!xmlStrcmp(curr->name, BAD_CAST "folder"))
 	    {
-	      folder_name = xmlGetProp (curr, (const xmlChar *)"name");
+	      folder_name = xmlGetProp (curr, BAD_CAST "name");
 	      if (folder_name && *folder_name)
 		{
 		  entry = vinagre_bookmarks_entry_new_folder ((const gchar *) folder_name);
@@ -329,7 +329,7 @@ vinagre_bookmarks_parse_xml (VinagreBookmarks *book, xmlNode *root, VinagreBookm
 		}
 	      xmlFree (folder_name);
 	    }
-	  else if (!xmlStrcmp(curr->name, (const xmlChar *)"item"))
+	  else if (!xmlStrcmp(curr->name, BAD_CAST "item"))
 	    {
 	      entry = vinagre_bookmarks_parse_item (curr);
 	      if (entry)
@@ -374,7 +374,7 @@ vinagre_bookmarks_update_from_file (VinagreBookmarks *book)
       return;
     }
 
-  if (xmlStrcmp (root->name, (const xmlChar *) "vinagre-bookmarks"))
+  if (xmlStrcmp (root->name, BAD_CAST "vinagre-bookmarks"))
     {
       g_warning (_("Error while initializing bookmarks: The file is not a vinagre bookmarks file"));
       xmlFreeDoc (doc);
@@ -467,7 +467,7 @@ vinagre_bookmarks_save_to_file (VinagreBookmarks *book)
       goto finalize;
     }
 
-  rc = xmlTextWriterStartElement (writer, (const xmlChar *)"vinagre-bookmarks");
+  rc = xmlTextWriterStartElement (writer, BAD_CAST "vinagre-bookmarks");
   if (rc < 0)
     {
       g_warning (_("Error while saving bookmarks: Failed to initialize the XML structure"));

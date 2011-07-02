@@ -226,14 +226,14 @@ vnc_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
   VinagreVncConnection *vnc_conn = VINAGRE_VNC_CONNECTION (conn);
   VINAGRE_CONNECTION_CLASS (vinagre_vnc_connection_parent_class)->impl_fill_writer (conn, writer);
 
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"view_only", "%d", vnc_conn->priv->view_only);
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"scaling", "%d", vnc_conn->priv->scaling);
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"keep_ratio", "%d", vnc_conn->priv->keep_ratio);
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"depth_profile", "%d", vnc_conn->priv->depth_profile);
-  xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"lossy_encoding", "%d", vnc_conn->priv->lossy_encoding);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "view_only", "%d", vnc_conn->priv->view_only);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "scaling", "%d", vnc_conn->priv->scaling);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "keep_ratio", "%d", vnc_conn->priv->keep_ratio);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "depth_profile", "%d", vnc_conn->priv->depth_profile);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "lossy_encoding", "%d", vnc_conn->priv->lossy_encoding);
 
   if (vnc_conn->priv->ssh_tunnel_host && *vnc_conn->priv->ssh_tunnel_host)
-    xmlTextWriterWriteFormatElement (writer, (const xmlChar *)"ssh_tunnel_host", "%s", vnc_conn->priv->ssh_tunnel_host);
+    xmlTextWriterWriteFormatElement (writer, BAD_CAST "ssh_tunnel_host", "%s", vnc_conn->priv->ssh_tunnel_host);
 }
 
 static void
@@ -249,28 +249,28 @@ vnc_parse_item (VinagreConnection *conn, xmlNode *root)
     {
       s_value = xmlNodeGetContent (curr);
 
-      if (!xmlStrcmp(curr->name, (const xmlChar *)"view_only"))
+      if (!xmlStrcmp(curr->name, BAD_CAST "view_only"))
 	{
 	  vinagre_vnc_connection_set_view_only (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"scaling"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "scaling"))
 	{
 	  if (!scaling_command_line)
 	    vinagre_vnc_connection_set_scaling (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"keep_ratio"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "keep_ratio"))
 	{
 	  vinagre_vnc_connection_set_keep_ratio (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"depth_profile"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "depth_profile"))
 	{
 	  vinagre_vnc_connection_set_depth_profile (vnc_conn, atoi((const char *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"lossy_encoding"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "lossy_encoding"))
 	{
 	  vinagre_vnc_connection_set_lossy_encoding (vnc_conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
 	}
-      else if (!xmlStrcmp(curr->name, (const xmlChar *)"ssh_tunnel_host"))
+      else if (!xmlStrcmp(curr->name, BAD_CAST "ssh_tunnel_host"))
 	{
 	  vinagre_vnc_connection_set_ssh_tunnel_host (vnc_conn, (const gchar *)s_value);
 	}
