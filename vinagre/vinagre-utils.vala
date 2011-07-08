@@ -198,33 +198,15 @@ namespace Vinagre.Utils {
 
     // TODO: Move this into the uilder file.
     public void show_help_about (Window parent) {
-        string[] authors = { "David King <amigadave@amigadave.com>",
-                             "Jonh Wendell <jwendell@gnome.org>" };
+        var builder = get_builder ();
+        var dialog = builder.get_object ("about_dialog") as Gtk.AboutDialog;
 
-        string[] artists = { "Vinicius Depizzol <vdepizzol@gmail.com>" };
+        dialog.logo_icon_name = Vinagre.Config.PACKAGE_TARNAME;
+        dialog.version = Vinagre.Config.PACKAGE_VERSION;
+        dialog.website = Vinagre.Config.PACKAGE_URL;
+        dialog.set_transient_for (parent);
 
-        const string copyright = "Copyright \xc2\xa9 2007-2011 Jonh Wendell\n" +
-                                 "Copyright \xc2\xa9 2011 David King";
-
-        const string comments = N_("Vinagre is a remote desktop viewer for the GNOME Desktop");
-
-        const string license = """Vinagre is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-
-            Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-            You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.""";
-
-        show_about_dialog (parent,
-                           "authors", authors,
-                           "artists", artists,
-                           "comments", _(comments),
-                           "copyright", copyright,
-                           "license", license,
-                           "wrap-license", true,
-                           "logo-icon-name", Vinagre.Config.PACKAGE_TARNAME,
-                           "translator-credits", _("translator-credits"),
-                           "version", Vinagre.Config.PACKAGE_VERSION,
-                           "website", Vinagre.Config.PACKAGE_URL,
-                           "website-label", _("Vinagre Website"));
+        dialog.run ();
+        dialog.hide ();
     }
 } // namespace Vinagre.Utils
