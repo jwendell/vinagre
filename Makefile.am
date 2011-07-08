@@ -305,6 +305,9 @@ $(nodist_service_DATA): $(service_in_file) Makefile
 	$(AM_V_GEN)$(SED) -e "s|[@]bindir[@]|$(bindir)|" $< > $@
 endif
 
+convertdir = $(datadir)/GConf/gsettings
+dist_convert_DATA = data/org.gnome.Vinagre.convert
+
 if MAINTAINER_MODE
 dist-hook: dist-changelog
 else
