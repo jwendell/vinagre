@@ -6,6 +6,7 @@ DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 AM_CPPFLAGS = \
 	-I$(top_builddir) \
 	-I$(top_builddir)/vinagre \
+	-I$(top_srcdir) \
 	-I$(top_srcdir)/vinagre/view \
 	-DBINDIR=\"$(bindir)\" \
 	-DDATADIR=\"$(datadir)\" \
