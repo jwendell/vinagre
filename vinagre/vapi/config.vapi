@@ -4,6 +4,8 @@ namespace Vinagre.Config
 {
     public const string DATADIR;
     public const string LIBDIR;
+    public const string GETTEXT_PACKAGE;
+    public const string PACKAGE_LOCALEDIR;
     public const string PACKAGE_TARNAME;
     public const string PACKAGE_URL;
     public const string PACKAGE_VERSION;

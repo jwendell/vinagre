@@ -6,14 +6,14 @@ test -z "$srcdir" && srcdir=.
 
 PKG_NAME="vinagre"
 
-(test -f $srcdir/vinagre/vinagre-main.c) || {
+(test -f $srcdir/vinagre/vinagre-application.vala) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1
 }
 
 which gnome-autogen.sh || {
-    echo "You need to install gnome-common from the GNOME git"
+    echo "You need to install gnome-common from GNOME git"
     exit 1
 }
 

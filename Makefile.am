@@ -5,9 +5,6 @@ DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 common_cppflags = \
 	-I$(top_builddir) \
-	-I$(top_builddir)/vinagre \
-	-I$(top_srcdir) \
-	-I$(top_srcdir)/vinagre/view \
 	-DBINDIR=\"$(bindir)\" \
 	-DDATADIR=\"$(datadir)\" \
 	-DPREFIX=\""$(prefix)"\" \
@@ -15,7 +12,6 @@ common_cppflags = \
 	-DLIBDIR=\""$(libdir)"\" \
 	-DVINAGRE_DATADIR=\""$(pkgdatadir)"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\" \
-	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\" \
 	$(VINAGRE_CFLAGS) \
 	$(WARN_FLAGS) \
 	$(DISABLE_DEPRECATED_FLAGS)
@@ -37,7 +33,7 @@ ifaddrs_sources = \
 endif
 
 vinagre_vinagre_SOURCES = \
-	vinagre/vinagre-main.c \
+	vinagre/vinagre-application.vala \
 	vinagre/vinagre-options.c
 
 vinagre_vinagre_LDADD = \
