@@ -223,6 +223,7 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
   gchar *host;
   const gchar *service_s;
   VinagreProtocol *plugin;
+  TpConnection *tp_conn;
 
   if (error != NULL)
     {
@@ -278,6 +279,15 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
 
   conn = vinagre_connection_new_from_string (host, &error_conn_msg,
       TRUE);
+
+  /* Use 8 bits color depth to reduce bandwidth when using XMPP. We don't want
+   * this when using link-local XMPP as then the connection is local.
+   */
+  tp_conn = tp_channel_borrow_connection ((TpChannel *) channel);
+  if (!tp_strdiff (tp_connection_get_protocol_name (tp_conn), "jabber"))
+    {
+      vinagre_vnc_connection_set_depth_profile (conn, 3);
+    }
 
   g_free (host);
 
