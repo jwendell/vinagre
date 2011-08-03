@@ -500,6 +500,15 @@ _escape_underscores (const gchar* text,
 }
 
 static void
+_open_bookmark (GtkAction *action, gpointer user_data)
+{
+    VinagreWindow *window = VINAGRE_WINDOW (user_data);
+    VinagreConnection *connection = VINAGRE_CONNECTION (g_object_get_data (G_OBJECT (action), "conn"));
+
+    vinagre_cmd_open_bookmark (window, connection);
+}
+
+static void
 vinagre_window_populate_bookmarks (VinagreWindow *window,
 				   const gchar   *group,
 				   GSList        *entries,
@@ -584,6 +593,8 @@ vinagre_window_populate_bookmarks (VinagreWindow *window,
 				   action_label, action_name,
 				   GTK_UI_MANAGER_MENUITEM,
 				   FALSE);
+
+            g_signal_connect (action, "activate", G_CALLBACK (_open_bookmark), window);
 
 	    g_object_unref (action);
 	    g_free (action_name);
