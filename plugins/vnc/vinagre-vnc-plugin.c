@@ -247,7 +247,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gchar     *str, *ssh_host;
   gboolean has_conn = VINAGRE_IS_VNC_CONNECTION (conn), active;
 
-  box = gtk_vbox_new (FALSE, 6);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 
   str = g_strdup_printf ("<b>%s</b>", _("VNC Options"));
   label = gtk_label_new (str);
@@ -300,7 +300,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 				: vinagre_cache_prefs_get_boolean ("vnc-connection", "lossy-encoding", FALSE));
 
   /* Color depth combo box */
-  box2 = gtk_hbox_new (FALSE, 6);
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   label = gtk_label_new_with_mnemonic (_("Color _Depth:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (box2), GTK_WIDGET (label), FALSE, FALSE, 0);
@@ -321,7 +321,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gtk_container_add (GTK_CONTAINER (box), box2);
 
   /* SSH Tunneling */
-  box2 = gtk_hbox_new (FALSE, 6);
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   /* Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel*/
   check = gtk_check_button_new_with_mnemonic (_("Use h_ost"));

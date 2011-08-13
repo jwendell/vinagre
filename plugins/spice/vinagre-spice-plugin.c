@@ -204,7 +204,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gchar	    *str, *ssh_host;
   gboolean  has_conn = VINAGRE_IS_SPICE_CONNECTION (conn);
 
-  box = gtk_vbox_new (FALSE, 0);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
   str = g_strdup_printf ("<b>%s</b>", _("SPICE Options"));
   label = gtk_label_new (str);
@@ -251,7 +251,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 				: vinagre_cache_prefs_get_boolean ("spice-connection", "scaling", FALSE));
 
   /* SSH Tunneling */
-  box2 = gtk_hbox_new (FALSE, 5);
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   /* Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel*/
   check = gtk_check_button_new_with_mnemonic (_("Use h_ost"));
@@ -290,7 +290,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gtk_table_attach_defaults (table, box2, 1, 2, 3, 4);
 
   /* Password */
-  box2 = gtk_hbox_new (FALSE, 4);
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   label = gtk_label_new_with_mnemonic (_("_Password:"));
   gtk_box_pack_start (GTK_BOX (box2), label, FALSE, FALSE, 0);

@@ -40,12 +40,12 @@ typedef struct _VinagreBookmarksTreePrivate VinagreBookmarksTreePrivate;
 
 struct _VinagreBookmarksTreeClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 struct _VinagreBookmarksTree
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
   VinagreBookmarksTreePrivate *priv;
 };
 

@@ -780,7 +780,7 @@ vinagre_window_init (VinagreWindow *window)
   window->priv->fullscreen = FALSE;
   window->priv->dispose_has_run = FALSE;
 
-  main_box = gtk_vbox_new (FALSE, 0);
+  main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_container_add (GTK_CONTAINER (window), main_box);
   gtk_widget_show (main_box);
 

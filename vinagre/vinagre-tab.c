@@ -49,7 +49,7 @@ struct _VinagreTabPrivate
   gboolean          has_screenshot;
 };
 
-G_DEFINE_ABSTRACT_TYPE (VinagreTab, vinagre_tab, GTK_TYPE_VBOX)
+G_DEFINE_ABSTRACT_TYPE (VinagreTab, vinagre_tab, GTK_TYPE_BOX)
 
 /* Signals */
 enum
@@ -546,6 +546,8 @@ vinagre_tab_add_recent_used (VinagreTab *tab)
 static void
 vinagre_tab_init (VinagreTab *tab)
 {
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab), GTK_ORIENTATION_VERTICAL);
+
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
   tab->priv->save_credentials = FALSE;
   tab->priv->keyring_item_id = 0;

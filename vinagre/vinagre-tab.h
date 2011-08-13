@@ -53,7 +53,7 @@ typedef enum
 
 struct _VinagreTab 
 {
-  GtkVBox vbox;
+  GtkBox box;
   VinagreTabPrivate *priv;
 };
 
@@ -65,7 +65,7 @@ typedef struct
 
 struct _VinagreTabClass 
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 
   /* Signals */
   void		(* tab_connected)			(VinagreTab *tab);

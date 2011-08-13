@@ -39,7 +39,7 @@ enum {
   NUM_COLS
 };
 
-G_DEFINE_TYPE (VinagreBookmarksTree, vinagre_bookmarks_tree, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (VinagreBookmarksTree, vinagre_bookmarks_tree, GTK_TYPE_BOX);
 
 static void
 vinagre_bookmarks_tree_row_activated_cb (GtkTreeView          *treeview,
@@ -142,6 +142,8 @@ vinagre_bookmarks_tree_init (VinagreBookmarksTree *tree)
   GtkTreeViewColumn *main_column;
 
   tree->priv = G_TYPE_INSTANCE_GET_PRIVATE (tree, VINAGRE_TYPE_BOOKMARKS_TREE, VinagreBookmarksTreePrivate);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (tree), GTK_ORIENTATION_VERTICAL);
 
   /* Create the scrolled window */
   scroll = gtk_scrolled_window_new (NULL, NULL);

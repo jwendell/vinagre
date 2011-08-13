@@ -96,7 +96,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   GtkWidget *box, *label, *u_box, *u_entry;
   gchar     *str;
 
-  box = gtk_vbox_new (FALSE, 6);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 
   str = g_strdup_printf ("<b>%s</b>", _("SSH Options"));
   label = gtk_label_new (str);
@@ -105,7 +105,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
-  u_box = gtk_hbox_new (FALSE, 6);
+  u_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   label = gtk_label_new_with_mnemonic (_("_Username:"));
   gtk_box_pack_start (GTK_BOX (u_box), label, FALSE, FALSE, 0);

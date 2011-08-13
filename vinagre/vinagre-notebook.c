@@ -510,7 +510,7 @@ static GtkWidget *
 build_tab_label (VinagreNotebook *nb, 
 		 VinagreTab      *tab)
 {
-  GtkWidget *hbox, *label_hbox, *label_ebox;
+  GtkWidget *box, *label_box, *label_ebox;
   GtkWidget *label, *dummy_label;
   GtkWidget *close_button, *spinner;
   GtkRcStyle *rcstyle;
@@ -518,15 +518,15 @@ build_tab_label (VinagreNotebook *nb,
   GtkWidget *icon;
   gchar     *name;
 
-  hbox = gtk_hbox_new (FALSE, 4);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   label_ebox = gtk_event_box_new ();
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (label_ebox), FALSE);
-  gtk_box_pack_start (GTK_BOX (hbox), label_ebox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), label_ebox, TRUE, TRUE, 0);
   gtk_widget_set_tooltip_text (label_ebox, _("Connecting..."));
 
-  label_hbox = gtk_hbox_new (FALSE, 4);
-  gtk_container_add (GTK_CONTAINER (label_ebox), label_hbox);
+  label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_container_add (GTK_CONTAINER (label_ebox), label_box);
 
   /* setup close button */
   close_button = gtk_button_new ();
@@ -548,7 +548,7 @@ build_tab_label (VinagreNotebook *nb,
   image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
 					  GTK_ICON_SIZE_MENU);
   gtk_container_add (GTK_CONTAINER (close_button), image);
-  gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (box), close_button, FALSE, FALSE, 0);
 
   gtk_widget_set_tooltip_text (close_button, _("Close connection"));
 
@@ -559,12 +559,12 @@ build_tab_label (VinagreNotebook *nb,
 
   /* setup spinner */
   spinner = gtk_spinner_new();
-  gtk_box_pack_start (GTK_BOX (label_hbox), spinner, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (label_box), spinner, FALSE, FALSE, 0);
 
   /* setup site icon */
   icon = gtk_image_new_from_icon_name (vinagre_tab_get_icon_name (tab),
 				       GTK_ICON_SIZE_MENU);
-  gtk_box_pack_start (GTK_BOX (label_hbox), icon, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (label_box), icon, FALSE, FALSE, 0);
 	
   /* setup label */
   name = vinagre_connection_get_best_name (vinagre_tab_get_conn (tab));
@@ -572,39 +572,39 @@ build_tab_label (VinagreNotebook *nb,
   g_free (name);
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_misc_set_padding (GTK_MISC (label), 0, 0);
-  gtk_box_pack_start (GTK_BOX (label_hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (label_box), label, FALSE, FALSE, 0);
 
   dummy_label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (label_hbox), dummy_label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (label_box), dummy_label, TRUE, TRUE, 0);
 	
-  gtk_widget_show (hbox);
+  gtk_widget_show (box);
   gtk_widget_show (label_ebox);
-  gtk_widget_show (label_hbox);
+  gtk_widget_show (label_box);
   gtk_widget_show (label);
   gtk_widget_show (dummy_label);	
   gtk_widget_show (image);
   gtk_widget_show (close_button);
   
-  g_object_set_data (G_OBJECT (hbox), "label", label);
+  g_object_set_data (G_OBJECT (box), "label", label);
   g_object_set_data (G_OBJECT (tab),  "label", label);
-  g_object_set_data (G_OBJECT (hbox), "label-ebox", label_ebox);
+  g_object_set_data (G_OBJECT (box), "label-ebox", label_ebox);
   g_object_set_data (G_OBJECT (tab),  "label-ebox", label_ebox);
   g_object_set_data (G_OBJECT (tab), "spinner", spinner);
   g_object_set_data (G_OBJECT (tab), "icon", icon);
-  g_object_set_data (G_OBJECT (hbox), "close-button", close_button);
+  g_object_set_data (G_OBJECT (box), "close-button", close_button);
   g_object_set_data (G_OBJECT (tab),  "close-button", close_button);
 
-  gtk_drag_source_set ( GTK_WIDGET (hbox),
+  gtk_drag_source_set ( GTK_WIDGET (box),
 			GDK_BUTTON1_MASK,
 			vinagre_target_list,
 			G_N_ELEMENTS (vinagre_target_list),
 			GDK_ACTION_COPY );
-  g_signal_connect (hbox,
+  g_signal_connect (box,
 		    "drag-data-get",
 		    G_CALLBACK (drag_data_get_handl),
 		    tab);
 
-  return hbox;
+  return box;
 }
 
 void
