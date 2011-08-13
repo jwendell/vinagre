@@ -673,6 +673,13 @@ init_widgets_visibility (VinagreWindow *window)
 }
 
 static void
+_create_infobar (VinagreWindow *window, GtkWidget *main_box)
+{
+    window->priv->infobar = gtk_info_bar_new ();
+    gtk_container_add (GTK_CONTAINER (main_box), window->priv->infobar);
+}
+
+static void
 create_statusbar (VinagreWindow *window, 
 		  GtkWidget   *main_box)
 {
@@ -717,47 +724,79 @@ _init_reverse_connections (VinagreWindow *window)
         vinagre_reverse_vnc_listener_start (listener);
 }
 
+static void
+_on_infobar_response (GtkInfoBar *infobar, gint response_id, gpointer user_data)
+{
+    VinagreWindow *window = VINAGRE_WINDOW (user_data);
+    gboolean accels_enabled;
+
+    switch (response_id)
+    {
+    case GTK_RESPONSE_CLOSE:
+        break;
+    case GTK_RESPONSE_HELP:
+        vinagre_utils_show_help (window, "preferences");
+        break;
+    case GTK_RESPONSE_YES:
+        /* Enable keyboard shortcuts. */
+        g_settings_set_boolean (vinagre_prefs_get_default_gsettings (), "show-accels", TRUE);
+        break;
+    default:
+        g_assert_not_reached ();
+    }
+
+    gtk_widget_hide (GTK_WIDGET (infobar));
+}
+
 static gboolean
 vinagre_window_check_first_run (VinagreWindow *window)
 {
-  gchar *dir, *filename;
+    gchar *dir, *filename;
 
-  dir = vinagre_dirs_get_user_data_dir ();
-  filename = g_build_filename (dir,
-			       "first_run",
-			       NULL);
-  g_free (dir);
+    dir = vinagre_dirs_get_user_data_dir ();
+    filename = g_build_filename (dir, "first_run", NULL);
+    g_free (dir);
 
-  if (!g_file_test (filename, G_FILE_TEST_EXISTS))
+    if (!g_file_test (filename, G_FILE_TEST_EXISTS))
     {
-      GError *error = NULL;
-      GtkWidget *dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-						  GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_INFO,
-						  GTK_BUTTONS_CLOSE,
-						  _("About menu accelerators and keyboard shortcuts"));
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						_("Vinagre comes with menu accelerators and keyboard shortcuts disabled by default. The reason is to avoid the keys from being intercepted by the program, and allow them to be sent to the remote desktop.\n\nYou can change this behavior through the preferences dialog. For more information, check the documentation.\n\nThis message will appear only once."));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+        GError *error = NULL;
+        GtkWidget *infobar = window->priv->infobar;
+        GtkWidget *content_area =
+            gtk_info_bar_get_content_area (GTK_INFO_BAR (infobar));
+        GtkWidget *label =
+            gtk_label_new (_("Vinagre disables keyboard shortcuts by default, so that any keyboard shortcuts are sent to the remote desktop.\n\nThis message will appear only once."));
 
-      if (vinagre_utils_create_dir_for_file (filename, &error))
+        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+
+        gtk_container_add (GTK_CONTAINER (content_area), label);
+        gtk_info_bar_add_buttons (GTK_INFO_BAR (infobar),
+            _("Enable shortcuts"), GTK_RESPONSE_YES, GTK_STOCK_CLOSE,
+            GTK_RESPONSE_CLOSE, GTK_STOCK_HELP, GTK_RESPONSE_HELP, NULL);
+        gtk_info_bar_set_default_response (GTK_INFO_BAR (infobar),
+            GTK_RESPONSE_CLOSE);
+        g_signal_connect (G_OBJECT (infobar), "response",
+            G_CALLBACK (_on_infobar_response), window);
+
+        gtk_widget_show_all (infobar);
+
+        if (vinagre_utils_create_dir_for_file (filename, &error))
         {
-          int fd = g_creat (filename, 0644);
-          if (fd < 0)
-            g_warning (_("Error while creating the file %s: %s"), filename, strerror (errno));
-          else
-            close (fd);
+            int fd = g_creat (filename, 0644);
+            if (fd < 0)
+                g_warning (_("Error while creating the file %s: %s"), filename, strerror (errno));
+            else
+                close (fd);
         }
-      else
+        else
         {
           g_warning (_("Error while creating the file %s: %s"), filename, error ? error->message: _("Unknown error"));
           g_clear_error (&error);
         }
     }
 
-  g_free (filename);
-  return FALSE;
+    g_free (filename);
+
+    return FALSE;
 }
 
 static void
@@ -786,6 +825,9 @@ vinagre_window_init (VinagreWindow *window)
 
   /* Add menu bar and toolbar bar  */
   create_menu_bar_and_toolbar (window, main_box);
+
+  /* Add info bar. */
+  _create_infobar (window, main_box);
 
   /* Add status bar */
   create_statusbar (window, main_box);

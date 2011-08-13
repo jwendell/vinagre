@@ -33,6 +33,7 @@ struct _VinagreWindowPrivate
 {
   VinagreNotebook *notebook;
   VinagreReverseVncListener *listener;
+  GtkWidget       *infobar;
   GtkWidget       *statusbar;	
   guint           generic_message_cid;
   guint           tip_message_cid;
