@@ -196,7 +196,6 @@ namespace Vinagre.Utils {
         }
     }
 
-    // TODO: Move this into the uilder file.
     public void show_help_about (Window parent) {
         var builder = get_builder ();
         var dialog = builder.get_object ("about_dialog") as Gtk.AboutDialog;
