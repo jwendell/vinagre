@@ -39,7 +39,7 @@ struct _VinagreVncTabPrivate
   gchar      *clipboard_str;
   GSList     *connected_actions, *initialized_actions;
   GtkWidget  *viewonly_button, *scaling_button;
-  GtkAction  *scaling_action, *viewonly_action, *original_size_action, *keep_ratio_action;
+  GtkAction  *scaling_action, *viewonly_action, *original_size_action, *keep_ratio_action, *ctrlaltdel_action;
   gulong     signal_clipboard, signal_align;
 };
 
@@ -688,6 +688,7 @@ create_initialized_actions (VinagreVncTab *tab)
   gtk_action_set_icon_name (a->action, "preferences-desktop-keyboard-shortcuts");
   g_signal_connect (a->action, "activate", G_CALLBACK (send_ctrlaltdel_cb), tab);
   list = g_slist_append (list, a);
+  tab->priv->ctrlaltdel_action = a->action;
 
   return list;
 }
@@ -950,6 +951,8 @@ vinagre_vnc_tab_set_viewonly (VinagreVncTab *tab, gboolean active) {
   vnc_display_set_read_only (VNC_DISPLAY (tab->priv->vnc), active);
   gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (tab->priv->viewonly_button),
 				     active);
+
+    gtk_action_set_sensitive (tab->priv->ctrlaltdel_action, !active);
 }
 
 gboolean
