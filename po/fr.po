@@ -1,10 +1,10 @@
 # French translation of vinagre.
-# Copyright (C) 2007-2010 Free Software Foundation, Inc.
+# Copyright (C) 2007-2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the vinagre package.
 #
 # Robert-André Mauchin <zebob.m@pengzone.org>, 2007.
 # Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007-2008.
-# Claude Paroz <claude@2xlibre.net>, 2007-2010.
+# Claude Paroz <claude@2xlibre.net>, 2007-2011.
 # Frédéric Péters <fpeters@0d.be>, 2008.
 # Laurent Coudeur <laurentc@iol.ie>, 2009.
 # Pablo Martin-Gomez <pablo.martin-gomez@laposte.net>, 2009.
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=vinagre&component=general\n"
-"POT-Creation-Date: 2011-02-23 23:27+0000\n"
-"PO-Revision-Date: 2010-07-19 17:45+0200\n"
+"product=vinagre&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-08-13 15:41+0000\n"
+"PO-Revision-Date: 2011-08-13 21:54+0200\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,13 +23,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1
-msgid "_About"
-msgstr "À _propos"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+msgid "Maximum number of history items in connect dialog"
+msgstr ""
+"Nombre maximal de lignes d'historique dans la boîte de dialogue de connexion"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
-msgid "_Help"
-msgstr "Aid_e"
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+msgid ""
+"Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
+"Note that if they are enabled, those keys will be intercepted by the menu "
+"and will not be sent to the remote host."
+msgstr ""
+"Définir à « false » pour désactiver les raccourcis des menus. Définir à "
+"« true » pour les activer. Notez que si elles sont activées, ces touches "
+"seront interceptées par le menu et ne seront pas envoyées à l'hôte distant."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+msgid ""
+"Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
+"tabs when there is more than one active connection."
+msgstr ""
+"Définir à « true » pour toujours afficher les onglets. Définir à « false » "
+"pour les afficher uniquement quand il y a plus d'une connexion active."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+msgid ""
+"Set to \"true\" to always start the program listening for reverse "
+"connections."
+msgstr ""
+"Définir à « true » pour que le programme démarre toujours en écoutant les "
+"connexions inverses."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+msgid "Specifies the maximum number of items in the host dropdown entry."
+msgstr ""
+"Indique le nombre maximal d'éléments dans la liste déroulante des hôtes."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+msgid ""
+"When connecting to a host, the client can say to the server to leave other "
+"clients connected or to drop the existent connections. Set the value to true "
+"to share the desktop with the other clients."
+msgstr ""
+"Lors de la connexion à un hôte, le client peut dire au serveur de laisser "
+"les autres clients connectés ou d'abandonner les connexions existantes. "
+"Définir la valeur à « true » pour partager le bureau avec les autres clients."
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+msgid "Whether we should leave other clients connected"
+msgstr "Indique s'il faut laisser les autres clients connectés"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr ""
+"Indique s'il faut afficher les onglets même quand il n'y a qu'une connexion "
+"active"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "Indique s'il faut afficher les raccourcis clavier du menu"
+
+#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+msgid "Whether we should start the program listening for reverse connections"
+msgstr ""
+"Indique s'il faut démarrer le programme en restant à l'écoute des connexions "
+"inverses"
 
 # Utilisation de l'infinitif dans les infobulles du Bureau
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
@@ -37,9 +96,7 @@ msgid "Access remote desktops"
 msgstr "Accéder à des bureaux distants"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
-#: ../vinagre/vinagre-applet.c:440 ../vinagre/vinagre-applet.c:492
-#: ../vinagre/vinagre-main.c:130
+#: ../vinagre/vinagre-main.c:129
 msgid "Remote Desktop Viewer"
 msgstr "Visionneur de bureaux distants"
 
@@ -48,100 +105,180 @@ msgid "Allow _keyboard shortcuts"
 msgstr "Autoriser les _raccourcis clavier"
 
 #: ../data/vinagre.ui.h:2
+msgid "Always show tabs in the remote desktop display area"
+msgstr ""
+"Toujours afficher des onglets dans la zone d'affichage des bureaux distants"
+
+#: ../data/vinagre.ui.h:3
 msgid "Authentication is required"
 msgstr "Une authentification est requise"
 
-#. setup label
-#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:854
+#: ../data/vinagre.ui.h:4
+msgid "Bookmark Folder"
+msgstr "Dossier des signets"
+
+#: ../data/vinagre.ui.h:5
 msgid "Bookmarks"
 msgstr "Signets"
 
-#: ../data/vinagre.ui.h:4
+#: ../data/vinagre.ui.h:6
+msgid ""
+"By activating reverse connections you can access remote desktops that are "
+"behind a firewall. The remote side is supposed to initiate the connection "
+"with you. For further information, read the help."
+msgstr ""
+"En activant les connexions inverses, vous pouvez accéder à des bureaux "
+"distants qui sont derrière un pare-feu. C'est à l'ordinateur distant "
+"d'initier la connexion. Pour plus d'informations, consultez l'aide."
+
+#: ../data/vinagre.ui.h:7
+msgid "Choose a remote desktop to connect to"
+msgstr "Choisissez un bureau distant auquel se connecter"
+
+#: ../data/vinagre.ui.h:8
+msgid "Connect"
+msgstr "Se connecter"
+
+#: ../data/vinagre.ui.h:9
 msgid "Connection"
 msgstr "Connexion"
 
-#: ../data/vinagre.ui.h:5
+#: ../data/vinagre.ui.h:10
 msgid "Connection options"
 msgstr "Options de connexion"
 
-#: ../data/vinagre.ui.h:6
+#: ../data/vinagre.ui.h:11
+msgid "Connectivity"
+msgstr "Connectivité"
+
+#: ../data/vinagre.ui.h:12
+msgid "Enable fullscreen mode for this connection"
+msgstr "Active le mode plein écran pour cette connexion"
+
+#. A tooltip in the preferences dialog
+#: ../data/vinagre.ui.h:14
+msgid ""
+"Enables menu accelerators and keyboard shortcuts. This prevents those "
+"shortcuts being sent to the remote desktop"
+msgstr ""
+"Active les raccourcis clavier et les touches d'accès rapide. Cela empêche ces "
+"raccourcis d'être envoyés au bureau distant"
+
+#: ../data/vinagre.ui.h:15
+msgid "Enter a valid hostname or IP address"
+msgstr "Saisissez un nom d'hôte ou une adresse IP valide"
+
+#: ../data/vinagre.ui.h:16
 msgid "Folder"
 msgstr "Dossier"
 
-#: ../data/vinagre.ui.h:7 ../plugins/rdp/vinagre-rdp-tab.c:53
+#: ../data/vinagre.ui.h:17 ../plugins/rdp/vinagre-rdp-tab.c:53
 #: ../plugins/ssh/vinagre-ssh-tab.c:49 ../plugins/vnc/vinagre-vnc-tab.c:148
-#: ../plugins/spice/vinagre-spice-tab.c:138 ../vinagre/vinagre-fav.c:406
+#: ../plugins/spice/vinagre-spice-tab.c:138
 msgid "Host:"
 msgstr "Hôte :"
 
-#: ../data/vinagre.ui.h:8
+#: ../data/vinagre.ui.h:18
 msgid "Interface"
 msgstr "Interface"
 
-#: ../data/vinagre.ui.h:9
+#: ../data/vinagre.ui.h:19
 msgid "Options"
 msgstr "Options"
 
-#: ../data/vinagre.ui.h:10
+#: ../data/vinagre.ui.h:20
 msgid "Parent Folder"
 msgstr "Dossier parent"
 
-#: ../data/vinagre.ui.h:11
+#: ../data/vinagre.ui.h:21
 msgid "Preferences"
 msgstr "Préférences"
 
-#. This is a tooltip in preferences dialog
-#: ../data/vinagre.ui.h:13
-msgid ""
-"This option enables menu accelerators and keyboard shortcuts. For more info "
-"on why you may want to disable them, check the documentation."
-msgstr ""
-"Cette option active les raccourcis clavier et les touches d'accès rapide. "
-"Pour plus de détails sur les raisons qui poussent à leur désactivation, "
-"consultez la documentation."
+#: ../data/vinagre.ui.h:22
+msgid "Reverse Connections"
+msgstr "Connexions inverses"
 
-#: ../data/vinagre.ui.h:14
-msgid "Which machine do you want to connect to?"
-msgstr "Sur quelle machine souhaitez-vous vous connecter ?"
+#: ../data/vinagre.ui.h:23
+msgid "Search for remote hosts on the network"
+msgstr "Rechercher des hôtes distants sur le réseau"
 
-#: ../data/vinagre.ui.h:15
+#: ../data/vinagre.ui.h:24
+msgid "Select a remote desktop protocol for this connection"
+msgstr "Choisissez un protocole de bureau distant pour cette connexion"
+
+#: ../data/vinagre.ui.h:25
+msgid "Store the login credential in GNOME Keyring"
+msgstr "Enregistrer les données de connexion dans le trousseau GNOME"
+
+#: ../data/vinagre.ui.h:26
+msgid "This desktop is reachable through the following IP address(es):"
+msgstr "Cet ordinateur est accessible par la ou les adresses IP suivantes :"
+
+#: ../data/vinagre.ui.h:27
+msgid "Vinagre is a remote desktop viewer for the GNOME desktop"
+msgstr "Vinagre est un visionneur de bureau à distance pour le bureau GNOME"
+
+#. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Remote->Reverse connections.
+#: ../data/vinagre.ui.h:29
+msgid "_Always Enabled"
+msgstr "_Toujours activé"
+
+#: ../data/vinagre.ui.h:30
 msgid "_Always show tabs"
 msgstr "_Toujours afficher les onglets"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.ui.h:17
+#: ../data/vinagre.ui.h:32
 msgid "_Authenticate"
 msgstr "S'_authentifier"
 
-#: ../data/vinagre.ui.h:18
+#: ../data/vinagre.ui.h:33
+msgid "_Enable Reverse Connections"
+msgstr "_Activer les connexions inverses"
+
+#: ../data/vinagre.ui.h:34
 msgid "_Full screen"
 msgstr "_Plein écran"
 
-#: ../data/vinagre.ui.h:19
+#: ../data/vinagre.ui.h:35
+msgid "_Fullscreen"
+msgstr "_Plein écran"
+
+#: ../data/vinagre.ui.h:36
 msgid "_Host:"
 msgstr "_Hôte :"
 
 #. Translators: This is the name of a bookmark. It appears in the add/edit bookmark dialog.
-#: ../data/vinagre.ui.h:21
+#: ../data/vinagre.ui.h:38
 msgid "_Name:"
 msgstr "_Nom :"
 
-#: ../data/vinagre.ui.h:22 ../plugins/spice/vinagre-spice-plugin.c:295
+#: ../data/vinagre.ui.h:39 ../plugins/spice/vinagre-spice-plugin.c:295
 msgid "_Password:"
 msgstr "_Mot de passe :"
 
-#: ../data/vinagre.ui.h:23
+#: ../data/vinagre.ui.h:40
 msgid "_Protocol:"
 msgstr "_Protocole :"
 
-#: ../data/vinagre.ui.h:24
+#: ../data/vinagre.ui.h:41
 msgid "_Remember this credential"
 msgstr "_Se souvenir de l'information d'identification"
 
-#: ../data/vinagre.ui.h:25 ../plugins/rdp/vinagre-rdp-plugin.c:108
-#: ../plugins/ssh/vinagre-ssh-plugin.c:113
+#: ../data/vinagre.ui.h:42 ../plugins/rdp/vinagre-rdp-plugin.c:105
+#: ../plugins/ssh/vinagre-ssh-plugin.c:110
 msgid "_Username:"
 msgstr "Nom d'_utilisateur :"
+
+#. Add your name here to appear as a translator in the about dialog
+#: ../data/vinagre.ui.h:44
+msgid "translator-credits"
+msgstr ""
+"Robert-André Mauchin <zebob.m@pengzone.org>, 2007\n"
+"Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007-2008\n"
+"Claude Paroz <claude@2xlibre.net>, 2007-2010\n"
+"Frédéric Péters <fpeters@0d.be>, 2008\n"
+"Laurent Coudeur <laurentc@iol.ie>, 2009"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -151,19 +288,15 @@ msgstr "Fichier d'accès à distance (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Connexion à un bureau distant"
 
-#: ../plugins/rdp/rdp.plugin.desktop.in.h:1
 #: ../plugins/rdp/vinagre-rdp-plugin.c:55
 msgid "RDP"
 msgstr "RDP"
 
-#: ../plugins/rdp/rdp.plugin.desktop.in.h:2
-msgid "RDP support"
-msgstr "Prise en charge de RDP"
-
-#. Translators: This is a description of the RDP protocol. It appears at Connect dialog.
+# Utilisation de l'infinitif dans les infobulles du Bureau
+#. Translators: This is a description of the RDP protocol. It appears in the Connect dialog.
 #: ../plugins/rdp/vinagre-rdp-plugin.c:57
-msgid "Access MS Windows machines"
-msgstr "Accéder à des machines MS Windows"
+msgid "Access MS Windows remote desktops"
+msgstr "Accéder à des bureaux distants MS Windows"
 
 #: ../plugins/rdp/vinagre-rdp-plugin.c:96
 msgid "RDP Options"
@@ -171,14 +304,14 @@ msgstr "Options RDP"
 
 #. Translators: This is the tooltip for the username field in a RDP connection
 #. Translators: This is the tooltip for the username field in a SSH connection
-#: ../plugins/rdp/vinagre-rdp-plugin.c:113
-#: ../plugins/ssh/vinagre-ssh-plugin.c:118
+#: ../plugins/rdp/vinagre-rdp-plugin.c:110
+#: ../plugins/ssh/vinagre-ssh-plugin.c:115
 msgid ""
 "Optional. If blank, your username will be used. Also, it can be supplied in "
-"the Machine field above, in the form username@hostname."
+"the Host field above, in the form username@hostname."
 msgstr ""
 "Facultatif. Si le champ est vide, votre nom d'utilisateur sera utilisé. Peut "
-"également être fourni dans le champ Machine ci-dessus sous la forme nom-"
+"également être fourni dans le champ Hôte ci-dessus sous la forme nom-"
 "utilisateur@nom-hote."
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:54 ../plugins/ssh/vinagre-ssh-tab.c:50
@@ -191,19 +324,17 @@ msgstr "Port :"
 msgid "Error while executing rdesktop"
 msgstr "Erreur lors du lancement de rdesktop"
 
-#: ../plugins/rdp/vinagre-rdp-tab.c:124 ../vinagre/vinagre-bookmarks.c:366
-#: ../vinagre/vinagre-bookmarks.c:492
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:170
-#: ../vinagre/vinagre-connect.c:492 ../vinagre/vinagre-fav.c:766
-#: ../vinagre/vinagre-options.c:76 ../vinagre/vinagre-options.c:94
-#: ../vinagre/vinagre-window.c:278 ../vinagre/vinagre-window.c:749
+#: ../plugins/rdp/vinagre-rdp-tab.c:124 ../vinagre/vinagre-bookmarks.c:365
+#: ../vinagre/vinagre-bookmarks.c:491
+#: ../vinagre/vinagre-bookmarks-migration.c:134
+#: ../vinagre/vinagre-cache-prefs.c:56 ../vinagre/vinagre-commands.c:161
+#: ../vinagre/vinagre-connect.c:490 ../vinagre/vinagre-options.c:80
+#: ../vinagre/vinagre-options.c:98 ../vinagre/vinagre-window.c:259
+#: ../vinagre/vinagre-window.c:792
 msgid "Unknown error"
 msgstr "Erreur inconnue"
 
-#. vim: set ts=8:
 #: ../plugins/ssh/vinagre-ssh-plugin.c:59
-#: ../plugins/ssh/ssh.plugin.desktop.in.h:1
 msgid "SSH"
 msgstr "SSH"
 
@@ -215,10 +346,6 @@ msgstr "Accéder à des terminaux Unix/Linux"
 #: ../plugins/ssh/vinagre-ssh-plugin.c:101
 msgid "SSH Options"
 msgstr "Options SSH"
-
-#: ../plugins/ssh/ssh.plugin.desktop.in.h:2
-msgid "SSH support"
-msgstr "Prise en charge de SSH"
 
 #. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
 #: ../plugins/vnc/vinagre-vnc-connection.c:316
@@ -245,15 +372,13 @@ msgstr "Options VNC :"
 msgid "Show VNC Options"
 msgstr "Affiche les options VNC"
 
-#. vim: set ts=8:
 #: ../plugins/vnc/vinagre-vnc-plugin.c:87
-#: ../plugins/vnc/vnc.plugin.desktop.in.h:1
 msgid "VNC"
 msgstr "VNC"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:88
-msgid "Access Unix/Linux, Windows and other machines."
-msgstr "Accéder à des machines Unix/Linux, Windows et autres."
+msgid "Access Unix/Linux, Windows and other remote desktops."
+msgstr "Accéder à des bureaux distants Unix/Linux, Windows et autres."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:145
 #: ../plugins/spice/vinagre-spice-plugin.c:100
@@ -277,85 +402,86 @@ msgstr "Options VNC"
 
 #. View only check button
 #. View only check button - not fully ready on spice-gtk side
-#: ../plugins/vnc/vinagre-vnc-plugin.c:265
-#: ../plugins/vnc/vinagre-vnc-tab.c:624
+#: ../plugins/vnc/vinagre-vnc-plugin.c:260
+#: ../plugins/vnc/vinagre-vnc-tab.c:618
 #: ../plugins/spice/vinagre-spice-plugin.c:222
 #: ../plugins/spice/vinagre-spice-tab.c:506
 msgid "_View only"
 msgstr "_Vue seule"
 
 #. Scaling check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:273
+#: ../plugins/vnc/vinagre-vnc-plugin.c:269
 #: ../plugins/spice/vinagre-spice-plugin.c:246
 msgid "_Scaling"
 msgstr "M_ise à l'échelle"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:289
+#. Keep ratio check button
+#: ../plugins/vnc/vinagre-vnc-plugin.c:283
 msgid "_Keep aspect ratio"
 msgstr "_Conserver le rapport d'affichage"
 
 #. JPEG Compression check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:299
+#: ../plugins/vnc/vinagre-vnc-plugin.c:293
 msgid "_Use JPEG Compression"
 msgstr "_Utiliser la compression JPEG"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:300
+#: ../plugins/vnc/vinagre-vnc-plugin.c:294
 msgid "This might not work on all VNC servers"
 msgstr "Cela ne fonctionne pas sur tous les serveurs VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:309
-msgid "_Depth Color:"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:304
+msgid "Color _Depth:"
 msgstr "_Profondeur de couleur :"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:314
+#: ../plugins/vnc/vinagre-vnc-plugin.c:309
 msgid "Use Server Settings"
 msgstr "Utiliser les paramètres du serveur"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:315
+#: ../plugins/vnc/vinagre-vnc-plugin.c:310
 msgid "True Color (24 bits)"
 msgstr "Couleurs réelles (24 bits)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:316
+#: ../plugins/vnc/vinagre-vnc-plugin.c:311
 msgid "High Color (16 bits)"
 msgstr "Haute définition (16 bits)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:317
+#: ../plugins/vnc/vinagre-vnc-plugin.c:312
 msgid "Low Color (8 bits)"
 msgstr "Basse définition (8 bits)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:318
+#: ../plugins/vnc/vinagre-vnc-plugin.c:313
 msgid "Ultra Low Color (3 bits)"
 msgstr "Définition minimale (3 bits)"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:331
+#: ../plugins/vnc/vinagre-vnc-plugin.c:327
 #: ../plugins/spice/vinagre-spice-plugin.c:257
 msgid "Use h_ost"
 msgstr "Utiliser l'_hôte"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:340
+#: ../plugins/vnc/vinagre-vnc-plugin.c:336
 #: ../plugins/spice/vinagre-spice-plugin.c:266
 msgid "hostname or user@hostname"
 msgstr "nom d'hôte ou utilisateur@nom d'hôte"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:341
+#: ../plugins/vnc/vinagre-vnc-plugin.c:337
 #: ../plugins/spice/vinagre-spice-plugin.c:267
 msgid "Supply an alternative port using colon"
 msgstr "Indiquez un port différent en utilisant les deux-points"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:342
+#: ../plugins/vnc/vinagre-vnc-plugin.c:338
 #: ../plugins/spice/vinagre-spice-plugin.c:268
 msgid "For instance: joe@domain.com:5022"
 msgstr "Par exemple : jean@domaine.com:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:348
+#: ../plugins/vnc/vinagre-vnc-plugin.c:344
 #: ../plugins/spice/vinagre-spice-plugin.c:274
 msgid "as a SSH tunnel"
 msgstr "comme tunnel SSH"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:383
+#: ../plugins/vnc/vinagre-vnc-plugin.c:379
 msgid "VNC Files"
 msgstr "Fichiers VNC"
 
@@ -394,88 +520,88 @@ msgstr ""
 msgid "Authentication unsupported"
 msgstr "Méthode d'authentification non prise en charge"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:523 ../plugins/vnc/vinagre-vnc-tab.c:540
+#: ../plugins/vnc/vinagre-vnc-tab.c:517 ../plugins/vnc/vinagre-vnc-tab.c:534
 msgid "Authentication error"
 msgstr "Erreur d'authentification"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:524
-msgid "A username is required in order to access this machine."
+#: ../plugins/vnc/vinagre-vnc-tab.c:518
+msgid "A username is required in order to access this remote desktop."
 msgstr ""
-"Un nom d'utilisateur est obligatoire pour avoir accès à cet ordinateur."
+"Un nom d'utilisateur est obligatoire pour avoir accès à ce bureau distant."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:541
-msgid "A password is required in order to access this machine."
-msgstr "Un mot de passe est obligatoire pour avoir accès à cet ordinateur."
+#: ../plugins/vnc/vinagre-vnc-tab.c:535
+msgid "A password is required in order to access this remote desktop."
+msgstr "Un mot de passe est obligatoire pour avoir accès à ce bureau distant."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:595
+#: ../plugins/vnc/vinagre-vnc-tab.c:589
 #: ../plugins/spice/vinagre-spice-tab.c:465
 msgid "S_caling"
 msgstr "_Mise à l'échelle"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:596
+#: ../plugins/vnc/vinagre-vnc-tab.c:590
 #: ../plugins/spice/vinagre-spice-tab.c:466
 msgid "Fits the remote screen into the current window size"
 msgstr "Adapte la taille de l'écran distant à la taille actuelle de la fenêtre"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:609
+#: ../plugins/vnc/vinagre-vnc-tab.c:603
 msgid "_Keep Aspect Ratio"
 msgstr "_Conserver le rapport d'affichage"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:610
+#: ../plugins/vnc/vinagre-vnc-tab.c:604
 msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "Conserve le rapport d'affichage de l'écran lors de la mise à l'échelle"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:625
+#: ../plugins/vnc/vinagre-vnc-tab.c:619
 #: ../plugins/spice/vinagre-spice-tab.c:507
 msgid "Does not send mouse and keyboard events"
 msgstr "N'envoie pas les évènements souris et clavier"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:638
+#: ../plugins/vnc/vinagre-vnc-tab.c:632
 msgid "_Original size"
 msgstr "Taille _originale"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:639
+#: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Ajuste la taille de la fenêtre à celle du bureau distant"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:652
+#: ../plugins/vnc/vinagre-vnc-tab.c:646
 msgid "_Refresh Screen"
 msgstr "_Actualiser l'écran"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:653
+#: ../plugins/vnc/vinagre-vnc-tab.c:647
 msgid "Requests an update of the screen"
 msgstr "Demande une mise à jour de l'écran"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:675
+#: ../plugins/vnc/vinagre-vnc-tab.c:669
 #: ../plugins/spice/vinagre-spice-tab.c:530
 msgid "_Send Ctrl-Alt-Del"
 msgstr "_Envoyer Ctrl-Alt-Suppr"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:676
+#: ../plugins/vnc/vinagre-vnc-tab.c:670
 #: ../plugins/spice/vinagre-spice-tab.c:531
-msgid "Sends Ctrl+Alt+Del to the remote machine"
-msgstr "Envoie Ctrl+Alt+Suppr à la machine distante"
+msgid "Sends Ctrl+Alt+Del to the remote desktop"
+msgstr "Envoie Ctrl+Alt+Suppr au bureau distant"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:728 ../plugins/vnc/vinagre-vnc-tab.c:729
+#: ../plugins/vnc/vinagre-vnc-tab.c:723 ../plugins/vnc/vinagre-vnc-tab.c:724
 #: ../plugins/spice/vinagre-spice-tab.c:583
 #: ../plugins/spice/vinagre-spice-tab.c:584
 msgid "Scaling"
 msgstr "Mise à l'échelle"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:738 ../plugins/vnc/vinagre-vnc-tab.c:739
+#: ../plugins/vnc/vinagre-vnc-tab.c:733 ../plugins/vnc/vinagre-vnc-tab.c:734
 #: ../plugins/spice/vinagre-spice-tab.c:593
 #: ../plugins/spice/vinagre-spice-tab.c:594
 msgid "Read only"
 msgstr "Lecture seule"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:747 ../plugins/vnc/vinagre-vnc-tab.c:749
+#: ../plugins/vnc/vinagre-vnc-tab.c:742 ../plugins/vnc/vinagre-vnc-tab.c:744
 #: ../plugins/spice/vinagre-spice-tab.c:602
 #: ../plugins/spice/vinagre-spice-tab.c:604
 msgid "Send Ctrl-Alt-Del"
 msgstr "Envoyer Ctrl-Alt-Suppr"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:912
+#: ../plugins/vnc/vinagre-vnc-tab.c:907
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -488,71 +614,10 @@ msgstr ""
 "activer cette fonctionnalité."
 
 #: ../plugins/vnc/vinagre-vnc-tunnel.c:96
-#: ../plugins/spice/vinagre-spice-tunnel.c:96
+#: ../plugins/spice/vinagre-spice-tunnel.c:103
 #, c-format
 msgid "Unable to find a free TCP port"
 msgstr "Impossible de trouver un port TCP libre"
-
-#: ../plugins/vnc/vnc.plugin.desktop.in.h:2
-msgid "VNC support"
-msgstr "Prise en charge de VNC"
-
-#: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:1
-msgid "Allows reverse VNC connections"
-msgstr "Autorise les connexions VNC inverses"
-
-#: ../plugins/reverse-vnc/reverse-vnc.plugin.desktop.in.h:2
-msgid "Reverse VNC"
-msgstr "VNC inverses"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:101
-msgid "IPv4:"
-msgstr "IPv4 :"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:113
-msgid ""
-"\n"
-"\n"
-"IPv6:"
-msgstr ""
-"\n"
-"\n"
-"IPv6 :"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener-dialog.c:172
-#, c-format
-msgid "On the port %d"
-msgstr "Sur le port %d"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:211
-msgid "Error activating reverse connections"
-msgstr "Impossible d'activer les connexions inverses"
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-listener.c:212
-msgid ""
-"The program could not find any available TCP ports starting at 5500. Is "
-"there any other running program consuming all your TCP ports?"
-msgstr ""
-"Le programme n'a pas pu trouver de ports TCP disponibles en commençant à "
-"5500. Y a-t-il d'autres programme en cours consommant tous vos ports TCP ?"
-
-#. Translators: "Reverse" here is an adjective, not a verb.
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:69
-msgid "_Reverse Connections..."
-msgstr "Connexions _inverses..."
-
-#: ../plugins/reverse-vnc/vinagre-reverse-vnc-plugin.c:71
-msgid "Configure incoming VNC connections"
-msgstr "Configurer les connexions VNC entrantes"
-
-#. vim: set ts=8:
-#: ../plugins/spice/spice.plugin.desktop.in.h:1
-msgid "Spice"
-msgstr "Spice"
-
-#: ../plugins/spice/spice.plugin.desktop.in.h:2
-msgid "Spice support"
-msgstr "Prise en charge de Spice"
 
 #. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
 #: ../plugins/spice/vinagre-spice-plugin.c:107
@@ -609,149 +674,81 @@ msgstr "Redimensionne l'écran invité pour un meilleur ajustement"
 msgid "Automatically share clipboard between client and guest"
 msgstr "Partage automatiquement le presse-papiers entre le client et l'invité"
 
-#. vim: set ts=8:
-#: ../plugins/reverse-vnc/reverse-vnc.ui.h:1
-msgid ""
-"By activating reverse connections you can access machines that are behind a "
-"firewall. The remote side is supposed to initiate the connection with you. "
-"For further information, checkout the help."
-msgstr ""
-"En activant les connexions inverses, vous pouvez accéder à des ordinateurs "
-"qui sont derrière un pare-feu. C'est à l'ordinateur distant d'initier la "
-"connexion. Pour plus d'informations, consultez l'aide."
-
-#: ../plugins/reverse-vnc/reverse-vnc.ui.h:2
-msgid "Connectivity"
-msgstr "Connectivité"
-
-#: ../plugins/reverse-vnc/reverse-vnc.ui.h:3
-msgid "Reverse Connections"
-msgstr "Connexions inverses"
-
-#: ../plugins/reverse-vnc/reverse-vnc.ui.h:4
-msgid "This machine is reachable through the following IP address(es):"
-msgstr "Cette machine est accessible par la ou les adresses IP suivantes :"
-
-#. Translators: this is the reverse connection mode. "Always enabled" means it will be enabled by default in the program startup. You can see this string in the dialog Machine->Reverse connections.
-#: ../plugins/reverse-vnc/reverse-vnc.ui.h:6
-msgid "_Always Enabled"
-msgstr "_Toujours activé"
-
-#: ../plugins/reverse-vnc/reverse-vnc.ui.h:7
-msgid "_Enable Reverse Connections"
-msgstr "_Activer les connexions inverses"
-
-#: ../plugins/im-status/im-status.plugin.desktop.in.h:1
-msgid ""
-"Changes Instant Messenger status to busy when window toggles to fullscreen "
-"(works with Empathy)"
-msgstr ""
-"Bascule l'état de la messagerie instantanée sur occupé lorsque la fenêtre "
-"passe en mode plein écran (fonctionne avec Empathy)"
-
-#: ../plugins/im-status/im-status.plugin.desktop.in.h:2
-msgid "IM Status"
-msgstr "État messagerie instantanée"
-
-#: ../plugins/im-status/im-status.js:43
-msgid "Could not communicate to Telepathy. IM Status plugin will not work."
-msgstr "Impossible de communiquer vers Telepathy. Le greffon d'état de la messagerie instantanée ne fonctionne pas."
-
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "Un menu pour accéder rapidement à des machines distantes"
-
-#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Fabrique pour l'applet Vinagre"
-
-#: ../vinagre/vinagre-applet.c:283 ../vinagre/vinagre-applet.c:366
-msgid "Could not run vinagre:"
-msgstr "Impossible de lancer vinagre :"
-
-#: ../vinagre/vinagre-applet.c:386
-msgid "Open Remote Desktop Viewer"
-msgstr "Ouvrir le visionneur de bureaux distants"
-
-#: ../vinagre/vinagre-applet.c:441
-msgid "Access your bookmarks"
-msgstr "Accéder à vos signets"
-
-#: ../vinagre/vinagre-bookmarks.c:366
+#: ../vinagre/vinagre-bookmarks.c:365
 #, c-format
 msgid "Error while initializing bookmarks: %s"
 msgstr "Impossible d'initialiser les signets : %s"
 
-#: ../vinagre/vinagre-bookmarks.c:373
+#: ../vinagre/vinagre-bookmarks.c:372
 msgid "Error while initializing bookmarks: The file seems to be empty"
 msgstr "Impossible d'initialiser les signets : le fichier semble vide"
 
-#: ../vinagre/vinagre-bookmarks.c:380
+#: ../vinagre/vinagre-bookmarks.c:379
 msgid ""
 "Error while initializing bookmarks: The file is not a vinagre bookmarks file"
 msgstr ""
 "Impossible d'initialiser les signets : le fichier n'est pas un fichier de "
 "signets de vinagre"
 
-#: ../vinagre/vinagre-bookmarks.c:453 ../vinagre/vinagre-bookmarks.c:460
+#: ../vinagre/vinagre-bookmarks.c:452 ../vinagre/vinagre-bookmarks.c:459
 msgid "Error while saving bookmarks: Failed to create the XML structure"
 msgstr ""
 "Erreur lors de l'enregistrement des signets : la création de la structure "
 "XML a échoué"
 
-#: ../vinagre/vinagre-bookmarks.c:467 ../vinagre/vinagre-bookmarks.c:474
+#: ../vinagre/vinagre-bookmarks.c:466 ../vinagre/vinagre-bookmarks.c:473
 msgid "Error while saving bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Erreur lors de l'enregistrement des signets : l'initialisation de la "
 "structure XML a échoué"
 
-#: ../vinagre/vinagre-bookmarks.c:483
+#: ../vinagre/vinagre-bookmarks.c:482
 msgid "Error while saving bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Erreur lors de l'enregistrement des signets : la finalisation de la "
 "structure XML a échoué"
 
-#: ../vinagre/vinagre-bookmarks.c:492
+#: ../vinagre/vinagre-bookmarks.c:491
 #, c-format
 msgid "Error while saving bookmarks: %s"
 msgstr "Erreur lors de l'enregistrement des signets : %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:95
-#: ../vinagre/vinagre-bookmarks-migration.c:102
+#: ../vinagre/vinagre-bookmarks-migration.c:94
+#: ../vinagre/vinagre-bookmarks-migration.c:101
 msgid "Error while migrating bookmarks: Failed to create the XML structure"
 msgstr ""
 "Erreur lors de la migration des signets : la création de la structure XML a "
 "échoué"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:109
-#: ../vinagre/vinagre-bookmarks-migration.c:116
+#: ../vinagre/vinagre-bookmarks-migration.c:108
+#: ../vinagre/vinagre-bookmarks-migration.c:115
 msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
 msgstr ""
 "Erreur lors de la migration des signets : l'initialisation de la structure "
 "XML a échoué"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:125
+#: ../vinagre/vinagre-bookmarks-migration.c:124
 msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
 msgstr ""
 "Erreur lors de la migration des signets : la finalisation de la structure "
 "XML a échoué"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:135
-#: ../vinagre/vinagre-bookmarks-migration.c:216
+#: ../vinagre/vinagre-bookmarks-migration.c:134
+#: ../vinagre/vinagre-bookmarks-migration.c:215
 #, c-format
 msgid "Error while migrating bookmarks: %s"
 msgstr "Erreur lors de la migration des signets : %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:164
+#: ../vinagre/vinagre-bookmarks-migration.c:163
 msgid "Error while migrating bookmarks: VNC plugin is not activated"
 msgstr ""
 "Erreur lors de la migration des signets : le greffon VNC n'est pas activé"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:216
+#: ../vinagre/vinagre-bookmarks-migration.c:215
 msgid "Failed to create the directory"
 msgstr "Échec lors de la création du dossier"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:241
+#: ../vinagre/vinagre-bookmarks-migration.c:240
 msgid ""
 "Migrating the bookmarks file to the new format. This operation is only "
 "supposed to run once."
@@ -759,21 +756,21 @@ msgstr ""
 "Migration du fichier des signets vers le nouveau format. Cette opération est "
 "censée n'être exécutée qu'une seule fois."
 
-#: ../vinagre/vinagre-bookmarks-migration.c:249
+#: ../vinagre/vinagre-bookmarks-migration.c:248
 #, c-format
 msgid "Error opening old bookmarks file: %s"
 msgstr "Erreur lors de l'ouverture du fichier des anciens signets : %s"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:250
-#: ../vinagre/vinagre-bookmarks-migration.c:262
+#: ../vinagre/vinagre-bookmarks-migration.c:249
+#: ../vinagre/vinagre-bookmarks-migration.c:261
 msgid "Migration cancelled"
 msgstr "Migration annulée"
 
-#: ../vinagre/vinagre-bookmarks-migration.c:259
+#: ../vinagre/vinagre-bookmarks-migration.c:258
 msgid "Could not remove the old bookmarks file"
 msgstr "Impossible de supprimer l'ancien fichier de signets"
 
-#: ../vinagre/vinagre-bookmarks-tree.c:119
+#: ../vinagre/vinagre-bookmarks-tree.c:120
 msgid "Root Folder"
 msgstr "Dossier racine"
 
@@ -810,8 +807,8 @@ msgid "Remove Folder?"
 msgstr "Enlever le dossier ?"
 
 #: ../vinagre/vinagre-bookmarks-ui.c:312
-msgid "Notice that all its subfolders and items will be removed as well."
-msgstr "Note : tous les sous-répertoires et objets seront aussi supprimés."
+msgid "Note that all its subfolders and bookmarks will be removed as well."
+msgstr "Note : tous les sous-dossiers et signets seront aussi supprimés."
 
 #: ../vinagre/vinagre-bookmarks-ui.c:317
 msgid "Remove Item?"
@@ -830,15 +827,15 @@ msgstr "Nouveau dossier"
 msgid "Error while saving preferences: %s"
 msgstr "Erreur lors de l'enregistrement des préférences : %s"
 
-#: ../vinagre/vinagre-commands.c:122
+#: ../vinagre/vinagre-commands.c:113
 msgid "Choose the file"
 msgstr "Sélectionner le fichier"
 
-#: ../vinagre/vinagre-commands.c:146
+#: ../vinagre/vinagre-commands.c:137
 msgid "There are no supported files"
 msgstr "Il n'y a aucun fichier pris en charge"
 
-#: ../vinagre/vinagre-commands.c:147
+#: ../vinagre/vinagre-commands.c:138
 msgid ""
 "None of the active plugins support this action. Activate some plugins and "
 "try again."
@@ -846,346 +843,333 @@ msgstr ""
 "Aucun des greffons activés ne gère cette action. Activez des greffons et "
 "essayez de nouveau."
 
-#: ../vinagre/vinagre-commands.c:181
+#: ../vinagre/vinagre-commands.c:172
 msgid "The following file could not be opened:"
 msgid_plural "The following files could not be opened:"
 msgstr[0] "Impossible d'ouvrir ce fichier :"
 msgstr[1] "Impossible d'ouvrir ces fichiers :"
 
-#: ../vinagre/vinagre-connect.c:91 ../vinagre/vinagre-connect.c:337
-#: ../vinagre/vinagre-connect.c:456
+#: ../vinagre/vinagre-connect.c:89 ../vinagre/vinagre-connect.c:335
+#: ../vinagre/vinagre-connect.c:454
 msgid "Could not get the active protocol from the protocol list."
 msgstr "Impossible de trouver le protocole actuel dans la liste de protocoles."
 
-#: ../vinagre/vinagre-connect.c:318
+#: ../vinagre/vinagre-connect.c:316
 #, c-format
 msgid "Error while saving history file: %s"
 msgstr "Impossible d'enregistrer le fichier d'historique : %s"
 
-#: ../vinagre/vinagre-connect.c:353
+#: ../vinagre/vinagre-connect.c:351
 msgid "Choose a Remote Desktop"
 msgstr "Choisir un bureau distant"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:573
-#: ../vinagre/vinagre-tube-handler.c:254
+#: ../vinagre/vinagre-connection.c:524 ../vinagre/vinagre-tab.c:574
+#: ../vinagre/vinagre-tube-handler.c:255
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Le protocole %s n'est pas pris en charge."
 
-#: ../vinagre/vinagre-connection.c:633
+#: ../vinagre/vinagre-connection.c:632
 msgid "Could not open the file."
 msgstr "Le fichier n'a pas pu être ouvert."
 
-#: ../vinagre/vinagre-connection.c:657
+#: ../vinagre/vinagre-connection.c:656
 msgid "The file was not recognized by any of the plugins."
 msgstr "Le fichier n'est reconnu par aucun des greffons."
 
-#: ../vinagre/vinagre-fav.c:569
-msgid "_New Folder"
-msgstr "_Nouveau dossier"
-
-#: ../vinagre/vinagre-fav.c:570
-msgid "Create a new folder"
-msgstr "Crée un nouveau dossier"
-
-#: ../vinagre/vinagre-fav.c:575
-msgid "_Open bookmark"
-msgstr "_Ouvrir le signet"
-
-#: ../vinagre/vinagre-fav.c:576
-msgid "Connect to this machine"
-msgstr "Se connecter à cette machine"
-
-#: ../vinagre/vinagre-fav.c:577
-msgid "_Edit bookmark"
-msgstr "M_odifier le signet"
-
-#: ../vinagre/vinagre-fav.c:578
-msgid "Edit the details of selected bookmark"
-msgstr "Modifie les détails du signet sélectionné"
-
-#: ../vinagre/vinagre-fav.c:579
-msgid "_Remove from bookmarks"
-msgstr "_Retirer des signets"
-
-#: ../vinagre/vinagre-fav.c:580
-msgid "Remove current selected connection from bookmarks"
-msgstr "Retire la connexion sélectionnée des signets"
-
-#: ../vinagre/vinagre-fav.c:597 ../vinagre/vinagre-window.c:408
-#, c-format
-msgid "Could not merge UI XML file: %s"
-msgstr "Impossible de fusionner le fichier d'interface XML : %s"
-
-#: ../vinagre/vinagre-fav.c:755
-msgid "Invalid operation"
-msgstr "Opération non valable"
-
-#: ../vinagre/vinagre-fav.c:756
-msgid "Data received from drag&drop operation is invalid."
-msgstr ""
-"Les données reçues lors de l'opération glisser-déposer sont incorrectes."
-
-#: ../vinagre/vinagre-fav.c:862
-msgid "Hide panel"
-msgstr "Masquer le panneau"
-
-#: ../vinagre/vinagre-fav.c:1067
-msgid "Hosts nearby"
-msgstr "Hôtes à proximité"
-
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:140
+#: ../vinagre/vinagre-main.c:133
 msgid "- Remote Desktop Viewer"
 msgstr "- Visionneur de bureaux distants"
 
-#: ../vinagre/vinagre-mdns.c:171
+#: ../vinagre/vinagre-mdns.c:172
 #, c-format
 msgid "Failed to resolve avahi hostname: %s\n"
 msgstr "La résolution de nom Avahi a échoué : %s\n"
 
-#: ../vinagre/vinagre-mdns.c:225
+#: ../vinagre/vinagre-mdns.c:226
 #, c-format
 msgid "The service %s was already registered by another plugin."
 msgstr "Le service %s a déjà été enregistré par un autre greffon."
 
-#: ../vinagre/vinagre-mdns.c:233
+#: ../vinagre/vinagre-mdns.c:234
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
 msgstr "Erreur lors de l'ajout du navigateur mDNS pour le service %s."
 
-#. Translators: "Browse for hosts" means the ability to find/locate some machines [with the VNC service enabled] in the local network
-#: ../vinagre/vinagre-mdns.c:250
+#. Translators: "Browse for hosts" means the ability to find/locate some remote hosts [with the VNC service enabled] in the local network
+#: ../vinagre/vinagre-mdns.c:251
 #, c-format
 msgid "Failed to browse for hosts: %s\n"
 msgstr "La découverte d'hôtes a échoué : %s\n"
 
-#: ../vinagre/vinagre-mdns.c:319
+#: ../vinagre/vinagre-mdns.c:320
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
 msgstr "Erreur d'initialisation du navigateur mDNS : %s\n"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:462
+#: ../vinagre/vinagre-notebook.c:461
 #, c-format
 msgid "Connection to host %s was closed."
 msgstr "La connexion à l'hôte %s a été fermée."
 
-#: ../vinagre/vinagre-notebook.c:464
+#: ../vinagre/vinagre-notebook.c:463
 msgid "Connection closed"
 msgstr "Connexion fermée"
 
 #. Translators: %s is a host name or IP address.
-#: ../vinagre/vinagre-notebook.c:483
+#: ../vinagre/vinagre-notebook.c:482
 #, c-format
 msgid "Authentication for host %s has failed"
 msgstr "L'authentification pour l'hôte %s a échoué"
 
-#: ../vinagre/vinagre-notebook.c:489
+#: ../vinagre/vinagre-notebook.c:488
 msgid "Authentication failed"
 msgstr "L'authentification a échoué"
 
-#: ../vinagre/vinagre-notebook.c:527
-msgid "Connecting..."
-msgstr "Connexion en cours..."
+#: ../vinagre/vinagre-notebook.c:526
+msgid "Connecting…"
+msgstr "Connexion en cours…"
 
-#: ../vinagre/vinagre-notebook.c:554 ../vinagre/vinagre-tab.c:354
+#: ../vinagre/vinagre-notebook.c:553
 msgid "Close connection"
 msgstr "Ferme la connexion"
 
 #. Translators: this is a command line option (run vinagre --help)
 #: ../vinagre/vinagre-options.c:31
-msgid "Open vinagre in fullscreen mode"
-msgstr "Ouvre vinagre en mode plein écran"
+msgid "Specify geometry of the main Vinagre window"
+msgstr "Indique la géométrie de la fenêtre principale de Vinagre"
 
 #. Translators: this is a command line option (run vinagre --help)
 #: ../vinagre/vinagre-options.c:35
-msgid "Create a new toplevel window in an existing instance of vinagre"
+msgid "Open Vinagre in fullscreen mode"
+msgstr "Ouvre Vinagre en mode plein écran"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-options.c:39
+msgid "Create a new toplevel window in an existing instance of Vinagre"
 msgstr ""
 "Crée une nouvelle fenêtre de premier niveau dans une instance existante de "
 "Vinagre"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-options.c:39
-msgid "Open a file recognized by vinagre"
-msgstr "Ouvre un fichier reconnu par vinagre"
+#: ../vinagre/vinagre-options.c:43
+msgid "Open a file recognized by Vinagre"
+msgstr "Ouvre un fichier reconnu par Vinagre"
 
-#: ../vinagre/vinagre-options.c:39
+#: ../vinagre/vinagre-options.c:43
 msgid "filename"
 msgstr "nom_de_fichier"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-options.c:44
+#: ../vinagre/vinagre-options.c:48
 msgid "[server:port]"
 msgstr "[serveur:port]"
 
-#: ../vinagre/vinagre-options.c:125
+#: ../vinagre/vinagre-options.c:122
+#, c-format
+msgid "Invalid argument %s for --geometry"
+msgstr "Paramètre %s non valide pour --geometry"
+
+#: ../vinagre/vinagre-options.c:140
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "L'erreur suivante s'est produite :"
 msgstr[1] "Les erreurs suivantes se sont produites :"
 
-#: ../vinagre/vinagre-plugin-dialog.c:71
-msgid "Plugin Manager"
-msgstr "Gestionnaire de greffons"
-
-#: ../vinagre/vinagre-prefs.c:87
+#: ../vinagre/vinagre-prefs.c:85
 msgid "Cannot initialize preferences manager."
 msgstr "Impossible d'initialiser le gestionnaire des préférences."
 
-#: ../vinagre/vinagre-ssh.c:106
+#: ../vinagre/vinagre-reverse-vnc-listener-dialog.c:100
+msgid "IPv4:"
+msgstr "IPv4 :"
+
+#: ../vinagre/vinagre-reverse-vnc-listener-dialog.c:112
+msgid ""
+"\n"
+"\n"
+"IPv6:"
+msgstr ""
+"\n"
+"\n"
+"IPv6 :"
+
+#: ../vinagre/vinagre-reverse-vnc-listener-dialog.c:172
+#, c-format
+msgid "On the port %d"
+msgstr "Sur le port %d"
+
+#: ../vinagre/vinagre-reverse-vnc-listener.c:211
+msgid "Error activating reverse connections"
+msgstr "Impossible d'activer les connexions inverses"
+
+#: ../vinagre/vinagre-reverse-vnc-listener.c:212
+msgid ""
+"The program could not find any available TCP ports starting at 5500. Is "
+"there any other running program consuming all your TCP ports?"
+msgstr ""
+"Le programme n'a pas pu trouver de ports TCP disponibles en commençant à "
+"5500. Y a-t-il d'autres programme en cours consommant tous vos ports TCP ?"
+
+#: ../vinagre/vinagre-ssh.c:113
 msgid "Timed out when logging into SSH host"
 msgstr "Délai expiré lors de la connexion à l'hôte SSH"
 
-#: ../vinagre/vinagre-ssh.c:180
+#: ../vinagre/vinagre-ssh.c:187
 msgid "Unable to spawn ssh program"
 msgstr "Impossible de lancer le programme ssh"
 
-#: ../vinagre/vinagre-ssh.c:197
+#: ../vinagre/vinagre-ssh.c:204
 #, c-format
 msgid "Unable to spawn ssh program: %s"
 msgstr "Impossible de lancer le programme ssh : %s"
 
-#: ../vinagre/vinagre-ssh.c:352
+#: ../vinagre/vinagre-ssh.c:420
 msgid "Timed out when logging in"
 msgstr "Expiration du délai lors de la connexion"
 
-#: ../vinagre/vinagre-ssh.c:382 ../vinagre/vinagre-ssh.c:537
-#: ../vinagre/vinagre-ssh.c:621
+#: ../vinagre/vinagre-ssh.c:450 ../vinagre/vinagre-ssh.c:598
+#: ../vinagre/vinagre-ssh.c:682
 msgid "Permission denied"
 msgstr "Permission refusée"
 
-#: ../vinagre/vinagre-ssh.c:448
+#: ../vinagre/vinagre-ssh.c:509
 msgid "Password dialog canceled"
 msgstr "Demande de mot de passe annulée"
 
-#: ../vinagre/vinagre-ssh.c:471
+#: ../vinagre/vinagre-ssh.c:532
 msgid "Could not send password"
 msgstr "Impossible d'envoyer le mot de passe"
 
-#: ../vinagre/vinagre-ssh.c:479
+#: ../vinagre/vinagre-ssh.c:540
 msgid "Log In Anyway"
 msgstr "Se connecter quand même"
 
-#: ../vinagre/vinagre-ssh.c:479
+#: ../vinagre/vinagre-ssh.c:540
 msgid "Cancel Login"
 msgstr "Annuler la connexion"
 
-#: ../vinagre/vinagre-ssh.c:488
+#: ../vinagre/vinagre-ssh.c:549
 #, c-format
 msgid ""
-"The identity of the remote computer (%s) is unknown.\n"
-"This happens when you log in to a computer the first time.\n"
+"The identity of the remote host (%s) is unknown.\n"
+"This happens when you log in to a host the first time.\n"
 "\n"
-"The identity sent by the remote computer is %s. If you want to be absolutely "
+"The identity sent by the remote host is %s. If you want to be absolutely "
 "sure it is safe to continue, contact the system administrator."
 msgstr ""
-"L'identité de l'ordinateur distant (%s) est inconnue.\n"
-"Ceci arrive lors de la première connexion à un ordinateur.\n"
+"L'identité de l'hôte distant (%s) est inconnue.\n"
+"Ceci arrive lors de la première connexion à un hôte.\n"
 "\n"
-"L'identité envoyée par l'ordinateur distant est %s. Si vous voulez vous "
-"assurer que la connexion peut être effectuée en toute sécurité, contactez "
+"L'identité envoyée par l'hôte distant est %s. Si vous voulez vous assurer "
+"que la connexion peut être effectuée en toute sécurité, contactez "
 "l'administrateur système."
 
-#: ../vinagre/vinagre-ssh.c:506
+#: ../vinagre/vinagre-ssh.c:567
 msgid "Login dialog canceled"
 msgstr "Demande de connexion annulée"
 
-#: ../vinagre/vinagre-ssh.c:527
+#: ../vinagre/vinagre-ssh.c:588
 msgid "Can't send host identity confirmation"
 msgstr "Impossible d'envoyer la confirmation de l'identité de l'hôte"
 
-#: ../vinagre/vinagre-ssh.c:562 ../vinagre/vinagre-tab.c:806
+#: ../vinagre/vinagre-ssh.c:623 ../vinagre/vinagre-tab.c:807
 msgid "Error saving the credentials on the keyring."
 msgstr ""
 "Erreur lors de l'enregistrement des données d'authentification dans le "
 "trousseau de clés."
 
-#: ../vinagre/vinagre-ssh.c:628
+#: ../vinagre/vinagre-ssh.c:689
 msgid "Hostname not known"
 msgstr "Nom d'hôte non connu"
 
-#: ../vinagre/vinagre-ssh.c:635
+#: ../vinagre/vinagre-ssh.c:696
 msgid "No route to host"
 msgstr "Pas de route vers l'hôte"
 
-#: ../vinagre/vinagre-ssh.c:642
+#: ../vinagre/vinagre-ssh.c:703
 msgid "Connection refused by server"
 msgstr "Connexion refusée par le serveur"
 
-#: ../vinagre/vinagre-ssh.c:649
+#: ../vinagre/vinagre-ssh.c:710
 msgid "Host key verification failed"
 msgstr "La vérification de la clé de l'hôte a échoué"
 
-#: ../vinagre/vinagre-ssh.c:686
+#: ../vinagre/vinagre-ssh.c:747
 msgid "Unable to find a valid SSH program"
 msgstr "Impossible de trouver un programme SSH valide"
 
-#: ../vinagre/vinagre-tab.c:375
+#: ../vinagre/vinagre-tab.c:353
+msgid "Disconnect"
+msgstr "Se déconnecter"
+
+#: ../vinagre/vinagre-tab.c:374
 msgid "Leave fullscreen"
 msgstr "Quitter le plein écran"
 
-#: ../vinagre/vinagre-tab.c:537
+#: ../vinagre/vinagre-tab.c:536
 msgid "Error saving recent connection."
 msgstr "Impossible d'enregistrer la connexion récente."
 
-#: ../vinagre/vinagre-tab.c:895
+#: ../vinagre/vinagre-tab.c:896
 msgid "Could not get a screenshot of the connection."
 msgstr "Impossible d'effectuer une capture d'écran de la connexion."
 
-#: ../vinagre/vinagre-tab.c:900
+#: ../vinagre/vinagre-tab.c:901
 msgid "Save Screenshot"
 msgstr "Enregistrer la copie d'écran"
 
 #. Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123
-#: ../vinagre/vinagre-tab.c:912
+#: ../vinagre/vinagre-tab.c:913
 #, c-format
 msgid "Screenshot of %s"
 msgstr "Copie d'écran de %s"
 
-#: ../vinagre/vinagre-tab.c:963
+#: ../vinagre/vinagre-tab.c:964
 msgid "Error saving screenshot"
 msgstr "Erreur lors de l'enregistrement de la capture d'écran"
 
-#: ../vinagre/vinagre-tube-handler.c:230
+#: ../vinagre/vinagre-tube-handler.c:231
 #, c-format
 msgid "Impossible to get service property: %s"
 msgstr "Impossible d'obtenir la propriété du service : %s"
 
-#: ../vinagre/vinagre-tube-handler.c:287
+#: ../vinagre/vinagre-tube-handler.c:297
 #, c-format
 msgid "Impossible to create the connection: %s"
 msgstr "Impossible de créer la connexion : %s"
 
-#: ../vinagre/vinagre-tube-handler.c:326
+#: ../vinagre/vinagre-tube-handler.c:336
 #, c-format
 msgid "Impossible to accept the stream tube: %s"
 msgstr "Impossible d'accepter le tube de flux : %s"
 
 #. Translators: this is an error message when we fail to get the name of an empathy/telepathy buddy. %s will be replaced by the actual error message.
-#: ../vinagre/vinagre-tube-handler.c:464
+#: ../vinagre/vinagre-tube-handler.c:474
 #, c-format
 msgid "Impossible to get the contact name: %s"
 msgstr "Impossible d'obtenir le nom du contact : %s"
 
-#: ../vinagre/vinagre-tube-handler.c:501
+#: ../vinagre/vinagre-tube-handler.c:511
 #, c-format
 msgid "Impossible to get the avatar: %s"
 msgstr "Impossible d'obtenir l'avatar : %s"
 
-#: ../vinagre/vinagre-tube-handler.c:522
+#: ../vinagre/vinagre-tube-handler.c:532
 #, c-format
 msgid "%s wants to share their desktop with you."
 msgstr "%s souhaite partager son bureau avec vous."
 
-#: ../vinagre/vinagre-tube-handler.c:527
+#: ../vinagre/vinagre-tube-handler.c:537
 msgid "Desktop sharing invitation"
 msgstr "Invitation à partager le bureau"
 
 #. Toplevel
 #: ../vinagre/vinagre-ui.h:33
-msgid "_Machine"
-msgstr "_Machine"
+msgid "_Remote"
+msgstr "_Distant"
 
 #: ../vinagre/vinagre-ui.h:34
 msgid "_Edit"
@@ -1199,334 +1183,156 @@ msgstr "_Affichage"
 msgid "_Bookmarks"
 msgstr "_Signets"
 
+#: ../vinagre/vinagre-ui.h:37
+msgid "_Help"
+msgstr "Aid_e"
+
 #: ../vinagre/vinagre-ui.h:41
-msgid "Connect to a remote machine"
-msgstr "Se connecter à une machine distante"
+msgid "Connect to a remote desktop"
+msgstr "Se connecter à un bureau distant"
 
 #: ../vinagre/vinagre-ui.h:43
 msgid "Open a .VNC file"
 msgstr "Ouvrir un fichier .VNC"
 
+#. Translators: "Reverse" here is an adjective, not a verb.
 #: ../vinagre/vinagre-ui.h:45
+msgid "_Reverse Connections…"
+msgstr "Connexions _inverses…"
+
+#: ../vinagre/vinagre-ui.h:45
+msgid "Configure incoming VNC connections"
+msgstr "Configurer les connexions VNC entrantes"
+
+#: ../vinagre/vinagre-ui.h:48
 msgid "Quit the program"
 msgstr "Quitter le programme"
 
-#: ../vinagre/vinagre-ui.h:49
+#: ../vinagre/vinagre-ui.h:52
 msgid "Edit the application preferences"
 msgstr "Modifie les préférences de l'application"
 
-#: ../vinagre/vinagre-ui.h:50
-msgid "_Plugins"
-msgstr "_Greffons"
-
-#: ../vinagre/vinagre-ui.h:51
-msgid "Select plugins"
-msgstr "Choix des greffons"
-
 #. Help menu
-#: ../vinagre/vinagre-ui.h:54
+#: ../vinagre/vinagre-ui.h:55
 msgid "_Contents"
 msgstr "_Sommaire"
 
-#: ../vinagre/vinagre-ui.h:55
-msgid "Open the vinagre manual"
+#: ../vinagre/vinagre-ui.h:56
+msgid "Open the Vinagre manual"
 msgstr "Ouvre le manuel de Vinagre"
 
-#: ../vinagre/vinagre-ui.h:57
+#: ../vinagre/vinagre-ui.h:58
 msgid "About this application"
 msgstr "À propos de Vinagre"
 
-#: ../vinagre/vinagre-ui.h:62
+#: ../vinagre/vinagre-ui.h:63
 msgid "_Toolbar"
 msgstr "Barre d'_outils"
 
-#: ../vinagre/vinagre-ui.h:63
+#: ../vinagre/vinagre-ui.h:64
 msgid "Show or hide the toolbar"
 msgstr "Affiche ou masque la barre d'outils"
 
-#: ../vinagre/vinagre-ui.h:66
+#: ../vinagre/vinagre-ui.h:67
 msgid "_Statusbar"
 msgstr "Barre d'é_tat"
 
-#: ../vinagre/vinagre-ui.h:67
+#: ../vinagre/vinagre-ui.h:68
 msgid "Show or hide the statusbar"
 msgstr "Affiche ou masque la barre d'état"
 
-#: ../vinagre/vinagre-ui.h:70
-msgid "Side _Panel"
-msgstr "_Panneau latéral"
+#: ../vinagre/vinagre-ui.h:76
+msgid "Disconnect the current connection"
+msgstr "Se déconnecte de la connexion actuelle"
 
-#: ../vinagre/vinagre-ui.h:71
-msgid "Show or hide the side panel"
-msgstr "Affiche ou masque le panneau latéral"
+#: ../vinagre/vinagre-ui.h:77
+msgid "Disconnect All"
+msgstr "Tout déconnecter"
 
-#: ../vinagre/vinagre-ui.h:79
-msgid "Close the current connection"
-msgstr "Ferme la connexion actuelle"
-
-#: ../vinagre/vinagre-ui.h:80
-msgid "C_lose All"
-msgstr "_Tout fermer"
-
-#: ../vinagre/vinagre-ui.h:81
-msgid "Close all active connections"
-msgstr "Ferme toutes les connexions actives"
+#: ../vinagre/vinagre-ui.h:78
+msgid "Disconnect all connections"
+msgstr "Se déconnecte de toutes les connexions"
 
 #. Bookmarks menu
-#: ../vinagre/vinagre-ui.h:84
-msgid "_Add to bookmarks"
-msgstr "_Ajouter aux signets"
+#: ../vinagre/vinagre-ui.h:81
+msgid "_Add Bookmark"
+msgstr "_Ajouter un signet"
 
-#: ../vinagre/vinagre-ui.h:85
-msgid "Add current connection to your bookmarks"
+#: ../vinagre/vinagre-ui.h:82
+msgid "Add the current connection to your bookmarks"
 msgstr "Ajoute la connexion actuelle aux signets"
 
-#. Machine menu
-#: ../vinagre/vinagre-ui.h:92
-msgid "_Take screenshot"
+#. Remote menu
+#: ../vinagre/vinagre-ui.h:89
+msgid "_Take Screenshot"
 msgstr "_Prendre une copie d'écran"
 
-#: ../vinagre/vinagre-ui.h:93
-msgid "Take a screenshot of active connection"
-msgstr "Prend une copie d'écran de la connexion active"
+#: ../vinagre/vinagre-ui.h:90
+msgid "Take a screenshot of the current remote desktop"
+msgstr "Prend une copie d'écran du bureau distant actif"
 
-#: ../vinagre/vinagre-ui.h:97
-msgid "View the current machine in full screen"
-msgstr "Affiche la machine actuelle en plein écran"
+#: ../vinagre/vinagre-ui.h:94
+msgid "View the current remote desktop in fullscreen mode"
+msgstr "Affiche le bureau distant actuel en plein écran"
 
-#: ../vinagre/vinagre-utils.c:72
-msgid "An error has occurred:"
-msgstr "Une erreur est survenue :"
+#: ../vinagre/vinagre-utils.vala:40
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
 
-#: ../vinagre/vinagre-utils.c:161
-msgid ""
-"A plugin tried to open an UI file but did not succeed, with the error "
-"message:"
-msgstr ""
-"Un greffon a tenté sans succès d'ouvrir un fichier d'interface utilisateur, "
-"avec le message d'erreur :"
+#: ../vinagre/vinagre-utils.vala:83
+msgid "Vinagre failed to open a UI file,"
+msgstr "Vinagre n'a pas réussi à ouvrir un fichier d'interface,"
 
-#: ../vinagre/vinagre-utils.c:163
-msgid ""
-"The program tried to open an UI file but did not succeed, with the error "
-"message:"
-msgstr ""
-"Le programme a tenté sans succès d'ouvrir un fichier d'interface "
-"utilisateur, avec le message d'erreur :"
-
-#: ../vinagre/vinagre-utils.c:166
+#: ../vinagre/vinagre-utils.vala:85
 msgid "Please check your installation."
 msgstr "Veuillez contrôler votre installation."
 
-#: ../vinagre/vinagre-utils.c:167
+#: ../vinagre/vinagre-utils.vala:89
 msgid "Error loading UI file"
 msgstr "Erreur de chargement du fichier d'interface"
 
-#: ../vinagre/vinagre-utils.c:288
-msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
-msgstr "Vinagre est un visionneur de bureau à distance pour le bureau GNOME"
-
-#: ../vinagre/vinagre-utils.c:291
-msgid ""
-"Vinagre is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version."
-msgstr ""
-"Vinagre est un logiciel libre ; vous pouvez le redistribuer et/ou le "
-"modifier au titre des clauses de la Licence Publique Générale GNU, telle que "
-"publiée par la Free Software Foundation ; soit la version 2 de la Licence, "
-"ou (à votre discrétion) une version ultérieure quelconque."
-
-#: ../vinagre/vinagre-utils.c:295
-msgid ""
-"Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details."
-msgstr ""
-"Vinagre est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE "
-"GARANTIE ; sans même une garantie implicite de COMMERCIABILITÉ ou DE "
-"CONFORMITÉ À UNE UTILISATION PARTICULIÈRE. Voir la Licence Publique Générale "
-"GNU pour plus de détails."
-
-#: ../vinagre/vinagre-utils.c:299
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-"Vous devriez avoir reçu un exemplaire de la Licence Publique Générale GNU "
-"avec ce programme. Si ce n'est pas le cas, consultez <http://www.gnu.org/"
-"licenses/>."
-
-#: ../vinagre/vinagre-utils.c:316
-msgid "translator-credits"
-msgstr ""
-"Robert-André Mauchin <zebob.m@pengzone.org>, 2007\n"
-"Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007-2008\n"
-"Claude Paroz <claude@2xlibre.net>, 2007-2010\n"
-"Frédéric Péters <fpeters@0d.be>, 2008\n"
-"Laurent Coudeur <laurentc@iol.ie>, 2009"
-
-#: ../vinagre/vinagre-utils.c:319
-msgid "Vinagre Website"
-msgstr "Site Web de Vinagre"
-
 #. Translators: %s is a protocol, like VNC or SSH
-#: ../vinagre/vinagre-utils.c:431
+#: ../vinagre/vinagre-utils.vala:112
 #, c-format
 msgid "%s authentication is required"
 msgstr "Une authentification %s est requise"
 
-#: ../vinagre/vinagre-window.c:437
-msgid "_Recent connections"
+#: ../vinagre/vinagre-utils.vala:195
+msgid "Error showing help"
+msgstr "Erreur d'affichage de l'aide"
+
+#: ../vinagre/vinagre-window.c:385
+#, c-format
+msgid "Could not merge UI XML file: %s"
+msgstr "Impossible de fusionner le fichier d'interface XML : %s"
+
+#: ../vinagre/vinagre-window.c:416
+msgid "_Recent Connections"
 msgstr "Connexions _récentes"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../vinagre/vinagre-window.c:554
+#: ../vinagre/vinagre-window.c:574
 #, c-format
 msgid "Open %s:%d"
 msgstr "Ouvre %s:%d"
 
-#: ../vinagre/vinagre-window.c:733
-msgid "About menu accelerators and keyboard shortcuts"
-msgstr "À propos des touches d'accès rapide et des raccourcis clavier"
-
-#: ../vinagre/vinagre-window.c:735
+#: ../vinagre/vinagre-window.c:767
 msgid ""
-"Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
-"default. The reason is to avoid the keys to be intercepted by the program, "
-"and allow them to be sent to the remote machine.\n"
-"\n"
-"You can change this behavior through the preferences dialog. For more "
-"information, check the documentation.\n"
+"Vinagre disables keyboard shortcuts by default, so that any keyboard "
+"shortcuts are sent to the remote desktop.\n"
 "\n"
 "This message will appear only once."
 msgstr ""
-"Dans Vinagre, les raccourcis clavier et touches d'accès rapide sont "
-"désactivés par défaut. Ceci évite que les touches soient interceptées par le "
-"programme et permet ainsi de les faire parvenir à la machine distante.\n"
-"\n"
-"Vous pouvez modifier ce comportement dans la boîte de dialogue des "
-"préférences. Pour plus d'informations, consultez la documentation.\n"
+"Vinagre désactive par défaut les raccourcis clavier, afin que tout raccourci "
+"clavier soit envoyé au bureau distant.\n"
 "\n"
 "Ce message n'apparaît qu'une seule fois."
 
-#: ../vinagre/vinagre-window.c:743 ../vinagre/vinagre-window.c:749
+#: ../vinagre/vinagre-window.c:773
+msgid "Enable shortcuts"
+msgstr "Activer les raccourcis"
+
+#: ../vinagre/vinagre-window.c:786 ../vinagre/vinagre-window.c:792
 #, c-format
 msgid "Error while creating the file %s: %s"
 msgstr "Erreur lors de la création du fichier %s : %s"
-
-#~ msgid "Active plugins"
-#~ msgstr "Greffons actifs"
-
-#~ msgid ""
-#~ "List of active plugins. It contains the \"Location\" of the active "
-#~ "plugins. See the .vinagre-plugin file for obtaining the \"Location\" of a "
-#~ "given plugin."
-#~ msgstr ""
-#~ "Liste des greffons activés. Elle contient l'emplacement (« Location ») des "
-#~ "greffons activés. Voir le fichier .vinagre-plugin pour obtenir "
-#~ "l'emplacement d'un greffon donné."
-
-#~ msgid "Maximum number of history items in connect dialog"
-#~ msgstr ""
-#~ "Nombre maximal de lignes d'historique dans la boîte de dialogue de "
-#~ "connexion"
-
-#~ msgid ""
-#~ "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable "
-#~ "them. Note that if they are enabled, those keys will be intercepted by "
-#~ "the menu and will not be sent to the remote host."
-#~ msgstr ""
-#~ "Définir à « false » pour désactiver les raccourcis des menus. Définir à "
-#~ "« true » pour les activer. Notez que si elles sont activées, ces touches "
-#~ "seront interceptées par le menu et ne seront pas envoyées à l'hôte "
-#~ "distant."
-
-#~ msgid ""
-#~ "Set to \"true\" to always show the tabs. Set to \"false\" to only show "
-#~ "the tabs when there is more than one active connection."
-#~ msgstr ""
-#~ "Définir à « true » pour toujours afficher les onglets. Définir à « false » "
-#~ "pour les afficher uniquement quand il y a plus d'une connexion active."
-
-#~ msgid ""
-#~ "Set to \"true\" to always start the program listening for reverse "
-#~ "connections."
-#~ msgstr ""
-#~ "Définir à « true » pour que le programme démarre toujours en écoutant les "
-#~ "connexions inverses."
-
-#~ msgid "Specifies the maximum number of items in the host dropdown entry."
-#~ msgstr ""
-#~ "Indique le nombre maximal d'éléments dans la liste déroulante des hôtes."
-
-#~ msgid "The handler for \"vnc://\" URLs"
-#~ msgstr "Le gestionnaire des URL « vnc:// »"
-
-#~ msgid ""
-#~ "When connecting to a host, the client can say to the server to leave "
-#~ "other clients connected or to drop the existent connections. Set the "
-#~ "value to true to share the desktop with the other clients."
-#~ msgstr ""
-#~ "Lors de la connexion à un hôte, le client peut dire au serveur de laisser "
-#~ "les autres clients connectés ou d'abandonner les connexions existantes. "
-#~ "Définir la valeur à « true » pour partager le bureau avec les autres "
-#~ "clients."
-
-#~ msgid "Whether we should leave other clients connected"
-#~ msgstr "Indique s'il faut laisser les autres clients connectés"
-
-#~ msgid ""
-#~ "Whether we should show tabs even when there is only one active connection"
-#~ msgstr ""
-#~ "Indique s'il faut afficher les onglets même quand il n'y a qu'une "
-#~ "connexion active"
-
-#~ msgid "Whether we should show the menu accelerators (shortcut keys)"
-#~ msgstr "Indique s'il faut afficher les raccourcis clavier du menu"
-
-#~ msgid ""
-#~ "Whether we should start the program listening for reverse connections"
-#~ msgstr ""
-#~ "Indique s'il faut démarrer le programme en restant à l'écoute des "
-#~ "connexions inverses"
-
-#~ msgid "Incoming VNC connection arrived but there is no active window"
-#~ msgstr ""
-#~ "Une connexion VNC entrante a été détectée mais il n'y a pas de fenêtre "
-#~ "active"
-
-#~ msgid ""
-#~ "Run 'vinagre --help' to see a full list of available command line options"
-#~ msgstr ""
-#~ "Exécutez « vinagre --help » pour voir une liste complète des options en "
-#~ "ligne de commande"
-
-#~ msgid "Plugin %s has already registered a browser for service %s."
-#~ msgstr "Le greffons %s a déjà enregistré un navigateur pour le service %s."
-
-#~ msgid "Plugin"
-#~ msgstr "Greffon"
-
-#~ msgid "Enabled"
-#~ msgstr "Activé"
-
-#~ msgid "C_onfigure"
-#~ msgstr "C_onfigurer"
-
-#~ msgid "A_ctivate"
-#~ msgstr "A_ctiver"
-
-#~ msgid "Ac_tivate All"
-#~ msgstr "_Tout activer"
-
-#~ msgid "_Deactivate All"
-#~ msgstr "Tout _désactiver"
-
-#~ msgid "_About Plugin"
-#~ msgstr "À _propos du greffon"
-
-#~ msgid "C_onfigure Plugin"
-#~ msgstr "C_onfigurer le greffon"
