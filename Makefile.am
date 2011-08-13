@@ -18,7 +18,7 @@ common_cppflags = \
 	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\" \
 	$(VINAGRE_CFLAGS) \
 	$(WARN_FLAGS) \
-	$(DISABLE_DEPRECATED_FLAGS)
+	$(DISABLE_DEPRECATED)
 
 AM_CPPFLAGS = \
 	$(common_cppflags) \
