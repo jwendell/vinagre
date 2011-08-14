@@ -4,14 +4,14 @@ dist-hook: doc-dist-hook
 DOC_ID = $(PACKAGE_TARNAME)
 
 DOC_FIGURES = \
-	figures/vinagre-screenshot.png	\
 	figures/vinagre-auth-needed.png	\
-	figures/vinagre-bookmarks-side-pane.png \
-	figures/vinagre-connect-dialog.png	\
-	figures/vinagre-editing-bookmarks.png	\
-	figures/vinagre-saving-bookmarks.png
-
-# TODO: Install reverse-connections only with the corresponding plugin.
+	figures/vinagre-connect-dialog.png \
+	figures/vinagre-connected.png \
+	figures/vinagre-connection-closed.png \
+	figures/vinagre-fullscreen.png \
+	figures/vinagre-no-scaling.png \
+	figures/vinagre-reverse-connections.png \
+	figures/vinagre-scaling.png
 
 DOC_PAGES = \
 	connect.page \
@@ -19,7 +19,7 @@ DOC_PAGES = \
 	fullscreen.page \
 	index.page \
 	introduction.page \
-	preferences.page \
+	keyboard-shortcuts.page \
 	reverse-connections.page \
 	scaling.page \
 	take-screenshot.page \
