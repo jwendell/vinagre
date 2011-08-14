@@ -40,7 +40,7 @@
 #include <glib/gi18n.h>
 #include <gnome-keyring.h>
 
-#define SSH_READ_TIMEOUT 40   /* seconds */
+static const int SSH_READ_TIMEOUT = 40; /* seconds */
 
 #ifdef HAVE_GRANTPT
 /* We only use this on systems with unix98 ptys */

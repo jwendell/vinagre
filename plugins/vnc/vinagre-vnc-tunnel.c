@@ -29,7 +29,7 @@
 #include <vinagre/vinagre-ssh.h>
 #include "vinagre-vnc-tunnel.h"
 
-#define TUNNEL_PORT_OFFSET 5500
+static const int TUNNEL_PORT_OFFSET = 5500;
 
 static int
 find_free_port (void)

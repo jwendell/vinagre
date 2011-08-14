@@ -22,10 +22,10 @@
 #include <glib/gi18n.h>
 #include "vinagre-prefs.h"
 
-#define VINAGRE_SCHEMA_NAME		"org.gnome.Vinagre"
-#define VM_HISTORY_SIZE			"history-size"
-#define VM_ALWAYS_ENABLE_LISTENING	"always-enable-listening"
-#define VM_SHARED_FLAG			"shared-flag"
+static const char VINAGRE_SCHEMA_NAME[]	= "org.gnome.Vinagre";
+static const char VM_HISTORY_SIZE[] = "history-size";
+static const char VM_ALWAYS_ENABLE_LISTENING[] = "always-enable-listening";
+static const char VM_SHARED_FLAG[] = "shared-flag";
 
 struct _VinagrePrefsPrivate
 {

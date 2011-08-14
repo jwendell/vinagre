@@ -38,11 +38,9 @@
 #include "vinagre-tube-handler.h"
 #include "vinagre-debug.h"
 
-#define CLIENT_NAME "Vinagre"
-#define SERVICE "rfb"
+#include "config.h"
 
-#define BUS_NAME TP_CLIENT_BUS_NAME_BASE CLIENT_NAME
-#define OBJECT_PATH TP_CLIENT_OBJECT_PATH_BASE CLIENT_NAME
+static const char SERVICE[] = "rfb";
 
 G_DEFINE_TYPE (VinagreTubesManager, vinagre_tubes_manager, G_TYPE_OBJECT);
 
@@ -214,7 +212,7 @@ vinagre_tubes_manager_init (VinagreTubesManager *self)
 
   dbus = tp_dbus_daemon_dup (NULL);
 
-  priv->handler = tp_simple_handler_new (dbus, FALSE, FALSE, "Vinagre", FALSE,
+  priv->handler = tp_simple_handler_new (dbus, FALSE, FALSE, PACKAGE_NAME, FALSE,
       vinagre_tubes_manager_handle_channels, self, NULL);
 
   g_object_unref (dbus);
