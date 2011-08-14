@@ -47,10 +47,6 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
   { "RemoteQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
     N_("Quit the program"), G_CALLBACK (vinagre_cmd_remote_quit) },
 
-  /* Edit menu */
-  { "EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
-    N_("Edit the application preferences"), G_CALLBACK (vinagre_cmd_edit_preferences) },
-
   /* Help menu */
   {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
     N_("Open the Vinagre manual"),  G_CALLBACK (vinagre_cmd_help_contents)},
@@ -60,6 +56,9 @@ static const GtkActionEntry vinagre_always_sensitive_entries[] =
 
 static const GtkToggleActionEntry vinagre_always_sensitive_toggle_entries[] =
 {
+  { "ViewKeyboardShortcuts", NULL, N_("_Keyboard shortcuts"), NULL,
+    N_("Enable keyboard shurtcuts"), NULL, FALSE },
+
   { "ViewToolbar", NULL, N_("_Toolbar"), NULL,
     N_("Show or hide the toolbar"),
     G_CALLBACK (vinagre_cmd_view_show_toolbar), FALSE },

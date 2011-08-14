@@ -47,9 +47,6 @@ void            vinagre_cmd_remote_vnc_listener (GtkAction *action,
 void		vinagre_cmd_remote_quit	(GtkAction     *action,
 					 VinagreWindow *window);
 
-void		vinagre_cmd_edit_preferences	(GtkAction     *action,
-						 VinagreWindow *window);
-
 void		vinagre_cmd_view_show_toolbar	(GtkAction     *action,
 						 VinagreWindow *window);
 void		vinagre_cmd_view_show_statusbar	(GtkAction     *action,
@@ -67,9 +64,6 @@ void		vinagre_cmd_help_contents	(GtkAction     *action,
 void		vinagre_cmd_help_about		(GtkAction     *action,
 						 VinagreWindow *window);
 
-
-
 G_END_DECLS
 
 #endif /* __VINAGRE_COMMANDS_H__ */ 
-/* vim: set ts=8: */

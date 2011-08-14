@@ -53,9 +53,6 @@ GType vinagre_prefs_get_type (void) G_GNUC_CONST;
 VinagrePrefs *	vinagre_prefs_get_default (void);
 GSettings *	vinagre_prefs_get_default_gsettings (void);
 
-void		vinagre_prefs_dialog_show (VinagreWindow *window);
-
 G_END_DECLS
 
 #endif /* _VINAGRE_PREFS_H_ */
-/* vim: set ts=8: */

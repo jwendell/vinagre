@@ -23,8 +23,6 @@
 #include "vinagre-prefs.h"
 
 #define VINAGRE_SCHEMA_NAME		"org.gnome.Vinagre"
-#define VM_ALWAYS_SHOW_TABS		"always-show-tabs"
-#define VM_SHOW_ACCELS			"show-accels"
 #define VM_HISTORY_SIZE			"history-size"
 #define VM_ALWAYS_ENABLE_LISTENING	"always-enable-listening"
 #define VM_SHARED_FLAG			"shared-flag"
@@ -179,57 +177,3 @@ vinagre_prefs_class_init (VinagrePrefsClass *klass)
 							 FALSE,
 							 G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
-
-/* Preferences dialog */
-
-typedef struct {
-  GtkBuilder  *xml;
-  GtkWidget   *dialog;
-  GtkWidget   *show_tabs;
-  GtkWidget   *show_accels;
-  GtkWindow   *parent;
-} VinagrePrefsDialog;
-
-static void
-vinagre_prefs_dialog_response (GtkDialog *d, gint response_id, VinagrePrefsDialog *dialog)
-{
-  if (response_id > 0)
-    {
-      vinagre_utils_show_help (dialog->parent, "preferences");
-      return;
-    }
-
-  gtk_widget_destroy (dialog->dialog);
-  g_object_unref (dialog->xml);
-  g_slice_free (VinagrePrefsDialog, dialog);
-  dialog = NULL;
-}
-
-void
-vinagre_prefs_dialog_show (VinagreWindow *window)
-{
-  VinagrePrefsDialog *dialog;
-  VinagrePrefs *pref;
-
-  dialog = g_slice_new (VinagrePrefsDialog);
-
-  dialog->xml = vinagre_utils_get_builder ();
-  dialog->dialog = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "preferences_dialog"));
-  dialog->parent = GTK_WINDOW (window);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), dialog->parent);
-
-  dialog->show_tabs = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "always_show_tabs_check"));
-  dialog->show_accels = GTK_WIDGET (gtk_builder_get_object (dialog->xml, "show_accels_check"));
-
-  pref = vinagre_prefs_get_default ();
-  g_settings_bind (pref->priv->gsettings, VM_ALWAYS_SHOW_TABS, dialog->show_tabs, "active", G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (pref->priv->gsettings, VM_SHOW_ACCELS, dialog->show_accels, "active", G_SETTINGS_BIND_DEFAULT);
-
-  g_signal_connect (dialog->dialog,
-		    "response",
-		    G_CALLBACK (vinagre_prefs_dialog_response),
-		    dialog);
-
-  gtk_widget_show_all (dialog->dialog);
-}
-/* vim: set ts=8: */

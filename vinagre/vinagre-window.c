@@ -351,6 +351,10 @@ create_menu_bar_and_toolbar (VinagreWindow *window,
   action = gtk_action_group_get_action (action_group, "RemoteConnect");
   gtk_action_set_is_important (action, TRUE);
 
+  action = gtk_action_group_get_action (action_group, "ViewKeyboardShortcuts");
+  g_settings_bind (vinagre_prefs_get_default_gsettings (), "show-accels",
+    action, "active", G_SETTINGS_BIND_DEFAULT);
+
   /* Remote connected actions */
   action_group = gtk_action_group_new ("VinagreWindowRemoteConnectedActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
