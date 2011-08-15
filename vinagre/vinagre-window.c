@@ -732,14 +732,13 @@ static void
 _on_infobar_response (GtkInfoBar *infobar, gint response_id, gpointer user_data)
 {
     VinagreWindow *window = VINAGRE_WINDOW (user_data);
-    gboolean accels_enabled;
 
     switch (response_id)
     {
     case GTK_RESPONSE_CLOSE:
         break;
     case GTK_RESPONSE_HELP:
-        vinagre_utils_show_help (window, "preferences");
+        vinagre_utils_show_help (window, "keyboard-shortcuts");
         break;
     case GTK_RESPONSE_YES:
         /* Enable keyboard shortcuts. */
