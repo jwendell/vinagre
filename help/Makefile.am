@@ -1,7 +1,7 @@
 include $(top_srcdir)/build-aux/gnome-doc-utils.make
 dist-hook: doc-dist-hook
 
-DOC_ID = $(PACKAGE_TARNAME)
+DOC_ID = vinagre
 
 DOC_FIGURES = \
 	figures/vinagre-auth-needed.png	\
