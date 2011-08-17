@@ -126,6 +126,7 @@ namespace Vinagre.Utils {
 
         var username_entry = xml.get_object ("username_entry") as Entry;
         var password_entry = xml.get_object ("password_entry") as Entry;
+
         username_entry.changed.connect (() => {
             var enabled = true;
 
@@ -138,9 +139,7 @@ namespace Vinagre.Utils {
             ok_button.sensitive = enabled;
         });
 
-        if (need_username)
-            username_entry.text = username;
-        else {
+        if (!need_username) {
             username_label.hide ();
             username_entry.hide ();
         }
@@ -156,9 +155,9 @@ namespace Vinagre.Utils {
 
             ok_button.sensitive = enabled;
         });
+
         if (need_password) {
             password_entry.max_length = password_limit;
-            password_entry.text = password;
         } else {
             password_label.hide ();
             password_entry.hide ();
