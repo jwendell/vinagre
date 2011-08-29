@@ -103,10 +103,10 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
         </child>
         <child>
           <object class="GtkBox" id="vbox1">
-	    <property name="orientation">vertical</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkLabel" id="auth_required_label">
@@ -285,15 +285,15 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox" id="main_box">
-	    <property name="orientation">vertical</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">18</property>
             <child>
               <object class="GtkBox" id="vbox8">
-	        <property name="orientation">vertical</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel" id="label15">
                     <property name="visible">True</property>
@@ -418,9 +418,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
             </child>
             <child>
               <object class="GtkBox" id="vbox9">
-	        <property name="orientation">vertical</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="label7">
@@ -459,9 +459,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
                 </child>
                 <child>
                   <object class="GtkBox" id="plugin_options_vbox">
-	            <property name="orientation">vertical</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -482,9 +482,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
             </child>
             <child>
               <object class="GtkBox" id="vbox10">
-                <property name="orientation">vertical</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="label10">
@@ -505,7 +505,6 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
                 </child>
                 <child>
                   <object class="GtkBox" id="folder_box">
-                    <property name="orientation">horizontal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -653,15 +652,15 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
         </child>
         <child>
           <object class="GtkBox" id="vbox4">
-            <property name="orientation">vertical</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">18</property>
             <child>
               <object class="GtkBox" id="vbox7">
-                <property name="orientation">vertical</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="label8">
@@ -734,9 +733,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
             </child>
             <child>
               <object class="GtkBox" id="vbox6">
-                <property name="orientation">vertical</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="label25">
@@ -757,7 +756,6 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
                 </child>
                 <child>
                   <object class="GtkBox" id="folder_box1">
-                    <property name="orientation">horizontal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -812,9 +810,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
         <property name="spacing">18</property>
         <child>
           <object class="GtkBox" id="vbox2">
-            <property name="orientation">vertical</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
               <object class="GtkLabel" id="label11">
                 <property name="visible">True</property>
@@ -912,7 +910,6 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
                 </child>
                 <child>
                   <object class="GtkBox" id="hbox1">
-                    <property name="orientation">horizontal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">6</property>
@@ -975,6 +972,21 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
             <property name="layout_style">end</property>
             <child>
+              <object class="GtkButton" id="connect_help">
+                <property name="label">gtk-help</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkButton" id="button1">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
@@ -987,7 +999,8 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -1006,7 +1019,8 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">1</property>
+                <property name="pack_type">end</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
@@ -1019,9 +1033,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
         </child>
         <child>
           <object class="GtkBox" id="vbox5">
-            <property name="orientation">vertical</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkLabel" id="label4">
@@ -1068,9 +1082,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
         </child>
         <child>
           <object class="GtkBox" id="plugin_options_connect_vbox">
-            <property name="orientation">vertical</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
               <placeholder/>
             </child>
@@ -1084,6 +1098,7 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
       </object>
     </child>
     <action-widgets>
+      <action-widget response="-11">connect_help</action-widget>
       <action-widget response="-6">button1</action-widget>
       <action-widget response="-5">connect_button</action-widget>
     </action-widgets>
@@ -1148,13 +1163,12 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
         </child>
         <child>
           <object class="GtkBox" id="vbox11">
-	    <property name="orientation">vertical</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkBox" id="hbox2">
-                <property name="orientation">horizontal</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">6</property>
@@ -1198,9 +1212,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
             </child>
             <child>
               <object class="GtkBox" id="vbox12">
-                <property name="orientation">vertical</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <child>
                   <object class="GtkCheckButton" id="enable_reverse_check">
@@ -1220,7 +1234,6 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
                 </child>
                 <child>
                   <object class="GtkBox" id="hbox3">
-                    <property name="orientation">horizontal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -1260,7 +1273,6 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
                 </child>
                 <child>
                   <object class="GtkBox" id="hbox4">
-                    <property name="orientation">horizontal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -1281,9 +1293,9 @@ Jonh Wendell &lt;jwendell@gnome.org&gt;</property>
                         <property name="can_focus">True</property>
                         <child>
                           <object class="GtkBox" id="vbox13">
-                            <property name="orientation">vertical</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkFrame" id="frame1">
                                 <property name="visible">True</property>

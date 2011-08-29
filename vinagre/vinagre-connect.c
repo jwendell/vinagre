@@ -433,7 +433,11 @@ vinagre_connect (VinagreWindow *window)
   gtk_widget_show_all (dialog.dialog);
   result = gtk_dialog_run (GTK_DIALOG (dialog.dialog));
 
-  if (result == GTK_RESPONSE_OK)
+  if (result == GTK_RESPONSE_HELP)
+    {
+      vinagre_utils_show_help (window, "connect");
+    }
+  else if (result == GTK_RESPONSE_OK)
     {
       gchar *host = NULL, *error_msg = NULL, *protocol = NULL, *actual_host;
       gint port;
