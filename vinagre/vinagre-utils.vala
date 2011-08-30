@@ -184,9 +184,9 @@ namespace Vinagre.Utils {
     {
         string uri;
         if (page != null)
-            uri = "ghelp:" + Vinagre.Config.PACKAGE_TARNAME + "?" + page;
+            uri = "help:" + Vinagre.Config.PACKAGE_TARNAME + "?" + page;
         else
-            uri = "ghelp:" + Vinagre.Config.PACKAGE_TARNAME;
+            uri = "help:" + Vinagre.Config.PACKAGE_TARNAME;
 
         try {
             show_uri (window.get_screen (), uri, Gdk.CURRENT_TIME);

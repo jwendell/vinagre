@@ -215,7 +215,7 @@ AS_IF([test "x$ac_cv_header_ifaddrs_h" = "xyes"],
   [AS_IF([test "x$have_sockaddr_storage" = "xyes"],
     [AC_DEFINE([RFC2553], [], [Define if RFC2553 is followed])])])
 
-GNOME_DOC_INIT
+YELP_HELP_INIT
 
 GLIB_GSETTINGS
 

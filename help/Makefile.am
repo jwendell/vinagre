@@ -1,9 +1,8 @@
-include $(top_srcdir)/build-aux/gnome-doc-utils.make
-dist-hook: doc-dist-hook
+@YELP_HELP_RULES@
 
-DOC_ID = vinagre
+HELP_ID = vinagre
 
-DOC_FIGURES = \
+HELP_MEDIA = \
 	figures/vinagre-auth-needed.png	\
 	figures/vinagre-connect-dialog.png \
 	figures/vinagre-connected.png \
@@ -13,7 +12,7 @@ DOC_FIGURES = \
 	figures/vinagre-reverse-connections.png \
 	figures/vinagre-scaling.png
 
-DOC_PAGES = \
+HELP_FILES = \
 	connect.page \
 	connect-file.page \
 	fullscreen.page \
@@ -25,4 +24,4 @@ DOC_PAGES = \
 	take-screenshot.page \
 	view-only.page
 
-DOC_LINGUAS = de es eu gl hu sl
+HELP_LINGUAS = de es eu gl hu sl
