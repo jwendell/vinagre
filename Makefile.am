@@ -1,7 +1,9 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = help po
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+DISTCHECK_CONFIGURE_FLAGS = \
+	--disable-scrollkeeper \
+	--enable-compile-warnings=maximum
 
 common_cppflags = \
 	-I$(top_builddir) \
@@ -17,7 +19,7 @@ common_cppflags = \
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\" \
 	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\" \
 	$(VINAGRE_CFLAGS) \
-	$(WARN_FLAGS) \
+	$(WARN_CFLAGS) \
 	$(DISABLE_DEPRECATED)
 
 AM_CPPFLAGS = \
