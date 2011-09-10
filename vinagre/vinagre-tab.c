@@ -916,6 +916,7 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), suggested_filename->str);
   g_string_free (suggested_filename, TRUE);
 
+  /* FIXME: Assumes that the PNG format is always supported by GdkPixbuf. */
   formats = get_supported_image_formats ();
   for (l = formats; l; l = l->next)
     {

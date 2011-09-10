@@ -38,6 +38,7 @@
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-reverse-vnc-listener-dialog.h"
 
 void
 vinagre_cmd_direct_connect (VinagreConnection *conn,
@@ -103,7 +104,7 @@ vinagre_cmd_remote_open (GtkAction     *action,
   gchar             *uri;
   gchar             *error = NULL;
   GSList            *errors = NULL;
-  gint              i;
+  gint              i = 0;
   GHashTable        *protocols;
   GHashTableIter    iter;
   VinagreProtocol   *protocol;
@@ -206,7 +207,7 @@ void
 vinagre_cmd_remote_vnc_listener (GtkAction *action,
                                  VinagreWindow *window)
 {
-    vinagre_reverse_vnc_listener_dialog_show (window);
+    vinagre_reverse_vnc_listener_dialog_show (GTK_WINDOW (window));
 }
 
 void

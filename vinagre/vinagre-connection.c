@@ -203,7 +203,7 @@ default_parse_item (VinagreConnection *conn, xmlNode *root)
       if (!xmlStrcmp(curr->name, BAD_CAST "host"))
 	vinagre_connection_set_host (conn, (const gchar *)s_value);
       else if (!xmlStrcmp(curr->name, BAD_CAST "name"))
-	vinagre_connection_set_name (conn, BAD_CAST s_value);
+	vinagre_connection_set_name (conn, (const gchar *)s_value);
       else if (!xmlStrcmp(curr->name, BAD_CAST "username"))
 	vinagre_connection_set_username (conn, (const gchar *)s_value);
       else if (!xmlStrcmp(curr->name, BAD_CAST "port"))

@@ -207,7 +207,6 @@ vinagre_reverse_vnc_listener_dialog_show (GtkWindow *parent)
 {
   VncListenDialog *dialog;
   GtkBuilder *xml;
-  GError *error = NULL;
   gboolean always;
 
   xml = vinagre_utils_get_builder ();

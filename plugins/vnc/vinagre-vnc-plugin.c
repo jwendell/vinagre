@@ -243,7 +243,6 @@ static GtkWidget *
 impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 {
   GtkWidget *box, *check, *label, *combo, *box2, *ssh_host_entry;
-  GtkTable  *table;
   gchar     *str, *ssh_host;
   gboolean has_conn = VINAGRE_IS_VNC_CONNECTION (conn), active;
 
