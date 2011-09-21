@@ -199,7 +199,7 @@ namespace Vinagre.Utils {
         var builder = get_builder ();
         var dialog = builder.get_object ("about_dialog") as Gtk.AboutDialog;
 
-        dialog.logo_icon_name = Vinagre.Config.PACKAGE_TARNAME;
+        dialog.logo_icon_name = "preferences-desktop-remote-desktop";
         dialog.version = Vinagre.Config.PACKAGE_VERSION;
         dialog.website = Vinagre.Config.PACKAGE_URL;
         dialog.set_transient_for (parent);
