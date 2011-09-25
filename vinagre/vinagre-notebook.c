@@ -513,10 +513,20 @@ build_tab_label (VinagreNotebook *nb,
   GtkWidget *box, *label_box, *label_ebox;
   GtkWidget *label, *dummy_label;
   GtkWidget *close_button, *spinner;
-  GtkRcStyle *rcstyle;
   GtkWidget *image;
   GtkWidget *icon;
   gchar     *name;
+    GtkStyleContext *context;
+    GtkCssProvider *css;
+
+    static const gchar button_style[] = "* {\n"
+        "-GtkButton-default-border : 0;\n"
+        "-GtkButton-default-outside-border : 0;\n"
+        "-GtkButton-inner-border: 0;\n"
+        "-GtkWidget-focus-line-width : 0;\n"
+        "-GtkWidget-focus-padding : 0;\n"
+        "padding: 0;\n"
+        "}";
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
@@ -528,25 +538,20 @@ build_tab_label (VinagreNotebook *nb,
   label_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   gtk_container_add (GTK_CONTAINER (label_ebox), label_box);
 
-  /* setup close button */
-  close_button = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (close_button),
-			 GTK_RELIEF_NONE);
+    /* setup close button */
+    close_button = gtk_button_new ();
+    css = gtk_css_provider_new ();
+    gtk_css_provider_load_from_data (css, button_style, -1, NULL);
+    context = gtk_widget_get_style_context (close_button);
+    gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    gtk_button_set_relief (GTK_BUTTON (close_button), GTK_RELIEF_NONE);
 
   /* don't allow focus on the close button */
   gtk_button_set_focus_on_click (GTK_BUTTON (close_button), FALSE);
 
   /* make it as small as possible */
-  rcstyle = gtk_rc_style_new ();
-  rcstyle->xthickness = rcstyle->ythickness = 0;
-  gtk_widget_modify_style (close_button, rcstyle);
-  g_object_unref (rcstyle);
-  gint w, h;
-  gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
-  gtk_widget_set_size_request (GTK_WIDGET (close_button), w+2, h+2);
-
-  image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
-					  GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
   gtk_container_add (GTK_CONTAINER (close_button), image);
   gtk_box_pack_start (GTK_BOX (box), close_button, FALSE, FALSE, 0);
 
