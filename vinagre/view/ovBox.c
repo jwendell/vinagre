@@ -331,13 +331,14 @@ static void
 ViewOvBoxSetBackground(ViewOvBox *that) // IN
 {
    GtkWidget *widget;
-   GtkStyle *style;
+   GtkStyleContext *context;
 
    widget = GTK_WIDGET(that);
-   style = gtk_widget_get_style (widget);
-   gtk_style_set_background(style, gtk_widget_get_window(widget), GTK_STATE_NORMAL);
-   gtk_style_set_background(style, that->priv->underWin, GTK_STATE_NORMAL);
-   gtk_style_set_background(style, that->priv->overWin, GTK_STATE_NORMAL);
+   context = gtk_widget_get_style_context (widget);
+   gtk_style_context_set_state(context, GTK_STATE_FLAG_NORMAL);
+   gtk_style_context_set_background(context, gtk_widget_get_window(widget));
+   gtk_style_context_set_background(context, that->priv->underWin);
+   gtk_style_context_set_background(context, that->priv->overWin);
 }
 
 
@@ -387,7 +388,6 @@ ViewOvBoxRealize(GtkWidget *widget) // IN
                            &attributes, mask);
    gtk_widget_set_window(widget, window);
    gdk_window_set_user_data(window, that);
-   gtk_widget_set_style(widget, gtk_style_attach(gtk_widget_get_style(widget), window));
 
    /*
     * The order in which we create the children X window matters: the child
@@ -491,8 +491,8 @@ ViewOvBoxSizeRequest(GtkWidget *widget,           // IN
    that = VIEW_OV_BOX(widget);
    priv = that->priv;
 
-   gtk_widget_size_request(priv->under, &underR);
-   gtk_widget_size_request(priv->over, &priv->overR);
+   gtk_widget_get_preferred_size(priv->under, &underR, NULL);
+   gtk_widget_get_preferred_size(priv->over, &priv->overR, NULL);
 
    gtk_container_child_get(GTK_CONTAINER(that), priv->over,
                            "expand", &expand,
