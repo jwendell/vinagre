@@ -80,8 +80,8 @@ namespace Vinagre.Utils {
         try {
             builder.add_from_file (filename);
         } catch (Error err) {
-            var subtitle = _("Vinagre failed to open a UI file," +
-                             " with the error message:");
+            var subtitle =
+                _("Vinagre failed to open a UI file, with the error message:");
             var closing = _("Please check your installation.");
             var message = "%s\n\n%s\n\n%s".printf (subtitle,
                                                    err.message,
