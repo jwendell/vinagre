@@ -30,6 +30,7 @@
 #include <gio/gwin32inputstream.h>
 #include <gio/gwin32outputstream.h>
 #else /* !G_OS_WIN32 */
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixoutputstream.h>
