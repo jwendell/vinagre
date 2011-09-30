@@ -29,6 +29,7 @@
 #include "vinagre-vnc-tab.h"
 #include "vinagre-vnc-connection.h"
 #include "vinagre-vnc-tunnel.h"
+#include "vinagre-vala.h"
 
 #define VINAGRE_VNC_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_VNC_TAB, VinagreVncTabPrivate))
 

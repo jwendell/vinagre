@@ -27,6 +27,7 @@
 #include "vinagre-connection.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-vala.h"
 
 struct _VinagreConnectionPrivate
 {

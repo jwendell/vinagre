@@ -32,6 +32,7 @@
 #include "vinagre-spice-tab.h"
 #include "vinagre-spice-connection.h"
 #include "vinagre-spice-tunnel.h"
+#include "vinagre-vala.h"
 
 #define VINAGRE_SPICE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_SPICE_TAB, VinagreSpiceTabPrivate))
 

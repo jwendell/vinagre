@@ -9,6 +9,7 @@ vinagre_vinagre_CPPFLAGS = \
 	-I$(top_builddir) \
 	-I$(top_builddir)/vinagre \
 	-I$(top_srcdir) \
+	-I$(top_srcdir)/vinagre \
 	-I$(top_srcdir)/vinagre/view \
 	-DBINDIR=\"$(bindir)\" \
 	-DDATADIR=\"$(datadir)\" \
@@ -65,6 +66,10 @@ noinst_vinagreh_headers = \
 	vinagre/vinagre-window.h \
 	vinagre/vinagre-ssh.h
 
+vinagre_vala_sources = \
+	vinagre/vinagre-dirs.vala \
+	vinagre/vinagre-utils.vala
+
 vinagre_vinagre_SOURCES = \
 	vinagre/vinagre-main.c \
 	vinagre/vinagre-options.c \
@@ -80,14 +85,12 @@ vinagre_vinagre_SOURCES = \
 	vinagre/vinagre-connect.c \
 	vinagre/vinagre-connection.c \
 	vinagre/vinagre-debug.c \
-	vinagre/vinagre-dirs.vala \
 	vinagre/vinagre-notebook.c \
 	vinagre/vinagre-prefs.c \
 	vinagre/vinagre-reverse-vnc-listener.c \
 	vinagre/vinagre-reverse-vnc-listener-dialog.c \
 	vinagre/vinagre-static-extension.c \
 	vinagre/vinagre-tab.c \
-	vinagre/vinagre-utils.vala \
 	vinagre/vinagre-window.c \
 	vinagre/vinagre-ssh.c \
 	vinagre/vinagre-cache-prefs.c \
@@ -96,7 +99,8 @@ vinagre_vinagre_SOURCES = \
 	plugins/vnc/vinagre-vnc-plugin.c \
 	plugins/vnc/vinagre-vnc-connection.c \
 	plugins/vnc/vinagre-vnc-tab.c \
-	plugins/vnc/vinagre-vnc-tunnel.c
+	plugins/vnc/vinagre-vnc-tunnel.c \
+	$(vinagre_vala_sources:.vala=.c)
 
 if VINAGRE_HAVE_SELF_IFADDRS
 vinagre_vinagre_SOURCES += \
@@ -170,6 +174,24 @@ vinagre_vinagre_SOURCES += \
 	plugins/ssh/vinagre-ssh-connection.c \
 	plugins/ssh/vinagre-ssh-tab.c
 endif
+
+# Ensure vinagre-vala.h is available immediately since C sources #include it
+BUILT_SOURCES = \
+	vinagre/vinagre-vala.h
+
+# We have to write an explicit rule instead of just adding --header AM_VALAFLAGS
+# or VALAFLAGS because automake does not support per-target VALAFLAGS, so if in
+# the future we use a .vala file in a plugin, vinagre-vala.h will get clobbered.
+vinagre_vala.stamp: $(vinagre_vala_sources)
+	$(AM_V_VALAC)$(VALAC) $(AM_VALAFLAGS) $(VALAFLAGS) --header vinagre/vinagre-vala.h -C $(vinagre_vala_sources)
+	$(AM_V_at)touch $@
+
+# Automake doesn't have an implicit rule to generate headers from vala
+vinagre/vinagre-vala.h $(vinagre_vala_sources:.vala=.c): $(srcdir)/vinagre_vala.stamp
+	@if test -f $@; then :; else \
+	  rm -f $(srcdir)/vinagre_vala.stamp; \
+	  $(am__cd) $(srcdir) && $(MAKE) $(AM_MAKEFLAGS) vinagre_vala.stamp; \
+	fi
 
 iconthemedir = $(datadir)/icons/hicolor
 mimeicon16dir = $(iconthemedir)/16x16/mimetypes
@@ -276,6 +298,9 @@ dist-changelog:
 
 dist_noinst_DATA = \
 	$(noinst_vinagreh_headers) \
+	$(vinagre_vala_sources) \
+	vinagre/vinagre-vala.h \
+	vinagre_vala.stamp \
 	$(noinst_plugin_headers) \
 	ChangeLog.pre-git \
 	data/vinagre-mime.xml.in \

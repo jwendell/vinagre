@@ -44,6 +44,7 @@
 #include "vinagre-prefs.h"
 #include "vinagre-reverse-vnc-listener-dialog.h"
 #include "vinagre-reverse-vnc-listener.h"
+#include "vinagre-vala.h"
 
 typedef struct
 {

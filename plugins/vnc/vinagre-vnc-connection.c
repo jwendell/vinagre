@@ -25,6 +25,7 @@
 #include <vinagre/vinagre-cache-prefs.h>
 
 #include "vinagre-vnc-connection.h"
+#include "vinagre-vala.h"
 
 struct _VinagreVncConnectionPrivate
 {

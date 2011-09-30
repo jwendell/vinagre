@@ -31,6 +31,7 @@
 #include "vinagre-prefs.h"
 #include "view/autoDrawer.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-vala.h"
 
 #define VINAGRE_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_TAB, VinagreTabPrivate))
 

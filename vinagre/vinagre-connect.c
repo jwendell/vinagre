@@ -36,6 +36,7 @@
 #include "vinagre-prefs.h"
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-vala.h"
 
 typedef struct {
   GtkBuilder *xml;

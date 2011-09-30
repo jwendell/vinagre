@@ -37,6 +37,7 @@
 #include "vinagre-commands.h"
 #include "vinagre-reverse-vnc-listener.h"
 #include "plugins/vnc/vinagre-vnc-connection.h"
+#include "vinagre-vala.h"
 
 struct _VinagreReverseVncListenerPrivate
 {
