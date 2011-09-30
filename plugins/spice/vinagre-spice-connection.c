@@ -25,6 +25,7 @@
 #include <vinagre/vinagre-cache-prefs.h>
 
 #include "vinagre-spice-connection.h"
+#include "vinagre-vala.h"
 
 struct _VinagreSpiceConnectionPrivate
 {

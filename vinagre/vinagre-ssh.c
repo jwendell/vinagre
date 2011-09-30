@@ -22,6 +22,7 @@
 #include <config.h>
 
 #include "vinagre-ssh.h"
+#include "vinagre-vala.h"
 #include "pty_open.h"
 
 #ifdef G_OS_WIN32

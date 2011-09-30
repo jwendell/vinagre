@@ -21,6 +21,7 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "vinagre-cache-prefs.h"
+#include "vinagre-vala.h"
 
 static GKeyFile *keyfile = NULL;
 static char* filename = NULL;

@@ -36,6 +36,7 @@
 #include "vinagre-bookmarks-migration.h"
 #include "vinagre-bookmarks.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-vala.h"
 
 static void
 fill_xml (GSList *list, xmlTextWriter *writer)

@@ -25,6 +25,7 @@
 #include "vinagre-bookmarks-ui.h"
 #include "vinagre-bookmarks-tree.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-vala.h"
 
 static void
 control_save_button_visibility (GtkEntry *ed, GtkWidget *bt)

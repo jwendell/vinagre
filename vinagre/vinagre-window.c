@@ -41,6 +41,7 @@
 #include "vinagre-window-private.h"
 #include "vinagre-bookmarks-entry.h"
 #include "vinagre-plugins-engine.h"
+#include "vinagre-vala.h"
 
 #ifdef VINAGRE_HAVE_AVAHI
 #include "vinagre-mdns.h"

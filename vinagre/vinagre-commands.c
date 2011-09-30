@@ -39,6 +39,7 @@
 #include "vinagre-cache-prefs.h"
 #include "vinagre-plugins-engine.h"
 #include "vinagre-reverse-vnc-listener-dialog.h"
+#include "vinagre-vala.h"
 
 void
 vinagre_cmd_direct_connect (VinagreConnection *conn,

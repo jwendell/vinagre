@@ -30,6 +30,7 @@
 
 #include "vinagre-rdp-tab.h"
 #include "vinagre-rdp-connection.h"
+#include "vinagre-vala.h"
 
 #define VINAGRE_RDP_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), VINAGRE_TYPE_RDP_TAB, VinagreRdpTabPrivate))
 
