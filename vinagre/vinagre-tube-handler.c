@@ -39,6 +39,7 @@
 #include "vinagre-debug.h"
 #include "vinagre-protocol.h"
 #include "vinagre-plugins-engine.h"
+#include "plugins/vnc/vinagre-vnc-connection.h"
 
 G_DEFINE_TYPE (VinagreTubeHandler, vinagre_tube_handler, G_TYPE_OBJECT);
 
