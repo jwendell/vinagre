@@ -634,7 +634,7 @@ void
 vinagre_tab_add_view (VinagreTab *tab, GtkWidget *view)
 {
   GtkWidget *viewport;
-  GdkColor color = {0,};
+  GdkRGBA color = {0,};
 
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
@@ -643,7 +643,7 @@ vinagre_tab_add_view (VinagreTab *tab, GtkWidget *view)
 					 view);
   viewport = gtk_bin_get_child (GTK_BIN (tab->priv->scroll));
   gtk_viewport_set_shadow_type(GTK_VIEWPORT (viewport), GTK_SHADOW_NONE);
-  gtk_widget_modify_bg (viewport, GTK_STATE_NORMAL, &color);
+  gtk_widget_override_background_color (viewport, GTK_STATE_NORMAL, &color);
 }
 
 /**
