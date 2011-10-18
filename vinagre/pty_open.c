@@ -404,9 +404,10 @@ _pty_fork_on_pty_name(const char *path, int parent_fd, char **env_add,
 		      const char *directory,
 		      int columns, int rows, 
 		      int *stdin_fd, int *stdout_fd, int *stderr_fd, 
+		      int *held_fd,
 		      pid_t *child, gboolean reapchild, gboolean login)
 {
-	int fd, i;
+	int fd, hold_fd, i;
 	char c;
 	int ready_a[2] = { 0, 0 };
 	int ready_b[2] = { 0, 0 };
@@ -415,6 +416,17 @@ _pty_fork_on_pty_name(const char *path, int parent_fd, char **env_add,
 	int stdin_pipe[2];
 	int stdout_pipe[2];
 	int stderr_pipe[2];
+
+	/* Optionally hold the slave PTY open in the parent. Needed to prevent
+	 * EIO from read() on the master if exec'ing a program that enumerates
+	 * and closes open fds before opening /dev/tty (ssh). Partially fixes
+	 * bug 644432. */
+	if (held_fd) {
+		hold_fd = open(path, O_RDWR|O_NOCTTY);
+		if (hold_fd == -1) {
+			return -1;
+		}
+	}
 
 	/* Open pipes for synchronizing between parent and child. */
 	if (_pty_pipe_open_bi(&ready_a[0], &ready_a[1],
@@ -457,6 +469,7 @@ _pty_fork_on_pty_name(const char *path, int parent_fd, char **env_add,
 		close(stdin_pipe[1]);
 		close(stdout_pipe[0]);
 		close(stderr_pipe[0]);
+		if (held_fd) close(hold_fd);
 
 		if(reapchild) {
 			close(pid_pipe[0]);
@@ -575,6 +588,7 @@ _pty_fork_on_pty_name(const char *path, int parent_fd, char **env_add,
 		*stdin_fd = stdin_pipe[1];
 		*stdout_fd = stdout_pipe[0];
 		*stderr_fd = stderr_pipe[0];
+		if (held_fd) *held_fd = hold_fd;
 
 		return 0;
 		break;
@@ -603,6 +617,7 @@ _pty_fork_on_pty_name(const char *path, int parent_fd, char **env_add,
 	close(ready_b[1]);
  bail_ready:
 	*child = -1;
+	if (held_fd) close(hold_fd);
 	return -1;
 }
 
@@ -716,7 +731,8 @@ static int
 _pty_open_unix98(pid_t *child, guint flags, char **env_add,
 			   const char *command, char **argv,
 			   const char *directory, int columns, int rows,
-			   int *stdin_fd, int *stdout_fd, int *stderr_fd)
+			   int *stdin_fd, int *stdout_fd, int *stderr_fd,
+			   int *held_fd)
 {
 	int fd;
 	char *buf;
@@ -736,6 +752,7 @@ _pty_open_unix98(pid_t *child, guint flags, char **env_add,
 						  argv, directory,
 						  columns, rows,
 						  stdin_fd, stdout_fd, stderr_fd, 
+						  held_fd,
 						  child, 
 						  flags & PTY_REAP_CHILD, 
 						  flags & PTY_LOGIN_TTY) != 0) {
@@ -773,13 +790,15 @@ int
 pty_open(pid_t *child, guint flags, char **env_add, 
 	 const char *command, char **argv, const char *directory,
 	 int columns, int rows,
-	 int *stdin_fd, int *stdout_fd, int *stderr_fd)
+	 int *stdin_fd, int *stdout_fd, int *stderr_fd,
+	 int *held_fd)
 {
 	int ret = -1;
 	if (ret == -1) {
 		ret = _pty_open_unix98(child, flags, env_add, command, 
 						 argv, directory, columns, rows,
-						 stdin_fd, stdout_fd, stderr_fd);
+						 stdin_fd, stdout_fd, stderr_fd,
+						 held_fd);
 	}
 	return ret;
 }

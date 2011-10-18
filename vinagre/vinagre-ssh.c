@@ -173,13 +173,15 @@ spawn_ssh (char *args[],
            int *stdin_fd,
            int *stdout_fd,
            int *stderr_fd,
+           int *held_fd,
            GError **error)
 {
 #ifdef USE_PTY
   *tty_fd = pty_open(pid, PTY_REAP_CHILD, NULL,
 		     args[0], args, NULL,
 		     300, 300, 
-		     stdin_fd, stdout_fd, stderr_fd);
+		     stdin_fd, stdout_fd, stderr_fd,
+		     held_fd);
   if (*tty_fd == -1)
     {
       g_set_error_literal (error,
@@ -207,6 +209,7 @@ spawn_ssh (char *args[],
       return FALSE;
     }
   *pid = gpid;
+  if (held_fd) *held_fd = -1; /* Not applicable here. */
 #endif
   
   return TRUE;
@@ -728,7 +731,7 @@ vinagre_ssh_connect (GtkWindow *parent,
 		     gint *tty,
 		     GError **error)
 {
-  int tty_fd, stdin_fd, stdout_fd, stderr_fd;
+  int tty_fd, stdin_fd, stdout_fd, stderr_fd, held_fd;
   GPid pid;
   gchar *user, *host, **args;
   gboolean res;
@@ -758,7 +761,7 @@ vinagre_ssh_connect (GtkWindow *parent,
   args = setup_ssh_commandline (host, port, user, extra_arguments, command);
   if (!spawn_ssh (args,
 		  &pid,
-		  &tty_fd, &stdin_fd, &stdout_fd, &stderr_fd,
+		  &tty_fd, &stdin_fd, &stdout_fd, &stderr_fd, &held_fd,
 		  error))
     {
       g_strfreev (args);
@@ -771,6 +774,9 @@ vinagre_ssh_connect (GtkWindow *parent,
     res = wait_for_reply (stdout_fd, error);
   else
     res = handle_login (parent, host, port, user, tty_fd, stdout_fd, stderr_fd, error);
+
+  /* ssh has opened the PTY slave by now, so we can close it */
+  if (held_fd != -1) close(held_fd);
 
   g_strfreev (args);
   g_free (user);
