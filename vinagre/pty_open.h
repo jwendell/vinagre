@@ -59,7 +59,8 @@ enum {
 int pty_open(pid_t *child, guint flags, char **env_add,
 	     const char *command, char **argv, const char *directory,
 	     int columns, int rows,
-	     int *stdin_fd, int *stdout_fd, int *stderr_fd);
+	     int *stdin_fd, int *stdout_fd, int *stderr_fd,
+	     int *held_fd);
 
 G_END_DECLS
 
