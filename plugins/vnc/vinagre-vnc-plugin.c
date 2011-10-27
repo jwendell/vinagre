@@ -147,22 +147,22 @@ impl_new_connection_from_file (VinagreProtocol *plugin,
       goto the_end;
     }
 
-  if (!g_key_file_has_group (file, "connection"))
+  if (!g_key_file_has_group (file, "Connection"))
     {
-      /* Translators: Do not translate "connection". It's the name of a group in the .vnc (.ini like) file. */
-      *error_msg = g_strdup (_("The file is not a VNC one: Missing the group \"connection\"."));
+      /* Translators: Do not translate "Connection". It's the name of a group in the .vnc (.ini like) file. */
+      *error_msg = g_strdup (_("The file is not a VNC one: Missing the group \"Connection\"."));
       goto the_end;
     }
 
-  if (!g_key_file_has_key (file, "connection", "host", NULL))
+  if (!g_key_file_has_key (file, "Connection", "Host", NULL))
     {
-      /* Translators: Do not translate "host". It's the name of a key in the .vnc (.ini like) file. */
-      *error_msg = g_strdup (_("The file is not a VNC one: Missing the key \"host\"."));
+      /* Translators: Do not translate "Host". It's the name of a key in the .vnc (.ini like) file. */
+      *error_msg = g_strdup (_("The file is not a VNC one: Missing the key \"Host\"."));
       goto the_end;
     }
 
-  host = g_key_file_get_string (file, "connection", "host", NULL);
-  port = g_key_file_get_integer (file, "connection", "port", NULL);
+  host = g_key_file_get_string (file, "Connection", "Host", NULL);
+  port = g_key_file_get_integer (file, "Connection", "Port", NULL);
   if (!port)
     {
       if (!vinagre_connection_split_string (host, "vnc", &protocol, &actual_host, &port, error_msg))
@@ -183,15 +183,15 @@ impl_new_connection_from_file (VinagreProtocol *plugin,
       vinagre_connection_set_host (conn, host);
       vinagre_connection_set_port (conn, port);
 
-      s_value = g_key_file_get_string  (file, "connection", "username", NULL);
+      s_value = g_key_file_get_string  (file, "Connection", "Username", NULL);
       vinagre_connection_set_username (conn, s_value);
       g_free (s_value);
 
-      s_value = g_key_file_get_string  (file, "connection", "password", NULL);
+      s_value = g_key_file_get_string  (file, "Connection", "Password", NULL);
       vinagre_connection_set_password (conn, s_value);
       g_free (s_value);
 
-      shared = g_key_file_get_integer (file, "options", "shared", NULL);
+      shared = g_key_file_get_integer (file, "Options", "Shared", NULL);
       if (shared == 0 || shared == 1)
 	vinagre_vnc_connection_set_shared (VINAGRE_VNC_CONNECTION (conn), shared);
       else
@@ -322,7 +322,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   /* SSH Tunneling */
   box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
-  /* Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel*/
+  /* Translators: the whole sentence will be: Use Host <hostname> as a SSH tunnel*/
   check = gtk_check_button_new_with_mnemonic (_("Use h_ost"));
   g_object_set_data (G_OBJECT (box), "use_ssh", check);
   gtk_box_pack_start (GTK_BOX (box2), check, FALSE, FALSE, 0);
