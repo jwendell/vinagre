@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: vinagre HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&component=general\n"
-"POT-Creation-Date: 2009-04-09 10:48+0000\n"
+"POT-Creation-Date: 2010-05-17 08:26+0000\n"
 "PO-Revision-Date: 2009-04-09 14:25+0800\n"
 "Last-Translator: Ray Wang <wanglei1123@gmail.com>\n"
 "Language-Team: Chinese/Simplified <i18n-zh@googlegroups.com>\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/GNOME_VinagreApplet.xml.h:1
+#: ../data/GNOME_VinagreApplet.xml.h:1 ../vinagre/vinagre-plugin-manager.c:495
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../data/GNOME_VinagreApplet.xml.h:2 ../src/vinagre-ui.h:37
+#: ../data/GNOME_VinagreApplet.xml.h:2 ../vinagre/vinagre-ui.h:37
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -32,124 +32,136 @@ msgid "Access remote desktops"
 msgstr "访问远程桌面"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
-#: ../src/GNOME_VinagreApplet.server.in.in.h:2 ../src/vinagre-applet.c:418
-#: ../src/vinagre-applet.c:473 ../src/vinagre-main.c:151
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:2
+#: ../vinagre/vinagre-applet.c:434 ../vinagre/vinagre-applet.c:486
+#: ../vinagre/vinagre-main.c:198
 msgid "Remote Desktop Viewer"
 msgstr "远程桌面查看器"
 
-#: ../data/vinagre.glade.h:1
-msgid "<b>Authentication is required</b>"
-msgstr "<b>需要验证</b>"
-
-#: ../data/vinagre.glade.h:2
-msgid "<b>Connection options</b>"
-msgstr "<b>连接选项</b>"
-
-#: ../data/vinagre.glade.h:3
-msgid "<b>Connection</b>"
-msgstr "<b>连接</b>"
-
-#: ../data/vinagre.glade.h:4
-msgid "<b>Folder</b>"
-msgstr "<b>文件夹</b>"
-
-#: ../data/vinagre.glade.h:5
-msgid "<b>Interface</b>"
-msgstr "<b>界面</b>"
-
-#: ../data/vinagre.glade.h:6
-msgid "<b>Options</b>"
-msgstr "<b>选项</b>"
-
-#: ../data/vinagre.glade.h:7
-msgid "<b>Parent Folder</b>"
-msgstr "<b>父文件夹</b>"
-
-#: ../data/vinagre.glade.h:8
-msgid "<b>Which machine do you want to connect to?</b>"
-msgstr "<b>您想连接到哪台机器？</b>"
-
-#: ../data/vinagre.glade.h:9
-msgid "<i><small>All fields above are mandatory</small></i>"
+#: ../data/vinagre.ui.h:1
+#, fuzzy
+#| msgid "<i><small>All fields above are mandatory</small></i>"
+msgid "All fields above are mandatory"
 msgstr "<i><small>上面所有的域都是必需的</small></i>"
 
-#: ../data/vinagre.glade.h:10 ../src/vinagre-fav.c:846
+#: ../data/vinagre.ui.h:2
+#, fuzzy
+#| msgid "<b>Authentication is required</b>"
+msgid "Authentication is required"
+msgstr "<b>需要验证</b>"
+
+#: ../data/vinagre.ui.h:3 ../vinagre/vinagre-fav.c:855
 msgid "Bookmarks"
 msgstr "书签"
 
-#: ../data/vinagre.glade.h:11 ../src/vinagre-fav.c:422
-#: ../src/vinagre-tab.c:1062
+#: ../data/vinagre.ui.h:4
+#, fuzzy
+#| msgid "Connecting..."
+msgid "Connection"
+msgstr "正在连接..."
+
+#: ../data/vinagre.ui.h:5
+#, fuzzy
+#| msgid "<b>Connection options</b>"
+msgid "Connection options"
+msgstr "<b>连接选项</b>"
+
+#: ../data/vinagre.ui.h:6
+#, fuzzy
+#| msgid "New Folder"
+msgid "Folder"
+msgstr "新文件夹"
+
+#: ../data/vinagre.ui.h:7 ../plugins/ssh/vinagre-ssh-tab.c:49
+#: ../plugins/vnc/vinagre-vnc-tab.c:134 ../vinagre/vinagre-fav.c:424
 msgid "Host:"
 msgstr "主机："
 
-#: ../data/vinagre.glade.h:12
+#: ../data/vinagre.ui.h:8
+#, fuzzy
+#| msgid "<b>Interface</b>"
+msgid "Interface"
+msgstr "<b>界面</b>"
+
+#: ../data/vinagre.ui.h:9
+#, fuzzy
+#| msgid "<b>Options</b>"
+msgid "Options"
+msgstr "<b>选项</b>"
+
+#: ../data/vinagre.ui.h:10
+#, fuzzy
+#| msgid "<b>Parent Folder</b>"
+msgid "Parent Folder"
+msgstr "<b>父文件夹</b>"
+
+#: ../data/vinagre.ui.h:11
 msgid "Preferences"
 msgstr "首选项"
 
-#: ../data/vinagre.glade.h:13 ../data/vinagre.schemas.in.h:8
-msgid ""
-"Whether we should show tabs even when there is only one active connection"
-msgstr "在只有一个活动连接时是否仍然应显示标签"
+#: ../data/vinagre.ui.h:12
+#, fuzzy
+#| msgid "<b>Which machine do you want to connect to?</b>"
+msgid "Which machine do you want to connect to?"
+msgstr "<b>您想连接到哪台机器？</b>"
 
-#: ../data/vinagre.glade.h:14 ../data/vinagre.schemas.in.h:9
-msgid "Whether we should show the menu accelerators (shortcut keys)"
-msgstr "是否应显示菜单加速器(快捷键)"
-
-#: ../data/vinagre.glade.h:15
+#: ../data/vinagre.ui.h:13
 msgid "_Always show tabs"
 msgstr "总是显示标签(_A)"
 
 #. This is a button label, in the authentication dialog
-#: ../data/vinagre.glade.h:17
+#: ../data/vinagre.ui.h:15
 msgid "_Authenticate"
 msgstr "验证(_A)"
 
-#: ../data/vinagre.glade.h:18
+#: ../data/vinagre.ui.h:16
 msgid "_Full screen"
 msgstr "全屏(_F)"
 
-#: ../data/vinagre.glade.h:19
+#: ../data/vinagre.ui.h:17
 msgid "_Host:"
 msgstr "主机(_H)："
 
-#: ../data/vinagre.glade.h:20
+#: ../data/vinagre.ui.h:18
 msgid "_Name:"
 msgstr "名称(_N)："
 
-#: ../data/vinagre.glade.h:21
+#: ../data/vinagre.ui.h:19
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#: ../data/vinagre.glade.h:22
+#: ../data/vinagre.ui.h:20
+msgid "_Protocol:"
+msgstr ""
+
+#: ../data/vinagre.ui.h:21
 msgid "_Remember this credential"
 msgstr "记住此证书(_R)"
 
-#: ../data/vinagre.glade.h:23
-msgid "_Scaling"
-msgstr "缩放(_S)"
-
-#: ../data/vinagre.glade.h:24
+#: ../data/vinagre.ui.h:22
 msgid "_Show menu shortcuts"
 msgstr "显示菜单快捷键(_S)"
 
-#: ../data/vinagre.glade.h:25
+#: ../data/vinagre.ui.h:23
 msgid "_Username:"
 msgstr "用户名(_N)："
 
-#: ../data/vinagre.glade.h:26
-msgid "_View only"
-msgstr "仅查看(_V)"
+#: ../data/vinagre.schemas.in.in.h:1 ../vinagre/vinagre-plugin-manager.c:795
+msgid "Active plugins"
+msgstr ""
 
-#. Tooltip for host entry in connect dialog
-#: ../data/vinagre.glade.h:28
-msgid "host or host:display or host::port"
-msgstr "主机 或 主机:显示 或 主机::端口"
+#: ../data/vinagre.schemas.in.in.h:2
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .vinagre-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
 
-#: ../data/vinagre.schemas.in.h:1
+#: ../data/vinagre.schemas.in.in.h:3
 msgid "Maximum number of history items in connect dialog"
 msgstr "连接对话框中最多的历史记录条数"
 
-#: ../data/vinagre.schemas.in.h:2
+#: ../data/vinagre.schemas.in.in.h:4
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -158,22 +170,22 @@ msgstr ""
 "设为“false”以禁用菜单快捷键。设为“true”以启用它们。注意如果\n"
 "被启用的话，这些键将被菜单所截获，不能被发送到远程主机。"
 
-#: ../data/vinagre.schemas.in.h:3
+#: ../data/vinagre.schemas.in.in.h:5
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
 msgstr ""
 "设为“true”以总是显示标签栏。设为“false”以仅当存在多个活动连接时显示标签栏。"
 
-#: ../data/vinagre.schemas.in.h:4
+#: ../data/vinagre.schemas.in.in.h:6
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "指定在主机下拉菜单中显示项的最大数目"
 
-#: ../data/vinagre.schemas.in.h:5
+#: ../data/vinagre.schemas.in.in.h:7
 msgid "The handler for \"vnc://\" URLs"
 msgstr "“vnc://”这类 URL 的处理程序"
 
-#: ../data/vinagre.schemas.in.h:6
+#: ../data/vinagre.schemas.in.in.h:8
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -182,9 +194,18 @@ msgstr ""
 "当连接到主机时，客户端可以告诉服务器保持其它客户端的连接\n"
 "或丢弃已有的连接。将此值设为“true”以和其它客户端共享桌面。"
 
-#: ../data/vinagre.schemas.in.h:7
+#: ../data/vinagre.schemas.in.in.h:9
 msgid "Whether we should leave other clients connected"
 msgstr "是否应保持其它客户端的连接"
+
+#: ../data/vinagre.schemas.in.in.h:10
+msgid ""
+"Whether we should show tabs even when there is only one active connection"
+msgstr "在只有一个活动连接时是否仍然应显示标签"
+
+#: ../data/vinagre.schemas.in.in.h:11
+msgid "Whether we should show the menu accelerators (shortcut keys)"
+msgstr "是否应显示菜单加速器(快捷键)"
 
 #: ../data/vinagre-mime.xml.in.h:1
 msgid "Remote Desktop (VNC) file"
@@ -194,361 +215,166 @@ msgstr "远程桌面(VNC)文件"
 msgid "Remote Desktop Connection"
 msgstr "远程桌面连接"
 
-#: ../src/GNOME_VinagreApplet.server.in.in.h:1
-msgid "A menu to quickly access remote machines"
-msgstr "可快速连接到远程机器的菜单"
+#. vim: set ts=8:
+#: ../plugins/ssh/vinagre-ssh-plugin.c:70
+#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:1
+msgid "SSH"
+msgstr ""
 
-#: ../src/GNOME_VinagreApplet.server.in.in.h:3
-msgid "Vinagre Applet Factory"
-msgstr "Vinagre 小程序工厂"
+#. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
+#: ../plugins/ssh/vinagre-ssh-plugin.c:72
+msgid "Access Unix/Linux terminals"
+msgstr ""
 
-#: ../src/vinagre-applet.c:271 ../src/vinagre-applet.c:349
-msgid "Could not run vinagre:"
-msgstr "无法运行 vinagre："
+#: ../plugins/ssh/vinagre-ssh-tab.c:50 ../plugins/vnc/vinagre-vnc-tab.c:135
+msgid "Port:"
+msgstr "端口："
 
-#: ../src/vinagre-applet.c:369
-msgid "Open Remote Desktop Viewer"
-msgstr "打开远程桌面查看器"
+#: ../plugins/ssh/ssh.vinagre-plugin.desktop.in.h:2
+msgid "SSH support"
+msgstr ""
 
-#: ../src/vinagre-applet.c:419
-msgid "Access your bookmarks"
-msgstr "访问您的书签"
-
-#: ../src/vinagre-bookmarks.c:344
-#, c-format
-msgid "Error while initializing bookmarks: %s"
-msgstr "初始化书签时出错：%s"
-
-#: ../src/vinagre-bookmarks.c:344 ../src/vinagre-bookmarks.c:459
-#: ../src/vinagre-bookmarks-migration.c:133 ../src/vinagre-commands.c:145
-#: ../src/vinagre-connect.c:277 ../src/vinagre-fav.c:678
-#: ../src/vinagre-main.c:85 ../src/vinagre-main.c:104
-#: ../src/vinagre-window.c:279
-msgid "Unknown error"
-msgstr "未知错误"
-
-#: ../src/vinagre-bookmarks.c:351
-msgid "Error while initializing bookmarks: The file seems to be empty"
-msgstr "初始化书签时出错：文件似乎为空"
-
-#: ../src/vinagre-bookmarks.c:358
-msgid ""
-"Error while initializing bookmarks: The file is not a vinagre bookmarks file"
-msgstr "初始化书签时出错：该文件不是一个 vinagre 书签文件"
-
-#: ../src/vinagre-bookmarks.c:420 ../src/vinagre-bookmarks.c:427
-msgid "Error while saving bookmarks: Failed to create the XML structure"
-msgstr "保存书签时出错：无法创建 XML 结构"
-
-#: ../src/vinagre-bookmarks.c:434 ../src/vinagre-bookmarks.c:441
-msgid "Error while saving bookmarks: Failed to initialize the XML structure"
-msgstr "保存书签时出错：无法初始化 XML 结构"
-
-#: ../src/vinagre-bookmarks.c:450
-msgid "Error while saving bookmarks: Failed to finalize the XML structure"
-msgstr "保存书签时出错：无法结束 XML 结构"
-
-#: ../src/vinagre-bookmarks.c:459
-#, c-format
-msgid "Error while saving bookmarks: %s"
-msgstr "保存书签时出错：%s"
-
-#: ../src/vinagre-bookmarks-migration.c:93
-#: ../src/vinagre-bookmarks-migration.c:100
-msgid "Error while migrating bookmarks: Failed to create the XML structure"
-msgstr "迁移书签时出错：无法创建 XML 结构"
-
-#: ../src/vinagre-bookmarks-migration.c:107
-#: ../src/vinagre-bookmarks-migration.c:114
-msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
-msgstr "迁移书签时出错：无法初始化 XML 结构"
-
-#: ../src/vinagre-bookmarks-migration.c:123
-msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
-msgstr "迁移书签时出错：无法结束 XML 结构"
-
-#: ../src/vinagre-bookmarks-migration.c:133
-#: ../src/vinagre-bookmarks-migration.c:231
-#, c-format
-msgid "Error while migrating bookmarks: %s"
-msgstr "迁移书签时出错：%s"
-
-#: ../src/vinagre-bookmarks-migration.c:231
-msgid "Failed to create the directory"
-msgstr "创建目录失败"
-
-#: ../src/vinagre-bookmarks-migration.c:255
-msgid ""
-"Migrating the bookmarks file to the new format. This operation is only "
-"supposed to run once."
-msgstr "将书签文件迁移为新格式。此操作应当仅需执行一次。"
-
-#: ../src/vinagre-bookmarks-migration.c:263
-#, c-format
-msgid "Error opening old bookmarks file: %s"
-msgstr "打开旧书签文件时出错：%s"
-
-#: ../src/vinagre-bookmarks-migration.c:264
-#: ../src/vinagre-bookmarks-migration.c:276
-msgid "Migration cancelled"
-msgstr "迁移已取消"
-
-#: ../src/vinagre-bookmarks-migration.c:273
-msgid "Could not remove the old bookmarks file"
-msgstr "无法删除旧书签文件"
-
-#: ../src/vinagre-bookmarks-tree.c:120
-msgid "Root Folder"
-msgstr "根文件夹"
-
-#: ../src/vinagre-bookmarks-ui.c:79
-msgid "Invalid name for this folder"
-msgstr "无效的文件夹名"
-
-#: ../src/vinagre-bookmarks-ui.c:89 ../src/vinagre-bookmarks-ui.c:191
-#, c-format
-msgid ""
-"The name \"%s\" is already used in this folder. Please use a different name."
-msgstr "“%s”这个名称在这个文件夹中已经被使用。请使用不同的名称。"
-
-#: ../src/vinagre-bookmarks-ui.c:90 ../src/vinagre-bookmarks-ui.c:181
-#: ../src/vinagre-bookmarks-ui.c:192
-msgid "Invalid name for this item"
-msgstr "该项的名称无效"
-
-#: ../src/vinagre-bookmarks-ui.c:292
-#, c-format
-msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
-msgstr "您确认想要从书签中删除 <i>%s</i> 吗？"
-
-#: ../src/vinagre-bookmarks-ui.c:297
-msgid "Remove Folder?"
-msgstr "删除文件夹？"
-
-#: ../src/vinagre-bookmarks-ui.c:298
-msgid "Notice that all its subfolders and items will be removed as well."
-msgstr "注意所有的子文件夹及项目均将被删除。"
-
-#: ../src/vinagre-bookmarks-ui.c:303
-msgid "Remove Item?"
-msgstr "删除项目？"
-
-#: ../src/vinagre-bookmarks-ui.c:320
-msgid "Error removing bookmark: Entry not found"
-msgstr "保存书签时出错：没有找到条目"
-
-#: ../src/vinagre-bookmarks-ui.c:337
-msgid "New Folder"
-msgstr "新文件夹"
-
-#: ../src/vinagre-commands.c:113
-msgid "Choose the file"
-msgstr "选择文件"
-
-#: ../src/vinagre-commands.c:124 ../src/vinagre-tab.c:1152
-msgid "Supported formats"
-msgstr "支持的格式"
-
-#: ../src/vinagre-commands.c:156
-msgid "The following file could not be opened:"
-msgid_plural "The following files could not be opened:"
-msgstr[0] "无法打开下列文件："
-
-#: ../src/vinagre-connect.c:181
-#, c-format
-msgid "Error while saving history file: %s"
-msgstr "保存历史文件时出错：%s"
-
-#: ../src/vinagre-connect.c:193
-msgid "Choose a VNC Server"
-msgstr "选择 VNC 服务器"
-
-#: ../src/vinagre-connection.c:601
-#, c-format
-msgid "The protocol %s is not supported."
-msgstr "不支持 %s 协议。"
-
-#: ../src/vinagre-connection.c:708
-msgid "Could not open the file."
-msgstr "无法打开该文件。"
-
-#: ../src/vinagre-connection.c:727
-msgid "Could not parse the file."
-msgstr "无法处理该文件。"
-
-#: ../src/vinagre-connection.c:772
+#: ../plugins/vnc/vinagre-vnc-connection.c:207
+#: ../plugins/vnc/vinagre-vnc-plugin.c:214
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr "坏的“共享”标记值：%d。应当为 0 或 1。忽略掉。"
 
-#: ../src/vinagre-connection.c:778
-msgid "Could not find the host address in the file."
-msgstr "无法在文件中找到主机地址。"
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:66
+msgid "Enable scaled mode"
+msgstr ""
 
-#: ../src/vinagre-fav.c:667
-msgid "Invalid operation"
-msgstr "无效操作"
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:81
+msgid "VNC Options:"
+msgstr ""
 
-#: ../src/vinagre-fav.c:668
-msgid "Data received from drag&drop operation is invalid."
-msgstr "来自拖/放操作的数据无效。"
+#. Translators: this is a command line option (run vinagre --help)
+#: ../plugins/vnc/vinagre-vnc-plugin.c:83
+msgid "Show VNC Options"
+msgstr ""
 
-#: ../src/vinagre-fav.c:861
-msgid "Hosts nearby"
-msgstr "临近的主机"
+#. vim: set ts=8:
+#: ../plugins/vnc/vinagre-vnc-plugin.c:105
+#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:1
+msgid "VNC"
+msgstr ""
 
-#: ../src/vinagre-main.c:53
-msgid "Opens a .vnc file"
-msgstr "打开 .vnc 文件"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:106
+msgid "Access Unix/Linux, Windows and other machines."
+msgstr ""
 
-#: ../src/vinagre-main.c:53
-msgid "filename"
-msgstr "文件名"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:163
+msgid "Could not parse the file."
+msgstr "无法处理该文件。"
 
-#: ../src/vinagre-main.c:56
-msgid "Create a new toplevel window in an existing instance of vinagre"
-msgstr "在现有 vinagre 中创建新的顶级窗口"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:170
+msgid "The file is not a VNC one: Missing the group \"connection\"."
+msgstr ""
 
-#: ../src/vinagre-main.c:60
-msgid "[server:port]"
-msgstr "[服务器:端口]"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:176
+msgid "The file is not a VNC one: Missing the key \"host\"."
+msgstr ""
 
-#: ../src/vinagre-main.c:115
-msgid "The following error has occurred:"
-msgid_plural "The following errors have occurred:"
-msgstr[0] "发生下列错误："
+#: ../plugins/vnc/vinagre-vnc-plugin.c:243
+msgid "VNC Options"
+msgstr ""
 
-#. Setup command line options
-#: ../src/vinagre-main.c:137
-msgid "- VNC Client for GNOME"
-msgstr "- GNOME 的 VNC 客户端"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:254
+#: ../plugins/vnc/vinagre-vnc-tab.c:654
+msgid "_View only"
+msgstr "仅查看(_V)"
 
-#: ../src/vinagre-main.c:146
-msgid ""
-"Run 'vinagre --help' to see a full list of available command line options"
-msgstr "执行“vinagre --help”以查看可用命令行选项的完整列表"
+#: ../plugins/vnc/vinagre-vnc-plugin.c:261
+msgid "_Scaling"
+msgstr "缩放(_S)"
 
-#: ../src/vinagre-mdns.c:123
-#, c-format
-msgid "Failed to resolve avahi hostname: %s\n"
-msgstr "解析 avahi 主机名失败：%s\n"
+#. Translators: this is a pattern to open *.vnc files in a open dialog.
+#: ../plugins/vnc/vinagre-vnc-plugin.c:285
+msgid "VNC Files"
+msgstr ""
 
-#: ../src/vinagre-mdns.c:175 ../src/vinagre-mdns.c:184
-#, c-format
-msgid "Failed to browse for hosts: %s\n"
-msgstr "浏览主机失败：%s\n"
-
-#: ../src/vinagre-notebook.c:168
-#, c-format
-msgid "Connection to host <i>%s</i> was closed."
-msgstr "到主机 <i>%s</i> 的连接已关闭。"
-
-#: ../src/vinagre-notebook.c:170
-msgid "Connection closed"
-msgstr "连接已关闭"
-
-#: ../src/vinagre-notebook.c:194
-msgid "Connecting..."
-msgstr "正在连接..."
-
-#: ../src/vinagre-notebook.c:221 ../src/vinagre-tab.c:878
-msgid "Close connection"
-msgstr "关闭连接"
-
-#: ../src/vinagre-prefs.c:169
-msgid "Cannot initialize preferences manager."
-msgstr "无法初始化受选项管理器。"
-
-#: ../src/vinagre-tab.c:322
-msgid "Error connecting to host."
-msgstr "连接到主机出错。"
-
-#: ../src/vinagre-tab.c:354
-#, c-format
-msgid "Authentication to host <i>%s</i> has failed"
-msgstr "到主机 <i>%s</i> 的验证失败"
-
-#: ../src/vinagre-tab.c:360
-msgid "Authentication failed"
-msgstr "验证失败"
-
-#: ../src/vinagre-tab.c:382
-#, c-format
-msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
-msgstr "不支持到主机 <i>%s</i> 的验证方法。(%u)"
-
-#: ../src/vinagre-tab.c:386
-msgid "Authentication unsupported"
-msgstr "验证方法不支持"
-
-#: ../src/vinagre-tab.c:460
-msgid "Error saving recent connection."
-msgstr "保存最近连接出错。"
-
-#: ../src/vinagre-tab.c:492
-msgid "Error saving the credential on the keyring."
-msgstr "保存证书到密钥环出错。"
-
-#: ../src/vinagre-tab.c:747 ../src/vinagre-tab.c:764
-msgid "Authentication error"
-msgstr "验证错误"
-
-#: ../src/vinagre-tab.c:748
-msgid "A username is required in order to access this machine."
-msgstr "要访问这台机器必须提供用户名。"
-
-#: ../src/vinagre-tab.c:765
-msgid "A password is required in order to access this machine."
-msgstr "要访问这台机器必须提供密码。"
-
-#: ../src/vinagre-tab.c:891
-msgid "Minimize window"
-msgstr "最小化窗口"
-
-#: ../src/vinagre-tab.c:906 ../src/vinagre-tab.c:907
-msgid "Scaling"
-msgstr "缩放"
-
-#: ../src/vinagre-tab.c:916 ../src/vinagre-tab.c:917
-msgid "Read only"
-msgstr "只读"
-
-#. Machine menu
-#: ../src/vinagre-tab.c:927 ../src/vinagre-tab.c:928 ../src/vinagre-ui.h:85
-msgid "Take screenshot"
-msgstr "抓拍屏幕截图"
-
-#: ../src/vinagre-tab.c:936 ../src/vinagre-tab.c:937 ../src/vinagre-ui.h:88
-msgid "Send Ctrl-Alt-Del"
-msgstr "发送 Ctrl+Alt+Del"
-
-#: ../src/vinagre-tab.c:1061
+#: ../plugins/vnc/vinagre-vnc-tab.c:133
 msgid "Desktop Name:"
 msgstr "桌面名称："
 
-#: ../src/vinagre-tab.c:1063
-msgid "Port:"
-msgstr "端口："
-
-#: ../src/vinagre-tab.c:1064
+#: ../plugins/vnc/vinagre-vnc-tab.c:136
 msgid "Dimensions:"
 msgstr "面积："
 
-#: ../src/vinagre-tab.c:1130
-msgid "Could not get a screenshot of the connection."
-msgstr "无法得到该连接的屏幕截图。"
+#: ../plugins/vnc/vinagre-vnc-tab.c:268
+msgid "Error connecting to host."
+msgstr "连接到主机出错。"
 
-#: ../src/vinagre-tab.c:1138
-#, c-format
-msgid "Screenshot of %s"
-msgstr "%s 的屏幕截图"
+#. Translators: %s is a host name or IP address; %u is a code error (number).
+#: ../plugins/vnc/vinagre-vnc-tab.c:306
+#, fuzzy, c-format
+#| msgid "Authentication method to host <i>%s</i> is unsupported. (%u)"
+msgid "Authentication method to host %s is unsupported. (%u)"
+msgstr "不支持到主机 <i>%s</i> 的验证方法。(%u)"
 
-#: ../src/vinagre-tab.c:1141
-msgid "Save Screenshot"
-msgstr "保存屏幕截图"
+#: ../plugins/vnc/vinagre-vnc-tab.c:310
+msgid "Authentication unsupported"
+msgstr "验证方法不支持"
 
-#: ../src/vinagre-tab.c:1205
+#: ../plugins/vnc/vinagre-vnc-tab.c:570 ../plugins/vnc/vinagre-vnc-tab.c:587
+msgid "Authentication error"
+msgstr "验证错误"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:571
+msgid "A username is required in order to access this machine."
+msgstr "要访问这台机器必须提供用户名。"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:588
+msgid "A password is required in order to access this machine."
+msgstr "要访问这台机器必须提供密码。"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:639
+msgid "S_caling"
+msgstr "缩放(_C)"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:640
+#, fuzzy
+#| msgid "Fit the remote screen into the current window size"
+msgid "Fits the remote screen into the current window size"
+msgstr "将远程屏幕适应到窗口大小"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:655
+#, fuzzy
+#| msgid "Disable mouse and keyboard"
+msgid "Does not send mouse and keyboard events"
+msgstr "禁用鼠标和键盘"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:668
+msgid "_Original size"
+msgstr "原始大小(_O)"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:669
+msgid "Adjusts the window to the remote desktop's size"
+msgstr "调节窗口到远程桌面大小"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:692 ../plugins/vnc/vinagre-vnc-tab.c:766
+#: ../plugins/vnc/vinagre-vnc-tab.c:767
+msgid "Send Ctrl-Alt-Del"
+msgstr "发送 Ctrl+Alt+Del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:693
+#, fuzzy
+#| msgid "Send Ctrl+Alt+Del to active connection"
+msgid "Sends Ctrl+Alt+Del to the remote machine"
+msgstr "向活动连接发送 Ctrl+Alt+Del"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:745 ../plugins/vnc/vinagre-vnc-tab.c:746
+msgid "Scaling"
+msgstr "缩放"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:755 ../plugins/vnc/vinagre-vnc-tab.c:756
+msgid "Read only"
+msgstr "只读"
+
+#: ../plugins/vnc/vinagre-vnc-tab.c:973
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -559,175 +385,596 @@ msgstr ""
 "\n"
 "请阅读 Vinagre 自带的 README 文件，以便获知如何启用此特性。"
 
+#: ../plugins/vnc/vnc.vinagre-plugin.desktop.in.h:2
+msgid "VNC support"
+msgstr ""
+
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:1
+msgid "A menu to quickly access remote machines"
+msgstr "可快速连接到远程机器的菜单"
+
+#: ../vinagre/GNOME_VinagreApplet.server.in.in.h:3
+msgid "Vinagre Applet Factory"
+msgstr "Vinagre 小程序工厂"
+
+#: ../vinagre/vinagre-applet.c:277 ../vinagre/vinagre-applet.c:360
+msgid "Could not run vinagre:"
+msgstr "无法运行 vinagre："
+
+#: ../vinagre/vinagre-applet.c:380
+msgid "Open Remote Desktop Viewer"
+msgstr "打开远程桌面查看器"
+
+#: ../vinagre/vinagre-applet.c:435
+msgid "Access your bookmarks"
+msgstr "访问您的书签"
+
+#: ../vinagre/vinagre-bookmarks.c:265 ../vinagre/vinagre-connection.c:519
+#: ../vinagre/vinagre-tab.c:533 ../vinagre/vinagre-tube-handler.c:253
+#, c-format
+msgid "The protocol %s is not supported."
+msgstr "不支持 %s 协议。"
+
+#: ../vinagre/vinagre-bookmarks.c:343
+#, c-format
+msgid "Error while initializing bookmarks: %s"
+msgstr "初始化书签时出错：%s"
+
+#: ../vinagre/vinagre-bookmarks.c:343 ../vinagre/vinagre-bookmarks.c:458
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-commands.c:170 ../vinagre/vinagre-connect.c:463
+#: ../vinagre/vinagre-fav.c:680 ../vinagre/vinagre-main.c:100
+#: ../vinagre/vinagre-main.c:119 ../vinagre/vinagre-window.c:266
+msgid "Unknown error"
+msgstr "未知错误"
+
+#: ../vinagre/vinagre-bookmarks.c:350
+msgid "Error while initializing bookmarks: The file seems to be empty"
+msgstr "初始化书签时出错：文件似乎为空"
+
+#: ../vinagre/vinagre-bookmarks.c:357
+msgid ""
+"Error while initializing bookmarks: The file is not a vinagre bookmarks file"
+msgstr "初始化书签时出错：该文件不是一个 vinagre 书签文件"
+
+#: ../vinagre/vinagre-bookmarks.c:419 ../vinagre/vinagre-bookmarks.c:426
+msgid "Error while saving bookmarks: Failed to create the XML structure"
+msgstr "保存书签时出错：无法创建 XML 结构"
+
+#: ../vinagre/vinagre-bookmarks.c:433 ../vinagre/vinagre-bookmarks.c:440
+msgid "Error while saving bookmarks: Failed to initialize the XML structure"
+msgstr "保存书签时出错：无法初始化 XML 结构"
+
+#: ../vinagre/vinagre-bookmarks.c:449
+msgid "Error while saving bookmarks: Failed to finalize the XML structure"
+msgstr "保存书签时出错：无法结束 XML 结构"
+
+#: ../vinagre/vinagre-bookmarks.c:458
+#, c-format
+msgid "Error while saving bookmarks: %s"
+msgstr "保存书签时出错：%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:95
+#: ../vinagre/vinagre-bookmarks-migration.c:102
+msgid "Error while migrating bookmarks: Failed to create the XML structure"
+msgstr "迁移书签时出错：无法创建 XML 结构"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:109
+#: ../vinagre/vinagre-bookmarks-migration.c:116
+msgid "Error while migrating bookmarks: Failed to initialize the XML structure"
+msgstr "迁移书签时出错：无法初始化 XML 结构"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:125
+msgid "Error while migrating bookmarks: Failed to finalize the XML structure"
+msgstr "迁移书签时出错：无法结束 XML 结构"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:135
+#: ../vinagre/vinagre-bookmarks-migration.c:238
+#, c-format
+msgid "Error while migrating bookmarks: %s"
+msgstr "迁移书签时出错：%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:164
+#, fuzzy
+#| msgid "Error while migrating bookmarks: %s"
+msgid "Error while migrating bookmarks: VNC plugin is not activated"
+msgstr "迁移书签时出错：%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:238
+msgid "Failed to create the directory"
+msgstr "创建目录失败"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:262
+msgid ""
+"Migrating the bookmarks file to the new format. This operation is only "
+"supposed to run once."
+msgstr "将书签文件迁移为新格式。此操作应当仅需执行一次。"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:270
+#, c-format
+msgid "Error opening old bookmarks file: %s"
+msgstr "打开旧书签文件时出错：%s"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:271
+#: ../vinagre/vinagre-bookmarks-migration.c:283
+msgid "Migration cancelled"
+msgstr "迁移已取消"
+
+#: ../vinagre/vinagre-bookmarks-migration.c:280
+msgid "Could not remove the old bookmarks file"
+msgstr "无法删除旧书签文件"
+
+#: ../vinagre/vinagre-bookmarks-tree.c:120
+msgid "Root Folder"
+msgstr "根文件夹"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:78
+msgid "Invalid name for this folder"
+msgstr "无效的文件夹名"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:88 ../vinagre/vinagre-bookmarks-ui.c:200
+#, c-format
+msgid ""
+"The name \"%s\" is already used in this folder. Please use a different name."
+msgstr "“%s”这个名称在这个文件夹中已经被使用。请使用不同的名称。"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:89 ../vinagre/vinagre-bookmarks-ui.c:190
+#: ../vinagre/vinagre-bookmarks-ui.c:201
+msgid "Invalid name for this item"
+msgstr "该项的名称无效"
+
+#. Translators: %s is a protocol name, like VNC or SSH
+#: ../vinagre/vinagre-bookmarks-ui.c:168
+#, c-format
+msgid "(Protocol: %s)"
+msgstr ""
+
+#. Translators: %s is a bookmark entry name
+#: ../vinagre/vinagre-bookmarks-ui.c:308
+#, fuzzy, c-format
+#| msgid "Are you sure you want to remove <i>%s</i> from bookmarks?"
+msgid "Are you sure you want to remove %s from bookmarks?"
+msgstr "您确认想要从书签中删除 <i>%s</i> 吗？"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:314
+msgid "Remove Folder?"
+msgstr "删除文件夹？"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:315
+msgid "Notice that all its subfolders and items will be removed as well."
+msgstr "注意所有的子文件夹及项目均将被删除。"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:320
+msgid "Remove Item?"
+msgstr "删除项目？"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:337
+msgid "Error removing bookmark: Entry not found"
+msgstr "保存书签时出错：没有找到条目"
+
+#: ../vinagre/vinagre-bookmarks-ui.c:354
+msgid "New Folder"
+msgstr "新文件夹"
+
+#: ../vinagre/vinagre-commands.c:120
+msgid "Choose the file"
+msgstr "选择文件"
+
+#: ../vinagre/vinagre-commands.c:148
+msgid "There are none supported files"
+msgstr ""
+
+#: ../vinagre/vinagre-commands.c:148
+msgid ""
+"None of the active plugins offer a supported file to be open. Activate some "
+"plugins and try again."
+msgstr ""
+
+#: ../vinagre/vinagre-commands.c:181
+msgid "The following file could not be opened:"
+msgid_plural "The following files could not be opened:"
+msgstr[0] "无法打开下列文件："
+
+#: ../vinagre/vinagre-connect.c:86 ../vinagre/vinagre-connect.c:330
+#: ../vinagre/vinagre-connect.c:428
+msgid "Could not get the active protocol in the protocol list."
+msgstr ""
+
+#: ../vinagre/vinagre-connect.c:313
+#, c-format
+msgid "Error while saving history file: %s"
+msgstr "保存历史文件时出错：%s"
+
+#: ../vinagre/vinagre-connect.c:340
+#, fuzzy
+#| msgid "Open Remote Desktop Viewer"
+msgid "Choose a Remote Desktop"
+msgstr "打开远程桌面查看器"
+
+#: ../vinagre/vinagre-connection.c:627
+msgid "Could not open the file."
+msgstr "无法打开该文件。"
+
+#: ../vinagre/vinagre-connection.c:651
+msgid "The file was not recognized by any of the plugins."
+msgstr ""
+
+#: ../vinagre/vinagre-fav.c:669
+msgid "Invalid operation"
+msgstr "无效操作"
+
+#: ../vinagre/vinagre-fav.c:670
+msgid "Data received from drag&drop operation is invalid."
+msgstr "来自拖/放操作的数据无效。"
+
+#: ../vinagre/vinagre-fav.c:870
+msgid "Hosts nearby"
+msgstr "临近的主机"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:62
+msgid "Open vinagre in fullscreen mode"
+msgstr ""
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:66
+msgid "Create a new toplevel window in an existing instance of vinagre"
+msgstr "在现有 vinagre 中创建新的顶级窗口"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:70
+msgid "Open a file recognized by vinagre"
+msgstr ""
+
+#: ../vinagre/vinagre-main.c:70
+msgid "filename"
+msgstr "文件名"
+
+#. Translators: this is a command line option (run vinagre --help)
+#: ../vinagre/vinagre-main.c:75
+msgid "[server:port]"
+msgstr "[服务器:端口]"
+
+#: ../vinagre/vinagre-main.c:130
+msgid "The following error has occurred:"
+msgid_plural "The following errors have occurred:"
+msgstr[0] "发生下列错误："
+
+#. Setup command line options
+#: ../vinagre/vinagre-main.c:169
+#, fuzzy
+#| msgid "Remote Desktop Viewer"
+msgid "- Remote Desktop Viewer"
+msgstr "远程桌面查看器"
+
+#: ../vinagre/vinagre-main.c:193
+msgid ""
+"Run 'vinagre --help' to see a full list of available command line options"
+msgstr "执行“vinagre --help”以查看可用命令行选项的完整列表"
+
+#: ../vinagre/vinagre-mdns.c:144
+#, c-format
+msgid "Failed to resolve avahi hostname: %s\n"
+msgstr "解析 avahi 主机名失败：%s\n"
+
+#: ../vinagre/vinagre-mdns.c:202
+#, c-format
+msgid "Plugin %s has already registered a browser for service %s."
+msgstr ""
+
+#: ../vinagre/vinagre-mdns.c:211
+#, fuzzy, c-format
+#| msgid "Failed to browse for hosts: %s\n"
+msgid "Failed to add mDNS browser for service %s."
+msgstr "浏览主机失败：%s\n"
+
+#: ../vinagre/vinagre-mdns.c:227
+#, c-format
+msgid "Failed to browse for hosts: %s\n"
+msgstr "浏览主机失败：%s\n"
+
+#: ../vinagre/vinagre-mdns.c:300
+#, fuzzy, c-format
+#| msgid "Failed to browse for hosts: %s\n"
+msgid "Failed to initialize mDNS browser: %s\n"
+msgstr "浏览主机失败：%s\n"
+
+#. Translators: %s is a host name or IP address.
+#: ../vinagre/vinagre-notebook.c:461
+#, fuzzy, c-format
+#| msgid "Connection to host <i>%s</i> was closed."
+msgid "Connection to host %s was closed."
+msgstr "到主机 <i>%s</i> 的连接已关闭。"
+
+#: ../vinagre/vinagre-notebook.c:463
+msgid "Connection closed"
+msgstr "连接已关闭"
+
+#. Translators: %s is a host name or IP address.
+#: ../vinagre/vinagre-notebook.c:482
+#, fuzzy, c-format
+#| msgid "Authentication to host <i>%s</i> has failed"
+msgid "Authentication to host %s has failed"
+msgstr "到主机 <i>%s</i> 的验证失败"
+
+#: ../vinagre/vinagre-notebook.c:488
+msgid "Authentication failed"
+msgstr "验证失败"
+
+#: ../vinagre/vinagre-notebook.c:525
+msgid "Connecting..."
+msgstr "正在连接..."
+
+#: ../vinagre/vinagre-notebook.c:552 ../vinagre/vinagre-tab.c:325
+msgid "Close connection"
+msgstr "关闭连接"
+
+#: ../vinagre/vinagre-plugin-dialog.c:83
+msgid "Plugin Manager"
+msgstr ""
+
+#: ../vinagre/vinagre-plugin-manager.c:45
+msgid "Plugin"
+msgstr ""
+
+#: ../vinagre/vinagre-plugin-manager.c:46
+msgid "Enabled"
+msgstr ""
+
+#: ../vinagre/vinagre-plugin-manager.c:503
+msgid "C_onfigure"
+msgstr ""
+
+#: ../vinagre/vinagre-plugin-manager.c:512
+msgid "A_ctivate"
+msgstr ""
+
+#: ../vinagre/vinagre-plugin-manager.c:523
+msgid "Ac_tivate All"
+msgstr ""
+
+#: ../vinagre/vinagre-plugin-manager.c:528
+msgid "_Deactivate All"
+msgstr ""
+
+#: ../vinagre/vinagre-plugin-manager.c:824
+#, fuzzy
+#| msgid "_About"
+msgid "_About Plugin"
+msgstr "关于(_A)"
+
+#: ../vinagre/vinagre-plugin-manager.c:828
+msgid "C_onfigure Plugin"
+msgstr ""
+
+#: ../vinagre/vinagre-prefs.c:227
+msgid "Cannot initialize preferences manager."
+msgstr "无法初始化受选项管理器。"
+
+#: ../vinagre/vinagre-tab.c:346
+msgid "Leave fullscreen"
+msgstr "退出全屏(_F)"
+
+#: ../vinagre/vinagre-tab.c:495
+msgid "Error saving recent connection."
+msgstr "保存最近连接出错。"
+
+#: ../vinagre/vinagre-tab.c:730
+msgid "Error saving the credentials on the keyring."
+msgstr "保存证书到密钥环出错。"
+
+#: ../vinagre/vinagre-tab.c:816
+msgid "Could not get a screenshot of the connection."
+msgstr "无法得到该连接的屏幕截图。"
+
+#: ../vinagre/vinagre-tab.c:821
+msgid "Save Screenshot"
+msgstr "保存屏幕截图"
+
+#: ../vinagre/vinagre-tab.c:832
+#, c-format
+msgid "Screenshot of %s"
+msgstr "%s 的屏幕截图"
+
+#: ../vinagre/vinagre-tab.c:883
+#, fuzzy
+#| msgid "Error saving recent connection."
+msgid "Error saving screenshot"
+msgstr "保存最近连接出错。"
+
+#: ../vinagre/vinagre-tube-handler.c:229
+#, c-format
+msgid "Impossible to get service property: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:286
+#, fuzzy, c-format
+#| msgid "Failed to create the directory"
+msgid "Impossible to create the connection: %s"
+msgstr "创建目录失败"
+
+#: ../vinagre/vinagre-tube-handler.c:325
+#, c-format
+msgid "Impossible to accept the stream tube: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:463
+#, c-format
+msgid "Impossible to get the contact name: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:498
+#, c-format
+msgid "Impossible to get the avatar: %s"
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:519
+#, c-format
+msgid "%s wants to share his desktop with you."
+msgstr ""
+
+#: ../vinagre/vinagre-tube-handler.c:524
+msgid "Desktop sharing invitation"
+msgstr ""
+
 #. Toplevel
-#: ../src/vinagre-ui.h:33
+#: ../vinagre/vinagre-ui.h:33
 msgid "_Machine"
 msgstr "机器(_M)"
 
-#: ../src/vinagre-ui.h:34
+#: ../vinagre/vinagre-ui.h:34
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../src/vinagre-ui.h:35
+#: ../vinagre/vinagre-ui.h:35
 msgid "_View"
 msgstr "查看(_V)"
 
-#: ../src/vinagre-ui.h:36
+#: ../vinagre/vinagre-ui.h:36
 msgid "_Bookmarks"
 msgstr "书签(_B)"
 
-#: ../src/vinagre-ui.h:41
+#: ../vinagre/vinagre-ui.h:41
 msgid "Connect to a remote machine"
 msgstr "连接到远程机器"
 
-#: ../src/vinagre-ui.h:43
+#: ../vinagre/vinagre-ui.h:43
 msgid "Open a .VNC file"
 msgstr "打开 .VNC 文件"
 
-#: ../src/vinagre-ui.h:45
+#: ../vinagre/vinagre-ui.h:45
 msgid "Quit the program"
 msgstr "退出程序"
 
-#: ../src/vinagre-ui.h:49
+#: ../vinagre/vinagre-ui.h:49
 msgid "Edit the application preferences"
 msgstr "编辑程序首选项"
 
+#. FIXME: Study this dialog for next release
+#. { "EditPlugins", GTK_STOCK_EXECUTE, N_("_Plugins"), NULL,
+#. N_("Select plugins"), G_CALLBACK (vinagre_cmd_edit_plugins) },
+#.
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:52
+#: ../vinagre/vinagre-ui.h:56
 msgid "_Open bookmark"
 msgstr "打开书签(_O)"
 
-#: ../src/vinagre-ui.h:53
+#: ../vinagre/vinagre-ui.h:57
 msgid "Connect to this machine"
 msgstr "连接到此机器"
 
-#: ../src/vinagre-ui.h:54
+#: ../vinagre/vinagre-ui.h:58
 msgid "_Edit bookmark"
 msgstr "编辑书签(_E)"
 
-#: ../src/vinagre-ui.h:55
+#: ../vinagre/vinagre-ui.h:59
 msgid "Edit the details of selected bookmark"
 msgstr "编辑所选择书签的细节"
 
-#: ../src/vinagre-ui.h:56
+#: ../vinagre/vinagre-ui.h:60
 msgid "_Remove from bookmarks"
 msgstr "从书签中删除(_R)"
 
-#: ../src/vinagre-ui.h:57
+#: ../vinagre/vinagre-ui.h:61
 msgid "Remove current selected connection from bookmarks"
 msgstr "从书签中删除目前选中的连接"
 
-#: ../src/vinagre-ui.h:58
+#: ../vinagre/vinagre-ui.h:62
 msgid "_New Folder"
 msgstr "新文件夹(_N)"
 
-#: ../src/vinagre-ui.h:59
+#: ../vinagre/vinagre-ui.h:63
 msgid "Create a new folder"
 msgstr "创建一个新文件夹"
 
 #. Help menu
-#: ../src/vinagre-ui.h:62
+#: ../vinagre/vinagre-ui.h:66
 msgid "_Contents"
 msgstr "目录(_C)"
 
-#: ../src/vinagre-ui.h:63
+#: ../vinagre/vinagre-ui.h:67
 msgid "Open the vinagre manual"
 msgstr "打开 vinagre 手册"
 
-#: ../src/vinagre-ui.h:65
+#: ../vinagre/vinagre-ui.h:69
 msgid "About this application"
 msgstr "关于此程序"
 
-#: ../src/vinagre-ui.h:72
+#: ../vinagre/vinagre-ui.h:74
+msgid "_Toolbar"
+msgstr "工具栏(_T)"
+
+#: ../vinagre/vinagre-ui.h:75
+msgid "Show or hide the toolbar"
+msgstr "显示或隐藏工具栏"
+
+#: ../vinagre/vinagre-ui.h:78
+msgid "_Statusbar"
+msgstr "状态栏(_S)"
+
+#: ../vinagre/vinagre-ui.h:79
+msgid "Show or hide the statusbar"
+msgstr "显示或隐藏状态栏"
+
+#: ../vinagre/vinagre-ui.h:82
+msgid "Side _Panel"
+msgstr "侧边栏(_P)"
+
+#: ../vinagre/vinagre-ui.h:83
+msgid "Show or hide the side panel"
+msgstr "显示或隐藏侧边栏"
+
+#: ../vinagre/vinagre-ui.h:91
 msgid "Close the current connection"
 msgstr "关闭当前连接"
 
-#: ../src/vinagre-ui.h:73
+#: ../vinagre/vinagre-ui.h:92
 msgid "C_lose All"
 msgstr "全部关闭(_L)"
 
-#: ../src/vinagre-ui.h:74
+#: ../vinagre/vinagre-ui.h:93
 msgid "Close all active connections"
 msgstr "关闭所有活动连接"
 
 #. Bookmarks menu
-#: ../src/vinagre-ui.h:77
+#: ../vinagre/vinagre-ui.h:96
 msgid "_Add to bookmarks"
 msgstr "添加到书签(_A)"
 
-#: ../src/vinagre-ui.h:78
+#: ../vinagre/vinagre-ui.h:97
 msgid "Add current connection to your bookmarks"
 msgstr "添加连接到你的书签"
 
-#: ../src/vinagre-ui.h:86
+#. Machine menu
+#: ../vinagre/vinagre-ui.h:104
+msgid "Take screenshot"
+msgstr "抓拍屏幕截图"
+
+#: ../vinagre/vinagre-ui.h:105
 msgid "Take a screenshot of active connection"
 msgstr "抓拍活动连接的屏幕截图"
 
-#: ../src/vinagre-ui.h:89
-msgid "Send Ctrl+Alt+Del to active connection"
-msgstr "向活动连接发送 Ctrl+Alt+Del"
-
-#: ../src/vinagre-ui.h:93
+#: ../vinagre/vinagre-ui.h:109
 msgid "View the current machine in full screen"
 msgstr "以全屏方式查看当前机器"
 
-#: ../src/vinagre-ui.h:95
-msgid "_Original size"
-msgstr "原始大小(_O)"
-
-#: ../src/vinagre-ui.h:96
-msgid "Adjusts the window to the remote desktop's size"
-msgstr "调节窗口到远程桌面大小"
-
-#: ../src/vinagre-ui.h:102
-msgid "S_caling"
-msgstr "缩放(_C)"
-
-#: ../src/vinagre-ui.h:103
-msgid "Fit the remote screen into the current window size"
-msgstr "将远程屏幕适应到窗口大小"
-
-#: ../src/vinagre-ui.h:105
-msgid "_Read only"
-msgstr "只读(_R)"
-
-#: ../src/vinagre-ui.h:106
-msgid "Disable mouse and keyboard"
-msgstr "禁用鼠标和键盘"
-
-#: ../src/vinagre-ui.h:112
-msgid "_Toolbar"
-msgstr "工具栏(_T)"
-
-#: ../src/vinagre-ui.h:113
-msgid "Show or hide the toolbar"
-msgstr "显示或隐藏工具栏"
-
-#: ../src/vinagre-ui.h:116
-msgid "_Statusbar"
-msgstr "状态栏(_S)"
-
-#: ../src/vinagre-ui.h:117
-msgid "Show or hide the statusbar"
-msgstr "显示或隐藏状态栏"
-
-#: ../src/vinagre-ui.h:120
-msgid "Side _Panel"
-msgstr "侧边栏(_P)"
-
-#: ../src/vinagre-ui.h:121
-msgid "Show or hide the side panel"
-msgstr "显示或隐藏侧边栏"
-
-#: ../src/vinagre-utils.c:75
+#: ../vinagre/vinagre-utils.c:75
 msgid "An error has occurred:"
 msgstr "发生一个错误："
 
-#: ../src/vinagre-utils.c:433
-msgid "Vinagre is a VNC client for the GNOME Desktop"
+#: ../vinagre/vinagre-utils.c:150
+#, fuzzy, c-format
+#| msgid "Could not open the file."
+msgid "Could not load builder file: %s"
+msgstr "无法打开该文件。"
+
+#: ../vinagre/vinagre-utils.c:453
+#, fuzzy
+#| msgid "Vinagre is a VNC client for the GNOME Desktop"
+msgid "Vinagre is a remote desktop viewer for the GNOME Desktop"
 msgstr "Vinagre 是 GNOME 桌面的 VNC 客户端"
 
-#: ../src/vinagre-utils.c:436
+#: ../vinagre/vinagre-utils.c:456
 msgid ""
 "Vinagre is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -737,7 +984,7 @@ msgstr ""
 "Vinagre 是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放和/"
 "或修改它；GPL 协议应该采用第二版或以后的任何版本。"
 
-#: ../src/vinagre-utils.c:440
+#: ../vinagre/vinagre-utils.c:460
 msgid ""
 "Vinagre is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -747,7 +994,7 @@ msgstr ""
 "Vinagre 发表的目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使"
 "用它所造成的任何直接或间接后果都不承担任何责任。请参看GNU GPL 协议中的细节。"
 
-#: ../src/vinagre-utils.c:444
+#: ../vinagre/vinagre-utils.c:464
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program. If not, see <http://www.gnu.org/licenses/>."
@@ -755,29 +1002,58 @@ msgstr ""
 "您应该在收到 Nautilus 的同时收到了 GNU GPL 协议的副本；如果您没有收到的话，请"
 "查看 <http://www.gnu.org/licenses/>。"
 
-#: ../src/vinagre-utils.c:466
+#: ../vinagre/vinagre-utils.c:486
 msgid "translator-credits"
 msgstr "GNOME 简体中文翻译组"
 
-#: ../src/vinagre-utils.c:469
+#: ../vinagre/vinagre-utils.c:489
 msgid "Vinagre Website"
 msgstr "Vinagre 网站"
 
-#: ../src/vinagre-window.c:413
+#: ../vinagre/vinagre-window.c:397
 #, c-format
 msgid "Could not merge vinagre-ui.xml: %s"
 msgstr "无法合并 vinagre-ui.xml：%s"
 
-#: ../src/vinagre-window.c:441
+#: ../vinagre/vinagre-window.c:425
 msgid "_Recent connections"
 msgstr "最近连接(_R)"
 
 #. Translators: This is server:port, a statusbar tooltip when mouse is over a bookmark item on menu
-#: ../src/vinagre-window.c:614
+#: ../vinagre/vinagre-window.c:585
 #, c-format
 msgid "Open %s:%d"
 msgstr "打开 %s：%d"
 
-#: ../src/vinagre-window.c:797
-msgid "Press Ctrl+Alt to release the cursor"
-msgstr "按 Ctrl+Alt 以释放鼠标"
+#~ msgid "<b>Connection</b>"
+#~ msgstr "<b>连接</b>"
+
+#~ msgid "<b>Folder</b>"
+#~ msgstr "<b>文件夹</b>"
+
+#~ msgid "host or host:display or host::port"
+#~ msgstr "主机 或 主机:显示 或 主机::端口"
+
+#~ msgid "Supported formats"
+#~ msgstr "支持的格式"
+
+#~ msgid "Choose a VNC Server"
+#~ msgstr "选择 VNC 服务器"
+
+#~ msgid "Could not find the host address in the file."
+#~ msgstr "无法在文件中找到主机地址。"
+
+#~ msgid "Opens a .vnc file"
+#~ msgstr "打开 .vnc 文件"
+
+#~ msgid "- VNC Client for GNOME"
+#~ msgstr "- GNOME 的 VNC 客户端"
+
+#~ msgid "Minimize window"
+#~ msgstr "最小化窗口"
+
+#~ msgid "_Read only"
+#~ msgstr "只读(_R)"
+
+#~ msgid "Press Ctrl+Alt to release the cursor"
+#~ msgstr "按 Ctrl+Alt 以释放鼠标"
