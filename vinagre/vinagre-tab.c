@@ -880,9 +880,10 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
   GdkPixbuf     *pix;
   GtkWidget     *dialog;
   GString       *suggested_filename;
-  gchar         *name;
+  gchar         *name, *timestamp;
   GtkFileFilter *filter, *initial_filter;
   GSList        *formats, *l;
+  GDateTime     *localtime;
 
   g_return_if_fail (VINAGRE_IS_TAB (tab));
 
@@ -909,10 +910,14 @@ vinagre_tab_take_screenshot (VinagreTab *tab)
 
   name = vinagre_connection_get_best_name (tab->priv->conn);
   suggested_filename = g_string_new (NULL);
-  /* Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. %s will be replaced by the friendly name of the connection, for instance: Screenshot of wendell@wendell-laptop, or Screenshot of 200.100.100.123 */
-  g_string_printf (suggested_filename, _("Screenshot of %s"), name);
+  /* Translators: This is the suggested filename (in save dialog) when taking a screenshot of the connection. First %s will be replaced by the friendly name of the connection and the second %s by the current date and time, for instance: Screenshot of wendell@wendell-laptop at 2011-10-29 12:34:11, or Screenshot of 200.100.100.123 at 2011-10-29 18:27:11 */
+  localtime = g_date_time_new_now_local ();
+  timestamp =  g_date_time_format (localtime, "%F %H:%M:%S");
+  g_string_printf (suggested_filename, _("Screenshot of %s at %s"), name, timestamp);
   g_string_append (suggested_filename, ".png");
   g_free (name);
+  g_free (timestamp);
+  g_date_time_unref (localtime);
   gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), suggested_filename->str);
   g_string_free (suggested_filename, TRUE);
 
