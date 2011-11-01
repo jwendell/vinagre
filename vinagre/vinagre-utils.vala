@@ -121,7 +121,7 @@ namespace Vinagre.Utils {
 
         var ok_button = xml.get_object ("ok_button") as Button;
         var image = new Image.from_stock (Stock.DIALOG_AUTHENTICATION,
-                                          IconSize.DIALOG);
+                                          IconSize.BUTTON);
         ok_button.image = image;
 
         var username_entry = xml.get_object ("username_entry") as Entry;
