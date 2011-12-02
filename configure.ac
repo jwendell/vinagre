@@ -17,10 +17,6 @@ AM_MAINTAINER_MODE([enable])
 GNOME_COMPILE_WARNINGS([maximum])
 GNOME_MAINTAINER_MODE_DEFINES
 
-LT_PREREQ([2.2.6])
-LT_INIT([disable-static])
-
-# Libtool requires this, but it is only expanded once anyway.
 AC_CANONICAL_HOST
 
 AC_MSG_CHECKING([whether to build for a Windows host])
@@ -32,12 +28,6 @@ AC_MSG_RESULT([$windows_host])
 PKG_PROG_PKG_CONFIG([0.16])
 
 AC_PROG_SED
-
-AC_SUBST([VINAGRE_ABI_VERSION], [3.0])
-AC_DEFINE_UNQUOTED([VINAGRE_ABI_VERSION], ["$VINAGRE_ABI_VERSION"], [Vinagre ABI version])
-
-AC_SUBST([PLUGIN_LIBTOOL_FLAGS], ["-avoid-version"])
-AC_SUBST([VINAGRE_PLUGINS_LIBS_DIR], ["$libdir/vinagre-$VINAGRE_ABI_VERSION/plugins"])
 
 GLIB_DEPS="glib-2.0 >= 2.28.0 $gio_os >= 2.28.0"
 GTHREAD_DEPS="gthread-2.0 >= 2.0.0"
