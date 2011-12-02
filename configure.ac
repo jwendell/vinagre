@@ -21,7 +21,7 @@ AC_CANONICAL_HOST
 
 AC_MSG_CHECKING([whether to build for a Windows host])
 AS_CASE([$host_os],
-  [*mingw*|*cygwin*], [gio_os=gio-windows-2.0; windows_host=yes],
+  [*mingw*], [gio_os=gio-windows-2.0; windows_host=yes],
   [gio_os=gio-unix-2.0; windows_host=no])
 AC_MSG_RESULT([$windows_host])
 
@@ -118,7 +118,7 @@ AC_TYPE_UINT64_T
 # Checks for library functions. See vinagre/pty_open.c for usage.
 AC_CHECK_FUNCS([getpt posix_openpt grantpt unlockpt ptsname ptsname_r])
 
-AM_CONDITIONAL([VINAGRE_PTY_OPEN], [test "x$ac_cv_func_getpt" = xyes])
+AM_CONDITIONAL([VINAGRE_PTY_OPEN], [test "x$ac_cv_func_grantpt" == xyes])
 
 AC_SEARCH_LIBS([strerror], [cposix])
 
