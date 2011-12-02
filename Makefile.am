@@ -5,7 +5,7 @@ DISTCHECK_CONFIGURE_FLAGS = \
 	--disable-scrollkeeper \
 	--enable-compile-warnings=maximum
 
-common_cppflags = \
+vinagre_vinagre_CPPFLAGS = \
 	-I$(top_builddir) \
 	-I$(top_builddir)/vinagre \
 	-I$(top_srcdir) \
@@ -19,12 +19,14 @@ common_cppflags = \
 	-DPACKAGE_LOCALE_DIR=\""$(datadir)/locale"\" \
 	-DSSH_PROGRAM=\"$(SSH_PROGRAM)\" \
 	$(VINAGRE_CFLAGS) \
+	$(VNC_CFLAGS) \
 	$(WARN_CFLAGS) \
-	$(DISABLE_DEPRECATED)
-
-AM_CPPFLAGS = \
-	$(common_cppflags) \
+	$(DISABLE_DEPRECATED) \
 	-include config.h
+
+vinagre_vinagre_LDADD = \
+	$(VINAGRE_LIBS) \
+	$(VNC_LIBS)
 
 AM_VALAFLAGS = \
 	--vapidir vinagre/vapi \
@@ -32,24 +34,6 @@ AM_VALAFLAGS = \
 	--pkg gtk+-3.0
 
 bin_PROGRAMS = vinagre/vinagre
-
-if VINAGRE_HAVE_SELF_IFADDRS
-ifaddrs_sources = \
-       vinagre/if/getifaddrs.c
-endif
-
-vinagre_vinagre_SOURCES = \
-	vinagre/vinagre-main.c \
-	vinagre/vinagre-options.c
-
-vinagre_vinagre_LDADD = \
-	libvinagre.la \
-	$(VINAGRE_LIBS) \
-	$(GTKVNC_LIBS) \
-	$(rdp_plugin) \
-	$(spice_plugin) \
-	$(ssh_plugin) \
-	libvnc.la
 
 noinst_vinagreh_headers = \
 	vinagre/if/ifaddrs.h \
@@ -81,10 +65,9 @@ noinst_vinagreh_headers = \
 	vinagre/vinagre-window.h \
 	vinagre/vinagre-ssh.h
 
-# The main library
-noinst_LTLIBRARIES = libvinagre.la
-
-handwritten_sources = \
+vinagre_vinagre_SOURCES = \
+	vinagre/vinagre-main.c \
+	vinagre/vinagre-options.c \
 	vinagre/view/autoDrawer.c \
 	vinagre/view/drawer.c \
 	vinagre/view/ovBox.c \
@@ -110,40 +93,39 @@ handwritten_sources = \
 	vinagre/vinagre-cache-prefs.c \
 	vinagre/vinagre-protocol.c \
 	vinagre/vinagre-plugins-engine.c \
-	$(ifaddrs_sources)
+	plugins/vnc/vinagre-vnc-plugin.c \
+	plugins/vnc/vinagre-vnc-connection.c \
+	plugins/vnc/vinagre-vnc-tab.c \
+	plugins/vnc/vinagre-vnc-tunnel.c
+
+if VINAGRE_HAVE_SELF_IFADDRS
+vinagre_vinagre_SOURCES += \
+       vinagre/if/getifaddrs.c
+endif
 
 if VINAGRE_PTY_OPEN
 noinst_vinagreh_headers += \
 	vinagre/pty_open.h
-handwritten_sources += \
+vinagre_vinagre_SOURCES += \
 	vinagre/pty_open.c
 endif
 
-libvinagre_la_SOURCES = \
-	$(handwritten_sources)
-
 if VINAGRE_HAVE_AVAHI
-libvinagre_la_SOURCES += \
+vinagre_vinagre_SOURCES += \
 	vinagre/vinagre-mdns.c
 noinst_vinagreh_headers += \
 	vinagre/vinagre-mdns.h
 endif
 
-libvinagre_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
-
-libvinagre_la_LIBADD = $(VINAGRE_LIBS)
-
 # Telepathy stuff
 if VINAGRE_HAVE_TELEPATHY_GLIB
-handwritten_sources += \
+vinagre_vinagre_SOURCES += \
 	vinagre/vinagre-tubes-manager.c \
 	vinagre/vinagre-tube-handler.c
 noinst_vinagreh_headers += \
 	vinagre/vinagre-tubes-manager.h \
 	vinagre/vinagre-tube-handler.h
 endif
-
-plugindir = $(VINAGRE_PLUGINS_LIBS_DIR)
 
 noinst_plugin_headers = \
 	plugins/rdp/vinagre-rdp-plugin.h \
@@ -162,66 +144,32 @@ noinst_plugin_headers = \
 	plugins/vnc/vinagre-vnc-tunnel.h
 
 if VINAGRE_ENABLE_RDP
-rdp_plugin = librdp.la
-
-librdp_la_SOURCES = \
+vinagre_vinagre_SOURCES += \
 	plugins/rdp/vinagre-rdp-plugin.c \
 	plugins/rdp/vinagre-rdp-connection.c \
 	plugins/rdp/vinagre-rdp-tab.c
-
-librdp_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-librdp_la_LIBADD = $(VINAGRE_LIBS)
 endif
 
 if VINAGRE_ENABLE_SPICE
-spice_plugin = libspice.la
-
-libspice_la_CPPFLAGS = \
-	$(AM_CPPFLAGS) \
+vinagre_vinagre_CPPFLAGS += \
 	$(SPICE_CFLAGS) \
 	-I$(top_srcdir)/plugins/spice
 
-libspice_la_SOURCES = \
+vinagre_vinagre_SOURCES += \
 	plugins/spice/vinagre-spice-plugin.c \
 	plugins/spice/vinagre-spice-connection.c \
 	plugins/spice/vinagre-spice-tab.c \
 	plugins/spice/vinagre-spice-tunnel.c
 
-libspice_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-libspice_la_LIBADD = $(SPICE_LIBS)
+vinagre_vinagre_LDADD += $(SPICE_LIBS)
 endif
 
 if VINAGRE_ENABLE_SSH
-ssh_plugin = libssh.la
-
-libssh_la_SOURCES = \
+vinagre_vinagre_SOURCES += \
 	plugins/ssh/vinagre-ssh-plugin.c \
 	plugins/ssh/vinagre-ssh-connection.c \
 	plugins/ssh/vinagre-ssh-tab.c
-
-libssh_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-libssh_la_LIBADD = $(VINAGRE_LIBS)
 endif
-
-plugin_LTLIBRARIES = \
-	$(rdp_plugin) \
-	$(spice_plugin) \
-	$(ssh_plugin) \
-	libvnc.la
-
-libvnc_la_CPPFLAGS = \
-	$(AM_CPPFLAGS) \
-	$(VNC_CFLAGS) \
-	-I$(top_srcdir)
-
-libvnc_la_SOURCES = \
-	plugins/vnc/vinagre-vnc-plugin.c \
-	plugins/vnc/vinagre-vnc-connection.c \
-	plugins/vnc/vinagre-vnc-tab.c \
-	plugins/vnc/vinagre-vnc-tunnel.c
-
-libvnc_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-libvnc_la_LIBADD = $(VNC_LIBS)
 
 iconthemedir = $(datadir)/icons/hicolor
 mimeicon16dir = $(iconthemedir)/16x16/mimetypes
