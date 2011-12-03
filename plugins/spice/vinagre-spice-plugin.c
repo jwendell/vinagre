@@ -215,7 +215,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
 
   grid = gtk_grid_new ();
   label = gtk_label_new ("  ");
-  gtk_grid_attach (grid, label, 0, 0, 1, 1);
+  gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
 
   /* View only check button - not fully ready on spice-gtk side */
   check = gtk_check_button_new_with_mnemonic (_("_View only"));
@@ -228,7 +228,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   /* Resize guest check button */
   check = gtk_check_button_new_with_mnemonic (_("_Resize guest"));
   g_object_set_data (G_OBJECT (box), "resize_guest", check);
-  gtk_grid_attach (grid, check, 1, 0, 1, 1);
+  gtk_grid_attach (GTK_GRID (grid), check, 1, 0, 1, 1);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				has_conn ? vinagre_spice_connection_get_resize_guest (VINAGRE_SPICE_CONNECTION (conn))
 				: vinagre_cache_prefs_get_boolean ("spice-connection", "resize-guest", TRUE));
@@ -236,7 +236,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   /* Clipboard sharing check button */
   check = gtk_check_button_new_with_mnemonic (_("_Share clipboard"));
   g_object_set_data (G_OBJECT (box), "auto_clipboard", check);
-  gtk_grid_attach (table, check, 1, 1, 1, 1);
+  gtk_grid_attach (GTK_GRID (grid), check, 1, 1, 1, 1);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				has_conn ? vinagre_spice_connection_get_auto_clipboard (VINAGRE_SPICE_CONNECTION (conn))
 				: vinagre_cache_prefs_get_boolean ("spice-connection", "auto-clipboard", TRUE));
@@ -244,7 +244,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   /* Scaling check button */
   check = gtk_check_button_new_with_mnemonic (_("_Scaling"));
   g_object_set_data (G_OBJECT (box), "scaling", check);
-  gtk_grid_attach (table, check, 1, 2, 1, 1);
+  gtk_grid_attach (GTK_GRID (grid), check, 1, 2, 1, 1);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
 				has_conn ? vinagre_spice_connection_get_scaling (VINAGRE_SPICE_CONNECTION (conn))
 				: vinagre_cache_prefs_get_boolean ("spice-connection", "scaling", FALSE));
@@ -286,7 +286,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), ssh_host && *ssh_host);
   g_free (ssh_host);
 
-  gtk_grid_attach (table, box2, 1, 3, 1, 1);
+  gtk_grid_attach (GTK_GRID (grid), box2, 1, 3, 1, 1);
 
   /* Password */
   box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
