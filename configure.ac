@@ -25,7 +25,7 @@ AS_CASE([$host_os],
   [gio_os=gio-unix-2.0; windows_host=no])
 AC_MSG_RESULT([$windows_host])
 
-PKG_PROG_PKG_CONFIG([0.16])
+PKG_PROG_PKG_CONFIG([0.24])
 
 AC_PROG_SED
 
