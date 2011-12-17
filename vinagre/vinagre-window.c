@@ -732,7 +732,7 @@ _init_reverse_connections (VinagreWindow *window)
 static void
 _on_infobar_response (GtkInfoBar *infobar, gint response_id, gpointer user_data)
 {
-    VinagreWindow *window = VINAGRE_WINDOW (user_data);
+    GtkWindow *window = GTK_WINDOW (user_data);
 
     switch (response_id)
     {

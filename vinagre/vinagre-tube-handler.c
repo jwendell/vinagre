@@ -288,7 +288,8 @@ vinagre_tube_handler_call_service_cb (TpProxy *channel,
   tp_conn = tp_channel_borrow_connection ((TpChannel *) channel);
   if (!tp_strdiff (tp_connection_get_protocol_name (tp_conn), "jabber"))
     {
-      vinagre_vnc_connection_set_depth_profile (conn, 3);
+      vinagre_vnc_connection_set_depth_profile (VINAGRE_VNC_CONNECTION (conn),
+        3);
     }
 
   g_free (host);
