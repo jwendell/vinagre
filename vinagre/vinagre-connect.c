@@ -436,7 +436,7 @@ vinagre_connect (VinagreWindow *window)
 
   if (result == GTK_RESPONSE_HELP)
     {
-      vinagre_utils_show_help (window, "connect");
+      vinagre_utils_show_help (GTK_WINDOW (window), "connect");
     }
   else if (result == GTK_RESPONSE_OK)
     {
