@@ -12,6 +12,8 @@ PKG_NAME="vinagre"
     exit 1
 }
 
+mkdir build-aux m4
+
 which gnome-autogen.sh || {
     echo "You need to install gnome-common from the GNOME git"
     exit 1
