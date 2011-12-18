@@ -723,6 +723,8 @@ _init_reverse_connections (VinagreWindow *window)
 
     listener = vinagre_reverse_vnc_listener_get_default ();
 
+    vinagre_reverse_vnc_listener_set_window (listener, window);
+
     g_object_get (vinagre_prefs_get_default (), "always-enable-listening",
         &always, NULL);
     if (always)
