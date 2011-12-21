@@ -24,4 +24,4 @@ HELP_FILES = \
 	take-screenshot.page \
 	view-only.page
 
-HELP_LINGUAS = de es eu gl hu sl
+HELP_LINGUAS = de es eu fr gl hu sl
