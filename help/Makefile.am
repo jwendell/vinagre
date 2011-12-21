@@ -25,4 +25,5 @@ DOC_PAGES = \
 	take-screenshot.page \
 	view-only.page
 
-DOC_LINGUAS = de es eu gl hu sl
+DOC_LINGUAS = de es eu fr gl hu sl
+
