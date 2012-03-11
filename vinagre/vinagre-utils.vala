@@ -184,7 +184,7 @@ namespace Vinagre.Utils {
     {
         string uri;
         if (page != null)
-            uri = "help:" + Vinagre.Config.PACKAGE_TARNAME + "?" + page;
+            uri = "help:" + Vinagre.Config.PACKAGE_TARNAME + "/" + page;
         else
             uri = "help:" + Vinagre.Config.PACKAGE_TARNAME;
 
