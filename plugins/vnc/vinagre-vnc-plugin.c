@@ -334,7 +334,7 @@ impl_get_connect_widget (VinagreProtocol *plugin, VinagreConnection *conn)
   str = g_strdup_printf ("%s\n%s\n%s",
 			 _("hostname or user@hostname"),
 			 _("Supply an alternative port using colon"),
-			 _("For instance: joe@domain.com:5022"));
+			 _("For instance: joe@example.com:5022"));
   gtk_widget_set_tooltip_text (ssh_host_entry, str);
   g_free (str);
   gtk_box_pack_start (GTK_BOX (box2), ssh_host_entry, FALSE, FALSE, 0);
