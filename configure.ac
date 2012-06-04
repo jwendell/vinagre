@@ -106,7 +106,7 @@ AC_CHECK_HEADERS([ifaddrs.h sys/un.h stropts.h termios.h utmp.h])
 # Internationalization.
 AC_SUBST([GETTEXT_PACKAGE], [$PACKAGE_TARNAME])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [GETTEXT package name])
-IT_PROG_INTLTOOL([0.40.0])
+IT_PROG_INTLTOOL([0.50.0])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE

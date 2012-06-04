@@ -255,13 +255,7 @@ nodist_desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 mimedir = $(datadir)/mime/packages
 nodist_mime_DATA = data/vinagre-mime.xml
 
-gsettings_in_file = data/org.gnome.Vinagre.gschema.xml.in
-gsettings_SCHEMAS = $(gsettings_in_file:.xml.in=.xml)
-# @INTLTOOL_XML_NOMERGE_RULE@
-# This rule is overriden by the above INTLTOOL_XML_RULE macro.
-# Here is the workaround. Could break if intltools changes arguments.
-$(gsettings_SCHEMAS): $(gsettings_in_file) $(INTLTOOL_MERGE)
-	 LC_ALL=C $(INTLTOOL_MERGE) -x -u /tmp $< $@
+gsettings_SCHEMAS = data/org.gnome.Vinagre.gschema.xml
 
 @GSETTINGS_RULES@
 
@@ -305,7 +299,7 @@ dist_noinst_DATA = \
 	ChangeLog.pre-git \
 	data/vinagre-mime.xml.in \
 	$(desktop_in_files) \
-	$(gsettings_in_file) \
+	$(gsettings_SCHEMAS) \
 	$(service_in_file) \
 	intltool-extract.in \
 	intltool-merge.in \
@@ -316,7 +310,6 @@ dist_noinst_DATA = \
 CLEANFILES = \
 	$(nodist_desktop_DATA) \
 	$(nodist_mime_DATA) \
-	$(gsettings_SCHEMAS) \
 	$(nodist_pkgconfig_DATA) \
 	$(nodist_service_DATA)
 
