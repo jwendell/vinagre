@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-03 20:37+0200\n"
-"PO-Revision-Date: 2012-06-03 20:51+0200\n"
+"POT-Creation-Date: 2012-06-07 19:29+0200\n"
+"PO-Revision-Date: 2012-04-02 00:11+0200\n"
 "Last-Translator: Joan Duran <jodufi@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca-XV\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+#: ../data/org.gnome.Vinagre.gschema.xml.h:1
 msgid "Whether we should leave other clients connected"
 msgstr "Si s'haurien de mantindre els altres clients connectats"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+#: ../data/org.gnome.Vinagre.gschema.xml.h:2
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -31,14 +31,14 @@ msgstr ""
 "els altres clients connectats o que abandoni les altres connexions. Establiu "
 "el valor a cert per compartir l'escriptori amb altres clients."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+#: ../data/org.gnome.Vinagre.gschema.xml.h:3
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr ""
 "Si s'haurien de mostrar les pestanyes encara que només hi haja una connexió "
 "activa"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+#: ../data/org.gnome.Vinagre.gschema.xml.h:4
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -47,11 +47,11 @@ msgstr ""
 "«false» (fals) per mostrar les pestanyes només quan hi haja més d'una "
 "connexió activa."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+#: ../data/org.gnome.Vinagre.gschema.xml.h:5
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Si s'haurien de mostrar els acceleradors del menú (dreceres de teclat)"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+#: ../data/org.gnome.Vinagre.gschema.xml.h:6
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -62,20 +62,20 @@ msgstr ""
 "estes tecles sempre seran interceptades pel menú i no s'enviaran a "
 "l'ordinador remot."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+#: ../data/org.gnome.Vinagre.gschema.xml.h:7
 msgid "Maximum number of history items in connect dialog"
 msgstr "Nombre màxim d'elements de l'historial en el diàleg de connexió"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+#: ../data/org.gnome.Vinagre.gschema.xml.h:8
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr ""
 "Especifica el nombre màxim d'elements en l'entrada desplegable d'ordinadors."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+#: ../data/org.gnome.Vinagre.gschema.xml.h:9
 msgid "Whether we should start the program listening for reverse connections"
 msgstr "Si s'hauria d'iniciar el programa escoltant per a connexions inverses"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+#: ../data/org.gnome.Vinagre.gschema.xml.h:10
 msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
@@ -1302,10 +1302,39 @@ msgstr "S'ha produït un error en crear el fitxer %s: %s"
 #~ msgid "Active plugins"
 #~ msgstr "Connectors actius"
 
+#~ msgid ""
+#~ "List of active plugins. It contains the \"Location\" of the active "
+#~ "plugins. See the .vinagre-plugin file for obtaining the \"Location\" of a "
+#~ "given plugin."
+#~ msgstr ""
+#~ "Llista de connectors actius. Aquesta conté la «Ubicació» dels connectors "
+#~ "actius. Vegeu el fitxer .vinagre-plugin per obtenir la «Ubicació» d'un "
+#~ "connector donat."
+
+#~ msgid "Interface"
+#~ msgstr "Interfície"
+
 #~ msgid "Preferences"
 #~ msgstr "Preferències"
 
+#~ msgid ""
+#~ "This option enables menu accelerators and keyboard shortcuts. For more "
+#~ "info on why you may want to disable them, check the documentation."
+#~ msgstr ""
+#~ "Aquesta opció habilita els acceleradors del menú i les dreceres de "
+#~ "teclat. Per obtenir més informació sobre perquè els voldríeu desactivar, "
+#~ "consulteu la documentació."
+
+#~ msgid "Which machine do you want to connect to?"
+#~ msgstr "A quin ordinador us voleu connectar?"
+
+#~ msgid "_Always show tabs"
+#~ msgstr "_Mostra sempre les pestanyes"
+
 #~ msgid "RDP support"
+#~ msgstr "Compatibilitat per a RDP"
+
+#~ msgid "Access MS Windows machines"
 #~ msgstr "Accedeix a ordinadors Microsoft Windows."
 
 #~ msgid "SSH support"
@@ -1368,3 +1397,291 @@ msgstr "S'ha produït un error en crear el fitxer %s: %s"
 #~ msgid "_Open bookmark"
 #~ msgstr "_Obre una adreça d'interès"
 
+#~ msgid "Connect to this machine"
+#~ msgstr "Connecta't a aquest ordinador"
+
+#~ msgid "_Edit bookmark"
+#~ msgstr "_Edita una adreça d'interès"
+
+#~ msgid "Edit the details of selected bookmark"
+#~ msgstr "Edita els detalls de l'adreça d'interès seleccionada"
+
+#~ msgid "_Remove from bookmarks"
+#~ msgstr "_Suprimeix de les adreces d'interès"
+
+#~ msgid "Remove current selected connection from bookmarks"
+#~ msgstr "Suprimeix la connexió seleccionada de les adreces d'interès"
+
+#~ msgid "Invalid operation"
+#~ msgstr "Operació no vàlida"
+
+#~ msgid "Data received from drag&drop operation is invalid."
+#~ msgstr ""
+#~ "Les dades rebudes de l'operació d'arrossegar i deixar anar no són vàlides."
+
+#~ msgid "Hide panel"
+#~ msgstr "Oculta el quadre"
+
+#~ msgid "Hosts nearby"
+#~ msgstr "Ordinadors propers"
+
+#~ msgid "Connecting..."
+#~ msgstr "S'està connectant..."
+
+#~ msgid "Plugin Manager"
+#~ msgstr "Gestor de connectors"
+
+#~ msgid "_Machine"
+#~ msgstr "_Ordinador"
+
+#~ msgid "Edit the application preferences"
+#~ msgstr "Edita les preferències de l'aplicació"
+
+#~ msgid "_Plugins"
+#~ msgstr "_Connectors"
+
+#~ msgid "Select plugins"
+#~ msgstr "Seleccioneu els connectors"
+
+#~ msgid "Side _Panel"
+#~ msgstr "_Quadre lateral"
+
+#~ msgid "Show or hide the side panel"
+#~ msgstr "Mostra o amaga el quadre lateral"
+
+#~ msgid "C_lose All"
+#~ msgstr "_Tanca-ho tot"
+
+#~ msgid ""
+#~ "A plugin tried to open an UI file but did not succeed, with the error "
+#~ "message:"
+#~ msgstr ""
+#~ "Un connector ha intentat obrir un fitxer d'interfície d'usuari però no ho "
+#~ "ha aconseguit, el missatge d'error ha estat:"
+
+#~ msgid ""
+#~ "The program tried to open an UI file but did not succeed, with the error "
+#~ "message:"
+#~ msgstr ""
+#~ "El programa ha intentat obrir un fitxer d'interfície d'usuari però no ho "
+#~ "ha aconseguit, el missatge d'error ha estat:"
+
+#~ msgid ""
+#~ "Vinagre is free software; you can redistribute it and/or modify it under "
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software Foundation; either version 2 of the License, or (at your option) "
+#~ "any later version."
+#~ msgstr ""
+#~ "El Vinagre és programari lliure; el podeu redistribuir i/o modificar sota "
+#~ "els termes de la Llicència Publica General GNU publicat per la Free "
+#~ "Software Foundation; o bé la versió 2 de la llicència, o bé (si ho "
+#~ "preferiu) qualsevol versió posterior."
+
+#~ msgid ""
+#~ "Vinagre is distributed in the hope that it will be useful, but WITHOUT "
+#~ "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+#~ "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+#~ "more details."
+#~ msgstr ""
+#~ "El Vinagre es distribueix amb l'esperança que sigui útil, però SENSE CAP "
+#~ "GARANTIA; ni tan sols la garantia implícita de COMERCIALITZACIÓ o "
+#~ "ADEQUACIÓ PER A CAP PROPÒSIT PARTICULAR. Vegeu la Llicència Publica "
+#~ "General de la GNU per a més detalls."
+
+#~ msgid ""
+#~ "You should have received a copy of the GNU General Public License along "
+#~ "with this program. If not, see <http://www.gnu.org/licenses/>."
+#~ msgstr ""
+#~ "Hauríeu d'haver rebut una còpia de la Llicència Pública General GNU "
+#~ "juntament aquest programa. En cas contrari, vegeu <http://www.gnu.org/"
+#~ "licenses/>."
+
+#~ msgid "Vinagre Website"
+#~ msgstr "Lloc web del Vinagre"
+
+#~ msgid "About menu accelerators and keyboard shortcuts"
+#~ msgstr "Sobre els acceleradors del menú i les dreceres de teclat"
+
+#~ msgid ""
+#~ "Vinagre comes with menu accelerators and keyboard shortcuts disabled by "
+#~ "default. The reason is to avoid the keys to be intercepted by the "
+#~ "program, and allow them to be sent to the remote machine.\n"
+#~ "\n"
+#~ "You can change this behavior through the preferences dialog. For more "
+#~ "information, check the documentation.\n"
+#~ "\n"
+#~ "This message will appear only once."
+#~ msgstr ""
+#~ "El Vinagre té els acceleradors del menú i les dreceres de teclat "
+#~ "desactivats per defecte. La raó és per evitar que el programa intercepti "
+#~ "les tecles i permetre que aquestes siguin enviades a l'ordinador remot.\n"
+#~ "\n"
+#~ "Podeu canviar aquest comportament mitjançant el diàleg de preferències. "
+#~ "Per obtenir més informació, consulteu la documentació.\n"
+#~ "\n"
+#~ "Aquest missatge només es mostrarà un cop."
+
+#~ msgid "The handler for \"vnc://\" URLs"
+#~ msgstr "El gestor per a URL de tipus «vnc://»"
+
+#~ msgid "Incoming VNC connection arrived but there is no active window"
+#~ msgstr ""
+#~ "Ha arribat una connexió VNC entrant però no hi ha cap finestra activa"
+
+#~ msgid "A menu to quickly access remote machines"
+#~ msgstr "Un menú per accedir ràpidament a ordinadors remots"
+
+#~ msgid "Vinagre Applet Factory"
+#~ msgstr "Fàbrica de miniaplicacions del Vinagre"
+
+#~ msgid ""
+#~ "Run 'vinagre --help' to see a full list of available command line options"
+#~ msgstr ""
+#~ "Executeu «vinagre --help» per veure una llista completa de les opcions "
+#~ "disponibles en la línia d'ordres"
+
+#~ msgid "Plugin %s has already registered a browser for service %s."
+#~ msgstr "El connector %s ja ha registrat un navegador per al servei %s."
+
+#~ msgid "Plugin"
+#~ msgstr "Connector"
+
+#~ msgid "Enabled"
+#~ msgstr "Habilitat"
+
+#~ msgid "C_onfigure"
+#~ msgstr "C_onfigura"
+
+#~ msgid "A_ctivate"
+#~ msgstr "A_ctiva"
+
+#~ msgid "Ac_tivate All"
+#~ msgstr "Ac_tiva'ls tots"
+
+#~ msgid "_Deactivate All"
+#~ msgstr "_Desactiva'ls tots"
+
+#~ msgid "_About Plugin"
+#~ msgstr "_Quant al connector"
+
+#~ msgid "C_onfigure Plugin"
+#~ msgstr "C_onfigura el connector"
+
+#~ msgid "All fields above are mandatory"
+#~ msgstr "Tots els camps de sobre són obligatoris"
+
+#~ msgid "Could not merge vinagre-ui.xml: %s"
+#~ msgstr "No s'ha pogut fusionar el vinagre-ui.xml: %s"
+
+#~ msgid "<b>Connection</b>"
+#~ msgstr "<b>Connexió</b>"
+
+#~ msgid "<b>Folder</b>"
+#~ msgstr "<b>Carpeta</b>"
+
+#~ msgid "host or host:display or host::port"
+#~ msgstr "ordinador o ordinador:pantalla o ordinador::port"
+
+#~ msgid "Supported formats"
+#~ msgstr "Formats admesos"
+
+#~ msgid "Choose a VNC Server"
+#~ msgstr "Seleccioneu un servidor de VNC"
+
+#~ msgid "Could not find the host address in the file."
+#~ msgstr "No s'ha pogut trobar l'adreça de l'ordinador al fitxer."
+
+#~ msgid "Opens a .vnc file"
+#~ msgstr "Obre un fitxer .vnc"
+
+#~ msgid "- VNC Client for GNOME"
+#~ msgstr "- Client de VNC del GNOME"
+
+#~ msgid "Minimize window"
+#~ msgstr "Minimitza la finestra"
+
+#~ msgid "_Read only"
+#~ msgstr "Només _lectura"
+
+#~ msgid "Press Ctrl+Alt to release the cursor"
+#~ msgstr "Premeu Ctrl+Alt per a alliberar el cursor"
+
+#~ msgid "<b>Editing a bookmark</b>"
+#~ msgstr "<b>Edició d'una adreça d'interès</b>"
+
+#~ msgid ""
+#~ "<b>In order to connect on this machine, a password is required. Please "
+#~ "supply it.</b>"
+#~ msgstr ""
+#~ "<b>Per connectar-se a aquest ordinador es necessita una contrasenya. "
+#~ "Introduïu-la.</b>"
+
+#~ msgid "Editing a bookmark"
+#~ msgstr "Edició d'una adreça d'interès"
+
+#~ msgid "Saving to bookmarks"
+#~ msgstr "Desant a les adreces d'interès"
+
+#~ msgid "_Bookmark name:"
+#~ msgstr "Nom de l'_adreça d'interès:"
+
+#~ msgid "Error: %s"
+#~ msgstr "Error: %s"
+
+#~ msgid "Confirm removal?"
+#~ msgstr "Confirmeu la supressió?"
+
+#~ msgid "Error while removing %s from bookmarks: %s"
+#~ msgstr "S'ha produït un error en suprimir %s de les adreces d'interès: %s"
+
+#~ msgid ""
+#~ "Scaling does not work properly on composited windows. Disable the visual "
+#~ "effects and try again."
+#~ msgstr ""
+#~ "L'escalat no funciona correctament en finestres compostes. Inhabiliteu "
+#~ "els efectes visuals i torneu-ho a provar."
+
+#~ msgid "Image"
+#~ msgstr "Imatge"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Hide bookmarks"
+#~ msgstr "Amaga les adreces d'interès"
+
+#~ msgid "Expected `%s' got `%s' for key %s"
+#~ msgstr "S'esperava «%s» i s'ha obtingut «%s» per a la clau %s"
+
+#~ msgid "Press Ctrl+Alt to grab the cursor"
+#~ msgstr "Premeu Ctrl+Alt per capturar el cursor"
+
+#~ msgid "Could not initialize GnomeVFS\n"
+#~ msgstr "No s'ha pogut inicialitzar el GnomeVFS\n"
+
+#~ msgid "Add to favorites"
+#~ msgstr "Afegeix-lo a preferits"
+
+#~ msgid "Favorites"
+#~ msgstr "Preferits"
+
+#~ msgid "Hide favorites"
+#~ msgstr "Amaga els preferits"
+
+#~ msgid "Vinagre"
+#~ msgstr "Vinagre"
+
+#~ msgid "_Favorites"
+#~ msgstr "_Preferits"
+
+#~ msgid "_Open favorite"
+#~ msgstr "_Obre el preferit"
+
+#~ msgid "Connect to this favorite"
+#~ msgstr "Connecta a aquest preferit"
+
+#~ msgid "_Edit favorite"
+#~ msgstr "_Edita el preferit"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Copia la selecció"
