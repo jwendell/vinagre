@@ -24,7 +24,7 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <gnome-keyring.h>
+#include <libsecret/secret.h>
 
 #include "vinagre-tab.h"
 #include "vinagre-notebook.h"
@@ -43,7 +43,7 @@ struct _VinagreTabPrivate
   VinagreNotebook   *nb;
   VinagreWindow     *window;
   gboolean           save_credentials;
-  guint32            keyring_item_id;
+  gboolean           saved_credentials;
   VinagreTabState    state;
   GtkWidget         *layout;
   GtkWidget         *toolbar;
@@ -551,7 +551,6 @@ vinagre_tab_init (VinagreTab *tab)
 
   tab->priv = VINAGRE_TAB_GET_PRIVATE (tab);
   tab->priv->save_credentials = FALSE;
-  tab->priv->keyring_item_id = 0;
   tab->priv->state = VINAGRE_TAB_STATE_INITIALIZING;
 
   /* Create the scrolled window */
@@ -746,36 +745,19 @@ vinagre_tab_get_from_connection (VinagreConnection *conn)
 gboolean
 vinagre_tab_find_credentials_in_keyring (VinagreTab *tab, gchar **username, gchar **password)
 {
-  GnomeKeyringNetworkPasswordData *found_item;
-  GnomeKeyringResult               result;
-  GList                           *matches;
-  
-  matches   = NULL;
   *username = NULL;
-  *password = NULL;
 
-  result = gnome_keyring_find_network_password_sync (
-                vinagre_connection_get_username (tab->priv->conn),            /* user     */
-		NULL,                                                         /* domain   */
-		vinagre_connection_get_host (tab->priv->conn),                /* server   */
-		NULL,                                                         /* object   */
-		vinagre_connection_get_protocol (tab->priv->conn),            /* protocol */
-		NULL,                                                         /* authtype */
-		vinagre_connection_get_port (tab->priv->conn),                /* port     */
-		&matches);
+  *password = secret_password_lookup_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, NULL,
+                                           "user", vinagre_connection_get_username (tab->priv->conn),
+                                           "server", vinagre_connection_get_host (tab->priv->conn),
+                                           "protocol", vinagre_connection_get_protocol (tab->priv->conn),
+                                           "port", vinagre_connection_get_port (tab->priv->conn),
+                                           NULL);
 
-  if (result != GNOME_KEYRING_RESULT_OK || matches == NULL || matches->data == NULL)
+  if (*password == NULL)
     return FALSE;
 
-  found_item = (GnomeKeyringNetworkPasswordData *) matches->data;
-
-  *username = g_strdup (found_item->user);
-  *password = g_strdup (found_item->password);
-  
-  tab->priv->keyring_item_id = found_item->item_id;
-
-  gnome_keyring_network_password_list_free (matches);
-
+  *username = g_strdup (vinagre_connection_get_username (tab->priv->conn));
   return TRUE;
 }
 
@@ -787,41 +769,51 @@ void vinagre_tab_set_save_credentials (VinagreTab *tab, gboolean value)
 void
 vinagre_tab_save_credentials_in_keyring (VinagreTab *tab)
 {
-  GnomeKeyringResult result;
+  GError *error = NULL;
+  gchar *label;
 
   if (!tab->priv->save_credentials)
     return;
 
-  result = gnome_keyring_set_network_password_sync (
-                NULL,                                                        /* default keyring */
-                vinagre_connection_get_username (tab->priv->conn),           /* user            */
-                NULL,                                                        /* domain          */
-                vinagre_connection_get_host (tab->priv->conn),               /* server          */
-                NULL,                                                        /* object          */
-                vinagre_connection_get_protocol (tab->priv->conn),           /* protocol        */
-                NULL,                                                        /* authtype        */
-                vinagre_connection_get_port (tab->priv->conn),               /* port            */
-                vinagre_connection_get_password (tab->priv->conn),           /* password        */
-                &tab->priv->keyring_item_id);
+  label = g_strdup_printf (_("Remote desktop password: %s"), vinagre_connection_get_host (tab->priv->conn));
+  secret_password_store_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL,
+                              label, vinagre_connection_get_password (tab->priv->conn),
+                              NULL, &error,
+                              "user", vinagre_connection_get_username (tab->priv->conn),
+                              "server", vinagre_connection_get_host (tab->priv->conn),
+                              "protocol", vinagre_connection_get_protocol (tab->priv->conn),
+                              "port", vinagre_connection_get_port (tab->priv->conn),
+                              NULL);
+  g_free (label);
 
-  if (result != GNOME_KEYRING_RESULT_OK)
+  if (error == NULL) {
+    tab->priv->saved_credentials = TRUE;
+
+  } else {
     vinagre_utils_show_error_dialog (_("Error saving the credentials on the keyring."),
-			      gnome_keyring_result_to_message (result),
-			      GTK_WINDOW (tab->priv->window));
+                                     error->message,
+                                     GTK_WINDOW (tab->priv->window));
+    g_error_free (error);
+  }
 
   tab->priv->save_credentials = FALSE;
 }
 
 void vinagre_tab_remove_credentials_from_keyring (VinagreTab *tab)
 {
+  if (tab->priv->saved_credentials)
+    {
+      secret_password_clear_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, NULL,
+                                  "user", vinagre_connection_get_username (tab->priv->conn),
+                                  "server", vinagre_connection_get_host (tab->priv->conn),
+                                  "protocol", vinagre_connection_get_protocol (tab->priv->conn),
+                                  "port", vinagre_connection_get_port (tab->priv->conn),
+                                  NULL);
+      tab->priv->saved_credentials = FALSE;
+    }
+
   vinagre_connection_set_username (tab->priv->conn, NULL);
   vinagre_connection_set_password (tab->priv->conn, NULL);
-
-  if (tab->priv->keyring_item_id > 0)
-    {
-      gnome_keyring_item_delete_sync (NULL, tab->priv->keyring_item_id);
-      tab->priv->keyring_item_id = 0;
-    }
 }
 
 void

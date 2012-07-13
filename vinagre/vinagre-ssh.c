@@ -40,7 +40,7 @@
 #include <fcntl.h>
 
 #include <glib/gi18n.h>
-#include <gnome-keyring.h>
+#include <libsecret/secret.h>
 
 static const int SSH_READ_TIMEOUT = 40; /* seconds */
 
@@ -382,9 +382,8 @@ handle_login (GtkWindow *parent,
   gsize bytes_written;
   const gchar *authtype;
   gchar *object, *password;
-  GnomeKeyringResult result;
-  GList *matches;
-  GnomeKeyringNetworkPasswordData *found_item;
+  GError *secret_error = NULL;
+  gchar *label;
 
   object = password = NULL;
   authtype = NULL;
@@ -473,7 +472,7 @@ handle_login (GtkWindow *parent,
       if (strncmp (buffer, "\r\n", 2) == 0)
         continue;
 
-      g_free (password);
+      secret_password_free (password);
       password = NULL;
 
       if (g_str_has_suffix (buffer, "password: ") ||
@@ -487,17 +486,17 @@ handle_login (GtkWindow *parent,
 	  object = get_object_from_password_line (buffer);
 
 	  /* Search password in the keyring */
-	  result = gnome_keyring_find_network_password_sync (user,		/* username */
-							     NULL,		/* domain */
-							     host,	        /* server */
-							     object,		/* object */
-							     "ssh",		/* protocol */
-							     authtype,		/* authtype */
-							     port,		/* port */
-							     &matches);
+          password = secret_password_lookup_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, NULL,
+                                                  "user", user,
+                                                  "server", host,
+                                                  "object", object,
+                                                  "protocol", "ssh",
+                                                  "authtype", authtype,
+                                                  "port", port,
+                                                  NULL);
 
 	  /* If the password was not found in keyring then ask for it */
-	  if (result != GNOME_KEYRING_RESULT_OK || matches == NULL || matches->data == NULL)
+          if (password == NULL)
 	    {
 	      gchar *full_host;
 	      gboolean res;
@@ -516,12 +515,6 @@ handle_login (GtkWindow *parent,
                   break;
                 }
             }
-	  else
-	    {
-	      found_item = (GnomeKeyringNetworkPasswordData *) matches->data;
-	      password = g_strdup (found_item->password);
-	      gnome_keyring_network_password_list_free (matches);
-	    }
 
           if (!g_output_stream_write_all (reply_stream,
                                           password, strlen (password),
@@ -609,29 +602,28 @@ handle_login (GtkWindow *parent,
   if (ret_val && save_in_keyring)
     {
       /* Login succeed, save password in keyring */
-      GnomeKeyringResult result;
-      guint32            keyring_item_id;
+      label = g_strdup_printf (_("Secure shell password: %s"), host);
+      secret_password_store_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, label,
+                                  password, NULL, &secret_error,
+                                  "user", user,
+                                  "server", host,
+                                  "object", object,
+                                  "protocol", "ssh",
+                                  "authtype", authtype,
+                                  "port", port,
+                                  NULL);
+      g_free (label);
 
-      result = gnome_keyring_set_network_password_sync (
-                NULL,         /* default keyring */
-                user,         /* user            */
-                NULL,         /* domain          */
-                host,         /* server          */
-                object,       /* object          */
-                "ssh",        /* protocol        */
-                authtype,     /* authtype        */
-                port,         /* port            */
-                password,     /* password        */
-                &keyring_item_id);
-
-      if (result != GNOME_KEYRING_RESULT_OK)
+      if (secret_error != NULL) {
         vinagre_utils_show_error_dialog (_("Error saving the credentials on the keyring."),
-				  gnome_keyring_result_to_message (result),
-				  parent);
-
+                                         secret_error->message,
+                                         parent);
+        g_error_free (secret_error);
+      }
     }
 
   g_free (object);
+  secret_password_free (password);
   g_object_unref (prompt_stream);
   g_object_unref (stdout_stream);
   g_object_unref (reply_stream);
