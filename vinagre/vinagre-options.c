@@ -44,7 +44,10 @@ const GOptionEntry all_options [] =
   /* Translators: this is a command line option (run vinagre --help) */
     N_("Open a file recognized by Vinagre"), N_("filename")},
 
-  { 
+  { "help", '?', 0, G_OPTION_ARG_NONE, &optionstate.help,
+    N_("Show help"), NULL},
+
+  {
     G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &optionstate.uris,
   /* Translators: this is a command line option (run vinagre --help) */
     NULL, N_("[server:port]") },

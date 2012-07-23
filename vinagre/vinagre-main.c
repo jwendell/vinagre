@@ -44,7 +44,6 @@
 
 static gboolean startup_called = FALSE;
 static GtkWindow *window = NULL;
-static GOptionContext *context = NULL;
 
 #ifdef VINAGRE_HAVE_TELEPATHY_GLIB
 static VinagreTubesManager *vinagre_tubes_manager = NULL;
@@ -80,6 +79,37 @@ app_startup (GApplication *app,
   startup_called = TRUE;
 }
 
+static GOptionContext *
+get_option_context (void)
+{
+  GOptionContext *context;
+  VinagreProtocol *extension;
+  GHashTable *extensions;
+  GHashTableIter iter;
+
+  /* Setup command line options */
+  context = g_option_context_new (_("- Remote Desktop Viewer"));
+  g_option_context_set_help_enabled (context, FALSE);
+  g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
+  g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
+  g_option_context_add_group (context, gtk_get_option_group (TRUE));
+
+  extensions = vinagre_plugins_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
+
+  g_hash_table_iter_init (&iter, extensions);
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&extension))
+    {
+      GSList *groups, *l;
+
+      groups = vinagre_protocol_get_context_groups (extension);
+      for (l = groups; l; l = l->next)
+	g_option_context_add_group (context, (GOptionGroup *)l->data);
+      g_slist_free (groups);
+    }
+
+  return context;
+}
+
 static int
 app_command_line (GApplication            *app,
 		  GApplicationCommandLine *command_line,
@@ -88,10 +118,32 @@ app_command_line (GApplication            *app,
   GError *error = NULL;
   int argc;
   char **argv;
+  GOptionContext *context;
+  int ret;
+
+  ret = 0;
+
+  context = get_option_context ();
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
 
-  g_option_context_parse (context, &argc, &argv, &error);
+  optionstate.help = FALSE;
+
+  if (!g_option_context_parse (context, &argc, &argv, &error))
+    {
+      g_application_command_line_printerr (command_line, "%s\n", error->message);
+      g_error_free (error);
+      ret = 1;
+      goto out;
+    }
+  else if (optionstate.help)
+    {
+      gchar *text;
+      text = g_option_context_get_help (context, FALSE, NULL);
+      g_application_command_line_print (command_line, "%s", text);
+      g_free (text);
+      goto out;
+    }
 
   /* Don't create another window if we're remote.
    * We can't use g_application_get_is_remote() because it's not registered yet */
@@ -107,15 +159,16 @@ app_command_line (GApplication            *app,
 
   vinagre_options_process_command_line (GTK_APPLICATION (app), window, &optionstate);
 
+out:
   g_strfreev (argv);
-  return 0;
+
+  g_option_context_free (context);
+
+  return ret;
 }
 
 int main (int argc, char **argv) {
   GtkApplication *app;
-  VinagreProtocol *extension;
-  GHashTable *extensions;
-  GHashTableIter iter;
   int res;
 
   /* i18n */
@@ -128,25 +181,6 @@ int main (int argc, char **argv) {
   g_type_init ();
   g_set_application_name (_("Remote Desktop Viewer"));
   optionstate.new_window = FALSE;
-
-  /* Setup command line options */
-  context = g_option_context_new (_("- Remote Desktop Viewer"));
-  g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
-  g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
-  g_option_context_add_group (context, gtk_get_option_group (TRUE));
-
-  extensions = vinagre_plugins_engine_get_plugins_by_protocol (vinagre_plugins_engine_get_default ());
-
-  g_hash_table_iter_init (&iter, extensions);
-  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&extension))
-    {
-      GSList *groups, *l;
-
-      groups = vinagre_protocol_get_context_groups (extension);
-      for (l = groups; l; l = l->next)
-	g_option_context_add_group (context, (GOptionGroup *)l->data);
-      g_slist_free (groups);
-    }
 
   app = gtk_application_new ("org.gnome.vinagre", G_APPLICATION_HANDLES_COMMAND_LINE);
   /* https://bugzilla.gnome.org/show_bug.cgi?id=634990 */
@@ -164,6 +198,7 @@ int main (int argc, char **argv) {
   if (res == 0)
     {
 #ifdef VINAGRE_HAVE_TELEPATHY_GLIB
+      if (vinagre_tubes_manager != NULL)
 	g_object_unref (vinagre_tubes_manager);
 #endif
 
@@ -177,7 +212,6 @@ int main (int argc, char **argv) {
     }
 
   g_object_unref (app);
-  g_option_context_free (context);
 
   return res;
 }

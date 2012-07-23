@@ -30,6 +30,7 @@ typedef struct {
   gboolean new_window;
   gboolean fullscreen;
   gchar *geometry;
+  gboolean help;
 } VinagreCmdLineOptions;
 
 extern const GOptionEntry all_options[];
