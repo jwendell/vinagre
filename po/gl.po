@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre-master-po-gl-26618\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-19 19:40+0200\n"
-"PO-Revision-Date: 2012-04-19 19:40+0200\n"
+"POT-Creation-Date: 2012-07-30 03:32+0200\n"
+"PO-Revision-Date: 2012-07-30 03:31+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -24,13 +24,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Gtranslator 2.91.5\n"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+#: ../data/org.gnome.Vinagre.gschema.xml.h:1
 msgid "Whether we should leave other clients connected"
 msgstr "Indica se se deberían manter outros clientes conectados"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+#: ../data/org.gnome.Vinagre.gschema.xml.h:2
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -41,14 +41,14 @@ msgstr ""
 "existentes. Defina o valor como true para compartir o escritorio con outros "
 "clientes."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+#: ../data/org.gnome.Vinagre.gschema.xml.h:3
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr ""
 "Indica se se deberían mostrar as lapelas incluso cando só hai unha conexión "
 "activa"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+#: ../data/org.gnome.Vinagre.gschema.xml.h:4
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -56,12 +56,12 @@ msgstr ""
 "Definir como \"true\" para mostrar sempre as lapelas. Definir como \"false\" "
 "para mostrar as lapelas só cando hai máis dunha conexión activa."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+#: ../data/org.gnome.Vinagre.gschema.xml.h:5
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr ""
 "Indica se se deberían mostrar as teclas rápidas de menú (atallos de teclado)"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+#: ../data/org.gnome.Vinagre.gschema.xml.h:6
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -71,22 +71,22 @@ msgstr ""
 "\" para activalas. Repare en que se están activadas estas teclas serán "
 "interceptadas polo menú e non se lle enviarán ao servidor remoto."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+#: ../data/org.gnome.Vinagre.gschema.xml.h:7
 msgid "Maximum number of history items in connect dialog"
 msgstr "Número máximo de elementos de historial no diálogo de conexión c"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+#: ../data/org.gnome.Vinagre.gschema.xml.h:8
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr ""
 "Especificar o número máximo de elementos na entrada despregábel do servidor."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+#: ../data/org.gnome.Vinagre.gschema.xml.h:9
 msgid "Whether we should start the program listening for reverse connections"
 msgstr ""
 "Indica cando deberiamos iniciar o programa para a escoita das conexións "
 "inversas"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+#: ../data/org.gnome.Vinagre.gschema.xml.h:10
 msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
@@ -95,7 +95,7 @@ msgstr ""
 "conexións reversas."
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
-#: ../vinagre/vinagre-main.c:129
+#: ../vinagre/vinagre-main.c:182
 msgid "Remote Desktop Viewer"
 msgstr "Visualizador de escritorios remotos"
 
@@ -298,8 +298,8 @@ msgstr "Produciuse un erro ao executar rdesktop"
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:163
-#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:82
-#: ../vinagre/vinagre-options.c:100 ../vinagre/vinagre-window.c:260
+#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:85
+#: ../vinagre/vinagre-options.c:103 ../vinagre/vinagre-window.c:260
 #: ../vinagre/vinagre-window.c:798
 msgid "Unknown error"
 msgstr "Erro descoñecido"
@@ -848,7 +848,7 @@ msgid "The file was not recognized by any of the plugins."
 msgstr "O ficheiro non foi recoñecido por ningún dos engadidos."
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:133
+#: ../vinagre/vinagre-main.c:91
 msgid "- Remote Desktop Viewer"
 msgstr "- Visualizador de escritorios remotos"
 
@@ -931,17 +931,21 @@ msgstr "Abrir un ficheiro recoñecido por Vinagre"
 msgid "filename"
 msgstr "nome_de_ficheiro"
 
+#: ../vinagre/vinagre-options.c:48
+msgid "Show help"
+msgstr "Mostrar a axuda"
+
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-options.c:50
+#: ../vinagre/vinagre-options.c:53
 msgid "[server:port]"
 msgstr "[servidor:porto]"
 
-#: ../vinagre/vinagre-options.c:124
+#: ../vinagre/vinagre-options.c:127
 #, c-format
 msgid "Invalid argument %s for --geometry"
 msgstr "Argumento %s non válido para --geometry"
 
-#: ../vinagre/vinagre-options.c:142
+#: ../vinagre/vinagre-options.c:145
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Produciuse o seguinte erro:"
