@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.4\n"
+"Project-Id-Version: 3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-14 00:51+0000\n"
-"PO-Revision-Date: 2012-03-14 00:55+0000\n"
+"POT-Creation-Date: 2012-08-15 19:18+0100\n"
+"PO-Revision-Date: 2012-08-15 19:20+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "Language: pt\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+#: ../data/org.gnome.Vinagre.gschema.xml.h:1
 msgid "Whether we should leave other clients connected"
 msgstr "Se deverão ou não ser mantidos os outros clientes ligados"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+#: ../data/org.gnome.Vinagre.gschema.xml.h:2
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -33,14 +33,14 @@ msgstr ""
 "valor como \"true\" para partilhar a área de trabalho com os restantes "
 "clientes."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+#: ../data/org.gnome.Vinagre.gschema.xml.h:3
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr ""
 "Se deverão ou não ser apresentados separadores mesmo quando existe apenas "
 "uma ligação activa"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+#: ../data/org.gnome.Vinagre.gschema.xml.h:4
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -49,12 +49,12 @@ msgstr ""
 "\"false\" para apenas apresentar separadores quando existir mais de uma "
 "ligação activa."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+#: ../data/org.gnome.Vinagre.gschema.xml.h:5
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr ""
 "Se deverão ou não ser apresentados os atalhos de menu (teclas de atalho)"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+#: ../data/org.gnome.Vinagre.gschema.xml.h:6
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -64,20 +64,20 @@ msgstr ""
 "\" para os activar. Note que se estiverem activos, essas teclas serão "
 "interceptadas pelo menu e não serão enviadas para a máquina remota."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+#: ../data/org.gnome.Vinagre.gschema.xml.h:7
 msgid "Maximum number of history items in connect dialog"
 msgstr "Número máximo de itens de histórico no diálogo de ligação"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+#: ../data/org.gnome.Vinagre.gschema.xml.h:8
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "Especifica o número máximo de itens na lista de selecção de máquinas."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+#: ../data/org.gnome.Vinagre.gschema.xml.h:9
 msgid "Whether we should start the program listening for reverse connections"
 msgstr ""
 "Se deverá ou não ser iniciada a aplicação escutando por ligações inversas"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+#: ../data/org.gnome.Vinagre.gschema.xml.h:10
 msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
@@ -86,13 +86,17 @@ msgstr ""
 "inversas."
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
-#: ../vinagre/vinagre-main.c:129
+#: ../vinagre/vinagre-main.c:182
 msgid "Remote Desktop Viewer"
 msgstr "Visualizador de Área de Trabalho Remota"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 msgid "Access remote desktops"
 msgstr "Aceder a áreas de trabalho remotas"
+
+#: ../data/vinagre.desktop.in.in.h:3
+msgid "VNC;RDP;SSH;"
+msgstr "VNC;RDP;SSH;"
 
 #: ../data/vinagre.ui.h:1
 msgid "Vinagre is a remote desktop viewer for the GNOME desktop"
@@ -286,8 +290,8 @@ msgstr "Erro ao executar o rdesktop"
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:163
-#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:82
-#: ../vinagre/vinagre-options.c:100 ../vinagre/vinagre-window.c:260
+#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:85
+#: ../vinagre/vinagre-options.c:103 ../vinagre/vinagre-window.c:260
 #: ../vinagre/vinagre-window.c:798
 msgid "Unknown error"
 msgstr "Erro desconhecido"
@@ -429,7 +433,7 @@ msgstr "Indique um porto alternativo utilizando dois pontos"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:337
 #: ../plugins/spice/vinagre-spice-plugin.c:267
-msgid "For instance: joe@domain.com:5022"
+msgid "For instance: joe@example.com:5022"
 msgstr "Por exemplo: jose@dominio.pt:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
@@ -819,7 +823,7 @@ msgid "The file was not recognized by any of the plugins."
 msgstr "O ficheiro não foi reconhecido por nenhum dos plugins."
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:133
+#: ../vinagre/vinagre-main.c:91
 msgid "- Remote Desktop Viewer"
 msgstr "- Visualizador de Área de Trabalho Remota"
 
@@ -901,17 +905,21 @@ msgstr "Abrir um ficheiro reconhecido pelo Vinagre"
 msgid "filename"
 msgstr "nomedoficheiro"
 
+#: ../vinagre/vinagre-options.c:48
+msgid "Show help"
+msgstr "Apresentar ajuda"
+
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-options.c:50
+#: ../vinagre/vinagre-options.c:53
 msgid "[server:port]"
 msgstr "[servidor:porto]"
 
-#: ../vinagre/vinagre-options.c:124
+#: ../vinagre/vinagre-options.c:127
 #, c-format
 msgid "Invalid argument %s for --geometry"
 msgstr "Argumento %s inválido para --geometry"
 
-#: ../vinagre/vinagre-options.c:142
+#: ../vinagre/vinagre-options.c:145
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Ocorreu o seguinte erro:"
@@ -1220,7 +1228,9 @@ msgstr "Ocorreu um erro"
 
 #: ../vinagre/vinagre-utils.vala:84
 msgid "Vinagre failed to open a UI file, with the error message:"
-msgstr "Vinagre falhou ao abrir um ficheiro de Interface Gráfico, com a mensagem de erro:"
+msgstr ""
+"Vinagre falhou ao abrir um ficheiro de Interface Gráfico, com a mensagem de "
+"erro:"
 
 #: ../vinagre/vinagre-utils.vala:85
 msgid "Please check your installation."
