@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: vinagre.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-07-30 13:59+0000\n"
-"PO-Revision-Date: 2012-07-30 17:04+0200\n"
+"POT-Creation-Date: 2012-08-20 21:57+0000\n"
+"PO-Revision-Date: 2012-08-23 17:30+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -817,7 +817,7 @@ msgstr "Error al guardar el archivo de histórico: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Elegir un escritorio remoto"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:575
+#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:574
 #: ../vinagre/vinagre-tube-handler.c:257
 #, c-format
 msgid "The protocol %s is not supported."
@@ -984,32 +984,32 @@ msgstr "No se pudo lanzar el programa SSH"
 msgid "Unable to spawn ssh program: %s"
 msgstr "No se pudo iniciar el programa de SSH: %s"
 
-#: ../vinagre/vinagre-ssh.c:425
+#: ../vinagre/vinagre-ssh.c:424
 msgid "Timed out when logging in"
 msgstr "Expiró el tiempo para iniciar la sesión"
 
-#: ../vinagre/vinagre-ssh.c:455 ../vinagre/vinagre-ssh.c:603
-#: ../vinagre/vinagre-ssh.c:687
+#: ../vinagre/vinagre-ssh.c:454 ../vinagre/vinagre-ssh.c:596
+#: ../vinagre/vinagre-ssh.c:679
 msgid "Permission denied"
 msgstr "Permiso denegado"
 
-#: ../vinagre/vinagre-ssh.c:514
+#: ../vinagre/vinagre-ssh.c:513
 msgid "Password dialog canceled"
 msgstr "Se canceló el diálogo de la contraseña"
 
-#: ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:530
 msgid "Could not send password"
 msgstr "No se pudo enviar la contraseña"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Log In Anyway"
 msgstr "Iniciar sesión de todas formas"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Cancel Login"
 msgstr "Cancelar inicio de sesión"
 
-#: ../vinagre/vinagre-ssh.c:554
+#: ../vinagre/vinagre-ssh.c:547
 #, c-format
 msgid ""
 "The identity of the remote host (%s) is unknown.\n"
@@ -1025,35 +1025,41 @@ msgstr ""
 "administrador del sistema si quiere estar completamente seguro de que es "
 "seguro continuar."
 
-#: ../vinagre/vinagre-ssh.c:572
+#: ../vinagre/vinagre-ssh.c:565
 msgid "Login dialog canceled"
 msgstr "Se canceló el diálogo de la contraseña"
 
-#: ../vinagre/vinagre-ssh.c:593
+#: ../vinagre/vinagre-ssh.c:586
 msgid "Can't send host identity confirmation"
 msgstr "No se puede enviar la confirmación de identidad del equipo"
 
-#: ../vinagre/vinagre-ssh.c:628 ../vinagre/vinagre-tab.c:808
+#. Login succeed, save password in keyring
+#: ../vinagre/vinagre-ssh.c:605
+#, c-format
+msgid "Secure shell password: %s"
+msgstr "Contraseña de shell segura: %s"
+
+#: ../vinagre/vinagre-ssh.c:618 ../vinagre/vinagre-tab.c:793
 msgid "Error saving the credentials on the keyring."
 msgstr "Error al guardar las credenciales en el depósito de claves."
 
-#: ../vinagre/vinagre-ssh.c:694
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Hostname not known"
 msgstr "El nombre de equipo desconocido"
 
-#: ../vinagre/vinagre-ssh.c:701
+#: ../vinagre/vinagre-ssh.c:693
 msgid "No route to host"
 msgstr "No hay una ruta al equipo"
 
-#: ../vinagre/vinagre-ssh.c:708
+#: ../vinagre/vinagre-ssh.c:700
 msgid "Connection refused by server"
 msgstr "El servidor rechazó la conexión"
 
-#: ../vinagre/vinagre-ssh.c:715
+#: ../vinagre/vinagre-ssh.c:707
 msgid "Host key verification failed"
 msgstr "Falló la verificación de la clave del servidor"
 
-#: ../vinagre/vinagre-ssh.c:752
+#: ../vinagre/vinagre-ssh.c:744
 msgid "Unable to find a valid SSH program"
 msgstr "No se pudo encontrar un programa de SSH válido"
 
@@ -1069,20 +1075,26 @@ msgstr "Abandonar pantalla completa"
 msgid "Error saving recent connection."
 msgstr "Error al guardar la conexión reciente."
 
-#: ../vinagre/vinagre-tab.c:898
+#: ../vinagre/vinagre-tab.c:778
+#, c-format
+#| msgid "Remote Desktop Viewer"
+msgid "Remote desktop password: %s"
+msgstr "Contraseña de escritorio remoto: %s"
+
+#: ../vinagre/vinagre-tab.c:890
 msgid "Could not get a screenshot of the connection."
 msgstr "No se pudo obtener una captura de la conexión."
 
-#: ../vinagre/vinagre-tab.c:903
+#: ../vinagre/vinagre-tab.c:895
 msgid "Save Screenshot"
 msgstr "Guardar la captura de pantalla"
 
-#: ../vinagre/vinagre-tab.c:917
+#: ../vinagre/vinagre-tab.c:909
 #, c-format
 msgid "Screenshot of %s at %s"
 msgstr "Captura de pantalla de %s en %s"
 
-#: ../vinagre/vinagre-tab.c:971
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "Error al guardar la captura de pantalla"
 
