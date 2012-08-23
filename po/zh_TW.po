@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vinagre 3.3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-12 23:43+0800\n"
-"PO-Revision-Date: 2012-08-12 12:33+0800\n"
+"POT-Creation-Date: 2012-08-23 15:47+0800\n"
+"PO-Revision-Date: 2012-08-22 20:13+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@lists.linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -787,7 +787,7 @@ msgstr "儲存歷史紀錄檔案時發生錯誤：%s"
 msgid "Choose a Remote Desktop"
 msgstr "選擇一個遠端桌面"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:575
+#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:574
 #: ../vinagre/vinagre-tube-handler.c:257
 #, c-format
 msgid "The protocol %s is not supported."
@@ -952,32 +952,32 @@ msgstr "無法呼叫 ssh 程式"
 msgid "Unable to spawn ssh program: %s"
 msgstr "無法呼叫 ssh 程式：%s"
 
-#: ../vinagre/vinagre-ssh.c:425
+#: ../vinagre/vinagre-ssh.c:424
 msgid "Timed out when logging in"
 msgstr "登入逾時時間"
 
-#: ../vinagre/vinagre-ssh.c:455 ../vinagre/vinagre-ssh.c:603
-#: ../vinagre/vinagre-ssh.c:687
+#: ../vinagre/vinagre-ssh.c:454 ../vinagre/vinagre-ssh.c:596
+#: ../vinagre/vinagre-ssh.c:679
 msgid "Permission denied"
 msgstr "權限不足"
 
-#: ../vinagre/vinagre-ssh.c:514
+#: ../vinagre/vinagre-ssh.c:513
 msgid "Password dialog canceled"
 msgstr "密碼對話盒已被取消"
 
-#: ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:530
 msgid "Could not send password"
 msgstr "無法傳送密碼"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Log In Anyway"
 msgstr "強制登入"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Cancel Login"
 msgstr "取消登入"
 
-#: ../vinagre/vinagre-ssh.c:554
+#: ../vinagre/vinagre-ssh.c:547
 #, c-format
 msgid ""
 "The identity of the remote host (%s) is unknown.\n"
@@ -991,35 +991,41 @@ msgstr ""
 "\n"
 "由遠端主機傳送的識別為 %s。如果您想要完全確定繼續是安全的，請連絡系統管理者。"
 
-#: ../vinagre/vinagre-ssh.c:572
+#: ../vinagre/vinagre-ssh.c:565
 msgid "Login dialog canceled"
 msgstr "登入對話盒已被取消"
 
-#: ../vinagre/vinagre-ssh.c:593
+#: ../vinagre/vinagre-ssh.c:586
 msgid "Can't send host identity confirmation"
 msgstr "不能傳送主機識別確認"
 
-#: ../vinagre/vinagre-ssh.c:628 ../vinagre/vinagre-tab.c:808
+#. Login succeed, save password in keyring
+#: ../vinagre/vinagre-ssh.c:605
+#, c-format
+msgid "Secure shell password: %s"
+msgstr "SSH 密碼：%s"
+
+#: ../vinagre/vinagre-ssh.c:618 ../vinagre/vinagre-tab.c:793
 msgid "Error saving the credentials on the keyring."
 msgstr "儲存憑證到鑰匙圈時發生錯誤。"
 
-#: ../vinagre/vinagre-ssh.c:694
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Hostname not known"
 msgstr "主機名稱不明"
 
-#: ../vinagre/vinagre-ssh.c:701
+#: ../vinagre/vinagre-ssh.c:693
 msgid "No route to host"
 msgstr "沒有路由可到主機"
 
-#: ../vinagre/vinagre-ssh.c:708
+#: ../vinagre/vinagre-ssh.c:700
 msgid "Connection refused by server"
 msgstr "連線被伺服器拒絕"
 
-#: ../vinagre/vinagre-ssh.c:715
+#: ../vinagre/vinagre-ssh.c:707
 msgid "Host key verification failed"
 msgstr "主機金鑰驗證失敗"
 
-#: ../vinagre/vinagre-ssh.c:752
+#: ../vinagre/vinagre-ssh.c:744
 msgid "Unable to find a valid SSH program"
 msgstr "找不到有效的 SSH 程式"
 
@@ -1035,20 +1041,25 @@ msgstr "離開全螢幕"
 msgid "Error saving recent connection."
 msgstr "儲存最近連線時錯誤。"
 
-#: ../vinagre/vinagre-tab.c:898
+#: ../vinagre/vinagre-tab.c:778
+#, c-format
+msgid "Remote desktop password: %s"
+msgstr "遠端桌面密碼：%s"
+
+#: ../vinagre/vinagre-tab.c:890
 msgid "Could not get a screenshot of the connection."
 msgstr "無法取得此連線的畫面快照。"
 
-#: ../vinagre/vinagre-tab.c:903
+#: ../vinagre/vinagre-tab.c:895
 msgid "Save Screenshot"
 msgstr "儲存畫面快照"
 
-#: ../vinagre/vinagre-tab.c:917
+#: ../vinagre/vinagre-tab.c:909
 #, c-format
 msgid "Screenshot of %s at %s"
 msgstr "%s 於 %s 的螢幕截圖"
 
-#: ../vinagre/vinagre-tab.c:971
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "儲存畫面快照時發生錯誤"
 
