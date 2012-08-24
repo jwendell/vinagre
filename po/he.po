@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 14:39+0300\n"
-"PO-Revision-Date: 2012-08-10 14:39+0200\n"
+"POT-Creation-Date: 2012-08-24 10:42+0300\n"
+"PO-Revision-Date: 2012-08-24 10:43+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: he\n"
 "Language: \n"
@@ -86,7 +86,7 @@ msgstr ""
 "Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "ליאל פרידמן <lielft@gmail.com>\n"
 "\n"
-"פרוייקט תרגום GNOME לעברית:\n"
+"פרויקט תרגום GNOME לעברית:\n"
 "‏http://gnome-il.berlios.de"
 
 #. This is a button label, in the authentication dialog
@@ -777,7 +777,7 @@ msgid "Choose a Remote Desktop"
 msgstr "בחירת שולחן עבודה מרוחק"
 
 #: ../vinagre/vinagre-connection.c:525
-#: ../vinagre/vinagre-tab.c:575
+#: ../vinagre/vinagre-tab.c:574
 #: ../vinagre/vinagre-tube-handler.c:257
 #, c-format
 msgid "The protocol %s is not supported."
@@ -938,34 +938,34 @@ msgstr "לא ניתן לטעון את תכנית ה־SSH"
 msgid "Unable to spawn ssh program: %s"
 msgstr "לא ניתן לטעון את תכנית ה־SSH:‏ %s"
 
-#: ../vinagre/vinagre-ssh.c:425
+#: ../vinagre/vinagre-ssh.c:424
 msgid "Timed out when logging in"
 msgstr "זמן ההמתנה פג בעת הכניסה"
 
-#: ../vinagre/vinagre-ssh.c:455
-#: ../vinagre/vinagre-ssh.c:603
-#: ../vinagre/vinagre-ssh.c:687
+#: ../vinagre/vinagre-ssh.c:454
+#: ../vinagre/vinagre-ssh.c:596
+#: ../vinagre/vinagre-ssh.c:679
 msgid "Permission denied"
 msgstr "ההרשאה נדחתה"
 
-#: ../vinagre/vinagre-ssh.c:514
+#: ../vinagre/vinagre-ssh.c:513
 msgid "Password dialog canceled"
 msgstr "דו־שיח הססמה בוטל"
 
 # c-format
-#: ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:530
 msgid "Could not send password"
 msgstr "לא ניתן לשלוח את הססמה"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Log In Anyway"
 msgstr "כניסה בכול מקרה"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Cancel Login"
 msgstr "ביטול הכניסה"
 
-#: ../vinagre/vinagre-ssh.c:554
+#: ../vinagre/vinagre-ssh.c:547
 #, c-format
 msgid ""
 "The identity of the remote host (%s) is unknown.\n"
@@ -978,36 +978,42 @@ msgstr ""
 "\n"
 "הזהות שנשלחה על ידי המארח המרוחק היא %s. אם ברצונך לוודא כי כדאי להמשיך, עליך ליצור קשר עם מנהל המערכת."
 
-#: ../vinagre/vinagre-ssh.c:572
+#: ../vinagre/vinagre-ssh.c:565
 msgid "Login dialog canceled"
 msgstr "דו־שיח הכניסה בוטל"
 
-#: ../vinagre/vinagre-ssh.c:593
+#: ../vinagre/vinagre-ssh.c:586
 msgid "Can't send host identity confirmation"
 msgstr "לא ניתן לשלוח את אימות זהות המארח"
 
-#: ../vinagre/vinagre-ssh.c:628
-#: ../vinagre/vinagre-tab.c:808
+#. Login succeed, save password in keyring
+#: ../vinagre/vinagre-ssh.c:605
+#, c-format
+msgid "Secure shell password: %s"
+msgstr "ססמת המעטפת המאובטחת (SSH):‏ %s"
+
+#: ../vinagre/vinagre-ssh.c:618
+#: ../vinagre/vinagre-tab.c:793
 msgid "Error saving the credentials on the keyring."
 msgstr "שגיאה בשמירת פרטי הזיהוי במחזיק המפתחות."
 
-#: ../vinagre/vinagre-ssh.c:694
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Hostname not known"
 msgstr "שם המארח אינו מוכר"
 
-#: ../vinagre/vinagre-ssh.c:701
+#: ../vinagre/vinagre-ssh.c:693
 msgid "No route to host"
 msgstr "אין נתיב למארח"
 
-#: ../vinagre/vinagre-ssh.c:708
+#: ../vinagre/vinagre-ssh.c:700
 msgid "Connection refused by server"
 msgstr "החיבור נדחה על ידי השרת"
 
-#: ../vinagre/vinagre-ssh.c:715
+#: ../vinagre/vinagre-ssh.c:707
 msgid "Host key verification failed"
 msgstr "אימות מפתח המארח נכשל"
 
-#: ../vinagre/vinagre-ssh.c:752
+#: ../vinagre/vinagre-ssh.c:744
 msgid "Unable to find a valid SSH program"
 msgstr "לא ניתן למצוא תכנית SSH תקפה"
 
@@ -1023,20 +1029,25 @@ msgstr "יציאה ממסך מלא"
 msgid "Error saving recent connection."
 msgstr "שגיאה בשמירת החיבור האחרון."
 
-#: ../vinagre/vinagre-tab.c:898
+#: ../vinagre/vinagre-tab.c:778
+#, c-format
+msgid "Remote desktop password: %s"
+msgstr "ססמת שולן העבודה המרוחק: %s"
+
+#: ../vinagre/vinagre-tab.c:890
 msgid "Could not get a screenshot of the connection."
 msgstr "לא ניתן לקבל צילום מסך של החיבור."
 
-#: ../vinagre/vinagre-tab.c:903
+#: ../vinagre/vinagre-tab.c:895
 msgid "Save Screenshot"
 msgstr "שמירת תמונת מסך"
 
-#: ../vinagre/vinagre-tab.c:917
+#: ../vinagre/vinagre-tab.c:909
 #, c-format
 msgid "Screenshot of %s at %s"
 msgstr "צילום מסך של %s ב־%s"
 
-#: ../vinagre/vinagre-tab.c:971
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "אירעה שגיאה בשמירת צילום המסך"
 
