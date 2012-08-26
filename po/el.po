@@ -15,14 +15,14 @@ msgstr ""
 "Project-Id-Version: vinagre.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-07 17:31+0000\n"
-"PO-Revision-Date: 2012-06-15 15:27+0200\n"
+"POT-Creation-Date: 2012-08-25 11:33+0000\n"
+"PO-Revision-Date: 2012-08-26 21:24+0200\n"
 "Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: ../data/org.gnome.Vinagre.gschema.xml.h:1
@@ -96,13 +96,17 @@ msgstr ""
 "για τις αντίστροφες συνδέσεις."
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
-#: ../vinagre/vinagre-main.c:129
+#: ../vinagre/vinagre-main.c:182
 msgid "Remote Desktop Viewer"
 msgstr "Σύνδεση απομακρυσμένης επιφ. εργασίας"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 msgid "Access remote desktops"
 msgstr "Πρόσβαση σε απομακρυσμένες επιφ. εργασίας"
+
+#: ../data/vinagre.desktop.in.in.h:3
+msgid "VNC;RDP;SSH;"
+msgstr "VNC;RDP;SSH;"
 
 #: ../data/vinagre.ui.h:1
 msgid "Vinagre is a remote desktop viewer for the GNOME desktop"
@@ -191,7 +195,7 @@ msgstr "Φάκελος σελιδοδεικτών"
 
 #: ../data/vinagre.ui.h:21
 msgid "Parent Folder"
-msgstr "Γονικός Φάκελος"
+msgstr "Γονικός φάκελος"
 
 #: ../data/vinagre.ui.h:22
 msgid "Connect"
@@ -206,10 +210,9 @@ msgid "_Protocol:"
 msgstr "_Πρωτόκολλο"
 
 #: ../data/vinagre.ui.h:25
-#, fuzzy
 msgid "Select a remote desktop protocol for this connection"
 msgstr ""
-"Επιλέξτε ένα απομακρυσμένο πρωτόκολλο επιφ. εργασίας γι' αυτή τη σύνδεση"
+"Επιλέξτε ένα απομακρυσμένο πρωτόκολλο επιφάνειας εργασίας γι' αυτή τη σύνδεση"
 
 #: ../data/vinagre.ui.h:26
 msgid "Search for remote hosts on the network"
@@ -240,7 +243,7 @@ msgstr ""
 "Με την ενεργοποίηση των αντίστροφων συνδέσεων μπορείτε να χειριστείτε "
 "μηχανήματα που βρίσκονται πίσω από τείχος προστασίας. Η απομακρυσμένη πλευρά "
 "υποτίθεται ότι θα ξεκινήσει τη σύνδεση με εσάς. Για περισσότερες "
-"πληροφορίες, διαβάστε την βοήθεια."
+"πληροφορίες, διαβάστε τη βοήθεια."
 
 #: ../data/vinagre.ui.h:32
 msgid "_Enable Reverse Connections"
@@ -291,7 +294,7 @@ msgid ""
 "the Host field above, in the form username@hostname."
 msgstr ""
 "Προαιρετικά. Εάν είναι κενό, θα χρησιμοποιηθεί το όνομα χρήστη σας. Επίσης, "
-"μπορείτε να το εισάγετε στο πεδίο Μηχάνημα ποιο πάνω, στην μορφή <όνομα "
+"μπορείτε να το εισάγετε στο πεδίο Σύστημα πιο πάνω, στην μορφή <όνομα "
 "χρήστη>@<όνομα υπολογιστή>."
 
 #: ../plugins/rdp/vinagre-rdp-tab.c:55 ../plugins/ssh/vinagre-ssh-tab.c:50
@@ -308,8 +311,8 @@ msgstr "Σφάλμα κατά την εκτέλεση του rdesktop"
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:163
-#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:82
-#: ../vinagre/vinagre-options.c:100 ../vinagre/vinagre-window.c:260
+#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:85
+#: ../vinagre/vinagre-options.c:103 ../vinagre/vinagre-window.c:260
 #: ../vinagre/vinagre-window.c:798
 msgid "Unknown error"
 msgstr "Άγνωστο σφάλμα"
@@ -368,12 +371,12 @@ msgstr "Αδυναμία ανάλυσης του αρχείου."
 #. Translators: Do not translate "Connection". It's the name of a group in the .vnc (.ini like) file.
 #: ../plugins/vnc/vinagre-vnc-plugin.c:153
 msgid "The file is not a VNC one: Missing the group \"Connection\"."
-msgstr "Το αρχείο δεν είναι VNC: Λείπει η ομάδα \"Σύνδεση\"."
+msgstr "Το αρχείο δεν είναι VNC: Λείπει η ομάδα \"Connection\"."
 
 #. Translators: Do not translate "Host". It's the name of a key in the .vnc (.ini like) file.
 #: ../plugins/vnc/vinagre-vnc-plugin.c:160
 msgid "The file is not a VNC one: Missing the key \"Host\"."
-msgstr "Το αρχείο δεν είναι VNC: Λείπει η λέξη κλειδί \"Μηχάνημα\"."
+msgstr "Το αρχείο δεν είναι VNC: Λείπει το κλειδί \"Host\"."
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:251
 msgid "VNC Options"
@@ -414,7 +417,7 @@ msgstr "_Βάθος χρώματος:"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:308
 msgid "Use Server Settings"
-msgstr "Χρησιμοποιήστε τις ρυθμίσεις του Server"
+msgstr "Χρησιμοποιήστε τις ρυθμίσεις του εξυπηρετητή"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:309
 msgid "True Color (24 bits)"
@@ -511,8 +514,7 @@ msgstr ""
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:536
 msgid "A password is required in order to access this remote desktop."
-msgstr ""
-"Απαιτείται συνθηματικό για την πρόσβαση στην απομακρυσμένη επιφ. εργασίας"
+msgstr "Απαιτείται κωδικός για πρόσβαση στην απομακρυσμένη επιφ. εργασίας"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:590
 #: ../plugins/spice/vinagre-spice-tab.c:466
@@ -538,8 +540,7 @@ msgstr ""
 #: ../plugins/vnc/vinagre-vnc-tab.c:620
 #: ../plugins/spice/vinagre-spice-tab.c:508
 msgid "Does not send mouse and keyboard events"
-msgstr ""
-"Δεν αποστέλονται κινήσεις του ποντικιού ή πληκτρολογήσεις του πληκτρολογίου"
+msgstr "Δεν αποστέλλονται συμβάντα του ποντικιού ή του πληκτρολογίου"
 
 #: ../plugins/vnc/vinagre-vnc-tab.c:633
 msgid "_Original size"
@@ -846,9 +847,9 @@ msgstr "Σφάλμα κατά την αποθήκευση του αρχείου 
 
 #: ../vinagre/vinagre-connect.c:352
 msgid "Choose a Remote Desktop"
-msgstr "Επιλέξτε μια Απομακρυσμένη Επιφάνεια Εργασίας"
+msgstr "Επιλέξτε μια απομακρυσμένη επιφάνεια εργασίας"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:575
+#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:574
 #: ../vinagre/vinagre-tube-handler.c:257
 #, c-format
 msgid "The protocol %s is not supported."
@@ -863,9 +864,9 @@ msgid "The file was not recognized by any of the plugins."
 msgstr "Το αρχείο δεν αναγνωρίστηκε από κάποιο πρόσθετο."
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:133
+#: ../vinagre/vinagre-main.c:91
 msgid "- Remote Desktop Viewer"
-msgstr "Θεατής Απομακρυσμένης Επιφάνειας Εργασίας"
+msgstr "Θεατής απομακρυσμένης επιφάνειας εργασίας"
 
 #: ../vinagre/vinagre-mdns.c:172
 #, c-format
@@ -880,7 +881,7 @@ msgstr "Η υπηρεσία %s ήταν ήδη κρατημένη από μια 
 #: ../vinagre/vinagre-mdns.c:234
 #, c-format
 msgid "Failed to add mDNS browser for service %s."
-msgstr "Αποτυχία προσθήκης φυλλομετρητού mDNS για την υπηρεσία %s."
+msgstr "Αποτυχία προσθήκης περιηγητή mDNS για την υπηρεσία %s."
 
 #. Translators: "Browse for hosts" means the ability to find/locate some remote hosts [with the VNC service enabled] in the local network
 #: ../vinagre/vinagre-mdns.c:251
@@ -891,7 +892,7 @@ msgstr "Αποτυχία αναζήτησης συστημάτων: %s\n"
 #: ../vinagre/vinagre-mdns.c:320
 #, c-format
 msgid "Failed to initialize mDNS browser: %s\n"
-msgstr "Αποτυχία εκκίνησης φυλλομετρητού mDNS: %s\n"
+msgstr "Αποτυχία εκκίνησης του περιηγητή mDNS: %s\n"
 
 #. Translators: %s is a host name or IP address.
 #: ../vinagre/vinagre-notebook.c:462
@@ -933,10 +934,9 @@ msgstr "Άνοιγμα του Vinagre σε λειτουργία πλήρους �
 
 #. Translators: this is a command line option (run vinagre --help)
 #: ../vinagre/vinagre-options.c:41
-#, fuzzy
 msgid "Create a new toplevel window in an existing instance of Vinagre"
 msgstr ""
-"Δημιουργία νέου κορυφαίου παραθύρου σ' ένα υπάρχον στιγμιότυπο του Vinagre"
+"Δημιουργία νέου κορυφαίου παραθύρου σε μια υπάρχουσα διεργασία του Vinagre"
 
 #. Translators: this is a command line option (run vinagre --help)
 #: ../vinagre/vinagre-options.c:45
@@ -947,17 +947,21 @@ msgstr "Άνοιγμα αρχείου που αναγνωρίζεται από �
 msgid "filename"
 msgstr "όνομα αρχείου"
 
+#: ../vinagre/vinagre-options.c:48
+msgid "Show help"
+msgstr "Εμφάνιση βοήθειας"
+
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-options.c:50
+#: ../vinagre/vinagre-options.c:53
 msgid "[server:port]"
 msgstr "[εξυπηρετητής:θύρα]"
 
-#: ../vinagre/vinagre-options.c:124
+#: ../vinagre/vinagre-options.c:127
 #, c-format
 msgid "Invalid argument %s for --geometry"
 msgstr "Μη έγκυρο όρισμα %s για --geometry"
 
-#: ../vinagre/vinagre-options.c:142
+#: ../vinagre/vinagre-options.c:145
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Συνέβη το ακόλουθο σφάλμα:"
@@ -995,7 +999,7 @@ msgid ""
 "The program could not find any available TCP ports starting at 5500. Is "
 "there any other running program consuming all your TCP ports?"
 msgstr ""
-"Το πρόγραμμα δεν βρήκε καμιά διαθέσιμη θύρα TCP ξεκινώντας από την 5500. "
+"Το πρόγραμμα δε βρήκε καμιά διαθέσιμη θύρα TCP ξεκινώντας από την 5500. "
 "Μήπως τρέχει κάποιο πρόγραμμα που χρησιμοποιεί όλες τις TCP θύρες σας;"
 
 #: ../vinagre/vinagre-ssh.c:115
@@ -1011,32 +1015,32 @@ msgstr "Αδυναμία εκτέλεσης προγράμματος ssh"
 msgid "Unable to spawn ssh program: %s"
 msgstr "Αδυναμία εκτέλεσης προγράμματος ssh: %s"
 
-#: ../vinagre/vinagre-ssh.c:425
+#: ../vinagre/vinagre-ssh.c:424
 msgid "Timed out when logging in"
 msgstr "Λήξη χρόνου αναμονής κατά την διάρκεια σύνδεσης"
 
-#: ../vinagre/vinagre-ssh.c:455 ../vinagre/vinagre-ssh.c:603
-#: ../vinagre/vinagre-ssh.c:687
+#: ../vinagre/vinagre-ssh.c:454 ../vinagre/vinagre-ssh.c:596
+#: ../vinagre/vinagre-ssh.c:679
 msgid "Permission denied"
 msgstr "Άρνηση πρόσβασης"
 
-#: ../vinagre/vinagre-ssh.c:514
+#: ../vinagre/vinagre-ssh.c:513
 msgid "Password dialog canceled"
-msgstr "Το παράθυρο διαλόγου για τον κωδικό πρόσβασης ακυρώθηκε"
+msgstr "Ακυρώθηκε το παράθυρο διαλόγου για τον κωδικό πρόσβασης"
 
-#: ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:530
 msgid "Could not send password"
 msgstr "Αδυναμία αποστολής κωδικού πρόσβασης"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Log In Anyway"
 msgstr "Σύνδεση οπωσδήποτε"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Cancel Login"
 msgstr "Ακύρωση σύνδεσης"
 
-#: ../vinagre/vinagre-ssh.c:554
+#: ../vinagre/vinagre-ssh.c:547
 #, c-format
 msgid ""
 "The identity of the remote host (%s) is unknown.\n"
@@ -1052,35 +1056,41 @@ msgstr ""
 "απολύτως βεβαίως ότι είναι ασφαλές να συνεχίσετε, επικοινωνήστε με το "
 "διαχειριστή του συστήματος."
 
-#: ../vinagre/vinagre-ssh.c:572
+#: ../vinagre/vinagre-ssh.c:565
 msgid "Login dialog canceled"
-msgstr "Το παράθυρο διαλόγου σύνδεσης ακυρώθηκε"
+msgstr "Ακυρώθηκε το παράθυρο διαλόγου σύνδεσης"
 
-#: ../vinagre/vinagre-ssh.c:593
+#: ../vinagre/vinagre-ssh.c:586
 msgid "Can't send host identity confirmation"
 msgstr "Αδυναμία αποστολής επιβεβαίωσης ταυτότητας του κεντρικού υπολογιστή"
 
-#: ../vinagre/vinagre-ssh.c:628 ../vinagre/vinagre-tab.c:808
+#. Login succeed, save password in keyring
+#: ../vinagre/vinagre-ssh.c:605
+#, c-format
+msgid "Secure shell password: %s"
+msgstr "Κωδικός ασφαλούς κελύφους: %s"
+
+#: ../vinagre/vinagre-ssh.c:618 ../vinagre/vinagre-tab.c:793
 msgid "Error saving the credentials on the keyring."
 msgstr "Σφάλμα κατά την αποθήκευση των διαπιστευτηρίων στην κλειδοθήκη."
 
-#: ../vinagre/vinagre-ssh.c:694
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Hostname not known"
 msgstr "Άγνωστο όνομα κεντρικού υπολογιστή"
 
-#: ../vinagre/vinagre-ssh.c:701
+#: ../vinagre/vinagre-ssh.c:693
 msgid "No route to host"
 msgstr "Δεν υπάρχει διαδρομή προς τον κεντρικό υπολογιστή"
 
-#: ../vinagre/vinagre-ssh.c:708
+#: ../vinagre/vinagre-ssh.c:700
 msgid "Connection refused by server"
 msgstr "Η σύνδεση απαγορεύεται από το διακομιστή"
 
-#: ../vinagre/vinagre-ssh.c:715
+#: ../vinagre/vinagre-ssh.c:707
 msgid "Host key verification failed"
 msgstr "Απέτυχε η επαλήθευση κλειδιού του συστήματος"
 
-#: ../vinagre/vinagre-ssh.c:752
+#: ../vinagre/vinagre-ssh.c:744
 msgid "Unable to find a valid SSH program"
 msgstr "Αδυναμία εντοπισμού έγκυρου προγράμματος SSH"
 
@@ -1096,20 +1106,25 @@ msgstr "Έξοδος από την πλήρη οθόνη"
 msgid "Error saving recent connection."
 msgstr "Σφάλμα κατά την αποθήκευση της πρόσφατης σύνδεσης."
 
-#: ../vinagre/vinagre-tab.c:898
-msgid "Could not get a screenshot of the connection."
-msgstr "Αδυναμία λήψης στιγμιοτύπου της σύνδεσης."
+#: ../vinagre/vinagre-tab.c:778
+#, c-format
+msgid "Remote desktop password: %s"
+msgstr "Κωδικός απομακρυσμένης επιφ. εργασίας: %s"
 
-#: ../vinagre/vinagre-tab.c:903
+#: ../vinagre/vinagre-tab.c:890
+msgid "Could not get a screenshot of the connection."
+msgstr "Αδυναμία λήψης στιγμιότυπου της σύνδεσης."
+
+#: ../vinagre/vinagre-tab.c:895
 msgid "Save Screenshot"
 msgstr "Αποθήκευση στιγμιότυπου"
 
-#: ../vinagre/vinagre-tab.c:917
+#: ../vinagre/vinagre-tab.c:909
 #, c-format
 msgid "Screenshot of %s at %s"
 msgstr "Στιγμιότυπο του %s στο %s"
 
-#: ../vinagre/vinagre-tab.c:971
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "Σφάλμα κατά την αποθήκευση του στιγμιότυπου"
 
