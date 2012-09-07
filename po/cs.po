@@ -1,15 +1,18 @@
 # Czech translation of vinagre.
 # Copyright (C) 2007, 2008, 2009 the author(s) of vinagre.
 # This file is distributed under the same license as the vinagre package.
-# Petr Kovar <pknbe@volny.cz>, 2008, 2009, 2012.
+#
+# Petr Kovar <pknbe@volny.cz>, 2008, 2009.
 # Lucas Lommer <llommer@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011, 2012.
+# Marek Černocký <marek@manet.cz>, 2012.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vinagr"
-"e&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-03-31 08:49+0000\n"
-"PO-Revision-Date: 2012-04-16 15:41+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=vinagre&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-08-20 21:57+0000\n"
+"PO-Revision-Date: 2012-09-07 10:28+0200\n"
 "Last-Translator: Petr Kovar <pknbe@volny.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -20,11 +23,11 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+#: ../data/org.gnome.Vinagre.gschema.xml.h:1
 msgid "Whether we should leave other clients connected"
 msgstr "Jestli má nechat ostatní klienty připojené"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+#: ../data/org.gnome.Vinagre.gschema.xml.h:2
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -34,12 +37,12 @@ msgstr ""
 "existující připojení ostatních klientů, nebo že mají být odpojeni. Nastavte "
 "hodnotu na zapnuto, pokud chcete plochu sdílet s ostatními klienty."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+#: ../data/org.gnome.Vinagre.gschema.xml.h:3
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr "Jestli zobrazovat karty i když je aktivní jen jedno spojení"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+#: ../data/org.gnome.Vinagre.gschema.xml.h:4
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -48,11 +51,11 @@ msgstr ""
 "na „vypnuto“, karty budou zobrazeny, pokud až když existuje více než jedno "
 "aktivní spojení."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+#: ../data/org.gnome.Vinagre.gschema.xml.h:5
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Jestli zobrazovat akcelerátory klávesových zkratek"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+#: ../data/org.gnome.Vinagre.gschema.xml.h:6
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -63,19 +66,19 @@ msgstr ""
 "zkratky aktivovány, budou zpracovávány pro nabídky a nebudou odesílány "
 "vzdálenému hostiteli."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+#: ../data/org.gnome.Vinagre.gschema.xml.h:7
 msgid "Maximum number of history items in connect dialog"
 msgstr "Nejvyšší počet položek historie v okně připojení"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+#: ../data/org.gnome.Vinagre.gschema.xml.h:8
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr "Určuje nejvyšší počet položek ve výběru hostitele."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+#: ../data/org.gnome.Vinagre.gschema.xml.h:9
 msgid "Whether we should start the program listening for reverse connections"
 msgstr "Jestli spustit program tak, aby naslouchal zpětným připojením"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+#: ../data/org.gnome.Vinagre.gschema.xml.h:10
 msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
@@ -84,13 +87,17 @@ msgstr ""
 "připojením."
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
-#: ../vinagre/vinagre-main.c:129
+#: ../vinagre/vinagre-main.c:182
 msgid "Remote Desktop Viewer"
 msgstr "Prohlížeč vzdálené plochy"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 msgid "Access remote desktops"
 msgstr "Přístup na vzdálené plochy"
+
+#: ../data/vinagre.desktop.in.in.h:3
+msgid "VNC;RDP;SSH;"
+msgstr "VNC;RDP;SSH;"
 
 #: ../data/vinagre.ui.h:1
 msgid "Vinagre is a remote desktop viewer for the GNOME desktop"
@@ -282,8 +289,8 @@ msgstr "Chyba při spouštění rdesktop"
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:163
-#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:82
-#: ../vinagre/vinagre-options.c:100 ../vinagre/vinagre-window.c:260
+#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:85
+#: ../vinagre/vinagre-options.c:103 ../vinagre/vinagre-window.c:260
 #: ../vinagre/vinagre-window.c:798
 msgid "Unknown error"
 msgstr "Neznámá chyba"
@@ -308,7 +315,7 @@ msgstr "Možnosti SSH"
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
 msgstr ""
-"Chybná hodnota pro přepínač 'shared': %d. Má být 0 nebo 1. Ignoruje se."
+"Chybná hodnota pro přepínač „shared“: %d. Má být 0 nebo 1. Ignoruje se."
 
 #. Translators: this is a command line option (run vinagre --help)
 #: ../plugins/vnc/vinagre-vnc-plugin.c:50
@@ -424,7 +431,6 @@ msgstr "Podporuje alternativní porty pomocí dvojtečky"
 
 #: ../plugins/vnc/vinagre-vnc-plugin.c:337
 #: ../plugins/spice/vinagre-spice-plugin.c:267
-#| msgid "For instance: joe@domain.com:5022"
 msgid "For instance: joe@example.com:5022"
 msgstr "Například: honza@domena.cz:5022"
 
@@ -798,7 +804,7 @@ msgstr "Chyba při ukládání souboru s historií: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Vyberte vzdálenou pracovní plochu"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:575
+#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:574
 #: ../vinagre/vinagre-tube-handler.c:257
 #, c-format
 msgid "The protocol %s is not supported."
@@ -813,7 +819,7 @@ msgid "The file was not recognized by any of the plugins."
 msgstr "Soubor nebyl rozpoznán žádným zásuvným modulem."
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:133
+#: ../vinagre/vinagre-main.c:91
 msgid "- Remote Desktop Viewer"
 msgstr "- Prohlížeč vzdálené plochy"
 
@@ -895,17 +901,21 @@ msgstr "Otevřít soubor použitelný s vinagre"
 msgid "filename"
 msgstr "soubor"
 
+#: ../vinagre/vinagre-options.c:48
+msgid "Show help"
+msgstr "Zobrazit nápovědu"
+
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-options.c:50
+#: ../vinagre/vinagre-options.c:53
 msgid "[server:port]"
 msgstr "[server:port]"
 
-#: ../vinagre/vinagre-options.c:124
+#: ../vinagre/vinagre-options.c:127
 #, c-format
 msgid "Invalid argument %s for --geometry"
 msgstr "Neplatný parametr %s přepínače --geometry"
 
-#: ../vinagre/vinagre-options.c:142
+#: ../vinagre/vinagre-options.c:145
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "Došlo k následující chybě:"
@@ -960,32 +970,32 @@ msgstr "Nelze spustit program ssh"
 msgid "Unable to spawn ssh program: %s"
 msgstr "Nelze spustit program ssh: %s"
 
-#: ../vinagre/vinagre-ssh.c:425
+#: ../vinagre/vinagre-ssh.c:424
 msgid "Timed out when logging in"
 msgstr "Vypršel časový limit pro přihlášení"
 
-#: ../vinagre/vinagre-ssh.c:455 ../vinagre/vinagre-ssh.c:603
-#: ../vinagre/vinagre-ssh.c:687
+#: ../vinagre/vinagre-ssh.c:454 ../vinagre/vinagre-ssh.c:596
+#: ../vinagre/vinagre-ssh.c:679
 msgid "Permission denied"
 msgstr "Přístup odepřen"
 
-#: ../vinagre/vinagre-ssh.c:514
+#: ../vinagre/vinagre-ssh.c:513
 msgid "Password dialog canceled"
 msgstr "Dialog s heslem byl zrušen"
 
-#: ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:530
 msgid "Could not send password"
 msgstr "Nelze odeslat heslo"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Log In Anyway"
 msgstr "Přesto se přihlásit"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Cancel Login"
 msgstr "Zrušit přihlášení"
 
-#: ../vinagre/vinagre-ssh.c:554
+#: ../vinagre/vinagre-ssh.c:547
 #, c-format
 msgid ""
 "The identity of the remote host (%s) is unknown.\n"
@@ -1000,35 +1010,41 @@ msgstr ""
 "Identita, kterou vzdálený počítač zaslal, je %s. Pokud si chcete být zcela "
 "jisti, že je bezpečné pokračovat, kontaktujte správce systému."
 
-#: ../vinagre/vinagre-ssh.c:572
+#: ../vinagre/vinagre-ssh.c:565
 msgid "Login dialog canceled"
 msgstr "Okno s přihlášením bylo zrušeno"
 
-#: ../vinagre/vinagre-ssh.c:593
+#: ../vinagre/vinagre-ssh.c:586
 msgid "Can't send host identity confirmation"
 msgstr "Nelze odeslat potvrzení identity hostitele"
 
-#: ../vinagre/vinagre-ssh.c:628 ../vinagre/vinagre-tab.c:808
+#. Login succeed, save password in keyring
+#: ../vinagre/vinagre-ssh.c:605
+#, c-format
+msgid "Secure shell password: %s"
+msgstr "Heslo secure shellu: %s"
+
+#: ../vinagre/vinagre-ssh.c:618 ../vinagre/vinagre-tab.c:793
 msgid "Error saving the credentials on the keyring."
 msgstr "Chyba při ukládání přihlašovacích údajů do klíčenky."
 
-#: ../vinagre/vinagre-ssh.c:694
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Hostname not known"
 msgstr "Neznámý hostitel"
 
-#: ../vinagre/vinagre-ssh.c:701
+#: ../vinagre/vinagre-ssh.c:693
 msgid "No route to host"
 msgstr "Nelze nalézt cestu k hostiteli"
 
-#: ../vinagre/vinagre-ssh.c:708
+#: ../vinagre/vinagre-ssh.c:700
 msgid "Connection refused by server"
 msgstr "Spojení bylo serverem odmítnuto"
 
-#: ../vinagre/vinagre-ssh.c:715
+#: ../vinagre/vinagre-ssh.c:707
 msgid "Host key verification failed"
 msgstr "Selhalo ověření klíče hostitele"
 
-#: ../vinagre/vinagre-ssh.c:752
+#: ../vinagre/vinagre-ssh.c:744
 msgid "Unable to find a valid SSH program"
 msgstr "Nelze nalézt funkční program pro práci s SSH"
 
@@ -1044,20 +1060,25 @@ msgstr "Opustit režim celé obrazovky"
 msgid "Error saving recent connection."
 msgstr "Chyba při ukládání aktuálního spojení."
 
-#: ../vinagre/vinagre-tab.c:898
+#: ../vinagre/vinagre-tab.c:778
+#, c-format
+msgid "Remote desktop password: %s"
+msgstr "Heslo vzdálené plochy: %s"
+
+#: ../vinagre/vinagre-tab.c:890
 msgid "Could not get a screenshot of the connection."
 msgstr "Nelze pořídit snímek obrazovky tohoto spojení."
 
-#: ../vinagre/vinagre-tab.c:903
+#: ../vinagre/vinagre-tab.c:895
 msgid "Save Screenshot"
 msgstr "Uložit snímek obrazovky"
 
-#: ../vinagre/vinagre-tab.c:917
+#: ../vinagre/vinagre-tab.c:909
 #, c-format
 msgid "Screenshot of %s at %s"
 msgstr "Snímek obrazovky %s na %s"
 
-#: ../vinagre/vinagre-tab.c:971
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "Chyba při ukládání snímku obrazovky"
 
