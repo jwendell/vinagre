@@ -8,21 +8,21 @@ msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=vinagre&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-03-31 08:49+0000\n"
-"PO-Revision-Date: 2012-04-02 00:11+0200\n"
+"POT-Creation-Date: 2012-09-21 17:26+0000\n"
+"PO-Revision-Date: 2012-08-29 23:20+0200\n"
 "Last-Translator: Joan Duran <jodufi@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:1
+#: ../data/org.gnome.Vinagre.gschema.xml.h:1
 msgid "Whether we should leave other clients connected"
 msgstr "Si s'haurien de mantenir els altres clients connectats"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:2
+#: ../data/org.gnome.Vinagre.gschema.xml.h:2
 msgid ""
 "When connecting to a host, the client can say to the server to leave other "
 "clients connected or to drop the existent connections. Set the value to true "
@@ -32,14 +32,14 @@ msgstr ""
 "els altres clients connectats o que abandoni les altres connexions. Establiu "
 "el valor a cert per compartir l'escriptori amb altres clients."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:3
+#: ../data/org.gnome.Vinagre.gschema.xml.h:3
 msgid ""
 "Whether we should show tabs even when there is only one active connection"
 msgstr ""
 "Si s'haurien de mostrar les pestanyes encara que només hi hagi una connexió "
 "activa"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:4
+#: ../data/org.gnome.Vinagre.gschema.xml.h:4
 msgid ""
 "Set to \"true\" to always show the tabs. Set to \"false\" to only show the "
 "tabs when there is more than one active connection."
@@ -48,11 +48,11 @@ msgstr ""
 "«false» (fals) per mostrar les pestanyes només quan hi hagi més d'una "
 "connexió activa."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:5
+#: ../data/org.gnome.Vinagre.gschema.xml.h:5
 msgid "Whether we should show the menu accelerators (shortcut keys)"
 msgstr "Si s'haurien de mostrar els acceleradors del menú (dreceres de teclat)"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:6
+#: ../data/org.gnome.Vinagre.gschema.xml.h:6
 msgid ""
 "Set to \"false\" to disable menu shortcuts. Set to \"true\" to enable them. "
 "Note that if they are enabled, those keys will be intercepted by the menu "
@@ -63,20 +63,20 @@ msgstr ""
 "aquestes tecles sempre seran interceptades pel menú i no s'enviaran a "
 "l'ordinador remot."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:7
+#: ../data/org.gnome.Vinagre.gschema.xml.h:7
 msgid "Maximum number of history items in connect dialog"
 msgstr "Nombre màxim d'elements de l'historial en el diàleg de connexió"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:8
+#: ../data/org.gnome.Vinagre.gschema.xml.h:8
 msgid "Specifies the maximum number of items in the host dropdown entry."
 msgstr ""
 "Especifica el nombre màxim d'elements en l'entrada desplegable d'ordinadors."
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:9
+#: ../data/org.gnome.Vinagre.gschema.xml.h:9
 msgid "Whether we should start the program listening for reverse connections"
 msgstr "Si s'hauria d'iniciar el programa escoltant per a connexions inverses"
 
-#: ../data/org.gnome.Vinagre.gschema.xml.in.h:10
+#: ../data/org.gnome.Vinagre.gschema.xml.h:10
 msgid ""
 "Set to \"true\" to always start the program listening for reverse "
 "connections."
@@ -85,13 +85,17 @@ msgstr ""
 "connexions inverses."
 
 #: ../data/vinagre.desktop.in.in.h:1 ../data/vinagre-file.desktop.in.in.h:1
-#: ../vinagre/vinagre-main.c:129
+#: ../vinagre/vinagre-main.c:182
 msgid "Remote Desktop Viewer"
 msgstr "Visualitzador d'escriptoris remots"
 
 #: ../data/vinagre.desktop.in.in.h:2 ../data/vinagre-file.desktop.in.in.h:2
 msgid "Access remote desktops"
 msgstr "Accés a escriptoris remots"
+
+#: ../data/vinagre.desktop.in.in.h:3
+msgid "VNC;RDP;SSH;"
+msgstr "VNC;RDP;SSH;"
 
 #: ../data/vinagre.ui.h:1
 msgid "Vinagre is a remote desktop viewer for the GNOME desktop"
@@ -282,8 +286,8 @@ msgstr "S'ha produït un error en executar l'rdesktop"
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:163
-#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:82
-#: ../vinagre/vinagre-options.c:100 ../vinagre/vinagre-window.c:260
+#: ../vinagre/vinagre-connect.c:495 ../vinagre/vinagre-options.c:85
+#: ../vinagre/vinagre-options.c:103 ../vinagre/vinagre-window.c:260
 #: ../vinagre/vinagre-window.c:798
 msgid "Unknown error"
 msgstr "Error desconegut"
@@ -821,7 +825,7 @@ msgstr "S'ha produït un error en desar el fitxer de l'historial: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Trieu un escriptori remot"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:575
+#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:574
 #: ../vinagre/vinagre-tube-handler.c:257
 #, c-format
 msgid "The protocol %s is not supported."
@@ -836,7 +840,7 @@ msgid "The file was not recognized by any of the plugins."
 msgstr "Cap dels connectors ha reconegut el fitxer."
 
 #. Setup command line options
-#: ../vinagre/vinagre-main.c:133
+#: ../vinagre/vinagre-main.c:91
 msgid "- Remote Desktop Viewer"
 msgstr "- Visualitzador d'escriptoris remots"
 
@@ -919,17 +923,21 @@ msgstr "Obre un fitxer reconegut pel Vinagre"
 msgid "filename"
 msgstr "nomdelfitxer"
 
+#: ../vinagre/vinagre-options.c:48
+msgid "Show help"
+msgstr "Mostra l'ajuda"
+
 #. Translators: this is a command line option (run vinagre --help)
-#: ../vinagre/vinagre-options.c:50
+#: ../vinagre/vinagre-options.c:53
 msgid "[server:port]"
 msgstr "[servidor:port]"
 
-#: ../vinagre/vinagre-options.c:124
+#: ../vinagre/vinagre-options.c:127
 #, c-format
 msgid "Invalid argument %s for --geometry"
 msgstr "L'argument %s no és vàlid per a --geometry"
 
-#: ../vinagre/vinagre-options.c:142
+#: ../vinagre/vinagre-options.c:145
 msgid "The following error has occurred:"
 msgid_plural "The following errors have occurred:"
 msgstr[0] "S'ha produït l'error següent:"
@@ -984,32 +992,32 @@ msgstr "No s'ha pogut engendrar el programa SSH"
 msgid "Unable to spawn ssh program: %s"
 msgstr "No s'ha pogut engendrar el programa SSH: %s"
 
-#: ../vinagre/vinagre-ssh.c:425
+#: ../vinagre/vinagre-ssh.c:424
 msgid "Timed out when logging in"
 msgstr "S'ha superat el temps d'espera en entrar"
 
-#: ../vinagre/vinagre-ssh.c:455 ../vinagre/vinagre-ssh.c:603
-#: ../vinagre/vinagre-ssh.c:687
+#: ../vinagre/vinagre-ssh.c:454 ../vinagre/vinagre-ssh.c:596
+#: ../vinagre/vinagre-ssh.c:679
 msgid "Permission denied"
 msgstr "S'ha denegat el permís"
 
-#: ../vinagre/vinagre-ssh.c:514
+#: ../vinagre/vinagre-ssh.c:513
 msgid "Password dialog canceled"
 msgstr "S'ha cancel·lat el diàleg de contrasenya"
 
-#: ../vinagre/vinagre-ssh.c:537
+#: ../vinagre/vinagre-ssh.c:530
 msgid "Could not send password"
 msgstr "No s'ha pogut enviar la contrasenya"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Log In Anyway"
 msgstr "Entra igualment"
 
-#: ../vinagre/vinagre-ssh.c:545
+#: ../vinagre/vinagre-ssh.c:538
 msgid "Cancel Login"
 msgstr "Cancel·la l'entrada"
 
-#: ../vinagre/vinagre-ssh.c:554
+#: ../vinagre/vinagre-ssh.c:547
 #, c-format
 msgid ""
 "The identity of the remote host (%s) is unknown.\n"
@@ -1025,35 +1033,41 @@ msgstr ""
 "l'administrador del sistema per estar absolutament segur que es pot "
 "continuar."
 
-#: ../vinagre/vinagre-ssh.c:572
+#: ../vinagre/vinagre-ssh.c:565
 msgid "Login dialog canceled"
 msgstr "S'ha cancel·lat el diàleg d'entrada"
 
-#: ../vinagre/vinagre-ssh.c:593
+#: ../vinagre/vinagre-ssh.c:586
 msgid "Can't send host identity confirmation"
 msgstr "No es pot enviar la confirmació d'identitat de l'ordinador"
 
-#: ../vinagre/vinagre-ssh.c:628 ../vinagre/vinagre-tab.c:808
+#. Login succeed, save password in keyring
+#: ../vinagre/vinagre-ssh.c:605
+#, c-format
+msgid "Secure shell password: %s"
+msgstr "Contrasenya segura del terminal: %s"
+
+#: ../vinagre/vinagre-ssh.c:618 ../vinagre/vinagre-tab.c:793
 msgid "Error saving the credentials on the keyring."
 msgstr "S'ha produït un error en desar les credencials a l'anell de claus."
 
-#: ../vinagre/vinagre-ssh.c:694
+#: ../vinagre/vinagre-ssh.c:686
 msgid "Hostname not known"
 msgstr "Nom d'ordinador no conegut"
 
-#: ../vinagre/vinagre-ssh.c:701
+#: ../vinagre/vinagre-ssh.c:693
 msgid "No route to host"
 msgstr "No hi ha cap ruta a l'ordinador"
 
-#: ../vinagre/vinagre-ssh.c:708
+#: ../vinagre/vinagre-ssh.c:700
 msgid "Connection refused by server"
 msgstr "El servidor ha rebutjat la connexió"
 
-#: ../vinagre/vinagre-ssh.c:715
+#: ../vinagre/vinagre-ssh.c:707
 msgid "Host key verification failed"
 msgstr "Ha fallat la verificació de la clau de l'ordinador"
 
-#: ../vinagre/vinagre-ssh.c:752
+#: ../vinagre/vinagre-ssh.c:744
 msgid "Unable to find a valid SSH program"
 msgstr "No s'ha pogut trobar un programa SSH vàlid"
 
@@ -1069,20 +1083,25 @@ msgstr "Surt de la pantalla completa"
 msgid "Error saving recent connection."
 msgstr "S'ha produït un error en desar la connexió recent."
 
-#: ../vinagre/vinagre-tab.c:898
+#: ../vinagre/vinagre-tab.c:778
+#, c-format
+msgid "Remote desktop password: %s"
+msgstr "Contrasenya de l'escriptori remot: %s"
+
+#: ../vinagre/vinagre-tab.c:890
 msgid "Could not get a screenshot of the connection."
 msgstr "No s'ha pogut obtenir una captura de pantalla de la connexió."
 
-#: ../vinagre/vinagre-tab.c:903
+#: ../vinagre/vinagre-tab.c:895
 msgid "Save Screenshot"
 msgstr "Desa la captura de pantalla"
 
-#: ../vinagre/vinagre-tab.c:917
+#: ../vinagre/vinagre-tab.c:909
 #, c-format
 msgid "Screenshot of %s at %s"
 msgstr "Captura de pantalla de %s a %s"
 
-#: ../vinagre/vinagre-tab.c:971
+#: ../vinagre/vinagre-tab.c:963
 msgid "Error saving screenshot"
 msgstr "S'ha produït un error en desar la captura de pantalla"
 
