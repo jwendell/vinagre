@@ -32,6 +32,7 @@
 #include "vinagre-rdp-connection.h"
 #include "vinagre-rdp-tab.h"
 
+void rdp_register_types (void);
 static void vinagre_rdp_protocol_iface_init (VinagreProtocolInterface *iface);
 
 G_DEFINE_TYPE_EXTENDED (VinagreRdpPlugin,

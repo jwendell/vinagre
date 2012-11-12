@@ -513,7 +513,7 @@ ViewAutoDrawerSetOver(ViewOvBox *ovBox,  // IN
  *-----------------------------------------------------------------------------
  */
 
-void
+static void
 ViewAutoDrawerRefreshPacking(ViewAutoDrawer *that) // IN
 {
    gboolean expand;

@@ -35,6 +35,8 @@
 #include "vinagre-vnc-connection.h"
 #include "vinagre-vnc-tab.h"
 
+void vnc_register_types (void);
+
 static void vinagre_vnc_protocol_iface_init (VinagreProtocolInterface *iface);
 G_DEFINE_TYPE_EXTENDED (VinagreVncPlugin,
 			vinagre_vnc_plugin,
