@@ -37,7 +37,9 @@
 #include <avahi-common/malloc.h>
 #endif
 
+void ssh_register_types (void);
 static void vinagre_ssh_protocol_iface_init (VinagreProtocolInterface *iface);
+
 G_DEFINE_TYPE_EXTENDED (VinagreSshPlugin,
 			vinagre_ssh_plugin,
 			VINAGRE_TYPE_STATIC_EXTENSION,

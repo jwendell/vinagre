@@ -33,6 +33,7 @@
 #include "vinagre-spice-connection.h"
 #include "vinagre-spice-tab.h"
 
+void spice_register_types (void);
 static void vinagre_spice_protocol_iface_init (VinagreProtocolInterface *iface);
 
 G_DEFINE_TYPE_EXTENDED (VinagreSpicePlugin,

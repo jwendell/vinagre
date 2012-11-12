@@ -40,7 +40,7 @@ default_get_default_port (VinagreProtocol *protocol)
   return 0;
 }
 
-GSList *
+static GSList *
 default_get_context_groups (VinagreProtocol *protocol)
 {
   return NULL;

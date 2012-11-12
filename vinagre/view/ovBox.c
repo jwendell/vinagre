@@ -953,7 +953,7 @@ ViewOvBox_GetFraction(ViewOvBox *that)
  *-----------------------------------------------------------------------------
  */
 
-void
+static void
 ViewOvBox_SetVerticalOffset(ViewOvBox *that, // IN
                             gint offset)     // IN
 {

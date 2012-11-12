@@ -197,32 +197,32 @@ vinagre_tab_dispose (GObject *object)
   G_OBJECT_CLASS (vinagre_tab_parent_class)->dispose (object);
 }
 
-void
+static void
 default_get_dimensions (VinagreTab *tab, int *w, int *h)
 {
   *w = -1;
   *h = -1;
 }
 
-const GSList *
+static const GSList *
 default_get_always_sensitive_actions (VinagreTab *tab)
 {
   return NULL;
 }
 
-const GSList *
+static const GSList *
 default_get_connected_actions (VinagreTab *tab)
 {
   return NULL;
 }
 
-const GSList *
+static const GSList *
 default_get_initialized_actions (VinagreTab *tab)
 {
   return NULL;
 }
 
-gchar *
+static gchar *
 default_get_extra_title (VinagreTab *tab)
 {
   return NULL;
