@@ -659,17 +659,30 @@ get_hostname (const gchar *host)
 }
 
 static gboolean
-look_for_stderr_errors (GDataInputStream *error_stream, GError **error)
+look_for_stderr_errors (GInputStream *is, GError **error)
 {
-  char *line;
+  GDataInputStream *error_stream;
+  char *line = NULL;
+  gboolean ret;
+
+  error_stream = g_data_input_stream_new (is);
 
   while (1)
     {
+#ifndef G_OS_WIN32
+      if (!g_pollable_input_stream_is_readable (G_POLLABLE_INPUT_STREAM (is)))
+        {
+          ret = TRUE;
+          break;
+        }
+#endif
+
       line = g_data_input_stream_read_line (error_stream, NULL, NULL, NULL);
 
       if (line == NULL)
         {
-          return TRUE;
+          ret = TRUE;
+          break;
         }
     
       if (strstr (line, "Permission denied") != NULL)
@@ -677,41 +690,49 @@ look_for_stderr_errors (GDataInputStream *error_stream, GError **error)
           g_set_error_literal (error,
 	                       VINAGRE_SSH_ERROR, VINAGRE_SSH_ERROR_PERMISSION_DENIED,
         	               _("Permission denied"));
-          return FALSE;
+          ret = FALSE;
+          break;
         }
       else if (strstr (line, "Name or service not known") != NULL)
         {
           g_set_error_literal (error,
 	                       VINAGRE_SSH_ERROR, VINAGRE_SSH_ERROR_HOST_NOT_FOUND,
         	               _("Hostname not known"));
-          return FALSE;
+          ret = FALSE;
+          break;
         }
       else if (strstr (line, "No route to host") != NULL)
         {
           g_set_error_literal (error,
 	                       VINAGRE_SSH_ERROR, VINAGRE_SSH_ERROR_HOST_NOT_FOUND,
         	               _("No route to host"));
-          return FALSE;
+          ret = FALSE;
+          break;
         }
       else if (strstr (line, "Connection refused") != NULL)
         {
           g_set_error_literal (error,
 	                       VINAGRE_SSH_ERROR, VINAGRE_SSH_ERROR_PERMISSION_DENIED,
         	               _("Connection refused by server"));
-          return FALSE;
+          ret = FALSE;
+          break;
         }
       else if (strstr (line, "Host key verification failed") != NULL) 
         {
           g_set_error_literal (error,
 	                       VINAGRE_SSH_ERROR, VINAGRE_SSH_ERROR_FAILED,
         	               _("Host key verification failed"));
-          return FALSE;
+          ret = FALSE;
+          break;
         }
       
-      g_free (line);
     }
 
-  return TRUE;
+  if (line)
+    g_free (line);
+
+  g_object_unref (error_stream);
+  return ret;
 }
 
 gboolean
@@ -729,7 +750,6 @@ vinagre_ssh_connect (GtkWindow *parent,
   gchar *user, *host, **args;
   gboolean res;
   GInputStream *is;
-  GDataInputStream *error_stream;
 
   if (!hostname)
     return FALSE;
@@ -783,14 +803,12 @@ vinagre_ssh_connect (GtkWindow *parent,
   ioctlsocket (stderr_fd, FIONBIO, &mode);
   is = g_win32_input_stream_new (stderr_fd, FALSE);
 #else /* !G_OS_WIN32 */
-  fcntl (stderr_fd, F_SETFL, O_NONBLOCK | fcntl (stderr_fd, F_GETFL));
   is = g_unix_input_stream_new (stderr_fd, FALSE);
 #endif /* G_OS_WIN32 */
-  error_stream = g_data_input_stream_new (is);
-  g_object_unref (is);
   
-  res = look_for_stderr_errors (error_stream, error);
-  g_object_unref (error_stream);
+  res = look_for_stderr_errors (is, error);
+
+  g_object_unref (is);
 
   if (!res)
     return FALSE;
