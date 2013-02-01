@@ -171,8 +171,7 @@ namespace Vinagre.Utils {
             if (password_entry.text_length > 0)
                 password = password_entry.text;
 
-            if (save_in_keyring)
-                save_in_keyring = save_credential_check.active;
+            save_in_keyring = save_credential_check.active;
         }
 
         password_dialog.destroy ();
