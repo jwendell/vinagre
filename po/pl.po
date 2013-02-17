@@ -5,14 +5,14 @@
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
-# Piotr Drąg <piotrdrag@gmail.com>, 2010-2012.
-# Aviary.pl <gnomepl@aviary.pl>, 2007-2012.
+# Piotr Drąg <piotrdrag@gmail.com>, 2010-2013.
+# Aviary.pl <gnomepl@aviary.pl>, 2007-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: vinagre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-04 21:18+0200\n"
-"PO-Revision-Date: 2012-09-04 21:21+0200\n"
+"POT-Creation-Date: 2013-02-17 21:17+0100\n"
+"PO-Revision-Date: 2013-02-17 21:18+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -66,7 +66,8 @@ msgid ""
 msgstr ""
 "Ustawienie na wartość \"false\" wyłącza skróty w menu. Ustawienie na wartość "
 "\"true\" je włącza. Proszę zauważyć, że jeśli są włączone, to wciśnięcia "
-"klawiszy mogą zostać "
+"klawiszy mogą zostać przechwycone przez menu i nie zostać wysłane do "
+"zdalnego komputera."
 
 #: ../data/org.gnome.Vinagre.gschema.xml.h:7
 msgid "Maximum number of history items in connect dialog"
@@ -111,8 +112,8 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2010-2012\n"
-"Aviary.pl <gnomepl@aviary.pl>, 2007-2012"
+"Piotr Drąg <piotrdrag@gmail.com>, 2010-2013\n"
+"Aviary.pl <gnomepl@aviary.pl>, 2007-2013"
 
 #. This is a button label, in the authentication dialog
 #: ../data/vinagre.ui.h:5
@@ -129,12 +130,12 @@ msgstr "Wymagane jest uwierzytelnienie"
 msgid "Host:"
 msgstr "Komputer:"
 
-#: ../data/vinagre.ui.h:8 ../plugins/rdp/vinagre-rdp-plugin.c:105
-#: ../plugins/ssh/vinagre-ssh-plugin.c:110
+#: ../data/vinagre.ui.h:8 ../plugins/rdp/vinagre-rdp-plugin.c:106
+#: ../plugins/ssh/vinagre-ssh-plugin.c:112
 msgid "_Username:"
 msgstr "_Nazwa użytkownika:"
 
-#: ../data/vinagre.ui.h:9 ../plugins/spice/vinagre-spice-plugin.c:294
+#: ../data/vinagre.ui.h:9 ../plugins/spice/vinagre-spice-plugin.c:295
 msgid "_Password:"
 msgstr "_Hasło:"
 
@@ -254,23 +255,23 @@ msgstr "Plik zdalnego pulpitu (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Połączenie ze zdalnym pulpitem"
 
-#: ../plugins/rdp/vinagre-rdp-plugin.c:55
+#: ../plugins/rdp/vinagre-rdp-plugin.c:56
 msgid "RDP"
 msgstr "RDP"
 
 #. Translators: This is a description of the RDP protocol. It appears in the Connect dialog.
-#: ../plugins/rdp/vinagre-rdp-plugin.c:57
+#: ../plugins/rdp/vinagre-rdp-plugin.c:58
 msgid "Access MS Windows remote desktops"
 msgstr "Dostęp do zdalnych pulpitów systemu MS Windows"
 
-#: ../plugins/rdp/vinagre-rdp-plugin.c:96
+#: ../plugins/rdp/vinagre-rdp-plugin.c:97
 msgid "RDP Options"
 msgstr "Opcje RDP"
 
 #. Translators: This is the tooltip for the username field in a RDP connection
 #. Translators: This is the tooltip for the username field in a SSH connection
-#: ../plugins/rdp/vinagre-rdp-plugin.c:110
-#: ../plugins/ssh/vinagre-ssh-plugin.c:115
+#: ../plugins/rdp/vinagre-rdp-plugin.c:111
+#: ../plugins/ssh/vinagre-ssh-plugin.c:117
 msgid ""
 "Optional. If blank, your username will be used. Also, it can be supplied in "
 "the Host field above, in the form username@hostname."
@@ -299,22 +300,22 @@ msgstr "Błąd podczas wykonywania programu rdesktop"
 msgid "Unknown error"
 msgstr "Nieznany błąd"
 
-#: ../plugins/ssh/vinagre-ssh-plugin.c:59
+#: ../plugins/ssh/vinagre-ssh-plugin.c:61
 msgid "SSH"
 msgstr "SSH"
 
 #. Translators: This is a description of the SSH protocol. It appears at Connect dialog.
-#: ../plugins/ssh/vinagre-ssh-plugin.c:61
+#: ../plugins/ssh/vinagre-ssh-plugin.c:63
 msgid "Access Unix/Linux terminals"
 msgstr "Dostęp do terminali systemu UNIX/Linux"
 
-#: ../plugins/ssh/vinagre-ssh-plugin.c:101
+#: ../plugins/ssh/vinagre-ssh-plugin.c:103
 msgid "SSH Options"
 msgstr "Opcje SSH"
 
 #. Translators: 'shared' here is a VNC protocol specific flag. You can translate it, but I think it's better to let it untranslated
 #: ../plugins/vnc/vinagre-vnc-connection.c:317
-#: ../plugins/vnc/vinagre-vnc-plugin.c:199
+#: ../plugins/vnc/vinagre-vnc-plugin.c:201
 #, c-format
 msgid ""
 "Bad value for 'shared' flag: %d. It is supposed to be 0 or 1. Ignoring it."
@@ -322,130 +323,130 @@ msgstr ""
 "Błędna wartość dla flagi \"shared\": %d. Powinna być 0 lub 1. Ignorowanie."
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:50
+#: ../plugins/vnc/vinagre-vnc-plugin.c:52
 msgid "Enable scaled mode"
 msgstr "Tryb skalowany"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:63
+#: ../plugins/vnc/vinagre-vnc-plugin.c:65
 msgid "VNC Options:"
 msgstr "Opcje VNC:"
 
 #. Translators: this is a command line option (run vinagre --help)
-#: ../plugins/vnc/vinagre-vnc-plugin.c:65
+#: ../plugins/vnc/vinagre-vnc-plugin.c:67
 msgid "Show VNC Options"
 msgstr "Wyświetla opcje VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:87
+#: ../plugins/vnc/vinagre-vnc-plugin.c:89
 msgid "VNC"
 msgstr "VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:88
+#: ../plugins/vnc/vinagre-vnc-plugin.c:90
 msgid "Access Unix/Linux, Windows and other remote desktops."
 msgstr "Dostęp do zdalnych pulpitów systemów UNIX/Linux oraz Windows."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:145
-#: ../plugins/spice/vinagre-spice-plugin.c:100
+#: ../plugins/vnc/vinagre-vnc-plugin.c:147
+#: ../plugins/spice/vinagre-spice-plugin.c:101
 msgid "Could not parse the file."
 msgstr "Nie można przetworzyć pliku."
 
 #. Translators: Do not translate "Connection". It's the name of a group in the .vnc (.ini like) file.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:153
+#: ../plugins/vnc/vinagre-vnc-plugin.c:155
 msgid "The file is not a VNC one: Missing the group \"Connection\"."
 msgstr "To nie jest plik VNC: brak grupy \"Connection\"."
 
 #. Translators: Do not translate "Host". It's the name of a key in the .vnc (.ini like) file.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:160
+#: ../plugins/vnc/vinagre-vnc-plugin.c:162
 msgid "The file is not a VNC one: Missing the key \"Host\"."
 msgstr "To nie jest plik VNC: brak klucza \"Host\"."
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:251
+#: ../plugins/vnc/vinagre-vnc-plugin.c:253
 msgid "VNC Options"
 msgstr "Opcje VNC"
 
 #. View only check button
 #. View only check button - not fully ready on spice-gtk side
-#: ../plugins/vnc/vinagre-vnc-plugin.c:259
-#: ../plugins/vnc/vinagre-vnc-tab.c:619
-#: ../plugins/spice/vinagre-spice-plugin.c:221
+#: ../plugins/vnc/vinagre-vnc-plugin.c:261
+#: ../plugins/vnc/vinagre-vnc-tab.c:624
+#: ../plugins/spice/vinagre-spice-plugin.c:222
 #: ../plugins/spice/vinagre-spice-tab.c:507
 msgid "_View only"
 msgstr "_Tylko podgląd"
 
 #. Scaling check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:268
-#: ../plugins/spice/vinagre-spice-plugin.c:245
+#: ../plugins/vnc/vinagre-vnc-plugin.c:270
+#: ../plugins/spice/vinagre-spice-plugin.c:246
 msgid "_Scaling"
 msgstr "_Skalowanie"
 
 #. Keep ratio check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:282
+#: ../plugins/vnc/vinagre-vnc-plugin.c:284
 msgid "_Keep aspect ratio"
 msgstr "Utrzy_mywanie proporcji obrazu"
 
 #. JPEG Compression check button
-#: ../plugins/vnc/vinagre-vnc-plugin.c:292
+#: ../plugins/vnc/vinagre-vnc-plugin.c:294
 msgid "_Use JPEG Compression"
 msgstr "_Użycie kompresji JPEG"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:293
+#: ../plugins/vnc/vinagre-vnc-plugin.c:295
 msgid "This might not work on all VNC servers"
 msgstr "Może nie działać na wszystkich serwerach VNC"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:303
+#: ../plugins/vnc/vinagre-vnc-plugin.c:305
 msgid "Color _Depth:"
 msgstr "_Głębia kolorów:"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:308
+#: ../plugins/vnc/vinagre-vnc-plugin.c:310
 msgid "Use Server Settings"
 msgstr "Użycie ustawień serwera"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:309
+#: ../plugins/vnc/vinagre-vnc-plugin.c:311
 msgid "True Color (24 bits)"
 msgstr "True Color (24 bitowy)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:310
+#: ../plugins/vnc/vinagre-vnc-plugin.c:312
 msgid "High Color (16 bits)"
 msgstr "High Color (16 bitowy)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:311
+#: ../plugins/vnc/vinagre-vnc-plugin.c:313
 msgid "Low Color (8 bits)"
 msgstr "Low Color (8 bitowy)"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:312
+#: ../plugins/vnc/vinagre-vnc-plugin.c:314
 msgid "Ultra Low Color (3 bits)"
 msgstr "Ultra Low Color (3 bitowy)"
 
 #. Translators: the whole sentence will be: Use Host <hostname> as a SSH tunnel
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:326
-#: ../plugins/spice/vinagre-spice-plugin.c:256
+#: ../plugins/vnc/vinagre-vnc-plugin.c:328
+#: ../plugins/spice/vinagre-spice-plugin.c:257
 msgid "Use h_ost"
 msgstr "Użycie _komputera"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:335
-#: ../plugins/spice/vinagre-spice-plugin.c:265
+#: ../plugins/vnc/vinagre-vnc-plugin.c:337
+#: ../plugins/spice/vinagre-spice-plugin.c:266
 msgid "hostname or user@hostname"
 msgstr "nazwa-komputera lub użytkownik@nazwa-komputera"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:336
-#: ../plugins/spice/vinagre-spice-plugin.c:266
+#: ../plugins/vnc/vinagre-vnc-plugin.c:338
+#: ../plugins/spice/vinagre-spice-plugin.c:267
 msgid "Supply an alternative port using colon"
 msgstr "Dostarczenie alternatywnego portu używając dwukropka"
 
-#: ../plugins/vnc/vinagre-vnc-plugin.c:337
-#: ../plugins/spice/vinagre-spice-plugin.c:267
+#: ../plugins/vnc/vinagre-vnc-plugin.c:339
+#: ../plugins/spice/vinagre-spice-plugin.c:268
 msgid "For instance: joe@example.com:5022"
 msgstr "Na przykład: jan@example.com:5022"
 
 #. Translators: the whole sentence will be: Use host <hostname> as a SSH tunnel
-#: ../plugins/vnc/vinagre-vnc-plugin.c:343
-#: ../plugins/spice/vinagre-spice-plugin.c:273
+#: ../plugins/vnc/vinagre-vnc-plugin.c:345
+#: ../plugins/spice/vinagre-spice-plugin.c:274
 msgid "as a SSH tunnel"
 msgstr "jako tunelu SSH"
 
 #. Translators: this is a pattern to open *.vnc files in a open dialog.
-#: ../plugins/vnc/vinagre-vnc-plugin.c:378
+#: ../plugins/vnc/vinagre-vnc-plugin.c:380
 msgid "VNC Files"
 msgstr "Pliki VNC"
 
@@ -483,90 +484,90 @@ msgstr "Metoda uwierzytelniania dla komputera %s jest nieobsługiwana. (%u)"
 msgid "Authentication unsupported"
 msgstr "Metoda uwierzytelniania jest nieobsługiwana"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:518 ../plugins/vnc/vinagre-vnc-tab.c:535
+#: ../plugins/vnc/vinagre-vnc-tab.c:523 ../plugins/vnc/vinagre-vnc-tab.c:540
 msgid "Authentication error"
 msgstr "Błąd uwierzytelniania"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:519
+#: ../plugins/vnc/vinagre-vnc-tab.c:524
 msgid "A username is required in order to access this remote desktop."
 msgstr ""
 "Wymagane jest podanie nazwy użytkownika, aby uzyskać dostęp do tego zdalnego "
 "pulpitu."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:536
+#: ../plugins/vnc/vinagre-vnc-tab.c:541
 msgid "A password is required in order to access this remote desktop."
 msgstr ""
 "Wymagane jest podanie hasła, aby uzyskać dostęp do tego zdalnego pulpitu."
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:590
+#: ../plugins/vnc/vinagre-vnc-tab.c:595
 #: ../plugins/spice/vinagre-spice-tab.c:466
 msgid "S_caling"
 msgstr "S_kalowanie"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:591
+#: ../plugins/vnc/vinagre-vnc-tab.c:596
 #: ../plugins/spice/vinagre-spice-tab.c:467
 msgid "Fits the remote screen into the current window size"
 msgstr "Dopasowuje zdalny ekran do bieżącego rozmiaru okna"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:604
+#: ../plugins/vnc/vinagre-vnc-tab.c:609
 msgid "_Keep Aspect Ratio"
 msgstr "Utrzy_mywanie proporcji obrazu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:605
+#: ../plugins/vnc/vinagre-vnc-tab.c:610
 msgid "Keeps the screen aspect ratio when using scaling"
 msgstr "Utrzymuje proporcje obrazu podczas skalowania"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:620
+#: ../plugins/vnc/vinagre-vnc-tab.c:625
 #: ../plugins/spice/vinagre-spice-tab.c:508
 msgid "Does not send mouse and keyboard events"
 msgstr "Nie przesyła zdarzeń myszy i klawiatury"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:633
+#: ../plugins/vnc/vinagre-vnc-tab.c:638
 msgid "_Original size"
 msgstr "_Rozmiar pierwotny"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:634
+#: ../plugins/vnc/vinagre-vnc-tab.c:639
 msgid "Adjusts the window to the remote desktop's size"
 msgstr "Dopasowuje okno do rozmiarów zdalnego pulpitu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:647
+#: ../plugins/vnc/vinagre-vnc-tab.c:652
 msgid "_Refresh Screen"
 msgstr "_Odśwież ekran"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:648
+#: ../plugins/vnc/vinagre-vnc-tab.c:653
 msgid "Requests an update of the screen"
 msgstr "Wysyła żądanie odświeżenia ekranu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:670
+#: ../plugins/vnc/vinagre-vnc-tab.c:675
 #: ../plugins/spice/vinagre-spice-tab.c:531
 msgid "_Send Ctrl-Alt-Del"
 msgstr "_Wyślij Ctrl-Alt-Del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:671
+#: ../plugins/vnc/vinagre-vnc-tab.c:676
 #: ../plugins/spice/vinagre-spice-tab.c:532
 msgid "Sends Ctrl+Alt+Del to the remote desktop"
 msgstr "Wysyła Ctrl+Alt+Del do zdalnego pulpitu"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:724 ../plugins/vnc/vinagre-vnc-tab.c:725
+#: ../plugins/vnc/vinagre-vnc-tab.c:729 ../plugins/vnc/vinagre-vnc-tab.c:730
 #: ../plugins/spice/vinagre-spice-tab.c:584
 #: ../plugins/spice/vinagre-spice-tab.c:585
 msgid "Scaling"
 msgstr "Skalowanie"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:734 ../plugins/vnc/vinagre-vnc-tab.c:735
+#: ../plugins/vnc/vinagre-vnc-tab.c:739 ../plugins/vnc/vinagre-vnc-tab.c:740
 #: ../plugins/spice/vinagre-spice-tab.c:594
 #: ../plugins/spice/vinagre-spice-tab.c:595
 msgid "Read only"
 msgstr "Tylko do odczytu"
 
 #. Send Ctrl-alt-del
-#: ../plugins/vnc/vinagre-vnc-tab.c:743 ../plugins/vnc/vinagre-vnc-tab.c:745
+#: ../plugins/vnc/vinagre-vnc-tab.c:748 ../plugins/vnc/vinagre-vnc-tab.c:750
 #: ../plugins/spice/vinagre-spice-tab.c:603
 #: ../plugins/spice/vinagre-spice-tab.c:605
 msgid "Send Ctrl-Alt-Del"
 msgstr "Wyślij Ctrl-Alt-Del"
 
-#: ../plugins/vnc/vinagre-vnc-tab.c:908
+#: ../plugins/vnc/vinagre-vnc-tab.c:913
 msgid ""
 "Scaling is not supported on this installation.\n"
 "\n"
@@ -585,47 +586,47 @@ msgid "Unable to find a free TCP port"
 msgstr "Nie można odnaleźć wolnego portu TCP"
 
 #. Translators: Do not translate "connection". It's the name of a group in the .spice (.ini like) file.
-#: ../plugins/spice/vinagre-spice-plugin.c:107
+#: ../plugins/spice/vinagre-spice-plugin.c:108
 msgid "The file is not a Spice one: Missing the group \"connection\"."
 msgstr "To nie jest plik Spice: brak grupy \"connection\"."
 
 #. Translators: Do not translate "host". It's the name of a key in the .spice (.ini like) file.
-#: ../plugins/spice/vinagre-spice-plugin.c:114
+#: ../plugins/spice/vinagre-spice-plugin.c:115
 msgid "The file is not a Spice one: Missing the key \"host\"."
 msgstr "To nie jest plik Spice: brak klucza \"host\"."
 
-#: ../plugins/spice/vinagre-spice-plugin.c:158
+#: ../plugins/spice/vinagre-spice-plugin.c:159
 msgid "SPICE"
 msgstr "Spice"
 
 #. Translators: This is a description of the SPICE protocol. It appears at Connect dialog.
-#: ../plugins/spice/vinagre-spice-plugin.c:160
+#: ../plugins/spice/vinagre-spice-plugin.c:161
 msgid "Access Spice desktop server"
 msgstr "Dostęp do serwera pulpitu Spice"
 
-#: ../plugins/spice/vinagre-spice-plugin.c:208
+#: ../plugins/spice/vinagre-spice-plugin.c:209
 msgid "SPICE Options"
 msgstr "Opcje Spice"
 
 #. Resize guest check button
-#: ../plugins/spice/vinagre-spice-plugin.c:229
+#: ../plugins/spice/vinagre-spice-plugin.c:230
 #: ../plugins/spice/vinagre-spice-tab.c:480
 msgid "_Resize guest"
 msgstr "Zmień _rozmiar gościa"
 
 #. Clipboard sharing check button
-#: ../plugins/spice/vinagre-spice-plugin.c:237
+#: ../plugins/spice/vinagre-spice-plugin.c:238
 #: ../plugins/spice/vinagre-spice-tab.c:493
 msgid "_Share clipboard"
 msgstr "Współdziel _schowek"
 
 #. Translators: This is the tooltip for the password field in a SPICE connection
-#: ../plugins/spice/vinagre-spice-plugin.c:299
+#: ../plugins/spice/vinagre-spice-plugin.c:300
 msgid "Optional"
 msgstr "Opcjonalne"
 
 #. Translators: this is a pattern to open *.spice files in a open dialog.
-#: ../plugins/spice/vinagre-spice-plugin.c:320
+#: ../plugins/spice/vinagre-spice-plugin.c:321
 msgid "Spice Files"
 msgstr "Pliki Spice"
 
@@ -804,7 +805,7 @@ msgid ""
 "try again."
 msgstr ""
 "Żadna z włączonych wtyczek nie obsługuje tego działania. Proszę włączyć "
-"wtyczki i spróbować ponownie. "
+"wtyczki i spróbować ponownie."
 
 #: ../vinagre/vinagre-commands.c:174
 msgid "The following file could not be opened:"
@@ -999,7 +1000,7 @@ msgid "Timed out when logging in"
 msgstr "Przekroczono czas oczekiwania podczas logowania"
 
 #: ../vinagre/vinagre-ssh.c:454 ../vinagre/vinagre-ssh.c:596
-#: ../vinagre/vinagre-ssh.c:679
+#: ../vinagre/vinagre-ssh.c:692
 msgid "Permission denied"
 msgstr "Brak upoważnienia"
 
@@ -1052,23 +1053,23 @@ msgstr "Hasło powłoki SSH: %s"
 msgid "Error saving the credentials on the keyring."
 msgstr "Błąd podczas zapisywania danych uwierzytelniania w bazie kluczy."
 
-#: ../vinagre/vinagre-ssh.c:686
+#: ../vinagre/vinagre-ssh.c:700
 msgid "Hostname not known"
 msgstr "Nieznana nazwa komputera"
 
-#: ../vinagre/vinagre-ssh.c:693
+#: ../vinagre/vinagre-ssh.c:708
 msgid "No route to host"
 msgstr "Brak trasy do komputera"
 
-#: ../vinagre/vinagre-ssh.c:700
+#: ../vinagre/vinagre-ssh.c:716
 msgid "Connection refused by server"
 msgstr "Połączenie zostało odrzucone przez serwer"
 
-#: ../vinagre/vinagre-ssh.c:707
+#: ../vinagre/vinagre-ssh.c:724
 msgid "Host key verification failed"
 msgstr "Sprawdzenie klucza komputera się nie powiodło"
 
-#: ../vinagre/vinagre-ssh.c:744
+#: ../vinagre/vinagre-ssh.c:764
 msgid "Unable to find a valid SSH program"
 msgstr "Nie można odnaleźć prawidłowego programu SSH"
 
@@ -1278,7 +1279,7 @@ msgstr "Błąd podczas wczytywania pliku interfejsu użytkownika"
 msgid "%s authentication is required"
 msgstr "Wymagane jest uwierzytelnienie %s"
 
-#: ../vinagre/vinagre-utils.vala:194
+#: ../vinagre/vinagre-utils.vala:193
 msgid "Error showing help"
 msgstr "Błąd podczas wyświetlania pomocy"
 
