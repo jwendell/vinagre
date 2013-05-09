@@ -148,7 +148,7 @@ dialog_response_handler (GtkDialog       *widget,
     {
       case GTK_RESPONSE_HELP:
 	vinagre_utils_show_help (GTK_WINDOW (dialog->dialog),
-          "reverse-connections");
+                                 "connect-reverse");
 	break;
 
       default:
