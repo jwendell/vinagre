@@ -58,7 +58,8 @@ rdp_parse_item (VinagreConnection *conn, xmlNode *root)
 static void
 rdp_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
 {
-  GtkWidget *u_entry;
+  GtkWidget *u_entry, *spin_button;
+  guint      width, height;
 
   u_entry = g_object_get_data (G_OBJECT (widget), "username_entry");
   if (!u_entry)
@@ -72,6 +73,34 @@ rdp_parse_options_widget (VinagreConnection *conn, GtkWidget *widget)
   g_object_set (conn,
 		"username", gtk_entry_get_text (GTK_ENTRY (u_entry)),
 		NULL);
+
+
+  spin_button = g_object_get_data (G_OBJECT (widget), "width_spin_button");
+  if (!spin_button)
+    {
+      g_warning ("Wrong widget passed to rdp_parse_options_widget()");
+      return;
+    }
+
+  width = (guint) gtk_spin_button_get_value (GTK_SPIN_BUTTON (spin_button));
+
+  vinagre_cache_prefs_set_integer  ("rdp-connection", "width", width);
+
+  vinagre_connection_set_width (conn, width);
+
+
+  spin_button = g_object_get_data (G_OBJECT (widget), "height_spin_button");
+  if (!spin_button)
+    {
+      g_warning ("Wrong widget passed to rdp_parse_options_widget()");
+      return;
+    }
+
+  height = (guint) gtk_spin_button_get_value (GTK_SPIN_BUTTON (spin_button));
+
+  vinagre_cache_prefs_set_integer  ("rdp-connection", "height", height);
+
+  vinagre_connection_set_height (conn, height);
 }
 
 static void

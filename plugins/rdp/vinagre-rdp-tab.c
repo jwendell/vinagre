@@ -90,13 +90,18 @@ delay_connect (GObject *object)
   username = vinagre_connection_get_username (conn);
   i = 0;
 
-  arg = g_new (gchar *, 9);
+  arg = g_new (gchar *, 11);
   arg[i++] = g_strdup ("rdesktop");
 
   arg[i++] = g_strdup ("-K");
 
   if (vinagre_connection_get_fullscreen (conn))
     arg[i++] = g_strdup ("-f");
+
+  arg[i++] = g_strdup ("-g");
+  arg[i++] = g_strdup_printf ("%dx%d",
+			      vinagre_connection_get_width (conn),
+			      vinagre_connection_get_height (conn));
 
   arg[i++] = g_strdup ("-X");
   arg[i++] = g_strdup_printf ("%d", (int)gtk_socket_get_id (GTK_SOCKET (rdp_tab->priv->box)));

@@ -29,6 +29,11 @@
 #include "vinagre-plugins-engine.h"
 #include "vinagre-vala.h"
 
+#define DEFAULT_WIDTH   800
+#define DEFAULT_HEIGHT  600
+#define MIN_SIZE          1
+#define MAX_SIZE       8192
+
 struct _VinagreConnectionPrivate
 {
   gchar *protocol;
@@ -38,6 +43,8 @@ struct _VinagreConnectionPrivate
   gchar *password;
   gchar *name;
   gboolean fullscreen;
+  guint  width;
+  guint  height;
 };
 
 enum
@@ -50,7 +57,9 @@ enum
   PROP_PASSWORD,
   PROP_NAME,
   PROP_BEST_NAME,
-  PROP_FULLSCREEN
+  PROP_FULLSCREEN,
+  PROP_WIDTH,
+  PROP_HEIGHT
 };
 
 #define VINAGRE_CONNECTION_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), VINAGRE_TYPE_CONNECTION, VinagreConnectionPrivate))
@@ -68,6 +77,8 @@ vinagre_connection_init (VinagreConnection *conn)
   conn->priv->username = NULL;
   conn->priv->name = NULL;
   conn->priv->fullscreen = FALSE;
+  conn->priv->width = DEFAULT_WIDTH;
+  conn->priv->height = DEFAULT_HEIGHT;
 }
 
 static void
@@ -123,6 +134,14 @@ vinagre_connection_set_property (GObject *object, guint prop_id, const GValue *v
 	vinagre_connection_set_name (conn, g_value_get_string (value));
 	break;
 
+      case PROP_WIDTH:
+	vinagre_connection_set_width (conn, g_value_get_uint (value));
+	break;
+
+      case PROP_HEIGHT:
+	vinagre_connection_set_height (conn, g_value_get_uint (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -173,6 +192,14 @@ vinagre_connection_get_property (GObject *object, guint prop_id, GValue *value, 
 	g_value_set_string (value, vinagre_connection_get_best_name (conn));
 	break;
 
+      case PROP_WIDTH:
+	g_value_set_uint (value, conn->priv->width);
+	break;
+
+      case PROP_HEIGHT:
+	g_value_set_uint (value, conn->priv->height);
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 	break;
@@ -189,6 +216,8 @@ default_fill_writer (VinagreConnection *conn, xmlTextWriter *writer)
   xmlTextWriterWriteElement (writer, BAD_CAST "username", BAD_CAST (conn->priv->username ? conn->priv->username : ""));
   xmlTextWriterWriteFormatElement (writer, BAD_CAST "port", "%d", conn->priv->port);
   xmlTextWriterWriteFormatElement (writer, BAD_CAST "fullscreen", "%d", conn->priv->fullscreen);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "width", "%d", conn->priv->width);
+  xmlTextWriterWriteFormatElement (writer, BAD_CAST "height", "%d", conn->priv->height);
 }
 
 static void
@@ -211,6 +240,10 @@ default_parse_item (VinagreConnection *conn, xmlNode *root)
 	vinagre_connection_set_port (conn, atoi ((const char *)s_value));
       else if (!xmlStrcmp(curr->name, BAD_CAST "fullscreen"))
 	vinagre_connection_set_fullscreen (conn, vinagre_utils_parse_boolean ((const gchar *)s_value));
+      else if (!xmlStrcmp(curr->name, BAD_CAST "width"))
+	vinagre_connection_set_width (conn, atoi ((const char *)s_value));
+      else if (!xmlStrcmp(curr->name, BAD_CAST "height"))
+	vinagre_connection_set_height (conn, atoi ((const char *)s_value));
 
       xmlFree (s_value);
     }
@@ -347,6 +380,30 @@ vinagre_connection_class_init (VinagreConnectionClass *klass)
                                                         G_PARAM_STATIC_NAME |
                                                         G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property (object_class,
+                                   PROP_WIDTH,
+                                   g_param_spec_uint ("width",
+                                                      "width",
+                                                      "width of screen",
+                                                       MIN_SIZE,
+                                                       MAX_SIZE,
+                                                       DEFAULT_WIDTH,
+                                                       G_PARAM_READWRITE |
+                                                       G_PARAM_CONSTRUCT |
+                                                       G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (object_class,
+                                   PROP_HEIGHT,
+                                   g_param_spec_uint ("height",
+                                                      "height",
+                                                      "height of screen",
+                                                       MIN_SIZE,
+                                                       MAX_SIZE,
+                                                       DEFAULT_HEIGHT,
+                                                       G_PARAM_READWRITE |
+                                                       G_PARAM_CONSTRUCT |
+                                                       G_PARAM_STATIC_STRINGS));
+
 }
 
 void
@@ -467,6 +524,38 @@ vinagre_connection_get_name (VinagreConnection *conn)
   g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), NULL);
 
   return conn->priv->name;
+}
+
+void
+vinagre_connection_set_width (VinagreConnection *conn,
+			      guint width)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  conn->priv->width = width;
+}
+guint
+vinagre_connection_get_width (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), 0);
+
+  return conn->priv->width;
+}
+
+void
+vinagre_connection_set_height (VinagreConnection *conn,
+			       guint height)
+{
+  g_return_if_fail (VINAGRE_IS_CONNECTION (conn));
+
+  conn->priv->height = height;
+}
+guint
+vinagre_connection_get_height (VinagreConnection *conn)
+{
+  g_return_val_if_fail (VINAGRE_IS_CONNECTION (conn), 0);
+
+  return conn->priv->height;
 }
 
 /**

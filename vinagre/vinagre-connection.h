@@ -88,6 +88,14 @@ gboolean	    vinagre_connection_get_fullscreen	(VinagreConnection *conn);
 void		    vinagre_connection_set_fullscreen	(VinagreConnection *conn,
 							 gboolean value);
 
+guint		    vinagre_connection_get_width	(VinagreConnection *conn);
+void		    vinagre_connection_set_width	(VinagreConnection *conn,
+							 guint width);
+
+guint		    vinagre_connection_get_height	(VinagreConnection *conn);
+void		    vinagre_connection_set_height	(VinagreConnection *conn,
+							 guint height);
+
 VinagreConnection*  vinagre_connection_new_from_string	(const gchar *url, gchar **error_msg, gboolean use_bookmarks);
 VinagreConnection*  vinagre_connection_new_from_file	(const gchar *uri, gchar **error_msg, gboolean use_bookmarks);
 
