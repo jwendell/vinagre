@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: vinagre-master-po-gl-26618\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-16 03:30+0200\n"
-"PO-Revision-Date: 2013-03-27 13:40+0200\n"
+"PO-Revision-Date: 2013-05-16 03:31+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -140,7 +140,7 @@ msgstr "Requírese a autenticación"
 msgid "Host:"
 msgstr "Servidor:"
 
-#: ../data/vinagre.ui.h:8 ../plugins/rdp/vinagre-rdp-plugin.c:106
+#: ../data/vinagre.ui.h:8 ../plugins/rdp/vinagre-rdp-plugin.c:111
 #: ../plugins/ssh/vinagre-ssh-plugin.c:112
 msgid "_Username:"
 msgstr "Nome de _usuario:"
@@ -265,22 +265,22 @@ msgstr "Ficheiro de escritorio remoto (VNC)"
 msgid "Remote Desktop Connection"
 msgstr "Conexión a escritorio remoto"
 
-#: ../plugins/rdp/vinagre-rdp-plugin.c:56
+#: ../plugins/rdp/vinagre-rdp-plugin.c:61
 msgid "RDP"
 msgstr "RDP"
 
 #. Translators: This is a description of the RDP protocol. It appears in the Connect dialog.
-#: ../plugins/rdp/vinagre-rdp-plugin.c:58
+#: ../plugins/rdp/vinagre-rdp-plugin.c:63
 msgid "Access MS Windows remote desktops"
 msgstr "Acceda a escritorios remotos de MS Windows"
 
-#: ../plugins/rdp/vinagre-rdp-plugin.c:97
+#: ../plugins/rdp/vinagre-rdp-plugin.c:104
 msgid "RDP Options"
 msgstr "Opcións RDP"
 
 #. Translators: This is the tooltip for the username field in a RDP connection
 #. Translators: This is the tooltip for the username field in a SSH connection
-#: ../plugins/rdp/vinagre-rdp-plugin.c:111
+#: ../plugins/rdp/vinagre-rdp-plugin.c:118
 #: ../plugins/ssh/vinagre-ssh-plugin.c:117
 msgid ""
 "Optional. If blank, your username will be used. Also, it can be supplied in "
@@ -290,17 +290,37 @@ msgstr ""
 "pode proporcionar no campo superior «Equipo», na forma "
 "usuario@nome_de_equipo."
 
+#. Host width
+#: ../plugins/rdp/vinagre-rdp-plugin.c:131
+msgid "_Width:"
+msgstr "_Ancho:"
+
+#. Translators: This is the tooltip for the width field in a RDP connection
+#: ../plugins/rdp/vinagre-rdp-plugin.c:138
+msgid "Set width of the remote desktop"
+msgstr "Estabelece o ancho do escritorio remoto"
+
+#. Host height
+#: ../plugins/rdp/vinagre-rdp-plugin.c:147
+msgid "_Height:"
+msgstr "_Alto:"
+
+#. Translators: This is the tooltip for the height field in a RDP connection
+#: ../plugins/rdp/vinagre-rdp-plugin.c:154
+msgid "Set height of the remote desktop"
+msgstr "Estabelece o alto do escritorio remoto"
+
 #: ../plugins/rdp/vinagre-rdp-tab.c:55 ../plugins/ssh/vinagre-ssh-tab.c:50
 #: ../plugins/vnc/vinagre-vnc-tab.c:150
 #: ../plugins/spice/vinagre-spice-tab.c:140
 msgid "Port:"
 msgstr "Porto:"
 
-#: ../plugins/rdp/vinagre-rdp-tab.c:124
+#: ../plugins/rdp/vinagre-rdp-tab.c:129
 msgid "Error while executing rdesktop"
 msgstr "Produciuse un erro ao executar rdesktop"
 
-#: ../plugins/rdp/vinagre-rdp-tab.c:125 ../vinagre/vinagre-bookmarks.c:366
+#: ../plugins/rdp/vinagre-rdp-tab.c:130 ../vinagre/vinagre-bookmarks.c:366
 #: ../vinagre/vinagre-bookmarks.c:492
 #: ../vinagre/vinagre-bookmarks-migration.c:135
 #: ../vinagre/vinagre-cache-prefs.c:57 ../vinagre/vinagre-commands.c:163
@@ -841,17 +861,17 @@ msgstr "Produciuse un erro ao gardar o ficheiro de historial: %s"
 msgid "Choose a Remote Desktop"
 msgstr "Escolla un escritorio remoto"
 
-#: ../vinagre/vinagre-connection.c:525 ../vinagre/vinagre-tab.c:574
+#: ../vinagre/vinagre-connection.c:614 ../vinagre/vinagre-tab.c:574
 #: ../vinagre/vinagre-tube-handler.c:257
 #, c-format
 msgid "The protocol %s is not supported."
 msgstr "Non se admite o protocolo %s."
 
-#: ../vinagre/vinagre-connection.c:633
+#: ../vinagre/vinagre-connection.c:722
 msgid "Could not open the file."
 msgstr "Non foi posíbel abrir o ficheiro."
 
-#: ../vinagre/vinagre-connection.c:657
+#: ../vinagre/vinagre-connection.c:746
 msgid "The file was not recognized by any of the plugins."
 msgstr "O ficheiro non foi recoñecido por ningún dos engadidos."
 
@@ -1419,9 +1439,6 @@ msgstr "Produciuse un erro ao crear o ficheiro: %s: %s"
 
 #~ msgid "_Open bookmark"
 #~ msgstr "_Abrir un marcador"
-
-#~ msgid "Connect to this remote desktop"
-#~ msgstr "Conectarse a este escritorio remoto"
 
 #~ msgid "_Edit bookmark"
 #~ msgstr "_Editar marcador"
