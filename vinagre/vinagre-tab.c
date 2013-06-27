@@ -852,7 +852,7 @@ filter_changed_cb (GObject *object, GParamSpec *pspec, VinagreTab *tab)
   filter = gtk_file_chooser_get_filter (chooser);
   extension = g_object_get_data (G_OBJECT (filter), "extension");
 
-  filename = gtk_file_chooser_get_filename (chooser);
+  filename = gtk_file_chooser_get_current_name (chooser);
   basename = g_path_get_basename (filename);
   for (i = strlen (basename)-1; i>=0; i--)
     if (basename[i] == '.')
