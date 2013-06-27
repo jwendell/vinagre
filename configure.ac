@@ -31,7 +31,7 @@ AC_PROG_SED
 
 GLIB_DEPS="glib-2.0 >= 2.28.0 $gio_os >= 2.28.0"
 GTHREAD_DEPS="gthread-2.0 >= 2.0.0"
-GTK_DEPS="gtk+-3.0 >= 3.0.3"
+GTK_DEPS="gtk+-3.0 >= 3.9.6"
 GTK_VNC_DEPS="gtk-vnc-2.0 >= 0.4.3"
 XML2_DEPS="libxml-2.0 >= 2.6.31"
 
