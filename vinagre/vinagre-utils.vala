@@ -36,7 +36,7 @@ namespace Vinagre.Utils {
     public void show_error_dialog (string? title,
                                    string? message,
                                    Window? parent) {
-        if (title != null)
+        if (title == null)
             title = _("An error occurred");
 
         var dialog = new MessageDialog (parent,
