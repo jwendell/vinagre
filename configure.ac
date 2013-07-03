@@ -70,8 +70,7 @@ AS_IF([test "x$enable_rdp" != "xno"],
   [have_rdp=no])
 
 AS_IF([test "x$have_rdp" = "xyes"],
-  [AC_DEFINE([VINAGRE_ENABLE_RDP], [], [Build with RDP support])
-    AC_PATH_PROG([RDESKTOP_PROGRAM], [rdesktop], [rdesktop])],
+  [AC_DEFINE([VINAGRE_ENABLE_RDP], [], [Build with RDP support])],
   [RDP_DEPS=""
     AS_IF([test "x$enable_rdp" = "xyes"],
       [AC_MSG_ERROR([RDP support requested by required dependencies not found])])])

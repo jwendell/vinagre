@@ -91,7 +91,7 @@ delay_connect (GObject *object)
   i = 0;
 
   arg = g_new (gchar *, 11);
-  arg[i++] = g_strdup ("rdesktop");
+  arg[i++] = g_strdup ("xfreerdp");
 
   arg[i++] = g_strdup ("-K");
 
@@ -126,7 +126,7 @@ delay_connect (GObject *object)
 		      &rdp_tab->priv->pid,
 		      &error))
     {
-      vinagre_utils_show_error_dialog (_("Error while executing rdesktop"),
+      vinagre_utils_show_error_dialog (_("Error while executing xfreerdp"),
 				error ? error->message : _("Unknown error"),
 				GTK_WINDOW (vinagre_tab_get_window (tab)));
       vinagre_tab_remove_from_notebook (tab);
