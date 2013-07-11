@@ -151,6 +151,21 @@ impl_new_connection_from_file (VinagreProtocol *plugin,
 
 }
 
+static gboolean
+impl_recognize_file (VinagreProtocol *plugin, GFile *file)
+{
+  gboolean result = FALSE;
+  gchar *filename = g_file_get_basename (file);
+
+  if (filename)
+    {
+      result = g_str_has_suffix (filename, ".spice");
+      g_free (filename);
+    }
+
+  return result;
+}
+
 static gchar **
 impl_get_public_description (VinagreProtocol *plugin)
 {
@@ -336,6 +351,7 @@ vinagre_spice_protocol_iface_init (VinagreProtocolInterface *iface)
   iface->new_connection = impl_new_connection;
   iface->new_tab = impl_new_tab;
   iface->new_connection_from_file = impl_new_connection_from_file;
+  iface->recognize_file = impl_recognize_file;
 }
 
 static void
