@@ -58,7 +58,7 @@ namespace Vinagre.Utils {
                                   SList<string> items,
                                   Window        parent) {
         var messages = "";
-        items.foreach ((message) => messages.printf ("%s\n", message));
+        items.foreach ((message) => messages += "%s\n".printf (message));
         show_error_dialog (title, messages, parent);
     }
 
