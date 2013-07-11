@@ -48,6 +48,8 @@ struct _VinagreProtocolInterface
 							 const gchar     *data,
 							 gboolean         use_bookmarks,
 							 gchar          **error_msg);
+  gboolean              (*recognize_file)               (VinagreProtocol *protocol,
+                                                         GFile           *file);
   const gchar		*(*get_mdns_service)		(VinagreProtocol *protocol);
   GtkWidget 		*(*new_tab)			(VinagreProtocol   *protocol,
 							 VinagreConnection *conn,
@@ -80,6 +82,8 @@ VinagreConnection *	vinagre_protocol_new_connection_from_file (VinagreProtocol *
 								   const gchar     *data,
 								   gboolean         use_bookmarks,
 								   gchar           **error_msg);
+gboolean                vinagre_protocol_recognize_file           (VinagreProtocol *protocol,
+                                                                   GFile           *file);
 const gchar *		vinagre_protocol_get_mdns_service	  (VinagreProtocol *protocol);
 
 GtkWidget *		vinagre_protocol_new_tab		  (VinagreProtocol   *protocol,
