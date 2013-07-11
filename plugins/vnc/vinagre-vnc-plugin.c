@@ -210,6 +210,21 @@ the_end:
 
 }
 
+static gboolean
+impl_recognize_file (VinagreProtocol *plugin, GFile *file)
+{
+  gboolean result = FALSE;
+  gchar *filename = g_file_get_basename (file);
+
+  if (filename)
+    {
+      result = g_str_has_suffix (filename, ".vnc");
+      g_free (filename);
+    }
+
+  return result;
+}
+
 static GtkWidget *
 impl_new_tab (VinagreProtocol *plugin,
 	      VinagreConnection *conn,
@@ -404,6 +419,7 @@ vinagre_vnc_protocol_iface_init (VinagreProtocolInterface *iface)
   iface->get_public_description  = impl_get_public_description;
   iface->new_connection = impl_new_connection;
   iface->new_connection_from_file = impl_new_connection_from_file;
+  iface->recognize_file = impl_recognize_file;
   iface->get_mdns_service  = impl_get_mdns_service;
   iface->new_tab = impl_new_tab;
   iface->get_connect_widget = impl_get_connect_widget;
