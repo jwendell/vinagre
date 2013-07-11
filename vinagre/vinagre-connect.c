@@ -364,14 +364,19 @@ vinagre_connect_find_button_cb (GtkButton            *button,
   if (gtk_dialog_run(GTK_DIALOG(d)) == GTK_RESPONSE_ACCEPT)
     {
       gchar *tmp;
+      AvahiAddress *address;
       char a[AVAHI_ADDRESS_STR_MAX];
 
-      avahi_address_snprint (a,
-			     sizeof(a),
-			     aui_service_dialog_get_address (AUI_SERVICE_DIALOG (d)));
-      tmp = g_strdup_printf ("%s::%d",
-			     a,
-			     aui_service_dialog_get_port (AUI_SERVICE_DIALOG (d)));
+      address = aui_service_dialog_get_address (AUI_SERVICE_DIALOG (d));
+      avahi_address_snprint (a, sizeof(a), address);
+      if (address->proto == AVAHI_PROTO_INET6)
+        tmp = g_strdup_printf ("[%s]::%d",
+			       a,
+			       aui_service_dialog_get_port (AUI_SERVICE_DIALOG (d)));
+      else
+        tmp = g_strdup_printf ("%s:%d",
+			       a,
+			       aui_service_dialog_get_port (AUI_SERVICE_DIALOG (d)));
 
       gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (dialog->host_entry))),
 			  tmp);
