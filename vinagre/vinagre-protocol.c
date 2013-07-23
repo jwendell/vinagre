@@ -75,13 +75,6 @@ default_new_connection_from_file (VinagreProtocol *protocol,
   return NULL;
 }
 
-static gboolean
-default_recognize_file (VinagreProtocol *protocol,
-                        GFile           *file)
-{
-  return FALSE;
-}
-
 static GtkWidget *
 default_get_connect_widget (VinagreProtocol   *protocol,
 			    VinagreConnection *initial_settings)
@@ -115,7 +108,6 @@ vinagre_protocol_default_init (VinagreProtocolInterface *iface)
   iface->new_tab = default_new_tab;
   iface->new_connection = default_new_connection;
   iface->new_connection_from_file = default_new_connection_from_file;
-  iface->recognize_file = default_recognize_file;
   iface->get_connect_widget = default_get_connect_widget;
   iface->parse_mdns_dialog = default_parse_mdns_dialog;
   iface->get_icon_name = dummy;
@@ -314,24 +306,6 @@ vinagre_protocol_new_connection_from_file (VinagreProtocol *protocol,
     }
 
   return NULL;
-}
-
-gboolean
-vinagre_protocol_recognize_file (VinagreProtocol *protocol,
-                                 GFile           *file)
-{
-  VinagreProtocolInterface *iface;
-
-  g_return_val_if_fail (VINAGRE_IS_PROTOCOL (protocol), FALSE);
-
-  iface = VINAGRE_PROTOCOL_GET_IFACE (protocol);
-
-  if (iface->recognize_file != NULL)
-    {
-      return iface->recognize_file (protocol, file);
-    }
-
-  return FALSE;
 }
 
 /**
