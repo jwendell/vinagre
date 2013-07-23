@@ -778,7 +778,8 @@ vinagre_tab_save_credentials_in_keyring (VinagreTab *tab)
   if (!tab->priv->save_credentials)
     return;
 
-  label = g_strdup_printf (_("Remote desktop password: %s"), vinagre_connection_get_host (tab->priv->conn));
+  label = g_strdup_printf (_("Remote desktop password for %s"),
+                           vinagre_connection_get_host (tab->priv->conn));
   /* "user" goes last, to terminate the attribute list if conn_user is NULL. */
   secret_password_store_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL,
                               label, vinagre_connection_get_password (tab->priv->conn),
