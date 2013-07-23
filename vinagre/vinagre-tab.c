@@ -742,17 +742,38 @@ vinagre_tab_get_from_connection (VinagreConnection *conn)
   return (res != NULL) ? VINAGRE_TAB (res) : NULL;
 }
 
+static GHashTable *
+create_secret_hash (VinagreTab *tab)
+{
+  GHashTable *table;
+
+  table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
+
+  if (vinagre_connection_get_username (tab->priv->conn))
+    g_hash_table_insert (table, "user",
+                         g_strdup (vinagre_connection_get_username (tab->priv->conn)));
+  g_hash_table_insert (table, "server",
+                       g_strdup (vinagre_connection_get_host (tab->priv->conn)));
+  g_hash_table_insert (table, "protocol",
+                       g_strdup (vinagre_connection_get_protocol (tab->priv->conn)));
+  g_hash_table_insert (table, "port",
+                       g_strdup_printf ("%d", vinagre_connection_get_port (tab->priv->conn)));
+
+  return table;
+}
+
 gboolean
 vinagre_tab_find_credentials_in_keyring (VinagreTab *tab, gchar **username, gchar **password)
 {
+  GHashTable *table = create_secret_hash (tab);
+
   *username = NULL;
 
-  *password = secret_password_lookup_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, NULL,
-                                           "user", vinagre_connection_get_username (tab->priv->conn),
-                                           "server", vinagre_connection_get_host (tab->priv->conn),
-                                           "protocol", vinagre_connection_get_protocol (tab->priv->conn),
-                                           "port", vinagre_connection_get_port (tab->priv->conn),
-                                           NULL);
+  *password = secret_password_lookupv_sync (SECRET_SCHEMA_COMPAT_NETWORK,
+                                            table,
+                                            NULL,
+                                            NULL);
+  g_hash_table_destroy (table);
 
   if (*password == NULL)
     return FALSE;
@@ -771,20 +792,22 @@ vinagre_tab_save_credentials_in_keyring (VinagreTab *tab)
 {
   GError *error = NULL;
   gchar *label;
+  GHashTable *table;
 
   if (!tab->priv->save_credentials)
     return;
 
+  table = create_secret_hash (tab);
   label = g_strdup_printf (_("Remote desktop password: %s"), vinagre_connection_get_host (tab->priv->conn));
-  secret_password_store_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL,
-                              label, vinagre_connection_get_password (tab->priv->conn),
-                              NULL, &error,
-                              "user", vinagre_connection_get_username (tab->priv->conn),
-                              "server", vinagre_connection_get_host (tab->priv->conn),
-                              "protocol", vinagre_connection_get_protocol (tab->priv->conn),
-                              "port", vinagre_connection_get_port (tab->priv->conn),
-                              NULL);
+  secret_password_storev_sync (SECRET_SCHEMA_COMPAT_NETWORK,
+                               table,
+                               NULL,
+                               label,
+                               vinagre_connection_get_password (tab->priv->conn),
+                               NULL,
+                               &error);
   g_free (label);
+  g_hash_table_destroy (table);
 
   if (error == NULL) {
     tab->priv->saved_credentials = TRUE;
@@ -803,12 +826,12 @@ void vinagre_tab_remove_credentials_from_keyring (VinagreTab *tab)
 {
   if (tab->priv->saved_credentials)
     {
-      secret_password_clear_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, NULL,
-                                  "user", vinagre_connection_get_username (tab->priv->conn),
-                                  "server", vinagre_connection_get_host (tab->priv->conn),
-                                  "protocol", vinagre_connection_get_protocol (tab->priv->conn),
-                                  "port", vinagre_connection_get_port (tab->priv->conn),
-                                  NULL);
+      GHashTable *table = create_secret_hash (tab);
+      secret_password_clearv_sync (SECRET_SCHEMA_COMPAT_NETWORK,
+                                   table,
+                                   NULL,
+                                   NULL);
+      g_hash_table_destroy (table);
       tab->priv->saved_credentials = FALSE;
     }
 
