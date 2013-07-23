@@ -639,16 +639,14 @@ vinagre_connection_new_from_file (const gchar *uri, gchar **error_msg, gboolean 
   g_hash_table_iter_init (&iter, extensions);
   while (g_hash_table_iter_next (&iter, NULL, &ext))
     {
-      VinagreProtocol *protocol = VINAGRE_PROTOCOL (ext);
-
-      if (vinagre_protocol_recognize_file (protocol, file_a))
-        {
-          conn = vinagre_protocol_new_connection_from_file (protocol,
-							    data,
-							    use_bookmarks,
-							    error_msg);
-          break;
-        }
+      conn = vinagre_protocol_new_connection_from_file ((VinagreProtocol *)ext,
+							data,
+							use_bookmarks,
+							error_msg);
+      g_free (*error_msg);
+      *error_msg = NULL;
+      if (conn)
+	break;
     }
 
 the_end:
