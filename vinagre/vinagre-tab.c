@@ -745,19 +745,21 @@ vinagre_tab_get_from_connection (VinagreConnection *conn)
 gboolean
 vinagre_tab_find_credentials_in_keyring (VinagreTab *tab, gchar **username, gchar **password)
 {
+  const gchar *conn_user = vinagre_connection_get_username (tab->priv->conn);
   *username = NULL;
 
+  /* "user" goes last, to terminate the attribute list if conn_user is NULL. */
   *password = secret_password_lookup_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, NULL,
-                                           "user", vinagre_connection_get_username (tab->priv->conn),
                                            "server", vinagre_connection_get_host (tab->priv->conn),
                                            "protocol", vinagre_connection_get_protocol (tab->priv->conn),
                                            "port", vinagre_connection_get_port (tab->priv->conn),
+                                           conn_user ? "user" : NULL, conn_user,
                                            NULL);
 
   if (*password == NULL)
     return FALSE;
 
-  *username = g_strdup (vinagre_connection_get_username (tab->priv->conn));
+  *username = g_strdup (conn_user);
   return TRUE;
 }
 
@@ -771,18 +773,20 @@ vinagre_tab_save_credentials_in_keyring (VinagreTab *tab)
 {
   GError *error = NULL;
   gchar *label;
+  const gchar *conn_user = vinagre_connection_get_username (tab->priv->conn);
 
   if (!tab->priv->save_credentials)
     return;
 
   label = g_strdup_printf (_("Remote desktop password: %s"), vinagre_connection_get_host (tab->priv->conn));
+  /* "user" goes last, to terminate the attribute list if conn_user is NULL. */
   secret_password_store_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL,
                               label, vinagre_connection_get_password (tab->priv->conn),
                               NULL, &error,
-                              "user", vinagre_connection_get_username (tab->priv->conn),
                               "server", vinagre_connection_get_host (tab->priv->conn),
                               "protocol", vinagre_connection_get_protocol (tab->priv->conn),
                               "port", vinagre_connection_get_port (tab->priv->conn),
+                              conn_user ? "user" : NULL, conn_user,
                               NULL);
   g_free (label);
 
@@ -803,11 +807,13 @@ void vinagre_tab_remove_credentials_from_keyring (VinagreTab *tab)
 {
   if (tab->priv->saved_credentials)
     {
+      /* Put "user" last, to terminate the attributes if conn_user is NULL. */
+      const gchar *conn_user = vinagre_connection_get_username (tab->priv->conn);
       secret_password_clear_sync (SECRET_SCHEMA_COMPAT_NETWORK, NULL, NULL,
-                                  "user", vinagre_connection_get_username (tab->priv->conn),
                                   "server", vinagre_connection_get_host (tab->priv->conn),
                                   "protocol", vinagre_connection_get_protocol (tab->priv->conn),
                                   "port", vinagre_connection_get_port (tab->priv->conn),
+                                  conn_user ? "user" : NULL, conn_user,
                                   NULL);
       tab->priv->saved_credentials = FALSE;
     }
