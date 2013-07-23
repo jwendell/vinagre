@@ -492,7 +492,11 @@ vnc_authentication_cb (VncDisplay *vnc, GValueArray *credList, VinagreVncTab *vn
 
   if (need_password || need_username)
     {
-      vinagre_tab_find_credentials_in_keyring (tab, &username, &password);
+      /* libsecret does not support NULL attributes, bug 685041. */
+      if (vinagre_connection_get_username (conn) != NULL)
+        {
+          vinagre_tab_find_credentials_in_keyring (tab, &username, &password);
+        }
 
       if ( (need_username && !username) || (need_password && !password) )
 	{
